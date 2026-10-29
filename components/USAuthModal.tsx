@@ -15,7 +15,7 @@ export default function USAuthModal({
   isOpen,
   onClose,
   title = 'Join StayHelper Private Club',
-  subtitle = 'Unlock direct verified partner booking links, live room rates, and 8K master reels.',
+  subtitle = 'Unlock direct verified partner booking links, live room rates, and cinematic master reels.',
   onSuccess,
 }: USAuthModalProps) {
   const [email, setEmail] = useState('');

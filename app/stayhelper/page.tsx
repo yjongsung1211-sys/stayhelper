@@ -519,7 +519,7 @@ export default function StayHelperLuxuryShowcase() {
             Direct Premier Reservation Link · Zero Service Fees
           </span>
           <span className="hidden sm:inline-block text-stone-400 font-mono">
-            8K CINEMATOGRAPHY
+            CINEMATIC REELS
           </span>
         </div>
       </div>
@@ -593,7 +593,7 @@ export default function StayHelperLuxuryShowcase() {
             {/* Slider Navigation Chevrons */}
             <div className="flex items-center gap-2">
               <span className="text-[11px] font-luxury-sans text-[#78716C] tracking-wide hidden md:inline-block mr-1">
-                Explore 8K reels
+                Explore master reels
               </span>
               <button
                 type="button"
@@ -642,11 +642,7 @@ export default function StayHelperLuxuryShowcase() {
                     <span className="absolute top-1 left-1.5 text-[9px] font-luxury-serif font-bold text-[#F4E8D4]">
                       {stay.numeral}
                     </span>
-                    {stay.status === "STREAMING" && (
-                      <span className="absolute bottom-1 right-1 px-1 py-0.2 rounded bg-black/80 text-[7px] font-mono text-[#E8D5B5] border border-[#C5A880]/40">
-                        8K
-                      </span>
-                    )}
+                    
                   </div>
 
                   <div className="min-w-0 flex-1">
@@ -678,7 +674,7 @@ export default function StayHelperLuxuryShowcase() {
         </div>
       </section>
 
-      {/* 4. MAIN CINEMATIC EXHIBIT: 8K MASTER REEL & EDITORIAL DOSSIER */}
+      {/* 4. MAIN CINEMATIC EXHIBIT: CINEMATIC MASTER REEL & EDITORIAL DOSSIER */}
       <main className="max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           
@@ -761,7 +757,7 @@ export default function StayHelperLuxuryShowcase() {
                   <div className="flex items-center gap-2 bg-black/70 backdrop-blur-md px-3.5 py-1.2 rounded-full border border-white/20 shadow-md">
                     <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
                     <span className="text-[10px] font-mono text-[#F4E8D4] tracking-wider uppercase font-semibold">
-                      8K Master Reel
+                      Cinematic Master Reel
                     </span>
                   </div>
                   <div className="bg-black/70 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 text-[11px] font-luxury-sans text-[#E8D5B5] flex items-center gap-1 shadow-md">
@@ -957,7 +953,7 @@ export default function StayHelperLuxuryShowcase() {
                 STAYHELPER
               </span>
               <p className="text-[11px] text-stone-500 mt-0.5">
-                The Private Luxury Collection · 8K AI Physical Cinematics
+                The Private Luxury Collection · Cinematic Sanctuaries
               </p>
             </div>
             <div className="text-right text-[11px] text-stone-500 font-luxury-sans">
@@ -978,7 +974,7 @@ export default function StayHelperLuxuryShowcase() {
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
         title="StayHelper Private Club"
-        subtitle="Complimentary private membership. Join to unlock direct partner reservation links, live room rates, and 8K sanctuary cinematics."
+        subtitle="Complimentary private membership. Join to unlock direct partner reservation links, live room rates, and cinematic master reels."
         onSuccess={(user) => {
           const newMember: MemberData = {
             name: user.name || user.email.split("@")[0],

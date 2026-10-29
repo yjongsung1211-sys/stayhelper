@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "StayHelper · The Private Luxury Hotel Collection (8K Cinematic)",
+  title: "StayHelper · The Private Luxury Hotel Collection (Cinematic Master Reels)",
   description:
-    "Discover the world's most extraordinary 5-star sanctuaries and pavilions through cinematic 8K Master Reels. Direct reservation via official premier luxury booking partners.",
+    "Discover the world's most extraordinary 5-star sanctuaries and pavilions through cinematic master reels. Direct reservation via official premier luxury booking partners.",
   icons: {
     icon: "/icon.svg",
   },
