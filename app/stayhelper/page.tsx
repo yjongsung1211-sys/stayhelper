@@ -691,7 +691,7 @@ export default function StayHelperLuxuryShowcase() {
                       {currentStay.priceAmount} USD / night · Trip.com Live Partner Link
                     </div>
 
-                    {/* High-Converting CTA Button ("부킹하러 가자!" 감성 반영) */}
+                    {/* High-Converting CTA Button  */}
                     <div className="w-full max-w-[290px] py-3.5 px-5 rounded-2xl bg-gradient-to-r from-[#D4AF37] to-[#FDE047] hover:brightness-110 text-black font-luxury-sans font-bold text-sm flex items-center justify-center gap-2 shadow-2xl transition-transform hover:scale-105 mb-3">
                       <Calendar className="w-4 h-4 text-black" />
                       <span>Let's Book Your Stay ↗</span>
@@ -705,7 +705,7 @@ export default function StayHelperLuxuryShowcase() {
                       className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-black/80 hover:bg-black text-stone-300 hover:text-white text-xs font-mono border border-white/20 shadow-lg transition-colors"
                     >
                       <RotateCcw className="w-3.5 h-3.5 text-[#D4AF37]" />
-                      <span>Replay Video (다시보기)</span>
+                      <span>Replay Video </span>
                     </button>
                   </div>
                 )}

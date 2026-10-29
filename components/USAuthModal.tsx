@@ -124,11 +124,11 @@ export default function USAuthModal({
 
   const handleGoogleAuth = async () => {
     const targetEmail =
-      email && email.includes('@') ? email.trim() : 'yjongsung1211@gmail.com';
+      email && email.includes('@') ? email.trim() : 'guest@stayhelper.com';
     const targetName =
       name.trim() ||
-      (targetEmail === 'yjongsung1211@gmail.com'
-        ? '대표 (CEO)'
+      (targetEmail === 'guest@stayhelper.com'
+        ? 'VIP Guest'
         : targetEmail.split('@')[0]);
     await handleAuthSubmit(undefined, targetEmail, 'google', targetName);
   };
@@ -206,7 +206,7 @@ export default function USAuthModal({
                   d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
                 />
               </svg>
-              <span>Continue with Google ({email || 'yjongsung1211@gmail.com'})</span>
+              <span>Continue with Google</span>
             </button>
 
             {/* Minimal Divider */}
@@ -225,7 +225,7 @@ export default function USAuthModal({
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Full Name (e.g. Eleanor Vance / 대표)"
+                placeholder="Full Name (e.g. Eleanor Vance)"
                 className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#E7DEC8] text-stone-900 text-xs sm:text-sm placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-[#8F703C] focus:border-[#8F703C] transition shadow-xs font-luxury-sans"
               />
 
