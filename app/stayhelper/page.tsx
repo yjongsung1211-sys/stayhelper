@@ -597,7 +597,7 @@ export default function StayHelperLuxuryShowcase() {
       </header>
 
       {/* 3. PLAN A: MUSEUM-GRADE LUXURY SELECTOR + PREV/NEXT ART NAVIGATOR */}
-      <section className="relative z-40 border-b border-[#E7DEC8]/80 bg-gradient-to-b from-[#F7F2E9]/80 to-[#FAF7F2] py-2.5 sm:py-3 px-4 sm:px-8">
+      <section className="sticky top-20 sm:top-24 z-40 border-b border-[#E7DEC8] bg-[#FAF7F2]/95 backdrop-blur-md shadow-xs py-2 sm:py-2.5 px-4 sm:px-8 transition-all">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4" ref={selectorRef}>
           
           {/* Previous Sanctuary Button */}
@@ -662,7 +662,7 @@ export default function StayHelperLuxuryShowcase() {
                     Click to load Master Reel
                   </span>
                 </div>
-                <div className="max-h-[380px] overflow-y-auto space-y-1.5 pr-1">
+                <div className="max-h-[50vh] sm:max-h-[380px] overflow-y-auto space-y-1.5 pr-1">
                   {ALL_STAYS.map((stay, idx) => {
                     const isSelected = stay.id === selectedStayId;
                     return (
