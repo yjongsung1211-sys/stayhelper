@@ -1,0 +1,33 @@
+# Next.js
+/.next/
+/out/
+
+# Dependencies
+/node_modules/
+/.pnp
+.pnp.js
+
+# Env & Secrets
+.env*.local
+.env
+*token*.json
+*secrets*.json
+client_secrets*.json
+
+# Remotion Output & Large Renders
+remotion_studio/output/
+remotion_studio/.remotion/
+*.pyc
+__pycache__/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts

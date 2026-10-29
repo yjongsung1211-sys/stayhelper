@@ -1,0 +1,127 @@
+[
+  {
+    "id": "hana",
+    "name": "Hana",
+    "koreanName": "하나",
+    "age": 21,
+    "height": "173cm (5'8\")",
+    "ratio": "7-Head Golden Silhouette",
+    "role": "Leader · Center · Eldest",
+    "origin": "Tongyeong, South Korea",
+    "aesthetic": "Clean Girl Minimal · Seaside Warmth",
+    "signaturePalette": [
+      "Warm Oatmeal",
+      "Classic Navy",
+      "Ecru White",
+      "Faded Indigo Denim"
+    ],
+    "signatureItems": [
+      "Relaxed Cardigans",
+      "Straight Denim Jeans",
+      "Clean White Boxy Tees",
+      "Minimalist Loafers"
+    ],
+    "avatar": "/images/blue_note/hana_port_walk.png",
+    "bio": "Effortless coastal minimalism. Loves cozy knitwear, timeless straight-leg denim, and ceramics."
+  },
+  {
+    "id": "lea",
+    "name": "Léa",
+    "koreanName": "레아",
+    "age": 20,
+    "height": "175cm (5'9\")",
+    "ratio": "7-Head Athletic Silhouette",
+    "role": "Cool & Chic · Tallest Member",
+    "origin": "Nice, France",
+    "aesthetic": "French Chic · Sporty Athleisure",
+    "signaturePalette": [
+      "Midnight Navy",
+      "Breton Stripe",
+      "French Black",
+      "Crisp White"
+    ],
+    "signatureItems": [
+      "Oversized Moto Jackets",
+      "Breton Striped Knits",
+      "Performance Running Fits",
+      "Combat Boots"
+    ],
+    "avatar": "/images/blue_note/lea_blue_chair.png",
+    "bio": "French Riviera cool meets high-mobility sportswear. Surfer aesthetic with sharp tailoring."
+  },
+  {
+    "id": "nao",
+    "name": "Nao",
+    "koreanName": "나오",
+    "age": 20,
+    "height": "173cm (5'8\")",
+    "ratio": "7-Head Balanced Performer",
+    "role": "All-Rounder · Key Performer",
+    "origin": "Osaka, Japan",
+    "aesthetic": "Quiet Luxury · Studio Dancewear",
+    "signaturePalette": [
+      "Heather Charcoal",
+      "Slate Blue",
+      "Rich Cream",
+      "Ivory"
+    ],
+    "signatureItems": [
+      "Layered Zip Hoodies",
+      "Pleated Tennis & Midi Skirts",
+      "Soft Ribbed Knits",
+      "Court Sneakers"
+    ],
+    "avatar": "/images/blue_note/nao_cafe_knit.png",
+    "bio": "Chic short leaf-perm with an old-money grace. Seamlessly balances studio dancewear with heritage Japanese minimalism."
+  },
+  {
+    "id": "jiwoo",
+    "name": "Jiwoo",
+    "koreanName": "지우",
+    "age": 18,
+    "height": "165cm (5'5\")",
+    "ratio": "7-Head Active Dancer",
+    "role": "Maknae Line · Style Chameleon",
+    "origin": "Los Angeles / Shanghai (US National)",
+    "aesthetic": "Y2K Downtown Street · Cali Chill",
+    "signaturePalette": [
+      "Washed Black",
+      "Vintage Olive",
+      "Acid Wash Denim",
+      "Cream"
+    ],
+    "signatureItems": [
+      "Cropped Baby Tees",
+      "Parachute Cargo Pants",
+      "Vintage Bomber Jackets",
+      "Platform Dunks"
+    ],
+    "avatar": "/images/blue_note/jiwoo_street_graffiti.png",
+    "bio": "Laid-back West Coast energy with sharp streetwear flair. Vintage cafe lover and headphone enthusiast."
+  },
+  {
+    "id": "seoyun",
+    "name": "Seoyun",
+    "koreanName": "서윤",
+    "age": 18,
+    "height": "166cm (5'5\")",
+    "ratio": "7-Head Natural Silhouette",
+    "role": "Maknae · High-Teen Energy",
+    "origin": "Seoul, South Korea (Multi-Heritage)",
+    "aesthetic": "K-Pop High-Teen · Home Cozy Cook",
+    "signaturePalette": [
+      "Pastel Lavender",
+      "Butter Yellow",
+      "Light Denim",
+      "Oatmeal"
+    ],
+    "signatureItems": [
+      "Oversized Varsity Pullovers",
+      "Linen Aprons & Mules",
+      "Baggy Fatigue Pants",
+      "Retro Runners"
+    ],
+    "avatar": "/images/blue_note/seoyun_table_feast.png",
+    "bio": "Playful foodie and high-teen athleisure icon. Loves cozy kitchen lounging, oversized sweatshirts, and retro sneakers."
+  }
+]

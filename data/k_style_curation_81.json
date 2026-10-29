@@ -1,0 +1,704 @@
+[
+  {
+    "lookNumber": 3,
+    "title": "스포티 고프코어 (Sporty Utility / 힙한 스트리트)",
+    "mood": "Hongdae Street & Gorpcore",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 스포티 고프코어 (Sporty Utility / 힙한 스트리트)\n* **Top**: 배색 나일론 윈드브레이커 (지퍼는 위아래 살짝 열린 투웨이 연출)\n* **Bottom**: 와이드 카고 파라슈트 팬츠 (밑단 스트링 조여서 조거 형태로 연출)\n* **Shoes**: 테크니컬 고프코어 트레일 슈즈 (살로몬 XT-6 등)\n* **Acc**: 나일론 크로스백, 스포티한 선글라스, 실버 카라비너 키링\n\n"
+  },
+  {
+    "lookNumber": 4,
+    "title": "모던 프레피 & 올드머니 (Modern Preppy)",
+    "mood": "Collegiate Preppy",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 모던 프레피 & 올드머니 (Modern Preppy)\n* **Top**: 네이비 금장 단추 크롭 자켓 + 이너 화이트 슬리브리스\n* **Bottom**: 테니스 플리츠 스커트 (미니 기장) or 하이웨이스트 크림 팬츠\n* **Shoes**: 클래식 버클 로퍼 + 화이트 앵클 삭스\n* **Acc**: 캔버스 앤 레더 배색 토트백, 얇은 헤어밴드(머리띠)\n\n---\n\n## 5. 실전 적용 시 핵심 체크리스트 (Summary)\n\n1. **상하의 중 한쪽만 살릴 것**: 상의가 루즈하면 하의는 짧거나 슬림하게, 상의가 타이트하면 하의는 풍성하고 와이드하게.\n2. **질감(Texture)의 대비**: 가죽(레더) + 니트, 나일론 + 코튼, 레이스 + 오버핏 자켓처럼 서로 다른 원단 질감을 섞어 밋밋함을 없앨 것.\n3. **밑단의 여백**: 와이드 팬츠는 신발 윗등을 살짝 덮는 '브레이크(Break)' 기장으로 신발과 바지가 자연스럽게 이어지게 연출할 것.\n\n---\n\n대표님, 이 가이드를 바탕으로 **StylingHelper 화보 생성용 프롬프트 디테일**이나 **Remotion 기반의 패션 쇼케이스/룩북 영상**에 그대로 녹여내실 수 있습니다. \n\n추가로 준비하신 "
+  },
+  {
+    "lookNumber": 5,
+    "title": "로맨틱 빈티지 페미닌 트래블 룩 (Romantic Travel Casual)",
+    "mood": "Feminine & Balletcore",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 로맨틱 빈티지 페미닌 트래블 룩 (Romantic Travel Casual)\n\n```\n[ 상의 ] 뮤트 모브 퍼플 오버핏 브이넥 니트 + 아이보리 플로럴 스캘럽 레이스 캐미솔\n[ 하의 ] 무릎 슬릿 디스트로이드 연청 와이드 데님 팬츠\n[ 슈즈 ] 웜 카멜 브라운 스웨이드 슬라우치 힐 부츠\n[ 가방 ] 코냑 브라운 스웨이드 숄더백 (★스트랩에 마블 집게핀 꽂기)\n[ 헤어 ] 내추럴 번(올림머리) & 잔머리 페이스라인 연출\n```\n\n---\n\n### 1. 컬러 팔레트 & 감성 조화 (Color Balance)\n\n| 영역 | 컬러 칩 / 명칭 | 소재 텍스처 | 스타일링 의도 |\n| :--- | :--- | :--- | :--- |\n| **Main Top** | **Muted Mauve / Orchid Purple** (차분한 보랏빛) | 헤어리한 울/모헤어 혼방 니트 | 쿨하고 몽환적인 파스텔 톤으로 피부톤을 맑아 보이게 하며, 여행지 풍경 속에서 자연스러운 독보적 포인트 형성 |\n| **Inner** | **Ivory / Butter White** | 섬세한 스캘럽 플로럴 레이스 | 짙은 노출감을 덜어내고 여리여리한 로맨틱 감성과 레이어드 깊이감 부여 |\n| "
+  },
+  {
+    "lookNumber": 6,
+    "title": "소프트 바이올렛 톤온톤 & 스카프 라운지 룩 (Monochromatic Violet Lounge)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 소프트 바이올렛 톤온톤 & 스카프 라운지 룩 (Monochromatic Violet Lounge)\n\n```\n[ 상의 ] 딥 플럼(자두빛/다크 퍼플) 슬림 브이넥 린넨-울 니트 풀오버\n[ 이너 ] 페일 라벤더 플로럴 스캘럽 레이스 슬립 나시\n[ 하의 ] 라일락/페일 바이올렛 루즈핏 드로우스트링 와이드 트레이닝 팬츠\n[ 목장식 ] 크링클(주름진) 씬 화이트 코튼 스키니 스카프\n[ 슈즈 ] 청키한 라운드 토 블랙 컴포트 슈즈 / 클로그 스니커즈\n[ 헤어 ] 정갈하게 빗어 넘긴 단발 태슬컷 (Tassel Bob Hair)\n```\n\n---\n\n### 1. 컬러 팔레트 & 3단계 톤온톤 공식 (Color Harmony)\n\n보라색은 자칫 잘못 입으면 촌스러워지기 쉬운 고난도 컬러인데, 이 룩은 **‘짙은 보라 → 중간 보라 → 옅은 보라’의 명도 그라데이션**으로 완벽한 세련미를 연출했습니다.\n\n| 계층 | 명칭 / 컬러 | 시각적 효과 및 스타일링 의도 |\n| :--- | :--- | :--- |\n| **Top (상의)** | **Deep Plum / Dark Violet** (짙은 자두빛 보라) | 상체를 차분하고 슬림하게 눌러주며, 얼굴빛을 또렷하게 살려주는 중심 "
+  },
+  {
+    "lookNumber": 7,
+    "title": "모던 나이트아웃 시어 드레이프 룩 (Sheer Glam & Boots-In Denim)",
+    "mood": "Downtown Noir & Glam",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 모던 나이트아웃 시어 드레이프 룩 (Sheer Glam & Boots-In Denim)\n\n```\n[ 상의 ] 블랙 폴드오버 드레이프 오프숄더 + 복부/소매 시어 메쉬(Sheer Mesh) 탑\n[ 목장식 ] 초슬림 골드 체인 네크리스 (쇄골 포인트)\n[ 하의 ] 미드라이즈 페일 빈티지 워싱 스트레이트 데님 진\n[ 슈즈 ] 샤프한 포인티드 토 블랙 레더 니하이(Knee-high) 와이드 롱부츠\n[ 가방 ] 블랙 하프문(크레센트) 레더 호보 숄더백\n[ 헤어 ] 볼륨감 있는 브라운 웨이브 단발 & 시스루 뱅 (Wavy Short Bob)\n```\n\n---\n\n### 1. 컬러 팔레트 & 텍스처 대비 (Color & Texture Contrast)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Top (상의)** | **Jet Black** | 불투명 드레이프 원단 × 은은한 시어 메쉬(Sheer Mesh) | 가슴은 단단하게 잡아주고(불투명), 복부와 팔 라인은 피부가 비쳐 관능적이고 슬림해 보이는 시각적 착시 극대화 |\n| **Bottom (하의)** | **Faded Vintage Blue"
+  },
+  {
+    "lookNumber": 8,
+    "title": "빈티지 코티지코어 & 보헤미안 트래블러 룩 (Boho Cottagecore Traveler)",
+    "mood": "Seongsu Vintage Workwear",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 빈티지 코티지코어 & 보헤미안 트래블러 룩 (Boho Cottagecore Traveler)\n\n```\n[ 상의 ] 베이비 핑크 빈티지 워시드 그래픽 루즈핏 니트 (사선 오프숄더 연출)\n[ 이너 ] 화이트 스파게티 스트랩 슬립 나시 (어깨 끈 노출)\n[ 하의 ] 핑크&베이지 빈티지 잔꽃무늬(Floral) 레이스 트리밍 미디 스커트\n[ 모자 ] 샌드 베이지 린넨-코튼 뉴스보이 캡 (베이커보이 캡)\n[ 슈즈 ] 카멜/탄 브라운 레더 미들 웨스턴 카우보이 부츠\n[ 가방 ] 다크 초콜릿 브라운 플랩 드로우스트링 나일론 백팩\n[ 헤어 ] 내추럴하게 풀어헤친 롱 스트레이트 흑발 (Natural Long Dark Hair)\n```\n\n---\n\n### 1. 컬러 팔레트 & 감성 조화 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 의도 |\n| :--- | :--- | :--- | :--- |\n| **Top (상의)** | **Baby Pink / Dusty Rose** | 포근한 루즈 조직 니트 + 빈티지 그래픽 | 상체를 부드럽고 사랑스럽게 톤업하며 햇살을 머금은 듯한 따스한 온도감 부여 |\n| **Skirt (하의)** | **Pastel"
+  },
+  {
+    "lookNumber": 9,
+    "title": "어반 고프-발레코어 & 다크 긱시크 룩 (Elevator Dark Balletcore)",
+    "mood": "Feminine & Balletcore",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 어반 고프-발레코어 & 다크 긱시크 룩 (Elevator Dark Balletcore)\n\n```\n[ 아우터 ] 블랙 테일러드 원버튼/토글 블레이저 재킷\n[ 이너 ] 클린 화이트 집업 후디 (모자를 머리 위로 완전히 푹 눌러씀)\n[ 하의 ] 블랙 테크니컬 A라인 플레어 미디 스커트 (밑단 와이드 립 밴딩)\n[ 레그웨어 ] 버터 크림 옐로우 골지 니트 레그워머 (Leg Warmers)\n[ 슈즈 ] 볼드한 투 스트랩(Two-strap) 청키 플랫폼 메리제인 슈즈\n[ 가방 ] 실버 메탈릭 키스락(Kiss-lock) 프레임 크로스백 (레드 포인트 참 부착)\n[ 악세서리 ] 귓가에서 턱선으로 길게 흘러내리는 아날로그 화이트 유선 이어폰\n```\n\n---\n\n### 1. 컬러 팔레트 & 텍스처 조합 (Color & Material Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Outer & Skirt** | **Jet Black** | 매트 테일러드 수트 원단 & A라인 패브릭 | 룩의 중심을 묵직하고 시크한 다크 무드로 통일 |\n| **Inner Hood** | **Crisp Wh"
+  },
+  {
+    "lookNumber": 10,
+    "title": "딥 포레스트 칠 힙스터 & 뮤직코어 룩 (Deep Forest Cafe Chill)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 딥 포레스트 칠 힙스터 & 뮤직코어 룩 (Deep Forest Cafe Chill)\n\n```\n[ 아우터 ] 딥 포레스트 그린(솔잎색) 벌키 울 바시티/봄버 재킷 (블랙 골지 넥 칼라)\n[ 이너 ] 다크 그런지 그래픽 블랙 슬림 탑\n[ 목장식 ] 초슬림 미니멀 실버 체인 네크리스\n[ 테크 악세서리 ] 매트 블랙 오버이어 무선 헤드폰 (Over-ear ANC Headphones)\n[ 헤어 ] 층이 많은 흑발 텍스처드 허쉬컷 단발 & 시스루 뱅 (Textured Shaggy Hush Cut)\n[ 아이/메이크업 ] 오묘한 헤이즐/그레이 컬러 렌즈 & 누디 모브 글로시 립\n[ 무드 ] 도심 카페 창가에서 음료를 앞에 두고 음악을 듣는 나른한 ‘칠(Chill)’ 바이브\n```\n\n---\n\n### 1. 컬러 팔레트 & 분위기 조화 (Color & Mood Balance)\n\n| 영역 | 컬러 칩 | 소재 & 텍스처 | 시각적 효과 |\n| :--- | :--- | :--- | :--- |\n| **Main Outer** | **Deep Forest Green / Pine** (짙은 솔잎/청록빛) | 도톰한 펠트 울(Wool) 혼방 소재 | 블랙보다 지적이고 유니크하며, 차분하"
+  },
+  {
+    "lookNumber": 11,
+    "title": "리조트 올드머니 실키 미니멀 룩 (Silky Cowl-Neck Resort Chic)",
+    "mood": "Hannam Quiet Luxury",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 리조트 올드머니 실키 미니멀 룩 (Silky Cowl-Neck Resort Chic)\n\n```\n[ 상의 ] 슬레이트 차콜 그레이 드레이프 카울넥(Cowl-neck) 셔링 홀터 탑\n[ 하의 ] 퓨어 화이트/아이보리 바이어스 컷(Bias-cut) 실크/새틴 맥시 스커트\n[ 슈즈 ] 미니멀 뉴트럴 플랫 슬라이드 샌들 / 슬립온 뮬\n[ 헤드웨어 ] 롱 흑발 정수리 위에 헤어밴드처럼 얹은 블랙 선글라스\n[ 소품 ] 투명 플라스틱 컵에 담긴 테이크아웃 아이스 라떼\n[ 무드 ] 이국적인 유럽풍 모자이크 자갈길 골목을 걷는 청량하고 우아한 바캉스 무드\n```\n\n---\n\n### 1. 컬러 팔레트 & 소재 조화 (Color & Material Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Top (상의)** | **Slate Charcoal Grey** (푸른빛 도는 차콜) | 텐셀/모달 혼방 소프트 저지 (자연스러운 주름) | 쿨하고 지적인 톤으로 상체를 슬림하게 잡아주며, 쇄골과 어깨 피부톤을 더욱 화사하게 대비 |\n| **Skirt (하의)** | **Pure Silky Whit"
+  },
+  {
+    "lookNumber": 12,
+    "title": "키치 프레피 & 비비드 컬러블록 룩 (Kitsch Preppy & Color-Block)",
+    "mood": "Collegiate Preppy",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 키치 프레피 & 비비드 컬러블록 룩 (Kitsch Preppy & Color-Block)\n\n```\n[ 아우터 탑 ] 비비드 마젠타 베리(Berry Violet) 브이넥 크롭 니트 가디건\n[ 이너 셔츠 ] 흑백 마이크로 깅엄 체크(Gingham Check) 칼라 셔츠 (소매 롤업 노출)\n[ 언더 레이어] 차콜 그레이 헴라인 레이어드 슬립 탑\n[ 하의 ] 올리브 그린 / 아보카도 슬림 핏 로우라이즈 마이크로 미니스커트\n[ 삭스 ] 자연스러운 주름의 아이보리/화이트 미들 골지 삭스\n[ 슈즈 ] 청키한 플랫폼 아웃솔의 블랙 레이스업 컴뱃 워크부츠\n[ 소품 & 무드 ] 대형 골든 리트리버 봉제인형을 안고 장난스럽게 웃는 하이틴 무드\n```\n\n---\n\n### 1. 컬러 팔레트 & 고난도 보색 이론 (Color Harmony)\n\n| 영역 | 컬러 | 패턴 & 텍스처 | 스타일링 의도 및 시각적 효과 |\n| :--- | :--- | :--- | :--- |\n| **Main Cardigan** | **Vivid Berry Magenta** (채도 높은 자주/보라) | 촘촘한 코튼-울 니트 | 얼굴을 화사하게 톤업하며 룩의 활기와 통통 튀는 키치함을 리드 |\n| **Patt"
+  },
+  {
+    "lookNumber": 13,
+    "title": "사이버 그런지 & 밀리터리 락시크 룩 (Cyber Grunge & Cadet Chic)",
+    "mood": "Hongdae Street & Gorpcore",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 사이버 그런지 & 밀리터리 락시크 룩 (Cyber Grunge & Cadet Chic)\n\n```\n[ 아우터 ] 워시드 차콜 블랙 크롭 레더 바이커 재킷 (프론트 토글/매듭 클로저 디테일)\n[ 이너 ] 클린 화이트 스트랩리스 밴도(Bandeau) 튜브탑\n[ 하의 ] 미니멀 블랙 코튼-스판덱스 로우라이즈 핫팬츠 쇼츠\n[ 헤드웨어 ] 각 잡힌 매트 블랙 밀리터리 카데트 캡 (Cadet Patrol Cap)\n[ 헤어 & 메이크업] 양갈래로 촘촘히 땋아 내린 브레이드 헤어(Pigtails) & 볼드 레드 립\n[ 슈즈 ] 볼드한 버클 디테일의 블랙 레더 미들 바이커/엔지니어 부츠\n[ 악세서리 ] 귓가에서 가슴 앞까지 지그재그로 늘어뜨린 클래식 화이트 유선 이어폰\n```\n\n---\n\n### 1. 컬러 팔레트 & 강렬한 콘트라스트 (Color & Contrast)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Outer & Bottom**| **Washed Charcoal / Jet Black** | 빈티지 레더(재킷) & 매트 코튼(쇼츠) | 어둡고 시크한 그런지 락시크 무드의 베이스를 구축 |\n"
+  },
+  {
+    "lookNumber": 14,
+    "title": "체리 레드 넥클로즈 & 캐주얼 데님 룩 (Top-Fastened Red Knit)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 체리 레드 넥클로즈 & 캐주얼 데님 룩 (Top-Fastened Red Knit)\n\n```\n[ 아우터 ] 딥 체리 레드 청키 골지 니트 집업 가디건 (하이넥 버튼만 잠그고 아래 전체 오픈)\n[ 이너 ] 크림 화이트 슬림핏 크루넥 베이비 티셔츠 (한쪽 허리라인 사선 노출)\n[ 벨트 ] 클래식 실버 오벌 버클 블랙 레더 벨트\n[ 하의 ] 미디엄 워시드 빈티지 블루 릴랙스 와이드 데님 팬츠\n[ 슈즈 ] 헤리티지 그레이 메쉬 레트로 러닝 스니커즈 (New Balance 스타일)\n[ 헤어 & 테크] 단정하게 귀 뒤로 넘긴 스트레이트 다크 헤어 & 화이트 에어팟(AirPods)\n```\n\n---\n\n### 1. 컬러 팔레트 & 실패 없는 3색 클래식 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Main Knit** | **Vivid Cherry Red** (선명한 체리 레드) | 볼륨감 있는 헤비 골지(Ribbed) 니트 | 시선을 단숨에 사로잡으며 얼굴빛을 가장 생기 있게 밝혀주는 확실한 포인트 컬러 |\n| **Inner Tee** | **Cream Ivory Wh"
+  },
+  {
+    "lookNumber": 15,
+    "title": "릴랙스 그레이 골지 & 슬림 스키니 룩 (Effortless Grey Knit & Skinny)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 릴랙스 그레이 골지 & 슬림 스키니 룩 (Effortless Grey Knit & Skinny)\n\n```\n[ 상의 ] 멜란지 헤더 그레이(Heather Grey) 와이드 골지 루즈핏 브이넥 니트\n[ 이너 ] 다크 차콜/그린-그레이 플로럴 스캘럽 레이스 슬립 캐미솔 (넥라인 살짝 노출)\n[ 하의 ] 매트 블랙 울트라 슬림핏 스키니 팬츠 / 레깅스 슬랙스\n[ 가방 ] 더스티 라일락 / 모브 퍼플 레더 숄더백 (독특한 폴디드 셰이프)\n[ 헤어 ] 정수리 높이 깔끔하게 틀어 올린 하이 탑 번(Top Knot Bun / 똥머리)\n[ 악세서리 ] 귓가에서 가슴 앞으로 자연스럽게 늘어진 화이트 유선 이어폰\n[ 무드 ] 가벼운 외출길 엘리베이터에서 포착된 편안하고 청초한 원마일 미니멀\n```\n\n---\n\n### 1. 컬러 팔레트 & 톤온톤 미학 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Main Knit** | **Melange Heather Grey** (은은한 멜란지 그레이) | 부드럽고 가벼운 와이드 골지(Ribbed) 니트 | 차분하고 세련된 도시적인 무드를 "
+  },
+  {
+    "lookNumber": 16,
+    "title": "네이비 × 선플라워 옐로우 컬러팝 룩 (Navy & Yellow Contrast Layering)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 네이비 × 선플라워 옐로우 컬러팝 룩 (Navy & Yellow Contrast Layering)\n\n```\n[ 아우터 탑 ] 딥 네이비 크루넥 슬림 가디건 (하단 단추를 풀어 역V자로 오픈 연출)\n[ 이너 탑 ] 비비드 선플라워 옐로우(해바라기색) 슬림 크루넥 티셔츠\n[ 하의 ] 미드라이즈 빈티지 페이디드 미디엄 블루 스트레이트 와이드 데님 팬츠\n[ 벨트 ] 클래식 실버 오벌 버클 블랙 레더 벨트\n[ 가방 ] 어깨 겨드랑이 아래 밀착되는 도톰한 블랙 레더 숄더백\n[ 슈즈 ] 매트 블랙 미니멀 레더 더비 슈즈 / 클로그\n[ 헤어 & 소품] 자연스러운 롱 브라운 웨이브 헤어 & 핑크 스마트폰 케이스 & 에어팟\n```\n\n---\n\n### 1. 컬러 팔레트 & 생동감 넘치는 보색 조화 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Main Cardigan** | **Deep Classic Navy** (차분한 딥 네이비) | 매끄러운 파인 게이지 울-코튼 니트 | 룩의 전체적인 단정함과 클래식한 프레피 무드를 단단하게 지탱 |\n| **Inner Pop Color*"
+  },
+  {
+    "lookNumber": 17,
+    "title": "하이넥 벨티드 코쿤 & 하의실종 럭스 룩 (Funnel-Neck Belted Luxe)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 하이넥 벨티드 코쿤 & 하의실종 럭스 룩 (Funnel-Neck Belted Luxe)\n\n```\n[ 아우터 ] 딥 제트블랙 헤비 울 하이 펀넬넥(Funnel-neck) 벨티드 하프 코트\n[ 벨트 연출 ] 코트와 동일한 와이드 울 벨트를 매듭지어 묶고 꼬리를 길게 늘어뜨림\n[ 하의 ] 코트 밑단 안쪽으로 살짝 숨겨진 마이크로 블랙 쇼츠 (하의 실종 연출)\n[ 슈즈 ] 발목 주름이 자연스러운 블랙 카프스킨 슬라우치(Slouchy) 미들 부츠\n[ 가방 ] 은은한 광택감이 도는 딥 에스프레소 브라운 가죽 숄더 토트백\n[ 헤어 & 메이크업] 정갈하게 빗어 넘겨 낮게 묶은 슬릭 로우 번(Sleek Low Bun)\n[ 무드 ] 찬바람을 완벽히 차단한 도회적이고 시크한 윈터 꾸안꾸 럭셔리\n```\n\n---\n\n### 1. 컬러 팔레트 & 텍스처 대비 (Color & Material Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Main Coat** | **Deep Jet Black** (완벽한 매트 블랙) | 두툼하고 각이 잡히는 멜톤/펠트 울 | 상체를 묵직하고 따뜻하게 감싸며 고급"
+  },
+  {
+    "lookNumber": 18,
+    "title": "로맨틱 빈티지 레이스 & 프레피 미니 룩 (Romantic Lace Preppy Chic)",
+    "mood": "Collegiate Preppy",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 로맨틱 빈티지 레이스 & 프레피 미니 룩 (Romantic Lace Preppy Chic)\n\n```\n[ 상의 ] 크림 아이보리 시어 플로럴 레이스 롱 슬리브 하이넥 블라우스\n[ 하의 ] 매트 블랙 A라인 플레어/플리츠 미니스커트\n[ 삭스 ] 발목 위로 올라오는 클린 화이트 코튼 크루 삭스 (자연스러운 주름)\n[ 슈즈 ] 볼드한 실버 라운드 버클이 장식된 블랙 레더 몽크 스트랩 로퍼 (Monk Loafers)\n[ 가방 ] 어깨에 가볍게 멘 블랙 레더 숄더백 (손에는 카키 야상 아우터 휴대)\n[ 헤어 ] 청순함을 극대화하는 롱 웨이브 반묶음 헤어 (Half-up Half-down)\n[ 포즈 ] 엘리베이터 층 버튼을 누르며 장난스럽게 웃는 다이내믹한 순간 포착\n```\n\n---\n\n### 1. 컬러 팔레트 & 클래식 콘트라스트 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Main Blouse** | **Cream / Butter Ivory** (부드러운 크림빛) | 입체적인 자수 플로럴 레이스 (Lace) | 피부톤을 화사하고 맑게 띄워주며 로맨틱하고 빈티지한 "
+  },
+  {
+    "lookNumber": 19,
+    "title": "파리지앵 맥시 트렌치 & 빈티지 모터 시크 룩 (Parisian Trench & Motor Chic)",
+    "mood": "Seongsu Vintage Workwear",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 파리지앵 맥시 트렌치 & 빈티지 모터 시크 룩 (Parisian Trench & Motor Chic)\n\n```\n[ 아우터 ] 오트밀 샌드 베이지 맥시 오버사이즈 트렌치코트 (군더더기 없는 미니멀 실루엣)\n[ 이너 ] 매트 블랙 슬림 버튼 가디건 / 롱 슬리브 니트 탑 (소매가 손등을 감쌈)\n[ 하의 ] 머디 옐로우 틴트(Muddy/Yellowish tint) 페이디드 루즈 와이드 데님 진\n[ 슈즈 ] 데님 밑단 밖으로 날카롭게 튀어나오는 블랙 레더 울트라 포인티드 토 힐 부츠\n[ 가방 ] 다크 러스트/초콜릿 브라운 스웨이드 모터백 (스터드 & 롱 가죽 태슬 디테일)\n[ 헤어 ] 시스루 뱅을 내린 내추럴 로우 번 헤어 (바람에 자연스럽게 흩날리는 잔머리)\n[ 배경 & 무드 ] 비 내린 후 촉촉한 파리 노천 카페 아케이드 기둥 아래에서의 시네마틱 무드\n```\n\n---\n\n### 1. 컬러 팔레트 & 하이엔드 빈티지 배색 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Main Trench** | **Oatmeal Sand Beige** (차분한 오트밀 베이지) "
+  },
+  {
+    "lookNumber": 20,
+    "title": "모카 랩 맥시 & 얼씨 올드머니 룩 (Mocha Belted Wrap Maxi Chic)",
+    "mood": "Hannam Quiet Luxury",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 모카 랩 맥시 & 얼씨 올드머니 룩 (Mocha Belted Wrap Maxi Chic)\n\n```\n[ 상의 ] 오트밀 샌드 베이지 파인 게이지 슬림 가디건 (상단 단추를 2개 풀어 은은한 V넥 오픈)\n[ 하의 ] 딥 모카 브라운 A라인 랩(Wrap) 맥시 스커트 (허리 사이드 실버 직사각 버클 디테일)\n[ 슈즈 ] 발등 버클 스트랩 디테일의 매트 블랙 레더 앵클 부츠\n[ 가방 ] 컴팩트한 블랙 스웨이드 직사각형 바게트 숄더백\n[ 헤어 ] 볼륨감 넘치게 안으로 안착된 풍성한 흑발 숏단발 (Classic Voluminous Bob)\n[ 배경 & 무드 ] 짙은 에스프레소 컬러의 감성 카페 앞 테라스 바위 벤치에서의 우아한 여유\n```\n\n---\n\n### 1. 컬러 팔레트 & 얼씨 톤온톤 공식 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Top (상의)** | **Oatmeal Sand Beige** (오트밀 베이지) | 얇고 부드러운 파인 울-텐셀 혼방 | 피부톤을 차분하고 우아하게 정돈하며 가을 햇살을 부드럽게 흡수하는 미니멀 상의 |\n| **Wrap Ski"
+  },
+  {
+    "lookNumber": 21,
+    "title": "크림 워크재킷 & 피치 쉬폰 믹스 룩 (Canvas Work Jacket & Chiffon)",
+    "mood": "Feminine & Balletcore",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 크림 워크재킷 & 피치 쉬폰 믹스 룩 (Canvas Work Jacket & Chiffon)\n\n```\n[ 아우터 ] 크림 에크루(Ecru) 오버사이즈 캔버스 워크재킷 (다크 브라운 코듀로이 배색 칼라)\n[ 이너 탑 ] 손등을 감싸는 초미세 화이트 시어(Sheer) 핑거홀(Thumbhole) 롱슬리브\n[ 하의 ] 걸을 때마다 찰랑거리는 소프트 피치 누드 쉬폰/새틴 맥시 롱스커트\n[ 슈즈 ] 카멜/탄 브라운 스웨이드 빈티지 레트로 로우탑 스니커즈 (Samba/Palermo 류)\n[ 가방 ] 양옆 날개가 우아하게 펼쳐지는 버터 크림 레더 윙 숄더 토트백\n[ 헤어 & 소품] 자연스러운 롱 브라운 웨이브 & 손에 쥔 선글라스 & 감성 세라믹 머그컵\n[ 배경 & 무드 ] 모던한 스케이트보드 데코와 카페 테라스 데크를 거니는 여유로운 주말 감성\n```\n\n---\n\n### 1. 컬러 팔레트 & 텍스처 대비 공식 (Color & Texture Harmony)\n\n이 룩은 **‘투박함(Rugged)과 가녀림(Delicate)’**이라는 정반대의 소재를 한 착장에 녹여낸 것이 핵심입니다.\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :"
+  },
+  {
+    "lookNumber": 22,
+    "title": "미드나잇 블루종 & 바이커 턱인 룩 (Midnight Blouson & Boots Tuck-in)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 미드나잇 블루종 & 바이커 턱인 룩 (Midnight Blouson & Boots Tuck-in)\n\n```\n[ 아우터 ] 딥 미드나잇 네이비 지퍼 블루종 재킷 (카라를 세워 하이넥 연출 가능)\n[ 이너 탑 ] 군더더기 없는 클린 화이트 크루넥 코튼 슬림 티셔츠 (하이웨이스트 턱인)\n[ 하의 ] 클래식 미디엄 블루 스트레이트 빈티지 데님 진 (부츠 안으로 찔러 넣음)\n[ 슈즈 ] 실버 링 & 버클 하네스 스트랩이 달린 블랙 스웨이드 미들 바이커 부츠\n[ 가방 ] 소프트한 질감의 볼륨감 있는 블랙 레더 숄더 토트백\n[ 헤어 ] 시스루 뱅을 내린 찰랑거리는 롱 스트레이트 흑발 (Long Sleek Black Hair)\n[ 배경 & 소품 ] 우드 'COFFEE' 입간판, 투명 유리잔의 아이스 아메리카노, 민트색 베스파 스쿠터\n```\n\n---\n\n### 1. 컬러 팔레트 & 쿨톤 클래식의 진수 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Jacket** | **Deep Midnight Navy** (짙은 밤하늘색) | 부드럽고 매트한 코튼-울 트윌 | 블랙보다 은"
+  },
+  {
+    "lookNumber": 23,
+    "title": "청량 모리걸 & 모노크롬 베스트 룩 (Clean Mori-Girl Maxi Dress)",
+    "mood": "Feminine & Balletcore",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 청량 모리걸 & 모노크롬 베스트 룩 (Clean Mori-Girl Maxi Dress)\n\n```\n[ 드레스 ] 퓨어 화이트 2단 티어드 코튼 맥시 원피스 (손목 셔링 프릴 커프스 디테일)\n[ 레이어드 베스트 ] 매트 블랙 루즈핏 크롭 유틸리티/볼륨 베스트 (조끼)\n[ 슈즈 ] 청키한 통굽 아웃솔의 블랙 레더 플랫폼 더비 슈즈 / 로퍼\n[ 가방 ] 내추럴 아이보리 코튼 캔버스 에코백 (숄더 착용)\n[ 헤어 ] 이마를 덮는 가지런한 풀뱅(Full Fringe Bangs) & 산뜻한 단발머리\n[ 포즈 & 배경 ] 전봇대와 전깃줄이 낭만적인 오르막 골목길에서 취하는 활기찬 만세 포즈\n```\n\n---\n\n### 1. 컬러 팔레트 & 흑백의 청량한 대비 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Maxi Dress** | **Pure Crisp White** (순백의 화이트) | 가볍고 바스락거리는 코튼 포플린 | 반사판처럼 빛을 받아 얼굴과 전신을 극도로 화사하고 깨끗하게 밝혀줌 |\n| **Layered Vest** | **Solid Jet Black** | 탄"
+  },
+  {
+    "lookNumber": 24,
+    "title": "선샤인 피크닉 모헤어 오프숄더 룩 (Picnic Fluffy Mohair Knit)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 선샤인 피크닉 모헤어 오프숄더 룩 (Picnic Fluffy Mohair Knit)\n\n```\n[ 상의 ] 멜란지 라이트 헤더 그레이 루즈핏 보송한 모헤어/알파카 브이넥 니트 (한쪽 어깨 드롭 연출)\n[ 이너 ] 클린 화이트 슬리브리스 슬립 탑 (어깨선과 쇄골 뒤로 깨끗하게 노출)\n[ 하의 ] 미니멀 매트 블랙 미니스커트\n[ 헤어 ] 풍성한 컬이 살아있는 하이 웨이브 포니테일 (얼굴선을 감싸는 내추럴 옆머리)\n[ 악세서리 & 테크 ] 귓가에서 스마트폰으로 연결된 클래식 화이트 유선 이어폰\n[ 배경 & 소품 ] 햇살이 쏟아지는 잔디밭 위 흑백 스트라이프 피크닉 매트 & 블랙 가죽 가방\n[ 무드 ] 나른한 오후 공원 잔디밭에 앉아 음악을 들으며 올려다보는 청초하고 여리여리한 무드\n```\n\n---\n\n### 1. 컬러 팔레트 & 햇살을 머금은 텍스처 (Color & Texture Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Main Knit** | **Heather Melange Grey** (은은한 멜란지 그레이) | 솜털이 살아있는 보송보송한 모헤어(Mohair) | 햇"
+  },
+  {
+    "lookNumber": 25,
+    "title": "크림 랩 가디건 & 샌드 베이지 미니 룩 (Cream Wrap Knit & Beige Mini)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 크림 랩 가디건 & 샌드 베이지 미니 룩 (Cream Wrap Knit & Beige Mini)\n\n```\n[ 상의 ] 소프트 크림 아이보리 루즈핏 파인 니트 랩 가디건 (어깨 드롭 & 소매 걷어 올림)\n[ 이너 탑 ] 은은한 물결 레이스 트리밍의 크림 화이트 슬립 캐미솔 (쇄골 라인 노출)\n[ 하의 ] 미니멀 샌드 베이지 슬림 A라인 마이크로 미니스커트\n[ 가방 ] 어깨에 무심하게 멘 볼륨감 있는 오버사이즈 블랙 레더/캔버스 빅 쇼퍼백\n[ 헤어 ] 허리까지 매끄럽게 떨어지는 내추럴 브라운 롱 스트레이트 헤어\n[ 포즈 & 무드 ] 햇살이 쏟아지는 가로수길 카페 테라스에서 환하게 웃는 청순한 데이트 무드\n```\n\n---\n\n### 1. 컬러 팔레트 & 웜 뉴트럴 톤온톤 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Top & Inner** | **Cream Ivory & Butter White** | 부드러운 파인 울 니트 × 섬세한 플로럴 레이스 | 반사판처럼 빛을 반사하여 피부를 투명하게 밝히고 몽환적인 여리핏 완성 |\n| **Mini Skirt** | *"
+  },
+  {
+    "lookNumber": 26,
+    "title": "갤러리 미니멀 & 레오파드 플랫 룩 (Gallery Minimalist & Leopard Flats)",
+    "mood": "Hannam Quiet Luxury",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 갤러리 미니멀 & 레오파드 플랫 룩 (Gallery Minimalist & Leopard Flats)\n\n```\n[ 아우터 탑 ] 버터 크림 아이보리 래글런 벌룬 슬리브 라운드넥 가디건 (하단 단추 오픈 연출)\n[ 이너 탑 ] 베이직 클린 화이트 슬림 크루넥 티셔츠 (가디건 단추 틈 사이로 살짝 노출)\n[ 하의 ] 미디엄 워시드 빈티지 블루 클래식 스트레이트 레그 데님 팬츠\n[ 슈즈 ] 다크 브라운 레오파드(호피) 패턴 벨벳/송치 라운드 토 발레리나 플랫 슈즈\n[ 가방 ] 어깨에 멘 딥 초콜릿 브라운 클래식 패턴/모노그램 숄더 토트백\n[ 헤어 & 주얼리] 정갈하게 빗어 넘긴 슬릭 로우 번(Sleek Low Bun) & 블랙 가죽 스트랩 워치\n[ 배경 & 무드 ] 흑백 추상화가 걸린 화이트 큐브 미술관을 거니는 지적이고 여유로운 아티스틱 무드\n```\n\n---\n\n### 1. 컬러 팔레트 & 한 끗 차이의 포인트 배색 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Main Cardigan** | **Butter Cream Ivory** (부드러운 버터 크림) |"
+  },
+  {
+    "lookNumber": 27,
+    "title": "블랙 레더 & 세이지 베이커 룩 (Black Leather & Sage Baker Balletcore)",
+    "mood": "Downtown Noir & Glam",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 블랙 레더 & 세이지 베이커 룩 (Black Leather & Sage Baker Balletcore)\n\n```\n[ 아우터 ] 오버사이즈 딥 제트블랙 빈티지 레더 지퍼 블루종 (넥 버튼만 채워 하이넥 연출)\n[ 이너 탑 ] 클린 화이트 슬림 탑 + 가슴 앞으로 길게 늘어뜨린 화이트 롱 스키니 타이/리본\n[ 하의 ] 페일 세이지 올리브 그린 와이드 베이커/치노 팬츠 (밑단 와이드 1단 롤업/턴업)\n[ 슈즈 ] 맨발에 착용한 블랙 레더 크리스-크로스(X자) 더블 스트랩 메리제인 플랫 슈즈\n[ 가방 ] 소프트 블랙 레더 숄더 토트백 (손잡이에 귀여운 실버/인형 키링 참 장식 부착)\n[ 헤어 & 소품] 자연스러운 롱 다크 스트레이트 헤어 & 따뜻한 라떼 머그잔\n[ 배경 & 무드 ] 성수/한남 감성의 로스터리 카페 앞 테라스 벤치에서 커피를 마시는 여유\n```\n\n---\n\n### 1. 컬러 팔레트 & 쿨 얼씨(Cool-Earthy) 조화 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Leather Jacket** | **Jet Black** (완벽한 매트 블랙) |"
+  },
+  {
+    "lookNumber": 28,
+    "title": "그레이 홀터 & 시어 볼레로 룩 (Grey Halter & Sheer Bolero Resort)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 그레이 홀터 & 시어 볼레로 룩 (Grey Halter & Sheer Bolero Resort)\n\n```\n[ 상의 탑 ] 헤더 그레이 헨리넥 버튼 슬림 홀터넥(Halter-neck) 슬리브리스 탑\n[ 아우터 볼레로 ] 퓨어 화이트 초경량 시스루 시폰 롱 슬리브 볼레로 슈러그 (Shrug)\n[ 목걸이 ] 쇄골 중심에 닿는 슬림 실버 미니멀 펜던트 네크리스\n[ 하의 ] 발목까지 차르르 흐르는 매트 블랙 텐셀 플루이드 맥시 스커트\n[ 슈즈 ] 발등을 얇은 끈으로 감싸는 퓨어 화이트 스트래피 플랫 슬라이드 샌들\n[ 헤어 ] 귀 뒤로 정갈하게 넘긴 단정한 흑발 단발 태슬컷 (Sleek Dark Bob)\n[ 배경 & 무드 ] 야자수와 미술 이젤이 어우러진 야외 공원 벤치에서의 고요하고 우아한 사색\n```\n\n---\n\n### 1. 컬러 팔레트 & 쿨 모노톤 3색 조화 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Halter Top** | **Heather Medium Grey** (차분한 헤더 그레이) | 신축성 있는 골지 코튼-모달 저지 | 상체를 슬림하게 잡아주며"
+  },
+  {
+    "lookNumber": 29,
+    "title": "아쿠아 민트 레이크사이드 & 아가일 룩 (Aqua Mint Lakeside Chiffon)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 아쿠아 민트 레이크사이드 & 아가일 룩 (Aqua Mint Lakeside Chiffon)\n\n```\n[ 상의 탑 ] 페일 씨폼 아쿠아 민트 쉬어 시폰 베이비돌 캐미솔 (더블 스트랩 & 프론트 리본 타이)\n[ 이너 탑 ] 넥라인 안쪽을 단정하게 받쳐주는 클린 화이트 슬립 튜브탑\n[ 하의 ] 파스텔 핑크-베이지 은은한 아가일 다이아몬드 체크 미디 쉬폰 스커트\n[ 슈즈 ] 화이트 트리플 튜블러(둥근 튜브형) 스트랩 플랫폼 슬라이드 샌들 (블랙 배색 아웃솔)\n[ 가방 ] 어깨에 가볍게 멘 오버사이즈 파스텔 스카이블루/화이트 경량 나일론 더플 숄더백\n[ 헤어 악세서리 ] 흑발을 단정하게 올려 고정한 앰버(호박색) 마블 호피 집게핀 (Claw Clip)\n[ 라이프스타일 소품 ] 접이식 미니멀 캠핑 체어 & 한 손에 쥐거나 무릎에 펼친 소설책\n[ 배경 & 무드 ] 버드나무와 잔잔한 물결이 흐르는 호숫가 데크에서의 평화로운 독서와 힐링\n```\n\n---\n\n### 1. 컬러 팔레트 & 수채화 파스텔 배색 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Babydoll Top"
+  },
+  {
+    "lookNumber": 30,
+    "title": "카멜 윈드브레이커 & 배럴 데님 룩 (Camel Windbreaker & Barrel Denim)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 카멜 윈드브레이커 & 배럴 데님 룩 (Camel Windbreaker & Barrel Denim)\n\n```\n[ 아우터 ] 카멜 샌드 탄 나일론 후드 윈드브레이커 (네이비 배색 안감, 과감한 원숄더 드롭 연출)\n[ 이너 탑 ] 멜란지 라이트 그레이 슬림핏 유넥 슬리브리스 탱크탑 (바지 안으로 깔끔하게 턱인)\n[ 벨트 ] 실버 스퀘어 버클 카멜 스웨이드 레더 벨트\n[ 하의 ] 미디엄 인디고 블루 배럴 레그(Barrel-leg / Horseshoe) 입체 곡선 와이드 데님 진\n[ 슈즈 ] 샌드 베이지/카멜 스웨이드 버클 스트랩 슬라우치 앵클 부츠 (데님 밑단 턱인 연출)\n[ 가방 ] 어깨에 멘 큼직한 카멜 브라운 스웨이드 슬라우치 호보백\n[ 헤어 & 소품] 산뜻한 시스루 뱅 단발 보브컷 & 화이트 스마트폰 케이스 & 파도가 치는 물결 전신 거울\n[ 배경 & 무드 ] 물결 거울 셀카와 야외 워터 미러 정원에서 햇살을 손으로 가리는 싱그러운 감성\n```\n\n---\n\n### 1. 컬러 팔레트 & 스포티-얼씨 배색 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Wind"
+  },
+  {
+    "lookNumber": 31,
+    "title": "차콜 딥 U넥 & 버뮤다 발레리나 룩 (Charcoal U-Neck & Bermuda Flats)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 차콜 딥 U넥 & 버뮤다 발레리나 룩 (Charcoal U-Neck & Bermuda Flats)\n\n```\n[ 아우터 니트 ] 챠콜 그레이 오버사이즈 헤비 울 딥 U넥(Deep Scoop-neck) 스웨터 (소매 걷음)\n[ 이너 셔츠 ] 부드러운 버터 레몬 옐로우 칼라 버튼다운 셔츠 (칼라와 둥근 밑단 노출)\n[ 하의 ] 클린 화이트 코튼 릴랙스 핏 버뮤다 쇼츠 (무릎 위 기장의 톰보이 쇼츠)\n[ 슈즈 ] 맨발에 신은 미니멀 블랙 스퀘어 토(Square-Toe) 레더 발레리나 플랫 슈즈\n[ 가방 ] 어깨에 가볍게 멘 파스텔 스카이블루 캔버스 숄더백\n[ 헤어 & 시계 ] 단정하게 빗어 내린 롱 스트레이트 흑발 & 슬림 메탈 스트랩 손목시계\n[ 배경 & 무드 ] 블루 어닝의 로드사이드 브런치 카페 앞에서 포착된 무심하고 감각적인 스트리트 무드\n```\n\n---\n\n### 1. 컬러 팔레트 & 감각적인 4색 배색 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Main Knit** | **Dark Charcoal Grey** (짙은 먹색 차콜) | 도톰하고 탄탄한 "
+  },
+  {
+    "lookNumber": 32,
+    "title": "아이보리 아일렛 오프숄더 룩 (Ivory Pointelle Knit & Boston Bag)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 아이보리 아일렛 오프숄더 룩 (Ivory Pointelle Knit & Boston Bag)\n\n```\n[ 상의 ] 크림 아이보리 폴드오버 아일렛(Pointelle/Eyelet) 레이스 펀칭 오프숄더 니트\n[ 넥라인 ] 어깨와 쇄골이 수평으로 완전히 개방되는 와이드 보트넥/오프숄더 (어깨끈 디테일)\n[ 소매 ] 손등을 푹 덮으며 섬세한 펀칭 패턴이 드러나는 엑스트라 롱 슬리브\n[ 하의 ] 클래식 미디엄 블루 스트레이트 빈티지 데님 진\n[ 가방 ] 어깨에 얌전하게 멘 허니 탄(Honey Tan) 레더 원통형 실린더 보스턴 숄더백\n[ 헤어 ] 귀 뒤로 우아하게 넘긴 롱 브라운 스트레이트 헤어\n[ 배경 & 무드 ] 단풍이 물들기 시작한 고궁 돌다리 난간에서 미소 짓는 가련하고 청순한 첫사랑 무드\n```\n\n---\n\n### 1. 컬러 팔레트 & 가을빛 웜 페미닌 조화 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Main Knit** | **Cream Ivory** (부드러운 크림빛 아이보리) | 섬세한 구멍이 뚫린 아일렛/포앵텔(Pointelle) 코튼-울 니트 "
+  },
+  {
+    "lookNumber": 33,
+    "title": "화이트 벌룬 & 실버 러너 발레코어 룩 (White Balloon & Silver Runner)",
+    "mood": "Feminine & Balletcore",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 화이트 벌룬 & 실버 러너 발레코어 룩 (White Balloon & Silver Runner)\n\n```\n[ 드레스 ] 퓨어 화이트 슬리브리스 벌룬/버블 헴(Bubble-hem) 미니 원피스 (둥글게 모이는 볼륨감)\n[ 아우터 (실외) ] 버터 크림/라이트 베이지 크롭 싱글 라이더 레더 재킷 (스탠드 카라 스냅 단추)\n[ 목 장식 1 ] 목에 가볍게 한 번 둘러 앞가슴으로 길게 늘어뜨린 얇은 화이트 스키니 스카프\n[ 목 장식 2 ] 스카프 사이로 길게 떨어지는 블랙 롱 드롭 펜던트 목걸이\n[ 레그웨어 ] 종아리부터 발목까지 자연스럽게 주름지게 신은 헤더 그레이 골지 니트 레그워머\n[ 슈즈 ] 메탈릭 실버 & 화이트 청키 테크 러닝 스니커즈 (Asics Gel / New Balance 1906 스타일)\n[ 가방 ] 블랙 비즈 네트백 / 크로셰 스트링 토트백\n[ 무드 & 배경 ] 감성 브런치 카페 실내와 고즈넉한 붉은 벽돌 담벼락 길을 활보하는 힙한 쿨걸\n```\n\n---\n\n### 1. 컬러 팔레트 & 퓨처리즘 믹스매치 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n"
+  },
+  {
+    "lookNumber": 34,
+    "title": "토프 모헤어 & 오니츠카 미니멀 룩 (Taupe Mohair & Onitsuka Chic)",
+    "mood": "Hannam Quiet Luxury",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 토프 모헤어 & 오니츠카 미니멀 룩 (Taupe Mohair & Onitsuka Chic)\n\n```\n[ 아우터 ] 토프 밍크 브라운(Taupe Mink) 보송보송한 헤어리 모헤어-알파카 크롭 가디건 (오픈 착용)\n[ 이너 탑 ] 쇄골과 가슴선을 깨끗하게 잡아주는 클린 화이트 슬림 스퀘어넥 슬리브리스 탱크탑\n[ 하의 ] 허벅지와 다리 라인을 시원하게 드러내는 매트 블랙 미니멀 테일러드 숏팬츠 (미니 쇼츠)\n[ 삭스 ] 복사뼈 위로 단정하게 올라오는 차콜 딥 그레이 코튼 크루 삭스 (Crew Socks)\n[ 슈즈 ] 레트로 슬림 실루엣의 화이트/아이보리 오니츠카 타이거 멕시코 66 스니커즈\n[ 가방 & 소품 ] 블랙 가죽 와이드 스트랩 숄더백 & 손에 든 화이트 디자이너 브랜드 쇼핑백\n[ 헤어 & 주얼리 ] 쇄골을 타고 흐르는 자연스러운 롱 다크 웨이브 & 슬림 실버 체인 목걸이\n[ 배경 & 무드 ] 감성 베이커리 쇼윈도와 화이트 아치형 쇼룸(TANNAT) 앞에서의 경쾌한 쇼핑 무드\n```\n\n---\n\n### 1. 컬러 팔레트 & 쿨 뉴트럴 4색 조화 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--"
+  },
+  {
+    "lookNumber": 35,
+    "title": "에크루 텐트 코트 & 핑크 새틴 슬립 룩 (Ecru Coat & Pink Satin Slip)",
+    "mood": "Hannam Quiet Luxury",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 에크루 텐트 코트 & 핑크 새틴 슬립 룩 (Ecru Coat & Pink Satin Slip)\n\n```\n[ 아우터 ] 퓨어 에크루 크림 아이보리 오버사이즈 A라인 텐트 실루엣 하프 발마칸 코트\n[ 이너 드레스 ] 소프트 베이비 핑크 실크 새틴 미니 슬립 드레스 (밑단 화이트 플로럴 레이스 트리밍)\n[ 슈즈 ] 맨발에 신은 클래식 카멜 웜 브라운 스웨이드 라운드 토 페니 로퍼 (Penny Loafers)\n[ 가방 ] 가로로 긴 직사각형 형태의 화이트 레더 이스트-웨스트(East-West) 바게트 토트백\n[ 가방 소품 킥 ] 토트백 손잡이에 무심하게 걸어둔 클래식 블랙 아세테이트 뿔테 안경\n[ 헤어 ] 잔머리 없이 정갈하게 빗어 넘긴 슬릭 로우 번(Sleek Low Bun)\n[ 배경 & 무드 ] 앤틱 문구 셀렉트숍(포인트오브뷰)과 레트로 베이커리 앞에서의 지적인 탐미주의 무드\n```\n\n---\n\n### 1. 컬러 팔레트 & 란제리 럭스 배색 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Balmacaan Coat**| **Pure Ecru Cream** (부드"
+  },
+  {
+    "lookNumber": 36,
+    "title": "밀크 니트 & 패치워크 타비 룩 (Milk Knit & Art-Patchwork Tabi)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 밀크 니트 & 패치워크 타비 룩 (Milk Knit & Art-Patchwork Tabi)\n\n```\n[ 상의 ] 부드럽게 흐르는 퓨어 밀크 화이트 루즈핏 드레이프 니트 풀오버 (드롭 숄더)\n[ 네크리스 ] 라운드넥을 볼드하게 장식하는 다크 차콜 크리스탈/원석 스테이트먼트 목걸이\n[ 하의 ] 파스텔 레몬 옐로우 바탕에 비대칭 블랙 패치워크가 들어간 플리츠 미디 스커트\n[ 슈즈 ] 맨발에 신은 아이코닉한 블랙 레더 스플릿 토 타비(Tabi) 발레리나 플랫 펌프스\n[ 가방 & 소품 ] 다크 초콜릿 브라운 미니멀 토트백 & 손에 든 전시회 아트 리플렛 매거진\n[ 헤어 ] 내추럴하게 풀어헤친 롱 다크 웨이브 헤어\n[ 배경 & 무드 ] 대나무 기둥이 길게 늘어선 건축적 회랑 복도와 호텔 창가에서의 고요한 갤러리 무드\n```\n\n---\n\n### 1. 컬러 팔레트 & 그래픽 아티스틱 배색 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Main Knit** | **Pure Milk White** (우윳빛 밀크 화이트) | 유연하게 흐르는 파인 코튼-모달 니트 | 룩의 상체"
+  },
+  {
+    "lookNumber": 37,
+    "title": "그레이 맨투맨 & 슬라우치 삭스 룩 (Slouchy Sweatshirt & Lounge Socks)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 그레이 맨투맨 & 슬라우치 삭스 룩 (Slouchy Sweatshirt & Lounge Socks)\n\n```\n[ 상의 ] 멜란지 미디엄 헤더 그레이 오버사이즈 소프트 스웨트셔츠 (한쪽 어깨 오프숄더 드롭)\n[ 이너 끈 ] 흘러내린 어깨선 사이로 엿보이는 얇은 블랙 슬립/브라렛 스트랩\n[ 하의 ] 소파 위에서 다리 라인을 극적으로 드러내는 매트 블랙 마이크로 숏팬츠\n[ 레그웨어 ] 종아리에 부드러운 주름(Slouch)을 잡아 신은 멜란지 라이트 그레이 롱 니삭스\n[ 헤어 & 주얼리 ] 턱선과 목선이 시원하게 드러나는 볼륨감 있는 픽시 숏컷 & 미니 실버 볼 이어링\n[ 뷰티 & 표정 ] 은은한 물광 피부 메이크업 & 로즈 틴트 립 & 나른하게 렌즈를 응시하는 눈빛\n[ 배경 & 무드 ] 모던한 베이지 레더 소파에 비스듬히 누워 다리를 끌어올린 감성 홈웨어 거울 셀카\n```\n\n---\n\n### 1. 컬러 팔레트 & 모노톤 라운지 조화 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Sweatshirt** | **Medium Heather Grey** (멜란지 그레이"
+  },
+  {
+    "lookNumber": 38,
+    "title": "사선 레이스 크롭 & 흑청 부츠컷 룩 (Asymmetric Lace Crop & Flare)",
+    "mood": "Feminine & Balletcore",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 사선 레이스 크롭 & 흑청 부츠컷 룩 (Asymmetric Lace Crop & Flare)\n\n```\n[ 상의 탑 ] 사선 비대칭 원숄더 화이트 플로럴 레이스 밴딩 & 빈티지 그래픽 크롭 탑\n[ 하의 ] 골반에 밀착되며 무릎 아래로 유려하게 퍼지는 워시드 블랙(흑청) 슬림 부츠컷 데님 진\n[ 슈즈 ] 볼드한 아웃솔의 유광 블랙 레더 4홀 레이스업 더비 슈즈 / 옥스포드 워커\n[ 가방 ] 앤틱한 감성을 더하는 클래식 루이비통 모노그램 캔버스 숄더 토트백\n[ 헤어 & 메이크업] 칠흑같이 어두운 롱 슬릭 흑발 생머리 & 몽환적인 로즈 립 메이크업\n[ 테이블 소품 ] 대리석 테이블 위 슬림 블랙 선글라스 & 앤틱 실버 촛대 & 디저트 플레이트\n[ 배경 & 무드 ] 프렌치 벨벳 암체어와 빈티지 석조 창가 턱에 걸터앉은 퇴폐미 넘치는 파리지앵 핫걸\n```\n\n---\n\n### 1. 컬러 팔레트 & 앤틱 락시크 배색 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Asymmetric Top**| **Cream White & Faded Print** | 섬세한 플로럴 레이스"
+  },
+  {
+    "lookNumber": 39,
+    "title": "버터 레몬 미니 & 어그 슬라우치 룩 (Butter Lemon Dress & UGG Boots)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 버터 레몬 미니 & 어그 슬라우치 룩 (Butter Lemon Dress & UGG Boots)\n\n```\n[ 메인 드레스 ] 파스텔 버터 레몬 옐로우 슬림핏 코튼 저지 롱슬리브 미니 원피스\n[ 넥 & 소매 ] 쇄골과 목선이 시원하게 트인 와이드 스쿱넥 & 손등을 덮는 엑스트라 롱 슬리브\n[ 슈즈 ] 발목 부분이 부드럽게 주름지는 체스넛 브라운 스웨이드 슬라우치 어그 미니 부츠\n[ 삭스 ] 어그 부츠 입구 위로 살짝 주름지게 올려 신은 아이보리/화이트 코튼 골지 삭스\n[ 가방 ] 어깨에 가볍게 멘 체스넛 브라운 스웨이드 숄더 토트백 (부츠와 소재/컬러 일체화)\n[ 손에 든 아우터 ] 팔에 무심하게 걸쳐 든 세이지 민트-아이보리 노르딕 패턴 니트 가디건\n[ 배경 & 무드 ] 화이트 벽돌 계단을 경쾌하게 오르내리며 터뜨리는 싱그러운 과즙미 캔디드 스냅\n```\n\n---\n\n### 1. 컬러 팔레트 & 햇살을 머금은 과즙 배색 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Mini Dress** | **Butter Lemon Yellow** (화사한 버터빛 레몬) "
+  },
+  {
+    "lookNumber": 40,
+    "title": "울트라 크롭 터틀넥 & 하이웨이스트 부츠컷 룩 (Ultra-Cropped Cable Turtleneck & Flare Denim)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 울트라 크롭 터틀넥 & 하이웨이스트 부츠컷 룩 (Ultra-Cropped Cable Turtleneck & Flare Denim)\n\n```\n[ 상의 니트 ] 크림 오트밀 헤비 케이블 짜임 울트라 크롭 터틀넥 스웨터 (언더붑-배꼽 경계까지 아치형 크롭)\n[ 하의 데님 ] 짙은 미디엄 인디고 워싱 하이웨이스트 슬림 핏 부츠컷/플레어 데님 팬츠\n[ 슈즈 ] 볼드한 플랫폼 솔의 매트 블랙 레더 청키 부츠 / 더비 워커\n[ 가방 ] 골드 메탈 버클 장식이 돋보이는 블랙 레더 숄더백 (셀린느 트리옹프 스타일 체인/스트랩)\n[ 헤어 & 메이크업 ] 턱선에서 떨어지는 단정하고 시크한 흑발 일자 보브 단발 + 미니멀 누드 글로우 립\n[ 테이크아웃 컵 ] 그린 로고의 스타벅스 핫 컵 (도시적이고 자연스러운 스트리트 캔디드 연출)\n[ 배경 & 로케이션 ] 도쿄 골목의 레드 자판기 & 가드레일 / 아오야마 크롬하츠(Chrome Hearts) 부티크 외벽\n```\n\n---\n\n### 1. 컬러 팔레트 & 쿨 어번 배색 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :--- |\n| **Top Knit*"
+  },
+  {
+    "lookNumber": 41,
+    "title": "어텀 어씨 워크자켓 & 체크 레이어드 룩 (Earthy Work Jacket & Plaid Layering)",
+    "mood": "Seongsu Vintage Workwear",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 어텀 어씨 워크자켓 & 체크 레이어드 룩 (Earthy Work Jacket & Plaid Layering)\n\n```\n[ 아우터 ] 딥 초콜릿 브라운 코튼 캔버스 오버핏 집업 워크자켓 (드롭 숄더 & 릴랙스 핏)\n[ 이너 셔츠 ] 딥 올리브/포레스트 그린 타탄 체크 플란넬 셔츠 (카라 오픈 & 소매 턴업 레이어드)\n[ 하의 팬츠 ] 은은한 샌드 베이지 와이드 실루엣 코튼 치노 팬츠 (여유로운 루즈 핏)\n[ 슈즈 ] 생고무창(Gum-sole)이 돋보이는 레트로 아이보리 레더 스니커즈 + 화이트 코튼 골지 양말\n[ 가방 & 참 ] 카멜 토바코 브라운 스웨이드 메신저 숄더백 + 스트랩에 달린 빈티지 모찌 인형 백참(Keyring)\n[ 주얼리 ] 쇄골 라인의 미니멀 실버 코인 펜던트 목걸이 + 얇은 실버 체인 브레이슬릿\n[ 헤어 & 메이크업 ] 자연스럽게 흐르는 흑발 롱 레이어드 웨이브 + 가을빛 소프트 뮤트 음영 메이크업\n[ 배경 & 무드 ] 햇살이 드리운 모던 빌라 벽돌 앞 턱에 무심하게 양반다리로 걸터앉은 내추럴 캔디드 샷\n```\n\n---\n\n### 1. 컬러 팔레트 & 얼씨(Earthy) 가을 톤온톤 배색 (Color Harmony)\n\n| 영역 | 컬러 | "
+  },
+  {
+    "lookNumber": 42,
+    "title": "아이보리 캡슬리브 니트 & 초콜릿 플레어 룩 (Ivory Cap-Sleeve Knit & Legwarmers)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 아이보리 캡슬리브 니트 & 초콜릿 플레어 룩 (Ivory Cap-Sleeve Knit & Legwarmers)\n\n```\n[ 상의 탑 ] 부드러운 크림 아이보리 파인 골지 모크넥/터틀넥 캡슬리브 니트 (어깨선을 살짝 덮는 실루엣)\n[ 하의 스커트 ] 깊이 있는 다크 초콜릿 에스프레소 브라운 코튼 플레어 A라인 미디 스커트 (무릎 선 기장)\n[ 레그웨어 ] 자연스럽게 주름지며 흘러내리는 도톰한 밀크 아이보리 골지 레그워머 (Slouchy Legwarmers)\n[ 슈즈 ] 매끈한 다크 브라운/블랙 라운드 토 웨지 힐(Wedge-heel) 발레리나 펌프스\n[ 가방 & 참 ] 미니멀한 화이트/아이보리 탑핸들 미니 토트 크로스백 + 귀여운 트렌치코트 테디베어 인형 백참\n[ 헤어 & 메이크업 ] 건강한 윤기가 흐르는 내추럴 흑발 롱 헤어 + 햇살을 머금은 브라이트 스마일 & 글로시 립\n[ 배경 & 로케이션 ] \n  - 사진 1: 빈티지 노천 카페 메탈 테이블 (에스프레소 잔 & 크루아상)\n  - 사진 2: 백조가 노니는 이탈리아 호숫가(Lake Como) 햇살 가득한 돌계단\n  - 사진 3: 따스한 옐로우 머스터드빛 유럽 고전 골목길 코블스톤\n```\n\n---\n\n### "
+  },
+  {
+    "lookNumber": 43,
+    "title": "차콜 롱코트 & 코발트 블루 숄 룩 (Charcoal Coat & Cobalt Blue Shoulder Knit)",
+    "mood": "Hannam Quiet Luxury",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 차콜 롱코트 & 코발트 블루 숄 룩 (Charcoal Coat & Cobalt Blue Shoulder Knit)\n\n```\n[ 메인 코트 ] 차콜 멜란지 울 블렌드 싱글 맥시 롱 코트 (종아리를 덮는 루즈 일자 핏 & 드롭 숄더)\n[ 숄 포인트 ] 채도 높은 선명한 코발트/세룰리안 블루 라운드 니트 (코트 어깨 위에 숄처럼 무심하게 묶어 연출)\n[ 이너 탑 ] 넥 라인을 깔끔하게 정돈해 주는 베이직 화이트 크루넥 티셔츠\n[ 하의 팬츠 ] 유연하고 부드럽게 찰랑이는 크림 아이보리 루즈 와이드 니트/코튼 팬츠\n[ 슈즈 ] 발가락 절개가 유니크한 메종 마르지엘라 스타일 블랙 레더 타비(Tabi) 발레 플랫\n[ 가방 ] 단정한 스퀘어 실루엣의 클래식 매트 블랙 레더 보스턴/볼링 탑핸들 백\n[ 주얼리 & 헤어 ] 귓불에 달린 미니멀 실버 드롭 이어링 + 시스루 뱅 애쉬 브라운 롱 헤어\n[ 배경 & 무드 ] \n  - 사진 1: 기와 한옥 툇마루 벤치에서 빨대로 아이스 아메리카노를 마시는 내추럴 캔디드 샷\n  - 사진 2, 3: 대나무 숲과 전통 한옥 목조 처마, 대리석 바닥이 어우러진 고즈넉한 카페 안뜰 전신 샷\n```\n\n---\n\n### 1. 컬러 팔레트 & 쿨 윈터"
+  },
+  {
+    "lookNumber": 44,
+    "title": "딥 카키 레더 & 블랙 레이스 새틴 룩 (Olive Leather & Black Satin Lace Slip)",
+    "mood": "Feminine & Balletcore",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 딥 카키 레더 & 블랙 레이스 새틴 룩 (Olive Leather & Black Satin Lace Slip)\n\n```\n[ 아우터 ] 딥 올리브 카키/다크 모스 브라운 세미 오버핏 비건 레더 셔츠 자켓 (클래식 포인트 카라 & 턴업 커프스)\n[ 이너 탑 ] 목선을 가늘고 길게 잡아주는 슬림 핏 매트 블랙 파인 터틀넥/모크넥 탑\n[ 하의 스커트 ] 밑단에 섬세한 블랙 속눈썹 플로럴 레이스(Eyelash Lace)가 트리밍된 블랙 실크 새틴 슬립 미디 스커트\n[ 가방 ] 옆구리에 가볍게 끼워 넣은 미니멀 블랙 레더 숄더백\n[ 주얼리 & 테크 ] 검지에 착용한 심플한 실버 웨이브 링 + 매트 블랙 케이스의 스마트폰\n[ 헤어 & 메이크업 ] 실크처럼 매끄러운 흑갈색 미디엄 롱 헤어 + 투명한 도자기 피부와 복숭앗빛 블러셔 & 글로우 립\n[ 배경 & 로케이션 ] \n  - 사진 1: 싱그러운 포도나무 덩굴 차양 아래 카페 입구 캔디드 샷\n  - 사진 2, 3: 붉은 화산석 자갈이 깔린 아늑한 야외 테라스 테이블에서 턱을 괴고 응시하는 하이앵글 무드 샷\n```\n\n---\n\n### 1. 컬러 팔레트 & 딥 어텀 드레시 배색 (Color Harmony)\n\n| 영역 | 컬러 "
+  },
+  {
+    "lookNumber": 45,
+    "title": "소프트 베이지 브이넥 & 플럼 체크 룩 (Beige V-Neck & Muted Plaid Mini)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 소프트 베이지 브이넥 & 플럼 체크 룩 (Beige V-Neck & Muted Plaid Mini)\n\n```\n[ 메인 니트 ] 포근하고 유연한 웜 오트밀 베이지 드롭 숄더 와이드 브이넥 루즈 니트\n[ 이너 캐미솔 ] 쇄골 어깨선 위로 얇은 스트랩이 은은하게 드러나는 페일 헤더 그레이/라일락 캐미솔\n[ 하의 스커트 ] 뮤트 브라운 & 더스티 플럼 퍼플 타탄 체크 플리츠 A라인 미니스커트\n[ 소매 디테일 ] 손등을 덮으며 손목 부근에 자연스럽게 주름지는 긴 소매 슬라우치 핏\n[ 밑단 레이어드 ] 니트 시보리 밑단 아래로 1~2cm 살짝 빠져나온 이너 탑 레이어드 라인\n[ 주얼리 ] 쇄골 중심에 얹어진 극도로 얇은 실버 체인 미니 펜던트 목걸이\n[ 헤어 & 메이크업 ] 볼륨감 있는 내추럴 소프트 숏단발(보브 컷) + 햇살에 물든 투명한 코랄 피치 블러셔\n[ 배경 & 무드 ] 늦은 오후 골든아워(Golden Hour) 햇살이 비치는 푸른 정원 산책로 캔디드 샷\n```\n\n---\n\n### 1. 컬러 팔레트 & 소프트 가을 뉴트럴 배색 (Color Harmony)\n\n| 영역 | 컬러 | 소재 & 텍스처 | 스타일링 효과 |\n| :--- | :--- | :--- | :-"
+  },
+  {
+    "lookNumber": 46,
+    "title": "블랙 하이넥 새틴 블루종 & 플레어 룩 (Black Satin Blouson & Flared Satin Skirt)",
+    "mood": "Feminine & Balletcore",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 블랙 하이넥 새틴 블루종 & 플레어 룩 (Black Satin Blouson & Flared Satin Skirt)\n\n```\n[ 아우터 ] 은은한 실크 광택이 감도는 블랙 헤비 새틴 하이넥 집업/버튼 블루종 (목 버클 여밈 & 벌룬 소매)\n[ 이너 탑 ] 룩의 무거움을 덜어주는 차분한 멜란지 오트밀 그레이 파인 골지 라운드 니트\n[ 하의 스커트 ] 발목 위까지 우아하게 A라인으로 떨어지는 미세 글리터 핀도트 블랙 실크 새틴 롱스커트\n[ 슈즈 ] 발등을 날렵하게 드러내는 유광 블랙 포인티드 토(뾰족코) 키튼 힐(Kitten-heel) 펌프스\n[ 가방 ] 조형적인 부채꼴/사다리꼴 쉐입이 돋보이는 모던 아키텍처럴 블랙 레더 토트백\n[ 액세서리 ] 손목을 빛내는 클래식 메탈릭 실버 체인 브레이슬릿 워치(Watch) + 미니멀 이어링\n[ 헤어 & 메이크업 ] 옆머리를 자연스럽게 내린 단아한 로우 번(Low Bun) 업스타일 + 투명한 글로우 스킨 & 톤다운 로즈 립\n[ 배경 & 무드 ] \n  - 사진 1: 우드 창틀과 콘크리트 외벽이 멋스러운 와인바 외관 앞 전신 샷\n  - 사진 2: 은은한 조명의 프라이빗 라운지 소파에서 따뜻한 라떼 머그잔을 들고 \n<trunca"
+  },
+  {
+    "lookNumber": 47,
+    "title": "네이비 골지 크롭 & 배기 데님 룩 (Navy Ribbed Cardigan & Baggy Denim)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 네이비 골지 크롭 & 배기 데님 룩 (Navy Ribbed Cardigan & Baggy Denim)\n\n```\n[ 상의 탑 ] 딥 미드나잇 네이비 세로 골지 슬림핏 크롭 가디건 (단독 착용 & 하단 단추 오픈으로 잘록한 복부 노출)\n[ 하의 데님 ] 허벅지부터 루즈하게 떨어지는 라이트/미디엄 워싱 빈티지 로우-미드라이즈 와이드 배기 데님\n[ 벨트 포인트 ] 골반에 묵직한 무게감을 주는 다크 에스프레소 브라운 가죽 벨트 (볼드한 스퀘어 실버 버클)\n[ 가방 ] 빈티지한 페이디드 워싱과 지퍼 스트랩이 돋보이는 워싱 데님 숄더백\n[ 슈즈 ] 메탈 버클 장식이 돋보이는 청키한 다크 브라운 레더 더블 스트랩 슬라이드 샌들\n[ 킬링 소품 ] 룩의 스토리를 완성하는 실버&블랙 레트로 인스탁스 즉석 필름 카메라 + 벤치 위 폴라로이드 사진들\n[ 헤어 & 메이크업 ] 바람에 자연스럽게 흩날리는 흑갈색 롱 레이어드 웨이브 + 투명한 도자기 피부 & 생기 있는 누드 코랄 립\n[ 배경 & 로케이션 ] \n  - 사진 1: 녹음이 짙은 골목길 나무 벤치에서 카메라를 들고 환하게 미소 짓는 캔디드 샷\n  - 사진 2:\n<truncated 11730 bytes>\n(Washed Blac"
+  },
+  {
+    "lookNumber": 48,
+    "title": "올리브 블레이저 & 브라운 버뮤다 룩 (Olive Blazer & Bermuda Shorts)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 올리브 블레이저 & 브라운 버뮤다 룩 (Olive Blazer & Bermuda Shorts)\n\n```\n[ 아우터 ] 은은한 골덴 결이 살아있는 올리브 머스터드/모스 그린 오버핏 테일러드 블레이저 (소매 턴업 새틴 안감)\n[ 이너 블라우스 ] 네크라인에 자연스러운 주름과 프릴이 잡힌 로맨틱 화이트 코튼 빅카라 블라우스\n[ 하의 쇼츠 ] 무릎을 살짝 덮으며 넉넉하게 떨어지는 다크 초콜릿 브라운 와이드 버뮤다 쇼츠 (하프 팬츠)\n[ 삭스 ] 발목 위로 단정하게 당겨 올린 클린 화이트 코튼 골지 크루 삭스 (White Crew Socks)\n[ 슈즈 ] 매트한 클래식 블랙 레더 슬립온 페니 로퍼 (Classic Penny Loafers)\n[ 가방 ] 사이드 포켓에 블루 텀블러를 꽂은 스포티한 차콜/블랙 아웃도어 유틸리티 백팩\n[ 헤어 & 메이크업 ] 텍스처와 컬이 자유롭게 살아있는 브라운 섀기/픽시 보브 헤어 + 양 볼의 수채화빛 피치 블러셔\n[ 배경 & 로케이션 ] \n  - 사진 1: 야외 카페 계단에 걸터앉아 테이크아웃 종이컵을 쥐고 있는 하이앵글 1인칭 POV 샷\n  - 사진 2: 장난감과 문구류가 가득한 대형 서점/\n<truncated 11574 bytes"
+  },
+  {
+    "lookNumber": 49,
+    "title": "오버핏 셔츠 & 크롭 뷔스티에 룩 (Layered Shirt & Knit Bustier)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 오버핏 셔츠 & 크롭 뷔스티에 룩 (Layered Shirt & Knit Bustier)\n\n```\n[ 이너 셔츠 ] 자연스러운 구김과 볼륨감이 멋스러운 페일 에크루 그레이 오버핏 린넨-코튼 셔츠 (소매 롤업 & 하단 오픈)\n[ 레이어드 베스트 ] 허리선 위로 경쾌하게 크롭되는 와이드 스쿱넥 헤더 미디엄 그레이 파인 니트 뷔스티에\n[ 하의 슬랙스 ] 하체를 단정하고 곧게 뻗어 보이게 만드는 매트한 블랙 슬림 스트레이트 테일러드 팬츠\n[ 메인 IT-백 ] \n  - 최근 더 로우(The Row) 등 하이엔드 트렌드를 주도하는 와이드 가로형 '이스트-웨스트(East-West) 초콜릿 브라운 페블 레더 토트백'\n  - 실버 턴락 버클 스트랩과 튜뷸러 더블 핸들이 돋보이는 최고급 그레인 카프스킨\n[ 액세서리 ] 단정한 블랙 레더 스트랩 실버 버클 손목시계 + 검은색 유광 매니큐어 & 미니멀 실버 링\n[ 헤어 & 메이크업 ] 실크처럼 찰랑이는 다크 브루넷 롱 레이어드 헤어 + 깨끗한 윤광 베이스 & 차분한 모브 로즈 립\n[ 배경 & 로케이션 ] \n  - 사진 1: 푸른 은행나무 가로수 잎이 내려다보이는 화\n<truncated 12010 bytes>\n + 청키 부츠 |\n"
+  },
+  {
+    "lookNumber": 50,
+    "title": "오트밀 플러피 퍼 & 카키 퍼티그 룩 (Oatmeal Fur Jacket & Fatigue Pants)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 오트밀 플러피 퍼 & 카키 퍼티그 룩 (Oatmeal Fur Jacket & Fatigue Pants)\n\n```\n[ 아우터 ] 몽글몽글한 헤어리 텍스처가 돋보이는 오트밀 샴페인 베이지 페이크 퍼/샤기 모헤어 크롭 자켓\n[ 이너 탑 ] 네크라인에 작은 버튼이 달린 슬림핏 화이트 코튼 헨리넥 티셔츠 (밑단 슬쩍 레이어드)\n[ 하의 팬츠 ] 전면 큼직한 패치 포켓이 매력적인 올리브 카키 코튼 트윌 퍼티그/베이커 와이드 스트레이트 팬츠\n[ 벨트 포인트 ] 골반에 빈티지한 무게감을 주는 딥 브라운 가죽 벨트 (사각 실버 버클)\n[ 슈즈 ] 스티치 라인이 돋보이는 다크 에스프레소 브라운 스웨이드 플랫폼 클로그/왈라비 슈즈\n[ 가방 & 참 ] 벤치 위에 놓인 부드러운 화이트 셔링 레더 호보 숄더백 + 지퍼에 달린 미니 브라운 베어 백참\n[ 헤어 & 메이크업 ] 공기감이 살아있는 볼륨 숏단발 웨이브펌 + 양 볼의 수채화빛 피치 핑크 블러셔 & 코랄 립\n[ 베이커리 소품 ] 라떼 아트가 담긴 화이트 세라믹 카푸치노 \n<truncated 12829 bytes>\n릿 에스프레소 플레어 미디 | 밀크 레그워머 + 웨지 발레리나 슈즈 |\n| **43** | **차콜 롱코트 코발트 "
+  },
+  {
+    "lookNumber": 51,
+    "title": "도서관 레드 볼캡 & 슬림 데님 룩 (Red Ballcap & Heather Slim Denim)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 도서관 레드 볼캡 & 슬림 데님 룩 (Red Ballcap & Heather Slim Denim)\n\n```\n[ 메인 상의 ] 쇄골과 어깨선을 단정하게 살려주는 라이트 멜란지 그레이 슬림핏 7부(3/4 슬리브) 코튼 보트넥 탑\n[ 킬링 포인트 모자 ] \n  - (사진 1, 3): 룩에 즉각적인 생기와 빈티지 무드를 불어넣는 체리 레드 워싱 코튼 레터링 볼캡 (Dad Hat)\n  - (사진 2 변주): 포근하고 귀여운 무드를 주는 밀크 화이트 골지 니트 비니 (Beanie)\n[ 하의 데님 ] 짙은 색감으로 다리를 곧고 길어 보이게 만드는 다크 인디고 린스 와이드 스트레이트 생지 데님\n[ 슈즈 ] 발목을 포근하게 감싸는 카멜 체스넛 스웨이드 플랫폼 어그 미니 부츠/슬리퍼\n[ 아우터 변주 (사진 2) ] \n  - 책장 앞에서 덧입은 풍성한 브라운 테디 퍼 카라가 돋보이는 오버핏 딥 네이비 패딩 봄버 자켓\n[ 헤어 & 메이크업 ] 모자 아래로 길게 늘어뜨린 내추럴 다크 웨이브 헤어 + 자연스러운 혈색의 핑크 코랄 립\n[ 배경 & 로케이션 ] \n  - 사진 1, 3: 오래된 원목 책장과 책들이 가득한 도서관 계단 바닥에 편안하게 앉아 햇살을 받는 캔\n<truncate"
+  },
+  {
+    "lookNumber": 52,
+    "title": "그레이 퍼프 가디건 & 브라운 슬랙스 룩 (Layered Puff Cardigan & Brown Slacks)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 그레이 퍼프 가디건 & 브라운 슬랙스 룩 (Layered Puff Cardigan & Brown Slacks)\n\n```\n[ 아우터 가디건 ] 넥라인 스트링 타이 리본과 미니 버튼이 달린 라이트 헤더 그레이 반팔 퍼프 니트 가디건 (하단 역V자 오픈)\n[ 이너 블라우스 ] 가디건 소매 밑으로 자연스럽게 빠져나오는 화이트 코튼 셔링 롱슬리브 블라우스\n[ 헤어밴드 포인트 ] 얼굴형을 작고 입체적으로 정돈해 주는 차콜/토프 그레이 와이드 니트 골지 머리띠 (Wide Headband)\n[ 하의 슬랙스 ] 다리 라인을 군더더기 없이 일자로 곧게 뻗어 보이게 만드는 다크 초콜릿 에스프레소 브라운 코튼 슬랙스\n[ 슈즈 ] 매끄러운 유광 광택이 살아있는 클래식 블랙 레더 페니 로퍼 + 화이트 코튼 양말\n[ 가방 ] 어깨에 가볍게 걸쳐 멘 직사각형 쉐입의 딥 브라운 빈티지 레더 숄더백\n[ 헤어 & 메이크업 ] 헤어밴드 뒤로 우아하게 흐르는 다크 브루넷 롱 웨이브 헤어 + 맑고 투명한 도자기 피부와 피치 립\n[ 배경 & 로케이션 ] \n  - 사진 1, 2: 나뭇가지 그림자가 길게 드리운 모던 석조 외벽과 빈티지 스쿠\n<truncated 12431 bytes>\n 블루 숄 니트 "
+  },
+  {
+    "lookNumber": 53,
+    "title": "차콜 니트 & 레오파드 스카프 룩 (Charcoal Knit & Leopard Scarf)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 차콜 니트 & 레오파드 스카프 룩 (Charcoal Knit & Leopard Scarf)\n\n```\n[ 상의 니트 ] 은은하게 빛이 투과되는 루즈핏 차콜 멜란지 시어(Sheer) 파인 롱슬리브 티셔츠/니트\n[ 넥웨어 포인트 ] \n  - 룩의 감도를 단번에 하이패션으로 끌어올리는 브라운 톤의 레오파드(호피) 패턴 실크 시폰 스카프 (목에 볼륨감 있게 타이 연출)\n[ 하의 쇼츠 ] 자연스러운 밑단 롤업 디테일의 차콜 멜란지 코튼/테리 마이크로 숏팬츠 (각선미 극대화)\n[ 삭스 ] 발목 위로 주름 없이 깨끗하게 당겨 신은 클린 화이트 코튼 골지 크루 삭스 (White Crew Socks)\n[ 슈즈 ] 매끄러운 둥근 코(Round-toe) 실루엣의 다크 에스프레소 브라운 볼드 레더 슬립온 클로그/뮬\n[ 주얼리 & 테크 ] 검지의 심플한 실버 링 + 두 손으로 쥐고 사진을 확인하는 레트로 Y2K 실버 디지털 카메라\n[ 헤어 & 메이크업 ] 실크처럼 찰랑이는 다크 브루넷 롱 헤어 + 투명한 도자기 피부와 살굿빛 피치 블러셔 & 글로우 립\n[ 배경 & 로케이션 ] 카페 외벽 콘크리트/타일 턱에 편안하게 걸터앉아 아이스 라떼를 곁들인 캔디드 샷\n```\n\n---\n\n### "
+  },
+  {
+    "lookNumber": 54,
+    "title": "비비드 옐로우 & 블랙 미니 타비 룩 (Vivid Yellow Knit & Black Mini Tabi)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 비비드 옐로우 & 블랙 미니 타비 룩 (Vivid Yellow Knit & Black Mini Tabi)\n\n```\n[ 상의 니트 ] 도심 속에서 독보적인 존재감을 드러내는 비비드 선플라워 옐로우 파인 울 크루넥 니트 (슬림-레귤러 핏)\n[ 하의 스커트 ] 허리를 잘록하게 잡아주며 다리를 길어 보이게 만드는 하이웨이스트 블랙 A라인 미니스커트\n[ 슈즈 ] 발가락 절개가 유니크한 시그니처 메종 마르지엘라 블랙 레더 타비(Tabi) 발레 플랫\n[ 아이웨어 ] 룩에 쿨하고 힙한 엣지를 더해주는 슬림 90s 블랙 오벌(타원형) 선글라스 (Black Oval Sunglasses)\n[ 가방 ] 어깨 뒤로 가볍게 넘겨 멘 딥 올리브/토프 브라운 스웨이드 숄더백\n[ 테크 ] 손에 쥐고 자연스럽게 화면을 응시하는 스마트폰\n[ 헤어 & 메이크업 ] 바람에 날리지 않도록 단정하게 묶은 로우 포니테일 + 햇살을 반사하는 내추럴 글로우 스킨\n[ 배경 & 로케이션 ] \n  - 도쿄 도심의 '횡단금지(横断禁止)' 레드 표지판과 육교 안전 난간에 무심하게 기댄 이국적인 스트리트 캔디드 샷\n```\n\n---\n\n### 1. 컬러 팔레트 & 도쿄 팝-컨트라스트 배색 (Color Harmony)"
+  },
+  {
+    "lookNumber": 55,
+    "title": "화이트 랩 니트 & 버건디 새틴 룩 (White Wrap Knit & Burgundy Satin)",
+    "mood": "Feminine & Balletcore",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 화이트 랩 니트 & 버건디 새틴 룩 (White Wrap Knit & Burgundy Satin)\n\n```\n[ 상의 탑 ] 쇄골과 바스트 라인을 아름답게 조각하는 슬림핏 화이트 언더버스트(Underbust) 절개 랩 5부 골지 니트\n[ 하의 스커트 ] 톤온톤 플로럴 자카드 문양과 밑단 레이스 밴드가 돋보이는 딥 와인 버건디 실크 새틴 미디 스커트\n[ 슈즈 ] 발등을 시원하고 슬림하게 드러내는 심플한 블랙 레더 슬립온 텅(Thong) 쪼리 샌들\n[ 헤어 액세서리 ] 머리 위에 자연스럽게 얹어 헤어밴드처럼 연출한 톨토이즈(호피) 브라운 선글라스\n[ 테크 스트랩 ] 이동이 잦은 여행지에서 활동성을 더해주는 블랙 크로스바디 스마트폰 스트랩\n[ 드링크 ] 노란색 빨대로 시원하게 마시는 테이크아웃 레모네이드/시트러스 그라니따 컵\n[ 헤어 & 메이크업 ] 깔끔하게 묶은 로우 포니테일 + 햇살을 받아 빛나는 도자기 물광 피부 & 로즈 틴트 립\n[ 배경 & 로케이션 ] \n  - 붉은 제라늄 화분과 초록 난간, 오래된 돌계단과 테라코타 오렌지 벽면이 어우러진 지중해 언덕길 캔디드 \n<truncated 13023 bytes>\n백 |\n| **47** | **네이비 크롭 배기 데"
+  },
+  {
+    "lookNumber": 56,
+    "title": "베이지 맥시 트렌치 & 허리 니트 묶기 룩 (Beige Trench & Waist-Tied Knit)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 베이지 맥시 트렌치 & 허리 니트 묶기 룩 (Beige Trench & Waist-Tied Knit)\n\n```\n[ 메인 아우터 ] 어깨 견장과 스톰 플랩, 와이드 라펠이 멋스러운 카멜 허니 베이지 오버핏 더블 맥시 트렌치코트\n[ 이너 탑 ] 군더더기 없이 몸에 슬림하게 밀착되는 베이직 화이트 크루넥 반팔 베이비 티셔츠\n[ 킬링 레이어드 ] \n  - 골반과 허리 라인에 자연스럽게 질끈 묶어 연출한 라이트 헤더 그레이 긴팔 니트/가디건 (Waist-Tied Knit)\n[ 하의 쇼츠 ] 트렌치코트와 묶은 니트 밑으로 아슬아슬하게 살짝 엿보이는 미니멀 블랙 마이크로 숏팬츠\n[ 삭스 ] 복사뼈 위로 자연스럽게 주름지며 흘러내리는 화이트 코튼 골지 슬라우치 삭스 (Scrunched White Socks)\n[ 슈즈 ] 청키한 미들 굽이 있어 다리를 길어 보이게 만드는 유광 블랙 레더 블록 힐(Block-heel) 페니 로퍼\n[ 가방 ] 바닥이나 벤치에 툭 내려놓은 묵직하고 유연한 다크 초콜릿 브라운 레더 슬라우치 빅 호보 숄더백\n[ 헤어 & 메이크업 ] 바람에 날리는 시스루 뱅 다크 브라운 롱 웨이브 헤어 + 투명한 도자기\n<truncated 13838 bytes>\n "
+  },
+  {
+    "lookNumber": 57,
+    "title": "딥 바이올렛 니트 & 로즈 플로럴 미니 룩 (Violet Knit & Rose Floral Mini)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 딥 바이올렛 니트 & 로즈 플로럴 미니 룩 (Violet Knit & Rose Floral Mini)\n\n```\n[ 상의 니트 ] 단정하면서도 신비로운 색감의 딥 로열 바이올렛(보라색) 파인 골지 반팔 모크넥 니트 탑\n[ 사이드 셔링 ] \n  - 니트 왼쪽 밑단에 실버 링/버클로 주름을 잡아 골반과 허리 라인을 살짝 드러내는 언밸런스 셔링 포인트\n[ 웨이스트 디테일 ] 스커트 허리단 위로 은은하게 반짝이는 실버 글리터/메탈릭 로우라이즈 밴딩 라인\n[ 하의 스커트 ] 블랙 바탕에 핑크빛 장미(Rose Blossom) 패턴이 화려하게 만개한 빈티지 코튼 A라인 미니스커트\n[ 삭스 ] 사이드에 미니멀한 블랙 레터링이 들어간 클린 화이트 코튼 미드-카프 삭스 (White Graphic Socks)\n[ 슈즈 ] 군더더기 없이 매끈한 클래식 블랙 레더 플랫/로우 블록 힐 페니 로퍼\n[ 가방 & 플라워 ] \n  - (사진 2): 프린트 실크 스카프가 삐져나온 캔버스 에코 토트백 + 화이트 종이에 정성스레 감싼 들꽃 꽃다발\n[ 헤어 & 메이크업 ] 차분하게 빗어 내린 진저 브라운 스트레이트 롱 헤어 + 투명한 도자기 피부와 피치 로즈 \n<truncated 13796 byt"
+  },
+  {
+    "lookNumber": 58,
+    "title": "크림 하트 니트 & 레이스업 발레코어 룩 (Heart Knit & Ribbon Balletcore)",
+    "mood": "Feminine & Balletcore",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 크림 하트 니트 & 레이스업 발레코어 룩 (Heart Knit & Ribbon Balletcore)\n\n```\n[ 메인 니트 ] 크림 아이보리 바탕에 레드 하트(Heart) 패턴이 가로 스트라이프로 수놓아진 라운드넥 루즈핏 니트\n[ 하의 ] 니트 밑으로 살짝 보이는 단정하고 차분한 다크 초콜릿 브라운 코튼/울 미니 쇼츠/스커트\n[ 삭스 ] 발목 위로 깨끗하게 당겨 신은 클린 화이트 코튼 골지 크루 삭스 (White Crew Socks)\n[ 킬링 슈즈 디테일 (사진 2) ] \n  - 발레코어의 정점: 화이트 양말 위를 우아하게 X자로 감싸며 묶은 '다크 브라운 광택 새틴 리본 레이스업'\n  - 앞코에 미니 리본 매듭과 셔링 주름이 잡힌 다크 초콜릿 레더 라운드 토 발레리나 플랫\n[ 주얼리 ] 왼손 약지에 착용한 심플하고 가느다란 실버 링\n[ 헤어 & 메이크업 ] 한쪽 어깨로 자연스럽게 늘어뜨린 사이드 로우 포니테일 + 시스루 뱅 & 투명한 핑크빛 혈색 메이크업\n[ 배경 & 로케이션 ] \n  - 사진 1: 노란 은행잎이 떨어진 공원 나무 벤치에 턱을 괴고 무릎을 모아 앉은 캔디드 샷\n  - 사진 2: 벤치 위에서 정성스럽게 발목의 새틴 리본을 묶고 있는 감\n<t"
+  },
+  {
+    "lookNumber": 59,
+    "title": "레이스 시스루 & 캐미솔 레이어드 퍼 백 룩 (Sheer Lace & Knit Camisole with Fluffy Bag)",
+    "mood": "Feminine & Balletcore",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 레이스 시스루 & 캐미솔 레이어드 퍼 백 룩 (Sheer Lace & Knit Camisole with Fluffy Bag)\n*(사진 1, 2: 베이커리 외관 테라스 착장)*\n\n```\n[ 아우터 ] 발목 위까지 길게 떨어지는 다크 차콜 체크/헤링본 테일러드 싱글 맥시 울 코트 (사진 1)\n[ 레이어드 이너 1 ] 목선과 팔을 은은하게 비추는 화이트 플로럴 자수 시스루 레이스 모크넥 롱슬리브 탑\n[ 레이어드 이너 2 ] 레이스 탑 위에 덧입은 블랙 속눈썹 레이스 트리밍의 차콜 멜란지 니트 캐미솔 롱 슬립 탑\n[ 하의 데님 ] 흑청과 연청 사이의 오묘한 빛을 띠는 페이디드 라이트 그레이시 와이드 데님 팬츠\n[ 킬링 백 ] 룩 전체에 몽글몽글한 계절감을 폭발시키는 볼륨감 넘치는 베이지 샤기 페이크 퍼(Fur) 숄더백\n[ 슈즈 ] 차분한 카멜 탠 브라운 스웨이드 슬립온 스니커즈\n[ 헤어 & 메이크업 ] 실크처럼 흐르는 붉은 기 없는 다크 애쉬 브루넷 롱 웨이브 + 투명한 도자기 피부와 피치 코랄 립\n[ 배경 & 로케이션 ] 가로수 그늘과 붉은 벽돌의 베이커리 카페(WAGL) 벤치에서 찍은 여유로운 캔디드 샷\n```\n\n#### 1. 스타일링 포인트 & 착장 문법\n-"
+  },
+  {
+    "lookNumber": 61,
+    "title": "브라운 레더 퍼 패딩 & 그레이시 데님 룩 (Brown Leather Puffer & Greyish Denim)",
+    "mood": "Downtown Noir & Glam",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 브라운 레더 퍼 패딩 & 그레이시 데님 룩 (Brown Leather Puffer & Greyish Denim)\n*(사진 2, 3, 4: 잔디밭 & 감나무 공원 산책 착장)*\n\n```\n[ 메인 아우터 ] 풍성한 허니 카멜 브라운 페이크 퍼(Fur) 후드 트리밍이 돋보이는 딥 초콜릿 브라운 비건 레더 크롭 패딩 점퍼\n[ 이너 탑 ] 아우터를 벗었을 때 반전의 가녀린 선을 보여주는 슬림핏 매트 블랙 V넥 파인 니트/롱슬리브 티셔츠 (사진 3)\n[ 하의 데님 ] 전면에 입체적인 핀턱/절개 스티치 라인이 들어간 루즈핏 그레이시 라이트 블루 와이드 데님 팬츠\n[ 슈즈 ] 룩의 브라운 톤과 일체감을 주는 카멜 브라운 스웨이드 레트로 러너/스니커즈\n[ 가방 & 참 ] 넉넉한 수납력의 카멜 토바코 브라운 스웨이드 슬라우치 빅 숄더백 + 스트랩에 달린 복슬복슬 브라운 퍼 인형 키링\n[ 헤어 & 메이크업 ] 붉은 단풍빛을 머금은 마호가니 브라운 롱 웨이브 헤어 + 가을 햇살에 빛나는 복숭앗빛 치크 & 윤광 피부\n[ 배경 & 로케이션 ] \n  - 사진 2, 4: 주황색 감이 주렁주렁 열린 감나무와 상록수 조경수 앞 따스한 가을 햇살 역광 샷\n  - 사진 3: 초록 잔디밭 트랙"
+  },
+  {
+    "lookNumber": 62,
+    "title": "워싱 데님 볼캡 & 모카 스트라이프 룩 (Denim Cap & Stripe Polo Baggy)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 워싱 데님 볼캡 & 모카 스트라이프 룩 (Denim Cap & Stripe Polo Baggy)\n\n```\n[ 헤드웨어 포인트 ] 룩의 시작점인 빈티지 라이트 스카이블루 워싱 코튼 데님 볼캡 (Washed Denim Dad Hat)\n[ 상의 탑 ] 톤다운된 모카 브라운 & 크림 화이트 파인 스트라이프 카라 폴로 오버핏 맨투맨 (루즈한 드롭 숄더)\n[ 하의 데님 ] 무릎과 허벅지에 자연스러운 올 풀림 컷아웃이 들어간 라이트-미디엄 블루 와이드 배기 데님 (Slash Ripped)\n[ 슈즈 ] 볼드한 플랫폼 솔과 힐에 레드 포인트가 들어간 화이트 청키 대드 스니커즈 (Chunky Platform Sneakers)\n[ 라이프스타일 소품 ] 손에 쥔 자동 리드줄 & 사랑스러운 크림빛 푸들/비숑 반려견 (Dog Walking Vibe)\n[ 헤어 & 메이크업 ] 볼캡 아래로 자연스럽게 늘어뜨린 긴 생머리 + 장난기 어린 표정의 투명한 내추럴 립 메이크업\n[ 배경 & 로케이션 ] \n  - 사진 1: 호숫가 야외 수변 무대 계단에 편안하게 걸터앉아 손으로 입을 가린 귀여운 캔디드 샷\n  - 사진 2: 가을빛 단풍나무 숲길을 따라 반려견과 여유롭게 걸어가는 전신 워킹 샷\n`"
+  },
+  {
+    "lookNumber": 63,
+    "title": "베이비 핑크 원숄더 & 차콜 데님 룩 (Pink Off-Shoulder & Charcoal Denim)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 베이비 핑크 원숄더 & 차콜 데님 룩 (Pink Off-Shoulder & Charcoal Denim)\n\n```\n[ 상의 탑 ] 쇄골과 한쪽 어깨선을 시원하게 드러낸 파스텔 베이비 핑크 와이드 보트넥 루즈핏 맨투맨 (원숄더 드롭 연출)\n[ 하의 데님 ] 핑크 상의와 최고의 색채 궁합을 자랑하는 빈티지 워싱 차콜 그레이/흑청 슬림 와이드 스트레이트 데님 팬츠\n[ 슈즈 ] 발목과 발등을 유연하게 감싸는 주름 밴딩 디테일의 소프트 블랙 레더 셔링 발레 플랫 / 글러브 슈즈 (Glove Flats)\n[ 가방 레이어링 (Two-Bag Trend) ] \n  - 손에 든 각 잡힌 스퀘어 실루엣의 클래식 미니 블랙 레더 탑핸들 토트백\n  - 어깨에 둘러멘 실용적인 와인-퍼플 배색 포인트의 캔버스 쇼퍼 에코백\n[ 음료 소품 ] 테이크아웃 블랙 컵 & 스트로우가 꽂힌 아이스 아메리카노\n[ 헤어 & 메이크업 ] 바람에 자연스럽게 흩날리는 다크 체스넛 롱 스트레이트 헤어 + 화사한 과즙 피치 블러셔 & 글로시 립\n[ 배경 & 로케이션 ] \n  - 사진 1: 가로수길 도로변 안전 가드레일에 걸터앉아 활짝 미소 짓는 햇살 가득한 전신 샷\n  - 사진 2: 횡단보도\n<truncate"
+  },
+  {
+    "lookNumber": 64,
+    "title": "비대칭 스커트-오버-팬츠 룩 (Skirt-Over-Pants & Draped Wrap)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "",
+    "colorPalette": "",
+    "stylingSecret": "",
+    "rawBlock": " 비대칭 스커트-오버-팬츠 룩 (Skirt-Over-Pants & Draped Wrap)\n\n```\n[ 이너 베이스 ] 몸에 밀착되어 팔과 상체를 길고 슬림하게 잡아주는 미니멀 블랙 크루넥 롱슬리브 탑\n[ 레이어드 탑 ] \n  - 블랙 탑 위에 덧입은 목선을 감싸며 대각선으로 유려하게 흘러내리는 차콜 그레이 크로스 드레이프 홀터/카울 랩 탑\n[ 하의 1 (스커트) ] 불규칙한 언밸런스 헴라인과 구조적인 주름이 잡힌 샌드 베이지/오트밀 비대칭 A라인 랩 미디 스커트\n[ 하의 2 (팬츠) ] 스커트 밑단 아래로 툭 떨어지는 와이드 실루엣의 블랙 코튼/데님 와이드 트라우저 (Skirt-Over-Pants)\n[ 벨트 포인트 ] 스커트 허리단에 묵직하게 채우고 남은 가죽 끈을 길게 늘어뜨린 블랙 레더 롱 드롭 벨트\n[ 슈즈 ] 스커트와 팬츠의 볼륨을 날렵하게 뚫고 나오는 블랙 레더 샤프 포인티드 토(뾰족코) 레이스업 앵클 부츠\n[ 주얼리 ] 목선을 장식하는 볼드한 2단 실버 체인 펜던트 레이어드 네크리스\n[ 헤어 & 메이크업 ] 5:5 가르마의 차분한 진저 브라운 스트레이트 헤어 + 쿨한 \n<truncated 15288 bytes>\n치 허리 니트**| 카멜 베이지 더블"
+  },
+  {
+    "lookNumber": 65,
+    "title": "그레이 터틀넥 & 레드 파이핑 니하이 부츠 룩 (Grey Turtleneck with Red Cuff Piping & Knee-High Boots Chic)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "헤더 그레이 하이넥 골지 터틀넥 니트 + 마이크로 블랙 숏팬츠 + 화이트 튜브 삭스 + 블랙 레더 니하이 라이딩 부츠",
+    "colorPalette": "Heather Grey × Cherry Red Piping × Solid Black Leather × Pure White",
+    "stylingSecret": "",
+    "rawBlock": " 그레이 터틀넥 & 레드 파이핑 니하이 부츠 룩 (Grey Turtleneck with Red Cuff Piping & Knee-High Boots Chic)\n\n```\n[룩 요약]\n- 아이템: 헤더 그레이 하이넥 골지 터틀넥 니트 + 마이크로 블랙 숏팬츠 + 화이트 튜브 삭스 + 블랙 레더 니하이 라이딩 부츠\n- 컬러: Heather Grey × Cherry Red Piping × Solid Black Leather × Pure White\n- 헤어/메이크업: 내추럴 롱 스트레이트 다크 브루넷 헤어 + 맑은 립 틴트 메이크업\n- 로케이션/소품: \"이음 GALLERY & COFFEE\" 노출 콘크리트 골목길 + 아이스 아메리카노 테이크아웃 컵 + 숄더백\n```\n\n---\n\n#### ① 컬러 팔레트 & 윈터 모노톤 컬러팁 배색 (Heather Grey × Cherry Red × Monochrome)\n* **모노톤에 가해진 한 끗의 체리 레드 파이핑**: 전체적으로 차분한 멜란지 그레이(Heather Grey)와 솔리드 블랙의 전형적인 미니멀 윈터 팔레트에 소매 끝단(Cuff)을 따라 얇게 둘러진 **선명한 체리 레드 팁(Tipping/Piping) 라인**이 시선을 "
+  },
+  {
+    "lookNumber": 66,
+    "title": "에메랄드 그린 볼캡 & 빈티지 그래픽 베이비티 캐주얼 스트리트 룩 (Emerald Green Ballcap & Graphic Baby Tee with Low-Slung Denim)",
+    "mood": "Hongdae Street & Gorpcore",
+    "itemsDescription": "에메랄드 그린 볼캡 + 빈티지 그래픽 화이트 베이비티 (살짝 허리선 노출) + 연청 로우라이즈 일자 스트레이트 데님 + 블랙 로우탑 스니커즈",
+    "colorPalette": "Emerald Green × Pop Graphic White × Light Vintage Indigo × Solid Black",
+    "stylingSecret": "",
+    "rawBlock": " 에메랄드 그린 볼캡 & 빈티지 그래픽 베이비티 캐주얼 스트리트 룩 (Emerald Green Ballcap & Graphic Baby Tee with Low-Slung Denim)\n\n```\n[룩 요약]\n- 아이템: 에메랄드 그린 볼캡 + 빈티지 그래픽 화이트 베이비티 (살짝 허리선 노출) + 연청 로우라이즈 일자 스트레이트 데님 + 블랙 로우탑 스니커즈\n- 컬러: Emerald Green × Pop Graphic White × Light Vintage Indigo × Solid Black\n- 헤어/메이크업: 볼캡 아래로 내추럴하게 풀어내린 롱 웨이브 브라운 헤어 + 미니멀 립 메이크업\n- 로케이션/소품: \n  - 사진 1: 유럽 도심 광장 햇살 아래 라임(Lime) 전기 자전거 라이딩 씬\n  - 사진 2: 횡단보도를 건너며 손을 주머니에 꽂은 캔디드 스트리트 씬 + 쇼핑백 핸드캐리\n```\n\n---\n\n#### ① 컬러 팔레트 & 햇살 머금은 청량한 스트리트 배색 (Emerald Green × Vintage Indigo)\n* **에메랄드 그린(비비드 그린) 볼캡의 원포인트 파워**:\n  - 화이트 그래픽 티셔츠와 빈티지 연청 데님이라는 클래식한 '흰 티에 청바"
+  },
+  {
+    "lookNumber": 67,
+    "title": "비 오는 날의 오버사이즈 레더 코트 & 헌터 레인부츠 턱인 룩 (Rainy Day Oversized Leather Car Coat with Tucked-in Hunter Boots)",
+    "mood": "Hannam Quiet Luxury",
+    "itemsDescription": "블랙 오버핏 페이크 레더 카 코트 + 화이트 후디 레이어드 + 미드 인디고 릴랙스드 데님 + 헌터(Hunter) 매트 블랙 숏/미들 레인부츠 + 카키 그레이 타이포 캔버스 숄더 숄더백",
+    "colorPalette": "Matte Black Leather × Cloud White × Mid-Wash Indigo Denim × Charcoal Black",
+    "stylingSecret": "",
+    "rawBlock": " 비 오는 날의 오버사이즈 레더 코트 & 헌터 레인부츠 턱인 룩 (Rainy Day Oversized Leather Car Coat with Tucked-in Hunter Boots)\n\n```\n[룩 요약]\n- 아이템: 블랙 오버핏 페이크 레더 카 코트 + 화이트 후디 레이어드 + 미드 인디고 릴랙스드 데님 + 헌터(Hunter) 매트 블랙 숏/미들 레인부츠 + 카키 그레이 타이포 캔버스 숄더 숄더백\n- 컬러: Matte Black Leather × Cloud White × Mid-Wash Indigo Denim × Charcoal Black\n- 헤어/메이크업: 단정하게 로우 포니테일로 묶은 흑발 + 빗방울 머금은 투명 물광 내추럴 메이크업\n- 로케이션/소품: \n  - 사진 1: 비 내리는 시골 전원 풍경 & 과수원 앞, 대형 화이트/블랙 우산을 받쳐 든 정면 샷\n  - 사진 2: 촉촉이 젖은 고즈넉한 한옥 사찰/정원 돌길을 걸어가는 측면 캔디드 샷\n```\n\n---\n\n#### ① 컬러 팔레트 & 레이니 데이의 차분한 텍스처 배색 (Black Leather × Mid Indigo × White)\n* **방수 레더와 빗물 머금은 딥 톤의 조화**: 비 오는 날의 "
+  },
+  {
+    "lookNumber": 68,
+    "title": "레이어드 캡슬리브 티셔츠 & 유틸리티 카고 숏팬츠 아틀리에 룩 (Layered Cap-Sleeve Tee with Utility Cargo Shorts & Knee Socks)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "화이트 롱슬리브 위에 라이트 그레이 캡슬리브 보트넥 반팔 레이어드 + 플랩 포켓 라이트 그레이 유틸리티 카고 숏팬츠 + 차콜 블랙 니삭스 + 매트 다크 네이비/블랙 슬립온 클로그",
+    "colorPalette": "Heather Ash Grey × Crisp White × Deep Charcoal × Matte Navy Black",
+    "stylingSecret": "",
+    "rawBlock": " 레이어드 캡슬리브 티셔츠 & 유틸리티 카고 숏팬츠 아틀리에 룩 (Layered Cap-Sleeve Tee with Utility Cargo Shorts & Knee Socks)\n\n```\n[룩 요약]\n- 아이템: 화이트 롱슬리브 위에 라이트 그레이 캡슬리브 보트넥 반팔 레이어드 + 플랩 포켓 라이트 그레이 유틸리티 카고 숏팬츠 + 차콜 블랙 니삭스 + 매트 다크 네이비/블랙 슬립온 클로그\n- 컬러: Heather Ash Grey × Crisp White × Deep Charcoal × Matte Navy Black\n- 헤어/메이크업: 볼륨감 있는 앞머리 숏 단발(보브 컷) + 맑고 깨끗한 미니멀 누드 메이크업\n- 로케이션/소품: 알록달록한 원사(실타래) 패널이 정갈하게 진열된 텍스타일/패션 공방(아틀리에) 실내 + 터프팅/재봉 기계\n```\n\n---\n\n#### ① 컬러 팔레트 & 톤온톤 미니멀 텍스타일 배색 (Ash Grey × White × Charcoal)\n* **절제된 애쉬 그레이 톤온톤(Tone-on-Tone)**:\n  - 상의와 하의를 거의 동일한 명도의 페일 애쉬 그레이(Pale Ash Grey)로 통일하여 깔끔하고 미니멀한 단색(Monochroma"
+  },
+  {
+    "lookNumber": 69,
+    "title": "칠리 레드 그래픽 티 & 슬릿 아일렛 벨트 맥시 스커트 룩 (Chili Red Layered Graphic Tee with Eyelet Belted Maxi Skirt)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "화이트 롱슬리브 위에 칠리 레드 그래픽 반팔 티셔츠 레이어드 + 메탈 아일렛 펀칭 벨트 골반 연출 + 페일 아이스 그레이 플루이드 맥시 스커트 + 클린 화이트 레트로 러너 스니커즈",
+    "colorPalette": "Vivid Chili Red × Pale Ice Grey × Crisp White × Metallic Silver",
+    "stylingSecret": "",
+    "rawBlock": " 칠리 레드 그래픽 티 & 슬릿 아일렛 벨트 맥시 스커트 룩 (Chili Red Layered Graphic Tee with Eyelet Belted Maxi Skirt)\n\n```\n[룩 요약]\n- 아이템: 화이트 롱슬리브 위에 칠리 레드 그래픽 반팔 티셔츠 레이어드 + 메탈 아일렛 펀칭 벨트 골반 연출 + 페일 아이스 그레이 플루이드 맥시 스커트 + 클린 화이트 레트로 러너 스니커즈\n- 컬러: Vivid Chili Red × Pale Ice Grey × Crisp White × Metallic Silver\n- 헤어/메이크업: 슬릭하게 넘긴 업두(번/집게핀) 헤어 + 직사각형 블랙 마이크로 선글라스 + 롱 실버 펜던트 네크리스 레이어드\n- 로케이션/소품: 베를린 \"Café Zadig / Französische Buchhandlung(프랑스 서점)\" 입구 칠판 입간판 앞 + 젤라또/아이스크림 컵 스푼\n```\n\n---\n\n#### ① 컬러 팔레트 & 핫 앤 쿨 하이콘트라스트 배색 (Chili Red × Pale Ice Grey)\n* **채도 높은 칠리 레드(Chili Red)와 페일 아이스 그레이의 쿨한 충돌**:\n  - 눈이 번쩍 뜨일 만큼 강렬한 핫 레드 컬러의"
+  },
+  {
+    "lookNumber": 70,
+    "title": "화이트 엠브로이더리 베스트 & 플리츠 미디스커트 웨스턴 믹스매치 룩 (White Embroidered Sleeveless Shirt with Pleated Midi Skirt & Western Cowboy Boots)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "은은한 톤온톤 자수가 들어간 아이보리 화이트 캡슬리브 셔츠 베스트 (언버튼 슬릿 연출) + A라인 블랙 플리츠 미디스커트 + 화이트 스티치 자수 블랙 레더 웨스턴 카우보이 부츠",
+    "colorPalette": "Ivory White × Deep Black × Monochromatic Western Stitch",
+    "stylingSecret": "",
+    "rawBlock": " 화이트 엠브로이더리 베스트 & 플리츠 미디스커트 웨스턴 믹스매치 룩 (White Embroidered Sleeveless Shirt with Pleated Midi Skirt & Western Cowboy Boots)\n\n```\n[룩 요약]\n- 아이템: 은은한 톤온톤 자수가 들어간 아이보리 화이트 캡슬리브 셔츠 베스트 (언버튼 슬릿 연출) + A라인 블랙 플리츠 미디스커트 + 화이트 스티치 자수 블랙 레더 웨스턴 카우보이 부츠\n- 컬러: Ivory White × Deep Black × Monochromatic Western Stitch\n- 헤어/메이크업: 시스루 뱅과 턱선 라인의 소프트 블랙 단발(보브 컷) + 맑은 코랄 핑크 립 & 블러셔\n- 로케이션/소품: 레트로한 일본식 킷사텐(喫茶店) 입구 (\"珈琲と軽食 丘 COFFEE OKA\" 빈티지 돌벽 간판 & 쇼케이스 앞)\n```\n\n---\n\n#### ① 컬러 팔레트 & 흑백의 클래식 콘트라스트 (Ivory White × Solid Black)\n* **군더더기 없는 완벽한 블랙 & 화이트 대비**:\n  - 상의의 소프트 아이보리 화이트와 하의의 딥 블랙이 선명한 명암 대비를 이루어, 단정하면서도 모던한 그래픽적 "
+  },
+  {
+    "lookNumber": 71,
+    "title": "올리브 윈드브레이커 & 바부슈카 캡 하이킹 고프코어 룩 (Olive Windbreaker with Babushka-Cap Styling & Trekking Gorpcore)",
+    "mood": "Hongdae Street & Gorpcore",
+    "itemsDescription": "올리브 카키 기능성 테크 윈드브레이커(바람막이) + 베이지 트레일 러닝 캡 위에 스카이블루 그래픽 반다나(바부슈카) 레이어드 + 앰버 톨토이즈 셸 틴트 선글라스 + 그레이 하이킹 팬츠 & 트레킹 슈즈",
+    "colorPalette": "Earthy Olive Khaki × Sky Blue & White Pattern × Sand Beige × Amber Tortoise",
+    "stylingSecret": "",
+    "rawBlock": " 올리브 윈드브레이커 & 바부슈카 캡 하이킹 고프코어 룩 (Olive Windbreaker with Babushka-Cap Styling & Trekking Gorpcore)\n\n```\n[룩 요약]\n- 아이템: 올리브 카키 기능성 테크 윈드브레이커(바람막이) + 베이지 트레일 러닝 캡 위에 스카이블루 그래픽 반다나(바부슈카) 레이어드 + 앰버 톨토이즈 셸 틴트 선글라스 + 그레이 하이킹 팬츠 & 트레킹 슈즈\n- 컬러: Earthy Olive Khaki × Sky Blue & White Pattern × Sand Beige × Amber Tortoise\n- 헤어/메이크업: 스카프 안으로 정돈된 자연스러운 브라운 헤어 & 뱅 + 맑고 건강한 선크림 물광 & 생기 있는 핑크 립\n- 로케이션/소품: 푸른 수풀과 흙길이 펼쳐진 등산 트레킹 코스 + 하이 앵글 셀피(Selfie) + 허리에 묶은 네이비 페이즐리 반다나\n```\n\n---\n\n#### ① 컬러 팔레트 & 아웃도어 어씨 톤과 청량한 스카이블루 배색 (Olive Khaki × Sky Blue)\n* **어씨(Earthy) 올리브에 생기를 불어넣는 스카이블루 포인트**:\n  - 전형적인 아웃도어 고프코어의 메인 컬러인"
+  },
+  {
+    "lookNumber": 72,
+    "title": "블루 트위드 보트넥 탑 & 네이비 배기 슬랙스 파리지앵 베레모 룩 (Blue Tweed Boatneck Top with Navy Baggy Trousers & Parisian Wool Beret)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "블루/그레이 믹스 텍스처 트위드 보트넥 롱슬리브 탑 + 초광폭 와이드 딥 네이비 배기 트라우저 슬랙스 + 네이비 울 베레모 + 버터 옐로우 레더 숄더백 + 블랙 레더 슈즈",
+    "colorPalette": "French Dusty Blue × Deep Midnight Navy × Butter Pale Yellow × Glossy Black",
+    "stylingSecret": "",
+    "rawBlock": " 블루 트위드 보트넥 탑 & 네이비 배기 슬랙스 파리지앵 베레모 룩 (Blue Tweed Boatneck Top with Navy Baggy Trousers & Parisian Wool Beret)\n\n```\n[룩 요약]\n- 아이템: 블루/그레이 믹스 텍스처 트위드 보트넥 롱슬리브 탑 + 초광폭 와이드 딥 네이비 배기 트라우저 슬랙스 + 네이비 울 베레모 + 버터 옐로우 레더 숄더백 + 블랙 레더 슈즈\n- 컬러: French Dusty Blue × Deep Midnight Navy × Butter Pale Yellow × Glossy Black\n- 헤어/메이크업: 베레모 아래로 깔끔하게 빗어 넘긴 긴 생머리 + 우아하고 지적인 내추럴 누드 메이크업\n- 로케이션/소품: 파리 마레 지구 거리의 독립 예술 서점/잡지 가판대 앞 + 대형 아트북/포토북을 펼쳐 든 캔디드 모먼트\n```\n\n---\n\n#### ① 컬러 팔레트 & 프렌치 블루 톤온톤과 버터 옐로우의 터치 (French Blue × Midnight Navy × Butter)\n* **프렌치 블루와 딥 네이비의 깊이감 있는 톤온톤**:\n  - 더스티한 스카이블루와 그레이가 섞인 트위드 얀(Yarn) 상의에 묵직한 "
+  },
+  {
+    "lookNumber": 73,
+    "title": "피그먼트 워싱 크롭 스웨트 셋업 & 옐로우 팀버랜드 힙합 스트리트 룩 (Pigment-Washed Cropped Sweatsuit Set with Yellow Timberland Boots)",
+    "mood": "Hongdae Street & Gorpcore",
+    "itemsDescription": "피그먼트 다이드 차콜 모카 그레이 크롭 맨투맨(스웨트셔츠) + 울트라 배기 벌룬 스웨트팬츠(조거) 셋업 + 옐로우 위트(Wheat) 팀버랜드 6인치 누벅 부츠 + 블랙 숄더백",
+    "colorPalette": "Pigment Washed Charcoal Mocha × Honey Wheat Yellow × Matte Black",
+    "stylingSecret": "",
+    "rawBlock": " 피그먼트 워싱 크롭 스웨트 셋업 & 옐로우 팀버랜드 힙합 스트리트 룩 (Pigment-Washed Cropped Sweatsuit Set with Yellow Timberland Boots)\n\n```\n[룩 요약]\n- 아이템: 피그먼트 다이드 차콜 모카 그레이 크롭 맨투맨(스웨트셔츠) + 울트라 배기 벌룬 스웨트팬츠(조거) 셋업 + 옐로우 위트(Wheat) 팀버랜드 6인치 누벅 부츠 + 블랙 숄더백\n- 컬러: Pigment Washed Charcoal Mocha × Honey Wheat Yellow × Matte Black\n- 헤어/메이크업: 볼륨감 있는 소프트 웨이브 롱 브라운 헤어 & 풀 뱅 + 두꺼운 블랙 뿔테 안경(긱시크 터치) + 내추럴 립\n- 로케이션/소품: 뉴욕/런던풍의 클래식한 딥그린 몰딩과 앤틱 원목 도어 (\"96\" 골드 번지수 표기) 앞 + 머리를 묶으려 양손을 올린 포즈\n```\n\n---\n\n#### ① 컬러 팔레트 & 빈티지 피그먼트와 옐로우 누벅의 하이라이트 (Pigment Charcoal × Wheat Yellow)\n* **빈티지 감성의 피그먼트 워싱 차콜 모카(Pigment Charcoal Mocha)**:\n  - 갓 찍어낸 단색 회색"
+  },
+  {
+    "lookNumber": 74,
+    "title": "린넨 셔링 블라우스 & 롱 머플러 하동 녹차밭 젠(Zen) 룩 (Linen Shirred Blouse with Long Knit Scarf & Deep Brown Slacks Zen Look)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "샌드 베이지 린넨 셔링 헨리넥 블라우스 (소매 롤업/푸시업) + 다크 초콜릿 브라운 와이드 슬랙스 + 롱 블랙 니트 슬림 머플러 + 블랙 아웃도어 트래커 로우 슈즈 + 블랙 미니 레더 크로스 파우치",
+    "colorPalette": "Sand Beige × Deep Chocolate Brown × Ink Black × Lush Green",
+    "stylingSecret": "",
+    "rawBlock": " 린넨 셔링 블라우스 & 롱 머플러 하동 녹차밭 젠(Zen) 룩 (Linen Shirred Blouse with Long Knit Scarf & Deep Brown Slacks Zen Look)\n\n```\n[룩 요약]\n- 아이템: 샌드 베이지 린넨 셔링 헨리넥 블라우스 (소매 롤업/푸시업) + 다크 초콜릿 브라운 와이드 슬랙스 + 롱 블랙 니트 슬림 머플러 + 블랙 아웃도어 트래커 로우 슈즈 + 블랙 미니 레더 크로스 파우치\n- 컬러: Sand Beige × Deep Chocolate Brown × Ink Black × Lush Green\n- 헤어/메이크업: 귀 뒤로 단정하게 넘긴 자연스러운 흑발 롱 생머리 + 맑고 담백한 노메이크업풍 투명 피부 & 코랄 립\n- 로케이션/소품: \n  - 사진 1: 싱그러운 차나무 덤불이 층층이 펼쳐진 보성/하동 녹차밭 오솔길 전신 샷\n  - 사진 2: 전통 돌담과 원목 마루(평상)에 걸터앉아 고즈넉하게 먼 곳을 응시하는 정적인 무드\n```\n\n---\n\n#### ① 컬러 팔레트 & 자연과 동화되는 얼씨 젠 팔레트 (Sand Beige × Chocolate Brown × Ink Black)\n* **내추럴 린넨과 딥 브라운의 온화한 "
+  },
+  {
+    "lookNumber": 75,
+    "title": "크롭 케이블 니트 & 티어드 체크 맥시 스커트 모리걸(Mori-Girl) 룩 (Cropped Cable Knit with Tiered Plaid Maxi Skirt & Single Braid)",
+    "mood": "Feminine & Balletcore",
+    "itemsDescription": "아이보리 크롭 케이블(꽈배기) 라운드넥 니트 + 프릴 밑단 화이트 셔츠 레이어드 + 사선 바이어스 타탄 체크 티어드 프릴 맥시 스커트 + 차콜 립 레그워머 + 매트 차콜 그레이 라운드 토 클로그 슈즈 + 오렌지 타이포 블랙 캔버스 숄더 에코백",
+    "colorPalette": "Cream Ivory × Crisp White × Monochrome Plaid (Black/White) × Charcoal Grey × Accent Tangerine",
+    "stylingSecret": "",
+    "rawBlock": " 크롭 케이블 니트 & 티어드 체크 맥시 스커트 모리걸(Mori-Girl) 룩 (Cropped Cable Knit with Tiered Plaid Maxi Skirt & Single Braid)\n\n```\n[룩 요약]\n- 아이템: 아이보리 크롭 케이블(꽈배기) 라운드넥 니트 + 프릴 밑단 화이트 셔츠 레이어드 + 사선 바이어스 타탄 체크 티어드 프릴 맥시 스커트 + 차콜 립 레그워머 + 매트 차콜 그레이 라운드 토 클로그 슈즈 + 오렌지 타이포 블랙 캔버스 숄더 에코백\n- 컬러: Cream Ivory × Crisp White × Monochrome Plaid (Black/White) × Charcoal Grey × Accent Tangerine\n- 헤어/메이크업: 한쪽으로 곱게 땋아 내린 사이드 브레이드(땋은 머리) & 풀뱅 + 몽환적이고 청순한 쿨톤 누드 핑크 메이크업\n- 로케이션/소품: 기하학적인 옐로우 브릿지 기둥 아치 아래 + 블랙 캔버스 빅 에코백 숄더 착용\n```\n\n---\n\n#### ① 컬러 팔레트 & 빈티지 모리걸의 포근한 모노크롬 믹스 (Cream Ivory × Monochrome Plaid)\n* **크림 아이보리와 화이트 프릴의 부드러운 상체 "
+  },
+  {
+    "lookNumber": 76,
+    "title": "네이비 오버핏 터틀넥 & 허리 니트 레이어드 한남동 쇼룸 룩 (Navy Chunky Turtleneck Knit with Waist-Tied Cardigan & Straight Denim)",
+    "mood": "Hannam Quiet Luxury",
+    "itemsDescription": "벌키한 딥 네이비 드롭숄더 하이 터틀넥 니트 + 허리에 무심하게 묶은 라이트 헤더 그레이 가디건(니트) + 미드 라이트 블루 스트레이트 데님 팬츠 + 블랙 빅 레더 숄더백",
+    "colorPalette": "Deep Midnight Navy × Heather Slate Grey × Classic Mid-Blue Denim × Jet Black",
+    "stylingSecret": "",
+    "rawBlock": " 네이비 오버핏 터틀넥 & 허리 니트 레이어드 한남동 쇼룸 룩 (Navy Chunky Turtleneck Knit with Waist-Tied Cardigan & Straight Denim)\n\n```\n[룩 요약]\n- 아이템: 벌키한 딥 네이비 드롭숄더 하이 터틀넥 니트 + 허리에 무심하게 묶은 라이트 헤더 그레이 가디건(니트) + 미드 라이트 블루 스트레이트 데님 팬츠 + 블랙 빅 레더 숄더백\n- 컬러: Deep Midnight Navy × Heather Slate Grey × Classic Mid-Blue Denim × Jet Black\n- 헤어/메이크업: 이마를 시원하게 드러낸 슬릭 하프업/올백 포니테일 + 투명하고 깨끗한 쿨톤 광채 피부 & 코랄 누드 립\n- 로케이션/소품: 따뜻한 전구색 조명과 미색 대리석 기둥이 있는 모던한 럭셔리 부티크/쇼룸 실내 + 롱 실버 체인에 걸어둔 블랙 선글라스\n```\n\n---\n\n#### ① 컬러 팔레트 & 클래식 쿨톤의 정석 배색 (Navy × Grey × Mid-Blue Denim)\n* **실패 없는 네이비-그레이-블루의 정제된 톤 밸런스**:\n  - 묵직하고 고급스러운 딥 네이비(Midnight Navy)와 밝은 헤더"
+  },
+  {
+    "lookNumber": 77,
+    "title": "스칼렛 레드 브이넥 니트 & 화이트 와이드 팬츠 쇼룸 럭셔리 룩 (Scarlet Red V-Neck Knit with Crisp White Wide Trousers & Belted Chic)",
+    "mood": "Hannam Quiet Luxury",
+    "itemsDescription": "채도 높은 스칼렛 레드 브이넥 니트 + 이너 그레이 라운드넥 티셔츠 레이어드 + 블랙 레더 벨트 + 하이웨이스트 크리스프 화이트 와이드 팬츠 + 블랙 레더 앵클부츠 + 팔에 걸쳐 든 시어링 무스탕 아우터",
+    "colorPalette": "Vibrant Scarlet Red × Crisp Pure White × Heather Slate Grey × Jet Black Leather",
+    "stylingSecret": "",
+    "rawBlock": " 스칼렛 레드 브이넥 니트 & 화이트 와이드 팬츠 쇼룸 럭셔리 룩 (Scarlet Red V-Neck Knit with Crisp White Wide Trousers & Belted Chic)\n\n```\n[룩 요약]\n- 아이템: 채도 높은 스칼렛 레드 브이넥 니트 + 이너 그레이 라운드넥 티셔츠 레이어드 + 블랙 레더 벨트 + 하이웨이스트 크리스프 화이트 와이드 팬츠 + 블랙 레더 앵클부츠 + 팔에 걸쳐 든 시어링 무스탕 아우터\n- 컬러: Vibrant Scarlet Red × Crisp Pure White × Heather Slate Grey × Jet Black Leather\n- 헤어/메이크업: 정수리부터 매끄럽게 빗어 넘긴 슬릭 하프업 롱 흑발 + 맑은 톤업 베이스 & 선명한 레드 틴티드 립\n- 로케이션/소품: 블랙 라운드 파티션과 대리석 기둥이 공존하는 고급 부티크 플래그십 스토어 실내 + 팔에 가볍게 얹은 블랙/화이트 무스탕\n```\n\n---\n\n#### ① 컬러 팔레트 & 대담한 레드와 화이트의 모던 콘트라스트 (Scarlet Red × Crisp White × Black)\n* **스칼렛 레드와 순백의 화이트가 만드는 시각적 압도감**:\n  - 눈부실 "
+  },
+  {
+    "lookNumber": 78,
+    "title": "카키 올리브 아일렛 랩 니트 & 와이드 데님 성수동 테일러드 룩 (Khaki Olive Eyelet Wrap Knit with Relaxed Wide Denim & Square-Toe Flats)",
+    "mood": "Hannam Quiet Luxury",
+    "itemsDescription": "언밸런스 플랩 카라와 스트링 랩 디테일의 카키 올리브 긴팔 니트 탑 + 릴랙스드 핏 미드 워시 와이드 데님 + 블랙 스퀘어 토 플랫/로퍼 + 딥 에스프레소 스웨이드 빅 토트백",
+    "colorPalette": "Muted Khaki Olive × Mid-Wash Vintage Blue × Deep Espresso Brown × Jet Black",
+    "stylingSecret": "",
+    "rawBlock": " 카키 올리브 아일렛 랩 니트 & 와이드 데님 성수동 테일러드 룩 (Khaki Olive Eyelet Wrap Knit with Relaxed Wide Denim & Square-Toe Flats)\n\n```\n[룩 요약]\n- 아이템: 언밸런스 플랩 카라와 스트링 랩 디테일의 카키 올리브 긴팔 니트 탑 + 릴랙스드 핏 미드 워시 와이드 데님 + 블랙 스퀘어 토 플랫/로퍼 + 딥 에스프레소 스웨이드 빅 토트백\n- 컬러: Muted Khaki Olive × Mid-Wash Vintage Blue × Deep Espresso Brown × Jet Black\n- 헤어/메이크업: 한쪽 어깨 위로 풍성하게 늘어뜨린 소프트 웨이브 롱 흑발 + 맑은 코랄 톤의 투명 립 & 내추럴 치크\n- 로케이션/소품: 모던한 콘크리트 및 그레이 루버 가벽 외벽 앞 인도 + 딥 브라운 스웨이드 빅 토트백 핸드캐리\n```\n\n---\n\n#### ① 컬러 팔레트 & 뮤트 올리브와 빈티지 블루의 차분한 가을 배색 (Khaki Olive × Mid Blue × Espresso)\n* **채도를 덜어낸 고급스러운 뮤트 올리브(Muted Khaki Olive)**:\n  - 노란빛이 살짝 감도는 차분한 올리브"
+  },
+  {
+    "lookNumber": 79,
+    "title": "차콜 오버핏 셔츠-타이 & 더스티 로즈 스커트 도쿄 빈티지 스쿨 룩 (Charcoal Oversized Shirt with Matching Tie, Dusty Rose Midi Skirt & Knee Socks)",
+    "mood": "Collegiate Preppy",
+    "itemsDescription": "동일 원단의 얇은 타이 세트 차콜 그레이 오버사이즈 롱슬리브 셔츠 + 밑단 프릴 디테일의 더스티 로즈(뮤트 핑크) 새틴/코튼 미디스커트 + 슬레이트 그레이 니삭스 + 블랙 레더 메리제인/티스트랩 슈즈 + 베이지 숄더백",
+    "colorPalette": "Charcoal Slate Grey × Dusty Rose (Muted Mauve Pink) × Warm Beige × Jet Black",
+    "stylingSecret": "",
+    "rawBlock": " 차콜 오버핏 셔츠-타이 & 더스티 로즈 스커트 도쿄 빈티지 스쿨 룩 (Charcoal Oversized Shirt with Matching Tie, Dusty Rose Midi Skirt & Knee Socks)\n\n```\n[룩 요약]\n- 아이템: 동일 원단의 얇은 타이 세트 차콜 그레이 오버사이즈 롱슬리브 셔츠 + 밑단 프릴 디테일의 더스티 로즈(뮤트 핑크) 새틴/코튼 미디스커트 + 슬레이트 그레이 니삭스 + 블랙 레더 메리제인/티스트랩 슈즈 + 베이지 숄더백\n- 컬러: Charcoal Slate Grey × Dusty Rose (Muted Mauve Pink) × Warm Beige × Jet Black\n- 헤어/메이크업: 눈썹을 덮는 뱅 헤어와 쇄골 라인의 내추럴 블랙 중단발 + 창백하고 맑은 피부 톤 & 담백한 누드 립\n- 로케이션/소품: 일본 주택가 골목길 철제 방범창 울타리와 도로 표지판 앞 + 장난스럽게 한 발을 앞으로 뻗으며 걷는 밸런스 워킹 포즈\n```\n\n---\n\n#### ① 컬러 팔레트 & 매니시 차콜과 페미닌 더스티 로즈의 절묘한 결합 (Charcoal × Dusty Rose)\n* **어둡고 무거운 차콜 그레이를 밝히는 말린 장미빛 핑크*"
+  },
+  {
+    "lookNumber": 80,
+    "title": "플로럴 벨벳 차이나 카라 자켓 & 배기 슬랙스 파리 메트로 룩 (Floral Velvet Mandarin Jacket with Baggy Trousers & Chunky Sneakers)",
+    "mood": "Seoul Casual Chic",
+    "itemsDescription": "미니 플로럴 자수가 촘촘히 놓인 블랙 벨벳 차이나 카라(만다린 칼라) 숏 자켓 + 턱 플리츠 블랙 울 와이드 배기 슬랙스 + 청키 솔 올블랙 대드 스니커즈 + 퀼팅 블랙 레더 체인 숄더백",
+    "colorPalette": "Jet Black Velvet × Crimson Red Floral Embroidery × Glazed White Tile",
+    "stylingSecret": "",
+    "rawBlock": " 플로럴 벨벳 차이나 카라 자켓 & 배기 슬랙스 파리 메트로 룩 (Floral Velvet Mandarin Jacket with Baggy Trousers & Chunky Sneakers)\n\n```\n[룩 요약]\n- 아이템: 미니 플로럴 자수가 촘촘히 놓인 블랙 벨벳 차이나 카라(만다린 칼라) 숏 자켓 + 턱 플리츠 블랙 울 와이드 배기 슬랙스 + 청키 솔 올블랙 대드 스니커즈 + 퀼팅 블랙 레더 체인 숄더백\n- 컬러: Jet Black Velvet × Crimson Red Floral Embroidery × Glazed White Tile\n- 헤어/메이크업: 살짝 웨이브 진 텍스처드 픽시 숏단발 + 볼드한 오벌 블랙 뿔테 안경 + 해맑은 미소의 투명 립 메이크업\n- 로케이션/소품: 파리 지하철(Metro) 역 특유의 하얀 베벨 타일과 붉은 와인색 벽돌 타일 벽면 앞 + 생수병 & 베이커리 종이봉투를 양손에 든 캔디드 샷\n```\n\n---\n\n#### ① 컬러 팔레트 & 올블랙 텍스처와 크림슨 플로럴의 변주 (Black Velvet × Crimson Embroidery)\n* **벨벳과 울, 가죽이 빚어내는 풍성한 올블랙 텍스처 레이어드**:\n  - 상의의 깊고 부"
+  },
+  {
+    "lookNumber": 81,
+    "title": "그레이 맥시 발마칸 코트 & 딥 플럼 가디건 시크 레이어드 룩 (Grey Maxi Balmacaan Coat with Deep Plum Cardigan & Mini Skirt Chic)",
+    "mood": "Hannam Quiet Luxury",
+    "itemsDescription": "멜란지 그레이 오버사이즈 맥시 울 발마칸 롱코트 + 딥 플럼(보라/와인) 소프트 모헤어 라운드 가디건 + 화이트 크루넥 이너 티셔츠 + A라인 블랙 미니스커트 + 시어 블랙 타이즈(스타킹) + 글로시 블랙 레더 라이딩 부츠 + 블랙 레더 숄더백",
+    "colorPalette": "Heather Slate Grey × Deep Plum Violet × Crisp White × Jet Black",
+    "stylingSecret": "",
+    "rawBlock": " 그레이 맥시 발마칸 코트 & 딥 플럼 가디건 시크 레이어드 룩 (Grey Maxi Balmacaan Coat with Deep Plum Cardigan & Mini Skirt Chic)\n\n```\n[룩 요약]\n- 아이템: 멜란지 그레이 오버사이즈 맥시 울 발마칸 롱코트 + 딥 플럼(보라/와인) 소프트 모헤어 라운드 가디건 + 화이트 크루넥 이너 티셔츠 + A라인 블랙 미니스커트 + 시어 블랙 타이즈(스타킹) + 글로시 블랙 레더 라이딩 부츠 + 블랙 레더 숄더백\n- 컬러: Heather Slate Grey × Deep Plum Violet × Crisp White × Jet Black\n- 헤어/메이크업: 이마를 단정하게 드러낸 슬릭 하프업 롱 스트레이트 흑발 + 맑은 쿨톤 도자기 피부 & 로즈 핑크 립\n- 로케이션/소품: 빈티지한 통유리창과 베이지 패브릭 커튼이 있는 성수동 골목 쇼룸/베이커리 외관\n```\n\n---\n\n#### ① 컬러 팔레트 & 딥 플럼 바이올렛과 슬레이트 그레이의 귀족적 조화 (Plum Violet × Slate Grey)\n* **그레이와 블랙 사이에 안착한 신비로운 딥 플럼(Deep Plum Violet)**:\n  - 전형적인 겨울 무채색"
+  }
+]

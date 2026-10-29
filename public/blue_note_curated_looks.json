@@ -1,0 +1,2261 @@
+[
+  {
+    "id": "look-hana-01",
+    "title": "Port Breeze Off-Duty Stroll (항구 바람의 퇴근 산책)",
+    "aesthetic": "Clean Girl Minimal",
+    "season": "All-Season Daily",
+    "imageUrl": "/images/blue_note/hana_port_walk.png",
+    "modelHeight": "173cm (5'8\")",
+    "memberId": "hana",
+    "memberName": "Hana (하나)",
+    "memberBio": "Effortless coastal minimalism. Loves cozy knitwear, timeless straight-leg denim, and ceramics.",
+    "description": "Seaside harbor boardwalk at golden hour after a quiet day at work. 일을 마친 뒤 항구 산책로에서 바닷바람 맞기 🌊",
+    "curatorNote": "BLUE:NOTE Hana (하나) signature off-duty fit. Characterized by Clean Girl Minimal · Seaside Warmth. Formulated with 7-head golden ratio balance.",
+    "colorPalette": [
+      "#1F2937",
+      "#D1D5DB",
+      "#F3F4F6",
+      "#9CA3AF"
+    ],
+    "vibeTags": [
+      "#Cozy Knitwear",
+      "#Denim Staples",
+      "#Clean Girl",
+      "#Coastal Casual"
+    ],
+    "hasSpaPicks": true,
+    "pins": [
+      {
+        "id": "hn-01-top",
+        "x": 48,
+        "y": 32,
+        "category": "Top",
+        "title": "Supima Cotton Crewneck Tee",
+        "brand": "Uniqlo US",
+        "price": 20,
+        "retailer": "Uniqlo US",
+        "buyUrl": "https://www.uniqlo.com/us/en/products/E422990-000/00",
+        "isSpaBrand": true,
+        "dupe": {
+          "title": "Relaxed Fit Cotton T-Shirt",
+          "brand": "H&M US",
+          "price": 10,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.0685814001.html",
+          "savingsPct": 50
+        }
+      },
+      {
+        "id": "hn-01-outer",
+        "x": 38,
+        "y": 28,
+        "category": "Outer",
+        "title": "Relaxed Merino Knit Cardigan in Navy",
+        "brand": "COS",
+        "price": 135,
+        "retailer": "COS",
+        "buyUrl": "https://www.cos.com/en_usd/women/womenswear/knitwear/cardigans.html",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Knit Ribbed Navy Cardigan",
+          "brand": "Zara US",
+          "price": 46,
+          "retailer": "Zara US",
+          "buyUrl": "https://www.zara.com/us/en/knit-cardigan-p03859100.html",
+          "savingsPct": 66
+        }
+      },
+      {
+        "id": "hn-01-bottom",
+        "x": 50,
+        "y": 58,
+        "category": "Bottom",
+        "title": "The Perfect Vintage Straight Jeans in Indigo",
+        "brand": "Madewell",
+        "price": 128,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.madewell.com/womens/clothing/jeans/the-perfect-vintage-jean",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Straight Regular Ankle High Jeans",
+          "brand": "H&M US",
+          "price": 30,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.0970819001.html",
+          "savingsPct": 77
+        }
+      },
+      {
+        "id": "hn-01-shoes",
+        "x": 50,
+        "y": 88,
+        "category": "Shoes",
+        "title": "574 Core Classic Sneakers in Sea Salt White",
+        "brand": "New Balance",
+        "price": 90,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B08V7S5X1B",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Minimalist Platform Court Trainers",
+          "brand": "Zara US",
+          "price": 40,
+          "retailer": "Zara US",
+          "buyUrl": "https://www.zara.com/us/en/contrast-trainers-p12403310.html",
+          "savingsPct": 56
+        }
+      }
+    ],
+    "focusType": "Full-Body Silhouette"
+  },
+  {
+    "id": "look-hana-02",
+    "title": "Sunlit Window Oatmeal Knit (창가에서 쉬는 오트밀 니트)",
+    "aesthetic": "Clean Girl Minimal",
+    "season": "All-Season Daily",
+    "imageUrl": "/images/blue_note/hana_window_knit.png",
+    "modelHeight": "173cm (5'8\")",
+    "memberId": "hana",
+    "memberName": "Hana (하나)",
+    "memberBio": "Effortless coastal minimalism. Loves cozy knitwear, timeless straight-leg denim, and ceramics.",
+    "description": "Peaceful afternoon by a sunny window with warm herbal tea. 따뜻한 햇살 받으면서 음악 듣는 시간 ☀️☕️",
+    "curatorNote": "BLUE:NOTE Hana (하나) signature off-duty fit. Characterized by Clean Girl Minimal · Seaside Warmth. Formulated with 7-head golden ratio balance.",
+    "colorPalette": [
+      "#1F2937",
+      "#D1D5DB",
+      "#F3F4F6",
+      "#9CA3AF"
+    ],
+    "vibeTags": [
+      "#Oatmeal Knit",
+      "#Morning Sun",
+      "#Quiet Luxury",
+      "#Relaxed Living"
+    ],
+    "hasSpaPicks": true,
+    "pins": [
+      {
+        "id": "hn-02-knit",
+        "x": 52,
+        "y": 36,
+        "category": "Top",
+        "title": "Oatmeal Chunky Button-Down Cardigan",
+        "brand": "& Other Stories",
+        "price": 149,
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/browse/women/clothing/sweaters",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Textured Knit Cardigan in Light Beige",
+          "brand": "H&M US",
+          "price": 35,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.1102944001.html",
+          "savingsPct": 77
+        }
+      },
+      {
+        "id": "hn-02-bottom",
+        "x": 48,
+        "y": 70,
+        "category": "Bottom",
+        "title": "Wide-Leg Off-White Chino Trousers",
+        "brand": "Everlane",
+        "price": 118,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.everlane.com/collections/womens-pants",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "High-Waist Wide Pleated Pants",
+          "brand": "Zara US",
+          "price": 50,
+          "retailer": "Zara US",
+          "buyUrl": "https://www.zara.com/us/en/high-waist-pants-p07385421.html",
+          "savingsPct": 58
+        }
+      },
+      {
+        "id": "hn-02-acc",
+        "x": 62,
+        "y": 90,
+        "category": "Accessory",
+        "title": "Organic Cashmere Ribbed Socks",
+        "brand": "Falconeri",
+        "price": 45,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.falconeri.com/us/women/accessories/socks/",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "2-Pack Fine Knit Lounge Socks",
+          "brand": "H&M US",
+          "price": 10,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.0751471001.html",
+          "savingsPct": 78
+        }
+      }
+    ],
+    "focusType": "Full-Body Silhouette"
+  },
+  {
+    "id": "look-hana-03",
+    "title": "Ceramic Studio Artisan Fit (도예 공방과 삐뚤어진 그릇)",
+    "aesthetic": "Clean Girl Minimal",
+    "season": "All-Season Daily",
+    "imageUrl": "/images/blue_note/hana_pottery_studio.png",
+    "modelHeight": "173cm (5'8\")",
+    "memberId": "hana",
+    "memberName": "Hana (하나)",
+    "memberBio": "Effortless coastal minimalism. Loves cozy knitwear, timeless straight-leg denim, and ceramics.",
+    "description": "Ceramic studio workshop working on pottery wheels. 조금 삐뚤어졌네. 그래도 내가 만든 거니까! 🏺💛",
+    "curatorNote": "BLUE:NOTE Hana (하나) signature off-duty fit. Characterized by Clean Girl Minimal · Seaside Warmth. Formulated with 7-head golden ratio balance.",
+    "colorPalette": [
+      "#1F2937",
+      "#D1D5DB",
+      "#F3F4F6",
+      "#9CA3AF"
+    ],
+    "vibeTags": [
+      "#Artisan Workwear",
+      "#Raw Cotton",
+      "#Clay Earth Tones",
+      "#Craft Studio"
+    ],
+    "hasSpaPicks": true,
+    "pins": [
+      {
+        "id": "hn-03-top",
+        "x": 45,
+        "y": 35,
+        "category": "Top",
+        "title": "Heavyweight Waffle Long-Sleeve Shirt",
+        "brand": "Uniqlo US",
+        "price": 29,
+        "retailer": "Uniqlo US",
+        "buyUrl": "https://www.uniqlo.com/us/en/products/E460309-000/00",
+        "dupe": {
+          "title": "Waffle-Knit Long-Sleeve Henley",
+          "brand": "H&M US",
+          "price": 19,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us",
+          "savingsPct": 34
+        }
+      },
+      {
+        "id": "hn-03-apron",
+        "x": 50,
+        "y": 52,
+        "category": "Accessory",
+        "title": "Cross-Back Washed Linen Studio Apron in Clay Taupe",
+        "brand": "MagicLinen",
+        "price": 68,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B07Z49V7NW",
+        "dupe": {
+          "title": "Canvas Utility Studio Apron",
+          "brand": "Amazon US",
+          "price": 14,
+          "retailer": "Amazon US",
+          "buyUrl": "https://www.amazon.com/dp/B08LN5XF7K",
+          "savingsPct": 79
+        }
+      },
+      {
+        "id": "hn-03-bowl",
+        "x": 65,
+        "y": 68,
+        "category": "Accessory",
+        "title": "Hand-Molded Ceramic Tea Bowl in Earth Glaze",
+        "brand": "Ceramic Studio Goods",
+        "price": 42,
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/browse/home",
+        "dupe": {
+          "title": "Handcrafted Stoneware Dish",
+          "brand": "H&M US",
+          "price": 12,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/home.html",
+          "savingsPct": 71
+        }
+      }
+    ],
+    "focusType": "Upper Studio Workwear"
+  },
+  {
+    "id": "look-lea-01",
+    "title": "Blue-Chair Mediterranean Pause (니스 프롬나드 파란 의자 휴식)",
+    "aesthetic": "French Riviera Chic",
+    "season": "All-Season Daily",
+    "imageUrl": "/images/blue_note/lea_blue_chair.png",
+    "modelHeight": "175cm (5'9\")",
+    "memberId": "lea",
+    "memberName": "Léa (레아)",
+    "memberBio": "French Riviera cool meets high-mobility sportswear. Surfer aesthetic with sharp tailoring.",
+    "description": "Promenade des Anglais sitting on iconic blue chair watching azure waves. A quiet seat, a little sea air. Just breathing. 🌊",
+    "curatorNote": "BLUE:NOTE Léa (레아) signature off-duty fit. Characterized by French Chic · Sporty Athleisure. Formulated with 7-head golden ratio balance.",
+    "colorPalette": [
+      "#1F2937",
+      "#D1D5DB",
+      "#F3F4F6",
+      "#9CA3AF"
+    ],
+    "vibeTags": [
+      "#Breton Stripe",
+      "#French Navy",
+      "#Riviera Style",
+      "#Classic Tailoring"
+    ],
+    "hasSpaPicks": true,
+    "pins": [
+      {
+        "id": "lea-01-top",
+        "x": 48,
+        "y": 35,
+        "category": "Top",
+        "title": "Minquiers Moderne Breton Striped Top",
+        "brand": "Saint James",
+        "price": 119,
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/browse/women/clothing/tops",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Striped Cotton Jersey Long-Sleeve Shirt",
+          "brand": "H&M US",
+          "price": 18,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.0984812001.html",
+          "savingsPct": 85
+        }
+      },
+      {
+        "id": "lea-01-outer",
+        "x": 38,
+        "y": 32,
+        "category": "Outer",
+        "title": "Relaxed Lightweight Navy Spring Blazer",
+        "brand": "COS",
+        "price": 190,
+        "retailer": "COS",
+        "buyUrl": "https://www.cos.com/en_usd/women/womenswear/blazers.html",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Fluid Oversized Navy Blazer",
+          "brand": "Zara US",
+          "price": 70,
+          "retailer": "Zara US",
+          "buyUrl": "https://www.zara.com/us/en/oversized-blazer-p02761044.html",
+          "savingsPct": 63
+        }
+      },
+      {
+        "id": "lea-01-bottom",
+        "x": 52,
+        "y": 65,
+        "category": "Bottom",
+        "title": "Le High Straight Raw-Hem Denim",
+        "brand": "FRAME",
+        "price": 248,
+        "retailer": "SSENSE",
+        "buyUrl": "https://www.ssense.com/en-us/women/designers/frame",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Vintage Straight High Ankle Jeans",
+          "brand": "H&M US",
+          "price": 30,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.0970819001.html",
+          "savingsPct": 88
+        }
+      },
+      {
+        "id": "lea-01-shoes",
+        "x": 50,
+        "y": 88,
+        "category": "Shoes",
+        "title": "Esplar Leather Minimalist White Trainers",
+        "brand": "Veja",
+        "price": 150,
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/s/veja-esplar-sneaker-women/4924784",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Basic White Lace-Up Trainers",
+          "brand": "Zara US",
+          "price": 40,
+          "retailer": "Zara US",
+          "buyUrl": "https://www.zara.com/us/en/contrast-trainers-p12403310.html",
+          "savingsPct": 73
+        }
+      }
+    ],
+    "focusType": "Full-Body Silhouette"
+  },
+  {
+    "id": "look-lea-02",
+    "title": "Montmartre Cobblestone Moto Chic (몽마르트르 골목 모토 재킷 룩)",
+    "aesthetic": "French Riviera Chic",
+    "season": "All-Season Daily",
+    "imageUrl": "/images/blue_note/lea_paris_montmartre.png",
+    "modelHeight": "175cm (5'9\")",
+    "memberId": "lea",
+    "memberName": "Léa (레아)",
+    "memberBio": "French Riviera cool meets high-mobility sportswear. Surfer aesthetic with sharp tailoring.",
+    "description": "Historic Paris cobblestone street with a sharp backward glance. Paris day. Taking the long way through Montmartre. 🖤",
+    "curatorNote": "BLUE:NOTE Léa (레아) signature off-duty fit. Characterized by French Chic · Sporty Athleisure. Formulated with 7-head golden ratio balance.",
+    "colorPalette": [
+      "#1F2937",
+      "#D1D5DB",
+      "#F3F4F6",
+      "#9CA3AF"
+    ],
+    "vibeTags": [
+      "#Biker Leather",
+      "#French Model Off-Duty",
+      "#Combat Boots",
+      "#Downtown Paris"
+    ],
+    "hasSpaPicks": true,
+    "pins": [
+      {
+        "id": "lea-02-outer",
+        "x": 42,
+        "y": 30,
+        "category": "Outer",
+        "title": "Balfern Leather Biker Moto Jacket",
+        "brand": "AllSaints",
+        "price": 529,
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/s/allsaints-balfern-leather-biker-jacket/4089851",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Faux Leather Oversized Biker Jacket",
+          "brand": "Zara US",
+          "price": 90,
+          "retailer": "Zara US",
+          "buyUrl": "https://www.zara.com/us/en/faux-leather-biker-jacket-p03046045.html",
+          "savingsPct": 83
+        }
+      },
+      {
+        "id": "lea-02-top",
+        "x": 50,
+        "y": 28,
+        "category": "Top",
+        "title": "High-Neck Micro-Ribbed Modal Tank",
+        "brand": "Skims",
+        "price": 38,
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/brands/skims",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Fitted Rib-Knit Tank Top",
+          "brand": "H&M US",
+          "price": 10,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.0974880001.html",
+          "savingsPct": 74
+        }
+      },
+      {
+        "id": "lea-02-bottom",
+        "x": 48,
+        "y": 62,
+        "category": "Bottom",
+        "title": "The 90s Straight Leg Washed Black Denim",
+        "brand": "Agolde",
+        "price": 218,
+        "retailer": "SSENSE",
+        "buyUrl": "https://www.ssense.com/en-us/women/designers/agolde",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Straight Regular High Waist Jeans in Black",
+          "brand": "H&M US",
+          "price": 35,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.0970819001.html",
+          "savingsPct": 84
+        }
+      },
+      {
+        "id": "lea-02-shoes",
+        "x": 52,
+        "y": 90,
+        "category": "Shoes",
+        "title": "1460 Smooth Leather 8-Eye Boots",
+        "brand": "Dr. Martens",
+        "price": 170,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B000W82R20",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Lace-Up Chunky Lug Sole Ankle Boots",
+          "brand": "Zara US",
+          "price": 60,
+          "retailer": "Zara US",
+          "buyUrl": "https://www.zara.com/us/en/flat-ankle-boots-with-track-soles-p13101110.html",
+          "savingsPct": 65
+        }
+      }
+    ],
+    "focusType": "Full-Body Silhouette"
+  },
+  {
+    "id": "look-lea-03",
+    "title": "Emerald Bay Beach Lounger & Sunnies (에메랄드 비치 타월 휴식)",
+    "aesthetic": "French Riviera Chic",
+    "season": "All-Season Daily",
+    "imageUrl": "/images/blue_note/lea_beach_resort.png",
+    "modelHeight": "175cm (5'9\")",
+    "memberId": "lea",
+    "memberName": "Léa (레아)",
+    "memberBio": "French Riviera cool meets high-mobility sportswear. Surfer aesthetic with sharp tailoring.",
+    "description": "Warm sand beach towel lounging in South of France. 바다 소리 들으면서 모래사장에 누워있기 🌊🏖️",
+    "curatorNote": "BLUE:NOTE Léa (레아) signature off-duty fit. Characterized by French Chic · Sporty Athleisure. Formulated with 7-head golden ratio balance.",
+    "colorPalette": [
+      "#1F2937",
+      "#D1D5DB",
+      "#F3F4F6",
+      "#9CA3AF"
+    ],
+    "vibeTags": [
+      "#Resort Chic",
+      "#Cat-Eye Sunnies",
+      "#Linen Shorts",
+      "#Summer Sun"
+    ],
+    "hasSpaPicks": true,
+    "pins": [
+      {
+        "id": "lea-03-top",
+        "x": 50,
+        "y": 35,
+        "category": "Top",
+        "title": "Sweetheart Ribbed Knit Tank Top",
+        "brand": "Reformation",
+        "price": 88,
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/browse/women/clothing/tops",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Ribbed Knit Halter Top",
+          "brand": "Zara US",
+          "price": 26,
+          "retailer": "Zara US",
+          "buyUrl": "https://www.zara.com/us/en/knit-halter-top-p02142100.html",
+          "savingsPct": 71
+        }
+      },
+      {
+        "id": "lea-03-acc",
+        "x": 50,
+        "y": 20,
+        "category": "Accessory",
+        "title": "Triomphe Oval Acetate Sunglasses",
+        "brand": "Celine",
+        "price": 510,
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/brands/celine",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Oval Frame Tortoiseshell Sunglasses",
+          "brand": "H&M US",
+          "price": 15,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.1130833001.html",
+          "savingsPct": 97
+        }
+      },
+      {
+        "id": "lea-03-bottom",
+        "x": 50,
+        "y": 65,
+        "category": "Bottom",
+        "title": "Pleated 100% European Linen Shorts",
+        "brand": "Mango US",
+        "price": 60,
+        "retailer": "Mango US",
+        "buyUrl": "https://shop.mango.com/us/women/shorts_c20330030",
+        "isSpaBrand": true,
+        "dupe": {
+          "title": "Drawstring Linen-Blend Shorts",
+          "brand": "H&M US",
+          "price": 25,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.0970819001.html",
+          "savingsPct": 58
+        }
+      }
+    ],
+    "focusType": "Full-Body Silhouette"
+  },
+  {
+    "id": "look-nao-01",
+    "title": "Slate Blue Vocal Notes & Notebook (노트 옆 보컬 체크 스타일)",
+    "aesthetic": "Quiet Luxury",
+    "season": "All-Season Daily",
+    "imageUrl": "/images/blue_note/nao_vocal_notes.png",
+    "modelHeight": "173cm (5'8\")",
+    "memberId": "nao",
+    "memberName": "Nao (나오)",
+    "memberBio": "Chic short leaf-perm with an old-money grace. Seamlessly balances studio dancewear with heritage Japanese minimalism.",
+    "description": "Private practice studio checking music score and lyric notes. 오늘은 이 한 소절이 조금 편해졌다. 🎼✍️",
+    "curatorNote": "BLUE:NOTE Nao (나오) signature off-duty fit. Characterized by Quiet Luxury · Studio Dancewear. Formulated with 7-head golden ratio balance.",
+    "colorPalette": [
+      "#1F2937",
+      "#D1D5DB",
+      "#F3F4F6",
+      "#9CA3AF"
+    ],
+    "vibeTags": [
+      "#Slate Blue",
+      "#Studio Minimal",
+      "#Rehearsal Fit",
+      "#Quiet Confidence"
+    ],
+    "hasSpaPicks": true,
+    "pins": [
+      {
+        "id": "nao-01-top",
+        "x": 50,
+        "y": 35,
+        "category": "Top",
+        "title": "Airism Cotton Oversized Long-Sleeve Shirt in Slate Blue",
+        "brand": "Uniqlo US",
+        "price": 30,
+        "retailer": "Uniqlo US",
+        "buyUrl": "https://www.uniqlo.com/us/en/products/E455365-000/00",
+        "isSpaBrand": true,
+        "dupe": {
+          "title": "Loose Fit Cotton Jersey Top",
+          "brand": "H&M US",
+          "price": 15,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.0685814001.html",
+          "savingsPct": 50
+        }
+      },
+      {
+        "id": "nao-01-bottom",
+        "x": 48,
+        "y": 65,
+        "category": "Bottom",
+        "title": "Relaxed Wide Straight Lounge Sweatpants",
+        "brand": "COS",
+        "price": 115,
+        "retailer": "COS",
+        "buyUrl": "https://www.cos.com/en_usd/women/womenswear/trousers.html",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Wide-Leg French Terry Sweatpants",
+          "brand": "Zara US",
+          "price": 40,
+          "retailer": "Zara US",
+          "buyUrl": "https://www.zara.com/us/en/plush-wide-leg-pants-p04174001.html",
+          "savingsPct": 65
+        }
+      },
+      {
+        "id": "nao-01-acc",
+        "x": 65,
+        "y": 55,
+        "category": "Accessory",
+        "title": "Classic Hardcover Ruled Notebook in Slate",
+        "brand": "Moleskine",
+        "price": 24,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B00006IF81",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Faux Leather Journal Notebook",
+          "brand": "Amazon Fashion US",
+          "price": 10,
+          "retailer": "Amazon US",
+          "buyUrl": "https://www.amazon.com/dp/B07R4D2Q11",
+          "savingsPct": 58
+        }
+      },
+      {
+        "id": "nao-01-shoes",
+        "x": 50,
+        "y": 90,
+        "category": "Shoes",
+        "title": "Mexico 66 Heritage Sneakers in White/Blue",
+        "brand": "Onitsuka Tiger",
+        "price": 130,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B003TX4B38",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Retro Contrast Sneaker",
+          "brand": "Zara US",
+          "price": 50,
+          "retailer": "Zara US",
+          "buyUrl": "https://www.zara.com/us/en/retro-runners-p12403310.html",
+          "savingsPct": 62
+        }
+      }
+    ],
+    "focusType": "Full-Body Silhouette"
+  },
+  {
+    "id": "look-nao-02",
+    "title": "Kyoto Cafe Cream Cable-Knit & Leaf-Perm (카페 크림니트 & 리프펌 단발)",
+    "aesthetic": "Quiet Luxury",
+    "season": "All-Season Daily",
+    "imageUrl": "/images/blue_note/nao_cafe_knit.png",
+    "modelHeight": "173cm (5'8\")",
+    "memberId": "nao",
+    "memberName": "Nao (나오)",
+    "memberBio": "Chic short leaf-perm with an old-money grace. Seamlessly balances studio dancewear with heritage Japanese minimalism.",
+    "description": "Tranquil Japanese cafe savoring specialty pour-over brew. 따뜻한 커피와 창밖 풍경 ☕️ 고요한 오후.",
+    "curatorNote": "BLUE:NOTE Nao (나오) signature off-duty fit. Characterized by Quiet Luxury · Studio Dancewear. Formulated with 7-head golden ratio balance.",
+    "colorPalette": [
+      "#1F2937",
+      "#D1D5DB",
+      "#F3F4F6",
+      "#9CA3AF"
+    ],
+    "vibeTags": [
+      "#Cable Knit",
+      "#Leaf-Perm Wave",
+      "#Quiet Luxury",
+      "#Pleated Skirt"
+    ],
+    "hasSpaPicks": true,
+    "pins": [
+      {
+        "id": "nao-02-knit",
+        "x": 50,
+        "y": 45,
+        "category": "Top",
+        "title": "Pure Cashmere Cable-Knit Crewneck in Ecru",
+        "brand": "Club Monaco",
+        "price": 298,
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/browse/women/clothing/sweaters",
+        "dupe": {
+          "title": "Cable-Knit Crewneck Sweater in Light Beige",
+          "brand": "H&M US",
+          "price": 39,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.1102944001.html",
+          "savingsPct": 87
+        }
+      },
+      {
+        "id": "nao-02-mug",
+        "x": 68,
+        "y": 72,
+        "category": "Accessory",
+        "title": "Artisan Ceramic Hand-Thrown Cafe Mug in Cream",
+        "brand": "Hasami Porcelain",
+        "price": 38,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B07R4D2Q11",
+        "dupe": {
+          "title": "Stoneware Minimal Coffee Mug",
+          "brand": "H&M US",
+          "price": 9,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/home.html",
+          "savingsPct": 76
+        }
+      },
+      {
+        "id": "nao-02-earrings",
+        "x": 36,
+        "y": 28,
+        "category": "Accessory",
+        "title": "Chunky Organic Small Hoop Earrings in 14k Gold Vermeil",
+        "brand": "Mejuri",
+        "price": 78,
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/browse/women/jewelry",
+        "dupe": {
+          "title": "Gold-Plated Mini Chunky Hoops",
+          "brand": "Zara US",
+          "price": 19,
+          "retailer": "Zara US",
+          "buyUrl": "https://www.zara.com/us",
+          "savingsPct": 75
+        }
+      }
+    ],
+    "focusType": "Upper Styling & Hair"
+  },
+  {
+    "id": "look-nao-03",
+    "title": "Flight High-Flyer Camo Hoodie & Cap (기내 비즈니스석 버건디 볼캡 룩)",
+    "aesthetic": "High-Street SPA Chic",
+    "season": "All-Season Daily",
+    "imageUrl": "/images/blue_note/nao_camo_hoodie.png",
+    "modelHeight": "173cm (5'8\")",
+    "memberId": "nao",
+    "memberName": "Nao (나오)",
+    "memberBio": "Chic short leaf-perm with an old-money grace. Seamlessly balances studio dancewear with heritage Japanese minimalism.",
+    "description": "Long-haul flight cabin relaxing with sparkling water. 비행기 타고 출발 ✈️🥂 장난기 가득 윙크 한 컷!",
+    "curatorNote": "BLUE:NOTE Nao (나오) signature off-duty fit. Characterized by Quiet Luxury · Studio Dancewear. Formulated with 7-head golden ratio balance.",
+    "colorPalette": [
+      "#1F2937",
+      "#D1D5DB",
+      "#F3F4F6",
+      "#9CA3AF"
+    ],
+    "vibeTags": [
+      "#Washed Cap",
+      "#Camo Graphic",
+      "#Airport Style",
+      "#Jetsetter"
+    ],
+    "hasSpaPicks": true,
+    "pins": [
+      {
+        "id": "nao-03-cap",
+        "x": 50,
+        "y": 18,
+        "category": "Accessory",
+        "title": "Clean Up Washed Cotton Ballcap in Burgundy",
+        "brand": "'47 Brand",
+        "price": 32,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B004FOD7WW",
+        "dupe": {
+          "title": "Cotton Twill Washed Cap in Wine",
+          "brand": "H&M US",
+          "price": 12,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us",
+          "savingsPct": 62
+        }
+      },
+      {
+        "id": "nao-03-hoodie",
+        "x": 48,
+        "y": 46,
+        "category": "Top",
+        "title": "Oversized Heavyweight French Terry Hoodie in Camo Print",
+        "brand": "Essentials Fear of God",
+        "price": 110,
+        "retailer": "SSENSE",
+        "buyUrl": "https://www.ssense.com/en-us/women/designers/essentials",
+        "dupe": {
+          "title": "Relaxed Graphic Hoodie",
+          "brand": "H&M US",
+          "price": 34,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us",
+          "savingsPct": 69
+        }
+      },
+      {
+        "id": "nao-03-glass",
+        "x": 65,
+        "y": 65,
+        "category": "Accessory",
+        "title": "Stemless Crystal Sparkling Wine Tumbler",
+        "brand": "Riedel",
+        "price": 35,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B00002N7U7",
+        "dupe": {
+          "title": "Clear Ribbed Glass Tumbler",
+          "brand": "H&M US",
+          "price": 7,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/home.html",
+          "savingsPct": 80
+        }
+      }
+    ],
+    "focusType": "Upper Styling & Travel"
+  },
+  {
+    "id": "look-jiwoo-01",
+    "title": "Downtown Alley Graffiti Crop Fit (도심 골목 그래피티 스트리트 룩)",
+    "aesthetic": "Downtown Streetwear",
+    "season": "All-Season Daily",
+    "imageUrl": "/images/blue_note/jiwoo_street_graffiti.png",
+    "modelHeight": "165cm (5'5\")",
+    "memberId": "jiwoo",
+    "memberName": "Jiwoo (지우)",
+    "memberBio": "Laid-back West Coast energy with sharp streetwear flair. Vintage cafe lover and headphone enthusiast.",
+    "description": "Downtown brick wall mural alleyway on a skate afternoon. 도심 골목 그래피티 앞 🖤 오늘 기분 최고!",
+    "curatorNote": "BLUE:NOTE Jiwoo (지우) signature off-duty fit. Characterized by Y2K Downtown Street · Cali Chill. Formulated with 7-head golden ratio balance.",
+    "colorPalette": [
+      "#1F2937",
+      "#D1D5DB",
+      "#F3F4F6",
+      "#9CA3AF"
+    ],
+    "vibeTags": [
+      "#Y2K Cargo",
+      "#Cropped Baby Tee",
+      "#Downtown Vibe",
+      "#Street Skater"
+    ],
+    "hasSpaPicks": true,
+    "pins": [
+      {
+        "id": "jw-01-top",
+        "x": 48,
+        "y": 32,
+        "category": "Top",
+        "title": "Vintage Graphic Fitted Baby Tee",
+        "brand": "Urban Outfitters",
+        "price": 39,
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/browse/women/clothing/tops",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Cropped Printed Cotton T-Shirt",
+          "brand": "H&M US",
+          "price": 13,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.0685814001.html",
+          "savingsPct": 67
+        }
+      },
+      {
+        "id": "jw-01-bottom",
+        "x": 50,
+        "y": 62,
+        "category": "Bottom",
+        "title": "Oversized Parachute Cargo Trousers in Olive",
+        "brand": "BDG Urban Outfitters",
+        "price": 89,
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/browse/women/clothing/pants",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Parachute Utility Trousers",
+          "brand": "Zara US",
+          "price": 50,
+          "retailer": "Zara US",
+          "buyUrl": "https://www.zara.com/us/en/parachute-pants-p04365040.html",
+          "savingsPct": 44
+        }
+      },
+      {
+        "id": "jw-01-shoes",
+        "x": 50,
+        "y": 90,
+        "category": "Shoes",
+        "title": "Dunk Low Retro Sneakers in Black/White Panda",
+        "brand": "Nike",
+        "price": 115,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B08V7S5X1B",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Platform Contrast Court Sneakers",
+          "brand": "Zara US",
+          "price": 40,
+          "retailer": "Zara US",
+          "buyUrl": "https://www.zara.com/us/en/contrast-trainers-p12403310.html",
+          "savingsPct": 65
+        }
+      },
+      {
+        "id": "jw-01-acc",
+        "x": 49,
+        "y": 22,
+        "category": "Accessory",
+        "title": "Silver Chunky Ball-Chain Choker Necklace",
+        "brand": "Vitaly",
+        "price": 75,
+        "retailer": "SSENSE",
+        "buyUrl": "https://www.ssense.com/en-us/women/designers/vitaly",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Chain-Link Metallic Choker",
+          "brand": "H&M US",
+          "price": 10,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.0984812001.html",
+          "savingsPct": 87
+        }
+      }
+    ],
+    "focusType": "Full-Body Silhouette"
+  },
+  {
+    "id": "look-jiwoo-02",
+    "title": "Mirror Selfie Cropped Zip & Carpenter Denim (엘리베이터 거울셀카 스트리트 룩)",
+    "aesthetic": "Downtown Streetwear",
+    "season": "All-Season Daily",
+    "imageUrl": "/images/blue_note/jiwoo_elevator_selfie.png",
+    "modelHeight": "165cm (5'5\")",
+    "memberId": "jiwoo",
+    "memberName": "Jiwoo (지우)",
+    "memberBio": "Laid-back West Coast energy with sharp streetwear flair. Vintage cafe lover and headphone enthusiast.",
+    "description": "Industrial steel elevator mirror capturing an impulsive fit check. 엘리베이터 거울 셀카 🖤 오늘 스타일 어때? 🛗✨",
+    "curatorNote": "BLUE:NOTE Jiwoo (지우) signature off-duty fit. Characterized by Y2K Downtown Street · Cali Chill. Formulated with 7-head golden ratio balance.",
+    "colorPalette": [
+      "#1F2937",
+      "#D1D5DB",
+      "#F3F4F6",
+      "#9CA3AF"
+    ],
+    "vibeTags": [
+      "#Mirror Selfie",
+      "#Cropped Zip",
+      "#Carpenter Denim",
+      "#Wired Earphones"
+    ],
+    "hasSpaPicks": true,
+    "pins": [
+      {
+        "id": "jw-02-top",
+        "x": 45,
+        "y": 35,
+        "category": "Top",
+        "title": "Cropped Heavy Fleece Two-Way Zip Hoodie",
+        "brand": "Aritzia",
+        "price": 88,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.aritzia.com/us/en/clothing/sweaters/hoodies",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Cropped Zip-Through Hoodie",
+          "brand": "H&M US",
+          "price": 25,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.0970819001.html",
+          "savingsPct": 72
+        }
+      },
+      {
+        "id": "jw-02-bottom",
+        "x": 50,
+        "y": 65,
+        "category": "Bottom",
+        "title": "Low-Rise Carpenter Wide Jeans",
+        "brand": "Levi's",
+        "price": 98,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B0B79L8Z2R",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Wide Carpenter Denim Jeans",
+          "brand": "Zara US",
+          "price": 50,
+          "retailer": "Zara US",
+          "buyUrl": "https://www.zara.com/us/en/carpenter-jeans-p04365040.html",
+          "savingsPct": 49
+        }
+      },
+      {
+        "id": "jw-02-shoes",
+        "x": 50,
+        "y": 92,
+        "category": "Shoes",
+        "title": "Old Skool Classic Canvas Skater Shoes",
+        "brand": "Vans",
+        "price": 70,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B000UYJB8U",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Canvas Low-Top Lace Sneakers",
+          "brand": "H&M US",
+          "price": 25,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.0685814001.html",
+          "savingsPct": 64
+        }
+      }
+    ],
+    "focusType": "Full-Body Silhouette"
+  },
+  {
+    "id": "look-jiwoo-03",
+    "title": "Retro Vinyl LP Lounge Cardigan (레트로 LP 카페 창가 일상)",
+    "aesthetic": "Downtown Streetwear",
+    "season": "All-Season Daily",
+    "imageUrl": "/images/blue_note/jiwoo_lp_cafe.png",
+    "modelHeight": "165cm (5'5\")",
+    "memberId": "jiwoo",
+    "memberName": "Jiwoo (지우)",
+    "memberBio": "Laid-back West Coast energy with sharp streetwear flair. Vintage cafe lover and headphone enthusiast.",
+    "description": "Vintage record shop cafe listening to classic city pop vinyls. 좋아하는 음악 들으면서 잠깐 쉬어가는 시간 ☕️💿",
+    "curatorNote": "BLUE:NOTE Jiwoo (지우) signature off-duty fit. Characterized by Y2K Downtown Street · Cali Chill. Formulated with 7-head golden ratio balance.",
+    "colorPalette": [
+      "#1F2937",
+      "#D1D5DB",
+      "#F3F4F6",
+      "#9CA3AF"
+    ],
+    "vibeTags": [
+      "#Vintage Knit",
+      "#City Pop",
+      "#Retro Frames",
+      "#Canvas Bag"
+    ],
+    "hasSpaPicks": true,
+    "pins": [
+      {
+        "id": "jw-03-knit",
+        "x": 48,
+        "y": 40,
+        "category": "Top",
+        "title": "Chunky Knit Vintage Cream Button Cardigan",
+        "brand": "Madewell",
+        "price": 110,
+        "retailer": "Madewell",
+        "buyUrl": "https://www.madewell.com/womens/clothing/sweaters",
+        "dupe": {
+          "title": "Knit Ribbed Cardigan in Light Beige",
+          "brand": "H&M US",
+          "price": 34,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us",
+          "savingsPct": 69
+        }
+      },
+      {
+        "id": "jw-03-headphones",
+        "x": 35,
+        "y": 22,
+        "category": "Accessory",
+        "title": "Major IV Wireless Retro On-Ear Headphones",
+        "brand": "Marshall",
+        "price": 149,
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/s/marshall-major-iv-wireless-headphones/5753028",
+        "dupe": {
+          "title": "Vintage Style Wired Audio Headphones",
+          "brand": "Amazon US",
+          "price": 29,
+          "retailer": "Amazon US",
+          "buyUrl": "https://www.amazon.com/dp/B07R4D2Q11",
+          "savingsPct": 80
+        }
+      },
+      {
+        "id": "jw-03-tote",
+        "x": 72,
+        "y": 65,
+        "category": "Bag",
+        "title": "Heavyweight Canvas Record Shopper Tote",
+        "brand": "Baggu",
+        "price": 44,
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/browse/women/handbags",
+        "dupe": {
+          "title": "Canvas Shoulder Tote",
+          "brand": "H&M US",
+          "price": 14,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us",
+          "savingsPct": 68
+        }
+      }
+    ],
+    "focusType": "Upper Knitwear & Music"
+  },
+  {
+    "id": "look-seoyun-01",
+    "title": "Kitchen Jumeokbap Riceball Morning (주먹밥을 만드는 작은 부엌)",
+    "aesthetic": "High-Teen Athleisure",
+    "season": "All-Season Daily",
+    "imageUrl": "/images/blue_note/seoyun_cooking_riceball.png",
+    "modelHeight": "166cm (5'5\")",
+    "memberId": "seoyun",
+    "memberName": "Seoyun (서윤)",
+    "memberBio": "Playful foodie and high-teen athleisure icon. Loves cozy kitchen lounging, oversized sweatshirts, and retro sneakers.",
+    "description": "Cozy home kitchen making freshly seasoned sesame riceballs for breakfast. 동글동글 주먹밥 만들기 성공! 🍙 생각보다 맛있네?",
+    "curatorNote": "BLUE:NOTE Seoyun (서윤) signature off-duty fit. Characterized by K-Pop High-Teen · Home Cozy Cook. Formulated with 7-head golden ratio balance.",
+    "colorPalette": [
+      "#1F2937",
+      "#D1D5DB",
+      "#F3F4F6",
+      "#9CA3AF"
+    ],
+    "vibeTags": [
+      "#Linen Apron",
+      "#Waffle Long Sleeve",
+      "#Kitchen Cozy",
+      "#Comfort Living"
+    ],
+    "hasSpaPicks": true,
+    "pins": [
+      {
+        "id": "sy-01-top",
+        "x": 45,
+        "y": 35,
+        "category": "Top",
+        "title": "Supima Waffle Knit Long-Sleeve Shirt in Butter",
+        "brand": "Uniqlo US",
+        "price": 29,
+        "retailer": "Uniqlo US",
+        "buyUrl": "https://www.uniqlo.com/us/en/products/E460309-000/00",
+        "dupe": {
+          "title": "Long-Sleeve Waffle Jersey Top",
+          "brand": "H&M US",
+          "price": 17,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us",
+          "savingsPct": 41
+        }
+      },
+      {
+        "id": "sy-01-apron",
+        "x": 50,
+        "y": 52,
+        "category": "Accessory",
+        "title": "Natural Stone-Washed Linen Pinafore Apron",
+        "brand": "Rough Linen",
+        "price": 85,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B07Z49V7NW",
+        "dupe": {
+          "title": "Washed Linen-Blend Kitchen Apron",
+          "brand": "H&M US",
+          "price": 19,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/home.html",
+          "savingsPct": 77
+        }
+      }
+    ],
+    "focusType": "Kitchen & Upper Workwear"
+  },
+  {
+    "id": "look-seoyun-02",
+    "title": "Harvest Vegetable Feast & Proud Smile (정성스레 차려낸 제철 채소 요리 한상)",
+    "aesthetic": "High-Teen Athleisure",
+    "season": "All-Season Daily",
+    "imageUrl": "/images/blue_note/seoyun_table_feast.png",
+    "modelHeight": "166cm (5'5\")",
+    "memberId": "seoyun",
+    "memberName": "Seoyun (서윤)",
+    "memberBio": "Playful foodie and high-teen athleisure icon. Loves cozy kitchen lounging, oversized sweatshirts, and retro sneakers.",
+    "description": "Dining table filled with seasonal vegetables and homemade banchan. 오늘의 요리 한상 완성! 🥗🍚 내가 만들었지만 진짜 맛있다",
+    "curatorNote": "BLUE:NOTE Seoyun (서윤) signature off-duty fit. Characterized by K-Pop High-Teen · Home Cozy Cook. Formulated with 7-head golden ratio balance.",
+    "colorPalette": [
+      "#1F2937",
+      "#D1D5DB",
+      "#F3F4F6",
+      "#9CA3AF"
+    ],
+    "vibeTags": [
+      "#Lavender Crewneck",
+      "#Lounge Cotton",
+      "#Wholesome Cook",
+      "#Foodie Maknae"
+    ],
+    "hasSpaPicks": true,
+    "pins": [
+      {
+        "id": "sy-02-top",
+        "x": 48,
+        "y": 32,
+        "category": "Top",
+        "title": "Pastel Lavender Raglan Cotton Sweatshirt",
+        "brand": "Champion",
+        "price": 55,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B07C37DF6B",
+        "dupe": {
+          "title": "Relaxed Crewneck Sweatshirt",
+          "brand": "H&M US",
+          "price": 19,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us",
+          "savingsPct": 65
+        }
+      },
+      {
+        "id": "sy-02-dish",
+        "x": 52,
+        "y": 72,
+        "category": "Accessory",
+        "title": "Organic Glazed Ceramic Seasonal Serving Bowl",
+        "brand": "East Fork",
+        "price": 48,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B07R4D2Q11",
+        "dupe": {
+          "title": "Stoneware Salad Bowl in Earth Taupe",
+          "brand": "H&M US",
+          "price": 14,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/home.html",
+          "savingsPct": 70
+        }
+      }
+    ],
+    "focusType": "Upper Lounge & Dining"
+  },
+  {
+    "id": "look-seoyun-03",
+    "title": "Metro Platform Commuter Fleece (지하철 승강장 이어폰 일상)",
+    "aesthetic": "High-Teen Athleisure",
+    "season": "All-Season Daily",
+    "imageUrl": "/images/blue_note/seoyun_subway_daily.png",
+    "modelHeight": "166cm (5'5\")",
+    "memberId": "seoyun",
+    "memberName": "Seoyun (서윤)",
+    "memberBio": "Playful foodie and high-teen athleisure icon. Loves cozy kitchen lounging, oversized sweatshirts, and retro sneakers.",
+    "description": "Waiting at the metro station listening to lively K-pop tracks. 지하철 기다리면서 신나는 노래 듣기 🎧🚇",
+    "curatorNote": "BLUE:NOTE Seoyun (서윤) signature off-duty fit. Characterized by K-Pop High-Teen · Home Cozy Cook. Formulated with 7-head golden ratio balance.",
+    "colorPalette": [
+      "#1F2937",
+      "#D1D5DB",
+      "#F3F4F6",
+      "#9CA3AF"
+    ],
+    "vibeTags": [
+      "#Anorak Fleece",
+      "#Baggy Denim",
+      "#High-Teen",
+      "#Retro Commuter"
+    ],
+    "hasSpaPicks": true,
+    "pins": [
+      {
+        "id": "sy-03-outer",
+        "x": 48,
+        "y": 35,
+        "category": "Outer",
+        "title": "Colorblock Half-Zip Fleece Anorak",
+        "brand": "Columbia",
+        "price": 75,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B07R4D2Q11",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Half-Zip Teddy Fleece Pullover",
+          "brand": "H&M US",
+          "price": 30,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.0984812001.html",
+          "savingsPct": 60
+        }
+      },
+      {
+        "id": "sy-03-bottom",
+        "x": 50,
+        "y": 65,
+        "category": "Bottom",
+        "title": "High Loose Baggy Light-Wash Jeans",
+        "brand": "Levi's",
+        "price": 108,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B08V7S5X1B",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Wide High Ankle Jeans",
+          "brand": "H&M US",
+          "price": 30,
+          "retailer": "H&M US",
+          "buyUrl": "https://www2.hm.com/en_us/productpage.0970819001.html",
+          "savingsPct": 72
+        }
+      },
+      {
+        "id": "sy-03-shoes",
+        "x": 50,
+        "y": 92,
+        "category": "Shoes",
+        "title": "Air Force 1 '07 Low Triple White",
+        "brand": "Nike",
+        "price": 115,
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/s/nike-air-force-1-07-sneaker-women/3052697",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Platform Sole White Trainers",
+          "brand": "Zara US",
+          "price": 40,
+          "retailer": "Zara US",
+          "buyUrl": "https://www.zara.com/us/en/contrast-trainers-p12403310.html",
+          "savingsPct": 65
+        }
+      }
+    ],
+    "focusType": "Full-Body Silhouette"
+  },
+  {
+    "id": "look-hana-04",
+    "title": "Midnight Sequin Mermaid Gala (미드나잇 시퀸 머메이드 갈라 룩)",
+    "aesthetic": "Haute Couture Red Carpet Glam",
+    "season": "Evening Gala / Fall Winter",
+    "imageUrl": "/images/blue_note/hana_everpretty_sequin_gala.png",
+    "modelHeight": "173cm (5'8\")",
+    "memberId": "hana",
+    "memberName": "Hana (하나)",
+    "memberBio": "5-member girl group BLUE:NOTE Leader & Center Visual Goddess. Showcasing opulent red carpet couture glamour.",
+    "description": "Opulent grand gala ballroom marble terrace overlooking midnight city skyline. 레드카펫과 그랜드 갈라에서 가장 눈부시게 빛나는 밤 ✨",
+    "curatorNote": "BLUE:NOTE Hana (하나) ultra-glamorous 'Kku-Kku-Kku' showstopper gala look. Strictly composed of 4 secured luxury items with high-street dupes. Perfectly rendered with authentic 7-head golden ratio balance.",
+    "colorPalette": [
+      "#0A1128",
+      "#1C1F26",
+      "#E0E6ED",
+      "#C5A880"
+    ],
+    "vibeTags": [
+      "#Haute Couture",
+      "#Red Carpet",
+      "#Velvet Gown",
+      "#Evening Glam",
+      "#High Jewelry"
+    ],
+    "hasSpaPicks": true,
+    "pins": [
+      {
+        "id": "hn-04-dress",
+        "x": 48,
+        "y": 48,
+        "category": "Dress",
+        "title": "Sequin V-Neck Mermaid Maxi Formal Dress",
+        "brand": "Ever-Pretty",
+        "price": 72.99,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B0HF4DHJT5",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Sparkly Sequin Evening Gown",
+          "brand": "Ever-Pretty",
+          "price": 72.99,
+          "retailer": "Amazon US",
+          "buyUrl": "https://www.amazon.com/dp/B0HF4DHJT5",
+          "savingsPct": 0
+        }
+      },
+      {
+        "id": "hn-04-shoes",
+        "x": 50,
+        "y": 92,
+        "category": "Shoes",
+        "title": "Romy Pointed Toe Evening Pump",
+        "brand": "Jimmy Choo",
+        "price": 795.0,
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/s/jimmy-choo-romy-pump/4392817",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Pointed Toe Stiletto Pumps",
+          "brand": "Steve Madden",
+          "price": 89.95,
+          "retailer": "Amazon US",
+          "buyUrl": "https://www.amazon.com/s?k=steve+madden+pointed+toe+pumps",
+          "savingsPct": 75
+        }
+      },
+      {
+        "id": "hn-04-earrings",
+        "x": 42,
+        "y": 26,
+        "category": "Jewelry",
+        "title": "Mesmera Crystal Drop Chandelier Earrings",
+        "brand": "Swarovski",
+        "price": 195.0,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B0CB29SZTY",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Crystal Chandelier Drop Earrings",
+          "brand": "PAVOI",
+          "price": 18.95,
+          "retailer": "Amazon US",
+          "buyUrl": "https://www.amazon.com/dp/B07LGYP2ZJ",
+          "savingsPct": 75
+        }
+      }
+    ]
+  },
+  {
+    "id": "look-lea-04",
+    "title": "Midnight Sequin Le Smoking Setup (미드나잇 시퀸 르스모킹 턱시도 셋업)",
+    "aesthetic": "French Chic Power Glamour",
+    "season": "Party Gala / Fall Winter",
+    "imageUrl": "/images/blue_note/lea_sequin_tuxedo_gala.png",
+    "modelHeight": "175cm (5'9\")",
+    "memberId": "lea",
+    "memberName": "Léa (레아)",
+    "memberBio": "French-Korean member from Nice, France. 175cm tallest runway visual. Master of effortless French chic and tailored Le Smoking aesthetics.",
+    "description": "Luxury Parisian penthouse terrace at midnight. 원피스를 넘어선 파리지앵의 시크한 턱시도 파티 셋업 ✨",
+    "curatorNote": "BLUE:NOTE Léa (레아) signature Le Smoking gala look. High-fashion combination of sequin cropped jacket and high-waisted fluid wide trousers. Formulated with authentic 7-head golden ratio balance.",
+    "colorPalette": [
+      "#C0C0C0",
+      "#111827",
+      "#374151",
+      "#9CA3AF"
+    ],
+    "vibeTags": [
+      "#French Chic",
+      "#Le Smoking",
+      "#Sequin Blazer",
+      "#Wide Trousers",
+      "#Gala Setup"
+    ],
+    "hasSpaPicks": true,
+    "pins": [
+      {
+        "id": "lea-04-top",
+        "x": 48,
+        "y": 35,
+        "category": "Top",
+        "title": "Sequin Party Cropped Bolero Jacket",
+        "brand": "Allegra K",
+        "price": 45.99,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B0B2J3YGFC",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Sparkle Metallic Cropped Bolero",
+          "brand": "Allegra K",
+          "price": 45.99,
+          "retailer": "Amazon US",
+          "buyUrl": "https://www.amazon.com/dp/B0B2J3YGFC",
+          "savingsPct": 0
+        }
+      },
+      {
+        "id": "lea-04-bottom",
+        "x": 50,
+        "y": 68,
+        "category": "Bottom",
+        "title": "High-Waisted Flowy Wide-Leg Pleated Trousers",
+        "brand": "PRETTYGARDEN",
+        "price": 45.99,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B0F8QJ6K5W",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Palazzo Pleated Flowy Pants",
+          "brand": "PRETTYGARDEN",
+          "price": 45.99,
+          "retailer": "Amazon US",
+          "buyUrl": "https://www.amazon.com/dp/B0F8QJ6K5W",
+          "savingsPct": 0
+        }
+      },
+      {
+        "id": "lea-04-shoes",
+        "x": 52,
+        "y": 94,
+        "category": "Shoes",
+        "title": "Pointed Toe Stiletto Evening Pumps",
+        "brand": "Steve Madden",
+        "price": 89.95,
+        "retailer": "Amazon US",
+        "buyUrl": "https://www.amazon.com/dp/B0B5F4KMYH",
+        "isSpaBrand": false,
+        "dupe": {
+          "title": "Classic Pointed Toe Pumps",
+          "brand": "Dream Pairs",
+          "price": 39.99,
+          "retailer": "Amazon US",
+          "buyUrl": "https://www.amazon.com/dp/B0B5F4KMYH",
+          "savingsPct": 55
+        }
+      }
+    ]
+  },
+  {
+    "id": "look-nao-04",
+    "memberId": "nao",
+    "memberName": "Nao (나오)",
+    "title": "Midnight Emerald Velvet Gala",
+    "koreanTitle": "미드나잇 에메랄드 벨벳 원숄더 룩",
+    "scene": "Opulent Blue Note jazz club lounge terrace overlooking midnight skyline",
+    "vibe": "Vintage Aristocratic Chic · Jazz Club Elegance",
+    "image": "/images/blue_note/nao_emerald_velvet_gala.png",
+    "aspectRatio": "vertical",
+    "framing": "85mm portrait, authentic 7-head golden ratio proportion (173cm)",
+    "caption": "재즈클럽 라운지 테라스를 물들이는 고혹적인 에메랄드 벨벳 갈라 룩 ✨",
+    "tags": [
+      "Emerald Velvet",
+      "One Shoulder",
+      "Jazz Club",
+      "Vintage Chic",
+      "Swarovski"
+    ],
+    "totalPrice": 344.94,
+    "dupeTotalPrice": 149.93,
+    "savingsPercentage": 56,
+    "items": [
+      {
+        "id": "nao-04-dress",
+        "category": "Dress",
+        "name": "Velvet One-Shoulder Draped Midi Evening Dress",
+        "brand": "Wenrine",
+        "retailer": "Amazon US",
+        "price": 59.99,
+        "url": "https://www.amazon.com/dp/B0C9C9BDLF",
+        "pin": {
+          "x": 50,
+          "y": 48
+        },
+        "dupe": {
+          "name": "One-Shoulder Ruched Midi Dress",
+          "brand": "Wenrine",
+          "retailer": "Amazon US",
+          "price": 59.99,
+          "url": "https://www.amazon.com/dp/B0C9C9BDLF"
+        }
+      },
+      {
+        "id": "nao-04-shoes",
+        "category": "Shoes",
+        "name": "Pointed Toe Stiletto Evening Pumps",
+        "brand": "Steve Madden",
+        "retailer": "Amazon US",
+        "price": 89.95,
+        "url": "https://www.amazon.com/dp/B0B5F4KMYH",
+        "pin": {
+          "x": 52,
+          "y": 92
+        },
+        "dupe": {
+          "name": "Classic Stiletto Pumps",
+          "brand": "Dream Pairs",
+          "retailer": "Amazon US",
+          "price": 39.99,
+          "url": "https://www.amazon.com/dp/B0B5F4KMYH"
+        }
+      },
+      {
+        "id": "nao-04-earrings",
+        "category": "Jewelry",
+        "name": "Mesmera Crystal Drop Chandelier Earrings",
+        "brand": "Swarovski",
+        "retailer": "Amazon US",
+        "price": 195.0,
+        "url": "https://www.amazon.com/dp/B0CB29SZTY",
+        "pin": {
+          "x": 45,
+          "y": 24
+        },
+        "dupe": {
+          "name": "Crystal Chandelier Drop Earrings",
+          "brand": "PAVOI",
+          "retailer": "Amazon US",
+          "price": 18.95,
+          "url": "https://www.amazon.com/dp/B07LGYP2ZJ"
+        }
+      }
+    ]
+  },
+  {
+    "id": "look-jiwoo-04",
+    "memberId": "jiwoo",
+    "memberName": "Jiwoo (지우)",
+    "title": "Midnight Leather Tuxedo Setup",
+    "koreanTitle": "미드나잇 레더 테일러드 턱시도 셋업",
+    "scene": "Private VIP rooftop jazz lounge terrace overlooking illuminated metropolis skyline",
+    "vibe": "Hipster Power Glam · Street Chic Charisma",
+    "image": "/images/blue_note/jiwoo_leather_blazer_gala.png",
+    "aspectRatio": "vertical",
+    "framing": "85mm full body, authentic 7-head golden ratio proportion (165cm)",
+    "caption": "루프탑 VIP 라운지를 압도하는 시크한 테일러드 레더 턱시도 셋업 ✨",
+    "tags": [
+      "Faux Leather",
+      "Tailored Blazer",
+      "Street Chic",
+      "Wide Slacks",
+      "Girl Crush"
+    ],
+    "totalPrice": 195.93,
+    "dupeTotalPrice": 145.97,
+    "savingsPercentage": 25,
+    "items": [
+      {
+        "id": "jiwoo-04-jacket",
+        "category": "Top",
+        "name": "Faux Leather Oversized Tailored Blazer Jacket",
+        "brand": "Amazon Brand",
+        "retailer": "Amazon US",
+        "price": 59.99,
+        "url": "https://www.amazon.com/dp/B0FK4S7FQQ",
+        "pin": {
+          "x": 48,
+          "y": 38
+        },
+        "dupe": {
+          "name": "Oversized Moto Blazer",
+          "brand": "Amazon Brand",
+          "retailer": "Amazon US",
+          "price": 59.99,
+          "url": "https://www.amazon.com/dp/B0FK4S7FQQ"
+        }
+      },
+      {
+        "id": "jiwoo-04-bottom",
+        "category": "Bottom",
+        "name": "High-Waisted Flowy Wide-Leg Pleated Trousers",
+        "brand": "PRETTYGARDEN",
+        "retailer": "Amazon US",
+        "price": 45.99,
+        "url": "https://www.amazon.com/dp/B0F8QJ6K5W",
+        "pin": {
+          "x": 50,
+          "y": 68
+        },
+        "dupe": {
+          "name": "Palazzo Pleated Flowy Pants",
+          "brand": "PRETTYGARDEN",
+          "retailer": "Amazon US",
+          "price": 45.99,
+          "url": "https://www.amazon.com/dp/B0F8QJ6K5W"
+        }
+      },
+      {
+        "id": "jiwoo-04-shoes",
+        "category": "Shoes",
+        "name": "Pointed Toe Stiletto Evening Pumps",
+        "brand": "Steve Madden",
+        "retailer": "Amazon US",
+        "price": 89.95,
+        "url": "https://www.amazon.com/dp/B0B5F4KMYH",
+        "pin": {
+          "x": 52,
+          "y": 94
+        },
+        "dupe": {
+          "name": "Classic Stiletto Pumps",
+          "brand": "Dream Pairs",
+          "retailer": "Amazon US",
+          "price": 39.99,
+          "url": "https://www.amazon.com/dp/B0B5F4KMYH"
+        }
+      }
+    ]
+  },
+  {
+    "id": "look-seoyun-04",
+    "memberId": "seoyun",
+    "memberName": "Seoyun (서윤)",
+    "title": "Midnight Ruched Corset Mermaid Gala",
+    "koreanTitle": "미드나잇 루슈드 코르셋 머메이드 드레스",
+    "scene": "Grand gala ballroom candlelit banquet terrace with fairy lights",
+    "vibe": "Fairy-tale Elegance · Romantic Princess",
+    "image": "/images/blue_note/seoyun_corset_mermaid_gala.png",
+    "aspectRatio": "vertical",
+    "framing": "85mm portrait, authentic 7-head golden ratio proportion (166cm)",
+    "caption": "그랜드 갈라 볼룸 캔들라이트 아래 순수하고 눈부시게 빛나는 머메이드 드레스 ✨",
+    "tags": [
+      "Corset Dress",
+      "Mermaid Gown",
+      "Romantic Gala",
+      "Candlelight",
+      "Princess"
+    ],
+    "totalPrice": 118.93,
+    "dupeTotalPrice": 98.93,
+    "savingsPercentage": 17,
+    "items": [
+      {
+        "id": "seoyun-04-dress",
+        "category": "Dress",
+        "name": "Ruched Corset Mermaid Maxi Evening Gown",
+        "brand": "Amazon Brand",
+        "retailer": "Amazon US",
+        "price": 59.99,
+        "url": "https://www.amazon.com/dp/B0BRQBW94Y",
+        "pin": {
+          "x": 50,
+          "y": 50
+        },
+        "dupe": {
+          "name": "Square Neck Corset Cocktail Dress",
+          "brand": "Amazon Brand",
+          "retailer": "Amazon US",
+          "price": 59.99,
+          "url": "https://www.amazon.com/dp/B0BRQBW94Y"
+        }
+      },
+      {
+        "id": "seoyun-04-shoes",
+        "category": "Shoes",
+        "name": "Classic Pointed Toe Stiletto Pumps",
+        "brand": "Dream Pairs",
+        "retailer": "Amazon US",
+        "price": 39.99,
+        "url": "https://www.amazon.com/dp/B0B5F4KMYH",
+        "pin": {
+          "x": 52,
+          "y": 94
+        },
+        "dupe": {
+          "name": "Pointed Toe High Heels",
+          "brand": "Dream Pairs",
+          "retailer": "Amazon US",
+          "price": 39.99,
+          "url": "https://www.amazon.com/dp/B0B5F4KMYH"
+        }
+      },
+      {
+        "id": "seoyun-04-earrings",
+        "category": "Jewelry",
+        "name": "14K Gold Plated Crystal Chandelier Drop Earrings",
+        "brand": "PAVOI",
+        "retailer": "Amazon US",
+        "price": 18.95,
+        "url": "https://www.amazon.com/dp/B07LGYP2ZJ",
+        "pin": {
+          "x": 46,
+          "y": 25
+        },
+        "dupe": {
+          "name": "Sparkling Dangle Earrings",
+          "brand": "PAVOI",
+          "retailer": "Amazon US",
+          "price": 18.95,
+          "url": "https://www.amazon.com/dp/B07LGYP2ZJ"
+        }
+      }
+    ]
+  },
+  {
+    "id": "look-hana-05",
+    "memberId": "hana",
+    "memberName": "Hana (하나)",
+    "title": "Seongsu Off-Duty Cropped Utility Chic",
+    "koreanTitle": "성수 오프듀티 크롭 유틸리티 & 플리츠 룩",
+    "scene": "Trendy brick-lined cafe street in Seongsu-dong Seoul during autumn golden hour",
+    "vibe": "Elevated K-Idol Off-Duty · Preppy Street Chic",
+    "image": "/images/blue_note/hana_offduty_cropped_skirt.png",
+    "aspectRatio": "vertical",
+    "framing": "85mm full body, authentic 7-head golden ratio proportion (173cm)",
+    "caption": "성수동 골목길을 런웨이로 만드는 아이돌의 세련된 오프듀티 사복 룩 ✨",
+    "tags": [
+      "Cropped Jacket",
+      "Pleated Skirt",
+      "Combat Boots",
+      "Off Duty",
+      "Street Chic"
+    ],
+    "totalPrice": 149.97,
+    "dupeTotalPrice": 149.97,
+    "savingsPercentage": 0,
+    "items": [
+      {
+        "id": "hn-05-jacket",
+        "category": "Top",
+        "name": "Cropped Barn Jacket Corduroy Collar Utility Coat",
+        "brand": "Amazon Brand",
+        "retailer": "Amazon US",
+        "price": 49.99,
+        "url": "https://www.amazon.com/dp/B0FKSJG3QV",
+        "pin": {
+          "x": 48,
+          "y": 36
+        },
+        "dupe": {
+          "name": "Utility Workwear Cropped Jacket",
+          "brand": "Amazon Brand",
+          "retailer": "Amazon US",
+          "price": 49.99,
+          "url": "https://www.amazon.com/dp/B0FKSJG3QV"
+        }
+      },
+      {
+        "id": "hn-05-skirt",
+        "category": "Bottom",
+        "name": "High-Waisted Pleated Tennis Mini Skirt",
+        "brand": "PINSPARK",
+        "retailer": "Amazon US",
+        "price": 49.99,
+        "url": "https://www.amazon.com/dp/B0CVZN6TPM",
+        "pin": {
+          "x": 50,
+          "y": 58
+        },
+        "dupe": {
+          "name": "Pleated A-Line Athletic Skort",
+          "brand": "PINSPARK",
+          "retailer": "Amazon US",
+          "price": 49.99,
+          "url": "https://www.amazon.com/dp/B0CVZN6TPM"
+        }
+      },
+      {
+        "id": "hn-05-boots",
+        "category": "Shoes",
+        "name": "Lace-Up Platform Combat Ankle Boots",
+        "brand": "Amazon Brand",
+        "retailer": "Amazon US",
+        "price": 49.99,
+        "url": "https://www.amazon.com/dp/B0GS1YV5PK",
+        "pin": {
+          "x": 52,
+          "y": 92
+        },
+        "dupe": {
+          "name": "Chunky Lug Sole Platform Boots",
+          "brand": "Amazon Brand",
+          "retailer": "Amazon US",
+          "price": 49.99,
+          "url": "https://www.amazon.com/dp/B0GS1YV5PK"
+        }
+      }
+    ]
+  },
+  {
+    "id": "look-jiwoo-05",
+    "memberId": "jiwoo",
+    "memberName": "Jiwoo (지우)",
+    "title": "Downtown LA Moto Racing Cargo Chic",
+    "koreanTitle": "다운타운 LA 모토 레이싱 & 카고 미니 룩",
+    "scene": "Trendy industrial graffiti art alley in Downtown LA Arts District during sunset",
+    "vibe": "Blokecore Hipster · Street Moto Charisma",
+    "image": "/images/blue_note/jiwoo_offduty_racing_cargo.png",
+    "aspectRatio": "vertical",
+    "framing": "85mm full body, authentic 7-head golden ratio proportion (165cm)",
+    "caption": "LA 그래피티 스트릿을 압도하는 메인 댄서 지우의 힙스터 레이싱 룩 🔥",
+    "tags": [
+      "Racing Jacket",
+      "Cargo Skirt",
+      "Dr Martens",
+      "Street Chic",
+      "Hip Hop"
+    ],
+    "totalPrice": 149.97,
+    "dupeTotalPrice": 149.97,
+    "savingsPercentage": 0,
+    "items": [
+      {
+        "id": "jw-05-jacket",
+        "category": "Top",
+        "name": "Cropped Moto Racing Faux Leather Bomber Jacket",
+        "brand": "VOIKERDR",
+        "retailer": "Amazon US",
+        "price": 49.99,
+        "url": "https://www.amazon.com/dp/B0BZ3QMXHS",
+        "pin": {
+          "x": 48,
+          "y": 35
+        },
+        "dupe": {
+          "name": "Colorblock Moto Racing Jacket",
+          "brand": "VOIKERDR",
+          "retailer": "Amazon US",
+          "price": 49.99,
+          "url": "https://www.amazon.com/dp/B0BZ3QMXHS"
+        }
+      },
+      {
+        "id": "jw-05-skirt",
+        "category": "Bottom",
+        "name": "High-Waisted Washed Denim Cargo Mini Skirt",
+        "brand": "ELLEVEN",
+        "retailer": "Amazon US",
+        "price": 49.99,
+        "url": "https://www.amazon.com/dp/B0D7PXBTSZ",
+        "pin": {
+          "x": 50,
+          "y": 58
+        },
+        "dupe": {
+          "name": "Y2K Denim Cargo Skort",
+          "brand": "ELLEVEN",
+          "retailer": "Amazon US",
+          "price": 49.99,
+          "url": "https://www.amazon.com/dp/B0D7PXBTSZ"
+        }
+      },
+      {
+        "id": "jw-05-boots",
+        "category": "Shoes",
+        "name": "Sanguine 8-Eye Lace-Up Platform Combat Boot",
+        "brand": "Dr. Martens",
+        "retailer": "Amazon US",
+        "price": 49.99,
+        "url": "https://www.amazon.com/dp/B0FFGKBYFS",
+        "pin": {
+          "x": 52,
+          "y": 92
+        },
+        "dupe": {
+          "name": "8-Eye Lug Sole Combat Boots",
+          "brand": "Dr. Martens",
+          "retailer": "Amazon US",
+          "price": 49.99,
+          "url": "https://www.amazon.com/dp/B0FFGKBYFS"
+        }
+      }
+    ]
+  },
+  {
+    "id": "look-lea-05",
+    "memberId": "lea",
+    "memberName": "Léa (레아)",
+    "title": "Paris Le Marais Biker Western Chic",
+    "koreanTitle": "파리 마레 올세인츠 바이커 & 웨스턴 부츠 룩",
+    "scene": "Sunny cobblestone street in Le Marais Paris with Haussmannian facades",
+    "vibe": "French Effortless Chic · Moto Biker Cool",
+    "image": "/images/blue_note/lea_offduty_biker_western.png",
+    "aspectRatio": "vertical",
+    "framing": "85mm full body, authentic 7-head golden ratio proportion (175cm)",
+    "caption": "파리 마레 지구를 런웨이로 만드는 레아의 정통 프렌치 모토 바이커 룩 ✨",
+    "tags": [
+      "AllSaints",
+      "Biker Jacket",
+      "Levis 501",
+      "Western Boots",
+      "French Chic"
+    ],
+    "totalPrice": 806.0,
+    "dupeTotalPrice": 216.0,
+    "savingsPercentage": 73,
+    "items": [
+      {
+        "id": "lea-05-jacket",
+        "category": "Outer",
+        "name": "Balfern Leather Biker Moto Jacket",
+        "brand": "AllSaints",
+        "retailer": "Nordstrom",
+        "price": 529.0,
+        "url": "https://www.nordstrom.com/s/allsaints-balfern-leather-biker-jacket/4089851",
+        "pin": {
+          "x": 48,
+          "y": 35
+        },
+        "dupe": {
+          "name": "Faux Leather Moto Jacket",
+          "brand": "Zara US",
+          "retailer": "Zara US",
+          "price": 89.0,
+          "url": "https://www.zara.com/us/en/search?searchTerm=faux%20leather%20biker%20jacket"
+        }
+      },
+      {
+        "id": "lea-05-top",
+        "category": "Top",
+        "name": "High-Neck Micro-Ribbed Modal Tank",
+        "brand": "Skims",
+        "retailer": "Nordstrom",
+        "price": 38.0,
+        "url": "https://www.nordstrom.com/brands/skims",
+        "pin": {
+          "x": 50,
+          "y": 42
+        },
+        "dupe": {
+          "name": "Ribbed Modal Tank Top",
+          "brand": "H&M US",
+          "retailer": "H&M US",
+          "price": 14.99,
+          "url": "https://www2.hm.com/en_us/search-results.html?q=ribbed+tank+top"
+        }
+      },
+      {
+        "id": "lea-05-bottom",
+        "category": "Bottom",
+        "name": "501 Original Distressed Raw-Hem Denim Cutoff Shorts",
+        "brand": "Levi's",
+        "retailer": "Nordstrom",
+        "price": 69.0,
+        "url": "https://www.nordstrom.com/sr?origin=keywordsearch&keyword=levis+501+denim+shorts+black",
+        "pin": {
+          "x": 50,
+          "y": 58
+        },
+        "dupe": {
+          "name": "Distressed Denim Cutoff Shorts",
+          "brand": "Zara US",
+          "retailer": "Zara US",
+          "price": 39.0,
+          "url": "https://www.zara.com/us/en/search?searchTerm=denim%20shorts%20black"
+        }
+      },
+      {
+        "id": "lea-05-boots",
+        "category": "Shoes",
+        "name": "Suede Western Pointed-Toe Cowboy Boots",
+        "brand": "Sam Edelman",
+        "retailer": "Nordstrom",
+        "price": 170.0,
+        "url": "https://www.nordstrom.com/sr?origin=keywordsearch&keyword=beige+suede+western+cowboy+boots",
+        "pin": {
+          "x": 52,
+          "y": 92
+        },
+        "dupe": {
+          "name": "Split Suede Western Boots",
+          "brand": "Zara US",
+          "retailer": "Zara US",
+          "price": 79.0,
+          "url": "https://www.zara.com/us/en/search?searchTerm=western%20cowboy%20boots"
+        }
+      }
+    ]
+  },
+  {
+    "id": "look-nao-05",
+    "title": "Tokyo Daikanyama Off-Shoulder Knit & Wide Trousers Chic",
+    "memberId": "nao",
+    "memberName": "Nao (나오)",
+    "scene": "Sunlit architectural street in Daikanyama Tokyo with autumn ginkgo bokeh",
+    "vibe": "Daikanyama Minimalist · Intellectual Knit Chic",
+    "imageUrl": "/images/blue_note/nao_offduty_knit_trousers.png",
+    "aspectRatio": "vertical",
+    "likes": 182,
+    "views": 2490,
+    "isStaffPick": true,
+    "tags": [
+      "Free People",
+      "COS",
+      "Madewell",
+      "Loafers",
+      "Tokyo Chic"
+    ],
+    "products": [
+      {
+        "id": "nao-05-knit",
+        "name": "Off-The-Shoulder Chunky Ribbed Knit Sweater in Cream",
+        "brand": "Free People",
+        "price": 98.0,
+        "category": "Top",
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/sr?origin=keywordsearch&keyword=off+the+shoulder+knit+sweater+cream",
+        "dupe": {
+          "name": "Off-The-Shoulder Soft Knit Jumper",
+          "brand": "Zara US",
+          "retailer": "Zara US",
+          "price": 49.0,
+          "url": "https://www.zara.com/us/en/search?searchTerm=off%20shoulder%20sweater"
+        }
+      },
+      {
+        "id": "nao-05-trousers",
+        "name": "Pleated High-Waisted Wide-Leg Trousers in Soft Taupe",
+        "brand": "COS",
+        "price": 110.0,
+        "category": "Bottom",
+        "retailer": "COS",
+        "buyUrl": "https://www.cos.com/en_usd/product/cos-pleated-high-waisted-wide-leg-trousers-soft-taupe-0613",
+        "dupe": {
+          "name": "Pleated Wide-Leg Trousers",
+          "brand": "H&M US",
+          "retailer": "H&M US",
+          "price": 39.0,
+          "url": "https://www2.hm.com/en_us/search-results.html?q=pleated+wide+leg+trousers"
+        }
+      },
+      {
+        "id": "nao-05-loafers",
+        "name": "Calfskin Bit Horsebit Loafers in Polished Black",
+        "brand": "Madewell",
+        "price": 121.0,
+        "category": "Shoes",
+        "retailer": "Madewell",
+        "buyUrl": "https://www.madewell.com/product/madewell-calfskin-bit-horsebit-loafers-crisp-ivory-0729",
+        "dupe": {
+          "name": "High-Street Horsebit Loafers",
+          "brand": "H&M US",
+          "retailer": "H&M US",
+          "price": 46.0,
+          "url": "https://www2.hm.com/en_us/search-results.html?q=horsebit+loafers"
+        }
+      },
+      {
+        "id": "nao-05-scarf",
+        "name": "Brushed Wool-Alpaca Fringe Scarf in Oatmeal Beige",
+        "brand": "COS",
+        "price": 120.0,
+        "category": "Accessory",
+        "retailer": "COS",
+        "buyUrl": "https://www.cos.com/en_usd/women/accessories/scarves.html",
+        "dupe": {
+          "name": "Fringed Knit Scarf in Melange Oat",
+          "brand": "Zara US",
+          "retailer": "Zara US",
+          "price": 35.9,
+          "url": "https://www.zara.com/us/en/search?searchTerm=fringe%20knit%20scarf"
+        }
+      }
+    ]
+  },
+  {
+    "id": "look-seoyun-05",
+    "title": "Brooklyn Dumbo Retro Fleece & Baggy Denim Clog Chic",
+    "memberId": "seoyun",
+    "memberName": "Seoyun (서윤)",
+    "scene": "Sunlit cobblestone loft street in Brooklyn Dumbo New York with autumn brick facades",
+    "vibe": "Effortless Retro Cozy · Gen-Z Baggy Chic",
+    "imageUrl": "/images/blue_note/seoyun_offduty_fleece_baggy.png",
+    "aspectRatio": "vertical",
+    "likes": 204,
+    "views": 2810,
+    "isStaffPick": true,
+    "tags": [
+      "Columbia",
+      "Levis",
+      "Birkenstock",
+      "Madewell",
+      "RetroCozy"
+    ],
+    "products": [
+      {
+        "id": "seoyun-05-fleece",
+        "name": "Steens Mountain Retro Colorblock Fleece Half-Zip Pullover",
+        "brand": "Columbia",
+        "price": 75.0,
+        "category": "Outer",
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/sr?origin=keywordsearch&keyword=columbia+half+zip+fleece+women",
+        "dupe": {
+          "name": "Colorblock Half-Zip Fleece Anorak",
+          "brand": "Amazon Brand",
+          "retailer": "Amazon US",
+          "price": 29.99,
+          "url": "https://www.amazon.com/dp/B07R4D2Q11"
+        }
+      },
+      {
+        "id": "seoyun-05-jeans",
+        "name": "High Loose Wide-Leg Baggy Denim Jeans in Light Wash",
+        "brand": "Levi's",
+        "price": 108.0,
+        "category": "Bottom",
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/sr?origin=keywordsearch&keyword=levis+high+loose+jeans",
+        "dupe": {
+          "name": "High Loose Baggy Light-Wash Jeans",
+          "brand": "Amazon Brand",
+          "retailer": "Amazon US",
+          "price": 39.0,
+          "url": "https://www.amazon.com/dp/B08V7S5X1B"
+        }
+      },
+      {
+        "id": "seoyun-05-clogs",
+        "name": "Boston Suede Leather Soft Footbed Clogs in Taupe",
+        "brand": "Birkenstock",
+        "price": 160.0,
+        "category": "Shoes",
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/s/birkenstock-boston-clog/3246221",
+        "dupe": {
+          "name": "Suede Leather Mules Clogs",
+          "brand": "Target US",
+          "retailer": "Target US",
+          "price": 39.0,
+          "url": "https://www.target.com/s?searchTerm=suede+clogs"
+        }
+      },
+      {
+        "id": "seoyun-05-bag",
+        "name": "Hand-Woven Mini Shoulder Bag with Braided Strap in Cream",
+        "brand": "Madewell",
+        "price": 128.0,
+        "category": "Bag",
+        "retailer": "Nordstrom",
+        "buyUrl": "https://www.nordstrom.com/sr?origin=keywordsearch&keyword=cream+woven+shoulder+bag",
+        "dupe": {
+          "name": "Braided Strap Shoulder Bag",
+          "brand": "H&M US",
+          "retailer": "H&M US",
+          "price": 35.0,
+          "url": "https://www2.hm.com/en_us/search-results.html?q=woven+shoulder+bag"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,1039 @@
+'use client';
+
+import React, { useState, useMemo, useEffect } from 'react';
+import editorial10Looks from '../public/editorial_top10_lookbook.json';
+import {
+  Sparkles,
+  ShieldCheck,
+  Zap,
+  ArrowRight,
+  TrendingDown,
+  ExternalLink,
+  Layers,
+  Tag,
+  DollarSign,
+  ShoppingBag,
+  Palette,
+  Lightbulb,
+  Search,
+  Check,
+  Copy,
+  ArrowUpDown,
+  CheckCircle2,
+  Users,
+  Heart,
+  Camera,
+  Flame,
+  X,
+} from 'lucide-react';
+
+// ==========================================
+// 1. DATA TYPES
+// ==========================================
+export type RetailerName =
+  | 'Zara US'
+  | 'H&M US'
+  | 'Nordstrom'
+  | 'Amazon US'
+  | 'SSENSE'
+  | 'Mango US'
+  | 'Uniqlo US'
+  | 'COS'
+  | 'Revolve'
+  | 'Madewell'
+  | 'Abercrombie';
+
+export interface HotspotPin {
+  id: string;
+  x: number;
+  y: number;
+  category: 'Outer' | 'Top' | 'Bottom' | 'Shoes' | 'Bag' | 'Accessory';
+  title: string;
+  brand: string;
+  price: number;
+  originalPrice?: number;
+  retailer: RetailerName;
+  buyUrl: string;
+  isSpaBrand?: boolean;
+  dupe?: {
+    title: string;
+    brand: string;
+    price: number;
+    retailer: RetailerName;
+    buyUrl: string;
+    savingsPct: number;
+  };
+}
+
+export interface StylingLook {
+  id: string;
+  title: string;
+  aesthetic: string;
+  season: string;
+  imageUrl: string;
+  modelHeight?: string;
+  memberId?: string;
+  memberName?: string;
+  memberBio?: string;
+  description: string;
+  curatorNote: string;
+  colorPalette: string[];
+  vibeTags: string[];
+  hasSpaPicks?: boolean;
+  pins: HotspotPin[];
+}
+
+export interface CatalogProduct {
+  id: string;
+  sku: string;
+  category: 'Outer' | 'Top' | 'Bottom' | 'Shoes' | 'Bag' | 'Accessory';
+  subCategory: string;
+  title: string;
+  brand: string;
+  price: number;
+  originalPrice?: number;
+  retailer: RetailerName;
+  buyUrl: string;
+  imageUrl: string;
+  isSpaBrand: boolean;
+  color: string;
+  inStock: boolean;
+}
+
+// ==========================================
+// 2. CURATED LOOKBOOKS (REAL SPA & US RETAILERS)
+// ==========================================
+const CURATED_LOOKS: StylingLook[] = editorial10Looks as StylingLook[];
+
+
+
+const RETAILERS: { name: RetailerName; isSpa: boolean; url: string }[] = [
+  { name: 'Zara US', isSpa: true, url: 'https://www.zara.com/us/en' },
+  { name: 'H&M US', isSpa: true, url: 'https://www2.hm.com/en_us' },
+  { name: 'Mango US', isSpa: true, url: 'https://shop.mango.com/us' },
+  { name: 'Uniqlo US', isSpa: true, url: 'https://www.uniqlo.com/us/en' },
+  { name: 'COS', isSpa: true, url: 'https://www.cos.com/en_usd' },
+  { name: 'Nordstrom', isSpa: false, url: 'https://www.nordstrom.com' },
+  { name: 'Amazon US', isSpa: false, url: 'https://www.amazon.com/fashion' },
+  { name: 'SSENSE', isSpa: false, url: 'https://www.ssense.com/en-us' },
+  { name: 'Abercrombie', isSpa: false, url: 'https://www.abercrombie.com' },
+  { name: 'Madewell', isSpa: false, url: 'https://www.madewell.com' },
+];
+
+// ==========================================
+// 4. MAIN HOMEPAGE COMPONENT
+// ==========================================
+// ==========================================
+export default function StylingHelperHomePage() {
+  const [activeLook, setActiveLook] = useState<StylingLook>(CURATED_LOOKS[0]);
+  const [selectedPinId, setSelectedPinId] = useState<string | null>(CURATED_LOOKS[0]?.pins[0]?.id || null);
+  const [showBudgetDupes, setShowBudgetDupes] = useState<boolean>(false);
+  const [activeAesthetic, setActiveAesthetic] = useState<string>('All Looks');
+
+  // Interactive Checklist selection in LookDetail
+  const [selectedItems, setSelectedItems] = useState<string[]>(CURATED_LOOKS[0].pins.map((p) => p.id));
+  const [copied, setCopied] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedProductModal, setSelectedProductModal] = useState<CatalogProduct | null>(null);
+
+  // Reset checklist and select first pin by default when activeLook changes
+  useEffect(() => {
+    setSelectedItems(activeLook.pins.map((p) => p.id));
+    if (activeLook.pins && activeLook.pins.length > 0) {
+      setSelectedPinId(activeLook.pins[0].id);
+    }
+  }, [activeLook]);
+
+  const aesthetics = [
+    'All Looks',
+    'Editorial Beauty & Glow',
+    'Clean Girl Minimal',
+    'French Riviera Chic',
+    'Quiet Luxury',
+    'High-Street SPA Chic',
+    'Downtown Streetwear',
+    'High-Teen Athleisure'
+  ];
+
+  const filteredLooks = useMemo(() => {
+    let result = CURATED_LOOKS;
+    if (activeAesthetic !== 'All Looks') {
+      result = result.filter((l) => l.aesthetic === activeAesthetic);
+    }
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter(
+        (l) =>
+          l.title.toLowerCase().includes(q) ||
+          l.description.toLowerCase().includes(q) ||
+          l.aesthetic.toLowerCase().includes(q) ||
+          l.pins.some((p) => p.title.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q))
+      );
+    }
+    return result;
+  }, [activeAesthetic, searchQuery]);
+
+  // Calculate bundle prices
+  const totalOriginalPrice = activeLook.pins
+    .filter((p) => selectedItems.includes(p.id))
+    .reduce((sum, p) => sum + p.price, 0);
+
+  const totalEffectivePrice = activeLook.pins
+    .filter((p) => selectedItems.includes(p.id))
+    .reduce((sum, p) => (showBudgetDupes && p.dupe ? sum + p.dupe.price : sum + p.price), 0);
+
+  const totalSavings = totalOriginalPrice - totalEffectivePrice;
+  const savingsPct = totalOriginalPrice > 0 ? Math.round((totalSavings / totalOriginalPrice) * 100) : 0;
+
+  const handleCopyChecklist = () => {
+    const lines = activeLook.pins
+      .filter((p) => selectedItems.includes(p.id))
+      .map((p) => {
+        const isDupe = showBudgetDupes && p.dupe;
+        const brand = isDupe ? p.dupe!.brand : p.brand;
+        const title = isDupe ? p.dupe!.title : p.title;
+        const price = isDupe ? p.dupe!.price : p.price;
+        const retailer = isDupe ? p.dupe!.retailer : p.retailer;
+        const url = isDupe ? p.dupe!.buyUrl : p.buyUrl;
+        return `[${p.category}] ${brand} - ${title} ($${price} on ${retailer})\nLink: ${url}`;
+      });
+
+    const checklistText = `StylingHelper US - "${activeLook.title}"\nTotal: $${totalEffectivePrice}\n\n${lines.join('\n\n')}`;
+    navigator.clipboard.writeText(checklistText);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const activePin = activeLook.pins.find((p) => p.id === selectedPinId) || activeLook.pins[0] || null;
+
+  return (
+    <div className="min-h-screen bg-[#FDFCFB] text-neutral-900 font-sans selection:bg-neutral-900 selection:text-white">
+      {/* 1. TOP LIVE US STATUS BAR */}
+      <div className="bg-neutral-900 text-neutral-300 text-xs py-1.5 px-4 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="font-bold text-white">StylingHelper USA Live</span>
+            <span className="text-neutral-400 hidden sm:inline">— AI-Recomposed Inspo from Real Zara, H&M, Nordstrom & Amazon Items</span>
+          </div>
+          <div className="flex items-center gap-3 text-neutral-400">
+            <span>Shipping: <strong className="text-white">United States (USD $)</strong></span>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. MAIN HEADER NAVIGATION */}
+      <header className="bg-white/95 backdrop-blur-md border-b border-neutral-200 sticky top-7 z-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-black text-white flex items-center justify-center font-black tracking-tighter text-lg shadow-sm">
+              SH
+            </div>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-xl font-black tracking-tight text-neutral-950">StylingHelper</span>
+                <span className="bg-neutral-100 text-neutral-700 border border-neutral-300 text-[10px] font-bold px-1.5 py-0.5 rounded tracking-wide uppercase">
+                  US
+                </span>
+              </div>
+              <p className="text-[11px] text-neutral-500 hidden sm:block">Where Inspiration Meets Where to Buy</p>
+            </div>
+          </div>
+
+          <div className="hidden md:flex flex-1 max-w-md mx-6 relative">
+            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search 1,000+ items (e.g. Zara blazer, H&M knit, loafers)..."
+              className="w-full pl-10 pr-4 py-2 text-sm bg-neutral-100 border border-transparent focus:border-neutral-900 focus:bg-white rounded-full outline-none transition text-neutral-900 placeholder:text-neutral-400"
+            />
+          </div>
+
+          <div className="flex items-center gap-3">
+            <a
+              href="#explore-all"
+              className="flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 text-emerald-900 bg-emerald-100/80 hover:bg-emerald-200 border border-emerald-300 rounded-lg transition"
+            >
+              <Tag className="w-3.5 h-3.5 text-emerald-700" />
+              <span>10 Looks</span>
+            </a>
+            <a
+              href="#styling-studio"
+              className="flex items-center gap-1.5 text-xs font-bold bg-neutral-900 text-white px-3.5 py-2 rounded-lg hover:bg-neutral-800 transition shadow-sm"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+              <span>Live Studio</span>
+            </a>
+          </div>
+        </div>
+
+        {/* Aesthetics Filter Bar */}
+        <div className="border-t border-neutral-100 bg-neutral-50/80 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center gap-2 overflow-x-auto no-scrollbar">
+            <span className="text-xs font-semibold text-neutral-500 mr-2 flex-shrink-0">Aesthetics:</span>
+            {aesthetics.map((aes) => {
+              const isActive = activeAesthetic === aes;
+              return (
+                <button
+                  key={aes}
+                  type="button"
+                  onClick={() => {
+                    setActiveAesthetic(aes);
+                    if (aes !== 'All Looks') {
+                      const firstMatch = CURATED_LOOKS.find((l) => l.aesthetic === aes);
+                      if (firstMatch) {
+                        setActiveLook(firstMatch);
+                        const el = document.getElementById('styling-studio');
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }
+                  }}
+                  className={`text-xs font-medium px-4 py-1.5 rounded-full transition-all duration-150 flex-shrink-0 whitespace-nowrap cursor-pointer select-none ${
+                    isActive
+                      ? 'bg-neutral-950 text-white shadow-md font-bold scale-[1.02]'
+                      : 'bg-white text-neutral-700 hover:bg-neutral-200/80 border border-neutral-200 hover:border-neutral-300'
+                  }`}
+                >
+                  {aes}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </header>
+
+      {/* 3. HERO SHOWCASE */}
+      <section className="relative overflow-hidden bg-white border-b border-neutral-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-14 sm:pt-16 sm:pb-20 relative z-10">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-neutral-900 text-white text-xs font-semibold mb-6 shadow-sm">
+              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+              <span>2026 Volume 1: 10 Ultra-Photorealistic Editorial Looks • 100% Real US Stock</span>
+            </div>
+
+            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-neutral-950 leading-[1.08]">
+              AI-Recomposed Styling <br />
+              <span className="text-neutral-500 font-medium">with</span> Real-World Links.
+            </h1>
+
+            <p className="mt-5 text-base sm:text-lg text-neutral-600 max-w-2xl leading-relaxed">
+              <strong>Imagined by AI. Curated for real life.</strong> Every editorial shoot is virtually synthesized from real in-stock pieces across <strong>Zara US, H&M US, Nordstrom, and SSENSE</strong>. Click any interactive tag on the model to own the exact AI-styled look in real life.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <a
+                href="#styling-studio"
+                className="inline-flex items-center gap-2 bg-neutral-950 text-white px-6 py-3.5 rounded-xl font-bold text-sm hover:bg-neutral-800 transition shadow-lg shadow-neutral-900/10"
+              >
+                <span>Launch Interactive Studio</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+              <a
+                href="#explore-all"
+                className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-900 border border-emerald-300 px-6 py-3.5 rounded-xl font-bold text-sm hover:bg-emerald-100 transition shadow-sm"
+              >
+                <ShoppingBag className="w-4 h-4 text-emerald-700" />
+                <span>Explore 10 Editorial Looks</span>
+              </a>
+            </div>
+
+            <div className="mt-12 pt-8 border-t border-neutral-200 grid grid-cols-3 gap-6 max-w-lg">
+              <div>
+                <span className="block text-2xl sm:text-3xl font-black text-neutral-950">AI 8K</span>
+                <span className="text-xs text-neutral-500 font-medium">Virtual Editorial Fits</span>
+              </div>
+              <div>
+                <span className="block text-2xl sm:text-3xl font-black text-neutral-950">1,000+</span>
+                <span className="text-xs text-neutral-500 font-medium">Real-World SKUs Matched</span>
+              </div>
+              <div>
+                <span className="block text-2xl sm:text-3xl font-black text-amber-600">-85%</span>
+                <span className="text-xs text-neutral-500 font-medium">Smart Budget Dupes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. VERIFIED RETAILERS RIBBON */}
+      <div className="bg-neutral-900 text-neutral-300 py-3.5 border-y border-neutral-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-4 text-xs font-semibold">
+          <span className="text-neutral-400 uppercase tracking-wider flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            Verified US Retail Inventory:
+          </span>
+          <div className="flex flex-wrap items-center gap-6 sm:gap-8 tracking-wider text-white">
+            <span className="hover:text-amber-300 transition">ZARA US</span>
+            <span className="hover:text-amber-300 transition">H&M US</span>
+            <span className="hover:text-amber-300 transition">NORDSTROM</span>
+            <span className="hover:text-amber-300 transition">AMAZON FASHION</span>
+            <span className="hover:text-amber-300 transition">SSENSE</span>
+            <span className="hover:text-amber-300 transition">MANGO US</span>
+            <span className="hover:text-amber-300 transition">UNIQLO US</span>
+          </div>
+        </div>
+      </div>
+
+      {/* 5. LIVE INTERACTIVE STYLING STUDIO */}
+      <section id="styling-studio" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-20">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+          <div>
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-600 mb-1">
+              <Zap className="w-3.5 h-3.5" />
+              <span>Interactive Live Studio</span>
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
+              Test The Hotspot Pin Experience
+            </h2>
+          </div>
+          <p className="text-xs sm:text-sm text-neutral-500 max-w-md">
+            Click any pin on the model to reveal authentic retail specs, check live USD prices on Zara, H&M, or toggle affordable alternatives.
+          </p>
+        </div>
+
+        {/* Quick Look Selector Strip */}
+        <div className="mb-8 p-3 rounded-2xl bg-neutral-100/70 border border-neutral-200/80">
+          <div className="flex items-center justify-between mb-2 px-1">
+            <span className="text-xs font-bold text-neutral-500 uppercase tracking-wider flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+              <span>Switch Studio Look ({filteredLooks.length} Looks in {activeAesthetic}):</span>
+            </span>
+            <span className="text-[11px] text-neutral-400">Click any card below to instantly preview</span>
+          </div>
+
+          <div className="flex items-center gap-2.5 overflow-x-auto no-scrollbar py-1">
+            {filteredLooks.map((look) => {
+              const isCurrent = activeLook.id === look.id;
+              return (
+                <button
+                  key={look.id}
+                  type="button"
+                  onClick={() => {
+                    setActiveLook(look);
+                    setSelectedPinId(null);
+                  }}
+                  className={`group flex items-center gap-2.5 px-3 py-2 rounded-xl border text-xs font-bold transition-all duration-150 flex-shrink-0 cursor-pointer shadow-xs ${
+                    isCurrent
+                      ? 'bg-neutral-950 text-white border-neutral-950 shadow-md ring-2 ring-neutral-950 ring-offset-2'
+                      : 'bg-white text-neutral-800 border-neutral-200 hover:border-neutral-400 hover:bg-neutral-50 hover:shadow-sm'
+                  }`}
+                >
+                  <img
+                    src={look.imageUrl}
+                    alt={look.title}
+                    className="w-7 h-7 rounded-lg object-cover flex-shrink-0 border border-black/10"
+                  />
+                  <div className="text-left">
+                    <span className="block truncate max-w-[150px] leading-tight">{look.title}</span>
+                    <span className={`text-[10px] font-medium ${isCurrent ? 'text-amber-300' : 'text-neutral-400'}`}>
+                      {look.pins.length} items • ${look.pins.reduce((sum, p) => sum + p.price, 0)}
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Left: Hotspot Image Viewer */}
+          <div className="lg:col-span-5 lg:sticky lg:top-28">
+            <div className="relative w-full rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-200 shadow-xl group">
+              <div className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-950">
+                <img
+                  src={activeLook.imageUrl}
+                  alt={activeLook.title}
+                  className="w-full h-full object-cover object-center transition duration-700 ease-out group-hover:scale-[1.01]"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+
+                {/* Top Overlay Badge */}
+                <div className="absolute top-4 left-4 flex items-center gap-2 z-20 flex-wrap">
+                  <span className="bg-neutral-950/85 backdrop-blur-md text-white text-[11px] font-semibold px-3 py-1.5 rounded-full border border-purple-500/40 shadow-lg flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+                    <span>AI-Recomposed Shoot</span>
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (activeLook.pins.length > 0) {
+                        const currentIndex = activeLook.pins.findIndex((p) => p.id === (selectedPinId || activeLook.pins[0]?.id));
+                        const nextIndex = (currentIndex + 1) % activeLook.pins.length;
+                        setSelectedPinId(activeLook.pins[nextIndex].id);
+                      }
+                    }}
+                    title="Click to view next pinned item"
+                    className="bg-black/75 hover:bg-neutral-900 backdrop-blur-md text-white text-[11px] font-semibold px-3 py-1.5 rounded-full border border-white/20 shadow-lg flex items-center gap-1.5 cursor-pointer transition active:scale-95"
+                  >
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                    <span>{activeLook.pins.length} Real Pins • Next</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowBudgetDupes((prev) => !prev)}
+                    className={`text-[11px] font-bold px-3 py-1.5 rounded-full backdrop-blur-md border transition flex items-center gap-1.5 shadow-lg ${
+                      showBudgetDupes
+                        ? 'bg-amber-400 text-neutral-950 border-amber-300'
+                        : 'bg-white/80 hover:bg-white text-neutral-900 border-white/40'
+                    }`}
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>{showBudgetDupes ? 'Showing: Smart Dupes' : 'View Affordable Dupes'}</span>
+                  </button>
+                </div>
+
+                {/* Hotspot Pins */}
+                {activeLook.pins.map((pin) => {
+                  const isSelected = selectedPinId === pin.id;
+                  const isDupeActive = showBudgetDupes && pin.dupe;
+
+                  return (
+                    <div
+                      key={pin.id}
+                      style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
+                      className="absolute -translate-x-1/2 -translate-y-1/2 z-30 cursor-pointer p-2"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedPinId(pin.id);
+                      }}
+                    >
+                      <div className="relative flex items-center justify-center">
+                        <span
+                          className={`absolute w-8 h-8 rounded-full transition-all duration-300 ${
+                            isSelected
+                              ? 'bg-white/80 scale-125 animate-ping'
+                              : isDupeActive
+                              ? 'bg-amber-400/40 animate-pulse'
+                              : 'bg-white/40'
+                          }`}
+                        />
+                        <button
+                          type="button"
+                          aria-label={pin.title}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedPinId(pin.id);
+                          }}
+                          className={`w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs shadow-2xl transition duration-200 transform ${
+                            isSelected
+                              ? 'bg-neutral-950 text-white scale-125 ring-2 ring-white ring-offset-2 ring-offset-black'
+                              : isDupeActive
+                              ? 'bg-amber-400 text-neutral-950 scale-105'
+                              : 'bg-white text-neutral-950 hover:scale-110'
+                          }`}
+                        >
+                          <Tag className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+
+                      <div
+                        className={`absolute left-1/2 -translate-x-1/2 mt-2 px-2.5 py-1 rounded-md text-[11px] font-semibold whitespace-nowrap shadow-xl transition-all duration-200 pointer-events-none ${
+                          isSelected
+                            ? 'opacity-100 bg-neutral-900 text-white border border-neutral-700 translate-y-0'
+                            : 'opacity-0 translate-y-1 group-hover:opacity-75 bg-black/80 text-white'
+                        }`}
+                      >
+                        {isDupeActive ? `Dupe: $${pin.dupe?.price}` : `$${pin.price}`} • {pin.category}
+                      </div>
+                    </div>
+                  );
+                })}
+
+                {/* Popover Card */}
+                {activePin && (
+                  <div className="absolute bottom-4 left-4 right-4 z-30 animate-fadeIn">
+                    <div className="bg-white/95 backdrop-blur-lg rounded-xl p-3.5 sm:p-4 shadow-2xl border border-neutral-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-0.5 flex-wrap">
+                          <span className="text-[10px] uppercase tracking-wider font-extrabold px-1.5 py-0.5 bg-neutral-100 text-neutral-700 rounded">
+                            {activePin.category}
+                          </span>
+                          {activePin.isSpaBrand && (
+                            <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 bg-emerald-100 text-emerald-800 rounded">
+                              SPA Essential
+                            </span>
+                          )}
+                          <span className="text-xs font-semibold text-neutral-500">
+                            {showBudgetDupes && activePin.dupe ? activePin.dupe.brand : activePin.brand}
+                          </span>
+                          {showBudgetDupes && activePin.dupe && (
+                            <span className="text-[10px] font-bold text-amber-900 bg-amber-100 border border-amber-300 px-1.5 py-0.5 rounded">
+                              Save {activePin.dupe.savingsPct}%
+                            </span>
+                          )}
+                        </div>
+
+                        <h4 className="text-sm font-bold text-neutral-900 truncate">
+                          {showBudgetDupes && activePin.dupe ? activePin.dupe.title : activePin.title}
+                        </h4>
+
+                        <div className="flex items-baseline gap-2 mt-1">
+                          <span className="text-base font-extrabold text-neutral-950">
+                            ${showBudgetDupes && activePin.dupe ? activePin.dupe.price : activePin.price}
+                          </span>
+                          {showBudgetDupes && activePin.dupe && (
+                            <span className="text-xs text-neutral-400 line-through">
+                              Orig. ${activePin.price}
+                            </span>
+                          )}
+                          <span className="text-xs text-neutral-500 font-medium">
+                            on {showBudgetDupes && activePin.dupe ? activePin.dupe.retailer : activePin.retailer}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const isDupe = showBudgetDupes && activePin.dupe;
+                            setSelectedProductModal({
+                              id: activePin.id,
+                              sku: 'SKU-' + activePin.id.toUpperCase(),
+                              category: activePin.category,
+                              subCategory: activePin.title,
+                              title: isDupe ? activePin.dupe!.title : activePin.title,
+                              brand: isDupe ? activePin.dupe!.brand : activePin.brand,
+                              price: isDupe ? activePin.dupe!.price : activePin.price,
+                              retailer: (isDupe ? activePin.dupe!.retailer : activePin.retailer) as RetailerName,
+                              buyUrl: isDupe ? activePin.dupe!.buyUrl : activePin.buyUrl,
+                              imageUrl: activeLook.imageUrl,
+                              isSpaBrand: activePin.isSpaBrand || false,
+                              color: activeLook.colorPalette[0] || 'Black',
+                              inStock: true
+                            });
+                          }}
+                          className="inline-flex items-center justify-center gap-1 text-xs font-bold px-3 py-2.5 rounded-lg bg-neutral-100 hover:bg-neutral-200 text-neutral-800 transition"
+                        >
+                          Quick View
+                        </button>
+
+                        <a
+                          href={showBudgetDupes && activePin.dupe ? activePin.dupe.buyUrl : activePin.buyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-lg bg-neutral-900 text-white hover:bg-neutral-800 transition shadow-sm"
+                        >
+                          <span>Shop on {showBudgetDupes && activePin.dupe ? activePin.dupe.retailer : activePin.retailer}</span>
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="p-3 bg-neutral-900 text-neutral-400 text-xs flex items-center justify-between border-t border-neutral-800">
+                <span className="flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-purple-400" />
+                  Synthesized by Generative AI from real garments • Click pins to shop exact item
+                </span>
+                <span className="text-[11px] text-neutral-500">100% In-Stock US Links</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Look Breakdown & Checklist */}
+          <div className="lg:col-span-7 flex flex-col gap-6">
+            {/* Header info */}
+            <div className="bg-white rounded-2xl p-6 border border-neutral-200 shadow-sm">
+              <div className="flex flex-wrap items-center gap-2 mb-2">
+                <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-neutral-900 text-white">
+                  {activeLook.aesthetic}
+                </span>
+                {activeLook.hasSpaPicks && (
+                  <span className="text-xs font-bold uppercase px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">
+                    Zara & H&M Picks
+                  </span>
+                )}
+                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-neutral-100 text-neutral-700">
+                  {activeLook.season}
+                </span>
+              </div>
+
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 tracking-tight leading-tight">
+                {activeLook.title}
+              </h3>
+              <p className="mt-2 text-sm text-neutral-600 leading-relaxed">{activeLook.description}</p>
+
+              <div className="mt-4 pt-4 border-t border-neutral-100 flex items-center gap-2">
+                <Palette className="w-4 h-4 text-neutral-400" />
+                <span className="text-xs font-semibold text-neutral-600 mr-2">Color Palette:</span>
+                <div className="flex items-center gap-1.5">
+                  {activeLook.colorPalette.map((color, idx) => (
+                    <span
+                      key={idx}
+                      style={{ backgroundColor: color }}
+                      title={color}
+                      className="w-5 h-5 rounded-full border border-neutral-300 shadow-inner"
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Smart Dupe Switch */}
+            <div className="bg-neutral-900 text-white rounded-2xl p-5 shadow-lg flex items-center justify-between">
+              <div>
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-amber-300" />
+                  <h4 className="text-sm font-bold tracking-tight">Smart Budget Matching</h4>
+                </div>
+                <p className="text-xs text-neutral-400 mt-0.5">
+                  Swap designer pieces with verified affordable alternatives from Zara US & H&M US.
+                </p>
+              </div>
+              <button
+                onClick={() => setShowBudgetDupes((prev) => !prev)}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 flex-shrink-0 ${
+                  showBudgetDupes
+                    ? 'bg-amber-400 text-neutral-950 shadow-md'
+                    : 'bg-neutral-800 text-neutral-200 hover:bg-neutral-700'
+                }`}
+              >
+                {showBudgetDupes ? 'Dupes Active' : 'Enable Dupes'}
+              </button>
+            </div>
+
+            {/* Item Checklist */}
+            <div className="bg-white rounded-2xl p-6 border border-neutral-200 shadow-sm flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <ShoppingBag className="w-5 h-5 text-neutral-900" />
+                  <h4 className="text-base font-bold text-neutral-900">
+                    Shop The Complete Look ({activeLook.pins.length} Pieces)
+                  </h4>
+                </div>
+              </div>
+
+              <div className="divide-y divide-neutral-100 flex flex-col">
+                {activeLook.pins.map((pin) => {
+                  const isChecked = selectedItems.includes(pin.id);
+                  const isDupe = showBudgetDupes && pin.dupe;
+                  const displayTitle = isDupe ? pin.dupe!.title : pin.title;
+                  const displayBrand = isDupe ? pin.dupe!.brand : pin.brand;
+                  const displayPrice = isDupe ? pin.dupe!.price : pin.price;
+                  const displayRetailer = isDupe ? pin.dupe!.retailer : pin.retailer;
+                  const displayUrl = isDupe ? pin.dupe!.buyUrl : pin.buyUrl;
+
+                  return (
+                    <div key={pin.id} className="py-3 flex items-start gap-3">
+                      <input
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={() =>
+                          setSelectedItems((prev) =>
+                            prev.includes(pin.id) ? prev.filter((i) => i !== pin.id) : [...prev, pin.id]
+                          )
+                        }
+                        className="mt-1 w-4 h-4 rounded text-neutral-900 border-neutral-300 cursor-pointer"
+                      />
+                      <div className="flex-1 min-w-0 cursor-pointer" onClick={() => setSelectedPinId(pin.id)}>
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span className="text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-neutral-100 text-neutral-600">
+                            {pin.category}
+                          </span>
+                          {pin.isSpaBrand && (
+                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">
+                              SPA
+                            </span>
+                          )}
+                          <span className="text-xs font-bold text-neutral-900">{displayBrand}</span>
+                          {isDupe && (
+                            <span className="text-[10px] font-bold text-amber-800 bg-amber-100 px-1.5 py-0.5 rounded">
+                              Dupe (-{pin.dupe?.savingsPct}%)
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-neutral-600 mt-0.5 line-clamp-1">{displayTitle}</p>
+                        <p className="text-[11px] text-neutral-400">Available on {displayRetailer}</p>
+                      </div>
+
+                      <div className="flex flex-col items-end gap-1 flex-shrink-0">
+                        <span className="text-sm font-extrabold text-neutral-950">${displayPrice}</span>
+                        <a
+                          href={displayUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-[11px] font-bold text-neutral-900 hover:underline"
+                        >
+                          <span>Buy</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Total & Copy Checklist */}
+              <div className="mt-2 pt-4 border-t border-neutral-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-neutral-50 -mx-6 -mb-6 p-6 rounded-b-2xl">
+                <div>
+                  <span className="text-xs text-neutral-500 font-semibold">
+                    Estimated Total ({selectedItems.length} selected):
+                  </span>
+                  <div className="flex items-baseline gap-2 mt-0.5">
+                    <span className="text-2xl font-black text-neutral-950">
+                      ${totalEffectivePrice.toLocaleString()}
+                    </span>
+                    {showBudgetDupes && savingsPct > 0 && (
+                      <span className="text-sm text-neutral-400 line-through">
+                        ${totalOriginalPrice.toLocaleString()}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <button
+                  onClick={handleCopyChecklist}
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-bold bg-white border border-neutral-300 text-neutral-800 rounded-xl hover:bg-neutral-100 transition shadow-sm"
+                >
+                  {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
+                  <span>{copied ? 'Copied Shopping List!' : 'Copy US Shopping List'}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Stylist Note */}
+            <div className="bg-amber-50/60 rounded-2xl p-5 border border-amber-200/80">
+              <div className="flex items-center gap-2 mb-1.5">
+                <Lightbulb className="w-4 h-4 text-amber-800" />
+                <h5 className="text-xs font-extrabold uppercase tracking-wider text-amber-900">
+                  Stylist's Fit & Silhouette Notes
+                </h5>
+              </div>
+              <p className="text-xs text-amber-950/80 leading-relaxed">{activeLook.curatorNote}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. 10 EDITORIAL LOOKBOOKS */}
+      <section id="explore-all" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-neutral-200">
+        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-10">
+          <div>
+            <span className="text-xs font-bold text-neutral-400 uppercase tracking-widest">
+              Trending US Aesthetics
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 mt-1 tracking-tight">
+              2026 Volume 1 Lookbook: 10 Editorial Styles
+            </h2>
+          </div>
+          <p className="text-xs sm:text-sm text-neutral-500 max-w-sm">
+            Click any aesthetic to inspect its complete item pins and budget dupe alternatives.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {filteredLooks.map((look, idx) => (
+            <div
+              key={look.id}
+              onClick={() => {
+                setActiveLook(look);
+                const el = document.getElementById('styling-studio');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              role="button" tabIndex={0} className={`group cursor-pointer rounded-2xl overflow-hidden bg-white border transition-all duration-300 flex flex-col active:scale-[0.99] ${
+                activeLook.id === look.id
+                  ? 'border-neutral-900 ring-2 ring-neutral-900 shadow-xl scale-[1.01]'
+                  : 'border-neutral-200 hover:border-neutral-400 hover:shadow-md'
+              }`}
+            >
+              <div className="relative aspect-[4/5] w-full overflow-hidden bg-neutral-100">
+                <img
+                  src={look.imageUrl}
+                  alt={look.title}
+                  className="w-full h-full object-cover object-center transition duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
+                <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                  <span className="text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full bg-white text-neutral-950 shadow-md">
+                    LOOK {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-black/80 backdrop-blur-md text-white border border-white/20">
+                    {look.aesthetic}
+                  </span>
+                  <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-white border border-white/20">
+                    {look.aesthetic}
+                  </span>
+                  {look.hasSpaPicks && (
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500 text-white">
+                      Zara & H&M
+                    </span>
+                  )}
+                </div>
+                <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between text-white">
+                  <div>
+                    <span className="text-[11px] text-neutral-300 font-medium">{look.pins.length} items pinned</span>
+                    <div className="text-base font-extrabold tracking-tight">
+                      ${look.pins.reduce((sum, p) => sum + p.price, 0).toLocaleString()} Full Set
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-4 flex flex-col justify-between flex-1">
+                <div>
+                  <h4 className="text-sm font-bold text-neutral-900 group-hover:text-black transition line-clamp-1">
+                    {look.title}
+                  </h4>
+                  <p className="text-xs text-neutral-500 mt-1 line-clamp-2 leading-relaxed">
+                    {look.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 8. GLOBAL FOOTER */}
+      <footer className="bg-white border-t border-neutral-200 py-12 text-xs text-neutral-500">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
+            <div className="w-7 h-7 rounded-lg bg-black text-white flex items-center justify-center font-bold text-xs">
+              SH
+            </div>
+            <div>
+              <span className="font-bold text-neutral-900">StylingHelper USA</span>
+              <span className="text-neutral-400 ml-2">© 2026. All rights reserved.</span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-6 text-neutral-600 font-medium">
+            <a href="#styling-studio" className="hover:text-black transition">Live Studio</a>
+            <a href="#explore-all" className="hover:text-black transition">1,000+ Items</a>
+            <a href="#explore-all" className="hover:text-black transition">Lookbooks</a>
+            <span className="text-neutral-300">|</span>
+            <span className="text-neutral-400 text-[11px]">Affiliate Certified: Zara • H&M • Nordstrom • Amazon</span>
+          </div>
+        </div>
+      </footer>
+
+      {/* 9. IN-APP PRODUCT DETAIL MODAL (No unexpected external redirect) */}
+      {selectedProductModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn"
+          onClick={() => setSelectedProductModal(null)}
+        >
+          <div
+            className="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-neutral-200 animate-scaleUp flex flex-col md:flex-row max-h-[90vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Image */}
+            <div className="relative md:w-1/2 bg-neutral-950 aspect-[3/4] md:aspect-auto">
+              <img
+                src={selectedProductModal.imageUrl}
+                alt={selectedProductModal.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute top-4 left-4 flex flex-wrap gap-1.5">
+                <span className="text-[11px] font-black uppercase px-2.5 py-1 rounded-full bg-black/85 text-white backdrop-blur-md border border-white/20">
+                  {selectedProductModal.retailer}
+                </span>
+                {selectedProductModal.isSpaBrand && (
+                  <span className="text-[11px] font-bold px-2 py-1 rounded-full bg-emerald-500 text-white">
+                    Fast-Fashion SPA
+                  </span>
+                )}
+              </div>
+              <span className="absolute bottom-4 left-4 text-xs font-semibold px-2.5 py-1 rounded-lg bg-white/90 backdrop-blur-md text-neutral-900">
+                SKU: {selectedProductModal.sku}
+              </span>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 md:w-1/2 flex flex-col justify-between overflow-y-auto">
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="text-xs font-bold uppercase tracking-wider text-neutral-400">
+                    {selectedProductModal.category} • {selectedProductModal.subCategory}
+                  </span>
+                  <button
+                    onClick={() => setSelectedProductModal(null)}
+                    className="w-8 h-8 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center text-neutral-700 transition cursor-pointer"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+
+                <span className="text-xs font-bold text-neutral-500 block">{selectedProductModal.brand}</span>
+                <h3 className="text-xl font-extrabold text-neutral-950 mt-1 leading-snug">
+                  {selectedProductModal.title}
+                </h3>
+
+                <div className="flex items-baseline gap-2.5 mt-3 pb-4 border-b border-neutral-100">
+                  <span className="text-2xl font-black text-neutral-950">
+                    ${selectedProductModal.price} <span className="text-xs font-bold text-neutral-500">USD</span>
+                  </span>
+                  {selectedProductModal.originalPrice && (
+                    <span className="text-sm text-neutral-400 line-through">
+                      ${selectedProductModal.originalPrice}
+                    </span>
+                  )}
+                  <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full ml-auto">
+                    ● In Stock
+                  </span>
+                </div>
+
+                <div className="mt-4 space-y-3 text-xs text-neutral-600">
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-neutral-500">Selected Color:</span>
+                    <span className="font-bold text-neutral-900">{selectedProductModal.color}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-neutral-500">Retail Partner:</span>
+                    <span className="font-bold text-neutral-900">{selectedProductModal.retailer} Official</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-neutral-500">Shipping:</span>
+                    <span className="font-bold text-emerald-700">Verified US Direct Dispatch</span>
+                  </div>
+
+                  {/* Stylist Fit Tip */}
+                  <div className="mt-4 p-3.5 rounded-xl bg-amber-50/80 border border-amber-200/70 text-amber-950">
+                    <div className="flex items-center gap-1.5 font-bold mb-1 text-[11px] text-amber-900 uppercase tracking-wider">
+                      <Lightbulb className="w-3.5 h-3.5 text-amber-600" />
+                      <span>Stylist Recommendation</span>
+                    </div>
+                    <p className="text-[11px] leading-relaxed text-amber-900/80">
+                      Pair this {selectedProductModal.subCategory.toLowerCase()} with high-waisted relaxed trousers or clean denim. Add minimal loafers to complete the effortless silhouette.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="mt-6 pt-4 border-t border-neutral-100 flex flex-col gap-2">
+                <a
+                  href={selectedProductModal.buyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3 px-4 rounded-xl bg-neutral-950 text-white hover:bg-neutral-800 font-bold text-xs flex items-center justify-center gap-2 transition shadow-md group cursor-pointer"
+                >
+                  <span>Proceed to Official {selectedProductModal.retailer} Store</span>
+                  <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition" />
+                </a>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    alert(`Added "${selectedProductModal.title}" to your active styling session!`);
+                    setSelectedProductModal(null);
+                  }}
+                  className="w-full py-2.5 px-4 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-800 font-semibold text-xs transition cursor-pointer"
+                >
+                  Save to My Outfit Wishlist
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
