@@ -24,7 +24,9 @@ import {
   Mail,
   User,
   Check,
-  ShieldCheck
+  ShieldCheck,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 
 interface StayInfo {
@@ -362,6 +364,11 @@ interface MemberData {
 
 export default function StayHelperLuxuryShowcase() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scrollSlider = (offset: number) => {
+    scrollContainerRef.current?.scrollBy({ left: offset, behavior: "smooth" });
+  };
   const [selectedStayId, setSelectedStayId] = useState<string>("stay-01");
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(true);
@@ -569,36 +576,62 @@ export default function StayHelperLuxuryShowcase() {
         </div>
       </header>
 
-      {/* 3. FIRST-SCREEN CURATED CAPSULE SELECTOR (ABOVE-THE-FOLD GALLERY) */}
-      <section className="border-b border-[#E7DEC8]/80 bg-gradient-to-b from-[#F7F2E9]/70 to-[#FAF7F2]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-5">
-          <div className="flex items-center justify-between mb-3.5">
-            <div className="flex items-center gap-2.5">
+      {/* 3. FIRST-SCREEN CURATED CAPSULE SELECTOR (SLICK HORIZONTAL CAROUSEL) */}
+      <section className="border-b border-[#E7DEC8]/80 bg-gradient-to-b from-[#F7F2E9]/70 to-[#FAF7F2] py-3.5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+          <div className="flex items-center justify-between mb-2.5">
+            <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#8F703C]" />
               <h3 className="text-xs sm:text-sm font-luxury-serif tracking-[0.2em] font-semibold text-[#1C1917] uppercase">
                 Curated Luxury Lineup
               </h3>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#EFE7D8] text-[#8F703C] border border-[#DFCFA9]">
+                {ALL_STAYS.length} Sanctuaries
+              </span>
             </div>
-            <span className="text-[11px] font-luxury-sans text-[#78716C] tracking-wide hidden sm:inline-block">
-              Select any destination to switch 8K Master Reel and architectural story
-            </span>
+            
+            {/* Slider Navigation Chevrons */}
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] font-luxury-sans text-[#78716C] tracking-wide hidden md:inline-block mr-1">
+                Explore 8K reels
+              </span>
+              <button
+                type="button"
+                onClick={() => scrollSlider(-340)}
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-[#DFCFA9] bg-white hover:bg-stone-50 flex items-center justify-center text-stone-700 shadow-xs hover:border-[#8F703C] transition cursor-pointer"
+                aria-label="Scroll left"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollSlider(340)}
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-[#DFCFA9] bg-white hover:bg-stone-50 flex items-center justify-center text-stone-700 shadow-xs hover:border-[#8F703C] transition cursor-pointer"
+                aria-label="Scroll right"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
 
-          {/* 4 Architectural Collection Cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
+          {/* Single-Row Horizontal Carousel Track (Zero Vertical Clutter) */}
+          <div
+            ref={scrollContainerRef}
+            className="flex items-center gap-3 overflow-x-auto scroll-smooth py-1 px-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
             {ALL_STAYS.map((stay) => {
               const isSelected = stay.id === selectedStayId;
               return (
                 <button
                   key={stay.id}
                   onClick={() => handleSelectStay(stay.id)}
-                  className={`text-left p-3 rounded-2xl transition-all duration-300 relative flex items-center gap-3.5 group overflow-hidden ${
+                  className={`flex-shrink-0 w-[240px] sm:w-[260px] text-left p-2.5 rounded-2xl transition-all duration-300 relative flex items-center gap-3 group overflow-hidden cursor-pointer ${
                     isSelected
-                      ? "bg-white border-[#B89B72] ring-2 ring-[#B89B72]/30 shadow-lg shadow-[#B89B72]/10"
-                      : "bg-white/70 border border-[#E7DEC8] hover:border-[#C5A880] hover:bg-white"
+                      ? "bg-white border-[#B89B72] ring-2 ring-[#B89B72]/30 shadow-md shadow-[#B89B72]/10"
+                      : "bg-white/75 border border-[#E7DEC8] hover:border-[#C5A880] hover:bg-white"
                   }`}
                 >
-                  <div className="relative w-14 h-16 sm:w-16 sm:h-20 rounded-xl overflow-hidden flex-shrink-0 bg-stone-100 border border-stone-200 shadow-sm">
+                  <div className="relative w-12 h-14 sm:w-14 sm:h-16 rounded-xl overflow-hidden flex-shrink-0 bg-stone-100 border border-stone-200 shadow-xs">
                     <Image
                       src={stay.image}
                       alt={stay.name}
@@ -610,24 +643,24 @@ export default function StayHelperLuxuryShowcase() {
                       {stay.numeral}
                     </span>
                     {stay.status === "STREAMING" && (
-                      <span className="absolute bottom-1 right-1 px-1.5 py-0.2 rounded bg-black/80 text-[8px] font-mono text-[#E8D5B5] border border-[#C5A880]/40">
+                      <span className="absolute bottom-1 right-1 px-1 py-0.2 rounded bg-black/80 text-[7px] font-mono text-[#E8D5B5] border border-[#C5A880]/40">
                         8K
                       </span>
                     )}
                   </div>
 
                   <div className="min-w-0 flex-1">
-                    <span className="block text-[10px] tracking-wider text-[#8F703C] uppercase font-luxury-sans font-medium truncate">
+                    <span className="block text-[9px] tracking-wider text-[#8F703C] uppercase font-luxury-sans font-medium truncate">
                       {stay.country}
                     </span>
                     <h4
-                      className={`text-sm sm:text-[15px] font-luxury-serif font-semibold truncate leading-snug mt-0.5 transition-colors ${
+                      className={`text-xs sm:text-[13px] font-luxury-serif font-semibold truncate leading-tight mt-0.5 transition-colors ${
                         isSelected ? "text-[#1C1917]" : "text-[#44403C] group-hover:text-[#1C1917]"
                       }`}
                     >
                       {stay.name}
                     </h4>
-                    <div className="flex items-center gap-1.5 mt-1.5">
+                    <div className="flex items-center gap-1.5 mt-1">
                       <span className="text-xs font-luxury-sans font-semibold text-[#1C1917]">
                         {stay.pricePerNight}
                       </span>
@@ -636,7 +669,7 @@ export default function StayHelperLuxuryShowcase() {
                   </div>
 
                   {isSelected && (
-                    <span className="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-[#B89B72]" />
+                    <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#B89B72]" />
                   )}
                 </button>
               );
