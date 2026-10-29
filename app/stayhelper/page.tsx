@@ -26,7 +26,9 @@ import {
   Check,
   ShieldCheck,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  ChevronDown,
+  ChevronUp
 } from "lucide-react";
 
 interface StayInfo {
@@ -364,11 +366,19 @@ interface MemberData {
 
 export default function StayHelperLuxuryShowcase() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const selectorRef = useRef<HTMLDivElement>(null);
+  const [isSelectorOpen, setIsSelectorOpen] = useState<boolean>(false);
 
-  const scrollSlider = (offset: number) => {
-    scrollContainerRef.current?.scrollBy({ left: offset, behavior: "smooth" });
-  };
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (selectorRef.current && !selectorRef.current.contains(e.target as Node)) {
+        setIsSelectorOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
   const [selectedStayId, setSelectedStayId] = useState<string>("stay-01");
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(true);
@@ -396,6 +406,16 @@ export default function StayHelperLuxuryShowcase() {
   }, []);
 
   const currentStay = ALL_STAYS.find((s) => s.id === selectedStayId) || ALL_STAYS[0];
+
+    const currentIndex = ALL_STAYS.findIndex((s) => s.id === selectedStayId);
+  const handlePrevStay = () => {
+    const prevIdx = (currentIndex - 1 + ALL_STAYS.length) % ALL_STAYS.length;
+    handleSelectStay(ALL_STAYS[prevIdx].id);
+  };
+  const handleNextStay = () => {
+    const nextIdx = (currentIndex + 1) % ALL_STAYS.length;
+    handleSelectStay(ALL_STAYS[nextIdx].id);
+  };
 
   const handleSelectStay = (id: string) => {
     setSelectedStayId(id);
@@ -576,101 +596,143 @@ export default function StayHelperLuxuryShowcase() {
         </div>
       </header>
 
-      {/* 3. FIRST-SCREEN CURATED CAPSULE SELECTOR (SLICK HORIZONTAL CAROUSEL) */}
-      <section className="border-b border-[#E7DEC8]/80 bg-gradient-to-b from-[#F7F2E9]/70 to-[#FAF7F2] py-3.5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="flex items-center justify-between mb-2.5">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#8F703C]" />
-              <h3 className="text-xs sm:text-sm font-luxury-serif tracking-[0.2em] font-semibold text-[#1C1917] uppercase">
-                Curated Luxury Lineup
-              </h3>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#EFE7D8] text-[#8F703C] border border-[#DFCFA9]">
-                {ALL_STAYS.length} Sanctuaries
-              </span>
-            </div>
-            
-            {/* Slider Navigation Chevrons */}
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] font-luxury-sans text-[#78716C] tracking-wide hidden md:inline-block mr-1">
-                Explore master reels
-              </span>
-              <button
-                type="button"
-                onClick={() => scrollSlider(-340)}
-                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-[#DFCFA9] bg-white hover:bg-stone-50 flex items-center justify-center text-stone-700 shadow-xs hover:border-[#8F703C] transition cursor-pointer"
-                aria-label="Scroll left"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                type="button"
-                onClick={() => scrollSlider(340)}
-                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-[#DFCFA9] bg-white hover:bg-stone-50 flex items-center justify-center text-stone-700 shadow-xs hover:border-[#8F703C] transition cursor-pointer"
-                aria-label="Scroll right"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-
-          {/* Single-Row Horizontal Carousel Track (Zero Vertical Clutter) */}
-          <div
-            ref={scrollContainerRef}
-            className="flex items-center gap-3 overflow-x-auto scroll-smooth py-1 px-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      {/* 3. PLAN A: MUSEUM-GRADE LUXURY SELECTOR + PREV/NEXT ART NAVIGATOR */}
+      <section className="relative z-40 border-b border-[#E7DEC8]/80 bg-gradient-to-b from-[#F7F2E9]/80 to-[#FAF7F2] py-2.5 sm:py-3 px-4 sm:px-8">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4" ref={selectorRef}>
+          
+          {/* Previous Sanctuary Button */}
+          <button
+            type="button"
+            onClick={handlePrevStay}
+            className="flex-shrink-0 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full bg-white hover:bg-[#FAF7F2] text-stone-800 text-xs sm:text-sm font-luxury-sans font-medium border border-[#DFCFA9] shadow-xs hover:border-[#8F703C] transition-all flex items-center gap-1.5 active:scale-95 cursor-pointer"
+            title="Previous Sanctuary"
           >
-            {ALL_STAYS.map((stay) => {
-              const isSelected = stay.id === selectedStayId;
-              return (
-                <button
-                  key={stay.id}
-                  onClick={() => handleSelectStay(stay.id)}
-                  className={`flex-shrink-0 w-[240px] sm:w-[260px] text-left p-2.5 rounded-2xl transition-all duration-300 relative flex items-center gap-3 group overflow-hidden cursor-pointer ${
-                    isSelected
-                      ? "bg-white border-[#B89B72] ring-2 ring-[#B89B72]/30 shadow-md shadow-[#B89B72]/10"
-                      : "bg-white/75 border border-[#E7DEC8] hover:border-[#C5A880] hover:bg-white"
-                  }`}
-                >
-                  <div className="relative w-12 h-14 sm:w-14 sm:h-16 rounded-xl overflow-hidden flex-shrink-0 bg-stone-100 border border-stone-200 shadow-xs">
-                    <Image
-                      src={stay.image}
-                      alt={stay.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                    <span className="absolute top-1 left-1.5 text-[9px] font-luxury-serif font-bold text-[#F4E8D4]">
-                      {stay.numeral}
-                    </span>
-                    
-                  </div>
+            <ChevronLeft className="w-4 h-4 text-[#8F703C]" />
+            <span className="hidden md:inline">Previous</span>
+          </button>
 
-                  <div className="min-w-0 flex-1">
-                    <span className="block text-[9px] tracking-wider text-[#8F703C] uppercase font-luxury-sans font-medium truncate">
-                      {stay.country}
+          {/* Central Stately Selector (Click to Open All 10 Sanctuaries) */}
+          <div className="relative flex-1 max-w-2xl mx-auto">
+            <button
+              type="button"
+              onClick={() => setIsSelectorOpen(!isSelectorOpen)}
+              className="w-full py-2 sm:py-2.5 px-3.5 sm:px-5 rounded-2xl bg-white hover:bg-[#FDFCFB] border border-[#DFCFA9] hover:border-[#8F703C] shadow-xs hover:shadow-md transition-all flex items-center justify-between gap-3 text-left group cursor-pointer ring-1 ring-black/[0.03]"
+            >
+              <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
+                <span className="px-2 py-0.5 rounded-md bg-[#EFE7D8] text-[#8F703C] text-[10px] sm:text-xs font-mono font-bold tracking-wider shrink-0 border border-[#DFCFA9]">
+                  № {String(currentIndex + 1).padStart(2, "0")} / 10
+                </span>
+                <div className="min-w-0 truncate">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs sm:text-sm font-luxury-serif font-bold text-[#1C1917] truncate">
+                      {currentStay.name}
                     </span>
-                    <h4
-                      className={`text-xs sm:text-[13px] font-luxury-serif font-semibold truncate leading-tight mt-0.5 transition-colors ${
-                        isSelected ? "text-[#1C1917]" : "text-[#44403C] group-hover:text-[#1C1917]"
-                      }`}
-                    >
-                      {stay.name}
-                    </h4>
-                    <div className="flex items-center gap-1.5 mt-1">
-                      <span className="text-xs font-luxury-sans font-semibold text-[#1C1917]">
-                        {stay.pricePerNight}
-                      </span>
-                      <span className="text-[10px] text-stone-400 font-luxury-sans">/ night</span>
-                    </div>
+                    <span className="text-[10px] text-stone-400 font-luxury-sans hidden sm:inline">
+                      • {currentStay.country}
+                    </span>
                   </div>
+                  <div className="text-[10px] sm:text-[11px] text-[#8F703C] font-luxury-sans truncate hidden sm:block">
+                    {currentStay.pricePerNight} / night · {currentStay.location}
+                  </div>
+                </div>
+              </div>
 
-                  {isSelected && (
-                    <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#B89B72]" />
+              <div className="flex items-center gap-2 shrink-0">
+                <span className="text-[11px] font-luxury-sans text-stone-500 hidden lg:inline">
+                  Browse Collection
+                </span>
+                <div className="w-6 h-6 rounded-full bg-[#FAF7F2] border border-[#DFCFA9] flex items-center justify-center text-[#8F703C] group-hover:bg-[#EFE7D8] transition-colors">
+                  {isSelectorOpen ? (
+                    <ChevronUp className="w-3.5 h-3.5" />
+                  ) : (
+                    <ChevronDown className="w-3.5 h-3.5" />
                   )}
-                </button>
-              );
-            })}
+                </div>
+              </div>
+            </button>
+
+            {/* Dropdown Menu of All 10 Sanctuaries */}
+            {isSelectorOpen && (
+              <div className="absolute top-full left-0 right-0 mt-2 bg-[#FAF7F2] border border-[#DFCFA9] rounded-3xl shadow-2xl overflow-hidden z-50 p-2 sm:p-3 animate-fadeIn backdrop-blur-xl">
+                <div className="px-3 py-2 border-b border-[#E7DEC8] flex items-center justify-between mb-1.5">
+                  <span className="text-[11px] font-luxury-serif tracking-widest uppercase font-semibold text-[#8F703C]">
+                    The Private Luxury Collection · 10 Sanctuaries
+                  </span>
+                  <span className="text-[10px] font-mono text-stone-400">
+                    Click to load Master Reel
+                  </span>
+                </div>
+                <div className="max-h-[380px] overflow-y-auto space-y-1.5 pr-1">
+                  {ALL_STAYS.map((stay, idx) => {
+                    const isSelected = stay.id === selectedStayId;
+                    return (
+                      <button
+                        key={stay.id}
+                        type="button"
+                        onClick={() => {
+                          handleSelectStay(stay.id);
+                          setIsSelectorOpen(false);
+                        }}
+                        className={`w-full text-left p-2 sm:p-2.5 rounded-2xl transition-all flex items-center justify-between gap-3 group cursor-pointer ${
+                          isSelected
+                            ? "bg-white border border-[#B89B72] shadow-sm ring-1 ring-[#B89B72]/30"
+                            : "hover:bg-white/80 border border-transparent hover:border-[#E7DEC8]"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="relative w-11 h-12 rounded-xl overflow-hidden shrink-0 border border-stone-200">
+                            <Image
+                              src={stay.image}
+                              alt={stay.name}
+                              fill
+                              className="object-cover"
+                            />
+                            <div className="absolute inset-0 bg-black/20" />
+                            <span className="absolute top-0.5 left-1 text-[8px] font-luxury-serif font-bold text-white">
+                              {stay.numeral}
+                            </span>
+                          </div>
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs sm:text-sm font-luxury-serif font-semibold text-stone-900 truncate">
+                                {stay.name}
+                              </span>
+                              {isSelected && (
+                                <span className="px-1.5 py-0.2 rounded-full bg-emerald-50 text-emerald-700 text-[9px] font-mono font-bold border border-emerald-200">
+                                  PLAYING
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-[11px] text-[#8F703C] font-luxury-sans truncate">
+                              {stay.country} · {stay.pricePerNight} / night
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="shrink-0 text-right pr-2">
+                          <span className="text-xs font-luxury-sans font-bold text-stone-800">
+                            {stay.priceAmount}
+                          </span>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
+
+          {/* Next Sanctuary Button */}
+          <button
+            type="button"
+            onClick={handleNextStay}
+            className="flex-shrink-0 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full bg-white hover:bg-[#FAF7F2] text-stone-800 text-xs sm:text-sm font-luxury-sans font-medium border border-[#DFCFA9] shadow-xs hover:border-[#8F703C] transition-all flex items-center gap-1.5 active:scale-95 cursor-pointer"
+            title="Next Sanctuary"
+          >
+            <span className="hidden md:inline">Next</span>
+            <ChevronRight className="w-4 h-4 text-[#8F703C]" />
+          </button>
+
         </div>
       </section>
 
