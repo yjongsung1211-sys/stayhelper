@@ -171,6 +171,186 @@ const ALL_STAYS: StayInfo[] = [
       { title: "Ethical Elephant Encounters", desc: "Dawn walks and natural habitat immersion with dedicated handlers" },
       { title: "Jungle-To-River Expeditions", desc: "Private longtail river cruises and candlelit forest dining" }
     ]
+  },
+  {
+    id: "stay-05",
+    numeral: "V",
+    name: "Soneva Jani Water Reserve",
+    subtitle: "Overwater Lagoon Villas with Spiral Water Slides & Retractable Starlight Pavilions",
+    location: "Medhufaru Island, Noonu Atoll",
+    country: "Maldives",
+    badge: "COLLECTION № 05 · MALDIVES ATOLL",
+    rating: "4.99",
+    reviews: "1,150+",
+    pricePerNight: "From $3,200",
+    priceAmount: "$3,200",
+    seasonalRange: "Low $2,800+ · Festive $5,400+",
+    rateInclusions: "Includes scenic seaplane flight transfers & barefoot private island dining",
+    forbesTier: "World's 50 Best Luxury Hotels",
+    image: "/images/stayhelper/soneva_jani_01_water_retreat.jpg",
+    videoSrc: "/videos/StayHelperSonevaJani_v1_CinematicMaster.mp4",
+    posterSrc: "/images/stayhelper/soneva_jani_01_water_retreat.jpg",
+    bookingUrl: "https://www.trip.com/hotels/noonu-atoll-hotel-detail-7009366/soneva-jani/",
+    status: "STREAMING",
+    story: [
+      "Perched within a massive 5-kilometer turquoise lagoon in the tranquil Noonu Atoll, Soneva Jani defines the pinnacle of barefoot sustainable luxury. Curved wooden boardwalks stretch over transparent, shallow azure waters teeming with marine life.",
+      "Each iconic multi-story Water Reserve features its own spiraling slide directly into the Indian Ocean lagoon, expansive catamaran netting daybeds, and a master bedroom with an automated retractable roof that glides open to unveil the starlit equatorial sky."
+    ],
+    features: [
+      { title: "Lagoon Overwater Slides", desc: "Curved private water slides plunging directly into the azure Indian Ocean" },
+      { title: "Retractable Starlight Ceiling", desc: "Master bedroom roof opens at the touch of a button for stargazing in bed" },
+      { title: "The Gathering Sanctuary", desc: "Three-story open-air timber dining and astronomical observatory over water" }
+    ]
+  },
+  {
+    id: "stay-06",
+    numeral: "VI",
+    name: "The Chedi Andermatt",
+    subtitle: "Monumental Alpine Grandeur & Steaming Thermal Pools in the Heart of the Swiss Alps",
+    location: "Andermatt, Canton of Uri",
+    country: "Swiss Alps, Switzerland",
+    badge: "COLLECTION № 06 · SWISS ALPS",
+    rating: "4.98",
+    reviews: "790+",
+    pricePerNight: "From $1,450",
+    priceAmount: "$1,450",
+    seasonalRange: "Summer $1,100+ · Ski Peak $2,600+",
+    rateInclusions: "Includes alpine artisan breakfast buffet & comprehensive thermal spa access",
+    forbesTier: "Forbes Travel Guide 5-Star Hotel",
+    image: "/images/stayhelper/chedi_andermatt_01_alpine_pool.jpg",
+    videoSrc: "/videos/StayHelperChediAndermatt_v1_CinematicMaster.mp4",
+    posterSrc: "/images/stayhelper/chedi_andermatt_01_alpine_pool.jpg",
+    bookingUrl: "https://www.trip.com/hotels/andermatt-hotel-detail-1628174/the-chedi-andermatt/",
+    status: "STREAMING",
+    story: [
+      "Nestled amidst the snow-blanketed peaks of the Urseren Valley, The Chedi Andermatt marries classic Swiss alpine warmth with sleek Asian Zen minimalism, masterfully envisioned by legendary architect Jean-Michel Gathy.",
+      "Dramatic dark timber beams, open stone fireplaces, and floor-to-ceiling glass pavilions frame breathtaking alpine winterscapes. The resort’s centerpiece 2,400-square-meter spa features a 35-meter indoor pool and steaming outdoor thermal baths where guests soak under falling mountain snow."
+    ],
+    features: [
+      { title: "Heated Alpine Thermal Pool", desc: "35-meter indoor pool and outdoor thermal pool surrounded by snowy peaks" },
+      { title: "Jean-Michel Gathy Alpine Design", desc: "Striking dark woods, soft leather, and monumental granite fireplaces" },
+      { title: "Michelin Japanese Gastronomy", desc: "The Japanese Restaurant with an authentic 9-seat Omakase and sake bar" }
+    ]
+  },
+  {
+    id: "stay-07",
+    numeral: "VII",
+    name: "Monastero Santa Rosa Hotel & Spa",
+    subtitle: "17th-Century Dominican Monastery & Cliff-Edge Infinity Sanctuary Over the Amalfi Gulf",
+    location: "Conca dei Marini, Amalfi Coast",
+    country: "Amalfi Coast, Italy",
+    badge: "COLLECTION № 07 · AMALFI COAST",
+    rating: "4.99",
+    reviews: "620+",
+    pricePerNight: "From $1,850",
+    priceAmount: "$1,850",
+    seasonalRange: "Spring $1,400+ · Summer Peak $2,700+",
+    rateInclusions: "Includes cliffside terrace breakfast & full thermal Roman bath suite",
+    forbesTier: "Condé Nast Traveler Readers' Choice #1 Hotel",
+    image: "/images/stayhelper/monastero_santa_rosa_01_amalfi_infinity.jpg",
+    videoSrc: "/videos/StayHelperMonastero_v1_CinematicMaster.mp4",
+    posterSrc: "/images/stayhelper/monastero_santa_rosa_01_amalfi_infinity.jpg",
+    bookingUrl: "https://www.trip.com/hotels/conca-dei-marini-hotel-detail-2180876/monastero-santa-rosa-hotel-spa/",
+    status: "STREAMING",
+    story: [
+      "Clinging dramatically to a vertical limestone cliff soaring above the sapphire Tyrrhenian Sea, Monastero Santa Rosa is an exquisite restoration of a 17th-century Dominican convent along Italy's most storied coast.",
+      "Cascading multi-level terraced gardens fragrant with rosemary and lemon blossoms lead to an elliptical infinity pool that appears suspended directly between sky and ocean. Ancient vaulted monastery corridors now shelter luxurious guest rooms celebrating authentic Italian heritage."
+    ],
+    features: [
+      { title: "Amalfi Sheer Cliff Infinity Pool", desc: "Suspended high over the sapphire sea with panoramic bay vistas" },
+      { title: "Historic Monastery Heritage", desc: "Preserved vaulted ceilings, rustic stone arches, and aromatic herb gardens" },
+      { title: "Thermal Roman Bath Circuit", desc: "Hydrotherapy pool, tepidarium, crushed-ice fountain, and sauna" }
+    ]
+  },
+  {
+    id: "stay-08",
+    numeral: "VIII",
+    name: "Aman Kyoto Secret Garden",
+    subtitle: "A Hidden Moss Garden & Mineral Onsen Sanctuary in Kyoto’s Ancient Cedar Forest",
+    location: "Takagamine, Kita Ward, Kyoto",
+    country: "Kyoto, Japan",
+    badge: "COLLECTION № 08 · KYOTO FOREST",
+    rating: "4.99",
+    reviews: "540+",
+    pricePerNight: "From $2,600",
+    priceAmount: "$2,600",
+    seasonalRange: "Winter $2,200+ · Autumn Foliage $3,800+",
+    rateInclusions: "Includes bespoke seasonal Kaiseki breakfast & private onsen bath session",
+    forbesTier: "Architectural Digest World Architectural Triumph",
+    image: "/images/stayhelper/aman_kyoto_01_secret_garden.jpg",
+    videoSrc: "/videos/StayHelperAmanKyoto_v1_CinematicMaster.mp4",
+    posterSrc: "/images/stayhelper/aman_kyoto_01_secret_garden.jpg",
+    bookingUrl: "https://www.trip.com/hotels/kyoto-hotel-detail-43750875/aman-kyoto/",
+    status: "STREAMING",
+    story: [
+      "Concealed within 79 acres of secluded cedar and maple forest at the foot of Kyoto’s sacred Takagamine mountains, Aman Kyoto is an ethereal architectural homage to classical Japanese ryokan aesthetics and Kerry Hill's timeless minimalism.",
+      "Moss-carpeted stone pathways and ancient granite staircases weave past babbling mountain brooks into private cedarwood pavilions. Scented hinoki wood onsen baths fed by pure local mineral springs offer complete spiritual rejuvenation enveloped in tranquil forest mist."
+    ],
+    features: [
+      { title: "Living Moss Garden Estate", desc: "Ancient stone pathways winding through Japanese maples and cedar groves" },
+      { title: "Natural Thermal Spring Onsen", desc: "Healing outdoor and indoor onsen baths drawing from local mineral springs" },
+      { title: "Authentic Hinoki Wood Pavilions", desc: "Minimalist cedar suites framing floor-to-ceiling forest tranquility" }
+    ]
+  },
+  {
+    id: "stay-09",
+    numeral: "IX",
+    name: "Capella Ubud Rainforest Retreat",
+    subtitle: "Bill Bensley Ultra-Luxury Tented Sanctuaries Nestled in the Sacred Keliki Gorge",
+    location: "Keliki, Tegallalang, Ubud, Bali",
+    country: "Bali, Indonesia",
+    badge: "COLLECTION № 09 · UBUD CANYON",
+    rating: "4.98",
+    reviews: "820+",
+    pricePerNight: "From $1,150",
+    priceAmount: "$1,150",
+    seasonalRange: "Low $950+ · High $1,650+",
+    rateInclusions: "Includes camp breakfast, afternoon tea, camp captain & campfire s'mores",
+    forbesTier: "Travel + Leisure World's Best Resort Hotel",
+    image: "/images/stayhelper/capella_ubud_01_rainforest_tent.jpg",
+    videoSrc: "/videos/StayHelperCapellaUbud_v1_CinematicMaster.mp4",
+    posterSrc: "/images/stayhelper/capella_ubud_01_rainforest_tent.jpg",
+    bookingUrl: "https://www.trip.com/hotels/bali-hotel-detail-16982635/capella-ubud-bali/",
+    status: "STREAMING",
+    story: [
+      "Hidden deep in the lush, untamed rainforest canopy of Ubud’s sacred Keliki Valley, Capella Ubud is a visionary tribute to early 19th-century European explorers, masterfully crafted without cutting down a single indigenous tree.",
+      "Twenty-two bespoke one-bedroom tented retreats feature opulent antique furnishings, handcrafted hammered copper bathtubs, and private saltwater plunge pools perched above emerald ravines. Nightly campfires under starry Balinese skies evoke timeless jungle romance."
+    ],
+    features: [
+      { title: "Bespoke Bensley Tented Lodges", desc: "One-of-a-kind antique furnishings, custom copper tubs, and private decks" },
+      { title: "Private Saltwater Plunge Pools", desc: "Individual plunge pools cantilevered over lush tropical rainforest ravines" },
+      { title: "Api Jiwa Live Charcoal Dining", desc: "Intimate open-fire chef’s counter crafting seasonal Robatayaki-style menus" }
+    ]
+  },
+  {
+    id: "stay-10",
+    numeral: "X",
+    name: "Hôtel du Cap-Eden-Roc",
+    subtitle: "The Riviera’s Ultimate Legendary Palace with Basalt Cliff Seawater Pool",
+    location: "Cap d'Antibes, Côte d'Azur",
+    country: "French Riviera, France",
+    badge: "COLLECTION № 10 · FRENCH RIVIERA",
+    rating: "4.99",
+    reviews: "1,450+",
+    pricePerNight: "From $2,100",
+    priceAmount: "$2,100",
+    seasonalRange: "Low $1,650+ · Summer Grand Prix $3,900+",
+    rateInclusions: "Includes seafront buffet breakfast & private coastal cabana day pass",
+    forbesTier: "Palace Distinction & Condé Nast Gold List",
+    image: "/images/stayhelper/eden_roc_01_riviera_pool.jpg",
+    videoSrc: "/videos/StayHelperEdenRoc_v1_CinematicMaster.mp4",
+    posterSrc: "/images/stayhelper/eden_roc_01_riviera_pool.jpg",
+    bookingUrl: "https://www.trip.com/hotels/antibes-hotel-detail-2195021/hotel-du-cap-eden-roc/",
+    status: "STREAMING",
+    story: [
+      "Commanding the southern tip of Cap d’Antibes since 1870, Hôtel du Cap-Eden-Roc stands as the timeless crown jewel of the French Riviera, long cherished by European royalty, literary titans, and cinema royalty during the Cannes Film Festival.",
+      "Surrounded by thirty-three acres of majestic Aleppo pine groves and fragrant rose gardens, its world-famous seawater pool is carved directly into white coastal limestone rocks, offering private cabanas and peerless Mediterranean glamour."
+    ],
+    features: [
+      { title: "Iconic Cliff Seawater Pool", desc: "Carved into sheer coastal basalt rocks directly above the Mediterranean waves" },
+      { title: "Century-Old Private Pine Groves", desc: "33 acres of immaculate gardens hosting royalty, artists, and screen legends" },
+      { title: "Dior Spa Eden-Roc", desc: "Holistic Mediterranean wellness treatments in open-air coastal cabanas" }
+    ]
   }
 ];
 
@@ -405,7 +585,7 @@ export default function StayHelperLuxuryShowcase() {
           </div>
 
           {/* 4 Architectural Collection Cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
             {ALL_STAYS.map((stay) => {
               const isSelected = stay.id === selectedStayId;
               return (
