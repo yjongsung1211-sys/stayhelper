@@ -136,7 +136,7 @@ const ALL_STAYS: StayInfo[] = [
     forbesTier: "World's 50 Best Luxury Stays",
     image: "/images/stayhelper/bulgari_01_arrival.jpg",
     wideHero: "/images/stayhelper/bulgari_01_arrival.jpg",
-    videoSrc: "/videos/bulgari/firstmotion_bulgari_dubai_master.mp4?v=20261030_perfect_sync",
+    videoSrc: "/videos/bulgari/firstmotion_bulgari_dubai_master.mp4?v=20261031_sunset_resonance",
     posterSrc: "/images/stayhelper/bulgari_01_arrival.jpg",
     bookingUrl: "https://www.trip.com/hotels/dubai-hotel-detail-2189035/bulgari-resort-dubai/",
     status: "STREAMING",

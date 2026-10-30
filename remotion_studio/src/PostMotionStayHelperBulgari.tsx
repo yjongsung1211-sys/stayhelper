@@ -22,7 +22,7 @@ export const PostMotionStayHelperBulgari: React.FC = () => {
   const imgPool = staticFile('stays/bulgari_pure_03_pool_swimming_couple.jpg'); // Act 3: 에메랄드 풀 남녀 동반 수영
   const videoMarina = staticFile('stays/bulgari_kling_03_marina.mp4'); // Act 4: 마리나 슈퍼요트
   const videoToastKling = staticFile('stays/kling_916_04_toast.mp4'); // Act 5: 유료 Kling 1.5 Pro 순정 9:16 와인 건배 비디오
-  const videoSunsetKling = staticFile('stays/kling_916_05_sunset.mp4'); // Act 6: 유료 Kling 1.5 Pro 순정 9:16 선셋 난간 피날레 비디오
+  const videoSunsetKling = staticFile('stays/bulgari_sunset_master_slowmo.mp4'); // Act 6: 10초 무중단 1080x1920 슬로우모션 석양 피날레 (여운 극대화)
 
   // Audio Soundscape
   const ambientAudio = staticFile('stays/stay_luxury_ambient.mp3');
@@ -52,8 +52,32 @@ export const PostMotionStayHelperBulgari: React.FC = () => {
   const op5 = interpolate(frame, [555, 570, 630, 645], [0, 1, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
   const scale5 = interpolate(frame, [560, 645], [1.0, 1.04], { extrapolateRight: 'clamp' });
 
-  const op6 = interpolate(frame, [630, 645], [0, 1], { extrapolateLeft: 'clamp' });
-  const scale6 = interpolate(frame, [635, 900], [1.0, 1.06], { extrapolateRight: 'clamp' });
+  const op6 = interpolate(frame, [620, 645], [0, 1], { extrapolateLeft: 'clamp' });
+  const scale6 = interpolate(frame, [620, 900], [1.0, 1.05], { extrapolateRight: 'clamp' });
+  const translateY6 = interpolate(frame, [620, 900], [0, -12], { extrapolateRight: 'clamp' });
+
+  // ── SUNSET EMOTIONAL RESONANCE (여운) LAYERS ──
+  const sunsetPulse = Math.sin((frame - 620) * 0.04);
+  const sunsetBloomOpacity = interpolate(
+    frame,
+    [620, 680, 815, 870, 900],
+    [0, 0.24, 0.30 + sunsetPulse * 0.05, 0.18, 0],
+    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
+  );
+
+  // Deep Obsidian Outro Dissolve (마지막 1초의 깊고 은은한 여운 페이드아웃)
+  const outroFade = interpolate(frame, [872, 900], [0, 0.92], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+
+  // Dynamic Audio Swell & Decrescendo (나레이션 종료 후 앰비언트 볼륨 상승 및 여운 페이드아웃)
+  const ambientVolume = interpolate(
+    frame,
+    [0, 30, 620, 815, 845, 875, 900],
+    [0.15, 0.28, 0.28, 0.35, 0.38, 0.22, 0.03],
+    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
+  );
 
   // ── FIRSTMOTION™ SIGNATURE MOTION PHYSICS ──
   const wave1 = 8 + Math.sin(t * 7.5) * 6;
@@ -81,7 +105,8 @@ export const PostMotionStayHelperBulgari: React.FC = () => {
   const text3Spring = spring({ frame: frame - 270, fps, config: { damping: 22 } });
   const text4Spring = spring({ frame: frame - 420, fps, config: { damping: 22 } });
   const text5Spring = spring({ frame: frame - 565, fps, config: { damping: 22 } });
-  const text6Spring = spring({ frame: frame - 645, fps, config: { damping: 22 } });
+  const text6ActSpring = spring({ frame: frame - 635, fps, config: { damping: 22 } });
+  const text6CtaSpring = spring({ frame: frame - 745, fps, config: { damping: 20 } });
 
   // Highlighter Sweeps
   const hl1 = interpolate(frame, [15, 45], [0, 100], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
@@ -101,7 +126,7 @@ export const PostMotionStayHelperBulgari: React.FC = () => {
       }}
     >
       {/* ── AUDIO SOUNDSCAPE: Continuous 100% Unclipped Natural Voiceovers ── */}
-      <Audio src={ambientAudio} volume={0.30} />
+      <Audio src={ambientAudio} volume={ambientVolume} />
 
       <Sequence from={10}>
         <Audio src={vo1} volume={1.0} />
@@ -165,9 +190,9 @@ export const PostMotionStayHelperBulgari: React.FC = () => {
         </div>
       </Sequence>
 
-      {/* Act 6: 남녀 주인공 선셋 피날레 (유료 Kling 1.5 Pro 순정 9:16 비디오) */}
-      <Sequence from={630} durationInFrames={270}>
-        <div style={{ position: 'absolute', inset: 0, opacity: op6, transform: `scale(${scale6})` }}>
+      {/* Act 6: 남녀 주인공 선셋 피날레 (10초 무중단 1080x1920 슬로우모션 석양 + 여운 극대화) */}
+      <Sequence from={620} durationInFrames={280}>
+        <div style={{ position: 'absolute', inset: 0, opacity: op6, transform: `scale(${scale6}) translateY(${translateY6}px)` }}>
           <OffthreadVideo
             src={videoSunsetKling}
             style={{
@@ -178,6 +203,21 @@ export const PostMotionStayHelperBulgari: React.FC = () => {
           />
         </div>
       </Sequence>
+
+      {/* ── SUNSET GOLDEN BREATHING BLOOM (여운 극대화 앰비언트 빛의 호흡) ── */}
+      {frame >= 620 && (
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            opacity: sunsetBloomOpacity,
+            background: 'radial-gradient(ellipse at 50% 55%, rgba(255, 185, 70, 0.65) 0%, rgba(255, 125, 40, 0.25) 50%, rgba(0,0,0,0) 80%)',
+            mixBlendMode: 'screen',
+            pointerEvents: 'none',
+            zIndex: 25,
+          }}
+        />
+      )}
 
       {/* ── CINEMATIC AMBIENT VIGNETTE ── */}
       <div
@@ -322,7 +362,7 @@ export const PostMotionStayHelperBulgari: React.FC = () => {
           </div>
         )}
 
-        {frame >= 560 && frame < 645 && (
+        {frame >= 560 && frame < 635 && (
           <div style={{ opacity: text5Spring, transform: `translateY(${(1 - text5Spring) * 30}px)` }}>
             <div style={{ fontSize: 20, letterSpacing: 4, color: '#f6d365', fontWeight: 700, marginBottom: 8 }}>
               ACT 05 / THE CELEBRATION
@@ -340,24 +380,45 @@ export const PostMotionStayHelperBulgari: React.FC = () => {
           </div>
         )}
 
-        {frame >= 645 && (
-          <div style={{ opacity: text6Spring, transform: `translateY(${(1 - text6Spring) * 20}px)`, textAlign: 'center' }}>
-            <div style={{ fontSize: 20, letterSpacing: 6, color: '#f6d365', fontWeight: 700, marginBottom: 8 }}>
+        {frame >= 635 && frame < 750 && (
+          <div style={{ opacity: text6ActSpring, transform: `translateY(${(1 - text6ActSpring) * 25}px)` }}>
+            <div style={{ fontSize: 20, letterSpacing: 5, color: '#f6d365', fontWeight: 700, marginBottom: 8 }}>
+              ACT 06 / ETERNAL TWILIGHT
+            </div>
+            <div style={{ fontSize: 50, fontWeight: 900, lineHeight: 1.15, color: '#ffffff', marginBottom: 12 }}>
+              Dubai's Radiant Skyline &{' '}
+              <span style={{ position: 'relative', display: 'inline-block' }}>
+                Golden Dusk
+                <span style={{ position: 'absolute', left: 0, bottom: 2, height: '28%', width: `${hl6}%`, backgroundColor: 'rgba(246, 211, 101, 0.45)', zIndex: -1 }} />
+              </span>
+            </div>
+            <div style={{ fontSize: 24, color: 'rgba(255,255,255,0.85)', lineHeight: 1.4, marginBottom: 16 }}>
+              Where the tranquil Arabian Gulf mirrors the timeless romance of Jumeira Bay
+            </div>
+            <div style={{ display: 'inline-block', padding: '12px 26px', borderRadius: 40, background: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)', color: '#07090e', fontSize: 24, fontWeight: 800 }}>
+              💡 HORIZON: PRIVATE SEA-FACING BALCONY AT TWILIGHT
+            </div>
+          </div>
+        )}
+
+        {frame >= 750 && (
+          <div style={{ opacity: text6CtaSpring, transform: `translateY(${(1 - text6CtaSpring) * 20}px)`, textAlign: 'center' }}>
+            <div style={{ fontSize: 18, letterSpacing: 6, color: '#f6d365', fontWeight: 700, marginBottom: 8 }}>
               EXCLUSIVE CURATION · STAYHELPER
             </div>
-            <div style={{ fontSize: 46, fontWeight: 900, color: '#ffffff', marginBottom: 10 }}>
+            <div style={{ fontSize: 46, fontWeight: 900, color: '#ffffff', marginBottom: 10, letterSpacing: 2 }}>
               BULGARI RESORT DUBAI
             </div>
-            <div style={{ fontSize: 24, color: 'rgba(255,255,255,0.85)', marginBottom: 24 }}>
+            <div style={{ fontSize: 24, color: 'rgba(255,255,255,0.85)', marginBottom: 22 }}>
               Reserve your bespoke luxury escape on Jumeira Bay
             </div>
             <div
               style={{
                 display: 'inline-block',
-                padding: '22px 48px',
+                padding: '22px 50px',
                 borderRadius: 50,
                 background: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)',
-                boxShadow: '0 12px 40px rgba(246, 211, 101, 0.45)',
+                boxShadow: '0 14px 45px rgba(246, 211, 101, 0.45)',
                 color: '#07090e',
                 fontSize: 32,
                 fontWeight: 900,
@@ -369,6 +430,20 @@ export const PostMotionStayHelperBulgari: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* ── CINEMATIC OBSIDIAN TWILIGHT DISSOLVE (여운 피날레 페이드 아웃) ── */}
+      {frame >= 870 && (
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            backgroundColor: '#07090e',
+            opacity: outroFade,
+            pointerEvents: 'none',
+            zIndex: 55,
+          }}
+        />
+      )}
 
       {/* ── BOTTOM GLOBAL PROGRESS BAR ── */}
       <div
