@@ -136,7 +136,7 @@ const ALL_STAYS: StayInfo[] = [
     forbesTier: "World's 50 Best Luxury Stays",
     image: "/images/stayhelper/bulgari_01_arrival.jpg",
     wideHero: "/images/stayhelper/bulgari_01_arrival.jpg",
-    videoSrc: "/videos/StayHelperBulgari_v1_CinematicMaster.mp4",
+    videoSrc: "/videos/bulgari/firstmotion_bulgari_dubai_master.mp4?v=20261030_kling_vip_v2",
     posterSrc: "/images/stayhelper/bulgari_01_arrival.jpg",
     bookingUrl: "https://www.trip.com/hotels/dubai-hotel-detail-2189035/bulgari-resort-dubai/",
     status: "STREAMING",
@@ -379,7 +379,7 @@ export default function StayHelperLuxuryShowcase() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const dockScrollRef = useRef<HTMLDivElement>(null);
   
-  const [selectedStayId, setSelectedStayId] = useState<string>("stay-06"); // The Chedi Andermatt default
+  const [selectedStayId, setSelectedStayId] = useState<string>("stay-03"); // Bulgari Resort Dubai default
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(true);
   const [isEnded, setIsEnded] = useState<boolean>(false);
@@ -595,7 +595,7 @@ export default function StayHelperLuxuryShowcase() {
               <div className="relative w-[280px] sm:w-[320px] lg:w-[340px] aspect-[9/16] rounded-[22px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.85)] border border-white/20 bg-black/40 backdrop-blur-xs transition-transform duration-500 group-hover:scale-[1.01]">
                 <video
                   ref={videoRef}
-                  key={currentStay.id}
+                  key={`${currentStay.id}-${currentStay.videoSrc}`}
                   src={currentStay.videoSrc}
                   poster={currentStay.posterSrc}
                   playsInline
