@@ -32,6 +32,7 @@ import {
 } from "lucide-react";
 
 interface StayInfo {
+  wideHero?: string;
   id: string;
   numeral: string;
   name: string;
@@ -132,6 +133,7 @@ const ALL_STAYS: StayInfo[] = [
     rateInclusions: "Includes Mediterranean breakfast & private yacht marina access",
     forbesTier: "World's 50 Best Luxury Stays",
     image: "/images/stayhelper/bulgari_01_arrival.jpg",
+    wideHero: "/images/stayhelper/bulgari_01_arrival.jpg",
     videoSrc: "/videos/StayHelperBulgari_v1_CinematicMaster.mp4",
     posterSrc: "/images/stayhelper/bulgari_01_arrival.jpg",
     bookingUrl: "https://www.trip.com/hotels/dubai-hotel-detail-2189035/bulgari-resort-dubai/",
@@ -162,6 +164,7 @@ const ALL_STAYS: StayInfo[] = [
     rateInclusions: "All-inclusive: meals, drinks & ethical elephant experience",
     forbesTier: "Architectural Digest Top 10 World Retreats",
     image: "/images/stayhelper/tented_01_arrival.jpg",
+    wideHero: "/images/stayhelper/tented_01_arrival.jpg",
     videoSrc: "/videos/StayHelperFourSeasons_v1_CinematicMaster.mp4",
     posterSrc: "/images/stayhelper/tented_01_arrival.jpg",
     bookingUrl: "https://www.trip.com/hotels/chiang-saen-hotel-detail-489234/four-seasons-tented-camp-golden-triangle/",
@@ -221,7 +224,8 @@ const ALL_STAYS: StayInfo[] = [
     seasonalRange: "Summer $1,100+ · Ski Peak $2,600+",
     rateInclusions: "Includes alpine artisan breakfast buffet & comprehensive thermal spa access",
     forbesTier: "Forbes Travel Guide 5-Star Hotel",
-    image: "/images/stayhelper/chedi_andermatt_01_alpine_pool.jpg",
+    image: "/images/stayhelper/chedi_andermatt_wide_hero.jpg",
+    wideHero: "/images/stayhelper/chedi_andermatt_wide_hero.jpg",
     videoSrc: "/videos/StayHelperChediAndermatt_v1_CinematicMaster.mp4",
     posterSrc: "/images/stayhelper/chedi_andermatt_01_alpine_pool.jpg",
     bookingUrl: "https://www.trip.com/hotels/andermatt-hotel-detail-1628174/the-chedi-andermatt/",
@@ -368,7 +372,7 @@ export default function StayHelperLuxuryShowcase() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const dockScrollRef = useRef<HTMLDivElement>(null);
   
-  const [selectedStayId, setSelectedStayId] = useState<string>("stay-06"); // The Chedi Andermatt as default hero or stay-01
+  const [selectedStayId, setSelectedStayId] = useState<string>("stay-06"); // The Chedi Andermatt default
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(true);
   const [isEnded, setIsEnded] = useState<boolean>(false);
@@ -376,10 +380,6 @@ export default function StayHelperLuxuryShowcase() {
   // VIP Membership State
   const [member, setMember] = useState<MemberData | null>(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
-  const [inputName, setInputName] = useState<string>("");
-  const [inputEmail, setInputEmail] = useState<string>("");
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [authError, setAuthError] = useState<string>("");
   const [pendingRedirectUrl, setPendingRedirectUrl] = useState<string | null>(null);
 
   // Read member status from localStorage on mount
@@ -396,6 +396,7 @@ export default function StayHelperLuxuryShowcase() {
 
   const currentStay = ALL_STAYS.find((s) => s.id === selectedStayId) || ALL_STAYS[0];
   const currentIndex = ALL_STAYS.findIndex((s) => s.id === selectedStayId);
+  const heroBackground = currentStay.wideHero || currentStay.posterSrc;
 
   // Auto-scroll active item into view in the dock
   useEffect(() => {
@@ -459,7 +460,6 @@ export default function StayHelperLuxuryShowcase() {
     setIsEnded(false);
   };
 
-  // Handle Booking Button Click (Requires VIP Membership Sign-up)
   const handleBookingAction = (targetUrl: string) => {
     if (member) {
       window.open(targetUrl, "_blank", "noopener,noreferrer");
@@ -469,91 +469,53 @@ export default function StayHelperLuxuryShowcase() {
     }
   };
 
-  // Submit VIP Sign-Up Form
-  const handleMemberSignUp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!inputEmail || !inputEmail.includes("@")) {
-      setAuthError("Please enter a valid email address");
-      return;
-    }
-
-    setIsSubmitting(true);
-    setAuthError("");
-
-    try {
-      const res = await fetch("/api/stayhelper/member", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: inputName.trim() || "Private Member",
-          email: inputEmail.trim(),
-          interestedHotel: currentStay.name,
-          destination: currentStay.country
-        })
-      });
-
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || "Failed to register membership");
-      }
-
-      const newMember: MemberData = {
-        name: data.member?.name || inputName.trim() || "Private Member",
-        email: data.member?.email || inputEmail.trim()
-      };
-
-      localStorage.setItem("stayhelper_member", JSON.stringify(newMember));
-      setMember(newMember);
-      setIsAuthModalOpen(false);
-
-      const target = pendingRedirectUrl || currentStay.bookingUrl;
-      window.open(target, "_blank", "noopener,noreferrer");
-      setPendingRedirectUrl(null);
-    } catch (err: any) {
-      setAuthError(err.message || "An unexpected error occurred. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#F3EFE6] selection:bg-[#B89B72]/30 selection:text-white font-luxury-sans">
+    <div className="min-h-screen bg-[#070707] text-[#F3EFE6] selection:bg-[#B89B72]/30 selection:text-white font-luxury-sans">
       
-      {/* 1. HAUTE ARCHITECTURAL HEADER */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/85 via-black/40 to-transparent backdrop-blur-xs transition-all">
-        <div className="max-w-[1440px] mx-auto px-6 sm:px-12 h-20 sm:h-24 flex items-center justify-between">
-          
-          {/* Brand Identity */}
-          <Link href="/stayhelper" className="flex items-center space-x-3.5 group">
-            <div className="w-9 h-9 rounded-full border border-white/20 bg-white/5 backdrop-blur-md flex items-center justify-center text-[#E8D5B5] font-luxury-serif text-lg tracking-widest group-hover:border-white/50 transition-colors">
-              S
-            </div>
-            <div>
-              <span className="text-lg sm:text-xl font-luxury-serif tracking-[0.22em] text-white uppercase font-light">
-                STAYHELPER
-              </span>
-              <span className="hidden sm:block text-[9px] tracking-[0.3em] text-[#C5A880] uppercase font-mono mt-0.5">
-                Private Architectural Collection
-              </span>
-            </div>
+      {/* ============================================================== */}
+      {/* 1. CONCEPT 3: FULL-BLEED ARCHITECTURAL CINEMA HERO STAGE     */}
+      {/* ============================================================== */}
+      <section id="sanctuary-stage" className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden bg-black">
+        
+        {/* Full-Bleed High-Definition Widescreen Scenery (Z-0) */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            key={heroBackground}
+            src={heroBackground}
+            alt={currentStay.name}
+            className="w-full h-full object-cover object-center scale-[1.01] transition-opacity duration-700 ease-out"
+          />
+          {/* Subtle Atmospheric Darkening (Vibrant Scenery Preserved 100%) */}
+          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent hidden lg:block" />
+        </div>
+
+        {/* 1.1 MINIMALIST FLOATING HEADER (EXACT MOCKUP MATCH) */}
+        <header className="relative z-30 w-full px-6 sm:px-14 pt-6 sm:pt-8 flex items-center justify-between pointer-events-auto">
+          {/* Brand Logo */}
+          <Link href="/stayhelper" className="flex items-center space-x-3 group">
+            <span className="text-xl sm:text-2xl font-luxury-serif tracking-[0.26em] text-white uppercase font-light drop-shadow-md">
+              STAYHELPER
+            </span>
           </Link>
 
           {/* Minimalist Editorial Links */}
-          <nav className="hidden lg:flex items-center gap-8 text-[11px] font-luxury-sans tracking-[0.2em] text-white/70 uppercase">
+          <nav className="hidden md:flex items-center gap-6 text-[11px] font-mono tracking-[0.24em] text-white/80 uppercase drop-shadow">
             <a href="#sanctuary-stage" className="hover:text-white transition-colors">Portfolio</a>
-            <span className="text-white/20">—</span>
+            <span className="text-white/30">—</span>
             <a href="#architectural-dossier" className="hover:text-white transition-colors">Philosophy</a>
-            <span className="text-white/20">—</span>
+            <span className="text-white/30">—</span>
             <a href="#reserve-section" className="hover:text-white transition-colors">Inquire</a>
           </nav>
 
-          {/* Direct Private Reservation Actions */}
+          {/* Right Direct Action */}
           <div className="flex items-center gap-3">
             {member ? (
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-xs font-luxury-sans text-[#E8D5B5] backdrop-blur-md">
-                <Check className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="hidden sm:inline">Member:</span>
-                <strong className="text-white font-normal">{member.name}</strong>
+              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/40 border border-white/20 text-xs font-mono text-[#E8D5B5] backdrop-blur-md">
+                <Check className="w-3 h-3 text-emerald-400" />
+                <span className="hidden sm:inline">{member.name}</span>
               </div>
             ) : (
               <button
@@ -562,233 +524,176 @@ export default function StayHelperLuxuryShowcase() {
                   setPendingRedirectUrl(currentStay.bookingUrl);
                   setIsAuthModalOpen(true);
                 }}
-                className="px-4 py-2 rounded-full border border-white/20 hover:border-white/50 bg-white/5 hover:bg-white/10 text-xs font-luxury-sans text-stone-200 transition-all backdrop-blur-md"
+                className="hidden sm:inline-block px-4 py-1.5 rounded-full border border-white/25 hover:border-white/50 bg-black/40 hover:bg-black/60 text-xs font-mono text-stone-200 transition-all backdrop-blur-md cursor-pointer"
               >
-                <span>Join Private Club</span>
+                Join Private Club
               </button>
             )}
 
             <button
               type="button"
               onClick={() => handleBookingAction(currentStay.bookingUrl)}
-              className="px-5 py-2.5 rounded-full bg-white hover:bg-[#F3EFE6] text-black text-xs font-luxury-sans font-medium tracking-wider transition-all duration-300 shadow-xl shadow-black/40 flex items-center gap-2 active:scale-95"
+              className="px-5 py-2 rounded-full bg-white hover:bg-[#F3EFE6] text-black text-xs font-luxury-sans font-medium tracking-wider transition-all duration-300 shadow-xl shadow-black/60 flex items-center gap-1.5 active:scale-95 cursor-pointer"
             >
               <span>Let's Book Your Stay ↗</span>
             </button>
           </div>
-        </div>
-      </header>
+        </header>
 
-      {/* 2. FULL-BLEED ARCHITECTURAL CINEMA STAGE */}
-      <section id="sanctuary-stage" className="relative min-h-screen flex flex-col justify-between pt-28 sm:pt-32 pb-8 sm:pb-12 px-6 sm:px-12 overflow-hidden">
-        
-        {/* Full-Bleed Widescreen Background Photography */}
-        <div className="absolute inset-0 -z-20 transition-all duration-1000 ease-out">
-          <Image
-            src={currentStay.posterSrc}
-            alt={currentStay.name}
-            fill
-            priority
-            className="object-cover object-center scale-[1.03] transition-transform duration-1000"
-          />
-          {/* Cinematic Vignette & Ambient Darkness */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-black/40 to-black/75" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/40 to-transparent" />
-        </div>
-
-        {/* Ambient Subtle Radial Glow behind Reel */}
-        <div className="absolute right-1/4 top-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#B89B72]/15 blur-3xl rounded-full pointer-events-none -z-10" />
-
-        {/* Upper Main Grid: Architectural Identity (Left) & Floating Reel (Right) */}
-        <div className="max-w-[1440px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center flex-1 my-auto">
+        {/* 1.2 OPEN LANDSCAPE BODY: LOWER-LEFT LABEL & RIGHT FLOATING 9:16 REEL */}
+        <div className="relative z-20 max-w-[1440px] mx-auto w-full px-6 sm:px-14 flex-1 flex flex-col lg:flex-row items-end justify-between gap-8 py-8 sm:py-12 my-auto">
           
-          {/* Left Column: Stately Architectural Narrative */}
-          <div className="lg:col-span-7 space-y-6 max-w-2xl">
-            <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#E8D5B5] text-[11px] font-mono tracking-widest uppercase">
+          {/* Lower-Left: Discreet Architectural Label */}
+          <div className="space-y-3 max-w-xl text-left drop-shadow-lg">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-[#E8D5B5] text-[11px] font-mono tracking-widest uppercase">
               <span>№ {String(currentIndex + 1).padStart(2, "0")}</span>
               <span className="text-white/40">·</span>
               <span>{currentStay.numeral}</span>
               <span className="text-white/40">·</span>
-              <span className="text-white">{currentStay.country}</span>
+              <span className="text-white font-medium">{currentStay.country}</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl lg:text-[72px] font-luxury-serif font-light text-white tracking-tight leading-[1.04]">
+            <h1 className="text-4xl sm:text-6xl font-luxury-serif font-light text-white tracking-tight leading-[1.05] drop-shadow-xl">
               {currentStay.name}
             </h1>
 
-            <p className="text-sm sm:text-base font-luxury-sans text-stone-300 tracking-[0.15em] uppercase font-light">
-              {currentStay.location}
+            <p className="text-xs sm:text-sm font-luxury-sans text-stone-200 tracking-[0.2em] uppercase font-light drop-shadow">
+              {currentStay.location} · {currentStay.pricePerNight} / night
             </p>
 
-            <p className="text-base sm:text-lg italic font-luxury-serif text-[#E8D5B5]/90 leading-relaxed font-light line-clamp-3 sm:line-clamp-none">
+            <p className="text-sm sm:text-base italic font-luxury-serif text-[#E8D5B5]/90 leading-relaxed font-light line-clamp-2 sm:line-clamp-none drop-shadow">
               "{currentStay.subtitle}"
             </p>
+          </div>
 
-            <div className="pt-2 flex flex-wrap items-center gap-6 text-xs font-mono text-stone-300">
-              <div>
-                <span className="block text-[10px] text-stone-400 uppercase tracking-widest">Nightly Rate</span>
-                <span className="text-sm font-luxury-serif text-white font-medium">{currentStay.pricePerNight}</span>
-              </div>
-              <div className="h-6 w-px bg-white/20" />
-              <div>
-                <span className="block text-[10px] text-stone-400 uppercase tracking-widest">Setting</span>
-                <span className="text-sm text-stone-200">{currentStay.features[0]?.title}</span>
-              </div>
-              <div className="h-6 w-px bg-white/20 hidden sm:block" />
-              <div className="hidden sm:block">
-                <span className="block text-[10px] text-stone-400 uppercase tracking-widest">Concierge Tier</span>
-                <span className="text-sm text-[#E8D5B5]">{currentStay.forbesTier}</span>
-              </div>
-            </div>
-
-            {/* Quick Inquire & Reserve Trigger */}
-            <div className="pt-3 flex items-center gap-4">
-              <button
-                type="button"
+          {/* Right Side: Floating 9:16 Haute-Couture Master Reel (Exact Inset Placement) */}
+          <div className="shrink-0 flex justify-center lg:justify-end">
+            <div className="relative w-[280px] sm:w-[320px] lg:w-[340px] aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl shadow-black border-2 border-white/35 bg-black ring-1 ring-white/20 group">
+              <video
+                ref={videoRef}
+                key={currentStay.id}
+                src={currentStay.videoSrc}
+                poster={currentStay.posterSrc}
+                playsInline
+                autoPlay
+                muted={isMuted}
+                onEnded={() => {
+                  setIsPlaying(false);
+                  setIsEnded(true);
+                }}
+                className="w-full h-full object-cover cursor-pointer"
                 onClick={() => handleBookingAction(currentStay.bookingUrl)}
-                className="px-7 py-3 rounded-full bg-white hover:bg-[#F3EFE6] text-black text-xs font-luxury-sans font-medium tracking-wider transition-all duration-300 shadow-2xl flex items-center gap-2 group active:scale-95"
-              >
-                <span>Let's Book Your Stay ↗</span>
-              </button>
-              <a
-                href="#architectural-dossier"
-                className="text-xs font-luxury-sans tracking-widest uppercase text-stone-300 hover:text-white transition-colors underline underline-offset-8"
-              >
-                View Sanctuary Dossier ↓
-              </a>
-            </div>
-          </div>
+                title="Click to check live rates and reserve"
+              />
 
-          {/* Right Column: Floating 9:16 Haute-Couture Master Reel */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-[340px] sm:max-w-[380px] xl:max-w-[400px]">
-              
-              {/* Outer Golden Hairline Frame */}
-              <div className="relative aspect-[9/16] rounded-[28px] overflow-hidden shadow-2xl shadow-black border border-white/25 bg-black ring-1 ring-white/10 group">
-                <video
-                  ref={videoRef}
-                  key={currentStay.id}
-                  src={currentStay.videoSrc}
-                  poster={currentStay.posterSrc}
-                  playsInline
-                  autoPlay
-                  muted={isMuted}
-                  onEnded={() => {
-                    setIsPlaying(false);
-                    setIsEnded(true);
-                  }}
-                  className="w-full h-full object-cover cursor-pointer"
-                  onClick={() => handleBookingAction(currentStay.bookingUrl)}
-                  title="Click to check live rates and reserve"
-                />
-
-                {/* Video Top Header Pill */}
-                <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">
-                  <div className="flex items-center gap-2 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/15">
-                    <span className="w-2 h-2 rounded-full bg-[#E8D5B5] animate-pulse" />
-                    <span className="text-[10px] font-mono text-white tracking-widest uppercase">
-                      Cinematic Master Reel
-                    </span>
-                  </div>
-                  <div className="bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15 text-[11px] font-mono text-[#E8D5B5]">
-                    {currentStay.numeral}
-                  </div>
+              {/* Video Top Pill */}
+              <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-20 pointer-events-none">
+                <div className="flex items-center gap-2 bg-black/65 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+                  <span className="w-2 h-2 rounded-full bg-[#E8D5B5] animate-pulse" />
+                  <span className="text-[9px] font-mono text-white tracking-widest uppercase">
+                    Cinematic Master Reel
+                  </span>
                 </div>
+                <div className="bg-black/65 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/20 text-[10px] font-mono text-[#E8D5B5]">
+                  {currentStay.numeral}
+                </div>
+              </div>
 
-                {/* Replay & VIP Lockup Overlay */}
-                {isEnded && (
-                  <div
-                    onClick={() => handleBookingAction(currentStay.bookingUrl)}
-                    className="absolute inset-0 bg-black/65 backdrop-blur-[4px] z-30 flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all duration-300"
-                  >
-                    <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#E8D5B5] mb-2">
-                      Master Reel Complete
-                    </span>
-                    <h3 className="text-2xl font-luxury-serif font-light text-white mb-1">
-                      {currentStay.name}
-                    </h3>
-                    <p className="text-xs font-mono text-stone-300 mb-5">
-                      {currentStay.priceAmount} USD / night · Direct Partner Link
-                    </p>
-
-                    <div className="w-full max-w-[260px] py-3 px-5 rounded-full bg-white hover:bg-[#F3EFE6] text-black font-luxury-sans font-medium text-xs flex items-center justify-center gap-2 shadow-2xl transition-transform hover:scale-105 mb-3">
-                      <span>Let's Book Your Stay ↗</span>
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        restartVideo();
-                      }}
-                      className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-black/70 hover:bg-black text-stone-300 hover:text-white text-xs font-mono border border-white/20 transition-colors"
-                    >
-                      <RotateCcw className="w-3.5 h-3.5 text-[#E8D5B5]" />
-                      <span>Replay</span>
-                    </button>
-                  </div>
-                )}
-
-                {/* Bottom Video Controls */}
+              {/* Replay Overlay on Video End */}
+              {isEnded && (
                 <div
-                  onClick={(e) => e.stopPropagation()}
-                  className="absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between bg-black/70 backdrop-blur-md px-3.5 py-2 rounded-full border border-white/15 shadow-xl"
+                  onClick={() => handleBookingAction(currentStay.bookingUrl)}
+                  className="absolute inset-0 bg-black/70 backdrop-blur-[4px] z-30 flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all duration-300"
                 >
-                  <div className="flex items-center gap-3">
-                    <button
-                      type="button"
-                      onClick={togglePlay}
-                      className="text-white hover:text-[#E8D5B5] transition p-1"
-                      title={isPlaying ? "Pause" : "Play"}
-                    >
-                      {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-white" />}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={toggleMute}
-                      className="text-white hover:text-[#E8D5B5] transition p-1"
-                      title={isMuted ? "Unmute" : "Mute"}
-                    >
-                      {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-[#E8D5B5]" />}
-                    </button>
-                    <span className="text-[10px] font-mono text-stone-300">
-                      {isMuted ? "Muted" : "Audio On"}
-                    </span>
+                  <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#E8D5B5] mb-2">
+                    Master Reel Complete
+                  </span>
+                  <h3 className="text-xl font-luxury-serif font-light text-white mb-1">
+                    {currentStay.name}
+                  </h3>
+                  <p className="text-xs font-mono text-stone-300 mb-5">
+                    {currentStay.priceAmount} USD / night · Direct Partner Link
+                  </p>
+
+                  <div className="w-full max-w-[240px] py-2.5 px-4 rounded-full bg-white hover:bg-[#F3EFE6] text-black font-luxury-sans font-medium text-xs flex items-center justify-center gap-2 shadow-2xl transition-transform hover:scale-105 mb-3">
+                    <span>Let's Book Your Stay ↗</span>
                   </div>
-                  {isEnded && (
-                    <button
-                      type="button"
-                      onClick={restartVideo}
-                      className="text-stone-300 hover:text-white transition flex items-center gap-1 text-[10px] font-mono"
-                    >
-                      <RotateCcw className="w-3 h-3 text-[#E8D5B5]" />
-                      <span>Replay</span>
-                    </button>
-                  )}
+
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      restartVideo();
+                    }}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/70 hover:bg-black text-stone-300 hover:text-white text-xs font-mono border border-white/20 transition-colors"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5 text-[#E8D5B5]" />
+                    <span>Replay</span>
+                  </button>
                 </div>
+              )}
+
+              {/* Bottom Video Controls */}
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="absolute bottom-3.5 left-3.5 right-3.5 z-20 flex items-center justify-between bg-black/70 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 shadow-xl"
+              >
+                <div className="flex items-center gap-2.5">
+                  <button
+                    type="button"
+                    onClick={togglePlay}
+                    className="text-white hover:text-[#E8D5B5] transition p-1"
+                    title={isPlaying ? "Pause" : "Play"}
+                  >
+                    {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-white" />}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={toggleMute}
+                    className="text-white hover:text-[#E8D5B5] transition p-1"
+                    title={isMuted ? "Unmute" : "Mute"}
+                  >
+                    {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-[#E8D5B5]" />}
+                  </button>
+                  <span className="text-[9px] font-mono text-stone-300">
+                    {isMuted ? "Muted" : "Audio"}
+                  </span>
+                </div>
+                {isEnded && (
+                  <button
+                    type="button"
+                    onClick={restartVideo}
+                    className="text-stone-300 hover:text-white transition flex items-center gap-1 text-[9px] font-mono"
+                  >
+                    <RotateCcw className="w-3 h-3 text-[#E8D5B5]" />
+                    <span>Replay</span>
+                  </button>
+                )}
               </div>
             </div>
           </div>
+
         </div>
 
-        {/* 3. FLOATING ARCHITECTURAL SANCTUARY DOCK (THE 10-HOTEL TIMELINE) */}
-        <div className="relative z-40 max-w-5xl mx-auto w-full mt-10">
-          <div className="bg-black/60 backdrop-blur-2xl border border-white/20 rounded-full px-3 sm:px-6 py-2 sm:py-2.5 shadow-2xl flex items-center justify-between gap-2 sm:gap-4">
-            
-            {/* Prev Sanctuary Arrow */}
+        {/* 1.3 FLOATING FROSTED GLASS DOCK (THE 10-SANCTUARY TIMELINE) */}
+        <div className="relative z-30 w-full px-6 sm:px-14 pb-8 flex flex-col sm:flex-row items-center justify-between gap-4 pointer-events-auto">
+          
+          {/* Centered Frosted Glass Timeline Capsule */}
+          <div className="bg-black/60 backdrop-blur-2xl border border-white/20 rounded-xl px-3 sm:px-6 py-2 shadow-2xl flex items-center gap-2 sm:gap-4 max-w-4xl mx-auto sm:mx-0">
+            {/* Prev Arrow */}
             <button
               type="button"
               onClick={handlePrevStay}
-              className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all shrink-0 active:scale-95"
+              className="w-7 h-7 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all shrink-0 active:scale-95 cursor-pointer"
               title="Previous Sanctuary"
             >
-              <ChevronLeft className="w-4 h-4 text-[#E8D5B5]" />
+              <ChevronLeft className="w-3.5 h-3.5 text-[#E8D5B5]" />
             </button>
 
-            {/* Scrollable Timeline Track */}
+            {/* Timeline Track */}
             <div
               ref={dockScrollRef}
-              className="flex items-center gap-2 sm:gap-4 overflow-x-auto no-scrollbar scroll-smooth py-1 px-1 flex-1 text-center"
+              className="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar scroll-smooth py-0.5 px-1 flex-1 text-center"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {ALL_STAYS.map((stay, idx) => {
@@ -800,13 +705,13 @@ export default function StayHelperLuxuryShowcase() {
                     type="button"
                     data-dock-id={stay.id}
                     onClick={() => handleSelectStay(stay.id)}
-                    className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-mono transition-all flex items-center gap-1.5 cursor-pointer ${
+                    className={`shrink-0 px-2.5 py-1 rounded-md text-[11px] font-mono transition-all flex items-center gap-1 cursor-pointer ${
                       isActive
-                        ? "bg-white text-black font-semibold shadow-md scale-105"
-                        : "text-stone-400 hover:text-white hover:bg-white/5"
+                        ? "bg-white text-black font-semibold shadow-sm"
+                        : "text-stone-400 hover:text-white"
                     }`}
                   >
-                    <span className={isActive ? "text-stone-600" : "text-stone-500"}>
+                    <span className={isActive ? "text-stone-600 font-bold" : "text-stone-500"}>
                       {String(idx + 1).padStart(2, "0")}
                     </span>
                     <span>{shortName}</span>
@@ -815,21 +720,32 @@ export default function StayHelperLuxuryShowcase() {
               })}
             </div>
 
-            {/* Next Sanctuary Arrow */}
+            {/* Next Arrow */}
             <button
               type="button"
               onClick={handleNextStay}
-              className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all shrink-0 active:scale-95"
+              className="w-7 h-7 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all shrink-0 active:scale-95 cursor-pointer"
               title="Next Sanctuary"
             >
-              <ChevronRight className="w-4 h-4 text-[#E8D5B5]" />
+              <ChevronRight className="w-3.5 h-3.5 text-[#E8D5B5]" />
             </button>
           </div>
+
+          {/* Right: Request Sanctuary Dossier Link */}
+          <a
+            href="#architectural-dossier"
+            className="text-xs font-luxury-sans text-stone-200 hover:text-white transition-colors underline underline-offset-4 tracking-wider uppercase shrink-0"
+          >
+            Request Sanctuary Dossier ↗
+          </a>
+
         </div>
 
       </section>
 
-      {/* 4. CURATED ARCHITECTURAL DOSSIER (BELOW THE FOLD) */}
+      {/* ============================================================== */}
+      {/* 2. CURATED ARCHITECTURAL DOSSIER (BELOW THE FOLD)              */}
+      {/* ============================================================== */}
       <section id="architectural-dossier" className="relative z-30 bg-[#0E0D0C] border-t border-white/10 py-20 sm:py-28 px-6 sm:px-12">
         <div className="max-w-[1440px] mx-auto space-y-16">
           
@@ -905,7 +821,7 @@ export default function StayHelperLuxuryShowcase() {
               <button
                 type="button"
                 onClick={() => handleBookingAction(currentStay.bookingUrl)}
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white hover:bg-[#F3EFE6] text-black text-xs font-luxury-sans font-medium tracking-wider transition-all duration-300 shadow-2xl flex items-center justify-center gap-2 group active:scale-95"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white hover:bg-[#F3EFE6] text-black text-xs font-luxury-sans font-medium tracking-wider transition-all duration-300 shadow-2xl flex items-center justify-center gap-2 group active:scale-95 cursor-pointer"
               >
                 <span>Let's Book Your Stay ↗</span>
               </button>
@@ -916,7 +832,7 @@ export default function StayHelperLuxuryShowcase() {
                     setPendingRedirectUrl(currentStay.bookingUrl);
                     setIsAuthModalOpen(true);
                   }}
-                  className="w-full sm:w-auto px-6 py-3.5 rounded-full border border-white/20 hover:border-white/50 bg-white/5 hover:bg-white/10 text-xs font-luxury-sans text-stone-300 transition-all"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-full border border-white/20 hover:border-white/50 bg-white/5 hover:bg-white/10 text-xs font-luxury-sans text-stone-300 transition-all cursor-pointer"
                 >
                   <span>Join Private Club</span>
                 </button>
@@ -927,7 +843,7 @@ export default function StayHelperLuxuryShowcase() {
         </div>
       </section>
 
-      {/* 5. EDITORIAL COLOPHON FOOTER */}
+      {/* 3. EDITORIAL COLOPHON FOOTER */}
       <footer className="border-t border-white/10 bg-black py-12 px-6 sm:px-12 text-center">
         <div className="max-w-[1440px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-[11px] font-mono text-stone-500 uppercase tracking-widest">
           <div>
@@ -942,7 +858,7 @@ export default function StayHelperLuxuryShowcase() {
         </div>
       </footer>
 
-      {/* 6. US FAST 1-CLICK AUTH MODAL */}
+      {/* 4. US FAST 1-CLICK AUTH MODAL */}
       <USAuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
