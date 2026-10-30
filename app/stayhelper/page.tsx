@@ -72,9 +72,10 @@ const ALL_STAYS: StayInfo[] = [
     seasonalRange: "Low $3,450+ · Peak $5,800+",
     rateInclusions: "Includes full-board dining for 2 & Page airport transfers",
     forbesTier: "Forbes Travel Guide 5-Star",
-    image: "/images/stayhelper/amangiri_canyon.jpg",
+    image: "/images/stayhelper/amangiri_wide_hero.jpg",
+    wideHero: "/images/stayhelper/amangiri_wide_hero.jpg",
     videoSrc: "/videos/StayHelperAmangiri_v1_MasterReel.mp4",
-    posterSrc: "/images/stayhelper/amangiri_01_arrival.jpg",
+    posterSrc: "/images/stayhelper/amangiri_wide_hero.jpg",
     bookingUrl: "https://www.trip.com/hotels/kane-county-hotel-detail-690559/amangiri/",
     status: "STREAMING",
     story: [
@@ -726,23 +727,23 @@ export default function StayHelperLuxuryShowcase() {
             >
               {ALL_STAYS.map((stay, idx) => {
                 const isActive = stay.id === selectedStayId;
-                const shortName = stay.name.split(" ")[0].toUpperCase();
+                const fullName = stay.name.toUpperCase();
                 return (
                   <button
                     key={stay.id}
                     type="button"
                     data-dock-id={stay.id}
                     onClick={() => handleSelectStay(stay.id)}
-                    className={`shrink-0 px-2.5 py-1 rounded-md text-[11px] font-mono transition-all flex items-center gap-1 cursor-pointer ${
+                    className={`shrink-0 px-3 py-1.5 rounded-lg text-xs font-mono tracking-wider transition-all flex items-center gap-2 cursor-pointer whitespace-nowrap ${
                       isActive
-                        ? "bg-white text-black font-semibold shadow-sm"
-                        : "text-stone-400 hover:text-white"
+                        ? "bg-white text-black font-semibold shadow-md ring-1 ring-white/30"
+                        : "text-stone-400 hover:text-white hover:bg-white/5"
                     }`}
                   >
-                    <span className={isActive ? "text-stone-600 font-bold" : "text-stone-500"}>
+                    <span className={isActive ? "text-stone-700 font-bold" : "text-stone-500"}>
                       {String(idx + 1).padStart(2, "0")}
                     </span>
-                    <span>{shortName}</span>
+                    <span>{fullName}</span>
                   </button>
                 );
               })}
