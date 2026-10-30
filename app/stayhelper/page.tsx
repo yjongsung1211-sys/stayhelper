@@ -499,17 +499,17 @@ export default function StayHelperLuxuryShowcase() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent hidden lg:block" />
         </div>
 
-        {/* 1.1 MINIMALIST FLOATING HEADER (EXACT MOCKUP MATCH) */}
-        <header className="relative z-30 w-full px-6 sm:px-14 pt-6 sm:pt-8 flex items-center justify-between pointer-events-auto">
+        {/* 1.1 MINIMALIST FLOATING HEADER (RESPONSIVE NO-OVERLAP) */}
+        <header className="relative z-30 w-full px-4 sm:px-8 xl:px-14 pt-5 sm:pt-7 flex items-center justify-between gap-4 pointer-events-auto">
           {/* Brand Logo */}
-          <Link href="/stayhelper" className="flex items-center space-x-3 group">
-            <span className="text-xl sm:text-2xl font-luxury-serif tracking-[0.26em] text-white uppercase font-light drop-shadow-md">
+          <Link href="/stayhelper" className="flex items-center space-x-3 group shrink-0">
+            <span className="text-lg sm:text-xl xl:text-2xl font-luxury-serif tracking-[0.2em] sm:tracking-[0.26em] text-white uppercase font-light drop-shadow-md whitespace-nowrap">
               STAYHELPER
             </span>
           </Link>
 
-          {/* Minimalist Editorial Links */}
-          <nav className="hidden md:flex items-center gap-6 text-[11px] font-mono tracking-[0.24em] text-white/80 uppercase drop-shadow">
+          {/* Minimalist Editorial Links (Only on wide screens where ample space exists) */}
+          <nav className="hidden xl:flex items-center gap-5 2xl:gap-8 text-[11px] font-mono tracking-[0.24em] text-white/80 uppercase drop-shadow shrink-0">
             <a href="#sanctuary-stage" className="hover:text-white transition-colors">Portfolio</a>
             <span className="text-white/30">—</span>
             <a href="#architectural-dossier" className="hover:text-white transition-colors">Philosophy</a>
@@ -518,9 +518,9 @@ export default function StayHelperLuxuryShowcase() {
           </nav>
 
           {/* Right Direct Action */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {member ? (
-              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/40 border border-white/20 text-xs font-mono text-[#E8D5B5] backdrop-blur-md">
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 border border-white/20 text-xs font-mono text-[#E8D5B5] backdrop-blur-md shrink-0">
                 <Check className="w-3 h-3 text-emerald-400" />
                 <span className="hidden sm:inline">{member.name}</span>
               </div>
@@ -531,7 +531,7 @@ export default function StayHelperLuxuryShowcase() {
                   setPendingRedirectUrl(currentStay.bookingUrl);
                   setIsAuthModalOpen(true);
                 }}
-                className="hidden sm:inline-block px-4 py-1.5 rounded-full border border-white/25 hover:border-white/50 bg-black/40 hover:bg-black/60 text-xs font-mono text-stone-200 transition-all backdrop-blur-md cursor-pointer"
+                className="hidden lg:inline-block px-3.5 py-1.5 rounded-full border border-white/25 hover:border-white/50 bg-black/40 hover:bg-black/60 text-xs font-mono text-stone-200 transition-all backdrop-blur-md cursor-pointer shrink-0 whitespace-nowrap"
               >
                 Join Private Club
               </button>
@@ -540,7 +540,7 @@ export default function StayHelperLuxuryShowcase() {
             <button
               type="button"
               onClick={() => handleBookingAction(currentStay.bookingUrl)}
-              className="px-5 py-2 rounded-full bg-white hover:bg-[#F3EFE6] text-black text-xs font-luxury-sans font-medium tracking-wider transition-all duration-300 shadow-xl shadow-black/60 flex items-center gap-1.5 active:scale-95 cursor-pointer"
+              className="px-4 sm:px-5 py-2 rounded-full bg-white hover:bg-[#F3EFE6] text-black text-xs font-luxury-sans font-medium tracking-wider transition-all duration-300 shadow-xl shadow-black/60 flex items-center gap-1.5 active:scale-95 cursor-pointer shrink-0 whitespace-nowrap"
             >
               <span>Let's Book Your Stay ↗</span>
             </button>
