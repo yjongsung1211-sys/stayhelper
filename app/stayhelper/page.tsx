@@ -366,20 +366,9 @@ interface MemberData {
 
 export default function StayHelperLuxuryShowcase() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const selectorRef = useRef<HTMLDivElement>(null);
-  const [isSelectorOpen, setIsSelectorOpen] = useState<boolean>(false);
-
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handleOutsideClick = (e: MouseEvent) => {
-      if (selectorRef.current && !selectorRef.current.contains(e.target as Node)) {
-        setIsSelectorOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleOutsideClick);
-    return () => document.removeEventListener("mousedown", handleOutsideClick);
-  }, []);
-  const [selectedStayId, setSelectedStayId] = useState<string>("stay-01");
+  const dockScrollRef = useRef<HTMLDivElement>(null);
+  
+  const [selectedStayId, setSelectedStayId] = useState<string>("stay-06"); // The Chedi Andermatt as default hero or stay-01
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(true);
   const [isEnded, setIsEnded] = useState<boolean>(false);
@@ -406,12 +395,23 @@ export default function StayHelperLuxuryShowcase() {
   }, []);
 
   const currentStay = ALL_STAYS.find((s) => s.id === selectedStayId) || ALL_STAYS[0];
+  const currentIndex = ALL_STAYS.findIndex((s) => s.id === selectedStayId);
 
-    const currentIndex = ALL_STAYS.findIndex((s) => s.id === selectedStayId);
+  // Auto-scroll active item into view in the dock
+  useEffect(() => {
+    if (dockScrollRef.current) {
+      const activeEl = dockScrollRef.current.querySelector(`[data-dock-id="${selectedStayId}"]`) as HTMLElement;
+      if (activeEl) {
+        activeEl.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      }
+    }
+  }, [selectedStayId]);
+
   const handlePrevStay = () => {
     const prevIdx = (currentIndex - 1 + ALL_STAYS.length) % ALL_STAYS.length;
     handleSelectStay(ALL_STAYS[prevIdx].id);
   };
+
   const handleNextStay = () => {
     const nextIdx = (currentIndex + 1) % ALL_STAYS.length;
     handleSelectStay(ALL_STAYS[nextIdx].id);
@@ -462,10 +462,8 @@ export default function StayHelperLuxuryShowcase() {
   // Handle Booking Button Click (Requires VIP Membership Sign-up)
   const handleBookingAction = (targetUrl: string) => {
     if (member) {
-      // Already a member -> Direct forward to Trip.com
       window.open(targetUrl, "_blank", "noopener,noreferrer");
     } else {
-      // Unregistered user -> Open Luxury Sign-Up Modal to capture first-party data
       setPendingRedirectUrl(targetUrl);
       setIsAuthModalOpen(true);
     }
@@ -504,12 +502,10 @@ export default function StayHelperLuxuryShowcase() {
         email: data.member?.email || inputEmail.trim()
       };
 
-      // Save locally
       localStorage.setItem("stayhelper_member", JSON.stringify(newMember));
       setMember(newMember);
       setIsAuthModalOpen(false);
 
-      // Open the intended booking destination immediately
       const target = pendingRedirectUrl || currentStay.bookingUrl;
       window.open(target, "_blank", "noopener,noreferrer");
       setPendingRedirectUrl(null);
@@ -521,233 +517,154 @@ export default function StayHelperLuxuryShowcase() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-[#292524] selection:bg-[#E8DCC4] selection:text-[#1C1917] font-luxury-sans">
-      {/* LUXURY AMBIENT BACKGROUND ACCENTS */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-gradient-to-b from-[#F2E8D5]/60 via-[#FAF7F2]/40 to-transparent blur-3xl opacity-70" />
-        <div className="absolute top-[400px] right-0 w-[500px] h-[500px] bg-[#EFE3CD]/40 rounded-full blur-3xl opacity-50" />
-      </div>
-
-      {/* 1. REFINED LUXURY TOP BAR */}
-      <div className="bg-[#1C1917] text-[#FAF7F2] py-2 px-4 text-center border-b border-[#2E2824]">
-        <div className="max-w-7xl mx-auto flex items-center justify-between text-[11px] font-luxury-sans tracking-widest uppercase">
-          <span className="hidden sm:inline-block text-[#B89B72]">
-            StayHelper Private Collection · Curated Ultra-Luxury Escapes
-          </span>
-          <span className="mx-auto sm:mx-0 flex items-center gap-1.5 text-stone-300">
-            <Gem className="w-3 h-3 text-[#D4AF37]" />
-            Direct Premier Reservation Link · Zero Service Fees
-          </span>
-          <span className="hidden sm:inline-block text-stone-400 font-mono">
-            CINEMATIC REELS
-          </span>
-        </div>
-      </div>
-
-      {/* 2. MAIN EDITORIAL HEADER */}
-      <header className="sticky top-0 z-50 bg-[#FAF7F2]/90 backdrop-blur-md border-b border-[#E7DEC8]/80 transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 sm:h-24 flex items-center justify-between">
+    <div className="min-h-screen bg-[#0A0A0A] text-[#F3EFE6] selection:bg-[#B89B72]/30 selection:text-white font-luxury-sans">
+      
+      {/* 1. HAUTE ARCHITECTURAL HEADER */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/85 via-black/40 to-transparent backdrop-blur-xs transition-all">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-12 h-20 sm:h-24 flex items-center justify-between">
+          
+          {/* Brand Identity */}
           <Link href="/stayhelper" className="flex items-center space-x-3.5 group">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#2E2824] to-[#1C1917] flex items-center justify-center text-[#E8D5B5] font-luxury-serif font-semibold text-xl shadow-md border border-[#C5A880]/30 group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 rounded-full border border-white/20 bg-white/5 backdrop-blur-md flex items-center justify-center text-[#E8D5B5] font-luxury-serif text-lg tracking-widest group-hover:border-white/50 transition-colors">
               S
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="text-xl sm:text-2xl font-luxury-serif tracking-[0.18em] font-medium text-[#1C1917] uppercase">
-                  STAYHELPER
-                </span>
-                <span className="text-[9px] tracking-widest font-mono px-2 py-0.5 rounded-full bg-[#EFE7D8] text-[#8F703C] font-semibold border border-[#DFCFA9]">
-                  PRIVATE COLLECTION
-                </span>
-              </div>
-              <span className="block text-[10px] tracking-[0.25em] text-[#8F703C] uppercase font-luxury-sans font-medium mt-0.5">
-                The World’s Most Extraordinary Sanctuaries
+              <span className="text-lg sm:text-xl font-luxury-serif tracking-[0.22em] text-white uppercase font-light">
+                STAYHELPER
+              </span>
+              <span className="hidden sm:block text-[9px] tracking-[0.3em] text-[#C5A880] uppercase font-mono mt-0.5">
+                Private Architectural Collection
               </span>
             </div>
           </Link>
 
+          {/* Minimalist Editorial Links */}
+          <nav className="hidden lg:flex items-center gap-8 text-[11px] font-luxury-sans tracking-[0.2em] text-white/70 uppercase">
+            <a href="#sanctuary-stage" className="hover:text-white transition-colors">Portfolio</a>
+            <span className="text-white/20">—</span>
+            <a href="#architectural-dossier" className="hover:text-white transition-colors">Philosophy</a>
+            <span className="text-white/20">—</span>
+            <a href="#reserve-section" className="hover:text-white transition-colors">Inquire</a>
+          </nav>
+
+          {/* Direct Private Reservation Actions */}
           <div className="flex items-center gap-3">
             {member ? (
-              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFE7D8] border border-[#DFCFA9] text-xs font-luxury-sans text-[#8F703C] font-medium shadow-sm">
-                <Check className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Private Member: <strong className="text-[#1C1917]">{member.name}</strong></span>
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-xs font-luxury-sans text-[#E8D5B5] backdrop-blur-md">
+                <Check className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="hidden sm:inline">Member:</span>
+                <strong className="text-white font-normal">{member.name}</strong>
               </div>
             ) : (
               <button
+                type="button"
                 onClick={() => {
                   setPendingRedirectUrl(currentStay.bookingUrl);
                   setIsAuthModalOpen(true);
                 }}
-                className="px-4 py-2 rounded-full border border-[#DFCFA9] hover:border-[#8F703C] bg-white/80 hover:bg-white text-xs font-luxury-sans font-medium text-[#8F703C] transition-all flex items-center gap-1.5 shadow-sm"
+                className="px-4 py-2 rounded-full border border-white/20 hover:border-white/50 bg-white/5 hover:bg-white/10 text-xs font-luxury-sans text-stone-200 transition-all backdrop-blur-md"
               >
-                <Lock className="w-3.5 h-3.5 text-[#8F703C]" />
                 <span>Join Private Club</span>
               </button>
             )}
 
             <button
+              type="button"
               onClick={() => handleBookingAction(currentStay.bookingUrl)}
-              className="px-5 py-2.5 rounded-full bg-[#1C1917] hover:bg-black text-[#F4E8D4] text-xs font-luxury-sans font-medium tracking-wider transition-all duration-300 shadow-md shadow-stone-900/10 flex items-center gap-2 border border-[#C5A880]/40 group"
+              className="px-5 py-2.5 rounded-full bg-white hover:bg-[#F3EFE6] text-black text-xs font-luxury-sans font-medium tracking-wider transition-all duration-300 shadow-xl shadow-black/40 flex items-center gap-2 active:scale-95"
             >
-              <Calendar className="w-3.5 h-3.5 text-[#D4AF37]" />
               <span>Let's Book Your Stay ↗</span>
             </button>
           </div>
         </div>
       </header>
 
-      {/* 3. PLAN A: MUSEUM-GRADE LUXURY SELECTOR + PREV/NEXT ART NAVIGATOR */}
-      <section className="sticky top-20 sm:top-24 z-40 border-b border-[#E7DEC8] bg-[#FAF7F2]/95 backdrop-blur-md shadow-xs py-2 sm:py-2.5 px-4 sm:px-8 transition-all">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4" ref={selectorRef}>
+      {/* 2. FULL-BLEED ARCHITECTURAL CINEMA STAGE */}
+      <section id="sanctuary-stage" className="relative min-h-screen flex flex-col justify-between pt-28 sm:pt-32 pb-8 sm:pb-12 px-6 sm:px-12 overflow-hidden">
+        
+        {/* Full-Bleed Widescreen Background Photography */}
+        <div className="absolute inset-0 -z-20 transition-all duration-1000 ease-out">
+          <Image
+            src={currentStay.posterSrc}
+            alt={currentStay.name}
+            fill
+            priority
+            className="object-cover object-center scale-[1.03] transition-transform duration-1000"
+          />
+          {/* Cinematic Vignette & Ambient Darkness */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-black/40 to-black/75" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/40 to-transparent" />
+        </div>
+
+        {/* Ambient Subtle Radial Glow behind Reel */}
+        <div className="absolute right-1/4 top-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#B89B72]/15 blur-3xl rounded-full pointer-events-none -z-10" />
+
+        {/* Upper Main Grid: Architectural Identity (Left) & Floating Reel (Right) */}
+        <div className="max-w-[1440px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center flex-1 my-auto">
           
-          {/* Previous Sanctuary Button */}
-          <button
-            type="button"
-            onClick={handlePrevStay}
-            className="flex-shrink-0 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full bg-white hover:bg-[#FAF7F2] text-stone-800 text-xs sm:text-sm font-luxury-sans font-medium border border-[#DFCFA9] shadow-xs hover:border-[#8F703C] transition-all flex items-center gap-1.5 active:scale-95 cursor-pointer"
-            title="Previous Sanctuary"
-          >
-            <ChevronLeft className="w-4 h-4 text-[#8F703C]" />
-            <span className="hidden md:inline">Previous</span>
-          </button>
+          {/* Left Column: Stately Architectural Narrative */}
+          <div className="lg:col-span-7 space-y-6 max-w-2xl">
+            <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#E8D5B5] text-[11px] font-mono tracking-widest uppercase">
+              <span>№ {String(currentIndex + 1).padStart(2, "0")}</span>
+              <span className="text-white/40">·</span>
+              <span>{currentStay.numeral}</span>
+              <span className="text-white/40">·</span>
+              <span className="text-white">{currentStay.country}</span>
+            </div>
 
-          {/* Central Stately Selector (Click to Open All 10 Sanctuaries) */}
-          <div className="relative flex-1 max-w-2xl mx-auto">
-            <button
-              type="button"
-              onClick={() => setIsSelectorOpen(!isSelectorOpen)}
-              className="w-full py-2 sm:py-2.5 px-3.5 sm:px-5 rounded-2xl bg-white hover:bg-[#FDFCFB] border border-[#DFCFA9] hover:border-[#8F703C] shadow-xs hover:shadow-md transition-all flex items-center justify-between gap-3 text-left group cursor-pointer ring-1 ring-black/[0.03]"
-            >
-              <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
-                <span className="px-2 py-0.5 rounded-md bg-[#EFE7D8] text-[#8F703C] text-[10px] sm:text-xs font-mono font-bold tracking-wider shrink-0 border border-[#DFCFA9]">
-                  № {String(currentIndex + 1).padStart(2, "0")} / 10
-                </span>
-                <div className="min-w-0 truncate">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs sm:text-sm font-luxury-serif font-bold text-[#1C1917] truncate">
-                      {currentStay.name}
-                    </span>
-                    <span className="text-[10px] text-stone-400 font-luxury-sans hidden sm:inline">
-                      • {currentStay.country}
-                    </span>
-                  </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#8F703C] font-luxury-sans truncate hidden sm:block">
-                    {currentStay.pricePerNight} / night · {currentStay.location}
-                  </div>
-                </div>
+            <h1 className="text-4xl sm:text-6xl lg:text-[72px] font-luxury-serif font-light text-white tracking-tight leading-[1.04]">
+              {currentStay.name}
+            </h1>
+
+            <p className="text-sm sm:text-base font-luxury-sans text-stone-300 tracking-[0.15em] uppercase font-light">
+              {currentStay.location}
+            </p>
+
+            <p className="text-base sm:text-lg italic font-luxury-serif text-[#E8D5B5]/90 leading-relaxed font-light line-clamp-3 sm:line-clamp-none">
+              "{currentStay.subtitle}"
+            </p>
+
+            <div className="pt-2 flex flex-wrap items-center gap-6 text-xs font-mono text-stone-300">
+              <div>
+                <span className="block text-[10px] text-stone-400 uppercase tracking-widest">Nightly Rate</span>
+                <span className="text-sm font-luxury-serif text-white font-medium">{currentStay.pricePerNight}</span>
               </div>
-
-              <div className="flex items-center gap-2 shrink-0">
-                <span className="text-[11px] font-luxury-sans text-stone-500 hidden lg:inline">
-                  Browse Collection
-                </span>
-                <div className="w-6 h-6 rounded-full bg-[#FAF7F2] border border-[#DFCFA9] flex items-center justify-center text-[#8F703C] group-hover:bg-[#EFE7D8] transition-colors">
-                  {isSelectorOpen ? (
-                    <ChevronUp className="w-3.5 h-3.5" />
-                  ) : (
-                    <ChevronDown className="w-3.5 h-3.5" />
-                  )}
-                </div>
+              <div className="h-6 w-px bg-white/20" />
+              <div>
+                <span className="block text-[10px] text-stone-400 uppercase tracking-widest">Setting</span>
+                <span className="text-sm text-stone-200">{currentStay.features[0]?.title}</span>
               </div>
-            </button>
-
-            {/* Dropdown Menu of All 10 Sanctuaries */}
-            {isSelectorOpen && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-[#FAF7F2] border border-[#DFCFA9] rounded-3xl shadow-2xl overflow-hidden z-50 p-2 sm:p-3 animate-fadeIn backdrop-blur-xl">
-                <div className="px-3 py-2 border-b border-[#E7DEC8] flex items-center justify-between mb-1.5">
-                  <span className="text-[11px] font-luxury-serif tracking-widest uppercase font-semibold text-[#8F703C]">
-                    The Private Luxury Collection · 10 Sanctuaries
-                  </span>
-                  <span className="text-[10px] font-mono text-stone-400">
-                    Click to load Master Reel
-                  </span>
-                </div>
-                <div className="max-h-[50vh] sm:max-h-[380px] overflow-y-auto space-y-1.5 pr-1">
-                  {ALL_STAYS.map((stay, idx) => {
-                    const isSelected = stay.id === selectedStayId;
-                    return (
-                      <button
-                        key={stay.id}
-                        type="button"
-                        onClick={() => {
-                          handleSelectStay(stay.id);
-                          setIsSelectorOpen(false);
-                        }}
-                        className={`w-full text-left p-2 sm:p-2.5 rounded-2xl transition-all flex items-center justify-between gap-3 group cursor-pointer ${
-                          isSelected
-                            ? "bg-white border border-[#B89B72] shadow-sm ring-1 ring-[#B89B72]/30"
-                            : "hover:bg-white/80 border border-transparent hover:border-[#E7DEC8]"
-                        }`}
-                      >
-                        <div className="flex items-center gap-3 min-w-0">
-                          <div className="relative w-11 h-12 rounded-xl overflow-hidden shrink-0 border border-stone-200">
-                            <Image
-                              src={stay.image}
-                              alt={stay.name}
-                              fill
-                              className="object-cover"
-                            />
-                            <div className="absolute inset-0 bg-black/20" />
-                            <span className="absolute top-0.5 left-1 text-[8px] font-luxury-serif font-bold text-white">
-                              {stay.numeral}
-                            </span>
-                          </div>
-                          <div className="min-w-0">
-                            <div className="flex items-center gap-2">
-                              <span className="text-xs sm:text-sm font-luxury-serif font-semibold text-stone-900 truncate">
-                                {stay.name}
-                              </span>
-                              {isSelected && (
-                                <span className="px-1.5 py-0.2 rounded-full bg-emerald-50 text-emerald-700 text-[9px] font-mono font-bold border border-emerald-200">
-                                  PLAYING
-                                </span>
-                              )}
-                            </div>
-                            <p className="text-[11px] text-[#8F703C] font-luxury-sans truncate">
-                              {stay.country} · {stay.pricePerNight} / night
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="shrink-0 text-right pr-2">
-                          <span className="text-xs font-luxury-sans font-bold text-stone-800">
-                            {stay.priceAmount}
-                          </span>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
+              <div className="h-6 w-px bg-white/20 hidden sm:block" />
+              <div className="hidden sm:block">
+                <span className="block text-[10px] text-stone-400 uppercase tracking-widest">Concierge Tier</span>
+                <span className="text-sm text-[#E8D5B5]">{currentStay.forbesTier}</span>
               </div>
-            )}
+            </div>
+
+            {/* Quick Inquire & Reserve Trigger */}
+            <div className="pt-3 flex items-center gap-4">
+              <button
+                type="button"
+                onClick={() => handleBookingAction(currentStay.bookingUrl)}
+                className="px-7 py-3 rounded-full bg-white hover:bg-[#F3EFE6] text-black text-xs font-luxury-sans font-medium tracking-wider transition-all duration-300 shadow-2xl flex items-center gap-2 group active:scale-95"
+              >
+                <span>Let's Book Your Stay ↗</span>
+              </button>
+              <a
+                href="#architectural-dossier"
+                className="text-xs font-luxury-sans tracking-widest uppercase text-stone-300 hover:text-white transition-colors underline underline-offset-8"
+              >
+                View Sanctuary Dossier ↓
+              </a>
+            </div>
           </div>
 
-          {/* Next Sanctuary Button */}
-          <button
-            type="button"
-            onClick={handleNextStay}
-            className="flex-shrink-0 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full bg-white hover:bg-[#FAF7F2] text-stone-800 text-xs sm:text-sm font-luxury-sans font-medium border border-[#DFCFA9] shadow-xs hover:border-[#8F703C] transition-all flex items-center gap-1.5 active:scale-95 cursor-pointer"
-            title="Next Sanctuary"
-          >
-            <span className="hidden md:inline">Next</span>
-            <ChevronRight className="w-4 h-4 text-[#8F703C]" />
-          </button>
-
-        </div>
-      </section>
-
-      {/* 4. MAIN CINEMATIC EXHIBIT: CINEMATIC MASTER REEL & EDITORIAL DOSSIER */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-          
-          {/* Left Column: Haute-Couture 9:16 Vertical Reel Player */}
-          <div className="lg:col-span-5 flex justify-center sticky lg:top-28">
-            <div className="relative w-full max-w-[430px] xl:max-w-[440px]">
-              {/* Warm Golden Halo Backdrop Glow */}
-              <div className="absolute -inset-4 bg-gradient-to-tr from-[#D4AF37]/20 via-[#B89B72]/15 to-transparent blur-3xl -z-10 rounded-full" />
-
-              {/* Museum-Grade Showcase Chassis */}
-              <div className="relative aspect-[9/16] rounded-[32px] overflow-hidden shadow-2xl shadow-stone-900/20 border-[3px] border-[#1C1917] bg-[#0E0D0C] ring-1 ring-[#C5A880]/50 group">
+          {/* Right Column: Floating 9:16 Haute-Couture Master Reel */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-[340px] sm:max-w-[380px] xl:max-w-[400px]">
+              
+              {/* Outer Golden Hairline Frame */}
+              <div className="relative aspect-[9/16] rounded-[28px] overflow-hidden shadow-2xl shadow-black border border-white/25 bg-black ring-1 ring-white/10 group">
                 <video
                   ref={videoRef}
                   key={currentStay.id}
@@ -765,100 +682,86 @@ export default function StayHelperLuxuryShowcase() {
                   title="Click to check live rates and reserve"
                 />
 
-                {/* Option B: Final VIP Lockup Replay & Conversion Overlay */}
+                {/* Video Top Header Pill */}
+                <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">
+                  <div className="flex items-center gap-2 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/15">
+                    <span className="w-2 h-2 rounded-full bg-[#E8D5B5] animate-pulse" />
+                    <span className="text-[10px] font-mono text-white tracking-widest uppercase">
+                      Cinematic Master Reel
+                    </span>
+                  </div>
+                  <div className="bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15 text-[11px] font-mono text-[#E8D5B5]">
+                    {currentStay.numeral}
+                  </div>
+                </div>
+
+                {/* Replay & VIP Lockup Overlay */}
                 {isEnded && (
                   <div
                     onClick={() => handleBookingAction(currentStay.bookingUrl)}
-                    className="absolute inset-0 bg-black/55 backdrop-blur-[3px] z-30 flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all duration-300"
+                    className="absolute inset-0 bg-black/65 backdrop-blur-[4px] z-30 flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all duration-300"
                   >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/50 text-[#FDE047] text-[11px] font-mono uppercase tracking-widest mb-3">
-                      <Sparkles className="w-3 h-3 text-[#D4AF37]" />
-                      <span>Reel Complete · Live Rate Available</span>
-                    </div>
-                    <div className="text-2xl font-luxury-serif font-medium text-white mb-1">
+                    <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#E8D5B5] mb-2">
+                      Master Reel Complete
+                    </span>
+                    <h3 className="text-2xl font-luxury-serif font-light text-white mb-1">
                       {currentStay.name}
-                    </div>
-                    <div className="text-sm font-luxury-sans text-[#E8D5B5] mb-5">
-                      {currentStay.priceAmount} USD / night · Trip.com Live Partner Link
-                    </div>
+                    </h3>
+                    <p className="text-xs font-mono text-stone-300 mb-5">
+                      {currentStay.priceAmount} USD / night · Direct Partner Link
+                    </p>
 
-                    {/* High-Converting CTA Button  */}
-                    <div className="w-full max-w-[290px] py-3.5 px-5 rounded-2xl bg-gradient-to-r from-[#D4AF37] to-[#FDE047] hover:brightness-110 text-black font-luxury-sans font-bold text-sm flex items-center justify-center gap-2 shadow-2xl transition-transform hover:scale-105 mb-3">
-                      <Calendar className="w-4 h-4 text-black" />
+                    <div className="w-full max-w-[260px] py-3 px-5 rounded-full bg-white hover:bg-[#F3EFE6] text-black font-luxury-sans font-medium text-xs flex items-center justify-center gap-2 shadow-2xl transition-transform hover:scale-105 mb-3">
                       <span>Let's Book Your Stay ↗</span>
                     </div>
 
                     <button
+                      type="button"
                       onClick={(e) => {
                         e.stopPropagation();
                         restartVideo();
                       }}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-black/80 hover:bg-black text-stone-300 hover:text-white text-xs font-mono border border-white/20 shadow-lg transition-colors"
+                      className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-black/70 hover:bg-black text-stone-300 hover:text-white text-xs font-mono border border-white/20 transition-colors"
                     >
-                      <RotateCcw className="w-3.5 h-3.5 text-[#D4AF37]" />
-                      <span>Replay Video </span>
+                      <RotateCcw className="w-3.5 h-3.5 text-[#E8D5B5]" />
+                      <span>Replay</span>
                     </button>
                   </div>
                 )}
 
-                {/* Hover Invitation Overlay */}
-                {!isEnded && (
-                  <div
-                    onClick={() => handleBookingAction(currentStay.bookingUrl)}
-                    className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center cursor-pointer z-10"
-                  >
-                    <div className="px-5 py-2.5 rounded-full bg-black/80 backdrop-blur-md border border-[#C5A880]/70 text-[#F4E8D4] text-xs font-luxury-sans font-medium flex items-center gap-2 shadow-2xl transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                      <Calendar className="w-3.5 h-3.5 text-[#D4AF37]" />
-                      <span>Let's Book Your Stay ↗</span>
-                    </div>
-                  </div>
-                )}
-
-                {/* Top Video Cinema Overlay */}
-                <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">
-                  <div className="flex items-center gap-2 bg-black/70 backdrop-blur-md px-3.5 py-1.2 rounded-full border border-white/20 shadow-md">
-                    <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
-                    <span className="text-[10px] font-mono text-[#F4E8D4] tracking-wider uppercase font-semibold">
-                      Cinematic Master Reel
-                    </span>
-                  </div>
-                  <div className="bg-black/70 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 text-[11px] font-luxury-sans text-[#E8D5B5] flex items-center gap-1 shadow-md">
-                    <Star className="w-3 h-3 fill-[#D4AF37] text-[#D4AF37]" />
-                    <span className="font-semibold">{currentStay.rating}</span>
-                  </div>
-                </div>
-
-                {/* Bottom Video Controls Bar */}
+                {/* Bottom Video Controls */}
                 <div
                   onClick={(e) => e.stopPropagation()}
-                  className="absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between bg-black/80 backdrop-blur-md px-4 py-2.5 rounded-full border border-white/20 shadow-xl"
+                  className="absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between bg-black/70 backdrop-blur-md px-3.5 py-2 rounded-full border border-white/15 shadow-xl"
                 >
                   <div className="flex items-center gap-3">
                     <button
+                      type="button"
                       onClick={togglePlay}
                       className="text-white hover:text-[#E8D5B5] transition p-1"
                       title={isPlaying ? "Pause" : "Play"}
                     >
-                      {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-white" />}
+                      {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-white" />}
                     </button>
                     <button
+                      type="button"
                       onClick={toggleMute}
                       className="text-white hover:text-[#E8D5B5] transition p-1"
                       title={isMuted ? "Unmute" : "Mute"}
                     >
-                      {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-[#D4AF37]" />}
+                      {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-[#E8D5B5]" />}
                     </button>
-                    <span className="text-[11px] font-mono text-stone-300">
+                    <span className="text-[10px] font-mono text-stone-300">
                       {isMuted ? "Muted" : "Audio On"}
                     </span>
                   </div>
                   {isEnded && (
                     <button
+                      type="button"
                       onClick={restartVideo}
-                      className="text-stone-300 hover:text-white transition flex items-center gap-1.5 text-[11px] font-mono"
-                      title="Replay video"
+                      className="text-stone-300 hover:text-white transition flex items-center gap-1 text-[10px] font-mono"
                     >
-                      <RotateCcw className="w-3.5 h-3.5 text-[#D4AF37]" />
+                      <RotateCcw className="w-3 h-3 text-[#E8D5B5]" />
                       <span>Replay</span>
                     </button>
                   )}
@@ -866,182 +769,190 @@ export default function StayHelperLuxuryShowcase() {
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Right Column: Editorial Dossier & Direct Affiliate Monetization */}
-          <div className="lg:col-span-7 space-y-6">
+        {/* 3. FLOATING ARCHITECTURAL SANCTUARY DOCK (THE 10-HOTEL TIMELINE) */}
+        <div className="relative z-40 max-w-5xl mx-auto w-full mt-10">
+          <div className="bg-black/60 backdrop-blur-2xl border border-white/20 rounded-full px-3 sm:px-6 py-2 sm:py-2.5 shadow-2xl flex items-center justify-between gap-2 sm:gap-4">
             
-            {/* Curated Sanctuary Identity */}
-            <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFE7D8] border border-[#DFCFA9] text-[#8F703C] text-xs font-luxury-sans font-semibold tracking-wider uppercase mb-3">
-                <Sparkles className="w-3.5 h-3.5 text-[#8F703C]" />
-                <span>{currentStay.badge}</span>
-              </div>
+            {/* Prev Sanctuary Arrow */}
+            <button
+              type="button"
+              onClick={handlePrevStay}
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all shrink-0 active:scale-95"
+              title="Previous Sanctuary"
+            >
+              <ChevronLeft className="w-4 h-4 text-[#E8D5B5]" />
+            </button>
 
-              <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-luxury-serif font-medium text-[#1C1917] tracking-tight leading-[1.08]">
-                {currentStay.name}
-              </h1>
-
-              <p className="text-base sm:text-lg italic font-luxury-serif text-[#785D2E] mt-2 leading-snug">
-                {currentStay.subtitle}
-              </p>
-
-              {/* Geographic and Recognition Badges */}
-              <div className="flex flex-wrap items-center gap-4 mt-3 text-xs sm:text-sm text-stone-600">
-                <span className="flex items-center gap-1.5 text-stone-800 font-medium">
-                  <MapPin className="w-4 h-4 text-[#8F703C]" />
-                  <span>{currentStay.location}</span>
-                </span>
-                <span className="text-stone-300">•</span>
-                <div className="flex items-center gap-1 text-[#8F703C]">
-                  <Star className="w-4 h-4 fill-[#8F703C]" />
-                  <span className="font-semibold text-stone-900">{currentStay.rating}</span>
-                  <span className="text-xs text-stone-500">({currentStay.reviews} Verified Guest Reviews)</span>
-                </div>
-                <span className="text-stone-300">•</span>
-                <span className="flex items-center gap-1.5 text-stone-800 font-medium font-luxury-sans">
-                  <Award className="w-4 h-4 text-[#8F703C]" />
-                  <span>{currentStay.forbesTier}</span>
-                </span>
-              </div>
-            </div>
-
-            {/* Editorial Review & Architectural Narrative */}
-            <div className="space-y-4 text-base sm:text-lg text-[#44403C] font-luxury-serif leading-relaxed pt-4 border-t border-[#E7DEC8]">
-              {currentStay.story.map((paragraph, idx) => (
-                <p key={idx} className="tracking-wide">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-
-            {/* Signature Architectural Highlights (3 Capsules) */}
-            <div className="space-y-3 pt-2">
-              <h4 className="text-xs font-luxury-sans tracking-widest text-[#8F703C] uppercase font-semibold">
-                Signature Architectural Highlights
-              </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {currentStay.features.map((feat, idx) => (
-                  <div
-                    key={idx}
-                    className="p-3.5 rounded-2xl bg-white border border-[#E7DEC8] shadow-sm hover:border-[#C5A880] transition-colors"
+            {/* Scrollable Timeline Track */}
+            <div
+              ref={dockScrollRef}
+              className="flex items-center gap-2 sm:gap-4 overflow-x-auto no-scrollbar scroll-smooth py-1 px-1 flex-1 text-center"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            >
+              {ALL_STAYS.map((stay, idx) => {
+                const isActive = stay.id === selectedStayId;
+                const shortName = stay.name.split(" ")[0].toUpperCase();
+                return (
+                  <button
+                    key={stay.id}
+                    type="button"
+                    data-dock-id={stay.id}
+                    onClick={() => handleSelectStay(stay.id)}
+                    className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-mono transition-all flex items-center gap-1.5 cursor-pointer ${
+                      isActive
+                        ? "bg-white text-black font-semibold shadow-md scale-105"
+                        : "text-stone-400 hover:text-white hover:bg-white/5"
+                    }`}
                   >
-                    <div className="flex items-center gap-1.5 text-xs font-luxury-sans font-bold text-[#1C1917]">
-                      <span className="text-[#8F703C]">✦</span>
-                      <span>{feat.title}</span>
-                    </div>
-                    <p className="text-[11px] font-luxury-sans text-stone-500 mt-1 leading-snug">
-                      {feat.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
+                    <span className={isActive ? "text-stone-600" : "text-stone-500"}>
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <span>{shortName}</span>
+                  </button>
+                );
+              })}
             </div>
 
-            {/* ★ LUXURY BOOKING SUITE (COMMISSION MONETIZATION ENGINE) */}
-            <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-white via-[#FCFAF7] to-[#F7F2E8] border border-[#DFCFA9] shadow-lg shadow-[#B89B72]/10 space-y-5">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E7DEC8] pb-4">
-                <div>
-                  <span className="block text-[11px] tracking-widest font-luxury-sans uppercase text-[#8F703C] font-semibold">
-                    Premier Booking Link
-                  </span>
-                  <div className="flex items-baseline gap-2 mt-0.5">
-                    <span className="text-3xl font-luxury-serif font-bold text-[#1C1917]">
-                      {currentStay.priceAmount}
-                    </span>
-                    <span className="text-xs text-stone-500 font-luxury-sans">
-                      USD / night · Trip.com Live Rate
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  {member ? (
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-luxury-sans font-medium text-emerald-800">
-                      <Unlock className="w-3.5 h-3.5 text-emerald-600" />
-                      <span>Member Access Active</span>
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF7F2] border border-[#DFCFA9] text-xs font-luxury-sans font-medium text-[#8F703C]">
-                      <Lock className="w-3.5 h-3.5 text-[#8F703C]" />
-                      <span>Complimentary Sign-up Required</span>
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              {/* Dynamic Seasonal Range & Inclusions Pill */}
-              <div className="rounded-2xl bg-[#FAF7F2] border border-[#E7DEC8] p-3.5 space-y-1.5">
-                <div className="flex items-center gap-2 text-xs font-luxury-sans text-[#8F703C]">
-                  <span>🗓️</span>
-                  <span className="font-semibold text-[#1C1917]">Seasonal Estimate:</span>
-                  <span className="text-stone-700 font-medium">{currentStay.seasonalRange}</span>
-                </div>
-                {currentStay.rateInclusions && (
-                  <div className="text-[11px] font-luxury-sans text-stone-500 flex items-center gap-2 pl-0.5">
-                    <span>✨</span>
-                    <span>{currentStay.rateInclusions}</span>
-                  </div>
-                )}
-              </div>
-
-              {/* Primary Affiliate Conversion Button */}
-              <div>
-                <button
-                  onClick={() => handleBookingAction(currentStay.bookingUrl)}
-                  className="w-full py-4 px-6 rounded-2xl bg-[#1C1917] hover:bg-black text-[#F4E8D4] font-luxury-sans font-semibold text-base tracking-wide transition-all duration-300 shadow-xl shadow-stone-900/15 flex items-center justify-center gap-3 border border-[#C5A880]/50 group"
-                >
-                  <Calendar className="w-5 h-5 text-[#D4AF37]" />
-                  <span>Let's Book Your Stay ↗</span>
-                  <ArrowUpRight className="w-5 h-5 text-[#D4AF37] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </button>
-
-                {/* Honest, transparent single note */}
-                <p className="text-center text-xs text-stone-500 font-luxury-sans mt-3">
-                  Zero StayHelper service or membership fees · Direct booking with official partner
-                </p>
-              </div>
-            </div>
-
+            {/* Next Sanctuary Arrow */}
+            <button
+              type="button"
+              onClick={handleNextStay}
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all shrink-0 active:scale-95"
+              title="Next Sanctuary"
+            >
+              <ChevronRight className="w-4 h-4 text-[#E8D5B5]" />
+            </button>
           </div>
         </div>
-      </main>
 
-      {/* 5. EDITORIAL FOOTER & DISCLOSURE */}
-      <footer className="border-t border-[#E7DEC8] bg-[#F7F2E9] py-10 px-4 sm:px-8 text-xs text-[#78716C]">
-        <div className="max-w-7xl mx-auto space-y-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <span className="font-luxury-serif text-lg font-bold text-[#1C1917] tracking-wider uppercase">
-                STAYHELPER
+      </section>
+
+      {/* 4. CURATED ARCHITECTURAL DOSSIER (BELOW THE FOLD) */}
+      <section id="architectural-dossier" className="relative z-30 bg-[#0E0D0C] border-t border-white/10 py-20 sm:py-28 px-6 sm:px-12">
+        <div className="max-w-[1440px] mx-auto space-y-16">
+          
+          {/* Curatorial Header */}
+          <div className="max-w-3xl space-y-4">
+            <span className="text-[11px] font-mono tracking-[0.3em] uppercase text-[#C5A880]">
+              Architectural Provenance & Curation
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-luxury-serif font-light text-white tracking-tight leading-tight">
+              {currentStay.name}
+            </h2>
+            <p className="text-stone-400 text-sm sm:text-base leading-relaxed font-light">
+              {currentStay.story.join(" ")}
+            </p>
+          </div>
+
+          {/* 3-Column Haute Specification Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            
+            {/* Feature 1 */}
+            <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3 hover:border-white/25 transition-colors">
+              <span className="text-[10px] font-mono text-[#C5A880] uppercase tracking-widest">
+                01 · Spatial Signature
               </span>
-              <p className="text-[11px] text-stone-500 mt-0.5">
-                The Private Luxury Collection · Cinematic Sanctuaries
+              <h3 className="text-xl font-luxury-serif font-medium text-white">
+                {currentStay.features[0]?.title}
+              </h3>
+              <p className="text-xs text-stone-400 leading-relaxed font-light">
+                {currentStay.features[0]?.desc}
               </p>
             </div>
-            <div className="text-right text-[11px] text-stone-500 font-luxury-sans">
-              <span>© {new Date().getFullYear()} StayHelper Private Collection. All Rights Reserved.</span>
+
+            {/* Feature 2 */}
+            <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3 hover:border-white/25 transition-colors">
+              <span className="text-[10px] font-mono text-[#C5A880] uppercase tracking-widest">
+                02 · Master Experience
+              </span>
+              <h3 className="text-xl font-luxury-serif font-medium text-white">
+                {currentStay.features[1]?.title}
+              </h3>
+              <p className="text-xs text-stone-400 leading-relaxed font-light">
+                {currentStay.features[1]?.desc}
+              </p>
+            </div>
+
+            {/* Feature 3 */}
+            <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3 hover:border-white/25 transition-colors">
+              <span className="text-[10px] font-mono text-[#C5A880] uppercase tracking-widest">
+                03 · Inclusions & Privilege
+              </span>
+              <h3 className="text-xl font-luxury-serif font-medium text-white">
+                {currentStay.features[2]?.title}
+              </h3>
+              <p className="text-xs text-stone-400 leading-relaxed font-light">
+                {currentStay.rateInclusions} · {currentStay.seasonalRange}
+              </p>
+            </div>
+
+          </div>
+
+          {/* Master Reservation Lockup */}
+          <div id="reserve-section" className="rounded-3xl bg-gradient-to-r from-stone-900/80 via-black to-stone-900/80 border border-white/15 p-8 sm:p-14 text-center space-y-6">
+            <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#C5A880]">
+              Direct Premier Partnership
+            </span>
+            <h3 className="text-2xl sm:text-4xl font-luxury-serif font-light text-white tracking-tight max-w-xl mx-auto">
+              Reserve Your Private Sanctuary at {currentStay.name}
+            </h3>
+            <p className="text-xs sm:text-sm text-stone-400 max-w-md mx-auto font-light leading-relaxed">
+              Experience unparalleled hospitality with direct live partner rates, verified availability, and zero service fees.
+            </p>
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button
+                type="button"
+                onClick={() => handleBookingAction(currentStay.bookingUrl)}
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white hover:bg-[#F3EFE6] text-black text-xs font-luxury-sans font-medium tracking-wider transition-all duration-300 shadow-2xl flex items-center justify-center gap-2 group active:scale-95"
+              >
+                <span>Let's Book Your Stay ↗</span>
+              </button>
+              {!member && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPendingRedirectUrl(currentStay.bookingUrl);
+                    setIsAuthModalOpen(true);
+                  }}
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-full border border-white/20 hover:border-white/50 bg-white/5 hover:bg-white/10 text-xs font-luxury-sans text-stone-300 transition-all"
+                >
+                  <span>Join Private Club</span>
+                </button>
+              )}
             </div>
           </div>
 
-          <div className="border-t border-[#E7DEC8]/80 pt-4 text-[11px] text-stone-500 font-luxury-sans leading-relaxed">
-            <p>
-              StayHelper is an independent luxury hospitality curation platform. We partner with world-renowned official booking engines (including Trip.com) to provide seamless reservation access. When you reserve through our verified links, we may earn an affiliate commission at zero additional cost to you.
-            </p>
+        </div>
+      </section>
+
+      {/* 5. EDITORIAL COLOPHON FOOTER */}
+      <footer className="border-t border-white/10 bg-black py-12 px-6 sm:px-12 text-center">
+        <div className="max-w-[1440px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-[11px] font-mono text-stone-500 uppercase tracking-widest">
+          <div>
+            STAYHELPER · PRIVATE ARCHITECTURAL COLLECTION
+          </div>
+          <div>
+            THE WORLD'S MOST EXTRAORDINARY SANCTUARIES
+          </div>
+          <div>
+            CURATED WITH SILENT LUXURY
           </div>
         </div>
       </footer>
 
-      {/* 6. ★ COMPLIMENTARY LUXURY MEMBERSHIP MODAL (ROOMHELPER-IDENTICAL 1-CLICK AUTH) */}
+      {/* 6. US FAST 1-CLICK AUTH MODAL */}
       <USAuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
-        title="StayHelper Private Club"
-        subtitle="Complimentary private membership. Join to unlock direct partner reservation links, live room rates, and cinematic master reels."
-        onSuccess={(user) => {
-          const newMember: MemberData = {
-            name: user.name || user.email.split("@")[0],
-            email: user.email,
-            signedUpAt: new Date().toISOString(),
+        title={`Join StayHelper Private Club · ${currentStay.name}`}
+        subtitle="Unlock direct verified partner booking links, live room rates, and cinematic master reels."
+        onSuccess={(userData) => {
+          const newMember = {
+            name: userData.name,
+            email: userData.email,
+            signedUpAt: new Date().toISOString()
           };
           setMember(newMember);
           setIsAuthModalOpen(false);
@@ -1050,6 +961,7 @@ export default function StayHelperLuxuryShowcase() {
           setPendingRedirectUrl(null);
         }}
       />
+
     </div>
   );
 }
