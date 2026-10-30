@@ -567,110 +567,132 @@ export default function StayHelperLuxuryShowcase() {
           </div>
 
           {/* Right Side: Floating 9:16 Haute-Couture Master Reel (Exact Inset Placement) */}
-          <div className="shrink-0 flex justify-center lg:justify-end">
-            <div className="relative w-[280px] sm:w-[320px] lg:w-[340px] aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl shadow-black border-2 border-white/35 bg-black ring-1 ring-white/20 group">
-              <video
-                ref={videoRef}
-                key={currentStay.id}
-                src={currentStay.videoSrc}
-                poster={currentStay.posterSrc}
-                playsInline
-                autoPlay
-                muted={isMuted}
-                onEnded={() => {
-                  setIsPlaying(false);
-                  setIsEnded(true);
-                }}
-                className="w-full h-full object-cover cursor-pointer"
-                onClick={() => handleBookingAction(currentStay.bookingUrl)}
-                title="Click to check live rates and reserve"
-              />
+          <div className="shrink-0 flex flex-col items-center lg:items-end justify-center">
+            
+            {/* Subtle Minimalist Architectural Inset Header */}
+            <div className="w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[340px] flex items-center justify-between text-[10px] font-mono text-[#E8D5B5]/80 tracking-[0.22em] uppercase px-2 mb-2.5 drop-shadow">
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#E8D5B5] animate-pulse" />
+                Live Motion Inset
+              </span>
+              <span className="text-white/40 font-light">№ {String(currentIndex + 1).padStart(2, "0")}</span>
+            </div>
 
-              {/* Video Top Pill */}
-              <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-20 pointer-events-none">
-                <div className="flex items-center gap-2 bg-black/65 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
-                  <span className="w-2 h-2 rounded-full bg-[#E8D5B5] animate-pulse" />
-                  <span className="text-[9px] font-mono text-white tracking-widest uppercase">
-                    Cinematic Master Reel
-                  </span>
-                </div>
-                <div className="bg-black/65 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/20 text-[10px] font-mono text-[#E8D5B5]">
-                  {currentStay.numeral}
-                </div>
-              </div>
+            {/* Architectural Window with Soft Ambient Glow & Glassmorphism */}
+            <div className="relative group">
+              
+              {/* Soft Ambient Light Halo (Blends naturally with background snow & chalets) */}
+              <div className="absolute -inset-2.5 bg-gradient-to-tr from-[#D4AF37]/20 via-[#B89B72]/15 to-transparent rounded-[30px] blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-              {/* Replay Overlay on Video End */}
-              {isEnded && (
-                <div
+              {/* Main Architectural Motion Frame (No phone chassis, seamless glass bevel) */}
+              <div className="relative w-[280px] sm:w-[320px] lg:w-[340px] aspect-[9/16] rounded-[22px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.85)] border border-white/20 bg-black/40 backdrop-blur-xs transition-transform duration-500 group-hover:scale-[1.01]">
+                <video
+                  ref={videoRef}
+                  key={currentStay.id}
+                  src={currentStay.videoSrc}
+                  poster={currentStay.posterSrc}
+                  playsInline
+                  autoPlay
+                  muted={isMuted}
+                  onEnded={() => {
+                    setIsPlaying(false);
+                    setIsEnded(true);
+                  }}
+                  className="w-full h-full object-cover cursor-pointer"
                   onClick={() => handleBookingAction(currentStay.bookingUrl)}
-                  className="absolute inset-0 bg-black/70 backdrop-blur-[4px] z-30 flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all duration-300"
-                >
-                  <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#E8D5B5] mb-2">
-                    Master Reel Complete
-                  </span>
-                  <h3 className="text-xl font-luxury-serif font-light text-white mb-1">
-                    {currentStay.name}
-                  </h3>
-                  <p className="text-xs font-mono text-stone-300 mb-5">
-                    {currentStay.priceAmount} USD / night · Direct Partner Link
-                  </p>
+                  title="Click to check live rates and reserve"
+                />
 
-                  <div className="w-full max-w-[240px] py-2.5 px-4 rounded-full bg-white hover:bg-[#F3EFE6] text-black font-luxury-sans font-medium text-xs flex items-center justify-center gap-2 shadow-2xl transition-transform hover:scale-105 mb-3">
-                    <span>Let's Book Your Stay ↗</span>
+                {/* Soft Edge Vignette Overlay (Gently blends the frame inward) */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
+
+                {/* Hover Invitation Overlay */}
+                {!isEnded && (
+                  <div
+                    onClick={() => handleBookingAction(currentStay.bookingUrl)}
+                    className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center cursor-pointer z-10"
+                  >
+                    <div className="px-5 py-2.5 rounded-full bg-white/95 text-black text-xs font-luxury-sans font-medium flex items-center gap-2 shadow-2xl transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                      <span>Let's Book Your Stay ↗</span>
+                    </div>
                   </div>
-
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      restartVideo();
-                    }}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/70 hover:bg-black text-stone-300 hover:text-white text-xs font-mono border border-white/20 transition-colors"
-                  >
-                    <RotateCcw className="w-3.5 h-3.5 text-[#E8D5B5]" />
-                    <span>Replay</span>
-                  </button>
-                </div>
-              )}
-
-              {/* Bottom Video Controls */}
-              <div
-                onClick={(e) => e.stopPropagation()}
-                className="absolute bottom-3.5 left-3.5 right-3.5 z-20 flex items-center justify-between bg-black/70 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 shadow-xl"
-              >
-                <div className="flex items-center gap-2.5">
-                  <button
-                    type="button"
-                    onClick={togglePlay}
-                    className="text-white hover:text-[#E8D5B5] transition p-1"
-                    title={isPlaying ? "Pause" : "Play"}
-                  >
-                    {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-white" />}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={toggleMute}
-                    className="text-white hover:text-[#E8D5B5] transition p-1"
-                    title={isMuted ? "Unmute" : "Mute"}
-                  >
-                    {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-[#E8D5B5]" />}
-                  </button>
-                  <span className="text-[9px] font-mono text-stone-300">
-                    {isMuted ? "Muted" : "Audio"}
-                  </span>
-                </div>
-                {isEnded && (
-                  <button
-                    type="button"
-                    onClick={restartVideo}
-                    className="text-stone-300 hover:text-white transition flex items-center gap-1 text-[9px] font-mono"
-                  >
-                    <RotateCcw className="w-3 h-3 text-[#E8D5B5]" />
-                    <span>Replay</span>
-                  </button>
                 )}
+
+                {/* Replay Overlay on Video End */}
+                {isEnded && (
+                  <div
+                    onClick={() => handleBookingAction(currentStay.bookingUrl)}
+                    className="absolute inset-0 bg-black/75 backdrop-blur-[5px] z-30 flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all duration-300"
+                  >
+                    <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#E8D5B5] mb-2">
+                      Master Reel Complete
+                    </span>
+                    <h3 className="text-xl font-luxury-serif font-light text-white mb-1">
+                      {currentStay.name}
+                    </h3>
+                    <p className="text-xs font-mono text-stone-300 mb-5">
+                      {currentStay.priceAmount} USD / night · Direct Partner Link
+                    </p>
+
+                    <div className="w-full max-w-[240px] py-2.5 px-4 rounded-full bg-white hover:bg-[#F3EFE6] text-black font-luxury-sans font-medium text-xs flex items-center justify-center gap-2 shadow-2xl transition-transform hover:scale-105 mb-3">
+                      <span>Let's Book Your Stay ↗</span>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        restartVideo();
+                      }}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/70 hover:bg-black text-stone-300 hover:text-white text-xs font-mono border border-white/20 transition-colors cursor-pointer"
+                    >
+                      <RotateCcw className="w-3.5 h-3.5 text-[#E8D5B5]" />
+                      <span>Replay</span>
+                    </button>
+                  </div>
+                )}
+
+                {/* Minimalist Floating Controls (Softly Fades in on Hover, completely hidden otherwise) */}
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="absolute bottom-3 left-3 right-3 z-20 flex items-center justify-between bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto"
+                >
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={togglePlay}
+                      className="text-white hover:text-[#E8D5B5] transition p-1 cursor-pointer"
+                      title={isPlaying ? "Pause" : "Play"}
+                    >
+                      {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-white" />}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={toggleMute}
+                      className="text-white hover:text-[#E8D5B5] transition p-1 cursor-pointer"
+                      title={isMuted ? "Unmute" : "Mute"}
+                    >
+                      {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-[#E8D5B5]" />}
+                    </button>
+                    <span className="text-[9px] font-mono text-stone-300">
+                      {isMuted ? "Muted" : "Audio On"}
+                    </span>
+                  </div>
+                  {isEnded && (
+                    <button
+                      type="button"
+                      onClick={restartVideo}
+                      className="text-stone-300 hover:text-white transition flex items-center gap-1 text-[9px] font-mono cursor-pointer"
+                    >
+                      <RotateCcw className="w-3 h-3 text-[#E8D5B5]" />
+                      <span>Replay</span>
+                    </button>
+                  )}
+                </div>
+
               </div>
             </div>
+
           </div>
 
         </div>
