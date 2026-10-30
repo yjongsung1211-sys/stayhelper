@@ -705,10 +705,10 @@ export default function StayHelperLuxuryShowcase() {
         </div>
 
         {/* 1.3 FLOATING FROSTED GLASS DOCK (THE 10-SANCTUARY TIMELINE) */}
-        <div className="relative z-30 w-full px-6 sm:px-14 pb-8 flex flex-col sm:flex-row items-center justify-between gap-4 pointer-events-auto">
+        <div className="relative z-30 w-full px-4 sm:px-8 xl:px-12 pb-7 flex flex-col lg:flex-row items-center justify-between gap-4 pointer-events-auto">
           
-          {/* Centered Frosted Glass Timeline Capsule */}
-          <div className="bg-black/60 backdrop-blur-2xl border border-white/20 rounded-xl px-3 sm:px-6 py-2 shadow-2xl flex items-center gap-2 sm:gap-4 max-w-4xl mx-auto sm:mx-0">
+          {/* Expanded Dynamic Timeline Dock (Stretches smoothly on large screens) */}
+          <div className="bg-black/60 backdrop-blur-2xl border border-white/20 rounded-xl px-2.5 sm:px-4 py-2 shadow-2xl flex items-center gap-2 sm:gap-3 w-full lg:flex-1 lg:max-w-[calc(100%-250px)] xl:max-w-[calc(100%-270px)] min-w-0">
             {/* Prev Arrow */}
             <button
               type="button"
