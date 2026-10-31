@@ -55,6 +55,11 @@ import { PostMotionStayHelperAmangiri } from "./PostMotionStayHelperAmangiri";
 import { PostMotionStayHelperBulgari } from "./PostMotionStayHelperBulgari";
 import { PostMotionStayHelperKohSamui } from "./PostMotionStayHelperKohSamui";
 import { PostMotionStayHelperSonevaJani } from "./PostMotionStayHelperSonevaJani";
+import { PostMotionStayHelperChedi } from "./PostMotionStayHelperChedi";
+import { PostMotionStayHelperMonastero } from "./PostMotionStayHelperMonastero";
+import { PostMotionStayHelperAmanKyoto } from "./PostMotionStayHelperAmanKyoto";
+import { PostMotionStayHelperSingita } from "./PostMotionStayHelperSingita";
+import { PostMotionStayHelperEdenRoc } from "./PostMotionStayHelperEdenRoc";
 import { PostMotionStayHelperUniversal, defaultStayHelperProps } from "./PostMotionStayHelperUniversal";
 import { PostMotionThursdayTest } from "./PostMotionThursdayTest";
 import { PostMotionLongformTest } from "./PostMotionLongformTest";
@@ -2214,6 +2219,56 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="PostMotionStayHelperSonevaJani"
         component={PostMotionStayHelperSonevaJani}
+        durationInFrames={1050}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+
+      {/* ── [StayHelper 글로벌 럭셔리 6호 The Chedi Andermatt] ── */}
+      <Composition
+        id="PostMotionStayHelperChedi"
+        component={PostMotionStayHelperChedi}
+        durationInFrames={1050}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+
+      {/* 🌊 [StayHelper 마스터 7호 Monastero Santa Rosa] 🌊 */}
+      <Composition
+        id="PostMotionStayHelperMonastero"
+        component={PostMotionStayHelperMonastero}
+        durationInFrames={1050}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+
+      {/* ⛩️ [StayHelper 마스터 8호 Aman Kyoto] ⛩️ */}
+      <Composition
+        id="PostMotionStayHelperAmanKyoto"
+        component={PostMotionStayHelperAmanKyoto}
+        durationInFrames={1050}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+
+      {/* 🦁 [StayHelper 마스터 9호 Singita Sasakwa Lodge] 🦁 */}
+      <Composition
+        id="PostMotionStayHelperSingita"
+        component={PostMotionStayHelperSingita}
+        durationInFrames={1050}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+
+      {/* 🌊 [StayHelper 마스터 10호 Hôtel du Cap-Eden-Roc] 🌊 */}
+      <Composition
+        id="PostMotionStayHelperEdenRoc"
+        component={PostMotionStayHelperEdenRoc}
         durationInFrames={1050}
         fps={30}
         width={1080}
