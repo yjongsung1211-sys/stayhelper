@@ -167,7 +167,7 @@ const ALL_STAYS: StayInfo[] = [
     forbesTier: "Forbes Travel Guide Five-Star Resort",
     image: "/images/stayhelper/fs_kohsamui_wide_hero.jpg",
     wideHero: "/images/stayhelper/fs_kohsamui_wide_hero.jpg",
-    videoSrc: "/videos/StayHelperFourSeasons_v1_CinematicMaster.mp4?v=20261031_kohsamui_master",
+    videoSrc: "/videos/StayHelperKohSamui_v2_NaturalClean_Live.mp4",
     posterSrc: "/images/stayhelper/fs_kohsamui_poster.jpg",
     bookingUrl: "https://www.trip.com/hotels/koh-samui-hotel-detail-995775/four-seasons-resort-koh-samui/",
     status: "STREAMING",
@@ -379,7 +379,7 @@ export default function StayHelperLuxuryShowcase() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const dockScrollRef = useRef<HTMLDivElement>(null);
   
-  const [selectedStayId, setSelectedStayId] = useState<string>("stay-03"); // Bulgari Resort Dubai default
+  const [selectedStayId, setSelectedStayId] = useState<string>("stay-04"); // Four Seasons Resort Koh Samui default (Active Spotlight)
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(true);
   const [isEnded, setIsEnded] = useState<boolean>(false);

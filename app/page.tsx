@@ -218,8 +218,8 @@ const K_STYLING_FORMULAS = [
 ];
 
 export default function CleanStylingHelper() {
-  const [activeLook, setActiveLook] = useState<StylingLook>(CURATED_LOOKS[0]);
-  const [selectedPinId, setSelectedPinId] = useState<string | null>(CURATED_LOOKS[0]?.pins[0]?.id || null);
+  const [activeLook, setActiveLook] = useState<StylingLook | null>(CURATED_LOOKS[0] || null);
+  const [selectedPinId, setSelectedPinId] = useState<string | null>(CURATED_LOOKS[0]?.pins?.[0]?.id || null);
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [showPins, setShowPins] = useState<boolean>(true);
   const [hoveredPinId, setHoveredPinId] = useState<string | null>(null);
@@ -231,8 +231,8 @@ export default function CleanStylingHelper() {
     const groups: Record<string, { name: string; tag: string; count: number }> = {};
 
     CURATED_LOOKS.forEach((look) => {
-      const sId = look.styleId || 'modern-minimalist';
-      const sName = look.styleName || look.aesthetic || 'Modern Minimalist';
+      const sId = look.styleId || 'quiet-luxury';
+      const sName = look.styleName || look.aesthetic || 'Quiet Luxury & Minimalist';
       const sTag = look.styleTag || `#${sName.replace(/[^a-zA-Z0-9]/g, '')}`;
 
       if (!groups[sId]) {
@@ -396,7 +396,7 @@ export default function CleanStylingHelper() {
 
   // Auto select first pin when activeLook changes
   useEffect(() => {
-    if (activeLook.pins && activeLook.pins.length > 0) {
+    if (activeLook && activeLook.pins && activeLook.pins.length > 0) {
       setSelectedPinId(activeLook.pins[0].id);
     }
   }, [activeLook]);
@@ -406,6 +406,35 @@ export default function CleanStylingHelper() {
     if (activeCategory === 'all') return CURATED_LOOKS;
     return CURATED_LOOKS.filter((l) => (l.styleId || 'modern-minimalist') === activeCategory);
   }, [activeCategory]);
+
+  // Handle click anywhere on the main editorial photo - automatically selects and opens the nearest garment pin
+  const handlePhotoClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // If clicked on an interactive button (e.g. tag toggle or pin), let the button handle it
+    if ((e.target as HTMLElement).closest('button')) return;
+    if (!activeLook || !activeLook.pins || activeLook.pins.length === 0) return;
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = ((e.clientX - rect.left) / rect.width) * 100;
+    const clickY = ((e.clientY - rect.top) / rect.height) * 100;
+
+    // Find the pin closest to where the user clicked on the outfit
+    let closestPin = activeLook.pins[0];
+    let minDistance = Infinity;
+
+    for (const pin of activeLook.pins) {
+      const dx = pin.x - clickX;
+      const dy = pin.y - clickY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < minDistance) {
+        minDistance = dist;
+        closestPin = pin;
+      }
+    }
+
+    setSelectedPinId(closestPin.id);
+    setQuickViewPin(closestPin);
+    setCopiedSku(false);
+  };
 
   // Handle User Photo Upload
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -520,7 +549,6 @@ export default function CleanStylingHelper() {
             <div>
               <div className="flex items-center gap-1.5">
                 <span className="text-base font-extrabold tracking-tight text-neutral-950 block">StylingHelper</span>
-                <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-neutral-100 text-neutral-600 border border-neutral-200">US</span>
               </div>
               <span className="text-[10px] text-neutral-500 font-medium hidden sm:block -mt-0.5">Click Any Look, Shop the Outfit</span>
             </div>
@@ -528,16 +556,7 @@ export default function CleanStylingHelper() {
 
           {/* Quick Nav Actions */}
           <div className="flex items-center gap-2">
-            {/* K-Styling Recommendation Trigger */}
-            <button
-              type="button"
-              onClick={() => setIsRecommendationModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-amber-950 bg-amber-400 hover:bg-amber-300 transition cursor-pointer shadow-xs"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-neutral-950" />
-              <span className="hidden sm:inline">🇰🇷 K-Styling Recommendations</span>
-              <span className="sm:hidden">🇰🇷 K-Style</span>
-            </button>
+{/* K-Styling Recommendations hidden for future paid subscription */}
 
             {/* Shop All Items (Desktop / Tablet only, mobile uses discovery bar) */}
             <button
@@ -604,10 +623,10 @@ export default function CleanStylingHelper() {
               type="button"
               onClick={() => {
                 if (categoryTabsRef.current) {
-                  categoryTabsRef.current.scrollBy({ left: -240, behavior: 'smooth' });
+                  categoryTabsRef.current.scrollLeft -= 280;
                 }
               }}
-              className="p-1.5 rounded-full bg-white hover:bg-neutral-100 text-neutral-700 border border-neutral-200 shadow-xs flex-shrink-0 transition cursor-pointer"
+              className="p-1.5 rounded-full bg-white hover:bg-neutral-100 text-neutral-700 border border-neutral-200 shadow-xs flex-shrink-0 transition cursor-pointer select-none active:scale-95"
               title="Scroll Left"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -628,7 +647,11 @@ export default function CleanStylingHelper() {
                       setActiveCategory(cat.id);
                       if (cat.id !== 'all') {
                         const match = CURATED_LOOKS.find((l) => (l.styleId || 'modern-minimalist') === cat.id);
-                        if (match) setActiveLook(match);
+                        if (match) {
+                          setActiveLook(match);
+                        }
+                      } else {
+                        setActiveLook(CURATED_LOOKS[0]);
                       }
                     }}
                     className={`text-xs font-bold px-4 py-1.5 rounded-full transition-all duration-150 flex items-center gap-2 flex-shrink-0 cursor-pointer ${
@@ -655,10 +678,10 @@ export default function CleanStylingHelper() {
               type="button"
               onClick={() => {
                 if (categoryTabsRef.current) {
-                  categoryTabsRef.current.scrollBy({ left: 240, behavior: 'smooth' });
+                  categoryTabsRef.current.scrollLeft += 280;
                 }
               }}
-              className="p-1.5 rounded-full bg-white hover:bg-neutral-100 text-neutral-700 border border-neutral-200 shadow-xs flex-shrink-0 transition cursor-pointer"
+              className="p-1.5 rounded-full bg-white hover:bg-neutral-100 text-neutral-700 border border-neutral-200 shadow-xs flex-shrink-0 transition cursor-pointer select-none active:scale-95"
               title="Scroll Right"
             >
               <ChevronRight className="w-4 h-4" />
@@ -730,13 +753,35 @@ export default function CleanStylingHelper() {
 
       {/* 3. CENTERPIECE: INTERACTIVE EDITORIAL LOOKBOOK STUDIO */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        {!activeLook || CURATED_LOOKS.length === 0 ? (
+          <div className="py-24 text-center max-w-2xl mx-auto bg-white rounded-3xl border border-neutral-200/80 p-10 shadow-sm my-8">
+            <div className="w-16 h-16 rounded-2xl bg-neutral-950 text-amber-400 flex items-center justify-center mx-auto mb-6 shadow-xl">
+              <Sparkles className="w-8 h-8" />
+            </div>
+            <span className="px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-amber-400 text-neutral-950 inline-block mb-3">
+              100% Real-Product Production Underway
+            </span>
+            <h2 className="text-3xl font-black text-neutral-950 tracking-tight sm:text-4xl">
+              New Editorial Capsule In Production
+            </h2>
+            <p className="mt-4 text-sm text-neutral-600 leading-relaxed max-w-lg mx-auto">
+              All legacy concept photos have been completely cleared. We are currently curating a fresh series of 100% verified, in-stock US luxury outfits using 1:1 physical garment synchronization.
+            </p>
+            <div className="mt-8 pt-6 border-t border-neutral-100 flex flex-wrap items-center justify-center gap-6 text-xs text-neutral-500 font-bold uppercase tracking-wider">
+              <span>✓ 100% Real In-Stock US Items</span>
+              <span>✓ Zero Bot Blockers</span>
+              <span>✓ 1:1 Verified Garments</span>
+            </div>
+          </div>
+        ) : (
+          <>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Left Column: 4K Editorial Photo with Interactive Hotspot Pins (7 Cols) */}
           <div className="lg:col-span-7 flex flex-col justify-between h-full gap-3">
             {/* Quick 1-Click Look Selector Ribbon */}
             <div className="flex items-center justify-between gap-2 bg-neutral-100/80 p-1.5 rounded-2xl border border-neutral-200/80">
               <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-                {CURATED_LOOKS.map((look, idx) => {
+                {filteredLooks.map((look, idx) => {
                   const isCurrent = activeLook.id === look.id;
                   return (
                     <button
@@ -787,12 +832,22 @@ export default function CleanStylingHelper() {
               </div>
             </div>
 
-            <div className="relative rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-200 shadow-xl aspect-[3/4] w-full select-none group">
+            <div
+              onClick={handlePhotoClick}
+              className="relative rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-200 shadow-xl aspect-[3/4] w-full select-none group cursor-pointer"
+              title="Click any item on the photo to view garment details & store links"
+            >
               <img
                 src={activeLook.imageUrl}
                 alt={activeLook.title}
-                className="w-full h-full object-cover object-top transition duration-500"
+                className="w-full h-full object-cover object-top transition duration-500 group-hover:scale-[1.01]"
               />
+
+              {/* Interactive Photo Click Guide Pill */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 px-3.5 py-1.5 rounded-full bg-black/80 hover:bg-black/95 backdrop-blur-md text-white text-xs font-bold border border-white/20 flex items-center gap-2 shadow-xl pointer-events-none group-hover:scale-105 transition">
+                <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                <span>Click any item on the photo to shop</span>
+              </div>
 
               {/* Editorial Header Pill on Photo */}
               <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
@@ -840,7 +895,8 @@ export default function CleanStylingHelper() {
                   <button
                     key={pin.id}
                     type="button"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setSelectedPinId(pin.id);
                       setQuickViewPin(pin);
                       setCopiedSku(false);
@@ -873,7 +929,7 @@ export default function CleanStylingHelper() {
                       {/* Tooltip on Hover / Active */}
                       {(isHovered || isSelected) && (
                         <span className="absolute left-1/2 -translate-x-1/2 -top-8 px-2.5 py-0.5 rounded-md bg-neutral-950/95 backdrop-blur-md text-white text-[11px] font-bold whitespace-nowrap shadow-xl border border-white/10 pointer-events-none z-40">
-                          {pin.brand} • ${pin.price}
+                          {pin.brand} • {formatPrice(pin.price)}
                         </span>
                       )}
                     </span>
@@ -1020,6 +1076,12 @@ export default function CleanStylingHelper() {
                   key={look.id}
                   onClick={() => {
                     setActiveLook(look);
+                    const primaryPin = look.pins && look.pins.length > 0 ? look.pins[0] : null;
+                    if (primaryPin) {
+                      setSelectedPinId(primaryPin.id);
+                      setQuickViewPin(primaryPin);
+                      setCopiedSku(false);
+                    }
                     window.scrollTo({ top: 80, behavior: 'smooth' });
                   }}
                   className={`group cursor-pointer rounded-xl overflow-hidden bg-white border transition-all duration-200 flex flex-col ${
@@ -1039,6 +1101,13 @@ export default function CleanStylingHelper() {
                         {look.aesthetic.split(' ')[0]}
                       </span>
                     </div>
+                    {/* Hover overlay action pill */}
+                    <div className="absolute inset-0 bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span className="px-3 py-1.5 rounded-full bg-white/95 text-neutral-950 text-xs font-black shadow-md flex items-center gap-1.5">
+                        <Sparkles className="w-3 h-3 text-amber-500" />
+                        <span>View {look.pins.length} Items</span>
+                      </span>
+                    </div>
                   </div>
                   <div className="p-3">
                     <h4 className="text-xs font-bold text-neutral-950 truncate">{look.title}</h4>
@@ -1049,6 +1118,8 @@ export default function CleanStylingHelper() {
             })}
           </div>
         </section>
+          </>
+        )}
       </main>
 
       {/* 5. CLEAN AI VIRTUAL TRY-ON MODAL (NO CLUTTER) */}
@@ -1336,7 +1407,7 @@ export default function CleanStylingHelper() {
                   </div>
 
                   <div className="pt-3 border-t border-neutral-100 flex items-center justify-between gap-2">
-                    <span className="text-sm font-black text-neutral-950">${item.price}</span>
+                    <span className="text-sm font-black text-neutral-950">{formatPrice(item.price)}</span>
                     <a
                       href={item.buyUrl}
                       target="_blank"
@@ -1376,7 +1447,7 @@ export default function CleanStylingHelper() {
           onClick={(e) => {
             if (e.target === e.currentTarget) setQuickViewPin(null);
           }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
         >
           <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-neutral-200 overflow-hidden flex flex-col max-h-[90vh]">
             {/* Modal Header */}
@@ -1485,10 +1556,10 @@ export default function CleanStylingHelper() {
               {/* Complete the Look Pills */}
               <div>
                 <span className="text-[11px] font-extrabold uppercase tracking-wider text-neutral-500 block mb-2">
-                  Complete this Korean Look ({activeLook.title})
+                  Complete this Korean Look ({activeLook?.title || ''})
                 </span>
                 <div className="flex flex-wrap gap-1.5">
-                  {activeLook.pins.map((p) => {
+                  {activeLook?.pins?.map((p) => {
                     const isCurrent = p.id === quickViewPin.id;
                     return (
                       <button
