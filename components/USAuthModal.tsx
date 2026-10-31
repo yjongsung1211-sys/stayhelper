@@ -37,7 +37,7 @@ export default function USAuthModal({
   const googleClientId =
     process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ||
     process.env.GOOGLE_CLIENT_ID ||
-    '';
+    '868789396018-7elo1i4i9fid9qdigk599pqpikr65rn6.apps.googleusercontent.com';
 
   useEffect(() => {
     setMode(initialMode);

@@ -8,7 +8,10 @@ export async function GET(req: NextRequest) {
     return NextResponse.redirect(new URL("/stayhelper?error=google_auth_failed", req.url));
   }
 
-  const clientId = process.env.GOOGLE_CLIENT_ID || process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+  const clientId =
+    process.env.GOOGLE_CLIENT_ID ||
+    process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ||
+    "868789396018-7elo1i4i9fid9qdigk599pqpikr65rn6.apps.googleusercontent.com";
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
 
   if (!clientId || !clientSecret) {

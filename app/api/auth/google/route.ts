@@ -40,7 +40,10 @@ export async function POST(req: NextRequest) {
     }
     // 2. Case B: Authorization Code Exchange (OAuth 2.0 Code Flow)
     else if (code) {
-      const clientId = process.env.GOOGLE_CLIENT_ID || process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+      const clientId =
+        process.env.GOOGLE_CLIENT_ID ||
+        process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ||
+        "868789396018-7elo1i4i9fid9qdigk599pqpikr65rn6.apps.googleusercontent.com";
       const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
 
       if (!clientId || !clientSecret) {
