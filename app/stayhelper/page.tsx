@@ -108,7 +108,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/kayon_jungle_wide_hero.jpg",
     videoSrc: "/videos/StayHelperBaliVilla_v10_GrandFinaleMaster.mp4",
     posterSrc: "/images/stayhelper/kayon_jungle_wide_hero.jpg",
-    bookingUrl: "https://www.booking.com/hotel/id/the-kayon-jungle-resort.html?aid=800100&lang=en-us",
+    bookingUrl: "https://thekayonjungleresort.com/",
     status: "STREAMING",
     story: [
       "Perched dramatically above the sacred Cerapu River valley in Ubud, The Kayon Jungle Resort is an exclusive adults-only haven inspired by the geometric terraces of ancient Balinese rice fields.",
@@ -139,7 +139,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/bulgari_01_arrival.jpg",
     videoSrc: "/videos/bulgari/firstmotion_bulgari_dubai_master.mp4?v=20261031_sunset_resonance",
     posterSrc: "/images/stayhelper/bulgari_01_arrival.jpg",
-    bookingUrl: "https://www.booking.com/hotel/ae/bulgari-resort-dubai.html?aid=800100&lang=en-us",
+    bookingUrl: "https://www.bulgarihotels.com/en_US/dubai",
     status: "STREAMING",
     story: [
       "Carved into the tranquil waters of Jumeira Bay Island, Bulgari Resort Dubai marries Mediterranean coastal grace with visionary Italian craftsmanship, designed by legendary architectural studio ACPV ARCHITECTS.",
@@ -170,7 +170,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/fs_kohsamui_wide_hero.jpg",
     videoSrc: "/videos/StayHelperKohSamui_v2_NaturalClean_Live.mp4",
     posterSrc: "/images/stayhelper/fs_kohsamui_poster.jpg",
-    bookingUrl: "https://www.booking.com/hotel/th/four-seasons-resort-koh-samui.html?aid=800100&lang=en-us",
+    bookingUrl: "https://www.fourseasons.com/kohsamui/",
     status: "STREAMING",
     story: [
       "Cascading down a lush tropical hillside to a secluded private white-sand beach on Laem Yai Bay, Four Seasons Resort Koh Samui is the ultimate sanctuary of island serenity.",
@@ -201,7 +201,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/soneva_jani_wide_hero.jpg",
     videoSrc: "/videos/StayHelperSonevaJani_Master_Reel.mp4",
     posterSrc: "/images/stayhelper/soneva_jani_poster.jpg",
-    bookingUrl: "https://www.booking.com/hotel/mv/soneva-jani.html?aid=800100&lang=en-us",
+    bookingUrl: "https://soneva.com/resorts/soneva-jani/",
     status: "STREAMING",
     story: [
       "Perched within a massive 5-kilometer turquoise lagoon in the tranquil Noonu Atoll, Soneva Jani defines the pinnacle of barefoot sustainable luxury. Curved wooden boardwalks stretch over transparent, shallow azure waters teeming with marine life.",
@@ -232,7 +232,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/chedi_andermatt_wide_hero.jpg",
     videoSrc: "/videos/StayHelperChediAndermatt_Master_Reel.mp4",
     posterSrc: "/images/stayhelper/chedi_andermatt_poster.jpg",
-    bookingUrl: "https://www.booking.com/hotel/ch/the-chedi-andermatt.html?aid=800100&lang=en-us",
+    bookingUrl: "https://www.thechediandermatt.com/",
     status: "STREAMING",
     story: [
       "Nestled amidst the snow-blanketed peaks of the Urseren Valley, The Chedi Andermatt marries classic Swiss alpine warmth with sleek Asian Zen minimalism, masterfully envisioned by legendary architect Jean-Michel Gathy.",
@@ -263,7 +263,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/monastero_santa_rosa_wide_hero.jpg",
     videoSrc: "/videos/StayHelperMonastero_Master_Reel.mp4",
     posterSrc: "/stays/monastero_santa_rosa/act1.jpg",
-    bookingUrl: "https://www.booking.com/hotel/it/monastero-santa-rosa-spa.html?aid=800100&lang=en-us",
+    bookingUrl: "https://monasterosantarosa.com/",
     status: "STREAMING",
     story: [
       "Clinging dramatically to a vertical limestone cliff soaring above the sapphire Tyrrhenian Sea, Monastero Santa Rosa is an exquisite restoration of a 17th-century Dominican convent along Italy's most storied coast.",
@@ -988,9 +988,9 @@ export default function StayHelperLuxuryShowcase() {
             <button
               type="button"
               onClick={() => handleBookingAction(currentStay.bookingUrl)}
-              className="px-4 sm:px-5 py-2 rounded-full bg-white hover:bg-[#F3EFE6] text-black text-xs font-luxury-sans font-medium tracking-wider transition-all duration-300 shadow-xl shadow-black/60 flex items-center gap-1.5 active:scale-95 cursor-pointer shrink-0 whitespace-nowrap"
+              className="px-4 sm:px-6 py-2 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A880] hover:brightness-110 text-black text-xs font-luxury-sans font-semibold tracking-wider transition-all duration-300 shadow-xl shadow-black/60 flex items-center gap-1.5 active:scale-95 cursor-pointer shrink-0 whitespace-nowrap"
             >
-              <span>Let's Book Your Stay ↗</span>
+              <span>Book with VIP Perks ✨</span>
             </button>
           </div>
         </header>
@@ -1077,8 +1077,8 @@ export default function StayHelperLuxuryShowcase() {
                     onClick={() => handleBookingAction(currentStay.bookingUrl)}
                     className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center cursor-pointer z-10"
                   >
-                    <div className="px-5 py-2.5 rounded-full bg-white/95 text-black text-xs font-luxury-sans font-medium flex items-center gap-2 shadow-2xl transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                      <span>Let's Book Your Stay ↗</span>
+                    <div className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A880] text-black text-xs font-luxury-sans font-bold flex items-center gap-2 shadow-2xl transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                      <span>Book with VIP Perks (Breakfast + $100 Credit) ✨</span>
                     </div>
                   </div>
                 )}
@@ -1280,36 +1280,32 @@ export default function StayHelperLuxuryShowcase() {
           </div>
 
           {/* Master Reservation Lockup */}
-          <div id="reserve-section" className="rounded-3xl bg-gradient-to-r from-stone-900/80 via-black to-stone-900/80 border border-white/15 p-8 sm:p-14 text-center space-y-6">
-            <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#C5A880]">
-              Direct Premier Partnership
-            </span>
+          <div id="reserve-section" className="rounded-3xl bg-gradient-to-r from-stone-900/90 via-black to-stone-900/90 border border-[#D4AF37]/30 p-8 sm:p-14 text-center space-y-6 shadow-2xl shadow-black/80">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#E8D5B5] text-[10px] font-mono uppercase tracking-[0.25em]">
+              <span>Official Fora & Virtuoso Partner Privileges</span>
+            </div>
             <h3 className="text-2xl sm:text-4xl font-luxury-serif font-light text-white tracking-tight max-w-xl mx-auto">
               Reserve Your Private Sanctuary at {currentStay.name}
             </h3>
-            <p className="text-xs sm:text-sm text-stone-400 max-w-md mx-auto font-light leading-relaxed">
-              Experience unparalleled hospitality with direct live partner rates, verified availability, and zero service fees.
+            <p className="text-xs sm:text-sm text-stone-300 max-w-lg mx-auto font-light leading-relaxed">
+              Book at official hotel rates and receive exclusive VIP privileges: <strong className="text-[#E8D5B5] font-normal">Daily Complimentary Breakfast for 2</strong>, <strong className="text-[#E8D5B5] font-normal">$100 Resort / Spa Credit</strong>, and <strong className="text-[#E8D5B5] font-normal">Room Upgrade Priority</strong>.
             </p>
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 type="button"
-                onClick={() => handleBookingAction(currentStay.bookingUrl)}
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white hover:bg-[#F3EFE6] text-black text-xs font-luxury-sans font-medium tracking-wider transition-all duration-300 shadow-2xl flex items-center justify-center gap-2 group active:scale-95 cursor-pointer"
+                onClick={() => handleBookingAction(currentStay.name)}
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A880] hover:brightness-110 text-black text-xs font-luxury-sans font-bold tracking-wider transition-all duration-300 shadow-2xl flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
               >
-                <span>Let's Book Your Stay ↗</span>
+                <span>Reserve with VIP Perks (Breakfast + $100 Credit) 🥂</span>
               </button>
-              {!member && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setPendingRedirectUrl(currentStay.bookingUrl);
-                    setIsAuthModalOpen(true);
-                  }}
-                  className="w-full sm:w-auto px-6 py-3.5 rounded-full border border-white/20 hover:border-white/50 bg-white/5 hover:bg-white/10 text-xs font-luxury-sans text-stone-300 transition-all cursor-pointer"
-                >
-                  <span>Join Private Club</span>
-                </button>
-              )}
+              <a
+                href={currentStay.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-full border border-white/20 hover:border-white/50 bg-white/5 hover:bg-white/10 text-xs font-luxury-sans text-stone-300 transition-all cursor-pointer flex items-center justify-center gap-1.5"
+              >
+                <span>Official Hotel Website ↗</span>
+              </a>
             </div>
           </div>
 

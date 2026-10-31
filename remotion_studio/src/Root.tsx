@@ -660,6 +660,228 @@ export const RemotionRoot: React.FC = () => {
         }}
       />
 
+      <Composition
+        id="KoreanLoopShortsES12-Gwaenchana"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Frases Mágicas]",
+          categoryColor: "#3b82f6",
+          categoryBg: "#eff6ff",
+          title: "La Frase Mágica para 'Está Bien' 👌",
+          tagText: "K-DRAMA HIT",
+          korean: "괜찮아요!",
+          romanization: "[Guen-cha-na-yo!]",
+          english: '"¡Está bien! / No te preocupes."',
+          nuanceTitle: "💡 Consejo de K-Drama 👌",
+          nuanceDesc: "La palabra más versátil de Corea: sirve para aceptar disculpas, tranquilizar o rechazar con cortesía.",
+          audioFile: "audio_es_shorts_12.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES13-HowLong"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Viajar por Seúl]",
+          categoryColor: "#0284c7",
+          categoryBg: "#f0f9ff",
+          title: "Preguntar '¿Cuánto Tarda?' ⏱️",
+          tagText: "TIEMPO & VIAJE",
+          korean: "얼마나 걸려요?",
+          romanization: "[Ol-ma-na gol-lyo-yo?]",
+          english: '"¿Cuánto tiempo tarda / se demora?"',
+          nuanceTitle: "💡 Consejo en Seúl ⏱️",
+          nuanceDesc: "Úsala en taxis, al esperar mesa en restaurantes virales o al pedir comida para llevar.",
+          audioFile: "audio_es_shorts_13.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES14-TakePic"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Fotos en Corea]",
+          categoryColor: "#ec4899",
+          categoryBg: "#fdf2f8",
+          title: "Pedir que te Tomen una Foto 📸",
+          tagText: "FOTO PERFECTA",
+          korean: "사진 좀 찍어주세요!",
+          romanization: "[Sa-chin chom chi-go-chu-se-yo!]",
+          english: '"¿Puede tomarnos una foto, por favor?"',
+          nuanceTitle: "💡 Consejo Fotográfico 📸",
+          nuanceDesc: "Los coreanos son expertos en tomar fotos de cuerpo entero con el mejor ángulo. ¡Pídelo sin pena!",
+          audioFile: "audio_es_shorts_14.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES15-Discount"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Mercados de Corea]",
+          categoryColor: "#d97706",
+          categoryBg: "#fffbeb",
+          title: "Pedir Descuento en Mercados 🛍️",
+          tagText: "MERCADO REAL",
+          korean: "조금만 깎아주세요!",
+          romanization: "[Cho-guem-man kka-kka-chu-se-yo!]",
+          english: '"¿Me hace un descuento, por favor?"',
+          nuanceTitle: "💡 Consejo de Regateo 🛍️",
+          nuanceDesc: "Díselo con una gran sonrisa a las 'ajummas' en mercados tradicionales. ¡En tiendas oficiales no se regatea!",
+          audioFile: "audio_es_shorts_15.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES16-Cheers"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[K-Food / Brindis]",
+          categoryColor: "#e11d48",
+          categoryBg: "#fff1f2",
+          title: "Cómo Brindar en Corea 🍻",
+          tagText: "BRINDIS COREANO",
+          korean: "짠! (건배!)",
+          romanization: "[Chan! / Gon-be!]",
+          english: '"¡Salud! / ¡Brindemos!"',
+          nuanceTitle: "💡 Etiqueta de Brindis 🍻",
+          nuanceDesc: "Al brindar con mayores, sostén el vaso con dos manos y choca tu vaso un poco más abajo por respeto.",
+          audioFile: "audio_es_shorts_16.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES17-ExcuseMe"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Moverse en Seúl]",
+          categoryColor: "#2563eb",
+          categoryBg: "#eff6ff",
+          title: "Pedir Permiso en el Metro 🚇",
+          tagText: "METRO DE SEÚL",
+          korean: "잠시만요!",
+          romanization: "[Cham-si-man-yo!]",
+          english: '"¡Un momento! / Con permiso."',
+          nuanceTitle: "💡 Consejo en Seúl 🚇",
+          nuanceDesc: "Úsalo en el metro para pedir paso al bajar o cuando necesites un segundo.",
+          audioFile: "audio_es_shorts_17.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES18-EnjoyMeal"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[K-Food / Etiqueta]",
+          categoryColor: "#ea580c",
+          categoryBg: "#fff7ed",
+          title: "Desear '¡Buen Provecho!' 🍲",
+          tagText: "K-FOOD HIT",
+          korean: "맛있게 드세요!",
+          romanization: "[Ma-sit-gue deu-se-yo!]",
+          english: '"¡Buen provecho! / ¡Que lo disfrutes!"',
+          nuanceTitle: "💡 Etiqueta K-Food 🍲",
+          nuanceDesc: "Lo que dicen los meseros o compañeros de mesa antes de empezar a comer.",
+          audioFile: "audio_es_shorts_18.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES19-Goodbye"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Cultura Coreana]",
+          categoryColor: "#8b5cf6",
+          categoryBg: "#f5f3ff",
+          title: "El Secreto para Decir 'Adiós' 👋",
+          tagText: "DESPEDIDA REAL",
+          korean: "안녕히 계세요!",
+          romanization: "[An-nyeong-ji gue-se-yo!]",
+          english: '"¡Adiós! (al que se queda)"',
+          nuanceTitle: "💡 Truco en Corea 👋",
+          nuanceDesc: "Di '계세요' [gue-se-yo] si tú te vas del lugar y la otra persona se queda allí.",
+          audioFile: "audio_es_shorts_19.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES20-ToGo"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Restaurantes / To-Go]",
+          categoryColor: "#d97706",
+          categoryBg: "#fffbeb",
+          title: "Preguntar '¿Es Para Llevar?' 🥡",
+          tagText: "COMIDA PARA LLEVAR",
+          korean: "포장되나요?",
+          romanization: "[Po-chang-dwe-na-yo?]",
+          english: '"¿Se puede pedir para llevar?"',
+          nuanceTitle: "💡 K-Food To-Go 🥡",
+          nuanceDesc: "En Corea casi toda la comida de restaurantes se puede empacar para llevar a casa.",
+          audioFile: "audio_es_shorts_20.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES21-Receipt"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Compras en Corea]",
+          categoryColor: "#16a34a",
+          categoryBg: "#f0fdf4",
+          title: "Frase al Pagar en Tiendas 🧾",
+          tagText: "PAGO EN CAJA",
+          korean: "영수증 버려주세요!",
+          romanization: "[Yong-su-cheung bo-ryo-chu-se-yo!]",
+          english: '"Puede tirar el recibo, por favor."',
+          nuanceTitle: "💡 Consejo Diario 🧾",
+          nuanceDesc: "Si no necesitas el ticket de compra en tiendas o cafés, usa esta frase corta y natural.",
+          audioFile: "audio_es_shorts_21.wav",
+        }}
+      />
+
+
+
 
 
       <Composition
@@ -2285,6 +2507,184 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
         defaultProps={defaultStayHelperProps}
       />
-    </>
+
+      {/* ── [FirstMotion 코리안루프 (KoreanLoop) 바이럴 쇼츠 3편] ── */}
+      <Composition
+        id="KoreanLoopShortsNunchi"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Untranslatable Korean]",
+          categoryColor: "#7c3aed",
+          categoryBg: "#f5f3ff",
+          title: "Untranslatable Korean Words You Must Know! #Shorts",
+          tagText: "KOREAN SLANG",
+          korean: "눈치 챙겨!",
+          romanization: "[Nun-chi chaeng-gyeo!]",
+          english: "Read the room! Pick up the vibe.",
+          nuanceTitle: "Korean Social Radar",
+          nuanceDesc: "Literally 'Pack your Nunchi!' Use when someone is socially oblivious.",
+          audioFile: "audio_shorts_nunchi.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsBab"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Real Korean Greeting]",
+          categoryColor: "#ea580c",
+          categoryBg: "#fff7ed",
+          title: "What Koreans Say Instead of How Are You? #Shorts",
+          tagText: "CULTURE SHOCK",
+          korean: "밥 먹었어?",
+          romanization: "[Bap meo-geo-sseo?]",
+          english: "Did you eat? (Korea's true greeting!)",
+          nuanceTitle: "The Ultimate Love Language",
+          nuanceDesc: "Koreans ask about food to ask if you are doing well! Reply '응, 먹었어!' (Yes, I ate!)",
+          audioFile: "audio_shorts_bab.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsService"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Secret Restaurant Hack]",
+          categoryColor: "#059669",
+          categoryBg: "#ecfdf5",
+          title: "The Magic Word to Get Free Food in Korea #Shorts",
+          tagText: "K-RESTAURANT HACK",
+          korean: "이거 서비스예요!",
+          romanization: "[I-geo seo-bi-seu-ye-yo!]",
+          english: "This is on the house! (Free food!)",
+          nuanceTitle: "Korea's Service Culture",
+          nuanceDesc: "When owners say '서비스', it means 100% free complimentary gift from the chef!",
+          audioFile: "audio_shorts_service.wav",
+        }}
+      />
+
+
+      <Composition
+        id="KoreanLoopShortsTreat"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Dining in Korea]",
+          categoryColor: "#0284c7",
+          categoryBg: "#f0f9ff",
+          title: "How to Say \"It's on Me\" in Korean Like a Boss 💳 #Shorts",
+          tagText: "KOREAN MANNERS",
+          korean: "내가 낼게!",
+          romanization: "[Nae-ga nael-ge!]",
+          english: "It's on me! I'll pay for this.",
+          nuanceTitle: "Cool Dining Flex",
+          nuanceDesc: "Say this smoothly when grabbing coffee or meals to show generous warmth!",
+          audioFile: "audio_shorts_treat.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsInsane"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[K-Food Slang]",
+          categoryColor: "#ea580c",
+          categoryBg: "#fff7ed",
+          title: "The #1 Slang Koreans Say When Food is Insane 🤤 #Shorts",
+          tagText: "TASTE REACTION",
+          korean: "미쳤다, 진짜!",
+          romanization: "[Mi-chyeot-da, jin-jja!]",
+          english: "This is insane! So good it's crazy.",
+          nuanceTitle: "The Craziest Compliment",
+          nuanceDesc: "Literally 'Crazy, for real!' Used when food tastes unbelievably amazing.",
+          audioFile: "audio_shorts_insane.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsExcuse"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Seoul Street Survival]",
+          categoryColor: "#059669",
+          categoryBg: "#ecfdf5",
+          title: "The Magic Word to Get Through Crowds in Seoul ✋ #Shorts",
+          tagText: "STREET SURVIVAL",
+          korean: "잠시만요!",
+          romanization: "[Jam-shi-man-yo!]",
+          english: "Excuse me! Just a moment, please.",
+          nuanceTitle: "Crowd Parting Spell",
+          nuanceDesc: "Say this on packed subways or busy streets to politely part the crowd!",
+          audioFile: "audio_shorts_excuse.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsSpicy"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[K-Spicy Challenge]",
+          categoryColor: "#dc2626",
+          categoryBg: "#fef2f2",
+          title: "How to Order Extra Spicy Food in Korea 🌶️ #Shorts",
+          tagText: "SPICY CHALLENGE",
+          korean: "아주 맵게 해주세요!",
+          romanization: "[A-ju maep-ge hae-ju-se-yo!]",
+          english: "Please make it extra spicy!",
+          nuanceTitle: "Bulldak Level Challenge",
+          nuanceDesc: "Use this if you love fiery chili heat! Warning: Korean spicy is serious!",
+          audioFile: "audio_shorts_spicy.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsFighting"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Korean Motivation]",
+          categoryColor: "#7c3aed",
+          categoryBg: "#f5f3ff",
+          title: "Korea's #1 National Cheering Phrase 🔥 #Shorts",
+          tagText: "K-SPIRIT CHEER",
+          korean: "파이팅! 할 수 있어!",
+          romanization: "[Pai-ting! Hal su i-sseo!]",
+          english: "Fighting! You can do it!",
+          nuanceTitle: "K-Spirit Encouragement",
+          nuanceDesc: "'Fighting' is Korea's universal power cheer! Pair with a fist pump!",
+          audioFile: "audio_shorts_fighting.wav",
+        }}
+      />
+</>
   );
 };

@@ -433,8 +433,8 @@ export default function CleanStylingHelper() {
 
   // Handle click anywhere on the main editorial photo - automatically selects and opens the nearest garment pin
   const handlePhotoClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    // If clicked on an interactive button (e.g. tag toggle or pin), let the button handle it
-    if ((e.target as HTMLElement).closest('button')) return;
+    // If clicked on an interactive anchor or button (e.g. pin or tag toggle), let it handle naturally
+    if ((e.target as HTMLElement).closest('a, button')) return;
     if (!activeLook || !activeLook.pins || activeLook.pins.length === 0) return;
 
     const rect = e.currentTarget.getBoundingClientRect();
@@ -457,7 +457,13 @@ export default function CleanStylingHelper() {
 
     setSelectedPinId(closestPin.id);
     if (closestPin.buyUrl) {
-      window.open(closestPin.buyUrl, '_blank', 'noopener,noreferrer');
+      const link = document.createElement('a');
+      link.href = closestPin.buyUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 
@@ -901,20 +907,22 @@ export default function CleanStylingHelper() {
                 if (!showPins && !isHovered) return null;
 
                 return (
-                  <button
+                  <a
                     key={pin.id}
-                    type="button"
+                    href={pin.buyUrl || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelectedPinId(pin.id);
-                      if (pin.buyUrl) {
-                        window.open(pin.buyUrl, '_blank', 'noopener,noreferrer');
+                      if (!pin.buyUrl) {
+                        e.preventDefault();
                       }
                     }}
                     onMouseEnter={() => setHoveredPinId(pin.id)}
                     onMouseLeave={() => setHoveredPinId(null)}
                     style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
-                    className={`absolute -translate-x-1/2 -translate-y-1/2 z-30 p-2 cursor-pointer group/pin transition-all duration-200 ${
+                    className={`absolute -translate-x-1/2 -translate-y-1/2 z-30 p-2 cursor-pointer group/pin transition-all duration-200 no-underline ${
                       isDimmed ? 'opacity-30 scale-90' : 'opacity-100'
                     }`}
                   >
@@ -943,7 +951,7 @@ export default function CleanStylingHelper() {
                         </span>
                       )}
                     </span>
-                  </button>
+                  </a>
                 );
               })}
             </div>
@@ -991,17 +999,20 @@ export default function CleanStylingHelper() {
                   const isSelected = selectedPinId === pin.id;
 
                   return (
-                    <div
+                    <a
                       key={pin.id}
-                      onClick={() => {
+                      href={pin.buyUrl || '#'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => {
                         setSelectedPinId(pin.id);
-                        if (pin.buyUrl) {
-                          window.open(pin.buyUrl, '_blank', 'noopener,noreferrer');
+                        if (!pin.buyUrl) {
+                          e.preventDefault();
                         }
                       }}
                       onMouseEnter={() => setHoveredPinId(pin.id)}
                       onMouseLeave={() => setHoveredPinId(null)}
-                      className={`py-2 px-2.5 flex items-center justify-between gap-3 cursor-pointer rounded-xl transition-all duration-150 group ${
+                      className={`py-2 px-2.5 flex items-center justify-between gap-3 cursor-pointer rounded-xl transition-all duration-150 group text-neutral-900 no-underline ${
                         isSelected || hoveredPinId === pin.id
                           ? 'bg-amber-50/80 border-l-4 border-amber-500 shadow-xs ring-1 ring-amber-400/40'
                           : 'hover:bg-neutral-50 border-l-4 border-transparent'
@@ -1042,7 +1053,7 @@ export default function CleanStylingHelper() {
                           <ArrowRight className="w-3.5 h-3.5" />
                         </div>
                       </div>
-                    </div>
+                    </a>
                   );
                 })}
               </div>
