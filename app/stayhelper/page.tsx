@@ -199,8 +199,8 @@ const ALL_STAYS: StayInfo[] = [
     forbesTier: "World's 50 Best Luxury Hotels",
     image: "/images/stayhelper/soneva_jani_wide_hero.jpg",
     wideHero: "/images/stayhelper/soneva_jani_wide_hero.jpg",
-    videoSrc: "/videos/StayHelperSonevaJani_v1_CinematicMaster.mp4",
-    posterSrc: "/images/stayhelper/soneva_jani_01_water_retreat.jpg",
+    videoSrc: "/videos/StayHelperSonevaJani_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/soneva_jani_poster.jpg",
     bookingUrl: "https://www.trip.com/hotels/noonu-atoll-hotel-detail-7009366/soneva-jani/",
     status: "STREAMING",
     story: [
