@@ -118,7 +118,7 @@ function saveUser(user: QuickUser) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, name, provider = "email" } = body;
+    const { email, name, provider = "email", mode = "signup" } = body;
 
     if (!email || typeof email !== "string" || !email.includes("@")) {
       return NextResponse.json(
@@ -128,13 +128,25 @@ export async function POST(request: NextRequest) {
     }
 
     const cleanEmail = email.trim().toLowerCase();
+    
+    // Check if user already exists
+    ensureDataFile();
+    let existingUser: QuickUser | null = null;
+    if (fs.existsSync(USERS_FILE)) {
+      try {
+        const users: QuickUser[] = JSON.parse(fs.readFileSync(USERS_FILE, "utf-8")) || [];
+        existingUser = users.find((u) => u.email.toLowerCase() === cleanEmail) || null;
+      } catch {}
+    }
+
+    const isNew = !existingUser;
     const cleanName =
-      name && typeof name === "string" && name.trim()
-        ? name.trim()
-        : cleanEmail.split("@")[0];
+      (name && typeof name === "string" && name.trim()) ||
+      existingUser?.name ||
+      cleanEmail.split("@")[0];
 
     const now = new Date().toISOString();
-    const userId = `usr_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+    const userId = existingUser?.id || `usr_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
 
     const userObj: QuickUser = {
       id: userId,
@@ -143,18 +155,22 @@ export async function POST(request: NextRequest) {
       role: "user",
       region: "US",
       provider,
-      createdAt: now,
+      createdAt: existingUser?.createdAt || now,
       lastLoginAt: now,
     };
 
     saveUser(userObj);
 
     // Send Telegram Notification
-    const telegramMessage = `👑 <b>[StayHelper] 신규 VIP 회원 가입 / 로그인</b>
+    const headerTitle = isNew
+      ? `👑 <b>[StayHelper] 신규 VIP 회원 가입</b>`
+      : `✨ <b>[StayHelper] 기존 VIP 회원 로그인</b>`;
+
+    const telegramMessage = `${headerTitle}
 ━━━━━━━━━━━━━━━━━━
 👤 <b>회원 이름</b>: <code>${userObj.name}</code>
 📧 <b>이메일</b>: <code>${userObj.email}</code>
-🔑 <b>인증 수단</b>: ${provider.toUpperCase()} 1-Click
+🔑 <b>인증 수단</b>: ${provider.toUpperCase()} 1-Click (${mode})
 💎 <b>회원 등급</b>: VIP Private Member
 ━━━━━━━━━━━━━━━━━━
 ⏰ <b>일시</b>: ${new Date().toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}`;
@@ -163,7 +179,8 @@ export async function POST(request: NextRequest) {
 
     const response = NextResponse.json({
       ok: true,
-      message: "Successfully authenticated",
+      message: isNew ? "VIP Membership Created" : "Welcome back",
+      isNewUser: isNew,
       user: userObj,
     });
 
@@ -189,4 +206,13 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
+}
+
+export async function DELETE() {
+  const response = NextResponse.json({
+    ok: true,
+    message: "Logged out successfully",
+  });
+  response.cookies.delete("stayhelper_user");
+  return response;
 }

@@ -28,7 +28,8 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  LogOut
 } from "lucide-react";
 
 interface StayInfo {
@@ -387,19 +388,44 @@ export default function StayHelperLuxuryShowcase() {
   // VIP Membership State
   const [member, setMember] = useState<MemberData | null>(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
+  const [authMode, setAuthMode] = useState<"signin" | "signup">("signup");
   const [pendingRedirectUrl, setPendingRedirectUrl] = useState<string | null>(null);
 
-  // Read member status from localStorage on mount
+  // Read member status from localStorage on mount and sync on auth change
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("stayhelper_member");
-      if (stored) {
-        setMember(JSON.parse(stored));
+    const syncMember = () => {
+      try {
+        const stored =
+          localStorage.getItem("stayhelper_member") ||
+          localStorage.getItem("stayhelper_user") ||
+          localStorage.getItem("sh_member_user");
+        if (stored) {
+          setMember(JSON.parse(stored));
+        } else {
+          setMember(null);
+        }
+      } catch (e) {
+        console.error("Local storage load error", e);
       }
-    } catch (e) {
-      console.error("Local storage load error", e);
-    }
+    };
+    syncMember();
+    window.addEventListener("stayhelper_auth_changed", syncMember);
+    return () => window.removeEventListener("stayhelper_auth_changed", syncMember);
   }, []);
+
+  const handleSignOut = () => {
+    try {
+      localStorage.removeItem("stayhelper_member");
+      localStorage.removeItem("stayhelper_user");
+      localStorage.removeItem("sh_member_user");
+      document.cookie = "stayhelper_user=; path=/; max-age=0;";
+      fetch("/api/auth/quick", { method: "DELETE" }).catch(() => {});
+    } catch (e) {
+      console.error("Sign out error", e);
+    }
+    setMember(null);
+    window.dispatchEvent(new Event("stayhelper_auth_changed"));
+  };
 
   const currentStay = ALL_STAYS.find((s) => s.id === selectedStayId) || ALL_STAYS[0];
   const currentIndex = ALL_STAYS.findIndex((s) => s.id === selectedStayId);
@@ -516,21 +542,46 @@ export default function StayHelperLuxuryShowcase() {
           {/* Right Direct Action */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {member ? (
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 border border-white/20 text-xs font-mono text-[#E8D5B5] backdrop-blur-md shrink-0">
-                <Check className="w-3 h-3 text-emerald-400" />
-                <span className="hidden sm:inline">{member.name}</span>
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 border border-white/20 text-xs font-mono text-[#E8D5B5] backdrop-blur-md shrink-0 shadow-lg">
+                  <Check className="w-3 h-3 text-emerald-400" />
+                  <span className="max-w-[100px] sm:max-w-[140px] truncate">{member.name}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleSignOut}
+                  title="Sign Out of Private Club"
+                  className="px-2.5 sm:px-3 py-1.5 rounded-full bg-black/40 hover:bg-rose-950/40 border border-white/15 hover:border-rose-400/40 text-[11px] font-mono text-stone-300 hover:text-rose-200 transition-all flex items-center gap-1 cursor-pointer shrink-0"
+                >
+                  <LogOut className="w-3 h-3 text-[#E8D5B5]" />
+                  <span className="hidden sm:inline">Sign Out</span>
+                </button>
               </div>
             ) : (
-              <button
-                type="button"
-                onClick={() => {
-                  setPendingRedirectUrl(currentStay.bookingUrl);
-                  setIsAuthModalOpen(true);
-                }}
-                className="hidden lg:inline-block px-3.5 py-1.5 rounded-full border border-white/25 hover:border-white/50 bg-black/40 hover:bg-black/60 text-xs font-mono text-stone-200 transition-all backdrop-blur-md cursor-pointer shrink-0 whitespace-nowrap"
-              >
-                Join Private Club
-              </button>
+              <div className="hidden lg:flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAuthMode("signin");
+                    setPendingRedirectUrl(currentStay.bookingUrl);
+                    setIsAuthModalOpen(true);
+                  }}
+                  className="px-3 py-1.5 rounded-full border border-white/20 hover:border-white/40 bg-black/30 hover:bg-black/50 text-xs font-mono text-stone-300 hover:text-white transition-all backdrop-blur-md cursor-pointer shrink-0"
+                >
+                  Sign In
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAuthMode("signup");
+                    setPendingRedirectUrl(currentStay.bookingUrl);
+                    setIsAuthModalOpen(true);
+                  }}
+                  className="px-3.5 py-1.5 rounded-full border border-[#DFCFA9]/40 hover:border-[#DFCFA9] bg-[#DFCFA9]/10 hover:bg-[#DFCFA9]/20 text-xs font-mono text-[#E8D5B5] transition-all backdrop-blur-md cursor-pointer shrink-0"
+                >
+                  Join Private Club
+                </button>
+              </div>
             )}
 
             <button
@@ -883,8 +934,17 @@ export default function StayHelperLuxuryShowcase() {
       <USAuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
-        title={`Join StayHelper Private Club · ${currentStay.name}`}
-        subtitle="Unlock direct verified partner booking links, live room rates, and cinematic master reels."
+        initialMode={authMode}
+        title={
+          authMode === "signin"
+            ? `Sign In to Private Club · ${currentStay.name}`
+            : `Join StayHelper Private Club · ${currentStay.name}`
+        }
+        subtitle={
+          authMode === "signin"
+            ? "Enter your registered email to resume your complimentary VIP sanctuary dossier access."
+            : "Unlock direct verified partner booking links, live room rates, and cinematic master reels."
+        }
         onSuccess={(userData) => {
           const newMember = {
             name: userData.name,
@@ -893,9 +953,10 @@ export default function StayHelperLuxuryShowcase() {
           };
           setMember(newMember);
           setIsAuthModalOpen(false);
-          const target = pendingRedirectUrl || currentStay.bookingUrl;
-          window.open(target, "_blank", "noopener,noreferrer");
-          setPendingRedirectUrl(null);
+          if (pendingRedirectUrl) {
+            window.open(pendingRedirectUrl, "_blank", "noopener,noreferrer");
+            setPendingRedirectUrl(null);
+          }
         }}
       />
 

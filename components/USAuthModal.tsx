@@ -1,29 +1,34 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { X, ArrowRight, Loader2, Check, Sparkles } from 'lucide-react';
+import { X, ArrowRight, Loader2, Check, Sparkles, LogIn, UserPlus } from 'lucide-react';
 
 interface USAuthModalProps {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
   subtitle?: string;
+  initialMode?: 'signin' | 'signup';
   onSuccess?: (user: any) => void;
 }
 
 export default function USAuthModal({
   isOpen,
   onClose,
-  title = 'Join StayHelper Private Club',
-  subtitle = 'Unlock direct verified partner booking links, live room rates, and cinematic master reels.',
+  initialMode = 'signup',
   onSuccess,
 }: USAuthModalProps) {
+  const [mode, setMode] = useState<'signin' | 'signup'>(initialMode);
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [successUser, setSuccessUser] = useState<any>(null);
+
+  useEffect(() => {
+    setMode(initialMode);
+  }, [initialMode, isOpen]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -45,7 +50,8 @@ export default function USAuthModal({
   ) => {
     if (e) e.preventDefault();
     const targetEmail = (customEmail || email).trim();
-    const targetName = (customName || name).trim() || targetEmail.split('@')[0];
+    const targetName =
+      (customName || name).trim() || (mode === 'signup' ? targetEmail.split('@')[0] : '');
 
     if (!targetEmail || !targetEmail.includes('@')) {
       setErrorMessage('Please enter a valid email address.');
@@ -61,8 +67,9 @@ export default function USAuthModal({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: targetEmail,
-          name: targetName,
+          name: targetName || targetEmail.split('@')[0],
           provider,
+          mode,
         }),
       });
 
@@ -71,9 +78,11 @@ export default function USAuthModal({
       if (data.ok && data.user) {
         localStorage.setItem('stayhelper_user', JSON.stringify(data.user));
         localStorage.setItem('stayhelper_member', JSON.stringify(data.user));
+        localStorage.setItem('sh_member_user', JSON.stringify(data.user));
         document.cookie = `stayhelper_user=${encodeURIComponent(
           JSON.stringify(data.user)
         )}; path=/; max-age=2592000; SameSite=Lax`;
+
         window.dispatchEvent(new Event('stayhelper_auth_changed'));
 
         setSuccessUser(data.user);
@@ -92,11 +101,11 @@ export default function USAuthModal({
       } else {
         setErrorMessage(data.error || 'Failed to authenticate.');
       }
-    } catch (err: any) {
+    } catch {
       const fallbackUser = {
         id: `usr_${Date.now()}`,
         email: targetEmail,
-        name: targetName,
+        name: targetName || targetEmail.split('@')[0],
         role: 'user',
         region: 'US',
         provider,
@@ -104,9 +113,11 @@ export default function USAuthModal({
       };
       localStorage.setItem('stayhelper_user', JSON.stringify(fallbackUser));
       localStorage.setItem('stayhelper_member', JSON.stringify(fallbackUser));
+      localStorage.setItem('sh_member_user', JSON.stringify(fallbackUser));
       document.cookie = `stayhelper_user=${encodeURIComponent(
         JSON.stringify(fallbackUser)
       )}; path=/; max-age=2592000; SameSite=Lax`;
+
       window.dispatchEvent(new Event('stayhelper_auth_changed'));
       setSuccessUser(fallbackUser);
       setIsSuccess(true);
@@ -123,13 +134,12 @@ export default function USAuthModal({
   };
 
   const handleGoogleAuth = async () => {
-    const targetEmail =
-      email && email.includes('@') ? email.trim() : 'guest@stayhelper.com';
-    const targetName =
-      name.trim() ||
-      (targetEmail === 'guest@stayhelper.com'
-        ? 'VIP Guest'
-        : targetEmail.split('@')[0]);
+    if (!email || !email.includes('@')) {
+      setErrorMessage('Please enter your Google / Gmail address below to continue.');
+      return;
+    }
+    const targetEmail = email.trim();
+    const targetName = name.trim() || targetEmail.split('@')[0];
     await handleAuthSubmit(undefined, targetEmail, 'google', targetName);
   };
 
@@ -147,7 +157,7 @@ export default function USAuthModal({
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center bg-stone-200/60 hover:bg-stone-200 text-stone-500 hover:text-stone-900 transition"
+          className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center bg-stone-200/60 hover:bg-stone-200 text-stone-500 hover:text-stone-900 transition cursor-pointer"
           aria-label="Close dialog"
         >
           <X className="w-4 h-4" />
@@ -159,26 +169,68 @@ export default function USAuthModal({
               <Check className="w-7 h-7 text-emerald-600 stroke-[2.5]" />
             </div>
             <h4 className="font-luxury-serif font-bold text-xl text-stone-950">
-              Welcome, {successUser?.name || 'Member'}
+              {mode === 'signup' ? 'Welcome to Private Club' : 'Welcome Back'},{' '}
+              {successUser?.name || 'VIP Member'}
             </h4>
-            <p className="text-xs text-stone-600 mt-1 max-w-[280px]">
-              VIP Access unlocked. Redirecting to your sanctuary booking link...
+            <p className="text-xs text-stone-600 mt-1.5 max-w-[280px]">
+              Complimentary VIP status confirmed. Direct reservation dossiers unlocked.
             </p>
           </div>
         ) : (
           <div className="flex flex-col items-center text-center">
+            {/* Mode Switcher Tabs */}
+            <div className="flex items-center gap-1 p-1 bg-stone-200/70 rounded-full mb-4 w-full max-w-[280px]">
+              <button
+                type="button"
+                onClick={() => {
+                  setMode('signup');
+                  setErrorMessage('');
+                }}
+                className={`flex-1 py-1.5 px-3 rounded-full text-xs font-mono font-medium transition cursor-pointer flex items-center justify-center gap-1.5 ${
+                  mode === 'signup'
+                    ? 'bg-white text-stone-900 shadow-xs'
+                    : 'text-stone-600 hover:text-stone-900'
+                }`}
+              >
+                <UserPlus className="w-3.5 h-3.5 text-[#8F703C]" />
+                <span>Join Club</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setMode('signin');
+                  setErrorMessage('');
+                }}
+                className={`flex-1 py-1.5 px-3 rounded-full text-xs font-mono font-medium transition cursor-pointer flex items-center justify-center gap-1.5 ${
+                  mode === 'signin'
+                    ? 'bg-white text-stone-900 shadow-xs'
+                    : 'text-stone-600 hover:text-stone-900'
+                }`}
+              >
+                <LogIn className="w-3.5 h-3.5 text-[#8F703C]" />
+                <span>Sign In</span>
+              </button>
+            </div>
+
             {/* Top Brand Pill */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EFE7D8] border border-[#DFCFA9] text-[10px] font-mono text-[#8F703C] uppercase tracking-widest font-semibold mb-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EFE7D8] border border-[#DFCFA9] text-[10px] font-mono text-[#8F703C] uppercase tracking-widest font-semibold mb-2">
               <Sparkles className="w-3 h-3 text-[#D4AF37]" />
-              <span>Complimentary VIP Access</span>
+              <span>
+                {mode === 'signup' ? 'Complimentary VIP Access' : 'VIP Member Access'}
+              </span>
             </div>
 
             {/* Title & Subtitle */}
             <h3 className="font-luxury-serif font-semibold text-2xl text-stone-900 tracking-tight">
-              {title}
+              {mode === 'signup'
+                ? 'Join StayHelper Private Club'
+                : 'Sign In to Private Club'}
             </h3>
             <p className="text-xs text-stone-600 mt-1.5 mb-5 max-w-[320px] leading-relaxed font-luxury-sans">
-              {subtitle}
+              {mode === 'signup'
+                ? 'Unlock direct verified partner booking links, live room availability, and architectural dossiers.'
+                : 'Enter your registered email to resume your complimentary VIP sanctuary dossier access.'}
             </p>
 
             {/* Primary 1-Click Google Button */}
@@ -186,7 +238,7 @@ export default function USAuthModal({
               type="button"
               onClick={handleGoogleAuth}
               disabled={loading}
-              className="w-full py-3.5 px-4 rounded-2xl bg-white hover:bg-stone-50 text-stone-900 font-luxury-sans font-semibold text-xs sm:text-sm flex items-center justify-center gap-3 transition border border-[#DFCFA9] shadow-sm hover:border-[#8F703C] active:scale-[0.99] cursor-pointer"
+              className="w-full py-3 px-4 rounded-2xl bg-white hover:bg-stone-50 text-stone-900 font-luxury-sans font-semibold text-xs sm:text-sm flex items-center justify-center gap-3 transition border border-[#DFCFA9] shadow-xs hover:border-[#8F703C] active:scale-[0.99] cursor-pointer"
             >
               <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
                 <path
@@ -219,22 +271,28 @@ export default function USAuthModal({
               </div>
             </div>
 
-            {/* Unified Name & Email Form */}
+            {/* Unified Form */}
             <form onSubmit={handleAuthSubmit} className="w-full space-y-3">
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Full Name (e.g. Eleanor Vance)"
-                className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#E7DEC8] text-stone-900 text-xs sm:text-sm placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-[#8F703C] focus:border-[#8F703C] transition shadow-xs font-luxury-sans"
-              />
+              {mode === 'signup' && (
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Full Name (e.g. Eleanor Vance)"
+                  className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#E7DEC8] text-stone-900 text-xs sm:text-sm placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-[#8F703C] focus:border-[#8F703C] transition shadow-xs font-luxury-sans"
+                />
+              )}
 
               <div className="relative flex items-center">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email address..."
+                  placeholder={
+                    mode === 'signup'
+                      ? 'Enter your email address...'
+                      : 'Enter your registered email...'
+                  }
                   required
                   className="w-full pl-4 pr-12 py-2.5 rounded-xl bg-white border border-[#E7DEC8] text-stone-900 text-xs sm:text-sm placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-[#8F703C] focus:border-[#8F703C] transition shadow-xs font-luxury-sans"
                 />
@@ -242,7 +300,7 @@ export default function USAuthModal({
                   type="submit"
                   disabled={loading}
                   className="absolute right-1.5 w-8 h-8 rounded-lg bg-[#1C1917] hover:bg-black text-[#D4AF37] flex items-center justify-center transition active:scale-95 disabled:opacity-50 cursor-pointer"
-                  title="Sign In / Register"
+                  title={mode === 'signup' ? 'Create VIP Membership' : 'Sign In'}
                 >
                   {loading ? (
                     <Loader2 className="w-3.5 h-3.5 animate-spin text-[#D4AF37]" />
@@ -259,9 +317,42 @@ export default function USAuthModal({
               )}
             </form>
 
+            {/* Switch Mode Link */}
+            <div className="mt-4 text-[11px] text-stone-500 font-luxury-sans">
+              {mode === 'signup' ? (
+                <span>
+                  Already a member?{' '}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMode('signin');
+                      setErrorMessage('');
+                    }}
+                    className="text-[#8F703C] font-semibold hover:underline cursor-pointer ml-1"
+                  >
+                    Sign In
+                  </button>
+                </span>
+              ) : (
+                <span>
+                  Need VIP access?{' '}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMode('signup');
+                      setErrorMessage('');
+                    }}
+                    className="text-[#8F703C] font-semibold hover:underline cursor-pointer ml-1"
+                  >
+                    Join Private Club
+                  </button>
+                </span>
+              )}
+            </div>
+
             {/* Discreet Micro-Footer */}
-            <div className="mt-4 flex items-center justify-center gap-1.5 text-[11px] text-stone-400 font-luxury-sans">
-              <span>Fast 1-click access. Zero passwords to remember.</span>
+            <div className="mt-2 text-[10px] text-stone-400 font-mono">
+              Fast 1-click VIP pass. Zero passwords to remember.
             </div>
           </div>
         )}

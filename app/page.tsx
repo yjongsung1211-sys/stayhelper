@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import USAuthModal from '@/components/USAuthModal';
 import editorialLooksData from '../public/editorial_top10_lookbook.json';
 import allProductsData from '../public/real_products_1000.json';
 import {
@@ -146,12 +147,12 @@ const K_STYLING_FORMULAS = [
   {
     id: 'seongsu',
     name: 'Seongsu Utility Core',
-    nameKr: '성수 스트릿 & 고프코어',
+    nameKr: 'Seongsu Street & Gorpcore',
     vibe: 'Oversized Boxy • Drop-Shoulder • Court Retro',
     badge: '🔥 #1 Seoul Trend',
     description:
       'Seoul’s youth capital favors dropped shoulders, boxy workwear canvas, and extra-wide pleated trousers pooling softly over chunky retro court sneakers.',
-    silhouetteTip: '상의는 박시하게 루즈핏, 바지는 신발 발등을 자연스럽게 덮는 롱 와이드 핏으로 실루엣의 무게감을 하단으로 잡습니다.',
+    silhouetteTip: 'Boxy oversized upper silhouette balanced by wide-leg trousers cascading smoothly over sneaker vamps to anchor the visual weight.',
     formula: [
       { piece: 'Outer', spec: 'Boxy Heavyweight Canvas Chore Coat or MA-1 Blouson' },
       { piece: 'Top', spec: 'Clean Cut Heavy Organic Cotton Crewneck Tee in Optic White' },
@@ -164,12 +165,12 @@ const K_STYLING_FORMULAS = [
   {
     id: 'hannam',
     name: 'Hannam Quiet Luxury',
-    nameKr: '한남동 콰이어트 럭셔리',
+    nameKr: 'Hannam Quiet Luxury',
     vibe: 'Minimalist • Monotone • Clean Tailoring',
     badge: '✨ Seoul Insider Pick',
     description:
       'Understated luxury loved by Hannam-dong creators. Perfectly crisp poplin shirts or ultrafine merino knits paired with tailored trousers and classic penny loafers.',
-    silhouetteTip: '군더더기 없는 미니멀 테일러링과 은은한 화이트 골지 양말의 1인치 노출이 완성하는 정갈한 럭셔리.',
+    silhouetteTip: 'Immaculate minimalist tailoring with a subtle 1-inch visible white ribbed sock hem for refined Seoul quiet luxury.',
     formula: [
       { piece: 'Top / Knit', spec: 'Oversized Crisp Poplin Shirt or Fine Merino Crew' },
       { piece: 'Bottom', spec: 'Double-Pleated Tailored Wool-Blend Slacks in Charcoal' },
@@ -182,12 +183,12 @@ const K_STYLING_FORMULAS = [
   {
     id: 'dosan',
     name: 'Dosan Effortless Chic',
-    nameKr: '도산공원 꾸안꾸 데이트',
+    nameKr: 'Dosan Effortless Chic',
     vibe: 'Soft Feminine • Draped • Cafe Brunch',
     badge: '☕ Weekend Favorite',
     description:
       'The quintessential Seoul weekend cafe look: a tactile fluffy knit cardigan paired effortlessly with a bias-cut slip skirt or straight ecru denim.',
-    silhouetteTip: '과하지 않은 우아함. 가벼운 가디건을 살짝 걸치고 슬립 스커트로 흐르는 듯한 드레이프를 연출합니다.',
+    silhouetteTip: 'Effortless elegance: a lightly draped plush cardigan paired with a bias-cut slip skirt creating fluid vertical movement.',
     formula: [
       { piece: 'Outer / Knit', spec: 'Soft Fluffy Alpaca-Blend Button-Down Cardigan' },
       { piece: 'Bottom', spec: 'Bias-Cut Satin Slip Skirt or Clean Straight-Leg Denim' },
@@ -200,12 +201,12 @@ const K_STYLING_FORMULAS = [
   {
     id: 'hongdae',
     name: 'Hongdae Geek-Chic & Vintage',
-    nameKr: '홍대 긱시크 & 빈티지 바이커',
+    nameKr: 'Hongdae Geek-Chic & Vintage Biker',
     vibe: 'Edgy • Rimless Glasses • Distressed Leather',
     badge: '⚡ Street Idol Vibe',
     description:
       'A sharp contrast between rugged vintage distressed moto leather and intellectual silver rimless eyewear. The defining look of Seoul’s music & indie scene.',
-    silhouetteTip: '와일드한 빈티지 가죽 자켓에 지적인 무테 실버 안경을 믹스매치하여 완성하는 힙스터 트렌드.',
+    silhouetteTip: 'Edgy vintage moto leather juxtaposed with intellectual rimless silver eyewear to master the defining Seoul street trend.',
     formula: [
       { piece: 'Outer', spec: 'Distressed Faux-Leather Biker Moto Jacket in Black' },
       { piece: 'Top', spec: 'Ribbed Scoop Tank or Vintage Graphic Baby Tee' },
@@ -297,14 +298,29 @@ export default function CleanStylingHelper() {
 
   // Initialize User from LocalStorage & Global Keyboard Listeners
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem('sh_member_user');
-      if (saved) {
-        setUser(JSON.parse(saved));
+    const syncUser = () => {
+      try {
+        const saved =
+          localStorage.getItem('sh_member_user') ||
+          localStorage.getItem('stayhelper_user') ||
+          localStorage.getItem('stayhelper_member');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          setUser({
+            name: parsed.name || 'VIP Member',
+            email: parsed.email || '',
+            avatar: parsed.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${parsed.name || 'VIP'}`,
+            tier: parsed.tier || 'Founding VIP Member ($0)'
+          });
+        } else {
+          setUser(null);
+        }
+      } catch (e) {
+        console.error(e);
       }
-    } catch (e) {
-      console.error(e);
-    }
+    };
+    syncUser();
+    window.addEventListener('stayhelper_auth_changed', syncUser);
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -316,7 +332,10 @@ export default function CleanStylingHelper() {
       }
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('stayhelper_auth_changed', syncUser);
+    };
   }, []);
 
   const handleGoogleSignIn = (customEmail?: string, customName?: string) => {
@@ -345,9 +364,14 @@ export default function CleanStylingHelper() {
     setUser(null);
     try {
       localStorage.removeItem('sh_member_user');
+      localStorage.removeItem('stayhelper_user');
+      localStorage.removeItem('stayhelper_member');
+      document.cookie = 'stayhelper_user=; path=/; max-age=0;';
+      fetch('/api/auth/quick', { method: 'DELETE' }).catch(() => {});
     } catch (e) {
       console.error(e);
     }
+    window.dispatchEvent(new Event('stayhelper_auth_changed'));
   };
 
   const filteredCatalogProducts = useMemo(() => {
@@ -432,8 +456,9 @@ export default function CleanStylingHelper() {
     }
 
     setSelectedPinId(closestPin.id);
-    setQuickViewPin(closestPin);
-    setCopiedSku(false);
+    if (closestPin.buyUrl) {
+      window.open(closestPin.buyUrl, '_blank', 'noopener,noreferrer');
+    }
   };
 
   // Handle User Photo Upload
@@ -566,16 +591,6 @@ export default function CleanStylingHelper() {
             >
               <ShoppingBag className="w-3.5 h-3.5 text-neutral-900" />
               <span>Browse Wardrobe ({allProductsData.length.toLocaleString()})</span>
-            </button>
-
-            {/* AI Try-on */}
-            <button
-              type="button"
-              onClick={() => setIsTryOnModalOpen(true)}
-              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-neutral-900 to-neutral-800 hover:from-neutral-800 hover:to-neutral-700 shadow-sm transition cursor-pointer"
-            >
-              <Wand2 className="w-3.5 h-3.5 text-amber-300" />
-              <span>AI Try-On</span>
             </button>
 
             {/* Google Sign-in / User Profile */}
@@ -843,12 +858,6 @@ export default function CleanStylingHelper() {
                 className="w-full h-full object-cover object-top transition duration-500 group-hover:scale-[1.01]"
               />
 
-              {/* Interactive Photo Click Guide Pill */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 px-3.5 py-1.5 rounded-full bg-black/80 hover:bg-black/95 backdrop-blur-md text-white text-xs font-bold border border-white/20 flex items-center gap-2 shadow-xl pointer-events-none group-hover:scale-105 transition">
-                <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-                <span>Click any item on the photo to shop</span>
-              </div>
-
               {/* Editorial Header Pill on Photo */}
               <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
                 <span className="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-black/75 backdrop-blur-md text-white border border-white/10">
@@ -898,8 +907,9 @@ export default function CleanStylingHelper() {
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelectedPinId(pin.id);
-                      setQuickViewPin(pin);
-                      setCopiedSku(false);
+                      if (pin.buyUrl) {
+                        window.open(pin.buyUrl, '_blank', 'noopener,noreferrer');
+                      }
                     }}
                     onMouseEnter={() => setHoveredPinId(pin.id)}
                     onMouseLeave={() => setHoveredPinId(null)}
@@ -949,20 +959,16 @@ export default function CleanStylingHelper() {
 
           {/* Right Column: Complete Wardrobe & Direct Purchase Deck - Perfectly Proportion-Matched (5 Cols) */}
           <div className="lg:col-span-5 flex flex-col justify-between h-full gap-3">
-            {/* Look Header Card - Perfectly Proportioned */}
+            {/* Look Header Card - Clean & Minimal */}
             <div className="bg-white rounded-2xl p-4 sm:p-5 border border-neutral-200/90 shadow-sm flex flex-col justify-center">
-              <div className="flex items-center justify-between gap-2 mb-2">
+              <div className="flex items-center gap-2 mb-2">
                 <span className="text-xs font-black uppercase tracking-wider text-white bg-neutral-950 px-2.5 py-1 rounded-full shadow-xs">
                   {activeLook.aesthetic}
                 </span>
-                <span className="text-xs text-neutral-500 font-semibold">{activeLook.season}</span>
               </div>
               <h1 className="text-xl sm:text-2xl font-black text-neutral-950 tracking-tight leading-snug">
                 {activeLook.title}
               </h1>
-              <p className="mt-1.5 text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal line-clamp-2">
-                {activeLook.description}
-              </p>
             </div>
 
             {/* Outfit Garments List - Perfectly Proportioned to match photo height */}
@@ -989,8 +995,9 @@ export default function CleanStylingHelper() {
                       key={pin.id}
                       onClick={() => {
                         setSelectedPinId(pin.id);
-                        setQuickViewPin(pin);
-                        setCopiedSku(false);
+                        if (pin.buyUrl) {
+                          window.open(pin.buyUrl, '_blank', 'noopener,noreferrer');
+                        }
                       }}
                       onMouseEnter={() => setHoveredPinId(pin.id)}
                       onMouseLeave={() => setHoveredPinId(null)}
@@ -1039,20 +1046,6 @@ export default function CleanStylingHelper() {
                   );
                 })}
               </div>
-
-              {/* Try on CTA button */}
-              <button
-                type="button"
-                onClick={() => {
-                  const cat = dynamicCategories.find((c) => c.id === activeLook.styleId) || dynamicCategories[1] || dynamicCategories[0];
-                  setSelectedTryOnStyle(cat.id);
-                  setIsTryOnModalOpen(true);
-                }}
-                className="w-full mt-2 py-3 px-4 rounded-xl bg-gradient-to-r from-neutral-900 via-neutral-800 to-neutral-900 hover:bg-neutral-800 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition"
-              >
-                <Wand2 className="w-4 h-4 text-amber-300" />
-                <span>✨ Try On This Outfit on Your Photo</span>
-              </button>
             </div>
           </div>
         </div>
@@ -1079,8 +1072,6 @@ export default function CleanStylingHelper() {
                     const primaryPin = look.pins && look.pins.length > 0 ? look.pins[0] : null;
                     if (primaryPin) {
                       setSelectedPinId(primaryPin.id);
-                      setQuickViewPin(primaryPin);
-                      setCopiedSku(false);
                     }
                     window.scrollTo({ top: 80, behavior: 'smooth' });
                   }}
@@ -1441,418 +1432,31 @@ export default function CleanStylingHelper() {
         </div>
       )}
 
-      {/* 5. IN-APP K-STYLE QUICK VIEW MODAL (OPTION 1) */}
-      {quickViewPin && (
-        <div
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setQuickViewPin(null);
-          }}
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
-        >
-          <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-neutral-200 overflow-hidden flex flex-col max-h-[90vh]">
-            {/* Modal Header */}
-            <div className="px-6 py-4 border-b border-neutral-100 flex items-center justify-between bg-neutral-50/80">
-              <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-neutral-950 text-white">
-                  K-Style Curation
-                </span>
-                <span className="text-xs font-bold text-neutral-600">
-                  Shop Locally in the US
-                </span>
-              </div>
-              <button
-                type="button"
-                onClick={() => setQuickViewPin(null)}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-neutral-400 hover:text-neutral-900 hover:bg-neutral-200 transition cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Modal Content */}
-            <div className="p-6 overflow-y-auto space-y-5">
-              {/* Product Title & Brand */}
-              <div>
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs font-black uppercase tracking-widest text-amber-700 bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200/60">
-                    {quickViewPin.category} • {quickViewPin.brand}
-                  </span>
-                  <span className="text-2xl font-black text-neutral-950 font-mono tracking-tight">
-                    {formatPrice(quickViewPin.price)}
-                  </span>
-                </div>
-                <h3 className="text-xl font-black text-neutral-950 mt-2 leading-tight tracking-tight">
-                  {quickViewPin.title}
-                </h3>
-              </div>
-
-              {/* Reference SKU / Code Box (Critical for Zara fallback!) */}
-              {quickViewPin.sku && (
-                <div className="flex items-center justify-between gap-3 p-3 bg-neutral-100/80 rounded-xl border border-neutral-200">
-                  <div className="min-w-0">
-                    <span className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider block">
-                      Retailer Item Reference Code
-                    </span>
-                    <span className="text-xs font-mono font-bold text-neutral-900 truncate block">
-                      {quickViewPin.sku}
-                    </span>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const code = quickViewPin.sku?.replace(/^(Ref:\s*|Style:\s*|Item:\s*|ASIN:\s*)/i, '') || '';
-                      navigator.clipboard.writeText(code);
-                      setCopiedSku(true);
-                      setTimeout(() => setCopiedSku(false), 2000);
-                    }}
-                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white border border-neutral-300 hover:bg-neutral-50 text-xs font-bold text-neutral-800 transition cursor-pointer flex-shrink-0"
-                  >
-                    {copiedSku ? (
-                      <>
-                        <Check className="w-3.5 h-3.5 text-emerald-600" />
-                        <span className="text-emerald-700">Copied!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3.5 h-3.5 text-neutral-600" />
-                        <span>Copy Code</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-              )}
-
-              {/* Seoul K-Style Formula Box (The Magic!) */}
-              <div className="p-4 rounded-xl bg-gradient-to-br from-amber-50 via-amber-50/50 to-orange-50 border border-amber-200/80">
-                <div className="flex items-center gap-1.5 text-amber-900 font-extrabold text-xs mb-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-                  <span>The Seoul Styling Formula</span>
-                </div>
-                <p className="text-xs text-amber-950/90 leading-relaxed font-medium">
-                  {quickViewPin.kStyleTip ||
-                    "Curated by Seoul fashion editors to recreate effortless Korean idol styling using authentic garments available directly at your local US retailers."}
-                </p>
-              </div>
-
-              {/* Seoul K-Style Sock & Legwear Formula Box (Pure Styling Guide) */}
-              {(quickViewPin.category === 'Shoes' || quickViewPin.sockTip) && (
-                <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-50/90 via-sky-50/40 to-blue-50/70 border border-indigo-200/80 flex flex-col gap-1.5">
-                  <div className="flex items-center justify-between gap-1.5">
-                    <div className="flex items-center gap-1.5 text-indigo-950 font-extrabold text-xs">
-                      <span>🧦</span>
-                      <span>The Seoul Sock & Legwear Formula</span>
-                    </div>
-                    <span className="text-[10px] font-bold text-indigo-700 bg-indigo-100/90 px-2 py-0.5 rounded-full">
-                      Editorial Styling Only • Not for Sale
-                    </span>
-                  </div>
-                  <p className="text-xs text-indigo-950/85 leading-relaxed font-medium">
-                    {quickViewPin.sockTip ||
-                      "Seoul Street Rule: Pair with thick optic-white ribbed crew socks casually scrunched at the ankle to balance relaxed wide-leg hems."}
-                  </p>
-                </div>
-              )}
-
-              {/* Complete the Look Pills */}
-              <div>
-                <span className="text-[11px] font-extrabold uppercase tracking-wider text-neutral-500 block mb-2">
-                  Complete this Korean Look ({activeLook?.title || ''})
-                </span>
-                <div className="flex flex-wrap gap-1.5">
-                  {activeLook?.pins?.map((p) => {
-                    const isCurrent = p.id === quickViewPin.id;
-                    return (
-                      <button
-                        key={p.id}
-                        type="button"
-                        onClick={() => {
-                          setQuickViewPin(p);
-                          setSelectedPinId(p.id);
-                          setCopiedSku(false);
-                        }}
-                        className={`text-[11px] px-2.5 py-1 rounded-lg font-bold border transition cursor-pointer ${
-                          isCurrent
-                            ? 'bg-neutral-950 text-white border-neutral-950 shadow-xs'
-                            : 'bg-white text-neutral-700 hover:bg-neutral-100 border-neutral-200'
-                        }`}
-                      >
-                        {p.category}: {p.brand} ({formatPrice(p.price)})
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-
-            {/* Modal Footer / CTAs */}
-            <div className="p-4 border-t border-neutral-100 bg-neutral-50 flex flex-col gap-2">
-              <a
-                href={quickViewPin.buyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3 px-4 rounded-xl bg-neutral-950 hover:bg-neutral-800 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-sm transition"
-              >
-                <span>Shop Exact Item on {quickViewPin.retailer} Official Store</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-              <p className="text-[10px] text-center text-neutral-400">
-                Direct PDP link. If retailer redirects to collection page due to low stock, use the copied Reference Code to find it instantly.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* 5.6. GOOGLE SIGN-IN & FOUNDING MEMBER MODAL */}
-      {isAuthModalOpen && (
-        <div
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setIsAuthModalOpen(false);
-          }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-in fade-in duration-200"
-        >
-          <div className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl border border-neutral-200 overflow-hidden flex flex-col">
-            {/* Modal Header */}
-            <div className="p-6 pb-4 border-b border-neutral-100 bg-neutral-50/80 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-400 text-neutral-950">
-                  🎁 Free Early Access
-                </span>
-                <span className="text-xs text-neutral-500 font-bold">Founding Pass</span>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIsAuthModalOpen(false)}
-                className="p-2 rounded-full hover:bg-neutral-200/80 text-neutral-500 transition cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Modal Body */}
-            <div className="p-6 flex flex-col gap-5">
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-2xl bg-neutral-950 text-white flex items-center justify-center font-black text-lg mx-auto shadow-md mb-3">
-                  SH
-                </div>
-                <h3 className="text-xl font-black text-neutral-950 tracking-tight">
-                  Join StylingHelper US
-                </h3>
-                <p className="text-xs text-neutral-600 mt-1 max-w-xs mx-auto leading-relaxed">
-                  Sign in with Google today to unlock <strong className="text-neutral-950">Lifetime Free Founding Membership</strong> (Normally $9/mo, 100% Free for Early Adopters).
-                </p>
-              </div>
-
-              {/* Perks Checklist */}
-              <div className="bg-neutral-50 rounded-2xl p-4 border border-neutral-200/80 flex flex-col gap-2.5 text-xs text-neutral-700">
-                <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                  <span><strong>1:1 Curated Seoul K-Styling</strong> & Silhouette Matching</span>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                  <span><strong>{allProductsData.length.toLocaleString()} In-Stock US Retail Items</strong> & Smart Luxury Dupes</span>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                  <span><strong>The Seoul Sock & Legwear Formula</strong> with every shoe</span>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                  <span><strong>$0/mo Subscription Lock-In</strong>: Never pay monthly fees later</span>
-                </div>
-              </div>
-
-              {/* Google 1-Click Button */}
-              <div className="flex flex-col gap-3">
-                <button
-                  type="button"
-                  onClick={() => handleGoogleSignIn()}
-                  disabled={isAuthLoading}
-                  className="w-full py-3.5 px-4 rounded-xl bg-white hover:bg-neutral-50 text-neutral-900 border-2 border-neutral-200 hover:border-neutral-300 font-bold text-xs flex items-center justify-center gap-3 shadow-sm transition cursor-pointer disabled:opacity-50"
-                >
-                  <GoogleIcon className="w-5 h-5" />
-                  <span>{isAuthLoading ? 'Connecting to Google...' : 'Continue with Google'}</span>
-                </button>
-
-                {/* Email entry option */}
-                <div className="relative flex py-1 items-center">
-                  <div className="flex-grow border-t border-neutral-200"></div>
-                  <span className="flex-shrink mx-3 text-[10px] uppercase font-bold text-neutral-400">or enter email</span>
-                  <div className="flex-grow border-t border-neutral-200"></div>
-                </div>
-
-                <div className="flex gap-2">
-                  <input
-                    type="email"
-                    value={authEmailInput}
-                    onChange={(e) => setAuthEmailInput(e.target.value)}
-                    placeholder="name@gmail.com"
-                    className="flex-1 px-3.5 py-2.5 rounded-xl border border-neutral-200 text-xs text-neutral-900 bg-neutral-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-900"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => handleGoogleSignIn(authEmailInput)}
-                    className="px-4 py-2.5 rounded-xl bg-neutral-950 hover:bg-neutral-800 text-white font-bold text-xs transition cursor-pointer flex-shrink-0"
-                  >
-                    Join Free
-                  </button>
-                </div>
-              </div>
-
-              <p className="text-[10px] text-center text-neutral-400 leading-tight">
-                By continuing, you agree to our Terms of Service & Privacy Policy. Zero spam, unsubscribe anytime.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* 5.7. K-STYLING RECOMMENDATION ENGINE MODAL */}
-      {isRecommendationModalOpen && (
-        <div
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setIsRecommendationModalOpen(false);
-          }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/75 backdrop-blur-md animate-in fade-in duration-200"
-        >
-          <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-neutral-200 overflow-hidden relative">
-            {/* Modal Header */}
-            <div className="p-6 border-b border-neutral-100 flex items-center justify-between gap-4 flex-shrink-0 bg-neutral-50/70">
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-400 text-neutral-950">
-                    🇰🇷 Seoul Trend Formulas
-                  </span>
-                  <span className="text-xs text-neutral-500 font-medium">Curated Korean Styling Guide</span>
-                </div>
-                <h3 className="text-xl sm:text-2xl font-black text-neutral-950 mt-1 tracking-tight">
-                  Authentic K-Styling Recommendation
-                </h3>
-                <p className="text-xs text-neutral-500 mt-0.5">
-                  Discover how Seoul insiders style drop-shoulder silhouettes, wide trousers, and the iconic white sock pairing.
-                </p>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => setIsRecommendationModalOpen(false)}
-                className="p-2.5 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-600 transition cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Vibe Selection Tabs */}
-            <div className="p-4 border-b border-neutral-100 bg-white flex items-center gap-2 overflow-x-auto no-scrollbar flex-shrink-0">
-              {K_STYLING_FORMULAS.map((formula) => {
-                const isSelected = activeVibeId === formula.id;
-                return (
-                  <button
-                    key={formula.id}
-                    type="button"
-                    onClick={() => setActiveVibeId(formula.id)}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 flex-shrink-0 cursor-pointer ${
-                      isSelected
-                        ? 'bg-neutral-950 text-white shadow-sm'
-                        : 'bg-neutral-100 hover:bg-neutral-200 text-neutral-700'
-                    }`}
-                  >
-                    <span>{formula.name}</span>
-                    <span className="text-[10px] font-normal opacity-80">({formula.nameKr})</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Active Formula Showcase */}
-            {(() => {
-              const currentFormula = K_STYLING_FORMULAS.find((f) => f.id === activeVibeId) || K_STYLING_FORMULAS[0];
-              const matchedLook = CURATED_LOOKS.find((l) => l.id === currentFormula.recommendedLookId) || CURATED_LOOKS[0];
-
-              return (
-                <div className="p-6 overflow-y-auto flex-1 flex flex-col md:flex-row gap-6">
-                  {/* Left: Matched Look Photo & Apply Button */}
-                  <div className="w-full md:w-5/12 flex flex-col gap-3">
-                    <div className="relative rounded-2xl overflow-hidden aspect-[3/4] bg-neutral-900 border border-neutral-200 shadow-md">
-                      <img
-                        src={matchedLook.imageUrl}
-                        alt={matchedLook.title}
-                        className="w-full h-full object-cover object-top"
-                      />
-                      <div className="absolute top-3 left-3 bg-neutral-950/80 backdrop-blur-sm text-amber-300 text-[10px] font-bold px-2.5 py-1 rounded-full">
-                        {currentFormula.badge}
-                      </div>
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setActiveLook(matchedLook);
-                        setSelectedPinId(matchedLook.pins[0]?.id || null);
-                        setIsRecommendationModalOpen(false);
-                        window.scrollTo({ top: 120, behavior: 'smooth' });
-                      }}
-                      className="w-full py-3 px-4 rounded-xl bg-neutral-950 hover:bg-neutral-800 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-sm transition cursor-pointer"
-                    >
-                      <span>Apply & Shop This Look in 4K</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-amber-300" />
-                    </button>
-                  </div>
-
-                  {/* Right: Detailed K-Styling Formula & Sock Pairing Secret */}
-                  <div className="w-full md:w-7/12 flex flex-col gap-5">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold uppercase tracking-wider text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-                          {currentFormula.nameKr}
-                        </span>
-                        <span className="text-xs text-neutral-400 font-medium">{currentFormula.vibe}</span>
-                      </div>
-                      <h4 className="text-xl font-black text-neutral-950 mt-1.5">{currentFormula.name}</h4>
-                      <p className="text-xs text-neutral-600 leading-relaxed mt-2">{currentFormula.description}</p>
-                    </div>
-
-                    {/* Silhouette Tip Box */}
-                    <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200/80 text-amber-950 text-xs">
-                      <div className="font-extrabold flex items-center gap-1.5 mb-1 text-amber-900">
-                        <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-                        <span>Seoul Silhouette Secret (실루엣 황금 비율)</span>
-                      </div>
-                      <p className="text-[11px] leading-relaxed text-amber-900/90 font-medium">
-                        {currentFormula.silhouetteTip}
-                      </p>
-                    </div>
-
-                    {/* Garment Formula List */}
-                    <div className="flex flex-col gap-2">
-                      <span className="text-xs font-extrabold uppercase tracking-wider text-neutral-500">
-                        Essential Garment Formula (착장 구성 품목)
-                      </span>
-                      <div className="divide-y divide-neutral-100 border border-neutral-200 rounded-xl overflow-hidden bg-neutral-50/40">
-                        {currentFormula.formula.map((item, idx) => (
-                          <div key={idx} className="p-3 flex items-start gap-3 bg-white text-xs">
-                            <span className="w-24 font-bold text-neutral-900 flex-shrink-0">
-                              {item.piece}
-                            </span>
-                            <span className="text-neutral-600 flex-1">{item.spec}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })()}
-          </div>
-        </div>
-      )}
+      {/* 5. IN-APP K-STYLE QUICK VIEW MODAL REMOVED (DIRECT LINK NAVIGATION ENABLED) */}
 
       {/* 6. CLEAN MINIMAL FOOTER */}
       <footer className="mt-20 bg-white border-t border-neutral-200 py-8 text-center text-xs text-neutral-500">
         <p className="font-semibold text-neutral-700">StylingHelper USA — Real Garment AI Inspo</p>
         <p className="mt-1 text-[11px]">100% Real-World Items from Zara US, Nordstrom & H&M US • Zero Fantasy Clothing</p>
       </footer>
+
+      {/* 7. FAST 1-CLICK AUTH MODAL (Google & VIP Email Sign In / Sign Up) */}
+      <USAuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        title="Join StylingHelper VIP"
+        subtitle="100% Free Forever for Early Members. Unlock Seoul K-Styling formulas and verified US shopping links."
+        onSuccess={(userData) => {
+          const newUser = {
+            name: userData.name || 'VIP Member',
+            email: userData.email || '',
+            avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${userData.name || 'VIP'}`,
+            tier: 'Founding Member · Free Forever ($0/mo)'
+          };
+          setUser(newUser);
+          setIsAuthModalOpen(false);
+        }}
+      />
     </div>
   );
 }
