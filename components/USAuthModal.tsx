@@ -21,6 +21,8 @@ export default function USAuthModal({
   const [mode, setMode] = useState<'signin' | 'signup'>(initialMode);
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [isGoogleStep, setIsGoogleStep] = useState(false);
+  const [googleEmail, setGoogleEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
@@ -38,6 +40,7 @@ export default function USAuthModal({
       window.addEventListener('keydown', handleKeyDown);
       setErrorMessage('');
       setIsSuccess(false);
+      setIsGoogleStep(false);
     }
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
@@ -95,8 +98,10 @@ export default function USAuthModal({
         setTimeout(() => {
           onClose();
           setIsSuccess(false);
+          setIsGoogleStep(false);
           setEmail('');
           setName('');
+          setGoogleEmail('');
         }, 1200);
       } else {
         setErrorMessage(data.error || 'Failed to authenticate.');
@@ -125,22 +130,34 @@ export default function USAuthModal({
       setTimeout(() => {
         onClose();
         setIsSuccess(false);
+        setIsGoogleStep(false);
         setEmail('');
         setName('');
+        setGoogleEmail('');
       }, 1200);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleGoogleAuth = async () => {
-    if (!email || !email.includes('@')) {
-      setErrorMessage('Please enter your Google / Gmail address below to continue.');
+  const handleGoogleClick = () => {
+    // If email already entered in main input, submit directly
+    if (email && email.includes('@')) {
+      handleAuthSubmit(undefined, email.trim(), 'google', name.trim());
       return;
     }
-    const targetEmail = email.trim();
-    const targetName = name.trim() || targetEmail.split('@')[0];
-    await handleAuthSubmit(undefined, targetEmail, 'google', targetName);
+    // Otherwise open the Google email input smoothly without error
+    setIsGoogleStep(true);
+    setErrorMessage('');
+  };
+
+  const handleGoogleConfirm = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!googleEmail || !googleEmail.includes('@')) {
+      setErrorMessage('Please enter your Google / Gmail address.');
+      return;
+    }
+    handleAuthSubmit(undefined, googleEmail.trim(), 'google', googleEmail.split('@')[0]);
   };
 
   if (!isOpen) return null;
@@ -184,6 +201,7 @@ export default function USAuthModal({
                 type="button"
                 onClick={() => {
                   setMode('signup');
+                  setIsGoogleStep(false);
                   setErrorMessage('');
                 }}
                 className={`flex-1 py-1.5 px-3 rounded-full text-xs font-mono font-medium transition cursor-pointer flex items-center justify-center gap-1.5 ${
@@ -200,6 +218,7 @@ export default function USAuthModal({
                 type="button"
                 onClick={() => {
                   setMode('signin');
+                  setIsGoogleStep(false);
                   setErrorMessage('');
                 }}
                 className={`flex-1 py-1.5 px-3 rounded-full text-xs font-mono font-medium transition cursor-pointer flex items-center justify-center gap-1.5 ${
@@ -233,33 +252,84 @@ export default function USAuthModal({
                 : 'Enter your registered email to resume your complimentary VIP sanctuary dossier access.'}
             </p>
 
-            {/* Primary 1-Click Google Button */}
-            <button
-              type="button"
-              onClick={handleGoogleAuth}
-              disabled={loading}
-              className="w-full py-3 px-4 rounded-2xl bg-white hover:bg-stone-50 text-stone-900 font-luxury-sans font-semibold text-xs sm:text-sm flex items-center justify-center gap-3 transition border border-[#DFCFA9] shadow-xs hover:border-[#8F703C] active:scale-[0.99] cursor-pointer"
-            >
-              <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
-                <path
-                  fill="#4285F4"
-                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                />
-                <path
-                  fill="#34A853"
-                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                />
-                <path
-                  fill="#FBBC05"
-                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
-                />
-                <path
-                  fill="#EA4335"
-                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
-                />
-              </svg>
-              <span>Continue with Google</span>
-            </button>
+            {/* Google Flow */}
+            {isGoogleStep ? (
+              <form onSubmit={handleGoogleConfirm} className="w-full mb-4 p-4 rounded-2xl bg-white border border-[#4285F4]/40 shadow-sm animate-fadeIn">
+                <div className="flex items-center gap-2 mb-2 text-left">
+                  <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+                    <path
+                      fill="#4285F4"
+                      d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                    />
+                    <path
+                      fill="#34A853"
+                      d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                    />
+                    <path
+                      fill="#FBBC05"
+                      d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                    />
+                    <path
+                      fill="#EA4335"
+                      d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                    />
+                  </svg>
+                  <span className="text-xs font-semibold text-stone-900">Sign in with Google</span>
+                </div>
+                <div className="relative flex items-center">
+                  <input
+                    type="email"
+                    value={googleEmail}
+                    onChange={(e) => setGoogleEmail(e.target.value)}
+                    placeholder="Enter your Gmail (e.g. name@gmail.com)"
+                    autoFocus
+                    required
+                    className="w-full pl-3 pr-10 py-2 rounded-xl bg-stone-50 border border-stone-200 text-stone-900 text-xs placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-[#4285F4] focus:border-[#4285F4]"
+                  />
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="absolute right-1 w-7 h-7 rounded-lg bg-[#4285F4] hover:bg-[#3367D6] text-white flex items-center justify-center transition active:scale-95 disabled:opacity-50 cursor-pointer"
+                  >
+                    {loading ? <Loader2 className="w-3 h-3 animate-spin" /> : <ArrowRight className="w-3 h-3" />}
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsGoogleStep(false)}
+                  className="mt-2 text-[10px] text-stone-400 hover:text-stone-600 block text-right w-full cursor-pointer"
+                >
+                  Cancel
+                </button>
+              </form>
+            ) : (
+              <button
+                type="button"
+                onClick={handleGoogleClick}
+                disabled={loading}
+                className="w-full py-3 px-4 rounded-2xl bg-white hover:bg-stone-50 text-stone-900 font-luxury-sans font-semibold text-xs sm:text-sm flex items-center justify-center gap-3 transition border border-[#DFCFA9] shadow-xs hover:border-[#8F703C] active:scale-[0.99] cursor-pointer"
+              >
+                <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+                  <path
+                    fill="#4285F4"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                  />
+                  <path
+                    fill="#EA4335"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                  />
+                </svg>
+                <span>Continue with Google</span>
+              </button>
+            )}
 
             {/* Minimal Divider */}
             <div className="relative w-full my-4">
@@ -326,6 +396,7 @@ export default function USAuthModal({
                     type="button"
                     onClick={() => {
                       setMode('signin');
+                      setIsGoogleStep(false);
                       setErrorMessage('');
                     }}
                     className="text-[#8F703C] font-semibold hover:underline cursor-pointer ml-1"
@@ -340,6 +411,7 @@ export default function USAuthModal({
                     type="button"
                     onClick={() => {
                       setMode('signup');
+                      setIsGoogleStep(false);
                       setErrorMessage('');
                     }}
                     className="text-[#8F703C] font-semibold hover:underline cursor-pointer ml-1"
