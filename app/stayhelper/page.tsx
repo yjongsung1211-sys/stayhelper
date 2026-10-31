@@ -558,7 +558,7 @@ export default function StayHelperLuxuryShowcase() {
                 </button>
               </div>
             ) : (
-              <div className="hidden lg:flex items-center gap-2">
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 <button
                   type="button"
                   onClick={() => {
@@ -566,7 +566,7 @@ export default function StayHelperLuxuryShowcase() {
                     setPendingRedirectUrl(currentStay.bookingUrl);
                     setIsAuthModalOpen(true);
                   }}
-                  className="px-3 py-1.5 rounded-full border border-white/20 hover:border-white/40 bg-black/30 hover:bg-black/50 text-xs font-mono text-stone-300 hover:text-white transition-all backdrop-blur-md cursor-pointer shrink-0"
+                  className="px-2.5 sm:px-3 py-1.5 rounded-full border border-white/20 hover:border-white/40 bg-black/30 hover:bg-black/50 text-[11px] sm:text-xs font-mono text-stone-300 hover:text-white transition-all backdrop-blur-md cursor-pointer shrink-0"
                 >
                   Sign In
                 </button>
@@ -577,9 +577,10 @@ export default function StayHelperLuxuryShowcase() {
                     setPendingRedirectUrl(currentStay.bookingUrl);
                     setIsAuthModalOpen(true);
                   }}
-                  className="px-3.5 py-1.5 rounded-full border border-[#DFCFA9]/40 hover:border-[#DFCFA9] bg-[#DFCFA9]/10 hover:bg-[#DFCFA9]/20 text-xs font-mono text-[#E8D5B5] transition-all backdrop-blur-md cursor-pointer shrink-0"
+                  className="px-2.5 sm:px-3.5 py-1.5 rounded-full border border-[#DFCFA9]/40 hover:border-[#DFCFA9] bg-[#DFCFA9]/10 hover:bg-[#DFCFA9]/20 text-[11px] sm:text-xs font-mono text-[#E8D5B5] transition-all backdrop-blur-md cursor-pointer shrink-0 whitespace-nowrap"
                 >
-                  Join Private Club
+                  <span className="hidden sm:inline">Join Private Club</span>
+                  <span className="sm:hidden">Join Club</span>
                 </button>
               </div>
             )}
