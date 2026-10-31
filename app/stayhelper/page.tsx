@@ -598,12 +598,22 @@ export default function StayHelperLuxuryShowcase() {
                   autoPlay
                   muted={isMuted}
                   onEnded={() => {
+                    if (videoRef.current) {
+                      videoRef.current.currentTime = 0;
+                      videoRef.current.pause();
+                    }
                     setIsPlaying(false);
                     setIsEnded(true);
                   }}
                   className="w-full h-full object-cover cursor-pointer"
-                  onClick={() => handleBookingAction(currentStay.bookingUrl)}
-                  title="Click to check live rates and reserve"
+                  onClick={() => {
+                    if (isEnded) {
+                      restartVideo();
+                    } else {
+                      handleBookingAction(currentStay.bookingUrl);
+                    }
+                  }}
+                  title={isEnded ? "Click to replay video" : "Click to check live rates and reserve"}
                 />
 
                 {/* Soft Edge Vignette Overlay (Gently blends the frame inward) */}
@@ -621,36 +631,22 @@ export default function StayHelperLuxuryShowcase() {
                   </div>
                 )}
 
-                {/* Replay Overlay on Video End */}
+                {/* Seamless First-Frame Freeze with Subtle Replay Badge (0 Black Screen, Vibrant Initial Scene Preserved) */}
                 {isEnded && (
                   <div
-                    onClick={() => handleBookingAction(currentStay.bookingUrl)}
-                    className="absolute inset-0 bg-black/75 backdrop-blur-[5px] z-30 flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all duration-300"
+                    onClick={restartVideo}
+                    className="absolute inset-0 z-20 flex flex-col items-center justify-center cursor-pointer p-4"
                   >
-                    <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#E8D5B5] mb-2">
-                      Master Reel Complete
-                    </span>
-                    <h3 className="text-xl font-luxury-serif font-light text-white mb-1">
-                      {currentStay.name}
-                    </h3>
-                    <p className="text-xs font-mono text-stone-300 mb-5">
-                      Official Partner Rates & Live Availability ↗
-                    </p>
-
-                    <div className="w-full max-w-[240px] py-2.5 px-4 rounded-full bg-white hover:bg-[#F3EFE6] text-black font-luxury-sans font-medium text-xs flex items-center justify-center gap-2 shadow-2xl transition-transform hover:scale-105 mb-3">
-                      <span>Let's Book Your Stay ↗</span>
-                    </div>
-
                     <button
                       type="button"
                       onClick={(e) => {
                         e.stopPropagation();
                         restartVideo();
                       }}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/70 hover:bg-black text-stone-300 hover:text-white text-xs font-mono border border-white/20 transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/50 hover:bg-black/80 text-stone-200 hover:text-white text-xs font-mono border border-white/20 backdrop-blur-md shadow-2xl transition-all duration-300 hover:scale-105 cursor-pointer"
                     >
                       <RotateCcw className="w-3.5 h-3.5 text-[#E8D5B5]" />
-                      <span>Replay</span>
+                      <span>Replay Reel</span>
                     </button>
                   </div>
                 )}
