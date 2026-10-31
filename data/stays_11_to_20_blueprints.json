@@ -1,0 +1,824 @@
+{
+  "stays": [
+    {
+      "id": "stay-11",
+      "slug": "villa_deste",
+      "numeral": "XI",
+      "name": "Villa d'Este",
+      "subtitle": "16th-Century Renaissance Royal Palace & Legendary Floating Pool on Lake Como",
+      "location": "Cernobbio, Lake Como",
+      "country": "Lake Como, Italy",
+      "badge": "COLLECTION № 11 · LAKE COMO, ITALY",
+      "rating": "4.99",
+      "reviews": "920+",
+      "pricePerNight": "From $1,950",
+      "priceAmount": "$1,950",
+      "seasonalRange": "Spring $1,600+ · Summer Grand Prix $3,400+",
+      "rateInclusions": "Includes lakeside artisan breakfast, floating pool pass & private gardens access",
+      "forbesTier": "Leading Hotels of the World & Forbes 5-Star",
+      "image": "/images/stayhelper/villa_deste_wide_hero.jpg",
+      "wideHero": "/images/stayhelper/villa_deste_wide_hero.jpg",
+      "videoSrc": "/videos/StayHelperVillaDEste_Master_Reel.mp4",
+      "posterSrc": "/images/stayhelper/villa_deste_wide_hero.jpg",
+      "bookingUrl": "https://www.villadeste.com/",
+      "status": "STREAMING",
+      "story": [
+        "Originally commissioned in 1568 as a summer residence for Cardinal Tolomeo Gallio, Villa d’Este is widely celebrated as the timeless grand dame of Lake Como. Nestled within twenty-five acres of Renaissance botanical gardens, majestic cypress alleys, and baroque fountains, it preserves an atmosphere of regal grandeur once favored by European royalty, aristocracy, and literary icons.",
+        "The estate’s crown jewel is its world-famous floating swimming pool, built directly into the dark blue waters of Lake Como with a private sunbathing pontoon facing misty mountain peaks. Gilded chandeliers, Murano glass, and Como silk furnishings frame private balcony vistas over passing wooden Riva motorboats."
+      ],
+      "features": [
+        { "title": "Iconic Floating Lake Pool", "desc": "Pioneering pontoon heated swimming pool suspended directly upon Lake Como" },
+        { "title": "25-Acre Renaissance Gardens", "desc": "Historic 16th-century baroque nymphaeum and centennial pine tree promenades" },
+        { "title": "Veranda Lakeside Gastronomy", "desc": "Fine Italian dining with floor-to-ceiling glass pavilions opening onto the water" }
+      ],
+      "acts": [
+        {
+          "badge": "ACT 01 / PANORAMIC ARRIVAL",
+          "title": "The Renaissance Palace",
+          "highlightWord": "Renaissance",
+          "description": "Gliding across Lake Como aboard a wooden Riva yacht toward the grand 16th-century facade.",
+          "fact": "💡 HIGHLIGHT: 1568 ARISTOCRATIC PALACE ON LAKE COMO",
+          "voText": "Gliding across the shimmering waters of Lake Como, arrive at Villa d’Este, a sixteenth-century Renaissance sanctuary of aristocratic grace."
+        },
+        {
+          "badge": "ACT 02 / BOTANICAL PATH",
+          "title": "Baroque Cypress Allee",
+          "highlightWord": "Cypress",
+          "description": "Strolling through 25 acres of historic cypress groves and cascading stone nymphaeum fountains.",
+          "fact": "💡 GARDENS: 25 ACRES OF CENTURY-OLD BOTANICAL SPLENDOR",
+          "voText": "Wander through centuries-old cypress alleys where historic stone fountains whisper tales of European royalty."
+        },
+        {
+          "badge": "ACT 03 / SACRED HERITAGE",
+          "title": "The Cardinal's Legacy",
+          "highlightWord": "Cardinal",
+          "description": "Admiring gilded fresco ceilings, Como silk draperies, and authentic neoclassical oil paintings.",
+          "fact": "💡 HERITAGE: CARDINAL GALLIO HISTORIC ARTIFACTS",
+          "voText": "Step inside regal salons draped in Como silk, adorned with Renaissance frescoes and museum-quality masterworks."
+        },
+        {
+          "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+          "title": "The Floating Pool",
+          "highlightWord": "Floating",
+          "description": "Floating in the legendary heated pontoon pool resting directly on the sapphire lake surface.",
+          "fact": "💡 SIGNATURE: WORLD-FAMOUS LAKE COMO FLOATING POOL",
+          "voText": "Immerse yourself in the iconic floating pool, suspended weightlessly over the deep sapphire waters of the lake."
+        },
+        {
+          "badge": "ACT 05 / HOLISTIC HEALING",
+          "title": "Lakeview Botanical Spa",
+          "highlightWord": "Botanical",
+          "description": "Restorative herbal therapies infused with Italian sweet orange, rosewater, and thermal minerals.",
+          "fact": "💡 WELLNESS: HOLISTIC MEDITERRANEAN SPA RITUALS",
+          "voText": "Rejuvenate at the private spa with restorative botanicals inspired by the fragrant Flora of Lombardy."
+        },
+        {
+          "badge": "ACT 06 / GOLDEN HOUR",
+          "title": "Veranda Sunset Bellini",
+          "highlightWord": "Bellini",
+          "description": "Sunset champagne toast on the lakeside terrace as classical piano music drifts across the water.",
+          "fact": "💡 SUNSET: GOLDEN TWILIGHT OVER THE CERNOBBIO SHORE",
+          "voText": "As twilight paints the alpine peaks in gold, raise a glass of champagne on the lakeside veranda. Reserve your private sanctuary today."
+        }
+      ]
+    },
+    {
+      "id": "stay-12",
+      "slug": "post_ranch_inn",
+      "numeral": "XII",
+      "name": "Post Ranch Inn",
+      "subtitle": "Cliffside Architectural Masterpiece Perched 1,200 Feet Above the Boundless Pacific",
+      "location": "Big Sur, Highway 1, California",
+      "country": "California, United States",
+      "badge": "COLLECTION № 12 · BIG SUR, USA",
+      "rating": "4.99",
+      "reviews": "840+",
+      "pricePerNight": "From $2,450",
+      "priceAmount": "$2,450",
+      "seasonalRange": "Fall $2,100+ · Summer Fog Peak $3,800+",
+      "rateInclusions": "Includes gourmet Big Sur breakfast, daily morning yoga & guided nature hikes",
+      "forbesTier": "Forbes Travel Guide 5-Star Hotel",
+      "image": "/images/stayhelper/post_ranch_inn_wide_hero.jpg",
+      "wideHero": "/images/stayhelper/post_ranch_inn_wide_hero.jpg",
+      "videoSrc": "/videos/StayHelperPostRanchInn_Master_Reel.mp4",
+      "posterSrc": "/images/stayhelper/post_ranch_inn_wide_hero.jpg",
+      "bookingUrl": "https://www.postranchinn.com/",
+      "status": "STREAMING",
+      "story": [
+        "Perched dramatically on the rugged cliffs of Big Sur twelve hundred feet above the crashing Pacific Ocean, Post Ranch Inn is an organic architectural triumph designed by Mickey Muennig. Built entirely with reclaimed redwood, local stone, and curved sod roofs, the resort harmonizes flawlessly with the wild California coastal ecosystem.",
+        "Freestanding cliff house sanctuaries and triangular treehouses elevated nine feet off the forest floor offer wood-burning fireplaces, private outdoor soaking tubs, and telescope observatories framing migrating humpback whales and starlit cosmic skies."
+      ],
+      "features": [
+        { "title": "Cliffside Jade Soaking Spas", "desc": "104-degree infinity soaking pools perched directly on sheer ocean precipices" },
+        { "title": "Elevated Treehouse Sanctuaries", "desc": "Architectural stilt pavilions built amidst ancient coastal redwood canopies" },
+        { "title": "Sierra Mar Gastronomy", "desc": "Michelin-recognized coastal cuisine paired with a 15,000-bottle Grand Award cellar" }
+      ],
+      "acts": [
+        {
+          "badge": "ACT 01 / PANORAMIC ARRIVAL",
+          "title": "The Edge of the World",
+          "highlightWord": "Edge",
+          "description": "Perched twelve hundred feet above the untamed coastal bluffs and crashing waves of Big Sur.",
+          "fact": "💡 HIGHLIGHT: 1,200 FEET SHEER PACIFIC CLIFF LOCATION",
+          "voText": "Twelve hundred feet above the crashing Pacific surf, arrive at Post Ranch Inn, Big Sur’s ultimate architectural sanctuary on the edge of the world."
+        },
+        {
+          "badge": "ACT 02 / BOTANICAL PATH",
+          "title": "Ancient Redwood Trails",
+          "highlightWord": "Redwood",
+          "description": "Walking through coastal fog and fragrant sagebrush along private old-growth redwood pathways.",
+          "fact": "💡 NATURE: 100 ACRES OF PROTECTED COASTAL REDWOOD BIOME",
+          "voText": "Follow private trails winding through ancient coastal redwoods, where sea mist and fragrant pine scent the ocean breeze."
+        },
+        {
+          "badge": "ACT 03 / SACRED HERITAGE",
+          "title": "Organic Redwood Architecture",
+          "highlightWord": "Organic",
+          "description": "Sculpted bio-climatic pavilions crafted with weathered copper, stone, and reclaimed timber.",
+          "fact": "💡 ARCHITECTURE: MICKEY MUENNIG BIO-ORGANIC DESIGN",
+          "voText": "Step inside organic treehouses and cliff pavilions, sculpted seamlessly from reclaimed redwood, granite, and floor-to-ceiling glass."
+        },
+        {
+          "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+          "title": "Jade Infinity Soaking Tub",
+          "highlightWord": "Soaking",
+          "description": "Soaking in a 104-degree heated mineral pool on a sheer precipice overlooking passing whales.",
+          "fact": "💡 EXPERIENCE: HEATED CLIFFSIDE JADE SPA 1,200FT HIGH",
+          "voText": "Sink into the heated cliffside Jade pool, soaking in pure warmth as migrating whales surface along the endless blue horizon."
+        },
+        {
+          "badge": "ACT 05 / HOLISTIC HEALING",
+          "title": "Big Sur Shamanic Wellness",
+          "highlightWord": "Shamanic",
+          "description": "Outdoor cedar deck massage treatments using California wild herbs and warm river stones.",
+          "fact": "💡 WELLNESS: HOLISTIC FOREST HEALING & CRADLING SPA",
+          "voText": "Restore inner balance with holistic wellness therapies conducted beneath the towering redwood canopy."
+        },
+        {
+          "badge": "ACT 06 / GOLDEN HOUR",
+          "title": "Sierra Mar Twilight",
+          "highlightWord": "Twilight",
+          "description": "Sunset wine tasting at Sierra Mar as the golden sun sinks below the Pacific fog bank.",
+          "fact": "💡 SUNSET: GOLDEN HOUR OVER THE BIG SUR PACIFIC OCEAN",
+          "voText": "As the sun melts into the Pacific horizon, sip vintage California wine at Sierra Mar. Reserve your Big Sur sanctuary today."
+        }
+      ]
+    },
+    {
+      "id": "stay-13",
+      "slug": "cheval_blanc_randheli",
+      "numeral": "XIII",
+      "name": "Cheval Blanc Randheli",
+      "subtitle": "LVMH’s Ultimate Haute Couture Island Maison with Private Marina and Infinity Sanctuaries",
+      "location": "Noonu Atoll, Republic of Maldives",
+      "country": "Maldives",
+      "badge": "COLLECTION № 13 · MALDIVES ATOLL",
+      "rating": "4.99",
+      "reviews": "710+",
+      "pricePerNight": "From $3,800",
+      "priceAmount": "$3,800",
+      "seasonalRange": "Low $3,200+ · Festive Holiday $6,800+",
+      "rateInclusions": "Includes customized twin-otter seaplane transfers, private majordome butler service",
+      "forbesTier": "World's 50 Best Luxury Hotels & Forbes 5-Star",
+      "image": "/images/stayhelper/cheval_blanc_wide_hero.jpg",
+      "wideHero": "/images/stayhelper/cheval_blanc_wide_hero.jpg",
+      "videoSrc": "/videos/StayHelperChevalBlanc_Master_Reel.mp4",
+      "posterSrc": "/images/stayhelper/cheval_blanc_wide_hero.jpg",
+      "bookingUrl": "https://www.chevalblanc.com/en/maison/randheli/",
+      "status": "STREAMING",
+      "story": [
+        "Conceived by Jean-Michel Gathy for luxury conglomerate LVMH, Cheval Blanc Randheli represents the absolute pinnacle of contemporary island elegance in the secluded Noonu Atoll. Rising from crystalline lagoons, soaring 7-meter-high cathedral wooden doors, graphic yellow pop accents, and bespoke art installations define this exclusive haute couture retreat.",
+        "Forty-six monumental overwater and island villas feature 12.5-meter private infinity pools, secluded private white-sand beaches, and dedicated Majordome butlers catering to every bespoke whim. Guests arrive via the Maison's signature taupe-and-yellow customized private seaplane."
+      ],
+      "features": [
+        { "title": "Monumental 12.5m Private Pools", "desc": "Every single villa features a private heated infinity pool extending into the lagoon" },
+        { "title": "Cheval Blanc Spa Island", "desc": "A dedicated private island accessible only by traditional wooden dhoni boat" },
+        { "title": "Le 1947 Haute Gastronomy", "desc": "French 12-course fine dining paired with legendary Château Cheval Blanc vintages" }
+      ],
+      "acts": [
+        {
+          "badge": "ACT 01 / PANORAMIC ARRIVAL",
+          "title": "Haute Couture Lagoon",
+          "highlightWord": "Couture",
+          "description": "Touching down on turquoise atoll waters aboard the custom bespoke Cheval Blanc seaplane.",
+          "fact": "💡 HIGHLIGHT: LVMH PRIVATE ATOLL ARCHIPELAGO SANCTUARY",
+          "voText": "Touch down in the pristine Noonu Atoll aboard a bespoke private seaplane. Welcome to Cheval Blanc Randheli, the pinnacle of island haute couture."
+        },
+        {
+          "badge": "ACT 02 / BOTANICAL PATH",
+          "title": "Cathedral Teak Promenade",
+          "highlightWord": "Cathedral",
+          "description": "Passing seven-meter-high soaring timber doors framed by flourishing tropical banyan trees.",
+          "fact": "💡 DESIGN: JEAN-MICHEL GATHY 7-METER SOARING DOORS",
+          "voText": "Stroll past seven-meter cathedral timber doors and fragrant frangipani blossoms, curated in flawless contemporary elegance."
+        },
+        {
+          "badge": "ACT 03 / SACRED HERITAGE",
+          "title": "French Maison Craftsmanship",
+          "highlightWord": "Craftsmanship",
+          "description": "Minimalist rattan geometry, pure white Thassos marble, and bespoke contemporary art.",
+          "fact": "💡 ART: BESPOKE SCULPTURES BY CONTEMPORARY MASTERS",
+          "voText": "Experience residential masterworks of teak, Thassos marble, and French luxury, overseen by your personal dedicated Majordome."
+        },
+        {
+          "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+          "title": "Monumental Lagoon Pool",
+          "highlightWord": "Monumental",
+          "description": "Floating in a 12.5-meter private overwater infinity pool merging seamlessly with the ocean.",
+          "fact": "💡 EXPERIENCE: 12.5-METER PRIVATE INFINITY LAP POOL",
+          "voText": "Glide through your twelve-and-a-half-meter private infinity pool, extending directly into the transparent sapphire Indian Ocean."
+        },
+        {
+          "badge": "ACT 05 / HOLISTIC HEALING",
+          "title": "Dedicated Spa Island",
+          "highlightWord": "Island",
+          "description": "Gliding by private wooden dhoni to an entire island dedicated exclusively to Guerlain wellness.",
+          "fact": "💡 SPA: DEDICATED PRIVATE GUERLAIN ISLAND SANCTUARY",
+          "voText": "Sail by traditional wooden dhoni to an entire private island devoted solely to bespoke Guerlain wellness rituals."
+        },
+        {
+          "badge": "ACT 06 / GOLDEN HOUR",
+          "title": "Le 1947 Starlight Toast",
+          "highlightWord": "Starlight",
+          "description": "Tasting Grand Cru champagne on the white sand sandbank as evening stars ignite the sky.",
+          "fact": "💡 SUNSET: GOLDEN HOUR OVER THE NOONU ATOLL LAGOON",
+          "voText": "As twilight paints the equator in shades of gold and violet, savor vintage champagne by the ocean. Reserve your private Maison today."
+        }
+      ]
+    },
+    {
+      "id": "stay-14",
+      "slug": "belmond_hotel_caruso",
+      "numeral": "XIV",
+      "name": "Belmond Hotel Caruso",
+      "subtitle": "11th-Century Palatial Cliffside Sanctuary Suspended Between Sky and Sea in Ravello",
+      "location": "Ravello, Amalfi Coast",
+      "country": "Amalfi Coast, Italy",
+      "badge": "COLLECTION № 14 · AMALFI COAST",
+      "rating": "4.98",
+      "reviews": "880+",
+      "pricePerNight": "From $1,980",
+      "priceAmount": "$1,980",
+      "seasonalRange": "Spring $1,550+ · Summer Peak $3,200+",
+      "rateInclusions": "Includes cliff-top terrace breakfast, daily sunset cruise on private wooden gozzo boat",
+      "forbesTier": "Condé Nast Traveler Gold List & Forbes 5-Star",
+      "image": "/images/stayhelper/belmond_caruso_wide_hero.jpg",
+      "wideHero": "/images/stayhelper/belmond_caruso_wide_hero.jpg",
+      "videoSrc": "/videos/StayHelperBelmondCaruso_Master_Reel.mp4",
+      "posterSrc": "/images/stayhelper/belmond_caruso_wide_hero.jpg",
+      "bookingUrl": "https://www.belmond.com/hotels/europe/italy/amalfi-coast/belmond-hotel-caruso/",
+      "status": "STREAMING",
+      "story": [
+        "Perched high on a limestone bluff 350 meters above the azure Amalfi Coast in medieval Ravello, Belmond Hotel Caruso is an exquisitely restored 11th-century palace originally built by a wealthy Roman patrician family. Its historic colonnades, fragrant lemon terraces, and original frescoes transport guests into an era of aristocratic Mediterranean leisure.",
+        "The hotel’s crown jewel is its world-renowned cliff-edge heated infinity pool, famously dubbed the pool in the clouds. Seeming to float magically in mid-air over the Gulf of Salerno, it offers uninterrupted 360-degree vistas across dramatic coastal cliffs, pastel villages, and sapphire seas."
+      ],
+      "features": [
+        { "title": "The Infinity Pool in the Clouds", "desc": "Suspended 350 meters above the Mediterranean with 360-degree Amalfi gulf vistas" },
+        { "title": "11th-Century Historic Colonnades", "desc": "Preserved vaulted stone arches, baroque garden pergolas and authentic frescoed suites" },
+        { "title": "Belvedere Cliffside Dining", "desc": "Neapolitan haute gastronomy prepared with fresh vegetables from the hotel's own garden" }
+      ],
+      "acts": [
+        {
+          "badge": "ACT 01 / PANORAMIC ARRIVAL",
+          "title": "Palace in the Clouds",
+          "highlightWord": "Clouds",
+          "description": "Perched three hundred and fifty meters above the azure Amalfi Coast in the hilltown of Ravello.",
+          "fact": "💡 HIGHLIGHT: 11TH-CENTURY CLIFF PALACE 350M ABOVE SEA",
+          "voText": "Perched three hundred and fifty meters above the azure Amalfi Coast, welcome to Belmond Hotel Caruso, a celestial eleventh-century palace in the clouds."
+        },
+        {
+          "badge": "ACT 02 / BOTANICAL PATH",
+          "title": "Pergola of Roses and Lemons",
+          "highlightWord": "Pergola",
+          "description": "Strolling beneath centuries-old stone pergolas draped in climbing wisteria and fragrant Amalfi lemons.",
+          "fact": "💡 GARDENS: TERRACED LEMON GROVES & CENTURY-OLD ROSES",
+          "voText": "Wander through stone pergolas blooming with wisteria and heirloom roses, overlooking terraced lemon groves plunging toward the sea."
+        },
+        {
+          "badge": "ACT 03 / SACRED HERITAGE",
+          "title": "Medieval Roman Patrician Grandeur",
+          "highlightWord": "Patrician",
+          "description": "Vaulted marble corridors, ancient Roman busts, and restored 18th-century ceiling frescoes.",
+          "fact": "💡 HERITAGE: 18TH-CENTURY RESTORED FRESCO CEILINGS",
+          "voText": "Step beneath ancient vaulted stone arches where original eighteenth-century frescoes celebrate Ravello’s aristocratic legacy."
+        },
+        {
+          "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+          "title": "Pool Between Sky and Sea",
+          "highlightWord": "Sky",
+          "description": "Swimming to the vanishing edge of the world's most dramatic heated cliffside infinity pool.",
+          "fact": "💡 SIGNATURE: ICONIC RAVELOW CLIFF-EDGE INFINITY POOL",
+          "voText": "Float to the vanishing edge of the heated infinity pool, seemingly suspended weightlessly between the sapphire sea and open sky."
+        },
+        {
+          "badge": "ACT 05 / HOLISTIC HEALING",
+          "title": "Amalfi Citrus Aromatherapy",
+          "highlightWord": "Citrus",
+          "description": "Open-air garden massage using cold-pressed sweet almond oil and pure Ravello lemon essence.",
+          "fact": "💡 WELLNESS: OPEN-AIR BOTANICAL MASSAGE IN PRIVATE GARDENS",
+          "voText": "Surrender to therapeutic open-air garden rituals infused with Mediterranean citrus and pure almond botanicals."
+        },
+        {
+          "badge": "ACT 06 / GOLDEN HOUR",
+          "title": "Belvedere Sunset Limoncello",
+          "highlightWord": "Limoncello",
+          "description": "Sunset aperitivo on the Belvedere cliff terrace as twilight envelops the Gulf of Salerno.",
+          "fact": "💡 SUNSET: GOLDEN HOUR OVER THE GULF OF SALERNO",
+          "voText": "As twilight sets the Gulf of Salerno aglow with golden light, toast to timeless beauty from the palace terrace. Reserve your sanctuary today."
+        }
+      ]
+    },
+    {
+      "id": "stay-15",
+      "slug": "aman_tokyo",
+      "numeral": "XV",
+      "name": "Aman Tokyo",
+      "subtitle": "Monumental Washi Paper Lantern Atrium & Basalt Stone Sanctuary Above Otemachi",
+      "location": "The Otemachi Tower, Tokyo",
+      "country": "Tokyo, Japan",
+      "badge": "COLLECTION № 15 · TOKYO, JAPAN",
+      "rating": "4.99",
+      "reviews": "1,120+",
+      "pricePerNight": "From $2,250",
+      "priceAmount": "$2,250",
+      "seasonalRange": "Winter $1,850+ · Cherry Blossom Peak $3,900+",
+      "rateInclusions": "Includes traditional Japanese seasonal breakfast, private onsen spa bath access",
+      "forbesTier": "Forbes Travel Guide 5-Star Hotel",
+      "image": "/images/stayhelper/aman_tokyo_wide_hero.jpg",
+      "wideHero": "/images/stayhelper/aman_tokyo_wide_hero.jpg",
+      "videoSrc": "/videos/StayHelperAmanTokyo_Master_Reel.mp4",
+      "posterSrc": "/images/stayhelper/aman_tokyo_wide_hero.jpg",
+      "bookingUrl": "https://www.aman.com/hotels/aman-tokyo",
+      "status": "STREAMING",
+      "story": [
+        "Occupying the top six floors of the prestigious Otemachi Tower, Aman Tokyo is a monument to urban Zen serenity envisioned by master architect Kerry Hill. At its core lies a breathtaking monumental lobby atrium rising thirty meters high, crafted from delicate textured washi paper that glows like a colossal Japanese lantern against the Tokyo skyline.",
+        "Framing panoramic vistas across the Imperial Palace Gardens and Mount Fuji on clear mornings, the hotel blends classical ryokan aesthetics—shoji paper screens, camphor wood, and black basalt stone—with refined urban tranquility. The 30-meter black granite swimming pool offers an ethereal sanctuary far above the metropolis."
+      ],
+      "features": [
+        { "title": "30-Meter Washi Lantern Atrium", "desc": "Soaring architectural lobby evoking the interior of a traditional Japanese paper shoji" },
+        { "title": "30m Black Basalt Pool", "desc": "Monumental heated indoor pool overlooking the Imperial Palace gardens and skyline" },
+        { "title": "Authentic Ryokan Cedar Onsen", "desc": "Mineral-rich Japanese public and private onsen hot stone bath pavilion" }
+      ],
+      "acts": [
+        {
+          "badge": "ACT 01 / PANORAMIC ARRIVAL",
+          "title": "Sanctuary Above the Clouds",
+          "highlightWord": "Clouds",
+          "description": "Ascending to the 33rd floor of Otemachi Tower overlooking the Imperial Palace and Mount Fuji.",
+          "fact": "💡 HIGHLIGHT: TOP 6 FLOORS OF PRESTIGIOUS OTEMACHI TOWER",
+          "voText": "Ascend to the thirty-third floor of Otemachi Tower, where Aman Tokyo unveils a tranquil urban sanctuary floating high above the city."
+        },
+        {
+          "badge": "ACT 02 / BOTANICAL PATH",
+          "title": "Engawa Cedar Corridors",
+          "highlightWord": "Cedar",
+          "description": "Stepping along minimalist camphor wood hallways past indoor stone rock gardens and ikebana.",
+          "fact": "💡 DESIGN: TRADITIONAL ENGAWA TIMBER RUNWAYS & IKEBANA",
+          "voText": "Walk along fragrant camphor wood pathways past sculptural ikebana and serene indoor rock gardens."
+        },
+        {
+          "badge": "ACT 03 / SACRED HERITAGE",
+          "title": "The 30-Meter Washi Lantern",
+          "highlightWord": "Lantern",
+          "description": "Standing beneath a soaring 30-meter washi paper ceiling that filters natural daylight like a lantern.",
+          "fact": "💡 ARCHITECTURE: KERRY HILL 30-METER SHOJI PAPER ATRIUM",
+          "voText": "Gaze upward into the monumental thirty-meter washi paper lantern, masterfully filtering ethereal light into the grand lobby atrium."
+        },
+        {
+          "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+          "title": "The Black Basalt Pool",
+          "highlightWord": "Basalt",
+          "description": "Swimming in the 30-meter heated basalt pool overlooking Mount Fuji and the Tokyo skyline.",
+          "fact": "💡 EXPERIENCE: 30-METER BLACK GRANITE SKYLINE POOL",
+          "voText": "Immerse yourself in the thirty-meter black basalt pool, swimming alongside panoramic panoramas of Mount Fuji and the Imperial Gardens."
+        },
+        {
+          "badge": "ACT 05 / HOLISTIC HEALING",
+          "title": "Traditional Onsen & Kampo Herbal Spa",
+          "highlightWord": "Onsen",
+          "description": "Soaking in mineral-rich Japanese hot stone onsens infused with seasonal Kuromoji botanicals.",
+          "fact": "💡 WELLNESS: HEATED HOT SPRING STONE BATHS & KAMPO OILS",
+          "voText": "Restore serenity in traditional hot stone onsen baths, enriched with ancient Kampo herbs and calming cedar aromas."
+        },
+        {
+          "badge": "ACT 06 / GOLDEN HOUR",
+          "title": "Metropolitan Sunset Saki",
+          "highlightWord": "Sunset",
+          "description": "Sipping rare vintage sake at The Lounge by Aman as the neon city lights illuminate the dusk.",
+          "fact": "💡 SUNSET: GOLDEN HOUR OVER THE TOKYO METROPOLITAN SKYLINE",
+          "voText": "As twilight settles over the metropolis, savor artisanal sake high above the glowing neon skyline. Reserve your Tokyo sanctuary today."
+        }
+      ]
+    },
+    {
+      "id": "stay-16",
+      "slug": "royal_mansour",
+      "numeral": "XVI",
+      "name": "Royal Mansour Marrakech",
+      "subtitle": "Palatial Masterpiece Commissioned by the King with Private Multi-Story Riads & Starlight Pools",
+      "location": "Rue Abou Abbas El Sebti, Marrakech",
+      "country": "Marrakech, Morocco",
+      "badge": "COLLECTION № 16 · MARRAKECH, MOROCCO",
+      "rating": "4.99",
+      "reviews": "950+",
+      "pricePerNight": "From $2,200",
+      "priceAmount": "$2,200",
+      "seasonalRange": "Summer $1,750+ · Winter Festive $3,800+",
+      "rateInclusions": "Includes fast-track VIP airport transfers, personal butler, traditional Moroccan breakfast",
+      "forbesTier": "Forbes 5-Star & World's Most Lavish Urban Palace",
+      "image": "/images/stayhelper/royal_mansour_wide_hero.jpg",
+      "wideHero": "/images/stayhelper/royal_mansour_wide_hero.jpg",
+      "videoSrc": "/videos/StayHelperRoyalMansour_Master_Reel.mp4",
+      "posterSrc": "/images/stayhelper/royal_mansour_wide_hero.jpg",
+      "bookingUrl": "https://www.royalmansour.com/marrakech/",
+      "status": "STREAMING",
+      "story": [
+        "Commissioned by His Majesty King Mohammed VI to showcase the very pinnacle of Moroccan craftsmanship, Royal Mansour Marrakech is a palatial city within a city. Instead of conventional hotel rooms or suites, guests reside in fifty-three private three-story riads, each with its own open-air courtyard, private elevator, and rooftop terrace featuring a heated plunge pool and starlight fireplace.",
+        "Over 1,500 master artisans spent five years hand-carving intricate cedarwood ceilings, geometric zellij tilework, and sculpted plaster arabesques. An ingenious subterranean tunnel network allows personal butlers to serve guests with complete discretion, preserving absolute privacy amidst fragrant orange blossoms and palatial courtyards."
+      ],
+      "features": [
+        { "title": "53 Private Multi-Story Riads", "desc": "Exclusive 3-story private residences with open courtyards and personal rooftop pools" },
+        { "title": "Secret Subterranean Tunnels", "desc": "Underground staff labyrinth ensuring total discretion and invisible butler service" },
+        { "title": "All-White Marble Hammam Spa", "desc": "Iconic birdcage-like white wrought-iron atrium offering royal Moroccan rhassoul rituals" }
+      ],
+      "acts": [
+        {
+          "badge": "ACT 01 / PANORAMIC ARRIVAL",
+          "title": "The Royal City Within",
+          "highlightWord": "Royal",
+          "description": "Passing monumental bronze palace gates into a private imperial medina of palatial riads.",
+          "fact": "💡 HIGHLIGHT: COMMISSIONED BY KING MOHAMMED VI",
+          "voText": "Step through monumental bronze gates into Royal Mansour Marrakech, an imperial palace commissioned by the King to honor master Moroccan artisans."
+        },
+        {
+          "badge": "ACT 02 / BOTANICAL PATH",
+          "title": "Fragrant Moorish Courtyards",
+          "highlightWord": "Moorish",
+          "description": "Strolling past trickling marble fountains, fragrant orange trees, and flowering jasmine gardens.",
+          "fact": "💡 GARDENS: ANDALUSIAN PALM OASIS & CENTURY OLIVE GROVES",
+          "voText": "Stroll through Andalusian courtyards where cool marble fountains and sweet orange blossoms scent the desert air."
+        },
+        {
+          "badge": "ACT 03 / SACRED HERITAGE",
+          "title": "Master Zellij Artistry",
+          "highlightWord": "Zellij",
+          "description": "Hand-chiseled geometric tilework, carved fragrant cedarwood, and delicate lace-like plaster.",
+          "fact": "💡 CRAFTSMANSHIP: 1,500 MASTER ARTISANS HAND-CARVED PALACE",
+          "voText": "Admire museum-grade geometric zellij tilework and hand-carved cedar ceilings crafted by fifteen hundred master artisans."
+        },
+        {
+          "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+          "title": "Private Rooftop Plunge Pool",
+          "highlightWord": "Rooftop",
+          "description": "Basking in your private heated rooftop pool overlooking the Atlas Mountains and Koutoubia.",
+          "fact": "💡 SIGNATURE: PRIVATE ROOFTOP PLUNGE POOL & OUTDOOR FIREPLACE",
+          "voText": "Ascend by private elevator to your personal rooftop pool, soaking under open skies with vistas of the Atlas Mountains."
+        },
+        {
+          "badge": "ACT 05 / HOLISTIC HEALING",
+          "title": "The Grand White Hammam",
+          "highlightWord": "Hammam",
+          "description": "Royal rhassoul clay and rosewater therapy inside the iconic all-white lace-wrought iron atrium.",
+          "fact": "💡 SPA: WORLD-FAMOUS ALL-WHITE MARBLE LACE HAMMAM",
+          "voText": "Surrender to ancient royal hammam rituals inside an ethereal all-white marble sanctuary wrapped in delicate wrought-iron lace."
+        },
+        {
+          "badge": "ACT 06 / GOLDEN HOUR",
+          "title": "Riad Starlight Fireplace",
+          "highlightWord": "Starlight",
+          "description": "Sipping Moroccan mint tea by the rooftop fireplace as evening calls to prayer echo softly.",
+          "fact": "💡 SUNSET: GOLDEN TWILIGHT OVER THE ATLAS MOUNTAINS",
+          "voText": "As twilight bathes the desert ramparts in rose gold, warm by your rooftop fireplace. Reserve your royal riad today."
+        }
+      ]
+    },
+    {
+      "id": "stay-17",
+      "slug": "como_laucala",
+      "numeral": "XVII",
+      "name": "COMO Laucala Island",
+      "subtitle": "Ultra-Exclusive 3,000-Acre Private Island Sanctuary with Iconic Glass-Cube Lap Pool",
+      "location": "Laucala Island, Cakaudrove",
+      "country": "Fiji, South Pacific",
+      "badge": "COLLECTION № 17 · FIJI ISLANDS",
+      "rating": "4.99",
+      "reviews": "520+",
+      "pricePerNight": "From $5,600",
+      "priceAmount": "$5,600",
+      "seasonalRange": "All-Inclusive $5,600+ · Peak Holiday $9,200+",
+      "rateInclusions": "Fully inclusive of all private dining, sommelier wines, DeepFlight submarine dives & golf",
+      "forbesTier": "World's Most Exclusive Private Island Resort",
+      "image": "/images/stayhelper/como_laucala_wide_hero.jpg",
+      "wideHero": "/images/stayhelper/como_laucala_wide_hero.jpg",
+      "videoSrc": "/videos/StayHelperComoLaucala_Master_Reel.mp4",
+      "posterSrc": "/images/stayhelper/como_laucala_wide_hero.jpg",
+      "bookingUrl": "https://www.comohotels.com/fiji/como-laucala-island",
+      "status": "STREAMING",
+      "story": [
+        "Spanning three thousand pristine acres of private South Pacific paradise in northern Fiji, COMO Laucala Island is an extraordinary ultra-luxury resort once owned by Malcolm Forbes and Red Bull founder Dietrich Mateschitz. Featuring twenty-five standalone presidential villas, its own private airstrip, and organic farms producing 85% of all estate food, it defines absolute ecological privacy.",
+        "The island’s architectural triumph is its 25-meter clear-glass cube lap pool, suspended inside a massive 2,000-square-meter lagoon pool framed by coconut palms and white beaches. Guests enjoy private submarine diving on virgin barrier reefs, equestrian trails, and world-class 18-hole championship golf."
+      ],
+      "features": [
+        { "title": "25m Transparent Glass Cube Pool", "desc": "World-famous submerged acrylic glass lap pool set inside an organic lagoon" },
+        { "title": "DeepFlight Super Falcon Submarine", "desc": "Private two-person high-tech submarine exploration across pristine coral atolls" },
+        { "title": "Self-Sustaining Organic Farm", "desc": "Farm-to-table gastronomy powered by 240 acres of private organic hydroponic farms" }
+      ],
+      "acts": [
+        {
+          "badge": "ACT 01 / PANORAMIC ARRIVAL",
+          "title": "Private Pacific Eden",
+          "highlightWord": "Eden",
+          "description": "Gliding down to the island's private runway surrounded by virgin coral reefs and jungle peaks.",
+          "fact": "💡 HIGHLIGHT: 3,000-ACRE SELF-SUSTAINING PRIVATE ISLAND",
+          "voText": "Descend onto a private South Pacific island paradise. Welcome to COMO Laucala Island, three thousand acres of untamed tropical luxury in Fiji."
+        },
+        {
+          "badge": "ACT 02 / BOTANICAL PATH",
+          "title": "Coconut Grove Trails",
+          "highlightWord": "Coconut",
+          "description": "Riding horseback or private electric buggies through 240 acres of pristine coconut plantations.",
+          "fact": "💡 LANDSCAPE: ANCIENT RAINFOREST & PRIVATE SANDY COVES",
+          "voText": "Meander along secluded coconut trails where emerald volcanic peaks meet turquoise waters and deserted white-sand coves."
+        },
+        {
+          "badge": "ACT 03 / SACRED HERITAGE",
+          "title": "Bespoke Fijian Bure Design",
+          "highlightWord": "Fijian",
+          "description": "Handwoven magimagi coconut fiber lashings, thatched roofs, and natural stone outdoor bathtubs.",
+          "fact": "💡 ARCHITECTURE: TRADITIONAL MAGIMAGI WEAVING ARTISTRY",
+          "voText": "Step inside bespoke private bures, masterfully handwoven with traditional Fijian magimagi coconut cord and local hardwood."
+        },
+        {
+          "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+          "title": "The Clear-Glass Cube Pool",
+          "highlightWord": "Glass",
+          "description": "Swimming through the iconic 25-meter transparent glass cube suspended inside a lagoon.",
+          "fact": "💡 SIGNATURE: WORLD-FAMOUS 25M CLEAR ACRYLIC GLASS POOL",
+          "voText": "Glide weightlessly through the world-famous transparent glass cube pool, framed by the lush lagoon and swaying palms."
+        },
+        {
+          "badge": "ACT 05 / HOLISTIC HEALING",
+          "title": "COMO Shambhala Wellness",
+          "highlightWord": "Shambhala",
+          "description": "Open-air clifftop spa pavilions utilizing island-grown volcanic ash, virgin coconut, and herbs.",
+          "fact": "💡 WELLNESS: VOLCANIC ASH & PURE COCONUT ISLAND THERAPY",
+          "voText": "Restore natural vitality at COMO Shambhala, with therapeutic treatments utilizing mineral-rich volcanic ash and island botanicals."
+        },
+        {
+          "badge": "ACT 06 / GOLDEN HOUR",
+          "title": "Seagrass Bay Twilight",
+          "highlightWord": "Twilight",
+          "description": "Private beach barbecue under tiki torches with freshly caught yellowfin tuna and champagne.",
+          "fact": "💡 SUNSET: GOLDEN HOUR OVER THE FIJIAN ARCHIPELAGO",
+          "voText": "As twilight ignites the South Pacific horizon in blazing gold, savor private beachfront dining under the stars. Reserve your island today."
+        }
+      ]
+    },
+    {
+      "id": "stay-18",
+      "slug": "badrutts_palace",
+      "numeral": "XVIII",
+      "name": "Badrutt's Palace Hotel",
+      "subtitle": "Legendary 128-Year-Old Fairy-Tale Alpine Castle Overlooking Lake St. Moritz",
+      "location": "Via Serlas, St. Moritz",
+      "country": "Engadin, Switzerland",
+      "badge": "COLLECTION № 18 · SWISS ALPS",
+      "rating": "4.98",
+      "reviews": "1,180+",
+      "pricePerNight": "From $1,750",
+      "priceAmount": "$1,750",
+      "seasonalRange": "Summer $1,250+ · Winter Ski Peak $3,600+",
+      "rateInclusions": "Includes Rolls-Royce train station transfers, gourmet Engadin breakfast, Palace Spa access",
+      "forbesTier": "Forbes Travel Guide 5-Star Hotel",
+      "image": "/images/stayhelper/badrutts_palace_wide_hero.jpg",
+      "wideHero": "/images/stayhelper/badrutts_palace_wide_hero.jpg",
+      "videoSrc": "/videos/StayHelperBadruttsPalace_Master_Reel.mp4",
+      "posterSrc": "/images/stayhelper/badrutts_palace_wide_hero.jpg",
+      "bookingUrl": "https://badruttspalace.com/",
+      "status": "STREAMING",
+      "story": [
+        "Reigning over the sparkling alpine waters of Lake St. Moritz since 1896, Badrutt’s Palace Hotel is the birthplace of winter tourism and European high-society alpine glamour. Its iconic neo-Gothic tower and monumental stone arches have hosted everyone from Audrey Hepburn and Alfred Hitchcock to international royalty and tastemakers.",
+        "Guests arrive in vintage Rolls-Royce limousines, stepping into the legendary Grand Hall with soaring timber ceilings and panoramic vistas across snow-draped Engadin mountains. The glass-fronted Palace Spa features an indoor granite pool with views of frozen Lake St. Moritz and outdoor steaming thermal whirlpools."
+      ],
+      "features": [
+        { "title": "Lakeview Infinity Indoor Pool", "desc": "Glass-walled granite pool with seamless views across snow-draped Lake St. Moritz" },
+        { "title": "Vintage Rolls-Royce Transfers", "desc": "Chauffeured arrival from St. Moritz railway station in bespoke classic limousines" },
+        { "title": "Le Grand Hall & King's Social House", "desc": "Legendary Engadin salon and Switzerland's oldest and most prestigious nightclub" }
+      ],
+      "acts": [
+        {
+          "badge": "ACT 01 / PANORAMIC ARRIVAL",
+          "title": "The Alpine Castle",
+          "highlightWord": "Castle",
+          "description": "Arriving by classic Rolls-Royce at the iconic neo-Gothic fairy-tale palace in St. Moritz.",
+          "fact": "💡 HIGHLIGHT: 1896 ICONIC ALPINE PALACE ON LAKE ST. MORITZ",
+          "voText": "Arrive in vintage Rolls-Royce elegance at Badrutt’s Palace Hotel, the legendary fairy-tale castle reigning over Lake St. Moritz since 1896."
+        },
+        {
+          "badge": "ACT 02 / BOTANICAL PATH",
+          "title": "Snow-Covered Pine Promenade",
+          "highlightWord": "Pine",
+          "description": "Strolling through fresh alpine powder past frosted pine trees along the tranquil frozen lake.",
+          "fact": "💡 LANDSCAPE: ENGADIN VALLEY SNOW-BLANKETED FOREST",
+          "voText": "Walk along crisp alpine snow trails where frosted pine branches frame the pristine mirror of the frozen mountain lake."
+        },
+        {
+          "badge": "ACT 03 / SACRED HERITAGE",
+          "title": "Le Grand Hall Splendor",
+          "highlightWord": "Splendor",
+          "description": "Sipping tea beneath monumental coffered wood ceilings and historic European oil paintings.",
+          "fact": "💡 HERITAGE: 128 YEARS OF HIGH-SOCIETY GLAMOUR",
+          "voText": "Step into Le Grand Hall, an aristocratic alpine salon of soaring coffered ceilings and timeless European glamour."
+        },
+        {
+          "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+          "title": "Granite Alpine Pool",
+          "highlightWord": "Granite",
+          "description": "Swimming through floor-to-ceiling glass pavilions facing the snow-capped Engadin summits.",
+          "fact": "💡 EXPERIENCE: HEATED GLASS-WALLED POOL OVERLOOKING LAKE",
+          "voText": "Immerse yourself in the glass-fronted granite pool, swimming as gentle snowflakes drift against the towering mountain peaks."
+        },
+        {
+          "badge": "ACT 05 / HOLISTIC HEALING",
+          "title": "Palace Wellness Thermal Spa",
+          "highlightWord": "Thermal",
+          "description": "Steaming outdoor whirlpool baths surrounded by mountain snow and aromatic Swiss pine saunas.",
+          "fact": "💡 WELLNESS: OUTDOOR HEATED HYDROTHERAPY & CEDAR SAUNAS",
+          "voText": "Warm your senses in steaming outdoor hydrotherapy pools, enveloped in fresh mountain air and restorative Swiss pine saunas."
+        },
+        {
+          "badge": "ACT 06 / GOLDEN HOUR",
+          "title": "Alpine Alpenglow Champagne",
+          "highlightWord": "Alpenglow",
+          "description": "Vintage champagne toast as the dramatic sunset Alpenglow illuminates the Swiss alpine peaks.",
+          "fact": "💡 SUNSET: GOLDEN ALPENGLOW OVER THE ENGADIN SUMMITS",
+          "voText": "As the sun dips behind the Alps, watch the peaks turn brilliant rose gold with a glass of champagne. Reserve your palace sanctuary today."
+        }
+      ]
+    },
+    {
+      "id": "stay-19",
+      "slug": "capella_ubud",
+      "numeral": "XIX",
+      "name": "Capella Ubud",
+      "subtitle": "Bill Bensley’s Mystical Rainforest Tented Camp Sanctuary Above Sacred Wos River",
+      "location": "Tegallalang, Ubud, Bali",
+      "country": "Bali, Indonesia",
+      "badge": "COLLECTION № 19 · BALI JUNGLE",
+      "rating": "4.99",
+      "reviews": "940+",
+      "pricePerNight": "From $1,350",
+      "priceAmount": "$1,350",
+      "seasonalRange": "Regular $1,150+ · High Season $2,200+",
+      "rateInclusions": "Includes bespoke camp breakfast, afternoon tea, camp duffel bag & 24hr Culturist service",
+      "forbesTier": "Travel + Leisure World's #1 Hotel",
+      "image": "/images/stayhelper/capella_ubud_wide_hero.jpg",
+      "wideHero": "/images/stayhelper/capella_ubud_wide_hero.jpg",
+      "videoSrc": "/videos/StayHelperCapellaUbud_Master_Reel.mp4",
+      "posterSrc": "/images/stayhelper/capella_ubud_wide_hero.jpg",
+      "bookingUrl": "https://capellahotels.com/en/capella-ubud",
+      "status": "STREAMING",
+      "story": [
+        "Hidden within the sacred rainforest canopy of Keliki valley in Ubud, Capella Ubud is a visionary tribute to 19th-century European explorers created by eccentric architect Bill Bensley. Twenty-two ultra-luxury tented retreats and a two-bedroom lodge sit balanced delicately on stilts amidst dense jungle terrain without cutting down a single tree.",
+        "Each tented sanctuary features an outdoor copper and teak salt-water plunge pool, handcrafted hammered brass bathtubs, and bespoke antique decor. At night, guests gather around the open-air Camp Fire for roasted marshmallows, hot chocolate, and silent vintage films under the stars."
+      ],
+      "features": [
+        { "title": "Salt-Water Plunge Pool Retreats", "desc": "Handcrafted outdoor plunge pools overlooking dense virgin jungle canopies" },
+        { "title": "Zero-Impact Eco Architecture", "desc": "Built without cutting a single tree, preserving the Keliki rainforest valley" },
+        { "title": "The Camp Fire Starlight Ritual", "desc": "Nightly fireside gatherings with acoustic music, artisan chocolate and ghost stories" }
+      ],
+      "acts": [
+        {
+          "badge": "ACT 01 / PANORAMIC ARRIVAL",
+          "title": "The Hidden Jungle Camp",
+          "highlightWord": "Jungle",
+          "description": "Crossing a wooden suspension bridge into an untouched virgin rainforest valley above Wos River.",
+          "fact": "💡 HIGHLIGHT: BILL BENSLEY 1800S EXPEDITION TENT SANCTUARY",
+          "voText": "Cross a suspension bridge into the sacred Keliki valley. Welcome to Capella Ubud, a mystical luxury tented sanctuary nestled in Bali’s ancient rainforest."
+        },
+        {
+          "badge": "ACT 02 / BOTANICAL PATH",
+          "title": "Verdant Jungle Ravine",
+          "highlightWord": "Ravine",
+          "description": "Wandering along secluded stone trails past giant ferns, wild orchids, and terraced rice paddies.",
+          "fact": "💡 NATURE: UNTOUCHED TROPICAL CANOPY ABOVE WOS RIVER",
+          "voText": "Follow winding stone paths beneath towering tree ferns and wild orchids, serenaded by the rushing waters of the sacred river below."
+        },
+        {
+          "badge": "ACT 03 / SACRED HERITAGE",
+          "title": "1800s Explorer Nostalgia",
+          "highlightWord": "Explorer",
+          "description": "Hammered brass bathtubs, bespoke Balinese ikat fabrics, and antique steamer trunks.",
+          "fact": "💡 ARTIFACTS: HANDCRAFTED BALINESE WOODCARVING & BRASS TUBS",
+          "voText": "Discover handcrafted tented pavilions adorned with antique maps, hammered brass bathtubs, and handwoven Balinese textiles."
+        },
+        {
+          "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+          "title": "Salt-Water Canopy Plunge",
+          "highlightWord": "Canopy",
+          "description": "Floating in your private copper-decked saltwater pool suspended amidst the jungle canopy.",
+          "fact": "💡 EXPERIENCE: PRIVATE OUTDOOR SALT-WATER POOL IN EVERY TENT",
+          "voText": "Submerge into your private outdoor saltwater plunge pool, suspended right amidst the emerald rainforest canopy."
+        },
+        {
+          "badge": "ACT 05 / HOLISTIC HEALING",
+          "title": "Auriga Moon Phase Spa",
+          "highlightWord": "Moon",
+          "description": "Healing Balinese wellness treatments aligned with lunar cycles inside open-air tent pavilions.",
+          "fact": "💡 WELLNESS: BESPOKE LUNAR-ALIGNED CHAKRA THERAPY",
+          "voText": "Experience restorative wellness at Auriga Spa, where ancient Balinese healing rituals harmonize with the rhythm of the moon."
+        },
+        {
+          "badge": "ACT 06 / GOLDEN HOUR",
+          "title": "The Starlight Camp Fire",
+          "highlightWord": "Fire",
+          "description": "Gathering around the crackling jungle campfire with roasted marshmallows and spiced hot toddies.",
+          "fact": "💡 SUNSET: GOLDEN HOUR OVER THE UBUD SACRED VALLEY",
+          "voText": "As darkness falls, gather around the crackling campfire beneath a canopy of stars. Reserve your enchanted jungle sanctuary today."
+        }
+      ]
+    },
+    {
+      "id": "stay-20",
+      "slug": "jade_mountain",
+      "numeral": "XX",
+      "name": "Jade Mountain Resort",
+      "subtitle": "Architectural Masterpiece with Open 4th Wall Framing the Iconic Volcanic Pitons",
+      "location": "Soufrière, St. Lucia",
+      "country": "St. Lucia, Caribbean",
+      "badge": "COLLECTION № 20 · CARIBBEAN",
+      "rating": "4.99",
+      "reviews": "1,040+",
+      "pricePerNight": "From $2,850",
+      "priceAmount": "$2,850",
+      "seasonalRange": "Summer $2,250+ · Winter Peak $4,600+",
+      "rateInclusions": "Includes personal Major-Domo butler, organic estate dining & catamaran sailing pass",
+      "forbesTier": "World's Top Architectural Resort & Conde Nast Traveler #1",
+      "image": "/images/stayhelper/jade_mountain_wide_hero.jpg",
+      "wideHero": "/images/stayhelper/jade_mountain_wide_hero.jpg",
+      "videoSrc": "/videos/StayHelperJadeMountain_Master_Reel.mp4",
+      "posterSrc": "/images/stayhelper/jade_mountain_wide_hero.jpg",
+      "bookingUrl": "https://www.jademountain.com/",
+      "status": "STREAMING",
+      "story": [
+        "Rising like a monumental eco-futuristic ziggurat above the sapphire Caribbean Sea, Jade Mountain is an organic architectural triumph conceived by architect-owner Nick Troubetzkoy. Connected by dramatic suspended stone bridges hovering in mid-air, the resort is celebrated for its revolutionary open fourth wall design concept.",
+        "In each palatial Sanctuary, the bedroom, living space, and a private multi-colored glass tile infinity pool glide seamlessly into the tropical trade winds, framing uninterrupted, jaw-dropping panoramas of St. Lucia’s UNESCO World Heritage Piton volcanic spires. There are no clocks, no televisions, and no walls separating guests from the sublime Caribbean panorama."
+      ],
+      "features": [
+        { "title": "Private Infinity Pool Sanctuaries", "desc": "Cantilevered floating pools ranging from 400 to 900 sq ft with glowing iridescent tiles" },
+        { "title": "Open 4th-Wall Architecture", "desc": "Revolutionary structural design opening bedrooms completely to panoramic Piton views" },
+        { "title": "Suspended Stone Sky Bridges", "desc": "Dramatic private skybridges leading individually to each private architectural sanctuary" }
+      ],
+      "acts": [
+        {
+          "badge": "ACT 01 / PANORAMIC ARRIVAL",
+          "title": "Sanctuary Above the Pitons",
+          "highlightWord": "Pitons",
+          "description": "Hovering above the sparkling Caribbean Sea facing St. Lucia's monumental volcanic Piton spires.",
+          "fact": "💡 HIGHLIGHT: UNESCO PITONS VOLCANO PANORAMIC LOCATION",
+          "voText": "Hovering high above the azure Caribbean Sea, welcome to Jade Mountain, an architectural marvel framing St. Lucia’s majestic volcanic Pitons."
+        },
+        {
+          "badge": "ACT 02 / BOTANICAL PATH",
+          "title": "Floating Stone Bridges",
+          "highlightWord": "Bridges",
+          "description": "Crossing dramatic stone sky bridges suspended in mid-air toward your private sanctuary.",
+          "fact": "💡 ARCHITECTURE: SUSPENDED STONE SKY BRIDGES IN MID-AIR",
+          "voText": "Cross dramatic suspended stone bridges floating in mid-air, leading to your private architectural sanctuary in the sky."
+        },
+        {
+          "badge": "ACT 03 / SACRED HERITAGE",
+          "title": "The Open Fourth Wall",
+          "highlightWord": "Fourth",
+          "description": "Experiencing monumental spaces where no wall separates you from the sea and cosmic stars.",
+          "fact": "💡 DESIGN: NICK TROUBETZKOY OPEN 4TH-WALL CONCEPT",
+          "voText": "Step into a sanctuary with no fourth wall, where tropical ocean trade winds and monumental volcanic peaks become your living room."
+        },
+        {
+          "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+          "title": "Cantilevered Floating Pool",
+          "highlightWord": "Floating",
+          "description": "Swimming in private iridescent glass pools that appear to spill directly into the ocean abyss.",
+          "fact": "💡 EXPERIENCE: 900 SQ FT CANTILEVERED GLASS INFINITY POOL",
+          "voText": "Immerse yourself in your private cantilevered infinity pool, floating weightlessly against the backdrop of the towering green Pitons."
+        },
+        {
+          "badge": "ACT 05 / HOLISTIC HEALING",
+          "title": "Kai en Ciel Holistic Spa",
+          "highlightWord": "Ciel",
+          "description": "Organic cocoa bean and local volcanic sulfur body scrubs overlooking the endless Caribbean.",
+          "fact": "💡 WELLNESS: ORGANIC SAINT LUCIAN COCOA & MINERAL THERAPY",
+          "voText": "Restore harmony with organic estate cocoa and volcanic mineral rituals at the Kai en Ciel sanctuary."
+        },
+        {
+          "badge": "ACT 06 / GOLDEN HOUR",
+          "title": "Celestial Terrace Twilight",
+          "highlightWord": "Celestial",
+          "description": "Sipping passionfruit champagne on the Celestial Terrace as the sun sets behind the Gros Piton.",
+          "fact": "💡 SUNSET: GOLDEN HOUR OVER THE UNESCO CARIBBEAN SEA",
+          "voText": "As twilight bathes the Caribbean in blazing amber and violet, watch the Pitons fade into the starlight. Reserve your sanctuary today."
+        }
+      ]
+    }
+  ]
+}

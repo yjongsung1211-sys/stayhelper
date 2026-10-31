@@ -367,6 +367,406 @@ const ALL_STAYS: StayInfo[] = [
       { title: "Century-Old Private Pine Groves", desc: "33 acres of immaculate gardens hosting royalty, artists, and screen legends" },
       { title: "Dior Spa Eden-Roc", desc: "Holistic Mediterranean wellness treatments in open-air coastal cabanas" }
     ]
+  },
+  {
+    id: "stay-11",
+    numeral: "XI",
+    name: "Villa d'Este",
+    subtitle: "16th-Century Renaissance Royal Palace & Legendary Floating Pool on Lake Como",
+    location: "Cernobbio, Lake Como",
+    country: "Lake Como, Italy",
+    badge: "COLLECTION № 11 · LAKE COMO, ITALY",
+    rating: "4.99",
+    reviews: "920+",
+    pricePerNight: "From $1,950",
+    priceAmount: "$1,950",
+    seasonalRange: "Spring $1,600+ · Summer Grand Prix $3,400+",
+    rateInclusions: "Includes lakeside artisan breakfast, floating pool pass & private gardens access",
+    forbesTier: "Leading Hotels of the World & Forbes 5-Star",
+    image: "/images/stayhelper/villa_deste_wide_hero.jpg",
+    wideHero: "/images/stayhelper/villa_deste_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperVillaDEste_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/villa_deste_wide_hero.jpg",
+    bookingUrl: "https://www.villadeste.com/",
+    status: "STREAMING",
+    story: [
+      "Originally commissioned in 1568 as a summer residence for Cardinal Tolomeo Gallio, Villa d’Este is widely celebrated as the timeless grand dame of Lake Como. Nestled within twenty-five acres of Renaissance botanical gardens, majestic cypress alleys, and baroque fountains, it preserves an atmosphere of regal grandeur once favored by European royalty, aristocracy, and literary icons.",
+      "The estate’s crown jewel is its world-famous floating swimming pool, built directly into the dark blue waters of Lake Como with a private sunbathing pontoon facing misty mountain peaks. Gilded chandeliers, Murano glass, and Como silk furnishings frame private balcony vistas over passing wooden Riva motorboats."
+],
+    features: [
+      {
+            "title": "Iconic Floating Lake Pool",
+            "desc": "Pioneering pontoon heated swimming pool suspended directly upon Lake Como"
+      },
+      {
+            "title": "25-Acre Renaissance Gardens",
+            "desc": "Historic 16th-century baroque nymphaeum and centennial pine tree promenades"
+      },
+      {
+            "title": "Veranda Lakeside Gastronomy",
+            "desc": "Fine Italian dining with floor-to-ceiling glass pavilions opening onto the water"
+      }
+]
+  },
+  {
+    id: "stay-12",
+    numeral: "XII",
+    name: "Post Ranch Inn",
+    subtitle: "Cliffside Architectural Masterpiece Perched 1,200 Feet Above the Boundless Pacific",
+    location: "Big Sur, Highway 1, California",
+    country: "California, United States",
+    badge: "COLLECTION № 12 · BIG SUR, USA",
+    rating: "4.99",
+    reviews: "840+",
+    pricePerNight: "From $2,450",
+    priceAmount: "$2,450",
+    seasonalRange: "Fall $2,100+ · Summer Fog Peak $3,800+",
+    rateInclusions: "Includes gourmet Big Sur breakfast, daily morning yoga & guided nature hikes",
+    forbesTier: "Forbes Travel Guide 5-Star Hotel",
+    image: "/images/stayhelper/post_ranch_inn_wide_hero.jpg",
+    wideHero: "/images/stayhelper/post_ranch_inn_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperPostRanchInn_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/post_ranch_inn_wide_hero.jpg",
+    bookingUrl: "https://www.postranchinn.com/",
+    status: "STREAMING",
+    story: [
+      "Perched dramatically on the rugged cliffs of Big Sur twelve hundred feet above the crashing Pacific Ocean, Post Ranch Inn is an organic architectural triumph designed by Mickey Muennig. Built entirely with reclaimed redwood, local stone, and curved sod roofs, the resort harmonizes flawlessly with the wild California coastal ecosystem.",
+      "Freestanding cliff house sanctuaries and triangular treehouses elevated nine feet off the forest floor offer wood-burning fireplaces, private outdoor soaking tubs, and telescope observatories framing migrating humpback whales and starlit cosmic skies."
+],
+    features: [
+      {
+            "title": "Cliffside Jade Soaking Spas",
+            "desc": "104-degree infinity soaking pools perched directly on sheer ocean precipices"
+      },
+      {
+            "title": "Elevated Treehouse Sanctuaries",
+            "desc": "Architectural stilt pavilions built amidst ancient coastal redwood canopies"
+      },
+      {
+            "title": "Sierra Mar Gastronomy",
+            "desc": "Michelin-recognized coastal cuisine paired with a 15,000-bottle Grand Award cellar"
+      }
+]
+  },
+  {
+    id: "stay-13",
+    numeral: "XIII",
+    name: "Cheval Blanc Randheli",
+    subtitle: "LVMH’s Ultimate Haute Couture Island Maison with Private Marina and Infinity Sanctuaries",
+    location: "Noonu Atoll, Republic of Maldives",
+    country: "Maldives",
+    badge: "COLLECTION № 13 · MALDIVES ATOLL",
+    rating: "4.99",
+    reviews: "710+",
+    pricePerNight: "From $3,800",
+    priceAmount: "$3,800",
+    seasonalRange: "Low $3,200+ · Festive Holiday $6,800+",
+    rateInclusions: "Includes customized twin-otter seaplane transfers, private majordome butler service",
+    forbesTier: "World's 50 Best Luxury Hotels & Forbes 5-Star",
+    image: "/images/stayhelper/cheval_blanc_wide_hero.jpg",
+    wideHero: "/images/stayhelper/cheval_blanc_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperChevalBlanc_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/cheval_blanc_wide_hero.jpg",
+    bookingUrl: "https://www.chevalblanc.com/en/maison/randheli/",
+    status: "STREAMING",
+    story: [
+      "Conceived by Jean-Michel Gathy for luxury conglomerate LVMH, Cheval Blanc Randheli represents the absolute pinnacle of contemporary island elegance in the secluded Noonu Atoll. Rising from crystalline lagoons, soaring 7-meter-high cathedral wooden doors, graphic yellow pop accents, and bespoke art installations define this exclusive haute couture retreat.",
+      "Forty-six monumental overwater and island villas feature 12.5-meter private infinity pools, secluded private white-sand beaches, and dedicated Majordome butlers catering to every bespoke whim. Guests arrive via the Maison's signature taupe-and-yellow customized private seaplane."
+],
+    features: [
+      {
+            "title": "Monumental 12.5m Private Pools",
+            "desc": "Every single villa features a private heated infinity pool extending into the lagoon"
+      },
+      {
+            "title": "Cheval Blanc Spa Island",
+            "desc": "A dedicated private island accessible only by traditional wooden dhoni boat"
+      },
+      {
+            "title": "Le 1947 Haute Gastronomy",
+            "desc": "French 12-course fine dining paired with legendary Château Cheval Blanc vintages"
+      }
+]
+  },
+  {
+    id: "stay-14",
+    numeral: "XIV",
+    name: "Belmond Hotel Caruso",
+    subtitle: "11th-Century Palatial Cliffside Sanctuary Suspended Between Sky and Sea in Ravello",
+    location: "Ravello, Amalfi Coast",
+    country: "Amalfi Coast, Italy",
+    badge: "COLLECTION № 14 · AMALFI COAST",
+    rating: "4.98",
+    reviews: "880+",
+    pricePerNight: "From $1,980",
+    priceAmount: "$1,980",
+    seasonalRange: "Spring $1,550+ · Summer Peak $3,200+",
+    rateInclusions: "Includes cliff-top terrace breakfast, daily sunset cruise on private wooden gozzo boat",
+    forbesTier: "Condé Nast Traveler Gold List & Forbes 5-Star",
+    image: "/images/stayhelper/belmond_caruso_wide_hero.jpg",
+    wideHero: "/images/stayhelper/belmond_caruso_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperBelmondCaruso_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/belmond_caruso_wide_hero.jpg",
+    bookingUrl: "https://www.belmond.com/hotels/europe/italy/amalfi-coast/belmond-hotel-caruso/",
+    status: "STREAMING",
+    story: [
+      "Perched high on a limestone bluff 350 meters above the azure Amalfi Coast in medieval Ravello, Belmond Hotel Caruso is an exquisitely restored 11th-century palace originally built by a wealthy Roman patrician family. Its historic colonnades, fragrant lemon terraces, and original frescoes transport guests into an era of aristocratic Mediterranean leisure.",
+      "The hotel’s crown jewel is its world-renowned cliff-edge heated infinity pool, famously dubbed the pool in the clouds. Seeming to float magically in mid-air over the Gulf of Salerno, it offers uninterrupted 360-degree vistas across dramatic coastal cliffs, pastel villages, and sapphire seas."
+],
+    features: [
+      {
+            "title": "The Infinity Pool in the Clouds",
+            "desc": "Suspended 350 meters above the Mediterranean with 360-degree Amalfi gulf vistas"
+      },
+      {
+            "title": "11th-Century Historic Colonnades",
+            "desc": "Preserved vaulted stone arches, baroque garden pergolas and authentic frescoed suites"
+      },
+      {
+            "title": "Belvedere Cliffside Dining",
+            "desc": "Neapolitan haute gastronomy prepared with fresh vegetables from the hotel's own garden"
+      }
+]
+  },
+  {
+    id: "stay-15",
+    numeral: "XV",
+    name: "Aman Tokyo",
+    subtitle: "Monumental Washi Paper Lantern Atrium & Basalt Stone Sanctuary Above Otemachi",
+    location: "The Otemachi Tower, Tokyo",
+    country: "Tokyo, Japan",
+    badge: "COLLECTION № 15 · TOKYO, JAPAN",
+    rating: "4.99",
+    reviews: "1,120+",
+    pricePerNight: "From $2,250",
+    priceAmount: "$2,250",
+    seasonalRange: "Winter $1,850+ · Cherry Blossom Peak $3,900+",
+    rateInclusions: "Includes traditional Japanese seasonal breakfast, private onsen spa bath access",
+    forbesTier: "Forbes Travel Guide 5-Star Hotel",
+    image: "/images/stayhelper/aman_tokyo_wide_hero.jpg",
+    wideHero: "/images/stayhelper/aman_tokyo_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperAmanTokyo_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/aman_tokyo_wide_hero.jpg",
+    bookingUrl: "https://www.aman.com/hotels/aman-tokyo",
+    status: "STREAMING",
+    story: [
+      "Occupying the top six floors of the prestigious Otemachi Tower, Aman Tokyo is a monument to urban Zen serenity envisioned by master architect Kerry Hill. At its core lies a breathtaking monumental lobby atrium rising thirty meters high, crafted from delicate textured washi paper that glows like a colossal Japanese lantern against the Tokyo skyline.",
+      "Framing panoramic vistas across the Imperial Palace Gardens and Mount Fuji on clear mornings, the hotel blends classical ryokan aesthetics—shoji paper screens, camphor wood, and black basalt stone—with refined urban tranquility. The 30-meter black granite swimming pool offers an ethereal sanctuary far above the metropolis."
+],
+    features: [
+      {
+            "title": "30-Meter Washi Lantern Atrium",
+            "desc": "Soaring architectural lobby evoking the interior of a traditional Japanese paper shoji"
+      },
+      {
+            "title": "30m Black Basalt Pool",
+            "desc": "Monumental heated indoor pool overlooking the Imperial Palace gardens and skyline"
+      },
+      {
+            "title": "Authentic Ryokan Cedar Onsen",
+            "desc": "Mineral-rich Japanese public and private onsen hot stone bath pavilion"
+      }
+]
+  },
+  {
+    id: "stay-16",
+    numeral: "XVI",
+    name: "Royal Mansour Marrakech",
+    subtitle: "Palatial Masterpiece Commissioned by the King with Private Multi-Story Riads & Starlight Pools",
+    location: "Rue Abou Abbas El Sebti, Marrakech",
+    country: "Marrakech, Morocco",
+    badge: "COLLECTION № 16 · MARRAKECH, MOROCCO",
+    rating: "4.99",
+    reviews: "950+",
+    pricePerNight: "From $2,200",
+    priceAmount: "$2,200",
+    seasonalRange: "Summer $1,750+ · Winter Festive $3,800+",
+    rateInclusions: "Includes fast-track VIP airport transfers, personal butler, traditional Moroccan breakfast",
+    forbesTier: "Forbes 5-Star & World's Most Lavish Urban Palace",
+    image: "/images/stayhelper/royal_mansour_wide_hero.jpg",
+    wideHero: "/images/stayhelper/royal_mansour_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperRoyalMansour_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/royal_mansour_wide_hero.jpg",
+    bookingUrl: "https://www.royalmansour.com/marrakech/",
+    status: "STREAMING",
+    story: [
+      "Commissioned by His Majesty King Mohammed VI to showcase the very pinnacle of Moroccan craftsmanship, Royal Mansour Marrakech is a palatial city within a city. Instead of conventional hotel rooms or suites, guests reside in fifty-three private three-story riads, each with its own open-air courtyard, private elevator, and rooftop terrace featuring a heated plunge pool and starlight fireplace.",
+      "Over 1,500 master artisans spent five years hand-carving intricate cedarwood ceilings, geometric zellij tilework, and sculpted plaster arabesques. An ingenious subterranean tunnel network allows personal butlers to serve guests with complete discretion, preserving absolute privacy amidst fragrant orange blossoms and palatial courtyards."
+],
+    features: [
+      {
+            "title": "53 Private Multi-Story Riads",
+            "desc": "Exclusive 3-story private residences with open courtyards and personal rooftop pools"
+      },
+      {
+            "title": "Secret Subterranean Tunnels",
+            "desc": "Underground staff labyrinth ensuring total discretion and invisible butler service"
+      },
+      {
+            "title": "All-White Marble Hammam Spa",
+            "desc": "Iconic birdcage-like white wrought-iron atrium offering royal Moroccan rhassoul rituals"
+      }
+]
+  },
+  {
+    id: "stay-17",
+    numeral: "XVII",
+    name: "COMO Laucala Island",
+    subtitle: "Ultra-Exclusive 3,000-Acre Private Island Sanctuary with Iconic Glass-Cube Lap Pool",
+    location: "Laucala Island, Cakaudrove",
+    country: "Fiji, South Pacific",
+    badge: "COLLECTION № 17 · FIJI ISLANDS",
+    rating: "4.99",
+    reviews: "520+",
+    pricePerNight: "From $5,600",
+    priceAmount: "$5,600",
+    seasonalRange: "All-Inclusive $5,600+ · Peak Holiday $9,200+",
+    rateInclusions: "Fully inclusive of all private dining, sommelier wines, DeepFlight submarine dives & golf",
+    forbesTier: "World's Most Exclusive Private Island Resort",
+    image: "/images/stayhelper/como_laucala_wide_hero.jpg",
+    wideHero: "/images/stayhelper/como_laucala_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperComoLaucala_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/como_laucala_wide_hero.jpg",
+    bookingUrl: "https://www.comohotels.com/fiji/como-laucala-island",
+    status: "STREAMING",
+    story: [
+      "Spanning three thousand pristine acres of private South Pacific paradise in northern Fiji, COMO Laucala Island is an extraordinary ultra-luxury resort once owned by Malcolm Forbes and Red Bull founder Dietrich Mateschitz. Featuring twenty-five standalone presidential villas, its own private airstrip, and organic farms producing 85% of all estate food, it defines absolute ecological privacy.",
+      "The island’s architectural triumph is its 25-meter clear-glass cube lap pool, suspended inside a massive 2,000-square-meter lagoon pool framed by coconut palms and white beaches. Guests enjoy private submarine diving on virgin barrier reefs, equestrian trails, and world-class 18-hole championship golf."
+],
+    features: [
+      {
+            "title": "25m Transparent Glass Cube Pool",
+            "desc": "World-famous submerged acrylic glass lap pool set inside an organic lagoon"
+      },
+      {
+            "title": "DeepFlight Super Falcon Submarine",
+            "desc": "Private two-person high-tech submarine exploration across pristine coral atolls"
+      },
+      {
+            "title": "Self-Sustaining Organic Farm",
+            "desc": "Farm-to-table gastronomy powered by 240 acres of private organic hydroponic farms"
+      }
+]
+  },
+  {
+    id: "stay-18",
+    numeral: "XVIII",
+    name: "Badrutt's Palace Hotel",
+    subtitle: "Legendary 128-Year-Old Fairy-Tale Alpine Castle Overlooking Lake St. Moritz",
+    location: "Via Serlas, St. Moritz",
+    country: "Engadin, Switzerland",
+    badge: "COLLECTION № 18 · SWISS ALPS",
+    rating: "4.98",
+    reviews: "1,180+",
+    pricePerNight: "From $1,750",
+    priceAmount: "$1,750",
+    seasonalRange: "Summer $1,250+ · Winter Ski Peak $3,600+",
+    rateInclusions: "Includes Rolls-Royce train station transfers, gourmet Engadin breakfast, Palace Spa access",
+    forbesTier: "Forbes Travel Guide 5-Star Hotel",
+    image: "/images/stayhelper/badrutts_palace_wide_hero.jpg",
+    wideHero: "/images/stayhelper/badrutts_palace_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperBadruttsPalace_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/badrutts_palace_wide_hero.jpg",
+    bookingUrl: "https://badruttspalace.com/",
+    status: "STREAMING",
+    story: [
+      "Reigning over the sparkling alpine waters of Lake St. Moritz since 1896, Badrutt’s Palace Hotel is the birthplace of winter tourism and European high-society alpine glamour. Its iconic neo-Gothic tower and monumental stone arches have hosted everyone from Audrey Hepburn and Alfred Hitchcock to international royalty and tastemakers.",
+      "Guests arrive in vintage Rolls-Royce limousines, stepping into the legendary Grand Hall with soaring timber ceilings and panoramic vistas across snow-draped Engadin mountains. The glass-fronted Palace Spa features an indoor granite pool with views of frozen Lake St. Moritz and outdoor steaming thermal whirlpools."
+],
+    features: [
+      {
+            "title": "Lakeview Infinity Indoor Pool",
+            "desc": "Glass-walled granite pool with seamless views across snow-draped Lake St. Moritz"
+      },
+      {
+            "title": "Vintage Rolls-Royce Transfers",
+            "desc": "Chauffeured arrival from St. Moritz railway station in bespoke classic limousines"
+      },
+      {
+            "title": "Le Grand Hall & King's Social House",
+            "desc": "Legendary Engadin salon and Switzerland's oldest and most prestigious nightclub"
+      }
+]
+  },
+  {
+    id: "stay-19",
+    numeral: "XIX",
+    name: "Capella Ubud",
+    subtitle: "Bill Bensley’s Mystical Rainforest Tented Camp Sanctuary Above Sacred Wos River",
+    location: "Tegallalang, Ubud, Bali",
+    country: "Bali, Indonesia",
+    badge: "COLLECTION № 19 · BALI JUNGLE",
+    rating: "4.99",
+    reviews: "940+",
+    pricePerNight: "From $1,350",
+    priceAmount: "$1,350",
+    seasonalRange: "Regular $1,150+ · High Season $2,200+",
+    rateInclusions: "Includes bespoke camp breakfast, afternoon tea, camp duffel bag & 24hr Culturist service",
+    forbesTier: "Travel + Leisure World's #1 Hotel",
+    image: "/images/stayhelper/capella_ubud_wide_hero.jpg",
+    wideHero: "/images/stayhelper/capella_ubud_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperCapellaUbud_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/capella_ubud_wide_hero.jpg",
+    bookingUrl: "https://capellahotels.com/en/capella-ubud",
+    status: "STREAMING",
+    story: [
+      "Hidden within the sacred rainforest canopy of Keliki valley in Ubud, Capella Ubud is a visionary tribute to 19th-century European explorers created by eccentric architect Bill Bensley. Twenty-two ultra-luxury tented retreats and a two-bedroom lodge sit balanced delicately on stilts amidst dense jungle terrain without cutting down a single tree.",
+      "Each tented sanctuary features an outdoor copper and teak salt-water plunge pool, handcrafted hammered brass bathtubs, and bespoke antique decor. At night, guests gather around the open-air Camp Fire for roasted marshmallows, hot chocolate, and silent vintage films under the stars."
+],
+    features: [
+      {
+            "title": "Salt-Water Plunge Pool Retreats",
+            "desc": "Handcrafted outdoor plunge pools overlooking dense virgin jungle canopies"
+      },
+      {
+            "title": "Zero-Impact Eco Architecture",
+            "desc": "Built without cutting a single tree, preserving the Keliki rainforest valley"
+      },
+      {
+            "title": "The Camp Fire Starlight Ritual",
+            "desc": "Nightly fireside gatherings with acoustic music, artisan chocolate and ghost stories"
+      }
+]
+  },
+  {
+    id: "stay-20",
+    numeral: "XX",
+    name: "Jade Mountain Resort",
+    subtitle: "Architectural Masterpiece with Open 4th Wall Framing the Iconic Volcanic Pitons",
+    location: "Soufrière, St. Lucia",
+    country: "St. Lucia, Caribbean",
+    badge: "COLLECTION № 20 · CARIBBEAN",
+    rating: "4.99",
+    reviews: "1,040+",
+    pricePerNight: "From $2,850",
+    priceAmount: "$2,850",
+    seasonalRange: "Summer $2,250+ · Winter Peak $4,600+",
+    rateInclusions: "Includes personal Major-Domo butler, organic estate dining & catamaran sailing pass",
+    forbesTier: "World's Top Architectural Resort & Conde Nast Traveler #1",
+    image: "/images/stayhelper/jade_mountain_wide_hero.jpg",
+    wideHero: "/images/stayhelper/jade_mountain_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperJadeMountain_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/jade_mountain_wide_hero.jpg",
+    bookingUrl: "https://www.jademountain.com/",
+    status: "STREAMING",
+    story: [
+      "Rising like a monumental eco-futuristic ziggurat above the sapphire Caribbean Sea, Jade Mountain is an organic architectural triumph conceived by architect-owner Nick Troubetzkoy. Connected by dramatic suspended stone bridges hovering in mid-air, the resort is celebrated for its revolutionary open fourth wall design concept.",
+      "In each palatial Sanctuary, the bedroom, living space, and a private multi-colored glass tile infinity pool glide seamlessly into the tropical trade winds, framing uninterrupted, jaw-dropping panoramas of St. Lucia’s UNESCO World Heritage Piton volcanic spires. There are no clocks, no televisions, and no walls separating guests from the sublime Caribbean panorama."
+],
+    features: [
+      {
+            "title": "Private Infinity Pool Sanctuaries",
+            "desc": "Cantilevered floating pools ranging from 400 to 900 sq ft with glowing iridescent tiles"
+      },
+      {
+            "title": "Open 4th-Wall Architecture",
+            "desc": "Revolutionary structural design opening bedrooms completely to panoramic Piton views"
+      },
+      {
+            "title": "Suspended Stone Sky Bridges",
+            "desc": "Dramatic private skybridges leading individually to each private architectural sanctuary"
+      }
+]
   }
 ];
 
