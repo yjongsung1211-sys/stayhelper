@@ -893,9 +893,11 @@ export default function StayHelperLuxuryShowcase() {
     setIsEnded(false);
   };
 
-  const handleBookingAction = (targetUrl: string) => {
-    // Direct 1-Click to official partner booking page (들어가서 알아서 보게 하자)
-    window.open(targetUrl, "_blank", "noopener,noreferrer");
+    const FORA_VIP_INTAKE_URL = "https://secure.foratravel.com/intake/VXwROA88te";
+
+  const handleBookingAction = (_targetUrl?: string) => {
+    // Direct 1-Click to CEO's Official Fora Travel VIP Perks Booking Portal
+    window.open(FORA_VIP_INTAKE_URL, "_blank", "noopener,noreferrer");
   };
 
   return (
