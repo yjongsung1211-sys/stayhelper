@@ -108,7 +108,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/kayon_jungle_wide_hero.jpg",
     videoSrc: "/videos/StayHelperBaliVilla_v10_GrandFinaleMaster.mp4",
     posterSrc: "/images/stayhelper/kayon_jungle_wide_hero.jpg",
-    bookingUrl: "https://thekayonjungleresort.com/",
+    bookingUrl: "https://www.booking.com/hotel/id/the-kayon-jungle-resort.html?aid=800100&lang=en-us",
     status: "STREAMING",
     story: [
       "Perched dramatically above the sacred Cerapu River valley in Ubud, The Kayon Jungle Resort is an exclusive adults-only haven inspired by the geometric terraces of ancient Balinese rice fields.",
@@ -139,7 +139,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/bulgari_01_arrival.jpg",
     videoSrc: "/videos/bulgari/firstmotion_bulgari_dubai_master.mp4?v=20261031_sunset_resonance",
     posterSrc: "/images/stayhelper/bulgari_01_arrival.jpg",
-    bookingUrl: "https://www.bulgarihotels.com/en_US/dubai",
+    bookingUrl: "https://www.booking.com/hotel/ae/bulgari-resort-dubai.html?aid=800100&lang=en-us",
     status: "STREAMING",
     story: [
       "Carved into the tranquil waters of Jumeira Bay Island, Bulgari Resort Dubai marries Mediterranean coastal grace with visionary Italian craftsmanship, designed by legendary architectural studio ACPV ARCHITECTS.",
@@ -170,7 +170,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/fs_kohsamui_wide_hero.jpg",
     videoSrc: "/videos/StayHelperKohSamui_v2_NaturalClean_Live.mp4",
     posterSrc: "/images/stayhelper/fs_kohsamui_poster.jpg",
-    bookingUrl: "https://www.fourseasons.com/kohsamui/",
+    bookingUrl: "https://www.booking.com/hotel/th/four-seasons-resort-koh-samui.html?aid=800100&lang=en-us",
     status: "STREAMING",
     story: [
       "Cascading down a lush tropical hillside to a secluded private white-sand beach on Laem Yai Bay, Four Seasons Resort Koh Samui is the ultimate sanctuary of island serenity.",
@@ -201,7 +201,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/soneva_jani_wide_hero.jpg",
     videoSrc: "/videos/StayHelperSonevaJani_Master_Reel.mp4",
     posterSrc: "/images/stayhelper/soneva_jani_poster.jpg",
-    bookingUrl: "https://soneva.com/resorts/soneva-jani/",
+    bookingUrl: "https://www.booking.com/hotel/mv/soneva-jani.html?aid=800100&lang=en-us",
     status: "STREAMING",
     story: [
       "Perched within a massive 5-kilometer turquoise lagoon in the tranquil Noonu Atoll, Soneva Jani defines the pinnacle of barefoot sustainable luxury. Curved wooden boardwalks stretch over transparent, shallow azure waters teeming with marine life.",
@@ -232,7 +232,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/chedi_andermatt_wide_hero.jpg",
     videoSrc: "/videos/StayHelperChediAndermatt_Master_Reel.mp4",
     posterSrc: "/images/stayhelper/chedi_andermatt_poster.jpg",
-    bookingUrl: "https://www.thechediandermatt.com/",
+    bookingUrl: "https://www.booking.com/hotel/ch/the-chedi-andermatt.html?aid=800100&lang=en-us",
     status: "STREAMING",
     story: [
       "Nestled amidst the snow-blanketed peaks of the Urseren Valley, The Chedi Andermatt marries classic Swiss alpine warmth with sleek Asian Zen minimalism, masterfully envisioned by legendary architect Jean-Michel Gathy.",
@@ -263,7 +263,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/monastero_santa_rosa_wide_hero.jpg",
     videoSrc: "/videos/StayHelperMonastero_Master_Reel.mp4",
     posterSrc: "/stays/monastero_santa_rosa/act1.jpg",
-    bookingUrl: "https://monasterosantarosa.com/",
+    bookingUrl: "https://www.booking.com/hotel/it/monastero-santa-rosa-spa.html?aid=800100&lang=en-us",
     status: "STREAMING",
     story: [
       "Clinging dramatically to a vertical limestone cliff soaring above the sapphire Tyrrhenian Sea, Monastero Santa Rosa is an exquisite restoration of a 17th-century Dominican convent along Italy's most storied coast.",
