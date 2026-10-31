@@ -169,7 +169,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/fs_kohsamui_wide_hero.jpg",
     videoSrc: "/videos/StayHelperKohSamui_v2_NaturalClean_Live.mp4",
     posterSrc: "/images/stayhelper/fs_kohsamui_poster.jpg",
-    bookingUrl: "https://www.trip.com/hotels/koh-samui-hotel-detail-995775/four-seasons-resort-koh-samui/",
+    bookingUrl: "https://www.trip.com/hotels/koh-samui-hotel-detail-922901/four-seasons-resort-koh-samui/",
     status: "STREAMING",
     story: [
       "Cascading down a lush tropical hillside to a secluded private white-sand beach on Laem Yai Bay, Four Seasons Resort Koh Samui is the ultimate sanctuary of island serenity.",
@@ -468,12 +468,8 @@ export default function StayHelperLuxuryShowcase() {
   };
 
   const handleBookingAction = (targetUrl: string) => {
-    if (member) {
-      window.open(targetUrl, "_blank", "noopener,noreferrer");
-    } else {
-      setPendingRedirectUrl(targetUrl);
-      setIsAuthModalOpen(true);
-    }
+    // Direct 1-Click to official partner booking page (들어가서 알아서 보게 하자)
+    window.open(targetUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -565,7 +561,7 @@ export default function StayHelperLuxuryShowcase() {
             </h1>
 
             <p className="text-xs sm:text-sm font-luxury-sans text-stone-200 tracking-[0.2em] uppercase font-light drop-shadow">
-              {currentStay.location} · {currentStay.pricePerNight} / night
+              {currentStay.location} · {currentStay.forbesTier.toUpperCase()}
             </p>
 
             <p className="text-sm sm:text-base italic font-luxury-serif text-[#E8D5B5]/90 leading-relaxed font-light line-clamp-2 sm:line-clamp-none drop-shadow">
@@ -638,7 +634,7 @@ export default function StayHelperLuxuryShowcase() {
                       {currentStay.name}
                     </h3>
                     <p className="text-xs font-mono text-stone-300 mb-5">
-                      {currentStay.priceAmount} USD / night · Direct Partner Link
+                      Official Partner Rates & Live Availability ↗
                     </p>
 
                     <div className="w-full max-w-[240px] py-2.5 px-4 rounded-full bg-white hover:bg-[#F3EFE6] text-black font-luxury-sans font-medium text-xs flex items-center justify-center gap-2 shadow-2xl transition-transform hover:scale-105 mb-3">
@@ -829,7 +825,7 @@ export default function StayHelperLuxuryShowcase() {
                 {currentStay.features[2]?.title}
               </h3>
               <p className="text-xs text-stone-400 leading-relaxed font-light">
-                {currentStay.rateInclusions} · {currentStay.seasonalRange}
+                {currentStay.rateInclusions}
               </p>
             </div>
 
