@@ -276,7 +276,7 @@ export const PostMotionStayHelperSingita: React.FC = () => {
               textTransform: 'uppercase',
             }}
           >
-            AMALFI COAST, ITALY
+            SERENGETI, TANZANIA
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 4, height: 26 }}>
@@ -293,7 +293,7 @@ export const PostMotionStayHelperSingita: React.FC = () => {
             SINGITA SASAKWA LODGE
           </div>
           <div style={{ fontSize: 16, letterSpacing: 3, color: 'rgba(255,255,255,0.65)' }}>
-            CLIFFSIDE MONASTERY · ITALY
+            EDWARDIAN SAFARI MANOR · SERENGETI
           </div>
         </div>
       </div>
@@ -360,7 +360,7 @@ export const PostMotionStayHelperSingita: React.FC = () => {
                 fontWeight: 800,
               }}
             >
-              💡 HERITAGE: 17TH-CENTURY CLIFF MONASTERY OVERLOOKING AMALFI
+              💡 CONSERVATION: 350,000 PRIVATE ACRES OVERLOOKING SERENGETI PLAINS
             </div>
           </div>
         )}
@@ -389,7 +389,7 @@ export const PostMotionStayHelperSingita: React.FC = () => {
               </span>
             </div>
             <div style={{ fontSize: 23, color: 'rgba(255,255,255,0.85)', lineHeight: 1.4, marginBottom: 16 }}>
-              Cascading stone terraces scented with wild rosemary and sun-drenched Amalfi lemons.
+              Grand sandstone arches and wrap-around verandas opening to boundless savanna.
             </div>
             <div
               style={{
@@ -570,7 +570,7 @@ export const PostMotionStayHelperSingita: React.FC = () => {
                 fontWeight: 800,
               }}
             >
-              💡 SUNSET: GOLDEN HOUR OVER THE GULF OF SALERNO & AMALFI
+              💡 WILDLIFE: PRIVATE 4X4 BIG FIVE ENCOUNTERS & STARLIT BUSH FIREPITS
             </div>
           </div>
         )}
@@ -605,7 +605,7 @@ export const PostMotionStayHelperSingita: React.FC = () => {
               textTransform: 'uppercase',
             }}
           >
-            AMALFI COAST · ITALY
+            GRUMETI RESERVE · TANZANIA
           </div>
 
           <div
@@ -630,7 +630,7 @@ export const PostMotionStayHelperSingita: React.FC = () => {
               marginBottom: 60,
             }}
           >
-            AMALFI COAST, ITALY
+            SERENGETI, TANZANIA
           </div>
 
           <div

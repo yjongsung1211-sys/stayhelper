@@ -77,7 +77,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/amangiri_wide_hero.jpg",
     videoSrc: "/videos/StayHelperAmangiri_v1_MasterReel.mp4",
     posterSrc: "/images/stayhelper/amangiri_wide_hero.jpg",
-    bookingUrl: "https://www.trip.com/hotels/kane-county-hotel-detail-690559/amangiri/",
+    bookingUrl: "https://www.aman.com/resorts/amangiri",
     status: "STREAMING",
     story: [
       "Discreetly hidden across 600 pristine acres of the southern Utah desert, Amangiri is an architectural triumph that blends seamlessly into raw 165-million-year-old Navajo sandstone escarpments. Here, minimalist concrete geometry and untamed geological formations unite to create an oasis of unearthly silence and monumental beauty.",
@@ -108,7 +108,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/kayon_jungle_wide_hero.jpg",
     videoSrc: "/videos/StayHelperBaliVilla_v10_GrandFinaleMaster.mp4",
     posterSrc: "/images/stayhelper/kayon_jungle_wide_hero.jpg",
-    bookingUrl: "https://www.trip.com/hotels/bali-hotel-detail-22019000/the-kayon-jungle-resort-adult-only/",
+    bookingUrl: "https://thekayonjungleresort.com/",
     status: "STREAMING",
     story: [
       "Perched dramatically above the sacred Cerapu River valley in Ubud, The Kayon Jungle Resort is an exclusive adults-only haven inspired by the geometric terraces of ancient Balinese rice fields.",
@@ -139,7 +139,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/bulgari_01_arrival.jpg",
     videoSrc: "/videos/bulgari/firstmotion_bulgari_dubai_master.mp4?v=20261031_sunset_resonance",
     posterSrc: "/images/stayhelper/bulgari_01_arrival.jpg",
-    bookingUrl: "https://www.trip.com/hotels/dubai-hotel-detail-2189035/bulgari-resort-dubai/",
+    bookingUrl: "https://www.bulgarihotels.com/en_US/dubai",
     status: "STREAMING",
     story: [
       "Carved into the tranquil waters of Jumeira Bay Island, Bulgari Resort Dubai marries Mediterranean coastal grace with visionary Italian craftsmanship, designed by legendary architectural studio ACPV ARCHITECTS.",
@@ -170,7 +170,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/fs_kohsamui_wide_hero.jpg",
     videoSrc: "/videos/StayHelperKohSamui_v2_NaturalClean_Live.mp4",
     posterSrc: "/images/stayhelper/fs_kohsamui_poster.jpg",
-    bookingUrl: "https://www.trip.com/hotels/koh-samui-hotel-detail-922901/four-seasons-resort-koh-samui/",
+    bookingUrl: "https://www.fourseasons.com/kohsamui/",
     status: "STREAMING",
     story: [
       "Cascading down a lush tropical hillside to a secluded private white-sand beach on Laem Yai Bay, Four Seasons Resort Koh Samui is the ultimate sanctuary of island serenity.",
@@ -201,7 +201,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/soneva_jani_wide_hero.jpg",
     videoSrc: "/videos/StayHelperSonevaJani_Master_Reel.mp4",
     posterSrc: "/images/stayhelper/soneva_jani_poster.jpg",
-    bookingUrl: "https://www.trip.com/hotels/noonu-atoll-hotel-detail-7009366/soneva-jani/",
+    bookingUrl: "https://soneva.com/resorts/soneva-jani/",
     status: "STREAMING",
     story: [
       "Perched within a massive 5-kilometer turquoise lagoon in the tranquil Noonu Atoll, Soneva Jani defines the pinnacle of barefoot sustainable luxury. Curved wooden boardwalks stretch over transparent, shallow azure waters teeming with marine life.",
@@ -232,7 +232,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/chedi_andermatt_wide_hero.jpg",
     videoSrc: "/videos/StayHelperChediAndermatt_Master_Reel.mp4",
     posterSrc: "/images/stayhelper/chedi_andermatt_poster.jpg",
-    bookingUrl: "https://www.trip.com/hotels/andermatt-hotel-detail-1628174/the-chedi-andermatt/",
+    bookingUrl: "https://www.thechediandermatt.com/",
     status: "STREAMING",
     story: [
       "Nestled amidst the snow-blanketed peaks of the Urseren Valley, The Chedi Andermatt marries classic Swiss alpine warmth with sleek Asian Zen minimalism, masterfully envisioned by legendary architect Jean-Michel Gathy.",
@@ -263,7 +263,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/monastero_santa_rosa_wide_hero.jpg",
     videoSrc: "/videos/StayHelperMonastero_Master_Reel.mp4",
     posterSrc: "/stays/monastero_santa_rosa/act1.jpg",
-    bookingUrl: "https://www.trip.com/hotels/conca-dei-marini-hotel-detail-2180876/monastero-santa-rosa-hotel-spa/",
+    bookingUrl: "https://monasterosantarosa.com/",
     status: "STREAMING",
     story: [
       "Clinging dramatically to a vertical limestone cliff soaring above the sapphire Tyrrhenian Sea, Monastero Santa Rosa is an exquisite restoration of a 17th-century Dominican convent along Italy's most storied coast.",
@@ -294,7 +294,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/aman_kyoto_wide_hero.jpg",
     videoSrc: "/videos/StayHelperAmanKyoto_Master_Reel.mp4",
     posterSrc: "/stays/aman_kyoto/act1.jpg",
-    bookingUrl: "https://www.trip.com/hotels/kyoto-hotel-detail-43750875/aman-kyoto/",
+    bookingUrl: "https://www.aman.com/resorts/aman-kyoto",
     status: "STREAMING",
     story: [
       "Concealed within 79 acres of secluded cedar and maple forest at the foot of Kyoto’s sacred Takagamine mountains, Aman Kyoto is an ethereal architectural homage to classical Japanese ryokan aesthetics and Kerry Hill's timeless minimalism.",
@@ -325,7 +325,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/singita_sasakwa_wide_hero.jpg",
     videoSrc: "/videos/StayHelperSingita_Master_Reel.mp4",
     posterSrc: "/stays/singita_sasakwa/act1.jpg",
-    bookingUrl: "https://www.trip.com/hotels/serengeti-hotel-detail-50110328/singita-sasakwa-lodge/",
+    bookingUrl: "https://singita.com/lodge/singita-sasakwa-lodge/",
     status: "STREAMING",
     story: [
       "Perched high on Sasakwa Hill overlooking the endless golden savanna of the Serengeti, Singita Sasakwa Lodge captures the grandeur of a classic Edwardian manor amidst 350,000 acres of private protected wilderness.",
@@ -356,7 +356,7 @@ const ALL_STAYS: StayInfo[] = [
     wideHero: "/images/stayhelper/eden_roc_wide_hero.jpg",
     videoSrc: "/videos/StayHelperEdenRoc_Master_Reel.mp4",
     posterSrc: "/stays/eden_roc/act1.jpg",
-    bookingUrl: "https://www.trip.com/hotels/antibes-hotel-detail-2195021/hotel-du-cap-eden-roc/",
+    bookingUrl: "https://www.oetkercollection.com/hotels/hotel-du-cap-eden-roc/",
     status: "STREAMING",
     story: [
       "Commanding the southern tip of Cap d’Antibes since 1870, Hôtel du Cap-Eden-Roc stands as the timeless crown jewel of the French Riviera, long cherished by European royalty, literary titans, and cinema royalty during the Cannes Film Festival.",

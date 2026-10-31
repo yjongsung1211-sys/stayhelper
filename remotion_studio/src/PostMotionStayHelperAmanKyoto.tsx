@@ -276,7 +276,7 @@ export const PostMotionStayHelperAmanKyoto: React.FC = () => {
               textTransform: 'uppercase',
             }}
           >
-            AMALFI COAST, ITALY
+            TAKAGAMINE, KYOTO
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 4, height: 26 }}>
@@ -293,7 +293,7 @@ export const PostMotionStayHelperAmanKyoto: React.FC = () => {
             AMAN KYOTO SANCTUARY
           </div>
           <div style={{ fontSize: 16, letterSpacing: 3, color: 'rgba(255,255,255,0.65)' }}>
-            CLIFFSIDE MONASTERY · ITALY
+            SECRET FOREST SANCTUARY · KYOTO
           </div>
         </div>
       </div>
@@ -360,7 +360,7 @@ export const PostMotionStayHelperAmanKyoto: React.FC = () => {
                 fontWeight: 800,
               }}
             >
-              💡 HERITAGE: 17TH-CENTURY CLIFF MONASTERY OVERLOOKING AMALFI
+              💡 ARCHITECTURE: KERRY HILL MINIMALIST TIMBER & LIVING CEDAR FOREST
             </div>
           </div>
         )}
@@ -389,7 +389,7 @@ export const PostMotionStayHelperAmanKyoto: React.FC = () => {
               </span>
             </div>
             <div style={{ fontSize: 23, color: 'rgba(255,255,255,0.85)', lineHeight: 1.4, marginBottom: 16 }}>
-              Cascading stone terraces scented with wild rosemary and sun-drenched Amalfi lemons.
+              Moss-covered granite pathways meandering through ancient cedars and wild maples.
             </div>
             <div
               style={{
@@ -570,7 +570,7 @@ export const PostMotionStayHelperAmanKyoto: React.FC = () => {
                 fontWeight: 800,
               }}
             >
-              💡 SUNSET: GOLDEN HOUR OVER THE GULF OF SALERNO & AMALFI
+              💡 SERENITY: MEDITATIVE TWILIGHT THROUGH ANCIENT TAKAGAMINE WOODS
             </div>
           </div>
         )}
@@ -605,7 +605,7 @@ export const PostMotionStayHelperAmanKyoto: React.FC = () => {
               textTransform: 'uppercase',
             }}
           >
-            AMALFI COAST · ITALY
+            TAKAGAMINE · KYOTO, JAPAN
           </div>
 
           <div
@@ -630,7 +630,7 @@ export const PostMotionStayHelperAmanKyoto: React.FC = () => {
               marginBottom: 60,
             }}
           >
-            AMALFI COAST, ITALY
+            TAKAGAMINE, KYOTO
           </div>
 
           <div

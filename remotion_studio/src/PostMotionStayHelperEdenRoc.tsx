@@ -276,7 +276,7 @@ export const PostMotionStayHelperEdenRoc: React.FC = () => {
               textTransform: 'uppercase',
             }}
           >
-            AMALFI COAST, ITALY
+            CAP D'ANTIBES, FRANCE
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 4, height: 26 }}>
@@ -293,7 +293,7 @@ export const PostMotionStayHelperEdenRoc: React.FC = () => {
             HÔTEL DU CAP-EDEN-ROC
           </div>
           <div style={{ fontSize: 16, letterSpacing: 3, color: 'rgba(255,255,255,0.65)' }}>
-            CLIFFSIDE MONASTERY · ITALY
+            PALACE OF THE FRENCH RIVIERA · 1870
           </div>
         </div>
       </div>
@@ -360,7 +360,7 @@ export const PostMotionStayHelperEdenRoc: React.FC = () => {
                 fontWeight: 800,
               }}
             >
-              💡 HERITAGE: 17TH-CENTURY CLIFF MONASTERY OVERLOOKING AMALFI
+              💡 LEGEND: 150 YEARS OF RIVIERA GLAMOUR & NAPOLEON III MAJESTY
             </div>
           </div>
         )}
@@ -389,7 +389,7 @@ export const PostMotionStayHelperEdenRoc: React.FC = () => {
               </span>
             </div>
             <div style={{ fontSize: 23, color: 'rgba(255,255,255,0.85)', lineHeight: 1.4, marginBottom: 16 }}>
-              Cascading stone terraces scented with wild rosemary and sun-drenched Amalfi lemons.
+              The legendary pine-flanked Grand Allée leading toward the crystalline Mediterranean.
             </div>
             <div
               style={{
@@ -570,7 +570,7 @@ export const PostMotionStayHelperEdenRoc: React.FC = () => {
                 fontWeight: 800,
               }}
             >
-              💡 SUNSET: GOLDEN HOUR OVER THE GULF OF SALERNO & AMALFI
+              💡 SUNSET: GOLDEN HOUR OVER CAP D'ANTIBES & DIOR CLIFFSIDE CABANAS
             </div>
           </div>
         )}
@@ -605,7 +605,7 @@ export const PostMotionStayHelperEdenRoc: React.FC = () => {
               textTransform: 'uppercase',
             }}
           >
-            AMALFI COAST · ITALY
+            FRENCH RIVIERA · FRANCE
           </div>
 
           <div
@@ -630,7 +630,7 @@ export const PostMotionStayHelperEdenRoc: React.FC = () => {
               marginBottom: 60,
             }}
           >
-            AMALFI COAST, ITALY
+            CAP D'ANTIBES, FRANCE
           </div>
 
           <div
