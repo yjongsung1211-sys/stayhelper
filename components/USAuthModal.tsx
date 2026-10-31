@@ -1,7 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { X, ArrowRight, Loader2, Check, Sparkles, LogIn, UserPlus } from 'lucide-react';
+
+declare global {
+  interface Window {
+    google?: any;
+  }
+}
 
 interface USAuthModalProps {
   isOpen: boolean;
@@ -21,17 +27,23 @@ export default function USAuthModal({
   const [mode, setMode] = useState<'signin' | 'signup'>(initialMode);
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
-  const [isGoogleStep, setIsGoogleStep] = useState(false);
-  const [googleEmail, setGoogleEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [infoMessage, setInfoMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [successUser, setSuccessUser] = useState<any>(null);
+  const googleBtnRef = useRef<HTMLDivElement>(null);
+
+  const googleClientId =
+    process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ||
+    process.env.GOOGLE_CLIENT_ID ||
+    '';
 
   useEffect(() => {
     setMode(initialMode);
   }, [initialMode, isOpen]);
 
+  // Handle ESC key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -39,22 +51,193 @@ export default function USAuthModal({
     if (isOpen) {
       window.addEventListener('keydown', handleKeyDown);
       setErrorMessage('');
+      setInfoMessage('');
       setIsSuccess(false);
-      setIsGoogleStep(false);
     }
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  const handleAuthSubmit = async (
-    e?: React.FormEvent,
-    customEmail?: string,
-    provider = 'email',
-    customName?: string
-  ) => {
+  // Load official Google Identity Services Script
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const loadGoogleScript = () => {
+      if (document.getElementById('google-gsi-client')) return;
+      const script = document.createElement('script');
+      script.id = 'google-gsi-client';
+      script.src = 'https://accounts.google.com/gsi/client';
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        initGoogleSignIn();
+      };
+      document.body.appendChild(script);
+    };
+
+    const initGoogleSignIn = () => {
+      if (!window.google?.accounts?.id || !googleClientId) return;
+
+      try {
+        window.google.accounts.id.initialize({
+          client_id: googleClientId,
+          callback: handleGoogleCredentialResponse,
+          auto_select: false,
+          cancel_on_tap_outside: true,
+        });
+
+        if (googleBtnRef.current) {
+          window.google.accounts.id.renderButton(googleBtnRef.current, {
+            theme: 'outline',
+            size: 'large',
+            width: 320,
+            text: mode === 'signup' ? 'signup_with' : 'signin_with',
+            shape: 'pill',
+          });
+        }
+      } catch (err) {
+        console.error('Google Sign-In Init Error:', err);
+      }
+    };
+
+    if (window.google?.accounts?.id) {
+      initGoogleSignIn();
+    } else {
+      loadGoogleScript();
+    }
+  }, [isOpen, mode, googleClientId]);
+
+  // Handle Google Credential Response (from real Google OAuth)
+  const handleGoogleCredentialResponse = async (response: any) => {
+    if (!response || !response.credential) {
+      setErrorMessage('Google authentication could not be completed.');
+      return;
+    }
+
+    setLoading(true);
+    setErrorMessage('');
+    setInfoMessage('');
+
+    try {
+      const res = await fetch('/api/auth/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ credential: response.credential }),
+      });
+
+      const data = await res.json();
+      if (data.ok && data.user) {
+        handleAuthSuccess(data.user);
+      } else {
+        setErrorMessage(data.error || 'Failed to authenticate with Google.');
+      }
+    } catch {
+      setErrorMessage('Network error during Google authentication.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAuthSuccess = (user: any) => {
+    localStorage.setItem('stayhelper_user', JSON.stringify(user));
+    localStorage.setItem('stayhelper_member', JSON.stringify(user));
+    localStorage.setItem('sh_member_user', JSON.stringify(user));
+    document.cookie = `stayhelper_user=${encodeURIComponent(
+      JSON.stringify(user)
+    )}; path=/; max-age=2592000; SameSite=Lax`;
+
+    window.dispatchEvent(new Event('stayhelper_auth_changed'));
+
+    setSuccessUser(user);
+    setIsSuccess(true);
+
+    if (onSuccess) onSuccess(user);
+
+    setTimeout(() => {
+      onClose();
+      setIsSuccess(false);
+      setEmail('');
+      setName('');
+    }, 1200);
+  };
+
+  // Google Click Trigger (Real Popup or OAuth Redirect)
+  const handleGoogleClick = () => {
+    setErrorMessage('');
+    setInfoMessage('');
+
+    if (!googleClientId) {
+      setInfoMessage(
+        'Google OAuth 2.0 Web Client ID is being configured in Google Cloud Console. In the meantime, use the Instant VIP Pass below.'
+      );
+      return;
+    }
+
+    // Try Google Identity Services token client popup
+    if (window.google?.accounts?.oauth2) {
+      try {
+        const client = window.google.accounts.oauth2.initTokenClient({
+          client_id: googleClientId,
+          scope: 'email profile openid',
+          callback: async (tokenResponse: any) => {
+            if (tokenResponse?.access_token) {
+              setLoading(true);
+              try {
+                const profileRes = await fetch(
+                  'https://www.googleapis.com/oauth2/v3/userinfo',
+                  {
+                    headers: {
+                      Authorization: `Bearer ${tokenResponse.access_token}`,
+                    },
+                  }
+                );
+                const profile = await profileRes.json();
+                if (profile?.email) {
+                  const vipUser = {
+                    id: `usr_g_${profile.sub || Date.now()}`,
+                    email: profile.email,
+                    name: profile.name || profile.email.split('@')[0],
+                    picture: profile.picture,
+                    role: 'vip',
+                    region: 'US',
+                    provider: 'google',
+                    createdAt: new Date().toISOString(),
+                  };
+                  handleAuthSuccess(vipUser);
+                }
+              } catch {
+                setErrorMessage('Failed to fetch Google profile.');
+              } finally {
+                setLoading(false);
+              }
+            }
+          },
+        });
+        client.requestAccessToken();
+        return;
+      } catch (e) {
+        console.error('GIS token error, falling back to popup redirect', e);
+      }
+    }
+
+    // Fallback: Real Google OAuth 2.0 Redirect
+    const redirectUri = `${window.location.origin}/api/auth/callback/google`;
+    const googleAuthUrl =
+      `https://accounts.google.com/o/oauth2/v2/auth?` +
+      `client_id=${encodeURIComponent(googleClientId)}` +
+      `&redirect_uri=${encodeURIComponent(redirectUri)}` +
+      `&response_type=code` +
+      `&scope=${encodeURIComponent('openid email profile')}` +
+      `&prompt=select_account`;
+
+    window.location.href = googleAuthUrl;
+  };
+
+  // Email Submit
+  const handleAuthSubmit = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    const targetEmail = (customEmail || email).trim();
+    const targetEmail = email.trim();
     const targetName =
-      (customName || name).trim() || (mode === 'signup' ? targetEmail.split('@')[0] : '');
+      name.trim() || (mode === 'signup' ? targetEmail.split('@')[0] : '');
 
     if (!targetEmail || !targetEmail.includes('@')) {
       setErrorMessage('Please enter a valid email address.');
@@ -63,6 +246,7 @@ export default function USAuthModal({
 
     setLoading(true);
     setErrorMessage('');
+    setInfoMessage('');
 
     try {
       const res = await fetch('/api/auth/quick', {
@@ -71,38 +255,14 @@ export default function USAuthModal({
         body: JSON.stringify({
           email: targetEmail,
           name: targetName || targetEmail.split('@')[0],
-          provider,
+          provider: 'email',
           mode,
         }),
       });
 
       const data = await res.json();
-
       if (data.ok && data.user) {
-        localStorage.setItem('stayhelper_user', JSON.stringify(data.user));
-        localStorage.setItem('stayhelper_member', JSON.stringify(data.user));
-        localStorage.setItem('sh_member_user', JSON.stringify(data.user));
-        document.cookie = `stayhelper_user=${encodeURIComponent(
-          JSON.stringify(data.user)
-        )}; path=/; max-age=2592000; SameSite=Lax`;
-
-        window.dispatchEvent(new Event('stayhelper_auth_changed'));
-
-        setSuccessUser(data.user);
-        setIsSuccess(true);
-
-        if (onSuccess) {
-          onSuccess(data.user);
-        }
-
-        setTimeout(() => {
-          onClose();
-          setIsSuccess(false);
-          setIsGoogleStep(false);
-          setEmail('');
-          setName('');
-          setGoogleEmail('');
-        }, 1200);
+        handleAuthSuccess(data.user);
       } else {
         setErrorMessage(data.error || 'Failed to authenticate.');
       }
@@ -113,51 +273,13 @@ export default function USAuthModal({
         name: targetName || targetEmail.split('@')[0],
         role: 'user',
         region: 'US',
-        provider,
+        provider: 'email',
         createdAt: new Date().toISOString(),
       };
-      localStorage.setItem('stayhelper_user', JSON.stringify(fallbackUser));
-      localStorage.setItem('stayhelper_member', JSON.stringify(fallbackUser));
-      localStorage.setItem('sh_member_user', JSON.stringify(fallbackUser));
-      document.cookie = `stayhelper_user=${encodeURIComponent(
-        JSON.stringify(fallbackUser)
-      )}; path=/; max-age=2592000; SameSite=Lax`;
-
-      window.dispatchEvent(new Event('stayhelper_auth_changed'));
-      setSuccessUser(fallbackUser);
-      setIsSuccess(true);
-      if (onSuccess) onSuccess(fallbackUser);
-      setTimeout(() => {
-        onClose();
-        setIsSuccess(false);
-        setIsGoogleStep(false);
-        setEmail('');
-        setName('');
-        setGoogleEmail('');
-      }, 1200);
+      handleAuthSuccess(fallbackUser);
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleGoogleClick = () => {
-    // If email already entered in main input, submit directly
-    if (email && email.includes('@')) {
-      handleAuthSubmit(undefined, email.trim(), 'google', name.trim());
-      return;
-    }
-    // Otherwise open the Google email input smoothly without error
-    setIsGoogleStep(true);
-    setErrorMessage('');
-  };
-
-  const handleGoogleConfirm = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!googleEmail || !googleEmail.includes('@')) {
-      setErrorMessage('Please enter your Google / Gmail address.');
-      return;
-    }
-    handleAuthSubmit(undefined, googleEmail.trim(), 'google', googleEmail.split('@')[0]);
   };
 
   if (!isOpen) return null;
@@ -201,8 +323,8 @@ export default function USAuthModal({
                 type="button"
                 onClick={() => {
                   setMode('signup');
-                  setIsGoogleStep(false);
                   setErrorMessage('');
+                  setInfoMessage('');
                 }}
                 className={`flex-1 py-1.5 px-3 rounded-full text-xs font-mono font-medium transition cursor-pointer flex items-center justify-center gap-1.5 ${
                   mode === 'signup'
@@ -218,8 +340,8 @@ export default function USAuthModal({
                 type="button"
                 onClick={() => {
                   setMode('signin');
-                  setIsGoogleStep(false);
                   setErrorMessage('');
+                  setInfoMessage('');
                 }}
                 className={`flex-1 py-1.5 px-3 rounded-full text-xs font-mono font-medium transition cursor-pointer flex items-center justify-center gap-1.5 ${
                   mode === 'signin'
@@ -252,62 +374,13 @@ export default function USAuthModal({
                 : 'Enter your registered email to resume your complimentary VIP sanctuary dossier access.'}
             </p>
 
-            {/* Google Flow */}
-            {isGoogleStep ? (
-              <form onSubmit={handleGoogleConfirm} className="w-full mb-4 p-4 rounded-2xl bg-white border border-[#4285F4]/40 shadow-sm animate-fadeIn">
-                <div className="flex items-center gap-2 mb-2 text-left">
-                  <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
-                    <path
-                      fill="#4285F4"
-                      d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                    />
-                    <path
-                      fill="#34A853"
-                      d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                    />
-                    <path
-                      fill="#FBBC05"
-                      d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
-                    />
-                    <path
-                      fill="#EA4335"
-                      d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
-                    />
-                  </svg>
-                  <span className="text-xs font-semibold text-stone-900">Sign in with Google</span>
-                </div>
-                <div className="relative flex items-center">
-                  <input
-                    type="email"
-                    value={googleEmail}
-                    onChange={(e) => setGoogleEmail(e.target.value)}
-                    placeholder="Enter your Gmail (e.g. name@gmail.com)"
-                    autoFocus
-                    required
-                    className="w-full pl-3 pr-10 py-2 rounded-xl bg-stone-50 border border-stone-200 text-stone-900 text-xs placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-[#4285F4] focus:border-[#4285F4]"
-                  />
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="absolute right-1 w-7 h-7 rounded-lg bg-[#4285F4] hover:bg-[#3367D6] text-white flex items-center justify-center transition active:scale-95 disabled:opacity-50 cursor-pointer"
-                  >
-                    {loading ? <Loader2 className="w-3 h-3 animate-spin" /> : <ArrowRight className="w-3 h-3" />}
-                  </button>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setIsGoogleStep(false)}
-                  className="mt-2 text-[10px] text-stone-400 hover:text-stone-600 block text-right w-full cursor-pointer"
-                >
-                  Cancel
-                </button>
-              </form>
-            ) : (
+            {/* Official Google Button Container */}
+            <div className="w-full mb-3 flex flex-col items-center">
               <button
                 type="button"
                 onClick={handleGoogleClick}
                 disabled={loading}
-                className="w-full py-3 px-4 rounded-2xl bg-white hover:bg-stone-50 text-stone-900 font-luxury-sans font-semibold text-xs sm:text-sm flex items-center justify-center gap-3 transition border border-[#DFCFA9] shadow-xs hover:border-[#8F703C] active:scale-[0.99] cursor-pointer"
+                className="w-full flex items-center justify-center gap-3 px-5 py-3 rounded-2xl bg-white border border-[#DFCFA9] hover:border-[#8F703C] shadow-sm hover:shadow transition-all duration-200 text-xs font-luxury-sans font-semibold text-stone-800 cursor-pointer disabled:opacity-60"
               >
                 <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
                   <path
@@ -329,27 +402,36 @@ export default function USAuthModal({
                 </svg>
                 <span>Continue with Google</span>
               </button>
-            )}
 
-            {/* Minimal Divider */}
-            <div className="relative w-full my-4">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-[#E7DEC8]" />
-              </div>
-              <div className="relative flex justify-center text-[10px] uppercase font-mono tracking-wider">
-                <span className="bg-[#FAF9F6] px-3 text-stone-400">or with email</span>
-              </div>
+              {/* Native Google One Tap Button Mount (hidden when rendered) */}
+              <div ref={googleBtnRef} className="hidden" />
             </div>
 
-            {/* Unified Form */}
-            <form onSubmit={handleAuthSubmit} className="w-full space-y-3">
+            {/* Info Message (if Google Client ID pending) */}
+            {infoMessage && (
+              <p className="text-[11px] text-[#8F703C] bg-[#F5EEDD] border border-[#DFCFA9] rounded-xl px-3 py-2 mb-3 text-left w-full leading-normal">
+                💡 {infoMessage}
+              </p>
+            )}
+
+            {/* Divider */}
+            <div className="w-full flex items-center gap-3 my-2">
+              <div className="flex-1 h-px bg-stone-300/80" />
+              <span className="text-[10px] font-mono tracking-widest uppercase text-stone-500">
+                Or with Email
+              </span>
+              <div className="flex-1 h-px bg-stone-300/80" />
+            </div>
+
+            {/* Email Form */}
+            <form onSubmit={handleAuthSubmit} className="w-full space-y-3 mt-2">
               {mode === 'signup' && (
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Full Name (e.g. Eleanor Vance)"
-                  className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#E7DEC8] text-stone-900 text-xs sm:text-sm placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-[#8F703C] focus:border-[#8F703C] transition shadow-xs font-luxury-sans"
+                  className="w-full px-4 py-3 rounded-2xl bg-white border border-[#DFCFA9] text-stone-900 text-xs placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#8F703C]/30 focus:border-[#8F703C] shadow-xs"
                 />
               )}
 
@@ -358,73 +440,61 @@ export default function USAuthModal({
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder={
-                    mode === 'signup'
-                      ? 'Enter your email address...'
-                      : 'Enter your registered email...'
-                  }
+                  placeholder="Enter your email address..."
                   required
-                  className="w-full pl-4 pr-12 py-2.5 rounded-xl bg-white border border-[#E7DEC8] text-stone-900 text-xs sm:text-sm placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-[#8F703C] focus:border-[#8F703C] transition shadow-xs font-luxury-sans"
+                  className="w-full pl-4 pr-12 py-3 rounded-2xl bg-white border border-[#DFCFA9] text-stone-900 text-xs placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#8F703C]/30 focus:border-[#8F703C] shadow-xs"
                 />
                 <button
                   type="submit"
                   disabled={loading}
-                  className="absolute right-1.5 w-8 h-8 rounded-lg bg-[#1C1917] hover:bg-black text-[#D4AF37] flex items-center justify-center transition active:scale-95 disabled:opacity-50 cursor-pointer"
-                  title={mode === 'signup' ? 'Create VIP Membership' : 'Sign In'}
+                  className="absolute right-1.5 w-9 h-9 rounded-xl bg-stone-900 hover:bg-stone-800 text-[#DFCFA9] flex items-center justify-center transition active:scale-95 disabled:opacity-50 cursor-pointer shadow-sm"
+                  aria-label="Submit"
                 >
                   {loading ? (
-                    <Loader2 className="w-3.5 h-3.5 animate-spin text-[#D4AF37]" />
+                    <Loader2 className="w-4 h-4 animate-spin" />
                   ) : (
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-4 h-4" />
                   )}
                 </button>
               </div>
 
               {errorMessage && (
-                <p className="text-[11px] text-rose-600 mt-1 text-left font-medium">
+                <p className="text-xs text-rose-600 font-medium pt-1 text-center">
                   {errorMessage}
                 </p>
               )}
             </form>
 
-            {/* Switch Mode Link */}
-            <div className="mt-4 text-[11px] text-stone-500 font-luxury-sans">
-              {mode === 'signup' ? (
-                <span>
-                  Already a member?{' '}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setMode('signin');
-                      setIsGoogleStep(false);
-                      setErrorMessage('');
-                    }}
-                    className="text-[#8F703C] font-semibold hover:underline cursor-pointer ml-1"
-                  >
-                    Sign In
-                  </button>
-                </span>
-              ) : (
-                <span>
-                  Need VIP access?{' '}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setMode('signup');
-                      setIsGoogleStep(false);
-                      setErrorMessage('');
-                    }}
-                    className="text-[#8F703C] font-semibold hover:underline cursor-pointer ml-1"
-                  >
-                    Join Private Club
-                  </button>
-                </span>
-              )}
-            </div>
-
-            {/* Discreet Micro-Footer */}
-            <div className="mt-2 text-[10px] text-stone-400 font-mono">
-              Fast 1-click VIP pass. Zero passwords to remember.
+            {/* Footer switcher */}
+            <div className="mt-5 text-center">
+              <button
+                type="button"
+                onClick={() => {
+                  setMode(mode === 'signup' ? 'signin' : 'signup');
+                  setErrorMessage('');
+                  setInfoMessage('');
+                }}
+                className="text-xs text-stone-600 hover:text-stone-900 font-luxury-sans transition cursor-pointer"
+              >
+                {mode === 'signup' ? (
+                  <>
+                    Already a member?{' '}
+                    <span className="font-semibold text-[#8F703C] underline underline-offset-2">
+                      Sign In
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    New to StayHelper?{' '}
+                    <span className="font-semibold text-[#8F703C] underline underline-offset-2">
+                      Join Private Club
+                    </span>
+                  </>
+                )}
+              </button>
+              <p className="text-[10px] font-mono text-stone-500 mt-2">
+                Fast 1-click VIP pass. Zero passwords to remember.
+              </p>
             </div>
           </div>
         )}
