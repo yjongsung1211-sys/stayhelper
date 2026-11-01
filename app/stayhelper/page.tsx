@@ -887,7 +887,7 @@ export default function StayHelperLuxuryShowcase() {
   
   const [selectedStayId, setSelectedStayId] = useState<string>("stay-04"); // Four Seasons Resort Koh Samui default (Active Spotlight)
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
-  const [isMuted, setIsMuted] = useState<boolean>(true);
+  const [isMuted, setIsMuted] = useState<boolean>(false);
   const [isEnded, setIsEnded] = useState<boolean>(false);
 
   // VIP Membership State
@@ -921,12 +921,22 @@ export default function StayHelperLuxuryShowcase() {
     syncMember();
     window.addEventListener("stayhelper_auth_changed", syncMember);
 
-    // 3. 100% Reliable Mobile Autoplay: Start muted so all mobile WebViews (Kakao/Safari/Chrome) immediately start streaming & playing without black screen
+    // 3. Luxury Unmuted Autoplay: Start unmuted audio on web & mobile immediately
     const startAutoplay = () => {
       if (videoRef.current) {
-        videoRef.current.muted = true;
-        setIsMuted(true);
-        videoRef.current.play().catch(() => {});
+        videoRef.current.muted = false;
+        setIsMuted(false);
+        videoRef.current.play().then(() => {
+          setIsPlaying(true);
+        }).catch((err) => {
+          // If strict browser policy temporarily blocks unmuted autoplay before first touch
+          console.log("Unmuted autoplay restricted by browser policy, falling back to instant gesture unlock:", err);
+          if (videoRef.current) {
+            videoRef.current.muted = true;
+            setIsMuted(true);
+            videoRef.current.play().catch(() => {});
+          }
+        });
       }
     };
     startAutoplay();
@@ -998,6 +1008,7 @@ export default function StayHelperLuxuryShowcase() {
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
       videoRef.current.load();
+      videoRef.current.muted = isMuted;
       videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {
         if (videoRef.current) {
           videoRef.current.muted = true;
