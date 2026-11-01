@@ -1081,7 +1081,7 @@ export default function StayHelperLuxuryShowcase() {
         </header>
 
         {/* 1.2 OPEN LANDSCAPE BODY: LOWER-LEFT LABEL & RIGHT FLOATING 9:16 REEL */}
-        <div className="relative z-20 max-w-[1440px] mx-auto w-full px-6 sm:px-14 flex-1 flex flex-col lg:flex-row items-end justify-between gap-8 py-8 sm:py-12 my-auto">
+        <div className="lg:relative max-w-[1440px] mx-auto w-full px-6 sm:px-14 flex-1 flex flex-col lg:flex-row items-end justify-between gap-8 py-8 sm:py-12 my-auto pointer-events-none lg:pointer-events-auto z-20">
           
           {/* Lower-Left: Discreet Architectural Label (Overlaid smoothly over full-bleed reel) */}
           <div className="relative z-20 space-y-2 sm:space-y-3 max-w-xl text-left drop-shadow-lg pointer-events-none pb-2 sm:pb-0">
@@ -1112,7 +1112,7 @@ export default function StayHelperLuxuryShowcase() {
           </div>
 
           {/* Right Side / Mobile Full-Bleed 9:16 Reel Stage */}
-          <div className="absolute inset-0 w-full h-full lg:static lg:w-auto lg:h-auto lg:shrink-0 flex flex-col items-center lg:items-end justify-center pointer-events-none lg:pointer-events-auto z-0 lg:z-20">
+          <div className="lg:shrink-0 flex flex-col items-center lg:items-end justify-center pointer-events-none lg:pointer-events-auto">
             
             {/* Subtle Minimalist Architectural Inset Header (Desktop Only) */}
             <div className="hidden lg:flex w-full max-w-[340px] items-center justify-between text-[10px] font-mono text-[#E8D5B5]/80 tracking-[0.22em] uppercase px-2 mb-2.5 drop-shadow">
@@ -1124,7 +1124,7 @@ export default function StayHelperLuxuryShowcase() {
             </div>
 
             {/* Architectural Window with Soft Ambient Glow & Glassmorphism */}
-            <div className="relative group">
+            <div className="lg:relative group">
               
               {/* Soft Ambient Light Halo (Desktop Only) */}
               <div className="hidden lg:block absolute -inset-2.5 bg-gradient-to-tr from-[#D4AF37]/20 via-[#B89B72]/15 to-transparent rounded-[30px] blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
