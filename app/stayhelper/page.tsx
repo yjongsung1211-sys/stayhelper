@@ -1084,10 +1084,10 @@ export default function StayHelperLuxuryShowcase() {
       {/* ============================================================== */}
       {/* 1. CONCEPT 3: FULL-BLEED ARCHITECTURAL CINEMA HERO STAGE     */}
       {/* ============================================================== */}
-      <section id="sanctuary-stage" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} className="relative h-[100dvh] sm:min-h-screen w-full flex flex-col justify-between overflow-hidden bg-black select-none">
+            <section id="sanctuary-stage" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} className="relative h-[100dvh] w-full flex flex-col justify-between overflow-hidden bg-black select-none">
         
-        {/* Full-Bleed High-Definition Widescreen Scenery (Z-0) */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* DESKTOP BACKGROUND: High-Definition Widescreen Scenery (Z-0) */}
+        <div className="hidden lg:block absolute inset-0 z-0 overflow-hidden pointer-events-none">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             key={heroBackground}
@@ -1095,14 +1095,13 @@ export default function StayHelperLuxuryShowcase() {
             alt={currentStay.name}
             className="w-full h-full object-cover object-center scale-[1.01] transition-opacity duration-700 ease-out"
           />
-          {/* Subtle Atmospheric Darkening (Vibrant Scenery Preserved 100%) */}
           <div className="absolute inset-0 bg-black/20" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/60" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent hidden lg:block" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
         </div>
 
         {/* 1.1 MINIMALIST FLOATING HEADER (RESPONSIVE NO-OVERLAP) */}
-        <header className="relative z-30 w-full px-4 sm:px-8 xl:px-14 pt-5 sm:pt-7 flex items-center justify-between gap-4 pointer-events-auto">
+        <header className="relative z-30 w-full px-4 sm:px-8 xl:px-14 pt-4 sm:pt-7 flex items-center justify-between gap-4 pointer-events-auto">
           {/* Brand Logo */}
           <Link href="/stayhelper" className="flex items-center space-x-3 group shrink-0">
             <span className="text-lg sm:text-xl xl:text-2xl font-luxury-serif tracking-[0.2em] sm:tracking-[0.26em] text-white uppercase font-light drop-shadow-md whitespace-nowrap">
@@ -1157,21 +1156,31 @@ export default function StayHelperLuxuryShowcase() {
                     setPendingRedirectUrl(currentStay.bookingUrl);
                     setIsAuthModalOpen(true);
                   }}
-                  className="px-2.5 sm:px-3.5 py-1.5 rounded-full border border-[#DFCFA9]/40 hover:border-[#DFCFA9] bg-[#DFCFA9]/10 hover:bg-[#DFCFA9]/20 text-[11px] sm:text-xs font-mono text-[#E8D5B5] transition-all backdrop-blur-md cursor-pointer shrink-0 whitespace-nowrap"
+                  className="px-3 sm:px-4 py-1.5 rounded-full border border-[#D4AF37]/40 hover:border-[#D4AF37] bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 text-[11px] sm:text-xs font-mono text-[#F3E5AB] transition-all backdrop-blur-md cursor-pointer shrink-0"
                 >
-                  <span>Join Private Club</span>
+                  Join Private Club
                 </button>
               </div>
             )}
 
+            {/* Global Sound Button */}
             <button
               type="button"
               onClick={toggleMute}
-              title={isMuted ? "Unmute Audio" : "Mute Audio"}
-              className="px-2.5 sm:px-3 py-1.5 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 text-[#E8D5B5] backdrop-blur-md flex items-center gap-1.5 transition cursor-pointer shrink-0"
+              title={isMuted ? "Unmute luxury audio track" : "Mute audio"}
+              className="px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full bg-black/60 hover:bg-black/80 border border-white/25 text-[11px] sm:text-xs font-mono text-white flex items-center gap-1.5 cursor-pointer backdrop-blur-md shadow-lg shrink-0 transition-transform active:scale-95"
             >
-              {isMuted ? <VolumeX className="w-3.5 h-3.5 text-stone-400" /> : <Volume2 className="w-3.5 h-3.5 text-[#E8D5B5]" />}
-              <span className="hidden sm:inline text-[11px] font-mono">{isMuted ? "Unmute" : "Sound"}</span>
+              {isMuted ? (
+                <>
+                  <VolumeX className="w-3.5 h-3.5 text-[#E8D5B5]" />
+                  <span className="hidden sm:inline">Unmute</span>
+                </>
+              ) : (
+                <>
+                  <Volume2 className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+                  <span className="hidden sm:inline">Sound On</span>
+                </>
+              )}
             </button>
 
             <button
@@ -1184,19 +1193,23 @@ export default function StayHelperLuxuryShowcase() {
           </div>
         </header>
 
-        {/* 1.2 OPEN LANDSCAPE BODY: LOWER-LEFT LABEL & RIGHT FLOATING 9:16 REEL */}
-        <div className="relative z-20 max-w-[1440px] mx-auto w-full px-4 sm:px-8 xl:px-14 flex-1 flex flex-col lg:flex-row items-center lg:items-end justify-between gap-6 lg:gap-12 py-6 sm:py-10 my-auto pointer-events-auto">
+        {/* 1.2 MASTER STAGE: 100% IMMERSIVE FULL-BLEED ON MOBILE, DUAL-PANEL INSET ON DESKTOP */}
+        <div className="relative z-20 max-w-[1440px] mx-auto w-full px-4 sm:px-8 xl:px-14 flex-1 flex flex-col justify-end lg:justify-between lg:flex-row items-start lg:items-end gap-6 lg:gap-12 pb-4 lg:py-10 my-auto pointer-events-auto">
           
-          {/* Lower-Left: Discreet Architectural Label */}
-          <div className="space-y-2 sm:space-y-3 max-w-xl text-left drop-shadow-lg shrink-0 w-full lg:w-auto">
+          {/* Subtle Mobile Top & Bottom Shadows for 100% Crisp Video Contrast */}
+          <div className="lg:hidden absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-black/80 via-black/35 to-transparent pointer-events-none z-10" />
+          <div className="lg:hidden absolute bottom-0 inset-x-0 h-[440px] bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none z-10" />
+
+          {/* Text & Active Promotion Overlay: Positioned bottom-left on Mobile over full-bleed video */}
+          <div className="relative z-20 space-y-1.5 sm:space-y-2.5 max-w-xl text-left drop-shadow-xl shrink-0 w-full lg:w-auto">
             {/* Native Reel Swipe Cue */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#E8D5B5]/30 text-[#E8D5B5] text-[10px] font-mono tracking-widest uppercase mb-1">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#E8D5B5]/30 text-[#E8D5B5] text-[10px] font-mono tracking-widest uppercase mb-0.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span>Swipe up / down for next stay</span>
             </div>
             
             <div className="flex items-center gap-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-[#E8D5B5] text-[11px] font-mono tracking-widest uppercase">
+              <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-[#E8D5B5] text-[10px] sm:text-[11px] font-mono tracking-widest uppercase">
                 <span>№ {String(currentIndex + 1).padStart(2, "0")}</span>
                 <span className="text-white/40">·</span>
                 <span>{currentStay.numeral}</span>
@@ -1205,27 +1218,28 @@ export default function StayHelperLuxuryShowcase() {
               </div>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-luxury-serif font-light text-white tracking-tight leading-[1.05] drop-shadow-xl">
+            <h1 className="text-2xl sm:text-4xl lg:text-6xl font-luxury-serif font-light text-white tracking-tight leading-[1.05] drop-shadow-2xl">
               {currentStay.name}
             </h1>
 
-            <p className="text-xs sm:text-sm font-luxury-sans text-stone-200 tracking-[0.2em] uppercase font-light drop-shadow">
+            <p className="text-[11px] sm:text-sm font-luxury-sans text-stone-200 tracking-[0.18em] uppercase font-light drop-shadow">
               {currentStay.location} · {currentStay.forbesTier.toUpperCase()}
             </p>
 
-            <p className="text-xs sm:text-base italic font-luxury-serif text-[#E8D5B5]/90 leading-relaxed font-light line-clamp-2 sm:line-clamp-none drop-shadow">
+            <p className="text-xs sm:text-base italic font-luxury-serif text-[#E8D5B5]/95 leading-snug sm:leading-relaxed font-light line-clamp-1 sm:line-clamp-none drop-shadow">
               "{currentStay.subtitle}"
             </p>
+
             {/* Active Fora Reserve Deal / Exclusive Promotion Badge */}
             {currentStay.activeDeal && (
-              <div className="pt-2">
-                <div className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#D4AF37]/25 via-[#F3E5AB]/20 to-[#D4AF37]/10 border border-[#D4AF37]/60 backdrop-blur-md shadow-lg shadow-black/40">
-                  <span className="text-amber-300 animate-pulse text-sm">✨</span>
+              <div className="pt-1">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#D4AF37]/30 via-[#F3E5AB]/25 to-[#D4AF37]/15 border border-[#D4AF37]/70 backdrop-blur-md shadow-xl shadow-black/60">
+                  <span className="text-amber-300 animate-pulse text-xs sm:text-sm">✨</span>
                   <div className="text-left">
-                    <span className="text-[10px] font-mono tracking-wider uppercase font-bold text-[#F3E5AB] block">
+                    <span className="text-[9px] sm:text-[10px] font-mono tracking-wider uppercase font-bold text-[#F3E5AB] block">
                       ACTIVE PROMOTION · {currentStay.activeDeal.tag}
                     </span>
-                    <span className="text-xs sm:text-sm font-luxury-sans text-white/95 font-medium">
+                    <span className="text-[11px] sm:text-sm font-luxury-sans text-white font-medium">
                       {currentStay.activeDeal.desc}
                     </span>
                   </div>
@@ -1234,11 +1248,11 @@ export default function StayHelperLuxuryShowcase() {
             )}
           </div>
 
-          {/* Right Side: Floating 9:16 Haute-Couture Master Reel */}
-          <div className="shrink-0 flex flex-col items-center lg:items-end justify-center w-full sm:w-auto">
+          {/* Master Video Container: Full-Screen Absolute on Mobile, Floating 9:16 Card on Desktop */}
+          <div className="absolute inset-0 w-full h-full lg:relative lg:inset-auto lg:shrink-0 flex flex-col items-center lg:items-end justify-center pointer-events-auto z-0 lg:z-20">
             
-            {/* Subtle Minimalist Architectural Inset Header */}
-            <div className="w-full max-w-[300px] sm:max-w-[340px] flex items-center justify-between text-[10px] font-mono text-[#E8D5B5]/80 tracking-[0.22em] uppercase px-2 mb-2 drop-shadow">
+            {/* Minimalist Inset Header (Desktop Only) */}
+            <div className="hidden lg:flex w-full max-w-[340px] items-center justify-between text-[10px] font-mono text-[#E8D5B5]/80 tracking-[0.22em] uppercase px-2 mb-2 drop-shadow">
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#E8D5B5] animate-pulse" />
                 Live Motion Reel
@@ -1246,14 +1260,14 @@ export default function StayHelperLuxuryShowcase() {
               <span className="text-white/40 font-light">№ {String(currentIndex + 1).padStart(2, "0")}</span>
             </div>
 
-            {/* Architectural Window with Soft Ambient Glow & Glassmorphism */}
-            <div className="relative group">
+            {/* Frame Wrapper */}
+            <div className="w-full h-full lg:w-auto lg:h-auto lg:relative group">
               
-              {/* Soft Ambient Light Halo */}
-              <div className="absolute -inset-2.5 bg-gradient-to-tr from-[#D4AF37]/20 via-[#B89B72]/15 to-transparent rounded-[30px] blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              {/* Soft Ambient Light Halo (Desktop Only) */}
+              <div className="hidden lg:block absolute -inset-2.5 bg-gradient-to-tr from-[#D4AF37]/20 via-[#B89B72]/15 to-transparent rounded-[30px] blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-              {/* Main Architectural Motion Frame: Rock-Solid 9:16 Dimensions on All Screens */}
-              <div className="relative w-[300px] sm:w-[340px] aspect-[9/16] rounded-[22px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.85)] border border-white/20 bg-black/60 backdrop-blur-xs transition-transform duration-500 group-hover:scale-[1.01]">
+              {/* Video Element: 100% Full-Bleed on Mobile, 340px 9:16 Frame on Desktop */}
+              <div className="w-full h-full lg:w-[340px] lg:aspect-[9/16] lg:rounded-[22px] overflow-hidden lg:shadow-[0_20px_60px_rgba(0,0,0,0.85)] lg:border lg:border-white/20 bg-black transition-transform duration-500 group-hover:scale-[1.01]">
                 <video
                   ref={videoRef}
                   key={`${currentStay.id}-${currentStay.videoSrc}`}
@@ -1277,14 +1291,14 @@ export default function StayHelperLuxuryShowcase() {
                   title={isEnded ? "Click to replay video" : "Click to check live rates and reserve"}
                 />
 
-                {/* Soft Edge Vignette Overlay (Gently blends the frame inward) */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
+                {/* Desktop Edge Vignette */}
+                <div className="hidden lg:block absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
 
-                {/* Hover Invitation Overlay */}
+                {/* Hover Invitation Overlay (Desktop Only) */}
                 {!isEnded && (
                   <div
                     onClick={() => handleBookingAction(currentStay.bookingUrl)}
-                    className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center cursor-pointer z-10"
+                    className="hidden lg:flex absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center cursor-pointer z-10"
                   >
                     <div className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A880] text-black text-xs font-luxury-sans font-bold flex items-center gap-2 shadow-2xl transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                       <span>Book with VIP Perks (Breakfast + $100 Credit) ✨</span>
@@ -1292,7 +1306,7 @@ export default function StayHelperLuxuryShowcase() {
                   </div>
                 )}
 
-                {/* Seamless First-Frame Freeze with Subtle Replay Badge (0 Black Screen, Vibrant Initial Scene Preserved) */}
+                {/* Seamless Replay Badge */}
                 {isEnded && (
                   <div
                     onClick={restartVideo}
@@ -1304,7 +1318,7 @@ export default function StayHelperLuxuryShowcase() {
                         e.stopPropagation();
                         restartVideo();
                       }}
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/50 hover:bg-black/80 text-stone-200 hover:text-white text-xs font-mono border border-white/20 backdrop-blur-md shadow-2xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/60 hover:bg-black/90 text-stone-200 hover:text-white text-xs font-mono border border-white/20 backdrop-blur-md shadow-2xl transition-all duration-300 hover:scale-105 cursor-pointer"
                     >
                       <RotateCcw className="w-3.5 h-3.5 text-[#E8D5B5]" />
                       <span>Replay Reel</span>
@@ -1312,10 +1326,10 @@ export default function StayHelperLuxuryShowcase() {
                   </div>
                 )}
 
-                {/* Minimalist Floating Controls (Softly Fades in on Hover, completely hidden otherwise) */}
+                {/* Minimalist Floating Controls (Desktop Hover) */}
                 <div
                   onClick={(e) => e.stopPropagation()}
-                  className="absolute bottom-3 left-3 right-3 z-20 flex items-center justify-between bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto"
+                  className="hidden lg:flex absolute bottom-3 left-3 right-3 z-20 items-center justify-between bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto"
                 >
                   <div className="flex items-center gap-2">
                     <button
@@ -1356,9 +1370,7 @@ export default function StayHelperLuxuryShowcase() {
           </div>
 
         </div>
-
-        {/* 1.3 FLOATING FROSTED GLASS DOCK (THE 10-SANCTUARY TIMELINE) */}
-        <div className="relative z-30 w-full px-4 sm:px-8 xl:px-12 pb-7 flex flex-col lg:flex-row items-center justify-between gap-4 pointer-events-auto">
+<div className="relative z-30 w-full px-4 sm:px-8 xl:px-12 pb-7 flex flex-col lg:flex-row items-center justify-between gap-4 pointer-events-auto">
           
           {/* Expanded Dynamic Timeline Dock (Stretches smoothly on large screens) */}
           <div className="bg-black/60 backdrop-blur-2xl border border-white/20 rounded-xl px-2.5 sm:px-4 py-2 shadow-2xl flex items-center gap-2 sm:gap-3 w-full lg:flex-1 lg:max-w-[calc(100%-250px)] xl:max-w-[calc(100%-270px)] min-w-0">
