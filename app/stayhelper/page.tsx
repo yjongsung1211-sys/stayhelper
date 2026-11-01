@@ -936,7 +936,38 @@ export default function StayHelperLuxuryShowcase() {
     setIsEnded(false);
   };
 
-    const FORA_VIP_INTAKE_URL = "https://secure.foratravel.com/intake/VXwROA88te";
+    // Touch swipe detection for mobile reels
+  const touchStartY = useRef<number | null>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartTime = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartY.current = e.touches[0].clientY;
+    touchStartX.current = e.touches[0].clientX;
+    touchStartTime.current = Date.now();
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartY.current === null || touchStartX.current === null) return;
+    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const deltaTime = Date.now() - (touchStartTime.current || 0);
+
+    // If swipe was deliberate (within 600ms and threshold > 45px)
+    if (deltaTime < 600) {
+      if (deltaY < -45 || deltaX < -50) {
+        // Swiped UP or LEFT -> Next Stay!
+        handleNextStay();
+      } else if (deltaY > 45 || deltaX > 50) {
+        // Swiped DOWN or RIGHT -> Previous Stay!
+        handlePrevStay();
+      }
+    }
+    touchStartY.current = null;
+    touchStartX.current = null;
+  };
+
+  const FORA_VIP_INTAKE_URL = "https://secure.foratravel.com/intake/VXwROA88te";
 
   const handleBookingAction = (_targetUrl?: string) => {
     // Direct 1-Click to CEO's Official Fora Travel VIP Perks Booking Portal
@@ -949,10 +980,10 @@ export default function StayHelperLuxuryShowcase() {
       {/* ============================================================== */}
       {/* 1. CONCEPT 3: FULL-BLEED ARCHITECTURAL CINEMA HERO STAGE     */}
       {/* ============================================================== */}
-      <section id="sanctuary-stage" className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden bg-black">
+      <section id="sanctuary-stage" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} className="relative h-[100dvh] sm:min-h-screen w-full flex flex-col justify-between overflow-hidden bg-black select-none">
         
         {/* Full-Bleed High-Definition Widescreen Scenery (Z-0) */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="hidden lg:block absolute inset-0 z-0 overflow-hidden pointer-events-none">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             key={heroBackground}
@@ -1031,8 +1062,18 @@ export default function StayHelperLuxuryShowcase() {
 
             <button
               type="button"
+              onClick={toggleMute}
+              title={isMuted ? "Unmute Audio" : "Mute Audio"}
+              className="px-2.5 sm:px-3 py-1.5 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 text-[#E8D5B5] backdrop-blur-md flex items-center gap-1.5 transition cursor-pointer shrink-0"
+            >
+              {isMuted ? <VolumeX className="w-3.5 h-3.5 text-stone-400" /> : <Volume2 className="w-3.5 h-3.5 text-[#E8D5B5]" />}
+              <span className="hidden sm:inline text-[11px] font-mono">{isMuted ? "Unmute" : "Sound"}</span>
+            </button>
+
+            <button
+              type="button"
               onClick={() => handleBookingAction(currentStay.bookingUrl)}
-              className="px-4 sm:px-6 py-2 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A880] hover:brightness-110 text-black text-xs font-luxury-sans font-semibold tracking-wider transition-all duration-300 shadow-xl shadow-black/60 flex items-center gap-1.5 active:scale-95 cursor-pointer shrink-0 whitespace-nowrap"
+              className="px-3.5 sm:px-6 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A880] hover:brightness-110 text-black text-[11px] sm:text-xs font-luxury-sans font-semibold tracking-wider transition-all duration-300 shadow-xl shadow-black/60 flex items-center gap-1.5 active:scale-95 cursor-pointer shrink-0 whitespace-nowrap"
             >
               <span>Book with VIP Perks ✨</span>
             </button>
@@ -1042,8 +1083,13 @@ export default function StayHelperLuxuryShowcase() {
         {/* 1.2 OPEN LANDSCAPE BODY: LOWER-LEFT LABEL & RIGHT FLOATING 9:16 REEL */}
         <div className="relative z-20 max-w-[1440px] mx-auto w-full px-6 sm:px-14 flex-1 flex flex-col lg:flex-row items-end justify-between gap-8 py-8 sm:py-12 my-auto">
           
-          {/* Lower-Left: Discreet Architectural Label */}
-          <div className="space-y-3 max-w-xl text-left drop-shadow-lg">
+          {/* Lower-Left: Discreet Architectural Label (Overlaid smoothly over full-bleed reel) */}
+          <div className="relative z-20 space-y-2 sm:space-y-3 max-w-xl text-left drop-shadow-lg pointer-events-none pb-2 sm:pb-0">
+            {/* Mobile Native Reel Swipe Cue */}
+            <div className="lg:hidden inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#E8D5B5]/30 text-[#E8D5B5] text-[10px] font-mono tracking-widest uppercase mb-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Swipe up / down for next stay</span>
+            </div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-[#E8D5B5] text-[11px] font-mono tracking-widest uppercase">
               <span>№ {String(currentIndex + 1).padStart(2, "0")}</span>
               <span className="text-white/40">·</span>
@@ -1065,11 +1111,11 @@ export default function StayHelperLuxuryShowcase() {
             </p>
           </div>
 
-          {/* Right Side: Floating 9:16 Haute-Couture Master Reel (Exact Inset Placement) */}
-          <div className="shrink-0 flex flex-col items-center lg:items-end justify-center">
+          {/* Right Side / Mobile Full-Bleed 9:16 Reel Stage */}
+          <div className="absolute inset-0 w-full h-full lg:static lg:w-auto lg:h-auto lg:shrink-0 flex flex-col items-center lg:items-end justify-center pointer-events-none lg:pointer-events-auto z-0 lg:z-20">
             
-            {/* Subtle Minimalist Architectural Inset Header */}
-            <div className="w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[340px] flex items-center justify-between text-[10px] font-mono text-[#E8D5B5]/80 tracking-[0.22em] uppercase px-2 mb-2.5 drop-shadow">
+            {/* Subtle Minimalist Architectural Inset Header (Desktop Only) */}
+            <div className="hidden lg:flex w-full max-w-[340px] items-center justify-between text-[10px] font-mono text-[#E8D5B5]/80 tracking-[0.22em] uppercase px-2 mb-2.5 drop-shadow">
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#E8D5B5] animate-pulse" />
                 Live Motion Inset
@@ -1080,11 +1126,11 @@ export default function StayHelperLuxuryShowcase() {
             {/* Architectural Window with Soft Ambient Glow & Glassmorphism */}
             <div className="relative group">
               
-              {/* Soft Ambient Light Halo (Blends naturally with background snow & chalets) */}
-              <div className="absolute -inset-2.5 bg-gradient-to-tr from-[#D4AF37]/20 via-[#B89B72]/15 to-transparent rounded-[30px] blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              {/* Soft Ambient Light Halo (Desktop Only) */}
+              <div className="hidden lg:block absolute -inset-2.5 bg-gradient-to-tr from-[#D4AF37]/20 via-[#B89B72]/15 to-transparent rounded-[30px] blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-              {/* Main Architectural Motion Frame (No phone chassis, seamless glass bevel) */}
-              <div className="relative w-[280px] sm:w-[320px] lg:w-[340px] aspect-[9/16] rounded-[22px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.85)] border border-white/20 bg-black/40 backdrop-blur-xs transition-transform duration-500 group-hover:scale-[1.01]">
+              {/* Main Architectural Motion Frame: Full-Bleed on Mobile, Inset Window on Desktop */}
+              <div className="absolute inset-0 w-full h-full lg:relative lg:w-[340px] lg:aspect-[9/16] lg:rounded-[22px] overflow-hidden lg:shadow-[0_20px_60px_rgba(0,0,0,0.85)] lg:border lg:border-white/20 bg-black pointer-events-auto transition-transform duration-500 group-hover:scale-[1.01]">
                 <video
                   ref={videoRef}
                   key={`${currentStay.id}-${currentStay.videoSrc}`}
@@ -1094,12 +1140,8 @@ export default function StayHelperLuxuryShowcase() {
                   autoPlay
                   muted={isMuted}
                   onEnded={() => {
-                    if (videoRef.current) {
-                      videoRef.current.currentTime = 0;
-                      videoRef.current.pause();
-                    }
-                    setIsPlaying(false);
-                    setIsEnded(true);
+                    // Option A: Seamless Auto-Advance to Next Luxury Stay Reel
+                    handleNextStay();
                   }}
                   className="w-full h-full object-cover cursor-pointer"
                   onClick={() => {
