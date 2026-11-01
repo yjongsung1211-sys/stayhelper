@@ -872,12 +872,14 @@ export default function StayHelperLuxuryShowcase() {
   const currentIndex = ALL_STAYS.findIndex((s) => s.id === selectedStayId);
   const heroBackground = currentStay.wideHero || currentStay.posterSrc;
 
-  // Auto-scroll active item into view in the dock
+  // Auto-scroll active item horizontally into view in the dock without scrolling window
   useEffect(() => {
     if (dockScrollRef.current) {
       const activeEl = dockScrollRef.current.querySelector(`[data-dock-id="${selectedStayId}"]`) as HTMLElement;
       if (activeEl) {
-        activeEl.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+        const container = dockScrollRef.current;
+        const scrollTarget = activeEl.offsetLeft - container.clientWidth / 2 + activeEl.clientWidth / 2;
+        container.scrollTo({ left: scrollTarget, behavior: "smooth" });
       }
     }
   }, [selectedStayId]);
