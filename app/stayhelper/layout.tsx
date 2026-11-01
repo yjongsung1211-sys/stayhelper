@@ -1,11 +1,47 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "StayHelper · The Private Luxury Hotel Collection (Cinematic Master Reels)",
+  metadataBase: new URL("https://www.thestayhelper.com"),
+  title: "StayHelper · The Private Luxury Stay Dossier & Master Reels",
   description:
-    "Discover the world's most extraordinary 5-star sanctuaries and pavilions through cinematic master reels. Direct reservation via official premier luxury booking partners.",
+    "Curated editorial collection of the world's most extraordinary 5-star sanctuaries and pavilions. Direct reservation with verified VIP perks via Fora Reserve.",
+  keywords: [
+    "Luxury Hotels",
+    "StayHelper",
+    "Fora Reserve",
+    "5 Star Sanctuaries",
+    "Ultra Luxury Resorts",
+    "Aman Resorts",
+    "Four Seasons",
+    "Hotel Du Cap-Eden-Roc",
+    "Luxury Travel Advisor"
+  ],
   icons: {
     icon: "/icon.svg",
+  },
+  openGraph: {
+    title: "StayHelper — The Private Luxury Stay Dossier",
+    description:
+      "Curated editorial collection of the world's most extraordinary 5-star sanctuaries and pavilions. Master reels & verified VIP partner perks.",
+    url: "https://www.thestayhelper.com",
+    siteName: "StayHelper",
+    images: [
+      {
+        url: "/images/stayhelper/fs_kohsamui_poster.jpg",
+        width: 1200,
+        height: 630,
+        alt: "StayHelper Luxury Hotel Collection",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "StayHelper — The Private Luxury Stay Dossier",
+    description:
+      "Curated editorial collection of the world's most extraordinary 5-star sanctuaries and pavilions.",
+    images: ["/images/stayhelper/fs_kohsamui_poster.jpg"],
   },
 };
 

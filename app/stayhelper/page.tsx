@@ -55,6 +55,11 @@ interface StayInfo {
   forbesTier: string;
   story: string[];
   features: { title: string; desc: string }[];
+  activeDeal?: {
+    title: string;
+    tag: string;
+    desc: string;
+  };
 }
 
 const ALL_STAYS: StayInfo[] = [
@@ -87,7 +92,12 @@ const ALL_STAYS: StayInfo[] = [
       { title: "Monolithic Rock Escarpment Pool", desc: "Sculpted directly around a dramatic 165M-year sandstone monolith" },
       { title: "Mesa View Pavilion Suites", desc: "Private desert courtyards with open-air fire pits and daybeds" },
       { title: "Navajo Hydrotherapy Spa", desc: "Water Pavilion with private outdoor flotation therapy and sauna" }
-    ]
+    ],
+    activeDeal: {
+      title: "Fora Reserve VIP Inclusions",
+      tag: "FULL BOARD + AIRPORT VIP",
+      desc: "Full-board dining for 2 + Page private airport transfer & $100 Navajo spa credit"
+    }
   },
   {
     id: "stay-02",
@@ -118,7 +128,12 @@ const ALL_STAYS: StayInfo[] = [
       { title: "3-Tiered Canyon Infinity Pools", desc: "Cascading organic pools suspended over the sacred river valley" },
       { title: "Traditional Alang-Alang Villas", desc: "Private hillside villas with personal infinity plunges" },
       { title: "Serayu Forest Spa Sanctuary", desc: "Open-air therapeutic treatment decks facing the rainforest canopy" }
-    ]
+    ],
+    activeDeal: {
+      title: "Valley Escape · 20% Early Bird",
+      tag: "SAVE 20% + AFTERNOON TEA",
+      desc: "Complimentary daily high tea overlooking jungle valley + 20% advance booking discount"
+    }
   },
   {
     id: "stay-03",
@@ -149,7 +164,12 @@ const ALL_STAYS: StayInfo[] = [
       { title: "Private Superyacht Marina", desc: "46-berth exclusive harbor with members-only yacht club" },
       { title: "Il Ristorante - Niko Romito", desc: "Two Michelin-starred contemporary Italian gastronomy" },
       { title: "Secluded Oceanfront Mansions", desc: "Private beach gardens, temperature-controlled pools and butler service" }
-    ]
+    ],
+    activeDeal: {
+      title: "Marina Penthouse Exclusive Credit",
+      tag: "$200 LUXURY CREDIT",
+      desc: "Double resort credit ($200 USD) toward Il Ristorante Niko Romito + daily ocean breakfast"
+    }
   },
   {
     id: "stay-04",
@@ -180,7 +200,12 @@ const ALL_STAYS: StayInfo[] = [
       { title: "Cliffside Infinity Pool Villas", desc: "Private plunge pools with panoramic views across the Gulf of Thailand" },
       { title: "The Secret Garden Spa", desc: "Open-air teak treatment pavilions nestled in dense tropical rainforest" },
       { title: "Secluded Private Bay & CoCo Rum", desc: "Powder-soft white sands with beachfront dining and sunset mixology" }
-    ]
+    ],
+    activeDeal: {
+      title: "Stay Longer · 20% Off",
+      tag: "SAVE 20% (4+ NIGHTS)",
+      desc: "Stay 4 nights or more and enjoy 20% off room rates + $100 Resort Credit & Daily Breakfast"
+    }
   },
   {
     id: "stay-05",
@@ -211,7 +236,12 @@ const ALL_STAYS: StayInfo[] = [
       { title: "Lagoon Overwater Slides", desc: "Curved private water slides plunging directly into the azure Indian Ocean" },
       { title: "Retractable Starlight Ceiling", desc: "Master bedroom roof opens at the touch of a button for stargazing in bed" },
       { title: "The Gathering Sanctuary", desc: "Three-story open-air timber dining and astronomical observatory over water" }
-    ]
+    ],
+    activeDeal: {
+      title: "The Great Escape · 4th Night Free",
+      tag: "STAY 4, PAY 3 (1 NIGHT FREE)",
+      desc: "Book 3 consecutive nights and receive the 4th night complimentary + $100 Resort Credit"
+    }
   },
   {
     id: "stay-06",
@@ -242,7 +272,12 @@ const ALL_STAYS: StayInfo[] = [
       { title: "Heated Alpine Thermal Pool", desc: "35-meter indoor pool and outdoor thermal pool surrounded by snowy peaks" },
       { title: "Jean-Michel Gathy Alpine Design", desc: "Striking dark woods, soft leather, and monumental granite fireplaces" },
       { title: "Michelin Japanese Gastronomy", desc: "The Japanese Restaurant with an authentic 9-seat Omakase and sake bar" }
-    ]
+    ],
+    activeDeal: {
+      title: "Alpine Sanctuary · 3rd Night Complimentary",
+      tag: "STAY 3, PAY 2 (1 NIGHT FREE)",
+      desc: "Book 2 nights and receive your 3rd night on us with daily breakfast buffet & $100 spa credit"
+    }
   },
   {
     id: "stay-07",
@@ -273,7 +308,12 @@ const ALL_STAYS: StayInfo[] = [
       { title: "Amalfi Sheer Cliff Infinity Pool", desc: "Suspended high over the sapphire sea with panoramic bay vistas" },
       { title: "Historic Monastery Heritage", desc: "Preserved vaulted ceilings, rustic stone arches, and aromatic herb gardens" },
       { title: "Thermal Roman Bath Circuit", desc: "Hydrotherapy pool, tepidarium, crushed-ice fountain, and sauna" }
-    ]
+    ],
+    activeDeal: {
+      title: "Cliffside Respite · 4th Night Free",
+      tag: "STAY 4, PAY 3 (1 NIGHT FREE)",
+      desc: "Complimentary 4th night on cliffside suite bookings + €100 thermal baths spa credit"
+    }
   },
   {
     id: "stay-08",
@@ -304,7 +344,12 @@ const ALL_STAYS: StayInfo[] = [
       { title: "Living Moss Garden Estate", desc: "Ancient stone pathways winding through Japanese maples and cedar groves" },
       { title: "Natural Thermal Spring Onsen", desc: "Healing outdoor and indoor onsen baths drawing from local mineral springs" },
       { title: "Authentic Hinoki Wood Pavilions", desc: "Minimalist cedar suites framing floor-to-ceiling forest tranquility" }
-    ]
+    ],
+    activeDeal: {
+      title: "Discover Aman Kyoto · Cultural Inclusions",
+      tag: "COMPLIMENTARY TEA CEREMONY + $100",
+      desc: "Private Zen rock garden matcha ceremony + $100 dining credit and daily Japanese breakfast"
+    }
   },
   {
     id: "stay-09",
@@ -335,7 +380,12 @@ const ALL_STAYS: StayInfo[] = [
       { title: "Cliffside Savanna Infinity Pools", desc: "Private plunge pools commanding 360-degree vistas across the boundless Serengeti" },
       { title: "Private Grumeti Game Drives", desc: "Exclusive access to 350,000 untamed acres tracking the Big Five and Great Migration" },
       { title: "Bespoke Bush Dining & Cellar", desc: "Bush breakfasts under acacia trees paired with rare vintage African wines" }
-    ]
+    ],
+    activeDeal: {
+      title: "Serengeti Migration Special",
+      tag: "FREE PRIVATE GAME DRIVE",
+      desc: "Includes twice-daily private Land Cruiser safaris + full board and vintage cellar wines"
+    }
   },
   {
     id: "stay-10",
@@ -366,7 +416,12 @@ const ALL_STAYS: StayInfo[] = [
       { title: "Iconic Cliff Seawater Pool", desc: "Carved into sheer coastal basalt rocks directly above the Mediterranean waves" },
       { title: "Century-Old Private Pine Groves", desc: "33 acres of immaculate gardens hosting royalty, artists, and screen legends" },
       { title: "Dior Spa Eden-Roc", desc: "Holistic Mediterranean wellness treatments in open-air coastal cabanas" }
-    ]
+    ],
+    activeDeal: {
+      title: "Oetker Pearl Partner VIP Upgrade",
+      tag: "PRIORITY UPGRADE AT BOOKING",
+      desc: "Priority room upgrade at confirmation + €100 culinary credit at Eden-Roc Restaurant"
+    }
   },
   {
     id: "stay-11",
@@ -406,7 +461,12 @@ const ALL_STAYS: StayInfo[] = [
             "title": "Veranda Lakeside Gastronomy",
             "desc": "Fine Italian dining with floor-to-ceiling glass pavilions opening onto the water"
       }
-]
+],
+    activeDeal: {
+      title: "Lake Como Heritage · 4th Night Free",
+      tag: "STAY 4, PAY 3 (1 NIGHT FREE)",
+      desc: "Enjoy a complimentary 4th night amidst Renaissance private gardens + daily lakefront breakfast"
+    }
   },
   {
     id: "stay-12",
@@ -446,7 +506,12 @@ const ALL_STAYS: StayInfo[] = [
             "title": "Sierra Mar Gastronomy",
             "desc": "Michelin-recognized coastal cuisine paired with a 15,000-bottle Grand Award cellar"
       }
-]
+],
+    activeDeal: {
+      title: "Big Sur Coastal Escape · $100 Credit",
+      tag: "$100 SPA & WINE CREDIT",
+      desc: "Complimentary $100 cliffside spa credit + daily gourmet breakfast at Sierra Mar"
+    }
   },
   {
     id: "stay-13",
@@ -486,7 +551,12 @@ const ALL_STAYS: StayInfo[] = [
             "title": "Le 1947 Haute Gastronomy",
             "desc": "French 12-course fine dining paired with legendary Château Cheval Blanc vintages"
       }
-]
+],
+    activeDeal: {
+      title: "Maison Maldivian Escape · 5th Night Free",
+      tag: "STAY 5, PAY 4 (1 NIGHT FREE)",
+      desc: "Book 4 nights and enjoy your 5th night complimentary + Cheval Blanc welcome champagne"
+    }
   },
   {
     id: "stay-14",
@@ -526,7 +596,12 @@ const ALL_STAYS: StayInfo[] = [
             "title": "Belvedere Cliffside Dining",
             "desc": "Neapolitan haute gastronomy prepared with fresh vegetables from the hotel's own garden"
       }
-]
+],
+    activeDeal: {
+      title: "Bellini Club Exclusive · $200 Credit",
+      tag: "$200 RESORT CREDIT",
+      desc: "Complimentary $200 USD Bellini experience credit + cliffside infinity pool cabana priority"
+    }
   },
   {
     id: "stay-15",
@@ -566,7 +641,12 @@ const ALL_STAYS: StayInfo[] = [
             "title": "Authentic Ryokan Cedar Onsen",
             "desc": "Mineral-rich Japanese public and private onsen hot stone bath pavilion"
       }
-]
+],
+    activeDeal: {
+      title: "Oeno & Dining Experience · $100 Credit",
+      tag: "$100 DINING CREDIT + SAKE TASTING",
+      desc: "Complimentary 33rd floor sommelier tasting + $100 hotel credit and daily breakfast"
+    }
   },
   {
     id: "stay-16",
@@ -606,7 +686,12 @@ const ALL_STAYS: StayInfo[] = [
             "title": "All-White Marble Hammam Spa",
             "desc": "Iconic birdcage-like white wrought-iron atrium offering royal Moroccan rhassoul rituals"
       }
-]
+],
+    activeDeal: {
+      title: "Medina Riad Experience · 4th Night Free",
+      tag: "STAY 4, PAY 3 (1 NIGHT FREE)",
+      desc: "Stay 4 nights in a private multi-story riad, pay for 3 + traditional hammam experience for 2"
+    }
   },
   {
     id: "stay-17",
@@ -646,7 +731,12 @@ const ALL_STAYS: StayInfo[] = [
             "title": "Self-Sustaining Organic Farm",
             "desc": "Farm-to-table gastronomy powered by 240 acres of private organic hydroponic farms"
       }
-]
+],
+    activeDeal: {
+      title: "Private Island All-Inclusive Sanctuary",
+      tag: "ALL-INCLUSIVE ISLAND RETREAT",
+      desc: "All gourmet dining, private chef services, golf, horseback riding & watersports 100% included"
+    }
   },
   {
     id: "stay-18",
@@ -686,7 +776,12 @@ const ALL_STAYS: StayInfo[] = [
             "title": "Le Grand Hall & King's Social House",
             "desc": "Legendary Engadin salon and Switzerland's oldest and most prestigious nightclub"
       }
-]
+],
+    activeDeal: {
+      title: "St. Moritz Ski Pass Included",
+      tag: "COMPLIMENTARY SKI PASS + $100",
+      desc: "Free Engadin ski pass for all guests staying 2+ nights + $100 Palace wellness credit"
+    }
   },
   {
     id: "stay-19",
@@ -726,7 +821,12 @@ const ALL_STAYS: StayInfo[] = [
             "title": "The Camp Fire Starlight Ritual",
             "desc": "Nightly fireside gatherings with acoustic music, artisan chocolate and ghost stories"
       }
-]
+],
+    activeDeal: {
+      title: "Rainforest Retreat · 3rd Night Complimentary",
+      tag: "STAY 3, PAY 2 (1 NIGHT FREE)",
+      desc: "Stay 3 nights for the price of 2 + $100 dining credit and daily tented camp breakfast"
+    }
   },
   {
     id: "stay-20",
@@ -766,7 +866,12 @@ const ALL_STAYS: StayInfo[] = [
             "title": "Suspended Stone Sky Bridges",
             "desc": "Dramatic private skybridges leading individually to each private architectural sanctuary"
       }
-]
+],
+    activeDeal: {
+      title: "Caribbean Escape · 5th Night Free",
+      tag: "STAY 5, PAY 4 (1 NIGHT FREE)",
+      desc: "Book an open-air infinity sanctuary for 4 nights, receive 5th night on us + $100 credit"
+    }
   }
 ];
 
@@ -782,7 +887,7 @@ export default function StayHelperLuxuryShowcase() {
   
   const [selectedStayId, setSelectedStayId] = useState<string>("stay-04"); // Four Seasons Resort Koh Samui default (Active Spotlight)
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
-  const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [isMuted, setIsMuted] = useState<boolean>(true);
   const [isEnded, setIsEnded] = useState<boolean>(false);
 
   // VIP Membership State
@@ -816,24 +921,17 @@ export default function StayHelperLuxuryShowcase() {
     syncMember();
     window.addEventListener("stayhelper_auth_changed", syncMember);
 
-    // 3. Unmuted Audio Autoplay on connect with instant gesture fallback
-    const attemptUnmutePlay = () => {
+    // 3. 100% Reliable Mobile Autoplay: Start muted so all mobile WebViews (Kakao/Safari/Chrome) immediately start streaming & playing without black screen
+    const startAutoplay = () => {
       if (videoRef.current) {
-        videoRef.current.muted = false;
-        setIsMuted(false);
-        videoRef.current.play().catch(() => {
-          // If browser policy temporarily blocks unmuted autoplay without interaction
-          if (videoRef.current) {
-            videoRef.current.muted = true;
-            setIsMuted(true);
-            videoRef.current.play().catch(() => {});
-          }
-        });
+        videoRef.current.muted = true;
+        setIsMuted(true);
+        videoRef.current.play().catch(() => {});
       }
     };
-    attemptUnmutePlay();
+    startAutoplay();
 
-    // First touch/click anywhere on screen immediately unlocks full unmuted audio
+    // First touch/click anywhere on screen immediately unlocks full luxury audio
     const unlockSoundOnTouch = () => {
       if (videoRef.current) {
         videoRef.current.muted = false;
@@ -900,7 +998,13 @@ export default function StayHelperLuxuryShowcase() {
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
       videoRef.current.load();
-      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {
+        if (videoRef.current) {
+          videoRef.current.muted = true;
+          setIsMuted(true);
+          videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+        }
+      });
     }
   };
 
@@ -983,7 +1087,7 @@ export default function StayHelperLuxuryShowcase() {
       <section id="sanctuary-stage" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} className="relative h-[100dvh] sm:min-h-screen w-full flex flex-col justify-between overflow-hidden bg-black select-none">
         
         {/* Full-Bleed High-Definition Widescreen Scenery (Z-0) */}
-        <div className="hidden lg:block absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             key={heroBackground}
@@ -1081,24 +1185,27 @@ export default function StayHelperLuxuryShowcase() {
         </header>
 
         {/* 1.2 OPEN LANDSCAPE BODY: LOWER-LEFT LABEL & RIGHT FLOATING 9:16 REEL */}
-        <div className="lg:relative max-w-[1440px] mx-auto w-full px-6 sm:px-14 flex-1 flex flex-col lg:flex-row items-end justify-between gap-8 py-8 sm:py-12 my-auto pointer-events-none lg:pointer-events-auto z-20">
+        <div className="relative z-20 max-w-[1440px] mx-auto w-full px-4 sm:px-8 xl:px-14 flex-1 flex flex-col lg:flex-row items-center lg:items-end justify-between gap-6 lg:gap-12 py-6 sm:py-10 my-auto pointer-events-auto">
           
-          {/* Lower-Left: Discreet Architectural Label (Overlaid smoothly over full-bleed reel) */}
-          <div className="relative z-20 space-y-2 sm:space-y-3 max-w-xl text-left drop-shadow-lg pointer-events-none pb-2 sm:pb-0">
-            {/* Mobile Native Reel Swipe Cue */}
-            <div className="lg:hidden inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#E8D5B5]/30 text-[#E8D5B5] text-[10px] font-mono tracking-widest uppercase mb-1">
+          {/* Lower-Left: Discreet Architectural Label */}
+          <div className="space-y-2 sm:space-y-3 max-w-xl text-left drop-shadow-lg shrink-0 w-full lg:w-auto">
+            {/* Native Reel Swipe Cue */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#E8D5B5]/30 text-[#E8D5B5] text-[10px] font-mono tracking-widest uppercase mb-1">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span>Swipe up / down for next stay</span>
             </div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-[#E8D5B5] text-[11px] font-mono tracking-widest uppercase">
-              <span>№ {String(currentIndex + 1).padStart(2, "0")}</span>
-              <span className="text-white/40">·</span>
-              <span>{currentStay.numeral}</span>
-              <span className="text-white/40">·</span>
-              <span className="text-white font-medium">{currentStay.country}</span>
+            
+            <div className="flex items-center gap-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-[#E8D5B5] text-[11px] font-mono tracking-widest uppercase">
+                <span>№ {String(currentIndex + 1).padStart(2, "0")}</span>
+                <span className="text-white/40">·</span>
+                <span>{currentStay.numeral}</span>
+                <span className="text-white/40">·</span>
+                <span className="text-white font-medium">{currentStay.country}</span>
+              </div>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl font-luxury-serif font-light text-white tracking-tight leading-[1.05] drop-shadow-xl">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-luxury-serif font-light text-white tracking-tight leading-[1.05] drop-shadow-xl">
               {currentStay.name}
             </h1>
 
@@ -1106,31 +1213,47 @@ export default function StayHelperLuxuryShowcase() {
               {currentStay.location} · {currentStay.forbesTier.toUpperCase()}
             </p>
 
-            <p className="text-sm sm:text-base italic font-luxury-serif text-[#E8D5B5]/90 leading-relaxed font-light line-clamp-2 sm:line-clamp-none drop-shadow">
+            <p className="text-xs sm:text-base italic font-luxury-serif text-[#E8D5B5]/90 leading-relaxed font-light line-clamp-2 sm:line-clamp-none drop-shadow">
               "{currentStay.subtitle}"
             </p>
+            {/* Active Fora Reserve Deal / Exclusive Promotion Badge */}
+            {currentStay.activeDeal && (
+              <div className="pt-2">
+                <div className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#D4AF37]/25 via-[#F3E5AB]/20 to-[#D4AF37]/10 border border-[#D4AF37]/60 backdrop-blur-md shadow-lg shadow-black/40">
+                  <span className="text-amber-300 animate-pulse text-sm">✨</span>
+                  <div className="text-left">
+                    <span className="text-[10px] font-mono tracking-wider uppercase font-bold text-[#F3E5AB] block">
+                      ACTIVE PROMOTION · {currentStay.activeDeal.tag}
+                    </span>
+                    <span className="text-xs sm:text-sm font-luxury-sans text-white/95 font-medium">
+                      {currentStay.activeDeal.desc}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Right Side / Mobile Full-Bleed 9:16 Reel Stage */}
-          <div className="lg:shrink-0 flex flex-col items-center lg:items-end justify-center pointer-events-none lg:pointer-events-auto">
+          {/* Right Side: Floating 9:16 Haute-Couture Master Reel */}
+          <div className="shrink-0 flex flex-col items-center lg:items-end justify-center w-full sm:w-auto">
             
-            {/* Subtle Minimalist Architectural Inset Header (Desktop Only) */}
-            <div className="hidden lg:flex w-full max-w-[340px] items-center justify-between text-[10px] font-mono text-[#E8D5B5]/80 tracking-[0.22em] uppercase px-2 mb-2.5 drop-shadow">
+            {/* Subtle Minimalist Architectural Inset Header */}
+            <div className="w-full max-w-[300px] sm:max-w-[340px] flex items-center justify-between text-[10px] font-mono text-[#E8D5B5]/80 tracking-[0.22em] uppercase px-2 mb-2 drop-shadow">
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#E8D5B5] animate-pulse" />
-                Live Motion Inset
+                Live Motion Reel
               </span>
               <span className="text-white/40 font-light">№ {String(currentIndex + 1).padStart(2, "0")}</span>
             </div>
 
             {/* Architectural Window with Soft Ambient Glow & Glassmorphism */}
-            <div className="lg:relative group">
+            <div className="relative group">
               
-              {/* Soft Ambient Light Halo (Desktop Only) */}
-              <div className="hidden lg:block absolute -inset-2.5 bg-gradient-to-tr from-[#D4AF37]/20 via-[#B89B72]/15 to-transparent rounded-[30px] blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              {/* Soft Ambient Light Halo */}
+              <div className="absolute -inset-2.5 bg-gradient-to-tr from-[#D4AF37]/20 via-[#B89B72]/15 to-transparent rounded-[30px] blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-              {/* Main Architectural Motion Frame: Full-Bleed on Mobile, Inset Window on Desktop */}
-              <div className="absolute inset-0 w-full h-full lg:relative lg:w-[340px] lg:aspect-[9/16] lg:rounded-[22px] overflow-hidden lg:shadow-[0_20px_60px_rgba(0,0,0,0.85)] lg:border lg:border-white/20 bg-black pointer-events-auto transition-transform duration-500 group-hover:scale-[1.01]">
+              {/* Main Architectural Motion Frame: Rock-Solid 9:16 Dimensions on All Screens */}
+              <div className="relative w-[300px] sm:w-[340px] aspect-[9/16] rounded-[22px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.85)] border border-white/20 bg-black/60 backdrop-blur-xs transition-transform duration-500 group-hover:scale-[1.01]">
                 <video
                   ref={videoRef}
                   key={`${currentStay.id}-${currentStay.videoSrc}`}
