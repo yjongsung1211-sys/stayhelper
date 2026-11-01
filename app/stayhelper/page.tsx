@@ -188,7 +188,7 @@ const ALL_STAYS: StayInfo[] = [
     forbesTier: "Forbes Travel Guide Five-Star Resort",
     image: "/images/stayhelper/fs_kohsamui_wide_hero.jpg",
     wideHero: "/images/stayhelper/fs_kohsamui_wide_hero.jpg",
-    videoSrc: "/videos/StayHelperKohSamui_v2_NaturalClean_Live.mp4",
+    videoSrc: "/videos/StayHelperKohSamui_v2_6Act_MasterReels.mp4",
     posterSrc: "/images/stayhelper/fs_kohsamui_poster.jpg",
     bookingUrl: "https://www.fourseasons.com/kohsamui/",
     status: "STREAMING",
@@ -1139,8 +1139,9 @@ export default function StayHelperLuxuryShowcase() {
             </div>
           </div>
 
-          {/* Mobile Bottom Content Overlay (Instagram Reels Style) */}
-          <div className="absolute bottom-16 inset-x-4 z-20 space-y-1.5 text-left drop-shadow-2xl pointer-events-auto">
+          {/* Mobile Bottom Content Overlay (Instagram Reels Style - Hidden on stay-04 which has burned-in Remotion typography) */}
+          {currentStay.id !== "stay-04" && (
+            <div className="absolute bottom-16 inset-x-4 z-20 space-y-1.5 text-left drop-shadow-2xl pointer-events-auto">
             {/* Native Swipe Cue */}
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-[#E8D5B5]/30 text-[#E8D5B5] text-[9px] font-mono tracking-widest uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -1184,7 +1185,8 @@ export default function StayHelperLuxuryShowcase() {
                 </div>
               </div>
             )}
-          </div>
+            </div>
+          )}
 
           {/* Mobile Bottom Mini Switcher Dock */}
           <div className="absolute bottom-3 inset-x-4 z-20 flex items-center justify-between gap-2 pointer-events-auto">
