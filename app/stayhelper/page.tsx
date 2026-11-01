@@ -782,7 +782,7 @@ export default function StayHelperLuxuryShowcase() {
   
   const [selectedStayId, setSelectedStayId] = useState<string>("stay-04"); // Four Seasons Resort Koh Samui default (Active Spotlight)
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
-  const [isMuted, setIsMuted] = useState<boolean>(true);
+  const [isMuted, setIsMuted] = useState<boolean>(false);
   const [isEnded, setIsEnded] = useState<boolean>(false);
 
   // VIP Membership State
@@ -791,8 +791,13 @@ export default function StayHelperLuxuryShowcase() {
   const [authMode, setAuthMode] = useState<"signin" | "signup">("signup");
   const [pendingRedirectUrl, setPendingRedirectUrl] = useState<string | null>(null);
 
-  // Read member status from localStorage on mount and sync on auth change
+  // Read member status and randomize initial stay on mount + unmuted autoplay
   useEffect(() => {
+    // 1. Randomize starting sanctuary on every visitor load across all 20 stays
+    const randomIndex = Math.floor(Math.random() * ALL_STAYS.length);
+    setSelectedStayId(ALL_STAYS[randomIndex].id);
+
+    // 2. Sync member
     const syncMember = () => {
       try {
         const stored =
@@ -810,7 +815,43 @@ export default function StayHelperLuxuryShowcase() {
     };
     syncMember();
     window.addEventListener("stayhelper_auth_changed", syncMember);
-    return () => window.removeEventListener("stayhelper_auth_changed", syncMember);
+
+    // 3. Unmuted Audio Autoplay on connect with instant gesture fallback
+    const attemptUnmutePlay = () => {
+      if (videoRef.current) {
+        videoRef.current.muted = false;
+        setIsMuted(false);
+        videoRef.current.play().catch(() => {
+          // If browser policy temporarily blocks unmuted autoplay without interaction
+          if (videoRef.current) {
+            videoRef.current.muted = true;
+            setIsMuted(true);
+            videoRef.current.play().catch(() => {});
+          }
+        });
+      }
+    };
+    attemptUnmutePlay();
+
+    // First touch/click anywhere on screen immediately unlocks full unmuted audio
+    const unlockSoundOnTouch = () => {
+      if (videoRef.current) {
+        videoRef.current.muted = false;
+        setIsMuted(false);
+        videoRef.current.play().catch(() => {});
+      }
+    };
+
+    window.addEventListener("pointerdown", unlockSoundOnTouch, { once: true });
+    window.addEventListener("touchstart", unlockSoundOnTouch, { once: true });
+    window.addEventListener("click", unlockSoundOnTouch, { once: true });
+
+    return () => {
+      window.removeEventListener("stayhelper_auth_changed", syncMember);
+      window.removeEventListener("pointerdown", unlockSoundOnTouch);
+      window.removeEventListener("touchstart", unlockSoundOnTouch);
+      window.removeEventListener("click", unlockSoundOnTouch);
+    };
   }, []);
 
   const handleSignOut = () => {
@@ -960,7 +1001,7 @@ export default function StayHelperLuxuryShowcase() {
                 </button>
               </div>
             ) : (
-              <div className="flex items-center gap-1.5 sm:gap-2">
+              <div className="hidden sm:flex items-center gap-1.5 sm:gap-2">
                 <button
                   type="button"
                   onClick={() => {
@@ -981,8 +1022,7 @@ export default function StayHelperLuxuryShowcase() {
                   }}
                   className="px-2.5 sm:px-3.5 py-1.5 rounded-full border border-[#DFCFA9]/40 hover:border-[#DFCFA9] bg-[#DFCFA9]/10 hover:bg-[#DFCFA9]/20 text-[11px] sm:text-xs font-mono text-[#E8D5B5] transition-all backdrop-blur-md cursor-pointer shrink-0 whitespace-nowrap"
                 >
-                  <span className="hidden sm:inline">Join Private Club</span>
-                  <span className="sm:hidden">Join Club</span>
+                  <span>Join Private Club</span>
                 </button>
               </div>
             )}

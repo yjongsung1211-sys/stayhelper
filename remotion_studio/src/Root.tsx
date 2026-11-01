@@ -2685,6 +2685,96 @@ export const RemotionRoot: React.FC = () => {
           audioFile: "audio_shorts_fighting.wav",
         }}
       />
-</>
+
+      {/* ── [FirstMotion 일요일 주말 3-in-1 쇼츠: [일요일 1분 필수 영어]] ── */}
+      <Composition
+        id="PostMotionSun3in1EN"
+        component={PostMotion3in1Template}
+        durationInFrames={699}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          badgeText: "[일요일 1분 필수 영어]",
+          badgeColor: "#2563eb",
+          badgeBg: "#eff6ff",
+          title: "일요일 주말 힐링 필수 영어 3문장",
+          cardTimings: [{'startFrame': 10, 'flipStartFrame': 88, 'flipEndFrame': 88, 'endFrame': 226}, {'startFrame': 226, 'flipStartFrame': 322, 'flipEndFrame': 322, 'endFrame': 460}, {'startFrame': 460, 'flipStartFrame': 546, 'flipEndFrame': 546, 'endFrame': 694}],
+          cards: [{'indexBadge': '1 / 3', 'primaryText': 'Sundays are meant for doing nothing.', 'pronunciation': '[선데이즈 아 멘트 포 두잉 너씽.]', 'meaning': '일요일은 원래 아무것도 안 하라고 있는 날이야.', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• be meant for: '~를 위해 존재하다'<br />• doing nothing: 아무것도 안 하고 푹 쉬기", 'audio_lang': 'Sundays are meant for doing nothing.', 'audio_ko': '일요일은 원래 아무것도 안 하라고 있는 날이야.'}, {'indexBadge': '2 / 3', 'primaryText': 'Recharging my battery before Monday comes.', 'pronunciation': '[리차징 마이 배터리 비포 먼데이 컴스.]', 'meaning': '월요일 오기 전에 에너지 100% 충전 중!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• recharge battery: '에너지를 재충전하다'<br />• before Monday: 월요일이 오기 전에", 'audio_lang': 'Recharging my battery before Monday comes.', 'audio_ko': '월요일 오기 전에 에너지 100% 충전 중!'}, {'indexBadge': '3 / 3', 'primaryText': 'Just chilling at home with some good coffee.', 'pronunciation': '[저스트 칠링 앳 홈 위드 썸 굿 커피.]', 'meaning': '맛있는 커피 마시면서 집에서 편하게 쉬는 중.', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• chilling: '집에서 느긋하게 힐링하다'<br />• at home: 집에서 온전히 쉬는 모양", 'audio_lang': 'Just chilling at home with some good coffee.', 'audio_ko': '맛있는 커피 마시면서 집에서 편하게 쉬는 중.'}],
+        }}
+      />
+
+      {/* ── [FirstMotion 일요일 주말 3-in-1 쇼츠: [일요일 1분 필수 일본어]] ── */}
+      <Composition
+        id="PostMotionSun3in1JA"
+        component={PostMotion3in1Template}
+        durationInFrames={753}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          badgeText: "[일요일 1분 필수 일본어]",
+          badgeColor: "#dc2626",
+          badgeBg: "#fef2f2",
+          title: "일요일 주말 힐링 필수 일본어 3문장",
+          cardTimings: [{'startFrame': 10, 'flipStartFrame': 115, 'flipEndFrame': 115, 'endFrame': 245}, {'startFrame': 245, 'flipStartFrame': 369, 'flipEndFrame': 369, 'endFrame': 491}, {'startFrame': 491, 'flipStartFrame': 614, 'flipEndFrame': 614, 'endFrame': 748}],
+          cards: [{'indexBadge': '1 / 3', 'primaryText': '日曜日は何もしないでゴロゴロする日！', 'pronunciation': '[니치요-비와 나니모 시나이데 고로고로스루 히!]', 'meaning': '일요일은 아무것도 안 하고 뒹굴거리는 날!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': '• ゴロゴロ: 집에서 빈둥빈둥 뒹굴거리는 모양<br />• 何もしない: 아무것도 하지 않다', 'audio_lang': '日曜日は何もしないでゴロゴロする日！', 'audio_ko': '일요일은 아무것도 안 하고 뒹굴거리는 날!'}, {'indexBadge': '2 / 3', 'primaryText': '明日からのために、しっかりエネルギー充電中。', 'pronunciation': '[아시타카라노 타메니, 싯카리 에네루기- 주-덴추-.]', 'meaning': '내일을 위해 제대로 에너지 충전 중!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': '• しっかり: 확실하게, 제대로 푹<br />• 充電(じゅうでん): 기력을 회복함, 충전', 'audio_lang': '明日からのために、しっかりエネルギー充電中。', 'audio_ko': '내일을 위해 제대로 에너지 충전 중!'}, {'indexBadge': '3 / 3', 'primaryText': '温かいコーヒーを飲みながら、静かに過ごそう。', 'pronunciation': '[아타타카이 코-히-오 노미나가라, 시즈카니 스고소-.]', 'meaning': '따뜻한 커피 마시면서 조용히 쉬어야지.', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': '• 飲みながら: 마시면서 (동사+ながら: ~하며)<br />• 過ごす(すごす): (시간을) 보내다, 지내다', 'audio_lang': '温かいコーヒーを飲みながら、静かに過ごそう。', 'audio_ko': '따뜻한 커피 마시면서 조용히 쉬어야지.'}],
+        }}
+      />
+
+      {/* ── [FirstMotion 일요일 주말 3-in-1 쇼츠: [일요일 1분 필수 스페인어]] ── */}
+      <Composition
+        id="PostMotionSun3in1ES"
+        component={PostMotion3in1Template}
+        durationInFrames={704}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          badgeText: "[일요일 1분 필수 스페인어]",
+          badgeColor: "#ea580c",
+          badgeBg: "#fff7ed",
+          title: "일요일 주말 힐링 필수 스페인어 3문장",
+          cardTimings: [{'startFrame': 10, 'flipStartFrame': 110, 'flipEndFrame': 110, 'endFrame': 244}, {'startFrame': 244, 'flipStartFrame': 349, 'flipEndFrame': 349, 'endFrame': 470}, {'startFrame': 470, 'flipStartFrame': 565, 'flipEndFrame': 565, 'endFrame': 699}],
+          cards: [{'indexBadge': '1 / 3', 'primaryText': 'Los domingos son para descansar y no hacer nada.', 'pronunciation': '[로스 도민고스 손 파라 데스칸사르 이 노 아세르 나다.]', 'meaning': '일요일은 푹 쉬고 아무것도 안 하는 날이야.', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• descansar: '(피로를 풀며) 편히 쉬다'<br />• no hacer nada: 아무것도 안 하다", 'audio_lang': 'Los domingos son para descansar y no hacer nada.', 'audio_ko': '일요일은 푹 쉬고 아무것도 안 하는 날이야.'}, {'indexBadge': '2 / 3', 'primaryText': 'Recargando energías antes de que llegue el lunes.', 'pronunciation': '[레카르간도 에네르히아스 안테스 데 케 예게 엘 루네스.]', 'meaning': '월요일이 오기 전에 에너지 완충 중!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• recargar: '재충전하다' (현재분사형)<br />• antes de que: '~하기 전에' (접속법)", 'audio_lang': 'Recargando energías antes de que llegue el lunes.', 'audio_ko': '월요일이 오기 전에 에너지 완충 중!'}, {'indexBadge': '3 / 3', 'primaryText': 'Disfrutando de un café tranquilo en casa.', 'pronunciation': '[디스프루탄도 데 운 카페 트란킬로 엔 카사.]', 'meaning': '집에서 여유롭게 커피 한잔 즐기는 중.', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• disfrutar de: '~를 마음껏 만끽하다'<br />• tranquilo: '조용한, 평온한, 여유로운'", 'audio_lang': 'Disfrutando de un café tranquilo en casa.', 'audio_ko': '집에서 여유롭게 커피 한잔 즐기는 중.'}],
+        }}
+      />
+
+      {/* ── [FirstMotion 일요일 주말 3-in-1 쇼츠: [일요일 1분 필수 중국어]] ── */}
+      <Composition
+        id="PostMotionSun3in1ZH"
+        component={PostMotion3in1Template}
+        durationInFrames={710}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          badgeText: "[일요일 1분 필수 중국어]",
+          badgeColor: "#e11d48",
+          badgeBg: "#fff1f2",
+          title: "일요일 주말 힐링 필수 중국어 3문장",
+          cardTimings: [{'startFrame': 10, 'flipStartFrame': 89, 'flipEndFrame': 89, 'endFrame': 231}, {'startFrame': 231, 'flipStartFrame': 323, 'flipEndFrame': 323, 'endFrame': 457}, {'startFrame': 457, 'flipStartFrame': 559, 'flipEndFrame': 559, 'endFrame': 705}],
+          cards: [{'indexBadge': '1 / 3', 'primaryText': '周日就是用来彻底躺平的！', 'pronunciation': '[저우르 지우 쉬 용라이 치어디 탕핑 더!]', 'meaning': '일요일은 원래 완벽하게 뒹굴거리라고 있는 날이야!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': '• 彻底(chèdǐ): 철저하게, 완벽하게<br />• 躺平(tǎngpíng): 푹 누워서 힐링하다', 'audio_lang': '周日就是用来彻底躺平的！', 'audio_ko': '일요일은 원래 완벽하게 뒹굴거리라고 있는 날이야!'}, {'indexBadge': '2 / 3', 'primaryText': '在周一到来之前，好好充满电。', 'pronunciation': '[짜이 저우이 다오라이 지치엔, 하오하오 충만 띠엔.]', 'meaning': '월요일이 오기 전에 제대로 에너지 완충하기.', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• 充满电: '에너지를 완충하다, 원기 회복'<br />• 好好: '제대로, 푹, 알차게'", 'audio_lang': '在周一到来之前，好好充满电。', 'audio_ko': '월요일이 오기 전에 제대로 에너지 완충하기.'}, {'indexBadge': '3 / 3', 'primaryText': '喝杯热咖啡，安安静静度过今天。', 'pronunciation': '[허 베이 러 카페이, 안안징징 두궈 진티엔.]', 'meaning': '따뜻한 커피 한잔하며 조용하게 오늘을 보내자.', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• 安安静静: '아주 조용하고 평온한 모양'<br />• 度过: '(시간이나 휴일을) 보내다, 지내다'", 'audio_lang': '喝杯热咖啡，安安静静度过今天。', 'audio_ko': '따뜻한 커피 한잔하며 조용하게 오늘을 보내자.'}],
+        }}
+      />
+
+      {/* ── [FirstMotion 일요일 주말 3-in-1 쇼츠: [일요일 1분 필수 인니어]] ── */}
+      <Composition
+        id="PostMotionSun3in1ID"
+        component={PostMotion3in1Template}
+        durationInFrames={777}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          badgeText: "[일요일 1분 필수 인니어]",
+          badgeColor: "#059669",
+          badgeBg: "#ecfdf5",
+          title: "일요일 주말 힐링 필수 인니어 3문장",
+          cardTimings: [{'startFrame': 10, 'flipStartFrame': 127, 'flipEndFrame': 127, 'endFrame': 267}, {'startFrame': 267, 'flipStartFrame': 382, 'flipEndFrame': 382, 'endFrame': 513}, {'startFrame': 513, 'flipStartFrame': 629, 'flipEndFrame': 629, 'endFrame': 772}],
+          cards: [{'indexBadge': '1 / 3', 'primaryText': 'Hari Minggu waktunya santai dan rebahan total!', 'pronunciation': '[하리 밍구 왁투냐 산타이 단 르바한 토탈!]', 'meaning': '일요일은 온전히 여유 부리며 누워 쉬는 시간!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• santai: '여유로운, 편안히 쉬는'<br />• rebahan: '침대에 편히 누워 뒹굴거리다'", 'audio_lang': 'Hari Minggu waktunya santai dan rebahan total!', 'audio_ko': '일요일은 온전히 여유 부리며 누워 쉬는 시간!'}, {'indexBadge': '2 / 3', 'primaryText': 'Isi energi lagi sebelum hari Senin datang.', 'pronunciation': '[이시 에네르기 라기 스블룸 하리 스닌 다탕.]', 'meaning': '월요일이 오기 전에 에너지 다시 완충 중!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• isi energi: '에너지를 채우다, 재충전하다'<br />• sebelum: '~하기 전에'", 'audio_lang': 'Isi energi lagi sebelum hari Senin datang.', 'audio_ko': '월요일이 오기 전에 에너지 다시 완충 중!'}, {'indexBadge': '3 / 3', 'primaryText': 'Ngopi santai di rumah sambil menikmati hari.', 'pronunciation': '[응오피 산타이 디 루마 삼빌 므닉마티 하리.]', 'meaning': '집에서 여유롭게 커피 마시며 하루를 즐기기.', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• ngopi: '커피를 마시다' (kopi의 구어 동사)<br />• menikmati: '~를 만끽하다, 즐기다'", 'audio_lang': 'Ngopi santai di rumah sambil menikmati hari.', 'audio_ko': '집에서 여유롭게 커피 마시며 하루를 즐기기.'}],
+        }}
+      />
+    </>
   );
 };
