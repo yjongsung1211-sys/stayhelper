@@ -1,0 +1,68 @@
+{
+  "hotelName": "GRACE HOTEL",
+  "hotelSubtitle": "SANTORINI · AUBERGE COLLECTION",
+  "destination": "SANTORINI, GREECE",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / CALDERA ARRIVAL",
+      "title": "The White Sanctuary",
+      "highlightWord": "Sanctuary",
+      "description": "Perched 300 meters above the Aegean Sea, carved into dramatic volcanic caldera cliffs.",
+      "fact": "💡 HIGHLIGHT: 300M HIGH PRESTIGIOUS CALDERA CLIFF RETREAT",
+      "imagePath": "stays/grace_hotel_santorini/act1.jpg",
+      "voPath": "stays/grace_hotel_santorini/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / CLIFFSIDE TRAIL",
+      "title": "Whitewashed Cycladic Path",
+      "highlightWord": "Cycladic",
+      "description": "Strolling blindingly white cliff terraces framed by fuchsia bougainvillea.",
+      "fact": "💡 SETTING: ICONIC IMEROVIGLI PATHWAYS TO YOUR SUITE",
+      "imagePath": "stays/grace_hotel_santorini/act2.jpg",
+      "voPath": "stays/grace_hotel_santorini/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / HANDCRAFTED CAVE",
+      "title": "Sculpted Volcanic Serenity",
+      "highlightWord": "Serenity",
+      "description": "Handcrafted cave suites with organic curves, cool plaster, and private plunging terraces.",
+      "fact": "💡 ARCHITECTURE: BESPOKE TRADITIONAL VOLCANIC CAVE SUITE",
+      "imagePath": "stays/grace_hotel_santorini/act3.jpg",
+      "voPath": "stays/grace_hotel_santorini/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / CALDERA INDULGENCE",
+      "title": "Suspended Infinity Waters",
+      "highlightWord": "Infinity",
+      "description": "Floating at the edge of the world overlooking Skaros Rock and deep cobalt waters.",
+      "fact": "💡 POOL: SANTORINI'S MOST CELEBRATED HEATED INFINITY POOL",
+      "imagePath": "stays/grace_hotel_santorini/act4.jpg",
+      "voPath": "stays/grace_hotel_santorini/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / AEGEAN WELLNESS",
+      "title": "Mediterranean Sea Therapy",
+      "highlightWord": "Therapy",
+      "description": "Restorative volcanic salt rituals and lavender sea breezes in cliffside cabanas.",
+      "fact": "💡 SPA: HOLISTIC GREEK BOTANICAL & SEA MINERAL RITUALS",
+      "imagePath": "stays/grace_hotel_santorini/act5.jpg",
+      "voPath": "stays/grace_hotel_santorini/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / SUNSET CELEBRATION",
+      "title": "Golden Hour Assyrtiko",
+      "highlightWord": "Assyrtiko",
+      "description": "Chilled indigenous Assyrtiko wine toast as the sun ignites the Aegean sky.",
+      "fact": "💡 SUNSET: WORLD-RENOWNED OIA & CALDERA GOLDEN HOUR",
+      "imagePath": "stays/grace_hotel_santorini/act6.jpg",
+      "voPath": "stays/grace_hotel_santorini/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "STAYHELPER",
+    "tagline": "Curated Luxury Sanctuaries",
+    "cta": "Reserve Your Caldera Suite",
+    "url": "stayhelper.com · Fora VIP Partner"
+  }
+}

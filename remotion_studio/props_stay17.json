@@ -1,0 +1,68 @@
+{
+  "hotelName": "COMO LAUCALA ISLAND",
+  "hotelSubtitle": "ULTRA-EXCLUSIVE 3,000-ACRE PRIVATE ISLAN",
+  "destination": "FIJI, SOUTH PACIFIC",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / PANORAMIC ARRIVAL",
+      "title": "Private Pacific Eden",
+      "highlightWord": "Eden",
+      "description": "Gliding down to the island's private runway surrounded by virgin coral reefs and jungle peaks.",
+      "fact": "💡 HIGHLIGHT: 3,000-ACRE SELF-SUSTAINING PRIVATE ISLAND",
+      "imagePath": "stays/como_laucala/act1.jpg",
+      "voPath": "stays/como_laucala/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / BOTANICAL PATH",
+      "title": "Coconut Grove Trails",
+      "highlightWord": "Coconut",
+      "description": "Riding horseback or private electric buggies through 240 acres of pristine coconut plantations.",
+      "fact": "💡 LANDSCAPE: ANCIENT RAINFOREST & PRIVATE SANDY COVES",
+      "imagePath": "stays/como_laucala/act2.jpg",
+      "voPath": "stays/como_laucala/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / SACRED HERITAGE",
+      "title": "Bespoke Fijian Bure Design",
+      "highlightWord": "Fijian",
+      "description": "Handwoven magimagi coconut fiber lashings, thatched roofs, and natural stone outdoor bathtubs.",
+      "fact": "💡 ARCHITECTURE: TRADITIONAL MAGIMAGI WEAVING ARTISTRY",
+      "imagePath": "stays/como_laucala/act3.jpg",
+      "voPath": "stays/como_laucala/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+      "title": "The Clear-Glass Cube Pool",
+      "highlightWord": "Glass",
+      "description": "Swimming through the iconic 25-meter transparent glass cube suspended inside a lagoon.",
+      "fact": "💡 SIGNATURE: WORLD-FAMOUS 25M CLEAR ACRYLIC GLASS POOL",
+      "imagePath": "stays/como_laucala/act4.jpg",
+      "voPath": "stays/como_laucala/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / HOLISTIC HEALING",
+      "title": "COMO Shambhala Wellness",
+      "highlightWord": "Shambhala",
+      "description": "Open-air clifftop spa pavilions utilizing island-grown volcanic ash, virgin coconut, and herbs.",
+      "fact": "💡 WELLNESS: VOLCANIC ASH & PURE COCONUT ISLAND THERAPY",
+      "imagePath": "stays/como_laucala/act5.jpg",
+      "voPath": "stays/como_laucala/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / GOLDEN HOUR",
+      "title": "Seagrass Bay Twilight",
+      "highlightWord": "Twilight",
+      "description": "Private beach barbecue under tiki torches with freshly caught yellowfin tuna and champagne.",
+      "fact": "💡 SUNSET: GOLDEN HOUR OVER THE FIJIAN ARCHIPELAGO",
+      "imagePath": "stays/como_laucala/act6.jpg",
+      "voPath": "stays/como_laucala/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "COMO LAUCALA ISLAND",
+    "tagline": "FIJI, SOUTH PACIFIC",
+    "cta": "Reserve Your Private Sanctuary ↗",
+    "url": "STAYHELPER · CURATED EDITORIAL"
+  }
+}

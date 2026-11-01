@@ -1,0 +1,68 @@
+{
+  "hotelName": "BELMOND HOTEL CARUSO",
+  "hotelSubtitle": "11TH-CENTURY PALATIAL CLIFFSIDE SANCTUAR",
+  "destination": "AMALFI COAST, ITALY",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / PANORAMIC ARRIVAL",
+      "title": "Palace in the Clouds",
+      "highlightWord": "Clouds",
+      "description": "Perched three hundred and fifty meters above the azure Amalfi Coast in the hilltown of Ravello.",
+      "fact": "💡 HIGHLIGHT: 11TH-CENTURY CLIFF PALACE 350M ABOVE SEA",
+      "imagePath": "stays/belmond_hotel_caruso/act1.jpg",
+      "voPath": "stays/belmond_hotel_caruso/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / BOTANICAL PATH",
+      "title": "Pergola of Roses and Lemons",
+      "highlightWord": "Pergola",
+      "description": "Strolling beneath centuries-old stone pergolas draped in climbing wisteria and fragrant Amalfi lemons.",
+      "fact": "💡 GARDENS: TERRACED LEMON GROVES & CENTURY-OLD ROSES",
+      "imagePath": "stays/belmond_hotel_caruso/act2.jpg",
+      "voPath": "stays/belmond_hotel_caruso/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / SACRED HERITAGE",
+      "title": "Medieval Roman Patrician Grandeur",
+      "highlightWord": "Patrician",
+      "description": "Vaulted marble corridors, ancient Roman busts, and restored 18th-century ceiling frescoes.",
+      "fact": "💡 HERITAGE: 18TH-CENTURY RESTORED FRESCO CEILINGS",
+      "imagePath": "stays/belmond_hotel_caruso/act3.jpg",
+      "voPath": "stays/belmond_hotel_caruso/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+      "title": "Pool Between Sky and Sea",
+      "highlightWord": "Sky",
+      "description": "Swimming to the vanishing edge of the world's most dramatic heated cliffside infinity pool.",
+      "fact": "💡 SIGNATURE: ICONIC RAVELOW CLIFF-EDGE INFINITY POOL",
+      "imagePath": "stays/belmond_hotel_caruso/act4.jpg",
+      "voPath": "stays/belmond_hotel_caruso/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / HOLISTIC HEALING",
+      "title": "Amalfi Citrus Aromatherapy",
+      "highlightWord": "Citrus",
+      "description": "Open-air garden massage using cold-pressed sweet almond oil and pure Ravello lemon essence.",
+      "fact": "💡 WELLNESS: OPEN-AIR BOTANICAL MASSAGE IN PRIVATE GARDENS",
+      "imagePath": "stays/belmond_hotel_caruso/act5.jpg",
+      "voPath": "stays/belmond_hotel_caruso/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / GOLDEN HOUR",
+      "title": "Belvedere Sunset Limoncello",
+      "highlightWord": "Limoncello",
+      "description": "Sunset aperitivo on the Belvedere cliff terrace as twilight envelops the Gulf of Salerno.",
+      "fact": "💡 SUNSET: GOLDEN HOUR OVER THE GULF OF SALERNO",
+      "imagePath": "stays/belmond_hotel_caruso/act6.jpg",
+      "voPath": "stays/belmond_hotel_caruso/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "BELMOND HOTEL CARUSO",
+    "tagline": "AMALFI COAST, ITALY",
+    "cta": "Reserve Your Private Sanctuary ↗",
+    "url": "STAYHELPER · CURATED EDITORIAL"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "hotelName": "SINGITA SASAKWA",
+  "hotelSubtitle": "GRUMETI RESERVES · PRIVATE SERENGETI",
+  "destination": "SERENGETI, TANZANIA",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / SAVANNA ARRIVAL",
+      "title": "Sasakwa Hill Manor",
+      "highlightWord": "Manor",
+      "description": "Perched high on Sasakwa Hill overlooking boundless golden Serengeti plains.",
+      "fact": "💡 WILDERNESS: 350,000 ACRES OF EXCLUSIVE CONSERVATION SANCTUARY",
+      "imagePath": "stays/singita_sasakwa/act1.jpg",
+      "voPath": "stays/singita_sasakwa/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / BOTANICAL VERANDA",
+      "title": "Classic Edwardian Grandeur",
+      "highlightWord": "Grandeur",
+      "description": "Sprawling colonial wrap-around verandas with Swarovski spotting scopes.",
+      "fact": "💡 HERITAGE: TIMELESS 1900S ARISTOCRATIC SAFARI ARCHITECTURE",
+      "imagePath": "stays/singita_sasakwa/act2.jpg",
+      "voPath": "stays/singita_sasakwa/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / PRIVATE COTTAGE",
+      "title": "Secluded Stone Cottages",
+      "highlightWord": "Cottages",
+      "description": "Handcrafted stone cottages with crackling stone fireplaces and clawfoot tubs.",
+      "fact": "💡 SECLUSION: ONLY 10 HILLSIDE COTTAGES ACROSS ENTIRE RESERVE",
+      "imagePath": "stays/singita_sasakwa/act3.jpg",
+      "voPath": "stays/singita_sasakwa/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / INFINITY OVERLOOK",
+      "title": "Plains-Edge Infinity Pool",
+      "highlightWord": "Infinity",
+      "description": "Front-row private infinity plunge pools watching migrating elephant herds.",
+      "fact": "💡 PANORAMA: UNINTERRUPTED 360-DEGREE SERENGETI HORIZON",
+      "imagePath": "stays/singita_sasakwa/act4.jpg",
+      "voPath": "stays/singita_sasakwa/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / CELLAR & WELLNESS",
+      "title": "Sommelier Wine Vault",
+      "highlightWord": "Vault",
+      "description": "Private tastings of Africa's rarest vintages paired with holistic bush therapies.",
+      "fact": "💡 INDULGENCE: RENOWNED SUBTERRANEAN SOMMELIER WINE CELLAR",
+      "imagePath": "stays/singita_sasakwa/act5.jpg",
+      "voPath": "stays/singita_sasakwa/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / TWILIGHT BUSH DINING",
+      "title": "Golden Hour Sundowner",
+      "highlightWord": "Sundowner",
+      "description": "Lantern-lit open-air starlight banquets under the vast African night sky.",
+      "fact": "💡 SUNSET: PRIVATE FIRESIDE CHAMPAGNE IN THE WILD SAVANNA",
+      "imagePath": "stays/singita_sasakwa/act6.jpg",
+      "voPath": "stays/singita_sasakwa/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "SINGITA SASAKWA",
+    "tagline": "GRUMETI RESERVES · SERENGETI",
+    "cta": "Reserve Your Private Sanctuary ↗",
+    "url": "STAYHELPER · CURATED EDITORIAL"
+  }
+}

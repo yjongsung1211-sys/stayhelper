@@ -1,0 +1,68 @@
+{
+  "hotelName": "HÔTEL DU CAP-EDEN-ROC",
+  "hotelSubtitle": "LEGENDARY PALACE · CAP D'ANTIBES",
+  "destination": "FRENCH RIVIERA, FRANCE",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / RIVIERA ARRIVAL",
+      "title": "Grand Allée Arrival",
+      "highlightWord": "Arrival",
+      "description": "Strolling down the iconic pine-lined allée toward the azure Mediterranean.",
+      "fact": "💡 PROVENANCE: 1870 PALACE COMMANDING CAP D'ANTIBES CLIFFS",
+      "imagePath": "stays/eden_roc/act1.jpg",
+      "voPath": "stays/eden_roc/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / COASTAL PINE GROVES",
+      "title": "Majestic Aleppo Pines",
+      "highlightWord": "Pines",
+      "description": "Thirty-three acres of fragrant coastal gardens and secluded cliffside trails.",
+      "fact": "💡 BOTANICAL: CENTURY-OLD PRIVATE PINE & ROSE GARDEN ESTATE",
+      "imagePath": "stays/eden_roc/act2.jpg",
+      "voPath": "stays/eden_roc/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / SEASIDE CABANAS",
+      "title": "Historic White Cabanas",
+      "highlightWord": "Cabanas",
+      "description": "Private wooden day cabanas perched right above gentle Mediterranean surf.",
+      "fact": "💡 LEGEND: SANCTUARY OF ARTISTS, WRITERS & FILM ROYALTY",
+      "imagePath": "stays/eden_roc/act3.jpg",
+      "voPath": "stays/eden_roc/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / BASALT SEAWATER POOL",
+      "title": "The Iconic Basalt Pool",
+      "highlightWord": "Basalt",
+      "description": "Carved directly into white coastal limestone with panoramic Lerins Islands views.",
+      "fact": "💡 SIGNATURE: WORLD-FAMOUS HEATED COASTAL SEAWATER POOL",
+      "imagePath": "stays/eden_roc/act4.jpg",
+      "voPath": "stays/eden_roc/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / DIOR SPA & WELLNESS",
+      "title": "Dior Riviera Spa",
+      "highlightWord": "Dior",
+      "description": "Tailored coastal treatments in open-air gazebos under the maritime sun.",
+      "fact": "💡 WELLNESS: EXCLUSIVE DIOR SPA WELLNESS THERAPIES",
+      "imagePath": "stays/eden_roc/act5.jpg",
+      "voPath": "stays/eden_roc/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / TWILIGHT BELLINI",
+      "title": "Eden-Roc Sunset Toast",
+      "highlightWord": "Sunset",
+      "description": "Champagne cocktails on the terrace as the Riviera sky turns deep rose gold.",
+      "fact": "💡 SUNSET: TIMELESS FRENCH RIVIERA GLAMOUR & HORIZON TOAST",
+      "imagePath": "stays/eden_roc/act6.jpg",
+      "voPath": "stays/eden_roc/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "HÔTEL DU CAP-EDEN-ROC",
+    "tagline": "CAP D'ANTIBES · CÔTE D'AZUR",
+    "cta": "Reserve Your Private Sanctuary ↗",
+    "url": "STAYHELPER · CURATED EDITORIAL"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "hotelName": "AMAN TOKYO",
+  "hotelSubtitle": "MONUMENTAL WASHI PAPER LANTERN ATRIUM & ",
+  "destination": "TOKYO, JAPAN",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / PANORAMIC ARRIVAL",
+      "title": "Sanctuary Above the Clouds",
+      "highlightWord": "Clouds",
+      "description": "Ascending to the 33rd floor of Otemachi Tower overlooking the Imperial Palace and Mount Fuji.",
+      "fact": "💡 HIGHLIGHT: TOP 6 FLOORS OF PRESTIGIOUS OTEMACHI TOWER",
+      "imagePath": "stays/aman_tokyo/act1.jpg",
+      "voPath": "stays/aman_tokyo/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / BOTANICAL PATH",
+      "title": "Engawa Cedar Corridors",
+      "highlightWord": "Cedar",
+      "description": "Stepping along minimalist camphor wood hallways past indoor stone rock gardens and ikebana.",
+      "fact": "💡 DESIGN: TRADITIONAL ENGAWA TIMBER RUNWAYS & IKEBANA",
+      "imagePath": "stays/aman_tokyo/act2.jpg",
+      "voPath": "stays/aman_tokyo/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / SACRED HERITAGE",
+      "title": "The 30-Meter Washi Lantern",
+      "highlightWord": "Lantern",
+      "description": "Standing beneath a soaring 30-meter washi paper ceiling that filters natural daylight like a lantern.",
+      "fact": "💡 ARCHITECTURE: KERRY HILL 30-METER SHOJI PAPER ATRIUM",
+      "imagePath": "stays/aman_tokyo/act3.jpg",
+      "voPath": "stays/aman_tokyo/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+      "title": "The Black Basalt Pool",
+      "highlightWord": "Basalt",
+      "description": "Swimming in the 30-meter heated basalt pool overlooking Mount Fuji and the Tokyo skyline.",
+      "fact": "💡 EXPERIENCE: 30-METER BLACK GRANITE SKYLINE POOL",
+      "imagePath": "stays/aman_tokyo/act4.jpg",
+      "voPath": "stays/aman_tokyo/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / HOLISTIC HEALING",
+      "title": "Traditional Onsen & Kampo Herbal Spa",
+      "highlightWord": "Onsen",
+      "description": "Soaking in mineral-rich Japanese hot stone onsens infused with seasonal Kuromoji botanicals.",
+      "fact": "💡 WELLNESS: HEATED HOT SPRING STONE BATHS & KAMPO OILS",
+      "imagePath": "stays/aman_tokyo/act5.jpg",
+      "voPath": "stays/aman_tokyo/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / GOLDEN HOUR",
+      "title": "Metropolitan Sunset Saki",
+      "highlightWord": "Sunset",
+      "description": "Sipping rare vintage sake at The Lounge by Aman as the neon city lights illuminate the dusk.",
+      "fact": "💡 SUNSET: GOLDEN HOUR OVER THE TOKYO METROPOLITAN SKYLINE",
+      "imagePath": "stays/aman_tokyo/act6.jpg",
+      "voPath": "stays/aman_tokyo/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "AMAN TOKYO",
+    "tagline": "TOKYO, JAPAN",
+    "cta": "Reserve Your Private Sanctuary ↗",
+    "url": "STAYHELPER · CURATED EDITORIAL"
+  }
+}

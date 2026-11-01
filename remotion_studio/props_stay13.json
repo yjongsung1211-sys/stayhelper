@@ -1,0 +1,68 @@
+{
+  "hotelName": "CHEVAL BLANC RANDHELI",
+  "hotelSubtitle": "LVMH’S ULTIMATE HAUTE COUTURE ISLAND MAI",
+  "destination": "MALDIVES",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / PANORAMIC ARRIVAL",
+      "title": "Haute Couture Lagoon",
+      "highlightWord": "Couture",
+      "description": "Touching down on turquoise atoll waters aboard the custom bespoke Cheval Blanc seaplane.",
+      "fact": "💡 HIGHLIGHT: LVMH PRIVATE ATOLL ARCHIPELAGO SANCTUARY",
+      "imagePath": "stays/cheval_blanc_randheli/act1.jpg",
+      "voPath": "stays/cheval_blanc_randheli/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / BOTANICAL PATH",
+      "title": "Cathedral Teak Promenade",
+      "highlightWord": "Cathedral",
+      "description": "Passing seven-meter-high soaring timber doors framed by flourishing tropical banyan trees.",
+      "fact": "💡 DESIGN: JEAN-MICHEL GATHY 7-METER SOARING DOORS",
+      "imagePath": "stays/cheval_blanc_randheli/act2.jpg",
+      "voPath": "stays/cheval_blanc_randheli/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / SACRED HERITAGE",
+      "title": "French Maison Craftsmanship",
+      "highlightWord": "Craftsmanship",
+      "description": "Minimalist rattan geometry, pure white Thassos marble, and bespoke contemporary art.",
+      "fact": "💡 ART: BESPOKE SCULPTURES BY CONTEMPORARY MASTERS",
+      "imagePath": "stays/cheval_blanc_randheli/act3.jpg",
+      "voPath": "stays/cheval_blanc_randheli/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+      "title": "Monumental Lagoon Pool",
+      "highlightWord": "Monumental",
+      "description": "Floating in a 12.5-meter private overwater infinity pool merging seamlessly with the ocean.",
+      "fact": "💡 EXPERIENCE: 12.5-METER PRIVATE INFINITY LAP POOL",
+      "imagePath": "stays/cheval_blanc_randheli/act4.jpg",
+      "voPath": "stays/cheval_blanc_randheli/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / HOLISTIC HEALING",
+      "title": "Dedicated Spa Island",
+      "highlightWord": "Island",
+      "description": "Gliding by private wooden dhoni to an entire island dedicated exclusively to Guerlain wellness.",
+      "fact": "💡 SPA: DEDICATED PRIVATE GUERLAIN ISLAND SANCTUARY",
+      "imagePath": "stays/cheval_blanc_randheli/act5.jpg",
+      "voPath": "stays/cheval_blanc_randheli/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / GOLDEN HOUR",
+      "title": "Le 1947 Starlight Toast",
+      "highlightWord": "Starlight",
+      "description": "Tasting Grand Cru champagne on the white sand sandbank as evening stars ignite the sky.",
+      "fact": "💡 SUNSET: GOLDEN HOUR OVER THE NOONU ATOLL LAGOON",
+      "imagePath": "stays/cheval_blanc_randheli/act6.jpg",
+      "voPath": "stays/cheval_blanc_randheli/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "CHEVAL BLANC RANDHELI",
+    "tagline": "MALDIVES",
+    "cta": "Reserve Your Private Sanctuary ↗",
+    "url": "STAYHELPER · CURATED EDITORIAL"
+  }
+}

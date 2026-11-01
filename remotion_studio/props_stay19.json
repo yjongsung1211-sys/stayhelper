@@ -1,0 +1,68 @@
+{
+  "hotelName": "CAPELLA UBUD",
+  "hotelSubtitle": "BILL BENSLEY’S MYSTICAL RAINFOREST TENTE",
+  "destination": "BALI, INDONESIA",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / PANORAMIC ARRIVAL",
+      "title": "The Hidden Jungle Camp",
+      "highlightWord": "Jungle",
+      "description": "Crossing a wooden suspension bridge into an untouched virgin rainforest valley above Wos River.",
+      "fact": "💡 HIGHLIGHT: BILL BENSLEY 1800S EXPEDITION TENT SANCTUARY",
+      "imagePath": "stays/capella_ubud/act1.jpg",
+      "voPath": "stays/capella_ubud/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / BOTANICAL PATH",
+      "title": "Verdant Jungle Ravine",
+      "highlightWord": "Ravine",
+      "description": "Wandering along secluded stone trails past giant ferns, wild orchids, and terraced rice paddies.",
+      "fact": "💡 NATURE: UNTOUCHED TROPICAL CANOPY ABOVE WOS RIVER",
+      "imagePath": "stays/capella_ubud/act2.jpg",
+      "voPath": "stays/capella_ubud/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / SACRED HERITAGE",
+      "title": "1800s Explorer Nostalgia",
+      "highlightWord": "Explorer",
+      "description": "Hammered brass bathtubs, bespoke Balinese ikat fabrics, and antique steamer trunks.",
+      "fact": "💡 ARTIFACTS: HANDCRAFTED BALINESE WOODCARVING & BRASS TUBS",
+      "imagePath": "stays/capella_ubud/act3.jpg",
+      "voPath": "stays/capella_ubud/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+      "title": "Salt-Water Canopy Plunge",
+      "highlightWord": "Canopy",
+      "description": "Floating in your private copper-decked saltwater pool suspended amidst the jungle canopy.",
+      "fact": "💡 EXPERIENCE: PRIVATE OUTDOOR SALT-WATER POOL IN EVERY TENT",
+      "imagePath": "stays/capella_ubud/act4.jpg",
+      "voPath": "stays/capella_ubud/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / HOLISTIC HEALING",
+      "title": "Auriga Moon Phase Spa",
+      "highlightWord": "Moon",
+      "description": "Healing Balinese wellness treatments aligned with lunar cycles inside open-air tent pavilions.",
+      "fact": "💡 WELLNESS: BESPOKE LUNAR-ALIGNED CHAKRA THERAPY",
+      "imagePath": "stays/capella_ubud/act5.jpg",
+      "voPath": "stays/capella_ubud/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / GOLDEN HOUR",
+      "title": "The Starlight Camp Fire",
+      "highlightWord": "Fire",
+      "description": "Gathering around the crackling jungle campfire with roasted marshmallows and spiced hot toddies.",
+      "fact": "💡 SUNSET: GOLDEN HOUR OVER THE UBUD SACRED VALLEY",
+      "imagePath": "stays/capella_ubud/act6.jpg",
+      "voPath": "stays/capella_ubud/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "CAPELLA UBUD",
+    "tagline": "BALI, INDONESIA",
+    "cta": "Reserve Your Private Sanctuary ↗",
+    "url": "STAYHELPER · CURATED EDITORIAL"
+  }
+}

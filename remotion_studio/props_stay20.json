@@ -1,0 +1,68 @@
+{
+  "hotelName": "JADE MOUNTAIN RESORT",
+  "hotelSubtitle": "ARCHITECTURAL MASTERPIECE WITH OPEN 4TH ",
+  "destination": "ST. LUCIA, CARIBBEAN",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / PANORAMIC ARRIVAL",
+      "title": "Sanctuary Above the Pitons",
+      "highlightWord": "Pitons",
+      "description": "Hovering above the sparkling Caribbean Sea facing St. Lucia's monumental volcanic Piton spires.",
+      "fact": "💡 HIGHLIGHT: UNESCO PITONS VOLCANO PANORAMIC LOCATION",
+      "imagePath": "stays/jade_mountain/act1.jpg",
+      "voPath": "stays/jade_mountain/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / BOTANICAL PATH",
+      "title": "Floating Stone Bridges",
+      "highlightWord": "Bridges",
+      "description": "Crossing dramatic stone sky bridges suspended in mid-air toward your private sanctuary.",
+      "fact": "💡 ARCHITECTURE: SUSPENDED STONE SKY BRIDGES IN MID-AIR",
+      "imagePath": "stays/jade_mountain/act2.jpg",
+      "voPath": "stays/jade_mountain/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / SACRED HERITAGE",
+      "title": "The Open Fourth Wall",
+      "highlightWord": "Fourth",
+      "description": "Experiencing monumental spaces where no wall separates you from the sea and cosmic stars.",
+      "fact": "💡 DESIGN: NICK TROUBETZKOY OPEN 4TH-WALL CONCEPT",
+      "imagePath": "stays/jade_mountain/act3.jpg",
+      "voPath": "stays/jade_mountain/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+      "title": "Cantilevered Floating Pool",
+      "highlightWord": "Floating",
+      "description": "Swimming in private iridescent glass pools that appear to spill directly into the ocean abyss.",
+      "fact": "💡 EXPERIENCE: 900 SQ FT CANTILEVERED GLASS INFINITY POOL",
+      "imagePath": "stays/jade_mountain/act4.jpg",
+      "voPath": "stays/jade_mountain/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / HOLISTIC HEALING",
+      "title": "Kai en Ciel Holistic Spa",
+      "highlightWord": "Ciel",
+      "description": "Organic cocoa bean and local volcanic sulfur body scrubs overlooking the endless Caribbean.",
+      "fact": "💡 WELLNESS: ORGANIC SAINT LUCIAN COCOA & MINERAL THERAPY",
+      "imagePath": "stays/jade_mountain/act5.jpg",
+      "voPath": "stays/jade_mountain/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / GOLDEN HOUR",
+      "title": "Celestial Terrace Twilight",
+      "highlightWord": "Celestial",
+      "description": "Sipping passionfruit champagne on the Celestial Terrace as the sun sets behind the Gros Piton.",
+      "fact": "💡 SUNSET: GOLDEN HOUR OVER THE UNESCO CARIBBEAN SEA",
+      "imagePath": "stays/jade_mountain/act6.jpg",
+      "voPath": "stays/jade_mountain/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "JADE MOUNTAIN RESORT",
+    "tagline": "ST. LUCIA, CARIBBEAN",
+    "cta": "Reserve Your Private Sanctuary ↗",
+    "url": "STAYHELPER · CURATED EDITORIAL"
+  }
+}

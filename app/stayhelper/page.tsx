@@ -873,6 +873,457 @@ const ALL_STAYS: StayInfo[] = [
       desc: "Book an open-air infinity sanctuary for 4 nights, receive 5th night on us + $100 credit"
     }
   }
+,
+  {
+    id: "stay-21",
+    numeral: "XXI",
+    name: "Grace Hotel, Auberge Resorts Collection",
+    subtitle: "Whitewashed Cycladic Clifftop Cave Suites Overlooking Skaros Rock & World-Renowned Sunsets",
+    location: "Imerovigli, Santorini",
+    country: "Santorini, Greece",
+    badge: "COLLECTION № 21 · SANTORINI, GREECE",
+    rating: "4.99",
+    reviews: "1,320+",
+    pricePerNight: "From $1,850",
+    priceAmount: "$1,850",
+    seasonalRange: "Low $1,350+ · Summer Grand $3,400+",
+    rateInclusions: "Includes private airport limousine transfer, daily Champagne breakfast & caldera spa access",
+    forbesTier: "Forbes Travel Guide 5-Star & World's Best Clifftop Hotel",
+    image: "/images/stayhelper/grace_santorini_wide_hero.jpg",
+    wideHero: "/images/stayhelper/grace_santorini_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperGraceSantorini_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/grace_santorini_wide_hero.jpg",
+    bookingUrl: "https://aubergeresorts.com/gracehotel/",
+    status: "STREAMING",
+    story: [
+      "Perched high above the azure Aegean Sea, Grace Hotel, Auberge Resorts Collection is an ethereal clifftop sanctuary carved directly into Santorini's dramatic volcanic caldera in peaceful Imerovigli.",
+      "Cascading whitewashed terraces, handcrafted Cycladic cave suites, and the island's most iconic heated infinity pool offer front-row, private seats to the world's most celebrated sunsets over Skaros Rock."
+],
+    features: [
+      {
+            "title": "Suspended Caldera Infinity Pool",
+            "desc": "Santorini's premier heated infinity pool cantilevered 300 meters above the Aegean"
+      },
+      {
+            "title": "Sculpted Volcanic Cave Suites",
+            "desc": "Minimalist organic Cycladic architecture with private plunge pools facing the sea"
+      },
+      {
+            "title": "Varoulko Santorini Gastronomy",
+            "desc": "Michelin-starred Greek seafood dining by renowned Chef Lefteris Lazarou"
+      }
+],
+    activeDeal: {
+      title: "Santorini Escape · 4th Night Complimentary",
+      tag: "STAY 4, PAY 3 (1 NIGHT FREE)",
+      desc: "Enjoy a complimentary 4th night + Private Santorini Airport/Port roundtrip limousine transfer"
+    }
+  },
+  {
+    id: "stay-22",
+    numeral: "XXII",
+    name: "Hôtel Plaza Athénée",
+    subtitle: "The Haute Couture Crown Jewel of Avenue Montaigne with Private Eiffel Tower Balconies",
+    location: "Avenue Montaigne, 8th Arr.",
+    country: "Paris, France",
+    badge: "COLLECTION № 22 · PARIS, FRANCE",
+    rating: "4.99",
+    reviews: "2,150+",
+    pricePerNight: "From $2,400",
+    priceAmount: "$2,400",
+    seasonalRange: "Low $1,900+ · Fashion Week $4,800+",
+    rateInclusions: "Includes daily American breakfast for two, Dior Spa priority access & House of Dior welcome",
+    forbesTier: "French Distinction Palace & Forbes 5-Star",
+    image: "/images/stayhelper/plaza_athenee_wide_hero.jpg",
+    wideHero: "/images/stayhelper/plaza_athenee_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperPlazaAthenee_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/plaza_athenee_wide_hero.jpg",
+    bookingUrl: "https://www.dorchestercollection.com/paris/hotel-plaza-athenee",
+    status: "STREAMING",
+    story: [
+      "Commanding the prestigious Avenue Montaigne since 1913, Hôtel Plaza Athénée is the legendary heart of Parisian haute couture, surrounded by the world's greatest fashion houses and cherished by cinema legends.",
+      "Cascading with nearly two thousand signature scarlet geraniums, its Haussmannian suites feature private wrought-iron balconies opening directly onto full-frame, magical vistas of the Eiffel Tower."
+],
+    features: [
+      {
+            "title": "Signature Eiffel Balconies",
+            "desc": "Wrought-iron private balconies framing the ultimate direct view of the Eiffel Tower"
+      },
+      {
+            "title": "The Dior Spa Plaza Athénée",
+            "desc": "Haute-couture holistic treatments developed exclusively by the House of Dior"
+      },
+      {
+            "title": "Cour Jardin Courtyard",
+            "desc": "Historic ivy-draped courtyard adorned with thousands of signature red geraniums"
+      }
+],
+    activeDeal: {
+      title: "Guaranteed Eiffel Upgrade & Double Credit",
+      tag: "GUARANTEED UPGRADE AT CONFIRMATION",
+      desc: "Guaranteed room upgrade at booking + €200 double culinary & spa credit"
+    }
+  },
+  {
+    id: "stay-23",
+    numeral: "XXIII",
+    name: "The St. Regis Bora Bora Resort",
+    subtitle: "French Polynesia’s Largest Overwater Villas with Glass Floor Panels & Mount Otemanu Views",
+    location: "Motu Tupei, Bora Bora",
+    country: "Bora Bora, French Polynesia",
+    badge: "COLLECTION № 23 · BORA BORA",
+    rating: "4.99",
+    reviews: "1,410+",
+    pricePerNight: "From $2,650",
+    priceAmount: "$2,650",
+    seasonalRange: "Low $2,100+ · Festive Season $5,200+",
+    rateInclusions: "Includes 24-hour St. Regis Butler service, scenic lagoon boat transfers & gourmet breakfast",
+    forbesTier: "World's Best Overwater Resort & Condé Nast Gold List",
+    image: "/images/stayhelper/st_regis_bora_bora_wide_hero.jpg",
+    wideHero: "/images/stayhelper/st_regis_bora_bora_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperStRegisBoraBora_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/st_regis_bora_bora_wide_hero.jpg",
+    bookingUrl: "https://www.marriott.com/en-us/hotels/bobxr-the-st-regis-bora-bora-resort/overview/",
+    status: "STREAMING",
+    story: [
+      "Spanning forty-four lush tropical acres on a private motu in French Polynesia, The St. Regis Bora Bora Resort represents the zenith of South Pacific barefoot luxury.",
+      "The resort boasts the largest overwater villas in the South Pacific starting at 1,500 square feet, equipped with private glass floor viewing panels looking into living coral gardens and plunge pools facing Mount Otemanu."
+],
+    features: [
+      {
+            "title": "Largest Overwater Villas in Polynesia",
+            "desc": "Expansive 1,500+ sq ft villas with private glass viewing floors to the lagoon"
+      },
+      {
+            "title": "St. Regis Signature Butler Service",
+            "desc": "Unrivaled 24-hour bespoke attention for packing, unpacking and private dining"
+      },
+      {
+            "title": "Private Iridium Spa Islet",
+            "desc": "13,000 sq ft spa sanctuary on its own private lagoon island using native monoi"
+      }
+],
+    activeDeal: {
+      title: "Bora Bora Paradise · 5th Night Free",
+      tag: "STAY 5, PAY 4 (1 NIGHT FREE)",
+      desc: "Enjoy a complimentary 5th night + Private roundtrip airport boat transfer & 24hr Butler Service"
+    }
+  },
+  {
+    id: "stay-24",
+    numeral: "XXIV",
+    name: "Taj Lake Palace",
+    subtitle: "18th-Century Floating White Marble Royal Water Palace in the Center of Lake Pichola",
+    location: "Lake Pichola, Udaipur, Rajasthan",
+    country: "Udaipur, India",
+    badge: "COLLECTION № 24 · UDAIPUR, INDIA",
+    rating: "4.99",
+    reviews: "1,880+",
+    pricePerNight: "From $1,250",
+    priceAmount: "$1,250",
+    seasonalRange: "Summer $950+ · Royal Peak $2,900+",
+    rateInclusions: "Includes private ceremonial royal barge transfers, traditional welcome ritual & Mewar breakfast",
+    forbesTier: "World's Most Romantic Palace & Condé Nast Traveler Top 10",
+    image: "/images/stayhelper/taj_lake_palace_wide_hero.jpg",
+    wideHero: "/images/stayhelper/taj_lake_palace_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperTajLakePalace_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/taj_lake_palace_wide_hero.jpg",
+    bookingUrl: "https://www.tajhotels.com/en-in/taj/taj-lake-palace-udaipur/",
+    status: "STREAMING",
+    story: [
+      "Built in 1746 by Maharana Jagat Singh II as a royal summer pleasure palace, Taj Lake Palace floats like an ethereal white marble mirage on the tranquil waters of Lake Pichola.",
+      "Arriving aboard a handcrafted private royal barge showered with rose petals, guests experience authentic Mewar royal hospitality with hand-painted frescoes, stained glass arches, and serene lily ponds."
+],
+    features: [
+      {
+            "title": "Pure Marble Floating Architecture",
+            "desc": "Four-acre island palace of pure white marble rising directly out of Lake Pichola"
+      },
+      {
+            "title": "Jiva Spa Boat Rituals",
+            "desc": "Signature Ayurvedic treatments aboard a private heritage wooden spa boat on the lake"
+      },
+      {
+            "title": "Mewar Royal Grand Heritage Suites",
+            "desc": "Original royal chambers with ornate stained glass, carved jali screens and lake views"
+      }
+],
+    activeDeal: {
+      title: "Royal Heritage Special · 3rd Night Free",
+      tag: "STAY 3, PAY 2 (1 NIGHT FREE)",
+      desc: "Complimentary 3rd night + Private Lake Pichola sunset champagne cruise on the historic royal barge"
+    }
+  },
+  {
+    id: "stay-25",
+    numeral: "XXV",
+    name: "Bürgenstock Hotel & Alpine Spa",
+    subtitle: "500-Meter Sheer Clifftop Wonder with World-Famous Cantilevered Heated Infinity Spa",
+    location: "Bürgenberg, Obbürgen",
+    country: "Lake Lucerne, Switzerland",
+    badge: "COLLECTION № 25 · SWITZERLAND",
+    rating: "4.99",
+    reviews: "1,190+",
+    pricePerNight: "From $1,750",
+    priceAmount: "$1,750",
+    seasonalRange: "Autumn $1,350+ · Winter Ski Peak $3,100+",
+    rateInclusions: "Includes MS Bürgenstock lake catamaran shuttle, 1888 cliff funicular pass & 10,000 sqm spa access",
+    forbesTier: "Forbes Travel Guide 5-Star & Europe's #1 Alpine Spa",
+    image: "/images/stayhelper/burgenstock_wide_hero.jpg",
+    wideHero: "/images/stayhelper/burgenstock_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperBurgenstock_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/burgenstock_wide_hero.jpg",
+    bookingUrl: "https://burgenstockresort.com/",
+    status: "STREAMING",
+    story: [
+      "Perched on a monumental ridge 500 meters vertically above Lake Lucerne, Bürgenstock Resort is an architectural tour de force combining historic Swiss alpine heritage with cutting-edge modernist design.",
+      "The resort features Europe's largest alpine spa spanning 10,000 square meters, highlighted by its world-famous cantilevered outdoor infinity pool hovering directly over the misty lake abyss."
+],
+    features: [
+      {
+            "title": "Cantilevered Clifftop Infinity Pool",
+            "desc": "Outdoor heated thermal pool hovering 500 meters directly over Lake Lucerne"
+      },
+      {
+            "title": "10,000 sqm Alpine Spa Sanctuary",
+            "desc": "Three levels of panoramic saunas, saline floating pools, and private alpine gardens"
+      },
+      {
+            "title": "Historic 1888 Cliff Funicular",
+            "desc": "Private direct lake catamaran connection and historic funicular railway ascent"
+      }
+],
+    activeDeal: {
+      title: "Swiss Alpine Escape · 4th Night Free",
+      tag: "STAY 4, PAY 3 (1 NIGHT FREE)",
+      desc: "Complimentary 4th night + Unlimited MS Bürgenstock lake catamaran & historic funicular pass"
+    }
+  },
+  {
+    id: "stay-26",
+    numeral: "XXVI",
+    name: "The Silo Hotel",
+    subtitle: "Thomas Heatherwick’s Pillowed Glass Architectural Triumph Above V&A Waterfront",
+    location: "V&A Waterfront, Cape Town",
+    country: "Cape Town, South Africa",
+    badge: "COLLECTION № 26 · CAPE TOWN",
+    rating: "4.99",
+    reviews: "890+",
+    pricePerNight: "From $1,650",
+    priceAmount: "$1,650",
+    seasonalRange: "Low $1,250+ · Summer Peak $3,200+",
+    rateInclusions: "Includes gourmet table breakfast, private Zeitz MOCAA museum pass & rooftop access",
+    forbesTier: "Architectural Digest Global Icon & The Royal Portfolio",
+    image: "/images/stayhelper/the_silo_wide_hero.jpg",
+    wideHero: "/images/stayhelper/the_silo_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperTheSilo_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/the_silo_wide_hero.jpg",
+    bookingUrl: "https://www.theroyalportfolio.com/the-silo/",
+    status: "STREAMING",
+    story: [
+      "Soaring above the historic grain elevator complex of Cape Town's V&A Waterfront, The Silo Hotel is a breathtaking architectural masterpiece designed by visionary architect Thomas Heatherwick.",
+      "Crowned with monumental 5.5-meter convex, pillowed geometric glass windows, the hotel houses museum-grade contemporary African art and offers an exclusive 11th-floor rooftop pool with 360-degree vistas of Table Mountain."
+],
+    features: [
+      {
+            "title": "Thomas Heatherwick Pillowed Windows",
+            "desc": "5.5-meter multi-faceted convex glass panels reflecting Cape Town's harbor and sky"
+      },
+      {
+            "title": "Table Mountain Rooftop Sky Pool",
+            "desc": "11th-floor transparent swimming pool directly framed by the silhouette of Table Mountain"
+      },
+      {
+            "title": "Zeitz MOCAA Art Integration",
+            "desc": "Built directly above Africa’s largest museum of contemporary art with private curator access"
+      }
+],
+    activeDeal: {
+      title: "Stay Longer · 25% Off (4+ Nights)",
+      tag: "SAVE 25% (4+ NIGHTS)",
+      desc: "25% off room rates for 4+ nights + Private Zeitz MOCAA art museum tour & private wine tasting"
+    }
+  },
+  {
+    id: "stay-27",
+    numeral: "XXVII",
+    name: "Museum Hotel Cappadocia",
+    subtitle: "Turkey’s Sole Relais & Châteaux with Roman Infinity Pool Facing Daily Hot Air Balloons",
+    location: "Uchisar, Nevsehir",
+    country: "Cappadocia, Turkey",
+    badge: "COLLECTION № 27 · CAPPADOCIA",
+    rating: "4.99",
+    reviews: "1,120+",
+    pricePerNight: "From $980",
+    priceAmount: "$980",
+    seasonalRange: "Low $750+ · Balloon Peak $1,950+",
+    rateInclusions: "Includes organic farm-to-table breakfast, museum registered antique curation & valley transfers",
+    forbesTier: "Relais & Châteaux Exclusive & Europe's Best Historic Hotel",
+    image: "/images/stayhelper/museum_hotel_wide_hero.jpg",
+    wideHero: "/images/stayhelper/museum_hotel_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperMuseumHotel_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/museum_hotel_wide_hero.jpg",
+    bookingUrl: "https://www.museumhotel.com.tr/",
+    status: "STREAMING",
+    story: [
+      "Carved into the ancient volcanic slopes of Uchisar, Museum Hotel Cappadocia is Turkey’s only Relais & Châteaux hotel, meticulously restored from thousands of years of Byzantine and Roman cave dwellings.",
+      "Decorated with registered historical antiques, its centerpiece is the heated Roman outdoor pool, where guests float at dawn as hundreds of vibrantly colored hot air balloons rise into the sunrise sky over the fairy chimneys."
+],
+    features: [
+      {
+            "title": "Balloon Sunrise Roman Pool",
+            "desc": "Heated Roman outdoor pool perfectly situated beneath the daily hot air balloon flight path"
+      },
+      {
+            "title": "Living Museum Cave Heritage",
+            "desc": "Restored authentic cave suites filled with registered museum-grade Turkish antiques"
+      },
+      {
+            "title": "Lil'a Fine Dining Gastronomy",
+            "desc": "Michelin-recommended modern Anatolian cuisine with ingredients from the hotel's organic farm"
+      }
+],
+    activeDeal: {
+      title: "Guaranteed Cave Suite Upgrade",
+      tag: "GUARANTEED CAVE SUITE UPGRADE",
+      desc: "Guaranteed upgrade to Imperial Cave Suite for 3+ nights + Complimentary 4-course dinner for 2 at Lil'a"
+    }
+  },
+  {
+    id: "stay-28",
+    numeral: "XXVIII",
+    name: "The Retreat at Blue Lagoon",
+    subtitle: "Subterranean Geothermal Sanctuary Carved into an 800-Year-Old Volcanic Lava Field",
+    location: "Grindavík, Reykjanes Peninsula",
+    country: "Grindavík, Iceland",
+    badge: "COLLECTION № 28 · ICELAND",
+    rating: "4.99",
+    reviews: "980+",
+    pricePerNight: "From $1,950",
+    priceAmount: "$1,950",
+    seasonalRange: "Low $1,550+ · Aurora Peak $3,200+",
+    rateInclusions: "Includes unlimited Retreat Lagoon access, private host, Blue Lagoon Ritual & Icelandic breakfast",
+    forbesTier: "Forbes Travel Guide 5-Star & Time Magazine World's Greatest Places",
+    image: "/images/stayhelper/retreat_blue_lagoon_wide_hero.jpg",
+    wideHero: "/images/stayhelper/retreat_blue_lagoon_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperRetreatBlueLagoon_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/retreat_blue_lagoon_wide_hero.jpg",
+    bookingUrl: "https://www.bluelagoon.com/accommodation/retreat-hotel",
+    status: "STREAMING",
+    story: [
+      "Nestled within an 800-year-old volcanic lava flow in a UNESCO Global Geopark, The Retreat at Blue Lagoon is an extraordinary sanctuary of Nordic minimalism and geothermal wellness.",
+      "Its suites feature private terraces stepping directly into secluded geothermal waters, while subterranean lava spa chambers offer transformative rituals with silica, algae, and pure volcanic minerals beneath the Northern Lights."
+],
+    features: [
+      {
+            "title": "Private Stepping-Stone Lagoon",
+            "desc": "Suites with private stone terraces stepping directly into private mineral-rich waters"
+      },
+      {
+            "title": "Subterranean Lava Spa Ritual",
+            "desc": "Underground spa chambers carved into raw basalt offering 4-step geothermal mineral therapy"
+      },
+      {
+            "title": "Midnight Aurora Viewing",
+            "desc": "Float in steaming 38°C geothermal waters under dancing green Northern Lights"
+      }
+],
+    activeDeal: {
+      title: "In-Water Spa Ritual Special",
+      tag: "FREE IN-WATER MASSAGE FOR 2",
+      desc: "Includes complimentary signature 4-step Blue Lagoon Ritual & private in-water geothermal massage for 2"
+    }
+  },
+  {
+    id: "stay-29",
+    numeral: "XXIX",
+    name: "Belmond Hotel Cipriani",
+    subtitle: "The Ultimate Venetian Aristocratic Hideaway on Giudecca Island with Olympic Seawater Pool",
+    location: "Giudecca Island, Venice",
+    country: "Venice, Italy",
+    badge: "COLLECTION № 29 · VENICE, ITALY",
+    rating: "4.99",
+    reviews: "1,670+",
+    pricePerNight: "From $2,250",
+    priceAmount: "$2,250",
+    seasonalRange: "Low $1,750+ · Biennale/Film Festival $4,500+",
+    rateInclusions: "Includes 24hr private mahogany launch Shirley, gourmet Venetian buffet breakfast & Casanova gardens pass",
+    forbesTier: "Leading Hotels of the World & Forbes Travel Guide 5-Star",
+    image: "/images/stayhelper/belmond_cipriani_wide_hero.jpg",
+    wideHero: "/images/stayhelper/belmond_cipriani_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperBelmondCipriani_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/belmond_cipriani_wide_hero.jpg",
+    bookingUrl: "https://www.belmond.com/hotels/europe/italy/venice/belmond-hotel-cipriani/",
+    status: "STREAMING",
+    story: [
+      "Set across the lagoon on the peaceful eastern tip of Giudecca Island, Belmond Hotel Cipriani has reigned as the timeless haven of royalty, Hollywood icons, and literary figures since 1958.",
+      "Just five minutes by private mahogany launch from St. Mark's Square, it offers Venice's only Olympic-sized heated saltwater pool, historic Casanova botanical gardens, and the birthplace of the legendary white peach Bellini."
+],
+    features: [
+      {
+            "title": "Private Launch 'Shirley'",
+            "desc": "24-hour private varnished mahogany speedboat crossing to St. Mark's Square in 5 minutes"
+      },
+      {
+            "title": "Olympic-Sized Saltwater Pool",
+            "desc": "Venice's only heated Olympic seawater pool set within fragrant private botanical gardens"
+      },
+      {
+            "title": "The Historic Gabbiano Bar",
+            "desc": "Birthplace of the original white peach Bellini overlooking sunset reflections on the lagoon"
+      }
+],
+    activeDeal: {
+      title: "Bellini Double Credit & Private Launch",
+      tag: "DOUBLE RESORT CREDIT ($200)",
+      desc: "$200 Bellini Club hotel credit + 24hr private mahogany launch service 'Shirley' across St. Mark's Square"
+    }
+  },
+  {
+    id: "stay-30",
+    numeral: "XXX",
+    name: "Tierra Patagonia Hotel & Spa",
+    subtitle: "Organic Wind-Sculpted Lenga Lodge Framing Panoramic Horns of Torres del Paine",
+    location: "Torres del Paine, Magallanes",
+    country: "Patagonia, Chile",
+    badge: "COLLECTION № 30 · PATAGONIA",
+    rating: "4.99",
+    reviews: "920+",
+    pricePerNight: "From $2,400",
+    priceAmount: "$2,400",
+    seasonalRange: "Spring $1,950+ · Expedition Peak $3,800+",
+    rateInclusions: "All-inclusive: daily private naturalist excursions, full board gourmet dining, premium open bar & Uma spa",
+    forbesTier: "National Geographic Unique Lodge & Condé Nast Traveler Gold List",
+    image: "/images/stayhelper/tierra_patagonia_wide_hero.jpg",
+    wideHero: "/images/stayhelper/tierra_patagonia_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperTierraPatagonia_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/tierra_patagonia_wide_hero.jpg",
+    bookingUrl: "https://tierrahotels.com/patagonia/",
+    status: "STREAMING",
+    story: [
+      "Emerging effortlessly from the golden Patagonian steppe on the shores of Lake Sarmiento, Tierra Patagonia is an organic architectural masterpiece sculpted from native lenga wood by architect Cazú Zegers.",
+      "The lodge blends invisibly into the wind-swept landscape, with every guest room and the glass-enclosed Uma Spa pool framing unobstructed, awe-inspiring views of the granite towers of Torres del Paine National Park."
+],
+    features: [
+      {
+            "title": "Wind-Sculpted Organic Architecture",
+            "desc": "Curved native lenga wood lodge harmonizing seamlessly with the Patagonian prairie"
+      },
+      {
+            "title": "Glass-Enclosed Uma Spa Pool",
+            "desc": "Heated indoor pool with floor-to-ceiling glass framing dramatic mountain horns"
+      },
+      {
+            "title": "Private Naturalist Expeditions",
+            "desc": "Small-group hiking, horseback riding and glacier treks guided by expert local naturalists"
+      }
+],
+    activeDeal: {
+      title: "Patagonia All-Inclusive · Stay 4, Pay 3",
+      tag: "STAY 4, PAY 3 (ALL-INCLUSIVE)",
+      desc: "Complimentary 4th night + Daily private excursions with naturalist guides & premium open bar"
+    }
+  }
 ];
 
 interface MemberData {
@@ -1193,8 +1644,10 @@ export default function StayHelperLuxuryShowcase() {
                     </span>
                   </div>
                 </div>
-              </div>
-            )}
+              </div>
+
+            )}
+
           </div>
 
           {/* Mobile Bottom Mini Switcher Dock */}

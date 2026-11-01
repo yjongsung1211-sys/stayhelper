@@ -1,0 +1,68 @@
+{
+  "hotelName": "AMAN KYOTO",
+  "hotelSubtitle": "SECRET FOREST SANCTUARY · ONSEN",
+  "destination": "KYOTO, JAPAN",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / FOREST ARRIVAL",
+      "title": "Secret Forest Sanctuary",
+      "highlightWord": "Sanctuary",
+      "description": "Hidden amidst Kyoto's ancient Takagamine cedar groves.",
+      "fact": "💡 ARCHITECTURE: KERRY HILL MINIMALIST TIMBER & LIVING CEDAR FOREST",
+      "imagePath": "stays/aman_kyoto/act1.jpg",
+      "voPath": "stays/aman_kyoto/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / MOSS GARDEN",
+      "title": "Sacred Stone Pathways",
+      "highlightWord": "Pathways",
+      "description": "Wandering moss-covered stone pathways framed by wild Japanese maples.",
+      "fact": "💡 LANDSCAPE: HISTORIC 7.2-ACRE SECRET BOTANICAL GARDEN",
+      "imagePath": "stays/aman_kyoto/act2.jpg",
+      "voPath": "stays/aman_kyoto/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / TATAMI PAVILION",
+      "title": "Living Zen Pavilions",
+      "highlightWord": "Pavilions",
+      "description": "Minimalist floor-to-ceiling glass pavilions framing vibrant seasonal foliage.",
+      "fact": "💡 INTERIOR: TRADITIONAL WASHI LANTERNS & HINOKI CYPRESS WOOD",
+      "imagePath": "stays/aman_kyoto/act3.jpg",
+      "voPath": "stays/aman_kyoto/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / MINERAL ONSEN",
+      "title": "Thermal Forest Onsen",
+      "highlightWord": "Onsen",
+      "description": "Natural subterranean thermal spring waters beneath towering cedars.",
+      "fact": "💡 WELLNESS: HEALING MINERAL WATERS DIRECTLY FROM LOCAL BEDROCK",
+      "imagePath": "stays/aman_kyoto/act4.jpg",
+      "voPath": "stays/aman_kyoto/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / TEA CEREMONY",
+      "title": "Ceremonial Matcha Living",
+      "highlightWord": "Living",
+      "description": "Exclusive garden pavilion tea rituals and multi-course seasonal Kaiseki.",
+      "fact": "💡 CUISINE: MICHELIN-CALIBER BESPOKE KYOTO DINING",
+      "imagePath": "stays/aman_kyoto/act5.jpg",
+      "voPath": "stays/aman_kyoto/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / TWILIGHT STILLNESS",
+      "title": "Ancient Maple Glow",
+      "highlightWord": "Glow",
+      "description": "Lantern-lit tranquil evenings immersed in timeless Kyoto forest stillness.",
+      "fact": "💡 SERENITY: ABSOLUTE PRIVACY IN KYOTO'S NORTHERN HILLS",
+      "imagePath": "stays/aman_kyoto/act6.jpg",
+      "voPath": "stays/aman_kyoto/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "AMAN KYOTO",
+    "tagline": "TAKAGAMINE · SECRET CEDAR FOREST",
+    "cta": "Reserve Your Private Sanctuary ↗",
+    "url": "STAYHELPER · CURATED EDITORIAL"
+  }
+}

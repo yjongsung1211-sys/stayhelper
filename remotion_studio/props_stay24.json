@@ -1,0 +1,68 @@
+{
+  "hotelName": "TAJ LAKE PALACE",
+  "hotelSubtitle": "UDAIPUR · LAKE PICHOLA ROYAL PALACE",
+  "destination": "UDAIPUR, INDIA",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / LAKE ARRIVAL",
+      "title": "The Floating Mirage",
+      "highlightWord": "Mirage",
+      "description": "Floating white marble 18th-century royal pleasure palace in the center of Lake Pichola.",
+      "fact": "💡 HERITAGE: 1746 MAHARAJA ROYAL MARBLE WATER PALACE",
+      "imagePath": "stays/taj_lake_palace/act1.jpg",
+      "voPath": "stays/taj_lake_palace/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / ROYAL CEREMONY",
+      "title": "Handcrafted Royal Barge",
+      "highlightWord": "Barge",
+      "description": "Private arrival across sacred waters greeted with rose petal showers and royal trumpets.",
+      "fact": "💡 CEREMONY: EXCLUSIVE HISTORIC MAHARAJA BARGE ARRIVAL",
+      "imagePath": "stays/taj_lake_palace/act2.jpg",
+      "voPath": "stays/taj_lake_palace/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / MAHAL SUITE",
+      "title": "Stained Glass Opulence",
+      "highlightWord": "Opulence",
+      "description": "Royal suites adorned with hand-painted Mewar frescoes, stained glass, and marble jali screens.",
+      "fact": "💡 SUITE: AUTHENTIC MAHARAJA GRAND HISTORIC SUITE",
+      "imagePath": "stays/taj_lake_palace/act3.jpg",
+      "voPath": "stays/taj_lake_palace/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / LILY POND TRANQUILITY",
+      "title": "Courtyard Marble Pools",
+      "highlightWord": "Tranquility",
+      "description": "Basking in the inner courtyards with blooming lotus ponds and passing peacock breezes.",
+      "fact": "💡 OASIS: SACRED MARBLE LILY POND & JASMINE COURTYARD",
+      "imagePath": "stays/taj_lake_palace/act4.jpg",
+      "voPath": "stays/taj_lake_palace/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / JIVA SPA RETREAT",
+      "title": "Floating Royal Spa Boat",
+      "highlightWord": "Spa",
+      "description": "Traditional Ayurvedic essential oil therapy aboard a private wooden spa boat on the lake.",
+      "fact": "💡 WELLNESS: JIVA SPA BOAT & ANCIENT INDIAN AYURVEDA",
+      "imagePath": "stays/taj_lake_palace/act5.jpg",
+      "voPath": "stays/taj_lake_palace/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / ROOFTOP CANDLELIGHT",
+      "title": "Palace Starlight Feast",
+      "highlightWord": "Feast",
+      "description": "Candlelit feast on the palace roof, watching the illuminated City Palace glow on the water.",
+      "fact": "💡 DINING: MEWAR ROYAL ROOFTOP DINING OVER WATER",
+      "imagePath": "stays/taj_lake_palace/act6.jpg",
+      "voPath": "stays/taj_lake_palace/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "STAYHELPER",
+    "tagline": "Curated Luxury Sanctuaries",
+    "cta": "Reserve Your Royal Palace Suite",
+    "url": "stayhelper.com · Fora VIP Partner"
+  }
+}

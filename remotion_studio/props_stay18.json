@@ -1,0 +1,68 @@
+{
+  "hotelName": "BADRUTT'S PALACE HOTEL",
+  "hotelSubtitle": "LEGENDARY 128-YEAR-OLD FAIRY-TALE ALPINE",
+  "destination": "ENGADIN, SWITZERLAND",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / PANORAMIC ARRIVAL",
+      "title": "The Alpine Castle",
+      "highlightWord": "Castle",
+      "description": "Arriving by classic Rolls-Royce at the iconic neo-Gothic fairy-tale palace in St. Moritz.",
+      "fact": "💡 HIGHLIGHT: 1896 ICONIC ALPINE PALACE ON LAKE ST. MORITZ",
+      "imagePath": "stays/badrutts_palace/act1.jpg",
+      "voPath": "stays/badrutts_palace/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / BOTANICAL PATH",
+      "title": "Snow-Covered Pine Promenade",
+      "highlightWord": "Pine",
+      "description": "Strolling through fresh alpine powder past frosted pine trees along the tranquil frozen lake.",
+      "fact": "💡 LANDSCAPE: ENGADIN VALLEY SNOW-BLANKETED FOREST",
+      "imagePath": "stays/badrutts_palace/act2.jpg",
+      "voPath": "stays/badrutts_palace/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / SACRED HERITAGE",
+      "title": "Le Grand Hall Splendor",
+      "highlightWord": "Splendor",
+      "description": "Sipping tea beneath monumental coffered wood ceilings and historic European oil paintings.",
+      "fact": "💡 HERITAGE: 128 YEARS OF HIGH-SOCIETY GLAMOUR",
+      "imagePath": "stays/badrutts_palace/act3.jpg",
+      "voPath": "stays/badrutts_palace/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+      "title": "Granite Alpine Pool",
+      "highlightWord": "Granite",
+      "description": "Swimming through floor-to-ceiling glass pavilions facing the snow-capped Engadin summits.",
+      "fact": "💡 EXPERIENCE: HEATED GLASS-WALLED POOL OVERLOOKING LAKE",
+      "imagePath": "stays/badrutts_palace/act4.jpg",
+      "voPath": "stays/badrutts_palace/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / HOLISTIC HEALING",
+      "title": "Palace Wellness Thermal Spa",
+      "highlightWord": "Thermal",
+      "description": "Steaming outdoor whirlpool baths surrounded by mountain snow and aromatic Swiss pine saunas.",
+      "fact": "💡 WELLNESS: OUTDOOR HEATED HYDROTHERAPY & CEDAR SAUNAS",
+      "imagePath": "stays/badrutts_palace/act5.jpg",
+      "voPath": "stays/badrutts_palace/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / GOLDEN HOUR",
+      "title": "Alpine Alpenglow Champagne",
+      "highlightWord": "Alpenglow",
+      "description": "Vintage champagne toast as the dramatic sunset Alpenglow illuminates the Swiss alpine peaks.",
+      "fact": "💡 SUNSET: GOLDEN ALPENGLOW OVER THE ENGADIN SUMMITS",
+      "imagePath": "stays/badrutts_palace/act6.jpg",
+      "voPath": "stays/badrutts_palace/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "BADRUTT'S PALACE HOTEL",
+    "tagline": "ENGADIN, SWITZERLAND",
+    "cta": "Reserve Your Private Sanctuary ↗",
+    "url": "STAYHELPER · CURATED EDITORIAL"
+  }
+}

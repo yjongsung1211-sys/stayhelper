@@ -1,0 +1,68 @@
+{
+  "hotelName": "THE ST. REGIS BORA BORA",
+  "hotelSubtitle": "BORA BORA · PRIVATE MOTU SANCTUARY",
+  "destination": "BORA BORA, FRENCH POLYNESIA",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / LAGOON ARRIVAL",
+      "title": "The South Pacific Gem",
+      "highlightWord": "Pacific",
+      "description": "A 44-acre private island sanctuary of crystal-clear turquoise waters and swaying palms.",
+      "fact": "💡 RESORT: LARGEST PRIVATE OVERWATER RESORT IN POLYNESIA",
+      "imagePath": "stays/st_regis_bora_bora/act1.jpg",
+      "voPath": "stays/st_regis_bora_bora/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / BOARDWALK PROMENADE",
+      "title": "Turquoise Ocean Highway",
+      "highlightWord": "Highway",
+      "description": "Wandering wooden walkways over luminous azure lagoons teeming with stingrays.",
+      "fact": "💡 SETTING: SECLUDED PRIVATE LAGOON MOTU BRIDGES",
+      "imagePath": "stays/st_regis_bora_bora/act2.jpg",
+      "voPath": "stays/st_regis_bora_bora/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / OVERWATER PALACE",
+      "title": "Glass Floor Marvel",
+      "highlightWord": "Marvel",
+      "description": "Expansive overwater villas featuring transparent glass viewing panels into live coral reef.",
+      "fact": "💡 VILLA: 1,500+ SQ FT LARGEST OVERWATER VILLAS IN PACIFIC",
+      "imagePath": "stays/st_regis_bora_bora/act3.jpg",
+      "voPath": "stays/st_regis_bora_bora/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / OTEMANU INDULGENCE",
+      "title": "Sacred Mountain Plunge",
+      "highlightWord": "Mountain",
+      "description": "Private infinity plunge pool cantilevered facing the majestic peak of Mount Otemanu.",
+      "fact": "💡 VIEW: UNRIVALED MAJESTIC MOUNT OTEMANU PANORAMA",
+      "imagePath": "stays/st_regis_bora_bora/act4.jpg",
+      "voPath": "stays/st_regis_bora_bora/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / IRIDIUM SPA OASIS",
+      "title": "Polynesian Monoi Healing",
+      "highlightWord": "Healing",
+      "description": "Tiare-infused warm monoi oils and volcanic river stone massage on private spa islet.",
+      "fact": "💡 SPA: PRIVATE 13,000 SQ FT IRIDIUM SPA LAGOON ISLET",
+      "imagePath": "stays/st_regis_bora_bora/act5.jpg",
+      "voPath": "stays/st_regis_bora_bora/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / SABRAGE SUNSET",
+      "title": "Lagoon Starlight Sabrage",
+      "highlightWord": "Sabrage",
+      "description": "Sunset champagne sabrage ritual on powder-soft sands as the sky melts in magenta.",
+      "fact": "💡 RITUAL: TIMELESS ST. REGIS CHAMPAGNE SABRAGE CEREMONY",
+      "imagePath": "stays/st_regis_bora_bora/act6.jpg",
+      "voPath": "stays/st_regis_bora_bora/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "STAYHELPER",
+    "tagline": "Curated Luxury Sanctuaries",
+    "cta": "Reserve Your Overwater Villa",
+    "url": "stayhelper.com · Fora VIP Partner"
+  }
+}

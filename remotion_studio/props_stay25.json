@@ -1,0 +1,68 @@
+{
+  "hotelName": "BÜRGENSTOCK RESORT",
+  "hotelSubtitle": "LAKE LUCERNE · ALPINE SPA RETREAT",
+  "destination": "LAKE LUCERNE, SWITZERLAND",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / ALPINE ARRIVAL",
+      "title": "The Cliffside Summit",
+      "highlightWord": "Summit",
+      "description": "Perched 500 meters sheer above Lake Lucerne, Switzerland's architectural mountain pinnacle.",
+      "fact": "💡 LOCATION: 500M SHEER CLIFFTOP OVER LAKE LUCERNE",
+      "imagePath": "stays/burgenstock_resort/act1.jpg",
+      "voPath": "stays/burgenstock_resort/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / FUNICULAR ODYSSEY",
+      "title": "Historic Red Railway",
+      "highlightWord": "Railway",
+      "description": "Ascending through pristine pine forests via private lake catamaran and red cliff funicular.",
+      "fact": "💡 ACCESS: PRIVATE HIGH-SPEED CATAMARAN & 1888 FUNICULAR",
+      "imagePath": "stays/burgenstock_resort/act2.jpg",
+      "voPath": "stays/burgenstock_resort/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / CONTEMPORARY SUITE",
+      "title": "Quartz Stone Modernism",
+      "highlightWord": "Modernism",
+      "description": "Swiss oak timber, double-sided glass fireplaces, and bathtubs overlooking misty alpine peaks.",
+      "fact": "💡 DESIGN: FLOOR-TO-CEILING GLASS WALL ALPINE ARCHITECTURE",
+      "imagePath": "stays/burgenstock_resort/act3.jpg",
+      "voPath": "stays/burgenstock_resort/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / SUSPENDED INFINITY",
+      "title": "Cantilevered Mountain Pool",
+      "highlightWord": "Mountain",
+      "description": "Hovering in heated thermal waters directly over the 1,500-foot abyss of Lake Lucerne.",
+      "fact": "💡 POOL: WORLD'S GREATEST CANTILEVERED HEATED INFINITY POOL",
+      "imagePath": "stays/burgenstock_resort/act4.jpg",
+      "voPath": "stays/burgenstock_resort/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / ALPINE SPA SANCTUARY",
+      "title": "Tri-Level Thermal Wellness",
+      "highlightWord": "Thermal",
+      "description": "10,000 square meters of panoramic saunas, saline floating pools, and private alpine gardens.",
+      "fact": "💡 SPA: 10,000 SQM SWITZERLAND'S LARGEST ALPINE SPA",
+      "imagePath": "stays/burgenstock_resort/act5.jpg",
+      "voPath": "stays/burgenstock_resort/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / TWILIGHT ALPENGLOW",
+      "title": "Lucerne Panorama Toast",
+      "highlightWord": "Panorama",
+      "description": "Fine Swiss pinot noir by the terrace fire as town lights shimmer below snowy Alpine peaks.",
+      "fact": "💡 SUNSET: TWILIGHT PANORAMA OVER 4 CANTONS & MT. PILATUS",
+      "imagePath": "stays/burgenstock_resort/act6.jpg",
+      "voPath": "stays/burgenstock_resort/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "STAYHELPER",
+    "tagline": "Curated Luxury Sanctuaries",
+    "cta": "Reserve Your Alpine Suite",
+    "url": "stayhelper.com · Fora VIP Partner"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "hotelName": "THE SILO HOTEL",
+  "hotelSubtitle": "CAPE TOWN · V&A WATERFRONT",
+  "destination": "CAPE TOWN, SOUTH AFRICA",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / WATERFRONT ARRIVAL",
+      "title": "The Architectural Icon",
+      "highlightWord": "Architectural",
+      "description": "Transformed 1920s historic grain elevator crowned with Thomas Heatherwick's geometric glass.",
+      "fact": "💡 ARCHITECTURE: THOMAS HEATHERWICK PILLOWED GLASS SILO",
+      "imagePath": "stays/the_silo_hotel/act1.jpg",
+      "voPath": "stays/the_silo_hotel/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / CONTEMPORARY ATRIUM",
+      "title": "African Museum Splendor",
+      "highlightWord": "Splendor",
+      "description": "Wandering through 18-foot soaring galleries housing Africa's most prestigious art collection.",
+      "fact": "💡 CULTURE: LOCATED DIRECTLY ABOVE ZEITZ MOCAA MUSEUM",
+      "imagePath": "stays/the_silo_hotel/act2.jpg",
+      "voPath": "stays/the_silo_hotel/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / PILLOWED GLASS SUITE",
+      "title": "Convex Geometric Vistas",
+      "highlightWord": "Geometric",
+      "description": "5.5-meter billowing convex multi-faceted glass windows framing Table Mountain and the ocean.",
+      "fact": "💡 SUITE: 5.5-METER HIGH PILLOWED CONVEX WINDOWS",
+      "imagePath": "stays/the_silo_hotel/act3.jpg",
+      "voPath": "stays/the_silo_hotel/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / ROOFTOP SKY POOL",
+      "title": "Table Mountain Skyline",
+      "highlightWord": "Mountain",
+      "description": "Swimming in the clear rooftop pool surrounded by the dramatic 360-degree Cape Town skyline.",
+      "fact": "💡 ROOFTOP: EXCLUSIVE 11TH-FLOOR ROOFTOP GLASS POOL",
+      "imagePath": "stays/the_silo_hotel/act4.jpg",
+      "voPath": "stays/the_silo_hotel/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / BOTANICAL RETREAT",
+      "title": "Fynbos Herbal Harmony",
+      "highlightWord": "Harmony",
+      "description": "Indigenous Cape floral kingdom fynbos essential oils and tranquil spa pampering.",
+      "fact": "💡 SPA: THE SILO SPA INDIGENOUS CAPE FYNBOS TREATMENT",
+      "imagePath": "stays/the_silo_hotel/act5.jpg",
+      "voPath": "stays/the_silo_hotel/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / ATLANTIC GOLDEN HOUR",
+      "title": "Cape Amber Sunset",
+      "highlightWord": "Sunset",
+      "description": "Sipping vintage Cap Classique champagne as sunset turns Lion's Head into glowing copper.",
+      "fact": "💡 SUNSET: 360-DEGREE ATLANTIC & LION'S HEAD TWILIGHT",
+      "imagePath": "stays/the_silo_hotel/act6.jpg",
+      "voPath": "stays/the_silo_hotel/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "STAYHELPER",
+    "tagline": "Curated Luxury Sanctuaries",
+    "cta": "Reserve Your Silo Suite",
+    "url": "stayhelper.com · Fora VIP Partner"
+  }
+}

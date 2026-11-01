@@ -1,0 +1,68 @@
+{
+  "hotelName": "POST RANCH INN",
+  "hotelSubtitle": "CLIFFSIDE ARCHITECTURAL MASTERPIECE PERC",
+  "destination": "CALIFORNIA, UNITED STATES",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / PANORAMIC ARRIVAL",
+      "title": "The Edge of the World",
+      "highlightWord": "Edge",
+      "description": "Perched twelve hundred feet above the untamed coastal bluffs and crashing waves of Big Sur.",
+      "fact": "💡 HIGHLIGHT: 1,200 FEET SHEER PACIFIC CLIFF LOCATION",
+      "imagePath": "stays/post_ranch_inn/act1.jpg",
+      "voPath": "stays/post_ranch_inn/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / BOTANICAL PATH",
+      "title": "Ancient Redwood Trails",
+      "highlightWord": "Redwood",
+      "description": "Walking through coastal fog and fragrant sagebrush along private old-growth redwood pathways.",
+      "fact": "💡 NATURE: 100 ACRES OF PROTECTED COASTAL REDWOOD BIOME",
+      "imagePath": "stays/post_ranch_inn/act2.jpg",
+      "voPath": "stays/post_ranch_inn/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / SACRED HERITAGE",
+      "title": "Organic Redwood Architecture",
+      "highlightWord": "Organic",
+      "description": "Sculpted bio-climatic pavilions crafted with weathered copper, stone, and reclaimed timber.",
+      "fact": "💡 ARCHITECTURE: MICKEY MUENNIG BIO-ORGANIC DESIGN",
+      "imagePath": "stays/post_ranch_inn/act3.jpg",
+      "voPath": "stays/post_ranch_inn/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+      "title": "Jade Infinity Soaking Tub",
+      "highlightWord": "Soaking",
+      "description": "Soaking in a 104-degree heated mineral pool on a sheer precipice overlooking passing whales.",
+      "fact": "💡 EXPERIENCE: HEATED CLIFFSIDE JADE SPA 1,200FT HIGH",
+      "imagePath": "stays/post_ranch_inn/act4.jpg",
+      "voPath": "stays/post_ranch_inn/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / HOLISTIC HEALING",
+      "title": "Big Sur Shamanic Wellness",
+      "highlightWord": "Shamanic",
+      "description": "Outdoor cedar deck massage treatments using California wild herbs and warm river stones.",
+      "fact": "💡 WELLNESS: HOLISTIC FOREST HEALING & CRADLING SPA",
+      "imagePath": "stays/post_ranch_inn/act5.jpg",
+      "voPath": "stays/post_ranch_inn/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / GOLDEN HOUR",
+      "title": "Sierra Mar Twilight",
+      "highlightWord": "Twilight",
+      "description": "Sunset wine tasting at Sierra Mar as the golden sun sinks below the Pacific fog bank.",
+      "fact": "💡 SUNSET: GOLDEN HOUR OVER THE BIG SUR PACIFIC OCEAN",
+      "imagePath": "stays/post_ranch_inn/act6.jpg",
+      "voPath": "stays/post_ranch_inn/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "POST RANCH INN",
+    "tagline": "CALIFORNIA, UNITED STATES",
+    "cta": "Reserve Your Private Sanctuary ↗",
+    "url": "STAYHELPER · CURATED EDITORIAL"
+  }
+}

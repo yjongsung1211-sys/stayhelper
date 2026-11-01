@@ -1,0 +1,68 @@
+{
+  "hotelName": "THE RETREAT AT BLUE LAGOON",
+  "hotelSubtitle": "GRINDAVÍK · GEOTHERMAL SUITE",
+  "destination": "GRINDAVÍK, ICELAND",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / ARCTIC ARRIVAL",
+      "title": "The Lava Sanctuary",
+      "highlightWord": "Sanctuary",
+      "description": "Carved into an 800-year-old volcanic lava field, surrounded by milky-blue mineral waters.",
+      "fact": "💡 UNESCO: GLOBAL GEOPARK 800-YEAR-OLD LAVA FIELD",
+      "imagePath": "stays/retreat_blue_lagoon/act1.jpg",
+      "voPath": "stays/retreat_blue_lagoon/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / BASALT CANYON WALK",
+      "title": "Geothermal Steam Trails",
+      "highlightWord": "Geothermal",
+      "description": "Walking moss-covered lava canyons with ethereal thermal mineral steam rising into Arctic air.",
+      "fact": "💡 SETTING: SECLUDED PRIVATE MOSS-COVERED LAVA CANYONS",
+      "imagePath": "stays/retreat_blue_lagoon/act2.jpg",
+      "voPath": "stays/retreat_blue_lagoon/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / LAGOON SUITE",
+      "title": "Nordic Volcanic Purity",
+      "highlightWord": "Purity",
+      "description": "Minimalist suites with private balconies stepping directly into exclusive geothermal waters.",
+      "fact": "💡 SUITE: DIRECT ACCESS FROM PRIVATE TERRACE INTO LAGOON",
+      "imagePath": "stays/retreat_blue_lagoon/act3.jpg",
+      "voPath": "stays/retreat_blue_lagoon/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / MINERAL WATERS",
+      "title": "Milky-Blue Rejuvenation",
+      "highlightWord": "Rejuvenation",
+      "description": "Floating weightlessly in mineral-rich silica waters that dissolve all stress and tension.",
+      "fact": "💡 WATER: PRIVATE RETREAT LAGOON HEALING MINERALS",
+      "imagePath": "stays/retreat_blue_lagoon/act4.jpg",
+      "voPath": "stays/retreat_blue_lagoon/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / RETREAT SPA RITUAL",
+      "title": "Subterranean Silica Healing",
+      "highlightWord": "Silica",
+      "description": "Signature 4-step ritual of silica, algae, and volcanic scrub in subterranean cave chambers.",
+      "fact": "💡 SPA: SUBTERRANEAN LAVA SPA & 4-STEP MINERAL RITUAL",
+      "imagePath": "stays/retreat_blue_lagoon/act5.jpg",
+      "voPath": "stays/retreat_blue_lagoon/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / AURORA BOREALIS",
+      "title": "Northern Lights Symphony",
+      "highlightWord": "Northern",
+      "description": "Dancing emerald Aurora Borealis lights across the star-filled Arctic night from your warm pool.",
+      "fact": "💡 AURORA: CELESTIAL NORTHERN LIGHTS OVER STEAMING LAGOON",
+      "imagePath": "stays/retreat_blue_lagoon/act6.jpg",
+      "voPath": "stays/retreat_blue_lagoon/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "STAYHELPER",
+    "tagline": "Curated Luxury Sanctuaries",
+    "cta": "Reserve Your Lagoon Suite",
+    "url": "stayhelper.com · Fora VIP Partner"
+  }
+}

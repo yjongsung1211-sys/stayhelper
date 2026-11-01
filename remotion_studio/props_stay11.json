@@ -1,0 +1,68 @@
+{
+  "hotelName": "VILLA D'ESTE",
+  "hotelSubtitle": "16TH-CENTURY RENAISSANCE ROYAL PALACE & ",
+  "destination": "LAKE COMO, ITALY",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / PANORAMIC ARRIVAL",
+      "title": "The Renaissance Palace",
+      "highlightWord": "Renaissance",
+      "description": "Gliding across Lake Como aboard a wooden Riva yacht toward the grand 16th-century facade.",
+      "fact": "💡 HIGHLIGHT: 1568 ARISTOCRATIC PALACE ON LAKE COMO",
+      "imagePath": "stays/villa_deste/act1.jpg",
+      "voPath": "stays/villa_deste/vo_1.mp3"
+    },
+    {
+      "badge": "ACT 02 / BOTANICAL PATH",
+      "title": "Baroque Cypress Allee",
+      "highlightWord": "Cypress",
+      "description": "Strolling through 25 acres of historic cypress groves and cascading stone nymphaeum fountains.",
+      "fact": "💡 GARDENS: 25 ACRES OF CENTURY-OLD BOTANICAL SPLENDOR",
+      "imagePath": "stays/villa_deste/act2.jpg",
+      "voPath": "stays/villa_deste/vo_2.mp3"
+    },
+    {
+      "badge": "ACT 03 / SACRED HERITAGE",
+      "title": "The Cardinal's Legacy",
+      "highlightWord": "Cardinal",
+      "description": "Admiring gilded fresco ceilings, Como silk draperies, and authentic neoclassical oil paintings.",
+      "fact": "💡 HERITAGE: CARDINAL GALLIO HISTORIC ARTIFACTS",
+      "imagePath": "stays/villa_deste/act3.jpg",
+      "voPath": "stays/villa_deste/vo_3.mp3"
+    },
+    {
+      "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+      "title": "The Floating Pool",
+      "highlightWord": "Floating",
+      "description": "Floating in the legendary heated pontoon pool resting directly on the sapphire lake surface.",
+      "fact": "💡 SIGNATURE: WORLD-FAMOUS LAKE COMO FLOATING POOL",
+      "imagePath": "stays/villa_deste/act4.jpg",
+      "voPath": "stays/villa_deste/vo_4.mp3"
+    },
+    {
+      "badge": "ACT 05 / HOLISTIC HEALING",
+      "title": "Lakeview Botanical Spa",
+      "highlightWord": "Botanical",
+      "description": "Restorative herbal therapies infused with Italian sweet orange, rosewater, and thermal minerals.",
+      "fact": "💡 WELLNESS: HOLISTIC MEDITERRANEAN SPA RITUALS",
+      "imagePath": "stays/villa_deste/act5.jpg",
+      "voPath": "stays/villa_deste/vo_5.mp3"
+    },
+    {
+      "badge": "ACT 06 / GOLDEN HOUR",
+      "title": "Veranda Sunset Bellini",
+      "highlightWord": "Bellini",
+      "description": "Sunset champagne toast on the lakeside terrace as classical piano music drifts across the water.",
+      "fact": "💡 SUNSET: GOLDEN TWILIGHT OVER THE CERNOBBIO SHORE",
+      "imagePath": "stays/villa_deste/act6.jpg",
+      "voPath": "stays/villa_deste/vo_6.mp3"
+    }
+  ],
+  "outro": {
+    "brand": "VILLA D'ESTE",
+    "tagline": "LAKE COMO, ITALY",
+    "cta": "Reserve Your Private Sanctuary ↗",
+    "url": "STAYHELPER · CURATED EDITORIAL"
+  }
+}
