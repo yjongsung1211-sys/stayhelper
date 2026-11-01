@@ -1084,132 +1084,72 @@ export default function StayHelperLuxuryShowcase() {
       {/* ============================================================== */}
       {/* 1. CONCEPT 3: FULL-BLEED ARCHITECTURAL CINEMA HERO STAGE     */}
       {/* ============================================================== */}
-            <section id="sanctuary-stage" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} className="relative h-[100dvh] w-full flex flex-col justify-between overflow-hidden bg-black select-none">
+      {/* 1. CONCEPT 3: 100% IMMERSIVE FULL-BLEED REELS STAGE (RESPONSIVE SEPARATION) */}
+      {/* ============================================================================== */}
+      <section id="sanctuary-stage" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} className="relative h-[100dvh] w-full overflow-hidden bg-black select-none">
         
-        {/* DESKTOP BACKGROUND: High-Definition Widescreen Scenery (Z-0) */}
-        <div className="hidden lg:block absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            key={heroBackground}
-            src={heroBackground}
-            alt={currentStay.name}
-            className="w-full h-full object-cover object-center scale-[1.01] transition-opacity duration-700 ease-out"
+        {/* ========================================================= */}
+        {/* [MOBILE ONLY: lg:hidden] 100% IMMERSIVE FULL-SCREEN REELS */}
+        {/* ========================================================= */}
+        <div className="lg:hidden absolute inset-0 w-full h-full z-0 overflow-hidden">
+          {/* 100% Full-Bleed Video Background */}
+          <video
+            ref={videoRef}
+            key={`mobile-${currentStay.id}-${currentStay.videoSrc}`}
+            src={currentStay.videoSrc}
+            poster={currentStay.posterSrc}
+            playsInline
+            autoPlay
+            muted={isMuted}
+            onEnded={() => handleNextStay()}
+            className="w-full h-full object-cover"
+            onClick={() => {
+              if (isEnded) restartVideo();
+              else handleBookingAction(currentStay.bookingUrl);
+            }}
           />
-          <div className="absolute inset-0 bg-black/20" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/60" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
-        </div>
 
-        {/* 1.1 MINIMALIST FLOATING HEADER (RESPONSIVE NO-OVERLAP) */}
-        <header className="relative z-30 w-full px-4 sm:px-8 xl:px-14 pt-4 sm:pt-7 flex items-center justify-between gap-4 pointer-events-auto">
-          {/* Brand Logo */}
-          <Link href="/stayhelper" className="flex items-center space-x-3 group shrink-0">
-            <span className="text-lg sm:text-xl xl:text-2xl font-luxury-serif tracking-[0.2em] sm:tracking-[0.26em] text-white uppercase font-light drop-shadow-md whitespace-nowrap">
-              STAYHELPER
-            </span>
-          </Link>
-
-          {/* Minimalist Editorial Links (Only on wide screens where ample space exists) */}
-          <nav className="hidden xl:flex items-center gap-5 2xl:gap-8 text-[11px] font-mono tracking-[0.24em] text-white/80 uppercase drop-shadow shrink-0">
-            <a href="#sanctuary-stage" className="hover:text-white transition-colors">Portfolio</a>
-            <span className="text-white/30">—</span>
-            <a href="#architectural-dossier" className="hover:text-white transition-colors">Philosophy</a>
-            <span className="text-white/30">—</span>
-            <a href="#reserve-section" className="hover:text-white transition-colors">Inquire</a>
-          </nav>
-
-          {/* Right Direct Action */}
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            {member ? (
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 border border-white/20 text-xs font-mono text-[#E8D5B5] backdrop-blur-md shrink-0 shadow-lg">
-                  <Check className="w-3 h-3 text-emerald-400" />
-                  <span className="max-w-[100px] sm:max-w-[140px] truncate">{member.name}</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleSignOut}
-                  title="Sign Out of Private Club"
-                  className="px-2.5 sm:px-3 py-1.5 rounded-full bg-black/40 hover:bg-rose-950/40 border border-white/15 hover:border-rose-400/40 text-[11px] font-mono text-stone-300 hover:text-rose-200 transition-all flex items-center gap-1 cursor-pointer shrink-0"
-                >
-                  <LogOut className="w-3 h-3 text-[#E8D5B5]" />
-                  <span className="hidden sm:inline">Sign Out</span>
-                </button>
-              </div>
-            ) : (
-              <div className="hidden sm:flex items-center gap-1.5 sm:gap-2">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAuthMode("signin");
-                    setPendingRedirectUrl(currentStay.bookingUrl);
-                    setIsAuthModalOpen(true);
-                  }}
-                  className="px-2.5 sm:px-3 py-1.5 rounded-full border border-white/20 hover:border-white/40 bg-black/30 hover:bg-black/50 text-[11px] sm:text-xs font-mono text-stone-300 hover:text-white transition-all backdrop-blur-md cursor-pointer shrink-0"
-                >
-                  Sign In
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAuthMode("signup");
-                    setPendingRedirectUrl(currentStay.bookingUrl);
-                    setIsAuthModalOpen(true);
-                  }}
-                  className="px-3 sm:px-4 py-1.5 rounded-full border border-[#D4AF37]/40 hover:border-[#D4AF37] bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 text-[11px] sm:text-xs font-mono text-[#F3E5AB] transition-all backdrop-blur-md cursor-pointer shrink-0"
-                >
-                  Join Private Club
-                </button>
-              </div>
-            )}
-
-            {/* Global Sound Button */}
-            <button
-              type="button"
-              onClick={toggleMute}
-              title={isMuted ? "Unmute luxury audio track" : "Mute audio"}
-              className="px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full bg-black/60 hover:bg-black/80 border border-white/25 text-[11px] sm:text-xs font-mono text-white flex items-center gap-1.5 cursor-pointer backdrop-blur-md shadow-lg shrink-0 transition-transform active:scale-95"
-            >
-              {isMuted ? (
-                <>
-                  <VolumeX className="w-3.5 h-3.5 text-[#E8D5B5]" />
-                  <span className="hidden sm:inline">Unmute</span>
-                </>
-              ) : (
-                <>
-                  <Volume2 className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-                  <span className="hidden sm:inline">Sound On</span>
-                </>
-              )}
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleBookingAction(currentStay.bookingUrl)}
-              className="px-3.5 sm:px-6 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A880] hover:brightness-110 text-black text-[11px] sm:text-xs font-luxury-sans font-semibold tracking-wider transition-all duration-300 shadow-xl shadow-black/60 flex items-center gap-1.5 active:scale-95 cursor-pointer shrink-0 whitespace-nowrap"
-            >
-              <span>Book with VIP Perks ✨</span>
-            </button>
-          </div>
-        </header>
-
-        {/* 1.2 MASTER STAGE: 100% IMMERSIVE FULL-BLEED ON MOBILE, DUAL-PANEL INSET ON DESKTOP */}
-        <div className="relative z-20 max-w-[1440px] mx-auto w-full px-4 sm:px-8 xl:px-14 flex-1 flex flex-col justify-end lg:justify-between lg:flex-row items-start lg:items-end gap-6 lg:gap-12 pb-4 lg:py-10 my-auto pointer-events-auto">
+          {/* Top Contrast Vignette */}
+          <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black/85 via-black/40 to-transparent pointer-events-none z-10" />
           
-          {/* Subtle Mobile Top & Bottom Shadows for 100% Crisp Video Contrast */}
-          <div className="lg:hidden absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-black/80 via-black/35 to-transparent pointer-events-none z-10" />
-          <div className="lg:hidden absolute bottom-0 inset-x-0 h-[440px] bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none z-10" />
+          {/* Bottom Contrast Vignette */}
+          <div className="absolute bottom-0 inset-x-0 h-[480px] bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none z-10" />
 
-          {/* Text & Active Promotion Overlay: Positioned bottom-left on Mobile over full-bleed video */}
-          <div className="relative z-20 space-y-1.5 sm:space-y-2.5 max-w-xl text-left drop-shadow-xl shrink-0 w-full lg:w-auto">
-            {/* Native Reel Swipe Cue */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#E8D5B5]/30 text-[#E8D5B5] text-[10px] font-mono tracking-widest uppercase mb-0.5">
+          {/* Mobile Top Floating Header */}
+          <div className="absolute top-0 inset-x-0 z-20 px-4 pt-4 flex items-center justify-between pointer-events-auto">
+            <Link href="/stayhelper" className="text-lg font-luxury-serif tracking-[0.22em] text-white uppercase font-light drop-shadow-lg">
+              STAYHELPER
+            </Link>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={toggleMute}
+                title={isMuted ? "Unmute" : "Mute"}
+                className="px-2.5 py-1.5 rounded-full bg-black/60 border border-white/20 text-white text-[11px] font-mono flex items-center gap-1 backdrop-blur-md"
+              >
+                {isMuted ? <VolumeX className="w-3.5 h-3.5 text-[#E8D5B5]" /> : <Volume2 className="w-3.5 h-3.5 text-emerald-400" />}
+              </button>
+              <button
+                type="button"
+                onClick={() => handleBookingAction(currentStay.bookingUrl)}
+                className="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A880] text-black text-[11px] font-luxury-sans font-semibold tracking-wider shadow-lg active:scale-95"
+              >
+                VIP Perks ✨
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Bottom Content Overlay (Instagram Reels Style) */}
+          <div className="absolute bottom-16 inset-x-4 z-20 space-y-1.5 text-left drop-shadow-2xl pointer-events-auto">
+            {/* Native Swipe Cue */}
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-[#E8D5B5]/30 text-[#E8D5B5] text-[9px] font-mono tracking-widest uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span>Swipe up / down for next stay</span>
             </div>
-            
-            <div className="flex items-center gap-2">
-              <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-[#E8D5B5] text-[10px] sm:text-[11px] font-mono tracking-widest uppercase">
+
+            {/* Stay Meta */}
+            <div>
+              <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-[#E8D5B5] text-[10px] font-mono tracking-widest uppercase">
                 <span>№ {String(currentIndex + 1).padStart(2, "0")}</span>
                 <span className="text-white/40">·</span>
                 <span>{currentStay.numeral}</span>
@@ -1218,28 +1158,26 @@ export default function StayHelperLuxuryShowcase() {
               </div>
             </div>
 
-            <h1 className="text-2xl sm:text-4xl lg:text-6xl font-luxury-serif font-light text-white tracking-tight leading-[1.05] drop-shadow-2xl">
+            {/* Hotel Title */}
+            <h1 className="text-2xl sm:text-3xl font-luxury-serif font-light text-white tracking-tight leading-tight drop-shadow-2xl">
               {currentStay.name}
             </h1>
 
-            <p className="text-[11px] sm:text-sm font-luxury-sans text-stone-200 tracking-[0.18em] uppercase font-light drop-shadow">
-              {currentStay.location} · {currentStay.forbesTier.toUpperCase()}
-            </p>
-
-            <p className="text-xs sm:text-base italic font-luxury-serif text-[#E8D5B5]/95 leading-snug sm:leading-relaxed font-light line-clamp-1 sm:line-clamp-none drop-shadow">
+            {/* Subtitle */}
+            <p className="text-xs italic font-luxury-serif text-[#E8D5B5]/95 leading-snug line-clamp-2">
               "{currentStay.subtitle}"
             </p>
 
-            {/* Active Fora Reserve Deal / Exclusive Promotion Badge */}
+            {/* Active Promotion Badge */}
             {currentStay.activeDeal && (
-              <div className="pt-1">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#D4AF37]/30 via-[#F3E5AB]/25 to-[#D4AF37]/15 border border-[#D4AF37]/70 backdrop-blur-md shadow-xl shadow-black/60">
-                  <span className="text-amber-300 animate-pulse text-xs sm:text-sm">✨</span>
+              <div className="pt-0.5">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#D4AF37]/35 via-[#F3E5AB]/25 to-[#D4AF37]/15 border border-[#D4AF37]/70 backdrop-blur-md shadow-xl">
+                  <span className="text-amber-300 animate-pulse text-xs">✨</span>
                   <div className="text-left">
-                    <span className="text-[9px] sm:text-[10px] font-mono tracking-wider uppercase font-bold text-[#F3E5AB] block">
-                      ACTIVE PROMOTION · {currentStay.activeDeal.tag}
+                    <span className="text-[9px] font-mono tracking-wider uppercase font-bold text-[#F3E5AB] block">
+                      PROMOTION · {currentStay.activeDeal.tag}
                     </span>
-                    <span className="text-[11px] sm:text-sm font-luxury-sans text-white font-medium">
+                    <span className="text-[11px] font-luxury-sans text-white font-medium">
                       {currentStay.activeDeal.desc}
                     </span>
                   </div>
@@ -1248,191 +1186,285 @@ export default function StayHelperLuxuryShowcase() {
             )}
           </div>
 
-          {/* Master Video Container: Full-Screen Absolute on Mobile, Floating 9:16 Card on Desktop */}
-          <div className="absolute inset-0 w-full h-full lg:relative lg:inset-auto lg:shrink-0 flex flex-col items-center lg:items-end justify-center pointer-events-auto z-0 lg:z-20">
-            
-            {/* Minimalist Inset Header (Desktop Only) */}
-            <div className="hidden lg:flex w-full max-w-[340px] items-center justify-between text-[10px] font-mono text-[#E8D5B5]/80 tracking-[0.22em] uppercase px-2 mb-2 drop-shadow">
-              <span className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#E8D5B5] animate-pulse" />
-                Live Motion Reel
-              </span>
-              <span className="text-white/40 font-light">№ {String(currentIndex + 1).padStart(2, "0")}</span>
-            </div>
-
-            {/* Frame Wrapper */}
-            <div className="w-full h-full lg:w-auto lg:h-auto lg:relative group">
-              
-              {/* Soft Ambient Light Halo (Desktop Only) */}
-              <div className="hidden lg:block absolute -inset-2.5 bg-gradient-to-tr from-[#D4AF37]/20 via-[#B89B72]/15 to-transparent rounded-[30px] blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-
-              {/* Video Element: 100% Full-Bleed on Mobile, 340px 9:16 Frame on Desktop */}
-              <div className="w-full h-full lg:w-[340px] lg:aspect-[9/16] lg:rounded-[22px] overflow-hidden lg:shadow-[0_20px_60px_rgba(0,0,0,0.85)] lg:border lg:border-white/20 bg-black transition-transform duration-500 group-hover:scale-[1.01]">
-                <video
-                  ref={videoRef}
-                  key={`${currentStay.id}-${currentStay.videoSrc}`}
-                  src={currentStay.videoSrc}
-                  poster={currentStay.posterSrc}
-                  playsInline
-                  autoPlay
-                  muted={isMuted}
-                  onEnded={() => {
-                    // Option A: Seamless Auto-Advance to Next Luxury Stay Reel
-                    handleNextStay();
-                  }}
-                  className="w-full h-full object-cover cursor-pointer"
-                  onClick={() => {
-                    if (isEnded) {
-                      restartVideo();
-                    } else {
-                      handleBookingAction(currentStay.bookingUrl);
-                    }
-                  }}
-                  title={isEnded ? "Click to replay video" : "Click to check live rates and reserve"}
-                />
-
-                {/* Desktop Edge Vignette */}
-                <div className="hidden lg:block absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
-
-                {/* Hover Invitation Overlay (Desktop Only) */}
-                {!isEnded && (
-                  <div
-                    onClick={() => handleBookingAction(currentStay.bookingUrl)}
-                    className="hidden lg:flex absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center cursor-pointer z-10"
-                  >
-                    <div className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A880] text-black text-xs font-luxury-sans font-bold flex items-center gap-2 shadow-2xl transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                      <span>Book with VIP Perks (Breakfast + $100 Credit) ✨</span>
-                    </div>
-                  </div>
-                )}
-
-                {/* Seamless Replay Badge */}
-                {isEnded && (
-                  <div
-                    onClick={restartVideo}
-                    className="absolute inset-0 z-20 flex flex-col items-center justify-center cursor-pointer p-4"
-                  >
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        restartVideo();
-                      }}
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/60 hover:bg-black/90 text-stone-200 hover:text-white text-xs font-mono border border-white/20 backdrop-blur-md shadow-2xl transition-all duration-300 hover:scale-105 cursor-pointer"
-                    >
-                      <RotateCcw className="w-3.5 h-3.5 text-[#E8D5B5]" />
-                      <span>Replay Reel</span>
-                    </button>
-                  </div>
-                )}
-
-                {/* Minimalist Floating Controls (Desktop Hover) */}
-                <div
-                  onClick={(e) => e.stopPropagation()}
-                  className="hidden lg:flex absolute bottom-3 left-3 right-3 z-20 items-center justify-between bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto"
-                >
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={togglePlay}
-                      className="text-white hover:text-[#E8D5B5] transition p-1 cursor-pointer"
-                      title={isPlaying ? "Pause" : "Play"}
-                    >
-                      {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-white" />}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={toggleMute}
-                      className="text-white hover:text-[#E8D5B5] transition p-1 cursor-pointer"
-                      title={isMuted ? "Unmute" : "Mute"}
-                    >
-                      {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-[#E8D5B5]" />}
-                    </button>
-                    <span className="text-[9px] font-mono text-stone-300">
-                      {isMuted ? "Muted" : "Audio On"}
-                    </span>
-                  </div>
-                  {isEnded && (
-                    <button
-                      type="button"
-                      onClick={restartVideo}
-                      className="text-stone-300 hover:text-white transition flex items-center gap-1 text-[9px] font-mono cursor-pointer"
-                    >
-                      <RotateCcw className="w-3 h-3 text-[#E8D5B5]" />
-                      <span>Replay</span>
-                    </button>
-                  )}
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-<div className="relative z-30 w-full px-4 sm:px-8 xl:px-12 pb-7 flex flex-col lg:flex-row items-center justify-between gap-4 pointer-events-auto">
-          
-          {/* Expanded Dynamic Timeline Dock (Stretches smoothly on large screens) */}
-          <div className="bg-black/60 backdrop-blur-2xl border border-white/20 rounded-xl px-2.5 sm:px-4 py-2 shadow-2xl flex items-center gap-2 sm:gap-3 w-full lg:flex-1 lg:max-w-[calc(100%-250px)] xl:max-w-[calc(100%-270px)] min-w-0">
-            {/* Prev Arrow */}
+          {/* Mobile Bottom Mini Switcher Dock */}
+          <div className="absolute bottom-3 inset-x-4 z-20 flex items-center justify-between gap-2 pointer-events-auto">
             <button
               type="button"
               onClick={handlePrevStay}
-              className="w-7 h-7 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all shrink-0 active:scale-95 cursor-pointer"
-              title="Previous Sanctuary"
+              className="px-3 py-1.5 rounded-lg bg-black/60 border border-white/20 text-white text-xs font-mono flex items-center gap-1 backdrop-blur-md active:scale-95"
             >
               <ChevronLeft className="w-3.5 h-3.5 text-[#E8D5B5]" />
+              <span>PREV</span>
             </button>
-
-            {/* Timeline Track */}
-            <div
-              ref={dockScrollRef}
-              className="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar scroll-smooth py-0.5 px-1 flex-1 text-center"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-            >
-              {ALL_STAYS.map((stay, idx) => {
-                const isActive = stay.id === selectedStayId;
-                const fullName = stay.name.toUpperCase();
-                return (
-                  <button
-                    key={stay.id}
-                    type="button"
-                    data-dock-id={stay.id}
-                    onClick={() => handleSelectStay(stay.id)}
-                    className={`shrink-0 px-3 py-1.5 rounded-lg text-xs font-mono tracking-wider transition-all flex items-center gap-2 cursor-pointer whitespace-nowrap ${
-                      isActive
-                        ? "bg-white text-black font-semibold shadow-md ring-1 ring-white/30"
-                        : "text-stone-400 hover:text-white hover:bg-white/5"
-                    }`}
-                  >
-                    <span className={isActive ? "text-stone-700 font-bold" : "text-stone-500"}>
-                      {String(idx + 1).padStart(2, "0")}
-                    </span>
-                    <span>{fullName}</span>
-                  </button>
-                );
-              })}
+            <div className="text-[10px] font-mono text-white/70 tracking-widest uppercase">
+              № {String(currentIndex + 1).padStart(2, "0")} / {ALL_STAYS.length}
             </div>
-
-            {/* Next Arrow */}
             <button
               type="button"
               onClick={handleNextStay}
-              className="w-7 h-7 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all shrink-0 active:scale-95 cursor-pointer"
-              title="Next Sanctuary"
+              className="px-3 py-1.5 rounded-lg bg-black/60 border border-white/20 text-white text-xs font-mono flex items-center gap-1 backdrop-blur-md active:scale-95"
             >
+              <span>NEXT</span>
               <ChevronRight className="w-3.5 h-3.5 text-[#E8D5B5]" />
             </button>
           </div>
+        </div>
 
-          {/* Right: Request Sanctuary Dossier Link */}
-          <a
-            href="#architectural-dossier"
-            className="text-xs font-luxury-sans text-stone-200 hover:text-white transition-colors underline underline-offset-4 tracking-wider uppercase shrink-0"
-          >
-            Request Sanctuary Dossier ↗
-          </a>
+        {/* ========================================================= */}
+        {/* [DESKTOP ONLY: hidden lg:flex] EDITORIAL MAGAZINE LAYOUT   */}
+        {/* ========================================================= */}
+        <div className="hidden lg:flex flex-col justify-between h-full w-full relative z-10">
+          
+          {/* Desktop Widescreen Scenery Background */}
+          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              key={`desktop-hero-${heroBackground}`}
+              src={heroBackground}
+              alt={currentStay.name}
+              className="w-full h-full object-cover object-center scale-[1.01] transition-opacity duration-700 ease-out"
+            />
+            <div className="absolute inset-0 bg-black/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/60" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
+          </div>
 
+          {/* Desktop Header */}
+          <header className="relative z-30 w-full px-8 xl:px-14 pt-7 flex items-center justify-between gap-4 pointer-events-auto">
+            <Link href="/stayhelper" className="flex items-center space-x-3 group shrink-0">
+              <span className="text-2xl font-luxury-serif tracking-[0.26em] text-white uppercase font-light drop-shadow-md">
+                STAYHELPER
+              </span>
+            </Link>
+
+            <nav className="flex items-center gap-6 xl:gap-8 text-[11px] font-mono tracking-[0.24em] text-white/80 uppercase drop-shadow">
+              <a href="#sanctuary-stage" className="hover:text-white transition-colors">Portfolio</a>
+              <span className="text-white/30">—</span>
+              <a href="#architectural-dossier" className="hover:text-white transition-colors">Philosophy</a>
+              <span className="text-white/30">—</span>
+              <a href="#reserve-section" className="hover:text-white transition-colors">Inquire</a>
+            </nav>
+
+            <div className="flex items-center gap-3 shrink-0">
+              {member ? (
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 border border-white/20 text-xs font-mono text-[#E8D5B5] backdrop-blur-md shadow-lg">
+                    <Check className="w-3 h-3 text-emerald-400" />
+                    <span>{member.name}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleSignOut}
+                    className="px-3 py-1.5 rounded-full bg-black/40 hover:bg-rose-950/40 border border-white/15 text-[11px] font-mono text-stone-300 transition-all flex items-center gap-1"
+                  >
+                    <LogOut className="w-3 h-3 text-[#E8D5B5]" />
+                    <span>Sign Out</span>
+                  </button>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAuthMode("signin");
+                      setPendingRedirectUrl(currentStay.bookingUrl);
+                      setIsAuthModalOpen(true);
+                    }}
+                    className="px-3 py-1.5 rounded-full border border-white/20 bg-black/30 hover:bg-black/50 text-xs font-mono text-stone-300 transition-all backdrop-blur-md"
+                  >
+                    Sign In
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAuthMode("signup");
+                      setPendingRedirectUrl(currentStay.bookingUrl);
+                      setIsAuthModalOpen(true);
+                    }}
+                    className="px-4 py-1.5 rounded-full border border-[#D4AF37]/40 hover:border-[#D4AF37] bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 text-xs font-mono text-[#F3E5AB] transition-all backdrop-blur-md"
+                  >
+                    Join Private Club
+                  </button>
+                </div>
+              )}
+
+              <button
+                type="button"
+                onClick={toggleMute}
+                className="px-3.5 py-2 rounded-full bg-black/60 hover:bg-black/80 border border-white/25 text-xs font-mono text-white flex items-center gap-1.5 backdrop-blur-md shadow-lg transition-transform active:scale-95"
+              >
+                {isMuted ? (
+                  <>
+                    <VolumeX className="w-3.5 h-3.5 text-[#E8D5B5]" />
+                    <span>Unmute</span>
+                  </>
+                ) : (
+                  <>
+                    <Volume2 className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+                    <span>Sound On</span>
+                  </>
+                )}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleBookingAction(currentStay.bookingUrl)}
+                className="px-6 py-2 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A880] hover:brightness-110 text-black text-xs font-luxury-sans font-semibold tracking-wider transition-all duration-300 shadow-xl shadow-black/60 flex items-center gap-1.5 active:scale-95 cursor-pointer whitespace-nowrap"
+              >
+                <span>Book with VIP Perks ✨</span>
+              </button>
+            </div>
+          </header>
+
+          {/* Desktop Body: Left Typography & Right 9:16 Video Frame */}
+          <div className="relative z-20 max-w-[1440px] mx-auto w-full px-8 xl:px-14 flex-1 flex flex-row items-end justify-between gap-12 py-10 my-auto pointer-events-auto">
+            {/* Left Label */}
+            <div className="space-y-3 max-w-xl text-left drop-shadow-lg shrink-0">
+              <div className="flex items-center gap-2">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-[#E8D5B5] text-[11px] font-mono tracking-widest uppercase">
+                  <span>№ {String(currentIndex + 1).padStart(2, "0")}</span>
+                  <span className="text-white/40">·</span>
+                  <span>{currentStay.numeral}</span>
+                  <span className="text-white/40">·</span>
+                  <span className="text-white font-medium">{currentStay.country}</span>
+                </div>
+              </div>
+
+              <h1 className="text-5xl lg:text-6xl font-luxury-serif font-light text-white tracking-tight leading-[1.05] drop-shadow-xl">
+                {currentStay.name}
+              </h1>
+
+              <p className="text-sm font-luxury-sans text-stone-200 tracking-[0.2em] uppercase font-light drop-shadow">
+                {currentStay.location} · {currentStay.forbesTier.toUpperCase()}
+              </p>
+
+              <p className="text-base italic font-luxury-serif text-[#E8D5B5]/90 leading-relaxed font-light drop-shadow">
+                "{currentStay.subtitle}"
+              </p>
+
+              {/* Active Promotion Badge */}
+              {currentStay.activeDeal && (
+                <div className="pt-2">
+                  <div className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#D4AF37]/25 via-[#F3E5AB]/20 to-[#D4AF37]/10 border border-[#D4AF37]/60 backdrop-blur-md shadow-lg shadow-black/40">
+                    <span className="text-amber-300 animate-pulse text-sm">✨</span>
+                    <div className="text-left">
+                      <span className="text-[10px] font-mono tracking-wider uppercase font-bold text-[#F3E5AB] block">
+                        ACTIVE PROMOTION · {currentStay.activeDeal.tag}
+                      </span>
+                      <span className="text-sm font-luxury-sans text-white/95 font-medium">
+                        {currentStay.activeDeal.desc}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Right Video Card (Desktop Native) */}
+            <div className="shrink-0 flex flex-col items-end justify-center">
+              <div className="w-full max-w-[340px] flex items-center justify-between text-[10px] font-mono text-[#E8D5B5]/80 tracking-[0.22em] uppercase px-2 mb-2 drop-shadow">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#E8D5B5] animate-pulse" />
+                  Live Motion Reel
+                </span>
+                <span className="text-white/40 font-light">№ {String(currentIndex + 1).padStart(2, "0")}</span>
+              </div>
+
+              <div className="relative group">
+                <div className="absolute -inset-2.5 bg-gradient-to-tr from-[#D4AF37]/20 via-[#B89B72]/15 to-transparent rounded-[30px] blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+                <div className="relative w-[340px] aspect-[9/16] rounded-[22px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.85)] border border-white/20 bg-black/60 backdrop-blur-xs transition-transform duration-500 group-hover:scale-[1.01]">
+                  <video
+                    key={`desktop-${currentStay.id}-${currentStay.videoSrc}`}
+                    src={currentStay.videoSrc}
+                    poster={currentStay.posterSrc}
+                    playsInline
+                    autoPlay
+                    muted={isMuted}
+                    onEnded={() => handleNextStay()}
+                    className="w-full h-full object-cover cursor-pointer"
+                    onClick={() => {
+                      if (isEnded) restartVideo();
+                      else handleBookingAction(currentStay.bookingUrl);
+                    }}
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
+
+                  <div
+                    onClick={() => handleBookingAction(currentStay.bookingUrl)}
+                    className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center cursor-pointer z-10"
+                  >
+                    <div className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A880] text-black text-xs font-luxury-sans font-bold flex items-center gap-2 shadow-2xl">
+                      <span>Book with VIP Perks ✨</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop Timeline Dock */}
+          <div className="relative z-30 w-full px-8 xl:px-12 pb-7 flex flex-row items-center justify-between gap-4 pointer-events-auto">
+            <div className="bg-black/60 backdrop-blur-2xl border border-white/20 rounded-xl px-4 py-2 shadow-2xl flex items-center gap-3 w-full max-w-[calc(100%-250px)] xl:max-w-[calc(100%-270px)] min-w-0">
+              <button
+                type="button"
+                onClick={handlePrevStay}
+                className="w-7 h-7 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all shrink-0 active:scale-95 cursor-pointer"
+                title="Previous Sanctuary"
+              >
+                <ChevronLeft className="w-3.5 h-3.5 text-[#E8D5B5]" />
+              </button>
+
+              <div
+                ref={dockScrollRef}
+                className="flex items-center gap-3 overflow-x-auto no-scrollbar scroll-smooth py-0.5 px-1 flex-1 text-center"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
+                {ALL_STAYS.map((stay, idx) => {
+                  const isActive = stay.id === selectedStayId;
+                  const fullName = stay.name.toUpperCase();
+                  return (
+                    <button
+                      key={stay.id}
+                      type="button"
+                      data-dock-id={stay.id}
+                      onClick={() => handleSelectStay(stay.id)}
+                      className={`shrink-0 px-3 py-1.5 rounded-lg text-xs font-mono tracking-wider transition-all flex items-center gap-2 cursor-pointer whitespace-nowrap ${
+                        isActive
+                          ? "bg-white text-black font-semibold shadow-lg shadow-white/20 scale-[1.02]"
+                          : "text-stone-300 hover:text-white hover:bg-white/10"
+                      }`}
+                    >
+                      <span className={isActive ? "text-stone-700" : "text-stone-500"}>
+                        {String(idx + 1).padStart(2, "0")}
+                      </span>
+                      <span>{fullName}</span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <button
+                type="button"
+                onClick={handleNextStay}
+                className="w-7 h-7 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all shrink-0 active:scale-95 cursor-pointer"
+                title="Next Sanctuary"
+              >
+                <ChevronRight className="w-3.5 h-3.5 text-[#E8D5B5]" />
+              </button>
+            </div>
+
+            <div className="shrink-0 flex items-center gap-2">
+              <a
+                href="#reserve-section"
+                className="px-5 py-2.5 rounded-xl border border-white/20 hover:border-white/40 bg-black/40 hover:bg-black/70 text-xs font-mono tracking-wider text-[#E8D5B5] hover:text-white transition-all duration-300 backdrop-blur-md flex items-center gap-2"
+              >
+                <span>REQUEST SANCTUARY DOSSIER</span>
+                <span className="text-[#E8D5B5]">↗</span>
+              </a>
+            </div>
+          </div>
         </div>
 
       </section>
