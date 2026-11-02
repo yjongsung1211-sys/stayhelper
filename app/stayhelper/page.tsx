@@ -188,7 +188,7 @@ const ALL_STAYS: StayInfo[] = [
     forbesTier: "Forbes Travel Guide Five-Star Resort",
     image: "/images/stayhelper/fs_kohsamui_wide_hero.jpg",
     wideHero: "/images/stayhelper/fs_kohsamui_wide_hero.jpg",
-    videoSrc: "/videos/StayHelperKohSamui_v2_NaturalClean_Live.mp4",
+    videoSrc: "/videos/StayHelperKohSamui_Desktop_Master.mp4",
     posterSrc: "/images/stayhelper/fs_kohsamui_poster.jpg",
     bookingUrl: "https://www.fourseasons.com/kohsamui/",
     status: "STREAMING",
@@ -1323,6 +1323,907 @@ const ALL_STAYS: StayInfo[] = [
       tag: "STAY 4, PAY 3 (ALL-INCLUSIVE)",
       desc: "Complimentary 4th night + Daily private excursions with naturalist guides & premium open bar"
     }
+  }
+,
+  {
+    id: "stay-31",
+    numeral: "XXXI",
+    name: "Four Seasons Resort Bora Bora",
+    subtitle: "Monolithic Overwater Bungalows with Direct Panoramic Views of Sacred Mount Otemanu",
+    location: "Motu Tehotu, Bora Bora",
+    country: "Bora Bora, French Polynesia",
+    badge: "COLLECTION № 31 · BORA BORA",
+    rating: "4.99",
+    reviews: "1,540+",
+    pricePerNight: "From $2,200",
+    priceAmount: "$2,200",
+    seasonalRange: "Low $1,750+ · High Season $4,900+",
+    rateInclusions: "Includes Polynesian monoi floral greeting, catamaran lagoon boat transfers & daily gourmet breakfast",
+    forbesTier: "Forbes Travel Guide 5-Star & World's Best Overwater Resort",
+    image: "/images/stayhelper/fs_bora_bora_wide_hero.jpg",
+    wideHero: "/images/stayhelper/fs_bora_bora_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperFSBoraBora_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/fs_bora_bora_wide_hero.jpg",
+    bookingUrl: "https://www.fourseasons.com/borabora/",
+    status: "STREAMING",
+    story: [
+      "Perched on a private motu in French Polynesia's most celebrated lagoon, Four Seasons Resort Bora Bora is the quintessential South Pacific overwater sanctuary.",
+      "Cascading timber boardwalks link handcrafted pandanus thatched-roof bungalows, equipped with private plunge pools, glass lagoon floor panels, and unobstructed vistas of dramatic Mount Otemanu."
+],
+    features: [
+      {
+            "title": "Glass Floor Viewing Panels",
+            "desc": "Bespoke glass panels in living areas looking into living coral reef gardens"
+      },
+      {
+            "title": "Te Mahana Clifftop Spa",
+            "desc": "Holistic Polynesian monoi and volcanic mineral therapies in tropical groves"
+      },
+      {
+            "title": "Overwater Plunge Pools",
+            "desc": "Private infinity plunge pools suspended directly over crystal turquoise shallows"
+      }
+],
+    activeDeal: {
+      "title": "Bora Bora Paradise · 4th Night Complimentary",
+      "tag": "STAY 4, PAY 3 (1 NIGHT FREE)",
+      "desc": "Complimentary 4th night + Free round-trip catamaran boat transfers from Bora Bora Airport"
+}
+  },
+  {
+    id: "stay-32",
+    numeral: "XXXII",
+    name: "Rosewood Castiglion del Bosco",
+    subtitle: "800-Year-Old Medieval Tuscan Borgo and Historic Brunello di Montalcino Wine Estate",
+    location: "Montalcino, Val d'Orcia",
+    country: "Tuscany, Italy",
+    badge: "COLLECTION № 32 · TUSCANY, ITALY",
+    rating: "4.99",
+    reviews: "1,180+",
+    pricePerNight: "From $1,950",
+    priceAmount: "$1,950",
+    seasonalRange: "Low $1,450+ · Harvest Peak $3,800+",
+    rateInclusions: "Includes estate cellar tasting pass, daily Tuscan estate breakfast & heated infinity pool access",
+    forbesTier: "Travel + Leisure #1 Hotel in the World & UNESCO World Heritage Estate",
+    image: "/images/stayhelper/rosewood_castiglion_wide_hero.jpg",
+    wideHero: "/images/stayhelper/rosewood_castiglion_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperRosewoodCastiglion_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/rosewood_castiglion_wide_hero.jpg",
+    bookingUrl: "https://www.rosewoodhotels.com/en/castiglion-del-bosco",
+    status: "STREAMING",
+    story: [
+      "Spanning 5,000 private acres within the UNESCO-protected Val d'Orcia, Rosewood Castiglion del Bosco is an eight-hundred-year-old Tuscan medieval village restored to artisanal perfection.",
+      "Surrounded by rolling cypress ridges and ancient vineyards, its restored 17th-century stone villas feature antique terracotta, exposed timber beams, and infinity pools gazing upon rolling Brunello hills."
+],
+    features: [
+      {
+            "title": "Historic Brunello di Montalcino Cellars",
+            "desc": "Exclusive private cellar tastings and harvest tours at one of Montalcino's founding wineries"
+      },
+      {
+            "title": "Cantilevered Vineyard Pool",
+            "desc": "Heated infinity pool hovering over the rolling vineyards and cypress alleys"
+      },
+      {
+            "title": "Restored Medieval Borgo",
+            "desc": "13th-century stone church, historic cobblestone streets, and Tuscan culinary academy"
+      }
+],
+    activeDeal: {
+      "title": "Tuscan Harvest · 3rd Night Complimentary",
+      "tag": "STAY 3, PAY 2 (1 NIGHT FREE)",
+      "desc": "Complimentary 3rd night + Private Brunello di Montalcino historic winery tour & cellar tasting"
+}
+  },
+  {
+    id: "stay-33",
+    numeral: "XXXIII",
+    name: "Amanzoe",
+    subtitle: "Modern Classical Acropolis Crowning an Olive-Clad Ridge on the Peloponnese",
+    location: "Porto Heli, Peloponnese",
+    country: "Porto Heli, Greece",
+    badge: "COLLECTION № 33 · PORTO HELI, GREECE",
+    rating: "4.99",
+    reviews: "980+",
+    pricePerNight: "From $2,350",
+    priceAmount: "$2,350",
+    seasonalRange: "Low $1,800+ · High Summer $4,600+",
+    rateInclusions: "Includes private Mercedes chauffeur transfer, Greek estate breakfast & beach club speedboat pass",
+    forbesTier: "World's Best Modern Acropolis & Condé Nast Gold List",
+    image: "/images/stayhelper/amanzoe_greece_wide_hero.jpg",
+    wideHero: "/images/stayhelper/amanzoe_greece_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperAmanzoe_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/amanzoe_greece_wide_hero.jpg",
+    bookingUrl: "https://www.aman.com/resorts/amanzoe",
+    status: "STREAMING",
+    story: [
+      "Perched on a serene olive-clad hilltop on the eastern coast of the Peloponnese, Amanzoe is architect Ed Tuttle's monolithic contemporary interpretation of the ancient Greek Acropolis.",
+      "Flanked by towering Doric colonnades, reflecting pools, and fragrant lavender gardens, freestanding marble pavilions open into twelve-meter private plunge pools overlooking the tranquil Aegean Sea."
+],
+    features: [
+      {
+            "title": "Doric Colonnade Architecture",
+            "desc": "Classical Hellenistic marble colonnades and courtyards designed by Ed Tuttle"
+      },
+      {
+            "title": "12-Meter Private Plunge Pools",
+            "desc": "Every standalone pavilion features a private 12m emerald green plunge pool"
+      },
+      {
+            "title": "Amanzoe Beach Club Speedboat",
+            "desc": "Private beach club with four swimming pools and high-speed water sports"
+      }
+],
+    activeDeal: {
+      "title": "Peloponnese Upgrade & Chauffeur",
+      "tag": "GUARANTEED UPGRADE AT BOOKING",
+      "desc": "Guaranteed room upgrade upon confirmation + Complimentary round-trip Mercedes transfer from Athens"
+}
+  },
+  {
+    id: "stay-34",
+    numeral: "XXXIV",
+    name: "One&Only Palmilla",
+    subtitle: "Legendary Baja Peninsula Hacienda Clifftop Retreat Overlooking the Sea of Cortez",
+    location: "San José del Cabo, Baja",
+    country: "Los Cabos, Mexico",
+    badge: "COLLECTION № 34 · LOS CABOS, MEXICO",
+    rating: "4.99",
+    reviews: "1,420+",
+    pricePerNight: "From $1,650",
+    priceAmount: "$1,650",
+    seasonalRange: "Low $1,250+ · Winter Peak $3,900+",
+    rateInclusions: "Includes 24-hour dedicated butler, private luxury SUV airport transfer & daily Baja breakfast",
+    forbesTier: "Forbes Travel Guide 5-Star & AAA Five Diamond Legend",
+    image: "/images/stayhelper/oneandonly_palmilla_wide_hero.jpg",
+    wideHero: "/images/stayhelper/oneandonly_palmilla_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperOneAndOnlyPalmilla_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/oneandonly_palmilla_wide_hero.jpg",
+    bookingUrl: "https://www.oneandonlyresorts.com/palmilla",
+    status: "STREAMING",
+    story: [
+      "Commanding a dramatic rocky headland where azure Sea of Cortez waters crash against golden shores, One&Only Palmilla is the historic grande dame of Los Cabos luxury.",
+      "Whitewashed colonial arches, swaying coconut palms, and artisanal Mexican tiled suites frame dramatic ocean surf, complemented by cliffside fire pits and twenty-four-hour butler hospitality."
+],
+    features: [
+      {
+            "title": "Swimmable Pelican Beach",
+            "desc": "One of the few swimmable, pristine golden beaches in all of Los Cabos"
+      },
+      {
+            "title": "Cliffside Sculpted Infinity Pool",
+            "desc": "Adults-only pool carved directly into rocky promontory with oceanfront daybeds"
+      },
+      {
+            "title": "SEARED by Jean-Georges",
+            "desc": "Michelin-starred culinary mastery featuring prime steaks and fresh Baja seafood"
+      }
+],
+    activeDeal: {
+      "title": "Baja Escape · 4th Night Free + Agave Masterclass",
+      "tag": "STAY 4, PAY 3 + $200 CREDIT",
+      "desc": "Complimentary 4th night + Exclusive private agave & vintage mezcal masterclass for two"
+}
+  },
+  {
+    id: "stay-35",
+    numeral: "XXXV",
+    name: "Belmond Hotel Splendido",
+    subtitle: "Restored 16th-Century Clifftop Benedictine Monastery Overlooking Portofino Harbour",
+    location: "Salita Baratta, Portofino",
+    country: "Portofino, Liguria, Italy",
+    badge: "COLLECTION № 35 · PORTOFINO, ITALY",
+    rating: "4.99",
+    reviews: "1,290+",
+    pricePerNight: "From $2,100",
+    priceAmount: "$2,100",
+    seasonalRange: "Low $1,600+ · Summer Glamour $4,400+",
+    rateInclusions: "Includes daily Ligurian buffet breakfast, private Portofino shuttle boat & heated seawater pool",
+    forbesTier: "Historic Italian Luxury Icon & Forbes 5-Star",
+    image: "/images/stayhelper/belmond_splendido_wide_hero.jpg",
+    wideHero: "/images/stayhelper/belmond_splendido_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperBelmondSplendido_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/belmond_splendido_wide_hero.jpg",
+    bookingUrl: "https://www.belmond.com/hotels/europe/italy/portofino/belmond-hotel-splendido/",
+    status: "STREAMING",
+    story: [
+      "Nestled high upon a verdant hillside above Portofino's shimmering harbour, Belmond Hotel Splendido is an authentic sixteenth-century monastery transformed into Italy's most glamorous coastal haven.",
+      "Cascading terraced gardens of wisteria and wild olive trees embrace historic frescoed suites, an iconic heated seawater pool suspended in the sky, and panoramic terraces favored by Hollywood legends."
+],
+    features: [
+      {
+            "title": "Cliffside Heated Seawater Pool",
+            "desc": "Spectacular swimming pool perched high above the superyachts in Portofino bay"
+      },
+      {
+            "title": "La Terrazza Restaurant",
+            "desc": "World-renowned open-air dining serving fresh catch of the Ligurian coast"
+      },
+      {
+            "title": "Wisteria Terraced Gardens",
+            "desc": "Centuries-old botanical pathways offering secluded panoramic gazebos"
+      }
+],
+    activeDeal: {
+      "title": "Portofino Sunset Cruise & $200 Credit",
+      "tag": "SUNSET CRUISE & $200 CREDIT",
+      "desc": "Complimentary private 2-hour sunset cruise on wooden Gozzo boat + $200 culinary credit"
+}
+  },
+  {
+    id: "stay-36",
+    numeral: "XXXVI",
+    name: "Soneva Fushi",
+    subtitle: "Barefoot Island Luxury & Two-Story Lagoon Water Slides in Baa Atoll Biosphere",
+    location: "Kunfunadhoo Island, Baa Atoll",
+    country: "Baa Atoll, Maldives",
+    badge: "COLLECTION № 36 · BAA ATOLL, MALDIVES",
+    rating: "4.99",
+    reviews: "1,120+",
+    pricePerNight: "From $2,800",
+    priceAmount: "$2,800",
+    seasonalRange: "Low $2,200+ · Festive $5,800+",
+    rateInclusions: "Includes dedicated Barefoot Guardian butler, bespoke breakfast & lagoon water sports",
+    forbesTier: "UNESCO Biosphere Reserve Sanctuary & World's Top Eco-Luxury Resort",
+    image: "/images/stayhelper/soneva_fushi_wide_hero.jpg",
+    wideHero: "/images/stayhelper/soneva_fushi_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperSonevaFushi_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/soneva_fushi_wide_hero.jpg",
+    bookingUrl: "https://soneva.com/resorts/soneva-fushi/",
+    status: "STREAMING",
+    story: [
+      "Hidden within the untouched jungle of Kunfunadhoo Island in the Baa Atoll Biosphere Reserve, Soneva Fushi pioneered the world-famous philosophy of barefoot sustainable luxury.",
+      "Vast driftwood treehouse villas feature private curved water slides curving into crystalline lagoons, open-air garden bathrooms, an overwater observatory, and lush sandy bicycle trails."
+],
+    features: [
+      {
+            "title": "Curved Lagoon Water Slides",
+            "desc": "Private slides swooping from upper decks directly into the crystalline lagoon"
+      },
+      {
+            "title": "Overwater Star Observatory",
+            "desc": "High-powered astronomical telescope with resident astronomers and sommelier"
+      },
+      {
+            "title": "Soneva Soul Canopy Spa",
+            "desc": "Transformative Ayurvedic and integrative healing sanctuary in the jungle treetops"
+      }
+],
+    activeDeal: {
+      "title": "Baa Atoll Special · Free Seaplane for Two",
+      "tag": "STAY 4, PAY 3 + FREE SEAPLANE",
+      "desc": "Complimentary 4th night + Free round-trip seaplane transfers for two from Malé"
+}
+  },
+  {
+    id: "stay-37",
+    numeral: "XXXVII",
+    name: "The Brando",
+    subtitle: "Marlon Brando's 100% Sustainable Private Atoll of Pristine Polynesian Seclusion",
+    location: "Tetiaroa Atoll, French Polynesia",
+    country: "Tetiaroa, French Polynesia",
+    badge: "COLLECTION № 37 · TETIAROA, POLYNESIA",
+    rating: "4.99",
+    reviews: "760+",
+    pricePerNight: "From $3,400",
+    priceAmount: "$3,400",
+    seasonalRange: "Low $2,900+ · Peak $6,500+",
+    rateInclusions: "All-inclusive: private island villa, daily 50-minute spa treatment per villa & gourmet dining",
+    forbesTier: "World's Most Exclusive Eco-Island & National Geographic Unique Lodge",
+    image: "/images/stayhelper/the_brando_wide_hero.jpg",
+    wideHero: "/images/stayhelper/the_brando_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperTheBrando_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/the_brando_wide_hero.jpg",
+    bookingUrl: "https://thebrando.com/",
+    status: "STREAMING",
+    story: [
+      "Encircled by a dozen pristine white-sand motus around a vibrant turquoise lagoon, The Brando is Marlon Brando's visionary private atoll sanctuary in French Polynesia.",
+      "Operating on 100% renewable solar and deep seawater air conditioning, each beachfront villa opens directly onto untouched sands where nesting green sea turtles glide through tranquil waters."
+],
+    features: [
+      {
+            "title": "100% Energy Independent Atoll",
+            "desc": "Pioneering deep seawater air conditioning and solar energy microgrid"
+      },
+      {
+            "title": "Varua Polynesian Spa",
+            "desc": "Holistic treatments nestled over a tranquil natural freshwater lily pond"
+      },
+      {
+            "title": "Private Island Air Charter",
+            "desc": "Exclusive 20-minute private Air Tetiaroa flights from Tahiti Faa'a"
+      }
+],
+    activeDeal: {
+      "title": "Tetiaroa Extended Stay · 25% Off + Daily Spa",
+      "tag": "25% EXTENDED STAY PRIVILEGE",
+      "desc": "25% savings on stays of 4+ nights + Daily signature Polynesian spa treatment per villa"
+}
+  },
+  {
+    id: "stay-38",
+    numeral: "XXXVIII",
+    name: "Claridge's",
+    subtitle: "The Art Deco Crown Jewel of Mayfair Cherished by Royalty and Cinema Icons",
+    location: "Brook Street, Mayfair",
+    country: "London, United Kingdom",
+    badge: "COLLECTION № 38 · LONDON, UK",
+    rating: "4.99",
+    reviews: "2,450+",
+    pricePerNight: "From $1,550",
+    priceAmount: "$1,550",
+    seasonalRange: "Low $1,200+ · Royal Season $3,600+",
+    rateInclusions: "Includes traditional English breakfast for two, private Mayfair butler & 24hr packing service",
+    forbesTier: "The Annex to Buckingham Palace & Forbes Travel Guide 5-Star",
+    image: "/images/stayhelper/claridges_london_wide_hero.jpg",
+    wideHero: "/images/stayhelper/claridges_london_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperClaridges_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/claridges_london_wide_hero.jpg",
+    bookingUrl: "https://www.claridges.co.uk/",
+    status: "STREAMING",
+    story: [
+      "Standing proudly on Brook Street in the heart of Mayfair since 1856, Claridge's embodies the pinnacle of British aristocratic elegance and Jazz Age Art Deco glamour.",
+      "From its iconic black-and-white chevron marble lobby to bespoke velvet suites, Dale Chihuly champagne afternoon tea, and the subterranean wellness temple, it remains London's ultimate society address."
+],
+    features: [
+      {
+            "title": "Iconic Art Deco Heritage",
+            "desc": "Masterful 1920s decorative arts restored to museum-grade splendor"
+      },
+      {
+            "title": "The Subterranean Spa",
+            "desc": "Five-floor underground wellness temple with heated stone mineral pool"
+      },
+      {
+            "title": "The Fumoir Cocktail Bar",
+            "desc": "Intimate 1930s jewel box bar serving rare spirits in Lalique crystal"
+      }
+],
+    activeDeal: {
+      "title": "Mayfair Suite Upgrade & Champagne High Tea",
+      "tag": "GUARANTEED MAYFAIR UPGRADE",
+      "desc": "Guaranteed room upgrade to Mayfair Suite at booking + Complimentary champagne afternoon tea for two"
+}
+  },
+  {
+    id: "stay-39",
+    numeral: "XXXIX",
+    name: "Mandapa, a Ritz-Carlton Reserve",
+    subtitle: "Sacred Ayung River Sanctuary Terraced into Ubud's Emerald Valley",
+    location: "Kedewatan, Ubud",
+    country: "Ubud, Bali, Indonesia",
+    badge: "COLLECTION № 39 · UBUD, BALI",
+    rating: "4.99",
+    reviews: "1,340+",
+    pricePerNight: "From $1,450",
+    priceAmount: "$1,450",
+    seasonalRange: "Low $1,100+ · Peak $2,900+",
+    rateInclusions: "Includes 24hr Patih (butler) service, organic farm breakfast & sacred temple blessing",
+    forbesTier: "Forbes Travel Guide 5-Star & Travel + Leisure Top 5 World Resorts",
+    image: "/images/stayhelper/mandapa_ubud_wide_hero.jpg",
+    wideHero: "/images/stayhelper/mandapa_ubud_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperMandapaUbud_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/mandapa_ubud_wide_hero.jpg",
+    bookingUrl: "https://www.ritzcarlton.com/en/hotels/indonesia/mandapa",
+    status: "STREAMING",
+    story: [
+      "Named after the Sanskrit word for entrance temple, Mandapa, a Ritz-Carlton Reserve is terraced into the sacred valley walls along the rushing Ayung River in Ubud.",
+      "Working emerald rice paddies, ancient stone shrines, and hand-carved teakwood pool villas create an ethereal spiritual haven where woven bamboo cocoons host private riverside dining."
+],
+    features: [
+      {
+            "title": "Sacred Ayung Riverfront Villas",
+            "desc": "Private plunge pools suspended over the sacred rushing river rapids"
+      },
+      {
+            "title": "Kubu Private Cocoon Pods",
+            "desc": "Nine private woven bamboo cocoons offering 9-course Mediterranean feasts"
+      },
+      {
+            "title": "Mandapa Sound & Water Spa",
+            "desc": "Holistic Balinese healers, chakra balancing, and open-air riverfront suites"
+      }
+],
+    activeDeal: {
+      "title": "Ubud Sacred Valley · 3rd Night Free + Massage",
+      "tag": "STAY 3, PAY 2 + RIVER MASSAGE",
+      "desc": "Complimentary 3rd night + 60-minute riverside Balinese signature massage for two"
+}
+  },
+  {
+    id: "stay-40",
+    numeral: "XL",
+    name: "Four Seasons Tented Camp Golden Triangle",
+    subtitle: "All-Inclusive Luxury Tented Safari High in the Misty Bamboo Jungle Overlooking Three Nations",
+    location: "Sop Ruak, Chiang Rai",
+    country: "Golden Triangle, Thailand",
+    badge: "COLLECTION № 40 · GOLDEN TRIANGLE",
+    rating: "4.99",
+    reviews: "890+",
+    pricePerNight: "From $2,950",
+    priceAmount: "$2,950",
+    seasonalRange: "Low $2,400+ · Peak $5,200+",
+    rateInclusions: "All-inclusive: luxury safari tent, private elephant interaction, all meals & Mekong riverboat",
+    forbesTier: "World's Premier Luxury Tented Safari & Forbes 5-Star",
+    image: "/images/stayhelper/fs_golden_triangle_wide_hero.jpg",
+    wideHero: "/images/stayhelper/fs_golden_triangle_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperFSGoldenTriangle_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/fs_golden_triangle_wide_hero.jpg",
+    bookingUrl: "https://www.fourseasons.com/goldentriangle/",
+    status: "STREAMING",
+    story: [
+      "Accessible only by traditional longtail boat along the Ruak River, Four Seasons Tented Camp Golden Triangle is a legendary all-inclusive luxury safari suspended in the northern bamboo jungle.",
+      "Nineteenth-century explorer tents feature custom hand-hammered copper bathtubs, private decks overlooking Burma and Laos, suspension bridge skywalks, and rescued elephant sanctuary encounters."
+],
+    features: [
+      {
+            "title": "Rescued Elephant Encounters",
+            "desc": "Ethical walking and bathing experiences with rescued Asian elephants"
+      },
+      {
+            "title": "Hammered Copper Bathtubs",
+            "desc": "Custom handcrafted freestanding copper tubs with panoramic mountain views"
+      },
+      {
+            "title": "Mekong River Sunset Cruises",
+            "desc": "Private longtail riverboat excursions where Thailand, Laos, and Myanmar meet"
+      }
+],
+    activeDeal: {
+      "title": "Golden Triangle Expedition · Private Mekong Cruise",
+      "tag": "ALL-INCLUSIVE EXPEDITION",
+      "desc": "Full all-inclusive wilderness safari package + Complimentary private sunset longtail boat cruise on the Mekong"
+}
+  },
+  {
+    id: "stay-41",
+    numeral: "XLI",
+    name: "Le Sirenuse",
+    subtitle: "18th-Century Crimson Palazzo Clinging to the Cliffs of Positano with 400 Evening Candles",
+    location: "Via Cristoforo Colombo, Positano",
+    country: "Positano, Amalfi Coast, Italy",
+    badge: "COLLECTION № 41 · POSITANO, ITALY",
+    rating: "4.99",
+    reviews: "1,670+",
+    pricePerNight: "From $2,250",
+    priceAmount: "$2,250",
+    seasonalRange: "Low $1,650+ · High Summer $4,800+",
+    rateInclusions: "Includes daily Champagne breakfast on the terrace, vintage wooden boat excursion & spa access",
+    forbesTier: "World's Most Photographed Clifftop Haven & Forbes 5-Star",
+    image: "/images/stayhelper/le_sirenuse_wide_hero.jpg",
+    wideHero: "/images/stayhelper/le_sirenuse_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperLeSirenuse_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/le_sirenuse_wide_hero.jpg",
+    bookingUrl: "https://sirenuse.it/",
+    status: "STREAMING",
+    story: [
+      "Clinging to the sheer cliffs of Positano overlooking the sparkling Mediterranean, Le Sirenuse opened in 1951 when the aristocratic Sersale family transformed their private 18th-century summer palazzo.",
+      "Cascading with potted lemon trees and climbing bougainvillea, its romantic balconies frame the iconic majolica dome of Santa Maria Assunta, illuminated each evening by four hundred flickering hand-lit candles."
+],
+    features: [
+      {
+            "title": "Iconic Clifftop Pool Terrace",
+            "desc": "Surrounded by lemon trees framing the definitive postcard panorama of Positano"
+      },
+      {
+            "title": "Vintage Wooden Boat 'Sant'Anna'",
+            "desc": "Complimentary daily excursions along the Amalfi cliffs aboard historic wooden boat"
+      },
+      {
+            "title": "La Sponda 400-Candlelight Dining",
+            "desc": "Michelin-starred Mediterranean dining lit exclusively by 400 candles each night"
+      }
+],
+    activeDeal: {
+      "title": "Amalfi Dream · 4th Night Free + Riva Cruise",
+      "tag": "STAY 4, PAY 3 + RIVA EXCURSION",
+      "desc": "Complimentary 4th night + Sunset excursion along the Amalfi cliffs aboard vintage wooden boat Sant'Anna"
+}
+  },
+  {
+    id: "stay-42",
+    numeral: "XLII",
+    name: "Rosewood Mayakoba",
+    subtitle: "Private Island Cenote Spa and Overwater Lagoon Suites in the Emerald Mangroves",
+    location: "Playa del Carmen, Riviera Maya",
+    country: "Riviera Maya, Mexico",
+    badge: "COLLECTION № 42 · RIVIERA MAYA",
+    rating: "4.99",
+    reviews: "1,510+",
+    pricePerNight: "From $1,550",
+    priceAmount: "$1,550",
+    seasonalRange: "Low $1,150+ · Winter Peak $3,600+",
+    rateInclusions: "Includes electric eco-boat arrival, daily Mexican breakfast & Sense spa water journey",
+    forbesTier: "Forbes Travel Guide 5-Star & Mexico's Leading Luxury Resort",
+    image: "/images/stayhelper/rosewood_mayakoba_wide_hero.jpg",
+    wideHero: "/images/stayhelper/rosewood_mayakoba_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperRosewoodMayakoba_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/rosewood_mayakoba_wide_hero.jpg",
+    bookingUrl: "https://www.rosewoodhotels.com/en/mayakoba",
+    status: "STREAMING",
+    story: [
+      "Emerging from a 620-acre private jungle reserve along the pristine white sands of the Riviera Maya, Rosewood Mayakoba is an eco-luxury wonderland accessed via silent electric boats across emerald waterways.",
+      "Every suite is a private sanctuary featuring its own plunge pool, open-air garden shower, and rooftop sundeck, complemented by a private eight-acre spa island centered on a sacred cenote."
+],
+    features: [
+      {
+            "title": "Electric Eco-Boat Transit",
+            "desc": "Silent electric boats navigate miles of emerald mangrove lagoons"
+      },
+      {
+            "title": "Sense Spa Private Island",
+            "desc": "Eight-acre wellness sanctuary on a private island with cenote healing rituals"
+      },
+      {
+            "title": "Zapote Cocktail Bar",
+            "desc": "Critically acclaimed bar featured in the World's 50 Best Bars"
+      }
+],
+    activeDeal: {
+      "title": "Riviera Maya Retreat · 4th Night Free + $200 Dining",
+      "tag": "STAY 4, PAY 3 + $200 DINING",
+      "desc": "Complimentary 4th night + $200 culinary credit & private electric eco-boat lagoon wildlife tour"
+}
+  },
+  {
+    id: "stay-43",
+    numeral: "XLIII",
+    name: "Cheval Blanc St-Barth",
+    subtitle: "The Only Official French Palace in the Caribbean on the Sands of Flamands Bay",
+    location: "Anse des Flamands, Saint-Barth",
+    country: "St-Barth, French West Indies",
+    badge: "COLLECTION № 43 · ST-BARTH",
+    rating: "4.99",
+    reviews: "940+",
+    pricePerNight: "From $2,600",
+    priceAmount: "$2,600",
+    seasonalRange: "Low $2,000+ · Festive $6,200+",
+    rateInclusions: "Includes dedicated Alchimiste concierge, Guerlain beach amenities & French breakfast",
+    forbesTier: "The Only French Palace in the Caribbean & Forbes 5-Star",
+    image: "/images/stayhelper/cheval_blanc_stbarth_wide_hero.jpg",
+    wideHero: "/images/stayhelper/cheval_blanc_stbarth_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperChevalBlancStBarth_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/cheval_blanc_stbarth_wide_hero.jpg",
+    bookingUrl: "https://www.chevalblanc.com/en/maison/st-barth-isle-de-france/",
+    status: "STREAMING",
+    story: [
+      "Nestled along the powdery white sands of Anse des Flamands, Cheval Blanc St-Barth is the only property in the entire Caribbean awarded France's prestigious Palace distinction.",
+      "Redesigned by Jacques Grange with French Riviera ease and tropical elegance, oceanfront suites feature Guerlain perfumes, direct beach terraces, and sunset vintage champagne sabrage ceremonies."
+],
+    features: [
+      {
+            "title": "French Palace Distinction",
+            "desc": "The highest official accreditation of French hospitality and haute craftsmanship"
+      },
+      {
+            "title": "Cheval Blanc Spa by Guerlain",
+            "desc": "Exclusive Caribbean wellness pavilion with Orchidée Impériale therapies"
+      },
+      {
+            "title": "La Case by Jean Imbert",
+            "desc": "Acclaimed beachfront dining highlighting indigenous Caribbean spices and seafood"
+      }
+],
+    activeDeal: {
+      "title": "St-Barth Palace Upgrade & Transfers",
+      "tag": "GUARANTEED UPGRADE AT BOOKING",
+      "desc": "Guaranteed room upgrade at confirmation + Round-trip luxury chauffeur airport/harbor transfers"
+}
+  },
+  {
+    id: "stay-44",
+    numeral: "XLIV",
+    name: "Amanyara",
+    subtitle: "Timber Pavilions Carved into Dramatic Ironshore Coastal Cliffs and Marine Park",
+    location: "Northwest Point, Providenciales",
+    country: "Turks and Caicos Islands",
+    badge: "COLLECTION № 44 · TURKS & CAICOS",
+    rating: "4.99",
+    reviews: "880+",
+    pricePerNight: "From $2,700",
+    priceAmount: "$2,700",
+    seasonalRange: "Low $2,100+ · Winter Peak $5,400+",
+    rateInclusions: "Includes private Range Rover airport transfers, daily wellness classes & reef snorkeling",
+    forbesTier: "Forbes Travel Guide 5-Star & World's Top Island Sanctuary",
+    image: "/images/stayhelper/amanyara_wide_hero.jpg",
+    wideHero: "/images/stayhelper/amanyara_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperAmanyara_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/amanyara_wide_hero.jpg",
+    bookingUrl: "https://www.aman.com/resorts/amanyara",
+    status: "STREAMING",
+    story: [
+      "Occupying a secluded wilderness headland beside Northwest Point Marine National Park, Amanyara derives its name from the Sanskrit word for peace and the Arawak word for place.",
+      "Architect Jean-Michel Gathy's timber and glass pavilions feature three-sided retractable walls that open to tranquil ponds, an iconic clifftop black-tile infinity pool, and pristine coral reefs."
+],
+    features: [
+      {
+            "title": "108-Foot Black-Tile Infinity Pool",
+            "desc": "Dramatic clifftop pool cantilevered above crashing ocean waves"
+      },
+      {
+            "title": "Floating Lake Spa Pavilions",
+            "desc": "Treatment pavilions floating upon a calm natural lake surrounded by mahogany trees"
+      },
+      {
+            "title": "Direct Marine National Park Reef",
+            "desc": "Unrivaled direct barrier reef snorkeling with eagle rays and sea turtles"
+      }
+],
+    activeDeal: {
+      "title": "Amanyara Serenity · 4th Night Free + $250 Credit",
+      "tag": "STAY 4, PAY 3 + $250 CREDIT",
+      "desc": "Complimentary 4th night + $250 wellness & marine snorkeling safari credit"
+}
+  },
+  {
+    id: "stay-45",
+    numeral: "XLV",
+    name: "The Oberoi Amarvilas",
+    subtitle: "Unrivaled Direct Balcony Views of the Immortal Taj Mahal from Every Room",
+    location: "Taj East Gate Road, Agra",
+    country: "Agra, India",
+    badge: "COLLECTION № 45 · AGRA, INDIA",
+    rating: "4.99",
+    reviews: "2,120+",
+    pricePerNight: "From $1,350",
+    priceAmount: "$1,350",
+    seasonalRange: "Low $950+ · Winter Peak $3,100+",
+    rateInclusions: "Includes private golf buggy Taj Mahal escort, royal Mughal welcome & gourmet breakfast",
+    forbesTier: "World's Best Cultural Icon & Condé Nast Traveler Top 10",
+    image: "/images/stayhelper/oberoi_amarvilas_wide_hero.jpg",
+    wideHero: "/images/stayhelper/oberoi_amarvilas_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperOberoiAmarvilas_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/oberoi_amarvilas_wide_hero.jpg",
+    bookingUrl: "https://www.oberoihotels.com/hotels-in-agra-amarvilas-resort/",
+    status: "STREAMING",
+    story: [
+      "Situated a mere 600 meters from the Taj Mahal, The Oberoi Amarvilas was meticulously conceived so that every single guest room and suite frames an unobstructed view of the white marble monument of love.",
+      "Cascading Mughal fountains, terraced lawns, torchlit colonnades, and a cobalt-blue stepped swimming pool recreate the opulent golden era of Mughal royalty with private balcony dinners under moonlight."
+],
+    features: [
+      {
+            "title": "100% Guaranteed Taj Mahal Views",
+            "desc": "Every room and suite features a private balcony framing direct views of the Taj"
+      },
+      {
+            "title": "Cobalt Stepped Mughal Pool",
+            "desc": "Dramatic pool inspired by royal Indian stepwells with heated private cabanas"
+      },
+      {
+            "title": "Private Golf Buggy VIP Access",
+            "desc": "Exclusive direct golf cart transit past crowds directly to the Taj Mahal entrance"
+      }
+],
+    activeDeal: {
+      "title": "Taj Mahal Royal View · Guaranteed Upgrade & Dinner",
+      "tag": "GUARANTEED TAJ VIEW UPGRADE",
+      "desc": "Guaranteed room upgrade to Taj Mahal View Premier Room + Private candlelit balcony dinner for two"
+}
+  },
+  {
+    id: "stay-46",
+    numeral: "XLVI",
+    name: "Qasr Al Sarab Desert Resort by Anantara",
+    subtitle: "Monumental Arabian Fortress Emerging Amidst the Colossal Orange Dunes of the Empty Quarter",
+    location: "Liwa Oasis, Rub' al Khali",
+    country: "Rub' al Khali, Abu Dhabi, UAE",
+    badge: "COLLECTION № 46 · LIWA DESERT, UAE",
+    rating: "4.99",
+    reviews: "1,870+",
+    pricePerNight: "From $1,150",
+    priceAmount: "$1,150",
+    seasonalRange: "Summer $850+ · Winter Peak $2,600+",
+    rateInclusions: "Includes sunset camel trek, desert oasis breakfast buffet & archery experience",
+    forbesTier: "World's Most Instagrammed Desert Fortress & Forbes 5-Star",
+    image: "/images/stayhelper/qasr_al_sarab_wide_hero.jpg",
+    wideHero: "/images/stayhelper/qasr_al_sarab_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperQasrAlSarab_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/qasr_al_sarab_wide_hero.jpg",
+    bookingUrl: "https://www.anantara.com/en/qasr-al-sarab-abu-dhabi",
+    status: "STREAMING",
+    story: [
+      "Rising like a mirage fortress amidst the legendary Rub' al Khali—the largest uninterrupted sand desert on Earth—Qasr Al Sarab is an architectural triumph of ancient Emirati fort design.",
+      "Fortified ramparts, frankincense-scented courtyards, and palatial villas with private plunge pools gaze upon hundreds of square miles of colossal shifting amber sand dunes under star-filled skies."
+],
+    features: [
+      {
+            "title": "Deep Desert Oasis Pool",
+            "desc": "Expansive palm-shaded freeform pool overlooking towering orange sand dunes"
+      },
+      {
+            "title": "Moroccan Hammam Spa",
+            "desc": "Authentic marble hammam offering desert sand scrubs and botanical steam"
+      },
+      {
+            "title": "Bedouin Campfire Feasts",
+            "desc": "Traditional dining in the dunes beneath millions of brilliant desert stars"
+      }
+],
+    activeDeal: {
+      "title": "Desert Mirage · 3rd Night Free + Camel Safari",
+      "tag": "STAY 3, PAY 2 + BEDOUIN DINNER",
+      "desc": "Complimentary 3rd night + Private sunset camel expedition & Bedouin campfire dinner under the stars"
+}
+  },
+  {
+    id: "stay-47",
+    numeral: "XLVII",
+    name: "Six Senses Zighy Bay",
+    subtitle: "Tandem Paraglide Arrival into Dramatic Musandam Fjords and Omani Stone Villas",
+    location: "Musandam Peninsula, Dibba",
+    country: "Musandam Peninsula, Oman",
+    badge: "COLLECTION № 47 · MUSANDAM, OMAN",
+    rating: "4.99",
+    reviews: "1,030+",
+    pricePerNight: "From $1,850",
+    priceAmount: "$1,850",
+    seasonalRange: "Summer $1,350+ · Winter Peak $3,700+",
+    rateInclusions: "Includes tandem paraglide arrival option, organic farm breakfast & saltwater pool access",
+    forbesTier: "World's Best Adventure Luxury Haven & Forbes 5-Star",
+    image: "/images/stayhelper/six_senses_zighy_bay_wide_hero.jpg",
+    wideHero: "/images/stayhelper/six_senses_zighy_bay_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperSixSensesZighyBay_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/six_senses_zighy_bay_wide_hero.jpg",
+    bookingUrl: "https://www.sixsenses.com/en/resorts/zighy-bay",
+    status: "STREAMING",
+    story: [
+      "Nestled between the rugged 1,000-foot Hajar Mountains and the azure waters of Oman's Musandam fjords, Six Senses Zighy Bay offers one of the world's most thrilling arrivals: tandem paragliding directly onto the beach.",
+      "Recreated as an indigenous stone fishing village with date palms and cobblestone alleys, private stone villas feature high ceilings, secluded plunge pools, and sunset cruises on traditional handcrafted dhows."
+],
+    features: [
+      {
+            "title": "Tandem Paraglide Arrival",
+            "desc": "Fly from the mountaintop cliff directly onto the white sand beach of Zighy Bay"
+      },
+      {
+            "title": "Expansive Saltwater Lagoon",
+            "desc": "Region's largest outdoor filtered saltwater pool framed by dramatic mountains"
+      },
+      {
+            "title": "Traditional Dhow Cruises",
+            "desc": "Private sunset excursions aboard hand-carved Omani wooden sailing boats"
+      }
+],
+    activeDeal: {
+      "title": "Musandam Adventure · 4th Night Free + Paraglide",
+      "tag": "STAY 4, PAY 3 + FREE PARAGLIDE",
+      "desc": "Complimentary 4th night + Complimentary tandem paragliding arrival into the bay for two"
+}
+  },
+  {
+    id: "stay-48",
+    numeral: "XLVIII",
+    name: "Explora Rapa Nui",
+    subtitle: "Sculptural Volcanic Eco-Lodge in Harmony with Easter Island's Ancient Moai Heritage",
+    location: "Te Miro Oone, Easter Island",
+    country: "Easter Island, Chile",
+    badge: "COLLECTION № 48 · EASTER ISLAND",
+    rating: "4.99",
+    reviews: "680+",
+    pricePerNight: "From $2,250",
+    priceAmount: "$2,250",
+    seasonalRange: "Low $1,800+ · Festival Peak $4,100+",
+    rateInclusions: "All-inclusive: guided archaeologist excursions, gourmet Chilean cuisine & premium wines",
+    forbesTier: "LEED Gold Architectural Eco-Lodge & National Geographic Unique Lodge",
+    image: "/images/stayhelper/explora_rapa_nui_wide_hero.jpg",
+    wideHero: "/images/stayhelper/explora_rapa_nui_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperExploraRapaNui_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/explora_rapa_nui_wide_hero.jpg",
+    bookingUrl: "https://www.explora.com/easter-island-hotel/",
+    status: "STREAMING",
+    story: [
+      "Emerging effortlessly from the volcanic slopes of mysterious Rapa Nui, Explora is the premier architectural eco-lodge in the South Pacific, certified LEED Gold for environmental harmony.",
+      "Minimalist local pine and volcanic stone suites frame vast Pacific Ocean panoramas, serving as the luxurious base for private naturalist and archaeological treks uncovering the enigmatic ancient Moai."
+],
+    features: [
+      {
+            "title": "Private Archaeological Treks",
+            "desc": "Over 20 private guided excursions exploring volcanic craters and ancient ceremonial sites"
+      },
+      {
+            "title": "Hare Vai Open-Air Spa",
+            "desc": "Four open-air hydrotherapy hot tubs and volcanic stone massage rooms"
+      },
+      {
+            "title": "LEED Gold Eco-Architecture",
+            "desc": "Curved organic timber structures designed to leave zero footprint on sacred land"
+      }
+],
+    activeDeal: {
+      "title": "Easter Island Discovery · All-Inclusive + 20% Off",
+      "tag": "ALL-INCLUSIVE ARCHAEOLOGY",
+      "desc": "All-inclusive private Moai expedition package + 20% savings on 4+ night extended stays"
+}
+  },
+  {
+    id: "stay-49",
+    numeral: "XLIX",
+    name: "Grand Hotel Tremezzo",
+    subtitle: "Belle Époque Floating Pontoon Pool Palace on Lake Como Overlooking Bellagio",
+    location: "Via Regina, Tremezzina",
+    country: "Lake Como, Lombardy, Italy",
+    badge: "COLLECTION № 49 · LAKE COMO, ITALY",
+    rating: "4.99",
+    reviews: "1,890+",
+    pricePerNight: "From $1,950",
+    priceAmount: "$1,950",
+    seasonalRange: "Low $1,400+ · Summer Glamour $4,200+",
+    rateInclusions: "Includes Grand buffet breakfast, private park access & T Spa hydrotherapy pass",
+    forbesTier: "Belle Époque Floating Palace & Forbes Travel Guide 5-Star",
+    image: "/images/stayhelper/grand_hotel_tremezzo_wide_hero.jpg",
+    wideHero: "/images/stayhelper/grand_hotel_tremezzo_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperGrandHotelTremezzo_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/grand_hotel_tremezzo_wide_hero.jpg",
+    bookingUrl: "https://www.grandhoteltremezzo.com/",
+    status: "STREAMING",
+    story: [
+      "Standing majestically on the western shore of Lake Como directly facing Bellagio and the Grigne mountains, Grand Hotel Tremezzo is an iconic Belle Époque palace open since 1910.",
+      "Its world-famous pontoon pool floats directly on the crystal waters of the lake, complemented by twenty thousand square meters of centuries-old botanical gardens and 18th-century Villa Emilia T Spa."
+],
+    features: [
+      {
+            "title": "Water-on-Water Floating Pool",
+            "desc": "The world's most famous swimming pool floating directly on Lake Como"
+      },
+      {
+            "title": "T Spa in 18th-Century Villa",
+            "desc": "Historic Villa Emilia with infinity lake-view hydrotherapy and sauna"
+      },
+      {
+            "title": "Private Vintage Water Limousines",
+            "desc": "Classic handcrafted wooden speedboats 'Ruy' and 'Batt' for private lake tours"
+      }
+],
+    activeDeal: {
+      "title": "Lake Como Dolce Vita · Vintage Boat & $150 Spa",
+      "tag": "VINTAGE BOAT & $150 SPA",
+      "desc": "Complimentary 1-hour private tour aboard vintage wooden Ruy speed boat + $150 T Spa credit"
+}
+  },
+  {
+    id: "stay-50",
+    numeral: "L",
+    name: "Little Kulala",
+    subtitle: "Bleached Pod Architecture and Rooftop Starbeds in the Red Dunes of Sossusvlei",
+    location: "Kulala Wilderness Reserve, Sossusvlei",
+    country: "Sossusvlei, Namib Desert, Namibia",
+    badge: "COLLECTION № 50 · NAMIB DESERT",
+    rating: "4.99",
+    reviews: "720+",
+    pricePerNight: "From $2,650",
+    priceAmount: "$2,650",
+    seasonalRange: "Low $2,100+ · Safari Peak $4,800+",
+    rateInclusions: "All-inclusive: private reserve access to Sossusvlei, guided dune drives & gourmet dining",
+    forbesTier: "World's Premier Desert Safari Lodge & Condé Nast Gold List",
+    image: "/images/stayhelper/little_kulala_wide_hero.jpg",
+    wideHero: "/images/stayhelper/little_kulala_wide_hero.jpg",
+    videoSrc: "/videos/StayHelperLittleKulala_Master_Reel.mp4",
+    posterSrc: "/images/stayhelper/little_kulala_wide_hero.jpg",
+    bookingUrl: "https://wildernessdestinations.com/africa/namibia/sossusvlei/little-kulala",
+    status: "STREAMING",
+    story: [
+      "Nestled inside a 67,000-acre private reserve with direct private gate access to Sossusvlei, Little Kulala is Namibia's premier architectural luxury eco-safari camp.",
+      "Contemporary bleached timber kulalas inspired by the desert pods feature private plunge pools, glass walls looking out at roaming oryx and springbok, and dedicated rooftop starbeds for sleeping beneath the galaxy."
+],
+    features: [
+      {
+            "title": "Rooftop Stargazing Sleepouts",
+            "desc": "Bespoke bedding setups on private villa roofs under an International Dark Sky Reserve"
+      },
+      {
+            "title": "Private Direct Gate to Sossusvlei",
+            "desc": "Exclusive early sunrise access to the 300-meter terracotta dunes before public gates open"
+      },
+      {
+            "title": "Private Desert Plunge Pools",
+            "desc": "Cool refreshing plunge pools with unrestricted views across the vast gravel plains"
+      }
+],
+    activeDeal: {
+      "title": "Namib Sky Safari · Hot Air Balloon & Starbed",
+      "tag": "HOT AIR BALLOON & STARBED",
+      "desc": "Complimentary private sunrise Sossusvlei hot air balloon safari + Rooftop stargazing sleepout setup"
+}
   }
 ];
 
