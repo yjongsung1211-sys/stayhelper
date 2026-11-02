@@ -11,7 +11,11 @@
       "description": "Crossing a wooden suspension bridge into an untouched virgin rainforest valley above Wos River.",
       "fact": "💡 HIGHLIGHT: BILL BENSLEY 1800S EXPEDITION TENT SANCTUARY",
       "imagePath": "stays/capella_ubud/act1.jpg",
-      "voPath": "stays/capella_ubud/vo_1.mp3"
+      "voPath": "stays/capella_ubud/vo_1.mp3",
+      "voDurationSeconds": 9.89,
+      "voDurationFrames": 297,
+      "durationInFrames": 325,
+      "startFrame": 0
     },
     {
       "badge": "ACT 02 / BOTANICAL PATH",
@@ -20,7 +24,11 @@
       "description": "Wandering along secluded stone trails past giant ferns, wild orchids, and terraced rice paddies.",
       "fact": "💡 NATURE: UNTOUCHED TROPICAL CANOPY ABOVE WOS RIVER",
       "imagePath": "stays/capella_ubud/act2.jpg",
-      "voPath": "stays/capella_ubud/vo_2.mp3"
+      "voPath": "stays/capella_ubud/vo_2.mp3",
+      "voDurationSeconds": 7.9,
+      "voDurationFrames": 237,
+      "durationInFrames": 265,
+      "startFrame": 325
     },
     {
       "badge": "ACT 03 / SACRED HERITAGE",
@@ -29,7 +37,11 @@
       "description": "Hammered brass bathtubs, bespoke Balinese ikat fabrics, and antique steamer trunks.",
       "fact": "💡 ARTIFACTS: HANDCRAFTED BALINESE WOODCARVING & BRASS TUBS",
       "imagePath": "stays/capella_ubud/act3.jpg",
-      "voPath": "stays/capella_ubud/vo_3.mp3"
+      "voPath": "stays/capella_ubud/vo_3.mp3",
+      "voDurationSeconds": 8.06,
+      "voDurationFrames": 242,
+      "durationInFrames": 270,
+      "startFrame": 590
     },
     {
       "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
@@ -38,7 +50,11 @@
       "description": "Floating in your private copper-decked saltwater pool suspended amidst the jungle canopy.",
       "fact": "💡 EXPERIENCE: PRIVATE OUTDOOR SALT-WATER POOL IN EVERY TENT",
       "imagePath": "stays/capella_ubud/act4.jpg",
-      "voPath": "stays/capella_ubud/vo_4.mp3"
+      "voPath": "stays/capella_ubud/vo_4.mp3",
+      "voDurationSeconds": 6.67,
+      "voDurationFrames": 200,
+      "durationInFrames": 228,
+      "startFrame": 860
     },
     {
       "badge": "ACT 05 / HOLISTIC HEALING",
@@ -47,7 +63,11 @@
       "description": "Healing Balinese wellness treatments aligned with lunar cycles inside open-air tent pavilions.",
       "fact": "💡 WELLNESS: BESPOKE LUNAR-ALIGNED CHAKRA THERAPY",
       "imagePath": "stays/capella_ubud/act5.jpg",
-      "voPath": "stays/capella_ubud/vo_5.mp3"
+      "voPath": "stays/capella_ubud/vo_5.mp3",
+      "voDurationSeconds": 7.13,
+      "voDurationFrames": 214,
+      "durationInFrames": 242,
+      "startFrame": 1088
     },
     {
       "badge": "ACT 06 / GOLDEN HOUR",
@@ -56,7 +76,11 @@
       "description": "Gathering around the crackling jungle campfire with roasted marshmallows and spiced hot toddies.",
       "fact": "💡 SUNSET: GOLDEN HOUR OVER THE UBUD SACRED VALLEY",
       "imagePath": "stays/capella_ubud/act6.jpg",
-      "voPath": "stays/capella_ubud/vo_6.mp3"
+      "voPath": "stays/capella_ubud/vo_6.mp3",
+      "voDurationSeconds": 8.76,
+      "voDurationFrames": 263,
+      "durationInFrames": 291,
+      "startFrame": 1330
     }
   ],
   "outro": {
@@ -64,5 +88,6 @@
     "tagline": "BALI, INDONESIA",
     "cta": "Reserve Your Private Sanctuary ↗",
     "url": "STAYHELPER · CURATED EDITORIAL"
-  }
+  },
+  "totalDurationInFrames": 1691
 }

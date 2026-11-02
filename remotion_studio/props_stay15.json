@@ -11,7 +11,11 @@
       "description": "Ascending to the 33rd floor of Otemachi Tower overlooking the Imperial Palace and Mount Fuji.",
       "fact": "💡 HIGHLIGHT: TOP 6 FLOORS OF PRESTIGIOUS OTEMACHI TOWER",
       "imagePath": "stays/aman_tokyo/act1.jpg",
-      "voPath": "stays/aman_tokyo/vo_1.mp3"
+      "voPath": "stays/aman_tokyo/vo_1.mp3",
+      "voDurationSeconds": 7.97,
+      "voDurationFrames": 239,
+      "durationInFrames": 267,
+      "startFrame": 0
     },
     {
       "badge": "ACT 02 / BOTANICAL PATH",
@@ -20,7 +24,11 @@
       "description": "Stepping along minimalist camphor wood hallways past indoor stone rock gardens and ikebana.",
       "fact": "💡 DESIGN: TRADITIONAL ENGAWA TIMBER RUNWAYS & IKEBANA",
       "imagePath": "stays/aman_tokyo/act2.jpg",
-      "voPath": "stays/aman_tokyo/vo_2.mp3"
+      "voPath": "stays/aman_tokyo/vo_2.mp3",
+      "voDurationSeconds": 6.29,
+      "voDurationFrames": 189,
+      "durationInFrames": 217,
+      "startFrame": 267
     },
     {
       "badge": "ACT 03 / SACRED HERITAGE",
@@ -29,7 +37,11 @@
       "description": "Standing beneath a soaring 30-meter washi paper ceiling that filters natural daylight like a lantern.",
       "fact": "💡 ARCHITECTURE: KERRY HILL 30-METER SHOJI PAPER ATRIUM",
       "imagePath": "stays/aman_tokyo/act3.jpg",
-      "voPath": "stays/aman_tokyo/vo_3.mp3"
+      "voPath": "stays/aman_tokyo/vo_3.mp3",
+      "voDurationSeconds": 7.56,
+      "voDurationFrames": 227,
+      "durationInFrames": 255,
+      "startFrame": 484
     },
     {
       "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
@@ -38,7 +50,11 @@
       "description": "Swimming in the 30-meter heated basalt pool overlooking Mount Fuji and the Tokyo skyline.",
       "fact": "💡 EXPERIENCE: 30-METER BLACK GRANITE SKYLINE POOL",
       "imagePath": "stays/aman_tokyo/act4.jpg",
-      "voPath": "stays/aman_tokyo/vo_4.mp3"
+      "voPath": "stays/aman_tokyo/vo_4.mp3",
+      "voDurationSeconds": 7.94,
+      "voDurationFrames": 238,
+      "durationInFrames": 266,
+      "startFrame": 739
     },
     {
       "badge": "ACT 05 / HOLISTIC HEALING",
@@ -47,7 +63,11 @@
       "description": "Soaking in mineral-rich Japanese hot stone onsens infused with seasonal Kuromoji botanicals.",
       "fact": "💡 WELLNESS: HEATED HOT SPRING STONE BATHS & KAMPO OILS",
       "imagePath": "stays/aman_tokyo/act5.jpg",
-      "voPath": "stays/aman_tokyo/vo_5.mp3"
+      "voPath": "stays/aman_tokyo/vo_5.mp3",
+      "voDurationSeconds": 7.34,
+      "voDurationFrames": 220,
+      "durationInFrames": 248,
+      "startFrame": 1005
     },
     {
       "badge": "ACT 06 / GOLDEN HOUR",
@@ -56,7 +76,11 @@
       "description": "Sipping rare vintage sake at The Lounge by Aman as the neon city lights illuminate the dusk.",
       "fact": "💡 SUNSET: GOLDEN HOUR OVER THE TOKYO METROPOLITAN SKYLINE",
       "imagePath": "stays/aman_tokyo/act6.jpg",
-      "voPath": "stays/aman_tokyo/vo_6.mp3"
+      "voPath": "stays/aman_tokyo/vo_6.mp3",
+      "voDurationSeconds": 9.46,
+      "voDurationFrames": 284,
+      "durationInFrames": 312,
+      "startFrame": 1253
     }
   ],
   "outro": {
@@ -64,5 +88,6 @@
     "tagline": "TOKYO, JAPAN",
     "cta": "Reserve Your Private Sanctuary ↗",
     "url": "STAYHELPER · CURATED EDITORIAL"
-  }
+  },
+  "totalDurationInFrames": 1635
 }

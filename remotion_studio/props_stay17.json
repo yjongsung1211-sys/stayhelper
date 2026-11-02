@@ -11,7 +11,11 @@
       "description": "Gliding down to the island's private runway surrounded by virgin coral reefs and jungle peaks.",
       "fact": "💡 HIGHLIGHT: 3,000-ACRE SELF-SUSTAINING PRIVATE ISLAND",
       "imagePath": "stays/como_laucala/act1.jpg",
-      "voPath": "stays/como_laucala/vo_1.mp3"
+      "voPath": "stays/como_laucala/vo_1.mp3",
+      "voDurationSeconds": 9.84,
+      "voDurationFrames": 295,
+      "durationInFrames": 323,
+      "startFrame": 0
     },
     {
       "badge": "ACT 02 / BOTANICAL PATH",
@@ -20,7 +24,11 @@
       "description": "Riding horseback or private electric buggies through 240 acres of pristine coconut plantations.",
       "fact": "💡 LANDSCAPE: ANCIENT RAINFOREST & PRIVATE SANDY COVES",
       "imagePath": "stays/como_laucala/act2.jpg",
-      "voPath": "stays/como_laucala/vo_2.mp3"
+      "voPath": "stays/como_laucala/vo_2.mp3",
+      "voDurationSeconds": 7.13,
+      "voDurationFrames": 214,
+      "durationInFrames": 242,
+      "startFrame": 323
     },
     {
       "badge": "ACT 03 / SACRED HERITAGE",
@@ -29,7 +37,11 @@
       "description": "Handwoven magimagi coconut fiber lashings, thatched roofs, and natural stone outdoor bathtubs.",
       "fact": "💡 ARCHITECTURE: TRADITIONAL MAGIMAGI WEAVING ARTISTRY",
       "imagePath": "stays/como_laucala/act3.jpg",
-      "voPath": "stays/como_laucala/vo_3.mp3"
+      "voPath": "stays/como_laucala/vo_3.mp3",
+      "voDurationSeconds": 7.78,
+      "voDurationFrames": 233,
+      "durationInFrames": 261,
+      "startFrame": 565
     },
     {
       "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
@@ -38,7 +50,11 @@
       "description": "Swimming through the iconic 25-meter transparent glass cube suspended inside a lagoon.",
       "fact": "💡 SIGNATURE: WORLD-FAMOUS 25M CLEAR ACRYLIC GLASS POOL",
       "imagePath": "stays/como_laucala/act4.jpg",
-      "voPath": "stays/como_laucala/vo_4.mp3"
+      "voPath": "stays/como_laucala/vo_4.mp3",
+      "voDurationSeconds": 6.82,
+      "voDurationFrames": 204,
+      "durationInFrames": 232,
+      "startFrame": 826
     },
     {
       "badge": "ACT 05 / HOLISTIC HEALING",
@@ -47,7 +63,11 @@
       "description": "Open-air clifftop spa pavilions utilizing island-grown volcanic ash, virgin coconut, and herbs.",
       "fact": "💡 WELLNESS: VOLCANIC ASH & PURE COCONUT ISLAND THERAPY",
       "imagePath": "stays/como_laucala/act5.jpg",
-      "voPath": "stays/como_laucala/vo_5.mp3"
+      "voPath": "stays/como_laucala/vo_5.mp3",
+      "voDurationSeconds": 8.26,
+      "voDurationFrames": 248,
+      "durationInFrames": 276,
+      "startFrame": 1058
     },
     {
       "badge": "ACT 06 / GOLDEN HOUR",
@@ -56,7 +76,11 @@
       "description": "Private beach barbecue under tiki torches with freshly caught yellowfin tuna and champagne.",
       "fact": "💡 SUNSET: GOLDEN HOUR OVER THE FIJIAN ARCHIPELAGO",
       "imagePath": "stays/como_laucala/act6.jpg",
-      "voPath": "stays/como_laucala/vo_6.mp3"
+      "voPath": "stays/como_laucala/vo_6.mp3",
+      "voDurationSeconds": 9.12,
+      "voDurationFrames": 274,
+      "durationInFrames": 302,
+      "startFrame": 1334
     }
   ],
   "outro": {
@@ -64,5 +88,6 @@
     "tagline": "FIJI, SOUTH PACIFIC",
     "cta": "Reserve Your Private Sanctuary ↗",
     "url": "STAYHELPER · CURATED EDITORIAL"
-  }
+  },
+  "totalDurationInFrames": 1706
 }

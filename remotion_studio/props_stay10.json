@@ -11,7 +11,11 @@
       "description": "Strolling down the iconic pine-lined allée toward the azure Mediterranean.",
       "fact": "💡 PROVENANCE: 1870 PALACE COMMANDING CAP D'ANTIBES CLIFFS",
       "imagePath": "stays/eden_roc/act1.jpg",
-      "voPath": "stays/eden_roc/vo_1.mp3"
+      "voPath": "stays/eden_roc/vo_1.mp3",
+      "voDurationSeconds": 7.94,
+      "voDurationFrames": 238,
+      "durationInFrames": 266,
+      "startFrame": 0
     },
     {
       "badge": "ACT 02 / COASTAL PINE GROVES",
@@ -20,7 +24,11 @@
       "description": "Thirty-three acres of fragrant coastal gardens and secluded cliffside trails.",
       "fact": "💡 BOTANICAL: CENTURY-OLD PRIVATE PINE & ROSE GARDEN ESTATE",
       "imagePath": "stays/eden_roc/act2.jpg",
-      "voPath": "stays/eden_roc/vo_2.mp3"
+      "voPath": "stays/eden_roc/vo_2.mp3",
+      "voDurationSeconds": 7.78,
+      "voDurationFrames": 233,
+      "durationInFrames": 261,
+      "startFrame": 266
     },
     {
       "badge": "ACT 03 / SEASIDE CABANAS",
@@ -29,7 +37,11 @@
       "description": "Private wooden day cabanas perched right above gentle Mediterranean surf.",
       "fact": "💡 LEGEND: SANCTUARY OF ARTISTS, WRITERS & FILM ROYALTY",
       "imagePath": "stays/eden_roc/act3.jpg",
-      "voPath": "stays/eden_roc/vo_3.mp3"
+      "voPath": "stays/eden_roc/vo_3.mp3",
+      "voDurationSeconds": 8.3,
+      "voDurationFrames": 249,
+      "durationInFrames": 277,
+      "startFrame": 527
     },
     {
       "badge": "ACT 04 / BASALT SEAWATER POOL",
@@ -38,7 +50,11 @@
       "description": "Carved directly into white coastal limestone with panoramic Lerins Islands views.",
       "fact": "💡 SIGNATURE: WORLD-FAMOUS HEATED COASTAL SEAWATER POOL",
       "imagePath": "stays/eden_roc/act4.jpg",
-      "voPath": "stays/eden_roc/vo_4.mp3"
+      "voPath": "stays/eden_roc/vo_4.mp3",
+      "voDurationSeconds": 7.13,
+      "voDurationFrames": 214,
+      "durationInFrames": 242,
+      "startFrame": 804
     },
     {
       "badge": "ACT 05 / DIOR SPA & WELLNESS",
@@ -47,7 +63,11 @@
       "description": "Tailored coastal treatments in open-air gazebos under the maritime sun.",
       "fact": "💡 WELLNESS: EXCLUSIVE DIOR SPA WELLNESS THERAPIES",
       "imagePath": "stays/eden_roc/act5.jpg",
-      "voPath": "stays/eden_roc/vo_5.mp3"
+      "voPath": "stays/eden_roc/vo_5.mp3",
+      "voDurationSeconds": 6.86,
+      "voDurationFrames": 206,
+      "durationInFrames": 234,
+      "startFrame": 1046
     },
     {
       "badge": "ACT 06 / TWILIGHT BELLINI",
@@ -56,7 +76,11 @@
       "description": "Champagne cocktails on the terrace as the Riviera sky turns deep rose gold.",
       "fact": "💡 SUNSET: TIMELESS FRENCH RIVIERA GLAMOUR & HORIZON TOAST",
       "imagePath": "stays/eden_roc/act6.jpg",
-      "voPath": "stays/eden_roc/vo_6.mp3"
+      "voPath": "stays/eden_roc/vo_6.mp3",
+      "voDurationSeconds": 8.02,
+      "voDurationFrames": 240,
+      "durationInFrames": 268,
+      "startFrame": 1280
     }
   ],
   "outro": {
@@ -64,5 +88,6 @@
     "tagline": "CAP D'ANTIBES · CÔTE D'AZUR",
     "cta": "Reserve Your Private Sanctuary ↗",
     "url": "STAYHELPER · CURATED EDITORIAL"
-  }
+  },
+  "totalDurationInFrames": 1618
 }

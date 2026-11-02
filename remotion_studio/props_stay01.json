@@ -1,0 +1,93 @@
+{
+  "hotelName": "AMANGIRI",
+  "hotelSubtitle": "CANYON POINT · UTAH",
+  "destination": "UTAH, UNITED STATES",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / MONOLITHIC ARRIVAL",
+      "title": "The Desert Sanctuary",
+      "highlightWord": "Sanctuary",
+      "description": "Carved into 165-million-year Navajo sandstone in profound canyon silence.",
+      "fact": "💡 ARCHITECTURE: 600-ACRE PRISTINE MONOLITHIC DESERT ESCAPE",
+      "imagePath": "stays/amangiri_01_arrival.jpg",
+      "voPath": "stays/amangiri_vo_act1.mp3",
+      "voDurationSeconds": 4.1,
+      "voDurationFrames": 123,
+      "durationInFrames": 151,
+      "startFrame": 0
+    },
+    {
+      "badge": "ACT 02 / PRIVATE SUITE",
+      "title": "Mesa View Pavilion",
+      "highlightWord": "Pavilion",
+      "description": "Private courtyard with open-air fireplace framing boundless canyon vistas.",
+      "fact": "💡 SUITE: RETRACTABLE GLASS WALLS & OUTDOOR LOUNGE",
+      "imagePath": "stays/amangiri_03_suite.jpg",
+      "voPath": "stays/amangiri_vo_act2.mp3",
+      "voDurationSeconds": 4.27,
+      "voDurationFrames": 128,
+      "durationInFrames": 156,
+      "startFrame": 151
+    },
+    {
+      "badge": "ACT 03 / STONE SANCTUARY",
+      "title": "Navajo Hydrotherapy",
+      "highlightWord": "Hydrotherapy",
+      "description": "Carved stone water pavilion with sunken plunge and steam baths.",
+      "fact": "💡 WELLNESS: WATER PAVILION & SACRED NAVAJO RITUALS",
+      "imagePath": "stays/amangiri_04_stone_bath.jpg",
+      "voPath": "stays/amangiri_vo_act3.mp3",
+      "voDurationSeconds": 4.46,
+      "voDurationFrames": 134,
+      "durationInFrames": 162,
+      "startFrame": 307
+    },
+    {
+      "badge": "ACT 04 / MONOLITH POOL",
+      "title": "Curving Mesa Pool",
+      "highlightWord": "Pool",
+      "description": "Curving organically around a colossal 165-million-year sandstone mesa.",
+      "fact": "💡 POOL: ICONIC MONOLITHIC ESCARPMENT SWIMMING POOL",
+      "imagePath": "stays/amangiri_real_01_rock_pool.jpg",
+      "voPath": "stays/amangiri_vo_act4.mp3",
+      "voDurationSeconds": 5.09,
+      "voDurationFrames": 153,
+      "durationInFrames": 181,
+      "startFrame": 469
+    },
+    {
+      "badge": "ACT 05 / CANYON HORIZON",
+      "title": "Boundless Mesa Skies",
+      "highlightWord": "Skies",
+      "description": "Pristine desert expanse untouched by time under deep sapphire horizons.",
+      "fact": "💡 GEOLOGY: 165-MILLION-YEAR NAVAJO SANDSTONE FORMATION",
+      "imagePath": "stays/amangiri_real_05_landscape.jpg",
+      "voPath": "stays/amangiri_vo_act5.mp3",
+      "voDurationSeconds": 4.1,
+      "voDurationFrames": 123,
+      "durationInFrames": 151,
+      "startFrame": 650
+    },
+    {
+      "badge": "ACT 06 / GOLDEN HOUR",
+      "title": "Twilight Fireplace Toast",
+      "highlightWord": "Twilight",
+      "description": "Sipping private reserve wine by the glowing fire pit as canyon stars emerge.",
+      "fact": "💡 SUNSET: FORBES 5-STAR DESERT TWILIGHT RETREAT",
+      "imagePath": "stays/amangiri_golden_hour_finale.jpg",
+      "voPath": "stays/amangiri_vo_act6.mp3",
+      "voDurationSeconds": 4.42,
+      "voDurationFrames": 132,
+      "durationInFrames": 160,
+      "startFrame": 801
+    }
+  ],
+  "outro": {
+    "brand": "STAYHELPER",
+    "tagline": "Curated Luxury Sanctuaries",
+    "cta": "Reserve Your Desert Pavilion",
+    "url": "stayhelper.com · Fora VIP Partner"
+  },
+  "totalDurationInFrames": 1031
+}

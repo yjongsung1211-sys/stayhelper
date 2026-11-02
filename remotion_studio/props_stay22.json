@@ -11,7 +11,11 @@
       "description": "Commanding Avenue Montaigne since 1913, the supreme temple of French haute couture.",
       "fact": "💡 PALACE: OFFICIAL FRENCH GOVERNMENT DISTINCTION PALACE",
       "imagePath": "stays/plaza_athenee_paris/act1.jpg",
-      "voPath": "stays/plaza_athenee_paris/vo_1.mp3"
+      "voPath": "stays/plaza_athenee_paris/vo_1.mp3",
+      "voDurationSeconds": 8.5,
+      "voDurationFrames": 255,
+      "durationInFrames": 283,
+      "startFrame": 0
     },
     {
       "badge": "ACT 02 / GERANIUM FACADE",
@@ -20,7 +24,11 @@
       "description": "Strolling beneath iconic red awnings and thousands of cascading scarlet geraniums.",
       "fact": "💡 SIGNATURE: LEGENDARY 1,900 SCARLET GERANIUM COURTYARD",
       "imagePath": "stays/plaza_athenee_paris/act2.jpg",
-      "voPath": "stays/plaza_athenee_paris/vo_2.mp3"
+      "voPath": "stays/plaza_athenee_paris/vo_2.mp3",
+      "voDurationSeconds": 7.68,
+      "voDurationFrames": 230,
+      "durationInFrames": 258,
+      "startFrame": 283
     },
     {
       "badge": "ACT 03 / HAUSSMANNIAN SUITE",
@@ -29,7 +37,11 @@
       "description": "Wrought-iron balconies framing direct unobstructed vistas of the Eiffel Tower.",
       "fact": "💡 VIEW: ICONIC PRIVATE EIFFEL TOWER BREAKFAST BALCONY",
       "imagePath": "stays/plaza_athenee_paris/act3.jpg",
-      "voPath": "stays/plaza_athenee_paris/vo_3.mp3"
+      "voPath": "stays/plaza_athenee_paris/vo_3.mp3",
+      "voDurationSeconds": 7.22,
+      "voDurationFrames": 217,
+      "durationInFrames": 245,
+      "startFrame": 541
     },
     {
       "badge": "ACT 04 / SALON INDULGENCE",
@@ -38,7 +50,11 @@
       "description": "Warm fresh brioche and vintage champagne served in your gilded Marie-Antoinette salon.",
       "fact": "💡 DINING: 3-MICHELIN STAR GASTRONOMY & PRIVATE SALONS",
       "imagePath": "stays/plaza_athenee_paris/act4.jpg",
-      "voPath": "stays/plaza_athenee_paris/vo_4.mp3"
+      "voPath": "stays/plaza_athenee_paris/vo_4.mp3",
+      "voDurationSeconds": 7.46,
+      "voDurationFrames": 224,
+      "durationInFrames": 252,
+      "startFrame": 786
     },
     {
       "badge": "ACT 05 / DIOR SPA RETREAT",
@@ -47,7 +63,11 @@
       "description": "Bespoke beauty rituals crafted by the House of Dior in serene white-marble sanctuaries.",
       "fact": "💡 WELLNESS: EXCLUSIVE DIOR SPA PLAZA ATHÉNÉE INSTITUT",
       "imagePath": "stays/plaza_athenee_paris/act5.jpg",
-      "voPath": "stays/plaza_athenee_paris/vo_5.mp3"
+      "voPath": "stays/plaza_athenee_paris/vo_5.mp3",
+      "voDurationSeconds": 6.41,
+      "voDurationFrames": 192,
+      "durationInFrames": 220,
+      "startFrame": 1038
     },
     {
       "badge": "ACT 06 / TWILIGHT ILLUMINATION",
@@ -56,7 +76,11 @@
       "description": "Toasting with vintage champagne as the Eiffel Tower sparkles in midnight brilliance.",
       "fact": "💡 CELEBRATION: MIDNIGHT SPARKLING EIFFEL TOWER LIGHT SHOW",
       "imagePath": "stays/plaza_athenee_paris/act6.jpg",
-      "voPath": "stays/plaza_athenee_paris/vo_6.mp3"
+      "voPath": "stays/plaza_athenee_paris/vo_6.mp3",
+      "voDurationSeconds": 7.37,
+      "voDurationFrames": 221,
+      "durationInFrames": 249,
+      "startFrame": 1258
     }
   ],
   "outro": {
@@ -64,5 +88,6 @@
     "tagline": "Curated Luxury Sanctuaries",
     "cta": "Reserve Your Palace Suite",
     "url": "stayhelper.com · Fora VIP Partner"
-  }
+  },
+  "totalDurationInFrames": 1577
 }

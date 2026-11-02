@@ -11,7 +11,11 @@
       "description": "Hidden amidst Kyoto's ancient Takagamine cedar groves.",
       "fact": "💡 ARCHITECTURE: KERRY HILL MINIMALIST TIMBER & LIVING CEDAR FOREST",
       "imagePath": "stays/aman_kyoto/act1.jpg",
-      "voPath": "stays/aman_kyoto/vo_1.mp3"
+      "voPath": "stays/aman_kyoto/vo_1.mp3",
+      "voDurationSeconds": 8.83,
+      "voDurationFrames": 265,
+      "durationInFrames": 293,
+      "startFrame": 0
     },
     {
       "badge": "ACT 02 / MOSS GARDEN",
@@ -20,7 +24,11 @@
       "description": "Wandering moss-covered stone pathways framed by wild Japanese maples.",
       "fact": "💡 LANDSCAPE: HISTORIC 7.2-ACRE SECRET BOTANICAL GARDEN",
       "imagePath": "stays/aman_kyoto/act2.jpg",
-      "voPath": "stays/aman_kyoto/vo_2.mp3"
+      "voPath": "stays/aman_kyoto/vo_2.mp3",
+      "voDurationSeconds": 6.96,
+      "voDurationFrames": 209,
+      "durationInFrames": 237,
+      "startFrame": 293
     },
     {
       "badge": "ACT 03 / TATAMI PAVILION",
@@ -29,7 +37,11 @@
       "description": "Minimalist floor-to-ceiling glass pavilions framing vibrant seasonal foliage.",
       "fact": "💡 INTERIOR: TRADITIONAL WASHI LANTERNS & HINOKI CYPRESS WOOD",
       "imagePath": "stays/aman_kyoto/act3.jpg",
-      "voPath": "stays/aman_kyoto/vo_3.mp3"
+      "voPath": "stays/aman_kyoto/vo_3.mp3",
+      "voDurationSeconds": 8.93,
+      "voDurationFrames": 268,
+      "durationInFrames": 296,
+      "startFrame": 530
     },
     {
       "badge": "ACT 04 / MINERAL ONSEN",
@@ -38,7 +50,11 @@
       "description": "Natural subterranean thermal spring waters beneath towering cedars.",
       "fact": "💡 WELLNESS: HEALING MINERAL WATERS DIRECTLY FROM LOCAL BEDROCK",
       "imagePath": "stays/aman_kyoto/act4.jpg",
-      "voPath": "stays/aman_kyoto/vo_4.mp3"
+      "voPath": "stays/aman_kyoto/vo_4.mp3",
+      "voDurationSeconds": 8.16,
+      "voDurationFrames": 245,
+      "durationInFrames": 273,
+      "startFrame": 826
     },
     {
       "badge": "ACT 05 / TEA CEREMONY",
@@ -47,7 +63,11 @@
       "description": "Exclusive garden pavilion tea rituals and multi-course seasonal Kaiseki.",
       "fact": "💡 CUISINE: MICHELIN-CALIBER BESPOKE KYOTO DINING",
       "imagePath": "stays/aman_kyoto/act5.jpg",
-      "voPath": "stays/aman_kyoto/vo_5.mp3"
+      "voPath": "stays/aman_kyoto/vo_5.mp3",
+      "voDurationSeconds": 8.18,
+      "voDurationFrames": 246,
+      "durationInFrames": 274,
+      "startFrame": 1099
     },
     {
       "badge": "ACT 06 / TWILIGHT STILLNESS",
@@ -56,7 +76,11 @@
       "description": "Lantern-lit tranquil evenings immersed in timeless Kyoto forest stillness.",
       "fact": "💡 SERENITY: ABSOLUTE PRIVACY IN KYOTO'S NORTHERN HILLS",
       "imagePath": "stays/aman_kyoto/act6.jpg",
-      "voPath": "stays/aman_kyoto/vo_6.mp3"
+      "voPath": "stays/aman_kyoto/vo_6.mp3",
+      "voDurationSeconds": 6.74,
+      "voDurationFrames": 202,
+      "durationInFrames": 230,
+      "startFrame": 1373
     }
   ],
   "outro": {
@@ -64,5 +88,6 @@
     "tagline": "TAKAGAMINE · SECRET CEDAR FOREST",
     "cta": "Reserve Your Private Sanctuary ↗",
     "url": "STAYHELPER · CURATED EDITORIAL"
-  }
+  },
+  "totalDurationInFrames": 1673
 }

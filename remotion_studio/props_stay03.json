@@ -1,0 +1,93 @@
+{
+  "hotelName": "BULGARI RESORT",
+  "hotelSubtitle": "DUBAI · JUMEIRA BAY ISLAND",
+  "destination": "DUBAI, UAE",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / THE SANCTUARY",
+      "title": "Island Maritime Arrival",
+      "highlightWord": "Sanctuary",
+      "description": "Seahorse-shaped private island connected by a private bridge to Dubai.",
+      "fact": "💡 HIGHLIGHT: PRIVATE ULTRA-EXCLUSIVE SEAHORSE ISLAND",
+      "imagePath": "stays/bulgari_pure_01_arrival_aerial.jpg",
+      "voPath": "stays/bulgari_master_vo_1.mp3",
+      "voDurationSeconds": 2.69,
+      "voDurationFrames": 81,
+      "durationInFrames": 109,
+      "startFrame": 0
+    },
+    {
+      "badge": "ACT 02 / THE PRIVATE SUITE",
+      "title": "Italian Haute Horlogerie",
+      "highlightWord": "Italian",
+      "description": "Floor-to-ceiling glass and Italian marble designed by Antonio Citterio.",
+      "fact": "💡 DESIGN: ANTONIO CITTERIO ARCHITECTURAL MASTERPIECE",
+      "imagePath": "stays/bulgari_pure_02_bedroom_honeymoon.jpg",
+      "voPath": "stays/bulgari_master_vo_2.mp3",
+      "voDurationSeconds": 3.62,
+      "voDurationFrames": 109,
+      "durationInFrames": 137,
+      "startFrame": 109
+    },
+    {
+      "badge": "ACT 03 / ICONIC POOLSIDE",
+      "title": "Private Mansion Pool",
+      "highlightWord": "Pool",
+      "description": "Emerald-tiled private swimming oasis framed by lush Mediterranean greenery.",
+      "fact": "💡 PRIVACY: PRIVATE RESIDENCE POOL & SUN DECK",
+      "imagePath": "stays/bulgari_pure_03_pool_swimming_couple.jpg",
+      "voPath": "stays/bulgari_master_vo_3.mp3",
+      "voDurationSeconds": 3.55,
+      "voDurationFrames": 107,
+      "durationInFrames": 135,
+      "startFrame": 246
+    },
+    {
+      "badge": "ACT 04 / PRIVATE YACHT CLUB",
+      "title": "Bulgari Yacht Club",
+      "highlightWord": "Yacht",
+      "description": "World's first Bulgari Yacht Club overlooking a private 46-boat marina.",
+      "fact": "💡 EXCLUSIVITY: WORLD'S FIRST PRIVATE BULGARI MARINA",
+      "imagePath": "stays/bulgari_02_marina.jpg",
+      "voPath": "stays/bulgari_master_vo_4.mp3",
+      "voDurationSeconds": 2.86,
+      "voDurationFrames": 86,
+      "durationInFrames": 114,
+      "startFrame": 381
+    },
+    {
+      "badge": "ACT 05 / DINING TERRACE",
+      "title": "Il Ristorante Elegance",
+      "highlightWord": "Ristorante",
+      "description": "Two-Michelin-starred Italian culinary mastery by Chef Niko Romito.",
+      "fact": "💡 MICHELIN: 2-STAR GASTRONOMY BY NIKO ROMITO",
+      "imagePath": "stays/bulgari_04_dining_terrace.jpg",
+      "voPath": "stays/bulgari_master_vo_5.mp3",
+      "voDurationSeconds": 2.35,
+      "voDurationFrames": 71,
+      "durationInFrames": 99,
+      "startFrame": 495
+    },
+    {
+      "badge": "ACT 06 / ETERNAL TWILIGHT",
+      "title": "Skyline Sunset Toast",
+      "highlightWord": "Skyline",
+      "description": "Champagne toast as the sunset casts gold over the iconic Dubai skyline.",
+      "fact": "💡 SUNSET: PRIVATE ISLAND HORIZON & BURJ KHALIFA VISTAS",
+      "imagePath": "stays/bulgari_05_twilight_skyline.jpg",
+      "voPath": "stays/bulgari_master_vo_6.mp3",
+      "voDurationSeconds": 4.99,
+      "voDurationFrames": 150,
+      "durationInFrames": 178,
+      "startFrame": 594
+    }
+  ],
+  "outro": {
+    "brand": "STAYHELPER",
+    "tagline": "Curated Luxury Sanctuaries",
+    "cta": "Reserve Your Island Mansion",
+    "url": "stayhelper.com · Fora VIP Partner"
+  },
+  "totalDurationInFrames": 842
+}

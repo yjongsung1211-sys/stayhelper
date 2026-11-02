@@ -11,7 +11,11 @@
       "description": "Perched high on Sasakwa Hill overlooking boundless golden Serengeti plains.",
       "fact": "💡 WILDERNESS: 350,000 ACRES OF EXCLUSIVE CONSERVATION SANCTUARY",
       "imagePath": "stays/singita_sasakwa/act1.jpg",
-      "voPath": "stays/singita_sasakwa/vo_1.mp3"
+      "voPath": "stays/singita_sasakwa/vo_1.mp3",
+      "voDurationSeconds": 7.92,
+      "voDurationFrames": 238,
+      "durationInFrames": 266,
+      "startFrame": 0
     },
     {
       "badge": "ACT 02 / BOTANICAL VERANDA",
@@ -20,7 +24,11 @@
       "description": "Sprawling colonial wrap-around verandas with Swarovski spotting scopes.",
       "fact": "💡 HERITAGE: TIMELESS 1900S ARISTOCRATIC SAFARI ARCHITECTURE",
       "imagePath": "stays/singita_sasakwa/act2.jpg",
-      "voPath": "stays/singita_sasakwa/vo_2.mp3"
+      "voPath": "stays/singita_sasakwa/vo_2.mp3",
+      "voDurationSeconds": 7.51,
+      "voDurationFrames": 225,
+      "durationInFrames": 253,
+      "startFrame": 266
     },
     {
       "badge": "ACT 03 / PRIVATE COTTAGE",
@@ -29,7 +37,11 @@
       "description": "Handcrafted stone cottages with crackling stone fireplaces and clawfoot tubs.",
       "fact": "💡 SECLUSION: ONLY 10 HILLSIDE COTTAGES ACROSS ENTIRE RESERVE",
       "imagePath": "stays/singita_sasakwa/act3.jpg",
-      "voPath": "stays/singita_sasakwa/vo_3.mp3"
+      "voPath": "stays/singita_sasakwa/vo_3.mp3",
+      "voDurationSeconds": 7.13,
+      "voDurationFrames": 214,
+      "durationInFrames": 242,
+      "startFrame": 519
     },
     {
       "badge": "ACT 04 / INFINITY OVERLOOK",
@@ -38,7 +50,11 @@
       "description": "Front-row private infinity plunge pools watching migrating elephant herds.",
       "fact": "💡 PANORAMA: UNINTERRUPTED 360-DEGREE SERENGETI HORIZON",
       "imagePath": "stays/singita_sasakwa/act4.jpg",
-      "voPath": "stays/singita_sasakwa/vo_4.mp3"
+      "voPath": "stays/singita_sasakwa/vo_4.mp3",
+      "voDurationSeconds": 9.12,
+      "voDurationFrames": 274,
+      "durationInFrames": 302,
+      "startFrame": 761
     },
     {
       "badge": "ACT 05 / CELLAR & WELLNESS",
@@ -47,7 +63,11 @@
       "description": "Private tastings of Africa's rarest vintages paired with holistic bush therapies.",
       "fact": "💡 INDULGENCE: RENOWNED SUBTERRANEAN SOMMELIER WINE CELLAR",
       "imagePath": "stays/singita_sasakwa/act5.jpg",
-      "voPath": "stays/singita_sasakwa/vo_5.mp3"
+      "voPath": "stays/singita_sasakwa/vo_5.mp3",
+      "voDurationSeconds": 6.48,
+      "voDurationFrames": 194,
+      "durationInFrames": 222,
+      "startFrame": 1063
     },
     {
       "badge": "ACT 06 / TWILIGHT BUSH DINING",
@@ -56,7 +76,11 @@
       "description": "Lantern-lit open-air starlight banquets under the vast African night sky.",
       "fact": "💡 SUNSET: PRIVATE FIRESIDE CHAMPAGNE IN THE WILD SAVANNA",
       "imagePath": "stays/singita_sasakwa/act6.jpg",
-      "voPath": "stays/singita_sasakwa/vo_6.mp3"
+      "voPath": "stays/singita_sasakwa/vo_6.mp3",
+      "voDurationSeconds": 7.73,
+      "voDurationFrames": 232,
+      "durationInFrames": 260,
+      "startFrame": 1285
     }
   ],
   "outro": {
@@ -64,5 +88,6 @@
     "tagline": "GRUMETI RESERVES · SERENGETI",
     "cta": "Reserve Your Private Sanctuary ↗",
     "url": "STAYHELPER · CURATED EDITORIAL"
-  }
+  },
+  "totalDurationInFrames": 1615
 }

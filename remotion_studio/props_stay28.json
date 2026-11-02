@@ -11,7 +11,11 @@
       "description": "Carved into an 800-year-old volcanic lava field, surrounded by milky-blue mineral waters.",
       "fact": "💡 UNESCO: GLOBAL GEOPARK 800-YEAR-OLD LAVA FIELD",
       "imagePath": "stays/retreat_blue_lagoon/act1.jpg",
-      "voPath": "stays/retreat_blue_lagoon/vo_1.mp3"
+      "voPath": "stays/retreat_blue_lagoon/vo_1.mp3",
+      "voDurationSeconds": 8.3,
+      "voDurationFrames": 249,
+      "durationInFrames": 277,
+      "startFrame": 0
     },
     {
       "badge": "ACT 02 / BASALT CANYON WALK",
@@ -20,7 +24,11 @@
       "description": "Walking moss-covered lava canyons with ethereal thermal mineral steam rising into Arctic air.",
       "fact": "💡 SETTING: SECLUDED PRIVATE MOSS-COVERED LAVA CANYONS",
       "imagePath": "stays/retreat_blue_lagoon/act2.jpg",
-      "voPath": "stays/retreat_blue_lagoon/vo_2.mp3"
+      "voPath": "stays/retreat_blue_lagoon/vo_2.mp3",
+      "voDurationSeconds": 6.74,
+      "voDurationFrames": 202,
+      "durationInFrames": 230,
+      "startFrame": 277
     },
     {
       "badge": "ACT 03 / LAGOON SUITE",
@@ -29,7 +37,11 @@
       "description": "Minimalist suites with private balconies stepping directly into exclusive geothermal waters.",
       "fact": "💡 SUITE: DIRECT ACCESS FROM PRIVATE TERRACE INTO LAGOON",
       "imagePath": "stays/retreat_blue_lagoon/act3.jpg",
-      "voPath": "stays/retreat_blue_lagoon/vo_3.mp3"
+      "voPath": "stays/retreat_blue_lagoon/vo_3.mp3",
+      "voDurationSeconds": 8.62,
+      "voDurationFrames": 258,
+      "durationInFrames": 286,
+      "startFrame": 507
     },
     {
       "badge": "ACT 04 / MINERAL WATERS",
@@ -38,7 +50,11 @@
       "description": "Floating weightlessly in mineral-rich silica waters that dissolve all stress and tension.",
       "fact": "💡 WATER: PRIVATE RETREAT LAGOON HEALING MINERALS",
       "imagePath": "stays/retreat_blue_lagoon/act4.jpg",
-      "voPath": "stays/retreat_blue_lagoon/vo_4.mp3"
+      "voPath": "stays/retreat_blue_lagoon/vo_4.mp3",
+      "voDurationSeconds": 7.13,
+      "voDurationFrames": 214,
+      "durationInFrames": 242,
+      "startFrame": 793
     },
     {
       "badge": "ACT 05 / RETREAT SPA RITUAL",
@@ -47,7 +63,11 @@
       "description": "Signature 4-step ritual of silica, algae, and volcanic scrub in subterranean cave chambers.",
       "fact": "💡 SPA: SUBTERRANEAN LAVA SPA & 4-STEP MINERAL RITUAL",
       "imagePath": "stays/retreat_blue_lagoon/act5.jpg",
-      "voPath": "stays/retreat_blue_lagoon/vo_5.mp3"
+      "voPath": "stays/retreat_blue_lagoon/vo_5.mp3",
+      "voDurationSeconds": 8.06,
+      "voDurationFrames": 242,
+      "durationInFrames": 270,
+      "startFrame": 1035
     },
     {
       "badge": "ACT 06 / AURORA BOREALIS",
@@ -56,7 +76,11 @@
       "description": "Dancing emerald Aurora Borealis lights across the star-filled Arctic night from your warm pool.",
       "fact": "💡 AURORA: CELESTIAL NORTHERN LIGHTS OVER STEAMING LAGOON",
       "imagePath": "stays/retreat_blue_lagoon/act6.jpg",
-      "voPath": "stays/retreat_blue_lagoon/vo_6.mp3"
+      "voPath": "stays/retreat_blue_lagoon/vo_6.mp3",
+      "voDurationSeconds": 7.9,
+      "voDurationFrames": 237,
+      "durationInFrames": 265,
+      "startFrame": 1305
     }
   ],
   "outro": {
@@ -64,5 +88,6 @@
     "tagline": "Curated Luxury Sanctuaries",
     "cta": "Reserve Your Lagoon Suite",
     "url": "stayhelper.com · Fora VIP Partner"
-  }
+  },
+  "totalDurationInFrames": 1640
 }

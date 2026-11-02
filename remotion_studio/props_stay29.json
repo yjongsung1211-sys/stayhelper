@@ -11,7 +11,11 @@
       "description": "Secluded on Giudecca Island, Venice's legendary palace of aristocracy and dolce vita.",
       "fact": "💡 PALACE: HISTORIC 1958 CELEBRITY & ROYAL VENETIAN HIDEAWAY",
       "imagePath": "stays/belmond_hotel_cipriani/act1.jpg",
-      "voPath": "stays/belmond_hotel_cipriani/vo_1.mp3"
+      "voPath": "stays/belmond_hotel_cipriani/vo_1.mp3",
+      "voDurationSeconds": 8.14,
+      "voDurationFrames": 244,
+      "durationInFrames": 272,
+      "startFrame": 0
     },
     {
       "badge": "ACT 02 / PRIVATE MAHOGANY LAUNCH",
@@ -20,7 +24,11 @@
       "description": "Gliding across St. Mark's basin aboard the private varnished mahogany launch Shirley.",
       "fact": "💡 TRANSIT: 24-HOUR PRIVATE MAHOGANY SPEEDBOAT TO ST. MARKS",
       "imagePath": "stays/belmond_hotel_cipriani/act2.jpg",
-      "voPath": "stays/belmond_hotel_cipriani/vo_2.mp3"
+      "voPath": "stays/belmond_hotel_cipriani/vo_2.mp3",
+      "voDurationSeconds": 7.32,
+      "voDurationFrames": 220,
+      "durationInFrames": 248,
+      "startFrame": 272
     },
     {
       "badge": "ACT 03 / PALLADIO SUITE",
@@ -29,7 +37,11 @@
       "description": "Silk Fortuny wall coverings, pastel Murano chandeliers, and balconies over passing gondolas.",
       "fact": "💡 SUITE: PALATIAL SUITE WITH PRIVATE LAGOON BALCONY",
       "imagePath": "stays/belmond_hotel_cipriani/act3.jpg",
-      "voPath": "stays/belmond_hotel_cipriani/vo_3.mp3"
+      "voPath": "stays/belmond_hotel_cipriani/vo_3.mp3",
+      "voDurationSeconds": 8.21,
+      "voDurationFrames": 246,
+      "durationInFrames": 274,
+      "startFrame": 520
     },
     {
       "badge": "ACT 04 / OLYMPIC SEAWATER POOL",
@@ -38,7 +50,11 @@
       "description": "Basking beside Venice's only Olympic-sized heated saltwater pool under blooming wisteria.",
       "fact": "💡 POOL: VENICE'S SOLE OLYMPIC-SIZED HEATED SEAWATER POOL",
       "imagePath": "stays/belmond_hotel_cipriani/act4.jpg",
-      "voPath": "stays/belmond_hotel_cipriani/vo_4.mp3"
+      "voPath": "stays/belmond_hotel_cipriani/vo_4.mp3",
+      "voDurationSeconds": 7.39,
+      "voDurationFrames": 222,
+      "durationInFrames": 250,
+      "startFrame": 794
     },
     {
       "badge": "ACT 05 / CASANOVA GARDENS",
@@ -47,7 +63,11 @@
       "description": "Strolling through ancient pomegranate trees and rose arbors once favored by Casanova.",
       "fact": "💡 GARDEN: HISTORIC CASANOVA SECRET BOTANICAL GARDENS",
       "imagePath": "stays/belmond_hotel_cipriani/act5.jpg",
-      "voPath": "stays/belmond_hotel_cipriani/vo_5.mp3"
+      "voPath": "stays/belmond_hotel_cipriani/vo_5.mp3",
+      "voDurationSeconds": 8.09,
+      "voDurationFrames": 243,
+      "durationInFrames": 271,
+      "startFrame": 1044
     },
     {
       "badge": "ACT 06 / GABBIANO BELLINI",
@@ -56,7 +76,11 @@
       "description": "Savoring fresh peach Bellini at Gabbiano Bar as twilight bathes the Doge's Palace in gold.",
       "fact": "💡 COCKTAIL: BIRTHPLACE OF THE AUTHENTIC WHITE PEACH BELLINI",
       "imagePath": "stays/belmond_hotel_cipriani/act6.jpg",
-      "voPath": "stays/belmond_hotel_cipriani/vo_6.mp3"
+      "voPath": "stays/belmond_hotel_cipriani/vo_6.mp3",
+      "voDurationSeconds": 7.99,
+      "voDurationFrames": 240,
+      "durationInFrames": 268,
+      "startFrame": 1315
     }
   ],
   "outro": {
@@ -64,5 +88,6 @@
     "tagline": "Curated Luxury Sanctuaries",
     "cta": "Reserve Your Venetian Suite",
     "url": "stayhelper.com · Fora VIP Partner"
-  }
+  },
+  "totalDurationInFrames": 1653
 }

@@ -1,0 +1,93 @@
+{
+  "hotelName": "THE KAYON JUNGLE",
+  "hotelSubtitle": "RESORT · UBUD RAINFOREST",
+  "destination": "BALI, INDONESIA",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / JUNGLE ARRIVAL",
+      "title": "Private Pool Villa",
+      "highlightWord": "Sanctuary",
+      "description": "Stepping inside your private pool sanctuary suspended above the Petanu gorge.",
+      "fact": "💡 ARCHITECTURE: PRIVATE VALLEY POOL VILLA IN SACRED UBUD",
+      "imagePath": "stays/kayon_real_shot1_private_pool.jpg",
+      "voPath": "stays/vo_scene1.mp3",
+      "voDurationSeconds": 4.13,
+      "voDurationFrames": 124,
+      "durationInFrames": 152,
+      "startFrame": 0
+    },
+    {
+      "badge": "ACT 02 / TEAK TERRACE",
+      "title": "Valley Teak Terrace",
+      "highlightWord": "Terrace",
+      "description": "Morning serenity over boundless tropical palms and mist-laden ravines.",
+      "fact": "💡 SETTING: SECLUDED VALLEY BALCONY WITH RIVER BREEZES",
+      "imagePath": "stays/kayon_real_shot2_teak_terrace.jpg",
+      "voPath": "stays/vo_scene2.mp3",
+      "voDurationSeconds": 4.08,
+      "voDurationFrames": 122,
+      "durationInFrames": 150,
+      "startFrame": 152
+    },
+    {
+      "badge": "ACT 03 / CASCADING POOL",
+      "title": "Three-Tier Infinity",
+      "highlightWord": "Infinity",
+      "description": "Iconic three-tiered emerald pools inspired by ancient Balinese rice terraces.",
+      "fact": "💡 POOL: THREE-TIERED EMERALD VALLEY WATER SANCTUARY",
+      "imagePath": "stays/kayon_real_shot3_tiered_pool.jpg",
+      "voPath": "stays/vo_scene3a.mp3",
+      "voDurationSeconds": 4.51,
+      "voDurationFrames": 135,
+      "durationInFrames": 163,
+      "startFrame": 302
+    },
+    {
+      "badge": "ACT 04 / CANYON DINING",
+      "title": "Kepitu Dining Terrace",
+      "highlightWord": "Terrace",
+      "description": "Open-air gourmet breakfast suspended directly over the lush rainforest gorge.",
+      "fact": "💡 DINING: PANORAMIC CANYON GASTRONOMY BY PETANU RIVER",
+      "imagePath": "stays/kayon_real_shot4_canyon_terrace.jpg",
+      "voPath": "stays/vo_scene3b.mp3",
+      "voDurationSeconds": 3.96,
+      "voDurationFrames": 119,
+      "durationInFrames": 147,
+      "startFrame": 465
+    },
+    {
+      "badge": "ACT 05 / RIVER WELLNESS",
+      "title": "Seraswati River Spa",
+      "highlightWord": "Wellness",
+      "description": "Organic botanical river bath rituals immersed in wild jungle fragrances.",
+      "fact": "💡 SPA: HOLISTIC BALINESE RIVER STONE & FLOWER HEALING",
+      "imagePath": "stays/kayon_luxury_bathroom.jpg",
+      "voPath": "stays/vo_scene4.mp3",
+      "voDurationSeconds": 4.51,
+      "voDurationFrames": 135,
+      "durationInFrames": 163,
+      "startFrame": 612
+    },
+    {
+      "badge": "ACT 06 / TWILIGHT RESORT",
+      "title": "Grand Twilight Panorama",
+      "highlightWord": "Twilight",
+      "description": "Evening lanterns illuminating the emerald cascades under canopy stars.",
+      "fact": "💡 TWILIGHT: GOLD LIST UBUD VALLEY EVENING SANCTUARY",
+      "imagePath": "stays/kayon_real_twilight_pool.jpg",
+      "voPath": "stays/vo_scene5.mp3",
+      "voDurationSeconds": 5.76,
+      "voDurationFrames": 173,
+      "durationInFrames": 201,
+      "startFrame": 775
+    }
+  ],
+  "outro": {
+    "brand": "STAYHELPER",
+    "tagline": "Curated Luxury Sanctuaries",
+    "cta": "Reserve Your Jungle Villa",
+    "url": "stayhelper.com · Fora VIP Partner"
+  },
+  "totalDurationInFrames": 1046
+}

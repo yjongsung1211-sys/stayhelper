@@ -1,0 +1,93 @@
+{
+  "hotelName": "SONEVA JANI",
+  "hotelSubtitle": "WATER RESERVE · MALDIVES",
+  "destination": "NOONU ATOLL, MALDIVES",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / LAGOON ARRIVAL",
+      "title": "The Water Sanctuary",
+      "highlightWord": "Sanctuary",
+      "description": "Gliding across crystalline turquoise waters of the Noonu Atoll.",
+      "fact": "💡 HIGHLIGHT: SEAPLANE ARRIVAL & UNRIVALED ATOLL SERENITY",
+      "imagePath": "stays/soneva_jani/act1.jpg",
+      "voPath": "stays/soneva_jani/vo_1.mp3",
+      "voDurationSeconds": 7.49,
+      "voDurationFrames": 225,
+      "durationInFrames": 253,
+      "startFrame": 0
+    },
+    {
+      "badge": "ACT 02 / BAREFOOT BOARDWALK",
+      "title": "No News, No Shoes",
+      "highlightWord": "Shoes",
+      "description": "Meandering timber walkways suspended over shallow sapphire shallows.",
+      "fact": "💡 PHILOSOPHY: SIGNATURE BAREFOOT LUXURY OVER CRYSTAL WATERS",
+      "imagePath": "stays/soneva_jani/act2.jpg",
+      "voPath": "stays/soneva_jani/vo_2.mp3",
+      "voDurationSeconds": 7.03,
+      "voDurationFrames": 211,
+      "durationInFrames": 239,
+      "startFrame": 253
+    },
+    {
+      "badge": "ACT 03 / ICONIC CURVE SLIDE",
+      "title": "Ocean Slide Adventure",
+      "highlightWord": "Adventure",
+      "description": "Curving water slide dropping directly into the pristine Indian Ocean.",
+      "fact": "💡 ARCHITECTURE: TWO-STORY OVERWATER VILLA WITH PRIVATE SLIDE",
+      "imagePath": "stays/soneva_jani/act3.jpg",
+      "voPath": "stays/soneva_jani/vo_3.mp3",
+      "voDurationSeconds": 7.32,
+      "voDurationFrames": 220,
+      "durationInFrames": 248,
+      "startFrame": 492
+    },
+    {
+      "badge": "ACT 04 / CATAMARAN NETS",
+      "title": "Overwater Buoyancy",
+      "highlightWord": "Buoyancy",
+      "description": "Suspended over turquoise waters in private catamaran nets.",
+      "fact": "💡 LIVING: OVERWATER CATAMARAN NETS & PRIVATE SUNKEN DECK",
+      "imagePath": "stays/soneva_jani/act4.jpg",
+      "voPath": "stays/soneva_jani/vo_4.mp3",
+      "voDurationSeconds": 7.27,
+      "voDurationFrames": 218,
+      "durationInFrames": 246,
+      "startFrame": 740
+    },
+    {
+      "badge": "ACT 05 / RETRACTABLE ROOF",
+      "title": "Starlight Master Suite",
+      "highlightWord": "Starlight",
+      "description": "Retractable ceiling opens to reveal star-saturated Indian Ocean constellations.",
+      "fact": "💡 EXPERIENCE: MASTER BEDROOM WITH RETRACTABLE STARLIGHT ROOF",
+      "imagePath": "stays/soneva_jani/act5.jpg",
+      "voPath": "stays/soneva_jani/vo_5.mp3",
+      "voDurationSeconds": 7.32,
+      "voDurationFrames": 220,
+      "durationInFrames": 248,
+      "startFrame": 986
+    },
+    {
+      "badge": "ACT 06 / SUNSET CELEBRATION",
+      "title": "Twilight Champagne Toast",
+      "highlightWord": "Celebration",
+      "description": "Chilled vintage champagne as the sun melts into turquoise horizons.",
+      "fact": "💡 SUNSET: WORLD-FAMOUS MALDIVIAN SUNSET WATER SANCTUARY",
+      "imagePath": "stays/soneva_jani/act6.jpg",
+      "voPath": "stays/soneva_jani/vo_6.mp3",
+      "voDurationSeconds": 8.5,
+      "voDurationFrames": 255,
+      "durationInFrames": 283,
+      "startFrame": 1234
+    }
+  ],
+  "outro": {
+    "brand": "STAYHELPER",
+    "tagline": "Curated Luxury Sanctuaries",
+    "cta": "Reserve Your Water Villa",
+    "url": "stayhelper.com · Fora VIP Partner"
+  },
+  "totalDurationInFrames": 1587
+}

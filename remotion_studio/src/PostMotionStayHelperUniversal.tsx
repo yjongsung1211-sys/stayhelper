@@ -2,6 +2,7 @@ import React from 'react';
 import {
   AbsoluteFill,
   Audio,
+  Easing,
   interpolate,
   OffthreadVideo,
   Sequence,
@@ -21,6 +22,9 @@ export interface StayActConfig {
   imagePath: string;
   videoPath?: string;
   voPath: string;
+  durationInFrames?: number;
+  voDurationFrames?: number;
+  startFrame?: number;
 }
 
 export interface StayHelperUniversalProps {
@@ -28,6 +32,7 @@ export interface StayHelperUniversalProps {
   hotelSubtitle: string;
   destination: string;
   ambientAudio: string;
+  totalDurationInFrames?: number;
   acts: StayActConfig[];
   outro: {
     brand: string;
@@ -112,120 +117,66 @@ export const PostMotionStayHelperUniversal: React.FC<StayHelperUniversalProps> =
   const props = { ...defaultStayHelperProps, ...userProps };
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const t = frame / fps;
 
-  // ── 6-ACT MASTER TIMING (Total 1050 frames = 35.0s @ 30fps) ──
-  const op1 = interpolate(frame, [0, 150, 165], [1, 1, 0], { extrapolateRight: 'clamp' });
-  const scale1 = interpolate(frame, [0, 165], [1.0, 1.05], { extrapolateRight: 'clamp' });
+  // ── DYNAMIC ACT TIMELINE CALCULATION ──
+  // Compute start frames and durations dynamically if not explicitly specified
+  let currentStart = 0;
+  const computedActs = props.acts.map((act) => {
+    const voDurFrames = act.voDurationFrames || 180;
+    // Default duration is VO duration + 26 frames (+0.85s safety buffer per GEMINI.md)
+    const duration = act.durationInFrames || (voDurFrames + 26);
+    const start = act.startFrame !== undefined ? act.startFrame : currentStart;
+    currentStart = start + duration;
+    return {
+      ...act,
+      startFrame: start,
+      durationInFrames: duration,
+      voDurationFrames: voDurFrames,
+    };
+  });
 
-  const op2 = interpolate(frame, [150, 165, 310, 325], [0, 1, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const scale2 = interpolate(frame, [150, 325], [1.0, 1.05], { extrapolateRight: 'clamp' });
+  const outroDuration = 70;
+  const totalFrames = props.totalDurationInFrames || (currentStart + outroDuration);
+  const outroStartFrame = Math.max(0, totalFrames - outroDuration);
 
-  const op3 = interpolate(frame, [310, 325, 470, 485], [0, 1, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const scale3 = interpolate(frame, [310, 485], [1.0, 1.05], { extrapolateRight: 'clamp' });
-
-  const op4 = interpolate(frame, [470, 485, 630, 645], [0, 1, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const scale4 = interpolate(frame, [470, 645], [1.0, 1.06], { extrapolateRight: 'clamp' });
-
-  const op5 = interpolate(frame, [630, 645, 790, 805], [0, 1, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const scale5 = interpolate(frame, [630, 805], [1.0, 1.05], { extrapolateRight: 'clamp' });
-
-  const op6 = interpolate(frame, [790, 805], [0, 1], { extrapolateLeft: 'clamp' });
-  const scale6 = interpolate(frame, [790, 1050], [1.0, 1.08], { extrapolateRight: 'clamp' });
-
-  const opList = [op1, op2, op3, op4, op5, op6];
-  const scaleList = [scale1, scale2, scale3, scale4, scale5, scale6];
-
-  // ── [개선 3번] 3·4·5막 유기적 카메라 동선 (Organic Drift) & 앰비언트 빛 호흡 ──
-  const translateY3 = interpolate(frame, [310, 485], [12, -18], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const translateY4 = interpolate(frame, [470, 645], [-8, 10], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const waveFloatX4 = Math.sin((frame - 470) * 0.04) * 8;
-  const causticsOpacity =
-    interpolate(frame, [470, 510, 615, 645], [0, 0.24, 0.24, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }) *
-    (0.8 + Math.sin(frame * 0.08) * 0.2);
-
-  const translateX5 = interpolate(frame, [630, 805], [-12, 12], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const translateY5 = interpolate(frame, [630, 805], [8, -8], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const spaGlowOpacity =
-    interpolate(frame, [630, 670, 775, 805], [0, 0.18, 0.18, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }) *
-    (0.85 + Math.sin(frame * 0.06) * 0.15);
-
-  // Sunset Emotional Bloom Layer (Act 6 & Outro)
-  const sunsetPulse = Math.sin((frame - 790) * 0.05);
-  const sunsetBloomOpacity = interpolate(
-    frame,
-    [790, 840, 940, 1020],
-    [0, 0.28, 0.35 + sunsetPulse * 0.04, 0.15],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
-  );
-
-  // Outro Dimming
-  const outroBackdropOpacity = interpolate(frame, [940, 975], [0, 0.82], {
+  // Top UI Masthead Opacity (fades during outro)
+  const topUiOpacity = interpolate(frame, [outroStartFrame - 15, outroStartFrame], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  // Deep Obsidian Outro Final Fade
-  const outroFade = interpolate(frame, [1025, 1050], [0, 1.0], {
+  // Global Progress Bar Width (0% to 100%)
+  const progressBarWidth = interpolate(frame, [0, totalFrames - 10], [0, 100], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  // Dynamic Audio Swell & Outro Decrescendo
-  const ambientVolume = interpolate(
-    frame,
-    [0, 30, 780, 960, 1050],
-    [0.18, 0.30, 0.32, 0.28, 0.0],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
-  );
-
-  // Top UI Opacity
-  const topUiOpacity = interpolate(frame, [935, 955], [1, 0], {
+  // Outro Backdrop Dimming
+  const outroBackdropOpacity = interpolate(frame, [outroStartFrame, outroStartFrame + 25], [0, 0.88], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  const progressBarWidth = interpolate(frame, [0, 950], [0, 100], {
+  // Outro Final Fade
+  const outroFade = interpolate(frame, [totalFrames - 20, totalFrames], [0, 1.0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
-
-  // Springs for 6 Acts
-  const textSprings = [
-    spring({ frame: frame - 5, fps, config: { damping: 22 } }),
-    spring({ frame: frame - 165, fps, config: { damping: 22 } }),
-    spring({ frame: frame - 325, fps, config: { damping: 22 } }),
-    spring({ frame: frame - 485, fps, config: { damping: 22 } }),
-    spring({ frame: frame - 645, fps, config: { damping: 22 } }),
-    spring({ frame: frame - 805, fps, config: { damping: 22 } }),
-  ];
 
   // Outro Spring & Opacity
-  const outroSpring = spring({ frame: frame - 955, fps, config: { damping: 18 } });
-  const outroOpacity = interpolate(frame, [950, 970], [0, 1], {
+  const outroSpring = spring({ frame: frame - outroStartFrame - 5, fps, config: { damping: 18 } });
+  const outroOpacity = interpolate(frame, [outroStartFrame, outroStartFrame + 18], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  // Highlighter Sweeps
-  const hlSweeps = [
-    interpolate(frame, [15, 55], [0, 100], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }),
-    interpolate(frame, [175, 215], [0, 100], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }),
-    interpolate(frame, [335, 375], [0, 100], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }),
-    interpolate(frame, [495, 535], [0, 100], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }),
-    interpolate(frame, [655, 695], [0, 100], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }),
-    interpolate(frame, [815, 855], [0, 100], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }),
-  ];
-
-  const act6TextOpacity = interpolate(
+  // Ambient Audio Volume Curve (soft background bed with decrescendo at end)
+  const ambientVolume = interpolate(
     frame,
-    [800, 815, 935, 950],
-    [0, 1, 1, 0],
+    [0, 30, outroStartFrame - 30, totalFrames],
+    [0.18, 0.28, 0.25, 0.0],
     { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
   );
-
-  // ── [개선 2번] 나레이션 시작점 미세 전진 ──
-  const voStartFrames = [2, 162, 322, 482, 642, 792];
 
   return (
     <AbsoluteFill
@@ -236,128 +187,38 @@ export const PostMotionStayHelperUniversal: React.FC<StayHelperUniversalProps> =
         overflow: 'hidden',
       }}
     >
-      {/* ── AUDIO SOUNDSCAPE ── */}
+      {/* ── AMBIENT BACKGROUND AUDIO TRACK ── */}
       <Audio src={staticFile(props.ambientAudio)} volume={ambientVolume} />
 
-      {props.acts.map((act, idx) => (
-        <Sequence key={`vo-${idx}`} from={voStartFrames[idx]}>
-          <Audio src={staticFile(act.voPath)} volume={1.0} />
-        </Sequence>
-      ))}
-
-      {/* ── VISUAL CANVAS: 6 MASTER EDITORIAL SCENES ── */}
-      {props.acts.map((act, idx) => {
-        const isVideo = Boolean(act.videoPath);
-        const op = opList[idx];
-        const scale = scaleList[idx];
-
-        if (isVideo && act.videoPath) {
-          const fromFrame = idx === 1 ? 160 : 790;
-          const duration = idx === 1 ? 170 : 260;
-          return (
-            <Sequence key={`scene-${idx}`} from={fromFrame} durationInFrames={duration}>
-              <AbsoluteFill
-                style={{
-                  opacity: op,
-                  transform: `scale(${scale})`,
-                  transformOrigin: 'center center',
-                }}
-              >
-                <OffthreadVideo
-                  src={staticFile(act.videoPath)}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
-              </AbsoluteFill>
-            </Sequence>
-          );
-        }
-
-        let customTransform = `scale(${scale})`;
-        if (idx === 2) {
-          customTransform = `scale(${scale}) translateY(${translateY3}px)`;
-        } else if (idx === 3) {
-          customTransform = `scale(${scale}) translate(${waveFloatX4}px, ${translateY4}px)`;
-        } else if (idx === 4) {
-          customTransform = `scale(${scale}) translate(${translateX5}px, ${translateY5}px)`;
-        }
+      {/* ── ACT SEQUENCES (STRICT BOUNDARIES: ZERO AUDIO OVERLAPS) ── */}
+      {computedActs.map((act, idx) => {
+        const isFirstAct = idx === 0;
+        const isLastAct = idx === computedActs.length - 1;
 
         return (
-          <AbsoluteFill
-            key={`scene-${idx}`}
-            style={{
-              opacity: op,
-              transform: customTransform,
-              transformOrigin: 'center center',
-            }}
+          <Sequence
+            key={`act-${idx}`}
+            from={act.startFrame}
+            durationInFrames={act.durationInFrames}
           >
-            <Img
-              src={staticFile(act.imagePath)}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            <ActVisualAndAudio
+              act={act}
+              actIndex={idx}
+              isFirstAct={isFirstAct}
+              isLastAct={isLastAct}
+              fps={fps}
             />
-          </AbsoluteFill>
+          </Sequence>
         );
       })}
 
-      {/* Act 4 Caustics Shimmer Layer */}
-      <AbsoluteFill
-        style={{
-          opacity: causticsOpacity,
-          background:
-            'radial-gradient(circle at 45% 65%, rgba(56, 189, 248, 0.35) 0%, rgba(45, 212, 191, 0.12) 50%, transparent 80%)',
-          mixBlendMode: 'color-dodge',
-          pointerEvents: 'none',
-          zIndex: 25,
-        }}
-      />
-
-      {/* Act 5 Spa Warm Amber Glow Layer */}
-      <AbsoluteFill
-        style={{
-          opacity: spaGlowOpacity,
-          background:
-            'radial-gradient(circle at 60% 40%, rgba(245, 158, 11, 0.30) 0%, rgba(217, 119, 6, 0.10) 60%, transparent 85%)',
-          mixBlendMode: 'screen',
-          pointerEvents: 'none',
-          zIndex: 25,
-        }}
-      />
-
-      {/* ── LIGHTING & VIGNETTE LAYERS ── */}
+      {/* ── LIGHTING & EDITORIAL VIGNETTE ── */}
       <AbsoluteFill
         style={{
           background:
             'linear-gradient(180deg, rgba(8,12,18,0.70) 0%, rgba(8,12,18,0.05) 24%, rgba(8,12,18,0.05) 58%, rgba(8,12,18,0.92) 84%, rgba(8,12,18,0.98) 100%)',
           pointerEvents: 'none',
           zIndex: 30,
-        }}
-      />
-
-      <AbsoluteFill
-        style={{
-          opacity: sunsetBloomOpacity,
-          background:
-            'radial-gradient(circle at 65% 55%, rgba(245, 158, 11, 0.45) 0%, rgba(239, 68, 68, 0.25) 45%, transparent 80%)',
-          mixBlendMode: 'screen',
-          pointerEvents: 'none',
-          zIndex: 32,
-        }}
-      />
-
-      <AbsoluteFill
-        style={{
-          opacity: outroBackdropOpacity,
-          backgroundColor: '#070a0e',
-          pointerEvents: 'none',
-          zIndex: 34,
-        }}
-      />
-
-      <AbsoluteFill
-        style={{
-          opacity: outroFade,
-          backgroundColor: '#05070a',
-          pointerEvents: 'none',
-          zIndex: 60,
         }}
       />
 
@@ -417,87 +278,28 @@ export const PostMotionStayHelperUniversal: React.FC<StayHelperUniversalProps> =
         }}
       />
 
-      {/* ── BOTTOM CINEMATIC EDITORIAL CONTENT CARDS ── */}
-      <div
+      {/* ── OUTRO DIMMING LAYER ── */}
+      <AbsoluteFill
         style={{
-          position: 'absolute',
-          bottom: 75,
-          left: 55,
-          right: 55,
-          zIndex: 40,
+          opacity: outroBackdropOpacity,
+          backgroundColor: '#070a0e',
+          pointerEvents: 'none',
+          zIndex: 45,
         }}
-      >
-        {props.acts.map((act, idx) => {
-          const startFrame = idx === 0 ? 0 : idx * 160;
-          const endFrame = idx === 5 ? 950 : (idx + 1) * 160;
-          if (frame < startFrame || frame >= endFrame) return null;
+      />
 
-          const springVal = textSprings[idx];
-          const hl = hlSweeps[idx];
-          const opacityVal = idx === 5 ? act6TextOpacity * springVal : springVal;
-
-          return (
-            <div
-              key={`card-${idx}`}
-              style={{
-                opacity: opacityVal,
-                transform: `translateY(${(1 - springVal) * 30}px)`,
-              }}
-            >
-              <div style={{ fontSize: 20, letterSpacing: 4, color: '#f6d365', fontWeight: 700, marginBottom: 8 }}>
-                {act.badge}
-              </div>
-              <div style={{ fontSize: 50, fontWeight: 900, lineHeight: 1.15, color: '#ffffff', marginBottom: 12, whiteSpace: 'pre-wrap' }}>
-                {(() => {
-                  if (!act.highlightWord || !act.title.includes(act.highlightWord)) {
-                    return act.title;
-                  }
-                  const parts = act.title.split(act.highlightWord);
-                  return (
-                    <>
-                      {parts[0]}
-                      <span style={{ position: 'relative', display: 'inline-block' }}>
-                        {act.highlightWord}
-                        <span
-                          style={{
-                            position: 'absolute',
-                            left: 0,
-                            bottom: 2,
-                            height: '28%',
-                            width: `${hl}%`,
-                            backgroundColor: 'rgba(246, 211, 101, 0.45)',
-                            zIndex: -1,
-                          }}
-                        />
-                      </span>
-                      {parts.slice(1).join(act.highlightWord)}
-                    </>
-                  );
-                })()}
-              </div>
-              <div style={{ fontSize: 23, color: 'rgba(255,255,255,0.85)', lineHeight: 1.4, marginBottom: 16 }}>
-                {act.description}
-              </div>
-              <div
-                style={{
-                  display: 'inline-block',
-                  padding: '12px 26px',
-                  borderRadius: 40,
-                  background: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)',
-                  color: '#07090e',
-                  fontSize: 22,
-                  fontWeight: 800,
-                }}
-              >
-                {act.fact}
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      {/* ── OUTRO FINAL BLACK FADE ── */}
+      <AbsoluteFill
+        style={{
+          opacity: outroFade,
+          backgroundColor: '#05070a',
+          pointerEvents: 'none',
+          zIndex: 60,
+        }}
+      />
 
       {/* ── LUXURY SIGNATURE BRAND OUTRO SLATE ── */}
-      {frame >= 950 && (
+      {frame >= outroStartFrame && (
         <AbsoluteFill
           style={{
             display: 'flex',
@@ -600,6 +402,258 @@ export const PostMotionStayHelperUniversal: React.FC<StayHelperUniversalProps> =
           </div>
         </AbsoluteFill>
       )}
+    </AbsoluteFill>
+  );
+};
+
+// ── INTERNAL COMPONENT: SINGLE ACT VISUAL & AUDIO ──
+interface ActVisualAndAudioProps {
+  act: StayActConfig & { startFrame: number; durationInFrames: number; voDurationFrames: number };
+  actIndex: number;
+  isFirstAct: boolean;
+  isLastAct: boolean;
+  fps: number;
+}
+
+const ActVisualAndAudio: React.FC<ActVisualAndAudioProps> = ({
+  act,
+  actIndex,
+  isFirstAct,
+  isLastAct,
+  fps,
+}) => {
+  const f = useCurrentFrame();
+  const dur = act.durationInFrames;
+
+  // ── [요구사항 1: 나레이션 100% 끊김/겹침 방지] ──
+  // Voiceover starts at local frame 2 and strictly cuts off at voDurationFrames.
+  // The remaining 26 frames (+0.85s) of the act are guaranteed pure silence.
+
+  // ── [요구사항 2: 빠른 줌인/줌아웃 카메라 효과] ──
+  // Alternating Zoom:
+  // Even acts (0, 2, 4 -> Act 1, 3, 5): Snappy Zoom-IN (1.00 -> 1.13 in 60f, then gentle float to 1.16)
+  // Odd acts (1, 3, 5 -> Act 2, 4, 6): Snappy Zoom-OUT (1.18 -> 1.05 in 60f, then gentle settle to 1.02)
+  const isZoomIn = actIndex % 2 === 0;
+
+  // Snappy punch in the first 60 frames (~2.0s)
+  const fastPunch = interpolate(f, [0, 60], [0, 1], {
+    extrapolateRight: 'clamp',
+    easing: Easing.out(Easing.cubic),
+  });
+
+  const scale = isZoomIn
+    ? 1.00 + fastPunch * 0.12 + (f / dur) * 0.04
+    : 1.18 - fastPunch * 0.12 - (f / dur) * 0.04;
+
+  // Subtle organic camera drifts per act
+  let translateX = 0;
+  let translateY = 0;
+  if (actIndex === 0) {
+    translateY = interpolate(f, [0, dur], [10, -10], { extrapolateRight: 'clamp' });
+  } else if (actIndex === 1) {
+    translateX = interpolate(f, [0, dur], [-10, 10], { extrapolateRight: 'clamp' });
+  } else if (actIndex === 2) {
+    translateY = interpolate(f, [0, dur], [12, -14], { extrapolateRight: 'clamp' });
+  } else if (actIndex === 3) {
+    translateY = interpolate(f, [0, dur], [-6, 8], { extrapolateRight: 'clamp' }) + Math.sin(f * 0.06) * 5;
+  } else if (actIndex === 4) {
+    translateX = interpolate(f, [0, dur], [-10, 10], { extrapolateRight: 'clamp' });
+    translateY = interpolate(f, [0, dur], [6, -6], { extrapolateRight: 'clamp' });
+  } else if (actIndex === 5) {
+    translateY = interpolate(f, [0, dur], [8, -8], { extrapolateRight: 'clamp' });
+  }
+
+  // Crossfade Opacity:
+  // Slide 1: Starts at Opacity 1.0 immediately (GEMINI.md Rule: instant thumbnail visibility)
+  // Slides 2-6: Fade in smoothly over first 12 frames
+  // All slides fade out smoothly over final 12 frames (except last act which is dimmed by outro)
+  const fadeIn = isFirstAct ? 1 : interpolate(f, [0, 12], [0, 1], { extrapolateRight: 'clamp' });
+  const fadeOut = isLastAct ? 1 : interpolate(f, [dur - 12, dur], [1, 0], { extrapolateLeft: 'clamp' });
+  const actOpacity = Math.min(fadeIn, fadeOut);
+
+  // Typography Spring and Highlighter Sweep
+  // Slide 1 text starts at spring=1, hl=100% immediately for instant thumbnail reading!
+  const textSpring = isFirstAct
+    ? 1
+    : spring({ frame: f - 4, fps, config: { damping: 22 } });
+
+  const hlSweep = isFirstAct
+    ? 100
+    : interpolate(f, [10, 42], [0, 100], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+
+  const isVideo = Boolean(act.videoPath);
+
+  return (
+    <AbsoluteFill style={{ opacity: actOpacity }}>
+      {/* ── VOICEOVER AUDIO: STRICT SEQUENCE DURATION (ZERO OVERLAP) ── */}
+      <Sequence from={2} durationInFrames={act.voDurationFrames}>
+        <Audio src={staticFile(act.voPath)} volume={1.0} />
+      </Sequence>
+
+      {/* ── VISUAL MEDIA: SNAPPY ZOOM-IN / ZOOM-OUT ── */}
+      <AbsoluteFill
+        style={{
+          transform: `scale(${scale}) translate(${translateX}px, ${translateY}px)`,
+          transformOrigin: 'center center',
+        }}
+      >
+        {isVideo && act.videoPath ? (
+          <OffthreadVideo
+            src={staticFile(act.videoPath)}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        ) : (
+          <Img
+            src={staticFile(act.imagePath)}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        )}
+      </AbsoluteFill>
+
+      {/* ── ACT 4 CAUSTICS AMBIENT WATER SHIMMER ── */}
+      {actIndex === 3 && (
+        <AbsoluteFill
+          style={{
+            opacity:
+              interpolate(f, [0, 25, dur - 25, dur], [0, 0.26, 0.26, 0], {
+                extrapolateLeft: 'clamp',
+                extrapolateRight: 'clamp',
+              }) * (0.8 + Math.sin(f * 0.08) * 0.2),
+            background:
+              'radial-gradient(circle at 45% 65%, rgba(56, 189, 248, 0.35) 0%, rgba(45, 212, 191, 0.12) 50%, transparent 80%)',
+            mixBlendMode: 'color-dodge',
+            pointerEvents: 'none',
+            zIndex: 25,
+          }}
+        />
+      )}
+
+      {/* ── ACT 5 SPA AMBER WELLNESS GLOW ── */}
+      {actIndex === 4 && (
+        <AbsoluteFill
+          style={{
+            opacity:
+              interpolate(f, [0, 25, dur - 25, dur], [0, 0.20, 0.20, 0], {
+                extrapolateLeft: 'clamp',
+                extrapolateRight: 'clamp',
+              }) * (0.85 + Math.sin(f * 0.06) * 0.15),
+            background:
+              'radial-gradient(circle at 60% 40%, rgba(245, 158, 11, 0.30) 0%, rgba(217, 119, 6, 0.10) 60%, transparent 85%)',
+            mixBlendMode: 'screen',
+            pointerEvents: 'none',
+            zIndex: 25,
+          }}
+        />
+      )}
+
+      {/* ── ACT 6 SUNSET WARMTH BLOOM ── */}
+      {actIndex === 5 && (
+        <AbsoluteFill
+          style={{
+            opacity: interpolate(f, [0, 30, dur - 20, dur], [0, 0.32, 0.35, 0.15], {
+              extrapolateLeft: 'clamp',
+              extrapolateRight: 'clamp',
+            }),
+            background:
+              'radial-gradient(circle at 65% 55%, rgba(245, 158, 11, 0.45) 0%, rgba(239, 68, 68, 0.25) 45%, transparent 80%)',
+            mixBlendMode: 'screen',
+            pointerEvents: 'none',
+            zIndex: 32,
+          }}
+        />
+      )}
+
+      {/* ── EDITORIAL CONTENT CARD (STYLE B 46px DUAL FLOATING CHIP) ── */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 75,
+          left: 55,
+          right: 55,
+          zIndex: 40,
+          opacity: textSpring,
+          transform: `translateY(${(1 - textSpring) * 28}px)`,
+        }}
+      >
+        <div
+          style={{
+            fontSize: 20,
+            letterSpacing: 4,
+            color: '#f6d365',
+            fontWeight: 700,
+            marginBottom: 8,
+            textShadow: '0 2px 10px rgba(0,0,0,0.8)',
+          }}
+        >
+          {act.badge}
+        </div>
+
+        <div
+          style={{
+            fontSize: 50,
+            fontWeight: 900,
+            lineHeight: 1.15,
+            color: '#ffffff',
+            marginBottom: 12,
+            whiteSpace: 'pre-wrap',
+            textShadow: '0 3px 18px rgba(0,0,0,0.9)',
+          }}
+        >
+          {(() => {
+            if (!act.highlightWord || !act.title.includes(act.highlightWord)) {
+              return act.title;
+            }
+            const parts = act.title.split(act.highlightWord);
+            return (
+              <>
+                {parts[0]}
+                <span style={{ position: 'relative', display: 'inline-block' }}>
+                  {act.highlightWord}
+                  <span
+                    style={{
+                      position: 'absolute',
+                      left: 0,
+                      bottom: 2,
+                      height: '28%',
+                      width: `${hlSweep}%`,
+                      backgroundColor: 'rgba(246, 211, 101, 0.55)',
+                      zIndex: -1,
+                    }}
+                  />
+                </span>
+                {parts.slice(1).join(act.highlightWord)}
+              </>
+            );
+          })()}
+        </div>
+
+        <div
+          style={{
+            fontSize: 23,
+            color: 'rgba(255,255,255,0.92)',
+            lineHeight: 1.4,
+            marginBottom: 16,
+            textShadow: '0 2px 12px rgba(0,0,0,0.8)',
+          }}
+        >
+          {act.description}
+        </div>
+
+        <div
+          style={{
+            display: 'inline-block',
+            padding: '12px 26px',
+            borderRadius: 40,
+            background: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)',
+            color: '#07090e',
+            fontSize: 22,
+            fontWeight: 800,
+            boxShadow: '0 6px 20px rgba(0,0,0,0.4)',
+          }}
+        >
+          {act.fact}
+        </div>
+      </div>
     </AbsoluteFill>
   );
 };

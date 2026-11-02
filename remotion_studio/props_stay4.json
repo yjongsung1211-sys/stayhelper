@@ -1,0 +1,95 @@
+{
+  "hotelName": "FOUR SEASONS RESORT",
+  "hotelSubtitle": "KOH SAMUI · CLIFFSIDE VILLA",
+  "destination": "KOH SAMUI, THAILAND",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / PANORAMIC ARRIVAL",
+      "title": "The Ocean Sanctuary",
+      "highlightWord": "Sanctuary",
+      "description": "Perched high upon lush tropical cliffs overlooking the Gulf of Thailand.",
+      "fact": "💡 HIGHLIGHT: CLIFFSIDE RESIDENCE & UNRIVALED GULF VISTAS",
+      "imagePath": "stays/fs_kohsamui/01_cliffside_panorama.jpg",
+      "voPath": "stays/fs_kohsamui/vo_1.mp3",
+      "voDurationSeconds": 5.02,
+      "voDurationFrames": 150,
+      "durationInFrames": 178,
+      "startFrame": 0
+    },
+    {
+      "badge": "ACT 02 / BOTANICAL PATH",
+      "title": "Lush Bamboo Sanctuary",
+      "highlightWord": "Sanctuary",
+      "description": "Wandering down secluded bamboo groves toward your private ocean hideaway.",
+      "fact": "💡 SETTING: PRIVATE TROPICAL HILLSIDE PATH TO YOUR VILLA",
+      "imagePath": "stays/fs_kohsamui/02_bamboo_stroll.jpg",
+      "videoPath": "stays/fs_kohsamui/kling_act2_bamboo_stroll.mp4",
+      "voPath": "stays/fs_kohsamui/vo_2.mp3",
+      "voDurationSeconds": 4.92,
+      "voDurationFrames": 148,
+      "durationInFrames": 176,
+      "startFrame": 178
+    },
+    {
+      "badge": "ACT 03 / SACRED HERITAGE",
+      "title": "Temple of Gold",
+      "highlightWord": "Gold",
+      "description": "Ascending the golden dragon steps of Wat Phra Yai in handcrafted Thai silk.",
+      "fact": "💡 CULTURE: HISTORIC 12-METER BIG BUDDHA LANDMARK",
+      "imagePath": "stays/fs_kohsamui/03_big_buddha_temple.jpg",
+      "voPath": "stays/fs_kohsamui/vo_3.mp3",
+      "voDurationSeconds": 5.18,
+      "voDurationFrames": 156,
+      "durationInFrames": 184,
+      "startFrame": 354
+    },
+    {
+      "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
+      "title": "Floating Serenity",
+      "highlightWord": "Serenity",
+      "description": "Floating breakfast in your infinity pool overlooking boundless turquoise waters.",
+      "fact": "💡 EXPERIENCE: PRIVATE INFINITY POOL FLOATING BREAKFAST",
+      "imagePath": "stays/fs_kohsamui/04_infinity_pool_floating.jpg",
+      "voPath": "stays/fs_kohsamui/vo_4.mp3",
+      "voDurationSeconds": 5.16,
+      "voDurationFrames": 155,
+      "durationInFrames": 183,
+      "startFrame": 538
+    },
+    {
+      "badge": "ACT 05 / HOLISTIC HEALING",
+      "title": "Warm Coconut Therapy",
+      "highlightWord": "Therapy",
+      "description": "Open-air jungle pavilion massage where warm oils dissolve away all tension.",
+      "fact": "💡 WELLNESS: ANCIENT SOUTHERN THAI BOTANICAL THERAPY",
+      "imagePath": "stays/fs_kohsamui/05_spa_oil_massage.jpg",
+      "voPath": "stays/fs_kohsamui/vo_5.mp3",
+      "voDurationSeconds": 4.9,
+      "voDurationFrames": 147,
+      "durationInFrames": 175,
+      "startFrame": 721
+    },
+    {
+      "badge": "ACT 06 / GOLDEN HOUR",
+      "title": "Twilight Celebration",
+      "highlightWord": "Celebration",
+      "description": "Sunset cocktails by the sea. Celebrate twilight in true bespoke comfort.",
+      "fact": "💡 SUNSET: GOLDEN HOUR OVER THE GULF OF THAILAND",
+      "imagePath": "stays/fs_kohsamui/06_sunset_cocktail.jpg",
+      "videoPath": "stays/fs_kohsamui/kling_act6_sunset_cocktail_smooth.mp4",
+      "voPath": "stays/fs_kohsamui/vo_6.mp3",
+      "voDurationSeconds": 5.52,
+      "voDurationFrames": 166,
+      "durationInFrames": 194,
+      "startFrame": 896
+    }
+  ],
+  "outro": {
+    "brand": "STAYHELPER",
+    "tagline": "Curated Luxury Sanctuaries",
+    "cta": "Reserve Your Private Villa",
+    "url": "stayhelper.com · Fora VIP Partner"
+  },
+  "totalDurationInFrames": 1160
+}

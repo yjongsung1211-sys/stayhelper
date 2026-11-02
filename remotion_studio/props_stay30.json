@@ -11,7 +11,11 @@
       "description": "Curvilinear lenga wood architecture emerging seamlessly from the wild Patagonian steppe.",
       "fact": "💡 DESIGN: ORGANIC ARCHITECTURE SCULPTED BY PATAGONIAN WIND",
       "imagePath": "stays/tierra_patagonia/act1.jpg",
-      "voPath": "stays/tierra_patagonia/vo_1.mp3"
+      "voPath": "stays/tierra_patagonia/vo_1.mp3",
+      "voDurationSeconds": 8.93,
+      "voDurationFrames": 268,
+      "durationInFrames": 296,
+      "startFrame": 0
     },
     {
       "badge": "ACT 02 / STEPPE PROMENADE",
@@ -20,7 +24,11 @@
       "description": "Walking along turquoise shores where herds of wild guanacos graze beneath dramatic skies.",
       "fact": "💡 SETTING: UNTOUCHED SHORES OF LAKE SARMIENTO & WILD PLAINS",
       "imagePath": "stays/tierra_patagonia/act2.jpg",
-      "voPath": "stays/tierra_patagonia/vo_2.mp3"
+      "voPath": "stays/tierra_patagonia/vo_2.mp3",
+      "voDurationSeconds": 6.53,
+      "voDurationFrames": 196,
+      "durationInFrames": 224,
+      "startFrame": 296
     },
     {
       "badge": "ACT 03 / LENGA WOOD SUITE",
@@ -29,7 +37,11 @@
       "description": "Warm native wood suites framing monumental vistas of the soaring peaks of Torres del Paine.",
       "fact": "💡 VIEW: UNOBSTRUCTED VISTAS OF TORRES DEL PAINE PEAKS",
       "imagePath": "stays/tierra_patagonia/act3.jpg",
-      "voPath": "stays/tierra_patagonia/vo_3.mp3"
+      "voPath": "stays/tierra_patagonia/vo_3.mp3",
+      "voDurationSeconds": 8.02,
+      "voDurationFrames": 240,
+      "durationInFrames": 268,
+      "startFrame": 520
     },
     {
       "badge": "ACT 04 / UMA SPA POOL",
@@ -38,7 +50,11 @@
       "description": "Swimming in the heated indoor pool enclosed in glass facing the wild glaciers and peaks.",
       "fact": "💡 POOL: HEATED GLASS-ENCLOSED INFINITY POOL FACING PEAKS",
       "imagePath": "stays/tierra_patagonia/act4.jpg",
-      "voPath": "stays/tierra_patagonia/vo_4.mp3"
+      "voPath": "stays/tierra_patagonia/vo_4.mp3",
+      "voDurationSeconds": 7.61,
+      "voDurationFrames": 228,
+      "durationInFrames": 256,
+      "startFrame": 788
     },
     {
       "badge": "ACT 05 / NATIVE WELLNESS",
@@ -47,7 +63,11 @@
       "description": "Holistic treatments with native cypress oils and warm volcanic river stones.",
       "fact": "💡 SPA: UMA SPA WITH NATIVE BOTANICALS & VOLCANIC STONES",
       "imagePath": "stays/tierra_patagonia/act5.jpg",
-      "voPath": "stays/tierra_patagonia/vo_5.mp3"
+      "voPath": "stays/tierra_patagonia/vo_5.mp3",
+      "voDurationSeconds": 7.85,
+      "voDurationFrames": 235,
+      "durationInFrames": 263,
+      "startFrame": 1044
     },
     {
       "badge": "ACT 06 / FIREPLACE TWILIGHT",
@@ -56,7 +76,11 @@
       "description": "Handcrafted Calafate sour cocktail by the circular central fireplace as dusk settles over peaks.",
       "fact": "💡 SUNSET: TWILIGHT OVER THE TOWERS WITH CALAFATE COCKTAILS",
       "imagePath": "stays/tierra_patagonia/act6.jpg",
-      "voPath": "stays/tierra_patagonia/vo_6.mp3"
+      "voPath": "stays/tierra_patagonia/vo_6.mp3",
+      "voDurationSeconds": 7.85,
+      "voDurationFrames": 235,
+      "durationInFrames": 263,
+      "startFrame": 1307
     }
   ],
   "outro": {
@@ -64,5 +88,6 @@
     "tagline": "Curated Luxury Sanctuaries",
     "cta": "Reserve Your Patagonia Suite",
     "url": "stayhelper.com · Fora VIP Partner"
-  }
+  },
+  "totalDurationInFrames": 1640
 }

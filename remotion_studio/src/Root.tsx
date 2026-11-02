@@ -77,6 +77,11 @@ import {
   PostMotionKoreanLoopSpanishLongform15,
   defaultSpanishLongformProps,
 } from "./PostMotionKoreanLoopSpanishLongform15";
+import {
+  PostMotionKoreanLoopEnglishLongform15,
+  defaultEnglishLongformProps,
+} from "./PostMotionKoreanLoopEnglishLongform15";
+
 import { PostMotionPassportReels } from "./PostMotionPassportReels";
 import { PostMotionShortsTemplate } from "./PostMotionShortsTemplate";
 import { PostMotionLongformTemplate } from "./PostMotionLongformTemplate";
@@ -884,7 +889,20 @@ export const RemotionRoot: React.FC = () => {
 
 
 
-      <Composition
+            <Composition
+        id="KoreanLoopLongformEN-Phrases15"
+        component={PostMotionKoreanLoopEnglishLongform15}
+        durationInFrames={300}
+        fps={30}
+        width={1920}
+        height={1080}
+        defaultProps={defaultEnglishLongformProps}
+        calculateMetadata={({ props }) => ({
+          durationInFrames: Math.max(30, props.totalFrames),
+        })}
+      />
+
+<Composition
         id="KoreanLoopLongformES-Phrases15"
         component={PostMotionKoreanLoopSpanishLongform15}
         durationInFrames={300}
@@ -2505,6 +2523,20 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={1080}
         height={1920}
+        calculateMetadata={({ props }) => {
+          const p = props as any;
+          if (p.totalDurationInFrames) {
+            return { durationInFrames: p.totalDurationInFrames };
+          }
+          if (p.acts && Array.isArray(p.acts) && p.acts.length > 0) {
+            const total = p.acts.reduce((acc: number, a: any) => {
+              const dur = a.durationInFrames || (a.voDurationFrames ? a.voDurationFrames + 26 : 210);
+              return acc + dur;
+            }, 0) + 70;
+            return { durationInFrames: total };
+          }
+          return { durationInFrames: 1050 };
+        }}
         defaultProps={defaultStayHelperProps}
       />
 
@@ -2773,6 +2805,96 @@ export const RemotionRoot: React.FC = () => {
           title: "일요일 주말 힐링 필수 인니어 3문장",
           cardTimings: [{'startFrame': 10, 'flipStartFrame': 127, 'flipEndFrame': 127, 'endFrame': 267}, {'startFrame': 267, 'flipStartFrame': 382, 'flipEndFrame': 382, 'endFrame': 513}, {'startFrame': 513, 'flipStartFrame': 629, 'flipEndFrame': 629, 'endFrame': 772}],
           cards: [{'indexBadge': '1 / 3', 'primaryText': 'Hari Minggu waktunya santai dan rebahan total!', 'pronunciation': '[하리 밍구 왁투냐 산타이 단 르바한 토탈!]', 'meaning': '일요일은 온전히 여유 부리며 누워 쉬는 시간!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• santai: '여유로운, 편안히 쉬는'<br />• rebahan: '침대에 편히 누워 뒹굴거리다'", 'audio_lang': 'Hari Minggu waktunya santai dan rebahan total!', 'audio_ko': '일요일은 온전히 여유 부리며 누워 쉬는 시간!'}, {'indexBadge': '2 / 3', 'primaryText': 'Isi energi lagi sebelum hari Senin datang.', 'pronunciation': '[이시 에네르기 라기 스블룸 하리 스닌 다탕.]', 'meaning': '월요일이 오기 전에 에너지 다시 완충 중!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• isi energi: '에너지를 채우다, 재충전하다'<br />• sebelum: '~하기 전에'", 'audio_lang': 'Isi energi lagi sebelum hari Senin datang.', 'audio_ko': '월요일이 오기 전에 에너지 다시 완충 중!'}, {'indexBadge': '3 / 3', 'primaryText': 'Ngopi santai di rumah sambil menikmati hari.', 'pronunciation': '[응오피 산타이 디 루마 삼빌 므닉마티 하리.]', 'meaning': '집에서 여유롭게 커피 마시며 하루를 즐기기.', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• ngopi: '커피를 마시다' (kopi의 구어 동사)<br />• menikmati: '~를 만끽하다, 즐기다'", 'audio_lang': 'Ngopi santai di rumah sambil menikmati hari.', 'audio_ko': '집에서 여유롭게 커피 마시며 하루를 즐기기.'}],
+        }}
+      />
+    
+      {/* ── [FirstMotion 월요일 출근길 3-in-1 쇼츠: [월요일 출근길 필수 영어]] ── */}
+      <Composition
+        id="PostMotionMon3in1EN"
+        component={PostMotion3in1Template}
+        durationInFrames={621}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          badgeText: "[월요일 출근길 필수 영어]",
+          badgeColor: "#2563eb",
+          badgeBg: "#eff6ff",
+          title: "월요일 출근길 필수 영어 3문장",
+          cardTimings: [{'startFrame': 10, 'flipStartFrame': 94, 'flipEndFrame': 94, 'endFrame': 219}, {'startFrame': 219, 'flipStartFrame': 300, 'flipEndFrame': 300, 'endFrame': 429}, {'startFrame': 429, 'flipStartFrame': 499, 'flipEndFrame': 499, 'endFrame': 616}],
+          cards: [{'indexBadge': '1 / 3', 'primaryText': 'Monday morning comes way too fast.', 'pronunciation': '[먼데이 모닝 컴스 웨이 투 패스트.]', 'meaning': '월요일 아침은 왜 이렇게 빨리 올까요.', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• way too: '너무나, 훨씬 더 (강조)'<br />• come fast: 빠르게 다가오다", 'audio_lang': 'Monday morning comes way too fast.', 'audio_ko': '월요일 아침은 왜 이렇게 빨리 올까요.'}, {'indexBadge': '2 / 3', 'primaryText': 'Grabbing my coffee to survive today.', 'pronunciation': '[그래빙 마이 커피 투 서바이브 투데이.]', 'meaning': '오늘 하루 버티려고 모닝커피 수혈 중!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• grab coffee: '커피를 사 마시다'<br />• survive: 하루를 버텨내다, 살아남다", 'audio_lang': 'Grabbing my coffee to survive today.', 'audio_ko': '오늘 하루 버티려고 모닝커피 수혈 중!'}, {'indexBadge': '3 / 3', 'primaryText': "Let's make this week a good one!", 'pronunciation': '[렛츠 메이크 디스 위크 어 굿 원!]', 'meaning': '이번 주도 우리 힘차게 파이팅해요!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• make it a good one: '알찬 시간으로 만들다'<br />• let's: ~하자 (긍정적 응원)", 'audio_lang': "Let's make this week a good one!", 'audio_ko': '이번 주도 우리 힘차게 파이팅해요!'}],
+        }}
+      />
+
+      {/* ── [FirstMotion 월요일 출근길 3-in-1 쇼츠: [월요일 출근길 필수 일본어]] ── */}
+      <Composition
+        id="PostMotionMon3in1JA"
+        component={PostMotion3in1Template}
+        durationInFrames={750}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          badgeText: "[월요일 출근길 필수 일본어]",
+          badgeColor: "#dc2626",
+          badgeBg: "#fef2f2",
+          title: "월요일 출근길 필수 일본어 3문장",
+          cardTimings: [{'startFrame': 10, 'flipStartFrame': 124, 'flipEndFrame': 124, 'endFrame': 262}, {'startFrame': 262, 'flipStartFrame': 374, 'flipEndFrame': 374, 'endFrame': 516}, {'startFrame': 516, 'flipStartFrame': 624, 'flipEndFrame': 624, 'endFrame': 745}],
+          cards: [{'indexBadge': '1 / 3', 'primaryText': '月曜日の朝って、本当に早すぎる。', 'pronunciation': '[게츠요-비노 아삿테, 혼토-니 하야스기루.]', 'meaning': '월요일 아침은 정말 눈 깜짝할 사이에 와요.', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• 〜すぎる: '너무 ~하다 (지나침)'<br />• 朝って: 아침이란 건 (구어 강조)", 'audio_lang': '月曜日の朝って、本当に早すぎる。', 'audio_ko': '월요일 아침은 정말 눈 깜짝할 사이에 와요.'}, {'indexBadge': '2 / 3', 'primaryText': '今週を乗り切るために、まずはコーヒー！', 'pronunciation': '[콘슈-오 노리키루 타메니, 마즈와 코-히-!]', 'meaning': '이번 주를 버티기 위해, 일단 모닝커피부터!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• 乗り切る(のりきる): '어려움을 극복하다, 버티다'<br />• まずは: 우선, 일단", 'audio_lang': '今週を乗り切るために、まずはコーヒー！', 'audio_ko': '이번 주를 버티기 위해, 일단 모닝커피부터!'}, {'indexBadge': '3 / 3', 'primaryText': '今週も一週間、無理せず頑張ろう！', 'pronunciation': '[콘슈-모 잇슈-칸, 무리세즈 간바로우!]', 'meaning': '이번 주도 무리하지 말고 기운 내봐요!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• 無理せず(むりせず): '무리하지 않고, 적당히'<br />• 頑張ろう: 힘내자", 'audio_lang': '今週も一週間、無理せず頑張ろう！', 'audio_ko': '이번 주도 무리하지 말고 기운 내봐요!'}],
+        }}
+      />
+
+      {/* ── [FirstMotion 월요일 출근길 3-in-1 쇼츠: [월요일 출근길 필수 스페인어]] ── */}
+      <Composition
+        id="PostMotionMon3in1ES"
+        component={PostMotion3in1Template}
+        durationInFrames={709}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          badgeText: "[월요일 출근길 필수 스페인어]",
+          badgeColor: "#ea580c",
+          badgeBg: "#fff7ed",
+          title: "월요일 출근길 필수 스페인어 3문장",
+          cardTimings: [{'startFrame': 10, 'flipStartFrame': 111, 'flipEndFrame': 111, 'endFrame': 236}, {'startFrame': 236, 'flipStartFrame': 333, 'flipEndFrame': 333, 'endFrame': 475}, {'startFrame': 475, 'flipStartFrame': 561, 'flipEndFrame': 561, 'endFrame': 704}],
+          cards: [{'indexBadge': '1 / 3', 'primaryText': 'El lunes por la mañana llega demasiado rápido.', 'pronunciation': '[엘 루네스 포르 라 마냐나 예가 데마시아도 라피도.]', 'meaning': '월요일 아침은 너무나도 빨리 찾아와요.', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• demasiado: '너무, 지나치게 (too much)'<br />• por la mañana: 오전에, 아침에", 'audio_lang': 'El lunes por la mañana llega demasiado rápido.', 'audio_ko': '월요일 아침은 너무나도 빨리 찾아와요.'}, {'indexBadge': '2 / 3', 'primaryText': 'Necesito un café bien cargado para empezar.', 'pronunciation': '[네세시토 운 카페 비엔 카르가도 파라 엠페사르.]', 'meaning': '하루를 시작하려면 진한 커피가 꼭 필요해요.', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• café cargado: '진한 커피, 에스프레소 느낌의 샷'<br />• para empezar: 시작하기 위해", 'audio_lang': 'Necesito un café bien cargado para empezar.', 'audio_ko': '하루를 시작하려면 진한 커피가 꼭 필요해요.'}, {'indexBadge': '3 / 3', 'primaryText': '¡Ánimo, vamos a tener una gran semana!', 'pronunciation': '[아니모, 바모스 아 테네르 우나 그란 세마나!]', 'meaning': '기운 내요, 이번 주도 멋진 한 주가 될 거예요!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• ¡Ánimo!: '힘내!, 파이팅!' (대표 응원사)<br />• gran semana: 멋진 한 주", 'audio_lang': '¡Ánimo, vamos a tener una gran semana!', 'audio_ko': '기운 내요, 이번 주도 멋진 한 주가 될 거예요!'}],
+        }}
+      />
+
+      {/* ── [FirstMotion 월요일 출근길 3-in-1 쇼츠: [월요일 출근길 필수 중국어]] ── */}
+      <Composition
+        id="PostMotionMon3in1ZH"
+        component={PostMotion3in1Template}
+        durationInFrames={630}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          badgeText: "[월요일 출근길 필수 중국어]",
+          badgeColor: "#d97706",
+          badgeBg: "#fffbeb",
+          title: "월요일 출근길 필수 중국어 3문장",
+          cardTimings: [{'startFrame': 10, 'flipStartFrame': 82, 'flipEndFrame': 82, 'endFrame': 218}, {'startFrame': 218, 'flipStartFrame': 309, 'flipEndFrame': 309, 'endFrame': 435}, {'startFrame': 435, 'flipStartFrame': 507, 'flipEndFrame': 507, 'endFrame': 625}],
+          cards: [{'indexBadge': '1 / 3', 'primaryText': '周一早上来得太快了吧。', 'pronunciation': '[저우이 자오상 라이 더 타이 콰이 러 바.]', 'meaning': '월요일 아침은 왜 이렇게 빨리 오는지 몰라요.', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• 来得太快: '너무 빨리 오다 (정도보어 得)'<br />• 周一(zhōuyī): 월요일", 'audio_lang': '周一早上来得太快了吧。', 'audio_ko': '월요일 아침은 왜 이렇게 빨리 오는지 몰라요.'}, {'indexBadge': '2 / 3', 'primaryText': '买杯咖啡，准备开启新的一周！', 'pronunciation': '[마이 베이 카페이, 준베이 카이치 신 더 이 저우!]', 'meaning': '커피 한 잔 사서 새로운 한 주를 시작해요!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• 开启(kāiqǐ): '(본격적으로) 시작하다, 열다'<br />• 买杯: 한 잔 사다", 'audio_lang': '买杯咖啡，准备开启新的一周！', 'audio_ko': '커피 한 잔 사서 새로운 한 주를 시작해요!'}, {'indexBadge': '3 / 3', 'primaryText': '这周大家一起加油吧！', 'pronunciation': '[저 저우 다자 이치 자유 바!]', 'meaning': '이번 주도 우리 모두 다 같이 힘내요!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• 一起加油: '함께 힘내다, 파이팅하다'<br />• 这周: 이번 주", 'audio_lang': '这周大家一起加油吧！', 'audio_ko': '이번 주도 우리 모두 다 같이 힘내요!'}],
+        }}
+      />
+
+      {/* ── [FirstMotion 월요일 출근길 3-in-1 쇼츠: [월요일 출근길 필수 인니어]] ── */}
+      <Composition
+        id="PostMotionMon3in1ID"
+        component={PostMotion3in1Template}
+        durationInFrames={773}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          badgeText: "[월요일 출근길 필수 인니어]",
+          badgeColor: "#059669",
+          badgeBg: "#ecfdf5",
+          title: "월요일 출근길 필수 인니어 3문장",
+          cardTimings: [{'startFrame': 10, 'flipStartFrame': 123, 'flipEndFrame': 123, 'endFrame': 264}, {'startFrame': 264, 'flipStartFrame': 371, 'flipEndFrame': 371, 'endFrame': 507}, {'startFrame': 507, 'flipStartFrame': 625, 'flipEndFrame': 625, 'endFrame': 768}],
+          cards: [{'indexBadge': '1 / 3', 'primaryText': 'Senin pagi datangnya cepat banget, ya.', 'pronunciation': '[스닌 파기 다탕냐 츠팟 방엣, 야.]', 'meaning': '월요일 아침은 정말 눈 깜짝할 사이에 오네요.', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• cepat banget: '진짜 너무 빠르다 (인니 구어)'<br />• Senin pagi: 월요일 아침", 'audio_lang': 'Senin pagi datangnya cepat banget, ya.', 'audio_ko': '월요일 아침은 정말 눈 깜짝할 사이에 오네요.'}, {'indexBadge': '2 / 3', 'primaryText': 'Ngopi dulu biar semangat kerja hari ini.', 'pronunciation': '[응오피 둘루 비아르 스망앗 크르자 하리 이니.]', 'meaning': '오늘 힘내서 일하려고 일단 모닝커피 한잔!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• ngopi dulu: '일단 커피 마시다 (친근한 구어)'<br />• biar semangat: 기운 내기 위해", 'audio_lang': 'Ngopi dulu biar semangat kerja hari ini.', 'audio_ko': '오늘 힘내서 일하려고 일단 모닝커피 한잔!'}, {'indexBadge': '3 / 3', 'primaryText': 'Semangat ya, semoga minggu ini lancar!', 'pronunciation': '[스망앗 야, 스모가 밍구 이니 란차르!]', 'meaning': '힘내세요, 이번 주도 모든 일이 술술 풀리길!', 'backSubtitle': '핵심 어휘 & 표현', 'backMainQuote': "• lancar: '(일이나 막힘없이) 순조롭다, 술술 풀리다'<br />• semangat: 파이팅!", 'audio_lang': 'Semangat ya, semoga minggu ini lancar!', 'audio_ko': '힘내세요, 이번 주도 모든 일이 술술 풀리길!'}],
         }}
       />
     </>

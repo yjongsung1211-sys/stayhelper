@@ -1,0 +1,93 @@
+{
+  "hotelName": "MONASTERO SANTA ROSA",
+  "hotelSubtitle": "HOTEL & SPA · AMALFI COAST",
+  "destination": "AMALFI COAST, ITALY",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / CLIFF ARRIVAL",
+      "title": "The Cliff Sanctuary",
+      "highlightWord": "Sanctuary",
+      "description": "A 17th-century monastery clinging dramatically to a 1,000-foot sheer limestone cliff.",
+      "fact": "💡 HIGHLIGHT: 17TH-CENTURY MONASTERY 1,000FT ABOVE THE SEA",
+      "imagePath": "stays/monastero_santa_rosa/act1.jpg",
+      "voPath": "stays/monastero_santa_rosa/vo_1.mp3",
+      "voDurationSeconds": 9.36,
+      "voDurationFrames": 281,
+      "durationInFrames": 309,
+      "startFrame": 0
+    },
+    {
+      "badge": "ACT 02 / LEMON GARDENS",
+      "title": "Tiered Lemon Terraces",
+      "highlightWord": "Terraces",
+      "description": "Cascading fragrant gardens filled with heirloom Amalfi lemons and rosemary.",
+      "fact": "💡 SETTING: FIVE TIERS OF AROMATIC MONASTIC PERFUME GARDENS",
+      "imagePath": "stays/monastero_santa_rosa/act2.jpg",
+      "voPath": "stays/monastero_santa_rosa/vo_2.mp3",
+      "voDurationSeconds": 7.37,
+      "voDurationFrames": 221,
+      "durationInFrames": 249,
+      "startFrame": 309
+    },
+    {
+      "badge": "ACT 03 / MONASTIC CLOISTERS",
+      "title": "Vaulted Monastic Suites",
+      "highlightWord": "Monastic",
+      "description": "Ancient vaulted stone ceilings furnished with handpicked Italian antiques.",
+      "fact": "💡 HERITAGE: 20 EXCLUSIVE ROOMS RESTORED FROM NUNS' CELLS",
+      "imagePath": "stays/monastero_santa_rosa/act3.jpg",
+      "voPath": "stays/monastero_santa_rosa/vo_3.mp3",
+      "voDurationSeconds": 7.13,
+      "voDurationFrames": 214,
+      "durationInFrames": 242,
+      "startFrame": 558
+    },
+    {
+      "badge": "ACT 04 / CANTILEVERED POOL",
+      "title": "Infinity Over Salerno",
+      "highlightWord": "Infinity",
+      "description": "Heated infinity pool carved into sheer rock edge, floating above the azure Gulf.",
+      "fact": "💡 POOL: DRAMATIC CANTILEVERED EDGE OVER THE GULF OF SALERNO",
+      "imagePath": "stays/monastero_santa_rosa/act4.jpg",
+      "voPath": "stays/monastero_santa_rosa/vo_4.mp3",
+      "voDurationSeconds": 7.82,
+      "voDurationFrames": 235,
+      "durationInFrames": 263,
+      "startFrame": 800
+    },
+    {
+      "badge": "ACT 05 / ROMAN THERMAL SPA",
+      "title": "Santa Maria Novella Spa",
+      "highlightWord": "Novella",
+      "description": "Vaulted subterranean tepidarium featuring ancient monastic herbal tinctures.",
+      "fact": "💡 SPA: EXCLUSIVE SANTA MARIA NOVELLA MONASTIC TREATMENTS",
+      "imagePath": "stays/monastero_santa_rosa/act5.jpg",
+      "voPath": "stays/monastero_santa_rosa/vo_5.mp3",
+      "voDurationSeconds": 6.43,
+      "voDurationFrames": 193,
+      "durationInFrames": 221,
+      "startFrame": 1063
+    },
+    {
+      "badge": "ACT 06 / SUNSET LIMONCELLO",
+      "title": "Sunset Bellini Horizon",
+      "highlightWord": "Sunset",
+      "description": "Handcrafted limoncello as dusk paints the Amalfi coastline in rose and violet.",
+      "fact": "💡 SUNSET: MICHELIN-STARRED IL REFRETTORE CLIFFSIDE VISTAS",
+      "imagePath": "stays/monastero_santa_rosa/act6.jpg",
+      "voPath": "stays/monastero_santa_rosa/vo_6.mp3",
+      "voDurationSeconds": 8.71,
+      "voDurationFrames": 261,
+      "durationInFrames": 289,
+      "startFrame": 1284
+    }
+  ],
+  "outro": {
+    "brand": "STAYHELPER",
+    "tagline": "Curated Luxury Sanctuaries",
+    "cta": "Reserve Your Monastic Suite",
+    "url": "stayhelper.com · Fora VIP Partner"
+  },
+  "totalDurationInFrames": 1643
+}

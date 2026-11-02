@@ -11,7 +11,11 @@
       "description": "Arriving by classic Rolls-Royce at the iconic neo-Gothic fairy-tale palace in St. Moritz.",
       "fact": "💡 HIGHLIGHT: 1896 ICONIC ALPINE PALACE ON LAKE ST. MORITZ",
       "imagePath": "stays/badrutts_palace/act1.jpg",
-      "voPath": "stays/badrutts_palace/vo_1.mp3"
+      "voPath": "stays/badrutts_palace/vo_1.mp3",
+      "voDurationSeconds": 9.0,
+      "voDurationFrames": 270,
+      "durationInFrames": 298,
+      "startFrame": 0
     },
     {
       "badge": "ACT 02 / BOTANICAL PATH",
@@ -20,7 +24,11 @@
       "description": "Strolling through fresh alpine powder past frosted pine trees along the tranquil frozen lake.",
       "fact": "💡 LANDSCAPE: ENGADIN VALLEY SNOW-BLANKETED FOREST",
       "imagePath": "stays/badrutts_palace/act2.jpg",
-      "voPath": "stays/badrutts_palace/vo_2.mp3"
+      "voPath": "stays/badrutts_palace/vo_2.mp3",
+      "voDurationSeconds": 6.89,
+      "voDurationFrames": 207,
+      "durationInFrames": 235,
+      "startFrame": 298
     },
     {
       "badge": "ACT 03 / SACRED HERITAGE",
@@ -29,7 +37,11 @@
       "description": "Sipping tea beneath monumental coffered wood ceilings and historic European oil paintings.",
       "fact": "💡 HERITAGE: 128 YEARS OF HIGH-SOCIETY GLAMOUR",
       "imagePath": "stays/badrutts_palace/act3.jpg",
-      "voPath": "stays/badrutts_palace/vo_3.mp3"
+      "voPath": "stays/badrutts_palace/vo_3.mp3",
+      "voDurationSeconds": 6.98,
+      "voDurationFrames": 210,
+      "durationInFrames": 238,
+      "startFrame": 533
     },
     {
       "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
@@ -38,7 +50,11 @@
       "description": "Swimming through floor-to-ceiling glass pavilions facing the snow-capped Engadin summits.",
       "fact": "💡 EXPERIENCE: HEATED GLASS-WALLED POOL OVERLOOKING LAKE",
       "imagePath": "stays/badrutts_palace/act4.jpg",
-      "voPath": "stays/badrutts_palace/vo_4.mp3"
+      "voPath": "stays/badrutts_palace/vo_4.mp3",
+      "voDurationSeconds": 6.74,
+      "voDurationFrames": 202,
+      "durationInFrames": 230,
+      "startFrame": 771
     },
     {
       "badge": "ACT 05 / HOLISTIC HEALING",
@@ -47,7 +63,11 @@
       "description": "Steaming outdoor whirlpool baths surrounded by mountain snow and aromatic Swiss pine saunas.",
       "fact": "💡 WELLNESS: OUTDOOR HEATED HYDROTHERAPY & CEDAR SAUNAS",
       "imagePath": "stays/badrutts_palace/act5.jpg",
-      "voPath": "stays/badrutts_palace/vo_5.mp3"
+      "voPath": "stays/badrutts_palace/vo_5.mp3",
+      "voDurationSeconds": 7.49,
+      "voDurationFrames": 225,
+      "durationInFrames": 253,
+      "startFrame": 1001
     },
     {
       "badge": "ACT 06 / GOLDEN HOUR",
@@ -56,7 +76,11 @@
       "description": "Vintage champagne toast as the dramatic sunset Alpenglow illuminates the Swiss alpine peaks.",
       "fact": "💡 SUNSET: GOLDEN ALPENGLOW OVER THE ENGADIN SUMMITS",
       "imagePath": "stays/badrutts_palace/act6.jpg",
-      "voPath": "stays/badrutts_palace/vo_6.mp3"
+      "voPath": "stays/badrutts_palace/vo_6.mp3",
+      "voDurationSeconds": 8.95,
+      "voDurationFrames": 269,
+      "durationInFrames": 297,
+      "startFrame": 1254
     }
   ],
   "outro": {
@@ -64,5 +88,6 @@
     "tagline": "ENGADIN, SWITZERLAND",
     "cta": "Reserve Your Private Sanctuary ↗",
     "url": "STAYHELPER · CURATED EDITORIAL"
-  }
+  },
+  "totalDurationInFrames": 1621
 }

@@ -11,7 +11,11 @@
       "description": "Restored thousands of years of Byzantine and Roman cave dwellings on Uchisar slopes.",
       "fact": "💡 HERITAGE: TURKEY'S ONLY RELAIS & CHÂTEAUX HOTEL",
       "imagePath": "stays/museum_hotel_cappadocia/act1.jpg",
-      "voPath": "stays/museum_hotel_cappadocia/vo_1.mp3"
+      "voPath": "stays/museum_hotel_cappadocia/vo_1.mp3",
+      "voDurationSeconds": 8.57,
+      "voDurationFrames": 257,
+      "durationInFrames": 285,
+      "startFrame": 0
     },
     {
       "badge": "ACT 02 / CAVE PROMENADE",
@@ -20,7 +24,11 @@
       "description": "Wandering paths lined with registered museum antiques and ancient carved stone arches.",
       "fact": "💡 SETTING: UNESCO HISTORIC CAVE DWELLINGS & ANTIQUES",
       "imagePath": "stays/museum_hotel_cappadocia/act2.jpg",
-      "voPath": "stays/museum_hotel_cappadocia/vo_2.mp3"
+      "voPath": "stays/museum_hotel_cappadocia/vo_2.mp3",
+      "voDurationSeconds": 7.97,
+      "voDurationFrames": 239,
+      "durationInFrames": 267,
+      "startFrame": 285
     },
     {
       "badge": "ACT 03 / IMPERIAL CAVE SUITE",
@@ -29,7 +37,11 @@
       "description": "Centuries-old stone vault ceilings, roaring fireplaces, and antique Anatolian silk kilims.",
       "fact": "💡 SUITE: CENTURIES-OLD AUTHENTIC CAVE SUITES",
       "imagePath": "stays/museum_hotel_cappadocia/act3.jpg",
-      "voPath": "stays/museum_hotel_cappadocia/vo_3.mp3"
+      "voPath": "stays/museum_hotel_cappadocia/vo_3.mp3",
+      "voDurationSeconds": 8.04,
+      "voDurationFrames": 241,
+      "durationInFrames": 269,
+      "startFrame": 552
     },
     {
       "badge": "ACT 04 / BALLOON SUNRISE POOL",
@@ -38,7 +50,11 @@
       "description": "Floating in heated Roman pool as hundreds of colorful balloons drift over fairy chimneys.",
       "fact": "💡 EXPERIENCE: HEATED ROMAN POOL & HUNDREDS OF BALLOONS",
       "imagePath": "stays/museum_hotel_cappadocia/act4.jpg",
-      "voPath": "stays/museum_hotel_cappadocia/vo_4.mp3"
+      "voPath": "stays/museum_hotel_cappadocia/vo_4.mp3",
+      "voDurationSeconds": 7.3,
+      "voDurationFrames": 219,
+      "durationInFrames": 247,
+      "startFrame": 821
     },
     {
       "badge": "ACT 05 / ANATOLIAN HEALING",
@@ -47,7 +63,11 @@
       "description": "Warm volcanic stone therapies and lavender-infused almond oils overlooking Pigeon Valley.",
       "fact": "💡 WELLNESS: OPEN-AIR VALLEY MASSAGE & ORGANIC HERBS",
       "imagePath": "stays/museum_hotel_cappadocia/act5.jpg",
-      "voPath": "stays/museum_hotel_cappadocia/vo_5.mp3"
+      "voPath": "stays/museum_hotel_cappadocia/vo_5.mp3",
+      "voDurationSeconds": 7.63,
+      "voDurationFrames": 229,
+      "durationInFrames": 257,
+      "startFrame": 1068
     },
     {
       "badge": "ACT 06 / CAPPADOCIA TWILIGHT",
@@ -56,7 +76,11 @@
       "description": "Vintage estate wine by the open terrace fire under starry Anatolian twilight skies.",
       "fact": "💡 SUNSET: GOLDEN HOUR OVER RED & ROSE VALLEYS",
       "imagePath": "stays/museum_hotel_cappadocia/act6.jpg",
-      "voPath": "stays/museum_hotel_cappadocia/vo_6.mp3"
+      "voPath": "stays/museum_hotel_cappadocia/vo_6.mp3",
+      "voDurationSeconds": 8.06,
+      "voDurationFrames": 242,
+      "durationInFrames": 270,
+      "startFrame": 1325
     }
   ],
   "outro": {
@@ -64,5 +88,6 @@
     "tagline": "Curated Luxury Sanctuaries",
     "cta": "Reserve Your Cave Suite",
     "url": "stayhelper.com · Fora VIP Partner"
-  }
+  },
+  "totalDurationInFrames": 1665
 }

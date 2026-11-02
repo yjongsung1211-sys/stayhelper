@@ -11,7 +11,11 @@
       "description": "Hovering above the sparkling Caribbean Sea facing St. Lucia's monumental volcanic Piton spires.",
       "fact": "💡 HIGHLIGHT: UNESCO PITONS VOLCANO PANORAMIC LOCATION",
       "imagePath": "stays/jade_mountain/act1.jpg",
-      "voPath": "stays/jade_mountain/vo_1.mp3"
+      "voPath": "stays/jade_mountain/vo_1.mp3",
+      "voDurationSeconds": 8.86,
+      "voDurationFrames": 266,
+      "durationInFrames": 294,
+      "startFrame": 0
     },
     {
       "badge": "ACT 02 / BOTANICAL PATH",
@@ -20,7 +24,11 @@
       "description": "Crossing dramatic stone sky bridges suspended in mid-air toward your private sanctuary.",
       "fact": "💡 ARCHITECTURE: SUSPENDED STONE SKY BRIDGES IN MID-AIR",
       "imagePath": "stays/jade_mountain/act2.jpg",
-      "voPath": "stays/jade_mountain/vo_2.mp3"
+      "voPath": "stays/jade_mountain/vo_2.mp3",
+      "voDurationSeconds": 6.86,
+      "voDurationFrames": 206,
+      "durationInFrames": 234,
+      "startFrame": 294
     },
     {
       "badge": "ACT 03 / SACRED HERITAGE",
@@ -29,7 +37,11 @@
       "description": "Experiencing monumental spaces where no wall separates you from the sea and cosmic stars.",
       "fact": "💡 DESIGN: NICK TROUBETZKOY OPEN 4TH-WALL CONCEPT",
       "imagePath": "stays/jade_mountain/act3.jpg",
-      "voPath": "stays/jade_mountain/vo_3.mp3"
+      "voPath": "stays/jade_mountain/vo_3.mp3",
+      "voDurationSeconds": 7.68,
+      "voDurationFrames": 230,
+      "durationInFrames": 258,
+      "startFrame": 528
     },
     {
       "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
@@ -38,7 +50,11 @@
       "description": "Swimming in private iridescent glass pools that appear to spill directly into the ocean abyss.",
       "fact": "💡 EXPERIENCE: 900 SQ FT CANTILEVERED GLASS INFINITY POOL",
       "imagePath": "stays/jade_mountain/act4.jpg",
-      "voPath": "stays/jade_mountain/vo_4.mp3"
+      "voPath": "stays/jade_mountain/vo_4.mp3",
+      "voDurationSeconds": 7.46,
+      "voDurationFrames": 224,
+      "durationInFrames": 252,
+      "startFrame": 786
     },
     {
       "badge": "ACT 05 / HOLISTIC HEALING",
@@ -47,7 +63,11 @@
       "description": "Organic cocoa bean and local volcanic sulfur body scrubs overlooking the endless Caribbean.",
       "fact": "💡 WELLNESS: ORGANIC SAINT LUCIAN COCOA & MINERAL THERAPY",
       "imagePath": "stays/jade_mountain/act5.jpg",
-      "voPath": "stays/jade_mountain/vo_5.mp3"
+      "voPath": "stays/jade_mountain/vo_5.mp3",
+      "voDurationSeconds": 6.55,
+      "voDurationFrames": 197,
+      "durationInFrames": 225,
+      "startFrame": 1038
     },
     {
       "badge": "ACT 06 / GOLDEN HOUR",
@@ -56,7 +76,11 @@
       "description": "Sipping passionfruit champagne on the Celestial Terrace as the sun sets behind the Gros Piton.",
       "fact": "💡 SUNSET: GOLDEN HOUR OVER THE UNESCO CARIBBEAN SEA",
       "imagePath": "stays/jade_mountain/act6.jpg",
-      "voPath": "stays/jade_mountain/vo_6.mp3"
+      "voPath": "stays/jade_mountain/vo_6.mp3",
+      "voDurationSeconds": 8.83,
+      "voDurationFrames": 265,
+      "durationInFrames": 293,
+      "startFrame": 1263
     }
   ],
   "outro": {
@@ -64,5 +88,6 @@
     "tagline": "ST. LUCIA, CARIBBEAN",
     "cta": "Reserve Your Private Sanctuary ↗",
     "url": "STAYHELPER · CURATED EDITORIAL"
-  }
+  },
+  "totalDurationInFrames": 1626
 }

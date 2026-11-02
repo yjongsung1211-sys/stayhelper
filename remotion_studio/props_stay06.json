@@ -1,0 +1,93 @@
+{
+  "hotelName": "THE CHEDI ANDERMATT",
+  "hotelSubtitle": "ALPINE SANCTUARY · SWITZERLAND",
+  "destination": "ANDERMATT, SWITZERLAND",
+  "ambientAudio": "stays/stay_luxury_ambient.mp3",
+  "acts": [
+    {
+      "badge": "ACT 01 / ALPINE ARRIVAL",
+      "title": "The Alpine Sanctuary",
+      "highlightWord": "Sanctuary",
+      "description": "Arriving at 1,447 meters in the heart of the Swiss Alps.",
+      "fact": "💡 HIGHLIGHT: 1,447M HIGH LUXURY SWISS CHALET HAVEN",
+      "imagePath": "stays/chedi_andermatt/act1.jpg",
+      "voPath": "stays/chedi_andermatt/vo_1.mp3",
+      "voDurationSeconds": 8.11,
+      "voDurationFrames": 243,
+      "durationInFrames": 271,
+      "startFrame": 0
+    },
+    {
+      "badge": "ACT 02 / SNOW PINE PATH",
+      "title": "Pine Forest Trail",
+      "highlightWord": "Forest",
+      "description": "Pristine snow-dusted pine trails connecting historic Andermatt valley.",
+      "fact": "💡 SETTING: DRAMATIC URSEN VALLEY PINE SURROUNDINGS",
+      "imagePath": "stays/chedi_andermatt/act2.jpg",
+      "voPath": "stays/chedi_andermatt/vo_2.mp3",
+      "voDurationSeconds": 6.41,
+      "voDurationFrames": 192,
+      "durationInFrames": 220,
+      "startFrame": 271
+    },
+    {
+      "badge": "ACT 03 / CHALET ARCHITECTURE",
+      "title": "Jean-Michel Gathy Design",
+      "highlightWord": "Design",
+      "description": "Dark alpine wood, soft leather, and monumental granite fireplaces.",
+      "fact": "💡 DESIGN: ICONIC JEAN-MICHEL GATHY ASIAN-ALPINE FUSION",
+      "imagePath": "stays/chedi_andermatt/act3.jpg",
+      "voPath": "stays/chedi_andermatt/vo_3.mp3",
+      "voDurationSeconds": 7.9,
+      "voDurationFrames": 237,
+      "durationInFrames": 265,
+      "startFrame": 491
+    },
+    {
+      "badge": "ACT 04 / THERMAL POOL",
+      "title": "Glass Alpine Pool",
+      "highlightWord": "Pool",
+      "description": "35-meter indoor glass-enclosed lap pool with dramatic mountain views.",
+      "fact": "💡 POOL: 35-METER GLASS-ENCLOSED OLYMPIC INDOOR POOL",
+      "imagePath": "stays/chedi_andermatt/act4.jpg",
+      "voPath": "stays/chedi_andermatt/vo_4.mp3",
+      "voDurationSeconds": 7.73,
+      "voDurationFrames": 232,
+      "durationInFrames": 260,
+      "startFrame": 756
+    },
+    {
+      "badge": "ACT 05 / TIBETAN SPA",
+      "title": "The Spa & Hydrotherapy",
+      "highlightWord": "Hydrotherapy",
+      "description": "2,400 square meters of thermal hydrothermal baths and Tibetan rituals.",
+      "fact": "💡 WELLNESS: 2,400M² EXPANSIVE HYDROTHERMAL SPA OASIS",
+      "imagePath": "stays/chedi_andermatt/act5.jpg",
+      "voPath": "stays/chedi_andermatt/vo_5.mp3",
+      "voDurationSeconds": 7.63,
+      "voDurationFrames": 229,
+      "durationInFrames": 257,
+      "startFrame": 1016
+    },
+    {
+      "badge": "ACT 06 / FIRESIDE TOAST",
+      "title": "Alpine Twilight Wine",
+      "highlightWord": "Twilight",
+      "description": "Rare Swiss vintage by an open roaring fireplace under snowy peaks.",
+      "fact": "💡 FIRESIDE: OVER 200 OPEN FIREPLACES THROUGHOUT THE RESORT",
+      "imagePath": "stays/chedi_andermatt/act6.jpg",
+      "voPath": "stays/chedi_andermatt/vo_6.mp3",
+      "voDurationSeconds": 9.5,
+      "voDurationFrames": 285,
+      "durationInFrames": 313,
+      "startFrame": 1273
+    }
+  ],
+  "outro": {
+    "brand": "STAYHELPER",
+    "tagline": "Curated Luxury Sanctuaries",
+    "cta": "Reserve Your Alpine Suite",
+    "url": "stayhelper.com · Fora VIP Partner"
+  },
+  "totalDurationInFrames": 1656
+}

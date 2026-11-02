@@ -1333,13 +1333,22 @@ interface MemberData {
 }
 
 export default function StayHelperLuxuryShowcase() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const mobileVideoRef = useRef<HTMLVideoElement>(null);
+  const desktopVideoRef = useRef<HTMLVideoElement>(null);
   const dockScrollRef = useRef<HTMLDivElement>(null);
   
   const [selectedStayId, setSelectedStayId] = useState<string>("stay-04"); // Four Seasons Resort Koh Samui default (Active Spotlight)
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(false);
   const [isEnded, setIsEnded] = useState<boolean>(false);
+  const [isDesktop, setIsDesktop] = useState<boolean | null>(null);
+
+  const getActiveVideo = (): HTMLVideoElement | null => {
+    if (typeof window !== "undefined" && window.innerWidth >= 1024) {
+      return desktopVideoRef.current || mobileVideoRef.current;
+    }
+    return mobileVideoRef.current || desktopVideoRef.current;
+  };
 
   // VIP Membership State
   const [member, setMember] = useState<MemberData | null>(null);
@@ -1372,44 +1381,60 @@ export default function StayHelperLuxuryShowcase() {
     syncMember();
     window.addEventListener("stayhelper_auth_changed", syncMember);
 
-    // 3. Luxury Unmuted Autoplay: Start unmuted audio on web & mobile immediately
+    // 3. Viewport size detection to prevent dual video decoding & stuttering
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    // 4. Luxury Audio & Video Autoplay Orchestration
     const startAutoplay = () => {
-      if (videoRef.current) {
-        videoRef.current.muted = false;
+      const vid = getActiveVideo();
+      if (vid) {
+        vid.muted = false;
+        vid.volume = 1.0;
         setIsMuted(false);
-        videoRef.current.play().then(() => {
+        vid.play().then(() => {
           setIsPlaying(true);
         }).catch((err) => {
-          // If strict browser policy temporarily blocks unmuted autoplay before first touch
-          console.log("Unmuted autoplay restricted by browser policy, falling back to instant gesture unlock:", err);
-          if (videoRef.current) {
-            videoRef.current.muted = true;
-            setIsMuted(true);
-            videoRef.current.play().catch(() => {});
-          }
+          console.log("Browser policy blocked unmuted autoplay. Ready for 1-click sound unlock:", err);
+          if (desktopVideoRef.current) { desktopVideoRef.current.muted = true; }
+          if (mobileVideoRef.current) { mobileVideoRef.current.muted = true; }
+          setIsMuted(true);
+          const v = getActiveVideo();
+          if (v) v.play().catch(() => {});
         });
       }
     };
     startAutoplay();
 
-    // First touch/click anywhere on screen immediately unlocks full luxury audio
+    // Universal gesture unlock: First tap, click, scroll, or keypress anywhere on screen unlocks full luxury audio
     const unlockSoundOnTouch = () => {
-      if (videoRef.current) {
-        videoRef.current.muted = false;
-        setIsMuted(false);
-        videoRef.current.play().catch(() => {});
-      }
+      [mobileVideoRef.current, desktopVideoRef.current].forEach((v) => {
+        if (v) {
+          v.muted = false;
+          v.volume = 1.0;
+          v.play().catch(() => {});
+        }
+      });
+      setIsMuted(false);
     };
 
     window.addEventListener("pointerdown", unlockSoundOnTouch, { once: true });
     window.addEventListener("touchstart", unlockSoundOnTouch, { once: true });
     window.addEventListener("click", unlockSoundOnTouch, { once: true });
+    window.addEventListener("scroll", unlockSoundOnTouch, { once: true });
+    window.addEventListener("keydown", unlockSoundOnTouch, { once: true });
 
     return () => {
+      window.removeEventListener("resize", handleResize);
       window.removeEventListener("stayhelper_auth_changed", syncMember);
       window.removeEventListener("pointerdown", unlockSoundOnTouch);
       window.removeEventListener("touchstart", unlockSoundOnTouch);
       window.removeEventListener("click", unlockSoundOnTouch);
+      window.removeEventListener("scroll", unlockSoundOnTouch);
+      window.removeEventListener("keydown", unlockSoundOnTouch);
     };
   }, []);
 
@@ -1456,48 +1481,65 @@ export default function StayHelperLuxuryShowcase() {
   const handleSelectStay = (id: string) => {
     setSelectedStayId(id);
     setIsEnded(false);
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0;
-      videoRef.current.load();
-      videoRef.current.muted = isMuted;
-      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {
-        if (videoRef.current) {
-          videoRef.current.muted = true;
+    [mobileVideoRef.current, desktopVideoRef.current].forEach((vid) => {
+      if (vid) {
+        vid.currentTime = 0;
+        vid.load();
+        vid.muted = isMuted;
+        vid.play().then(() => setIsPlaying(true)).catch(() => {
+          vid.muted = true;
           setIsMuted(true);
-          videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
-        }
-      });
-    }
+          vid.play().then(() => setIsPlaying(true)).catch(() => {});
+        });
+      }
+    });
   };
 
   const togglePlay = () => {
-    if (!videoRef.current) return;
+    const vid = getActiveVideo();
+    if (!vid) return;
     if (isEnded) {
-      videoRef.current.currentTime = 0;
-      videoRef.current.play();
+      [mobileVideoRef.current, desktopVideoRef.current].forEach((v) => {
+        if (v) {
+          v.currentTime = 0;
+          v.play().catch(() => {});
+        }
+      });
       setIsPlaying(true);
       setIsEnded(false);
       return;
     }
     if (isPlaying) {
-      videoRef.current.pause();
+      [mobileVideoRef.current, desktopVideoRef.current].forEach((v) => {
+        if (v) v.pause();
+      });
       setIsPlaying(false);
     } else {
-      videoRef.current.play();
+      [mobileVideoRef.current, desktopVideoRef.current].forEach((v) => {
+        if (v) v.play().catch(() => {});
+      });
       setIsPlaying(true);
     }
   };
 
   const toggleMute = () => {
-    if (!videoRef.current) return;
-    videoRef.current.muted = !isMuted;
-    setIsMuted(!isMuted);
+    const nextMuted = !isMuted;
+    [mobileVideoRef.current, desktopVideoRef.current].forEach((v) => {
+      if (v) {
+        v.muted = nextMuted;
+        v.volume = nextMuted ? 0 : 1.0;
+      }
+    });
+    setIsMuted(nextMuted);
   };
 
   const restartVideo = () => {
-    if (!videoRef.current) return;
-    videoRef.current.currentTime = 0;
-    videoRef.current.play();
+    [mobileVideoRef.current, desktopVideoRef.current].forEach((v) => {
+      if (v) {
+        v.currentTime = 0;
+        v.play().catch(() => {});
+      }
+    });
     setIsPlaying(true);
     setIsEnded(false);
   };
@@ -1554,22 +1596,38 @@ export default function StayHelperLuxuryShowcase() {
         {/* [MOBILE ONLY: lg:hidden] 100% IMMERSIVE FULL-SCREEN REELS */}
         {/* ========================================================= */}
         <div className="lg:hidden absolute inset-0 w-full h-full z-0 overflow-hidden">
-          {/* 100% Full-Bleed Video Background */}
-          <video
-            ref={videoRef}
-            key={`mobile-${currentStay.id}-${currentStay.videoSrc}`}
-            src={currentStay.videoSrc}
-            poster={currentStay.posterSrc}
-            playsInline
-            autoPlay
-            muted={isMuted}
-            onEnded={() => handleNextStay()}
-            className="w-full h-full object-cover"
-            onClick={() => {
-              if (isEnded) restartVideo();
-              else handleBookingAction(currentStay.bookingUrl);
-            }}
-          />
+          {/* 100% Full-Bleed Video Background (Unmounted on desktop to prevent duplicate decoding and stuttering) */}
+          {isDesktop !== true && (
+            <video
+              ref={mobileVideoRef}
+              key={`mobile-${currentStay.id}-${currentStay.videoSrc}`}
+              src={currentStay.videoSrc}
+              poster={currentStay.posterSrc}
+              playsInline
+              autoPlay
+              preload="auto"
+              muted={isMuted}
+              onEnded={() => handleNextStay()}
+              className="w-full h-full object-cover"
+              onClick={() => {
+                if (isMuted) toggleMute();
+                else if (isEnded) restartVideo();
+                else handleBookingAction(currentStay.bookingUrl);
+              }}
+            />
+          )}
+
+          {/* High-Visibility Mobile Sound Unlock Badge */}
+          {isMuted && (
+            <button
+              type="button"
+              onClick={toggleMute}
+              className="absolute top-20 left-1/2 -translate-x-1/2 z-40 px-5 py-2.5 rounded-full bg-black/85 hover:bg-black border border-[#D4AF37]/90 text-[#F3E5AB] text-xs font-luxury-sans font-bold flex items-center gap-2 backdrop-blur-md shadow-2xl animate-bounce transition-transform active:scale-95 cursor-pointer whitespace-nowrap"
+            >
+              <VolumeX className="w-4 h-4 text-[#D4AF37] animate-pulse" />
+              <span>🔊 소리 켜기 (Tap for Sound)</span>
+            </button>
+          )}
 
           {/* Top Contrast Vignette */}
           <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black/85 via-black/40 to-transparent pointer-events-none z-10" />
@@ -1838,20 +1896,38 @@ export default function StayHelperLuxuryShowcase() {
                 <div className="absolute -inset-2.5 bg-gradient-to-tr from-[#D4AF37]/20 via-[#B89B72]/15 to-transparent rounded-[30px] blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
                 <div className="relative w-[340px] aspect-[9/16] rounded-[22px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.85)] border border-white/20 bg-black/60 backdrop-blur-xs transition-transform duration-500 group-hover:scale-[1.01]">
-                  <video
-                    key={`desktop-${currentStay.id}-${currentStay.videoSrc}`}
-                    src={currentStay.videoSrc}
-                    poster={currentStay.posterSrc}
-                    playsInline
-                    autoPlay
-                    muted={isMuted}
-                    onEnded={() => handleNextStay()}
-                    className="w-full h-full object-cover cursor-pointer"
-                    onClick={() => {
-                      if (isEnded) restartVideo();
-                      else handleBookingAction(currentStay.bookingUrl);
-                    }}
-                  />
+                  {/* Desktop Video (Unmounted on mobile to prevent duplicate decoding and stuttering) */}
+                  {isDesktop !== false && (
+                    <video
+                      ref={desktopVideoRef}
+                      key={`desktop-${currentStay.id}-${currentStay.videoSrc}`}
+                      src={currentStay.videoSrc}
+                      poster={currentStay.posterSrc}
+                      playsInline
+                      autoPlay
+                      preload="auto"
+                      muted={isMuted}
+                      onEnded={() => handleNextStay()}
+                      className="w-full h-full object-cover cursor-pointer"
+                      onClick={() => {
+                        if (isMuted) toggleMute();
+                        else if (isEnded) restartVideo();
+                        else handleBookingAction(currentStay.bookingUrl);
+                      }}
+                    />
+                  )}
+
+                  {/* Desktop Prominent Sound Floating Badge */}
+                  {isMuted && (
+                    <button
+                      type="button"
+                      onClick={toggleMute}
+                      className="absolute top-4 left-1/2 -translate-x-1/2 z-30 px-4 py-2 rounded-full bg-black/85 hover:bg-black border border-[#D4AF37] text-[#F3E5AB] text-[11px] font-luxury-sans font-bold flex items-center gap-2 shadow-2xl backdrop-blur-md animate-pulse whitespace-nowrap cursor-pointer transition-transform hover:scale-105 active:scale-95"
+                    >
+                      <VolumeX className="w-3.5 h-3.5 text-[#D4AF37]" />
+                      <span>소리 켜기 🔊</span>
+                    </button>
+                  )}
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
 

@@ -11,7 +11,11 @@
       "description": "Passing monumental bronze palace gates into a private imperial medina of palatial riads.",
       "fact": "💡 HIGHLIGHT: COMMISSIONED BY KING MOHAMMED VI",
       "imagePath": "stays/royal_mansour/act1.jpg",
-      "voPath": "stays/royal_mansour/vo_1.mp3"
+      "voPath": "stays/royal_mansour/vo_1.mp3",
+      "voDurationSeconds": 8.42,
+      "voDurationFrames": 253,
+      "durationInFrames": 281,
+      "startFrame": 0
     },
     {
       "badge": "ACT 02 / BOTANICAL PATH",
@@ -20,7 +24,11 @@
       "description": "Strolling past trickling marble fountains, fragrant orange trees, and flowering jasmine gardens.",
       "fact": "💡 GARDENS: ANDALUSIAN PALM OASIS & CENTURY OLIVE GROVES",
       "imagePath": "stays/royal_mansour/act2.jpg",
-      "voPath": "stays/royal_mansour/vo_2.mp3"
+      "voPath": "stays/royal_mansour/vo_2.mp3",
+      "voDurationSeconds": 6.1,
+      "voDurationFrames": 183,
+      "durationInFrames": 211,
+      "startFrame": 281
     },
     {
       "badge": "ACT 03 / SACRED HERITAGE",
@@ -29,7 +37,11 @@
       "description": "Hand-chiseled geometric tilework, carved fragrant cedarwood, and delicate lace-like plaster.",
       "fact": "💡 CRAFTSMANSHIP: 1,500 MASTER ARTISANS HAND-CARVED PALACE",
       "imagePath": "stays/royal_mansour/act3.jpg",
-      "voPath": "stays/royal_mansour/vo_3.mp3"
+      "voPath": "stays/royal_mansour/vo_3.mp3",
+      "voDurationSeconds": 7.54,
+      "voDurationFrames": 226,
+      "durationInFrames": 254,
+      "startFrame": 492
     },
     {
       "badge": "ACT 04 / CLIFFSIDE INDULGENCE",
@@ -38,7 +50,11 @@
       "description": "Basking in your private heated rooftop pool overlooking the Atlas Mountains and Koutoubia.",
       "fact": "💡 SIGNATURE: PRIVATE ROOFTOP PLUNGE POOL & OUTDOOR FIREPLACE",
       "imagePath": "stays/royal_mansour/act4.jpg",
-      "voPath": "stays/royal_mansour/vo_4.mp3"
+      "voPath": "stays/royal_mansour/vo_4.mp3",
+      "voDurationSeconds": 7.1,
+      "voDurationFrames": 213,
+      "durationInFrames": 241,
+      "startFrame": 746
     },
     {
       "badge": "ACT 05 / HOLISTIC HEALING",
@@ -47,7 +63,11 @@
       "description": "Royal rhassoul clay and rosewater therapy inside the iconic all-white lace-wrought iron atrium.",
       "fact": "💡 SPA: WORLD-FAMOUS ALL-WHITE MARBLE LACE HAMMAM",
       "imagePath": "stays/royal_mansour/act5.jpg",
-      "voPath": "stays/royal_mansour/vo_5.mp3"
+      "voPath": "stays/royal_mansour/vo_5.mp3",
+      "voDurationSeconds": 7.18,
+      "voDurationFrames": 215,
+      "durationInFrames": 243,
+      "startFrame": 987
     },
     {
       "badge": "ACT 06 / GOLDEN HOUR",
@@ -56,7 +76,11 @@
       "description": "Sipping Moroccan mint tea by the rooftop fireplace as evening calls to prayer echo softly.",
       "fact": "💡 SUNSET: GOLDEN TWILIGHT OVER THE ATLAS MOUNTAINS",
       "imagePath": "stays/royal_mansour/act6.jpg",
-      "voPath": "stays/royal_mansour/vo_6.mp3"
+      "voPath": "stays/royal_mansour/vo_6.mp3",
+      "voDurationSeconds": 8.28,
+      "voDurationFrames": 248,
+      "durationInFrames": 276,
+      "startFrame": 1230
     }
   ],
   "outro": {
@@ -64,5 +88,6 @@
     "tagline": "MARRAKECH, MOROCCO",
     "cta": "Reserve Your Private Sanctuary ↗",
     "url": "STAYHELPER · CURATED EDITORIAL"
-  }
+  },
+  "totalDurationInFrames": 1576
 }
