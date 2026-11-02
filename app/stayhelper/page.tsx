@@ -2506,7 +2506,7 @@ export default function StayHelperLuxuryShowcase() {
               poster={currentStay.posterSrc}
               playsInline
               autoPlay
-              preload="auto"
+              preload="metadata"
               muted={isMuted}
               onEnded={() => handleNextStay()}
               className="w-full h-full object-cover"
@@ -2645,6 +2645,8 @@ export default function StayHelperLuxuryShowcase() {
               key={`desktop-hero-${heroBackground}`}
               src={heroBackground}
               alt={currentStay.name}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover object-center scale-[1.01] transition-opacity duration-700 ease-out"
             />
             <div className="absolute inset-0 bg-black/20" />
@@ -2806,7 +2808,7 @@ export default function StayHelperLuxuryShowcase() {
                       poster={currentStay.posterSrc}
                       playsInline
                       autoPlay
-                      preload="auto"
+                      preload="metadata"
                       muted={isMuted}
                       onEnded={() => handleNextStay()}
                       className="w-full h-full object-cover cursor-pointer"

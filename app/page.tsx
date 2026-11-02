@@ -4,7 +4,8 @@ import React, { useState, useMemo, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import USAuthModal from '@/components/USAuthModal';
 import editorialLooksData from '../public/editorial_top10_lookbook.json';
-import allProductsData from '../public/real_products_1000.json';
+// Dynamic import optimized: real_products_1000.json loaded on-demand
+const TOTAL_WARDROBE_COUNT = 1000;
 import {
   Sparkles,
   ShieldCheck,
@@ -290,11 +291,27 @@ export default function CleanStylingHelper() {
   const [quickViewPin, setQuickViewPin] = useState<HotspotPin | null>(null);
   const [copiedSku, setCopiedSku] = useState<boolean>(false);
 
-  // 2,621 Items Real Wardrobe Catalog State
+  // Real Wardrobe Catalog State (Lazy Loaded to prevent 2.57MB bundle bloat)
   const [isCatalogOpen, setIsCatalogOpen] = useState<boolean>(false);
   const [catalogSearch, setCatalogSearch] = useState<string>('');
   const [catalogCategory, setCatalogCategory] = useState<string>('All');
   const [catalogVisibleCount, setCatalogVisibleCount] = useState<number>(36);
+  const [catalogProducts, setCatalogProducts] = useState<any[]>([]);
+  const [isCatalogLoading, setIsCatalogLoading] = useState<boolean>(false);
+
+  // Lazy load 2.57MB products JSON only when catalog drawer is opened or requested
+  useEffect(() => {
+    if (isCatalogOpen && catalogProducts.length === 0 && !isCatalogLoading) {
+      setIsCatalogLoading(true);
+      import('../public/real_products_1000.json').then((module) => {
+        setCatalogProducts(module.default || module);
+        setIsCatalogLoading(false);
+      }).catch((e) => {
+        console.error("Failed to load catalog products", e);
+        setIsCatalogLoading(false);
+      });
+    }
+  }, [isCatalogOpen, catalogProducts.length, isCatalogLoading]);
 
   // Initialize User from LocalStorage & Global Keyboard Listeners
   useEffect(() => {
@@ -375,7 +392,7 @@ export default function CleanStylingHelper() {
   };
 
   const filteredCatalogProducts = useMemo(() => {
-    let list = allProductsData as any[];
+    let list = catalogProducts as any[];
     if (catalogCategory !== 'All') {
       if (catalogCategory === 'Accessories') {
         list = list.filter((p) => p.category === 'Accessories' || p.category === 'Accessory');
@@ -416,7 +433,7 @@ export default function CleanStylingHelper() {
       );
     }
     return list;
-  }, [catalogCategory, catalogSearch]);
+  }, [catalogProducts, catalogCategory, catalogSearch]);
 
   // Auto select first pin when activeLook changes
   useEffect(() => {
@@ -546,7 +563,7 @@ export default function CleanStylingHelper() {
               100% Free Forever for Early Google Sign-ups (Normally $9/mo)
             </span>
             <span className="hidden md:inline text-neutral-400 truncate">
-              • Unlock Curated Seoul K-Styling Formulas & {allProductsData.length.toLocaleString()} In-Stock US Garments
+              • Unlock Curated Seoul K-Styling Formulas & {(catalogProducts.length || TOTAL_WARDROBE_COUNT).toLocaleString()} In-Stock US Garments
             </span>
           </div>
           <button
@@ -596,7 +613,7 @@ export default function CleanStylingHelper() {
               className="hidden md:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-800 bg-neutral-100 hover:bg-neutral-200 border border-neutral-200 transition cursor-pointer"
             >
               <ShoppingBag className="w-3.5 h-3.5 text-neutral-900" />
-              <span>Browse Wardrobe ({allProductsData.length.toLocaleString()})</span>
+              <span>Browse Wardrobe ({(catalogProducts.length || TOTAL_WARDROBE_COUNT).toLocaleString()})</span>
             </button>
 
             {/* Google Sign-in / User Profile */}
@@ -720,7 +737,7 @@ export default function CleanStylingHelper() {
             <input
               type="text"
               onClick={() => setIsCatalogOpen(true)}
-              placeholder={`🔍 Search ${allProductsData.length.toLocaleString()} real items (chore coat, wide trousers, loafers, caps, sunglasses)...`}
+              placeholder={`🔍 Search ${(catalogProducts.length || TOTAL_WARDROBE_COUNT).toLocaleString()} real items (chore coat, wide trousers, loafers, caps, sunglasses)...`}
               className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-neutral-200 bg-neutral-50 hover:bg-neutral-100/70 text-xs text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 transition cursor-pointer"
               readOnly
             />
@@ -855,7 +872,7 @@ export default function CleanStylingHelper() {
 
             <div
               onClick={handlePhotoClick}
-              className="relative rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-200 shadow-xl aspect-[3/4] w-full select-none group cursor-pointer"
+              className="relative rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-200 shadow-xl aspect-[2/3] w-full select-none group cursor-pointer"
               title="Click any item on the photo to view garment details & store links"
             >
               <img
@@ -1092,10 +1109,12 @@ export default function CleanStylingHelper() {
                       : 'border-neutral-200 hover:border-neutral-400 hover:shadow-sm'
                   }`}
                 >
-                  <div className="relative aspect-[3/4] w-full bg-neutral-100 overflow-hidden">
+                  <div className="relative aspect-[2/3] w-full bg-neutral-100 overflow-hidden">
                     <img
                       src={look.imageUrl}
                       alt={look.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition duration-300"
                     />
                     <div className="absolute top-2 left-2">
@@ -1288,7 +1307,7 @@ export default function CleanStylingHelper() {
               <div>
                 <div className="flex items-center gap-2">
                   <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-neutral-900 text-white">
-                    {allProductsData.length.toLocaleString()} In-Stock PDPs
+                    {(catalogProducts.length || TOTAL_WARDROBE_COUNT).toLocaleString()} In-Stock PDPs
                   </span>
                   <span className="text-xs text-neutral-500 font-medium">100% Direct Product Detail Pages</span>
                 </div>
@@ -1342,7 +1361,7 @@ export default function CleanStylingHelper() {
                     setCatalogSearch(e.target.value);
                     setCatalogVisibleCount(36);
                   }}
-                  placeholder={`Search ${allProductsData.length.toLocaleString()} items, brands or sunglasses...`}
+                  placeholder={`Search ${(catalogProducts.length || TOTAL_WARDROBE_COUNT).toLocaleString()} items, brands or sunglasses...`}
                   className="w-full pl-9 pr-4 py-2 rounded-xl border border-neutral-200 text-xs text-neutral-900 bg-neutral-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-900 transition"
                 />
               </div>
@@ -1377,8 +1396,22 @@ export default function CleanStylingHelper() {
             </div>
 
             {/* Product Cards Grid (Scrollable) */}
-            <div className="p-6 overflow-y-auto flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {filteredCatalogProducts.slice(0, catalogVisibleCount).map((item: any, idx: number) => (
+            <div className="p-6 overflow-y-auto flex-1">
+              {isCatalogLoading ? (
+                <div className="py-24 flex flex-col items-center justify-center gap-3 text-center">
+                  <div className="w-8 h-8 rounded-full border-2 border-neutral-900 border-t-transparent animate-spin" />
+                  <p className="text-xs font-bold text-neutral-600">
+                    Loading 1,000 Verified In-Stock US Garments...
+                  </p>
+                </div>
+              ) : filteredCatalogProducts.length === 0 ? (
+                <div className="py-24 flex flex-col items-center justify-center gap-2 text-center text-neutral-400">
+                  <p className="text-sm font-bold text-neutral-700">No items found</p>
+                  <p className="text-xs text-neutral-500">Try searching with a different keyword or select another category.</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                  {filteredCatalogProducts.slice(0, catalogVisibleCount).map((item: any, idx: number) => (
                 <div
                   key={item.id || idx}
                   className="p-4 rounded-2xl border border-neutral-200/80 hover:border-neutral-400 bg-white hover:shadow-md transition flex flex-col justify-between gap-3 group"
@@ -1422,6 +1455,8 @@ export default function CleanStylingHelper() {
                   </div>
                 </div>
               ))}
+                </div>
+              )}
             </div>
 
             {/* Modal Footer with Load More */}
