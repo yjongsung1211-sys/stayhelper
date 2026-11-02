@@ -212,11 +212,11 @@ export const PostMotionStayHelperUniversal: React.FC<StayHelperUniversalProps> =
         );
       })}
 
-      {/* ── LIGHTING & EDITORIAL VIGNETTE ── */}
+      {/* ── LIGHTING & EDITORIAL VIGNETTE (BRIGHT & CRISP: FULL PHOTO REVEAL) ── */}
       <AbsoluteFill
         style={{
           background:
-            'linear-gradient(180deg, rgba(8,12,18,0.70) 0%, rgba(8,12,18,0.05) 24%, rgba(8,12,18,0.05) 58%, rgba(8,12,18,0.92) 84%, rgba(8,12,18,0.98) 100%)',
+            'linear-gradient(180deg, rgba(8,12,18,0.25) 0%, transparent 16%, transparent 72%, rgba(8,12,18,0.18) 86%, rgba(8,12,18,0.38) 100%)',
           pointerEvents: 'none',
           zIndex: 30,
         }}
@@ -577,26 +577,13 @@ const ActVisualAndAudio: React.FC<ActVisualAndAudioProps> = ({
       >
         <div
           style={{
-            fontSize: 20,
-            letterSpacing: 4,
-            color: '#f6d365',
-            fontWeight: 700,
-            marginBottom: 8,
-            textShadow: '0 2px 10px rgba(0,0,0,0.8)',
-          }}
-        >
-          {act.badge}
-        </div>
-
-        <div
-          style={{
             fontSize: 50,
             fontWeight: 900,
             lineHeight: 1.15,
             color: '#ffffff',
             marginBottom: 12,
             whiteSpace: 'pre-wrap',
-            textShadow: '0 3px 18px rgba(0,0,0,0.9)',
+            textShadow: '0 4px 20px rgba(0,0,0,0.95), 0 2px 6px rgba(0,0,0,0.95), 0 0 30px rgba(0,0,0,0.7)',
           }}
         >
           {(() => {
@@ -630,10 +617,10 @@ const ActVisualAndAudio: React.FC<ActVisualAndAudioProps> = ({
         <div
           style={{
             fontSize: 23,
-            color: 'rgba(255,255,255,0.92)',
+            color: 'rgba(255,255,255,0.95)',
             lineHeight: 1.4,
             marginBottom: 16,
-            textShadow: '0 2px 12px rgba(0,0,0,0.8)',
+            textShadow: '0 2px 12px rgba(0,0,0,0.95), 0 1px 4px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6)',
           }}
         >
           {act.description}
@@ -648,7 +635,7 @@ const ActVisualAndAudio: React.FC<ActVisualAndAudioProps> = ({
             color: '#07090e',
             fontSize: 22,
             fontWeight: 800,
-            boxShadow: '0 6px 20px rgba(0,0,0,0.4)',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.55), 0 2px 6px rgba(0,0,0,0.4)',
           }}
         >
           {act.fact}

@@ -1633,7 +1633,7 @@ export default function StayHelperLuxuryShowcase() {
           <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black/85 via-black/40 to-transparent pointer-events-none z-10" />
           
           {/* Bottom Contrast Vignette */}
-          <div className="absolute bottom-0 inset-x-0 h-[480px] bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none z-10" />
+          <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none z-10" />
 
           {/* Mobile Top Floating Header */}
           <div className="absolute top-0 inset-x-0 z-20 px-4 pt-4 flex items-center justify-between pointer-events-auto">
@@ -1929,7 +1929,7 @@ export default function StayHelperLuxuryShowcase() {
                     </button>
                   )}
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-black/10 pointer-events-none" />
 
                   <div
                     onClick={() => handleBookingAction(currentStay.bookingUrl)}
