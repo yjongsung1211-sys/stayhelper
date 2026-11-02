@@ -1625,7 +1625,7 @@ export default function StayHelperLuxuryShowcase() {
               className="absolute top-20 left-1/2 -translate-x-1/2 z-40 px-5 py-2.5 rounded-full bg-black/85 hover:bg-black border border-[#D4AF37]/90 text-[#F3E5AB] text-xs font-luxury-sans font-bold flex items-center gap-2 backdrop-blur-md shadow-2xl animate-bounce transition-transform active:scale-95 cursor-pointer whitespace-nowrap"
             >
               <VolumeX className="w-4 h-4 text-[#D4AF37] animate-pulse" />
-              <span>🔊 소리 켜기 (Tap for Sound)</span>
+              <span>Tap for Sound 🔊</span>
             </button>
           )}
 
@@ -1925,7 +1925,7 @@ export default function StayHelperLuxuryShowcase() {
                       className="absolute top-4 left-1/2 -translate-x-1/2 z-30 px-4 py-2 rounded-full bg-black/85 hover:bg-black border border-[#D4AF37] text-[#F3E5AB] text-[11px] font-luxury-sans font-bold flex items-center gap-2 shadow-2xl backdrop-blur-md animate-pulse whitespace-nowrap cursor-pointer transition-transform hover:scale-105 active:scale-95"
                     >
                       <VolumeX className="w-3.5 h-3.5 text-[#D4AF37]" />
-                      <span>소리 켜기 🔊</span>
+                      <span>Click for Sound 🔊</span>
                     </button>
                   )}
 
