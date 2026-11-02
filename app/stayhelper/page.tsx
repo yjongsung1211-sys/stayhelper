@@ -2482,7 +2482,7 @@ export default function StayHelperLuxuryShowcase() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070707] text-[#F3EFE6] selection:bg-[#B89B72]/30 selection:text-white font-luxury-sans">
+    <div className="h-screen w-full overflow-hidden bg-[#070707] text-[#F3EFE6] selection:bg-[#B89B72]/30 selection:text-white font-luxury-sans">
       
       {/* ============================================================== */}
       {/* 1. CONCEPT 3: FULL-BLEED ARCHITECTURAL CINEMA HERO STAGE     */}
@@ -2660,13 +2660,7 @@ export default function StayHelperLuxuryShowcase() {
               </span>
             </Link>
 
-            <nav className="flex items-center gap-6 xl:gap-8 text-[11px] font-mono tracking-[0.24em] text-white/80 uppercase drop-shadow">
-              <a href="#sanctuary-stage" className="hover:text-white transition-colors">Portfolio</a>
-              <span className="text-white/30">—</span>
-              <a href="#architectural-dossier" className="hover:text-white transition-colors">Philosophy</a>
-              <span className="text-white/30">—</span>
-              <a href="#reserve-section" className="hover:text-white transition-colors">Inquire</a>
-            </nav>
+            
 
             <div className="flex items-center gap-3 shrink-0">
               {member ? (
@@ -2897,131 +2891,20 @@ export default function StayHelperLuxuryShowcase() {
             </div>
 
             <div className="shrink-0 flex items-center gap-2">
-              <a
-                href="#reserve-section"
-                className="px-5 py-2.5 rounded-xl border border-white/20 hover:border-white/40 bg-black/40 hover:bg-black/70 text-xs font-mono tracking-wider text-[#E8D5B5] hover:text-white transition-all duration-300 backdrop-blur-md flex items-center gap-2"
-              >
-                <span>REQUEST SANCTUARY DOSSIER</span>
-                <span className="text-[#E8D5B5]">↗</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </section>
-
-      {/* ============================================================== */}
-      {/* 2. CURATED ARCHITECTURAL DOSSIER (BELOW THE FOLD)              */}
-      {/* ============================================================== */}
-      <section id="architectural-dossier" className="relative z-30 bg-[#0E0D0C] border-t border-white/10 py-20 sm:py-28 px-6 sm:px-12">
-        <div className="max-w-[1440px] mx-auto space-y-16">
-          
-          {/* Curatorial Header */}
-          <div className="max-w-3xl space-y-4">
-            <span className="text-[11px] font-mono tracking-[0.3em] uppercase text-[#C5A880]">
-              Architectural Provenance & Curation
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-luxury-serif font-light text-white tracking-tight leading-tight">
-              {currentStay.name}
-            </h2>
-            <p className="text-stone-400 text-sm sm:text-base leading-relaxed font-light">
-              {currentStay.story.join(" ")}
-            </p>
-          </div>
-
-          {/* 3-Column Haute Specification Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            
-            {/* Feature 1 */}
-            <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3 hover:border-white/25 transition-colors">
-              <span className="text-[10px] font-mono text-[#C5A880] uppercase tracking-widest">
-                01 · Spatial Signature
-              </span>
-              <h3 className="text-xl font-luxury-serif font-medium text-white">
-                {currentStay.features[0]?.title}
-              </h3>
-              <p className="text-xs text-stone-400 leading-relaxed font-light">
-                {currentStay.features[0]?.desc}
-              </p>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3 hover:border-white/25 transition-colors">
-              <span className="text-[10px] font-mono text-[#C5A880] uppercase tracking-widest">
-                02 · Master Experience
-              </span>
-              <h3 className="text-xl font-luxury-serif font-medium text-white">
-                {currentStay.features[1]?.title}
-              </h3>
-              <p className="text-xs text-stone-400 leading-relaxed font-light">
-                {currentStay.features[1]?.desc}
-              </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3 hover:border-white/25 transition-colors">
-              <span className="text-[10px] font-mono text-[#C5A880] uppercase tracking-widest">
-                03 · Inclusions & Privilege
-              </span>
-              <h3 className="text-xl font-luxury-serif font-medium text-white">
-                {currentStay.features[2]?.title}
-              </h3>
-              <p className="text-xs text-stone-400 leading-relaxed font-light">
-                {currentStay.rateInclusions}
-              </p>
-            </div>
-
-          </div>
-
-          {/* Master Reservation Lockup */}
-          <div id="reserve-section" className="rounded-3xl bg-gradient-to-r from-stone-900/90 via-black to-stone-900/90 border border-[#D4AF37]/30 p-8 sm:p-14 text-center space-y-6 shadow-2xl shadow-black/80">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#E8D5B5] text-[10px] font-mono uppercase tracking-[0.25em]">
-              <span>Official Fora & Virtuoso Partner Privileges</span>
-            </div>
-            <h3 className="text-2xl sm:text-4xl font-luxury-serif font-light text-white tracking-tight max-w-xl mx-auto">
-              Reserve Your Private Sanctuary at {currentStay.name}
-            </h3>
-            <p className="text-xs sm:text-sm text-stone-300 max-w-lg mx-auto font-light leading-relaxed">
-              Book at official hotel rates and receive exclusive VIP privileges: <strong className="text-[#E8D5B5] font-normal">Daily Complimentary Breakfast for 2</strong>, <strong className="text-[#E8D5B5] font-normal">$100 Resort / Spa Credit</strong>, and <strong className="text-[#E8D5B5] font-normal">Room Upgrade Priority</strong>.
-            </p>
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 type="button"
                 onClick={() => handleBookingAction(currentStay.name)}
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A880] hover:brightness-110 text-black text-xs font-luxury-sans font-bold tracking-wider transition-all duration-300 shadow-2xl flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
+                className="px-5 py-2.5 rounded-xl border border-[#D4AF37]/50 hover:border-[#D4AF37] bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A880] text-black font-luxury-sans text-xs font-bold tracking-wider transition-all duration-300 shadow-lg hover:shadow-[#D4AF37]/20 flex items-center gap-2 active:scale-95 cursor-pointer shrink-0"
               >
-                <span>Reserve with VIP Perks (Breakfast + $100 Credit) 🥂</span>
+                <span>RESERVE WITH VIP PERKS ✨</span>
               </button>
-              <a
-                href={currentStay.bookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-6 py-3.5 rounded-full border border-white/20 hover:border-white/50 bg-white/5 hover:bg-white/10 text-xs font-luxury-sans text-stone-300 transition-all cursor-pointer flex items-center justify-center gap-1.5"
-              >
-                <span>Official Hotel Website ↗</span>
-              </a>
             </div>
           </div>
-
         </div>
+
       </section>
 
-      {/* 3. EDITORIAL COLOPHON FOOTER */}
-      <footer className="border-t border-white/10 bg-black py-12 px-6 sm:px-12 text-center">
-        <div className="max-w-[1440px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-[11px] font-mono text-stone-500 uppercase tracking-widest">
-          <div>
-            STAYHELPER · PRIVATE ARCHITECTURAL COLLECTION
-          </div>
-          <div>
-            THE WORLD'S MOST EXTRAORDINARY SANCTUARIES
-          </div>
-          <div>
-            CURATED WITH SILENT LUXURY
-          </div>
-        </div>
-      </footer>
-
-      {/* 4. US FAST 1-CLICK AUTH MODAL */}
+      {/* ============================================================== */}
       <USAuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
