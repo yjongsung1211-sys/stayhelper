@@ -2238,7 +2238,7 @@ export default function StayHelperLuxuryShowcase() {
   const desktopVideoRef = useRef<HTMLVideoElement>(null);
   const dockScrollRef = useRef<HTMLDivElement>(null);
   
-  const [selectedStayId, setSelectedStayId] = useState<string>("stay-04"); // Four Seasons Resort Koh Samui default (Active Spotlight)
+  const [selectedStayId, setSelectedStayId] = useState<string>("stay-02"); // Default: The Kayon Jungle Resort Ubud
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(false);
   const [isEnded, setIsEnded] = useState<boolean>(false);
@@ -2259,9 +2259,7 @@ export default function StayHelperLuxuryShowcase() {
 
   // Read member status and randomize initial stay on mount + unmuted autoplay
   useEffect(() => {
-    // 1. Randomize starting sanctuary on every visitor load across all 20 stays
-    const randomIndex = Math.floor(Math.random() * ALL_STAYS.length);
-    setSelectedStayId(ALL_STAYS[randomIndex].id);
+    // 1. Starting sanctuary fixed to Stay 02 (Kayon Jungle Resort Ubud) without wasteful duplicate downloads
 
     // 2. Sync member
     const syncMember = () => {
@@ -2498,7 +2496,7 @@ export default function StayHelperLuxuryShowcase() {
         {/* ========================================================= */}
         <div className="lg:hidden absolute inset-0 w-full h-full z-0 overflow-hidden">
           {/* 100% Full-Bleed Video Background (Unmounted on desktop to prevent duplicate decoding and stuttering) */}
-          {isDesktop !== true && (
+          {isDesktop === false && (
             <video
               ref={mobileVideoRef}
               key={`mobile-${currentStay.id}-${currentStay.videoSrc}`}
@@ -2800,7 +2798,7 @@ export default function StayHelperLuxuryShowcase() {
 
                 <div className="relative w-[340px] aspect-[9/16] rounded-[22px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.85)] border border-white/20 bg-black/60 backdrop-blur-xs transition-transform duration-500 group-hover:scale-[1.01]">
                   {/* Desktop Video (Unmounted on mobile to prevent duplicate decoding and stuttering) */}
-                  {isDesktop !== false && (
+                  {isDesktop === true && (
                     <video
                       ref={desktopVideoRef}
                       key={`desktop-${currentStay.id}-${currentStay.videoSrc}`}
