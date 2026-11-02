@@ -188,7 +188,7 @@ const ALL_STAYS: StayInfo[] = [
     forbesTier: "Forbes Travel Guide Five-Star Resort",
     image: "/images/stayhelper/fs_kohsamui_wide_hero.jpg",
     wideHero: "/images/stayhelper/fs_kohsamui_wide_hero.jpg",
-    videoSrc: "/videos/StayHelperKohSamui_v2_NaturalClean_Live.mp4",
+    videoSrc: "/videos/StayHelperKohSamui_v2_6Act_MasterReels.mp4",
     posterSrc: "/images/stayhelper/fs_kohsamui_poster.jpg",
     bookingUrl: "https://www.fourseasons.com/kohsamui/",
     status: "STREAMING",
