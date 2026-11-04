@@ -128,6 +128,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
+        {/* Vercel Web Analytics Engine (Zero Dependency Native Script) */}
+        <script defer src="/_vercel/insights/script.js"></script>
       </head>
       <body className="min-h-screen bg-[#FDFCFB] text-neutral-900 antialiased selection:bg-neutral-900 selection:text-white font-sans">
         {children}

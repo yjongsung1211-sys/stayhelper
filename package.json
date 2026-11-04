@@ -8,13 +8,19 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "audit": "node run_night_inspection.js"
+    "audit": "node run_night_inspection.js",
+    "audit:promos": "python verify_promotions_pipeline.py --limit 20",
+    "audit:promos:all": "python verify_promotions_pipeline.py --all --telegram",
+    "audit:promos:sync": "python verify_promotions_pipeline.py --all --sync --telegram"
   },
   "dependencies": {
+    "@types/nodemailer": "^8.0.2",
     "@types/three": "^0.186.0",
+    "@vercel/analytics": "^2.0.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.454.0",
     "next": "14.2.15",
+    "nodemailer": "^10.3.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwind-merge": "^2.5.4",
