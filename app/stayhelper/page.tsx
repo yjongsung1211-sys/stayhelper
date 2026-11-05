@@ -1365,10 +1365,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Bora Bora Paradise · 4th Night Complimentary",
-      "tag": "STAY 4, PAY 3 (1 NIGHT FREE)",
-      "desc": "Complimentary 4th night + Free round-trip catamaran boat transfers from Bora Bora Airport"
-}
+      title: "Bora Bora Paradise · 4th Night Complimentary",
+      tag: "STAY 4, PAY 3 (1 NIGHT FREE)",
+      desc: "Complimentary 4th night + Free round-trip catamaran boat transfers from Bora Bora Airport"
+    }
   },
   {
     id: "stay-32",
@@ -1410,10 +1410,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Tuscan Harvest · 3rd Night Complimentary",
-      "tag": "STAY 3, PAY 2 (1 NIGHT FREE)",
-      "desc": "Complimentary 3rd night + Private Brunello di Montalcino historic winery tour & cellar tasting"
-}
+      title: "Suites · Official Sanctuary Experience",
+      tag: "EXCLUSIVE PACKAGE",
+      desc: "Book through StayHelper VIP for official Suites inclusions + $100 Resort Credit & Daily Breakfast"
+    }
   },
   {
     id: "stay-33",
@@ -1455,10 +1455,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Peloponnese Upgrade & Chauffeur",
-      "tag": "GUARANTEED UPGRADE AT BOOKING",
-      "desc": "Guaranteed room upgrade upon confirmation + Complimentary round-trip Mercedes transfer from Athens"
-}
+      title: "exclusive offer · Official Sanctuary Experience",
+      tag: "EXCLUSIVE PACKAGE",
+      desc: "Book through StayHelper VIP for official exclusive offer inclusions + $100 Resort Credit & Daily Breakfast"
+    }
   },
   {
     id: "stay-34",
@@ -1500,10 +1500,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Baja Escape · 4th Night Free + Agave Masterclass",
-      "tag": "STAY 4, PAY 3 + $200 CREDIT",
-      "desc": "Complimentary 4th night + Exclusive private agave & vintage mezcal masterclass for two"
-}
+      title: "Fora Reserve VIP Inclusions",
+      tag: "DAILY BREAKFAST + $100 CREDIT",
+      desc: "Daily Complimentary Breakfast for 2 + $100 Resort / Spa Credit & Room Upgrade Priority"
+    }
   },
   {
     id: "stay-35",
@@ -1545,10 +1545,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Portofino Sunset Cruise & $200 Credit",
-      "tag": "SUNSET CRUISE & $200 CREDIT",
-      "desc": "Complimentary private 2-hour sunset cruise on wooden Gozzo boat + $200 culinary credit"
-}
+      title: "Portofino Sunset Cruise & $200 Credit",
+      tag: "SUNSET CRUISE & $200 CREDIT",
+      desc: "Complimentary private 2-hour sunset cruise on wooden Gozzo boat + $200 culinary credit"
+    }
   },
   {
     id: "stay-36",
@@ -1590,10 +1590,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Baa Atoll Special · Free Seaplane for Two",
-      "tag": "STAY 4, PAY 3 + FREE SEAPLANE",
-      "desc": "Complimentary 4th night + Free round-trip seaplane transfers for two from Malé"
-}
+      title: "Baa Atoll Special · Free Seaplane for Two",
+      tag: "STAY 4, PAY 3 + FREE SEAPLANE",
+      desc: "Complimentary 4th night + Free round-trip seaplane transfers for two from Malé"
+    }
   },
   {
     id: "stay-37",
@@ -1635,10 +1635,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Tetiaroa Extended Stay · 25% Off + Daily Spa",
-      "tag": "25% EXTENDED STAY PRIVILEGE",
-      "desc": "25% savings on stays of 4+ nights + Daily signature Polynesian spa treatment per villa"
-}
+      title: "Tetiaroa Extended Stay · 25% Off + Daily Spa",
+      tag: "25% EXTENDED STAY PRIVILEGE",
+      desc: "25% savings on stays of 4+ nights + Daily signature Polynesian spa treatment per villa"
+    }
   },
   {
     id: "stay-38",
@@ -1680,10 +1680,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Mayfair Suite Upgrade & Champagne High Tea",
-      "tag": "GUARANTEED MAYFAIR UPGRADE",
-      "desc": "Guaranteed room upgrade to Mayfair Suite at booking + Complimentary champagne afternoon tea for two"
-}
+      title: "Mayfair Suite Upgrade & Champagne High Tea",
+      tag: "GUARANTEED MAYFAIR UPGRADE",
+      desc: "Guaranteed room upgrade to Mayfair Suite at booking + Complimentary champagne afternoon tea for two"
+    }
   },
   {
     id: "stay-39",
@@ -1725,10 +1725,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Ubud Sacred Valley · 3rd Night Free + Massage",
-      "tag": "STAY 3, PAY 2 + RIVER MASSAGE",
-      "desc": "Complimentary 3rd night + 60-minute riverside Balinese signature massage for two"
-}
+      title: "Ubud Sacred Valley · 3rd Night Free + Massage",
+      tag: "STAY 3, PAY 2 + RIVER MASSAGE",
+      desc: "Complimentary 3rd night + 60-minute riverside Balinese signature massage for two"
+    }
   },
   {
     id: "stay-40",
@@ -1770,10 +1770,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Golden Triangle Expedition · Private Mekong Cruise",
-      "tag": "ALL-INCLUSIVE EXPEDITION",
-      "desc": "Full all-inclusive wilderness safari package + Complimentary private sunset longtail boat cruise on the Mekong"
-}
+      title: "Golden Triangle Expedition · Private Mekong Cruise",
+      tag: "ALL-INCLUSIVE EXPEDITION",
+      desc: "Full all-inclusive wilderness safari package + Complimentary private sunset longtail boat cruise on the Mekong"
+    }
   },
   {
     id: "stay-41",
@@ -1815,10 +1815,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Amalfi Dream · 4th Night Free + Riva Cruise",
-      "tag": "STAY 4, PAY 3 + RIVA EXCURSION",
-      "desc": "Complimentary 4th night + Sunset excursion along the Amalfi cliffs aboard vintage wooden boat Sant'Anna"
-}
+      title: "Amalfi Dream · 4th Night Free + Riva Cruise",
+      tag: "STAY 4, PAY 3 + RIVA EXCURSION",
+      desc: "Complimentary 4th night + Sunset excursion along the Amalfi cliffs aboard vintage wooden boat Sant'Anna"
+    }
   },
   {
     id: "stay-42",
@@ -1860,10 +1860,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Riviera Maya Retreat · 4th Night Free + $200 Dining",
-      "tag": "STAY 4, PAY 3 + $200 DINING",
-      "desc": "Complimentary 4th night + $200 culinary credit & private electric eco-boat lagoon wildlife tour"
-}
+      title: "Riviera Maya Retreat · 4th Night Free + $200 Dining",
+      tag: "STAY 4, PAY 3 + $200 DINING",
+      desc: "Complimentary 4th night + $200 culinary credit & private electric eco-boat lagoon wildlife tour"
+    }
   },
   {
     id: "stay-43",
@@ -1905,10 +1905,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "St-Barth Palace Upgrade & Transfers",
-      "tag": "GUARANTEED UPGRADE AT BOOKING",
-      "desc": "Guaranteed room upgrade at confirmation + Round-trip luxury chauffeur airport/harbor transfers"
-}
+      title: "St-Barth Palace Upgrade & Transfers",
+      tag: "GUARANTEED UPGRADE AT BOOKING",
+      desc: "Guaranteed room upgrade at confirmation + Round-trip luxury chauffeur airport/harbor transfers"
+    }
   },
   {
     id: "stay-44",
@@ -1950,10 +1950,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Amanyara Serenity · 4th Night Free + $250 Credit",
-      "tag": "STAY 4, PAY 3 + $250 CREDIT",
-      "desc": "Complimentary 4th night + $250 wellness & marine snorkeling safari credit"
-}
+      title: "Amanyara Serenity · 4th Night Free + $250 Credit",
+      tag: "STAY 4, PAY 3 + $250 CREDIT",
+      desc: "Complimentary 4th night + $250 wellness & marine snorkeling safari credit"
+    }
   },
   {
     id: "stay-45",
@@ -1995,10 +1995,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Taj Mahal Royal View · Guaranteed Upgrade & Dinner",
-      "tag": "GUARANTEED TAJ VIEW UPGRADE",
-      "desc": "Guaranteed room upgrade to Taj Mahal View Premier Room + Private candlelit balcony dinner for two"
-}
+      title: "Taj Mahal Royal View · Guaranteed Upgrade & Dinner",
+      tag: "GUARANTEED TAJ VIEW UPGRADE",
+      desc: "Guaranteed room upgrade to Taj Mahal View Premier Room + Private candlelit balcony dinner for two"
+    }
   },
   {
     id: "stay-46",
@@ -2040,10 +2040,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Desert Mirage · 3rd Night Free + Camel Safari",
-      "tag": "STAY 3, PAY 2 + BEDOUIN DINNER",
-      "desc": "Complimentary 3rd night + Private sunset camel expedition & Bedouin campfire dinner under the stars"
-}
+      title: "Desert Mirage · 3rd Night Free + Camel Safari",
+      tag: "STAY 3, PAY 2 + BEDOUIN DINNER",
+      desc: "Complimentary 3rd night + Private sunset camel expedition & Bedouin campfire dinner under the stars"
+    }
   },
   {
     id: "stay-47",
@@ -2085,10 +2085,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Musandam Adventure · 4th Night Free + Paraglide",
-      "tag": "STAY 4, PAY 3 + FREE PARAGLIDE",
-      "desc": "Complimentary 4th night + Complimentary tandem paragliding arrival into the bay for two"
-}
+      title: "Musandam Adventure · 4th Night Free + Paraglide",
+      tag: "STAY 4, PAY 3 + FREE PARAGLIDE",
+      desc: "Complimentary 4th night + Complimentary tandem paragliding arrival into the bay for two"
+    }
   },
   {
     id: "stay-48",
@@ -2130,10 +2130,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Easter Island Discovery · All-Inclusive + 20% Off",
-      "tag": "ALL-INCLUSIVE ARCHAEOLOGY",
-      "desc": "All-inclusive private Moai expedition package + 20% savings on 4+ night extended stays"
-}
+      title: "Easter Island Discovery · All-Inclusive + 20% Off",
+      tag: "ALL-INCLUSIVE ARCHAEOLOGY",
+      desc: "All-inclusive private Moai expedition package + 20% savings on 4+ night extended stays"
+    }
   },
   {
     id: "stay-49",
@@ -2175,10 +2175,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Lake Como Dolce Vita · Vintage Boat & $150 Spa",
-      "tag": "VINTAGE BOAT & $150 SPA",
-      "desc": "Complimentary 1-hour private tour aboard vintage wooden Ruy speed boat + $150 T Spa credit"
-}
+      title: "Lake Como Dolce Vita · Vintage Boat & $150 Spa",
+      tag: "VINTAGE BOAT & $150 SPA",
+      desc: "Complimentary 1-hour private tour aboard vintage wooden Ruy speed boat + $150 T Spa credit"
+    }
   },
   {
     id: "stay-50",
@@ -2220,10 +2220,10 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      "title": "Namib Sky Safari · Hot Air Balloon & Starbed",
-      "tag": "HOT AIR BALLOON & STARBED",
-      "desc": "Complimentary private sunrise Sossusvlei hot air balloon safari + Rooftop stargazing sleepout setup"
-}
+      title: "Namib Sky Safari · Hot Air Balloon & Starbed",
+      tag: "HOT AIR BALLOON & STARBED",
+      desc: "Complimentary private sunrise Sossusvlei hot air balloon safari + Rooftop stargazing sleepout setup"
+    }
   }
 ];
 
