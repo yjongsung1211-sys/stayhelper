@@ -9,15 +9,15 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "ColorHelper · AI 퍼스널 컬러 진단 & 12톤 뷰티 큐레이션",
+  title: "퍼스널컬러헬퍼 (PersonalColorHelper) · AI 퍼스널 컬러 진단 & 12톤 뷰티 큐레이션",
   description:
-    "내 얼굴에 꼭 맞는 인생 컬러를 3초 만에 찾는 AI 퍼스널 컬러 진단실. 12톤 정밀 색채학 매트릭스, 가상 드레이핑 체험, 인생 립스틱 및 패션 스타일링 큐레이션 제공.",
+    "내 얼굴에 꼭 맞는 인생 컬러를 3초 만에 찾는 AI 퍼스널컬러헬퍼. 12톤 정밀 색채학 매트릭스, 가상 드레이핑 체험, 인생 립스틱 및 패션 스타일링 큐레이션 제공.",
   keywords: [
+    "퍼스널컬러헬퍼",
     "퍼스널 컬러",
     "퍼스널 컬러 자가진단",
     "AI 퍼스널컬러",
-    "ColorHelper",
-    "컬러헬퍼",
+    "PersonalColorHelper",
     "봄웜톤",
     "여름쿨톤",
     "가을웜톤",
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
   },
   openGraph: {
-    title: "ColorHelper — AI 퍼스널 컬러 진단실",
+    title: "퍼스널컬러헬퍼 (PersonalColorHelper) — AI 퍼스널 컬러 진단실",
     description:
-      "나만의 12톤 퍼스널 컬러와 인생 립스틱, 가상 드레이핑을 지금 바로 무료로 체험해보세요.",
+      "나만의 12톤 퍼스널 컬러와 인생 립스틱, 가상 드레이핑을 지금 바로 체험해보세요.",
     type: "website",
     locale: "ko_KR",
   },

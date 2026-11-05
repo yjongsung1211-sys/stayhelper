@@ -53,50 +53,92 @@ export async function generateMetadata(): Promise<Metadata> {
     };
   }
 
+  if (host.includes('stylinghelper')) {
+    return {
+      metadataBase: new URL('https://stylinghelper.com'),
+      title: 'StylingHelper US — Click Any Look, Shop the Outfit | Curated Seoul K-Styling',
+      description:
+        'Discover curated Seoul street aesthetics & Korean styling formulas. Shop 3,521+ verified 100% in-stock US retail garments from Zara US, Nordstrom, COS, Mango, and SSENSE.',
+      keywords: [
+        'Korean Fashion',
+        'K-Style',
+        'Seoul Streetwear',
+        'Seongsu Core',
+        'Quiet Luxury',
+        'Zara US',
+        'Nordstrom',
+        'SSENSE',
+        'COS',
+        'Fashion Lookbook',
+        'AI Stylist'
+      ],
+      icons: {
+        icon: '/icon.svg',
+      },
+      openGraph: {
+        title: 'StylingHelper US — Click Any Look, Shop the Outfit',
+        description:
+          'Curated Seoul K-Fashion aesthetics with 1:1 real US retail items. Tap any garment pin to shop directly on Zara US, Nordstrom & SSENSE.',
+        url: 'https://stylinghelper.com',
+        siteName: 'StylingHelper US',
+        images: [
+          {
+            url: '/images/looks/look_seongsu_leather_01.jpg',
+            width: 1200,
+            height: 630,
+            alt: 'StylingHelper Seoul K-Fashion Editorial Lookbook',
+          },
+        ],
+        locale: 'en_US',
+        type: 'website',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'StylingHelper US — Click Any Look, Shop the Outfit',
+        description:
+          'Curated Seoul K-Fashion aesthetics with 1:1 real US retail items. Tap any garment pin to shop directly on Zara US, Nordstrom & SSENSE.',
+        images: ['/images/looks/look_seongsu_leather_01.jpg'],
+      },
+    };
+  }
+
+  // DEFAULT: 퍼스널컬러헬퍼 (PersonalColorHelper)
   return {
-    metadataBase: new URL('https://stylinghelper.com'),
-    title: 'StylingHelper US — Click Any Look, Shop the Outfit | Curated Seoul K-Styling',
+    metadataBase: new URL('https://personalcolorhelper.com'),
+    title: '퍼스널컬러헬퍼 (PersonalColorHelper) · AI 퍼스널 컬러 진단 & 12톤 뷰티 큐레이션',
     description:
-      'Discover curated Seoul street aesthetics & Korean styling formulas. Shop 3,521+ verified 100% in-stock US retail garments from Zara US, Nordstrom, COS, Mango, and SSENSE.',
+      '내 얼굴에 꼭 맞는 인생 컬러를 3초 만에 찾는 AI 퍼스널컬러헬퍼. 12톤 정밀 색채학 매트릭스, 가상 드레이핑 체험, 인생 립스틱 및 패션 스타일링 큐레이션 제공.',
     keywords: [
-      'Korean Fashion',
-      'K-Style',
-      'Seoul Streetwear',
-      'Seongsu Core',
-      'Quiet Luxury',
-      'Zara US',
-      'Nordstrom',
-      'SSENSE',
-      'COS',
-      'Fashion Lookbook',
-      'AI Stylist'
+      '퍼스널컬러헬퍼',
+      'PersonalColorHelper',
+      '퍼스널 컬러',
+      '퍼스널 컬러 자가진단',
+      'AI 퍼스널컬러',
+      '봄웜톤',
+      '여름쿨톤',
+      '가을웜톤',
+      '겨울쿨톤',
+      '가상 드레이핑',
+      '인생 립스틱',
+      'StylingHelper',
     ],
     icons: {
-      icon: '/icon.svg',
+      icon: '/favicon.ico',
     },
     openGraph: {
-      title: 'StylingHelper US — Click Any Look, Shop the Outfit',
+      title: '퍼스널컬러헬퍼 (PersonalColorHelper) — AI 퍼스널 컬러 진단실',
       description:
-        'Curated Seoul K-Fashion aesthetics with 1:1 real US retail items. Tap any garment pin to shop directly on Zara US, Nordstrom & SSENSE.',
-      url: 'https://stylinghelper.com',
-      siteName: 'StylingHelper US',
-      images: [
-        {
-          url: '/images/looks/look_seongsu_leather_01.jpg',
-          width: 1200,
-          height: 630,
-          alt: 'StylingHelper Seoul K-Fashion Editorial Lookbook',
-        },
-      ],
-      locale: 'en_US',
+        '나만의 12톤 퍼스널 컬러와 인생 립스틱, 가상 드레이핑을 지금 바로 무료로 체험해보세요.',
+      url: 'https://personalcolorhelper.com',
+      siteName: '퍼스널컬러헬퍼',
+      locale: 'ko_KR',
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'StylingHelper US — Click Any Look, Shop the Outfit',
+      title: '퍼스널컬러헬퍼 (PersonalColorHelper) — AI 퍼스널 컬러 진단실',
       description:
-        'Curated Seoul K-Fashion aesthetics with 1:1 real US retail items. Tap any garment pin to shop directly on Zara US, Nordstrom & SSENSE.',
-      images: ['/images/looks/look_seongsu_leather_01.jpg'],
+        '나만의 12톤 퍼스널 컬러와 인생 립스틱, 가상 드레이핑을 지금 바로 무료로 체험해보세요.',
     },
   };
 }

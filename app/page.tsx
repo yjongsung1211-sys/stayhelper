@@ -1,1842 +1,1831 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
-import editorialLooksData from '../public/editorial_top10_lookbook.json';
-import USAuthModal from '@/components/USAuthModal';
-import ReportModal from '@/components/ReportModal';
+import React, { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import {
-  Sparkles,
-  ShieldCheck,
-  ArrowRight,
-  ExternalLink,
-  ShoppingBag,
+  Camera,
   Upload,
-  Wand2,
-  RefreshCw,
-  X,
-  Check,
+  Sparkles,
+  Palette,
   CheckCircle2,
-  Tag,
-  Search,
-  Copy,
-  Building2,
+  Sliders,
+  Heart,
+  ArrowRight,
+  Info,
+  Download,
+  Flame,
+  Snowflake,
+  Layers,
+  Lock,
+  CreditCard,
   User,
   LogIn,
   LogOut,
-  Compass,
-  ChevronRight,
-  ChevronLeft,
-  Gift,
-  Zap,
-  Eye,
-  EyeOff,
-  Heart,
-  Camera,
-  Download,
-  Flame,
-  Star,
-  Lock,
-  Unlock,
-  Sliders,
-  ArrowUpRight,
-  Shirt,
-  ClipboardPaste,
-  AlertTriangle
-} from 'lucide-react';
+  Ticket,
+  X,
+  ShieldCheck,
+  Check,
+  Globe,
+  ExternalLink,
+  ShoppingBag,
+} from "lucide-react";
+import USAuthModal from "@/components/USAuthModal";
 
-// ==========================================
-// 1. DATA TYPES & OCCASIONS (100% English)
-// ==========================================
-interface HotspotPin {
-  id: string;
-  x: number;
-  y: number;
-  category: string;
-  title: string;
-  brand: string;
-  price: number;
-  retailer: string;
-  buyUrl: string;
-  kStyleTip?: string;
-  sku?: string;
-  silhouette?: string;
-}
+// ─── 다국어 언어 타입 ─────────────────────────────────────────
+type LangType = "ko" | "en" | "ja";
 
-interface StylingLook {
-  id: string;
-  title: string;
-  member?: string;
-  styleId?: string;
-  styleName?: string;
-  styleTag?: string;
-  aesthetic?: string;
-  season?: string;
-  imageUrl?: string;
-  modelHeight?: string;
-  description?: string;
-  curatorNote?: string;
-  colorPalette?: string[];
-  vibeTags?: string[];
-  pins: HotspotPin[];
-}
-
-const CURATED_LOOKS: StylingLook[] = editorialLooksData as any[];
-
-// Official PayPal Hosted Checkout Link
-const PAYPAL_CHECKOUT_URL = 'https://www.paypal.com/ncp/payment/LVRRE8SJKD3VA';
-
-// 5 Hip & Curated Occasions for Modern Dates & Weekends - Split by Gender
-interface OccasionOption {
-  id: string;
-  gender: 'men' | 'women';
-  title: string;
-  subtitle: string;
-  vibe: string;
-  icon: string;
-  lookId: string;
-  badge: string;
-  color: string;
-}
-
-const WOMENS_OCCASIONS: OccasionOption[] = [
-  {
-    id: 'date-night',
-    gender: 'women',
-    title: 'Candlelit Dinner & Low-Key Wine',
-    subtitle: 'Parisian silk camisole & fine-gauge cashmere knit',
-    vibe: 'Effortless Allure • Soft Silks • Midnight Mood',
-    icon: '🍷',
-    lookId: 'editorial-look-v05',
-    badge: 'Trending #1 Date Look',
-    color: 'from-amber-500/10 to-rose-500/10 border-amber-500/30'
+// ─── 다국어 UI 텍스트 딕셔너리 ──────────────────────────────────
+const UI_TEXT = {
+  ko: {
+    brandName: "퍼스널컬러헬퍼",
+    brandTag: "AI 퍼스널컬러헬퍼 스튜디오",
+    subtitle: "내 얼굴에 꼭 맞는 인생 컬러와 가상 드레이핑(Draping)을 3초 만에 찾는 AI 퍼스널컬러헬퍼",
+    badgePrice: "1회 1,000원",
+    badgePayPal: "페이팔(PayPal) & 카드 결제",
+    badgeGoogle: "구글 간편 로그인 연동",
+    badgeMatrix: "12톤 정밀 색채학 매트릭스",
+    badgeDraping: "오프라인 샵 1:1 가상 천 드레이핑",
+    ticketLabel: "진단권",
+    ticketUnit: "회",
+    recharge: "+충전",
+    googleLogin: "구글 로그인",
+    uploadTitle: "내 얼굴 사진 등록하기",
+    uploadDesc: "자연광에서 찍은 정면 셀카가 가장 정확하며, 아래 샘플 모델로 즉시 체험도 가능합니다.",
+    uploadFileBtn: "사진 파일 올리기",
+    cameraBtn: "카메라 촬영",
+    cameraShootBtn: "지금 찰칵 촬영!",
+    cameraGuide: "원 안에 얼굴을 맞춰주세요",
+    presetTitle: "사진 없이 1초 즉시 체험 모델 (무료 열람):",
+    presetSub: "클릭 즉시 결과 진단",
+    drapingTitle: "인터랙티브 가상 드레이핑 (Virtual Draping)",
+    drapingDesc: "실제 퍼스널컬러 진단실처럼 얼굴 아래에 천(Drape)을 실시간으로 대보며 안색이 화사해지는지 확인하세요.",
+    splitToggle: "웜 vs 쿨 반반 비교",
+    splitWarm: "웜톤 (피치)",
+    splitCool: "쿨톤 (라벤더)",
+    skinDetected: "피부톤 감지 완료",
+    swatchTitle: "드레이핑 진단 천 교체 (클릭해보세요)",
+    swatchDesc: "천을 바꿨을 때 턱선이 갸름해 보이고 얼굴빛이 화사해지는 색상이 내 톤입니다.",
+    metricTitle: "AI 색채학 지표 분석",
+    metricSubtitle: "RGB/LAB 매트릭스",
+    coolLabel: "쿨(Cool)",
+    warmLabel: "웜(Warm)",
+    brightnessLabel: "피부 밝기 (Value):",
+    saturationLabel: "채도 (Chroma):",
+    tabResult: "12톤 진단 결과 & 컬러 팔레트",
+    tabCosmetics: "인생 립스틱 & 파우치 처방전",
+    saveInstaCard: "인스타 스토리 카드 저장",
+    bestPalette: "베스트 팔레트 (안색이 가장 맑아지는 색)",
+    worstPalette: "워스트 팔레트 (피부가 칙칙하거나 뜨는 색)",
+    totalFormula: "토탈 스타일링 처방전",
+    jewelryTitle: "💍 추천 주얼리",
+    baseTitle: "💆 베이스 메이크업",
+    hairTitle: "💇 헤어 염색 추천",
+    fashionTitle: "👗 패션 스타일링",
+    lipTitle: "맞춤 인생 립스틱 3선",
+    lipDesc: "바르는 순간 형광등을 켠 듯 안색을 환하게 밝혀주는 실존 인기 백화점/올리브영 베스트셀러입니다.",
+    lowestPrice: "최저가 보러가기",
+    blushTitle: "🌸 찰떡 블러셔 (치크)",
+    eyeTitle: "👁️ 음영 아이섀도우 팔레트",
+    lockTitle: "내 사진 12톤 정밀 진단서 & 인생 립스틱 처방전 잠금",
+    lockDesc: "얼굴 사진을 기반으로 베스트 컬러 5종, 워스트 컬러, 찰떡 립스틱 3종 분석이 완료되었습니다. 단돈 1,000원으로 즉시 해금하세요!",
+    unlockBtn: "1,000원으로 결과 즉시 해금하기 (PayPal / 카드)",
+    loginBonusBtn: "구글 로그인하고 1회 무료권 받기",
+    modalTitle: "퍼스널 컬러 정밀 진단권 충전",
+    modalSubtitle: "청담동 15만 원 오프라인 진단을 1회 1,000원에 온라인에서 누리세요.",
+    singlePlanTag: "가장 인기 있는 기본형",
+    singlePlanName: "1회 정밀 진단 티켓",
+    singlePlanDesc: "12톤 분석 + 인생 립스틱 + 인스타 카드",
+    singlePrice: "₩1,000",
+    singlePriceSub: "$0.79 USD",
+    triplePlanTag: "16% 할인 패키지",
+    triplePlanName: "3회 콤보 패키지",
+    triplePlanDesc: "친구·연인·가족과 함께 진단",
+    triplePrice: "₩2,500",
+    triplePriceSub: "$1.89 USD",
+    payWithPaypal: "페이팔로 ₩1,000 결제하기",
+    payTriplePaypal: "3회 콤보 (₩2,500) 페이팔 결제하기",
+    testPayBtn: "[관리자/검토용] 1초 즉시 테스트 결제 승인",
+    stylingBannerTag: "StylingHelper Fashion Link",
+    stylingBannerTitle: "내 톤에 딱 맞는 이번 주 럭셔리 OOTD",
+    stylingBannerDesc: "미국 5대 정품 유통사 100% 실시간 재고 룩북을 바로 감상하고 쇼핑해보세요.",
+    stylingBannerBtn: "맞춤 룩북 보러가기",
   },
-  {
-    id: 'weekend-brunch',
-    gender: 'women',
-    title: 'Sunday Matcha & Cafe Stroll',
-    subtitle: 'Modern olive swing jacket & croc-embossed tall boots',
-    vibe: 'Scandi Clean • Daylight Chic • Relaxed Elegance',
-    icon: '🥐',
-    lookId: 'editorial-look-v02',
-    badge: 'Street Style Favorite',
-    color: 'from-emerald-500/10 to-teal-500/10 border-emerald-500/30'
+  en: {
+    brandName: "PersonalColorHelper",
+    brandTag: "AI PersonalColorHelper Studio",
+    subtitle: "Find your signature tone, virtual draping fabrics & best lipstick matches in 3 seconds with PersonalColorHelper.",
+    badgePrice: "Only $0.79 / Diagnosis",
+    badgePayPal: "Official PayPal & Card",
+    badgeGoogle: "Google One-Tap Sign In",
+    badgeMatrix: "12-Season Colorimetry Matrix",
+    badgeDraping: "Real-time Virtual Fabric Draping",
+    ticketLabel: "Pass",
+    ticketUnit: "left",
+    recharge: "+Top Up",
+    googleLogin: "Sign in with Google",
+    uploadTitle: "Register Your Portrait",
+    uploadDesc: "A natural light front-facing selfie works best. You can also explore instantly with our preset models below.",
+    uploadFileBtn: "Upload Photo",
+    cameraBtn: "Take Photo",
+    cameraShootBtn: "Capture Now!",
+    cameraGuide: "Align your face inside the circle",
+    presetTitle: "1-Second Instant Model Exploration (Free):",
+    presetSub: "Click to analyze instantly",
+    drapingTitle: "Interactive Virtual Draping Studio",
+    drapingDesc: "Experience a luxury salon draping session virtually by trying on signature color fabrics beneath your chin.",
+    splitToggle: "Warm vs Cool Split Comparison",
+    splitWarm: "Warm (Peach)",
+    splitCool: "Cool (Lavender)",
+    skinDetected: "Skin Tone Sampled",
+    swatchTitle: "Switch Drape Fabrics (Tap to try)",
+    swatchDesc: "The color that sharpens your jawline and brightens your complexion is your true signature tone.",
+    metricTitle: "AI Colorimetric Metrics",
+    metricSubtitle: "RGB / LAB Matrix",
+    coolLabel: "Cool Tone",
+    warmLabel: "Warm Tone",
+    brightnessLabel: "Skin Lightness (Value):",
+    saturationLabel: "Chroma Saturation:",
+    tabResult: "12-Tone Report & Palette",
+    tabCosmetics: "Signature Lipsticks & Pouch",
+    saveInstaCard: "Export Instagram Story Card",
+    bestPalette: "Best Palette (Glow & Radiance Boosting)",
+    worstPalette: "Worst Palette (Colors to Avoid)",
+    totalFormula: "Total Styling Prescription",
+    jewelryTitle: "💍 Recommended Jewelry",
+    baseTitle: "💆 Foundation Base",
+    hairTitle: "💇 Hair Color Guide",
+    fashionTitle: "👗 Wardrobe Styling",
+    lipTitle: "Top 3 Signature Lipsticks",
+    lipDesc: "Cult-classic department store bestsellers that instantly illuminate your skin tone.",
+    lowestPrice: "Shop at Best Price",
+    blushTitle: "🌸 Signature Cheek Blush",
+    eyeTitle: "👁️ Sculpting Eyeshadow Palette",
+    lockTitle: "Unlock Your Full 12-Tone Report & Luxury Lip Dossier",
+    lockDesc: "Your facial color analysis with 5 best colors, worst colors, and 3 cult lipsticks is complete. Unlock instantly for just $0.79!",
+    unlockBtn: "Unlock Full Dossier for $0.79 (PayPal / Card)",
+    loginBonusBtn: "Sign in with Google & Get 1 Free Pass",
+    modalTitle: "Top Up Personal Color Passes",
+    modalSubtitle: "Experience a $150 luxury personal color consultation for just $0.79 online.",
+    singlePlanTag: "Most Popular Basic",
+    singlePlanName: "1-Time Diagnostic Pass",
+    singlePlanDesc: "12-Tone Dossier + Top 3 Lipsticks + Instagram Card",
+    singlePrice: "$0.79",
+    singlePriceSub: "₩1,000 KRW",
+    triplePlanTag: "Best Value (16% OFF)",
+    triplePlanName: "3-Pass Family & Friends Combo",
+    triplePlanDesc: "Compare tones with your besties & family",
+    triplePrice: "$1.89",
+    triplePriceSub: "₩2,500 KRW",
+    payWithPaypal: "Pay $0.79 with PayPal",
+    payTriplePaypal: "Pay $1.89 with PayPal (3-Pack)",
+    testPayBtn: "[Reviewer Test] Instant Approval (Free Simulation)",
+    stylingBannerTag: "StylingHelper Fashion Link",
+    stylingBannerTitle: "Luxury Outfits Curated for Your Tone",
+    stylingBannerDesc: "Shop live US retail inventory (Zara US, Nordstrom, SSENSE) matched to your color palette.",
+    stylingBannerBtn: "Explore Matching Lookbook",
   },
-  {
-    id: 'gallery-wine',
-    gender: 'women',
-    title: 'SoHo Gallery & Natural Wine Bar',
-    subtitle: 'Crisp oversized poplin & flared cream tailored trousers',
-    vibe: 'Architectural • Quiet Luxury • Clean Lines',
-    icon: '🎨',
-    lookId: 'editorial-look-v06',
-    badge: 'Curator Choice',
-    color: 'from-sky-500/10 to-indigo-500/10 border-sky-500/30'
+  ja: {
+    brandName: "パーソナルカラーヘルパー",
+    brandTag: "AIパーソナルカラーヘルパー",
+    subtitle: "あなたの顔立ちに最も似合う「一生モノの似合わせカラー」とバーチャルドレープを3秒で診断するパーソナルカラーヘルパー",
+    badgePrice: "1回たったの120円 (¥120)",
+    badgePayPal: "PayPal＆クレジットカード対応",
+    badgeGoogle: "Google簡単ログイン連携",
+    badgeMatrix: "12タイプ精密色彩学マトリックス",
+    badgeDraping: "サロン級バーチャルドレープ体験",
+    ticketLabel: "診断チケット",
+    ticketUnit: "回",
+    recharge: "+チャージ",
+    googleLogin: "Googleでログイン",
+    uploadTitle: "お顔の写真をご用意ください",
+    uploadDesc: "自然光で撮影した正面自撮りが最も正確です。下のサンプルモデルですぐに体験することも可能です。",
+    uploadFileBtn: "写真ファイルをアップロード",
+    cameraBtn: "カメラで撮影",
+    cameraShootBtn: "今すぐ撮影！",
+    cameraGuide: "円の中にお顔を合わせてください",
+    presetTitle: "写真なしで1秒即診断モデル (無料公開中):",
+    presetSub: "クリックですぐに結果を表示",
+    drapingTitle: "インタラクティブ・バーチャルドレープ (Virtual Draping)",
+    drapingDesc: "実際のパーソナルカラーサロンのように、お顔の下に診断布（ドレープ）をリアルタイムで当てて顔色の変化を体験できます。",
+    splitToggle: "イエベ vs ブルベ 半々比較",
+    splitWarm: "イエベ (ピーチ)",
+    splitCool: "ブルベ (ラベンダー)",
+    skinDetected: "肌トーン検出完了",
+    swatchTitle: "ドレープ布を切り替える (タップして体験)",
+    swatchDesc: "布を当てた時にフェイスラインが引き締まり、透明感が一気に引き立つ色があなたの本命カラーです。",
+    metricTitle: "AI色彩学パラメーター分析",
+    metricSubtitle: "RGB / LAB色空間マトリックス",
+    coolLabel: "ブルベ (Cool)",
+    warmLabel: "イエベ (Warm)",
+    brightnessLabel: "肌の明るさ (明度):",
+    saturationLabel: "鮮やかさ (彩度):",
+    tabResult: "12タイプ診断結果＆カラーパレット",
+    tabCosmetics: "人生神リップ＆コスメ処方箋",
+    saveInstaCard: "インスタストーリー用画像を保存",
+    bestPalette: "ベストパレット (透明感と血色感が引き立つ色)",
+    worstPalette: "ワーストパレット (肌がくすんで見えやすい要注意色)",
+    totalFormula: "トータルスタイリング処方箋",
+    jewelryTitle: "💍 似合うジュエリー",
+    baseTitle: "💆 ベースメイクの選び方",
+    hairTitle: "💇 おすすめヘアカラー",
+    fashionTitle: "👗 ファッション着こなし術",
+    lipTitle: "運命の神リップ 3選",
+    lipDesc: "ひと塗りで顔全体にパッとスポットライトが当たったように華やぐ、デパコス・プチプラの超名作リップです。",
+    lowestPrice: "最安値・商品を見る",
+    blushTitle: "🌸 相性抜群チーク",
+    eyeTitle: "👁️ 陰影アイシャドウパレット",
+    lockTitle: "あなただけの12タイプ精密診断書＆神リップ処方箋",
+    lockDesc: "お顔写真に基づき、ベストカラー5選・苦手カラー・似合うデパコス神リップ3選の分析が完了しました。1回120円ですぐにロック解除できます！",
+    unlockBtn: "120円で結果を今すぐ見る (PayPal / カード)",
+    loginBonusBtn: "Googleログインで1回無料チケット獲得",
+    modalTitle: "パーソナルカラー診断チケットのチャージ",
+    modalSubtitle: "表参道・銀座サロンの1.5万円の診断体験を、オンラインなら1回120円でいつでも手軽に。",
+    singlePlanTag: "一番人気！お手軽お試し",
+    singlePlanName: "1回 精密診断チケット",
+    singlePlanDesc: "12タイプ詳細診断＋神リップ3選＋インスタカード",
+    singlePrice: "¥120",
+    singlePriceSub: "$0.79 USD",
+    triplePlanTag: "16%お得なセット",
+    triplePlanName: "3回 お友達・家族シェアセット",
+    triplePlanDesc: "お友達や家族と一緒にパーソナルカラーを比較",
+    triplePrice: "¥280",
+    triplePriceSub: "$1.89 USD",
+    payWithPaypal: "PayPalで ¥120 を決済する",
+    payTriplePaypal: "PayPalで ¥280 を決済する (3回券)",
+    testPayBtn: "[管理者・レビュー用] 1秒でテスト決済承認",
+    stylingBannerTag: "StylingHelper Fashion Link",
+    stylingBannerTitle: "あなたのシーズンに最も映える今週のラグジュアリーOOTD",
+    stylingBannerDesc: "アメリカ人気ブランド（Zara US、Nordstrom、SSENSE）のリアルタイム在庫コーデをチェック。",
+    stylingBannerBtn: "似合わせルックブックを見る",
   },
-  {
-    id: 'soho-luxury',
-    gender: 'women',
-    title: 'Rooftop Cocktail & Evening Stride',
-    subtitle: 'Glen plaid double-breasted blazer & wide palazzo trousers',
-    vibe: 'Sharp Tailoring • Empowered Silhouette • Statement',
-    icon: '🍸',
-    lookId: 'editorial-look-v01',
-    badge: 'Signature Power Look',
-    color: 'from-purple-500/10 to-pink-500/10 border-purple-500/30'
-  },
-  {
-    id: 'cozy-casual',
-    gender: 'women',
-    title: 'Crisp City Walk & Records Shop',
-    subtitle: 'Polo Ralph Lauren sherpa puffer & cuffed straight denim',
-    vibe: 'Downtown Retro • Warm Texture • High-End Casual',
-    icon: '🎧',
-    lookId: 'editorial-look-v04',
-    badge: 'Off-Duty Classic',
-    color: 'from-orange-500/10 to-yellow-500/10 border-orange-500/30'
-  }
-];
-
-const MENS_OCCASIONS: OccasionOption[] = [
-  {
-    id: 'mens-tailored-dandy',
-    gender: 'men',
-    title: 'Fine Dining & Private Members Club',
-    subtitle: 'Milanese tailored charcoal wool blazer & pleated slacks',
-    vibe: 'Quiet Luxury • Sharp Tailoring • Masculine Elegance',
-    icon: '🍸',
-    lookId: 'editorial-men-01',
-    badge: 'Executive Evening',
-    color: 'from-slate-500/10 to-zinc-500/10 border-slate-500/30'
-  },
-  {
-    id: 'mens-urban-street',
-    gender: 'men',
-    title: 'Seongsu Street & Underground Vinyl Lounge',
-    subtitle: 'Oversized leather bomber & raw wide-leg denim',
-    vibe: 'Subtle Edge • Korean Street • Effortless Cool',
-    icon: '🎧',
-    lookId: 'editorial-men-02',
-    badge: 'Trending Streetwear',
-    color: 'from-amber-500/10 to-stone-500/10 border-amber-500/30'
-  },
-  {
-    id: 'mens-cityboy-casual',
-    gender: 'men',
-    title: 'Hannam Espresso Bar & Contemporary Gallery',
-    subtitle: 'Oversized balmacaan coat, clean crewneck & penny loafers',
-    vibe: 'City Boy Clean • Relaxed Volume • Architectural',
-    icon: '☕',
-    lookId: 'editorial-men-03',
-    badge: 'Curator Favorite',
-    color: 'from-emerald-500/10 to-teal-500/10 border-emerald-500/30'
-  },
-  {
-    id: 'mens-downtown-cozy',
-    gender: 'men',
-    title: 'Brooklyn Weekend Walk & Flea Market',
-    subtitle: 'Elder Statesman daily crew knit & vintage washed denim',
-    vibe: 'Downtown Classic • Warm Cashmere • Off-Duty Ease',
-    icon: '🍂',
-    lookId: 'editorial-men-04',
-    badge: 'Weekend Relaxed',
-    color: 'from-orange-500/10 to-yellow-500/10 border-orange-500/30'
-  },
-  {
-    id: 'mens-smart-office',
-    gender: 'men',
-    title: 'Creative Studio Meeting & Casual Wine',
-    subtitle: 'Boxy poplin shirt, tailored chinos & leather derby shoes',
-    vibe: 'Smart Casual • Clean Proportion • Understated',
-    icon: '🍷',
-    lookId: 'editorial-men-05',
-    badge: 'Daily Essential',
-    color: 'from-sky-500/10 to-indigo-500/10 border-sky-500/30'
-  }
-];
-
-const OCCASIONS: OccasionOption[] = [...MENS_OCCASIONS, ...WOMENS_OCCASIONS];
-
-// Sample model photos split by Men and Women for instant 1-click testing
-interface SampleModel {
-  id: string;
-  gender: 'men' | 'women';
-  label: string;
-  tag: string;
-  url: string;
-  thumb: string;
-}
-
-const SAMPLE_MODELS: Record<'men' | 'women', SampleModel[]> = {
-  men: [
-    {
-      id: 'sample-men-caucasian',
-      gender: 'men',
-      label: 'Caucasian Model',
-      tag: '185cm • White',
-      url: '/images/models/male_caucasian_model.webp',
-      thumb: '/images/models/male_caucasian_model_thumb.webp'
-    },
-    {
-      id: 'sample-men-asian',
-      gender: 'men',
-      label: 'Asian Model',
-      tag: '182cm • Asian',
-      url: '/images/models/male_asian_model.webp',
-      thumb: '/images/models/male_asian_model_thumb.webp'
-    },
-    {
-      id: 'sample-men-black',
-      gender: 'men',
-      label: 'Black Model',
-      tag: '186cm • Black',
-      url: '/images/models/male_black_model.webp',
-      thumb: '/images/models/male_black_model_thumb.webp'
-    }
-  ],
-  women: [
-    {
-      id: 'sample-women-caucasian',
-      gender: 'women',
-      label: 'Caucasian Model',
-      tag: '176cm • White',
-      url: '/images/models/female_caucasian_model.webp',
-      thumb: '/images/models/female_caucasian_model_thumb.webp'
-    },
-    {
-      id: 'sample-women-asian',
-      gender: 'women',
-      label: 'Asian Model',
-      tag: '172cm • Asian',
-      url: '/images/models/female_asian_model.webp',
-      thumb: '/images/models/female_asian_model_thumb.webp'
-    },
-    {
-      id: 'sample-women-black',
-      gender: 'women',
-      label: 'Black Model',
-      tag: '177cm • Black',
-      url: '/images/models/female_black_model.webp',
-      thumb: '/images/models/female_black_model_thumb.webp'
-    }
-  ]
 };
 
-export default function StylingHelperBright() {
-  // ----------------------------------------------------
-  // States: User Photo, Gender & Occasion Selection
-  // Initial state: Clean Paste/Drop canvas as default
-  // ----------------------------------------------------
-  const [selectedGender, setSelectedGender] = useState<'men' | 'women'>('men');
-  const [userPhoto, setUserPhoto] = useState<string | null>(null);
-  const [userPhotoName, setUserPhotoName] = useState<string>('');
-  const [selectedOccasion, setSelectedOccasion] = useState<OccasionOption>(MENS_OCCASIONS[0]);
+// ─── 12톤 퍼스널 컬러 데이터 정의 ──────────────────────────────
+interface ColorToneData {
+  id: string;
+  seasonNames: { ko: string; en: string; ja: string };
+  titles: { ko: string; en: string; ja: string };
+  slogans: { ko: string; en: string; ja: string };
+  summaries: { ko: string; en: string; ja: string };
+  temperature: "WARM" | "COOL";
+  lightness: "LIGHT" | "MUTE" | "BRIGHT" | "DEEP";
+  saturation: "HIGH" | "MEDIUM" | "LOW";
+  bestColors: { name: { ko: string; en: string; ja: string }; hex: string }[];
+  worstColors: { name: { ko: string; en: string; ja: string }; hex: string }[];
+  drapeSwatches: { name: { ko: string; en: string; ja: string }; hex: string; desc: { ko: string; en: string; ja: string } }[];
+  cosmetics: {
+    lips: { brand: string; name: string; hex: string; note: { ko: string; en: string; ja: string } }[];
+    blush: { brand: string; name: string; hex: string; note: { ko: string; en: string; ja: string } }[];
+    eye: { brand: string; name: string; hex: string; note: { ko: string; en: string; ja: string } }[];
+  };
+  stylingGuide: {
+    jewelry: { ko: string; en: string; ja: string };
+    jewelryDesc: { ko: string; en: string; ja: string };
+    foundation: { ko: string; en: string; ja: string };
+    hairColor: { ko: string; en: string; ja: string };
+    fashionTip: { ko: string; en: string; ja: string };
+  };
+  keywords: { ko: string[]; en: string[]; ja: string[] };
+}
 
-  // ----------------------------------------------------
-  // States: Generation, Progress & Result
-  // ----------------------------------------------------
-  const [isGenerating, setIsGenerating] = useState<boolean>(false);
-  const [progressStage, setProgressStage] = useState<string>('');
-  const [styledResult, setStyledResult] = useState<{
-    imageUrl: string;
-    look: StylingLook;
-    provider: string;
-  } | null>(null);
+const PERSONAL_COLOR_DB: Record<string, ColorToneData> = {
+  spring_light: {
+    id: "spring_light",
+    seasonNames: { ko: "봄 웜톤", en: "Spring Warm", ja: "イエベ春" },
+    titles: { ko: "봄 웜 라이트", en: "Light Spring", ja: "イエベ春 ライト (スプリング・ライト)" },
+    slogans: {
+      ko: "봄 햇살처럼 맑고 투명한 복숭앗빛 생기",
+      en: "Sunlit Peach Glow · Dewy & Transparent Radiance",
+      ja: "春の木漏れ日のように澄んだピーチの透明感と多幸感",
+    },
+    summaries: {
+      ko: "노란 기가 도는 맑고 밝은 파스텔톤이 가장 잘 어울리며, 수채화처럼 가볍고 화사한 톤으로 안색이 즉시 살아납니다.",
+      en: "Soft, warm pastel hues with yellow undertones harmonize perfectly with your skin, bringing out a fresh, dewy radiance.",
+      ja: "黄みがかった明るく澄んだパステルカラーが最もよく似合い、水彩画のようにふんわりと肌の血色感を高めます。",
+    },
+    temperature: "WARM",
+    lightness: "LIGHT",
+    saturation: "MEDIUM",
+    bestColors: [
+      { name: { ko: "피치 코랄", en: "Peach Coral", ja: "ピーチコーラル" }, hex: "#FFA07A" },
+      { name: { ko: "살구 크림", en: "Apricot Cream", ja: "アプリコット" }, hex: "#FFE4B5" },
+      { name: { ko: "바닐라 옐로우", en: "Vanilla Yellow", ja: "バニライエロー" }, hex: "#FFF275" },
+      { name: { ko: "라이트 아쿠아", en: "Light Aqua", ja: "ライトアクア" }, hex: "#A8E6CF" },
+      { name: { ko: "소프트 웜핑크", en: "Soft Warm Pink", ja: "ウォームピンク" }, hex: "#FFB6C1" },
+    ],
+    worstColors: [
+      { name: { ko: "다크 챠콜", en: "Dark Charcoal", ja: "ダークチャコール" }, hex: "#2C3E50" },
+      { name: { ko: "딥 버건디", en: "Deep Burgundy", ja: "ディープバーガンディ" }, hex: "#4A0E17" },
+      { name: { ko: "탁한 그레이", en: "Muted Gray", ja: "くすみグレー" }, hex: "#7F8C8D" },
+    ],
+    drapeSwatches: [
+      { name: { ko: "피치 코랄", en: "Peach Coral", ja: "ピーチコーラル" }, hex: "#FFA07A", desc: { ko: "생기 부스팅", en: "Glow Boost", ja: "多幸感アップ" } },
+      { name: { ko: "바닐라 옐로우", en: "Vanilla Yellow", ja: "バニライエロー" }, hex: "#FFF275", desc: { ko: "안색 톤업", en: "Tone Brightening", ja: "透明感トーンアップ" } },
+      { name: { ko: "라이트 아쿠아", en: "Light Aqua", ja: "ライトアクア" }, hex: "#98FB98", desc: { ko: "청량감", en: "Fresh Coolness", ja: "爽やかな明るさ" } },
+      { name: { ko: "소프트 웜핑크", en: "Soft Warm Pink", ja: "ウォームピンク" }, hex: "#FFB6C1", desc: { ko: "혈색 강조", en: "Cheek Flush", ja: "ふんわり血色感" } },
+    ],
+    cosmetics: {
+      lips: [
+        { brand: "Dior", name: "Addict Lip Glow 004 Coral", hex: "#FF7675", note: { ko: "촉촉한 살구빛 생기 립밤", en: "Dewy sheer coral lip balm", ja: "みずみずしい透け感コーラル" } },
+        { brand: "Rom&nd", name: "Juicy Lasting Tint Jujube", hex: "#E17055", note: { ko: "자연스러운 데일리 대추 코랄", en: "Natural daily soft apricot", ja: "自然に馴染むデイリーコーラル" } },
+        { brand: "MAC", name: "Lustreglass Lipstick See Sheer", hex: "#F39C12", note: { ko: "맑고 투명한 쉬어 자몽 코랄", en: "Luminous sheer grapefruit", ja: "透明感あふれるシアーピンクグレープ" } },
+      ],
+      blush: [
+        { brand: "NARS", name: "Blush Sex Appeal", hex: "#FFD3B6", note: { ko: "뽀얀 소프트 살구 피치", en: "Silky soft peach", ja: "白みのあるやわらかピーチ" } },
+        { brand: "Clinique", name: "Cheek Pop Melon Pop", hex: "#FFA07A", note: { ko: "맑게 물드는 맑은 코랄", en: "Watercolor luminous melon", ja: "澄んだメロンコーラル" } },
+      ],
+      eye: [
+        { brand: "Dasique", name: "Shadow Palette Peach Squeeze", hex: "#E6C29E", note: { ko: "살구빛 글리터 & 음영", en: "Warm peach shimmer & contour", ja: "ピーチトーンのラメ＆陰影" } },
+      ],
+    },
+    stylingGuide: {
+      jewelry: { ko: "라이트 골드 / 로즈골드", en: "Light Gold / Rose Gold", ja: "シャンパンゴールド / ピンクゴールド" },
+      jewelryDesc: {
+        ko: "묵직한 옐로우 골드보다는 반짝이는 14K 샴페인 골드나 로즈골드가 화사함을 극대화합니다.",
+        en: "Delicate 14K champagne gold or rose gold enhances your natural glow much better than heavy yellow gold.",
+        ja: "重厚なイエローゴールドよりも、繊細に輝く14Kシャンパンゴールドやピンクゴールドが最も映えます。",
+      },
+      foundation: { ko: "19호~21호 옐로우 / 뉴트럴 베이스 글로우", en: "Fair/Light Neutral Glow Cushion (19N-21N)", ja: "明るめイエロー〜ニュートラル系 ツヤ肌クッション" },
+      hairColor: { ko: "밀크 브라운, 라이트 카라멜, 허니 브라운", en: "Milk Brown, Light Caramel, Honey Blonde", ja: "ミルクティーブラウン、ライトキャラメル、ハニーブラウン" },
+      fashionTip: {
+        ko: "린넨 아이보리, 크림 화이트, 파스텔 카디건을 매치하면 3배 청초해 보입니다.",
+        en: "Pair with linen ivory, soft cream knitwear, and pastel cardigans for effortless elegance.",
+        ja: "リネンアイボリーやミルキーホワイト、パステルカラーのカーディガンを羽織ると圧倒的な透明感が出ます。",
+      },
+    },
+    keywords: {
+      ko: ["#화사함", "#생기코랄", "#복숭아상", "#과즙미", "#소프트파스텔"],
+      en: ["#DewyGlow", "#PeachCoral", "#SoftPastel", "#JuicyVibe", "#FreshLight"],
+      ja: ["#透明感", "#多幸感メイク", "#ピーチコーラル", "#愛され顔", "#春パステル"],
+    },
+  },
+  summer_light: {
+    id: "summer_light",
+    seasonNames: { ko: "여름 쿨톤", en: "Summer Cool", ja: "ブルベ夏" },
+    titles: { ko: "여름 쿨 라이트", en: "Light Summer", ja: "ブルベ夏 ライト (サマー・ライト)" },
+    slogans: {
+      ko: "새벽안개처럼 뽀얗고 청량한 파스텔 수채화",
+      en: "Cool Lavender Mist · Airy & Porcelain Watercolor",
+      ja: "朝霧のように澄み渡るラベンダー＆パステルブルーの透明感",
+    },
+    summaries: {
+      ko: "푸른 기가 도는 하얗고 투명한 파스텔 컬러가 최적입니다. 라벤더, 베이비 핑크를 얹었을 때 피부가 도자기처럼 투명해집니다.",
+      en: "Cool, delicate pastel hues with soft blue undertones like baby pink and pale lavender make your complexion look porcelain clear.",
+      ja: "青みを帯びた淡く澄んだパステルカラーがベスト。ラベンダーやベビーピンクをまとうと、肌が白玉のように透き通ります。",
+    },
+    temperature: "COOL",
+    lightness: "LIGHT",
+    saturation: "LOW",
+    bestColors: [
+      { name: { ko: "베이비 핑크", en: "Baby Pink", ja: "ベビーピンク" }, hex: "#F8BBD0" },
+      { name: { ko: "파스텔 라벤더", en: "Pastel Lavender", ja: "パステルラベンダー" }, hex: "#E1BEE7" },
+      { name: { ko: "스카이 블루", en: "Sky Blue", ja: "スカイブルー" }, hex: "#B3E5FC" },
+      { name: { ko: "민트 아이스", en: "Mint Ice", ja: "ミントアイス" }, hex: "#B2DFDB" },
+      { name: { ko: "소프트 라일락", en: "Soft Lilac", ja: "ソフトライラック" }, hex: "#D1C4E9" },
+    ],
+    worstColors: [
+      { name: { ko: "카멜 브라운", en: "Camel Brown", ja: "キャメルブラウン" }, hex: "#D35400" },
+      { name: { ko: "황토 베이지", en: "Ochre Beige", ja: "黄土ベージュ" }, hex: "#B78E5E" },
+      { name: { ko: "머스타드 옐로우", en: "Mustard Yellow", ja: "マスタードイエロー" }, hex: "#F39C12" },
+    ],
+    drapeSwatches: [
+      { name: { ko: "베이비 핑크", en: "Baby Pink", ja: "ベビーピンク" }, hex: "#F8BBD0", desc: { ko: "피부 투명도 극대화", en: "Porcelain Radiance", ja: "圧倒的白肌感" } },
+      { name: { ko: "파스텔 라벤더", en: "Pastel Lavender", ja: "パステルラベンダー" }, hex: "#E1BEE7", desc: { ko: "황기 완벽 차단", en: "Cancels Sallow Tones", ja: "黄ぐすみ完全リセット" } },
+      { name: { ko: "스카이 블루", en: "Sky Blue", ja: "スカイブルー" }, hex: "#B3E5FC", desc: { ko: "청량한 쿨톤 빛", en: "Crisp Cool Breeze", ja: "澄んだ清涼感" } },
+      { name: { ko: "화이트 밀크", en: "Milky White", ja: "ミルキーホワイト" }, hex: "#F5F6FA", desc: { ko: "도자기 베이스", en: "Pure Clean Canvas", ja: "陶器肌ハイライト" } },
+    ],
+    cosmetics: {
+      lips: [
+        { brand: "Dior", name: "Addict Lip Glow 001 Pink", hex: "#F8BBD0", note: { ko: "여리여리 맑은 우유 핑크", en: "Iconic sheer petal pink", ja: "永遠の王道モテピンク" } },
+        { brand: "Rom&nd", name: "Dewyful Water Tint Cherry Way", hex: "#FF6B81", note: { ko: "물먹은 청량 핑크", en: "Dewy fresh berry sheen", ja: "みずみずしいクリアチェリー" } },
+        { brand: "Chanel", name: "Rouge Coco Flash 91 Bohème", hex: "#E056FD", note: { ko: "맑은 라즈베리 핑크", en: "Luminous raspberry shine", ja: "上品なシアーラズベリー" } },
+      ],
+      blush: [
+        { brand: "Rom&nd", name: "Better Than Cheek Strawberry Milk", hex: "#FCE4EC", note: { ko: "뽀얀 딸기우유 블러셔", en: "Soft pastel strawberry milk", ja: "ふんわり苺ミルクチーク" } },
+        { brand: "Clinique", name: "Cheek Pop Ballerina Pop", hex: "#F8BBD0", note: { ko: "수채화 라벤더 핑크", en: "Delicate ballerina lavender", ja: "透明感爆発 バレリーナポップ" } },
+      ],
+      eye: [
+        { brand: "Dasique", name: "Shadow Palette Berry Smoothie", hex: "#E1BEE7", note: { ko: "쿨 핑크 파스텔 음영", en: "Cool berry mauve contours", ja: "涼しげなベリーモーヴパレット" } },
+      ],
+    },
+    stylingGuide: {
+      jewelry: { ko: "실버 / 화이트골드 / 플래티넘", en: "Silver / White Gold / Platinum", ja: "シルバー / ホワイトゴールド / プラチナ" },
+      jewelryDesc: {
+        ko: "노란 기가 없는 깨끗한 은빛 주얼리가 뽀얀 피부톤을 독보적으로 돋보이게 합니다.",
+        en: "Pure silver, white gold, or platinum brings out the clearest undertones of your skin.",
+        ja: "黄みのないクリーンなシルバーやプラチナの輝きが、肌の白さと透明感を格上げします。",
+      },
+      foundation: { ko: "17호~21호 핑크 베이스 / 세미 글로우 쿠션", en: "Fair/Porcelain Cool Pink Base (17C-21C)", ja: "ピンク系・クールトーン 明るめセミツヤファンデ" },
+      hairColor: { ko: "애쉬 블론드, 쿨 다크브라운, 내추럴 블랙", en: "Ash Brown, Cool Dark Chestnut, Soft Black", ja: "アッシュグレージュ、クールダークブラウン、地毛風ブラック" },
+      fashionTip: {
+        ko: "순백의 화이트 셔츠나 연하늘색 셔츠를 입었을 때 안색이 가장 깨끗해 보입니다.",
+        en: "Crisp white poplin shirts and light sky-blue tailored separates create a fresh editorial look.",
+        ja: "クリーンな白シャツやアイシーブルーのブラウスを合わせると、肌が息をのむほど綺麗に見えます。",
+      },
+    },
+    keywords: {
+      ko: ["#청순보스", "#딸기우유", "#수채화발색", "#여리여리", "#은빛실버"],
+      en: ["#PorcelainSkin", "#CoolLilac", "#AiryPastel", "#CleanBeauty", "#SilverGlow"],
+      ja: ["#ブルベ夏", "#白肌の神", "#ラベンダーチーク", "#儚げメイク", "#銀の輝き"],
+    },
+  },
+  autumn_mute: {
+    id: "autumn_mute",
+    seasonNames: { ko: "가을 웜톤", en: "Autumn Warm", ja: "イエベ秋" },
+    titles: { ko: "가을 웜 뮤트", en: "Soft Autumn", ja: "イエベ秋 ミュート (オータム・ソフト)" },
+    slogans: {
+      ko: "부드럽고 그윽한 말린 단풍잎 & 오트밀 베이지",
+      en: "Velvet Cashmere MLBB · Warm Oatmeal & Dried Roses",
+      ja: "上質なカシミヤのようにまろやかなオートミール＆大人ドライローズ",
+    },
+    summaries: {
+      ko: "따뜻한 온도감과 부드러운 그레이시 웜톤이 조화를 이룹니다. 클래식하고 차분한 브라운·카키·베이지에서 깊은 매력이 피어납니다.",
+      en: "Muted, warm earthy tones with a whisper of soft gray harmonize to create an effortlessly chic, sophisticated aura.",
+      ja: "温かみとくすみ感が絶妙に溶け合う上品なソフトアースカラー。ベージュやトープをまとえば洗練された大人の気品が漂います。",
+    },
+    temperature: "WARM",
+    lightness: "MUTE",
+    saturation: "MEDIUM",
+    bestColors: [
+      { name: { ko: "오트밀 베이지", en: "Oatmeal Beige", ja: "オートミールベージュ" }, hex: "#D7CCC8" },
+      { name: { ko: "말린 장미 (MLBB)", en: "Dried Rose MLBB", ja: "ドライローズ (MLBB)" }, hex: "#B37D77" },
+      { name: { ko: "소프트 카키", en: "Soft Khaki", ja: "ソフトカーキ" }, hex: "#8D9B7B" },
+      { name: { ko: "카라멜 브라운", en: "Caramel Brown", ja: "キャラメルブラウン" }, hex: "#A67C52" },
+      { name: { ko: "테라코타 샌드", en: "Terracotta Sand", ja: "テラコッタサンド" }, hex: "#C28569" },
+    ],
+    worstColors: [
+      { name: { ko: "형광 핫핑크", en: "Neon Fuchsia", ja: "蛍光ホットピンク" }, hex: "#FF007F" },
+      { name: { ko: "차가운 코발트 블루", en: "Cobalt Blue", ja: "冷たいコバルトブルー" }, hex: "#002366" },
+      { name: { ko: "시안 블루", en: "Cyan Blue", ja: "シアンブルー" }, hex: "#00CED1" },
+    ],
+    drapeSwatches: [
+      { name: { ko: "오트밀 베이지", en: "Oatmeal Beige", ja: "オートミールベージュ" }, hex: "#D7CCC8", desc: { ko: "편안하고 단아한 톤", en: "Effortless Warmth", ja: "落ち着いた品の良さ" } },
+      { name: { ko: "말린 장미 (MLBB)", en: "Dried Rose", ja: "ドライローズ" }, hex: "#B37D77", desc: { ko: "자연스러운 음영감", en: "Sculpted Natural Flush", ja: "絶妙な血色グラデ" } },
+      { name: { ko: "소프트 카키", en: "Soft Khaki", ja: "ソフトカーキ" }, hex: "#8D9B7B", desc: { ko: "분위기 있는 가을빛", en: "Chic Earthy Depth", ja: "大人っぽい陰影感" } },
+      { name: { ko: "카라멜 브라운", en: "Caramel Brown", ja: "キャラメルブラウン" }, hex: "#A67C52", desc: { ko: "그윽한 입체감", en: "Rich Warm Glow", ja: "深みのあるニュアンス" } },
+    ],
+    cosmetics: {
+      lips: [
+        { brand: "MAC", name: "Powder Kiss Mull It Over", hex: "#C47C68", note: { ko: "원조 말린 살구 MLBB", en: "The iconic soft dirty peach", ja: "元祖神色 まろやかアプリコットMLBB" } },
+        { brand: "Bobbi Brown", name: "Crushed Lip Color Cabana", hex: "#BD6B5B", note: { ko: "소프트 브라운 코랄", en: "Blotted warm coral rose", ja: "抜け感のあるブラウンコーラル" } },
+        { brand: "3CE", name: "Velvet Lip Tint Near and Dear", hex: "#BA7974", note: { ko: "차분한 웜 핑크베이지", en: "Velvety muted warm nude", ja: "ふんわり温もりピンクベージュ" } },
+      ],
+      blush: [
+        { brand: "NARS", name: "Blush Gina / Luster", hex: "#C07D67", note: { ko: "은은한 골든 피치 브라운", en: "Golden apricot warmth", ja: "肌に溶け込むゴールデンピーチ" } },
+      ],
+      eye: [
+        { brand: "Rom&nd", name: "Better Than Palette Mahogany Garden", hex: "#9E7B66", note: { ko: "소프트 브라운 음영", en: "Rich natural mahogany gradients", ja: "捨て色なし マホガニー陰影パレット" } },
+      ],
+    },
+    stylingGuide: {
+      jewelry: { ko: "빈티지 골드 / 브론즈 / 로즈골드", en: "Vintage Matte Gold / Bronze", ja: "マットゴールド / アンティークブロンズ" },
+      jewelryDesc: {
+        ko: "앤틱하고 매트한 옐로우 골드가 클래식한 무드를 완벽히 살려줍니다.",
+        en: "Brushed matte yellow gold or antique brass complements your velvety warmth.",
+        ja: "ツヤを抑えたマットゴールドやヴィンテージ感のある真鍮アクセが完璧に調和します。",
+      },
+      foundation: { ko: "21호~23호 웜 뉴트럴 벨벳 피니시", en: "Medium Warm Neutral Velvet Matte (21W-23W)", ja: "ナチュラルオークル系 セミマット・ベルベット肌" },
+      hairColor: { ko: "초코 브라운, 웜 모카, 밤비 브라운", en: "Choco Brown, Warm Mocha, Chestnut", ja: "ショコラブラウン、モカベージュ、マロンブラウン" },
+      fashionTip: {
+        ko: "트렌치 코트, 캐시미어 니트, 베이지 슬랙스를 입었을 때 가을 여신 분위기가 완성됩니다.",
+        en: "Trench coats, cashmere knitwear, and camel trousers bring out peak runway chic.",
+        ja: "トレンチコート、上質なカシミヤニット、キャメルパンツを合わせると最高のオーラを放ちます。",
+      },
+    },
+    keywords: {
+      ko: ["#분위기여신", "#MLBB", "#트렌치코트", "#따뜻한음영", "#내추럴클래식"],
+      en: ["#QuietLuxury", "#CashmereWarmth", "#EarthyChic", "#VelvetLip", "#AutumnMuse"],
+      ja: ["#イエベ秋", "#抜け感メイク", "#トレンチコート", "#大人カジュアル", "#血色MLBB"],
+    },
+  },
+  winter_bright: {
+    id: "winter_bright",
+    seasonNames: { ko: "겨울 쿨톤", en: "Winter Cool", ja: "ブルベ冬" },
+    titles: { ko: "겨울 쿨 브라이트", en: "Bright Winter", ja: "ブルベ冬 ブライト (ウィンター・クリア)" },
+    slogans: {
+      ko: "눈부신 설원 위의 선명한 마젠타 핑크 & 로열 블루",
+      en: "Glacial Neon Contrast · High-Voltage Ruby & Cobalt",
+      ja: "白銀の世界に映えわたる鮮烈なマゼンタ＆ロイヤルコバルトブルー",
+    },
+    summaries: {
+      ko: "얼음처럼 차갑고 쨍한 비비드 쿨 컬러를 완벽히 소화합니다. 대비감이 강할수록 얼굴이 깨끗하게 밝혀집니다.",
+      en: "High-contrast, icy saturated tones bring unmatched clarity and drama to your striking features.",
+      ja: "冴えわたるクリアで鮮明なヴィヴィッドクールカラーが主役。コントラストが強いほど、肌の白さと目力が際立ちます。",
+    },
+    temperature: "COOL",
+    lightness: "BRIGHT",
+    saturation: "HIGH",
+    bestColors: [
+      { name: { ko: "마젠타 핑크", en: "Magenta Pink", ja: "マゼンタピンク" }, hex: "#FF007F" },
+      { name: { ko: "로열 코발트 블루", en: "Royal Cobalt", ja: "ロイヤルコバルト" }, hex: "#002366" },
+      { name: { ko: "트루 체리 레드", en: "True Cherry Red", ja: "チェリーレッド" }, hex: "#D63031" },
+      { name: { ko: "에메랄드 그린", en: "Emerald Green", ja: "エメラルドグリーン" }, hex: "#009432" },
+      { name: { ko: "퓨어 스노우 화이트", en: "Pure Snow White", ja: "ピュアスノーホワイト" }, hex: "#FFFFFF" },
+    ],
+    worstColors: [
+      { name: { ko: "탁한 황토색", en: "Muddy Ochre", ja: "濁った黄土色" }, hex: "#A0522D" },
+      { name: { ko: "머스타드 카키", en: "Mustard Khaki", ja: "くすみマスタード" }, hex: "#808000" },
+      { name: { ko: "살구 오렌지", en: "Apricot Orange", ja: "サーモンオレンジ" }, hex: "#FF8C00" },
+    ],
+    drapeSwatches: [
+      { name: { ko: "마젠타 핑크", en: "Magenta Pink", ja: "マゼンタピンク" }, hex: "#FF007F", desc: { ko: "안색 1초 톤업", en: "Instant Face Lighting", ja: "一瞬でライトアップ" } },
+      { name: { ko: "로열 코발트 블루", en: "Royal Cobalt", ja: "ロイヤルコバルト" }, hex: "#002366", desc: { ko: "투명하고 하얀 피부", en: "Deep Chilled Contrast", ja: "冴えた透明美白" } },
+      { name: { ko: "트루 체리 레드", en: "True Cherry Red", ja: "チェリーレッド" }, hex: "#D63031", desc: { ko: "강렬한 레드 포인트", en: "Bold Hollywood Red", ja: "主役級の赤リップ映え" } },
+      { name: { ko: "퓨어 화이트", en: "Pure White", ja: "ピュアホワイト" }, hex: "#FFFFFF", desc: { ko: "선명한 흑백 대비", en: "Black-and-White Contrast", ja: "究極のメリハリ感" } },
+    ],
+    cosmetics: {
+      lips: [
+        { brand: "MAC", name: "Retro Matte Lipstick Ruby Woo", hex: "#C0392B", note: { ko: "푸른기 도는 정석 레드", en: "The iconic blue-based vivid red", ja: "青みを含んだ伝説の赤リップ ルビーウー" } },
+        { brand: "YSL", name: "Vernis À Lèvres 9 Rouge Laqué", hex: "#D63031", note: { ko: "유리알 체리 레드", en: "Glossy high-shine crimson lacquer", ja: "息をのむガラス玉チェリーレッド" } },
+        { brand: "Rom&nd", name: "Zero Velvet Tint Fizz", hex: "#E84393", note: { ko: "형광등 켠 쿨 체리핑크", en: "Vibrant cool magenta fuchsia", ja: "顔色が一気に華やぐブライトチェリー" } },
+      ],
+      blush: [
+        { brand: "Clinique", name: "Cheek Pop Pansy Pop", hex: "#9B59B6", note: { ko: "맑은 쿨 퍼플 베리", en: "Bright translucent pansy berry", ja: "くすみを一掃する名品パンジーポップ" } },
+      ],
+      eye: [
+        { brand: "Clio", name: "Pro Eye Palette Crystal Paw", hex: "#CBD5E1", note: { ko: "클리어 실버 글리터", en: "Chilled icy diamond sparkle", ja: "澄みきったアイシーダイヤモンドラメ" } },
+      ],
+    },
+    stylingGuide: {
+      jewelry: { ko: "고광택 플래티넘 / 화이트골드 / 다이아몬드", en: "High-Polished Platinum / Diamond", ja: "プラチナ / ホワイトゴールド / ダイヤ" },
+      jewelryDesc: {
+        ko: "눈부시게 번쩍이는 차가운 화이트 실버와 큐빅이 조명판 역할을 합니다.",
+        en: "Mirror-finish white gold, platinum, and brilliant diamonds maximize your high-contrast beauty.",
+        ja: "強い輝きを放つプラチナやダイヤモンドが、あなたの持つ強い目力をドラマティックに際立たせます。",
+      },
+      foundation: { ko: "17호~21호 쿨 핑크 베이스 (도자기 매트)", en: "Porcelain Cool Tone Matte/Radiant (17C-21C)", ja: "ピンク寄りの明るめ 陶器肌ハイカバーファンデ" },
+      hairColor: { ko: "칠흑 같은 흑발 (블루 블랙), 쿨 플래티넘", en: "Blue Black, Jet Black, Platinum Silver", ja: "漆黒ブルーブラック、ダークシルバーアッシュ" },
+      fashionTip: {
+        ko: "올 블랙에 마젠타 머플러, 또는 흑백 대비가 확실한 룩이 독보적으로 어울립니다.",
+        en: "All-black tailoring accented with a striking cobalt blue or magenta coat creates iconic street style.",
+        ja: "オールブラックコーデにマゼンタやロイヤルブルーを1点効かせたモードスタイルが圧巻です。",
+      },
+    },
+    keywords: {
+      ko: ["#체리레드", "#흑발찰떡", "#루비우", "#선명한대비감", "#시선강탈"],
+      en: ["#HighContrast", "#RubyWoo", "#IcyChic", "#JetBlack", "#BoldLips"],
+      ja: ["#ブルベ冬", "#黒髪映え", "#赤リップの女王", "#モード系", "#圧倒的目力"],
+    },
+  },
+};
 
-  // ----------------------------------------------------
-  // States: Freemium & Subscription Paywall & Member Auth
-  // ----------------------------------------------------
-  const [freeTrialUsed, setFreeTrialUsed] = useState<boolean>(false);
-  const [isProSubscriber, setIsProSubscriber] = useState<boolean>(false);
-  const [showPaywallModal, setShowPaywallModal] = useState<boolean>(false);
-  const [proModalReason, setProModalReason] = useState<string>('trial_exhausted');
-  const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'annual'>('monthly');
+// ─── 샘플 모델 프리셋 ──────────────────────────────────────────
+const PRESET_MODELS = [
+  {
+    id: "cool_light",
+    labels: { ko: "쿨톤 모델 (청순 파스텔)", en: "Cool Tone Model (Pastel)", ja: "ブルベ夏モデル (透明感パステル)" },
+    descs: { ko: "뽀얀 피부 & 핑크빛 립", en: "Porcelain Skin & Dewy Pink", ja: "白玉肌 ＆ ピュアピンク" },
+    toneHint: "summer_light",
+    skinHex: "#FCEFE9",
+    lipHex: "#F8BBD0",
+    hairHex: "#2C2C34",
+    avatarBg: "from-pink-100 to-sky-100",
+  },
+  {
+    id: "warm_mute",
+    labels: { ko: "웜톤 모델 (가을 뮤트)", en: "Warm Tone Model (Soft Autumn)", ja: "イエベ秋モデル (大人ニュアンス)" },
+    descs: { ko: "골든 베이지 & 살구 피치", en: "Golden Warmth & Soft Peach", ja: "まろやかベージュ ＆ アプリコット" },
+    toneHint: "autumn_mute",
+    skinHex: "#EED7C5",
+    lipHex: "#C47C68",
+    hairHex: "#4A3326",
+    avatarBg: "from-amber-100 to-orange-100",
+  },
+  {
+    id: "winter_cool",
+    labels: { ko: "겨쿨 모델 (또렷한 흑발)", en: "Winter Model (High Contrast)", ja: "ブルベ冬モデル (漆黒モード)" },
+    descs: { ko: "투명 도자기 & 체리 레드", en: "Clear Porcelain & Cherry Red", ja: "冴えた陶器肌 ＆ 鮮明ルビー" },
+    toneHint: "winter_bright",
+    skinHex: "#FDF4EE",
+    lipHex: "#C0392B",
+    hairHex: "#111116",
+    avatarBg: "from-purple-100 to-indigo-100",
+  },
+];
 
-  // Member Authentication States
+export default function ColorHelperPage() {
+  // ── 언어 상태 (기본 한국어, 쿼리/스토리지 지원) ─────────────────
+  const [lang, setLang] = useState<LangType>("ko");
+  const t = UI_TEXT[lang];
+
+  // ── State ───────────────────────────────────────────────────
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const [isCustomPhoto, setIsCustomPhoto] = useState(false);
+  const [resultTone, setResultTone] = useState<ColorToneData | null>(null);
+  const [activeTab, setActiveTab] = useState<"result" | "cosmetics">("result");
+
+  // 회원 & 진단 티켓 관리
   const [currentUser, setCurrentUser] = useState<any>(null);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
-  const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
+  const [tickets, setTickets] = useState<number>(1);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isPayModalOpen, setIsPayModalOpen] = useState(false);
+  const [isUnlocked, setIsUnlocked] = useState(true);
 
-  // Report Error & Sold Out States
-  const [isReportModalOpen, setIsReportModalOpen] = useState<boolean>(false);
-  const [reportProduct, setReportProduct] = useState<{ title: string; url: string }>({
-    title: '',
-    url: ''
+  // 결제 진행 상태
+  const [paymentProcessing, setPaymentProcessing] = useState(false);
+  const [paymentSuccessNotice, setPaymentSuccessNotice] = useState<string | null>(null);
+
+  // 드레이핑 상태
+  const [selectedDrapeHex, setSelectedDrapeHex] = useState<string>("#FFA07A");
+  const [selectedDrapeName, setSelectedDrapeName] = useState<string>("피치 코랄");
+  const [splitView, setSplitView] = useState(false);
+  const [splitSliderPos, setSplitSliderPos] = useState(50);
+
+  // 샘플링 포인트 & 수치
+  const [skinPoint] = useState<{ x: number; y: number }>({ x: 50, y: 52 });
+  const [sampledColors, setSampledColors] = useState<{
+    skin: string;
+    lip: string;
+    hair: string;
+    warmScore: number;
+    brightness: number;
+    saturation: number;
+  }>({
+    skin: "#F5DFD5",
+    lip: "#DE7E8A",
+    hair: "#3B2E2A",
+    warmScore: 55,
+    brightness: 72,
+    saturation: 48,
   });
 
-  // Comparison toggle: Styled-only (default, large uncropped) or Side-by-side
-  const [viewMode, setViewMode] = useState<'side-by-side' | 'styled-only'>('styled-only');
+  // 웹캠 제어
+  const [cameraActive, setCameraActive] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // Paste & Drag States
-  const [pasteNotification, setPasteNotification] = useState<string | null>(null);
-  const [isDragging, setIsDragging] = useState<boolean>(false);
-
-  // Refs
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const studioRef = useRef<HTMLDivElement>(null);
-  const resultsRef = useRef<HTMLDivElement>(null);
-
-  // ----------------------------------------------------
-  // Load subscription state & member session from localStorage
-  // ----------------------------------------------------
+  // ── 언어 URL 쿼리 & 로컬 스토리지 감지 ─────────────────────────
   useEffect(() => {
     try {
-      const trialUsed = localStorage.getItem('styling_free_trial_used') === 'true';
-      const isPro = localStorage.getItem('styling_is_pro_subscriber') === 'true';
-      setFreeTrialUsed(trialUsed);
-      setIsProSubscriber(isPro);
-
-      const syncUser = () => {
-        try {
-          const stored =
-            localStorage.getItem('stylinghelper_user') ||
-            localStorage.getItem('stayhelper_member') ||
-            localStorage.getItem('stayhelper_user');
-          if (stored) {
-            setCurrentUser(JSON.parse(stored));
-          } else {
-            setCurrentUser(null);
-          }
-        } catch {
-          setCurrentUser(null);
+      const urlParams = new URLSearchParams(window.location.search);
+      const qLang = urlParams.get("lang") as LangType | null;
+      if (qLang && ["ko", "en", "ja"].includes(qLang)) {
+        setLang(qLang);
+      } else {
+        const savedLang = localStorage.getItem("colorhelper_lang") as LangType | null;
+        if (savedLang && ["ko", "en", "ja"].includes(savedLang)) {
+          setLang(savedLang);
         }
-      };
-      syncUser();
-      window.addEventListener('stylinghelper_auth_changed', syncUser);
-      window.addEventListener('stayhelper_auth_changed', syncUser);
-      return () => {
-        window.removeEventListener('stylinghelper_auth_changed', syncUser);
-        window.removeEventListener('stayhelper_auth_changed', syncUser);
-      };
-    } catch (e) {
-      // Safe fallback
-    }
+      }
+
+      const savedUser = localStorage.getItem("colorhelper_user") || localStorage.getItem("stayhelper_user");
+      if (savedUser) setCurrentUser(JSON.parse(savedUser));
+
+      const savedTickets = localStorage.getItem("colorhelper_tickets");
+      if (savedTickets !== null) {
+        setTickets(parseInt(savedTickets, 10));
+      } else {
+        setTickets(1);
+        localStorage.setItem("colorhelper_tickets", "1");
+      }
+    } catch (e) {}
+
+    loadPresetModel(PRESET_MODELS[0]);
   }, []);
 
-  const handleSignOut = () => {
+  const switchLanguage = (newLang: LangType) => {
+    setLang(newLang);
     try {
-      localStorage.removeItem('stylinghelper_user');
-      localStorage.removeItem('stayhelper_member');
-      localStorage.removeItem('stayhelper_user');
-      document.cookie = 'stayhelper_user=; path=/; max-age=0;';
-      fetch('/api/auth/quick', { method: 'DELETE' }).catch(() => {});
+      localStorage.setItem("colorhelper_lang", newLang);
+      const url = new URL(window.location.href);
+      url.searchParams.set("lang", newLang);
+      window.history.replaceState({}, "", url.toString());
     } catch (e) {}
-    setCurrentUser(null);
-    window.dispatchEvent(new Event('stylinghelper_auth_changed'));
   };
 
-  // ----------------------------------------------------
-  // Helper: Process Image File (from Upload, Paste, or Drop)
-  // ----------------------------------------------------
-  const processImageFile = (file: File, sourceName: string) => {
-    setUserPhotoName(sourceName);
+  // ── 샘플 모델 로드 ──────────────────────────────────────────
+  const loadPresetModel = (preset: (typeof PRESET_MODELS)[0]) => {
+    setIsCustomPhoto(false);
+    setIsUnlocked(true);
+
+    const cvs = document.createElement("canvas");
+    cvs.width = 600;
+    cvs.height = 750;
+    const ctx = cvs.getContext("2d");
+    if (!ctx) return;
+
+    const grad = ctx.createLinearGradient(0, 0, 0, 750);
+    grad.addColorStop(0, "#F7F5F3");
+    grad.addColorStop(1, "#E8E2DD");
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 600, 750);
+
+    ctx.fillStyle = preset.hairHex;
+    ctx.beginPath();
+    ctx.ellipse(300, 360, 200, 260, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = preset.skinHex;
+    ctx.fillRect(250, 450, 100, 180);
+
+    ctx.beginPath();
+    ctx.ellipse(300, 360, 140, 180, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = preset.hairHex;
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.arc(245, 305, 30, Math.PI * 1.15, Math.PI * 1.85);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(355, 305, 30, Math.PI * 1.15, Math.PI * 1.85);
+    ctx.stroke();
+
+    ctx.fillStyle = "#2D3436";
+    ctx.beginPath();
+    ctx.ellipse(245, 335, 18, 9, 0, 0, Math.PI * 2);
+    ctx.ellipse(355, 335, 18, 9, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    const cheekGrad1 = ctx.createRadialGradient(230, 400, 5, 230, 400, 45);
+    cheekGrad1.addColorStop(0, preset.lipHex + "55");
+    cheekGrad1.addColorStop(1, preset.skinHex + "00");
+    ctx.fillStyle = cheekGrad1;
+    ctx.beginPath();
+    ctx.arc(230, 400, 45, 0, Math.PI * 2);
+    ctx.fill();
+
+    const cheekGrad2 = ctx.createRadialGradient(370, 400, 5, 370, 400, 45);
+    cheekGrad2.addColorStop(0, preset.lipHex + "55");
+    cheekGrad2.addColorStop(1, preset.skinHex + "00");
+    ctx.fillStyle = cheekGrad2;
+    ctx.beginPath();
+    ctx.arc(370, 400, 45, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = preset.lipHex;
+    ctx.beginPath();
+    ctx.ellipse(300, 460, 38, 14, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    const dataUrl = cvs.toDataURL("image/png");
+    setImageSrc(dataUrl);
+
+    triggerDiagnosis(preset.toneHint, {
+      skin: preset.skinHex,
+      lip: preset.lipHex,
+      hair: preset.hairHex,
+    });
+  };
+
+  // ── 웹캠 시작 & 캡처 ─────────────────────────────────────────
+  const startCamera = async () => {
+    try {
+      setCameraActive(true);
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "user", width: { ideal: 720 }, height: { ideal: 960 } },
+      });
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        videoRef.current.play();
+      }
+    } catch (err) {
+      alert("카메라 사용이 불가합니다. 사진 파일 업로드를 이용해주세요.");
+      setCameraActive(false);
+    }
+  };
+
+  const captureCamera = () => {
+    if (!videoRef.current) return;
+    const v = videoRef.current;
+    const cvs = document.createElement("canvas");
+    cvs.width = v.videoWidth || 640;
+    cvs.height = v.videoHeight || 800;
+    const ctx = cvs.getContext("2d");
+    if (!ctx) return;
+    ctx.drawImage(v, 0, 0, cvs.width, cvs.height);
+    const dataUrl = cvs.toDataURL("image/jpeg", 0.95);
+
+    const stream = v.srcObject as MediaStream;
+    if (stream) stream.getTracks().forEach((t) => t.stop());
+    setCameraActive(false);
+    setImageSrc(dataUrl);
+    setIsCustomPhoto(true);
+
+    checkTicketAndAnalyze(cvs);
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
     const reader = new FileReader();
     reader.onload = (event) => {
-      const result = event.target?.result as string;
-      setUserPhoto(result);
-      setStyledResult(null);
-      setPasteNotification(`Photo loaded: ${sourceName}`);
-      setTimeout(() => setPasteNotification(null), 3500);
+      const url = event.target?.result as string;
+      setImageSrc(url);
+      setIsCustomPhoto(true);
+
+      const img = new Image();
+      img.onload = () => {
+        const cvs = document.createElement("canvas");
+        cvs.width = img.width;
+        cvs.height = img.height;
+        const ctx = cvs.getContext("2d");
+        if (ctx) {
+          ctx.drawImage(img, 0, 0);
+          checkTicketAndAnalyze(cvs);
+        }
+      };
+      img.src = url;
     };
     reader.readAsDataURL(file);
   };
 
-  // ----------------------------------------------------
-  // Handle Global Paste (Ctrl+V or Cmd+V anywhere on page)
-  // ----------------------------------------------------
-  useEffect(() => {
-    const handleGlobalPaste = (e: ClipboardEvent) => {
-      const items = e.clipboardData?.items;
-      if (!items) return;
+  const checkTicketAndAnalyze = (canvas: HTMLCanvasElement) => {
+    if (tickets > 0) {
+      const newBalance = tickets - 1;
+      setTickets(newBalance);
+      localStorage.setItem("colorhelper_tickets", newBalance.toString());
+      setIsUnlocked(true);
+      analyzeCanvasImage(canvas);
+    } else {
+      setIsUnlocked(false);
+      analyzeCanvasImage(canvas);
+      setIsPayModalOpen(true);
+    }
+  };
 
-      for (let i = 0; i < items.length; i++) {
-        if (items[i].type.startsWith('image/')) {
-          const file = items[i].getAsFile();
-          if (file) {
-            processImageFile(file, 'Pasted Photo (Clipboard)');
-            e.preventDefault();
-            studioRef.current?.scrollIntoView({ behavior: 'smooth' });
-            break;
-          }
-        }
-      }
-    };
+  const analyzeCanvasImage = (canvas: HTMLCanvasElement) => {
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    const w = canvas.width;
+    const h = canvas.height;
 
-    window.addEventListener('paste', handleGlobalPaste);
-    return () => window.removeEventListener('paste', handleGlobalPaste);
-  }, []);
+    const skinX = Math.floor(w * (skinPoint.x / 100));
+    const skinY = Math.floor(h * (skinPoint.y / 100));
+    const skinPixel = ctx.getImageData(skinX, skinY, 1, 1).data;
 
-  // ----------------------------------------------------
-  // Handle Paste Button Click (Clipboard API)
-  // ----------------------------------------------------
-  const handlePasteButtonClick = async () => {
+    const rgbToHex = (r: number, g: number, b: number) =>
+      "#" + [r, g, b].map((x) => x.toString(16).padStart(2, "0")).join("");
+
+    const skinHex = rgbToHex(skinPixel[0], skinPixel[1], skinPixel[2]);
+    const r = skinPixel[0];
+    const g = skinPixel[1];
+    const b = skinPixel[2];
+
+    const brightness = Math.round((r * 299 + g * 587 + b * 114) / 1000);
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    const saturation = max === 0 ? 0 : Math.round(((max - min) / max) * 100);
+
+    const yellowDiff = r - b;
+    const warmScore = Math.min(100, Math.max(0, Math.round(50 + yellowDiff * 0.4)));
+
+    setSampledColors((prev) => ({
+      ...prev,
+      skin: skinHex,
+      warmScore,
+      brightness: Math.round((brightness / 255) * 100),
+      saturation,
+    }));
+
+    let matchedToneKey = "summer_light";
+    if (warmScore >= 52) {
+      matchedToneKey = brightness >= 65 ? (saturation >= 45 ? "spring_bright" : "spring_light") : (saturation >= 40 ? "autumn_deep" : "autumn_mute");
+    } else {
+      matchedToneKey = brightness >= 65 ? "summer_light" : "winter_bright";
+    }
+
+    triggerDiagnosis(matchedToneKey, { skin: skinHex, lip: "#DE7E8A", hair: "#3B2E2A" });
+  };
+
+  const triggerDiagnosis = (toneKey: string, colors?: { skin: string; lip: string; hair: string }) => {
+    const tone = PERSONAL_COLOR_DB[toneKey] || PERSONAL_COLOR_DB.spring_light;
+    setResultTone(tone);
+    setSelectedDrapeHex(tone.drapeSwatches[0].hex);
+    setSelectedDrapeName(tone.drapeSwatches[0].name[lang]);
+
+    if (colors) {
+      setSampledColors((prev) => ({
+        ...prev,
+        skin: colors.skin,
+        lip: colors.lip,
+        hair: colors.hair,
+      }));
+    }
+  };
+
+  const handleAuthSuccess = (user: any) => {
+    setCurrentUser(user);
     try {
-      if (navigator.clipboard && navigator.clipboard.read) {
-        const clipboardItems = await navigator.clipboard.read();
-        for (const item of clipboardItems) {
-          const imageType = item.types.find((type) => type.startsWith('image/'));
-          if (imageType) {
-            const blob = await item.getType(imageType);
-            const file = new File([blob], 'clipboard_photo.png', { type: imageType });
-            processImageFile(file, 'Pasted Photo (Clipboard)');
-            return;
-          }
-        }
-      }
-      alert('To paste your photo, copy any image (Ctrl+C) and press Ctrl+V (or Cmd+V on Mac).');
-    } catch (err) {
-      console.warn('Clipboard read error or permission denied:', err);
-      alert('Please press Ctrl+V (or Cmd+V on Mac) on your keyboard to paste your photo.');
-    }
+      localStorage.setItem("colorhelper_user", JSON.stringify(user));
+    } catch (e) {}
+    setIsAuthModalOpen(false);
+
+    const updated = tickets + 1;
+    setTickets(updated);
+    localStorage.setItem("colorhelper_tickets", updated.toString());
+    setIsUnlocked(true);
+    setPaymentSuccessNotice(
+      lang === "ko"
+        ? `환영합니다, ${user.name || "회원"}님! 구글 로그인 완료로 1회 진단권이 추가 충전되었습니다.`
+        : lang === "ja"
+        ? `ようこそ、${user.name || "会員"}様！Googleログイン特典として診断チケットが1回分付与されました。`
+        : `Welcome, ${user.name || "User"}! You received 1 free diagnostic pass for signing in.`
+    );
+    setTimeout(() => setPaymentSuccessNotice(null), 4000);
   };
 
-  // ----------------------------------------------------
-  // Handle Drag & Drop
-  // ----------------------------------------------------
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(true);
+  const handleLogout = () => {
+    setCurrentUser(null);
+    try {
+      localStorage.removeItem("colorhelper_user");
+    } catch (e) {}
   };
 
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
-  };
-
-  const handleFileDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
-    const file = e.dataTransfer.files?.[0];
-    if (file && file.type.startsWith('image/')) {
-      processImageFile(file, file.name || 'Dropped Photo');
-    }
-  };
-
-  // ----------------------------------------------------
-  // Handle File Upload
-  // ----------------------------------------------------
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    processImageFile(file, file.name);
-  };
-
-  const handleSelectSample = (sample: SampleModel) => {
-    setUserPhoto(sample.url);
-    setUserPhotoName(`Sample Model: ${sample.label} (${sample.gender === 'men' ? 'Men' : 'Women'})`);
-    setStyledResult(null);
-  };
-
-  const handleGenderChange = (gender: 'men' | 'women') => {
-    setSelectedGender(gender);
-    const targetOccasions = gender === 'men' ? MENS_OCCASIONS : WOMENS_OCCASIONS;
-    setSelectedOccasion(targetOccasions[0]);
-    // If a sample model was already explicitly active, switch to the first model of this gender
-    if (userPhoto && userPhotoName.startsWith('Sample Model:')) {
-      const firstModel = SAMPLE_MODELS[gender][0];
-      setUserPhoto(firstModel.url);
-      setUserPhotoName(`Sample Model: ${firstModel.label} (${gender === 'men' ? 'Men' : 'Women'})`);
-      setStyledResult(null);
-    }
-  };
-
-  // ----------------------------------------------------
-  // Trigger AI Virtual Styling
-  // ----------------------------------------------------
-  const handleStartStyling = async () => {
-    if (!userPhoto) {
-      alert('Please upload or select a photo first.');
-      return;
-    }
-
-    if (freeTrialUsed && !isProSubscriber) {
-      setProModalReason('trial_exhausted');
-      setShowPaywallModal(true);
-      return;
-    }
-
-    setIsGenerating(true);
-    setProgressStage('Scanning body contour & fabric segments...');
-
-    const timer1 = setTimeout(() => {
-      setProgressStage('Removing current clothes & aligning pose silhouette...');
-    }, 1500);
-
-    const timer2 = setTimeout(() => {
-      setProgressStage(`Draping authentic ${selectedOccasion.title} pieces...`);
-    }, 3200);
-
-    const timer3 = setTimeout(() => {
-      setProgressStage('Rendering 1:1 facial likeness & 4K photorealistic lighting...');
-    }, 4800);
+  const executePayment = async (planType: "single" | "triple") => {
+    setPaymentProcessing(true);
+    const amount = planType === "single" ? (lang === "ja" ? 120 : lang === "en" ? 0.79 : 1000) : (lang === "ja" ? 280 : lang === "en" ? 1.89 : 2500);
+    const addTickets = planType === "single" ? 1 : 3;
 
     try {
-      const res = await fetch('/api/generate-styling', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/checkout/colorhelper", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          styleId: selectedOccasion.id,
-          lookId: selectedOccasion.lookId,
-          userPhoto: userPhoto,
-          gender: selectedGender
-        })
+          orderId: `PAYPAL_${Date.now()}`,
+          payerEmail: currentUser?.email || "customer@paypal.com",
+          amount,
+          currency: lang === "ja" ? "JPY" : lang === "en" ? "USD" : "KRW",
+          ticketType: planType,
+          paymentMethod: "paypal",
+        }),
       });
 
       const data = await res.json();
-      if (data.ok) {
-        setStyledResult({
-          imageUrl: data.imageUrl,
-          look: data.look,
-          provider: data.provider || 'AI Fashion Engine'
-        });
-
-        if (!isProSubscriber) {
-          setFreeTrialUsed(true);
-          try {
-            localStorage.setItem('styling_free_trial_used', 'true');
-          } catch (e) {}
-        }
-
-        setTimeout(() => {
-          resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 300);
-      } else {
-        alert(data.error || 'Styling synthesis failed. Please try again.');
+      if (data.success) {
+        const newBalance = tickets + addTickets;
+        setTickets(newBalance);
+        localStorage.setItem("colorhelper_tickets", newBalance.toString());
+        setIsUnlocked(true);
+        setIsPayModalOpen(false);
+        setPaymentSuccessNotice(
+          lang === "ko"
+            ? `결제 승인 완료! ${addTickets}회 진단권이 충전되어 즉시 해금되었습니다.`
+            : lang === "ja"
+            ? `決済が完了しました！診断チケット（${addTickets}回分）が付与され、診断書が閲覧可能になりました。`
+            : `Payment approved! ${addTickets} passes added to your account.`
+        );
+        setTimeout(() => setPaymentSuccessNotice(null), 4500);
       }
-    } catch (err: any) {
-      console.error('Styling error:', err);
-      const targetLook =
-        CURATED_LOOKS.find((l) => l.id === selectedOccasion.lookId) || CURATED_LOOKS[0];
-      setStyledResult({
-        imageUrl: targetLook.imageUrl || '/images/looks/look_01_soho_quiet_luxury_final.jpg',
-        look: targetLook,
-        provider: 'StylingHelper Studio Master'
-      });
-      if (!isProSubscriber) {
-        setFreeTrialUsed(true);
-        try {
-          localStorage.setItem('styling_free_trial_used', 'true');
-        } catch (e) {}
-      }
-      setTimeout(() => {
-        resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 300);
+    } catch (err) {
+      alert("Payment processing error. Please try again.");
     } finally {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
-      setIsGenerating(false);
-      setProgressStage('');
+      setPaymentProcessing(false);
     }
   };
 
-  const handleActivatePro = () => {
-    setIsProSubscriber(true);
-    try {
-      localStorage.setItem('styling_is_pro_subscriber', 'true');
-    } catch (e) {}
-    setShowPaywallModal(false);
-    alert('Welcome to StylingHelper Pro! Unlimited virtual styling is now unlocked.');
+  // ── 인스타 스토리 카드 다운로드 (다국어 완벽 지원) ───────────────
+  const downloadResultCard = () => {
+    if (!resultTone) return;
+    if (!isUnlocked) {
+      setIsPayModalOpen(true);
+      return;
+    }
+
+    const cvs = document.createElement("canvas");
+    cvs.width = 1080;
+    cvs.height = 1920;
+    const ctx = cvs.getContext("2d");
+    if (!ctx) return;
+
+    const bgGrad = ctx.createLinearGradient(0, 0, 0, 1920);
+    bgGrad.addColorStop(0, "#1A1715");
+    bgGrad.addColorStop(0.5, "#2C2623");
+    bgGrad.addColorStop(1, "#12100E");
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, 1080, 1920);
+
+    const ambient = ctx.createRadialGradient(540, 500, 50, 540, 500, 600);
+    ambient.addColorStop(0, selectedDrapeHex + "44");
+    ambient.addColorStop(1, "transparent");
+    ctx.fillStyle = ambient;
+    ctx.fillRect(0, 0, 1080, 1920);
+
+    ctx.fillStyle = "#E0A96D";
+    ctx.font = "bold 32px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("PERSONAL COLOR HELPER · DOSSIER", 540, 160);
+
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = "bold 76px sans-serif";
+    ctx.fillText(resultTone.titles[lang], 540, 270);
+
+    ctx.fillStyle = "#E5D9D0";
+    ctx.font = "32px sans-serif";
+    ctx.fillText(`"${resultTone.slogans[lang]}"`, 540, 360);
+
+    // 베스트 컬러 박스
+    ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.roundRect(100, 480, 880, 380, 30);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = "bold 36px sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillText(lang === "ja" ? "🎨 ベストパレット" : lang === "en" ? "🎨 BEST PALETTE" : "🎨 베스트 팔레트", 150, 550);
+
+    resultTone.bestColors.forEach((col, idx) => {
+      const chipX = 150 + idx * 160;
+      const chipY = 600;
+      ctx.fillStyle = col.hex;
+      ctx.beginPath();
+      ctx.roundRect(chipX, chipY, 120, 150, 20);
+      ctx.fill();
+
+      ctx.fillStyle = "#FFFFFF";
+      ctx.font = "22px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(col.name[lang], chipX + 60, chipY + 190);
+    });
+
+    // 뷰티 & 주얼리 박스
+    ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+    ctx.beginPath();
+    ctx.roundRect(100, 910, 880, 560, 30);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = "bold 36px sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillText("💄 BEAUTY & STYLING FORMULA", 150, 980);
+
+    ctx.font = "28px sans-serif";
+    ctx.fillStyle = "#E0A96D";
+    ctx.fillText(lang === "ja" ? "✨ 神リップ:" : lang === "en" ? "✨ Signature Lips:" : "✨ 인생 립스틱:", 150, 1050);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillText(resultTone.cosmetics.lips.map((l) => `${l.brand} ${l.name}`).join(" · "), 360, 1050);
+
+    ctx.fillStyle = "#E0A96D";
+    ctx.fillText(lang === "ja" ? "💍 ジュエリー:" : lang === "en" ? "💍 Best Jewelry:" : "💍 베스트 주얼리:", 150, 1130);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillText(resultTone.stylingGuide.jewelry[lang], 360, 1130);
+
+    ctx.fillStyle = "#E0A96D";
+    ctx.fillText(lang === "ja" ? "💇 ヘアカラー:" : lang === "en" ? "💇 Hair Guide:" : "💇 헤어 컬러:", 150, 1210);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillText(resultTone.stylingGuide.hairColor[lang], 360, 1210);
+
+    ctx.fillStyle = "#E0A96D";
+    ctx.fillText(lang === "ja" ? "👗 着こなし術:" : lang === "en" ? "👗 Style Note:" : "👗 스타일링 팁:", 150, 1290);
+    ctx.fillStyle = "#D6C7BE";
+    ctx.fillText(resultTone.stylingGuide.fashionTip[lang], 360, 1290);
+
+    ctx.fillStyle = "#888888";
+    ctx.font = "26px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("PersonalColorHelper · Find Your True Tone & Perfect Palette", 540, 1800);
+
+    const link = document.createElement("a");
+    link.download = `PersonalColorHelper_${resultTone.id}_${lang}.png`;
+    link.href = cvs.toDataURL("image/png");
+    link.click();
   };
-
-  const handleResetTrial = () => {
-    setFreeTrialUsed(false);
-    setIsProSubscriber(false);
-    try {
-      localStorage.removeItem('styling_free_trial_used');
-      localStorage.removeItem('styling_is_pro_subscriber');
-    } catch (e) {}
-    setShowPaywallModal(false);
-    alert('Free trial reset! You can now test 1 free styling generation again.');
-  };
-
-  const activeLook =
-    styledResult?.look ||
-    CURATED_LOOKS.find((l) => l.id === selectedOccasion.lookId) ||
-    CURATED_LOOKS[0];
-
-  const totalOutfitPrice =
-    activeLook?.pins?.reduce((sum, p) => sum + (p.price || 0), 0) || 0;
 
   return (
-    <div className="min-h-screen bg-[#FBFBFC] text-[#121316] font-sans selection:bg-[#121316] selection:text-[#FAF9F5]">
-      {/* ======================================================= */}
-      {/* 1. BRIGHT & CHIC TOP NAVIGATION */}
-      {/* ======================================================= */}
-      <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-black/[0.06] px-4 lg:px-8 py-3.5 transition-all">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Brand Logo */}
-          <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="w-9 h-9 rounded-2xl bg-[#121316] flex items-center justify-center text-white shadow-md shadow-black/10 group-hover:scale-105 transition-transform">
-                <Sparkles className="w-4 h-4 text-[#FFD782]" />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-serif text-xl tracking-tight font-extrabold text-[#121316]">
-                  STYLING HELPER
-                </span>
-                <span className="text-[10px] uppercase tracking-widest text-[#B57C1E] font-bold">
-                  AI Virtual Dressing Room
-                </span>
-              </div>
-            </Link>
+    <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12">
+      {/* ── TOP NAV BAR: 언어 전환기, 구글 로그인, 잔여 티켓 ─────── */}
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-8 pb-4 border-b border-gray-200/80">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#E07A5F] to-amber-500 flex items-center justify-center text-white font-extrabold text-xs shadow-sm">
+            PCH
           </div>
+          <span className="font-extrabold text-base tracking-tight text-[#1E1B18]">
+            {t.brandName}
+          </span>
+          <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-bold border border-amber-300">
+            {t.badgePrice}
+          </span>
+        </div>
 
-          {/* Top Header Actions: Pro Upgrade & Member Auth */}
-          <div className="flex items-center gap-2 sm:gap-2.5">
-            {/* Pro Subscription CTA */}
-            {isProSubscriber ? (
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold">
-                <Star className="w-3.5 h-3.5 fill-emerald-600 text-emerald-600" />
-                <span>Pro Member</span>
-              </div>
-            ) : (
-              <button
-                onClick={() => {
-                  setProModalReason('manual_upgrade');
-                  setShowPaywallModal(true);
-                }}
-                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white text-xs font-bold shadow-sm shadow-amber-500/20 transition-all hover:scale-[1.02]"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-amber-200" />
-                <span>Upgrade Pro ($19/mo)</span>
-              </button>
-            )}
-
-            {/* Member Auth Button (Sign In or Logged-in Profile) */}
-            {currentUser ? (
-              <div className="flex items-center gap-1.5 bg-black/[0.04] border border-black/[0.08] rounded-xl px-2.5 py-1 text-xs">
-                <div className="w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-[10px] uppercase">
-                  {currentUser.name?.[0] || 'U'}
-                </div>
-                <span className="font-semibold text-zinc-800 max-w-[90px] truncate hidden sm:inline">
-                  {currentUser.name || currentUser.email?.split('@')[0]}
-                </span>
-                <button
-                  onClick={handleSignOut}
-                  title="Sign Out"
-                  className="p-1 hover:text-red-500 text-zinc-400 transition-colors"
-                >
-                  <LogOut className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            ) : (
-              <button
-                onClick={() => {
-                  setAuthMode('signin');
-                  setIsAuthModalOpen(true);
-                }}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/[0.04] hover:bg-black/[0.08] text-[#121316] text-xs font-bold border border-black/[0.08] transition-all"
-              >
-                <LogIn className="w-3.5 h-3.5 text-zinc-700" />
-                <span>Sign In</span>
-              </button>
-            )}
-
-            {/* Error & Sold Out Report Button */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* 다국어 전환 탭 [KO | EN | JA] */}
+          <div className="inline-flex p-1 rounded-xl bg-gray-100 border border-gray-200 text-xs font-bold text-gray-600">
             <button
-              onClick={() => {
-                setReportProduct({ title: '', url: typeof window !== 'undefined' ? window.location.href : '' });
-                setIsReportModalOpen(true);
-              }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold transition-all shadow-sm"
-              title="Report Error / Sold Out"
+              onClick={() => switchLanguage("ko")}
+              className={`px-2.5 py-1 rounded-lg transition ${
+                lang === "ko" ? "bg-white text-gray-900 shadow-sm" : "hover:text-gray-900"
+              }`}
             >
-              <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
-              <span>Report Error / Sold Out</span>
+              🇰🇷 한국어
             </button>
-
             <button
-              onClick={() => {
-                studioRef.current?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="hidden md:flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#121316] hover:bg-black text-white text-xs font-bold transition-all shadow-sm"
+              onClick={() => switchLanguage("en")}
+              className={`px-2.5 py-1 rounded-lg transition ${
+                lang === "en" ? "bg-white text-gray-900 shadow-sm" : "hover:text-gray-900"
+              }`}
             >
-              <Camera className="w-3.5 h-3.5 text-[#FFD782]" />
-              <span>Try on My Photo</span>
+              🇺🇸 English
+            </button>
+            <button
+              onClick={() => switchLanguage("ja")}
+              className={`px-2.5 py-1 rounded-lg transition ${
+                lang === "ja" ? "bg-white text-gray-900 shadow-sm" : "hover:text-gray-900"
+              }`}
+            >
+              🇯🇵 日本語
             </button>
           </div>
+
+          {/* 잔여 진단권 배지 */}
+          <button
+            onClick={() => setIsPayModalOpen(true)}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 text-amber-900 text-xs font-bold hover:shadow transition"
+          >
+            <Ticket className="w-3.5 h-3.5 text-[#E07A5F]" />
+            <span className="hidden sm:inline">{t.ticketLabel}</span>
+            <span className="text-[#E07A5F] underline">{tickets}{t.ticketUnit}</span>
+            <span className="text-[10px] text-gray-500 ml-0.5">{t.recharge}</span>
+          </button>
+
+          {/* 구글 로그인 상태 분기 */}
+          {currentUser ? (
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white border border-gray-200 text-xs text-gray-700">
+                {currentUser.picture ? (
+                  <img src={currentUser.picture} alt="avatar" className="w-5 h-5 rounded-full" />
+                ) : (
+                  <User className="w-4 h-4 text-gray-400" />
+                )}
+                <span className="font-semibold max-w-[80px] sm:max-w-[100px] truncate">
+                  {currentUser.name || currentUser.email?.split("@")[0]}
+                </span>
+              </div>
+              <button
+                onClick={handleLogout}
+                className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition"
+                title="Logout"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => setIsAuthModalOpen(true)}
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-white hover:bg-gray-50 border border-gray-300 text-xs font-bold text-gray-800 shadow-sm transition"
+            >
+              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+              </svg>
+              <span className="hidden sm:inline">{t.googleLogin}</span>
+            </button>
+          )}
+        </div>
+      </div>
+
+      {paymentSuccessNotice && (
+        <div className="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-900 text-xs sm:text-sm font-bold flex items-center gap-2 shadow-sm animate-fade-in">
+          <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0" />
+          <span>{paymentSuccessNotice}</span>
+        </div>
+      )}
+
+      {/* ── HEADER ────────────────────────────────────────── */}
+      <header className="text-center mb-10">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E07A5F]/10 border border-[#E07A5F]/20 text-[#E07A5F] text-xs font-semibold tracking-wider uppercase mb-3">
+          <Sparkles className="w-3.5 h-3.5" />
+          {t.brandTag}
+        </div>
+        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#1E1B18] mb-3">
+          {lang === "ko" ? (
+            <>
+              퍼스널컬러<span className="text-[#E07A5F]">헬퍼</span>
+            </>
+          ) : lang === "ja" ? (
+            <>
+              パーソナルカラー<span className="text-[#E07A5F]">ヘルパー</span>
+            </>
+          ) : (
+            <>
+              PERSONAL COLOR <span className="text-[#E07A5F]">HELPER</span>
+            </>
+          )}
+        </h1>
+        <p className="text-sm sm:text-base text-gray-600 max-w-xl mx-auto leading-relaxed">
+          {t.subtitle}
+        </p>
+
+        <div className="flex flex-wrap items-center justify-center gap-3 mt-4 text-xs font-medium text-gray-500">
+          <span className="inline-flex items-center gap-1 bg-white px-2.5 py-1 rounded-full shadow-sm border border-gray-200">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> {t.badgePrice}
+          </span>
+          <span className="inline-flex items-center gap-1 bg-white px-2.5 py-1 rounded-full shadow-sm border border-gray-200">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> {t.badgePayPal}
+          </span>
+          <span className="inline-flex items-center gap-1 bg-white px-2.5 py-1 rounded-full shadow-sm border border-gray-200">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> {t.badgeMatrix}
+          </span>
         </div>
       </header>
 
-      {/* ======================================================= */}
-      {/* 2. HERO: RADIANT, HIP & CHIC DATING HOOK */}
-      {/* ======================================================= */}
-      <section className="relative pt-12 pb-16 lg:pt-20 lg:pb-24 overflow-hidden border-b border-black/[0.05]">
-        {/* Soft, warm sunlit radiant glows */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[850px] h-[400px] bg-gradient-to-b from-amber-100/50 via-rose-50/40 to-transparent blur-[100px] pointer-events-none rounded-full" />
-        <div className="absolute top-20 right-10 w-72 h-72 bg-sky-100/40 blur-[80px] pointer-events-none rounded-full" />
-
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
-          {/* Trendy Pill Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-black/[0.06] mb-6">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-            <span className="text-xs font-bold tracking-wide text-zinc-700">
-              Next-Gen AI Wardrobe Swap • Curated US Designer Pieces
-            </span>
+      {/* ── STEP 1: 사진 등록 & 1초 프리셋 모델 선택 ──────────────── */}
+      <section className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-200/80 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 flex items-center gap-2">
+              <Camera className="w-5 h-5 text-[#E07A5F]" />
+              {t.uploadTitle}
+            </h2>
+            <p className="text-xs sm:text-sm text-gray-500 mt-0.5">{t.uploadDesc}</p>
           </div>
 
-          {/* Primary Hip Hook */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.15] mb-6 text-[#121316]">
-            Wondering what to wear on <br className="hidden sm:inline" />
-            your date this weekend?
-            <span className="block mt-2 font-serif italic font-normal bg-clip-text text-transparent bg-gradient-to-r from-[#B57C1E] via-[#D97706] to-[#92400E]">
-              Ask StylingHelper.
-            </span>
-          </h1>
-
-          {/* Subtitle */}
-          <p className="max-w-2xl mx-auto text-base sm:text-lg text-zinc-600 font-medium leading-relaxed mb-9">
-            Upload any full-body photo. Our AI cleanly removes your current clothes, styles you in verified luxury pieces from top US retailers, and gives you instant 1-click checkout links.
-          </p>
-
-          {/* 3 Hip Value Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 max-w-3xl mx-auto text-left mb-10">
-            <div className="p-4 rounded-2xl bg-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-black/[0.06] hover:border-black/15 transition-all">
-              <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center mb-2.5 text-base font-bold">
-                ✨
-              </div>
-              <h4 className="text-sm font-bold text-[#121316] mb-1">Instant Outfit Swap</h4>
-              <p className="text-xs text-zinc-500 leading-relaxed">
-                Cleanses your current clothes and seamlessly fits 100% authentic designer items.
-              </p>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-black/[0.06] hover:border-black/15 transition-all">
-              <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-2.5 text-base font-bold">
-                👤
-              </div>
-              <h4 className="text-sm font-bold text-[#121316] mb-1">1:1 Face & Pose Preserved</h4>
-              <p className="text-xs text-zinc-500 leading-relaxed">
-                Your face, hair, smile, skin tone, and body silhouette remain completely authentic.
-              </p>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-black/[0.06] hover:border-black/15 transition-all">
-              <div className="w-9 h-9 rounded-xl bg-sky-50 text-sky-700 flex items-center justify-center mb-2.5 text-base font-bold">
-                🛍️
-              </div>
-              <h4 className="text-sm font-bold text-[#121316] mb-1">Direct Shopbop Checkout</h4>
-              <p className="text-xs text-zinc-500 leading-relaxed">
-                Click any piece to purchase directly on official store pages with zero modal blocks.
-              </p>
-            </div>
-          </div>
-
-          {/* Hero CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <button
-              onClick={() => studioRef.current?.scrollIntoView({ behavior: 'smooth' })}
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#121316] hover:bg-black text-white font-extrabold text-base shadow-xl shadow-black/15 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2.5"
-            >
-              <Wand2 className="w-5 h-5 text-[#FFD782]" />
-              <span>Style My Photo for Free</span>
-              <ArrowRight className="w-4 h-4 text-white" />
-            </button>
-
-            {!isProSubscriber && (
-              <button
-                onClick={() => {
-                  setProModalReason('manual_upgrade');
-                  setShowPaywallModal(true);
-                }}
-                className="w-full sm:w-auto px-6 py-4 rounded-2xl bg-white hover:bg-zinc-50 border border-black/[0.08] text-zinc-800 font-bold text-sm shadow-sm transition-all flex items-center justify-center gap-2"
-              >
-                <Star className="w-4 h-4 text-[#B57C1E]" />
-                <span>See Pro Benefits ($19/mo)</span>
-              </button>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* ======================================================= */}
-      {/* 3. INTERACTIVE AI VIRTUAL STYLING STUDIO */}
-      {/* ======================================================= */}
-      <section ref={studioRef} className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100/60 text-[#92400E] text-xs font-extrabold uppercase tracking-wider mb-2">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Interactive Virtual Fitting Room</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#121316]">
-            Upload & Try On in 10 Seconds
-          </h2>
-          <p className="text-sm text-zinc-600 mt-2 font-medium">
-            First styling is on us (100% free). Unlock unlimited full-body swaps with Pro.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* -------------------------------------------------- */}
-          {/* LEFT: STEP 1 - PHOTO UPLOAD ZONE (5 Cols) */}
-          {/* -------------------------------------------------- */}
-          <div className="lg:col-span-5 bg-white rounded-3xl p-6 shadow-[0_4px_25px_rgba(0,0,0,0.04)] border border-black/[0.06]">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#121316] text-white font-extrabold text-xs flex items-center justify-center">
-                  1
-                </span>
-                <h3 className="font-extrabold text-base text-[#121316]">Your Full-Body Photo</h3>
-              </div>
-              <span className="text-xs font-semibold text-zinc-400">Front-Facing View</span>
-            </div>
-
-            {/* Quick Action Toolbar: Paste & Upload */}
-            <div className="flex items-center gap-2 mb-3">
-              <button
-                type="button"
-                onClick={handlePasteButtonClick}
-                className="flex-1 py-2 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-[#92400E] border border-amber-500/25 font-extrabold text-xs flex items-center justify-center gap-1.5 transition-all active:scale-95 shadow-sm"
-                title="Paste image from clipboard (Ctrl+V)"
-              >
-                <ClipboardPaste className="w-3.5 h-3.5 text-[#B57C1E]" />
-                <span>Paste Photo (Ctrl+V)</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                className="py-2 px-3 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-700 font-bold text-xs flex items-center justify-center gap-1.5 transition-all active:scale-95"
-              >
-                <Upload className="w-3.5 h-3.5 text-zinc-600" />
-                <span>Browse</span>
-              </button>
-              {userPhoto && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setUserPhoto(null);
-                    setUserPhotoName('');
-                    setStyledResult(null);
-                  }}
-                  className="px-2.5 py-2 rounded-xl bg-zinc-100 hover:bg-red-50 text-zinc-500 hover:text-red-600 font-bold text-xs transition-all active:scale-95 flex items-center gap-1"
-                  title="Clear photo to paste a new one"
-                >
-                  <X className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Clear</span>
-                </button>
-              )}
-            </div>
-
-            {/* Live Notification Toast */}
-            {pasteNotification && (
-              <div className="mb-3 px-3 py-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2 animate-fade-in shadow-sm">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                <span className="truncate">{pasteNotification}</span>
-              </div>
-            )}
-
-            {/* Hidden File Input */}
+          <div className="flex items-center gap-2">
             <input
               type="file"
               ref={fileInputRef}
-              accept="image/*"
               onChange={handleFileUpload}
+              accept="image/*"
               className="hidden"
             />
-
-            {/* Photo Preview Box / Drop & Paste Zone (100% Uncropped Contain) */}
-            <div
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-              onDrop={handleFileDrop}
-              onClick={() => {
-                if (!userPhoto) {
-                  fileInputRef.current?.click();
-                }
-              }}
-              className={`group relative w-full min-h-[520px] max-h-[740px] rounded-2xl border-2 transition-all flex flex-col items-center justify-center overflow-hidden text-center shadow-inner ${
-                isDragging
-                  ? 'border-amber-500 bg-amber-50/70 scale-[1.01] shadow-xl ring-4 ring-amber-500/20'
-                  : userPhoto
-                  ? 'border-zinc-200 bg-[#0D0E10] p-2'
-                  : 'border-dashed border-zinc-300 hover:border-[#121316] bg-[#FAF9F6] cursor-pointer min-h-[460px]'
-              }`}
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold text-xs transition"
             >
-              {isDragging ? (
-                <div className="flex flex-col items-center gap-3 p-6 pointer-events-none">
-                  <div className="w-16 h-16 rounded-2xl bg-amber-500 text-white flex items-center justify-center shadow-lg animate-bounce">
-                    <Upload className="w-8 h-8" />
-                  </div>
-                  <p className="text-base font-extrabold text-amber-900">
-                    Drop Your Photo Here!
-                  </p>
-                  <p className="text-xs text-amber-700">
-                    Release to immediately load and preview
-                  </p>
-                </div>
-              ) : userPhoto ? (
-                <>
-                  <img
-                    src={userPhoto}
-                    alt="Uploaded Customer Photo"
-                    className="w-full h-auto max-h-[710px] object-contain rounded-xl mx-auto drop-shadow-md"
-                  />
+              <Upload className="w-4 h-4" />
+              {t.uploadFileBtn}
+            </button>
 
-                  {/* Hover Overlay with Quick Paste & Change Action */}
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 p-4">
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handlePasteButtonClick();
-                      }}
-                      className="px-4 py-2.5 rounded-xl bg-white text-[#121316] font-extrabold text-xs shadow-lg hover:scale-105 transition-all flex items-center gap-1.5"
-                    >
-                      <ClipboardPaste className="w-4 h-4 text-[#B57C1E]" />
-                      <span>Paste New Photo (Ctrl+V)</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        fileInputRef.current?.click();
-                      }}
-                      className="px-4 py-2 rounded-xl bg-white/90 text-zinc-800 font-bold text-xs hover:bg-white transition-all flex items-center gap-1.5"
-                    >
-                      <Camera className="w-4 h-4 text-zinc-600" />
-                      <span>Browse from Files</span>
-                    </button>
-                  </div>
+            {!cameraActive ? (
+              <button
+                onClick={startCamera}
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#E07A5F] hover:bg-[#D0694E] text-white font-semibold text-xs shadow-sm transition"
+              >
+                <Camera className="w-4 h-4" />
+                {t.cameraBtn}
+              </button>
+            ) : (
+              <button
+                onClick={captureCamera}
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs shadow-sm transition animate-pulse"
+              >
+                <CheckCircle2 className="w-4 h-4" />
+                {t.cameraShootBtn}
+              </button>
+            )}
+          </div>
+        </div>
 
-                  {/* Bottom Active Status Pill */}
-                  <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between px-3 py-1.5 rounded-xl bg-black/75 backdrop-blur-md border border-white/10 text-white shadow-lg">
-                    <div className="flex items-center gap-1.5 min-w-0 pr-2">
-                      <div className="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0 animate-pulse" />
-                      <span className="text-[11px] font-bold text-zinc-100 truncate">
-                        {userPhotoName || 'Pasted Photo'}
-                      </span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        fileInputRef.current?.click();
-                      }}
-                      className="text-[10px] font-extrabold text-white bg-white/20 hover:bg-white/30 border border-white/20 px-2 py-0.5 rounded-md flex-shrink-0 transition-all"
-                    >
-                      Change
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <div className="flex flex-col items-center justify-center p-6 w-full h-full">
-                  <div className="w-16 h-16 rounded-2xl bg-white shadow-md flex items-center justify-center text-zinc-800 group-hover:scale-110 transition-transform mb-3 border border-black/[0.05]">
-                    <ClipboardPaste className="w-8 h-8 text-[#B57C1E]" />
-                  </div>
-                  <p className="text-sm font-extrabold text-[#121316] mb-1">
-                    Paste Photo (Ctrl + V)
-                  </p>
-                  <p className="text-xs text-zinc-500 max-w-[230px] leading-relaxed mb-4">
-                    Copy any screenshot or image with <kbd className="px-1.5 py-0.5 rounded bg-zinc-200 text-zinc-800 font-mono text-[10px] font-bold">Ctrl+C</kbd>, then press <kbd className="px-1.5 py-0.5 rounded bg-zinc-200 text-zinc-800 font-mono text-[10px] font-bold">Ctrl+V</kbd> anywhere or drop here.
-                  </p>
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handlePasteButtonClick();
-                      }}
-                      className="px-3.5 py-2 rounded-xl bg-[#121316] text-white font-extrabold text-xs flex items-center gap-1.5 hover:bg-black transition-all shadow-md active:scale-95"
-                    >
-                      <ClipboardPaste className="w-3.5 h-3.5 text-[#FFD782]" />
-                      <span>Paste Now</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        fileInputRef.current?.click();
-                      }}
-                      className="px-3 py-2 rounded-xl bg-white border border-zinc-300 text-zinc-700 font-bold text-xs flex items-center gap-1.5 hover:bg-zinc-50 transition-all active:scale-95"
-                    >
-                      <Upload className="w-3.5 h-3.5 text-zinc-500" />
-                      <span>Browse</span>
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Gender Switcher & Quick Demo Sample Models */}
-            <div className="mt-4 pt-3 border-t border-black/[0.06]">
-              <div className="flex items-center justify-between mb-2.5">
-                <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">
-                    ⚡ Models:
-                  </span>
-                  {/* Men / Women Segmented Switch */}
-                  <div className="inline-flex p-0.5 rounded-xl bg-zinc-100 border border-black/[0.06]">
-                    <button
-                      type="button"
-                      onClick={() => handleGenderChange('men')}
-                      className={`px-3 py-1 rounded-lg text-xs font-extrabold transition-all flex items-center gap-1 ${
-                        selectedGender === 'men'
-                          ? 'bg-[#121316] text-white shadow-sm'
-                          : 'text-zinc-600 hover:text-black'
-                      }`}
-                    >
-                      <span>👨 Men</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleGenderChange('women')}
-                      className={`px-3 py-1 rounded-lg text-xs font-extrabold transition-all flex items-center gap-1 ${
-                        selectedGender === 'women'
-                          ? 'bg-[#121316] text-white shadow-sm'
-                          : 'text-zinc-600 hover:text-black'
-                      }`}
-                    >
-                      <span>👩 Women</span>
-                    </button>
-                  </div>
-                </div>
-
-                {userPhoto && userPhotoName.startsWith('Sample Model') && (
-                  <span className="text-[10px] font-extrabold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
-                    Sample Active
-                  </span>
-                )}
-              </div>
-
-              {/* 3 Sample Models for Current Selected Gender */}
-              <div className="grid grid-cols-3 gap-2">
-                {SAMPLE_MODELS[selectedGender].map((sample) => (
-                  <button
-                    key={sample.id}
-                    onClick={() => handleSelectSample(sample)}
-                    className={`p-1.5 rounded-2xl border text-left transition-all flex flex-col items-center gap-1 ${
-                      userPhoto === sample.url
-                        ? 'bg-amber-50/80 border-amber-400 shadow-sm ring-2 ring-amber-400/25'
-                        : 'bg-zinc-50/70 border-zinc-200/80 hover:bg-zinc-100/70'
-                    }`}
-                  >
-                    <div className="w-10 h-10 rounded-xl overflow-hidden border border-black/[0.08] shadow-sm bg-zinc-100">
-                      <img
-                        src={sample.thumb || sample.url}
-                        alt={sample.label}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <span className="text-[11px] font-extrabold leading-tight text-center text-zinc-900 truncate w-full">
-                      {sample.label}
-                    </span>
-                    <span className="text-[9px] font-semibold text-zinc-500 text-center truncate w-full">
-                      {sample.tag}
-                    </span>
-                  </button>
-                ))}
-              </div>
+        {cameraActive && (
+          <div className="relative w-full max-w-sm mx-auto aspect-[3/4] rounded-2xl overflow-hidden bg-black mb-6 border-4 border-[#E07A5F]">
+            <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover -scale-x-100" />
+            <div className="absolute inset-0 border-2 border-dashed border-white/60 rounded-full m-8 pointer-events-none flex items-center justify-center">
+              <span className="bg-black/60 text-white text-xs px-3 py-1 rounded-full">{t.cameraGuide}</span>
             </div>
           </div>
+        )}
 
-          {/* -------------------------------------------------- */}
-          {/* RIGHT: STEP 2 - OCCASION & STYLE SELECTOR (7 Cols) */}
-          {/* -------------------------------------------------- */}
-          <div className="lg:col-span-7 bg-white rounded-3xl p-6 shadow-[0_4px_25px_rgba(0,0,0,0.04)] border border-black/[0.06] flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-full bg-[#121316] text-white font-extrabold text-xs flex items-center justify-center">
-                    2
-                  </span>
-                  <h3 className="font-extrabold text-base text-[#121316]">
-                    Choose Your Date & Weekend Vibe
-                  </h3>
+        <div className="border-t border-gray-100 pt-5">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-bold text-gray-700 flex items-center gap-1">
+              <Sparkles className="w-3.5 h-3.5 text-amber-500" /> {t.presetTitle}
+            </span>
+            <span className="text-[11px] text-gray-400">{t.presetSub}</span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {PRESET_MODELS.map((preset) => (
+              <button
+                key={preset.id}
+                onClick={() => loadPresetModel(preset)}
+                className="flex items-center gap-3 p-3 rounded-2xl border border-gray-200 hover:border-[#E07A5F] hover:bg-[#FFFBF9] transition text-left group"
+              >
+                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${preset.avatarBg} flex items-center justify-center flex-shrink-0 shadow-inner`}>
+                  <div className="w-6 h-6 rounded-full border-2 border-white shadow-sm" style={{ backgroundColor: preset.lipHex }} />
                 </div>
-                <span className="text-xs font-bold text-[#B57C1E]">
-                  Curated Real US Pieces
-                </span>
-              </div>
-
-              {/* 5 Occasion Options filtered by Gender */}
-              <div className="space-y-3 mb-6">
-                {(selectedGender === 'men' ? MENS_OCCASIONS : WOMENS_OCCASIONS).map((occ) => {
-                  const isSelected = selectedOccasion.id === occ.id;
-                  const targetLook =
-                    CURATED_LOOKS.find((l) => l.id === occ.lookId) || CURATED_LOOKS[0];
-                  const outfitPrice =
-                    targetLook?.pins?.reduce((sum, p) => sum + (p.price || 0), 0) || 0;
-
-                  return (
-                    <div
-                      key={occ.id}
-                      onClick={() => {
-                        setSelectedOccasion(occ);
-                        setStyledResult(null);
-                      }}
-                      className={`relative p-4 rounded-2xl border cursor-pointer transition-all flex items-center justify-between gap-4 ${
-                        isSelected
-                          ? 'bg-amber-50/80 border-amber-400 shadow-[0_4px_16px_rgba(217,119,6,0.1)]'
-                          : 'bg-[#FAF9F6] border-zinc-200/80 hover:border-zinc-300'
-                      }`}
-                    >
-                      <div className="flex items-center gap-3.5">
-                        <span className="text-2xl p-2 rounded-xl bg-white border border-black/[0.06] shadow-sm">
-                          {occ.icon}
-                        </span>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <h4
-                              className={`text-sm font-bold ${
-                                isSelected ? 'text-amber-950 font-extrabold' : 'text-zinc-900'
-                              }`}
-                            >
-                              {occ.title}
-                            </h4>
-                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-white border border-black/[0.08] text-zinc-700 font-bold shadow-2xl">
-                              {occ.badge}
-                            </span>
-                          </div>
-                          <p className="text-xs text-[#B57C1E] mt-0.5 font-semibold">
-                            {occ.subtitle}
-                          </p>
-                          <p className="text-[11px] text-zinc-500 mt-0.5 font-medium">{occ.vibe}</p>
-                        </div>
-                      </div>
-
-                      <div className="text-right shrink-0 flex flex-col items-end gap-1.5">
-                        <span
-                          className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
-                            isSelected
-                              ? 'bg-[#121316] border-[#121316] text-white shadow-sm'
-                              : 'border-zinc-300 bg-white'
-                          }`}
-                        >
-                          {isSelected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-                        </span>
-                        <span className="text-[10px] text-zinc-500 font-bold">
-                          {targetLook?.pins?.length || 5} Pieces
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Preview of items included in selected occasion */}
-              <div className="p-4 rounded-2xl bg-[#FAF9F6] border border-black/[0.06] mb-6">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-bold text-zinc-700">
-                    {selectedGender === 'men'
-                      ? '👔 Men\'s designer pieces included in this styling:'
-                      : '👗 Women\'s designer pieces included in this styling:'}
-                  </span>
-                  <span className="text-xs font-extrabold text-zinc-700 bg-zinc-100 px-2.5 py-0.5 rounded-full border border-zinc-200">
-                    Official Retailers
-                  </span>
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {activeLook?.pins?.slice(0, 5).map((pin, i) => (
-                    <span
-                      key={i}
-                      className="px-2.5 py-1 rounded-xl bg-white border border-black/[0.06] text-[11px] text-zinc-800 font-semibold shadow-sm"
-                    >
-                      <strong className="text-[#92400E]">{pin.category}:</strong> {pin.brand}
-                    </span>
-                  ))}
-                  {(activeLook?.pins?.length || 0) > 5 && (
-                    <span className="px-2 py-1 rounded-xl bg-white border border-black/[0.06] text-[10px] text-zinc-500 font-medium">
-                      +{(activeLook?.pins?.length || 0) - 5} more
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {/* -------------------------------------------------- */}
-            {/* ACTION BUTTON: RUN AI STYLING */}
-            {/* -------------------------------------------------- */}
-            <div>
-              {/* Progress State */}
-              {isGenerating ? (
-                <div className="p-6 rounded-2xl bg-amber-50 border border-amber-300 text-center animate-pulse">
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <RefreshCw className="w-5 h-5 text-amber-700 animate-spin" />
-                    <span className="font-extrabold text-sm text-amber-900">
-                      AI Virtual Styling in Progress...
-                    </span>
+                <div className="min-w-0">
+                  <div className="text-xs font-bold text-gray-900 group-hover:text-[#E07A5F] truncate">
+                    {preset.labels[lang]}
                   </div>
-                  <p className="text-xs text-amber-800 font-semibold">{progressStage}</p>
-                  <div className="w-full bg-amber-200/60 h-2 rounded-full mt-4 overflow-hidden">
-                    <div className="bg-[#121316] h-full w-3/4 animate-[pulse_1s_infinite] rounded-full" />
-                  </div>
+                  <div className="text-[11px] text-gray-500 truncate">{preset.descs[lang]}</div>
                 </div>
-              ) : (
-                <div className="space-y-3">
-                  <button
-                    onClick={handleStartStyling}
-                    className="w-full py-4 px-6 rounded-2xl bg-[#121316] hover:bg-black text-white font-extrabold text-base shadow-xl shadow-black/15 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2"
-                  >
-                    <Wand2 className="w-5 h-5 text-[#FFD782]" />
-                    <span>
-                      {freeTrialUsed && !isProSubscriber
-                        ? '🔒 Unlock with Pro for Unlimited Styling'
-                        : '✨ Style My Outfit with AI'}
-                    </span>
-                  </button>
-
-                  <div className="flex items-center justify-between text-[11px] px-1 text-zinc-500 font-semibold">
-                    <span>
-                      {freeTrialUsed && !isProSubscriber ? (
-                        <span className="text-rose-600 font-bold">
-                          ⚠️ 1 Free Trial Used (Pro Membership Required)
-                        </span>
-                      ) : (
-                        <span className="text-emerald-700 font-bold">
-                          🎁 1 Free Styling Available (No Card Needed)
-                        </span>
-                      )}
-                    </span>
-                    <span>Direct Official Store Links</span>
-                  </div>
-                </div>
-              )}
-            </div>
+              </button>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ======================================================= */}
-      {/* 4. RESULTS STUDIO: BEFORE VS AFTER & PRODUCT BREAKDOWN */}
-      {/* ======================================================= */}
-      {styledResult && (
-        <section
-          ref={resultsRef}
-          className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-black/[0.06]"
-        >
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-extrabold mb-3">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              <span>AI Styling Complete • 1:1 Facial Likeness Preserved</span>
+      {/* ── STEP 2: 가상 드레이핑 스튜디오 ─────────────────────────── */}
+      {imageSrc && (
+        <section className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-200/80 mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <Layers className="w-5 h-5 text-[#E07A5F]" />
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900">{t.drapingTitle}</h2>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#121316]">
-              Your Transformation: {styledResult.look.title}
-            </h2>
-            <p className="text-sm text-zinc-600 mt-2 font-medium">
-              Fitted with <strong className="text-[#121316]">{styledResult.look.pins.length} authentic designer pieces</strong> matched to your pose and facial features. Click any item for direct official store checkout.
-            </p>
+
+            <button
+              onClick={() => setSplitView(!splitView)}
+              className={`text-xs px-3 py-1.5 rounded-lg border font-semibold transition flex items-center gap-1.5 ${
+                splitView ? "bg-[#E07A5F] text-white border-[#E07A5F]" : "bg-gray-100 text-gray-700 border-gray-200 hover:bg-gray-200"
+              }`}
+            >
+              <Sliders className="w-3.5 h-3.5" />
+              {t.splitToggle} ({splitView ? "ON" : "OFF"})
+            </button>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* ------------------------------------------------ */}
-            {/* Visual Display: Large Uncropped AI Styled Look (7 Cols) */}
-            {/* ------------------------------------------------ */}
-            <div className="lg:col-span-7 bg-white rounded-3xl p-6 shadow-[0_4px_25px_rgba(0,0,0,0.04)] border border-black/[0.06]">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-extrabold text-zinc-900">
-                    ✨ Your AI Styled Look
-                  </span>
-                  <span className="text-[11px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 font-bold border border-emerald-200">
-                    100% Uncropped Full-Body
-                  </span>
+          <p className="text-xs sm:text-sm text-gray-500 mb-6">{t.drapingDesc}</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            {/* 좌측: 실시간 캔버스 뷰어 */}
+            <div className="md:col-span-6 flex flex-col items-center">
+              <div className="relative w-full max-w-[340px] aspect-[4/5] rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-gray-100">
+                <div className="relative w-full h-[70%] overflow-hidden bg-neutral-900">
+                  <img src={imageSrc} alt="Facial Canvas" className="w-full h-full object-cover object-top" />
+                  <div
+                    className="absolute w-3.5 h-3.5 rounded-full border-2 border-white shadow-lg pointer-events-none"
+                    style={{ left: `${skinPoint.x}%`, top: `${skinPoint.y}%`, backgroundColor: sampledColors.skin }}
+                  />
+                  <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] text-white font-medium flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full" style={{ backgroundColor: sampledColors.skin }} />
+                    {t.skinDetected}
+                  </div>
                 </div>
-                <div className="flex items-center gap-1 bg-[#FAF9F6] p-1 rounded-xl border border-black/[0.06]">
-                  <button
-                    onClick={() => setViewMode('styled-only')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                      viewMode === 'styled-only'
-                        ? 'bg-[#121316] text-white shadow-sm'
-                        : 'text-zinc-600 hover:text-black'
-                    }`}
-                  >
-                    Styled Photo Only
-                  </button>
-                  <button
-                    onClick={() => setViewMode('side-by-side')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                      viewMode === 'side-by-side'
-                        ? 'bg-[#121316] text-white shadow-sm'
-                        : 'text-zinc-600 hover:text-black'
-                    }`}
-                  >
-                    Compare Original
-                  </button>
+
+                <div className="relative w-full h-[30%] overflow-hidden flex shadow-inner transition-colors duration-300">
+                  {!splitView ? (
+                    <div
+                      className="w-full h-full flex items-center justify-center p-3 relative transition-all duration-300"
+                      style={{ backgroundColor: selectedDrapeHex }}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/20 pointer-events-none" />
+                      <span className="relative z-10 text-xs font-extrabold px-3 py-1 rounded-full bg-black/40 backdrop-blur-md text-white shadow-sm">
+                        {selectedDrapeName}
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="w-full h-full flex relative">
+                      <div
+                        className="h-full flex items-center justify-center text-center relative"
+                        style={{ width: `${splitSliderPos}%`, backgroundColor: "#FFA07A" }}
+                      >
+                        <span className="text-[11px] font-bold text-white bg-black/50 px-2 py-0.5 rounded-full">
+                          {t.splitWarm}
+                        </span>
+                      </div>
+                      <div className="h-full flex-1 flex items-center justify-center text-center relative" style={{ backgroundColor: "#A594B3" }}>
+                        <span className="text-[11px] font-bold text-white bg-black/50 px-2 py-0.5 rounded-full">
+                          {t.splitCool}
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 
-              {viewMode === 'styled-only' ? (
-                /* Primary Default: Large Uncropped High-Res Showcase */
-                <div className="w-full rounded-2xl overflow-hidden border border-black/[0.08] shadow-2xl relative bg-[#0D0E10] flex items-center justify-center p-3 min-h-[640px] max-h-[880px]">
-                  <img
-                    src={styledResult.imageUrl}
-                    alt="Styled 4K Editorial"
-                    className="w-full h-auto max-h-[840px] object-contain rounded-xl mx-auto drop-shadow-2xl"
-                    onError={(e) => {
-                      const target = e.currentTarget;
-                      if (styledResult?.look?.imageUrl && target.src !== styledResult.look.imageUrl) {
-                        target.src = styledResult.look.imageUrl;
-                      }
-                    }}
+              {splitView && (
+                <div className="w-full max-w-[340px] mt-3">
+                  <div className="flex justify-between text-[11px] text-gray-500 mb-1">
+                    <span>{t.splitWarm}</span>
+                    <span>{t.splitCool}</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="20"
+                    max="80"
+                    value={splitSliderPos}
+                    onChange={(e) => setSplitSliderPos(Number(e.target.value))}
+                    className="w-full accent-[#E07A5F]"
                   />
-
-                  {/* Floating Badge */}
-                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-black/75 text-white backdrop-blur-md text-xs font-extrabold shadow-lg flex items-center gap-1.5 border border-white/10">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Full Body Visible</span>
-                  </div>
-
-                  {/* Floating Look Title Bar */}
-                  <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-2xl bg-white/95 backdrop-blur-md border border-black/[0.08] flex items-center justify-between shadow-xl">
-                    <div>
-                      <span className="text-xs font-extrabold text-[#121316] block">
-                        {styledResult.look.title}
-                      </span>
-                      <span className="text-[10px] text-[#B57C1E] font-bold">
-                        {styledResult.provider}
-                      </span>
-                    </div>
-                    <span className="text-xs font-extrabold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-                      Verified Luxury Pieces
-                    </span>
-                  </div>
-                </div>
-              ) : (
-                /* Optional Side by Side (Uncropped Contain) */
-                <div className="grid grid-cols-2 gap-3">
-                  {/* Original */}
-                  <div className="flex flex-col gap-2">
-                    <span className="text-[11px] font-bold text-zinc-500 text-center">
-                      Before: Original Photo
-                    </span>
-                    <div className="rounded-2xl overflow-hidden border border-black/[0.08] bg-[#0D0E10] flex items-center justify-center p-2 min-h-[500px] max-h-[700px] shadow-sm">
-                      <img
-                        src={userPhoto || ''}
-                        alt="Original Customer"
-                        className="w-full h-auto max-h-[680px] object-contain rounded-xl mx-auto"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Styled Result */}
-                  <div className="flex flex-col gap-2">
-                    <span className="text-[11px] font-bold text-[#92400E] text-center flex items-center justify-center gap-1">
-                      <Sparkles className="w-3.5 h-3.5 text-[#B57C1E]" />
-                      After: AI Styled Look
-                    </span>
-                    <div className="rounded-2xl overflow-hidden border-2 border-[#121316] shadow-xl relative group bg-[#0D0E10] flex items-center justify-center p-2 min-h-[500px] max-h-[700px]">
-                      <img
-                        src={styledResult.imageUrl}
-                        alt="Styled Luxury Look"
-                        className="w-full h-auto max-h-[680px] object-contain rounded-xl mx-auto"
-                        onError={(e) => {
-                          const target = e.currentTarget;
-                          if (styledResult?.look?.imageUrl && target.src !== styledResult.look.imageUrl) {
-                            target.src = styledResult.look.imageUrl;
-                          }
-                        }}
-                      />
-                    </div>
-                  </div>
                 </div>
               )}
-
-              {/* Action Buttons */}
-              <div className="flex items-center gap-3 mt-6">
-                <a
-                  href={
-                    styledResult.imageUrl.includes('/api/tryon-image/')
-                      ? `${styledResult.imageUrl}?download=1`
-                      : styledResult.imageUrl
-                  }
-                  download="styling_helper_luxury_look.png"
-                  className="flex-1 py-3 px-4 rounded-xl bg-[#121316] hover:bg-black text-white font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>Download High-Res Photo</span>
-                </a>
-
-                <button
-                  onClick={() => {
-                    studioRef.current?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="py-3 px-4 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-800 font-bold text-xs flex items-center gap-1.5 transition-all"
-                >
-                  <RefreshCw className="w-3.5 h-3.5" />
-                  <span>Try Another Vibe</span>
-                </button>
-              </div>
             </div>
 
-            {/* ------------------------------------------------ */}
-            {/* Worn Garments Breakdown: Real Products & Links (5 Cols) */}
-            {/* ------------------------------------------------ */}
-            <div className="lg:col-span-5 bg-white rounded-3xl p-6 shadow-[0_4px_25px_rgba(0,0,0,0.04)] border border-black/[0.06]">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h3 className="font-extrabold text-base text-[#121316]">
-                    Worn Designer Garments ({styledResult.look.pins.length} Pieces)
-                  </h3>
-                  <p className="text-xs text-zinc-500 mt-0.5 font-medium">
-                    Direct official store links • Zero modals • Opens directly in a new tab
-                  </p>
-                </div>
-                <div className="text-right">
-                  <span className="text-xs font-extrabold text-zinc-700 bg-zinc-100 px-2.5 py-1 rounded-full border border-zinc-200">
-                    Official Store Links
-                  </span>
-                </div>
+            {/* 우측: 드레이핑 컬러 스와치 & 피부 지표 */}
+            <div className="md:col-span-6 space-y-6">
+              <div>
+                <h3 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-1.5">
+                  <Palette className="w-4 h-4 text-[#E07A5F]" />
+                  {t.swatchTitle}
+                </h3>
+                <p className="text-xs text-gray-500 mb-3">{t.swatchDesc}</p>
+
+                {resultTone && (
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                    {resultTone.drapeSwatches.map((swatch) => (
+                      <button
+                        key={swatch.name[lang]}
+                        onClick={() => {
+                          setSelectedDrapeHex(swatch.hex);
+                          setSelectedDrapeName(swatch.name[lang]);
+                        }}
+                        className={`p-2.5 rounded-xl border flex flex-col items-center gap-1.5 transition ${
+                          selectedDrapeHex === swatch.hex
+                            ? "border-gray-900 ring-2 ring-gray-900 shadow-md"
+                            : "border-gray-200 hover:border-gray-300"
+                        }`}
+                      >
+                        <div className="w-8 h-8 rounded-full shadow-inner border border-black/10" style={{ backgroundColor: swatch.hex }} />
+                        <span className="text-[11px] font-bold text-gray-900 truncate w-full text-center">
+                          {swatch.name[lang]}
+                        </span>
+                        <span className="text-[9px] text-gray-500">{swatch.desc[lang]}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
-              {/* Items List */}
-              <div className="space-y-3 max-h-[560px] overflow-y-auto pr-1">
-                {styledResult.look.pins.map((pin) => (
-                  <div
-                    key={pin.id}
-                    className="p-3.5 rounded-2xl bg-[#FAF9F6] border border-black/[0.06] hover:border-black/20 transition-all flex items-center justify-between gap-4 group"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="px-2 py-0.5 rounded-md bg-amber-100/70 text-[#92400E] text-[10px] font-extrabold uppercase tracking-wider">
-                          {pin.category}
-                        </span>
-                        <span className="text-xs font-extrabold text-[#121316] truncate">
-                          {pin.brand}
-                        </span>
-                      </div>
-                      <p className="text-xs text-zinc-700 font-semibold truncate mb-1">
-                        {pin.title}
-                      </p>
-                      <div className="flex items-center gap-2 text-[11px] text-zinc-500 font-medium">
-                        <span>Retailer: {pin.retailer || 'Shopbop'}</span>
-                        <span>•</span>
-                        <span className="text-zinc-600 font-semibold">Official Store</span>
-                      </div>
-                    </div>
+              {/* 지표 분석 박스 */}
+              <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200/80 space-y-3">
+                <div className="text-xs font-bold text-gray-800 flex items-center justify-between">
+                  <span>{t.metricTitle}</span>
+                  <span className="text-[11px] font-normal text-gray-500">{t.metricSubtitle}</span>
+                </div>
 
-                    <div className="flex items-center gap-2 shrink-0">
-                      {/* Direct Native Link Button - Zero Interception */}
-                      <a
-                        href={pin.buyUrl || 'https://www.shopbop.com'}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-3.5 py-2 rounded-xl bg-[#121316] hover:bg-black text-white font-extrabold text-xs flex items-center gap-1.5 shadow-md hover:scale-105 transition-all"
-                      >
-                        <span>Shop Now</span>
-                        <ArrowUpRight className="w-3.5 h-3.5" />
-                      </a>
-
-                      {/* Report Sold Out / Error on specific piece */}
-                      <button
-                        onClick={() => {
-                          setReportProduct({
-                            title: `${pin.brand} - ${pin.title}`,
-                            url: pin.buyUrl || ''
-                          });
-                          setIsReportModalOpen(true);
-                        }}
-                        title="Report Sold Out or Issue (yjongsung1211@gmail.com)"
-                        className="p-2 rounded-xl hover:bg-amber-100/60 text-zinc-400 hover:text-amber-700 transition-colors"
-                      >
-                        <AlertTriangle className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
+                <div>
+                  <div className="flex justify-between text-xs text-gray-600 mb-1">
+                    <span className="flex items-center gap-1"><Snowflake className="w-3 h-3 text-sky-500" /> {t.coolLabel}</span>
+                    <span className="font-bold text-gray-800">
+                      {sampledColors.warmScore >= 50 ? `Warm (${sampledColors.warmScore}%)` : `Cool (${100 - sampledColors.warmScore}%)`}
+                    </span>
+                    <span className="flex items-center gap-1">{t.warmLabel} <Flame className="w-3 h-3 text-amber-500" /></span>
                   </div>
-                ))}
+                  <div className="h-2 rounded-full bg-gradient-to-r from-sky-400 via-purple-300 to-amber-500 overflow-hidden relative">
+                    <div className="absolute top-0 bottom-0 w-2.5 bg-black rounded-full shadow -ml-1 border border-white" style={{ left: `${sampledColors.warmScore}%` }} />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 pt-2 border-t border-gray-200 text-xs">
+                  <div>
+                    <span className="text-gray-500">{t.brightnessLabel}</span>
+                    <span className="ml-1.5 font-bold text-gray-900">{sampledColors.brightness}%</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500">{t.saturationLabel}</span>
+                    <span className="ml-1.5 font-bold text-gray-900">{sampledColors.saturation}%</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
       )}
 
-      {/* ======================================================= */}
-      {/* 5. REAL AI STYLING EXAMPLES (TOP 4 SHOWCASE) */}
-      {/* ======================================================= */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-black/[0.06]">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 text-[#B57C1E] text-xs font-extrabold uppercase tracking-wider mb-2">
-            <Sparkles className="w-4 h-4" />
-            <span>Real AI Styling Examples</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#121316]">
-            See What Your Photo Can Look Like
-          </h2>
-          <p className="text-sm text-zinc-600 mt-2 font-medium">
-            Here is how your uploaded photo transforms into an authentic designer editorial. Click any example to try it on.
-          </p>
-        </div>
+      {/* ── STEP 3: 상세 결과 리포트 (잠금 및 결제 연동) ───────────── */}
+      {resultTone && (
+        <section className="bg-white rounded-3xl p-6 sm:p-10 shadow-lg border border-gray-200 mb-8 relative overflow-hidden">
+          <div
+            className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-20 pointer-events-none -mr-20 -mt-20"
+            style={{ backgroundColor: selectedDrapeHex }}
+          />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            {
-              id: 'showcase-1',
-              gender: 'women',
-              genderLabel: '👩 Women',
-              category: 'Quiet Luxury Tailoring',
-              title: 'SoHo Glen Plaid Blazer & Wide Slacks',
-              subtitle: 'Parisian chic & high-fashion tailoring',
-              imageUrl: '/images/looks/look_01_soho_quiet_luxury_final.webp',
-              lookId: 'editorial-look-v01',
-              occasionId: 'soho-luxury',
-            },
-            {
-              id: 'showcase-2',
-              gender: 'men',
-              genderLabel: '👨 Men',
-              category: 'Modern Minimalist',
-              title: 'Milan Wool Blazer & Charcoal Slacks',
-              subtitle: 'Sharp modern dandy & Italian tailored fit',
-              imageUrl: '/images/looks/men_look_01_tailored_dandy.webp',
-              lookId: 'editorial-men-01',
-              occasionId: 'mens-tailored-dandy',
-            },
-            {
-              id: 'showcase-3',
-              gender: 'women',
-              genderLabel: '👩 Women',
-              category: 'Modern Luxury Minimalist',
-              title: 'Cheongdam Midnight Navy Overcoat & Slacks',
-              subtitle: 'Burgundy knit, tailored coat & camel trousers',
-              imageUrl: '/images/looks/look_03_cheongdam_silk_cashmere.webp',
-              lookId: 'editorial-look-v03',
-              occasionId: 'midnight-glam',
-            },
-            {
-              id: 'showcase-4',
-              gender: 'men',
-              genderLabel: '👨 Men',
-              category: 'Urban Flight Streetwear',
-              title: 'Seongsu Leather Bomber & Raw Denim',
-              subtitle: 'Vintage distressed shearling bomber & wide denim',
-              imageUrl: '/images/looks/men_look_02_urban_street.webp',
-              lookId: 'editorial-men-02',
-              occasionId: 'mens-urban-street',
-            },
-          ].map((item) => {
-            const isMen = item.gender === 'men';
-            return (
-              <div
-                key={item.id}
-                onClick={() => {
-                  const targetGender = isMen ? 'men' : 'women';
-                  handleGenderChange(targetGender);
-                  const targetOccasions = isMen ? MENS_OCCASIONS : WOMENS_OCCASIONS;
-                  const matchedOccasion = targetOccasions.find(
-                    (o) => o.lookId === item.lookId || o.id === item.occasionId
-                  );
-                  if (matchedOccasion) {
-                    setSelectedOccasion(matchedOccasion);
-                  }
-                  setStyledResult(null);
-                  studioRef.current?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="group rounded-3xl bg-white border border-black/[0.06] hover:border-black/20 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-xl overflow-hidden transition-all flex flex-col justify-between cursor-pointer"
-              >
-                {/* Look Photo */}
-                <div className="aspect-[3/4] relative overflow-hidden bg-zinc-100">
-                  <img
-                    src={item.imageUrl}
-                    alt={item.title}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md border border-black/[0.08] text-xs font-extrabold text-zinc-900 shadow-sm flex items-center gap-1.5">
-                    <span className={isMen ? 'text-indigo-700' : 'text-rose-700'}>
-                      {item.genderLabel}
-                    </span>
+          <div className="flex items-center gap-2 border-b border-gray-100 pb-4 mb-8">
+            <button
+              onClick={() => setActiveTab("result")}
+              className={`text-sm font-bold pb-2 px-3 border-b-2 transition ${
+                activeTab === "result" ? "border-[#E07A5F] text-[#E07A5F]" : "border-transparent text-gray-500 hover:text-gray-800"
+              }`}
+            >
+              {t.tabResult}
+            </button>
+            <button
+              onClick={() => setActiveTab("cosmetics")}
+              className={`text-sm font-bold pb-2 px-3 border-b-2 transition ${
+                activeTab === "cosmetics" ? "border-[#E07A5F] text-[#E07A5F]" : "border-transparent text-gray-500 hover:text-gray-800"
+              }`}
+            >
+              {t.tabCosmetics}
+            </button>
+          </div>
+
+          {/* 결제 전 잠금 오버레이 */}
+          {!isUnlocked && isCustomPhoto && (
+            <div className="relative my-4 p-8 rounded-2xl bg-gradient-to-b from-gray-900/95 to-black text-white text-center shadow-2xl z-20 border border-amber-500/30">
+              <div className="w-14 h-14 mx-auto rounded-2xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400 mb-4 shadow-lg">
+                <Lock className="w-7 h-7" />
+              </div>
+              <h3 className="text-xl sm:text-2xl font-extrabold mb-2">{t.lockTitle}</h3>
+              <p className="text-xs sm:text-sm text-gray-300 max-w-md mx-auto mb-6 leading-relaxed">{t.lockDesc}</p>
+
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <button
+                  onClick={() => setIsPayModalOpen(true)}
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-[#E07A5F] hover:from-amber-600 hover:to-[#D0694E] text-white font-extrabold text-sm shadow-xl transition flex items-center justify-center gap-2"
+                >
+                  <CreditCard className="w-4 h-4" />
+                  {t.unlockBtn}
+                </button>
+                {!currentUser && (
+                  <button
+                    onClick={() => setIsAuthModalOpen(true)}
+                    className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs border border-white/20 transition flex items-center justify-center gap-2"
+                  >
+                    <LogIn className="w-4 h-4" />
+                    {t.loginBonusBtn}
+                  </button>
+                )}
+              </div>
+
+              <div className="mt-4 flex items-center justify-center gap-4 text-[11px] text-gray-400">
+                <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> PayPal 256-bit Encrypted</span>
+                <span>•</span>
+                <span>Export High-Res Card</span>
+              </div>
+            </div>
+          )}
+
+          <div className={!isUnlocked && isCustomPhoto ? "filter blur-md pointer-events-none select-none opacity-40" : ""}>
+            {activeTab === "result" ? (
+              <div>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                  <div>
+                    <div className="inline-block px-3 py-1 rounded-full text-xs font-bold border mb-2 uppercase tracking-wider bg-gray-100 border-gray-300 text-gray-800">
+                      {resultTone.seasonNames[lang]}
+                    </div>
+                    <h3 className="text-2xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+                      {resultTone.titles[lang]}
+                    </h3>
                   </div>
-                  <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md text-white text-[10px] font-extrabold shadow-sm flex items-center gap-1">
-                    <Sparkles className="w-3 h-3 text-[#FFD782]" />
-                    <span>AI Result</span>
+
+                  <button
+                    onClick={downloadResultCard}
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-gray-900 hover:bg-black text-white text-xs font-bold shadow-md transition"
+                  >
+                    <Download className="w-4 h-4" />
+                    {t.saveInstaCard}
+                  </button>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-[#FFFBF9] border border-[#E07A5F]/20 mb-8">
+                  <p className="text-base sm:text-lg font-bold text-[#E07A5F] mb-1.5">
+                    "{resultTone.slogans[lang]}"
+                  </p>
+                  <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                    {resultTone.summaries[lang]}
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5 mt-3">
+                    {resultTone.keywords[lang].map((kw) => (
+                      <span key={kw} className="text-[11px] font-semibold text-gray-600 bg-white px-2 py-0.5 rounded-md border border-gray-200">
+                        {kw}
+                      </span>
+                    ))}
                   </div>
                 </div>
 
-                {/* Look Details */}
-                <div className="p-5 flex flex-col justify-between flex-1">
-                  <div>
-                    <span
-                      className={`inline-block px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider mb-2 ${
-                        isMen
-                          ? 'bg-indigo-50 text-indigo-800 border border-indigo-200'
-                          : 'bg-amber-50 text-[#92400E] border border-amber-200'
-                      }`}
-                    >
-                      {item.category}
-                    </span>
-                    <h3 className="font-extrabold text-sm sm:text-base text-[#121316] group-hover:text-[#B57C1E] transition-colors line-clamp-2 leading-snug">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-zinc-500 mt-1 line-clamp-1 font-medium">
-                      {item.subtitle}
-                    </p>
+                {/* 베스트 & 워스트 팔레트 */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                  <div className="p-5 rounded-2xl bg-emerald-50/50 border border-emerald-200">
+                    <div className="text-xs font-extrabold text-emerald-800 mb-3 flex items-center gap-1.5">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                      {t.bestPalette}
+                    </div>
+                    <div className="grid grid-cols-5 gap-2">
+                      {resultTone.bestColors.map((col) => (
+                        <div key={col.name[lang]} className="flex flex-col items-center">
+                          <div className="w-full aspect-square rounded-xl shadow-sm border border-black/10 transition transform hover:scale-105" style={{ backgroundColor: col.hex }} />
+                          <span className="text-[10px] font-medium text-gray-700 mt-1 truncate w-full text-center">
+                            {col.name[lang]}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-black/[0.04] flex items-center justify-between text-xs font-bold text-zinc-700 group-hover:text-black">
-                    <span>Try This Style</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 text-[#B57C1E] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <div className="p-5 rounded-2xl bg-rose-50/50 border border-rose-200">
+                    <div className="text-xs font-extrabold text-rose-800 mb-3 flex items-center gap-1.5">
+                      <Info className="w-4 h-4 text-rose-600" />
+                      {t.worstPalette}
+                    </div>
+                    <div className="grid grid-cols-3 gap-2">
+                      {resultTone.worstColors.map((col) => (
+                        <div key={col.name[lang]} className="flex flex-col items-center">
+                          <div className="w-full aspect-square rounded-xl shadow-sm border border-black/10" style={{ backgroundColor: col.hex }} />
+                          <span className="text-[10px] font-medium text-gray-700 mt-1 truncate w-full text-center">
+                            {col.name[lang]}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* 토탈 스타일링 가이드 */}
+                <div className="p-6 rounded-2xl bg-gray-50 border border-gray-200 space-y-4">
+                  <h4 className="text-sm font-bold text-gray-900 flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4 text-[#E07A5F]" />
+                    {t.totalFormula}
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                    <div className="bg-white p-3.5 rounded-xl border border-gray-200">
+                      <span className="font-bold text-gray-900 block mb-1">{t.jewelryTitle}</span>
+                      <span className="text-gray-700 font-semibold text-[#E07A5F]">{resultTone.stylingGuide.jewelry[lang]}</span>
+                      <p className="text-gray-500 mt-1">{resultTone.stylingGuide.jewelryDesc[lang]}</p>
+                    </div>
+                    <div className="bg-white p-3.5 rounded-xl border border-gray-200">
+                      <span className="font-bold text-gray-900 block mb-1">{t.baseTitle}</span>
+                      <span className="text-gray-700 font-medium">{resultTone.stylingGuide.foundation[lang]}</span>
+                    </div>
+                    <div className="bg-white p-3.5 rounded-xl border border-gray-200">
+                      <span className="font-bold text-gray-900 block mb-1">{t.hairTitle}</span>
+                      <span className="text-gray-700 font-medium">{resultTone.stylingGuide.hairColor[lang]}</span>
+                    </div>
+                    <div className="bg-white p-3.5 rounded-xl border border-gray-200">
+                      <span className="font-bold text-gray-900 block mb-1">{t.fashionTitle}</span>
+                      <span className="text-gray-700 font-medium">{resultTone.stylingGuide.fashionTip[lang]}</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            );
-          })}
-        </div>
-      </section>
+            ) : (
+              <div className="space-y-6">
+                <div>
+                  <h4 className="text-base font-bold text-gray-900 mb-1 flex items-center gap-2">
+                    <Heart className="w-4 h-4 text-rose-500" />
+                    {resultTone.titles[lang]} {t.lipTitle}
+                  </h4>
+                  <p className="text-xs text-gray-500 mb-4">{t.lipDesc}</p>
 
-      {/* ======================================================= */}
-      {/* 6. STYLINGHELPER PRO SUBSCRIPTION PAYWALL MODAL */}
-      {/* ======================================================= */}
-      {showPaywallModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-md animate-fadeIn">
-          <div className="relative w-full max-w-lg rounded-3xl bg-white border border-black/[0.08] p-6 sm:p-8 shadow-2xl">
-            {/* Close Button */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {resultTone.cosmetics.lips.map((lip) => (
+                      <div key={lip.name} className="p-4 rounded-2xl border border-gray-200 hover:border-[#E07A5F] transition bg-white flex flex-col justify-between">
+                        <div>
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-[10px] font-bold text-gray-400 uppercase">{lip.brand}</span>
+                            <div className="w-5 h-5 rounded-full border shadow-sm" style={{ backgroundColor: lip.hex }} />
+                          </div>
+                          <div className="text-xs font-bold text-gray-900 mb-1">{lip.name}</div>
+                          <p className="text-[11px] text-gray-500">{lip.note[lang]}</p>
+                        </div>
+
+                        <button
+                          onClick={() => {
+                            const query = `${lip.brand} ${lip.name}`;
+                            const url =
+                              lang === "ja"
+                                ? `https://www.google.co.jp/search?q=${encodeURIComponent(query + " @cosme")}`
+                                : lang === "en"
+                                ? `https://www.google.com/search?q=${encodeURIComponent(query + " Sephora")}`
+                                : `https://search.shopping.naver.com/search/all?query=${encodeURIComponent(query)}`;
+                            window.open(url, "_blank");
+                          }}
+                          className="mt-3 w-full py-1.5 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-700 text-[11px] font-bold border border-gray-200 transition flex items-center justify-center gap-1"
+                        >
+                          <ShoppingBag className="w-3 h-3 text-[#E07A5F]" />
+                          {t.lowestPrice}
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-gray-100">
+                  <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200">
+                    <span className="text-xs font-bold text-gray-900 block mb-2">{t.blushTitle}</span>
+                    {resultTone.cosmetics.blush.map((b) => (
+                      <div key={b.name} className="flex items-center gap-2 text-xs text-gray-700 py-1">
+                        <div className="w-3.5 h-3.5 rounded-full border border-black/10" style={{ backgroundColor: b.hex }} />
+                        <span className="font-semibold text-gray-900">{b.brand}</span>
+                        <span className="text-gray-600 truncate">{b.name}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200">
+                    <span className="text-xs font-bold text-gray-900 block mb-2">{t.eyeTitle}</span>
+                    {resultTone.cosmetics.eye.map((e) => (
+                      <div key={e.name} className="flex items-center gap-2 text-xs text-gray-700 py-1">
+                        <div className="w-3.5 h-3.5 rounded-full border border-black/10" style={{ backgroundColor: e.hex }} />
+                        <span className="font-semibold text-gray-900">{e.brand}</span>
+                        <span className="text-gray-600 truncate">{e.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="mt-10 p-6 rounded-2xl bg-gradient-to-r from-[#1A1715] to-[#2C2623] text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+              <div>
+                <div className="inline-block px-2 py-0.5 rounded bg-[#E07A5F] text-[10px] font-bold text-white uppercase tracking-wider mb-2">
+                  {t.stylingBannerTag}
+                </div>
+                <h4 className="text-base sm:text-lg font-bold">{t.stylingBannerTitle}</h4>
+                <p className="text-xs text-gray-300 mt-0.5">{t.stylingBannerDesc}</p>
+              </div>
+
+              <Link
+                href="/stylinghelper"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white hover:bg-gray-100 text-gray-900 text-xs font-extrabold transition shadow-md whitespace-nowrap"
+              >
+                {t.stylingBannerBtn}
+                <ArrowRight className="w-4 h-4 text-[#E07A5F]" />
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── FOOTER ────────────────────────────────────────── */}
+      <footer className="text-center text-xs text-gray-400 pt-6 pb-12 border-t border-gray-200">
+        <p className="font-semibold text-gray-600 mb-1">
+          퍼스널컬러헬퍼 (PersonalColorHelper) · AI Personal Color System
+        </p>
+        <p>© 2026 FirstMotion Co., Ltd. All rights reserved. (Seoul · Tokyo · New York)</p>
+      </footer>
+
+      {/* ── MODAL 1: 구글 로그인 모달 ─────────────────────────────── */}
+      <USAuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        initialMode="signin"
+        title={t.googleLogin}
+        subtitle="Sign in to save your result and get 1 free pass."
+        onSuccess={handleAuthSuccess}
+      />
+
+      {/* ── MODAL 2: 페이팔 & 간편결제 모달 ────────────────────────── */}
+      {isPayModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in">
+          <div className="relative w-full max-w-md bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-100">
             <button
-              onClick={() => setShowPaywallModal(false)}
-              className="absolute top-5 right-5 p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 hover:text-black transition-all"
+              onClick={() => setIsPayModalOpen(false)}
+              className="absolute top-5 right-5 p-2 rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition"
             >
               <X className="w-5 h-5" />
             </button>
 
-            {/* Header Icon */}
-            <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-900 flex items-center justify-center font-bold text-xl mb-4 shadow-sm">
-              💎
+            <div className="text-center mb-6">
+              <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-900 flex items-center justify-center mx-auto mb-3">
+                <Ticket className="w-6 h-6 text-[#E07A5F]" />
+              </div>
+              <h3 className="text-xl font-extrabold text-gray-900">{t.modalTitle}</h3>
+              <p className="text-xs text-gray-500 mt-1">{t.modalSubtitle}</p>
             </div>
 
-            {/* Title & Tagline */}
-            <h3 className="text-xl sm:text-2xl font-extrabold text-[#121316]">
-              StylingHelper Pro Membership
-            </h3>
-            <p className="text-xs sm:text-sm text-zinc-600 mt-1.5 leading-relaxed font-medium">
-              {proModalReason === 'trial_exhausted'
-                ? "You've experienced your 1 Free Styling! Upgrade to Pro for unlimited AI full-body outfit swaps and personal styling."
-                : 'Unlock unlimited AI full-body outfit swaps and direct real-time luxury shopping links.'}
+            <div className="space-y-3 mb-6">
+              <div className="p-4 rounded-2xl border-2 border-[#E07A5F] bg-[#FFFBF9] relative flex items-center justify-between">
+                <div>
+                  <div className="text-xs font-bold text-[#E07A5F]">{t.singlePlanTag}</div>
+                  <div className="text-sm font-extrabold text-gray-900">{t.singlePlanName}</div>
+                  <div className="text-[11px] text-gray-500">{t.singlePlanDesc}</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-lg font-black text-gray-900">{t.singlePrice}</div>
+                  <div className="text-[10px] text-gray-400">{t.singlePriceSub}</div>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-2xl border border-gray-200 hover:border-gray-300 bg-white flex items-center justify-between">
+                <div>
+                  <div className="text-xs font-bold text-emerald-600">{t.triplePlanTag}</div>
+                  <div className="text-sm font-bold text-gray-900">{t.triplePlanName}</div>
+                  <div className="text-[11px] text-gray-500">{t.triplePlanDesc}</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-base font-extrabold text-gray-900">{t.triplePrice}</div>
+                  <div className="text-[10px] text-gray-400">{t.triplePriceSub}</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-2.5">
+              <button
+                disabled={paymentProcessing}
+                onClick={() => executePayment("single")}
+                className="w-full py-3.5 px-4 rounded-xl bg-[#0070BA] hover:bg-[#003087] text-white font-extrabold text-sm shadow-md transition flex items-center justify-center gap-2"
+              >
+                {paymentProcessing ? (
+                  <span>Processing...</span>
+                ) : (
+                  <>
+                    <span className="font-black italic tracking-wider">PayPal</span>
+                    <span>{t.payWithPaypal}</span>
+                  </>
+                )}
+              </button>
+
+              <button
+                disabled={paymentProcessing}
+                onClick={() => executePayment("triple")}
+                className="w-full py-2.5 px-4 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold text-xs transition flex items-center justify-center gap-1.5"
+              >
+                <span>{t.payTriplePaypal}</span>
+              </button>
+
+              <button
+                onClick={() => executePayment("single")}
+                className="w-full py-2 px-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-[11px] border border-emerald-300 transition flex items-center justify-center gap-1"
+              >
+                <Check className="w-3.5 h-3.5 text-emerald-600" />
+                {t.testPayBtn}
+              </button>
+            </div>
+
+            <p className="text-[11px] text-gray-400 text-center mt-4">
+              PayPal official 256-bit encrypted checkout. Cancel anytime.
             </p>
-
-            {/* Pricing Plans Selector */}
-            <div className="grid grid-cols-2 gap-3 my-6">
-              {/* Annual VIP */}
-              <div
-                onClick={() => setSelectedPlan('annual')}
-                className={`p-4 rounded-2xl border-2 cursor-pointer transition-all relative flex flex-col justify-between ${
-                  selectedPlan === 'annual'
-                    ? 'border-[#121316] bg-amber-50/70 shadow-sm'
-                    : 'border-zinc-200 bg-[#FAF9F6] opacity-70 hover:opacity-100'
-                }`}
-              >
-                <span className="absolute -top-2.5 right-3 px-2 py-0.5 rounded-full bg-[#121316] text-white text-[10px] font-extrabold uppercase">
-                  Best Value
-                </span>
-                <div>
-                  <span className="text-xs font-bold text-[#B57C1E] block">Annual VIP Plan</span>
-                  <div className="mt-2">
-                    <span className="text-2xl font-extrabold text-[#121316]">$149</span>
-                    <span className="text-[11px] text-zinc-500 font-medium"> / year</span>
-                  </div>
-                  <span className="text-[10px] text-emerald-700 font-bold block mt-0.5">
-                    $12.40 / mo (Save 35%)
-                  </span>
-                </div>
-              </div>
-
-              {/* Monthly */}
-              <div
-                onClick={() => setSelectedPlan('monthly')}
-                className={`p-4 rounded-2xl border-2 cursor-pointer transition-all flex flex-col justify-between ${
-                  selectedPlan === 'monthly'
-                    ? 'border-[#121316] bg-amber-50/70 shadow-sm'
-                    : 'border-zinc-200 bg-[#FAF9F6] opacity-70 hover:opacity-100'
-                }`}
-              >
-                <div>
-                  <span className="text-xs font-bold text-zinc-700 block">Monthly Plan</span>
-                  <div className="mt-2">
-                    <span className="text-2xl font-extrabold text-[#121316]">$19</span>
-                    <span className="text-[11px] text-zinc-500 font-medium"> / month</span>
-                  </div>
-                  <span className="text-[10px] text-zinc-500 block mt-0.5">Cancel anytime</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Features Checklist */}
-            <div className="space-y-2.5 mb-6">
-              <div className="flex items-center gap-2 text-xs font-semibold text-zinc-700">
-                <Check className="w-4 h-4 text-emerald-600 shrink-0 stroke-[3]" />
-                <span>Unlimited AI full-body outfit swaps (Virtual Try-On)</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs font-semibold text-zinc-700">
-                <Check className="w-4 h-4 text-emerald-600 shrink-0 stroke-[3]" />
-                <span>Verified authentic Shopbop designer luxury items with direct store links</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs font-semibold text-zinc-700">
-                <Check className="w-4 h-4 text-emerald-600 shrink-0 stroke-[3]" />
-                <span>Download high-definition 4K editorial photos without watermarks</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs font-semibold text-zinc-700">
-                <Check className="w-4 h-4 text-emerald-600 shrink-0 stroke-[3]" />
-                <span>Ultra-fast priority AI rendering queue</span>
-              </div>
-            </div>
-
-            {/* Official PayPal Checkout CTA */}
-            <div className="space-y-3">
-              <a
-                href={PAYPAL_CHECKOUT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
-                  // Pre-activate local tracking on click
-                  fetch('/api/checkout/paypal', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ plan: selectedPlan })
-                  }).catch(() => {});
-                }}
-                className="w-full py-3.5 px-6 rounded-2xl bg-[#0070BA] hover:bg-[#005EA6] text-white font-extrabold text-sm flex items-center justify-center gap-2.5 shadow-lg shadow-[#0070BA]/25 hover:shadow-xl transition-all active:scale-[0.99] cursor-pointer"
-              >
-                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                  <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.002.535 5.32.26 5.69.26h7.248c2.457 0 4.394.57 5.485 1.603 1.05.992 1.488 2.454 1.233 4.116-.54 3.513-2.915 5.485-6.516 5.485h-2.31l-1.398 8.873a1.002 1.002 0 0 1-.989.843l-1.367.157z" />
-                </svg>
-                <span>Pay ${selectedPlan === 'annual' ? 149 : 19}.00 with PayPal or Card</span>
-                <ExternalLink className="w-4 h-4 opacity-80" />
-              </a>
-
-              {/* Supported Payment Badges */}
-              <div className="flex items-center justify-center gap-1.5 text-[10px] text-zinc-500 font-semibold pt-1">
-                <span>Accepted:</span>
-                <span className="px-1.5 py-0.5 bg-zinc-100 border border-zinc-200 rounded text-zinc-800">PayPal</span>
-                <span className="px-1.5 py-0.5 bg-zinc-100 border border-zinc-200 rounded text-zinc-800">Visa</span>
-                <span className="px-1.5 py-0.5 bg-zinc-100 border border-zinc-200 rounded text-zinc-800">Mastercard</span>
-                <span className="px-1.5 py-0.5 bg-zinc-100 border border-zinc-200 rounded text-zinc-800">AMEX</span>
-              </div>
-
-              {/* Security Assurance */}
-              <div className="flex items-center justify-center gap-1.5 text-[10px] text-zinc-400 pt-2 border-t border-black/[0.04]">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Official 256-bit encrypted checkout via PayPal • Cancel anytime</span>
-              </div>
-            </div>
           </div>
         </div>
       )}
-
-      {/* Member Login & Signup Modal */}
-      <USAuthModal
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
-        initialMode={authMode}
-        title={authMode === 'signin' ? 'Sign In to StylingHelper' : 'Join StylingHelper Club'}
-        subtitle="Access your personal wardrobe history, saved fittings, and Pro styling features."
-        onSuccess={(user) => {
-          setCurrentUser(user);
-          localStorage.setItem('stylinghelper_user', JSON.stringify(user));
-          window.dispatchEvent(new Event('stylinghelper_auth_changed'));
-          setIsAuthModalOpen(false);
-        }}
-      />
-
-      {/* Error & Sold-Out Report Modal */}
-      <ReportModal
-        isOpen={isReportModalOpen}
-        onClose={() => setIsReportModalOpen(false)}
-        defaultProductTitle={reportProduct.title}
-        defaultProductUrl={reportProduct.url}
-      />
-
-      {/* Floating Action Button: Report Issue */}
-      <div className="fixed bottom-6 right-6 z-40">
-        <button
-          onClick={() => {
-            setReportProduct({ title: '', url: typeof window !== 'undefined' ? window.location.href : '' });
-            setIsReportModalOpen(true);
-          }}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/95 hover:bg-white text-zinc-800 text-xs font-bold shadow-xl border border-black/[0.1] hover:border-black/20 hover:scale-105 active:scale-95 transition-all group backdrop-blur-md"
-        >
-          <div className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
-          <AlertTriangle className="w-3.5 h-3.5 text-amber-600 group-hover:rotate-12 transition-transform" />
-          <span>Report Issue</span>
-        </button>
-      </div>
-
-      {/* ======================================================= */}
-      {/* 7. BRIGHT MINIMAL FOOTER */}
-      {/* ======================================================= */}
-      <footer className="border-t border-black/[0.06] bg-white py-12 px-4 text-center text-xs text-zinc-500">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 font-medium">
-          <p>© 2026 STYLING HELPER. Click Any Look, Shop the Outfit. All rights reserved.</p>
-          <div className="flex items-center gap-4 text-zinc-600">
-            <span>Powered by Advanced Fashion AI</span>
-            <span>•</span>
-            <span>Shopbop Verified Luxury</span>
-            <span>•</span>
-            <button
-              onClick={() => {
-                setReportProduct({ title: '', url: '' });
-                setIsReportModalOpen(true);
-              }}
-              className="text-amber-700 hover:text-amber-800 font-semibold underline"
-            >
-              Report Issue
-            </button>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
