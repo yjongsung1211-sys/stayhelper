@@ -623,9 +623,9 @@ export default function WeddingHelperPage() {
 
             {/* Helper Ecosystem Switcher */}
             <nav className="hidden lg:flex items-center gap-4 text-xs tracking-wider text-[#8A7977] border-l border-[#EDE3DC] pl-6 font-medium">
-              <Link href="/stayhelper" className="hover:text-[#C87870] transition">StayHelper (Venues)</Link>
+              <a href="https://www.thestayhelper.com" target="_blank" rel="noreferrer" className="hover:text-[#C87870] transition cursor-pointer">StayHelper (Venues)</a>
               <span className="text-[#E0D2CB]">/</span>
-              <Link href="/" className="hover:text-[#C87870] transition">StylingHelper (Fashion)</Link>
+              <a href="https://www.stylinghelper.com" target="_blank" rel="noreferrer" className="hover:text-[#C87870] transition cursor-pointer">StylingHelper (Fashion)</a>
               <span className="text-[#E0D2CB]">/</span>
               <a href="https://roomhelper.vercel.app" target="_blank" rel="noreferrer" className="hover:text-[#C87870] transition">RoomHelper (Home)</a>
             </nav>
@@ -2824,8 +2824,8 @@ export default function WeddingHelperPage() {
             &ldquo;Every love story is beautiful, but yours should be timeless.&rdquo;
           </p>
           <div className="flex items-center gap-5 text-[#8A7977]">
-            <Link href="/stayhelper" className="hover:text-[#1F181B]">StayHelper</Link>
-            <Link href="/" className="hover:text-[#1F181B]">StylingHelper</Link>
+            <a href="https://www.thestayhelper.com" target="_blank" rel="noreferrer" className="hover:text-[#1F181B]">StayHelper</a>
+            <a href="https://www.stylinghelper.com" target="_blank" rel="noreferrer" className="hover:text-[#1F181B]">StylingHelper</a>
             <a href="https://roomhelper.vercel.app" target="_blank" rel="noreferrer" className="hover:text-[#1F181B]">RoomHelper</a>
           </div>
         </div>
