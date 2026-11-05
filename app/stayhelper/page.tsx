@@ -116,7 +116,7 @@ const ALL_STAYS: StayInfo[] = [
     forbesTier: "Condé Nast Traveler Gold List",
     image: "/images/stayhelper/kayon_jungle_wide_hero.jpg",
     wideHero: "/images/stayhelper/kayon_jungle_wide_hero.jpg",
-    videoSrc: "/videos/StayHelperKayonJungle_Master_Reel.mp4",
+    videoSrc: "/videos/StayHelperBaliVilla_v10_GrandFinaleMaster.mp4",
     posterSrc: "/images/stayhelper/kayon_jungle_wide_hero.jpg",
     bookingUrl: "https://thekayonjungleresort.com/",
     status: "STREAMING",
@@ -2240,7 +2240,7 @@ export default function StayHelperLuxuryShowcase() {
   
   const [selectedStayId, setSelectedStayId] = useState<string>("stay-02"); // Default: The Kayon Jungle Resort Ubud
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
-  const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [isMuted, setIsMuted] = useState<boolean>(true);
   const [isEnded, setIsEnded] = useState<boolean>(false);
   const [isDesktop, setIsDesktop] = useState<boolean | null>(null);
 
@@ -2354,6 +2354,23 @@ export default function StayHelperLuxuryShowcase() {
   const currentStay = ALL_STAYS.find((s) => s.id === selectedStayId) || ALL_STAYS[0];
   const currentIndex = ALL_STAYS.findIndex((s) => s.id === selectedStayId);
   const heroBackground = currentStay.wideHero || currentStay.posterSrc;
+
+  // 100% Resilient Autoplay Orchestrator on stay selection and desktop switch
+  useEffect(() => {
+    if (isDesktop === null) return;
+    const timer = setTimeout(() => {
+      const vid = getActiveVideo();
+      if (vid) {
+        vid.play().catch((err) => {
+          console.log("Autoplay unmuted blocked, falling back to muted autoplay:", err);
+          vid.muted = true;
+          setIsMuted(true);
+          vid.play().catch(() => {});
+        });
+      }
+    }, 50);
+    return () => clearTimeout(timer);
+  }, [selectedStayId, isDesktop]);
 
   // Auto-scroll active item horizontally into view in the dock without scrolling window
   useEffect(() => {
