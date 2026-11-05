@@ -650,7 +650,7 @@ export default function ColorHelperPage() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // ── 언어 URL 쿼리 & 로컬 스토리지 감지 ─────────────────────────
+  // ── 언어 URL 쿼리 & 로컬 스토리지 & 브라우저 언어 스마트 자동 감지 ───────
   useEffect(() => {
     try {
       const urlParams = new URLSearchParams(window.location.search);
@@ -661,6 +661,16 @@ export default function ColorHelperPage() {
         const savedLang = localStorage.getItem("colorhelper_lang") as LangType | null;
         if (savedLang && ["ko", "en", "ja"].includes(savedLang)) {
           setLang(savedLang);
+        } else {
+          // 브라우저 언어 스마트 자동 감지 (한국어: ko, 일본어: ja, 그 외 전 세계 글로벌: en)
+          const browserLang = (navigator.language || (navigator as any).userLanguage || "").toLowerCase();
+          if (browserLang.startsWith("ko")) {
+            setLang("ko");
+          } else if (browserLang.startsWith("ja")) {
+            setLang("ja");
+          } else {
+            setLang("en");
+          }
         }
       }
 
