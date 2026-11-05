@@ -116,7 +116,7 @@ const ALL_STAYS: StayInfo[] = [
     forbesTier: "Condé Nast Traveler Gold List",
     image: "/images/stayhelper/kayon_jungle_wide_hero.jpg",
     wideHero: "/images/stayhelper/kayon_jungle_wide_hero.jpg",
-    videoSrc: "/videos/StayHelperBaliVilla_v10_GrandFinaleMaster.mp4",
+    videoSrc: "/videos/StayHelperKayonJungle_Master_Reel.mp4",
     posterSrc: "/images/stayhelper/kayon_jungle_wide_hero.jpg",
     bookingUrl: "https://thekayonjungleresort.com/",
     status: "STREAMING",
@@ -238,9 +238,9 @@ const ALL_STAYS: StayInfo[] = [
       { title: "The Gathering Sanctuary", desc: "Three-story open-air timber dining and astronomical observatory over water" }
     ],
     activeDeal: {
-      title: "The Great Escape · 4th Night Free",
-      tag: "STAY 4, PAY 3 (1 NIGHT FREE)",
-      desc: "Book 3 consecutive nights and receive the 4th night complimentary + $100 Resort Credit"
+      title: "Stay inspired · Official Sanctuary Experience",
+      tag: "EXCLUSIVE PACKAGE",
+      desc: "Book through StayHelper VIP for official Stay inspired inclusions + $100 Resort Credit & Daily Breakfast"
     }
   },
   {
@@ -274,9 +274,9 @@ const ALL_STAYS: StayInfo[] = [
       { title: "Michelin Japanese Gastronomy", desc: "The Japanese Restaurant with an authentic 9-seat Omakase and sake bar" }
     ],
     activeDeal: {
-      title: "Alpine Sanctuary · 3rd Night Complimentary",
-      tag: "STAY 3, PAY 2 (1 NIGHT FREE)",
-      desc: "Book 2 nights and receive your 3rd night on us with daily breakfast buffet & $100 spa credit"
+      title: "Stay in touch with us · Official Sanctuary Experience",
+      tag: "EXCLUSIVE PACKAGE",
+      desc: "Book through StayHelper VIP for official Stay in touch with us inclusions + $100 Resort Credit & Daily Breakfast"
     }
   },
   {
@@ -310,9 +310,9 @@ const ALL_STAYS: StayInfo[] = [
       { title: "Thermal Roman Bath Circuit", desc: "Hydrotherapy pool, tepidarium, crushed-ice fountain, and sauna" }
     ],
     activeDeal: {
-      title: "Cliffside Respite · 4th Night Free",
-      tag: "STAY 4, PAY 3 (1 NIGHT FREE)",
-      desc: "Complimentary 4th night on cliffside suite bookings + €100 thermal baths spa credit"
+      title: "Fora Reserve VIP Inclusions",
+      tag: "DAILY BREAKFAST + $100 CREDIT",
+      desc: "Daily Complimentary Breakfast for 2 + $100 Resort / Spa Credit & Room Upgrade Priority"
     }
   },
   {
@@ -508,9 +508,9 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      title: "Big Sur Coastal Escape · $100 Credit",
-      tag: "$100 SPA & WINE CREDIT",
-      desc: "Complimentary $100 cliffside spa credit + daily gourmet breakfast at Sierra Mar"
+      title: "Experience · Official Sanctuary Experience",
+      tag: "EXCLUSIVE PACKAGE",
+      desc: "Book through StayHelper VIP for official Experience inclusions + $100 Resort Credit & Daily Breakfast"
     }
   },
   {
@@ -778,9 +778,9 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      title: "St. Moritz Ski Pass Included",
-      tag: "COMPLIMENTARY SKI PASS + $100",
-      desc: "Free Engadin ski pass for all guests staying 2+ nights + $100 Palace wellness credit"
+      title: "Fora Reserve VIP Inclusions",
+      tag: "DAILY BREAKFAST + $100 CREDIT",
+      desc: "Daily Complimentary Breakfast for 2 + $100 Resort / Spa Credit & Room Upgrade Priority"
     }
   },
   {
@@ -823,9 +823,9 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      title: "Rainforest Retreat · 3rd Night Complimentary",
-      tag: "STAY 3, PAY 2 (1 NIGHT FREE)",
-      desc: "Stay 3 nights for the price of 2 + $100 dining credit and daily tented camp breakfast"
+      title: "Fora Reserve VIP Inclusions",
+      tag: "DAILY BREAKFAST + $100 CREDIT",
+      desc: "Daily Complimentary Breakfast for 2 + $100 Resort / Spa Credit & Room Upgrade Priority"
     }
   },
   {
@@ -959,9 +959,9 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      title: "Guaranteed Eiffel Upgrade & Double Credit",
-      tag: "GUARANTEED UPGRADE AT CONFIRMATION",
-      desc: "Guaranteed room upgrade at booking + €200 double culinary & spa credit"
+      title: "Fora Reserve VIP Inclusions",
+      tag: "DAILY BREAKFAST + $100 CREDIT",
+      desc: "Daily Complimentary Breakfast for 2 + $100 Resort / Spa Credit & Room Upgrade Priority"
     }
   },
   {
@@ -1139,9 +1139,9 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      title: "Stay Longer · 25% Off (4+ Nights)",
-      tag: "SAVE 25% (4+ NIGHTS)",
-      desc: "25% off room rates for 4+ nights + Private Zeitz MOCAA art museum tour & private wine tasting"
+      title: "Fora Reserve VIP Inclusions",
+      tag: "DAILY BREAKFAST + $100 CREDIT",
+      desc: "Daily Complimentary Breakfast for 2 + $100 Resort / Spa Credit & Room Upgrade Priority"
     }
   },
   {
@@ -1184,9 +1184,9 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      title: "Guaranteed Cave Suite Upgrade",
-      tag: "GUARANTEED CAVE SUITE UPGRADE",
-      desc: "Guaranteed upgrade to Imperial Cave Suite for 3+ nights + Complimentary 4-course dinner for 2 at Lil'a"
+      title: "Fora Reserve VIP Inclusions",
+      tag: "DAILY BREAKFAST + $100 CREDIT",
+      desc: "Daily Complimentary Breakfast for 2 + $100 Resort / Spa Credit & Room Upgrade Priority"
     }
   },
   {
@@ -1319,9 +1319,9 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      title: "Patagonia All-Inclusive · Stay 4, Pay 3",
-      tag: "STAY 4, PAY 3 (ALL-INCLUSIVE)",
-      desc: "Complimentary 4th night + Daily private excursions with naturalist guides & premium open bar"
+      title: "Fora Reserve VIP Inclusions",
+      tag: "DAILY BREAKFAST + $100 CREDIT",
+      desc: "Daily Complimentary Breakfast for 2 + $100 Resort / Spa Credit & Room Upgrade Priority"
     }
   }
 ,
@@ -1390,7 +1390,7 @@ const ALL_STAYS: StayInfo[] = [
     videoSrc: "/videos/StayHelperRosewoodCastiglion_Master_Reel.mp4",
     posterSrc: "/images/stayhelper/rosewood_castiglion_wide_hero.jpg",
     bookingUrl: "https://www.rosewoodhotels.com/en/castiglion-del-bosco",
-    status: "STREAMING",
+    status: "COMING_SOON",
     story: [
       "Spanning 5,000 private acres within the UNESCO-protected Val d'Orcia, Rosewood Castiglion del Bosco is an eight-hundred-year-old Tuscan medieval village restored to artisanal perfection.",
       "Surrounded by rolling cypress ridges and ancient vineyards, its restored 17th-century stone villas feature antique terracotta, exposed timber beams, and infinity pools gazing upon rolling Brunello hills."
@@ -1435,7 +1435,7 @@ const ALL_STAYS: StayInfo[] = [
     videoSrc: "/videos/StayHelperAmanzoe_Master_Reel.mp4",
     posterSrc: "/images/stayhelper/amanzoe_greece_wide_hero.jpg",
     bookingUrl: "https://www.aman.com/resorts/amanzoe",
-    status: "STREAMING",
+    status: "COMING_SOON",
     story: [
       "Perched on a serene olive-clad hilltop on the eastern coast of the Peloponnese, Amanzoe is architect Ed Tuttle's monolithic contemporary interpretation of the ancient Greek Acropolis.",
       "Flanked by towering Doric colonnades, reflecting pools, and fragrant lavender gardens, freestanding marble pavilions open into twelve-meter private plunge pools overlooking the tranquil Aegean Sea."
@@ -1480,7 +1480,7 @@ const ALL_STAYS: StayInfo[] = [
     videoSrc: "/videos/StayHelperOneAndOnlyPalmilla_Master_Reel.mp4",
     posterSrc: "/images/stayhelper/oneandonly_palmilla_wide_hero.jpg",
     bookingUrl: "https://www.oneandonlyresorts.com/palmilla",
-    status: "STREAMING",
+    status: "COMING_SOON",
     story: [
       "Commanding a dramatic rocky headland where azure Sea of Cortez waters crash against golden shores, One&Only Palmilla is the historic grande dame of Los Cabos luxury.",
       "Whitewashed colonial arches, swaying coconut palms, and artisanal Mexican tiled suites frame dramatic ocean surf, complemented by cliffside fire pits and twenty-four-hour butler hospitality."
@@ -1525,7 +1525,7 @@ const ALL_STAYS: StayInfo[] = [
     videoSrc: "/videos/StayHelperBelmondSplendido_Master_Reel.mp4",
     posterSrc: "/images/stayhelper/belmond_splendido_wide_hero.jpg",
     bookingUrl: "https://www.belmond.com/hotels/europe/italy/portofino/belmond-hotel-splendido/",
-    status: "STREAMING",
+    status: "COMING_SOON",
     story: [
       "Nestled high upon a verdant hillside above Portofino's shimmering harbour, Belmond Hotel Splendido is an authentic sixteenth-century monastery transformed into Italy's most glamorous coastal haven.",
       "Cascading terraced gardens of wisteria and wild olive trees embrace historic frescoed suites, an iconic heated seawater pool suspended in the sky, and panoramic terraces favored by Hollywood legends."

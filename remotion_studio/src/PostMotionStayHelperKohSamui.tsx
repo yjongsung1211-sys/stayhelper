@@ -380,9 +380,6 @@ export const PostMotionStayHelperKohSamui: React.FC = () => {
         {/* Act 1 */}
         {frame >= 0 && frame < 160 && (
           <div style={{ opacity: text1Spring }}>
-            <div style={{ fontSize: 20, letterSpacing: 4, color: '#f6d365', fontWeight: 700, marginBottom: 8 }}>
-              ACT 01 / PANORAMIC ARRIVAL
-            </div>
             <div style={{ fontSize: 50, fontWeight: 900, lineHeight: 1.15, color: '#ffffff', marginBottom: 12 }}>
               The Ocean{' '}
               <span style={{ position: 'relative', display: 'inline-block' }}>
@@ -422,9 +419,6 @@ export const PostMotionStayHelperKohSamui: React.FC = () => {
         {/* Act 2 */}
         {frame >= 160 && frame < 320 && (
           <div style={{ opacity: text2Spring, transform: `translateY(${(1 - text2Spring) * 30}px)` }}>
-            <div style={{ fontSize: 20, letterSpacing: 4, color: '#f6d365', fontWeight: 700, marginBottom: 8 }}>
-              ACT 02 / BOTANICAL PATH
-            </div>
             <div style={{ fontSize: 50, fontWeight: 900, lineHeight: 1.15, color: '#ffffff', marginBottom: 12 }}>
               Lush Bamboo{' '}
               <span style={{ position: 'relative', display: 'inline-block' }}>
@@ -464,9 +458,6 @@ export const PostMotionStayHelperKohSamui: React.FC = () => {
         {/* Act 3 */}
         {frame >= 320 && frame < 480 && (
           <div style={{ opacity: text3Spring, transform: `translateY(${(1 - text3Spring) * 30}px)` }}>
-            <div style={{ fontSize: 20, letterSpacing: 4, color: '#f6d365', fontWeight: 700, marginBottom: 8 }}>
-              ACT 03 / SACRED HERITAGE
-            </div>
             <div style={{ fontSize: 50, fontWeight: 900, lineHeight: 1.15, color: '#ffffff', marginBottom: 12 }}>
               Temple of{' '}
               <span style={{ position: 'relative', display: 'inline-block' }}>
@@ -506,9 +497,6 @@ export const PostMotionStayHelperKohSamui: React.FC = () => {
         {/* Act 4 */}
         {frame >= 480 && frame < 640 && (
           <div style={{ opacity: text4Spring, transform: `translateY(${(1 - text4Spring) * 30}px)` }}>
-            <div style={{ fontSize: 20, letterSpacing: 4, color: '#f6d365', fontWeight: 700, marginBottom: 8 }}>
-              ACT 04 / CLIFFSIDE INDULGENCE
-            </div>
             <div style={{ fontSize: 50, fontWeight: 900, lineHeight: 1.15, color: '#ffffff', marginBottom: 12 }}>
               Floating{' '}
               <span style={{ position: 'relative', display: 'inline-block' }}>
@@ -548,9 +536,6 @@ export const PostMotionStayHelperKohSamui: React.FC = () => {
         {/* Act 5 */}
         {frame >= 640 && frame < 800 && (
           <div style={{ opacity: text5Spring, transform: `translateY(${(1 - text5Spring) * 30}px)` }}>
-            <div style={{ fontSize: 20, letterSpacing: 4, color: '#f6d365', fontWeight: 700, marginBottom: 8 }}>
-              ACT 05 / HOLISTIC HEALING
-            </div>
             <div style={{ fontSize: 50, fontWeight: 900, lineHeight: 1.15, color: '#ffffff', marginBottom: 12 }}>
               Warm Coconut{' '}
               <span style={{ position: 'relative', display: 'inline-block' }}>
@@ -595,9 +580,6 @@ export const PostMotionStayHelperKohSamui: React.FC = () => {
               transform: `translateY(${(1 - text6Spring) * 30}px)`,
             }}
           >
-            <div style={{ fontSize: 20, letterSpacing: 4, color: '#f6d365', fontWeight: 700, marginBottom: 8 }}>
-              ACT 06 / GOLDEN HOUR
-            </div>
             <div style={{ fontSize: 50, fontWeight: 900, lineHeight: 1.15, color: '#ffffff', marginBottom: 12 }}>
               Twilight{' '}
               <span style={{ position: 'relative', display: 'inline-block' }}>

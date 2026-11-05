@@ -1046,7 +1046,21 @@ eal_products_*.json 등)에 실존하는 에셋으로부터 실시간 동적 집
      - 각 장소별 카메라 워크(에어리얼, 줌인, 패닝 등)와 조명, 자연 앰비언스 사운드를 구체화하여 최종 렌더링에 착수합니다.
 
 
-- **★ 포라(Fora) 호텔 추천 시 특별 프로모션 필수 제공 원칙 (기본 특전 배제 - ★대표 지침으로 영구 픽스)**:
+- **★ [StayHelper] 기본 VIP 특전 + 시즌 특별 프로모션 동시 필수 탑재 원칙 (All-Inclusive VIP Amenities & Special Promotions Principle - ★대표 지침으로 영구 개정)**:
+  - 호텔을 추천하거나 릴스 혜택 및 예약 카피를 구성할 때는, 고객이 체감하는 혜택의 볼륨을 극대화하기 위해 **상시 제공되는 '기본 VIP 특전'과 예약 결정을 즉각 견인하는 '시즌 특별 프로모션'을 100% 필수로 함께 결합(Dual Inclusion)**하여 제공합니다:
+    1. **상시 기본 VIP 특전 (Standard Virtuoso/Fora VIP Amenities)**:
+       - 매일 2인 무료 조식 (Daily Complimentary Artisan Breakfast for Two)
+       - $100 호텔/식음/스파 크레딧 ($100 USD Hotel/Dining/Spa Resort Credit per stay)
+       - 룸 업그레이드 우선 배정 (Room Upgrade upon arrival, subject to availability)
+       - 얼리 체크인 & 레이트 체크아웃 (Early Check-in & 4PM Late Check-out, subject to availability)
+       - 웰컴 VIP 어메니티 및 총지배인 맞춤 레터 (Welcome VIP Amenity & Note)
+       - 무료 초고속 프리미엄 Wi-Fi
+    2. **시즌 실질 특별 프로모션 (Active Special Promotions)**:
+       - **N박 무료 숙박 혜택**: `Stay 4, Pay 3` (4박 투숙 시 1박 무료), `Stay 3, Pay 2` 등
+       - **연박 및 시즌 파격 할인**: 4박 이상 20%~25% 즉시 할인 (Extended Stay Discount)
+       - **예약 시점 확정 업그레이드 (Guaranteed Upgrade at Booking)**: 체크인 시 가능 여부가 아닌 예약 확정 즉시 상위 룸 보장
+       - **무료 럭셔리 트랜스퍼 (Complimentary Luxury Transfer)**: 전용 수상비행기, 프라이빗 쾌속정 보트, 벤츠/SUV 왕복 무료 픽업
+       - **더블 크레딧 & 전용 미식 혜택**: $200 이상 리조트 크레딧, 무료 미쉐린 디너 코스 등.
   - 호텔을 추천하거나 릴스 혜택을 구성할 때는, 모든 Virtuoso 호텔에 상시 기본 제공되는 단순 일상적 특전(단순 2인 조식, 기본 $100 크레딧 등)은 일절 생략합니다.
   - **반드시 고객의 예약 결정을 강력하게 견인하는 '포라의 실질적인 특별 프로모션(Active Special Promotions)'만을 엄선하여 100% 필수로 함께 제공**합니다:
     1. **N박 무료 숙박 혜택**: `Stay 4, Pay 3` (4박 투숙 시 1박 무료), `Stay 3, Pay 2` 등
@@ -1054,3 +1068,23 @@ eal_products_*.json 등)에 실존하는 에셋으로부터 실시간 동적 집
     3. **예약 시점 확정 업그레이드 (Guaranteed Upgrade at Booking)**: 체크인 시 가능 여부(upon availability)가 아닌 예약 확정 즉시 상위 룸 보장
     4. **무료 럭셔리 트랜스퍼 (Complimentary Luxury Transfer)**: 전용 수상비행기, 프라이빗 쾌속정 보트, 벤츠 S클래스 왕복 무료 픽업
     5. **더블 크레딧 & 전용 미식 혜택**: $200 이상 리조트 크레딧, 무료 미쉐린 3코스 디너, 프라이빗 와이너리 테이스팅 등 실질적 킬러 특전 병기.
+
+
+
+## 9. 지나월드(JinaWorld) 유튜브 쇼츠 및 가족 프로필 절대 원칙 (★대표 지침으로 영구 픽스)
+
+- **★ 가족 프로필 영구 고정 및 성함 오기재 전면 금지 원칙 (Zero-Error Family Identity Principle)**:
+  - **아기 이름**: **윤지나 (Yoon Jina)** (★절대 다른 이름이나 오타 표기 금지, 애칭 '지나', '찐아')
+  - **어머니 성함**: **임은아 (Im Eun-ah)** (★절대 오기재 금지)
+  - **아버지 성함**: **윤종성 대표님 (Yoon Jong-sung)**
+  - 지나월드의 모든 유튜브 쇼츠, 롱폼 편집, 자막(ASS/SRT), 썸네일, 제목, 영상 설명, 해시태그 및 스크립트 작성 시 **가족 구성원의 성함과 호칭을 100% 무결점으로 정확히 표기**합니다. 임의의 가명이나 다른 이름으로 혼동·왜곡하는 행위를 영구적으로 엄격히 금지합니다.
+
+- **지나월드 쇼츠 제작 및 업로드 표준 규격**:
+  - **채널명 / ID**: 지나월드 (JinaWorld) / `UCmoAOq6cVSOm93tMS7KbEeg`
+  - **영상 해상도 및 프레임**: 1080×1920 (9:16 세로형) @ 60fps Full HD
+  - **화면 연출 레이아웃**: 상·하단 은은한 가우시안 블러 배경 + 중앙 원본 16:9 선명 뷰 (`split_blur_vertical`)
+  - **자막 2단 표준**: 상단 한글 볼드 옐로우 (`&H00E5FF&`, 맑은 고딕 56pt) + 하단 영문 볼드 화이트 (`&HFFFFFF&`, Arial/맑은 고딕 40pt) + 블랙 외곽선 및 음영, 하단 안전 여백 330px 엄수.
+  - **커스텀 타이틀 썸네일**: 1080×1920 전용 썸네일 (브랜드 뱃지, 72pt 골드 옐로우 헤드라인, 42pt 라운드 서브타이틀 칩).
+  - **유튜브 업로드 상태**: 대표님 검토 및 승인 전까지 **무조건 100% 비공개(`private`)**로 업로드.
+  - **해시태그 원칙**: 반드시 **정확히 5개**만 선별하여 단독 코드블록으로 원클릭 복사 편의 제공.
+

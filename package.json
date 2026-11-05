@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test:tryon": "node verify_gender_tryon_pipeline.js",
     "audit": "node run_night_inspection.js",
     "audit:promos": "python verify_promotions_pipeline.py --limit 20",
     "audit:promos:all": "python verify_promotions_pipeline.py --all --telegram",

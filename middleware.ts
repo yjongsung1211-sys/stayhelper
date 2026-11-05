@@ -2,8 +2,15 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const host = request.headers.get('host') || '';
+  const host = request.headers.get('x-forwarded-host') || request.headers.get('host') || '';
   const pathname = request.nextUrl.pathname;
+
+  // When accessing via weddinghelper.love, serve WeddingHelper at root '/'
+  if (host.includes('weddinghelper') && pathname === '/') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/weddinghelper';
+    return NextResponse.rewrite(url);
+  }
 
   // When accessing via thestayhelper.com or any stayhelper domain, serve StayHelper at root '/'
   if ((host.includes('thestayhelper') || host.includes('stayhelper')) && pathname === '/') {

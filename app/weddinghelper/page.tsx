@@ -1,7 +1,5 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
-
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,7 +8,7 @@ import {
   MapPin, CheckCircle2, ChevronRight, Gem, Calendar,
   Share2, Download, RefreshCw, X, ExternalLink, Music2, Flower2,
   Phone, MessageCircle, Copy, ChevronDown, ChevronUp, Volume2, VolumeX, Clock, CreditCard,
-  Edit3, Music, Camera, Check, Eye, SlidersHorizontal
+  Edit3, Music, Camera, Check, Eye, SlidersHorizontal, Play, Pause
 } from 'lucide-react';
 import { WEDDING_12_PRESETS, WeddingThemePreset, WeddingProduct } from '@/lib/wedding-presets';
 import { MOBILE_INVITATION_10_TEMPLATES, MobileInvitationTemplate } from '@/lib/mobile-invitation-templates';
@@ -21,10 +19,10 @@ const BGM_PLAYLIST = [
   { id: 'acoustic-love', title: 'Sweet Acoustic (A Thousand Years)', mood: 'Warm & Emotional', icon: '🎸' },
   { id: 'orchestra-royal', title: 'Majestic Royal Symphony', mood: 'Grand & Noble', icon: '🎻' },
   { id: 'jazz-waltz', title: 'Gentle Jazz Romance (She)', mood: 'Chic & Cozy', icon: '🎷' },
-  { id: 'silent', title: 'No Music (무음 모드)', mood: 'Silent Reading', icon: '🔇' },
+  { id: 'silent', title: 'No Music (Silent Mode)', mood: 'Silent Reading', icon: '🔇' },
 ];
 
-// 5 Curated Luxury English Invitation Letter Presets (미국 명품 감성 5대 영문 모시는 글)
+// 5 Curated Luxury English Invitation Letter Presets (High-Society Editorial)
 const INVITATION_MESSAGE_PRESETS = [
   {
     title: 'Classic & Elegant',
@@ -53,6 +51,138 @@ const INVITATION_MESSAGE_PRESETS = [
   }
 ];
 
+// Web Audio Procedural Chords & Melody Synthesizer for Wedding BGM Preview
+let bgmAudioCtx: any = null;
+let bgmActiveNodes: any[] = [];
+let bgmTimer: any = null;
+
+function stopBgmAudio() {
+  if (bgmTimer) {
+    clearTimeout(bgmTimer);
+    bgmTimer = null;
+  }
+  if (bgmAudioCtx) {
+    const t = bgmAudioCtx.currentTime;
+    bgmActiveNodes.forEach((n) => {
+      try { n.stop(t + 0.05); } catch (e) {}
+    });
+    bgmActiveNodes = [];
+  }
+}
+
+function playBgmAudio(trackId: string) {
+  stopBgmAudio();
+  if (typeof window === 'undefined' || trackId === 'silent') return;
+
+  const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+  if (!AudioCtx) return;
+  if (!bgmAudioCtx) {
+    bgmAudioCtx = new AudioCtx();
+  }
+  if (bgmAudioCtx.state === 'suspended') {
+    bgmAudioCtx.resume();
+  }
+  const ctx = bgmAudioCtx;
+
+  const playTone = (freq: number, start: number, dur: number, type: OscillatorType = 'triangle', vol = 0.12) => {
+    try {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, start);
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.exponentialRampToValueAtTime(vol, start + 0.04);
+      gain.gain.exponentialRampToValueAtTime(vol * 0.4, start + dur * 0.5);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(start);
+      osc.stop(start + dur + 0.1);
+      bgmActiveNodes.push(osc);
+    } catch (e) {}
+  };
+
+  if (trackId === 'piano-canon') {
+    const chords = [
+      { b: 146.83, m: [293.66, 369.99, 440.0], mel: 739.99 },
+      { b: 110.0, m: [220.0, 277.18, 329.63], mel: 659.25 },
+      { b: 123.47, m: [246.94, 293.66, 369.99], mel: 587.33 },
+      { b: 92.5, m: [185.0, 220.0, 277.18], mel: 554.37 },
+      { b: 98.0, m: [196.0, 246.94, 293.66], mel: 493.88 },
+      { b: 146.83, m: [220.0, 293.66, 369.99], mel: 440.0 },
+      { b: 98.0, m: [196.0, 246.94, 293.66], mel: 493.88 },
+      { b: 110.0, m: [220.0, 277.18, 329.63], mel: 554.37 },
+    ];
+    const loop = () => {
+      const now = ctx.currentTime + 0.05;
+      chords.forEach((c, i) => {
+        const t = now + i * 1.8;
+        playTone(c.b, t, 1.7, 'sine', 0.15);
+        playTone(c.m[0], t + 0.1, 1.3, 'triangle', 0.09);
+        playTone(c.m[1], t + 0.45, 1.3, 'triangle', 0.09);
+        playTone(c.m[2], t + 0.8, 1.2, 'triangle', 0.09);
+        playTone(c.mel, t + 0.15, 1.5, 'triangle', 0.13);
+      });
+      bgmTimer = setTimeout(loop, chords.length * 1.8 * 1000 - 150);
+    };
+    loop();
+  } else if (trackId === 'acoustic-love') {
+    const progression = [261.63, 196.0, 220.0, 174.61];
+    const loop = () => {
+      const now = ctx.currentTime + 0.05;
+      progression.forEach((root, i) => {
+        const t = now + i * 2.0;
+        playTone(root * 0.5, t, 1.8, 'triangle', 0.14);
+        playTone(root, t + 0.2, 1.2, 'sine', 0.11);
+        playTone(root * 1.25, t + 0.5, 1.1, 'sine', 0.09);
+        playTone(root * 1.5, t + 0.8, 1.0, 'sine', 0.09);
+        playTone(root * 2.0, t + 1.2, 0.9, 'triangle', 0.11);
+      });
+      bgmTimer = setTimeout(loop, progression.length * 2.0 * 1000 - 100);
+    };
+    loop();
+  } else if (trackId === 'orchestra-royal') {
+    const chords = [
+      [220, 277.18, 329.63, 440],
+      [246.94, 311.13, 369.99, 493.88],
+      [277.18, 349.23, 415.3, 554.37],
+      [329.63, 415.3, 493.88, 659.25],
+    ];
+    const loop = () => {
+      const now = ctx.currentTime + 0.05;
+      chords.forEach((chord, i) => {
+        const t = now + i * 2.4;
+        chord.forEach((n) => {
+          playTone(n * 0.5, t, 2.2, 'sawtooth', 0.035);
+          playTone(n, t + 0.05, 2.1, 'sine', 0.07);
+        });
+      });
+      bgmTimer = setTimeout(loop, chords.length * 2.4 * 1000 - 100);
+    };
+    loop();
+  } else if (trackId === 'jazz-waltz') {
+    const chords = [
+      [174.61, 261.63, 329.63, 392.0],
+      [220.0, 261.63, 329.63, 392.0],
+      [233.08, 293.66, 349.23, 440.0],
+      [196.0, 246.94, 293.66, 349.23],
+    ];
+    const loop = () => {
+      const now = ctx.currentTime + 0.05;
+      chords.forEach((chord, i) => {
+        const t = now + i * 2.2;
+        playTone(chord[0] * 0.5, t, 2.0, 'sine', 0.15);
+        chord.forEach((n, idx) => {
+          playTone(n, t + 0.15 + idx * 0.08, 1.7, 'triangle', 0.08);
+        });
+      });
+      bgmTimer = setTimeout(loop, chords.length * 2.2 * 1000 - 100);
+    };
+    loop();
+  }
+}
+
+
 export default function WeddingHelperPage() {
   const [selectedThemeId, setSelectedThemeId] = useState<string>('bali-jungle');
   const [filterCategory, setFilterCategory] = useState<'all' | 'western' | 'heritage' | 'global_killer'>('all');
@@ -74,14 +204,33 @@ export default function WeddingHelperPage() {
 
   // Bojagi Card & Barunson 10 Luxury Mobile Invitation States
   const [isInvitationOpen, setIsInvitationOpen] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [playingBgmId, setPlayingBgmId] = useState<string | null>(null);
+
+  const handleToggleBgm = (bgmId: string, bgmTitle: string) => {
+    if (bgmId === 'silent') {
+      stopBgmAudio();
+      setPlayingBgmId(null);
+      setInvitationData(prev => ({ ...prev, bgmId: 'silent', bgmTitle: 'No Music (Silent Mode)' }));
+      return;
+    }
+    if (playingBgmId === bgmId) {
+      stopBgmAudio();
+      setPlayingBgmId(null);
+    } else {
+      playBgmAudio(bgmId);
+      setPlayingBgmId(bgmId);
+      setInvitationData(prev => ({ ...prev, bgmId, bgmTitle }));
+    }
+  };
+
+  const [isDemoMode, setIsDemoMode] = useState(true);
   const [selectedTemplateId, setSelectedTemplateId] = useState<string>('blooming-peony');
   const [activeAccountTab, setActiveAccountTab] = useState<'groom' | 'bride' | null>('groom');
   const [activeGalleryPhoto, setActiveGalleryPhoto] = useState<string | null>(null);
   const [guestCount, setGuestCount] = useState<number>(1);
   const [mealChoice, setMealChoice] = useState<'dinner' | 'ceremony_only'>('dinner');
-  const [rsvpStatus, setRsvpStatus] = useState<string>('');
-  const [rsvpSubmitted, setRsvpSubmitted] = useState<boolean>(false);
-  const [rsvpName, setRsvpName] = useState<string>('');
+
   const [copyToast, setCopyToast] = useState<string>('');
   const [isBgmPlaying, setIsBgmPlaying] = useState<boolean>(true);
   const [invitationEditorTab, setInvitationEditorTab] = useState<'couple' | 'datetime_venue' | 'media_bgm' | 'letter'>('letter');
@@ -90,45 +239,45 @@ export default function WeddingHelperPage() {
 
   // Guestbook list (Bojagi Card format)
   const [guestbookList, setGuestbookList] = useState<Array<{ id: number; name: string; message: string; date: string }>>([
-    { id: 1, name: '고영수 & 황성순 (혼주)', message: '사랑하는 우리 아들 지현아, 두 사람이 함께 걸어갈 앞날에 항상 축복과 행복만이 가득하길 바란다. 사랑한다.', date: '2026.11.01' },
-    { id: 2, name: '정성현 & 김선자 (혼주)', message: '예쁜 우리 딸 세영아, 서로 아끼고 배려하며 세상에서 가장 따뜻하고 아름다운 가정을 만들어가렴.', date: '2026.11.02' },
-    { id: 3, name: '친구 일동 (Friends)', message: '지현아 세영아 드디어 결혼하는구나! 진심으로 축하해! 가장 눈부시고 행복한 날 되길! 💍✨', date: '2026.11.03' }
+    { id: 1, name: 'Robert & Eleanor Brooks (Parents of the Groom)', message: 'To our dearest son Alexander and daughter-in-law Olivia, may your marriage be blessed with endless joy.', date: 'Nov 01, 2026' },
+    { id: 2, name: 'William & Victoria Vance (Parents of the Bride)', message: 'Dearest Olivia and Alexander, watching you embark on this breathtaking journey together brings tears of pure joy.', date: 'Nov 02, 2026' },
+    { id: 3, name: 'Bridal Party & Groomsmen', message: 'The most stunning couple and the wedding of the decade! Counting down to November 14!', date: 'Nov 03, 2026' }
   ]);
   const [newGuestName, setNewGuestName] = useState('');
   const [newGuestMsg, setNewGuestMsg] = useState('');
 
-  // Comprehensive Customer Editable Invitation State (신랑신부, 일시, 장소, 사진, 노래, 계좌 실시간 편집)
+  // Comprehensive Customer Editable Invitation State (Groom, Bride, Date, Venue, Photos, BGM, Letter)
   const [invitationData, setInvitationData] = useState({
-    groomName: '고지현',
-    groomPhone: '010-3849-2810',
-    groomFather: '고영수',
-    groomMother: '황성순',
-    groomRelation: '장남',
-    groomParentPhone: '010-2918-3819',
-    groomBank: '국민은행',
-    groomAccount: '123-456-789012',
-    groomHolder: '고지현',
-    groomKakaoPay: 'https://qr.kakaopay.com',
+    groomName: 'Alexander Brooks',
+    groomPhone: '+1 (212) 555-0192',
+    groomFather: 'Robert Brooks',
+    groomMother: 'Eleanor Brooks',
+    groomRelation: 'Son',
+    groomParentPhone: '+1 (212) 555-0193',
+    groomBank: 'Chase Bank',
+    groomAccount: '9876-5432-1098',
+    groomHolder: 'Alexander Brooks',
+    groomKakaoPay: 'https://venmo.com',
 
-    brideName: '정세영',
-    bridePhone: '010-9182-4729',
-    brideFather: '정성현',
-    brideMother: '김선자',
-    brideRelation: '장녀',
-    brideParentPhone: '010-5819-2849',
-    brideBank: '신한은행',
-    brideAccount: '987-654-321098',
-    brideHolder: '정세영',
-    brideKakaoPay: 'https://qr.kakaopay.com',
+    brideName: 'Olivia Catherine',
+    bridePhone: '+1 (212) 555-0145',
+    brideFather: 'William Vance',
+    brideMother: 'Victoria Vance',
+    brideRelation: 'Daughter',
+    brideParentPhone: '+1 (212) 555-0146',
+    brideBank: 'Bank of America',
+    brideAccount: '1234-5678-9012',
+    brideHolder: 'Olivia Catherine',
+    brideKakaoPay: 'https://venmo.com',
 
-    weddingDate: '2026. 11. 08 SUN',
-    weddingTime: '낮 10:50',
-    weddingDayNum: 8,
-    venueName: '전주 아름다운컨벤션센터',
-    venueHall: '2층 컨벤션홀',
-    venueAddress: '전북특별자치도 전주시 덕진구 온고을로 291',
-    venueTraffic: '호남고속도로 전주IC 10분, 전주역 셔틀버스 15분 간격 운행',
-    venueParking: '본관 지하 1~3층 및 야외 주차장 1,000대 무료 주차',
+    weddingDate: 'Saturday, November 14, 2026',
+    weddingTime: '4:30 PM EST',
+    weddingDayNum: 14,
+    venueName: 'The Plaza Hotel New York',
+    venueHall: 'The Grand Ballroom & Terrace Room',
+    venueAddress: '768 5th Ave, New York, NY 10019, United States',
+    venueTraffic: 'Subway: N, R, W at 5th Ave-59th St; 4, 5, 6 at 59th St-Lexington Ave.',
+    venueParking: 'Complimentary valet parking provided at the 58th Street entrance.',
     welcomeMessage: `Together with our families,\nwe joyfully invite you to celebrate our marriage.\nAs we exchange our sacred vows,\nyour love and blessing would mean the world to us.`,
     
     bgmId: 'piano-canon',
@@ -144,6 +293,22 @@ export default function WeddingHelperPage() {
     ]
   });
 
+  const getGuestShareUrl = (relative = false) => {
+    if (typeof window === 'undefined') return `/invite?theme=${selectedTemplateId}`;
+    const params = new URLSearchParams();
+    params.set('theme', selectedTemplateId);
+    if (invitationData.groomName) params.set('groom', invitationData.groomName);
+    if (invitationData.brideName) params.set('bride', invitationData.brideName);
+    if (invitationData.weddingDate) params.set('date', invitationData.weddingDate);
+    if (invitationData.weddingTime) params.set('time', invitationData.weddingTime);
+    if (invitationData.venueName) params.set('venue', invitationData.venueName);
+    if (invitationData.coverPhoto && !invitationData.coverPhoto.startsWith('data:')) {
+      params.set('photo', invitationData.coverPhoto);
+    }
+    const query = params.toString();
+    return relative ? `/invite?${query}` : `${window.location.origin}/invite?${query}`;
+  };
+
   const [visualizedResult, setVisualizedResult] = useState<{
     imageUrl: string;
     theme: WeddingThemePreset;
@@ -153,6 +318,80 @@ export default function WeddingHelperPage() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const photoUploadInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const checkHash = () => {
+      if (typeof window !== 'undefined' && (window.location.hash === '#invitation' || window.location.search.includes('invitation') || window.location.search.includes('demo'))) {
+        setIsDemoMode(true);
+        setIsInvitationOpen(true);
+      }
+    };
+    checkHash();
+    window.addEventListener('hashchange', checkHash);
+
+    // Global Clipboard Paste Support (Ctrl+V)
+    const handlePaste = (e: ClipboardEvent) => {
+      const items = e.clipboardData?.items;
+      if (!items) return;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const file = items[i].getAsFile();
+          if (file) {
+            e.preventDefault();
+            const reader = new FileReader();
+            reader.onload = (event) => {
+              if (event.target?.result) {
+                setUploadedImage(event.target.result as string);
+                setCopyToast('✨ Couple photograph pasted from clipboard!');
+                setTimeout(() => setCopyToast(''), 3500);
+              }
+            };
+            reader.readAsDataURL(file);
+            break;
+          }
+        }
+      }
+    };
+    window.addEventListener('paste', handlePaste);
+
+    // Restore persisted customer session & verify VIP status
+    try {
+      const savedUserStr = localStorage.getItem('weddinghelper_user');
+      const localDbStr = localStorage.getItem('weddinghelper_vip_db');
+      const localDb = localDbStr ? JSON.parse(localDbStr) : {};
+
+      if (savedUserStr) {
+        const parsed = JSON.parse(savedUserStr);
+        if (parsed?.email) {
+          const emailLower = parsed.email.toLowerCase();
+          if (localDb[emailLower]?.plan === 'grand' || parsed.plan === 'grand') {
+            setUser({ ...parsed, isVip: true, plan: 'grand' });
+          } else {
+            setUser(parsed);
+            // Server verification
+            fetch(`/api/weddinghelper/member?email=${encodeURIComponent(emailLower)}`)
+              .then(res => res.json())
+              .then(data => {
+                if (data?.isVip && data?.plan === 'grand') {
+                  const updated = { ...parsed, isVip: true, plan: 'grand' as const };
+                  setUser(updated);
+                  localStorage.setItem('weddinghelper_user', JSON.stringify(updated));
+                }
+              })
+              .catch(() => {});
+          }
+        }
+      }
+    } catch (e) {
+      console.error('Session restore error', e);
+    }
+
+    
+  return () => {
+      window.removeEventListener('hashchange', checkHash);
+      window.removeEventListener('paste', handlePaste);
+    };
+  }, []);
 
   const currentTheme = WEDDING_12_PRESETS[selectedThemeId] || WEDDING_12_PRESETS['bali-jungle'];
 
@@ -242,6 +481,109 @@ export default function WeddingHelperPage() {
     }
   };
 
+  
+
+  // Linked Login Handler (Guarantees paying customer is recognized)
+
+  const handleUserLogin = async (rawEmail: string) => {
+    const email = rawEmail.trim().toLowerCase();
+    if (!email || !email.includes('@')) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    let isVip = false;
+    let plan: 'single' | 'trio' | 'grand' | undefined = undefined;
+
+    // 1. Check local VIP DB
+    try {
+      const localDbStr = localStorage.getItem('weddinghelper_vip_db');
+      const localDb = localDbStr ? JSON.parse(localDbStr) : {};
+      if (localDb[email] && (localDb[email].plan === 'grand' || localDb[email].isVip)) {
+        isVip = true;
+        plan = localDb[email].plan || 'grand';
+      }
+    } catch (e) {}
+
+    // 2. Check server DB
+    if (!isVip) {
+      try {
+        const res = await fetch(`/api/weddinghelper/member?email=${encodeURIComponent(email)}`);
+        const data = await res.json();
+        if (data?.isVip && data?.plan === 'grand') {
+          isVip = true;
+          plan = 'grand';
+        }
+      } catch (e) {}
+    }
+
+    const userObj = { email, isVip, plan };
+    setUser(userObj);
+    try {
+      localStorage.setItem('weddinghelper_user', JSON.stringify(userObj));
+    } catch (e) {}
+
+    setIsLoginOpen(false);
+
+    if (isVip && plan === 'grand') {
+      setCopyToast(`Welcome back, ${email}! Your $19 Grand 12 VIP Pass is active.`);
+    } else {
+      setCopyToast(`Signed in as ${email}.`);
+    }
+    setTimeout(() => setCopyToast(''), 4000);
+  };
+
+  // Linked Checkout Handler (Permanently links purchase to account)
+  const handleCompleteOrder = async () => {
+    const payerEmail = (user?.email || loginEmail || 'vip.couple@wedding.com').trim().toLowerCase();
+
+    // 1. Save to server DB
+    try {
+      await fetch('/api/weddinghelper/member', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: payerEmail,
+          plan: selectedPlan,
+          weddingDate: invitationData.weddingDate,
+          orderId: `WH_VIP_${Date.now()}`
+        })
+      });
+    } catch (e) {
+      console.error(e);
+    }
+
+    // 2. Save to client persistent DB & session
+    const vipRecord = {
+      email: payerEmail,
+      isVip: true,
+      plan: selectedPlan,
+      paidAt: new Date().toISOString(),
+      weddingDate: invitationData.weddingDate,
+    };
+
+    try {
+      const localDbStr = localStorage.getItem('weddinghelper_vip_db');
+      const localDb = localDbStr ? JSON.parse(localDbStr) : {};
+      localDb[payerEmail] = vipRecord;
+      localStorage.setItem('weddinghelper_vip_db', JSON.stringify(localDb));
+      localStorage.setItem('weddinghelper_user', JSON.stringify(vipRecord));
+    } catch (e) {}
+
+    setUser(vipRecord);
+    setIsCheckoutOpen(false);
+
+    if (selectedPlan === 'grand') {
+      setIsInvitationOpen(true);
+      setCopyToast(`🎉 The Grand 12 VIP Pass Activated ($19 Special)! Permanently linked to ${payerEmail}.`);
+    } else {
+      setCopyToast(`VIP Pass Activated for ${payerEmail}.`);
+    }
+    setTimeout(() => setCopyToast(''), 5000);
+  };
+
+
+  
   return (
     <div className="min-h-screen bg-[#FFFDFC] text-[#2C2426] font-serif antialiased selection:bg-[#E8A598]/30 relative overflow-hidden">
       {/* 🌸 Floating Romantic Petals Overlay & Ambient Glows */}
@@ -288,37 +630,35 @@ export default function WeddingHelperPage() {
 
           <div className="flex items-center gap-3">
             <button 
+              type="button"
+              id="open-invitation-btn"
               onClick={() => {
-                if (user?.plan === 'grand') {
-                  setIsInvitationOpen(true);
-                } else {
-                  setSelectedPlan('grand');
-                  setIsCheckoutOpen(true);
-                }
+                setIsDemoMode(true);
+                setIsInvitationOpen(true);
               }}
-              className="px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-full border border-[#E8DCD4] text-[#8C6D1F] hover:bg-[#FAF3EF] hover:border-[#D4AF37] transition flex items-center gap-1.5 bg-white shadow-sm"
+              className="px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-full border border-[#E8DCD4] text-[#8C6D1F] hover:bg-[#FAF3EF] hover:border-[#D4AF37] transition flex items-center gap-1.5 bg-white shadow-sm cursor-pointer z-20 select-none active:scale-95"
             >
-              {user?.plan === 'grand' ? (
-                <>
-                  <Flower2 className="w-3.5 h-3.5 text-[#C87870]" />
-                  <span>Mobile Invitation (VIP)</span>
-                </>
-              ) : (
-                <>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#FAF0E6] text-[#B85E55] font-bold">🔒 $79 VIP</span>
-                  <span>Mobile Invitation</span>
-                </>
-              )}
+              <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#FAF0E6] text-[#B85E55] font-bold pointer-events-none">🔒 $19 VIP (76% OFF)</span>
+              <span className="pointer-events-none">Mobile Invitation Studio</span>
             </button>
 
             {user ? (
               <div className="flex items-center gap-2">
-                <span className="px-3 py-1.5 rounded-full bg-[#FAF3EF] border border-[#E8DCD4] text-xs font-semibold text-[#8C6D1F] flex items-center gap-1.5">
+                <span className={`px-3 py-1.5 rounded-full border text-xs font-semibold flex items-center gap-1.5 ${
+                  user.plan === 'grand' 
+                    ? 'bg-[#1F181B] text-[#D4AF37] border-[#D4AF37]/50 shadow-xs' 
+                    : 'bg-[#FAF3EF] text-[#8C6D1F] border-[#E8DCD4]'
+                }`}>
                   <Gem className="w-3.5 h-3.5 text-[#D4AF37]" />
-                  {user.isVip ? 'Royal VIP' : 'Member'}
+                  <span>{user.plan === 'grand' ? 'Grand 12 VIP ($19 Special Active)' : user.email}</span>
                 </span>
                 <button 
-                  onClick={() => setUser(null)}
+                  onClick={() => {
+                    setUser(null);
+                    localStorage.removeItem('weddinghelper_user');
+                    setCopyToast('Logged out successfully.');
+                    setTimeout(() => setCopyToast(''), 2500);
+                  }}
                   className="text-xs text-[#8A7977] hover:text-[#C87870] underline ml-1"
                 >
                   Log out
@@ -333,13 +673,23 @@ export default function WeddingHelperPage() {
               </button>
             )}
 
-            <button 
-              onClick={() => setIsCheckoutOpen(true)}
-              className="px-6 py-2.5 text-xs font-bold uppercase tracking-wider rounded-full bg-gradient-to-r from-[#C87870] via-[#D89BA6] to-[#C87870] text-white hover:opacity-95 transition shadow-[0_4px_18px_rgba(200,120,112,0.35)] flex items-center gap-1.5"
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>{user?.isVip ? 'VIP Active' : 'Get VIP Pass'}</span>
-            </button>
+            {user?.plan === 'grand' ? (
+              <button 
+                onClick={() => setIsInvitationOpen(true)}
+                className="px-6 py-2.5 text-xs font-bold uppercase tracking-wider rounded-full bg-[#1F181B] text-[#D4AF37] hover:bg-black transition shadow-sm flex items-center gap-1.5"
+              >
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#D4AF37]" />
+                <span>My VIP Studio (Active)</span>
+              </button>
+            ) : (
+              <button 
+                onClick={() => setIsCheckoutOpen(true)}
+                className="px-6 py-2.5 text-xs font-bold uppercase tracking-wider rounded-full bg-gradient-to-r from-[#C87870] via-[#D89BA6] to-[#C87870] text-white hover:opacity-95 transition shadow-[0_4px_18px_rgba(200,120,112,0.35)] flex items-center gap-1.5"
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Unlock VIP Pass ($19 Special)</span>
+              </button>
+            )}
           </div>
         </div>
       </header>
@@ -383,17 +733,66 @@ export default function WeddingHelperPage() {
           {!uploadedImage ? (
             <div 
               onClick={() => fileInputRef.current?.click()}
-              className="border-2 border-dashed border-[#EBDCD3] hover:border-[#C87870] rounded-[32px] p-12 sm:p-16 cursor-pointer transition duration-300 text-center group bg-[#FFFDFB]"
+              onDragEnter={(e) => { e.preventDefault(); e.stopPropagation(); setIsDragging(true); }}
+              onDragOver={(e) => { e.preventDefault(); e.stopPropagation(); setIsDragging(true); }}
+              onDragLeave={(e) => { e.preventDefault(); e.stopPropagation(); setIsDragging(false); }}
+              onDrop={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsDragging(false);
+                if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                  const file = e.dataTransfer.files[0];
+                  if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                      if (event.target?.result) {
+                        setUploadedImage(event.target.result as string);
+                        setCopyToast('✨ Couple photograph dropped successfully!');
+                        setTimeout(() => setCopyToast(''), 3500);
+                      }
+                    };
+                    reader.readAsDataURL(file);
+                  }
+                }
+              }}
+              className={`border-2 border-dashed rounded-[32px] p-10 sm:p-14 cursor-pointer transition-all duration-300 text-center group relative overflow-hidden ${
+                isDragging
+                  ? 'border-[#C87870] bg-[#FFF2EE] ring-4 ring-[#C87870]/20 scale-[1.01] shadow-xl'
+                  : 'border-[#EBDCD3] hover:border-[#C87870] bg-[#FFFDFB] hover:bg-[#FFFDFC]'
+              }`}
             >
-              <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-tr from-[#FCEBE7] to-[#FFF4E8] group-hover:scale-110 flex items-center justify-center text-[#B85E55] transition shadow-inner">
-                <Heart className="w-10 h-10 fill-[#C87870]/20 stroke-[#C87870]" />
+              <div className={`w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full bg-gradient-to-tr from-[#FCEBE7] to-[#FFF4E8] flex items-center justify-center text-[#B85E55] transition shadow-inner ${
+                isDragging ? 'scale-110 ring-4 ring-[#C87870]/30' : 'group-hover:scale-105'
+              }`}>
+                <Heart className="w-9 h-9 sm:w-10 sm:h-10 fill-[#C87870]/20 stroke-[#C87870]" />
               </div>
-              <h4 className="mt-6 text-xl sm:text-2xl font-serif text-[#1F181B] tracking-wide">
-                Drop your couple photograph here, or <span className="text-[#C87870] underline font-medium">choose from album</span>
+
+              <h4 className="mt-5 text-xl sm:text-2xl font-serif text-[#1F181B] tracking-wide">
+                {isDragging ? (
+                  <span className="text-[#C87870] font-medium animate-pulse">Release to Drop Your Couple Photograph ✨</span>
+                ) : (
+                  <>
+                    Drop your couple photograph here, or <span className="text-[#C87870] underline font-medium">choose from album</span>
+                  </>
+                )}
               </h4>
-              <p className="mt-3 text-sm text-[#8C7A78] max-w-md mx-auto">
-                JPG, PNG, HEIC up to 20MB. A warm candid selfie or vacation portrait where both faces are clearly smiling.
+
+              <p className="mt-2.5 text-xs sm:text-sm text-[#8C7A78] max-w-md mx-auto leading-relaxed">
+                JPG, PNG, HEIC up to 20MB. Drag & drop files directly or press <kbd className="px-1.5 py-0.5 rounded bg-[#FAF1EC] border border-[#E4D5CE] text-[11px] font-mono text-[#5C4D4D] font-bold">Ctrl+V</kbd> to paste from clipboard.
               </p>
+
+              {/* Badges for Drag & Drop and Clipboard Paste */}
+              <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FAF3EF] border border-[#EBDCD3] text-[10px] font-semibold text-[#8C6D1F]">
+                  <span>📂 Drag & Drop Ready</span>
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FAF3EF] border border-[#EBDCD3] text-[10px] font-semibold text-[#8C6D1F]">
+                  <span>📋 Ctrl+V Clipboard Paste</span>
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FAF3EF] border border-[#EBDCD3] text-[10px] font-semibold text-[#8C6D1F]">
+                  <span>✨ 1-Click Test Couples Below</span>
+                </span>
+              </div>
             </div>
           ) : (
             <div className="relative rounded-[32px] overflow-hidden bg-white border border-[#E8DCD4] shadow-md">
@@ -549,8 +948,8 @@ export default function WeddingHelperPage() {
             </p>
           </div>
 
-          {/* Category Tabs - Fully Visible Responsive Wrap (Never Cut Off) */}
-          <div className="flex flex-wrap items-center gap-2.5 pt-2 pb-4 border-b border-[#F2E5DC] font-sans">
+          {/* Category Tabs - Fully Responsive Multi-Device Pill Navigation */}
+          <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 pt-2 pb-4 border-b border-[#F2E5DC] font-sans overflow-x-auto no-scrollbar">
             {[
               { key: 'all', label: 'All 12 Worlds' },
               { key: 'western', label: 'Classic European & Resort (5)' },
@@ -560,7 +959,7 @@ export default function WeddingHelperPage() {
               <button
                 key={tab.key}
                 onClick={() => setFilterCategory(tab.key as any)}
-                className={`px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider transition ${
+                className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-semibold tracking-wider transition whitespace-nowrap ${
                   filterCategory === tab.key 
                     ? 'bg-[#C87870] text-white font-bold shadow-[0_4px_14px_rgba(200,120,112,0.3)]' 
                     : 'bg-white border border-[#EBDCD3] text-[#7C6E6D] hover:text-[#1F181B] hover:border-[#C87870]'
@@ -576,7 +975,8 @@ export default function WeddingHelperPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {themeList.map(theme => {
             const isSelected = selectedThemeId === theme.id;
-            return (
+            
+  return (
               <div 
                 key={theme.id}
                 onClick={() => setSelectedThemeId(theme.id)}
@@ -593,7 +993,7 @@ export default function WeddingHelperPage() {
                     alt={theme.title} 
                     fill 
                     unoptimized
-                    priority={theme.number <= 6}
+                    priority
                     className="object-cover group-hover:scale-108 transition duration-1000"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
@@ -726,38 +1126,6 @@ export default function WeddingHelperPage() {
               </div>
 
               {/* 100% In-Stock Wearable Products */}
-              <div className="space-y-3.5">
-                <h4 className="text-xs font-bold uppercase tracking-widest text-[#B85E55] flex items-center gap-2">
-                  <Gem className="w-3.5 h-3.5" />
-                  Shop the Wearable Attire (100% Live In-Stock Guarantee)
-                </h4>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                  {visualizedResult.products.map(prod => (
-                    <a
-                      key={prod.id}
-                      href={prod.buyUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="p-4 rounded-2xl bg-[#FFFDFB] border border-[#F2E5DC] hover:border-[#C87870] flex items-center justify-between group transition shadow-sm hover:shadow-md"
-                    >
-                      <div>
-                        <span className="text-[10px] tracking-wider uppercase text-[#9E8B88] block font-medium">
-                          {prod.brand} • {prod.type}
-                        </span>
-                        <span className="text-xs font-semibold text-[#1F181B] group-hover:text-[#B85E55] transition line-clamp-1">
-                          {prod.name}
-                        </span>
-                        <span className="text-xs text-[#9E6F28] font-bold mt-1 block">
-                          ${prod.price.toLocaleString()} USD
-                        </span>
-                      </div>
-                      <ExternalLink className="w-4 h-4 text-[#B5A5A2] group-hover:text-[#B85E55] transition" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-
               {/* Venue Booking & Consultation */}
               <div className="pt-5 border-t border-[#F2E5DC] flex flex-col sm:flex-row items-center justify-between gap-5">
                 <div>
@@ -769,15 +1137,12 @@ export default function WeddingHelperPage() {
 
                 <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
                   <button
+                    type="button"
                     onClick={() => {
-                      if (user?.plan === 'grand') {
-                        setIsInvitationOpen(true);
-                      } else {
-                        setSelectedPlan('grand');
-                        setIsCheckoutOpen(true);
-                      }
+                      setIsDemoMode(true);
+                      setIsInvitationOpen(true);
                     }}
-                    className="flex-1 sm:flex-none px-6 py-4 rounded-full border-2 border-[#C87870] bg-white text-[#C87870] font-bold uppercase tracking-wider text-xs hover:bg-[#FAF3EF] transition flex items-center justify-center gap-2 shadow-sm"
+                    className="flex-1 sm:flex-none px-6 py-4 rounded-full border-2 border-[#C87870] bg-white text-[#C87870] font-bold uppercase tracking-wider text-xs hover:bg-[#FAF3EF] transition flex items-center justify-center gap-2 shadow-sm cursor-pointer z-10"
                   >
                     {user?.plan === 'grand' ? (
                       <>
@@ -786,8 +1151,8 @@ export default function WeddingHelperPage() {
                       </>
                     ) : (
                       <>
-                        <span className="text-[10px] px-2 py-0.5 rounded bg-[#FAF0E6] text-[#B85E55] font-bold">🔒 $79 VIP</span>
-                        <span>Create Mobile Invitation</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-[#FAF0E6] text-[#B85E55] font-bold">🔒 $19 VIP (76% OFF)</span>
+              <span className="pointer-events-none">Mobile Invitation Studio</span>
                       </>
                     )}
                   </button>
@@ -810,7 +1175,7 @@ export default function WeddingHelperPage() {
 
       {/* 5. Mobile Wedding Invitation Kit Modal (Gated for $79 The Grand 12 VIP Pass) */}
       {isInvitationOpen && (() => {
-        const isUnlocked = user?.plan === 'grand';
+        const isUnlocked = user?.plan === 'grand' || isDemoMode;
         const currentSkin = MOBILE_INVITATION_10_TEMPLATES.find(t => t.id === selectedTemplateId) || MOBILE_INVITATION_10_TEMPLATES[0];
 
         // 6 gallery sample photos from wedding worlds
@@ -823,7 +1188,8 @@ export default function WeddingHelperPage() {
           '/images/weddings/santorini-caldera.jpg',
         ];
 
-        return (
+        
+  return (
           <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
             {/* If NOT Unlocked: Show VIP Gated Lock Screen with 10-Skin Showcase */}
             {!isUnlocked ? (
@@ -840,26 +1206,34 @@ export default function WeddingHelperPage() {
                 </div>
 
                 <span className="text-[11px] font-bold uppercase tracking-widest text-[#B85E55] block">
-                  Exclusive $79 VIP Pass Feature
+                  Exclusive $19 VIP Pass Feature (Launch 76% OFF)
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-serif text-[#1F181B] mt-1">
                   Mobile Wedding Invitation Kit
                 </h3>
                 <p className="text-xs text-[#7C6E6D] mt-2 max-w-md mx-auto leading-relaxed">
-                  모바일 청첩장은 <strong>$79 The Grand 12 VIP 패스</strong> 결제 회원에게만 단독 제공되는 프리미엄 기능입니다. 바른손카드 & 보자기카드 스타일의 10대 명품 스킨과 실시간 RSVP, D-Day 캘린더를 모두 잠금 해제하세요.
+                  The Bespoke Mobile Wedding Invitation Studio is exclusively unlocked with <strong>The Grand 12 VIP Pass ($19 Launch Special, originally $79)</strong>. Unlock all 10 luxury design architectures, real-time RSVP dashboard, Google Maps navigation, and guaranteed live hosting through your wedding day.
                 </p>
 
                 {/* 10 Template Preview Pills */}
                 <div className="mt-6 p-4 rounded-2xl bg-[#FAF5F1] border border-[#EFE5DE] text-left">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#8C7A78] block mb-2.5">
-                    ✨ Included 10 Luxury Design Templates (10대 명품 스킨 포함)
+                    ✨ Included 10 Luxury Design Templates (Click any style to preview immediately):
                   </span>
-                  <div className="grid grid-cols-2 sm:grid-cols-2 gap-2 text-xs">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                     {MOBILE_INVITATION_10_TEMPLATES.map((tmpl, idx) => (
-                      <div key={tmpl.id} className="p-2.5 rounded-xl bg-white border border-[#E8DCD4] flex items-center justify-between">
-                        <span className="font-medium text-[#1F181B]">{idx + 1}. {tmpl.name}</span>
-                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#FAF3EF] text-[#B85E55] font-bold">VIP</span>
-                      </div>
+                      <button 
+                        key={tmpl.id} 
+                        type="button"
+                        onClick={() => {
+                          setSelectedTemplateId(tmpl.id);
+                          setIsDemoMode(true);
+                        }}
+                        className="p-2.5 rounded-xl bg-white hover:bg-[#FFF8F5] border border-[#E8DCD4] hover:border-[#C87870] flex items-center justify-between text-left transition group"
+                      >
+                        <span className="font-medium text-[#1F181B] group-hover:text-[#C87870]">{idx + 1}. {tmpl.name}</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#FAF3EF] group-hover:bg-[#C87870] text-[#B85E55] group-hover:text-white font-bold transition">Preview Style →</span>
+                      </button>
                     ))}
                   </div>
                 </div>
@@ -871,10 +1245,17 @@ export default function WeddingHelperPage() {
                       setSelectedPlan('grand');
                       setIsCheckoutOpen(true);
                     }}
-                    className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#C87870] via-[#D89BA6] to-[#C87870] text-white font-bold uppercase tracking-widest text-xs hover:opacity-95 transition shadow-lg flex items-center justify-center gap-2"
+                    className="flex-1 w-full py-4 rounded-2xl bg-gradient-to-r from-[#C87870] via-[#D89BA6] to-[#C87870] text-white font-bold uppercase tracking-widest text-xs hover:opacity-95 transition shadow-lg flex items-center justify-center gap-2"
                   >
                     <Sparkles className="w-4 h-4" />
-                    <span>Unlock with $79 VIP Pass (100% Unlocked)</span>
+                    <span>Unlock with $19 VIP Pass</span>
+                  </button>
+                  <button
+                    onClick={() => setIsDemoMode(true)}
+                    className="flex-1 w-full py-4 rounded-2xl bg-[#FAF5F1] hover:bg-[#F2E5DC] text-[#1F181B] font-bold tracking-wider text-xs border border-[#E8DCD4] transition flex items-center justify-center gap-2"
+                  >
+                    <Eye className="w-4 h-4 text-[#C87870]" />
+                    <span>👀 Preview Studio (Explore 10 Styles)</span>
                   </button>
                 </div>
 
@@ -885,6 +1266,25 @@ export default function WeddingHelperPage() {
             ) : (
               /* When Unlocked: Full Interactive Customer Editable Studio & Live Mobile Device Mockup */
               <div className="relative max-w-6xl w-full bg-[#FFFDFB] border border-[#E8DCD4] rounded-[40px] shadow-2xl overflow-hidden font-sans my-4 flex flex-col max-h-[92vh]">
+                {/* Preview Mode Notice Banner */}
+                {user?.plan !== 'grand' && (
+                  <div className="bg-[#FAF3EF] border-b border-[#F0DDD5] px-4 py-2.5 flex items-center justify-between text-xs sticky top-0 z-40">
+                    <div className="flex items-center gap-2 text-[#7C6E6D]">
+                      <span className="px-2.5 py-0.5 rounded-full bg-[#C87870] text-white font-bold text-[10px] tracking-wider uppercase">DRAFT PREVIEW</span>
+                      <span className="hidden sm:inline text-xs">Previewing all 10 bespoke templates in draft mode. Complete order ($19 Special) to activate and receive your permanent live link.</span>
+                    </div>
+                    <button
+                      onClick={() => {
+                        setSelectedPlan('grand');
+                        setIsCheckoutOpen(true);
+                      }}
+                      className="px-4 py-1.5 rounded-full bg-[#1F181B] text-white font-bold text-[11px] hover:bg-[#C87870] transition flex items-center gap-1.5 shadow-sm uppercase tracking-wider"
+                    >
+                      <Sparkles className="w-3 h-3 text-[#D4AF37]" />
+                      <span>Unlock $19 VIP Pass</span>
+                    </button>
+                  </div>
+                )}
                 {/* Hidden File Input for Image Uploads */}
                 <input
                   type="file"
@@ -910,7 +1310,7 @@ export default function WeddingHelperPage() {
                           </span>
                         </div>
                         <h3 className="text-sm sm:text-base font-bold text-[#1F181B] font-serif">
-                          모바일 청첩장 맞춤 제작 & 실시간 고객 편집기
+                          Bespoke Mobile Wedding Invitation & Live Editor
                         </h3>
                       </div>
                     </div>
@@ -939,7 +1339,7 @@ export default function WeddingHelperPage() {
                             invitationViewMode === 'both' ? 'bg-[#1F181B] text-white' : 'text-[#7C6E6D] hover:text-[#1F181B]'
                           }`}
                         >
-                          스플릿 뷰
+                          Split View
                         </button>
                         <button
                           onClick={() => setInvitationViewMode('editor')}
@@ -948,7 +1348,7 @@ export default function WeddingHelperPage() {
                           }`}
                         >
                           <Edit3 className="w-3 h-3" />
-                          <span>편집하기</span>
+                          <span>Editor Only</span>
                         </button>
                         <button
                           onClick={() => setInvitationViewMode('preview')}
@@ -957,7 +1357,7 @@ export default function WeddingHelperPage() {
                           }`}
                         >
                           <Eye className="w-3 h-3" />
-                          <span>미리보기</span>
+                          <span>Preview Only</span>
                         </button>
                       </div>
 
@@ -976,17 +1376,18 @@ export default function WeddingHelperPage() {
                     <div className="flex items-center justify-between mb-1.5">
                       <span className="text-[10px] font-bold uppercase tracking-wider text-[#8C7A78] flex items-center gap-1">
                         <Sparkles className="w-3 h-3 text-[#D4AF37]" />
-                        <span>10대 명품 디자인 스킨 (원클릭 스타일 변경)</span>
+                        <span>10 Bespoke Editorial Wedding Templates (1-Click Style Switch)</span>
                       </span>
                       <span className="text-[10px] text-[#A89895]">
-                        현재 적용: <strong className="text-[#B85E55]">{currentSkin.koreanName}</strong>
+                        Active Template: <strong className="text-[#B85E55]">{currentSkin.name}</strong>
                       </span>
                     </div>
 
                     <div className="overflow-x-auto pb-1 flex items-center gap-2 scrollbar-thin">
                       {MOBILE_INVITATION_10_TEMPLATES.map((tmpl) => {
                         const isSelected = selectedTemplateId === tmpl.id;
-                        return (
+                        
+  return (
                           <button
                             key={tmpl.id}
                             onClick={() => setSelectedTemplateId(tmpl.id)}
@@ -1027,7 +1428,7 @@ export default function WeddingHelperPage() {
                                 : 'text-[#7C6E6D] hover:text-[#1F181B]'
                             }`}
                           >
-                            <span>1. 신랑·신부</span>
+                            <span>1. Couple</span>
                           </button>
                           <button
                             onClick={() => setInvitationEditorTab('datetime_venue')}
@@ -1037,7 +1438,7 @@ export default function WeddingHelperPage() {
                                 : 'text-[#7C6E6D] hover:text-[#1F181B]'
                             }`}
                           >
-                            <span>2. 일시·장소</span>
+                            <span>2. Date & Venue</span>
                           </button>
                           <button
                             onClick={() => setInvitationEditorTab('media_bgm')}
@@ -1047,7 +1448,7 @@ export default function WeddingHelperPage() {
                                 : 'text-[#7C6E6D] hover:text-[#1F181B]'
                             }`}
                           >
-                            <span>3. 사진·노래</span>
+                            <span>3. Photos & BGM</span>
                           </button>
                           <button
                             onClick={() => setInvitationEditorTab('letter')}
@@ -1057,99 +1458,47 @@ export default function WeddingHelperPage() {
                                 : 'text-[#7C6E6D] hover:text-[#1F181B]'
                             }`}
                           >
-                            <span>4. 모시는 글</span>
+                            <span>4. Invitation Letter</span>
                           </button>
                         </div>
 
-                        {/* TAB 1: 신랑 · 신부 & 양가 혼주 정보 */}
+                        {/* TAB 1: Couple Information (Groom & Bride) */}
                         {invitationEditorTab === 'couple' && (
-                          <div className="space-y-6 text-xs animate-fade-in">
+                          <div className="space-y-4 text-xs animate-fade-in">
                             {/* Groom Side Box */}
                             <div className="p-4 sm:p-5 rounded-2xl bg-[#FAF5F1] border border-[#EFE5DE] space-y-3">
                               <div className="flex items-center justify-between border-b border-[#E8DCD4] pb-2">
                                 <h4 className="font-serif font-bold text-sm text-[#1F181B] flex items-center gap-1.5">
-                                  <span>🤵 신랑측 정보</span>
+                                  <span>🤵 Groom Information</span>
                                 </h4>
-                                <span className="text-[10px] text-[#8C7A78]">신랑 및 혼주 연락처</span>
+                                <span className="text-[10px] text-[#8C7A78]">Groom Name & Contact</span>
                               </div>
 
                               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div>
                                   <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                    신랑 성함
+                                    Groom's Full Name
                                   </label>
                                   <input
                                     type="text"
                                     value={invitationData.groomName}
                                     onChange={(e) => setInvitationData({ ...invitationData, groomName: e.target.value })}
                                     className="w-full px-3 py-2 rounded-xl border border-[#D8C7BD] bg-white text-xs text-[#1F181B] focus:border-[#C87870] outline-none"
-                                    placeholder="고지현"
+                                    placeholder="Alexander Brooks"
                                   />
                                 </div>
                                 <div>
                                   <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                    신랑 연락처 (전화걸기 연동)
+                                    Groom's Phone / Contact
                                   </label>
                                   <input
                                     type="text"
                                     value={invitationData.groomPhone}
                                     onChange={(e) => setInvitationData({ ...invitationData, groomPhone: e.target.value })}
                                     className="w-full px-3 py-2 rounded-xl border border-[#D8C7BD] bg-white text-xs text-[#1F181B] focus:border-[#C87870] outline-none"
-                                    placeholder="010-0000-0000"
+                                    placeholder="010-3849-2810 / +1 212..."
                                   />
                                 </div>
-                              </div>
-
-                              <div className="grid grid-cols-3 gap-2 pt-1">
-                                <div>
-                                  <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                    아버지 성함
-                                  </label>
-                                  <input
-                                    type="text"
-                                    value={invitationData.groomFather}
-                                    onChange={(e) => setInvitationData({ ...invitationData, groomFather: e.target.value })}
-                                    className="w-full px-2.5 py-1.5 rounded-xl border border-[#D8C7BD] bg-white text-xs text-[#1F181B] outline-none"
-                                    placeholder="고영수"
-                                  />
-                                </div>
-                                <div>
-                                  <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                    어머니 성함
-                                  </label>
-                                  <input
-                                    type="text"
-                                    value={invitationData.groomMother}
-                                    onChange={(e) => setInvitationData({ ...invitationData, groomMother: e.target.value })}
-                                    className="w-full px-2.5 py-1.5 rounded-xl border border-[#D8C7BD] bg-white text-xs text-[#1F181B] outline-none"
-                                    placeholder="황성순"
-                                  />
-                                </div>
-                                <div>
-                                  <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                    관계 (서열)
-                                  </label>
-                                  <input
-                                    type="text"
-                                    value={invitationData.groomRelation}
-                                    onChange={(e) => setInvitationData({ ...invitationData, groomRelation: e.target.value })}
-                                    className="w-full px-2.5 py-1.5 rounded-xl border border-[#D8C7BD] bg-white text-xs text-[#1F181B] outline-none"
-                                    placeholder="장남"
-                                  />
-                                </div>
-                              </div>
-
-                              <div>
-                                <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                  혼주(신랑 부모님) 대표 전화번호
-                                </label>
-                                <input
-                                  type="text"
-                                  value={invitationData.groomParentPhone}
-                                  onChange={(e) => setInvitationData({ ...invitationData, groomParentPhone: e.target.value })}
-                                  className="w-full px-3 py-2 rounded-xl border border-[#D8C7BD] bg-white text-xs text-[#1F181B] outline-none"
-                                  placeholder="010-0000-0000"
-                                />
                               </div>
                             </div>
 
@@ -1157,105 +1506,53 @@ export default function WeddingHelperPage() {
                             <div className="p-4 sm:p-5 rounded-2xl bg-[#FAF5F1] border border-[#EFE5DE] space-y-3">
                               <div className="flex items-center justify-between border-b border-[#E8DCD4] pb-2">
                                 <h4 className="font-serif font-bold text-sm text-[#1F181B] flex items-center gap-1.5">
-                                  <span>👰 신부측 정보</span>
+                                  <span>👰 Bride Information</span>
                                 </h4>
-                                <span className="text-[10px] text-[#8C7A78]">신부 및 혼주 연락처</span>
+                                <span className="text-[10px] text-[#8C7A78]">Bride Name & Contact</span>
                               </div>
 
                               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div>
                                   <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                    신부 성함
+                                    Bride's Full Name
                                   </label>
                                   <input
                                     type="text"
                                     value={invitationData.brideName}
                                     onChange={(e) => setInvitationData({ ...invitationData, brideName: e.target.value })}
                                     className="w-full px-3 py-2 rounded-xl border border-[#D8C7BD] bg-white text-xs text-[#1F181B] focus:border-[#C87870] outline-none"
-                                    placeholder="정세영"
+                                    placeholder="Olivia Catherine"
                                   />
                                 </div>
                                 <div>
                                   <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                    신부 연락처 (전화걸기 연동)
+                                    Bride's Phone / Contact
                                   </label>
                                   <input
                                     type="text"
                                     value={invitationData.bridePhone}
                                     onChange={(e) => setInvitationData({ ...invitationData, bridePhone: e.target.value })}
                                     className="w-full px-3 py-2 rounded-xl border border-[#D8C7BD] bg-white text-xs text-[#1F181B] focus:border-[#C87870] outline-none"
-                                    placeholder="010-0000-0000"
+                                    placeholder="010-9182-4729 / +1 212..."
                                   />
                                 </div>
-                              </div>
-
-                              <div className="grid grid-cols-3 gap-2 pt-1">
-                                <div>
-                                  <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                    아버지 성함
-                                  </label>
-                                  <input
-                                    type="text"
-                                    value={invitationData.brideFather}
-                                    onChange={(e) => setInvitationData({ ...invitationData, brideFather: e.target.value })}
-                                    className="w-full px-2.5 py-1.5 rounded-xl border border-[#D8C7BD] bg-white text-xs text-[#1F181B] outline-none"
-                                    placeholder="정성현"
-                                  />
-                                </div>
-                                <div>
-                                  <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                    어머니 성함
-                                  </label>
-                                  <input
-                                    type="text"
-                                    value={invitationData.brideMother}
-                                    onChange={(e) => setInvitationData({ ...invitationData, brideMother: e.target.value })}
-                                    className="w-full px-2.5 py-1.5 rounded-xl border border-[#D8C7BD] bg-white text-xs text-[#1F181B] outline-none"
-                                    placeholder="김선자"
-                                  />
-                                </div>
-                                <div>
-                                  <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                    관계 (서열)
-                                  </label>
-                                  <input
-                                    type="text"
-                                    value={invitationData.brideRelation}
-                                    onChange={(e) => setInvitationData({ ...invitationData, brideRelation: e.target.value })}
-                                    className="w-full px-2.5 py-1.5 rounded-xl border border-[#D8C7BD] bg-white text-xs text-[#1F181B] outline-none"
-                                    placeholder="장녀"
-                                  />
-                                </div>
-                              </div>
-
-                              <div>
-                                <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                  혼주(신부 부모님) 대표 전화번호
-                                </label>
-                                <input
-                                  type="text"
-                                  value={invitationData.brideParentPhone}
-                                  onChange={(e) => setInvitationData({ ...invitationData, brideParentPhone: e.target.value })}
-                                  className="w-full px-3 py-2 rounded-xl border border-[#D8C7BD] bg-white text-xs outline-none"
-                                  placeholder="010-0000-0000"
-                                />
                               </div>
                             </div>
                           </div>
                         )}
 
-                        {/* TAB 2: 예식 일시 & 예식장 장소 */}
+                        {/* TAB 2: Ceremony Date & Venue */} 
                         {invitationEditorTab === 'datetime_venue' && (
                           <div className="space-y-5 text-xs animate-fade-in">
                             <div className="p-4 sm:p-5 rounded-2xl bg-[#FAF5F1] border border-[#EFE5DE] space-y-3">
                               <h4 className="font-serif font-bold text-sm text-[#1F181B] border-b border-[#E8DCD4] pb-2">
-                                📅 예식 일시 및 캘린더 설정
+                                📅 Ceremony Date & Calendar Settings
                               </h4>
 
                               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                 <div className="sm:col-span-2">
                                   <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                    예식 날짜 (표시용 텍스트)
+                                    Ceremony Date (Display Text)
                                   </label>
                                   <input
                                     type="text"
@@ -1267,7 +1564,7 @@ export default function WeddingHelperPage() {
                                 </div>
                                 <div>
                                   <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                    캘린더 하트 날짜 (일)
+                                    Calendar Highlight Day (1-31)
                                   </label>
                                   <input
                                     type="number"
@@ -1283,14 +1580,14 @@ export default function WeddingHelperPage() {
 
                               <div>
                                 <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                  예식 시간
+                                  Ceremony Time
                                 </label>
                                 <input
                                   type="text"
                                   value={invitationData.weddingTime}
                                   onChange={(e) => setInvitationData({ ...invitationData, weddingTime: e.target.value })}
                                   className="w-full px-3 py-2 rounded-xl border border-[#D8C7BD] bg-white text-xs text-[#1F181B] outline-none"
-                                  placeholder="낮 10:50 / 오전 11:30"
+                                  placeholder="4:30 PM EST"
                                 />
                               </div>
                             </div>
@@ -1299,7 +1596,7 @@ export default function WeddingHelperPage() {
                               <div className="flex items-center justify-between border-b border-[#E8DCD4] pb-2">
                                 <h4 className="font-serif font-bold text-sm text-[#1F181B] flex items-center gap-1.5">
                                   <MapPin className="w-4 h-4 text-[#4285F4]" />
-                                  <span>📍 예식장 위치 & Google Maps 길찾기 연동</span>
+                                  <span>📍 Venue Location & Live Google Maps Navigation</span>
                                 </h4>
                                 <span className="text-[10px] text-[#4285F4] font-bold">US & Global Maps</span>
                               </div>
@@ -1307,47 +1604,47 @@ export default function WeddingHelperPage() {
                               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div>
                                   <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                    Venue Name (예식장 명칭)
+                                    Venue Name
                                   </label>
                                   <input
                                     type="text"
                                     value={invitationData.venueName}
                                     onChange={(e) => setInvitationData({ ...invitationData, venueName: e.target.value })}
                                     className="w-full px-3 py-2 rounded-xl border border-[#D8C7BD] bg-white text-xs text-[#1F181B] outline-none focus:border-[#4285F4]"
-                                    placeholder="The Plaza Hotel / 전주 아름다운컨벤션"
+                                    placeholder="The Plaza Hotel New York"
                                   />
                                 </div>
                                 <div>
                                   <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                    Hall / Floor (상세 층 / 홀수)
+                                    Ballroom / Hall / Floor
                                   </label>
                                   <input
                                     type="text"
                                     value={invitationData.venueHall}
                                     onChange={(e) => setInvitationData({ ...invitationData, venueHall: e.target.value })}
                                     className="w-full px-3 py-2 rounded-xl border border-[#D8C7BD] bg-white text-xs text-[#1F181B] outline-none focus:border-[#4285F4]"
-                                    placeholder="The Grand Ballroom / 2층 컨벤션홀"
+                                    placeholder="The Grand Ballroom & Terrace"
                                   />
                                 </div>
                               </div>
 
                               <div>
                                 <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1 flex items-center justify-between">
-                                  <span>Full Street Address (도로명 주소 - Google Maps 실시간 길찾기 연동)</span>
-                                  <span className="text-[10px] text-[#8C7A78]">1-클릭 복사 자동 지원</span>
+                                  <span>Full Street Address (Live Google Maps Directions)</span>
+                                  <span className="text-[10px] text-[#8C7A78]">1-Click Copy Supported</span>
                                 </label>
                                 <input
                                   type="text"
                                   value={invitationData.venueAddress}
                                   onChange={(e) => setInvitationData({ ...invitationData, venueAddress: e.target.value })}
                                   className="w-full px-3 py-2 rounded-xl border border-[#D8C7BD] bg-white text-xs text-[#1F181B] outline-none focus:border-[#4285F4]"
-                                  placeholder="768 5th Ave, New York, NY 10019 / 온고을로 291"
+                                  placeholder="768 5th Ave, New York, NY 10019, United States"
                                 />
                               </div>
 
                               <div>
                                 <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                  Transit & Shuttle (대중교통 / 셔틀 안내)
+                                  Transit & Subway Directions
                                 </label>
                                 <input
                                   type="text"
@@ -1360,7 +1657,7 @@ export default function WeddingHelperPage() {
 
                               <div>
                                 <label className="block text-[11px] font-semibold text-[#5C4D4D] mb-1">
-                                  Parking & Valet (주차장 / 발렛파킹 안내)
+                                  Parking & Valet Information
                                 </label>
                                 <input
                                   type="text"
@@ -1374,7 +1671,7 @@ export default function WeddingHelperPage() {
                           </div>
                         )}
 
-                        {/* TAB 3: 대표 사진 & 갤러리 6컷 & BGM 배경음악 */}
+                        {/* TAB 3: Cover Photo, 6-Shot Gallery & BGM */}
                         {invitationEditorTab === 'media_bgm' && (
                           <div className="space-y-6 text-xs animate-fade-in">
                             {/* Main Cover Photo Selection */}
@@ -1382,7 +1679,7 @@ export default function WeddingHelperPage() {
                               <div className="flex items-center justify-between border-b border-[#E8DCD4] pb-2">
                                 <h4 className="font-serif font-bold text-sm text-[#1F181B] flex items-center gap-1.5">
                                   <Camera className="w-4 h-4 text-[#C87870]" />
-                                  <span>메인 커버 사진 설정</span>
+                                  <span>Master Cover Photo Setup</span>
                                 </h4>
                                 <button
                                   type="button"
@@ -1393,7 +1690,7 @@ export default function WeddingHelperPage() {
                                   className="px-3 py-1.5 rounded-full bg-white border border-[#C87870] text-[#C87870] font-bold text-[11px] hover:bg-[#FAF3EF] transition flex items-center gap-1 shadow-xs"
                                 >
                                   <Upload className="w-3 h-3" />
-                                  <span>내 사진 직접 업로드</span>
+                                  <span>Upload My Photo</span>
                                 </button>
                               </div>
 
@@ -1408,48 +1705,23 @@ export default function WeddingHelperPage() {
                                   />
                                 </div>
                                 <div className="flex-1 space-y-1">
-                                  <span className="text-[11px] font-bold text-[#1F181B]">현재 적용된 대표 커버 화보</span>
+                                  <span className="text-[11px] font-bold text-[#1F181B]">Active Master Cover Portrait</span>
                                   <p className="text-[10px] text-[#7C6E6D] leading-relaxed">
-                                    스마트폰 첫 화면에 노출되는 아치형 또는 라운드형 대형 메인 포트레이트입니다. 아래 12대 월드 화보를 클릭하거나 직접 촬영한 웨딩 사진을 업로드하세요.
+                                    The primary high-resolution wedding portrait displayed on the hero section of your mobile invitation. Select from our 12 AI editorial wedding worlds or upload your own real wedding portrait.
                                   </p>
                                 </div>
                               </div>
 
-                              {/* 12 Presets Quick Switcher for Cover */}
-                              <div>
-                                <span className="text-[10px] font-bold uppercase tracking-wider text-[#8C7A78] block mb-2">
-                                  ✨ 12대 AI 명품 웨딩 화보에서 원클릭 선택:
-                                </span>
-                                <div className="grid grid-cols-6 sm:grid-cols-6 gap-2">
-                                  {Object.values(WEDDING_12_PRESETS).map((preset) => {
-                                    const isCurr = invitationData.coverPhoto === preset.heroImage;
-                                    return (
-                                      <button
-                                        key={preset.id}
-                                        type="button"
-                                        onClick={() => setInvitationData(prev => ({ ...prev, coverPhoto: preset.heroImage }))}
-                                        className={`relative aspect-[3/4] rounded-xl overflow-hidden border-2 transition group ${
-                                          isCurr ? 'border-[#C87870] ring-2 ring-[#C87870]/40' : 'border-[#E8DCD4] opacity-80 hover:opacity-100'
-                                        }`}
-                                      >
-                                        <Image src={preset.heroImage} alt={preset.title} fill unoptimized className="object-cover" />
-                                        <span className="absolute bottom-1 left-1 right-1 text-[8px] bg-black/60 text-white rounded px-0.5 truncate font-sans text-center">
-                                          #{preset.number}
-                                        </span>
-                                      </button>
-                                    );
-                                  })}
-                                </div>
-                              </div>
+                              
                             </div>
 
                             {/* 6-Photo Gallery Customization */}
                             <div className="p-4 sm:p-5 rounded-2xl bg-[#FAF5F1] border border-[#EFE5DE] space-y-3">
                               <h4 className="font-serif font-bold text-sm text-[#1F181B] border-b border-[#E8DCD4] pb-2">
-                                🖼️ 갤러리 6컷 사진 개별 설정
+                                🖼️ 6-Shot Wedding Moments Gallery
                               </h4>
                               <p className="text-[10px] text-[#7C6E6D]">
-                                청첩장 내부 갤러리에 들어가는 6장의 사진입니다. 각 슬롯을 클릭하여 '내 사진 업로드'로 교체할 수 있습니다.
+                                6 featured wedding photos showcased in your mobile invitation gallery. Click any slot to upload your own wedding moments.
                               </p>
 
                               <div className="grid grid-cols-3 sm:grid-cols-6 gap-2.5">
@@ -1465,10 +1737,10 @@ export default function WeddingHelperPage() {
                                         }}
                                         className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-[10px] font-bold transition"
                                       >
-                                        사진 변경
+                                        Replace
                                       </button>
                                     </div>
-                                    <span className="text-[10px] font-semibold text-[#8C7A78]">컷 #{idx + 1}</span>
+                                    <span className="text-[10px] font-semibold text-[#8C7A78]">Shot #{idx + 1}</span>
                                   </div>
                                 ))}
                               </div>
@@ -1479,37 +1751,76 @@ export default function WeddingHelperPage() {
                               <div className="flex items-center justify-between border-b border-[#E8DCD4] pb-2">
                                 <h4 className="font-serif font-bold text-sm text-[#1F181B] flex items-center gap-1.5">
                                   <Music className="w-4 h-4 text-[#C87870]" />
-                                  <span>배경음악 (BGM) 사운드트랙 선택</span>
+                                  <span>Curated Romantic BGM Soundtrack</span>
                                 </h4>
-                                <span className="text-[10px] text-[#8C7A78]">하객 감동 앰비언스</span>
+                                <span className="text-[10px] text-[#8C7A78]">Guest Atmosphere</span>
                               </div>
 
                               <div className="space-y-2">
                                 {BGM_PLAYLIST.map((bgm) => {
                                   const isSelected = invitationData.bgmId === bgm.id;
+                                  const isPlayingThis = playingBgmId === bgm.id;
+
                                   return (
                                     <div
                                       key={bgm.id}
-                                      onClick={() => setInvitationData(prev => ({ ...prev, bgmId: bgm.id, bgmTitle: bgm.title }))}
+                                      onClick={() => handleToggleBgm(bgm.id, bgm.title)}
                                       className={`p-3 rounded-xl border flex items-center justify-between cursor-pointer transition ${
                                         isSelected
-                                          ? 'bg-white border-[#C87870] shadow-xs'
+                                          ? 'bg-white border-[#C87870] ring-1 ring-[#C87870]/30 shadow-sm'
                                           : 'bg-white/60 border-[#E8DCD4] hover:bg-white'
                                       }`}
                                     >
                                       <div className="flex items-center gap-3">
-                                        <span className="text-lg">{bgm.icon}</span>
+                                        <button
+                                          type="button"
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleToggleBgm(bgm.id, bgm.title);
+                                          }}
+                                          className={`w-8 h-8 rounded-full flex items-center justify-center transition shadow-xs ${
+                                            isPlayingThis 
+                                              ? 'bg-[#C87870] text-white animate-pulse' 
+                                              : 'bg-[#F4ECE6] text-[#6E5D5B] hover:bg-[#C87870] hover:text-white'
+                                          }`}
+                                          title={isPlayingThis ? 'Pause Soundtrack' : 'Play & Listen Preview'}
+                                        >
+                                          {bgm.id === 'silent' ? (
+                                            <VolumeX className="w-4 h-4" />
+                                          ) : isPlayingThis ? (
+                                            <Pause className="w-4 h-4 fill-white" />
+                                          ) : (
+                                            <Play className="w-4 h-4 fill-current ml-0.5" />
+                                          )}
+                                        </button>
+
+                                        <span className="text-xl">{bgm.icon}</span>
                                         <div>
-                                          <span className="font-bold text-xs text-[#1F181B] block">{bgm.title}</span>
+                                          <div className="flex items-center gap-2">
+                                            <span className="font-bold text-xs text-[#1F181B] block">{bgm.title}</span>
+                                            {isPlayingThis && (
+                                              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-[#C87870]/10 text-[#C87870] text-[9px] font-bold">
+                                                <span className="animate-bounce">●</span> Now Playing
+                                              </span>
+                                            )}
+                                          </div>
                                           <span className="text-[10px] text-[#8C7A78]">{bgm.mood}</span>
                                         </div>
                                       </div>
+
                                       <div className="flex items-center gap-2">
-                                        {isSelected && (
-                                          <span className="px-2 py-0.5 rounded-full bg-[#FAF3EF] text-[#B85E55] text-[10px] font-bold">
-                                            선택됨 ✓
+                                        {isPlayingThis && (
+                                          <span className="text-xs font-mono text-[#C87870] tracking-tighter animate-pulse font-bold">
+                                            ılılıllı
                                           </span>
                                         )}
+                                        <span className={`text-[11px] font-bold px-2 py-1 rounded-lg ${
+                                          isSelected 
+                                            ? 'bg-[#C87870]/10 text-[#C87870]' 
+                                            : 'text-[#9E8B88] hover:text-[#C87870]'
+                                        }`}>
+                                          {isSelected ? '✓ Selected' : 'Select'}
+                                        </span>
                                       </div>
                                     </div>
                                   );
@@ -1519,17 +1830,17 @@ export default function WeddingHelperPage() {
                           </div>
                         )}
 
-                        {/* TAB 4: 모시는 글 (Invitation Letter) 단독 전담 에디터 */}
+                        {/* TAB 4: Wedding Invitation Letter */}
                         {invitationEditorTab === 'letter' && (
                           <div className="space-y-6 text-xs animate-fade-in">
                             <div className="p-4 sm:p-6 rounded-3xl bg-[#FAF5F1] border border-[#EFE5DE] space-y-4">
                               <div className="flex items-center justify-between border-b border-[#E8DCD4] pb-3">
                                 <div>
                                   <h4 className="font-serif font-bold text-sm text-[#1F181B] flex items-center gap-1.5">
-                                    <span>💌 모시는 글 (Wedding Invitation Letter)</span>
+                                    <span>💌 Wedding Invitation Letter</span>
                                   </h4>
                                   <p className="text-[11px] text-[#7C6E6D] mt-0.5">
-                                    하객들에게 전하는 사랑과 감사의 초대 메시지입니다. 아래 5가지 영문 명품 템플릿 중 하나를 선택하거나 직접 자유롭게 작성하세요.
+                                    Your heartfelt invitation message to guests. Choose one of our 5 curated editorial presets or write your own custom wedding invitation text.
                                   </p>
                                 </div>
                                 <span className="px-2.5 py-1 rounded-full bg-[#FAF3EF] text-[#B85E55] text-[10px] font-bold shrink-0">
@@ -1540,12 +1851,13 @@ export default function WeddingHelperPage() {
                               {/* 5 Curated English Presets */}
                               <div>
                                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#8C7A78] block mb-2.5">
-                                  ✨ 5 Curated English Invitation Presets (원클릭 자동 채우기):
+                                  ✨ 5 Curated Editorial Invitation Presets (1-Click Auto-Fill):
                                 </span>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mb-4">
                                   {INVITATION_MESSAGE_PRESETS.map((preset, pIdx) => {
                                     const isSelected = invitationData.welcomeMessage === preset.text;
-                                    return (
+                                    
+  return (
                                       <button
                                         key={pIdx}
                                         type="button"
@@ -1566,7 +1878,7 @@ export default function WeddingHelperPage() {
                                           "{preset.text.split('\n')[0]}"
                                         </p>
                                         <span className="text-[9px] text-[#B85E55] font-semibold mt-2 block">
-                                          {isSelected ? '✓ 현재 적용됨' : '+ 클릭하여 적용'}
+                                          {isSelected ? '✓ Active Preset' : '+ Click to Apply'}
                                         </span>
                                       </button>
                                     );
@@ -1578,10 +1890,10 @@ export default function WeddingHelperPage() {
                               <div className="pt-2 border-t border-[#E8DCD4]">
                                 <div className="flex items-center justify-between mb-1.5">
                                   <label className="text-[11px] font-bold text-[#1F181B]">
-                                    직접 편집 & 작성 (Custom Invitation Text)
+                                    Custom Invitation Text (Direct Edit)
                                   </label>
                                   <span className="text-[10px] text-[#8C7A78]">
-                                    실시간 모바일 폰에 즉시 동기화됩니다
+                                    Live synchronized to mobile preview
                                   </span>
                                 </div>
                                 <textarea
@@ -1597,25 +1909,70 @@ export default function WeddingHelperPage() {
                         )}
                       </div>
 
-                      {/* Editor Action Bottom Bar */}
-                      <div className="mt-8 pt-4 border-t border-[#F0E6DE] flex flex-col sm:flex-row items-center justify-between gap-3">
-                        <div className="flex items-center gap-2 text-xs text-[#2E7D32]">
-                          <CheckCircle2 className="w-4 h-4 shrink-0" />
-                          <span>모든 편집 내용이 실시간 자동 동기화되었습니다</span>
-                        </div>
-                        <div className="flex items-center gap-2 w-full sm:w-auto">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setCopyToast('모바일 청첩장 고유 링크가 클립보드에 복사되었습니다! (카톡 전송 가능)');
-                              setTimeout(() => setCopyToast(''), 3000);
-                            }}
-                            className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#1F181B] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#C87870] transition shadow-sm flex items-center justify-center gap-2"
-                          >
-                            <Copy className="w-3.5 h-3.5" />
-                            <span>완성 링크 복사하기</span>
-                          </button>
-                        </div>
+                      {/* Editor Action Bottom Bar with Paid vs. Preview Gating & Validity Guarantee */}
+                      <div className="mt-8 pt-4 border-t border-[#F0E6DE] flex flex-col sm:flex-row items-center justify-between gap-4">
+                        {user?.plan === 'grand' ? (
+                          <>
+                            <div className="text-left space-y-0.5">
+                              <div className="flex items-center gap-2 text-xs text-[#2E7D32] font-semibold">
+                                <CheckCircle2 className="w-4 h-4 shrink-0 text-[#2E7D32]" />
+                                <span>Official Live Hosting Active</span>
+                              </div>
+                              <p className="text-[11px] text-[#7C6E6D]">
+                                Guaranteed live online hosting through your wedding day on <strong>{invitationData.weddingDate}</strong> (+ 30-day guest archive).
+                              </p>
+                            </div>
+                            <div className="flex items-center gap-2 w-full sm:w-auto">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if (typeof window !== 'undefined') {
+                                    const guestUrl = getGuestShareUrl(false);
+                                    navigator.clipboard.writeText(guestUrl);
+                                    setCopyToast(`Live Guest Invitation Link Copied! (${guestUrl})`);
+                                    setTimeout(() => setCopyToast(''), 4000);
+                                  }
+                                }}
+                                className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#1F181B] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#C87870] transition shadow-sm flex items-center justify-center gap-2"
+                              >
+                                <Copy className="w-3.5 h-3.5" />
+                                <span>Copy Live Guest Link</span>
+                              </button>
+                              <a
+                                href={getGuestShareUrl(true)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full sm:w-auto px-5 py-3 rounded-full bg-[#C87870] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#B3645C] transition shadow-sm flex items-center justify-center gap-2"
+                              >
+                                <ExternalLink className="w-3.5 h-3.5" />
+                                <span>Open Live Guest Page ↗</span>
+                              </a>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="text-left space-y-0.5">
+                              <div className="flex items-center gap-2 text-xs text-[#C87870] font-semibold">
+                                <span className="w-2 h-2 rounded-full bg-[#C87870] animate-ping" />
+                                <span>Draft Preview Mode · Live URL Locked</span>
+                              </div>
+                              <p className="text-[11px] text-[#7C6E6D]">
+                                Complete checkout ($19 Special VIP Pass) to publish your permanent live link, active through <strong>{invitationData.weddingDate}</strong>.
+                              </p>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setSelectedPlan('grand');
+                                setIsCheckoutOpen(true);
+                              }}
+                              className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-gradient-to-r from-[#C87870] via-[#D89BA6] to-[#C87870] text-white text-xs font-bold uppercase tracking-widest hover:opacity-95 transition shadow-lg flex items-center justify-center gap-2"
+                            >
+                              <Gem className="w-4 h-4 text-white" />
+                              <span>Unlock &amp; Publish Live Mobile Invitation ($19 Special)</span>
+                            </button>
+                          </>
+                        )}
                       </div>
                     </div>
                   )}
@@ -1645,6 +2002,18 @@ export default function WeddingHelperPage() {
                   className={`overflow-y-auto flex-1 transition-colors duration-500 bg-gradient-to-b ${currentSkin.bgGradient}`}
                   style={{ color: currentSkin.textColor }}
                 >
+                  {/* Top Live Verification vs Draft Preview Banner */}
+                  {user?.plan === 'grand' ? (
+                    <div className="bg-[#1F181B] text-[#D4AF37] text-[9px] font-sans font-bold tracking-[0.2em] uppercase py-1.5 px-4 text-center flex items-center justify-center gap-1.5 border-b border-[#D4AF37]/30">
+                      <CheckCircle2 className="w-3 h-3 text-[#D4AF37]" />
+                      <span>OFFICIAL LIVE INVITATION · HOSTED THROUGH {invitationData.weddingDate}</span>
+                    </div>
+                  ) : (
+                    <div className="bg-[#C87870] text-white text-[9px] font-sans font-bold tracking-[0.2em] uppercase py-1.5 px-4 text-center shadow-xs">
+                      🔒 DRAFT PREVIEW · COMPLETE ORDER ($19) TO PUBLISH LIVE LINK
+                    </div>
+                  )}
+
                   {/* Phone Status Bar Aesthetic */}
                   <div className="px-6 pt-3 pb-1 flex items-center justify-between text-[11px] font-sans opacity-70 tracking-widest">
                     <span>10:50 AM</span>
@@ -1654,65 +2023,252 @@ export default function WeddingHelperPage() {
                     </div>
                   </div>
 
-                  {/* 1. Cover Hero */}
-                  <div className="p-6 text-center">
-                    <div 
-                      className="inline-block px-3 py-1 rounded-full text-[10px] tracking-[0.25em] uppercase font-sans font-bold mb-4 shadow-xs border"
-                      style={{ 
-                        backgroundColor: currentSkin.cardBg, 
-                        borderColor: currentSkin.borderColor,
-                        color: currentSkin.themeColor 
-                      }}
-                    >
-                      {currentSkin.badgeLabel}
-                    </div>
-
-                    <div className="space-y-1 mb-5">
-                      <span className="text-[10px] tracking-[0.35em] uppercase font-sans block opacity-70">
-                        Wedding Invitation
-                      </span>
-                      <h2 className="text-3xl font-serif tracking-tight">
-                        {invitationData.groomName} <span style={{ color: currentSkin.themeColor }}>♡</span> {invitationData.brideName}
-                      </h2>
-                    </div>
-
-                    {/* Master Wedding Portrait Frame */}
-                    <div 
-                      className={`relative aspect-[3/4] w-full overflow-hidden shadow-xl border-4 ${
-                        currentSkin.frameShape === 'arch' ? 'rounded-t-[120px] rounded-b-2xl' : 'rounded-3xl'
-                      }`}
-                      style={{ borderColor: currentSkin.cardBg }}
-                    >
-                      <Image 
-                        src={invitationData.coverPhoto} 
-                        alt="Couple Wedding Portrait"
-                        fill
-                        unoptimized
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      <div className="absolute bottom-4 left-0 right-0 text-white font-sans text-center">
-                        <p className="text-xs tracking-widest uppercase font-light">
-                          {invitationData.weddingDate}
-                        </p>
-                        <p className="text-sm font-serif italic drop-shadow-md">
-                          Forever & Always
-                        </p>
+                  {/* 1. Cover Hero - 10 Distinct Bespoke Architecture Styles */}
+                  {currentSkin.headerStyle === 'vogue_magazine' && (
+                    /* STYLE 1: VOGUE HAUTE EDITORIAL COVER */
+                    <div className="p-5 text-center">
+                      <div className="border-b-2 border-black pb-1 mb-2 flex items-center justify-between font-sans text-[8px] tracking-[0.3em] uppercase font-bold">
+                        <span>THE WEDDING ISSUE</span>
+                        <span>SPECIAL EDITION · NO. 28</span>
+                        <span>FALL 2026</span>
+                      </div>
+                      <h1 className="text-4xl font-serif tracking-[0.25em] font-black uppercase text-black mb-3">
+                        V O G U E
+                      </h1>
+                      <div className="relative aspect-[3/4] w-full rounded-none overflow-hidden shadow-2xl border-2 border-black">
+                        <Image src={invitationData.coverPhoto} alt="Cover" fill unoptimized className="object-cover" priority />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
+                        <div className="absolute top-4 left-4 right-4 text-left">
+                          <span className="bg-black text-white text-[8px] font-sans font-bold tracking-widest px-2 py-0.5 uppercase">
+                            EXCLUSIVE
+                          </span>
+                          <h2 className="text-2xl font-serif text-white mt-1 drop-shadow-md">
+                            {invitationData.groomName} &amp; {invitationData.brideName}
+                          </h2>
+                          <p className="text-[10px] text-white/80 font-sans tracking-widest uppercase">
+                            The Union of the Season
+                          </p>
+                        </div>
+                        <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between text-white font-sans">
+                          <div className="text-left">
+                            <p className="text-[9px] tracking-[0.2em] uppercase opacity-90">{invitationData.weddingDate}</p>
+                            <p className="text-xs font-serif italic">{invitationData.venueName}</p>
+                          </div>
+                          <div className="bg-white/95 px-2 py-0.5 font-mono text-[8px] tracking-widest text-black border border-black/40">
+                            ||| | |||| | |||
+                          </div>
+                        </div>
+                      </div>
+                      <div className="py-2.5 mt-3 border-y-2 border-black font-sans text-xs tracking-widest font-bold uppercase">
+                        {invitationData.weddingDate} · {invitationData.weddingTime}
                       </div>
                     </div>
+                  )}
 
-                    {/* Date & Sanctuary Header */}
-                    <div className="mt-5 py-3 border-y border-black/10 space-y-1 font-sans">
-                      <p className="text-sm font-serif font-bold tracking-wide">
+                  {currentSkin.headerStyle === 'wax_seal' && (
+                    /* STYLE 2: VINTAGE WAX SEAL MONOGRAM */
+                    <div className="p-6 text-center">
+                      <div className="flex flex-col items-center mb-4">
+                        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#8A2D2A] via-[#A83834] to-[#5C1E1C] border-2 border-[#D4AF37]/80 shadow-[0_8px_20px_rgba(138,45,42,0.45)] flex items-center justify-center relative">
+                          <div className="w-12 h-12 rounded-full border border-dashed border-[#D4AF37]/60 flex items-center justify-center text-[#F5E6CC] font-serif text-sm font-bold tracking-widest drop-shadow-xs">
+                            {currentSkin.monogramText}
+                          </div>
+                          <div className="absolute -bottom-2 w-4 h-4 bg-[#8A2D2A] rotate-45" />
+                        </div>
+                        <span className="text-[9px] font-serif italic tracking-[0.3em] text-[#8A2D2A] mt-2.5 font-semibold">
+                          Official Wax Seal of Solemn Matrimony
+                        </span>
+                      </div>
+                      <div className="space-y-1 mb-4">
+                        <span className="text-[9px] tracking-[0.35em] uppercase font-sans opacity-70 block">
+                          Solemn Proclamation of Marriage
+                        </span>
+                        <h2 className="text-2xl font-serif font-medium tracking-wide">
+                          {invitationData.groomName} <span className="text-[#C49746]">⚜</span> {invitationData.brideName}
+                        </h2>
+                      </div>
+                      <div className="relative aspect-[3/4] w-full p-2 bg-[#FAF4EF] border-2 border-[#D4AF37]/70 shadow-xl rounded-sm">
+                        <div className="relative w-full h-full overflow-hidden border border-[#D4AF37]/30">
+                          <Image src={invitationData.coverPhoto} alt="Cover" fill unoptimized className="object-cover" priority />
+                          <span className="absolute top-2 left-2 text-[#D4AF37] text-xs">⚜</span>
+                          <span className="absolute top-2 right-2 text-[#D4AF37] text-xs">⚜</span>
+                          <span className="absolute bottom-2 left-2 text-[#D4AF37] text-xs">⚜</span>
+                          <span className="absolute bottom-2 right-2 text-[#D4AF37] text-xs">⚜</span>
+                        </div>
+                      </div>
+                      <div className="mt-4 py-2.5 border-y border-[#D4AF37]/40 text-xs font-serif italic font-bold">
                         {invitationData.weddingDate} · {invitationData.weddingTime}
-                      </p>
-                      <p className="text-xs opacity-75">
-                        {invitationData.venueName} {invitationData.venueHall}
-                      </p>
+                      </div>
                     </div>
-                  </div>
+                  )}
 
-                  {/* 2. Invitation Greeting (모시는 글 & 부모님 성함) */}
+                  {currentSkin.headerStyle === 'cathedral_gothic' && (
+                    /* STYLE 3: SACRED CATHEDRAL ARCH */
+                    <div className="p-6 text-center">
+                      <div className="w-10 h-10 mx-auto rounded-full bg-[#9C7A3C]/15 border border-[#9C7A3C]/40 text-[#9C7A3C] flex items-center justify-center text-base mb-2">
+                        ⛪
+                      </div>
+                      <span className="text-[9px] tracking-[0.4em] uppercase text-[#9C7A3C] font-bold block mb-1">
+                        SACRED BASILICA SOLEMNITY
+                      </span>
+                      <h2 className="text-2xl font-serif text-[#241D14] mb-4">
+                        {invitationData.groomName} <span className="text-[#9C7A3C] font-light">†</span> {invitationData.brideName}
+                      </h2>
+                      <div className="relative aspect-[3/4] w-full rounded-t-[130px] rounded-b-2xl overflow-hidden border-4 border-[#9C7A3C]/60 shadow-2xl p-1 bg-[#F5EFE6]">
+                        <div className="relative w-full h-full rounded-t-[125px] rounded-b-xl overflow-hidden">
+                          <Image src={invitationData.coverPhoto} alt="Cover" fill unoptimized className="object-cover" priority />
+                        </div>
+                      </div>
+                      <div className="mt-4 py-3 border-y border-[#9C7A3C]/40 text-xs font-serif font-bold tracking-wide">
+                        {invitationData.weddingDate} · {invitationData.weddingTime}
+                      </div>
+                    </div>
+                  )}
+
+                  {currentSkin.headerStyle === 'celestial_dark' && (
+                    /* STYLE 4: MIDNIGHT CELESTIAL STARLIGHT (DARK MODE) */
+                    <div className="p-6 text-center text-[#F8F6FA]">
+                      <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[#D4AF37] text-[10px] tracking-[0.25em] uppercase font-bold mb-3">
+                        <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+                        <span>BLACK TIE CELESTIAL GALA</span>
+                      </div>
+                      <p className="text-[9px] tracking-[0.35em] text-[#B9ACC9] uppercase font-light mb-1">
+                        UNDER A CANOPY OF STARS
+                      </p>
+                      <h2 className="text-3xl font-serif tracking-wide text-white mb-5">
+                        {invitationData.groomName} <span className="text-[#D4AF37]">✧</span> {invitationData.brideName}
+                      </h2>
+                      <div className="relative aspect-[3/4] w-full rounded-3xl overflow-hidden border-2 border-[#D4AF37]/80 shadow-[0_0_35px_rgba(212,175,55,0.35)]">
+                        <Image src={invitationData.coverPhoto} alt="Cover" fill unoptimized className="object-cover" priority />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                        <div className="absolute bottom-4 left-0 right-0 text-center text-white font-sans">
+                          <p className="text-xs tracking-widest uppercase font-light text-[#D4AF37]">{invitationData.weddingDate}</p>
+                          <p className="text-sm font-serif italic text-white/90">Dancing Under the Stars</p>
+                        </div>
+                      </div>
+                      <div className="mt-4 py-3 border-y border-[#3D3452] text-xs font-serif text-[#D4AF37] tracking-wider font-bold">
+                        {invitationData.weddingDate} · {invitationData.weddingTime}
+                      </div>
+                    </div>
+                  )}
+
+                  {currentSkin.headerStyle === 'floral_wreath' && (
+                    /* STYLE 5: BLOOMING PEONY GARDEN */
+                    <div className="p-6 text-center">
+                      <div className="flex items-center justify-center gap-2 mb-2">
+                        <span className="text-sm">🌸</span>
+                        <span className="text-[9px] tracking-[0.3em] uppercase text-[#D9756C] font-bold">FLORAL BOTANICAL ROMANCE</span>
+                        <span className="text-sm">🌸</span>
+                      </div>
+                      <h2 className="text-3xl font-serif italic text-[#2E1A1D] mb-4">
+                        {invitationData.groomName} <span className="text-[#E8A598] font-normal">&amp;</span> {invitationData.brideName}
+                      </h2>
+                      <div className="relative aspect-[3/4] w-full rounded-t-[110px] rounded-b-3xl overflow-hidden border-4 border-[#F3D8D4] shadow-xl">
+                        <Image src={invitationData.coverPhoto} alt="Cover" fill unoptimized className="object-cover" priority />
+                      </div>
+                      <div className="mt-4 py-2.5 border-y border-[#F3D8D4] text-xs font-serif font-bold text-[#2E1A1D]">
+                        {invitationData.weddingDate} · {invitationData.weddingTime}
+                      </div>
+                    </div>
+                  )}
+
+                  {currentSkin.headerStyle === 'royal_crest' && (
+                    /* STYLE 6: IMPERIAL CREST & GOLD FOIL */
+                    <div className="p-6 text-center">
+                      <div className="w-12 h-12 mx-auto rounded-full bg-gradient-to-tr from-[#8C6D1F] to-[#D4AF37] text-white flex items-center justify-center text-lg shadow-md mb-2">
+                        👑
+                      </div>
+                      <span className="text-[9px] tracking-[0.35em] text-[#8C6D1F] font-bold uppercase block mb-1">
+                        ROYAL HERITAGE CELEBRATION
+                      </span>
+                      <h2 className="text-2xl font-serif font-bold text-[#261E16] tracking-wide mb-4">
+                        {invitationData.groomName} &amp; {invitationData.brideName}
+                      </h2>
+                      <div className="relative aspect-[3/4] w-full p-2 border-2 border-[#C49746] rounded-xl shadow-xl bg-[#FAF6EE]">
+                        <div className="relative w-full h-full border border-[#8C6D1F]/50 rounded-lg overflow-hidden">
+                          <Image src={invitationData.coverPhoto} alt="Cover" fill unoptimized className="object-cover" priority />
+                        </div>
+                      </div>
+                      <div className="mt-4 py-3 border-y border-[#E2D1BC] text-xs font-serif font-bold text-[#261E16]">
+                        {invitationData.weddingDate} · {invitationData.weddingTime}
+                      </div>
+                    </div>
+                  )}
+
+                  {currentSkin.headerStyle === 'minimal_polaroid' && (
+                    /* STYLE 7: MODERN IVORY SILK (POLAROID) */
+                    <div className="p-6">
+                      <div className="bg-white p-3.5 pb-6 rounded-2xl shadow-xl border border-[#EBDCD3]">
+                        <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden mb-4 shadow-xs">
+                          <Image src={invitationData.coverPhoto} alt="Cover" fill unoptimized className="object-cover" priority />
+                        </div>
+                        <div className="text-center space-y-1">
+                          <p className="text-xl font-serif italic text-[#1F181B] tracking-wide font-bold">
+                            {invitationData.groomName} &amp; {invitationData.brideName}
+                          </p>
+                          <p className="text-[11px] font-sans tracking-[0.25em] text-[#7C6E6D] uppercase">
+                            {invitationData.weddingDate} · {invitationData.weddingTime}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {currentSkin.headerStyle === 'golden_sunset' && (
+                    /* STYLE 8: GOLDEN SUNSET RIVIERA */
+                    <div className="p-6 text-center">
+                      <span className="text-[9px] tracking-[0.3em] uppercase text-[#B85E55] font-bold block mb-1">
+                        ☼ MEDITERRANEAN RIVIERA SUNSET ☼
+                      </span>
+                      <h2 className="text-3xl font-serif text-[#291811] tracking-tight mb-4">
+                        {invitationData.groomName} &amp; {invitationData.brideName}
+                      </h2>
+                      <div className="relative aspect-[3/4] w-full rounded-3xl overflow-hidden border-4 border-[#ECD8C7] shadow-xl">
+                        <Image src={invitationData.coverPhoto} alt="Cover" fill unoptimized className="object-cover" priority />
+                      </div>
+                      <div className="mt-4 py-2.5 border-y border-[#ECD8C7] text-xs font-serif text-[#291811] font-bold">
+                        {invitationData.weddingDate} · {invitationData.weddingTime}
+                      </div>
+                    </div>
+                  )}
+
+                  {currentSkin.headerStyle === 'aegean_resort' && (
+                    /* STYLE 9: SANTORINI AEGEAN BREEZE */
+                    <div className="p-6 text-center">
+                      <span className="text-[9px] tracking-[0.3em] uppercase text-[#1A508B] font-bold block mb-1">
+                        AEGEAN CALDERA CLIFFSIDE · SANTORINI
+                      </span>
+                      <h2 className="text-2xl font-sans font-light tracking-[0.15em] text-[#0E2433] uppercase mb-4">
+                        {invitationData.groomName} <span className="text-[#4A8FE7]">•</span> {invitationData.brideName}
+                      </h2>
+                      <div className="relative aspect-[3/4] w-full rounded-t-[100px] rounded-b-2xl overflow-hidden border-4 border-[#D4E4F2] shadow-xl">
+                        <Image src={invitationData.coverPhoto} alt="Cover" fill unoptimized className="object-cover" priority />
+                      </div>
+                      <div className="mt-4 py-2.5 border-y border-[#D4E4F2] text-xs font-sans text-[#0E2433] font-bold tracking-wider">
+                        {invitationData.weddingDate} · {invitationData.weddingTime}
+                      </div>
+                    </div>
+                  )}
+
+                  {currentSkin.headerStyle === 'botanical_glass' && (
+                    /* STYLE 10: BOTANICAL GLASSHOUSE SANCTUARY */
+                    <div className="p-6 text-center">
+                      <span className="text-[9px] tracking-[0.3em] uppercase text-[#3B6047] font-bold block mb-1">
+                        🌿 GLASSHOUSE CONSERVATORY BOTANICAL 🌿
+                      </span>
+                      <h2 className="text-2xl font-serif text-[#1A291E] mb-4">
+                        {invitationData.groomName} &amp; {invitationData.brideName}
+                      </h2>
+                      <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden border-2 border-[#D6E4DB] shadow-lg">
+                        <Image src={invitationData.coverPhoto} alt="Cover" fill unoptimized className="object-cover" priority />
+                      </div>
+                      <div className="mt-4 py-2.5 border-y border-[#D6E4DB] text-xs font-serif text-[#1A291E] font-bold">
+                        {invitationData.weddingDate} · {invitationData.weddingTime}
+                      </div>
+                    </div>
+                  )}
+
+                            
                   <div className="p-6 text-center space-y-6">
                     <div>
                       <span 
@@ -1726,39 +2282,32 @@ export default function WeddingHelperPage() {
                       </p>
                     </div>
 
-                    {/* Family Parent Relationships (Bojagi Card Standard) */}
+                    {/* Editorial Couple Signature Card */}
                     <div 
-                      className="p-5 rounded-2xl border font-sans text-xs space-y-3"
+                      className="p-5 rounded-2xl border font-sans text-center space-y-2.5"
                       style={{ backgroundColor: currentSkin.cardBg, borderColor: currentSkin.borderColor }}
                     >
-                      <div className="flex items-center justify-between">
-                        <div className="text-left">
-                          <span className="opacity-70">{invitationData.groomFather} · {invitationData.groomMother}</span>의 {invitationData.groomRelation} <strong className="font-bold">{invitationData.groomName}</strong>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <a href={`tel:${invitationData.groomPhone}`} className="p-1.5 rounded-full bg-[#FAF5F1] text-[#7C6E6D] hover:text-[#C87870]">
-                            <Phone className="w-3.5 h-3.5" />
-                          </a>
-                          <a href={`sms:${invitationData.groomPhone}`} className="p-1.5 rounded-full bg-[#FAF5F1] text-[#7C6E6D] hover:text-[#C87870]">
-                            <MessageCircle className="w-3.5 h-3.5" />
-                          </a>
-                        </div>
-                      </div>
-
-                      <div className="h-px bg-black/5" />
-
-                      <div className="flex items-center justify-between">
-                        <div className="text-left">
-                          <span className="opacity-70">{invitationData.brideFather} · {invitationData.brideMother}</span>의 {invitationData.brideRelation} <strong className="font-bold">{invitationData.brideName}</strong>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <a href={`tel:${invitationData.bridePhone}`} className="p-1.5 rounded-full bg-[#FAF5F1] text-[#7C6E6D] hover:text-[#C87870]">
-                            <Phone className="w-3.5 h-3.5" />
-                          </a>
-                          <a href={`sms:${invitationData.bridePhone}`} className="p-1.5 rounded-full bg-[#FAF5F1] text-[#7C6E6D] hover:text-[#C87870]">
-                            <MessageCircle className="w-3.5 h-3.5" />
-                          </a>
-                        </div>
+                      <span className="text-[10px] tracking-[0.25em] uppercase font-bold block opacity-60">
+                        With Full Hearts & Joy
+                      </span>
+                      <p className="text-base font-serif font-medium tracking-wide">
+                        {invitationData.groomName} <span className="text-xs font-sans opacity-60">&</span> {invitationData.brideName}
+                      </p>
+                      <div className="flex items-center justify-center gap-2.5 pt-1">
+                        <a 
+                          href={`tel:${invitationData.groomPhone}`} 
+                          className="px-3.5 py-1.5 rounded-full bg-[#FAF5F1] text-[11px] font-semibold text-[#7C6E6D] hover:text-[#C87870] flex items-center gap-1.5 transition border border-[#EFE5DE]"
+                        >
+                          <Phone className="w-3 h-3" />
+                          <span>Groom: {invitationData.groomName}</span>
+                        </a>
+                        <a 
+                          href={`tel:${invitationData.bridePhone}`} 
+                          className="px-3.5 py-1.5 rounded-full bg-[#FAF5F1] text-[11px] font-semibold text-[#7C6E6D] hover:text-[#C87870] flex items-center gap-1.5 transition border border-[#EFE5DE]"
+                        >
+                          <Phone className="w-3 h-3" />
+                          <span>Bride: {invitationData.brideName}</span>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -1778,17 +2327,18 @@ export default function WeddingHelperPage() {
 
                       {/* Mini Monthly Calendar */}
                       <div className="grid grid-cols-7 gap-1 text-[11px] mb-5">
-                        <span className="text-[#C87870] font-bold">일</span>
-                        <span className="opacity-60">월</span>
-                        <span className="opacity-60">화</span>
-                        <span className="opacity-60">수</span>
-                        <span className="opacity-60">목</span>
-                        <span className="opacity-60">금</span>
-                        <span className="opacity-60">토</span>
+                        <span className="text-[#C87870] font-bold">Sun</span>
+                        <span className="opacity-60">Mon</span>
+                        <span className="opacity-60">Tue</span>
+                        <span className="opacity-60">Wed</span>
+                        <span className="opacity-60">Thu</span>
+                        <span className="opacity-60">Fri</span>
+                        <span className="opacity-60">Sat</span>
 
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map(day => {
                           const isWeddingDay = day === invitationData.weddingDayNum;
-                          return (
+                          
+  return (
                             <div 
                               key={day}
                               className={`py-1 text-center font-medium ${
@@ -1807,7 +2357,7 @@ export default function WeddingHelperPage() {
                       {/* D-Day Live Countdown */}
                       <div className="pt-4 border-t border-black/5">
                         <p className="text-xs font-serif italic mb-3">
-                          {invitationData.groomName} ♡ {invitationData.brideName}의 예식이 <span className="font-bold" style={{ color: currentSkin.themeColor }}>4일</span> 남았습니다
+                          {invitationData.groomName} &amp; {invitationData.brideName}&apos;s wedding is in <span className="font-bold" style={{ color: currentSkin.themeColor }}>4 Days</span>
                         </p>
                         <div className="grid grid-cols-4 gap-2 text-center text-xs">
                           <div className="p-2 rounded-xl bg-[#FAF5F1]"><strong className="block text-sm font-bold">04</strong><span className="text-[9px] opacity-70 uppercase">Days</span></div>
@@ -1840,7 +2390,7 @@ export default function WeddingHelperPage() {
                     </div>
                   </div>
 
-                  {/* 5. Venue Location & Map Navigation (오시는 길) */}
+                  {/* 5. Venue Location & Map Navigation */}
                   <div className="p-6 font-sans">
                     <div 
                       className="p-6 rounded-3xl border shadow-xs text-left space-y-4"
@@ -1848,10 +2398,10 @@ export default function WeddingHelperPage() {
                     >
                       <div>
                         <span className="text-[10px] tracking-[0.25em] uppercase font-bold block mb-1" style={{ color: currentSkin.themeColor }}>
-                          Location
+                          Location &amp; Directions
                         </span>
                         <h4 className="text-base font-serif font-bold text-[#1F181B]">
-                          {invitationData.venueName} {invitationData.venueHall}
+                          {invitationData.venueName} · {invitationData.venueHall}
                         </h4>
                         <p className="text-xs opacity-75 mt-1">
                           {invitationData.venueAddress}
@@ -1862,13 +2412,13 @@ export default function WeddingHelperPage() {
                       <button
                         onClick={() => {
                           navigator.clipboard?.writeText(invitationData.venueAddress);
-                          setCopyToast('주소가 클립보드에 복사되었습니다. (Address copied!)');
+                          setCopyToast('Venue address copied to clipboard!');
                           setTimeout(() => setCopyToast(''), 2500);
                         }}
                         className="w-full py-2.5 rounded-xl bg-[#FAF5F1] hover:bg-[#F2E5DC] text-xs font-semibold text-[#5C4D4D] flex items-center justify-center gap-1.5 transition"
                       >
                         <Copy className="w-3.5 h-3.5" />
-                        <span>Copy Address (주소 복사하기)</span>
+                        <span>Copy Address</span>
                       </button>
 
                       {/* Google Maps & US Live Navigation Links */}
@@ -1881,7 +2431,7 @@ export default function WeddingHelperPage() {
                           className="w-full py-3 rounded-xl bg-[#4285F4] hover:bg-[#3367D6] text-white text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm"
                         >
                           <MapPin className="w-4 h-4 text-white" />
-                          <span>Google Maps 길찾기 (Open in Google Maps)</span>
+                          <span>Open in Google Maps</span>
                           <ExternalLink className="w-3.5 h-3.5 opacity-80" />
                         </a>
 
@@ -1908,186 +2458,13 @@ export default function WeddingHelperPage() {
 
                       {/* Transportation Details */}
                       <div className="pt-2 text-[11px] opacity-75 space-y-1">
-                        <p>• <strong>대중교통 / Transit:</strong> {invitationData.venueTraffic}</p>
-                        <p>• <strong>주차안내 / Parking:</strong> {invitationData.venueParking}</p>
+                        <p>• <strong>Transit / Subway:</strong> {invitationData.venueTraffic}</p>
+                        <p>• <strong>Parking Information:</strong> {invitationData.venueParking}</p>
                       </div>
                     </div>
                   </div>
 
-                  {/* 6. Congratulatory Bank Accounts (마음 전하실 곳) */}
-                  <div className="p-6 font-sans">
-                    <div 
-                      className="p-6 rounded-3xl border shadow-xs text-left space-y-3"
-                      style={{ backgroundColor: currentSkin.cardBg, borderColor: currentSkin.borderColor }}
-                    >
-                      <div className="text-center mb-2">
-                        <span className="text-[10px] tracking-[0.25em] uppercase font-bold block" style={{ color: currentSkin.themeColor }}>
-                          Account
-                        </span>
-                        <h4 className="text-base font-serif">마음 전하실 곳</h4>
-                        <p className="text-[11px] opacity-70 mt-0.5">
-                          참석이 어려우신 분들을 위해 계좌번호를 안내해 드립니다.
-                        </p>
-                      </div>
-
-                      {/* Groom Side Accordion */}
-                      <div className="border border-[#EBDCD3] rounded-2xl overflow-hidden">
-                        <button
-                          onClick={() => setActiveAccountTab(activeAccountTab === 'groom' ? null : 'groom')}
-                          className="w-full p-3.5 bg-[#FAF5F1] flex items-center justify-between text-xs font-bold text-[#1F181B]"
-                        >
-                          <span>신랑측 계좌번호 보기</span>
-                          {activeAccountTab === 'groom' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                        </button>
-                        {activeAccountTab === 'groom' && (
-                          <div className="p-4 bg-white space-y-2 text-xs">
-                            <p><strong>{invitationData.groomBank}</strong> {invitationData.groomAccount} (예금주: {invitationData.groomHolder})</p>
-                            <div className="flex gap-2 pt-1">
-                              <button
-                                onClick={() => {
-                                  setCopyToast('신랑측 계좌번호가 복사되었습니다.');
-                                  setTimeout(() => setCopyToast(''), 2500);
-                                }}
-                                className="flex-1 py-2 rounded-xl bg-[#FAF5F1] text-[11px] font-semibold flex items-center justify-center gap-1 hover:bg-[#F2E5DC]"
-                              >
-                                <Copy className="w-3 h-3" />
-                                <span>계좌번호 복사</span>
-                              </button>
-                              <a
-                                href={invitationData.groomKakaoPay}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="px-4 py-2 rounded-xl bg-[#FEE500] text-[11px] font-bold text-[#191919] flex items-center justify-center"
-                              >
-                                카카오페이 송금
-                              </a>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Bride Side Accordion */}
-                      <div className="border border-[#EBDCD3] rounded-2xl overflow-hidden">
-                        <button
-                          onClick={() => setActiveAccountTab(activeAccountTab === 'bride' ? null : 'bride')}
-                          className="w-full p-3.5 bg-[#FAF5F1] flex items-center justify-between text-xs font-bold text-[#1F181B]"
-                        >
-                          <span>신부측 계좌번호 보기</span>
-                          {activeAccountTab === 'bride' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                        </button>
-                        {activeAccountTab === 'bride' && (
-                          <div className="p-4 bg-white space-y-2 text-xs">
-                            <p><strong>{invitationData.brideBank}</strong> {invitationData.brideAccount} (예금주: {invitationData.brideHolder})</p>
-                            <div className="flex gap-2 pt-1">
-                              <button
-                                onClick={() => {
-                                  setCopyToast('신부측 계좌번호가 복사되었습니다.');
-                                  setTimeout(() => setCopyToast(''), 2500);
-                                }}
-                                className="flex-1 py-2 rounded-xl bg-[#FAF5F1] text-[11px] font-semibold flex items-center justify-center gap-1 hover:bg-[#F2E5DC]"
-                              >
-                                <Copy className="w-3 h-3" />
-                                <span>계좌번호 복사</span>
-                              </button>
-                              <a
-                                href={invitationData.brideKakaoPay}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="px-4 py-2 rounded-xl bg-[#FEE500] text-[11px] font-bold text-[#191919] flex items-center justify-center"
-                              >
-                                카카오페이 송금
-                              </a>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 7. Interactive RSVP (참석 여부 전달) */}
-                  <div className="p-6 font-sans">
-                    <div 
-                      className="p-6 rounded-3xl border shadow-xs text-left space-y-4"
-                      style={{ backgroundColor: currentSkin.cardBg, borderColor: currentSkin.borderColor }}
-                    >
-                      <div className="text-center mb-1">
-                        <span className="text-[10px] tracking-[0.25em] uppercase font-bold block" style={{ color: currentSkin.themeColor }}>
-                          RSVP
-                        </span>
-                        <h4 className="text-base font-serif">참석 여부 전달</h4>
-                        <p className="text-[11px] opacity-70 mt-0.5">
-                          원활한 예식 및 식사 준비를 위해 참석 여부를 전달해 주세요.
-                        </p>
-                      </div>
-
-                      {rsvpSubmitted ? (
-                        <div className="p-4 rounded-2xl bg-[#E8F5E9] text-[#2E7D32] text-xs font-semibold text-center space-y-1">
-                          <CheckCircle2 className="w-5 h-5 mx-auto" />
-                          <p>참석 여부가 신랑신부에게 소중히 전달되었습니다!</p>
-                        </div>
-                      ) : (
-                        <div className="space-y-3">
-                          <div className="grid grid-cols-2 gap-2 text-xs font-semibold">
-                            <button
-                              onClick={() => setRsvpStatus('attending')}
-                              className={`py-3 rounded-xl border transition ${
-                                rsvpStatus === 'attending' 
-                                  ? 'bg-[#1F181B] text-white border-[#1F181B]' 
-                                  : 'bg-[#FAF5F1] text-[#7C6E6D] border-[#E8DCD4]'
-                              }`}
-                            >
-                              참석합니다
-                            </button>
-                            <button
-                              onClick={() => setRsvpStatus('declining')}
-                              className={`py-3 rounded-xl border transition ${
-                                rsvpStatus === 'declining' 
-                                  ? 'bg-[#1F181B] text-white border-[#1F181B]' 
-                                  : 'bg-[#FAF5F1] text-[#7C6E6D] border-[#E8DCD4]'
-                              }`}
-                            >
-                              마음으로 축하합니다
-                            </button>
-                          </div>
-
-                          <input
-                            type="text"
-                            placeholder="참석자 성함"
-                            value={rsvpName}
-                            onChange={e => setRsvpName(e.target.value)}
-                            className="w-full p-3 rounded-xl border border-[#E0D2CB] text-xs focus:outline-none focus:border-[#C87870] bg-white"
-                          />
-
-                          <div className="grid grid-cols-3 gap-1.5 text-xs text-center">
-                            {[1, 2, 3].map(cnt => (
-                              <button
-                                key={cnt}
-                                onClick={() => setGuestCount(cnt)}
-                                className={`py-2 rounded-lg border text-[11px] transition ${
-                                  guestCount === cnt 
-                                    ? 'bg-[#FAF3EF] border-[#C87870] text-[#B85E55] font-bold' 
-                                    : 'bg-white border-[#E8DCD4] text-[#7C6E6D]'
-                                }`}
-                              >
-                                {cnt === 3 ? '3인 이상' : `${cnt}인`}
-                              </button>
-                            ))}
-                          </div>
-
-                          <button
-                            onClick={() => {
-                              if (rsvpName) setRsvpSubmitted(true);
-                            }}
-                            className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#C87870] to-[#9E6F28] text-white text-xs font-bold uppercase tracking-wider shadow-sm hover:opacity-95 transition"
-                          >
-                            참석 정보 제출하기
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* 8. Live Guestbook (축하 메시지 방명록) */}
+                  {/* 8. Live Guestbook */}
                   <div className="p-6 font-sans">
                     <div 
                       className="p-6 rounded-3xl border shadow-xs text-left space-y-4"
@@ -2097,20 +2474,20 @@ export default function WeddingHelperPage() {
                         <span className="text-[10px] tracking-[0.25em] uppercase font-bold block" style={{ color: currentSkin.themeColor }}>
                           Guestbook
                         </span>
-                        <h4 className="text-base font-serif">축하 메시지</h4>
+                        <h4 className="text-base font-serif">Warm Wishes &amp; Blessings</h4>
                       </div>
 
                       {/* Guestbook Submission Form */}
                       <div className="space-y-2">
                         <input
                           type="text"
-                          placeholder="작성자 성함"
+                          placeholder="Your Name"
                           value={newGuestName}
                           onChange={e => setNewGuestName(e.target.value)}
                           className="w-full p-2.5 rounded-xl border border-[#E0D2CB] text-xs focus:outline-none focus:border-[#C87870] bg-white"
                         />
                         <textarea
-                          placeholder="신랑 신부에게 따뜻한 축하의 한마디를 남겨주세요."
+                          placeholder="Leave a congratulatory note for the couple..."
                           rows={2}
                           value={newGuestMsg}
                           onChange={e => setNewGuestMsg(e.target.value)}
@@ -2120,7 +2497,7 @@ export default function WeddingHelperPage() {
                           onClick={() => {
                             if (newGuestName && newGuestMsg) {
                               setGuestbookList([
-                                { id: Date.now(), name: newGuestName, message: newGuestMsg, date: '2026.11.04' },
+                                { id: Date.now(), name: newGuestName, message: newGuestMsg, date: 'Nov 14, 2026' },
                                 ...guestbookList
                               ]);
                               setNewGuestName('');
@@ -2129,7 +2506,7 @@ export default function WeddingHelperPage() {
                           }}
                           className="w-full py-2.5 rounded-xl bg-[#1F181B] text-white text-xs font-bold transition hover:bg-[#3A3335]"
                         >
-                          축하 메시지 등록
+                          Leave Warm Wishes
                         </button>
                       </div>
 
@@ -2148,34 +2525,52 @@ export default function WeddingHelperPage() {
                     </div>
                   </div>
 
-                  {/* 9. Share Footer */}
+                  {/* 9. Share Footer with Paid vs. Preview Gating */}
                   <div className="p-6 pt-2 font-sans space-y-2.5 pb-12">
-                    <button
-                      onClick={() => {
-                        setCopyToast('카카오톡 공유 링크가 준비되었습니다.');
-                        setTimeout(() => setCopyToast(''), 2500);
-                      }}
-                      className="w-full py-3.5 rounded-2xl bg-[#FEE500] text-[#191919] font-bold text-xs flex items-center justify-center gap-2 shadow-sm"
-                    >
-                      <Share2 className="w-4 h-4" />
-                      <span>카카오톡으로 공유하기</span>
-                    </button>
-                    <button
-                      onClick={() => {
-                        setCopyToast('청첩장 링크가 클립보드에 복사되었습니다.');
-                        setTimeout(() => setCopyToast(''), 2500);
-                      }}
-                      className="w-full py-3 rounded-2xl bg-white border border-[#E0D2CB] text-[#5C4D4D] font-semibold text-xs flex items-center justify-center gap-2"
-                    >
-                      <Copy className="w-4 h-4" />
-                      <span>청첩장 링크 복사하기</span>
-                    </button>
-                    </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+                    {user?.plan === 'grand' ? (
+                      <>
+                        <button
+                          onClick={() => {
+                            if (typeof window !== 'undefined') {
+                              const guestUrl = getGuestShareUrl(false);
+                              navigator.clipboard?.writeText(guestUrl);
+                              setCopyToast(`Official Live Invitation Link Copied! (${guestUrl})`);
+                              setTimeout(() => setCopyToast(''), 3500);
+                            }
+                          }}
+                          className="w-full py-3.5 rounded-2xl bg-[#1F181B] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm hover:bg-[#C87870] transition uppercase tracking-wider"
+                        >
+                          <Copy className="w-4 h-4" />
+                          <span>Copy Live Shareable Link</span>
+                        </button>
+                        <a
+                          href={getGuestShareUrl(true)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full py-3 rounded-2xl bg-white border border-[#E0D2CB] text-[#5C4D4D] font-semibold text-xs flex items-center justify-center gap-2 hover:bg-[#FAF5F1] transition"
+                        >
+                          <ExternalLink className="w-4 h-4 text-[#C87870]" />
+                          <span>Open Standalone Live Invitation ↗</span>
+                        </a>
+                      </>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          setSelectedPlan('grand');
+                          setIsCheckoutOpen(true);
+                        }}
+                        className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#C87870] via-[#D89BA6] to-[#C87870] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md hover:opacity-95 transition uppercase tracking-wider"
+                      >
+                        <Gem className="w-4 h-4" />
+                        <span>Unlock Live Guest Link ($19 Special)</span>
+                      </button>
+                    )}
+                  </div>
                 </div>
+              </div>
+            </div>
+          )}
+        </div>
 
                 {/* Toast Notification */}
                 {copyToast && (
@@ -2215,10 +2610,7 @@ export default function WeddingHelperPage() {
             <div className="mt-8 space-y-3.5">
               {/* Google 1-Click Login */}
               <button
-                onClick={() => {
-                  setUser({ email: 'vip.couple@gmail.com', isVip: false });
-                  setIsLoginOpen(false);
-                }}
+                onClick={() => handleUserLogin('vip.couple@gmail.com')}
                 className="w-full py-3.5 px-4 rounded-2xl border border-[#E0D2CB] hover:border-[#C87870] bg-[#FFFDFB] hover:bg-[#FAF5F1] flex items-center justify-center gap-3 transition shadow-sm text-xs font-semibold text-[#2C2426]"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -2232,7 +2624,7 @@ export default function WeddingHelperPage() {
 
               <div className="flex items-center gap-3 my-4">
                 <div className="flex-1 h-px bg-[#EADED7]" />
-                <span className="text-[10px] text-[#A89895] uppercase tracking-wider">or email</span>
+                <span className="text-[10px] text-[#A89895] uppercase tracking-wider">or sign in with email</span>
                 <div className="flex-1 h-px bg-[#EADED7]" />
               </div>
 
@@ -2241,19 +2633,17 @@ export default function WeddingHelperPage() {
                 placeholder="bride.groom@example.com"
                 value={loginEmail}
                 onChange={e => setLoginEmail(e.target.value)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter') handleUserLogin(loginEmail);
+                }}
                 className="w-full py-3 px-4 rounded-xl border border-[#E0D2CB] text-xs focus:outline-none focus:border-[#C87870] bg-[#FFFDFB]"
               />
 
               <button
-                onClick={() => {
-                  if (loginEmail) {
-                    setUser({ email: loginEmail, isVip: false });
-                    setIsLoginOpen(false);
-                  }
-                }}
+                onClick={() => handleUserLogin(loginEmail)}
                 className="w-full py-3.5 rounded-xl bg-[#2C2426] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#1A1517] transition shadow-md"
               >
-                Send Magic Link
+                Sign In &amp; Restore VIP Status
               </button>
             </div>
           </div>
@@ -2284,109 +2674,130 @@ export default function WeddingHelperPage() {
               </p>
             </div>
 
-            {/* 3-Tier Luxury Pricing Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 mt-8">
-              {/* Plan 1: Single World */}
-              <div 
-                onClick={() => setSelectedPlan('single')}
-                className={`p-4 rounded-2xl border cursor-pointer transition flex flex-col justify-between ${
-                  selectedPlan === 'single' 
-                    ? 'border-[#C87870] bg-[#FFFBF9] ring-2 ring-[#C87870]' 
-                    : 'border-[#EADED7] hover:border-[#D8BFB5] bg-[#FFFDFB]'
-                }`}
-              >
+            {/* Double-Payment Prevention: If already VIP, show Active status instead of payment button */}
+            {user?.plan === 'grand' ? (
+              <div className="mt-8 p-8 rounded-3xl bg-[#FAF5F1] border border-[#E8DCD4] text-center space-y-4">
+                <div className="w-14 h-14 rounded-full bg-[#E8F5E9] text-[#2E7D32] flex items-center justify-center mx-auto shadow-sm">
+                  <CheckCircle2 className="w-7 h-7" />
+                </div>
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#8C7A78] block">
-                    Single World
-                  </span>
-                  <div className="mt-1.5 flex items-baseline gap-1">
-                    <span className="text-2xl font-serif font-bold text-[#1F181B]">$29</span>
-                    <span className="text-[10px] text-[#A89895]">/ 1 theme</span>
-                  </div>
-                  <ul className="mt-3.5 space-y-1.5 text-[11px] text-[#5C4D4D]">
-                    <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> 20 4K Masterpieces (1 Theme)</li>
-                    <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> 1 Sanctuary Venue Link</li>
-                    <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> Real Gown In-Stock Links</li>
-                  </ul>
+                  <h4 className="font-serif text-2xl font-bold text-[#1F181B]">
+                    VIP Pass Already Active!
+                  </h4>
+                  <p className="text-xs text-[#7C6E6D] mt-2 max-w-md mx-auto leading-relaxed">
+                    You are signed in as <strong>{user.email}</strong> with an active <strong>Grand 12 VIP Pass ($19 Launch Special)</strong>. All 10 bespoke invitation templates, real-time RSVP dashboard, and verified live hosting through your wedding day on <strong>{invitationData.weddingDate}</strong> are fully paid and unlocked. You will never be asked to pay twice.
+                  </p>
+                </div>
+                <div className="pt-2">
+                  <button
+                    onClick={() => {
+                      setIsCheckoutOpen(false);
+                      setIsInvitationOpen(true);
+                    }}
+                    className="px-8 py-3.5 rounded-full bg-[#1F181B] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#C87870] transition shadow-md flex items-center justify-center gap-2 mx-auto"
+                  >
+                    <span>Open My Invitation Studio →</span>
+                  </button>
                 </div>
               </div>
-
-              {/* Plan 2: Trio Worlds */}
-              <div 
-                onClick={() => setSelectedPlan('trio')}
-                className={`p-4 rounded-2xl border cursor-pointer transition flex flex-col justify-between ${
-                  selectedPlan === 'trio' 
-                    ? 'border-[#C87870] bg-[#FFFBF9] ring-2 ring-[#C87870]' 
-                    : 'border-[#EADED7] hover:border-[#D8BFB5] bg-[#FFFDFB]'
-                }`}
-              >
-                <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#8C7A78] block">
-                    Trio Worlds
-                  </span>
-                  <div className="mt-1.5 flex items-baseline gap-1">
-                    <span className="text-2xl font-serif font-bold text-[#1F181B]">$59</span>
-                    <span className="text-[10px] text-[#A89895]">/ 3 themes</span>
+            ) : (
+              <>
+                {/* 3-Tier Luxury Pricing Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 mt-8">
+                  {/* Plan 1: Single World */}
+                  <div 
+                    onClick={() => setSelectedPlan('single')}
+                    className={`p-4 rounded-2xl border cursor-pointer transition flex flex-col justify-between ${
+                      selectedPlan === 'single' 
+                        ? 'border-[#C87870] bg-[#FFFBF9] ring-2 ring-[#C87870]' 
+                        : 'border-[#EADED7] hover:border-[#D8BFB5] bg-[#FFFDFB]'
+                    }`}
+                  >
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#8C7A78] block">
+                        Single World
+                      </span>
+                      <div className="mt-1.5 flex items-baseline gap-1">
+                        <span className="text-2xl font-serif font-bold text-[#1F181B]">$29</span>
+                        <span className="text-[10px] text-[#A89895]">/ 1 theme</span>
+                      </div>
+                      <ul className="mt-3.5 space-y-1.5 text-[11px] text-[#5C4D4D]">
+                        <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> 20 4K Masterpieces (1 Theme)</li>
+                        <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> 1 Sanctuary Venue Link</li>
+                        <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> Real Gown In-Stock Links</li>
+                      </ul>
+                    </div>
                   </div>
-                  <ul className="mt-3.5 space-y-1.5 text-[11px] text-[#5C4D4D]">
-                    <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> 60 4K Masterpieces (3 Themes)</li>
-                    <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> 3 Sanctuary Venues Direct Booking</li>
-                    <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> Real Gown In-Stock Links</li>
-                  </ul>
-                </div>
-              </div>
 
-              {/* Plan 3: The Grand 12 (Best Value) */}
-              <div 
-                onClick={() => setSelectedPlan('grand')}
-                className={`p-4 rounded-2xl border cursor-pointer transition flex flex-col justify-between relative ${
-                  selectedPlan === 'grand' 
-                    ? 'border-[#C87870] bg-[#FFFBF9] ring-2 ring-[#C87870] shadow-md' 
-                    : 'border-[#EADED7] hover:border-[#D8BFB5] bg-[#FFFDFB]'
-                }`}
-              >
-                <span className="absolute -top-2.5 right-3 px-2.5 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest bg-gradient-to-r from-[#B85E55] to-[#9E6F28] text-white shadow-sm">
-                  Best Value
-                </span>
-                <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#B85E55] block">
-                    The Grand 12
-                  </span>
-                  <div className="mt-1.5 flex items-baseline gap-1">
-                    <span className="text-2xl font-serif font-bold text-[#1F181B]">$79</span>
-                    <span className="text-[10px] text-[#A89895]">/ all worlds</span>
+                  {/* Plan 2: Trio Worlds */}
+                  <div 
+                    onClick={() => setSelectedPlan('trio')}
+                    className={`p-4 rounded-2xl border cursor-pointer transition flex flex-col justify-between ${
+                      selectedPlan === 'trio' 
+                        ? 'border-[#C87870] bg-[#FFFBF9] ring-2 ring-[#C87870]' 
+                        : 'border-[#EADED7] hover:border-[#D8BFB5] bg-[#FFFDFB]'
+                    }`}
+                  >
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#8C7A78] block">
+                        Trio Worlds
+                      </span>
+                      <div className="mt-1.5 flex items-baseline gap-1">
+                        <span className="text-2xl font-serif font-bold text-[#1F181B]">$59</span>
+                        <span className="text-[10px] text-[#A89895]">/ 3 themes</span>
+                      </div>
+                      <ul className="mt-3.5 space-y-1.5 text-[11px] text-[#5C4D4D]">
+                        <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> 60 4K Masterpieces (3 Themes)</li>
+                        <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> 3 Sanctuary Venues Direct Booking</li>
+                        <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> Real Gown In-Stock Links</li>
+                      </ul>
+                    </div>
                   </div>
-                  <ul className="mt-3.5 space-y-1.5 text-[11px] text-[#5C4D4D]">
-                    <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> 240 Masterpieces (All 12 Themes)</li>
-                    <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> 8K Canvas Print-Ready (5 Best Picks)</li>
-                    <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> Mobile Invitation Kit (RSVP Included)</li>
-                    <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> Real Gown In-Stock Links</li>
-                  </ul>
+
+                  {/* Plan 3: The Grand 12 (Best Value) */}
+                  <div 
+                    onClick={() => setSelectedPlan('grand')}
+                    className={`p-4 rounded-2xl border cursor-pointer transition flex flex-col justify-between relative ${
+                      selectedPlan === 'grand' 
+                        ? 'border-[#C87870] bg-[#FFFBF9] ring-2 ring-[#C87870] shadow-md' 
+                        : 'border-[#EADED7] hover:border-[#D8BFB5] bg-[#FFFDFB]'
+                    }`}
+                  >
+                    <span className="absolute -top-2.5 right-3 px-2.5 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest bg-gradient-to-r from-[#B85E55] to-[#9E6F28] text-white shadow-sm">
+                      Best Value
+                    </span>
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#B85E55] block">
+                        The Grand 12
+                      </span>
+                      <div className="mt-1.5 flex items-baseline gap-1">
+                        <span className="line-through text-xs text-[#A89895] mr-1">$79</span><span className="text-2xl font-serif font-bold text-[#B85E55]">$19</span>
+                        <span className="text-[10px] text-[#A89895]">/ all worlds</span>
+                      </div>
+                      <ul className="mt-3.5 space-y-1.5 text-[11px] text-[#5C4D4D]">
+                        <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> 240 Masterpieces (All 12 Themes)</li>
+                        <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> 8K Canvas Print-Ready (5 Best Picks)</li>
+                        <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> Mobile Invitation Kit (RSVP Included)</li>
+                        <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#C87870]" /> Real Gown In-Stock Links</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            <p className="mt-4 text-center text-[10px] text-[#9E8B88] font-sans italic">
-              * 8K UltraHD 300 DPI lossless files are provided for your top 5 favorite altar & frame portraits.
-            </p>
+                <p className="mt-4 text-center text-[10px] text-[#9E8B88] font-sans italic">
+                  * 8K UltraHD 300 DPI lossless files are provided for your top 5 favorite altar & frame portraits.
+                </p>
 
-            {/* Instant Checkout Button */}
-            <button
-              onClick={() => {
-                setUser({ email: 'vip.couple@wedding.com', isVip: true, plan: selectedPlan });
-                setIsCheckoutOpen(false);
-                if (selectedPlan === 'grand') {
-                  setIsInvitationOpen(true);
-                  alert('🎉 The Grand 12 VIP Pass Activated ($79)! Your 10-Skin Mobile Wedding Invitation Kit is now unlocked!');
-                } else {
-                  alert(`VIP Pass Activated! You selected the ${selectedPlan === 'trio' ? 'Trio Worlds ($59)' : 'Single World ($29)'} plan.`);
-                }
-              }}
-              className="mt-6 w-full py-4 rounded-2xl bg-gradient-to-r from-[#C87870] via-[#D89BA6] to-[#C87870] text-white font-bold uppercase tracking-widest text-xs hover:opacity-95 transition shadow-[0_6px_25px_rgba(200,120,112,0.4)] flex items-center justify-center gap-2"
-            >
-              <Gem className="w-4 h-4" />
-              <span>Complete Order with 1-Click Pay (${selectedPlan === 'grand' ? '79' : selectedPlan === 'trio' ? '59' : '29'} USD)</span>
-            </button>
+                {/* Instant Checkout Button with Linked Account Persistence */}
+                <button
+                  onClick={handleCompleteOrder}
+                  className="mt-6 w-full py-4 rounded-2xl bg-gradient-to-r from-[#C87870] via-[#D89BA6] to-[#C87870] text-white font-bold uppercase tracking-widest text-xs hover:opacity-95 transition shadow-[0_6px_25px_rgba(200,120,112,0.4)] flex items-center justify-center gap-2"
+                >
+                  <Gem className="w-4 h-4" />
+                  <span>Complete Order with 1-Click Pay (${selectedPlan === 'grand' ? '19' : selectedPlan === 'trio' ? '14' : '9'} USD)</span>
+                </button>
+              </>
+            )}
 
             <div className="mt-4 flex items-center justify-center gap-4 text-[10px] text-[#A89895]">
               <span>🔒 256-Bit SSL Encrypted</span>
