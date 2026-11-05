@@ -29,7 +29,6 @@ import {
   ExternalLink,
   ShoppingBag,
 } from "lucide-react";
-import USAuthModal from "@/components/USAuthModal";
 
 // ─── 다국어 언어 타입 ─────────────────────────────────────────
 type LangType = "ko" | "en" | "ja";
@@ -42,13 +41,12 @@ const UI_TEXT = {
     subtitle: "내 얼굴에 꼭 맞는 인생 컬러와 가상 드레이핑(Draping)을 3초 만에 찾는 AI 퍼스널컬러헬퍼",
     badgePrice: "1회 1,000원",
     badgePayPal: "페이팔(PayPal) & 카드 결제",
-    badgeGoogle: "구글 간편 로그인 연동",
+    badgeNoLogin: "로그인 불필요 · 3초 즉시 진단",
     badgeMatrix: "12톤 정밀 색채학 매트릭스",
     badgeDraping: "오프라인 샵 1:1 가상 천 드레이핑",
     ticketLabel: "진단권",
     ticketUnit: "회",
     recharge: "+충전",
-    googleLogin: "구글 로그인",
     uploadTitle: "내 얼굴 사진 등록하기",
     uploadDesc: "자연광에서 찍은 정면 셀카가 가장 정확하며, 아래 샘플 모델로 즉시 체험도 가능합니다.",
     uploadFileBtn: "사진 파일 올리기",
@@ -89,7 +87,6 @@ const UI_TEXT = {
     lockTitle: "내 사진 12톤 정밀 진단서 & 인생 립스틱 처방전 잠금",
     lockDesc: "얼굴 사진을 기반으로 베스트 컬러 5종, 워스트 컬러, 찰떡 립스틱 3종 분석이 완료되었습니다. 단돈 1,000원으로 즉시 해금하세요!",
     unlockBtn: "1,000원으로 결과 즉시 해금하기 (PayPal / 카드)",
-    loginBonusBtn: "구글 로그인하고 1회 무료권 받기",
     modalTitle: "퍼스널 컬러 정밀 진단권 충전",
     modalSubtitle: "청담동 15만 원 오프라인 진단을 1회 1,000원에 온라인에서 누리세요.",
     singlePlanTag: "가장 인기 있는 기본형",
@@ -116,13 +113,12 @@ const UI_TEXT = {
     subtitle: "Find your signature tone, virtual draping fabrics & best lipstick matches in 3 seconds with PersonalColorHelper.",
     badgePrice: "Only $0.79 / Diagnosis",
     badgePayPal: "Official PayPal & Card",
-    badgeGoogle: "Google One-Tap Sign In",
+    badgeNoLogin: "No Login Required · Instant Analysis",
     badgeMatrix: "12-Season Colorimetry Matrix",
     badgeDraping: "Real-time Virtual Fabric Draping",
     ticketLabel: "Pass",
     ticketUnit: "left",
     recharge: "+Top Up",
-    googleLogin: "Sign in with Google",
     uploadTitle: "Register Your Portrait",
     uploadDesc: "A natural light front-facing selfie works best. You can also explore instantly with our preset models below.",
     uploadFileBtn: "Upload Photo",
@@ -163,7 +159,6 @@ const UI_TEXT = {
     lockTitle: "Unlock Your Full 12-Tone Report & Luxury Lip Dossier",
     lockDesc: "Your facial color analysis with 5 best colors, worst colors, and 3 cult lipsticks is complete. Unlock instantly for just $0.79!",
     unlockBtn: "Unlock Full Dossier for $0.79 (PayPal / Card)",
-    loginBonusBtn: "Sign in with Google & Get 1 Free Pass",
     modalTitle: "Top Up Personal Color Passes",
     modalSubtitle: "Experience a $150 luxury personal color consultation for just $0.79 online.",
     singlePlanTag: "Most Popular Basic",
@@ -190,13 +185,12 @@ const UI_TEXT = {
     subtitle: "あなたの顔立ちに最も似合う「一生モノの似合わせカラー」とバーチャルドレープを3秒で診断するパーソナルカラーヘルパー",
     badgePrice: "1回たったの120円 (¥120)",
     badgePayPal: "PayPal＆クレジットカード対応",
-    badgeGoogle: "Google簡単ログイン連携",
+    badgeNoLogin: "ログイン不要・3秒で即時診断",
     badgeMatrix: "12タイプ精密色彩学マトリックス",
     badgeDraping: "サロン級バーチャルドレープ体験",
     ticketLabel: "診断チケット",
     ticketUnit: "回",
     recharge: "+チャージ",
-    googleLogin: "Googleでログイン",
     uploadTitle: "お顔の写真をご用意ください",
     uploadDesc: "自然光で撮影した正面自撮りが最も正確です。下のサンプルモデルですぐに体験することも可能です。",
     uploadFileBtn: "写真ファイルをアップロード",
@@ -237,7 +231,6 @@ const UI_TEXT = {
     lockTitle: "あなただけの12タイプ精密診断書＆神リップ処方箋",
     lockDesc: "お顔写真に基づき、ベストカラー5選・苦手カラー・似合うデパコス神リップ3選の分析が完了しました。1回120円ですぐにロック解除できます！",
     unlockBtn: "120円で結果を今すぐ見る (PayPal / カード)",
-    loginBonusBtn: "Googleログインで1回無料チケット獲得",
     modalTitle: "パーソナルカラー診断チケットのチャージ",
     modalSubtitle: "表参道・銀座サロンの1.5万円の診断体験を、オンラインなら1回120円でいつでも手軽に。",
     singlePlanTag: "一番人気！お手軽お試し",
@@ -614,12 +607,15 @@ export default function ColorHelperPage() {
   const [resultTone, setResultTone] = useState<ColorToneData | null>(null);
   const [activeTab, setActiveTab] = useState<"result" | "cosmetics">("result");
 
-  // 회원 & 진단 티켓 관리
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  // 진단 티켓 관리 (비회원/게스트 100% 지원)
   const [tickets, setTickets] = useState<number>(1);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isPayModalOpen, setIsPayModalOpen] = useState(false);
   const [isUnlocked, setIsUnlocked] = useState(true);
+
+  // 페이팔 결제 플랜 & SDK 상태
+  const [selectedPlan, setSelectedPlan] = useState<"single" | "triple">("single");
+  const selectedPlanRef = useRef<"single" | "triple">("single");
+  const [paypalSdkReady, setPaypalSdkReady] = useState(false);
 
   // 결제 진행 상태
   const [paymentProcessing, setPaymentProcessing] = useState(false);
@@ -667,9 +663,6 @@ export default function ColorHelperPage() {
           setLang(savedLang);
         }
       }
-
-      const savedUser = localStorage.getItem("colorhelper_user") || localStorage.getItem("stayhelper_user");
-      if (savedUser) setCurrentUser(JSON.parse(savedUser));
 
       const savedTickets = localStorage.getItem("colorhelper_tickets");
       if (savedTickets !== null) {
@@ -904,35 +897,102 @@ export default function ColorHelperPage() {
     }
   };
 
-  const handleAuthSuccess = (user: any) => {
-    setCurrentUser(user);
-    try {
-      localStorage.setItem("colorhelper_user", JSON.stringify(user));
-    } catch (e) {}
-    setIsAuthModalOpen(false);
+  // 페이팔 결제 플랜 변경 동기화
+  useEffect(() => {
+    selectedPlanRef.current = selectedPlan;
+  }, [selectedPlan]);
 
-    const updated = tickets + 1;
-    setTickets(updated);
-    localStorage.setItem("colorhelper_tickets", updated.toString());
-    setIsUnlocked(true);
-    setPaymentSuccessNotice(
-      lang === "ko"
-        ? `환영합니다, ${user.name || "회원"}님! 구글 로그인 완료로 1회 진단권이 추가 충전되었습니다.`
-        : lang === "ja"
-        ? `ようこそ、${user.name || "会員"}様！Googleログイン特典として診断チケットが1回分付与されました。`
-        : `Welcome, ${user.name || "User"}! You received 1 free diagnostic pass for signing in.`
-    );
-    setTimeout(() => setPaymentSuccessNotice(null), 4000);
-  };
+  // ── 페이팔 공식 JS SDK 실시간 로드 & 스마트 버튼 마운트 ───────────
+  useEffect(() => {
+    if (!isPayModalOpen) return;
 
-  const handleLogout = () => {
-    setCurrentUser(null);
-    try {
-      localStorage.removeItem("colorhelper_user");
-    } catch (e) {}
-  };
+    let isMounted = true;
+    const currency = lang === "ja" ? "JPY" : "USD";
+    const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "sb";
+    const scriptId = "paypal-sdk-script";
 
-  const executePayment = async (planType: "single" | "triple") => {
+    const renderPayPalButtons = () => {
+      if (!isMounted) return;
+      const container = document.getElementById("paypal-button-container");
+      if (!container) return;
+      container.innerHTML = "";
+
+      if ((window as any).paypal?.Buttons) {
+        try {
+          (window as any).paypal.Buttons({
+            style: {
+              layout: "vertical",
+              color: "gold",
+              shape: "rect",
+              label: "paypal",
+              height: 44,
+            },
+            createOrder: (_data: any, actions: any) => {
+              const currentPlan = selectedPlanRef.current;
+              const val = currentPlan === "single"
+                ? (lang === "ja" ? "120" : "0.79")
+                : (lang === "ja" ? "280" : "1.89");
+              return actions.order.create({
+                purchase_units: [
+                  {
+                    description:
+                      currentPlan === "single"
+                        ? "PersonalColorHelper 1-Pass Diagnostic Ticket"
+                        : "PersonalColorHelper 3-Pass Diagnostic Pack",
+                    amount: {
+                      currency_code: currency,
+                      value: val,
+                    },
+                  },
+                ],
+              });
+            },
+            onApprove: async (_data: any, actions: any) => {
+              try {
+                setPaymentProcessing(true);
+                const details = await actions.order.capture();
+                await executePayment(selectedPlanRef.current, details);
+              } catch (e) {
+                console.error("PayPal capture error:", e);
+                await executePayment(selectedPlanRef.current);
+              }
+            },
+            onError: (err: any) => {
+              console.error("PayPal Button error:", err);
+            },
+          }).render("#paypal-button-container");
+          setPaypalSdkReady(true);
+        } catch (e) {
+          console.error("PayPal render error:", e);
+        }
+      }
+    };
+
+    const existingScript = document.getElementById(scriptId) as HTMLScriptElement;
+    if (existingScript) {
+      if ((window as any).paypal) {
+        renderPayPalButtons();
+      } else {
+        existingScript.addEventListener("load", renderPayPalButtons);
+      }
+    } else {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=${currency}&intent=capture`;
+      script.async = true;
+      script.onload = () => {
+        if (isMounted) renderPayPalButtons();
+      };
+      document.body.appendChild(script);
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [isPayModalOpen, lang]);
+
+  // ── 결제 승인 & 진단권 즉시 충전 처리 ───────────────────────────
+  const executePayment = async (planType: "single" | "triple", details?: any) => {
     setPaymentProcessing(true);
     const amount = planType === "single" ? (lang === "ja" ? 120 : lang === "en" ? 0.79 : 1000) : (lang === "ja" ? 280 : lang === "en" ? 1.89 : 2500);
     const addTickets = planType === "single" ? 1 : 3;
@@ -942,8 +1002,8 @@ export default function ColorHelperPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          orderId: `PAYPAL_${Date.now()}`,
-          payerEmail: currentUser?.email || "customer@paypal.com",
+          orderId: details?.id || `PAYPAL_${Date.now()}`,
+          payerEmail: details?.payer?.email_address || "guest@personalcolorhelper.com",
           amount,
           currency: lang === "ja" ? "JPY" : lang === "en" ? "USD" : "KRW",
           ticketType: planType,
@@ -1131,52 +1191,17 @@ export default function ColorHelperPage() {
             </button>
           </div>
 
-          {/* 잔여 진단권 배지 */}
+          {/* 잔여 진단권 & 페이팔 충전 배지 (비회원/게스트 100% 즉시 이용) */}
           <button
             onClick={() => setIsPayModalOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 text-amber-900 text-xs font-bold hover:shadow transition"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-300 text-amber-900 text-xs font-bold hover:shadow-md transition"
+            title="PayPal & Card Top Up"
           >
-            <Ticket className="w-3.5 h-3.5 text-[#E07A5F]" />
-            <span className="hidden sm:inline">{t.ticketLabel}</span>
-            <span className="text-[#E07A5F] underline">{tickets}{t.ticketUnit}</span>
-            <span className="text-[10px] text-gray-500 ml-0.5">{t.recharge}</span>
+            <Ticket className="w-4 h-4 text-[#E07A5F]" />
+            <span className="hidden sm:inline">{t.ticketLabel}:</span>
+            <span className="text-[#E07A5F] font-black">{tickets}{t.ticketUnit}</span>
+            <span className="text-[10px] bg-[#E07A5F] text-white px-2 py-0.5 rounded-full font-bold ml-1">{t.recharge}</span>
           </button>
-
-          {/* 구글 로그인 상태 분기 */}
-          {currentUser ? (
-            <div className="flex items-center gap-2">
-              <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white border border-gray-200 text-xs text-gray-700">
-                {currentUser.picture ? (
-                  <img src={currentUser.picture} alt="avatar" className="w-5 h-5 rounded-full" />
-                ) : (
-                  <User className="w-4 h-4 text-gray-400" />
-                )}
-                <span className="font-semibold max-w-[80px] sm:max-w-[100px] truncate">
-                  {currentUser.name || currentUser.email?.split("@")[0]}
-                </span>
-              </div>
-              <button
-                onClick={handleLogout}
-                className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition"
-                title="Logout"
-              >
-                <LogOut className="w-4 h-4" />
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={() => setIsAuthModalOpen(true)}
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-white hover:bg-gray-50 border border-gray-300 text-xs font-bold text-gray-800 shadow-sm transition"
-            >
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24">
-                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
-                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
-              </svg>
-              <span className="hidden sm:inline">{t.googleLogin}</span>
-            </button>
-          )}
         </div>
       </div>
 
@@ -1218,6 +1243,9 @@ export default function ColorHelperPage() {
           </span>
           <span className="inline-flex items-center gap-1 bg-white px-2.5 py-1 rounded-full shadow-sm border border-gray-200">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> {t.badgePayPal}
+          </span>
+          <span className="inline-flex items-center gap-1 bg-white px-2.5 py-1 rounded-full shadow-sm border border-gray-200">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> {t.badgeNoLogin}
           </span>
           <span className="inline-flex items-center gap-1 bg-white px-2.5 py-1 rounded-full shadow-sm border border-gray-200">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> {t.badgeMatrix}
@@ -1513,15 +1541,6 @@ export default function ColorHelperPage() {
                   <CreditCard className="w-4 h-4" />
                   {t.unlockBtn}
                 </button>
-                {!currentUser && (
-                  <button
-                    onClick={() => setIsAuthModalOpen(true)}
-                    className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs border border-white/20 transition flex items-center justify-center gap-2"
-                  >
-                    <LogIn className="w-4 h-4" />
-                    {t.loginBonusBtn}
-                  </button>
-                )}
               </div>
 
               <div className="mt-4 flex items-center justify-center gap-4 text-[11px] text-gray-400">
@@ -1733,96 +1752,143 @@ export default function ColorHelperPage() {
       </footer>
 
       {/* ── MODAL 1: 구글 로그인 모달 ─────────────────────────────── */}
-      <USAuthModal
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
-        initialMode="signin"
-        title={t.googleLogin}
-        subtitle="Sign in to save your result and get 1 free pass."
-        onSuccess={handleAuthSuccess}
-      />
+      
 
-      {/* ── MODAL 2: 페이팔 & 간편결제 모달 ────────────────────────── */}
+      {/* ── MODAL 2: 페이팔 & 카드 즉시 결제 모달 ────────────────── */}
       {isPayModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in">
-          <div className="relative w-full max-w-md bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-100">
+          <div className="relative w-full max-w-md bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-100 max-h-[92vh] overflow-y-auto">
             <button
               onClick={() => setIsPayModalOpen(false)}
               className="absolute top-5 right-5 p-2 rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition"
+              title="Close"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="text-center mb-6">
-              <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-900 flex items-center justify-center mx-auto mb-3">
+              <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-900 flex items-center justify-center mx-auto mb-3 shadow-inner">
                 <Ticket className="w-6 h-6 text-[#E07A5F]" />
               </div>
               <h3 className="text-xl font-extrabold text-gray-900">{t.modalTitle}</h3>
               <p className="text-xs text-gray-500 mt-1">{t.modalSubtitle}</p>
             </div>
 
-            <div className="space-y-3 mb-6">
-              <div className="p-4 rounded-2xl border-2 border-[#E07A5F] bg-[#FFFBF9] relative flex items-center justify-between">
-                <div>
-                  <div className="text-xs font-bold text-[#E07A5F]">{t.singlePlanTag}</div>
-                  <div className="text-sm font-extrabold text-gray-900">{t.singlePlanName}</div>
-                  <div className="text-[11px] text-gray-500">{t.singlePlanDesc}</div>
+            {/* 결제 상품 플랜 선택 */}
+            <div className="space-y-3 mb-5">
+              <div
+                onClick={() => setSelectedPlan("single")}
+                className={`p-4 rounded-2xl border-2 cursor-pointer transition relative flex items-center justify-between ${
+                  selectedPlan === "single"
+                    ? "border-[#E07A5F] bg-[#FFFBF9] shadow-md ring-2 ring-[#E07A5F]/20"
+                    : "border-gray-200 hover:border-gray-300 bg-white"
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition ${
+                      selectedPlan === "single"
+                        ? "border-[#E07A5F] bg-[#E07A5F]"
+                        : "border-gray-300 bg-white"
+                    }`}
+                  >
+                    {selectedPlan === "single" && <div className="w-2 h-2 rounded-full bg-white" />}
+                  </div>
+                  <div>
+                    <div className="text-[11px] font-bold text-[#E07A5F]">{t.singlePlanTag}</div>
+                    <div className="text-sm font-extrabold text-gray-900">{t.singlePlanName}</div>
+                    <div className="text-[11px] text-gray-500">{t.singlePlanDesc}</div>
+                  </div>
                 </div>
                 <div className="text-right">
                   <div className="text-lg font-black text-gray-900">{t.singlePrice}</div>
-                  <div className="text-[10px] text-gray-400">{t.singlePriceSub}</div>
+                  <div className="text-[10px] text-gray-400 font-semibold">{t.singlePriceSub}</div>
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl border border-gray-200 hover:border-gray-300 bg-white flex items-center justify-between">
-                <div>
-                  <div className="text-xs font-bold text-emerald-600">{t.triplePlanTag}</div>
-                  <div className="text-sm font-bold text-gray-900">{t.triplePlanName}</div>
-                  <div className="text-[11px] text-gray-500">{t.triplePlanDesc}</div>
+              <div
+                onClick={() => setSelectedPlan("triple")}
+                className={`p-4 rounded-2xl border-2 cursor-pointer transition relative flex items-center justify-between ${
+                  selectedPlan === "triple"
+                    ? "border-emerald-500 bg-emerald-50/40 shadow-md ring-2 ring-emerald-500/20"
+                    : "border-gray-200 hover:border-gray-300 bg-white"
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition ${
+                      selectedPlan === "triple"
+                        ? "border-emerald-600 bg-emerald-600"
+                        : "border-gray-300 bg-white"
+                    }`}
+                  >
+                    {selectedPlan === "triple" && <div className="w-2 h-2 rounded-full bg-white" />}
+                  </div>
+                  <div>
+                    <div className="text-[11px] font-bold text-emerald-600">{t.triplePlanTag}</div>
+                    <div className="text-sm font-extrabold text-gray-900">{t.triplePlanName}</div>
+                    <div className="text-[11px] text-gray-500">{t.triplePlanDesc}</div>
+                  </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-base font-extrabold text-gray-900">{t.triplePrice}</div>
-                  <div className="text-[10px] text-gray-400">{t.triplePriceSub}</div>
+                  <div className="text-lg font-black text-gray-900">{t.triplePrice}</div>
+                  <div className="text-[10px] text-gray-400 font-semibold">{t.triplePriceSub}</div>
                 </div>
               </div>
             </div>
 
-            <div className="space-y-2.5">
+            {/* 공식 페이팔 스마트 버튼 마운트 영역 */}
+            <div className="mb-3">
+              <div className="flex items-center justify-between text-[11px] text-gray-500 font-medium mb-2 px-1">
+                <span>공식 페이팔 & 신용/체크카드 결제</span>
+                <span className="text-emerald-600 font-bold flex items-center gap-1">
+                  <ShieldCheck className="w-3.5 h-3.5" /> 256-bit SSL
+                </span>
+              </div>
+              <div id="paypal-button-container" className="min-h-[96px] w-full" />
+            </div>
+
+            {/* 직접 결제 및 테스트 승인 버튼 */}
+            <div className="space-y-2 pt-2 border-t border-gray-100">
               <button
                 disabled={paymentProcessing}
-                onClick={() => executePayment("single")}
-                className="w-full py-3.5 px-4 rounded-xl bg-[#0070BA] hover:bg-[#003087] text-white font-extrabold text-sm shadow-md transition flex items-center justify-center gap-2"
+                onClick={() => executePayment(selectedPlan)}
+                className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#0070BA] to-[#003087] hover:from-[#005ea6] hover:to-[#00256c] text-white font-extrabold text-xs shadow-md transition flex items-center justify-center gap-2"
               >
                 {paymentProcessing ? (
                   <span>Processing...</span>
                 ) : (
                   <>
                     <span className="font-black italic tracking-wider">PayPal</span>
-                    <span>{t.payWithPaypal}</span>
+                    <span>
+                      {selectedPlan === "single" ? t.payWithPaypal : t.payTriplePaypal}
+                    </span>
                   </>
                 )}
               </button>
 
               <button
-                disabled={paymentProcessing}
-                onClick={() => executePayment("triple")}
-                className="w-full py-2.5 px-4 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold text-xs transition flex items-center justify-center gap-1.5"
-              >
-                <span>{t.payTriplePaypal}</span>
-              </button>
-
-              <button
-                onClick={() => executePayment("single")}
-                className="w-full py-2 px-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-[11px] border border-emerald-300 transition flex items-center justify-center gap-1"
+                onClick={() => executePayment(selectedPlan)}
+                className="w-full py-2 px-3 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-600 font-medium text-[11px] border border-gray-200 transition flex items-center justify-center gap-1"
               >
                 <Check className="w-3.5 h-3.5 text-emerald-600" />
                 {t.testPayBtn}
               </button>
             </div>
 
-            <p className="text-[11px] text-gray-400 text-center mt-4">
-              PayPal official 256-bit encrypted checkout. Cancel anytime.
-            </p>
+            {/* 지원 결제 수단 & 신뢰 배지 */}
+            <div className="mt-4 pt-3 border-t border-gray-100 text-center">
+              <div className="flex items-center justify-center gap-1.5 text-[10px] text-gray-400 font-semibold mb-1">
+                <span className="px-1.5 py-0.5 bg-gray-100 rounded text-gray-700">PayPal</span>
+                <span className="px-1.5 py-0.5 bg-gray-100 rounded text-gray-700">Visa</span>
+                <span className="px-1.5 py-0.5 bg-gray-100 rounded text-gray-700">Mastercard</span>
+                <span className="px-1.5 py-0.5 bg-gray-100 rounded text-gray-700">AMEX</span>
+                <span className="px-1.5 py-0.5 bg-gray-100 rounded text-gray-700">JCB</span>
+              </div>
+              <p className="text-[10px] text-gray-400">
+                Official PayPal Checkout • Zero Login Required • Instant Unlock
+              </p>
+            </div>
           </div>
         </div>
       )}
