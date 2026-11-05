@@ -823,9 +823,9 @@ const ALL_STAYS: StayInfo[] = [
       }
 ],
     activeDeal: {
-      title: "Fora Reserve VIP Inclusions",
-      tag: "DAILY BREAKFAST + $100 CREDIT",
-      desc: "Daily Complimentary Breakfast for 2 + $100 Resort / Spa Credit & Room Upgrade Priority"
+      title: "BOOK YOUR STAY · Official Sanctuary Experience",
+      tag: "EXCLUSIVE PACKAGE",
+      desc: "Book through StayHelper VIP for official BOOK YOUR STAY inclusions + $100 Resort Credit & Daily Breakfast"
     }
   },
   {

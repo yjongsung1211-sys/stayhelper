@@ -10,9 +10,9 @@
     "lint": "next lint",
     "test:tryon": "node verify_gender_tryon_pipeline.js",
     "audit": "node run_night_inspection.js",
-    "audit:promos": "python verify_promotions_pipeline.py --limit 20",
-    "audit:promos:all": "python verify_promotions_pipeline.py --all --telegram",
-    "audit:promos:sync": "python verify_promotions_pipeline.py --all --sync --telegram"
+    "audit:promos": "\"C:\\Users\\wushu\\.local\\bin\\python3.15.exe\" verify_promotions_pipeline.py --limit 20",
+    "audit:promos:all": "\"C:\\Users\\wushu\\.local\\bin\\python3.15.exe\" verify_promotions_pipeline.py --all --telegram",
+    "audit:promos:sync": "\"C:\\Users\\wushu\\.local\\bin\\python3.15.exe\" verify_promotions_pipeline.py --all --sync --telegram"
   },
   "dependencies": {
     "@types/nodemailer": "^8.0.2",
