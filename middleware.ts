@@ -26,6 +26,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
+  // When accessing /stylinghelper via personalcolorhelper.com, redirect directly to official stylinghelper.com
+  if (host.includes('personalcolorhelper') && pathname.startsWith('/stylinghelper')) {
+    return NextResponse.redirect('https://stylinghelper.com', 301);
+  }
+
   return NextResponse.next();
 }
 

@@ -1725,23 +1725,30 @@ export default function ColorHelperPage() {
               </div>
             )}
 
-            <div className="mt-10 p-6 rounded-2xl bg-gradient-to-r from-[#1A1715] to-[#2C2623] text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
-              <div>
-                <div className="inline-block px-2 py-0.5 rounded bg-[#E07A5F] text-[10px] font-bold text-white uppercase tracking-wider mb-2">
-                  {t.stylingBannerTag}
+            {/* ── STYLING HELPER FASHION LINK (오직 영어 버전에서만 노출 & stylinghelper.com 직행) ── */}
+            {lang === "en" && (
+              <div className="mt-10 p-6 rounded-2xl bg-gradient-to-r from-[#1A1715] to-[#2C2623] text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+                <div>
+                  <div className="inline-block px-2.5 py-0.5 rounded-full bg-[#E07A5F] text-[10px] font-bold text-white uppercase tracking-wider mb-2">
+                    StylingHelper Fashion Match
+                  </div>
+                  <h4 className="text-base sm:text-lg font-bold">Luxury Outfits Curated for Your Tone</h4>
+                  <p className="text-xs text-gray-300 mt-0.5">
+                    Explore live US designer inventory (Nordstrom, SSENSE, Zara US) styled to complement your 12-season palette.
+                  </p>
                 </div>
-                <h4 className="text-base sm:text-lg font-bold">{t.stylingBannerTitle}</h4>
-                <p className="text-xs text-gray-300 mt-0.5">{t.stylingBannerDesc}</p>
-              </div>
 
-              <Link
-                href="/stylinghelper"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white hover:bg-gray-100 text-gray-900 text-xs font-extrabold transition shadow-md whitespace-nowrap"
-              >
-                {t.stylingBannerBtn}
-                <ArrowRight className="w-4 h-4 text-[#E07A5F]" />
-              </Link>
-            </div>
+                <a
+                  href="https://stylinghelper.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white hover:bg-gray-100 text-gray-900 text-xs font-extrabold transition shadow-md whitespace-nowrap"
+                >
+                  Explore StylingHelper
+                  <ArrowRight className="w-4 h-4 text-[#E07A5F]" />
+                </a>
+              </div>
+            )}
           </div>
         </section>
       )}
