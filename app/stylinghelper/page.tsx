@@ -625,7 +625,7 @@ export default function StylingHelperBright() {
   return (
     <div className="min-h-screen bg-[#FBFBFC] text-[#121316] font-sans selection:bg-[#121316] selection:text-[#FAF9F5]">
       {/* ======================================================= */}
-      {/* 0. NEW SERVICE PROMO BANNER: 퍼스널컬러헬퍼 */}
+      {/* 0. NEW SERVICE PROMO BANNER: PersonalColorHelper */}
       {/* ======================================================= */}
       <div className="bg-gradient-to-r from-[#1E1915] via-[#2F1F18] to-[#1E1915] text-white px-4 py-2 text-xs border-b border-amber-900/30">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
@@ -634,19 +634,19 @@ export default function StylingHelperBright() {
               NEW SERVICE
             </span>
             <span className="font-extrabold text-amber-200">
-              퍼스널컬러헬퍼 (PersonalColorHelper)
+              PersonalColorHelper
             </span>
             <span className="hidden sm:inline text-zinc-300 truncate">
-              · 내 얼굴에 꼭 맞는 12톤 퍼스널 컬러 & 청담동 가상 천 드레이핑 3초 진단실 (1회 ₩1,000)
+              · Discover your 12-season personal palette & virtual drape test in 3 seconds ($0.79 / trial)
             </span>
           </div>
 
           <div className="flex items-center gap-2 flex-shrink-0">
             <Link
-              href="/colorhelper"
+              href="/colorhelper/en"
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white hover:bg-zinc-100 text-[#121316] font-extrabold text-[11px] shadow-sm transition"
             >
-              <span>지금 진단하기</span>
+              <span>Start Analysis</span>
               <ArrowRight className="w-3 h-3 text-[#E07A5F]" />
             </Link>
           </div>
@@ -677,16 +677,16 @@ export default function StylingHelperBright() {
 
           {/* Top Header Actions: Pro Upgrade & Member Auth */}
           <div className="flex items-center gap-2 sm:gap-2.5">
-            {/* 퍼스널컬러헬퍼 Direct Link */}
+            {/* PersonalColorHelper Direct Link */}
             <Link
-              href="/colorhelper"
+              href="/colorhelper/en"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-rose-50 to-amber-50 hover:from-rose-100 hover:to-amber-100 text-[#1E1B18] text-xs font-bold border border-rose-200/80 transition-all shadow-sm group"
             >
               <Palette className="w-3.5 h-3.5 text-[#E07A5F]" />
-              <span className="font-extrabold hidden sm:inline">퍼스널컬러헬퍼</span>
-              <span className="font-extrabold sm:hidden">퍼스널컬러</span>
+              <span className="font-extrabold hidden sm:inline">Color Analysis</span>
+              <span className="font-extrabold sm:hidden">Color</span>
               <span className="px-1.5 py-0.5 rounded bg-[#E07A5F] text-white text-[9px] font-black">
-                1회 1천원
+                $0.79
               </span>
             </Link>
             {/* Pro Subscription CTA */}
@@ -856,7 +856,7 @@ export default function StylingHelperBright() {
       </section>
 
       {/* ======================================================= */}
-      {/* 2.5 SPECIAL FEATURED BANNER: 퍼스널컬러헬퍼 (PERSONAL COLOR HELPER) */}
+      {/* 2.5 SPECIAL FEATURED BANNER: PersonalColorHelper */}
       {/* ======================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#1E1B18] via-[#2E221B] to-[#171412] text-white p-6 sm:p-10 shadow-2xl border border-amber-500/20">
@@ -869,21 +869,21 @@ export default function StylingHelperBright() {
                 AI Personal Color & Virtual Draping Studio
               </div>
               <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3">
-                옷을 고르기 전, 내 인생 컬러부터 찾아보세요 <br />
-                <span className="text-[#FF9E80]">퍼스널컬러헬퍼 (PersonalColorHelper)</span>
+                Find your signature color palette before styling <br />
+                <span className="text-[#FF9E80]">PersonalColorHelper Studio</span>
               </h2>
               <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6">
-                청담동 15만 원 오프라인 진단을 <strong>1회 단돈 1,000원 ($0.79 / ¥120)</strong>에! <br className="hidden sm:inline" />
-                봄웜·여쿨·갈웜·겨쿨 12톤 정밀 분석, 실시간 가상 천 드레이핑(Virtual Draping), 그리고 내 톤에 꼭 맞는 백화점 인생 립스틱 3종 처방까지 3초 만에 확인하세요.
+                Professional salon color analysis for just <strong>$0.79 / single trial</strong>. <br className="hidden sm:inline" />
+                Precise 12-season color matrix, real-time virtual fabric draping, and curated lipstick matches delivered in 3 seconds.
               </p>
 
               <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                 <Link
-                  href="/colorhelper"
+                  href="/colorhelper/en"
                   className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#E07A5F] to-amber-500 hover:from-[#D0694E] hover:to-amber-600 text-white font-extrabold text-xs shadow-lg transition hover:scale-[1.02]"
                 >
                   <Palette className="w-4 h-4" />
-                  <span>퍼스널컬러헬퍼 진단실 바로가기 (₩1,000)</span>
+                  <span>Start Color Analysis ($0.79)</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
 
@@ -905,27 +905,27 @@ export default function StylingHelperBright() {
 
             {/* Visual Swatch Badges */}
             <div className="bg-white/5 backdrop-blur-md rounded-2xl p-5 border border-white/10 lg:w-80 flex flex-col gap-3">
-              <div className="text-xs font-extrabold text-amber-200">✨ 4계절 12톤 대표 팔레트</div>
+              <div className="text-xs font-extrabold text-amber-200">✨ 4-Season 12-Tone Palettes</div>
               <div className="grid grid-cols-4 gap-2 text-center text-[10px]">
                 <div className="p-2 rounded-xl bg-amber-500/20 border border-amber-400/30">
                   <div className="w-5 h-5 mx-auto rounded-full bg-[#FFA07A] mb-1 shadow-sm" />
-                  <span className="font-bold text-amber-200">봄 웜</span>
+                  <span className="font-bold text-amber-200">Spring Warm</span>
                 </div>
                 <div className="p-2 rounded-xl bg-sky-500/20 border border-sky-400/30">
                   <div className="w-5 h-5 mx-auto rounded-full bg-[#E1BEE7] mb-1 shadow-sm" />
-                  <span className="font-bold text-sky-200">여름 쿨</span>
+                  <span className="font-bold text-sky-200">Summer Cool</span>
                 </div>
                 <div className="p-2 rounded-xl bg-orange-500/20 border border-orange-400/30">
                   <div className="w-5 h-5 mx-auto rounded-full bg-[#B37D77] mb-1 shadow-sm" />
-                  <span className="font-bold text-orange-200">가을 웜</span>
+                  <span className="font-bold text-orange-200">Autumn Warm</span>
                 </div>
                 <div className="p-2 rounded-xl bg-purple-500/20 border border-purple-400/30">
                   <div className="w-5 h-5 mx-auto rounded-full bg-[#FF007F] mb-1 shadow-sm" />
-                  <span className="font-bold text-purple-200">겨울 쿨</span>
+                  <span className="font-bold text-purple-200">Winter Cool</span>
                 </div>
               </div>
               <div className="text-[11px] text-zinc-400 text-center pt-1 border-t border-white/10">
-                ✓ 구글 원탭 로그인 • 페이팔 256비트 결제 • 인스타 카드 저장
+                ✓ Google One-Tap • 256-bit Secure Checkout • Palette Card Export
               </div>
             </div>
           </div>
@@ -1936,8 +1936,8 @@ export default function StylingHelperBright() {
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 font-medium">
           <p>© 2026 STYLING HELPER. Click Any Look, Shop the Outfit. All rights reserved.</p>
           <div className="flex items-center gap-4 text-zinc-600">
-            <Link href="/colorhelper" className="text-amber-800 hover:text-amber-900 font-bold underline">
-              🎨 퍼스널컬러헬퍼
+            <Link href="/colorhelper/en" className="text-amber-800 hover:text-amber-900 font-bold underline">
+              🎨 Color Analysis
             </Link>
             <span>•</span>
             <span>Powered by Advanced Fashion AI</span>
