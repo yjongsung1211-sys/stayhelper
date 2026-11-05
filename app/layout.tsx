@@ -170,7 +170,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
-        {/* Vercel Web Analytics Engine (Zero Dependency Native Script) */}
+        {/* Vercel Web Analytics Engine with Multi-Site Domain Routing */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+              window.va('beforeSend', function (event) {
+                try {
+                  var host = window.location.hostname || '';
+                  var site = 'personalcolorhelper';
+                  if (host.indexOf('stylinghelper') !== -1) site = 'stylinghelper';
+                  else if (host.indexOf('stayhelper') !== -1) site = 'stayhelper';
+                  else if (host.indexOf('weddinghelper') !== -1) site = 'weddinghelper';
+                  else if (host.indexOf('roomhelper') !== -1) site = 'roomhelper';
+                  else if (host.indexOf('personalcolorhelper') !== -1) site = 'personalcolorhelper';
+
+                  if (event && event.url) {
+                    var p = event.url;
+                    var tag = '/[' + site + ']';
+                    if (p.indexOf(tag) !== 0) {
+                      event.url = tag + (p === '/' ? '' : p);
+                    }
+                  }
+                } catch (e) {}
+                return event;
+              });
+            `,
+          }}
+        />
         <script defer src="/_vercel/insights/script.js"></script>
       </head>
       <body className="min-h-screen bg-[#FDFCFB] text-neutral-900 antialiased selection:bg-neutral-900 selection:text-white font-sans">

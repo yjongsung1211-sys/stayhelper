@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Vercel Read-Only API Traffic & Referrer Collector
-- Target: StayHelper, StylingHelper, RoomHelper, etc.
+Vercel Read-Only API Traffic & Referrer Collector with 5-Helper Site Breakdown
+- Target: PersonalColorHelper, StylingHelper, StayHelper, WeddingHelper, RoomHelper
 - Metrics: Total Visits, Pageviews, Referrers (Instagram, Pinterest, Google), Top Countries, Top Paths
 """
 
@@ -71,7 +71,7 @@ def collect_vercel_traffic():
     projects = projects_res.get("projects", [])
     print(f"[+] Successfully fetched {len(projects)} projects from Vercel.")
 
-    now = datetime.utcnow()
+    now = datetime.now()
     yesterday = now - timedelta(days=1)
     since_str = yesterday.strftime("%Y-%m-%dT00:00:00.000Z")
     until_str = now.strftime("%Y-%m-%dT%H:%M:%S.000Z")
@@ -112,7 +112,7 @@ def collect_vercel_traffic():
         paths_res = vercel_api_get(
             "/v1/query/web-analytics/visits/aggregate",
             token,
-            {"projectId": prj_id, "since": since_str, "until": until_str, "by": "requestPath", "limit": 5}
+            {"projectId": prj_id, "since": since_str, "until": until_str, "by": "requestPath", "limit": 20}
         )
 
         summary_results.append({
@@ -140,27 +140,32 @@ def collect_vercel_traffic():
         
         for item in summary_results:
             p_name = item["projectName"]
-            domains = ", ".join(item["domains"][:2]) if item["domains"] else "N/A"
+            domains = ", ".join(item["domains"][:3]) if item["domains"] else "N/A"
             f.write(f"## 🌐 {p_name} ({domains})\n\n")
             
-            # Visits
-            visits = item["visits"]
-            if isinstance(visits, dict) and "error" in visits:
-                f.write(f"> ⚠️ Web Analytics status: {visits.get('error')} (Ensure Web Analytics is enabled in project settings)\n\n")
-            else:
-                total_val = visits.get("value", 0) if isinstance(visits, dict) else visits
-                f.write(f"* **Total Visitors / Views**: `{total_val}`\n\n")
+            # Paths Breakdown (Site Tags & Routes)
+            paths = item.get("paths", {})
+            if isinstance(paths, dict) and "data" in paths and paths["data"]:
+                f.write(f"### 📍 Sub-Sites & Paths Breakdown:\n")
+                f.write("| Path / Sub-Site | Visitors | Pageviews |\n| :--- | :---: | :---: |\n")
+                for p in paths["data"]:
+                    path_str = p.get("requestPath") or "/"
+                    v_cnt = p.get("visitors", p.get("value", 0))
+                    pv_cnt = p.get("pageviews", 0)
+                    f.write(f"| `{path_str}` | **{v_cnt}** | **{pv_cnt}** |\n")
+                f.write("\n")
 
             # Referrers (Instagram, Pinterest, etc.)
             refs = item.get("referrers", {})
             f.write(f"### 📱 Inflow Sources (Referrers):\n")
             if isinstance(refs, dict) and "data" in refs and refs["data"]:
-                f.write("| Inflow Channel | Visitors / Hits |\n| :--- | :---: |\n")
+                f.write("| Inflow Channel | Visitors | Pageviews |\n| :--- | :---: | :---: |\n")
                 for r in refs["data"]:
                     ref_host = r.get("referrerHostname") or "Direct / None"
-                    count = r.get("value", 0)
+                    v_cnt = r.get("visitors", r.get("value", 0))
+                    pv_cnt = r.get("pageviews", 0)
                     icon = "📸 " if "instagram" in ref_host.lower() else ("📌 " if "pinterest" in ref_host.lower() else ("🔍 " if "google" in ref_host.lower() else "🌐 "))
-                    f.write(f"| {icon}{ref_host} | **{count}** |\n")
+                    f.write(f"| {icon}{ref_host} | **{v_cnt}** | **{pv_cnt}** |\n")
                 f.write("\n")
             else:
                 f.write(f"* No specific external referrer recorded or Web Analytics enabled.\n\n")
@@ -171,8 +176,9 @@ def collect_vercel_traffic():
                 f.write(f"### 🌍 Top Countries:\n")
                 for c in cnts["data"]:
                     c_code = c.get("country", "Unknown")
-                    c_val = c.get("value", 0)
-                    f.write(f"- `{c_code}`: {c_val} visits\n")
+                    v_cnt = c.get("visitors", c.get("value", 0))
+                    pv_cnt = c.get("pageviews", 0)
+                    f.write(f"- `{c_code}`: {v_cnt} visitors ({pv_cnt} pageviews)\n")
                 f.write("\n")
 
             f.write("---\n\n")
