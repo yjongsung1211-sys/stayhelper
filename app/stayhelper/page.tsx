@@ -2395,20 +2395,10 @@ export default function StayHelperLuxuryShowcase() {
   };
 
   const handleSelectStay = (id: string) => {
+    if (id === selectedStayId) return;
     setSelectedStayId(id);
     setIsEnded(false);
-    [mobileVideoRef.current, desktopVideoRef.current].forEach((vid) => {
-      if (vid) {
-        vid.currentTime = 0;
-        vid.load();
-        vid.muted = isMuted;
-        vid.play().then(() => setIsPlaying(true)).catch(() => {
-          vid.muted = true;
-          setIsMuted(true);
-          vid.play().then(() => setIsPlaying(true)).catch(() => {});
-        });
-      }
-    });
+    setIsPlaying(true);
   };
 
   const togglePlay = () => {
@@ -2521,7 +2511,7 @@ export default function StayHelperLuxuryShowcase() {
               poster={currentStay.posterSrc}
               playsInline
               autoPlay
-              preload="metadata"
+              preload="auto"
               muted={isMuted}
               onEnded={() => handleNextStay()}
               className="w-full h-full object-cover"
@@ -2817,7 +2807,7 @@ export default function StayHelperLuxuryShowcase() {
                       poster={currentStay.posterSrc}
                       playsInline
                       autoPlay
-                      preload="metadata"
+                      preload="auto"
                       muted={isMuted}
                       onEnded={() => handleNextStay()}
                       className="w-full h-full object-cover cursor-pointer"
