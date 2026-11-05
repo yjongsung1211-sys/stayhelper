@@ -1257,17 +1257,21 @@ export default function ColorHelperPage() {
       </header>
 
       {/* ── STEP 1: 사진 등록 & 1초 프리셋 모델 선택 ──────────────── */}
-      <section className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-200/80 mb-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-          <div>
-            <h2 className="text-lg sm:text-xl font-bold text-gray-900 flex items-center gap-2">
-              <Camera className="w-5 h-5 text-[#E07A5F]" />
-              {t.uploadTitle}
-            </h2>
-            <p className="text-xs sm:text-sm text-gray-500 mt-0.5">{t.uploadDesc}</p>
+      <section className="bg-white rounded-3xl p-6 sm:p-10 shadow-lg border border-gray-200/90 mb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 sm:gap-6 mb-7 pb-6 border-b border-gray-100">
+          <div className="flex items-center gap-3.5 sm:gap-4">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-amber-100 to-[#E07A5F]/20 text-[#E07A5F] flex items-center justify-center shadow-inner flex-shrink-0">
+              <Camera className="w-6 h-6 sm:w-7 sm:h-7" />
+            </div>
+            <div>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-gray-900 tracking-tight">
+                {t.uploadTitle}
+              </h2>
+              <p className="text-xs sm:text-sm text-gray-500 mt-1 max-w-lg leading-relaxed">{t.uploadDesc}</p>
+            </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-2.5 sm:gap-3 w-full md:w-auto">
             <input
               type="file"
               ref={fileInputRef}
@@ -1277,27 +1281,27 @@ export default function ColorHelperPage() {
             />
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold text-xs transition"
+              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-800 font-extrabold text-xs sm:text-sm border border-gray-300 shadow-sm hover:shadow transition"
             >
-              <Upload className="w-4 h-4" />
-              {t.uploadFileBtn}
+              <Upload className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
+              <span>{t.uploadFileBtn}</span>
             </button>
 
             {!cameraActive ? (
               <button
                 onClick={startCamera}
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#E07A5F] hover:bg-[#D0694E] text-white font-semibold text-xs shadow-sm transition"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-[#E07A5F] hover:from-amber-600 hover:to-[#D0694E] text-white font-extrabold text-xs sm:text-sm shadow-md hover:shadow-lg transition transform hover:-translate-y-0.5"
               >
-                <Camera className="w-4 h-4" />
-                {t.cameraBtn}
+                <Camera className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span>{t.cameraBtn}</span>
               </button>
             ) : (
               <button
                 onClick={captureCamera}
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs shadow-sm transition animate-pulse"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs sm:text-sm shadow-md transition animate-pulse"
               >
-                <CheckCircle2 className="w-4 h-4" />
-                {t.cameraShootBtn}
+                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span>{t.cameraShootBtn}</span>
               </button>
             )}
           </div>
