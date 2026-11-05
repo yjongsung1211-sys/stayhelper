@@ -1202,6 +1202,9 @@ function InvitationContent() {
 }
 
 export default function MobileInvitePage() {
+  useEffect(() => {
+    document.title = 'Wedding Invitation | WeddingHelper Bespoke Mobile Invitation';
+  }, []);
   return (
     <Suspense fallback={<div className="min-h-screen bg-[#1F181B] flex items-center justify-center text-white font-serif">Loading Luxury Invitation...</div>}>
       <InvitationContent />

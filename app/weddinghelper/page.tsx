@@ -184,6 +184,9 @@ function playBgmAudio(trackId: string) {
 
 
 export default function WeddingHelperPage() {
+  useEffect(() => {
+    document.title = 'WeddingHelper · Where Forever Begins | Curated Luxury Weddings';
+  }, []);
   const [selectedThemeId, setSelectedThemeId] = useState<string>('bali-jungle');
   const [filterCategory, setFilterCategory] = useState<'all' | 'western' | 'heritage' | 'global_killer'>('all');
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
