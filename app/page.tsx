@@ -608,9 +608,9 @@ export default function ColorHelperPage() {
   const [activeTab, setActiveTab] = useState<"result" | "cosmetics">("result");
 
   // 진단 티켓 관리 (비회원/게스트 100% 지원)
-  const [tickets, setTickets] = useState<number>(1);
+  const [tickets, setTickets] = useState<number>(0);
   const [isPayModalOpen, setIsPayModalOpen] = useState(false);
-  const [isUnlocked, setIsUnlocked] = useState(true);
+  const [isUnlocked, setIsUnlocked] = useState(false);
 
   // 페이팔 결제 플랜 & SDK 상태
   const [selectedPlan, setSelectedPlan] = useState<"single" | "triple">("single");
@@ -666,10 +666,13 @@ export default function ColorHelperPage() {
 
       const savedTickets = localStorage.getItem("colorhelper_tickets");
       if (savedTickets !== null) {
-        setTickets(parseInt(savedTickets, 10));
+        const count = parseInt(savedTickets, 10);
+        setTickets(count);
+        setIsUnlocked(count > 0);
       } else {
-        setTickets(1);
-        localStorage.setItem("colorhelper_tickets", "1");
+        setTickets(0);
+        setIsUnlocked(false);
+        localStorage.setItem("colorhelper_tickets", "0");
       }
     } catch (e) {}
 
@@ -689,7 +692,7 @@ export default function ColorHelperPage() {
   // ── 샘플 모델 로드 ──────────────────────────────────────────
   const loadPresetModel = (preset: (typeof PRESET_MODELS)[0]) => {
     setIsCustomPhoto(false);
-    setIsUnlocked(true);
+    setIsUnlocked(tickets > 0);
 
     const cvs = document.createElement("canvas");
     cvs.width = 600;
@@ -1525,7 +1528,7 @@ export default function ColorHelperPage() {
           </div>
 
           {/* 결제 전 잠금 오버레이 */}
-          {!isUnlocked && isCustomPhoto && (
+          {!isUnlocked && (
             <div className="relative my-4 p-8 rounded-2xl bg-gradient-to-b from-gray-900/95 to-black text-white text-center shadow-2xl z-20 border border-amber-500/30">
               <div className="w-14 h-14 mx-auto rounded-2xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400 mb-4 shadow-lg">
                 <Lock className="w-7 h-7" />
@@ -1551,7 +1554,7 @@ export default function ColorHelperPage() {
             </div>
           )}
 
-          <div className={!isUnlocked && isCustomPhoto ? "filter blur-md pointer-events-none select-none opacity-40" : ""}>
+          <div className={!isUnlocked ? "filter blur-md pointer-events-none select-none opacity-40" : ""}>
             {activeTab === "result" ? (
               <div>
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
