@@ -341,6 +341,12 @@ export default function StylingHelperBright() {
   // Load subscription state & member session from localStorage
   // ----------------------------------------------------
   useEffect(() => {
+    // personalcolorhelper.com 도메인으로 접속된 경우 공식 stylinghelper.com 으로 즉시 리다이렉트
+    if (typeof window !== 'undefined' && window.location.hostname.includes('personalcolorhelper')) {
+      window.location.replace('https://stylinghelper.com');
+      return;
+    }
+
     try {
       const trialUsed = localStorage.getItem('styling_free_trial_used') === 'true';
       const isPro = localStorage.getItem('styling_is_pro_subscriber') === 'true';
