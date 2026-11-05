@@ -19,6 +19,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
+  // When accessing via stylinghelper.com, serve StylingHelper at root '/'
+  if (host.includes('stylinghelper') && pathname === '/') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/stylinghelper';
+    return NextResponse.rewrite(url);
+  }
+
   return NextResponse.next();
 }
 
