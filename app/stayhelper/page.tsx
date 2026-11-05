@@ -2355,6 +2355,48 @@ export default function StayHelperLuxuryShowcase() {
   const currentIndex = ALL_STAYS.findIndex((s) => s.id === selectedStayId);
   const heroBackground = currentStay.wideHero || currentStay.posterSrc;
 
+  // Intelligent High-Speed Prefetching Cache
+  const prefetchedStays = useRef<Set<string>>(new Set());
+  const prefetchStay = (stayId: string) => {
+    if (typeof window === "undefined" || prefetchedStays.current.has(stayId)) return;
+    const target = ALL_STAYS.find((s) => s.id === stayId);
+    if (!target) return;
+    prefetchedStays.current.add(stayId);
+
+    // 1. In-memory image caching for instant backdrop rendering
+    if (target.wideHero) {
+      const img = new (window as any).Image();
+      img.src = target.wideHero;
+    }
+    if (target.posterSrc && target.posterSrc !== target.wideHero) {
+      const img = new (window as any).Image();
+      img.src = target.posterSrc;
+    }
+
+    // 2. Pre-buffer initial 512KB of video into browser HTTP cache
+    if (target.videoSrc) {
+      fetch(target.videoSrc, {
+        headers: { Range: "bytes=0-524288" },
+        mode: "cors"
+      }).catch(() => {});
+    }
+  };
+
+  // Idle prefetch top 4 featured stays after initial render
+  useEffect(() => {
+    const prefetchFeatured = () => {
+      ["stay-01", "stay-02", "stay-03", "stay-04"].forEach((id) => prefetchStay(id));
+    };
+    if (typeof window !== "undefined") {
+      if ("requestIdleCallback" in window) {
+        (window as any).requestIdleCallback(prefetchFeatured);
+      } else {
+        setTimeout(prefetchFeatured, 1200);
+      }
+    }
+  }, []);
+
+
   // 100% Resilient Autoplay Orchestrator on stay selection and desktop switch
   useEffect(() => {
     if (isDesktop === null) return;
@@ -2396,6 +2438,7 @@ export default function StayHelperLuxuryShowcase() {
 
   const handleSelectStay = (id: string) => {
     if (id === selectedStayId) return;
+    prefetchStay(id);
     setSelectedStayId(id);
     setIsEnded(false);
     setIsPlaying(true);
@@ -2506,7 +2549,7 @@ export default function StayHelperLuxuryShowcase() {
           {isDesktop === false && (
             <video
               ref={mobileVideoRef}
-              key={`mobile-${currentStay.id}-${currentStay.videoSrc}`}
+              key="mobile-master-player"
               src={currentStay.videoSrc}
               poster={currentStay.posterSrc}
               playsInline
@@ -2802,7 +2845,7 @@ export default function StayHelperLuxuryShowcase() {
                   {isDesktop === true && (
                     <video
                       ref={desktopVideoRef}
-                      key={`desktop-${currentStay.id}-${currentStay.videoSrc}`}
+                      key="desktop-master-player"
                       src={currentStay.videoSrc}
                       poster={currentStay.posterSrc}
                       playsInline
@@ -2851,6 +2894,10 @@ export default function StayHelperLuxuryShowcase() {
             <div className="bg-black/60 backdrop-blur-2xl border border-white/20 rounded-xl px-4 py-2 shadow-2xl flex items-center gap-3 w-full max-w-[calc(100%-250px)] xl:max-w-[calc(100%-270px)] min-w-0">
               <button
                 type="button"
+                onMouseEnter={() => {
+                  const prevIdx = (currentIndex - 1 + ALL_STAYS.length) % ALL_STAYS.length;
+                  prefetchStay(ALL_STAYS[prevIdx].id);
+                }}
                 onClick={handlePrevStay}
                 className="w-7 h-7 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all shrink-0 active:scale-95 cursor-pointer"
                 title="Previous Sanctuary"
@@ -2871,6 +2918,8 @@ export default function StayHelperLuxuryShowcase() {
                       key={stay.id}
                       type="button"
                       data-dock-id={stay.id}
+                      onMouseEnter={() => prefetchStay(stay.id)}
+                      onTouchStart={() => prefetchStay(stay.id)}
                       onClick={() => handleSelectStay(stay.id)}
                       className={`shrink-0 px-3 py-1.5 rounded-lg text-xs font-mono tracking-wider transition-all flex items-center gap-2 cursor-pointer whitespace-nowrap ${
                         isActive
@@ -2889,6 +2938,10 @@ export default function StayHelperLuxuryShowcase() {
 
               <button
                 type="button"
+                onMouseEnter={() => {
+                  const nextIdx = (currentIndex + 1) % ALL_STAYS.length;
+                  prefetchStay(ALL_STAYS[nextIdx].id);
+                }}
                 onClick={handleNextStay}
                 className="w-7 h-7 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all shrink-0 active:scale-95 cursor-pointer"
                 title="Next Sanctuary"
