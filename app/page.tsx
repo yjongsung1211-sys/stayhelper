@@ -106,6 +106,45 @@ const UI_TEXT = {
     stylingBannerTitle: "내 톤에 딱 맞는 이번 주 럭셔리 OOTD",
     stylingBannerDesc: "미국 5대 정품 유통사 100% 실시간 재고 룩북을 바로 감상하고 쇼핑해보세요.",
     stylingBannerBtn: "맞춤 룩북 보러가기",
+    eduEyebrow: "세계관의 길 · 색채학 공식 가이드",
+    eduTitle: "퍼스널 컬러 — 색과 톤의 차이는 무엇인가?",
+    eduStep1Badge: "색 (Color) = 색상의 차이",
+    eduStep1Desc: "색은 빨강, 파랑, 노랑, 초록처럼 색의 종류를 구분하는 기준입니다. 즉, 어떤 색인가를 의미합니다.",
+    colorRed: "빨강",
+    colorYellow: "노랑",
+    colorBlue: "파랑",
+    colorGreen: "초록",
+    eduStep2Badge: "톤 (Tone) = 색의 성질",
+    eduStep2Desc: "톤은 색의 명도(밝기)와 채도(선명함)가 결합하여 나타나는 성질입니다. 같은 색이라도 톤에 따라 전혀 다른 인상을 줍니다.",
+    eduStep2Sub: "같은 파란색, 다른 톤의 예시",
+    toneLight: "라이트톤",
+    toneLightDesc: "밝고 부드러움",
+    toneVivid: "비비드톤",
+    toneVividDesc: "선명하고 강렬함",
+    toneMute: "뮤트톤",
+    toneMuteDesc: "차분하고 부드러움",
+    toneDeep: "딥톤",
+    toneDeepDesc: "어둡고 깊음",
+    eduStep3Badge: "퍼스널 컬러의 4계절 톤",
+    eduStep3Desc: "퍼스널 컬러는 색과 톤이 결합하여 사람의 피부, 머리카락, 눈동자와 조화롭게 어울리는 그룹을 4가지 계절 톤으로 나눕니다.",
+    springWarmName: "봄 웜톤 (Spring Warm)",
+    springWarmDesc: "밝고 맑고 선명한 느낌",
+    summerCoolName: "여름 쿨톤 (Summer Cool)",
+    summerCoolDesc: "부드럽고 차분한 느낌",
+    autumnWarmName: "가을 웜톤 (Autumn Warm)",
+    autumnWarmDesc: "깊고 차분하고 부드러운 느낌",
+    winterCoolName: "겨울 쿨톤 (Winter Cool)",
+    winterCoolDesc: "선명하고 대비가 강한 느낌",
+    eduSummaryTitle: "핵심 정리",
+    eduSumColorTag: "색 (Color)",
+    eduSumColorTitle: "색상의 차이",
+    eduSumColorDesc: "어떤 색인가 (빨강, 노랑, 파랑, 초록...)",
+    eduSumToneTag: "톤 (Tone)",
+    eduSumToneTitle: "색의 밝기와 선명함의 차이",
+    eduSumToneDesc: "명도 + 채도 (라이트, 비비드, 뮤트, 딥...)",
+    eduSumCoreTag: "퍼스널 컬러의 핵심",
+    eduSumCoreTitle: "색상 + 톤 + 개인의 조화",
+    eduSumCoreDesc: "자신에게 어울리는 색뿐 아니라 그 색의 톤까지 찾아내는 것",
   },
   en: {
     brandName: "PersonalColorHelper",
@@ -178,6 +217,45 @@ const UI_TEXT = {
     stylingBannerTitle: "Luxury Outfits Curated for Your Tone",
     stylingBannerDesc: "Shop live US retail inventory (Zara US, Nordstrom, SSENSE) matched to your color palette.",
     stylingBannerBtn: "Explore Matching Lookbook",
+    eduEyebrow: "COLOR SCIENCE ACADEMY",
+    eduTitle: "Personal Color — What is the Difference Between Color and Tone?",
+    eduStep1Badge: "Color = Hue Difference",
+    eduStep1Desc: "Color classifies the category of light wavelengths, such as Red, Yellow, Blue, or Green. It simply answers: 'Which color is it?'",
+    colorRed: "Red",
+    colorYellow: "Yellow",
+    colorBlue: "Blue",
+    colorGreen: "Green",
+    eduStep2Badge: "Tone = Character of Color",
+    eduStep2Desc: "Tone is created by combining Value (Lightness) and Chroma (Saturation). Even the exact same blue conveys an entirely different impression depending on its tone.",
+    eduStep2Sub: "Example: Same Blue in 4 Different Tones",
+    toneLight: "Light Tone",
+    toneLightDesc: "Bright & Gentle",
+    toneVivid: "Vivid Tone",
+    toneVividDesc: "Clear & Intense",
+    toneMute: "Mute Tone",
+    toneMuteDesc: "Calm & Soft",
+    toneDeep: "Deep Tone",
+    toneDeepDesc: "Dark & Rich",
+    eduStep3Badge: "The 4 Seasonal Tones of Personal Color",
+    eduStep3Desc: "Personal color unites hue and tone into 4 seasonal groups that harmonize with your skin tone, hair, and eye contrast.",
+    springWarmName: "Spring Warm",
+    springWarmDesc: "Bright, fresh, and clear radiance",
+    summerCoolName: "Summer Cool",
+    summerCoolDesc: "Soft, misty, and delicate elegance",
+    autumnWarmName: "Autumn Warm",
+    autumnWarmDesc: "Deep, earthy, and warm sophistication",
+    winterCoolName: "Winter Cool",
+    winterCoolDesc: "High-contrast, bold, and dramatic clarity",
+    eduSummaryTitle: "Key Takeaway",
+    eduSumColorTag: "Color (Hue)",
+    eduSumColorTitle: "Hue Difference",
+    eduSumColorDesc: "Which color category (Red, Yellow, Blue, Green...)",
+    eduSumToneTag: "Tone (Value + Chroma)",
+    eduSumToneTitle: "Lightness & Saturation",
+    eduSumToneDesc: "Brightness & Purity (Light, Vivid, Mute, Deep...)",
+    eduSumCoreTag: "Core of Personal Color",
+    eduSumCoreTitle: "Color + Tone + Personal Harmony",
+    eduSumCoreDesc: "Finding not just your color, but the exact seasonal TONE that illuminates you.",
   },
   ja: {
     brandName: "パーソナルカラーヘルパー",
@@ -250,6 +328,45 @@ const UI_TEXT = {
     stylingBannerTitle: "あなたのシーズンに最も映える今週のラグジュアリーOOTD",
     stylingBannerDesc: "アメリカ人気ブランド（Zara US、Nordstrom、SSENSE）のリアルタイム在庫コーデをチェック。",
     stylingBannerBtn: "似合わせルックブックを見る",
+    eduEyebrow: "色彩学マスタークラス · 公式ガイド",
+    eduTitle: "パーソナルカラー — 色とトーンの違いとは？",
+    eduStep1Badge: "色 (Color) ＝ 色相の違い",
+    eduStep1Desc: "色は赤、黄、青、緑のように色の種類を区別する基準です。つまり「何色か」を意味します。",
+    colorRed: "赤 (Red)",
+    colorYellow: "黄 (Yellow)",
+    colorBlue: "青 (Blue)",
+    colorGreen: "緑 (Green)",
+    eduStep2Badge: "トーン (Tone) ＝ 色の性質",
+    eduStep2Desc: "トーンは色の明度（明るさ）と彩度（鮮やかさ）が結びついて現れる性質です。同じ青でもトーンによって全く異なる印象を与えます。",
+    eduStep2Sub: "同じ青色・異なるトーンの例",
+    toneLight: "ライトトーン",
+    toneLightDesc: "明るく柔らかい",
+    toneVivid: "ビビッドトーン",
+    toneVividDesc: "鮮やかで強烈",
+    toneMute: "ミュートトーン",
+    toneMuteDesc: "落ち着きと上品さ",
+    toneDeep: "ディープトーン",
+    toneDeepDesc: "深みと重厚感",
+    eduStep3Badge: "パーソナルカラーの4シーズン・トーン",
+    eduStep3Desc: "パーソナルカラーは色とトーンが結合し、人の肌・髪・瞳の色と最も調和するグループを4つの季節タイプに分類します。",
+    springWarmName: "イエベ春 (Spring Warm)",
+    springWarmDesc: "明るく澄んで華やかな印象",
+    summerCoolName: "ブルベ夏 (Summer Cool)",
+    summerCoolDesc: "柔らかく上品で落ち着いた印象",
+    autumnWarmName: "イエベ秋 (Autumn Warm)",
+    autumnWarmDesc: "深みがありシックで温かい印象",
+    winterCoolName: "ブルベ冬 (Winter Cool)",
+    winterCoolDesc: "鮮やかでコントラストが際立つ印象",
+    eduSummaryTitle: "重要まとめ",
+    eduSumColorTag: "色 (Color)",
+    eduSumColorTitle: "色相の違い",
+    eduSumColorDesc: "何色か（赤、黄、青、緑...）",
+    eduSumToneTag: "トーン (Tone)",
+    eduSumToneTitle: "明るさと鮮やかさの違い",
+    eduSumToneDesc: "明度＋彩度（ライト、ビビッド、ミュート、ディープ...）",
+    eduSumCoreTag: "パーソナルカラーの核心",
+    eduSumCoreTitle: "色相 ＋ トーン ＋ 個人の調和",
+    eduSumCoreDesc: "似合う色だけでなく、その色の最適な「トーン」まで突き止めること",
   },
 };
 
@@ -1513,6 +1630,225 @@ export default function ColorHelperPage() {
           </div>
         </section>
       )}
+
+      {/* ── SECTION: 색과 톤의 차이는 무엇인가? (색채학 공식 마스터클래스) ─── */}
+      <section className="bg-white rounded-3xl p-6 sm:p-10 shadow-lg border border-gray-200/90 mb-8">
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-100 border border-gray-200 text-gray-600 text-[11px] font-bold tracking-wider uppercase mb-2">
+            <span>{t.eduEyebrow}</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">
+            퍼스널 컬러 — <span className="text-rose-500">색</span>과 <span className="text-sky-600">톤</span>의 차이는 무엇인가?
+          </h2>
+        </div>
+
+        <div className="space-y-6">
+          {/* 1. 색 (Color) = 색상의 차이 */}
+          <div className="p-6 rounded-3xl bg-[#FFF8F8] border border-rose-200/90 shadow-sm">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
+              <div className="max-w-md">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-6 h-6 rounded-full bg-rose-500 text-white font-black text-xs flex items-center justify-center shadow-sm">
+                    1
+                  </span>
+                  <h3 className="text-base sm:text-lg font-black text-gray-900">
+                    <span className="text-rose-600">색 (Color)</span> = 색상의 차이
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed">
+                  {t.eduStep1Desc}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-4 gap-2.5 sm:gap-3 w-full md:w-auto">
+                <div className="text-center">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#EF4444] shadow-md mx-auto mb-1 border border-black/10" />
+                  <span className="text-[11px] font-bold text-gray-800">{t.colorRed}</span>
+                </div>
+                <div className="text-center">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#FACC15] shadow-md mx-auto mb-1 border border-black/10" />
+                  <span className="text-[11px] font-bold text-gray-800">{t.colorYellow}</span>
+                </div>
+                <div className="text-center">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#2563EB] shadow-md mx-auto mb-1 border border-black/10" />
+                  <span className="text-[11px] font-bold text-gray-800">{t.colorBlue}</span>
+                </div>
+                <div className="text-center">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#10B981] shadow-md mx-auto mb-1 border border-black/10" />
+                  <span className="text-[11px] font-bold text-gray-800">{t.colorGreen}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 2. 톤 (Tone) = 색의 성질 */}
+          <div className="p-6 rounded-3xl bg-[#F0F7FF] border border-sky-200/90 shadow-sm">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+              <div className="max-w-md">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-6 h-6 rounded-full bg-sky-600 text-white font-black text-xs flex items-center justify-center shadow-sm">
+                    2
+                  </span>
+                  <h3 className="text-base sm:text-lg font-black text-gray-900">
+                    <span className="text-sky-600">톤 (Tone)</span> = 색의 성질
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed">
+                  {t.eduStep2Desc}
+                </p>
+              </div>
+
+              <div>
+                <span className="text-[11px] font-bold text-sky-900 block mb-2 text-center lg:text-right">
+                  {t.eduStep2Sub}
+                </span>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+                  <div className="p-3 rounded-2xl bg-[#BAE6FD] text-center border border-sky-300/60 shadow-sm">
+                    <div className="text-xs font-black text-sky-950 mb-0.5">{t.toneLight}</div>
+                    <div className="text-[10px] text-sky-900/80 font-semibold">{t.toneLightDesc}</div>
+                  </div>
+                  <div className="p-3 rounded-2xl bg-[#2563EB] text-center shadow-md text-white border border-blue-600">
+                    <div className="text-xs font-black mb-0.5">{t.toneVivid}</div>
+                    <div className="text-[10px] text-blue-100 font-semibold">{t.toneVividDesc}</div>
+                  </div>
+                  <div className="p-3 rounded-2xl bg-[#64748B] text-center shadow-sm text-white border border-slate-600">
+                    <div className="text-xs font-black mb-0.5">{t.toneMute}</div>
+                    <div className="text-[10px] text-slate-200 font-semibold">{t.toneMuteDesc}</div>
+                  </div>
+                  <div className="p-3 rounded-2xl bg-[#0F2537] text-center shadow-md text-white border border-black/40">
+                    <div className="text-xs font-black mb-0.5">{t.toneDeep}</div>
+                    <div className="text-[10px] text-gray-300 font-semibold">{t.toneDeepDesc}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 3. 퍼스널 컬러의 4계절 톤 */}
+          <div className="p-6 sm:p-7 rounded-3xl bg-[#FFFDF7] border border-amber-200/90 shadow-sm">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-6 h-6 rounded-full bg-amber-500 text-white font-black text-xs flex items-center justify-center shadow-sm">
+                3
+              </span>
+              <h3 className="text-base sm:text-lg font-black text-gray-900">
+                {t.eduStep3Badge}
+              </h3>
+            </div>
+            <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed mb-6">
+              {t.eduStep3Desc}
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* 봄 웜톤 */}
+              <div className="p-5 rounded-2xl bg-[#FFF9F5] border border-rose-100 flex flex-col items-center text-center">
+                <span className="px-3 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-black mb-3">
+                  {t.springWarmName}
+                </span>
+                <div className="grid grid-cols-4 gap-1.5 mb-3 w-full max-w-[200px]">
+                  {["#FFF7ED", "#FFEDD5", "#C27837", "#6B3B1A", "#FDA4AF", "#FB923C", "#EF4444", "#A3E635"].map((hex) => (
+                    <div key={hex} className="aspect-square rounded-lg shadow-sm border border-black/5" style={{ backgroundColor: hex }} />
+                  ))}
+                </div>
+                <span className="text-[11px] font-bold text-gray-700">{t.springWarmDesc}</span>
+              </div>
+
+              {/* 여름 쿨톤 */}
+              <div className="p-5 rounded-2xl bg-[#F8FAFC] border border-sky-100 flex flex-col items-center text-center">
+                <span className="px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-xs font-black mb-3">
+                  {t.summerCoolName}
+                </span>
+                <div className="grid grid-cols-4 gap-1.5 mb-3 w-full max-w-[200px]">
+                  {["#F8FAFC", "#FCE7F3", "#E2E8F0", "#94A3B8", "#475569", "#1E293B", "#F43F5E", "#818CF8"].map((hex) => (
+                    <div key={hex} className="aspect-square rounded-lg shadow-sm border border-black/5" style={{ backgroundColor: hex }} />
+                  ))}
+                </div>
+                <span className="text-[11px] font-bold text-gray-700">{t.summerCoolDesc}</span>
+              </div>
+
+              {/* 가을 웜톤 */}
+              <div className="p-5 rounded-2xl bg-[#FFFDF5] border border-amber-100 flex flex-col items-center text-center">
+                <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-black mb-3">
+                  {t.autumnWarmName}
+                </span>
+                <div className="grid grid-cols-4 gap-1.5 mb-3 w-full max-w-[200px]">
+                  {["#F5EBE0", "#D97706", "#B45309", "#78350F", "#E07A5F", "#9A3412", "#4D5C2C", "#701A75"].map((hex) => (
+                    <div key={hex} className="aspect-square rounded-lg shadow-sm border border-black/5" style={{ backgroundColor: hex }} />
+                  ))}
+                </div>
+                <span className="text-[11px] font-bold text-gray-700">{t.autumnWarmDesc}</span>
+              </div>
+
+              {/* 겨울 쿨톤 */}
+              <div className="p-5 rounded-2xl bg-[#F5F7FB] border border-indigo-100 flex flex-col items-center text-center">
+                <span className="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 text-xs font-black mb-3">
+                  {t.winterCoolName}
+                </span>
+                <div className="grid grid-cols-4 gap-1.5 mb-3 w-full max-w-[200px]">
+                  {["#0F172A", "#1E1B4B", "#312E81", "#FDF2F8", "#BE185D", "#2563EB", "#831843", "#581C87"].map((hex) => (
+                    <div key={hex} className="aspect-square rounded-lg shadow-sm border border-black/5" style={{ backgroundColor: hex }} />
+                  ))}
+                </div>
+                <span className="text-[11px] font-bold text-gray-700">{t.winterCoolDesc}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* 4. 핵심 정리 */}
+          <div className="p-6 sm:p-7 rounded-3xl bg-emerald-50/80 border-2 border-emerald-300 shadow-sm">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-sm">
+                <Check className="w-4 h-4" />
+              </div>
+              <h3 className="text-base sm:text-lg font-black text-emerald-950">
+                {t.eduSummaryTitle}
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+              <div className="p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+                <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[10px] font-bold inline-block mb-1.5">
+                  {t.eduSumColorTag}
+                </span>
+                <h4 className="text-sm font-black text-gray-900 mb-1">{t.eduSumColorTitle}</h4>
+                <p className="text-xs text-gray-500 font-medium">{t.eduSumColorDesc}</p>
+                <div className="flex items-center gap-1.5 mt-3">
+                  <span className="w-3 h-3 rounded-full bg-[#EF4444]" />
+                  <span className="w-3 h-3 rounded-full bg-[#FACC15]" />
+                  <span className="w-3 h-3 rounded-full bg-[#2563EB]" />
+                  <span className="w-3 h-3 rounded-full bg-[#10B981]" />
+                  <span className="text-[10px] text-gray-400">...</span>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+                <span className="px-2 py-0.5 rounded-full bg-sky-100 text-sky-700 text-[10px] font-bold inline-block mb-1.5">
+                  {t.eduSumToneTag}
+                </span>
+                <h4 className="text-sm font-black text-gray-900 mb-1">{t.eduSumToneTitle}</h4>
+                <p className="text-xs text-gray-500 font-medium">{t.eduSumToneDesc}</p>
+                <div className="flex items-center gap-1.5 mt-3">
+                  <span className="w-3 h-3 rounded-full bg-[#BAE6FD]" />
+                  <span className="w-3 h-3 rounded-full bg-[#2563EB]" />
+                  <span className="w-3 h-3 rounded-full bg-[#64748B]" />
+                  <span className="w-3 h-3 rounded-full bg-[#0F2537]" />
+                  <span className="text-[10px] text-gray-400">...</span>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-white border-2 border-emerald-500 shadow-md relative overflow-hidden">
+                <span className="px-2 py-0.5 rounded-full bg-emerald-600 text-white text-[10px] font-black inline-block mb-1.5 shadow-sm">
+                  {t.eduSumCoreTag}
+                </span>
+                <h4 className="text-sm font-black text-emerald-950 mb-1">{t.eduSumCoreTitle}</h4>
+                <p className="text-xs text-emerald-800 font-bold leading-relaxed">{t.eduSumCoreDesc}</p>
+                <div className="mt-3 flex items-center gap-1 text-[11px] font-extrabold text-emerald-700">
+                  <span>✨ 12톤 정밀 AI 진단 추천</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ── STEP 3: 상세 결과 리포트 (잠금 및 결제 연동) ───────────── */}
       {resultTone && (
