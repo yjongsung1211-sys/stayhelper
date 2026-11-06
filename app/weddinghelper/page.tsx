@@ -692,66 +692,65 @@ export default function WeddingHelperPage() {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            {/* Clean Invitation Studio Link */}
-            <button 
-              type="button"
-              id="open-invitation-btn"
-              onClick={() => {
-                setIsDemoMode(true);
-                setIsInvitationOpen(true);
-              }}
-              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium tracking-wider text-[#6E5D5C] hover:text-[#C87870] transition whitespace-nowrap cursor-pointer"
-            >
-              <span>💌 Invitations</span>
-            </button>
-
             {user ? (
-              <div className="flex items-center gap-2">
-                <span className={`px-3 py-1.5 rounded-full border text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap ${
-                  user.plan === 'grand' 
-                    ? 'bg-[#1F181B] text-[#D4AF37] border-[#D4AF37]/50 shadow-xs' 
-                    : 'bg-[#FAF3EF] text-[#8C6D1F] border-[#E8DCD4]'
-                }`}>
+              /* When Logged In as VIP: Clean Single Clickable Studio Button & Logout */
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  id="open-vip-studio-btn"
+                  onClick={() => {
+                    setIsDemoMode(false);
+                    setIsInvitationOpen(true);
+                  }}
+                  className="px-4 py-2 rounded-full bg-[#1F181B] text-[#D4AF37] border border-[#D4AF37]/50 hover:bg-black hover:scale-[1.02] transition shadow-sm flex items-center gap-2 text-xs font-bold uppercase tracking-wider whitespace-nowrap cursor-pointer active:scale-95"
+                >
                   <Gem className="w-3.5 h-3.5 text-[#D4AF37]" />
-                  <span>{user.plan === 'grand' ? 'VIP Active ($19)' : user.email}</span>
-                </span>
+                  <span>VIP Studio</span>
+                  <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#D4AF37]/20 text-[#D4AF37] font-bold">Active</span>
+                </button>
                 <button 
+                  type="button"
                   onClick={() => {
                     setUser(null);
                     localStorage.removeItem('weddinghelper_user');
                     setCopyToast('Logged out successfully.');
                     setTimeout(() => setCopyToast(''), 2500);
                   }}
-                  className="text-xs text-[#8A7977] hover:text-[#C87870] underline ml-1 whitespace-nowrap cursor-pointer"
+                  className="text-xs text-[#8A7977] hover:text-[#C87870] underline whitespace-nowrap cursor-pointer"
                 >
                   Log out
                 </button>
               </div>
             ) : (
-              <button 
-                onClick={() => setIsLoginOpen(true)}
-                className="px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-full border border-[#D8C7BD] text-[#4A3B39] hover:bg-[#FAF3EF] hover:border-[#C87870] transition bg-white shadow-xs whitespace-nowrap cursor-pointer"
-              >
-                Log In
-              </button>
-            )}
-
-            {user?.plan === 'grand' ? (
-              <button 
-                onClick={() => setIsInvitationOpen(true)}
-                className="px-5 py-2 text-xs font-bold uppercase tracking-wider rounded-full bg-[#1F181B] text-[#D4AF37] hover:bg-black transition shadow-sm flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
-              >
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#D4AF37]" />
-                <span>VIP Studio</span>
-              </button>
-            ) : (
-              <button 
-                onClick={() => setIsCheckoutOpen(true)}
-                className="px-5 py-2 text-xs font-bold uppercase tracking-wider rounded-full bg-gradient-to-r from-[#B85E55] via-[#C58968] to-[#9E6F28] text-white hover:opacity-95 transition shadow-[0_4px_16px_rgba(184,94,85,0.35)] flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-[#F3E5AB]" />
-                <span>VIP Pass · $19</span>
-              </button>
+              /* When Guest: Sleek Navigation Trio */
+              <div className="flex items-center gap-2 sm:gap-3">
+                <button 
+                  type="button"
+                  id="open-invitation-btn"
+                  onClick={() => {
+                    setIsDemoMode(true);
+                    setIsInvitationOpen(true);
+                  }}
+                  className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium tracking-wider text-[#6E5D5C] hover:text-[#C87870] transition whitespace-nowrap cursor-pointer"
+                >
+                  <span>💌 Invitations</span>
+                </button>
+                <button 
+                  type="button"
+                  onClick={() => setIsLoginOpen(true)}
+                  className="px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-full border border-[#D8C7BD] text-[#4A3B39] hover:bg-[#FAF3EF] hover:border-[#C87870] transition bg-white shadow-xs whitespace-nowrap cursor-pointer"
+                >
+                  Log In
+                </button>
+                <button 
+                  type="button"
+                  onClick={() => setIsCheckoutOpen(true)}
+                  className="px-5 py-2 text-xs font-bold uppercase tracking-wider rounded-full bg-gradient-to-r from-[#B85E55] via-[#C58968] to-[#9E6F28] text-white hover:opacity-95 transition shadow-[0_4px_16px_rgba(184,94,85,0.35)] flex items-center gap-1.5 whitespace-nowrap cursor-pointer active:scale-95"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-[#F3E5AB]" />
+                  <span>VIP Pass · $19</span>
+                </button>
+              </div>
             )}
           </div>
         </div>
