@@ -541,7 +541,7 @@ export default function WeddingHelperPage() {
   const handlePayAndCreate = () => {
     if (!uploadedImage) {
       fileInputRef.current?.click();
-      setCopyToast('📸 먼저 커플 사진을 업로드해 주세요! (Please upload couple photograph)');
+      setCopyToast('📸 Please upload a couple photograph first!');
       setTimeout(() => setCopyToast(''), 3500);
       return;
     }
@@ -652,7 +652,8 @@ export default function WeddingHelperPage() {
             </nav>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Clean Invitation Studio Link */}
             <button 
               type="button"
               id="open-invitation-btn"
@@ -660,21 +661,20 @@ export default function WeddingHelperPage() {
                 setIsDemoMode(true);
                 setIsInvitationOpen(true);
               }}
-              className="px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-full border border-[#E8DCD4] text-[#8C6D1F] hover:bg-[#FAF3EF] hover:border-[#D4AF37] transition flex items-center gap-1.5 bg-white shadow-sm cursor-pointer z-20 select-none active:scale-95"
+              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium tracking-wider text-[#6E5D5C] hover:text-[#C87870] transition whitespace-nowrap cursor-pointer"
             >
-              <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#FAF0E6] text-[#B85E55] font-bold pointer-events-none">🔒 $19 VIP (76% OFF)</span>
-              <span className="pointer-events-none">Mobile Invitation Studio</span>
+              <span>💌 Invitations</span>
             </button>
 
             {user ? (
               <div className="flex items-center gap-2">
-                <span className={`px-3 py-1.5 rounded-full border text-xs font-semibold flex items-center gap-1.5 ${
+                <span className={`px-3 py-1.5 rounded-full border text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap ${
                   user.plan === 'grand' 
                     ? 'bg-[#1F181B] text-[#D4AF37] border-[#D4AF37]/50 shadow-xs' 
                     : 'bg-[#FAF3EF] text-[#8C6D1F] border-[#E8DCD4]'
                 }`}>
                   <Gem className="w-3.5 h-3.5 text-[#D4AF37]" />
-                  <span>{user.plan === 'grand' ? 'Grand 12 VIP ($19 Special Active)' : user.email}</span>
+                  <span>{user.plan === 'grand' ? 'VIP Active ($19)' : user.email}</span>
                 </span>
                 <button 
                   onClick={() => {
@@ -683,7 +683,7 @@ export default function WeddingHelperPage() {
                     setCopyToast('Logged out successfully.');
                     setTimeout(() => setCopyToast(''), 2500);
                   }}
-                  className="text-xs text-[#8A7977] hover:text-[#C87870] underline ml-1"
+                  className="text-xs text-[#8A7977] hover:text-[#C87870] underline ml-1 whitespace-nowrap cursor-pointer"
                 >
                   Log out
                 </button>
@@ -691,7 +691,7 @@ export default function WeddingHelperPage() {
             ) : (
               <button 
                 onClick={() => setIsLoginOpen(true)}
-                className="px-5 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-full border border-[#D8C7BD] text-[#4A3B39] hover:bg-[#FAF3EF] hover:border-[#C87870] transition bg-white shadow-sm"
+                className="px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-full border border-[#D8C7BD] text-[#4A3B39] hover:bg-[#FAF3EF] hover:border-[#C87870] transition bg-white shadow-xs whitespace-nowrap cursor-pointer"
               >
                 Log In
               </button>
@@ -700,18 +700,18 @@ export default function WeddingHelperPage() {
             {user?.plan === 'grand' ? (
               <button 
                 onClick={() => setIsInvitationOpen(true)}
-                className="px-6 py-2.5 text-xs font-bold uppercase tracking-wider rounded-full bg-[#1F181B] text-[#D4AF37] hover:bg-black transition shadow-sm flex items-center gap-1.5"
+                className="px-5 py-2 text-xs font-bold uppercase tracking-wider rounded-full bg-[#1F181B] text-[#D4AF37] hover:bg-black transition shadow-sm flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
               >
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#D4AF37]" />
-                <span>My VIP Studio (Active)</span>
+                <span>VIP Studio</span>
               </button>
             ) : (
               <button 
                 onClick={() => setIsCheckoutOpen(true)}
-                className="px-6 py-2.5 text-xs font-bold uppercase tracking-wider rounded-full bg-gradient-to-r from-[#C87870] via-[#D89BA6] to-[#C87870] text-white hover:opacity-95 transition shadow-[0_4px_18px_rgba(200,120,112,0.35)] flex items-center gap-1.5"
+                className="px-5 py-2 text-xs font-bold uppercase tracking-wider rounded-full bg-gradient-to-r from-[#B85E55] via-[#C58968] to-[#9E6F28] text-white hover:opacity-95 transition shadow-[0_4px_16px_rgba(184,94,85,0.35)] flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
               >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Unlock VIP Pass ($19 Special)</span>
+                <Sparkles className="w-3.5 h-3.5 text-[#F3E5AB]" />
+                <span>VIP Pass · $19</span>
               </button>
             )}
           </div>
@@ -921,11 +921,11 @@ export default function WeddingHelperPage() {
             </div>
           </div>
 
-          {/* 몸무게 밑 '결제 후 만들기' Primary Action Button */}
+          {/* Primary Action Button under body proportions */}
           <button
             onClick={handlePayAndCreate}
             disabled={isGenerating}
-            className={`mt-8 w-full py-5 sm:py-6 rounded-2xl font-bold uppercase tracking-[0.15em] text-sm sm:text-base flex items-center justify-center gap-3 transition shadow-xl active:scale-[0.99] ${
+            className={`mt-8 w-full py-5 sm:py-6 rounded-2xl font-bold uppercase tracking-[0.18em] text-sm sm:text-base flex items-center justify-center gap-3 transition shadow-xl active:scale-[0.99] ${
               isGenerating 
                 ? 'bg-[#EAE2DC] text-[#9A8A87] cursor-not-allowed' 
                 : 'bg-gradient-to-r from-[#B85E55] via-[#C58968] to-[#9E6F28] text-white hover:opacity-95 shadow-[0_12px_40px_rgba(184,94,85,0.45)]'
@@ -939,24 +939,24 @@ export default function WeddingHelperPage() {
             ) : user?.plan === 'grand' ? (
               <>
                 <Sparkles className="w-5 h-5 fill-[#F3E5AB] text-[#F3E5AB]" />
-                <span>웨딩 화보 만들기 · Create {currentTheme.title} (VIP Active)</span>
+                <span>CREATE MY MASTERPIECE · {currentTheme.title} (VIP ACTIVE)</span>
                 <ArrowRight className="w-5 h-5" />
               </>
             ) : (
               <>
                 <Gem className="w-5 h-5 text-[#F3E5AB]" />
-                <span>결제 후 만들기 ($19 USD · 12개 테마 240장 전신 화보 즉시 생성)</span>
+                <span>PAY $19 & CREATE 240 MASTERPIECE SCENES</span>
                 <ArrowRight className="w-5 h-5" />
               </>
             )}
           </button>
 
           <div className="mt-5 flex items-center justify-center gap-5 text-xs text-[#8C7A78] flex-wrap">
-            <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-[#C87870]" /> 단일 $19 올인원 패스 (All 12 Worlds Included)</span>
+            <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-[#C87870]" /> Single $19 All-Access Pass (All 12 Worlds Included)</span>
             <span>•</span>
-            <span>240장 고화질 에디토리얼 화보</span>
+            <span>240 Haute Couture Masterpieces</span>
             <span>•</span>
-            <span>모바일 청첩장 스튜디오 무료 제공</span>
+            <span>Bespoke Mobile Invitation Studio Included</span>
           </div>
         </div>
       </section>
@@ -967,14 +967,14 @@ export default function WeddingHelperPage() {
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
             <div>
               <span className="text-xs font-sans font-bold tracking-[0.25em] text-[#C87870] uppercase block mb-2">
-                ✦ 12 GLOBAL SANCTUARY EDITORIAL EXAMPLES · 고객 제공 화보 완성 예시
+                ✦ 12 GLOBAL SANCTUARY PORTFOLIO · REAL EDITORIAL EXAMPLES
               </span>
               <h2 className="text-3xl sm:text-5xl font-light text-[#1F181B]">
-                The Grand 12 Wedding Masterpiece Examples
+                The Grand 12 Wedding Masterpiece Portfolio
               </h2>
             </div>
             <p className="text-xs font-sans text-[#8C7A78] max-w-md leading-relaxed">
-              단일 $19 결제 시 아래 12개 테마(총 240장)가 모두 제한 없이 제공됩니다. 각 성역별 실제 촬영 예시 화보를 둘러보세요.
+              All 12 sanctuary destinations (240 scenes) are 100% included in your single $19 pass. Browse real editorial examples crafted for discerning couples.
             </p>
           </div>
 
@@ -1031,7 +1031,7 @@ export default function WeddingHelperPage() {
                   {/* Badges */}
                   <div className="absolute top-6 left-6 flex items-center gap-2">
                     <span className="px-4 py-1.5 rounded-full text-[11px] font-sans font-bold tracking-wider uppercase bg-white/95 backdrop-blur-md text-[#B85E55] border border-[#E8A598]/50 shadow-md">
-                      예시 #{theme.number} · {theme.badge}
+                      Example #{theme.number} · {theme.badge}
                     </span>
                   </div>
 
@@ -1063,28 +1063,6 @@ export default function WeddingHelperPage() {
                     </div>
                     <div className="text-[#6E5E5D] break-words">
                       <span className="text-[#1F181B] font-semibold">Tuxedo:</span> {theme.groomAttire}
-                    </div>
-                  </div>
-
-                  {/* Action Selection & Studio Inclusion */}
-                  <div className="mt-7 flex flex-col gap-2">
-                    <button 
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setSelectedThemeId(theme.id);
-                        window.scrollTo({ top: 350, behavior: 'smooth' });
-                      }}
-                      className={`w-full py-3.5 rounded-2xl text-xs font-sans font-bold uppercase tracking-wider transition ${
-                        isSelected
-                          ? 'bg-[#C87870] text-white shadow-md'
-                          : 'bg-[#FAF5F1] text-[#7C6E6D] group-hover:text-[#1F181B] group-hover:bg-[#F3E8E1]'
-                      }`}
-                    >
-                      {isSelected ? '✓ 선택된 예시 테마 (Selected Example)' : '이 예시 테마로 만들기 (Try This Theme)'}
-                    </button>
-                    <div className="py-1 text-center flex items-center justify-center gap-1.5 text-[11px] font-sans text-[#8C7A78]">
-                      <Sparkles className="w-3 h-3 text-[#D4AF37]" />
-                      <span>$19 결제 시 12개 전 테마 240장 100% 포함</span>
                     </div>
                   </div>
                 </div>
@@ -2746,37 +2724,37 @@ export default function WeddingHelperPage() {
                         The Grand 12 VIP Pass · All-Inclusive Access
                       </span>
                       <h4 className="text-xl sm:text-2xl font-serif text-[#1F181B] font-medium mt-1">
-                        12대 전 세계 성역 웨딩 화보 풀 패키지
+                        Complete 12 Sanctuary Destination Collection
                       </h4>
                     </div>
                     <div className="flex items-baseline gap-1.5">
                       <span className="line-through text-sm text-[#A89895]">$79</span>
                       <span className="text-3xl sm:text-4xl font-serif font-bold text-[#B85E55]">$19</span>
-                      <span className="text-xs text-[#8C7A78] font-medium">USD (단일 평생 소장)</span>
+                      <span className="text-xs text-[#8C7A78] font-medium">USD (One-Time · Lifetime)</span>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5 text-xs text-[#4A3B39]">
                     <div className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#C87870] shrink-0 mt-0.5" />
-                      <span><strong>240 Masterpieces</strong>: 12개 테마 전신 고화질 화보 (테마당 20각도)</span>
+                      <span><strong>240 Masterpieces</strong>: 12 destination worlds, 20 cinematic angles each</span>
                     </div>
                     <div className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#C87870] shrink-0 mt-0.5" />
-                      <span><strong>8K Print-Ready</strong>: 대형 액자 및 캔버스 인화용 300 DPI 무손실 파일 (Top 5)</span>
+                      <span><strong>8K Print-Ready</strong>: 300 DPI lossless files for altar frames & luxury canvas prints (Top 5)</span>
                     </div>
                     <div className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#C87870] shrink-0 mt-0.5" />
-                      <span><strong>Mobile Invitation Kit</strong>: 10개 럭셔리 모바일 청첩장 + 실시간 RSVP 대시보드</span>
+                      <span><strong>Mobile Invitation Kit</strong>: 10 bespoke invitation templates with live RSVP tracking</span>
                     </div>
                     <div className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#C87870] shrink-0 mt-0.5" />
-                      <span><strong>1:1 Silhouette Fit</strong>: 신랑·신부 실제 키/몸무게 1:1 반영 턱시도 & 오뜨 드레스</span>
+                      <span><strong>1:1 Silhouette Fit</strong>: Custom groom & bride proportions for tuxedo & couture gowns</span>
                     </div>
                   </div>
 
                   <p className="mt-5 text-center text-[11px] text-[#9E8B88] font-sans italic border-t border-[#F5ECE5] pt-3">
-                    * 추가 결제나 구독 없이 단 19달러 결제 한 번으로 모든 서비스가 영구 해금됩니다.
+                    * Single $19 one-time payment. No subscription or hidden fees. Lifetime access to all 12 worlds.
                   </p>
 
                   {/* Instant Checkout Button */}
@@ -2785,7 +2763,7 @@ export default function WeddingHelperPage() {
                     className="mt-5 w-full py-4 sm:py-5 rounded-2xl bg-gradient-to-r from-[#C87870] via-[#D89BA6] to-[#C87870] text-white font-bold uppercase tracking-widest text-xs sm:text-sm hover:opacity-95 transition shadow-[0_6px_25px_rgba(200,120,112,0.4)] flex items-center justify-center gap-2 active:scale-[0.99]"
                   >
                     <Gem className="w-4 h-4" />
-                    <span>결제 후 즉시 생성하기 ($19 USD · 1-Click Pay)</span>
+                    <span>Complete Order & Create Masterpiece ($19 USD · 1-Click Pay)</span>
                   </button>
                 </div>
               </>
