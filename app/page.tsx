@@ -53,7 +53,7 @@ const UI_TEXT = {
     cameraBtn: "카메라 촬영",
     cameraShootBtn: "지금 찰칵 촬영!",
     cameraGuide: "원 안에 얼굴을 맞춰주세요",
-    presetTitle: "사진 없이 1초 즉시 체험 모델 (무료 열람):",
+    presetTitle: "사계절 4대 대표 모델 1초 즉시 체험 (무료):",
     presetSub: "클릭 즉시 결과 진단",
     drapingTitle: "인터랙티브 가상 드레이핑 (Virtual Draping)",
     drapingDesc: "실제 퍼스널컬러 진단실처럼 얼굴 아래에 천(Drape)을 실시간으로 대보며 안색이 화사해지는지 확인하세요.",
@@ -106,8 +106,13 @@ const UI_TEXT = {
     stylingBannerTitle: "내 톤에 딱 맞는 이번 주 럭셔리 OOTD",
     stylingBannerDesc: "미국 5대 정품 유통사 100% 실시간 재고 룩북을 바로 감상하고 쇼핑해보세요.",
     stylingBannerBtn: "맞춤 룩북 보러가기",
+    ethnicityTitle: "인종별 5대 피부색 선택 (흑인·백인·황인·라틴·동남아):",
     eduEyebrow: "세계관의 길 · 색채학 공식 가이드",
-    eduTitle: "퍼스널 컬러 — 색과 톤의 차이는 무엇인가?",
+    eduTitlePrefix: "퍼스널 컬러 — ",
+    eduTitleColor: "색",
+    eduTitleAnd: "과 ",
+    eduTitleTone: "톤",
+    eduTitleSuffix: "의 차이는 무엇인가?",
     eduStep1Badge: "색 (Color) = 색상의 차이",
     eduStep1Desc: "색은 빨강, 파랑, 노랑, 초록처럼 색의 종류를 구분하는 기준입니다. 즉, 어떤 색인가를 의미합니다.",
     colorRed: "빨강",
@@ -145,6 +150,7 @@ const UI_TEXT = {
     eduSumCoreTag: "퍼스널 컬러의 핵심",
     eduSumCoreTitle: "색상 + 톤 + 개인의 조화",
     eduSumCoreDesc: "자신에게 어울리는 색뿐 아니라 그 색의 톤까지 찾아내는 것",
+    eduSumCoreRec: "✨ 12톤 정밀 AI 진단 추천",
   },
   en: {
     brandName: "PersonalColorHelper",
@@ -164,7 +170,7 @@ const UI_TEXT = {
     cameraBtn: "Take Photo",
     cameraShootBtn: "Capture Now!",
     cameraGuide: "Align your face inside the circle",
-    presetTitle: "1-Second Instant Model Exploration (Free):",
+    presetTitle: "4-Season Signature Models (1-Sec Instant Analysis):",
     presetSub: "Click to analyze instantly",
     drapingTitle: "Interactive Virtual Draping Studio",
     drapingDesc: "Experience a luxury salon draping session virtually by trying on signature color fabrics beneath your chin.",
@@ -217,8 +223,13 @@ const UI_TEXT = {
     stylingBannerTitle: "Luxury Outfits Curated for Your Tone",
     stylingBannerDesc: "Shop live US retail inventory (Zara US, Nordstrom, SSENSE) matched to your color palette.",
     stylingBannerBtn: "Explore Matching Lookbook",
+    ethnicityTitle: "5 Global Complexions (Black · White · East Asian · Latino · SE Asian):",
     eduEyebrow: "COLOR SCIENCE ACADEMY",
-    eduTitle: "Personal Color — What is the Difference Between Color and Tone?",
+    eduTitlePrefix: "Personal Color — What is the Difference Between ",
+    eduTitleColor: "Color",
+    eduTitleAnd: " and ",
+    eduTitleTone: "Tone",
+    eduTitleSuffix: "?",
     eduStep1Badge: "Color = Hue Difference",
     eduStep1Desc: "Color classifies the category of light wavelengths, such as Red, Yellow, Blue, or Green. It simply answers: 'Which color is it?'",
     colorRed: "Red",
@@ -256,6 +267,7 @@ const UI_TEXT = {
     eduSumCoreTag: "Core of Personal Color",
     eduSumCoreTitle: "Color + Tone + Personal Harmony",
     eduSumCoreDesc: "Finding not just your color, but the exact seasonal TONE that illuminates you.",
+    eduSumCoreRec: "✨ Recommended: Unlock 12-Tone Matrix",
   },
   ja: {
     brandName: "パーソナルカラーヘルパー",
@@ -275,7 +287,7 @@ const UI_TEXT = {
     cameraBtn: "カメラで撮影",
     cameraShootBtn: "今すぐ撮影！",
     cameraGuide: "円の中にお顔を合わせてください",
-    presetTitle: "写真なしで1秒即診断モデル (無料公開中):",
+    presetTitle: "4シーズン代表モデル 1秒即時診断 (無料):",
     presetSub: "クリックですぐに結果を表示",
     drapingTitle: "インタラクティブ・バーチャルドレープ (Virtual Draping)",
     drapingDesc: "実際のパーソナルカラーサロンのように、お顔の下に診断布（ドレープ）をリアルタイムで当てて顔色の変化を体験できます。",
@@ -328,14 +340,19 @@ const UI_TEXT = {
     stylingBannerTitle: "あなたのシーズンに最も映える今週のラグジュアリーOOTD",
     stylingBannerDesc: "アメリカ人気ブランド（Zara US、Nordstrom、SSENSE）のリアルタイム在庫コーデをチェック。",
     stylingBannerBtn: "似合わせルックブックを見る",
+    ethnicityTitle: "人種・肌トーン5選 (黒人・白人・東アジア・ラテン・東南アジア):",
     eduEyebrow: "色彩学マスタークラス · 公式ガイド",
-    eduTitle: "パーソナルカラー — 色とトーンの違いとは？",
+    eduTitlePrefix: "パーソナルカラー — ",
+    eduTitleColor: "色",
+    eduTitleAnd: "と",
+    eduTitleTone: "トーン",
+    eduTitleSuffix: "の違いとは？",
     eduStep1Badge: "色 (Color) ＝ 色相の違い",
     eduStep1Desc: "色は赤、黄、青、緑のように色の種類を区別する基準です。つまり「何色か」を意味します。",
-    colorRed: "赤 (Red)",
-    colorYellow: "黄 (Yellow)",
-    colorBlue: "青 (Blue)",
-    colorGreen: "緑 (Green)",
+    colorRed: "赤",
+    colorYellow: "黄",
+    colorBlue: "青",
+    colorGreen: "緑",
     eduStep2Badge: "トーン (Tone) ＝ 色の性質",
     eduStep2Desc: "トーンは色の明度（明るさ）と彩度（鮮やかさ）が結びついて現れる性質です。同じ青でもトーンによって全く異なる印象を与えます。",
     eduStep2Sub: "同じ青色・異なるトーンの例",
@@ -367,6 +384,7 @@ const UI_TEXT = {
     eduSumCoreTag: "パーソナルカラーの核心",
     eduSumCoreTitle: "色相 ＋ トーン ＋ 個人の調和",
     eduSumCoreDesc: "似合う色だけでなく、その色の最適な「トーン」まで突き止めること",
+    eduSumCoreRec: "✨ 12タイプ精密AI診断推奨",
   },
 };
 
@@ -679,12 +697,12 @@ const PERSONAL_COLOR_DB: Record<string, ColorToneData> = {
   },
 };
 
-// ─── 샘플 모델 프리셋 (4계절 퍼스널 컬러) ──────────────────────
+// ─── 샘플 모델 프리셋 (사계절 퍼스널 컬러 4대 표준 모델) ────────────────
 const PRESET_MODELS = [
   {
     id: "spring_warm",
-    labels: { ko: "봄 웜톤 (생기 브라이트)", en: "Spring Warm (Bright Peach)", ja: "イエベ春 (ブライトピーチ)" },
-    descs: { ko: "화사한 피부 & 코랄 피치", en: "Radiant Peach & Coral Glow", ja: "明るい血色感 ＆ コーラル" },
+    labels: { ko: "봄 웜톤 (Spring)", en: "Spring Warm", ja: "イエベ春 (Spring)" },
+    descs: { ko: "화사한 피부 & 피치 코랄", en: "Radiant Peach & Coral Glow", ja: "明るい血色感 ＆ コーラル" },
     toneHint: "spring_light",
     skinHex: "#FDE8D7",
     lipHex: "#FF7043",
@@ -693,8 +711,8 @@ const PRESET_MODELS = [
   },
   {
     id: "summer_cool",
-    labels: { ko: "여름 쿨톤 (청순 파스텔)", en: "Summer Cool (Dewy Light)", ja: "ブルベ夏 (透明感パステル)" },
-    descs: { ko: "뽀얀 피부 & 핑크빛 립", en: "Porcelain Skin & Dewy Pink", ja: "白玉肌 ＆ ピュアピンク" },
+    labels: { ko: "여름 쿨톤 (Summer)", en: "Summer Cool", ja: "ブルベ夏 (Summer)" },
+    descs: { ko: "뽀얀 피부 & 핑크빛 로즈", en: "Porcelain Skin & Rose Pink", ja: "白玉肌 ＆ ピュアピンク" },
     toneHint: "summer_light",
     skinHex: "#FCEFE9",
     lipHex: "#F8BBD0",
@@ -703,8 +721,8 @@ const PRESET_MODELS = [
   },
   {
     id: "autumn_warm",
-    labels: { ko: "가을 웜톤 (차분 뮤트)", en: "Autumn Warm (Soft Autumn)", ja: "イエベ秋 (大人ニュアンス)" },
-    descs: { ko: "골든 베이지 & 살구 피치", en: "Golden Warmth & Soft Brick", ja: "まろやかベージュ ＆ アプリコット" },
+    labels: { ko: "가을 웜톤 (Autumn)", en: "Autumn Warm", ja: "イエベ秋 (Autumn)" },
+    descs: { ko: "골든 베이지 & 테라코타", en: "Golden Warmth & Soft Brick", ja: "まろやかベージュ ＆ テラコッタ" },
     toneHint: "autumn_mute",
     skinHex: "#EED7C5",
     lipHex: "#C47C68",
@@ -713,13 +731,58 @@ const PRESET_MODELS = [
   },
   {
     id: "winter_cool",
-    labels: { ko: "겨울 쿨톤 (선명 비비드)", en: "Winter Cool (High Contrast)", ja: "ブルベ冬 (鮮烈コントラスト)" },
+    labels: { ko: "겨울 쿨톤 (Winter)", en: "Winter Cool", ja: "ブルベ冬 (Winter)" },
     descs: { ko: "투명 도자기 & 체리 레드", en: "Clear Porcelain & Cherry Red", ja: "冴えた陶器肌 ＆ 鮮明ルビー" },
     toneHint: "winter_bright",
     skinHex: "#FDF4EE",
     lipHex: "#C0392B",
     hairHex: "#111116",
     avatarBg: "from-purple-100 to-indigo-100",
+  },
+];
+
+
+// ─── 5대 인종/글로벌 피부색 프리셋 (흑인 · 백인 · 황인종 · 라틴 · 동남아시아인) ─────
+const ETHNICITY_SKIN_TONES = [
+  {
+    id: "white",
+    labels: { ko: "백인 (Fair)", en: "White (Fair)", ja: "白人 (フェア)" },
+    skinHex: "#FBF0EA",
+    lipHex: "#EE8291",
+    hairHex: "#543825",
+    toneHint: "spring_light",
+  },
+  {
+    id: "east_asian",
+    labels: { ko: "황인종 (동아시아)", en: "East Asian", ja: "東アジア" },
+    skinHex: "#F6D9B8",
+    lipHex: "#E57373",
+    hairHex: "#211A16",
+    toneHint: "autumn_mute",
+  },
+  {
+    id: "latino",
+    labels: { ko: "라틴 (올리브)", en: "Latino (Olive)", ja: "ラテン (オリーブ)" },
+    skinHex: "#D5A073",
+    lipHex: "#C25953",
+    hairHex: "#1E1815",
+    toneHint: "autumn_deep",
+  },
+  {
+    id: "se_asian",
+    labels: { ko: "동남아시아인 (탠)", en: "SE Asian (Bronze)", ja: "東南アジア (タン)" },
+    skinHex: "#BA7C48",
+    lipHex: "#A9433D",
+    hairHex: "#15110E",
+    toneHint: "autumn_deep",
+  },
+  {
+    id: "black",
+    labels: { ko: "흑인 (에스프레소)", en: "Black (Deep)", ja: "黒人 (ディープ)" },
+    skinHex: "#5B3826",
+    lipHex: "#8B3A3A",
+    hairHex: "#0D0A08",
+    toneHint: "winter_deep",
   },
 ];
 
@@ -826,8 +889,8 @@ export default function ColorHelperPage() {
     } catch (e) {}
   };
 
-  // ── 샘플 모델 로드 ──────────────────────────────────────────
-  const loadPresetModel = (preset: (typeof PRESET_MODELS)[0]) => {
+  // ── 샘플 모델 / 피부색 로드 ────────────────────────────────
+  const applySkinTone = (skin: { skinHex: string; lipHex: string; hairHex: string; toneHint: string }) => {
     setIsCustomPhoto(false);
     setIsUnlocked(tickets > 0);
 
@@ -843,19 +906,19 @@ export default function ColorHelperPage() {
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, 600, 750);
 
-    ctx.fillStyle = preset.hairHex;
+    ctx.fillStyle = skin.hairHex;
     ctx.beginPath();
     ctx.ellipse(300, 360, 200, 260, 0, 0, Math.PI * 2);
     ctx.fill();
 
-    ctx.fillStyle = preset.skinHex;
+    ctx.fillStyle = skin.skinHex;
     ctx.fillRect(250, 450, 100, 180);
 
     ctx.beginPath();
     ctx.ellipse(300, 360, 140, 180, 0, 0, Math.PI * 2);
     ctx.fill();
 
-    ctx.strokeStyle = preset.hairHex;
+    ctx.strokeStyle = skin.hairHex;
     ctx.lineWidth = 4;
     ctx.beginPath();
     ctx.arc(245, 305, 30, Math.PI * 1.15, Math.PI * 1.85);
@@ -871,22 +934,22 @@ export default function ColorHelperPage() {
     ctx.fill();
 
     const cheekGrad1 = ctx.createRadialGradient(230, 400, 5, 230, 400, 45);
-    cheekGrad1.addColorStop(0, preset.lipHex + "55");
-    cheekGrad1.addColorStop(1, preset.skinHex + "00");
+    cheekGrad1.addColorStop(0, skin.lipHex + "55");
+    cheekGrad1.addColorStop(1, skin.skinHex + "00");
     ctx.fillStyle = cheekGrad1;
     ctx.beginPath();
     ctx.arc(230, 400, 45, 0, Math.PI * 2);
     ctx.fill();
 
     const cheekGrad2 = ctx.createRadialGradient(370, 400, 5, 370, 400, 45);
-    cheekGrad2.addColorStop(0, preset.lipHex + "55");
-    cheekGrad2.addColorStop(1, preset.skinHex + "00");
+    cheekGrad2.addColorStop(0, skin.lipHex + "55");
+    cheekGrad2.addColorStop(1, skin.skinHex + "00");
     ctx.fillStyle = cheekGrad2;
     ctx.beginPath();
     ctx.arc(370, 400, 45, 0, Math.PI * 2);
     ctx.fill();
 
-    ctx.fillStyle = preset.lipHex;
+    ctx.fillStyle = skin.lipHex;
     ctx.beginPath();
     ctx.ellipse(300, 460, 38, 14, 0, 0, Math.PI * 2);
     ctx.fill();
@@ -894,11 +957,15 @@ export default function ColorHelperPage() {
     const dataUrl = cvs.toDataURL("image/png");
     setImageSrc(dataUrl);
 
-    triggerDiagnosis(preset.toneHint, {
-      skin: preset.skinHex,
-      lip: preset.lipHex,
-      hair: preset.hairHex,
+    triggerDiagnosis(skin.toneHint, {
+      skin: skin.skinHex,
+      lip: skin.lipHex,
+      hair: skin.hairHex,
     });
+  };
+
+  const loadPresetModel = (preset: (typeof PRESET_MODELS)[0]) => {
+    applySkinTone(preset);
   };
 
   // ── 웹캠 시작 & 캡처 ─────────────────────────────────────────
@@ -1552,6 +1619,31 @@ export default function ColorHelperPage() {
                 </div>
               </div>
 
+              {/* ── 5대 인종/글로벌 피부색 실시간 변경 툴바 (흑인·백인·황인·라틴·동남아) ── */}
+              <div className="mt-4 w-full max-w-[340px] bg-gray-50/95 rounded-2xl p-3 border border-gray-200 shadow-sm">
+                <div className="text-[11px] font-bold text-gray-700 mb-2 flex items-center justify-between">
+                  <span>{t.ethnicityTitle}</span>
+                </div>
+                <div className="grid grid-cols-5 gap-1.5">
+                  {ETHNICITY_SKIN_TONES.map((eth) => (
+                    <button
+                      key={eth.id}
+                      onClick={() => applySkinTone(eth)}
+                      className="flex flex-col items-center p-1.5 rounded-xl border border-gray-200 hover:border-[#E07A5F] hover:bg-white transition group text-center"
+                      title={eth.labels[lang]}
+                    >
+                      <div
+                        className="w-7 h-7 rounded-full shadow-inner border-2 border-white mb-1 group-hover:scale-110 transition-transform"
+                        style={{ backgroundColor: eth.skinHex }}
+                      />
+                      <span className="text-[9px] font-bold text-gray-700 leading-tight truncate w-full group-hover:text-[#E07A5F]">
+                        {eth.labels[lang]}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               {splitView && (
                 <div className="w-full max-w-[340px] mt-3">
                   <div className="flex justify-between text-[11px] text-gray-500 mb-1">
@@ -1648,7 +1740,11 @@ export default function ColorHelperPage() {
             <span>{t.eduEyebrow}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">
-            퍼스널 컬러 — <span className="text-rose-500">색</span>과 <span className="text-sky-600">톤</span>의 차이는 무엇인가?
+            {t.eduTitlePrefix}
+            <span className="text-rose-500">{t.eduTitleColor}</span>
+            {t.eduTitleAnd}
+            <span className="text-sky-600">{t.eduTitleTone}</span>
+            {t.eduTitleSuffix}
           </h2>
         </div>
 
@@ -1662,7 +1758,7 @@ export default function ColorHelperPage() {
                     1
                   </span>
                   <h3 className="text-base sm:text-lg font-black text-gray-900">
-                    <span className="text-rose-600">색 (Color)</span> = 색상의 차이
+                    {t.eduStep1Badge}
                   </h3>
                 </div>
                 <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed">
@@ -1671,21 +1767,21 @@ export default function ColorHelperPage() {
               </div>
 
               <div className="grid grid-cols-4 gap-2.5 sm:gap-3 w-full md:w-auto">
-                <div className="text-center">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#EF4444] shadow-md mx-auto mb-1 border border-black/10" />
-                  <span className="text-[11px] font-bold text-gray-800">{t.colorRed}</span>
+                <div className="flex flex-col items-center justify-start text-center">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#EF4444] shadow-md mx-auto mb-2 border border-black/10" />
+                  <span className="text-xs sm:text-sm font-black text-gray-900 whitespace-nowrap text-center block leading-none">{t.colorRed}</span>
                 </div>
-                <div className="text-center">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#FACC15] shadow-md mx-auto mb-1 border border-black/10" />
-                  <span className="text-[11px] font-bold text-gray-800">{t.colorYellow}</span>
+                <div className="flex flex-col items-center justify-start text-center">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#FACC15] shadow-md mx-auto mb-2 border border-black/10" />
+                  <span className="text-xs sm:text-sm font-black text-gray-900 whitespace-nowrap text-center block leading-none">{t.colorYellow}</span>
                 </div>
-                <div className="text-center">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#2563EB] shadow-md mx-auto mb-1 border border-black/10" />
-                  <span className="text-[11px] font-bold text-gray-800">{t.colorBlue}</span>
+                <div className="flex flex-col items-center justify-start text-center">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#2563EB] shadow-md mx-auto mb-2 border border-black/10" />
+                  <span className="text-xs sm:text-sm font-black text-gray-900 whitespace-nowrap text-center block leading-none">{t.colorBlue}</span>
                 </div>
-                <div className="text-center">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#10B981] shadow-md mx-auto mb-1 border border-black/10" />
-                  <span className="text-[11px] font-bold text-gray-800">{t.colorGreen}</span>
+                <div className="flex flex-col items-center justify-start text-center">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#10B981] shadow-md mx-auto mb-2 border border-black/10" />
+                  <span className="text-xs sm:text-sm font-black text-gray-900 whitespace-nowrap text-center block leading-none">{t.colorGreen}</span>
                 </div>
               </div>
             </div>
@@ -1700,7 +1796,7 @@ export default function ColorHelperPage() {
                     2
                   </span>
                   <h3 className="text-base sm:text-lg font-black text-gray-900">
-                    <span className="text-sky-600">톤 (Tone)</span> = 색의 성질
+                    {t.eduStep2Badge}
                   </h3>
                 </div>
                 <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed">
@@ -1852,7 +1948,7 @@ export default function ColorHelperPage() {
                 <h4 className="text-sm font-black text-emerald-950 mb-1">{t.eduSumCoreTitle}</h4>
                 <p className="text-xs text-emerald-800 font-bold leading-relaxed">{t.eduSumCoreDesc}</p>
                 <div className="mt-3 flex items-center gap-1 text-[11px] font-extrabold text-emerald-700">
-                  <span>✨ 12톤 정밀 AI 진단 추천</span>
+                  <span>{t.eduSumCoreRec}</span>
                 </div>
               </div>
             </div>
@@ -2116,7 +2212,7 @@ export default function ColorHelperPage() {
       {/* ── FOOTER ────────────────────────────────────────── */}
       <footer className="text-center text-xs text-gray-400 pt-6 pb-12 border-t border-gray-200">
         <p className="font-semibold text-gray-600 mb-1">
-          퍼스널컬러헬퍼 (PersonalColorHelper) · AI Personal Color System
+          {lang === "ko" ? "퍼스널컬러헬퍼 (PersonalColorHelper) · AI 퍼스널 컬러 시스템" : lang === "ja" ? "パーソナルカラーヘルパー (PersonalColorHelper) · AIパーソナルカラーシステム" : "PersonalColorHelper · AI Precision Colorimetry System"}
         </p>
         <p>© 2026 FirstMotion Co., Ltd. All rights reserved. (Seoul · Tokyo · New York)</p>
       </footer>
@@ -2210,7 +2306,7 @@ export default function ColorHelperPage() {
             {/* 공식 페이팔 스마트 버튼 마운트 영역 */}
             <div className="mb-3">
               <div className="flex items-center justify-between text-[11px] text-gray-500 font-medium mb-2 px-1">
-                <span>공식 페이팔 & 신용/체크카드 결제</span>
+                <span>{lang === "ko" ? "공식 페이팔 & 신용/체크카드 결제" : lang === "ja" ? "公式PayPal＆クレジットカード決済" : "Official PayPal & Credit/Debit Card"}</span>
                 <span className="text-emerald-600 font-bold flex items-center gap-1">
                   <ShieldCheck className="w-3.5 h-3.5" /> 256-bit SSL
                 </span>
