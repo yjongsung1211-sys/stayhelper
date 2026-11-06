@@ -29,6 +29,8 @@ import {
   ExternalLink,
   ShoppingBag,
   Shirt,
+  Crown,
+  Droplet,
 } from "lucide-react";
 
 // ─── 다국어 언어 타입 ─────────────────────────────────────────
@@ -197,6 +199,63 @@ const UI_TEXT = {
     eduSumCoreTitle: "색상 + 톤 + 개인의 조화",
     eduSumCoreDesc: "자신에게 어울리는 색뿐 아니라 그 색의 톤까지 찾아내는 것",
     eduSumCoreRec: "✨ 12톤 정밀 AI 진단 추천",
+
+    // ── 5단계 인터랙티브 온보딩 (Color Analysis App 벤치마킹) ──
+    stepIndicator: "1단계 / 5단계",
+    step1Title: "나에게 어울리는 색을 정확히 알 수 있어요",
+    step1Desc: "얼굴 윤곽 및 피부 언더톤 스캔 완료",
+    step1Btn: "시작하기",
+    
+    step2Title: "내 컬러를 입으면 더욱 생기 있어 보여요",
+    step2Desc: "좌우 슬라이더를 드래그하여 베스트 vs 워스트 컬러 안색 차이를 비교해보세요.",
+    step2BestBadge: "베스트 (생기 UP)",
+    step2WorstBadge: "워스트 (안색 DOWN)",
+    step2Btn: "계속하기",
+    
+    step3Title: "올바른 헤어 컬러로 가장 아름다운 모습을 완성하세요",
+    step3Desc: "내 톤에 어울리는 헤어 컬러를 실시간으로 가상 염색해보세요.",
+    step3Intensity: "염색 농도",
+    step3Btn: "계속하기",
+    
+    step4Title: "장점을 돋보이게 하는 메이크업을 연출하세요",
+    step4Desc: "나의 퍼스널 톤에 맞는 립스틱과 아이 섀도우를 가상 착색해보세요.",
+    step4LipLabel: "립스틱 발색",
+    step4EyeLabel: "아이 섀도우",
+    step4Btn: "계속하기",
+    
+    step5Title: "무엇을 입든 자신감을 느껴보세요",
+    step5Desc: "내 얼굴과 가장 조화로운 옷 색상과 실시간 매칭률(%)을 확인해보세요.",
+    step5MatchLabel: "적합도",
+    step5UnlockBtn: "내 전체 결과 & 베스트 컬러 잠금 해제",
+    
+    // AI 스캔 애니메이션
+    scanTitle: "AI 퍼스널컬러 진단 / 나의 주요 컬러 특징",
+    scanStep1: "퍼스널컬러 진단 중...",
+    scanStep2: "선호도 및 피부 명도·채도 분석 중...",
+    scanStep3: "12톤 매트릭스 컬러 팔레트 생성 중...",
+    scanStep4: "어울리는 헤어·메이크업 톤 찾는 중...",
+    scanStep5: "퍼스널 워드로브 의상 매칭 생성 중...",
+    scanStep6: "스타일 프로필 작성 중",
+    scanSkinCool: "쿨톤 (차가운)",
+    scanSkinWarm: "웜톤 (따뜻한)",
+    
+    // 프리미엄 결제 팝업 (e04b264e.jpg)
+    paywallContinueFree: "기본 버전으로 계속하기",
+    paywallBadge: "프리미엄",
+    paywallTitle: "상세한 퍼스널컬러 진단으로 자연스러운 아름다움을 보여주세요",
+    paywallProofCounter: "10,746",
+    paywallProofSuffix: "명의 사람들이 자신에게 가장 잘 어울리는 컬러를 오늘 발견했어요",
+    paywallPlan1Title: "1회 정밀 리포트",
+    paywallPlan1Price: "₩5,900 ($4.99)",
+    paywallPlan2Title: "무제한 VIP 패스",
+    paywallPlan2Badge: "인기",
+    paywallPlan2Price: "₩12,900 ($9.99)",
+    paywallFeat1: "AI 퍼스널컬러 120개 개인 색상 정밀 진단",
+    paywallFeat2: "사계절 12톤 상세 세부 톤 & 안색 효과 분석",
+    paywallFeat3: "베스트 & 워스트 의상 컬러 30선 및 피해야 할 색상",
+    paywallFeat4: "올리브영/백화점 1위 찰떡 립스틱 & 파운데이션",
+    paywallFeat5: "인스타 스토리 & 소장용 고화질 진단 카드 다운로드",
+    paywallCta: "지금 즉시 리포트 잠금 해제",
   },
   en: {
     brandName: "PersonalColorHelper",
@@ -358,6 +417,63 @@ const UI_TEXT = {
     eduSumCoreTitle: "Color + Tone + Personal Harmony",
     eduSumCoreDesc: "Finding not just your color, but the exact seasonal TONE that illuminates you.",
     eduSumCoreRec: "✨ Recommended: Unlock 12-Tone Matrix",
+
+    // ── 5-Step Interactive Onboarding ──
+    stepIndicator: "Step 1 of 5",
+    step1Title: "Discover the exact colors that make you glow",
+    step1Desc: "Facial contours & skin undertone calibrated",
+    step1Btn: "Get Started",
+    
+    step2Title: "Wearing your true color makes your skin radiate",
+    step2Desc: "Drag the slider to compare Best vs. Worst drape colors and see your skin transform.",
+    step2BestBadge: "Best Tone (Glow UP)",
+    step2WorstBadge: "Worst Tone (Dull)",
+    step2Btn: "Continue",
+    
+    step3Title: "Find the hair color that highlights your natural glow",
+    step3Desc: "Test virtual hair dye shades matched to your undertone in real-time.",
+    step3Intensity: "Dye Intensity",
+    step3Btn: "Continue",
+    
+    step4Title: "Highlight your best facial features with matched makeup",
+    step4Desc: "Try virtual lip tint and eyeshadow tailored to your contrast and undertone.",
+    step4LipLabel: "Lip Tint Shade",
+    step4EyeLabel: "Eye Shadow",
+    step4Btn: "Continue",
+    
+    step5Title: "Feel absolute confidence in every outfit you wear",
+    step5Desc: "Check real-time outfit harmony scores (%) and discover what makes you shine.",
+    step5MatchLabel: "match",
+    step5UnlockBtn: "Unlock Full Analysis & Color Palettes",
+    
+    // AI Scan Animation
+    scanTitle: "AI Personal Color Diagnosis / Key Color Attributes",
+    scanStep1: "Analyzing Personal Color...",
+    scanStep2: "Analyzing Contrast & Chroma Balance...",
+    scanStep3: "Generating 12-Tone Color Palettes...",
+    scanStep4: "Finding Best Hair & Makeup Tones...",
+    scanStep5: "Generating Personal Wardrobe Combinations...",
+    scanStep6: "Building Style Profile",
+    scanSkinCool: "Cool Undertone",
+    scanSkinWarm: "Warm Undertone",
+    
+    // Premium Paywall Modal
+    paywallContinueFree: "Continue with Basic Preview",
+    paywallBadge: "PREMIUM",
+    paywallTitle: "Unlock your full personalized color diagnosis and styling guide",
+    paywallProofCounter: "10,746",
+    paywallProofSuffix: "people discovered their perfect colors today",
+    paywallPlan1Title: "Single Report",
+    paywallPlan1Price: "$4.99 USD",
+    paywallPlan2Title: "All-Access VIP",
+    paywallPlan2Badge: "POPULAR",
+    paywallPlan2Price: "$9.99 USD",
+    paywallFeat1: "AI Personal Color Diagnosis with 120 Personalized Shades",
+    paywallFeat2: "4-Season 12-Tone Detailed Breakdown & Undertone Science",
+    paywallFeat3: "Top 30 Best & Worst Outfit Palettes & Warning Colors",
+    paywallFeat4: "Top-Rated Matched Cosmetics, Lipsticks & Foundation",
+    paywallFeat5: "High-Resolution Printable Diagnosis Card Download",
+    paywallCta: "Unlock Full Report Now",
   },
   ja: {
     brandName: "パーソナルカラーヘルパー",
@@ -520,6 +636,63 @@ const UI_TEXT = {
     eduSumCoreTitle: "色相 ＋ トーン ＋ 個人の調和",
     eduSumCoreDesc: "似合う色だけでなく、その色の最適な「トーン」まで突き止めること",
     eduSumCoreRec: "✨ 12タイプ精密AI診断推奨",
+
+    // ── 5段階インタラクティブオンボーディング ──
+    stepIndicator: "ステップ 1 / 5",
+    step1Title: "あなたに似合う色を正確に診断します",
+    step1Desc: "顔の輪郭と肌のアンダートーンのスキャン完了",
+    step1Btn: "スタート",
+    
+    step2Title: "ベストカラーを身につけると肌が輝いて見えます",
+    step2Desc: "スライダーを動かして、ベストカラーと苦手な色の顔映りの違いを比較しましょう。",
+    step2BestBadge: "ベスト (血色感UP)",
+    step2WorstBadge: "ワースト (くすみ)",
+    step2Btn: "次へ進む",
+    
+    step3Title: "似合うヘアカラーで魅力を最大限に引き出します",
+    step3Desc: "パーソナルカラーに合うヘアカラーをリアルタイムでバーチャル体験。",
+    step3Intensity: "発色の濃さ",
+    step3Btn: "次へ進む",
+    
+    step4Title: "魅力を引き立てるパーソナルメイクを試しましょう",
+    step4Desc: "パーソナルカラーにぴったりのリップとアイシャドウをお試しください。",
+    step4LipLabel: "リップカラー",
+    step4EyeLabel: "アイシャドウ",
+    step4Btn: "次へ進む",
+    
+    step5Title: "どんな服を着ても自信が持てるスタイルを手に入れましょう",
+    step5Desc: "顔映りを引き立てる服の色とリアルタイム適合率(%)を確認しましょう。",
+    step5MatchLabel: "適合度",
+    step5UnlockBtn: "完全な診断結果とベストカラーを解除する",
+    
+    // AIスキャンアニメーション
+    scanTitle: "AIパーソナルカラー診断 / あなたの主要カラー特徴",
+    scanStep1: "パーソナルカラー診断中...",
+    scanStep2: "コントラストおよび明度・彩度を分析中...",
+    scanStep3: "12タイプ・カラーパレットを作成中...",
+    scanStep4: "似合うヘア＆メイクのトーンを抽出中...",
+    scanStep5: "パーソナルワードローブを生成中...",
+    scanStep6: "スタイルプロファイルを構築中",
+    scanSkinCool: "ブルベ (Cool)",
+    scanSkinWarm: "イエベ (Warm)",
+    
+    // プレミアム決済モーダル
+    paywallContinueFree: "基本バージョンで続ける",
+    paywallBadge: "プレミアム",
+    paywallTitle: "詳細なパーソナルカラー診断で本来の魅力を引き出しましょう",
+    paywallProofCounter: "10,746",
+    paywallProofSuffix: "人が今日、自分に似合うベストカラーを見つけました",
+    paywallPlan1Title: "1回診断レポート",
+    paywallPlan1Price: "¥680 ($4.99)",
+    paywallPlan2Title: "無制限VIPパス",
+    paywallPlan2Badge: "人気",
+    paywallPlan2Price: "¥1,480 ($9.99)",
+    paywallFeat1: "AIパーソナルカラー120色パーソナル診断",
+    paywallFeat2: "4シーズン12タイプ詳細サブトーン精密分析",
+    paywallFeat3: "ベスト＆ワースト衣装カラー30選・NGカラー警告",
+    paywallFeat4: "デパコス・人気No.1コスメ＆ファンデーション推奨",
+    paywallFeat5: "高解像度パーソナルカラーカード保存・印刷",
+    paywallCta: "今すぐ完全レポートを解除する",
   },
 };
 
@@ -1059,6 +1232,37 @@ const WARDROBE_TEST_COLORS = [
   { hex: "#E9C46A", name: { ko: "머스타드 골드", en: "Mustard Gold", ja: "マスタード" }, type: "warm" },
 ];
 
+
+// ─── [Color Analysis App 벤치마킹] 실시간 가상 비교 온보딩 프리셋 ─────────────
+const OUTFIT_MATCH_PRESETS = [
+  { id: "outfit_1", hex: "#E0834B", match: 84, name: { ko: "웜 앰버 오렌지", en: "Warm Amber Orange", ja: "アンバーオレンジ" } },
+  { id: "outfit_2", hex: "#633B26", match: 84, name: { ko: "체스트넛 브라운", en: "Chestnut Brown", ja: "チェスナットブラウン" } },
+  { id: "outfit_3", hex: "#625D43", match: 84, name: { ko: "올리브 카키", en: "Olive Khaki", ja: "オリーブカーキ" } },
+  { id: "outfit_4", hex: "#E9E5A8", match: 96, name: { ko: "소프트 버터 옐로우", en: "Soft Butter Yellow", ja: "バターイエロー" } },
+  { id: "outfit_5", hex: "#3A5335", match: 75, name: { ko: "딥 포레스트 그린", en: "Deep Forest Green", ja: "フォレストグリーン" } },
+];
+
+const HAIR_TRYON_PRESETS = [
+  { id: "hair_1", hex: "#B85D19", name: { ko: "웜 코퍼", en: "Warm Copper", ja: "ウォームカッパー" } },
+  { id: "hair_2", hex: "#4A2E1B", name: { ko: "다크 초콜릿", en: "Dark Chocolate", ja: "ダークチョコレート" } },
+  { id: "hair_3", hex: "#C49756", name: { ko: "허니 골드", en: "Honey Gold", ja: "ハニーゴールド" } },
+  { id: "hair_4", hex: "#6B2D5C", name: { ko: "리치 버건디", en: "Rich Burgundy", ja: "リッチバーガンディ" } },
+  { id: "hair_5", hex: "#1F2421", name: { ko: "제트 블랙", en: "Jet Black", ja: "ジェットブラック" } },
+];
+
+const MAKEUP_LIP_PRESETS = [
+  { id: "lip_1", hex: "#DE6B7E", name: { ko: "베리 핑크", en: "Berry Pink", ja: "ベリーピンク" } },
+  { id: "lip_2", hex: "#B23B30", name: { ko: "루비 레드", en: "Ruby Red", ja: "ルビーレッド" } },
+  { id: "lip_3", hex: "#FF6F91", name: { ko: "피치 코랄", en: "Peach Coral", ja: "ピーチコーラル" } },
+  { id: "lip_4", hex: "#C47C8B", name: { ko: "소프트 플럼", en: "Soft Plum", ja: "ソフトプラム" } },
+];
+
+const MAKEUP_EYE_PRESETS = [
+  { id: "eye_1", hex: "#5B6A72", name: { ko: "스모키 슬레이트", en: "Smoky Slate", ja: "スモーキースレート" } },
+  { id: "eye_2", hex: "#8C6D58", name: { ko: "웜 브라운", en: "Warm Brown", ja: "ウォームブラウン" } },
+  { id: "eye_3", hex: "#C8A282", name: { ko: "소프트 누드", en: "Soft Nude", ja: "ソフトヌード" } },
+];
+
 export default function ColorHelperPage() {
   // ── 언어 상태 (기본 한국어, 쿼리/스토리지 지원) ─────────────────
   const [lang, setLang] = useState<LangType>("ko");
@@ -1068,6 +1272,18 @@ export default function ColorHelperPage() {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [isCustomPhoto, setIsCustomPhoto] = useState(false);
   const [uploadedUserPhoto, setUploadedUserPhoto] = useState<string | null>(null);
+
+  // ── [신규] 5단계 인터랙티브 온보딩 & AI 스캔 상태 ────────────────
+  const [isScanning, setIsScanning] = useState(false);
+  const [scanProgress, setScanProgress] = useState(0);
+  const [comparisonStep, setComparisonStep] = useState<number>(1);
+  const [interactiveSplitPos, setInteractiveSplitPos] = useState<number>(50);
+  const [activeHairTryonHex, setActiveHairTryonHex] = useState<string>("#B85D19");
+  const [hairIntensity, setHairIntensity] = useState<number>(75);
+  const [activeLipTryonHex, setActiveLipTryonHex] = useState<string>("#DE6B7E");
+  const [activeEyeTryonHex, setActiveEyeTryonHex] = useState<string>("#5B6A72");
+  const [selectedOutfitIndex, setSelectedOutfitIndex] = useState<number>(3); // 96% match default
+  const [isPaywallOpen, setIsPaywallOpen] = useState(false);
   const [resultTone, setResultTone] = useState<ColorToneData | null>(null);
   const [activeTab, setActiveTab] = useState<"result" | "cosmetics">("result");
   const [studioTool, setStudioTool] = useState<"drape" | "custom" | "outfit" | "cosme" | "quiz">("custom");
@@ -1350,6 +1566,24 @@ export default function ColorHelperPage() {
   };
 
   const checkTicketAndAnalyze = (canvas: HTMLCanvasElement) => {
+    setIsScanning(true);
+    setScanProgress(15);
+    setComparisonStep(1);
+
+    const interval = setInterval(() => {
+      setScanProgress((prev) => {
+        if (prev >= 98) {
+          clearInterval(interval);
+          setTimeout(() => {
+            setIsScanning(false);
+            setComparisonStep(1);
+          }, 350);
+          return 100;
+        }
+        return prev + 18;
+      });
+    }, 250);
+
     if (tickets > 0) {
       const newBalance = tickets - 1;
       setTickets(newBalance);
@@ -1359,7 +1593,6 @@ export default function ColorHelperPage() {
     } else {
       setIsUnlocked(false);
       analyzeCanvasImage(canvas);
-      // 사용자가 올린 사진으로 자유롭게 드레이핑, 옷색, 화장품을 테스트할 수 있도록 모달 즉시 팝업 방지
     }
   };
 
@@ -1546,7 +1779,7 @@ export default function ColorHelperPage() {
         setIsPayModalOpen(false);
         setPaymentSuccessNotice(
           lang === "ko"
-            ? `결제 승인 완료! ${addTickets}회 진단권이 충전되어 즉시 해금되었습니다.`
+            ? (lang === "ko" ? `결제 승인 완료! ${addTickets}회 진단권이 충전되어 즉시 해금되었습니다.` : lang === "ja" ? `決済完了！${addTickets}回分の診断チケットがチャージされ、レポートが解除されました。` : `Payment Approved! ${addTickets} diagnosis pass credited & full report unlocked.`)
             : lang === "ja"
             ? `決済が完了しました！診断チケット（${addTickets}回分）が付与され、診断書が閲覧可能になりました。`
             : `Payment approved! ${addTickets} passes added to your account.`
@@ -1872,6 +2105,439 @@ export default function ColorHelperPage() {
       {/* ── STEP 2: 가상 드레이핑 스튜디오 ─────────────────────────── */}
       {imageSrc && (
         <section className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-200/80 mb-8">
+      {/* ── AI 실시간 랜드마크 스캐닝 & 체크리스트 화면 (f25ca9ca.jpg & b9ec68bc.jpg) ── */}
+      {isScanning && (
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full shadow-2xl border border-purple-200 text-center relative overflow-hidden animate-fade-in">
+            {/* Background Chromatic Rays effect */}
+            <div className="relative w-44 h-52 mx-auto mb-5 rounded-2xl overflow-hidden shadow-lg border-2 border-purple-300">
+              <img src={imageSrc || ""} alt="Scanned Portrait" className="w-full h-full object-cover object-top" />
+              
+              {/* Landmark Overlay Lines */}
+              <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-80" viewBox="0 0 100 120">
+                {/* Eyebrows */}
+                <path d="M 28 42 Q 38 38 48 43" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
+                <path d="M 52 43 Q 62 38 72 42" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
+                {/* Eyes */}
+                <ellipse cx="38" cy="48" rx="8" ry="4.5" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
+                <ellipse cx="62" cy="48" rx="8" ry="4.5" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
+                {/* Nose bridge & tip */}
+                <path d="M 50 43 L 50 64" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
+                <path d="M 44 65 Q 50 67 56 65" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
+                {/* Lips */}
+                <path d="M 38 76 Q 50 72 62 76 Q 50 82 38 76" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
+                {/* Facial Jawline */}
+                <path d="M 22 45 Q 26 85 50 102 Q 74 85 78 45" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
+              </svg>
+
+              {/* Pulse Scan Line */}
+              <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-purple-400 to-transparent shadow-[0_0_12px_#A855F7] animate-pulse top-1/2 -translate-y-1/2" />
+            </div>
+
+            <h3 className="text-sm font-black text-gray-900 mb-1">{t.scanTitle}</h3>
+            <div className="flex items-center justify-center gap-1.5 mb-4">
+              <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: sampledColors.skin }} />
+              <span className="text-[11px] font-bold text-gray-500">
+                {sampledColors.warmScore >= 50 ? t.scanSkinWarm : t.scanSkinCool}
+              </span>
+            </div>
+
+            {/* Progress Bars Checklist */}
+            <div className="space-y-2 text-left text-xs font-bold text-gray-700 mb-5">
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-purple-600" /> {t.scanStep1}</span>
+                <span className="text-purple-600 text-[10px]">100%</span>
+              </div>
+              <div className="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
+                <div className="bg-purple-600 h-full rounded-full transition-all duration-300" style={{ width: `${Math.min(100, scanProgress)}%` }} />
+              </div>
+
+              <div className="flex items-center justify-between pt-1">
+                <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-purple-600" /> {t.scanStep2}</span>
+                <span className="text-purple-600 text-[10px]">{Math.min(100, scanProgress)}%</span>
+              </div>
+              <div className="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
+                <div className="bg-purple-600 h-full rounded-full transition-all duration-300" style={{ width: `${Math.min(100, scanProgress)}%` }} />
+              </div>
+
+              <div className="flex items-center justify-between pt-1">
+                <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-purple-600" /> {t.scanStep3}</span>
+                <span className="text-purple-600 text-[10px]">{Math.min(100, scanProgress)}%</span>
+              </div>
+              <div className="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
+                <div className="bg-purple-600 h-full rounded-full transition-all duration-300" style={{ width: `${Math.min(100, scanProgress)}%` }} />
+              </div>
+
+              <div className="flex items-center justify-between pt-1">
+                <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-purple-600" /> {t.scanStep4}</span>
+                <span className="text-purple-600 text-[10px]">{Math.min(100, scanProgress)}%</span>
+              </div>
+              <div className="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
+                <div className="bg-purple-600 h-full rounded-full transition-all duration-300" style={{ width: `${Math.min(100, scanProgress)}%` }} />
+              </div>
+
+              <div className="flex items-center justify-between pt-1">
+                <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-purple-600" /> {t.scanStep5}</span>
+                <span className="text-purple-600 text-[10px]">{Math.min(100, scanProgress)}%</span>
+              </div>
+              <div className="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
+                <div className="bg-purple-600 h-full rounded-full transition-all duration-300" style={{ width: `${Math.min(100, scanProgress)}%` }} />
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                setIsScanning(false);
+                setComparisonStep(1);
+              }}
+              className="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-xs shadow-md transition"
+            >
+              {t.step1Btn}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ── 5-STEP GUIDED INTERACTIVE COMPARISON (Color Analysis App 벤치마킹) ── */}
+      <div className="mb-10 p-5 sm:p-8 rounded-3xl bg-gradient-to-b from-purple-50/50 via-white to-gray-50 border border-purple-100 shadow-xl">
+        {/* Stepper Dots (1 ~ 5) */}
+        <div className="flex items-center justify-center gap-2 mb-6">
+          {[1, 2, 3, 4, 5].map((stepNum) => (
+            <button
+              key={stepNum}
+              onClick={() => setComparisonStep(stepNum)}
+              className={`transition-all rounded-full ${
+                comparisonStep === stepNum
+                  ? "w-7 h-2.5 bg-purple-600 shadow-sm"
+                  : "w-2.5 h-2.5 bg-gray-300 hover:bg-purple-300"
+              }`}
+              title={`Step ${stepNum}`}
+            />
+          ))}
+        </div>
+
+        {/* Active Step Content */}
+        <div className="max-w-md mx-auto flex flex-col items-center">
+          {/* Portrait Canvas with Split View & Virtual Try-on Overlays */}
+          <div 
+            className="relative w-full aspect-[9/13] sm:aspect-[3/4] max-w-[340px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-gray-900 select-none touch-none mx-auto cursor-ew-resize mb-4"
+            onPointerDown={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const updatePos = (clientX: number) => {
+                const x = Math.max(5, Math.min(rect.width - 5, clientX - rect.left));
+                setInteractiveSplitPos(Math.round((x / rect.width) * 100));
+              };
+              updatePos(e.clientX);
+              const onPointerMove = (ev: PointerEvent) => updatePos(ev.clientX);
+              const onPointerUp = () => {
+                window.removeEventListener("pointermove", onPointerMove);
+                window.removeEventListener("pointerup", onPointerUp);
+              };
+              window.addEventListener("pointermove", onPointerMove);
+              window.addEventListener("pointerup", onPointerUp);
+            }}
+          >
+            {/* ── BASE LAYER: RIGHT SIDE (Natural / Dull / Basic) ── */}
+            <div className="absolute inset-0 w-full h-full overflow-hidden">
+              <img
+                src={imageSrc || ""}
+                alt="Portrait"
+                className="w-full h-full object-cover object-top"
+                style={
+                  comparisonStep === 2
+                    ? { filter: "brightness(0.94) saturate(0.85)" }
+                    : undefined
+                }
+              />
+
+              {/* Step 2 Right: Worst Drape on Shoulders */}
+              {comparisonStep === 2 && (
+                <div 
+                  className="absolute bottom-0 inset-x-0 h-[36%] rounded-t-[50px] shadow-2xl transition-colors duration-300 flex items-center justify-center pointer-events-none"
+                  style={{ 
+                    backgroundColor: resultTone ? resultTone.worstColors[0]?.hex || "#7F8C8D" : "#7F8C8D",
+                    boxShadow: "inset 0 10px 25px rgba(0,0,0,0.25)"
+                  }}
+                >
+                  <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-black/50 text-white backdrop-blur-xs">
+                    {t.step2WorstBadge}
+                  </span>
+                </div>
+              )}
+
+              {/* Step 5: Outfit Overlay on Full Width */}
+              {comparisonStep === 5 && (
+                <div 
+                  className="absolute bottom-0 inset-x-0 h-[36%] rounded-t-[50px] shadow-2xl transition-colors duration-300 flex items-center justify-center pointer-events-none"
+                  style={{ 
+                    backgroundColor: OUTFIT_MATCH_PRESETS[selectedOutfitIndex].hex,
+                    boxShadow: "inset 0 10px 25px rgba(0,0,0,0.25)"
+                  }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 pointer-events-none" />
+                  <span className="relative z-10 text-[11px] font-extrabold px-3 py-1 rounded-full bg-black/40 text-white backdrop-blur-xs">
+                    {OUTFIT_MATCH_PRESETS[selectedOutfitIndex].name[lang]}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* ── CLIPPED LAYER: LEFT SIDE (Best / Glow / Tryon) ── */}
+            {(comparisonStep === 2 || comparisonStep === 3 || comparisonStep === 4) && (
+              <div 
+                className="absolute inset-0 w-full h-full overflow-hidden"
+                style={{ clipPath: `inset(0 ${100 - interactiveSplitPos}% 0 0)` }}
+              >
+                <img
+                  src={imageSrc || ""}
+                  alt="Portrait Left"
+                  className="w-full h-full object-cover object-top"
+                  style={
+                    comparisonStep === 2
+                      ? { filter: "brightness(1.06) saturate(1.08)" }
+                      : undefined
+                  }
+                />
+
+                {/* Step 2 Left: Best Drape on Shoulders */}
+                {comparisonStep === 2 && (
+                  <div 
+                    className="absolute bottom-0 inset-x-0 h-[36%] rounded-t-[50px] shadow-2xl transition-colors duration-300 flex items-center justify-center pointer-events-none"
+                    style={{ 
+                      backgroundColor: resultTone ? resultTone.bestColors[0]?.hex || "#FFA07A" : "#FFA07A",
+                      boxShadow: "inset 0 10px 25px rgba(0,0,0,0.25)"
+                    }}
+                  >
+                    <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-black/50 text-white backdrop-blur-xs">
+                      {t.step2BestBadge}
+                    </span>
+                  </div>
+                )}
+
+                {/* Step 3 Left: Hair Tryon Tint */}
+                {comparisonStep === 3 && (
+                  <div 
+                    className="absolute inset-0 pointer-events-none transition-all duration-200"
+                    style={{ 
+                      backgroundColor: activeHairTryonHex,
+                      mixBlendMode: "color",
+                      opacity: hairIntensity / 100
+                    }}
+                  />
+                )}
+
+                {/* Step 4 Left: Makeup Tryon Tint */}
+                {comparisonStep === 4 && (
+                  <>
+                    {/* Eye Shadow Tint */}
+                    <div 
+                      className="absolute top-[35%] inset-x-0 h-[15%] pointer-events-none opacity-45"
+                      style={{ 
+                        backgroundColor: activeEyeTryonHex,
+                        mixBlendMode: "multiply",
+                        filter: "blur(6px)"
+                      }}
+                    />
+                    {/* Lip Tint */}
+                    <div 
+                      className="absolute top-[56%] inset-x-0 h-[12%] pointer-events-none opacity-70"
+                      style={{ 
+                        backgroundColor: activeLipTryonHex,
+                        mixBlendMode: "color",
+                        filter: "blur(4px)"
+                      }}
+                    />
+                  </>
+                )}
+              </div>
+            )}
+
+            {/* Step 1: Dotted Facial Landmark Contours */}
+            {comparisonStep === 1 && (
+              <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-75" viewBox="0 0 100 120">
+                <path d="M 28 42 Q 38 38 48 43" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
+                <path d="M 52 43 Q 62 38 72 42" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
+                <ellipse cx="38" cy="48" rx="8" ry="4.5" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
+                <ellipse cx="62" cy="48" rx="8" ry="4.5" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
+                <path d="M 50 43 L 50 64" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
+                <path d="M 44 65 Q 50 67 56 65" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
+                <path d="M 38 76 Q 50 72 62 76 Q 50 82 38 76" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
+                <path d="M 22 45 Q 26 85 50 102 Q 74 85 78 45" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
+              </svg>
+            )}
+
+            {/* Step 5: Floating Match Score Badge 🔥 */}
+            {comparisonStep === 5 && (
+              <div className="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-md px-3 py-1 rounded-2xl shadow-xl border border-amber-200 flex items-center gap-1.5 z-20">
+                <span className="text-base leading-none">🔥</span>
+                <div className="text-right">
+                  <div className="text-[8px] font-black uppercase text-amber-700 tracking-wider leading-none mb-0.5">{t.step5MatchLabel}</div>
+                  <div className="text-sm font-black text-gray-900 leading-none">{OUTFIT_MATCH_PRESETS[selectedOutfitIndex].match}%</div>
+                </div>
+              </div>
+            )}
+
+            {/* ── DRAGGABLE DIVIDER LINE & HANDLE (< >) ── */}
+            {(comparisonStep === 2 || comparisonStep === 3 || comparisonStep === 4) && (
+              <div 
+                className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg pointer-events-none z-30"
+                style={{ left: `${interactiveSplitPos}%` }}
+              >
+                {comparisonStep === 2 ? (
+                  <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-white shadow-2xl border-2 border-white flex items-center justify-center overflow-hidden">
+                    <div className="w-1/2 h-full bg-emerald-600 flex items-center justify-center text-white text-[11px] font-black">
+                      ✓
+                    </div>
+                    <div className="w-1/2 h-full bg-rose-600 flex items-center justify-center text-white text-[11px] font-black">
+                      ✕
+                    </div>
+                    <div className="absolute w-5 h-5 rounded-full bg-white text-gray-800 text-[9px] font-black flex items-center justify-center shadow">
+                      &lt;&gt;
+                    </div>
+                  </div>
+                ) : (
+                  <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-white shadow-xl border-2 border-purple-600 text-purple-700 flex items-center justify-center font-black text-xs">
+                    &lt;&gt;
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* ── SWATCHES & CONTROLS SPECIFIC TO STEP ── */}
+          {/* Step 3: Hair Tryon Swatches + Intensity Slider (💧) */}
+          {comparisonStep === 3 && (
+            <div className="w-full max-w-[340px] mb-4 space-y-2.5">
+              <div className="flex items-center justify-center gap-2.5">
+                {HAIR_TRYON_PRESETS.map((h) => (
+                  <button
+                    key={h.id}
+                    onClick={() => setActiveHairTryonHex(h.hex)}
+                    className={`w-9 h-9 rounded-full transition-transform border-2 cursor-pointer ${
+                      activeHairTryonHex === h.hex
+                        ? "border-purple-600 scale-110 shadow-md ring-2 ring-purple-300"
+                        : "border-white hover:scale-105 shadow-sm"
+                    }`}
+                    style={{ backgroundColor: h.hex }}
+                    title={h.name[lang]}
+                  />
+                ))}
+              </div>
+              <div className="flex items-center gap-2 px-2 bg-gray-100 rounded-xl p-1.5 border border-gray-200">
+                <input
+                  type="range"
+                  min="25"
+                  max="100"
+                  value={hairIntensity}
+                  onChange={(e) => setHairIntensity(Number(e.target.value))}
+                  className="w-full accent-purple-600"
+                />
+                <Droplet className="w-4 h-4 text-purple-600 flex-shrink-0" />
+              </div>
+            </div>
+          )}
+
+          {/* Step 4: Makeup Swatches (Lip & Eye) */}
+          {comparisonStep === 4 && (
+            <div className="w-full max-w-[340px] mb-4 space-y-2">
+              <div className="flex items-center justify-between px-1 text-[11px] font-bold text-gray-600">
+                <span>{t.step4LipLabel}:</span>
+                <div className="flex items-center gap-2">
+                  {MAKEUP_LIP_PRESETS.map((lp) => (
+                    <button
+                      key={lp.id}
+                      onClick={() => setActiveLipTryonHex(lp.hex)}
+                      className={`w-7 h-7 rounded-full border-2 transition cursor-pointer ${
+                        activeLipTryonHex === lp.hex ? "border-purple-600 scale-110 ring-2 ring-purple-300" : "border-white"
+                      }`}
+                      style={{ backgroundColor: lp.hex }}
+                      title={lp.name[lang]}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between px-1 text-[11px] font-bold text-gray-600">
+                <span>{t.step4EyeLabel}:</span>
+                <div className="flex items-center gap-2">
+                  {MAKEUP_EYE_PRESETS.map((ep) => (
+                    <button
+                      key={ep.id}
+                      onClick={() => setActiveEyeTryonHex(ep.hex)}
+                      className={`w-7 h-7 rounded-full border-2 transition cursor-pointer ${
+                        activeEyeTryonHex === ep.hex ? "border-purple-600 scale-110 ring-2 ring-purple-300" : "border-white"
+                      }`}
+                      style={{ backgroundColor: ep.hex }}
+                      title={ep.name[lang]}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Step 5: Outfit Swatches with % Match Badges (🔥) */}
+          {comparisonStep === 5 && (
+            <div className="w-full max-w-[340px] mb-4 flex items-center justify-between gap-1.5 px-1">
+              {OUTFIT_MATCH_PRESETS.map((outfit, idx) => (
+                <button
+                  key={outfit.id}
+                  onClick={() => setSelectedOutfitIndex(idx)}
+                  className={`flex flex-col items-center gap-1 p-1 rounded-2xl transition border cursor-pointer ${
+                    selectedOutfitIndex === idx
+                      ? "border-purple-600 bg-purple-50 ring-2 ring-purple-200 scale-105"
+                      : "border-transparent hover:bg-gray-100"
+                  }`}
+                >
+                  <span className="text-[9px] font-black text-amber-700 bg-white/90 px-1 rounded shadow-2xs">
+                    🔥{outfit.match}%
+                  </span>
+                  <div 
+                    className="w-10 h-10 rounded-full border-2 border-white shadow-md"
+                    style={{ backgroundColor: outfit.hex }}
+                  />
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Step Title & Description */}
+          <h3 className="text-base sm:text-lg font-black text-gray-900 text-center mb-1 leading-snug">
+            {comparisonStep === 1 && t.step1Title}
+            {comparisonStep === 2 && t.step2Title}
+            {comparisonStep === 3 && t.step3Title}
+            {comparisonStep === 4 && t.step4Title}
+            {comparisonStep === 5 && t.step5Title}
+          </h3>
+          <p className="text-xs text-gray-500 text-center mb-5 max-w-xs leading-relaxed">
+            {comparisonStep === 1 && t.step1Desc}
+            {comparisonStep === 2 && t.step2Desc}
+            {comparisonStep === 3 && t.step3Desc}
+            {comparisonStep === 4 && t.step4Desc}
+            {comparisonStep === 5 && t.step5Desc}
+          </p>
+
+          {/* Bottom Primary CTA Button */}
+          {comparisonStep < 5 ? (
+            <button
+              onClick={() => setComparisonStep(comparisonStep + 1)}
+              className="w-full max-w-[320px] py-3.5 rounded-2xl bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-sm shadow-xl transition flex items-center justify-center gap-2 group cursor-pointer"
+            >
+              <span>{comparisonStep === 1 ? t.step1Btn : t.step2Btn}</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+          ) : (
+            <button
+              onClick={() => setIsPaywallOpen(true)}
+              className="w-full max-w-[320px] py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-700 hover:to-indigo-700 text-white font-black text-sm shadow-2xl transition flex items-center justify-center gap-2 animate-pulse cursor-pointer"
+            >
+              <Crown className="w-4 h-4 text-amber-300" />
+              <span>{t.step5UnlockBtn}</span>
+            </button>
+          )}
+        </div>
+      </div>
+
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Layers className="w-5 h-5 text-[#E07A5F]" />
@@ -2435,7 +3101,9 @@ export default function ColorHelperPage() {
                     <div className="p-3 rounded-xl bg-white border border-purple-200 text-xs font-bold text-purple-950 flex items-center justify-between shadow-xs">
                       <span>{t.quizResultLabel}</span>
                       <span className="px-2.5 py-1 rounded-full bg-purple-100 text-purple-900 font-extrabold">
-                        {quizAnswers.vein === 0 || quizAnswers.jewelry === 0 ? "COOL (여름/겨울 쿨)" : "WARM (봄/가을 웜)"}
+                        {quizAnswers.vein === 0 || quizAnswers.jewelry === 0 
+                      ? (lang === "ko" ? "COOL (여름/겨울 쿨)" : lang === "ja" ? "COOL (ブルベ夏/冬)" : "COOL (Summer / Winter Cool)")
+                      : (lang === "ko" ? "WARM (봄/가을 웜)" : lang === "ja" ? "WARM (イエベ春/秋)" : "WARM (Spring / Autumn Warm)")}
                       </span>
                     </div>
                   )}
@@ -2961,7 +3629,111 @@ export default function ColorHelperPage() {
         <p>© 2026 FirstMotion Co., Ltd. All rights reserved. (Seoul · Tokyo · New York)</p>
       </footer>
 
-      {/* ── MODAL 1: 구글 로그인 모달 ─────────────────────────────── */}
+            {/* ── HIGH-CONVERTING PREMIUM PAYWALL MODAL (e04b264e.jpg 벤치마킹) ── */}
+      {isPaywallOpen && (
+        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="bg-[#0D0F12] text-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl border border-neutral-800 text-center relative my-auto animate-scale-up">
+            {/* Top Free Continue link */}
+            <button
+              onClick={() => setIsPaywallOpen(false)}
+              className="text-xs text-gray-400 hover:text-white transition block mx-auto mb-6 underline cursor-pointer"
+            >
+              {t.paywallContinueFree}
+            </button>
+
+            {/* Crown Icon & Premium Badge */}
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <Crown className="w-6 h-6 text-amber-400" />
+              <h3 className="text-xl sm:text-2xl font-black tracking-tight text-white">{t.paywallBadge}</h3>
+            </div>
+            <p className="text-xs text-gray-300 mb-6 leading-relaxed max-w-xs mx-auto">
+              {t.paywallTitle}
+            </p>
+
+            {/* Live Social Proof Counter */}
+            <div className="mb-6">
+              <div className="inline-flex items-center gap-1 bg-purple-950/80 px-3 py-1.5 rounded-xl border border-purple-500/40 shadow-inner mb-1.5">
+                {t.paywallProofCounter.split("").map((digit, i) => (
+                  <span 
+                    key={i} 
+                    className={`font-black text-sm sm:text-base ${digit === "," ? "text-purple-300 px-0.5" : "bg-purple-800 px-1.5 py-0.5 rounded text-white shadow-xs"}`}
+                  >
+                    {digit}
+                  </span>
+                ))}
+              </div>
+              <p className="text-[10px] text-gray-400">{t.paywallProofSuffix}</p>
+            </div>
+
+            {/* Pricing Cards: Single vs Unlimited */}
+            <div className="grid grid-cols-2 gap-3 mb-6">
+              <button
+                onClick={() => {
+                  setSelectedPlan("single");
+                  setIsPayModalOpen(true);
+                  setIsPaywallOpen(false);
+                }}
+                className={`p-3.5 rounded-2xl border text-center transition cursor-pointer ${
+                  selectedPlan === "single"
+                    ? "bg-neutral-900 border-amber-400 shadow-md ring-1 ring-amber-400/50"
+                    : "bg-neutral-950/80 border-neutral-800 hover:border-neutral-700"
+                }`}
+              >
+                <div className="text-[11px] font-bold text-gray-400 mb-1">{t.paywallPlan1Title}</div>
+                <div className="text-sm font-black text-white">{t.paywallPlan1Price}</div>
+              </button>
+
+              <button
+                onClick={() => {
+                  setSelectedPlan("triple");
+                  setIsPayModalOpen(true);
+                  setIsPaywallOpen(false);
+                }}
+                className={`p-3.5 rounded-2xl border text-center relative transition cursor-pointer ${
+                  selectedPlan === "triple"
+                    ? "bg-neutral-900 border-purple-500 shadow-lg ring-2 ring-purple-500/50"
+                    : "bg-neutral-950/80 border-neutral-800 hover:border-neutral-700"
+                }`}
+              >
+                <span className="absolute -top-2 right-2 px-1.5 py-0.5 rounded-full bg-purple-600 text-white text-[9px] font-black uppercase shadow">
+                  {t.paywallPlan2Badge}
+                </span>
+                <div className="text-[11px] font-bold text-purple-300 mb-1">{t.paywallPlan2Title}</div>
+                <div className="text-sm font-black text-white">{t.paywallPlan2Price}</div>
+              </button>
+            </div>
+
+            {/* Unlocked Benefits Checklist */}
+            <div className="space-y-2 text-left text-xs text-gray-300 mb-6 bg-neutral-900/60 p-4 rounded-2xl border border-neutral-800/80">
+              <div className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" /> <span>{t.paywallFeat1}</span></div>
+              <div className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" /> <span>{t.paywallFeat2}</span></div>
+              <div className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" /> <span>{t.paywallFeat3}</span></div>
+              <div className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" /> <span>{t.paywallFeat4}</span></div>
+              <div className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" /> <span>{t.paywallFeat5}</span></div>
+            </div>
+
+            {/* Big Purple Action CTA */}
+            <button
+              onClick={() => {
+                setIsPayModalOpen(true);
+                setIsPaywallOpen(false);
+              }}
+              className="w-full py-4 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-black text-sm shadow-xl transition flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <span>{t.paywallCta}</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+
+            {/* Security note */}
+            <div className="mt-4 flex items-center justify-center gap-2 text-[10px] text-gray-500">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+              <span>PayPal 256-bit Encrypted · Official Instant Access</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+{/* ── MODAL 1: 구글 로그인 모달 ─────────────────────────────── */}
       
 
       {/* ── MODAL 2: 페이팔 & 카드 즉시 결제 모달 ────────────────── */}
