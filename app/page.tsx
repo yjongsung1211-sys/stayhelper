@@ -969,55 +969,79 @@ const TOP_COSMETICS_SHOWCASE = [
   {
     id: "cosme_1",
     brand: "Dior",
-    name: "디올 어딕트 립글로우 (001 핑크 / 004 코랄)",
+    names: {
+      ko: "디올 어딕트 립글로우 (001 핑크 / 004 코랄)",
+      en: "Dior Addict Lip Glow (001 Pink / 004 Coral)",
+      ja: "ディオール アディクト リップ グロウ (001 / 004)",
+    },
     category: { ko: "명품 립밤/틴트 1위", en: "#1 Luxury Tint", ja: "デパコスNo.1 リップ" },
     hex: "#FF6F91",
-    price: "₩48,000 ($40)",
+    prices: { ko: "₩48,000", en: "$40.00 USD", ja: "¥4,950" },
     suitTone: "spring",
   },
   {
     id: "cosme_2",
     brand: "rom&nd",
-    name: "롬앤 쥬시 래스팅 틴트 (25호 베어 그레이프)",
-    category: { ko: "올리브영 1위 쿨톤 틴트", en: "Olive Young #1 Tint", ja: "オリヤンNo.1 ティント" },
+    names: {
+      ko: "롬앤 쥬시 래스팅 틴트 (25호 베어 그레이프)",
+      en: "Rom&nd Juicy Lasting Tint (25 Bare Grape)",
+      ja: "ロムアンド ジューシーラスティングティント (25)",
+    },
+    category: { ko: "올리브영 1위 쿨톤 틴트", en: "Olive Young #1 Tint", ja: "人気No.1 ティント" },
     hex: "#C47C8B",
-    price: "₩9,900 ($9)",
+    prices: { ko: "₩9,900", en: "$9.90 USD", ja: "¥1,320" },
     suitTone: "summer",
   },
   {
     id: "cosme_3",
     brand: "CHANEL",
-    name: "샤넬 루쥬 코코 플래쉬 (90 쥬르)",
-    category: { ko: "백화점 베스트셀러 립", en: "Chanel Bestseller", ja: "シャネル 口紅" },
+    names: {
+      ko: "샤넬 루쥬 코코 플래쉬 (90 쥬르)",
+      en: "Chanel Rouge Coco Flash (90 Jour)",
+      ja: "シャネル ルージュ ココ フラッシュ (90 ジュール)",
+    },
+    category: { ko: "백화점 베스트셀러 립", en: "Chanel Bestseller", ja: "シャネル リップ" },
     hex: "#DE6B7E",
-    price: "₩55,000 ($45)",
+    prices: { ko: "₩55,000", en: "$45.00 USD", ja: "¥5,500" },
     suitTone: "autumn",
   },
   {
     id: "cosme_4",
     brand: "YSL",
-    name: "입생로랑 루쥬 볼륍떼 샤인 (122호 번트 지엔나)",
-    category: { ko: "글로벌 립스틱 1위", en: "Global #1 Lipstick", ja: "YSL リップ" },
+    names: {
+      ko: "입생로랑 루쥬 볼륍떼 샤인 (122호 번트 지엔나)",
+      en: "YSL Rouge Volupté Shine (122 Burnt Zellige)",
+      ja: "YSL ルージュ ヴォリュプテ (122)",
+    },
+    category: { ko: "글로벌 립스틱 1위", en: "Global #1 Lipstick", ja: "YSL 人気口紅" },
     hex: "#B23B30",
-    price: "₩52,000 ($42)",
+    prices: { ko: "₩52,000", en: "$42.00 USD", ja: "¥5,280" },
     suitTone: "winter",
   },
   {
     id: "cosme_5",
     brand: "CLIO",
-    name: "클리오 프로 아이 팔레트 에어 (12구 음영)",
+    names: {
+      ko: "클리오 프로 아이 팔레트 에어 (12구 음영)",
+      en: "Clio Pro Eye Palette Air (12-Pan Sculpting)",
+      ja: "クリオ プロ アイ パレット エアー (12色)",
+    },
     category: { ko: "음영 섀도우 1위", en: "#1 Eye Palette", ja: "クリオ アイパレット" },
     hex: "#C8A282",
-    price: "₩28,000 ($24)",
+    prices: { ko: "₩28,000", en: "$24.00 USD", ja: "¥3,190" },
     suitTone: "all",
   },
   {
     id: "cosme_6",
     brand: "NARS",
-    name: "나스 블러쉬 (오르가즘 / 섹스어필)",
+    names: {
+      ko: "나스 블러쉬 (오르가즘 / 섹스어필)",
+      en: "NARS Iconic Blush (Orgasm / Sex Appeal)",
+      ja: "NARS ブラッシュ (オーガズム)",
+    },
     category: { ko: "수채화 치크 블러셔 1위", en: "#1 Glow Blush", ja: "NARS チーク" },
     hex: "#F4A396",
-    price: "₩45,000 ($38)",
+    prices: { ko: "₩45,000", en: "$38.00 USD", ja: "¥4,730" },
     suitTone: "all",
   },
 ];
@@ -1043,6 +1067,7 @@ export default function ColorHelperPage() {
   // ── State ───────────────────────────────────────────────────
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [isCustomPhoto, setIsCustomPhoto] = useState(false);
+  const [uploadedUserPhoto, setUploadedUserPhoto] = useState<string | null>(null);
   const [resultTone, setResultTone] = useState<ColorToneData | null>(null);
   const [activeTab, setActiveTab] = useState<"result" | "cosmetics">("result");
   const [studioTool, setStudioTool] = useState<"drape" | "custom" | "outfit" | "cosme" | "quiz">("custom");
@@ -1073,7 +1098,7 @@ export default function ColorHelperPage() {
 
   // 드레이핑 상태
   const [selectedDrapeHex, setSelectedDrapeHex] = useState<string>("#FFA07A");
-  const [selectedDrapeName, setSelectedDrapeName] = useState<string>("피치 코랄");
+  const [selectedDrapeName, setSelectedDrapeName] = useState<string>("Peach Coral");
   const [splitView, setSplitView] = useState(false);
   const [splitSliderPos, setSplitSliderPos] = useState(50);
 
@@ -1242,17 +1267,21 @@ export default function ColorHelperPage() {
     applySkinTone(preset);
   };
 
-  // [Zamface 장점] 실시간 립스틱 가상 착색
+  // [Zamface 장점] 실시간 립스틱 가상 착색 (사용자 사진 업로드 시 사진 보존!)
   const changeLipColor = (lipHex: string) => {
     setActiveLipHex(lipHex);
-    renderCanvasPortrait(activeSkinHex, lipHex, activeHairHex);
+    if (!isCustomPhoto) {
+      renderCanvasPortrait(activeSkinHex, lipHex, activeHairHex);
+    }
     setSampledColors((prev) => ({ ...prev, lip: lipHex }));
   };
 
-  // [Vivaldi Color 장점] 실시간 헤어 염색 컬러 체인지
+  // [Vivaldi Color 장점] 실시간 헤어 염색 컬러 체인지 (사용자 사진 업로드 시 사진 보존!)
   const changeHairColor = (hairHex: string) => {
     setActiveHairHex(hairHex);
-    renderCanvasPortrait(activeSkinHex, activeLipHex, hairHex);
+    if (!isCustomPhoto) {
+      renderCanvasPortrait(activeSkinHex, activeLipHex, hairHex);
+    }
     setSampledColors((prev) => ({ ...prev, hair: hairHex }));
   };
 
@@ -1288,6 +1317,7 @@ export default function ColorHelperPage() {
     if (stream) stream.getTracks().forEach((t) => t.stop());
     setCameraActive(false);
     setImageSrc(dataUrl);
+    setUploadedUserPhoto(dataUrl);
     setIsCustomPhoto(true);
 
     checkTicketAndAnalyze(cvs);
@@ -1300,6 +1330,7 @@ export default function ColorHelperPage() {
     reader.onload = (event) => {
       const url = event.target?.result as string;
       setImageSrc(url);
+      setUploadedUserPhoto(url);
       setIsCustomPhoto(true);
 
       const img = new Image();
@@ -1863,6 +1894,27 @@ export default function ColorHelperPage() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
             {/* 좌측: 실시간 캔버스 뷰어 */}
             <div className="md:col-span-6 flex flex-col items-center">
+              {uploadedUserPhoto && (
+                <div className="w-full max-w-[340px] flex items-center justify-between mb-2 px-1">
+                  <span className="text-[11px] font-extrabold text-gray-700 flex items-center gap-1.5">
+                    <Camera className="w-3.5 h-3.5 text-[#E07A5F]" />
+                    {isCustomPhoto 
+                      ? (lang === "ko" ? "내 사진 적용 중" : lang === "ja" ? "マイ写真適用中" : "My Uploaded Portrait") 
+                      : (lang === "ko" ? "샘플 모델 적용 중" : lang === "ja" ? "サンプルモデル" : "Preset Model")}
+                  </span>
+                  {!isCustomPhoto && (
+                    <button
+                      onClick={() => {
+                        setImageSrc(uploadedUserPhoto);
+                        setIsCustomPhoto(true);
+                      }}
+                      className="px-2.5 py-1 rounded-full bg-[#E07A5F] text-white text-[11px] font-extrabold shadow-sm hover:bg-[#D0694E] transition"
+                    >
+                      {lang === "ko" ? "📸 내 사진으로 보기" : lang === "ja" ? "📸 マイ写真に戻す" : "📸 Return to My Photo"}
+                    </button>
+                  )}
+                </div>
+              )}
               <div className="relative w-full max-w-[340px] aspect-[4/5] rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-gray-100">
                 <div className="relative w-full h-[70%] overflow-hidden bg-neutral-900">
                   <img src={imageSrc} alt="Facial Canvas" className="w-full h-full object-cover object-top" />
@@ -2092,7 +2144,7 @@ export default function ColorHelperPage() {
                           key={item.hex}
                           onClick={() => {
                             setSelectedDrapeHex(item.hex);
-                            setSelectedDrapeName(`[Outer] ${item.name[lang]}`);
+                            setSelectedDrapeName(`${lang === "ko" ? "[아우터] " : lang === "ja" ? "[アウター] " : "[Outer] "}${item.name[lang]}`);
                           }}
                           className={`p-2 rounded-xl border flex flex-col items-center gap-1 transition ${
                             selectedDrapeHex === item.hex
@@ -2121,7 +2173,7 @@ export default function ColorHelperPage() {
                           key={item.hex}
                           onClick={() => {
                             setSelectedDrapeHex(item.hex);
-                            setSelectedDrapeName(`[Top] ${item.name[lang]}`);
+                            setSelectedDrapeName(`${lang === "ko" ? "[상의] " : lang === "ja" ? "[トップス] " : "[Top] "}${item.name[lang]}`);
                           }}
                           className={`p-2 rounded-xl border flex flex-col items-center gap-1 transition ${
                             selectedDrapeHex === item.hex
@@ -2150,7 +2202,7 @@ export default function ColorHelperPage() {
                           key={item.hex}
                           onClick={() => {
                             setSelectedDrapeHex(item.hex);
-                            setSelectedDrapeName(`[Dress] ${item.name[lang]}`);
+                            setSelectedDrapeName(`${lang === "ko" ? "[원피스] " : lang === "ja" ? "[ワンピース] " : "[Dress] "}${item.name[lang]}`);
                           }}
                           className={`p-2 rounded-xl border flex flex-col items-center gap-1 transition ${
                             selectedDrapeHex === item.hex
@@ -2178,7 +2230,7 @@ export default function ColorHelperPage() {
                           key={item.hex}
                           onClick={() => {
                             setSelectedDrapeHex(item.hex);
-                            setSelectedDrapeName(`[Warning] ${item.name[lang]}`);
+                            setSelectedDrapeName(`${lang === "ko" ? "[워스트 주의] " : lang === "ja" ? "[注意] " : "[Caution] "}${item.name[lang]}`);
                           }}
                           className="p-1.5 rounded-lg border border-rose-200 bg-white flex items-center gap-1.5 text-left hover:border-rose-400 transition"
                         >
@@ -2218,8 +2270,8 @@ export default function ColorHelperPage() {
                           />
                           <div className="min-w-0">
                             <span className="text-[10px] font-bold text-rose-600 block">{cosme.category[lang]}</span>
-                            <span className="text-xs font-black text-gray-900 truncate block">{cosme.name}</span>
-                            <span className="text-[10px] text-gray-400 font-semibold">{cosme.price}</span>
+                            <span className="text-xs font-black text-gray-900 truncate block">{cosme.names[lang]}</span>
+                            <span className="text-[10px] text-gray-400 font-semibold">{cosme.prices[lang]}</span>
                           </div>
                         </div>
 
@@ -2227,7 +2279,7 @@ export default function ColorHelperPage() {
                           <button
                             onClick={() => {
                               setSelectedDrapeHex(cosme.hex);
-                              setSelectedDrapeName(cosme.name);
+                              setSelectedDrapeName(cosme.names[lang]);
                               changeLipColor(cosme.hex);
                             }}
                             className="px-2.5 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-extrabold text-[11px] border border-rose-200 transition"
@@ -2235,7 +2287,7 @@ export default function ColorHelperPage() {
                             {t.cosmeTryBtn}
                           </button>
                           <a
-                            href={`https://www.google.com/search?q=${encodeURIComponent(cosme.brand + " " + cosme.name)}`}
+                            href={`https://www.google.com/search?q=${encodeURIComponent(cosme.brand + " " + cosme.names[lang])}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="p-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 transition"
