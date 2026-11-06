@@ -2,11 +2,12 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { 
   Heart, Sparkles, MapPin, CheckCircle2, Volume2, VolumeX,
   Phone, Copy, ExternalLink, Calendar, Music2, Share2, Check,
-  Compass, Flame, Waves, Flower2, Star, ShieldCheck, Crown
+  Compass, Flame, Waves, Flower2, Star, ShieldCheck, Crown, ArrowRight
 } from 'lucide-react';
 import { MOBILE_INVITATION_10_TEMPLATES, MobileInvitationTemplate } from '@/lib/mobile-invitation-templates';
 
@@ -38,11 +39,59 @@ function playBgmAudio() {
   if (!bgmAudioCtx) {
     bgmAudioCtx = new AudioCtx();
   }
-  if (bgmAudioCtx.state === 'suspended') {
-    bgmAudioCtx.resume();
-  }
   const ctx = bgmAudioCtx;
 
+  const startLoop = () => {
+    const playTone = (freq: number, start: number, dur: number, type: OscillatorType = 'triangle', vol = 0.12) => {
+      try {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, start);
+        gain.gain.setValueAtTime(0.0001, start);
+        gain.gain.exponentialRampToValueAtTime(vol, start + 0.04);
+        gain.gain.exponentialRampToValueAtTime(vol * 0.4, start + dur * 0.5);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + dur + 0.1);
+        bgmActiveNodes.push(osc);
+      } catch (e) {}
+    };
+
+    const chords = [
+      { b: 146.83, m: [293.66, 369.99, 440.0], mel: 739.99 },
+      { b: 110.0, m: [220.0, 277.18, 329.63], mel: 659.25 },
+      { b: 123.47, m: [246.94, 293.66, 369.99], mel: 587.33 },
+      { b: 92.5, m: [185.0, 220.0, 277.18], mel: 554.37 },
+      { b: 98.0, m: [196.0, 246.94, 293.66], mel: 493.88 },
+      { b: 146.83, m: [220.0, 293.66, 369.99], mel: 440.0 },
+      { b: 98.0, m: [196.0, 246.94, 293.66], mel: 493.88 },
+      { b: 110.0, m: [220.0, 277.18, 329.63], mel: 554.37 },
+    ];
+    const loop = () => {
+      const now = ctx.currentTime + 0.05;
+      chords.forEach((chord, i) => {
+        const t = now + i * 1.8;
+        playTone(chord.b, t, 1.7, 'sine', 0.15);
+        playTone(chord.m[0], t + 0.1, 1.3, 'triangle', 0.09);
+        playTone(chord.m[1], t + 0.45, 1.3, 'triangle', 0.09);
+        playTone(chord.m[2], t + 0.8, 1.2, 'triangle', 0.09);
+        playTone(chord.mel, t + 0.15, 1.5, 'triangle', 0.13);
+      });
+      bgmTimer = setTimeout(loop, chords.length * 1.8 * 1000 - 150);
+    };
+    loop();
+  };
+
+  if (ctx.state === 'suspended') {
+    ctx.resume().then(() => startLoop()).catch(() => startLoop());
+  } else {
+    startLoop();
+  }
+  return;
+  // Legacy inline tone helper preserved below for compile safety
   const playTone = (freq: number, start: number, dur: number, type: OscillatorType = 'triangle', vol = 0.12) => {
     try {
       const osc = ctx.createOscillator();
@@ -243,7 +292,7 @@ function InvitationContent() {
     weddingDayNum: 8,
     venueName: searchParams.get('venue') || (
       activeTheme === 'royal-heritage'
-        ? 'The Shilla Yeong Bin Gwan (신라호텔 영빈관)'
+        ? 'The Shilla Yeong Bin Gwan (Imperial Palace)'
         : activeTheme === 'vintage-monogram'
         ? 'Villa Balbianello & Grand Hotel Tremezzo'
         : activeTheme === 'mediterranean-breeze'
@@ -265,7 +314,7 @@ function InvitationContent() {
       : 'Subway N/R/W at 5th Ave / 59th St (1 min walk)',
     venueParking: 'Complimentary VIP Valet Parking at main entrance',
     welcomeMessage: activeTheme === 'royal-heritage'
-      ? `서로를 향한 존경과 사랑으로 평생을 함께할 약속을 맺습니다.\n저희 두 사람이 사랑과 믿음으로 새 가정을 이루는 뜻깊은 자리에\n귀하신 걸음으로 축복해 주시면 더없는 영광이겠습니다.`
+      ? `Two lives, two hearts, joined in friendship, united forever in love.\nWe joyfully invite you to share in our celebration as we exchange our sacred vows\nand begin our new life together.`
       : `Together with our families,\nwe joyfully invite you to celebrate our marriage.\nAs we exchange our sacred vows,\nyour love and blessing would mean the world to us.`,
     coverPhoto: searchParams.get('photo') || getDefaultCover(activeTheme),
     galleryPhotos: getThemeGallery(activeTheme)
@@ -297,29 +346,30 @@ function InvitationContent() {
           <div className="flex items-center justify-between px-1 mb-2">
             <span className="text-[11px] font-sans font-extrabold tracking-[0.16em] text-[#D4AF37] uppercase flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-[#D4AF37] animate-pulse" />
-              <span>10 BESPOKE THEMES (원클릭 전환)</span>
+              <span>10 BESPOKE THEMES (1-CLICK SWITCH)</span>
             </span>
             <span className="text-[10px] text-amber-200/90 font-sans font-medium">
-              선택: <strong className="text-white font-bold">{currentSkin.name}</strong>
+              Active: <strong className="text-white font-bold">{currentSkin.name}</strong>
             </span>
           </div>
           
-          {/* Scrollable Horizontal 10-Theme Dock with visual indicators */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+          {/* 10-Theme Dock in 2 Clean Rows of 5 - Zero Cut-offs */}
+          <div className="grid grid-cols-5 gap-1.5 pt-0.5">
             {MOBILE_INVITATION_10_TEMPLATES.map((tmpl, idx) => {
               const isSelected = activeTheme === tmpl.id;
               return (
                 <button
                   key={tmpl.id}
+                  type="button"
                   onClick={() => setActiveTheme(tmpl.id)}
-                  className={`px-3 py-1.5 rounded-xl text-[11px] font-sans font-bold whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0 ${
+                  className={`w-full py-1.5 px-1 rounded-xl text-[10px] font-sans font-bold transition-all flex flex-col items-center justify-center gap-0.5 text-center cursor-pointer active:scale-95 ${
                     isSelected
-                      ? 'bg-gradient-to-r from-[#D4AF37] via-[#FFDF78] to-[#C49746] text-[#1A0A0E] shadow-[0_0_15px_rgba(212,175,55,0.6)] font-extrabold scale-105'
+                      ? 'bg-gradient-to-r from-[#D4AF37] via-[#FFDF78] to-[#C49746] text-[#1A0A0E] shadow-[0_0_12px_rgba(212,175,55,0.7)] font-black scale-[1.03]'
                       : 'bg-white/10 text-white/80 hover:bg-white/20 border border-white/10'
                   }`}
                 >
-                  <span className="text-xs">{tmpl.ornamentSymbol}</span>
-                  <span>#{idx + 1} {tmpl.name.split(' ')[0]}</span>
+                  <span className="text-xs leading-none">{tmpl.ornamentSymbol}</span>
+                  <span className="truncate w-full text-[10px]">#{idx + 1} {tmpl.name.split(' ')[0]}</span>
                 </button>
               );
             })}
@@ -400,14 +450,14 @@ function InvitationContent() {
                 百年佳約 · 鳳凰之盟
               </span>
               <span className="text-xs font-serif tracking-[0.2em] text-[#D4AF37] font-semibold mt-0.5">
-                朝鮮 王室 嘉禮 (조선 왕실 국빈 가례)
+                THE ROYAL DYNASTY WEDDING CEREMONY
               </span>
             </div>
 
             {/* Couple Royal Names */}
             <div className="space-y-1 mb-4">
               <h2 className="text-3xl font-serif font-extrabold tracking-widest text-[#FFF6E5]">
-                {invitationData.groomName} <span className="text-[#D4AF37] text-xl font-normal">과</span> {invitationData.brideName}
+                {invitationData.groomName} <span className="text-[#D4AF37] text-xl font-normal">&</span> {invitationData.brideName}
               </h2>
               <p className="text-[11px] font-sans tracking-[0.25em] text-[#D9B88F] uppercase">
                 Royal Matrimonial Ceremony
@@ -772,7 +822,7 @@ function InvitationContent() {
               className="text-[10px] tracking-[0.35em] uppercase font-sans font-extrabold block"
               style={{ color: currentSkin.themeColor }}
             >
-              {currentSkin.id === 'royal-heritage' ? '貴下를 丁重히 招待합니다 (초대의 글)' : 'INVITATION LETTER'}
+              {currentSkin.id === 'royal-heritage' ? 'CORDIALLY INVITED · LETTER OF HONOR' : 'INVITATION LETTER'}
             </span>
             
             <p 
@@ -864,7 +914,7 @@ function InvitationContent() {
             <div className="flex items-center justify-center gap-1.5 mb-1.5">
               <Calendar className="w-3.5 h-3.5" style={{ color: currentSkin.themeColor }} />
               <span className="text-[10px] tracking-[0.25em] uppercase font-extrabold" style={{ color: currentSkin.themeColor }}>
-                {currentSkin.id === 'royal-heritage' ? '吉日 吉時 (예식 일시)' : 'WEDDING CALENDAR'}
+                {currentSkin.id === 'royal-heritage' ? 'CEREMONIAL CALENDAR & TIME' : 'WEDDING CALENDAR'}
               </span>
             </div>
 
@@ -980,7 +1030,7 @@ function InvitationContent() {
         <div className="px-6 pb-4 font-sans">
           <div className="text-center mb-4">
             <span className="text-[10px] tracking-[0.3em] uppercase font-extrabold block" style={{ color: currentSkin.themeColor }}>
-              {currentSkin.id === 'royal-heritage' ? '嘉禮 畵帖 (궁중 가례 화첩)' : 'EDITORIAL PHOTO SPREAD'}
+              {currentSkin.id === 'royal-heritage' ? 'ROYAL CEREMONIAL PORTFOLIO' : 'EDITORIAL PHOTO SPREAD'}
             </span>
             <h4 className="text-xl font-serif tracking-wide mt-1">Treasured Moments</h4>
             <p className="text-[11px] opacity-60 font-serif italic mt-0.5">Click any photograph to view in high resolution</p>
@@ -1168,12 +1218,53 @@ function InvitationContent() {
             <span>Share Invitation Link ({currentSkin.name})</span>
           </button>
           
-          <div className="pt-2 opacity-50 space-y-1">
-            <p className="text-[10px] tracking-[0.3em] uppercase font-bold">
-              WEDDINGHELPER HAUTE EDITION
+          {/* Global Viral Loop: Guest-to-Host Acquisition Card */}
+          <div 
+            className="mt-6 p-5 rounded-2xl border text-center relative overflow-hidden backdrop-blur-md shadow-xl"
+            style={{
+              backgroundColor: `${currentSkin.cardBg}E6`,
+              borderColor: `${currentSkin.themeColor}55`,
+              color: currentSkin.textColor
+            }}
+          >
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase mb-2"
+              style={{
+                backgroundColor: `${currentSkin.themeColor}22`,
+                color: currentSkin.themeColor
+              }}
+            >
+              <Sparkles className="w-3 h-3" />
+              <span>WeddingHelper Global Haute Edition</span>
+            </div>
+            <h4 className="font-serif text-sm font-semibold tracking-wide mb-1">
+              Inspired by this unforgettable celebration?
+            </h4>
+            <p className="text-[11px] opacity-80 leading-relaxed mb-3.5 max-w-xs mx-auto">
+              Create your own bespoke mobile wedding invitation with real BGM soundtrack & 12 global destination AI photoshoot.
             </p>
-            <p className="text-[9px] tracking-[0.15em] font-serif italic">
-              Where Forever Begins · Handcrafted Luxury
+            <Link
+              href="/weddinghelper"
+              target="_blank"
+              className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold tracking-wider uppercase shadow-md transition hover:scale-[1.02] active:scale-[0.98]"
+              style={{
+                background: `linear-gradient(135deg, ${currentSkin.themeColor}, #F59E0B)`,
+                color: '#1F181B'
+              }}
+            >
+              <span>Create Your Luxury Invitation for Free</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+            <p className="mt-2 text-[9px] opacity-60 tracking-wider">
+              No credit card required · Join couples worldwide
+            </p>
+          </div>
+
+          <div className="pt-4 opacity-40 space-y-1">
+            <p className="text-[9px] tracking-[0.25em] uppercase font-bold">
+              WEDDINGHELPER WORLDWIDE
+            </p>
+            <p className="text-[8px] tracking-[0.1em] font-serif italic">
+              Where Forever Begins · Bespoke Luxury Digital Invitations
             </p>
           </div>
         </div>
