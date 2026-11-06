@@ -207,18 +207,18 @@ interface Wedding240Scene {
 }
 
 const DESTINATION_240_CONFIGS = [
-  { id: 'theme_01_bali', title: 'Bali Rainforest Infinity Chapel', dest: 'Bali, Indonesia', venue: 'The Edge Bali & Uluwatu Cliff Sanctuary' },
-  { id: 'theme_02_amalfi', title: 'Amalfi Coast Cliffside Cathedral', dest: 'Amalfi Coast, Italy', venue: 'Villa Cimbrone & Belmond Hotel Caruso' },
-  { id: 'theme_03_paris', title: 'Parisian Haussmann Balcony & Eiffel Tower', dest: 'Paris, France', venue: 'Shangri-La Paris & Grand Palais Suite' },
-  { id: 'theme_04_kyoto', title: 'Kyoto Arashiyama Bamboo & Royal Pavilion', dest: 'Kyoto, Japan', venue: 'Hoshinoya Kyoto & Suiran Sanctuary' },
-  { id: 'theme_05_santorini', title: 'Santorini Sunset Caldera Villa', dest: 'Santorini, Greece', venue: 'Canaves Oia Suites & Grace Hotel' },
-  { id: 'theme_06_lake_como', title: 'Lake Como Grand Villa Balbianello', dest: 'Lake Como, Italy', venue: 'Villa del Balbianello & Grand Hotel Tremezzo' },
-  { id: 'theme_07_nyc', title: 'NYC Central Park Penthouse Glass Terrace', dest: 'New York, USA', venue: 'The Plaza Hotel & Mandarin Oriental NYC' },
-  { id: 'theme_08_cappadocia', title: 'Cappadocia Dawn Hot Air Balloon Sanctuary', dest: 'Cappadocia, Turkey', venue: 'Museum Hotel Cappadocia & Sultan Cave' },
-  { id: 'theme_09_hawaii', title: 'Hawaiian Secret Cove Sunset Beach', dest: 'Hawaii, USA', venue: 'Four Seasons Hualalai Resort' },
-  { id: 'theme_10_tokyo', title: 'Tokyo Modern Minimalist Glass Sky Chapel', dest: 'Tokyo, Japan', venue: 'Aman Tokyo & Palace Hotel Tokyo' },
-  { id: 'theme_11_provence', title: 'Provence Lavender Field Stone Bastide', dest: 'Provence, France', venue: 'Château de Fonscolombe & Baumanière' },
-  { id: 'theme_12_swiss_alps', title: 'Swiss Alps Glacier Glass Igloo', dest: 'Swiss Alps, Switzerland', venue: 'The Chedi Andermatt & Kulm Hotel St. Moritz' },
+  { id: 'theme_01_bali', title: 'Bali Rainforest Infinity Chapel', dest: 'Ubud, Bali, Indonesia', venue: 'The Edge Bali & Mandapa Ritz-Carlton' },
+  { id: 'theme_02_amalfi', title: 'Amalfi Coast Cliffside Romance', dest: 'Positano & Ravello, Italy', venue: 'Villa Cimbrone & Belmond Caruso' },
+  { id: 'theme_03_lake_como', title: 'Lake Como Historic Villa & Riva Boat', dest: 'Lake Como, Lombardy, Italy', venue: 'Villa del Balbianello & Grand Hotel Tremezzo' },
+  { id: 'theme_04_paris', title: 'Paris Private Château & Tuileries Garden', dest: 'Chantilly & Paris, France', venue: 'Shangri-La Paris & Château de Chantilly' },
+  { id: 'theme_05_nyc', title: 'Manhattan Skyline Glass Penthouse', dest: 'New York City, USA', venue: 'The Plaza Hotel & Rainbow Room' },
+  { id: 'theme_06_hanok', title: 'Korean Royal Hanbok Heritage', dest: 'Seoul, South Korea', venue: 'The Shilla Seoul & Yeong Bin Gwan' },
+  { id: 'theme_07_kyoto', title: 'Kyoto Zen Shrine & Pure Silk Shiromuku', dest: 'Kyoto, Japan', venue: 'Hoshinoya Kyoto & Kamigamo Shrine' },
+  { id: 'theme_08_udaipur', title: 'Indian Royal Palace Extravaganza', dest: 'Udaipur, Rajasthan, India', venue: 'Taj Lake Palace & The Leela Palace' },
+  { id: 'theme_09_santorini', title: 'Santorini Aegean White Caldera', dest: 'Santorini, Greece', venue: 'Canaves Oia Epitome & Grace Hotel' },
+  { id: 'theme_10_cabo', title: 'Cabo Oceanfront Desert & Pacific Waves', dest: 'Cabo San Lucas, Mexico', venue: 'Las Ventanas al Paraíso & Waldorf Astoria' },
+  { id: 'theme_11_liwa', title: 'Arabian Desert Mirage & Golden Dunes', dest: 'Abu Dhabi & Dubai, UAE', venue: 'Qasr Al Sarab Desert Resort' },
+  { id: 'theme_12_swiss_alps', title: 'Swiss Alpine Glacier & Winter Chalet', dest: 'St. Moritz, Switzerland', venue: 'Badrutt’s Palace & The Chedi Andermatt' },
 ];
 
 const ANGLE_20_TITLES = [
