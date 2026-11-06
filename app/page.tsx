@@ -679,11 +679,21 @@ const PERSONAL_COLOR_DB: Record<string, ColorToneData> = {
   },
 };
 
-// ─── 샘플 모델 프리셋 ──────────────────────────────────────────
+// ─── 샘플 모델 프리셋 (4계절 퍼스널 컬러) ──────────────────────
 const PRESET_MODELS = [
   {
-    id: "cool_light",
-    labels: { ko: "쿨톤 모델 (청순 파스텔)", en: "Cool Tone Model (Pastel)", ja: "ブルベ夏モデル (透明感パステル)" },
+    id: "spring_warm",
+    labels: { ko: "봄 웜톤 (생기 브라이트)", en: "Spring Warm (Bright Peach)", ja: "イエベ春 (ブライトピーチ)" },
+    descs: { ko: "화사한 피부 & 코랄 피치", en: "Radiant Peach & Coral Glow", ja: "明るい血色感 ＆ コーラル" },
+    toneHint: "spring_light",
+    skinHex: "#FDE8D7",
+    lipHex: "#FF7043",
+    hairHex: "#5D4037",
+    avatarBg: "from-amber-100 via-rose-100 to-yellow-100",
+  },
+  {
+    id: "summer_cool",
+    labels: { ko: "여름 쿨톤 (청순 파스텔)", en: "Summer Cool (Dewy Light)", ja: "ブルベ夏 (透明感パステル)" },
     descs: { ko: "뽀얀 피부 & 핑크빛 립", en: "Porcelain Skin & Dewy Pink", ja: "白玉肌 ＆ ピュアピンク" },
     toneHint: "summer_light",
     skinHex: "#FCEFE9",
@@ -692,9 +702,9 @@ const PRESET_MODELS = [
     avatarBg: "from-pink-100 to-sky-100",
   },
   {
-    id: "warm_mute",
-    labels: { ko: "웜톤 모델 (가을 뮤트)", en: "Warm Tone Model (Soft Autumn)", ja: "イエベ秋モデル (大人ニュアンス)" },
-    descs: { ko: "골든 베이지 & 살구 피치", en: "Golden Warmth & Soft Peach", ja: "まろやかベージュ ＆ アプリコット" },
+    id: "autumn_warm",
+    labels: { ko: "가을 웜톤 (차분 뮤트)", en: "Autumn Warm (Soft Autumn)", ja: "イエベ秋 (大人ニュアンス)" },
+    descs: { ko: "골든 베이지 & 살구 피치", en: "Golden Warmth & Soft Brick", ja: "まろやかベージュ ＆ アプリコット" },
     toneHint: "autumn_mute",
     skinHex: "#EED7C5",
     lipHex: "#C47C68",
@@ -703,7 +713,7 @@ const PRESET_MODELS = [
   },
   {
     id: "winter_cool",
-    labels: { ko: "겨쿨 모델 (또렷한 흑발)", en: "Winter Model (High Contrast)", ja: "ブルベ冬モデル (漆黒モード)" },
+    labels: { ko: "겨울 쿨톤 (선명 비비드)", en: "Winter Cool (High Contrast)", ja: "ブルベ冬 (鮮烈コントラスト)" },
     descs: { ko: "투명 도자기 & 체리 레드", en: "Clear Porcelain & Cherry Red", ja: "冴えた陶器肌 ＆ 鮮明ルビー" },
     toneHint: "winter_bright",
     skinHex: "#FDF4EE",
@@ -1451,21 +1461,21 @@ export default function ColorHelperPage() {
             <span className="text-[11px] text-gray-400">{t.presetSub}</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3">
             {PRESET_MODELS.map((preset) => (
               <button
                 key={preset.id}
                 onClick={() => loadPresetModel(preset)}
-                className="flex items-center gap-3 p-3 rounded-2xl border border-gray-200 hover:border-[#E07A5F] hover:bg-[#FFFBF9] transition text-left group"
+                className="flex items-center gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-2xl border border-gray-200 hover:border-[#E07A5F] hover:bg-[#FFFBF9] transition text-left group shadow-xs"
               >
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${preset.avatarBg} flex items-center justify-center flex-shrink-0 shadow-inner`}>
-                  <div className="w-6 h-6 rounded-full border-2 border-white shadow-sm" style={{ backgroundColor: preset.lipHex }} />
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${preset.avatarBg} flex items-center justify-center flex-shrink-0 shadow-inner`}>
+                  <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-white shadow-sm" style={{ backgroundColor: preset.lipHex }} />
                 </div>
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <div className="text-xs font-bold text-gray-900 group-hover:text-[#E07A5F] truncate">
                     {preset.labels[lang]}
                   </div>
-                  <div className="text-[11px] text-gray-500 truncate">{preset.descs[lang]}</div>
+                  <div className="text-[10px] sm:text-[11px] text-gray-500 truncate">{preset.descs[lang]}</div>
                 </div>
               </button>
             ))}
