@@ -28,6 +28,7 @@ import {
   Globe,
   ExternalLink,
   ShoppingBag,
+  Shirt,
 } from "lucide-react";
 
 // ─── 다국어 언어 타입 ─────────────────────────────────────────
@@ -107,6 +108,35 @@ const UI_TEXT = {
     stylingBannerDesc: "미국 5대 정품 유통사 100% 실시간 재고 룩북을 바로 감상하고 쇼핑해보세요.",
     stylingBannerBtn: "맞춤 룩북 보러가기",
     ethnicityTitle: "인종별 5대 피부색 선택 (흑인·백인·황인·라틴·동남아):",
+    studioTabDrape: "🎨 천 드레이핑",
+    studioTabLip: "💄 립 피팅 (Zamface)",
+    studioTabHair: "💇 헤어 염색 (Vivaldi)",
+    studioTabWardrobe: "👗 의상 체커 (Colorwise)",
+    studioTabQuiz: "🔮 자가진단 퀴즈",
+    lipTryOnTitle: "실시간 AR 립스틱 발색 피팅 (탭하여 즉시 적용):",
+    lipTryOnDesc: "백화점 & 올리브영 1위 립 컬러를 얼굴에 직접 발색해보세요.",
+    hairTryOnTitle: "실시간 헤어 컬러 염색 시뮬레이션:",
+    hairTryOnDesc: "내 퍼스널 컬러와 가장 잘 어울리는 헤어 염색 컬러를 가상으로 입혀보세요.",
+    wardrobeTitle: "실시간 의상 컬러 매칭 체커 (쇼핑 컴패니언):",
+    wardrobeDesc: "쇼핑 중이거나 옷장에 있는 옷 색상을 골라보세요. 내 톤과의 어울림 지수를 실시간 판별합니다.",
+    wardrobeMatchBest: "최고의 찰떡 컬러! (안색 화사함 극대화)",
+    wardrobeMatchGood: "무난하고 세련된 세컨드 컬러",
+    wardrobeMatchWarn: "워스트 주의! (얼굴빛이 어두워질 수 있음)",
+    quizTitle: "3초 언더톤 퀵 자가진단 (AI 교차 검증):",
+    quizDesc: "3가지 질문에 답하고 AI 컬러 분석 결과와 교차 검증해보세요.",
+    quizQ1: "Q1. 손목 안쪽 혈관 색상은?",
+    quizA1_1: "파란색 / 보라색 (쿨톤)",
+    quizA1_2: "초록색 / 올리브색 (웜톤)",
+    quizA1_3: "둘 다 섞여 있음 (뉴트럴)",
+    quizQ2: "Q2. 피부에 더 잘 어울리는 주얼리는?",
+    quizA2_1: "은은한 실버 (쿨톤)",
+    quizA2_2: "고급스러운 골드 (웜톤)",
+    quizA2_3: "로즈골드 (뉴트럴)",
+    quizQ3: "Q3. 햇빛에 장시간 노출되었을 때 내 피부는?",
+    quizA3_1: "쉽게 빨개지고 화끈거림 (쿨톤)",
+    quizA3_2: "빨개지지 않고 검게 탐 (웜톤)",
+    quizResultLabel: "자가진단 언더톤 예측치:",
+    quizMatchConfirm: "AI 가상 드레이핑과 일치도:", 
     eduEyebrow: "세계관의 길 · 색채학 공식 가이드",
     eduTitlePrefix: "퍼스널 컬러 — ",
     eduTitleColor: "색",
@@ -224,6 +254,35 @@ const UI_TEXT = {
     stylingBannerDesc: "Shop live US retail inventory (Zara US, Nordstrom, SSENSE) matched to your color palette.",
     stylingBannerBtn: "Explore Matching Lookbook",
     ethnicityTitle: "5 Global Complexions (Black · White · East Asian · Latino · SE Asian):",
+    studioTabDrape: "🎨 Virtual Drape",
+    studioTabLip: "💄 Lip Try-On (Zamface)",
+    studioTabHair: "💇 Hair Dye (Vivaldi)",
+    studioTabWardrobe: "👗 Outfit Match (Colorwise)",
+    studioTabQuiz: "🔮 Undertone Quiz",
+    lipTryOnTitle: "Live AR Lipstick Try-On (Tap to Wear):",
+    lipTryOnDesc: "Instantly coat bestselling luxury lipsticks onto your facial portrait.",
+    hairTryOnTitle: "Live Hair Color Dye Simulator:",
+    hairTryOnDesc: "Test trending salon hair dyes virtually to find your perfect contrast.",
+    wardrobeTitle: "Wardrobe Color Matcher (Shopping Companion):",
+    wardrobeDesc: "Select a garment color to check its live harmony rating against your season palette.",
+    wardrobeMatchBest: "Signature Match! (Illuminates & Brightens Skin)",
+    wardrobeMatchGood: "Versatile Chic Secondary Neutral",
+    wardrobeMatchWarn: "Caution: May cast shadows or dull your complexion",
+    quizTitle: "3-Question Quick Undertone Self-Quiz:",
+    quizDesc: "Answer 3 classic questions to cross-validate your AI colorimetry results.",
+    quizQ1: "Q1. What color are the veins on your inner wrist?",
+    quizA1_1: "Blue / Purple (Cool Tone)",
+    quizA1_2: "Green / Olive (Warm Tone)",
+    quizA1_3: "Mix of both (Neutral Tone)",
+    quizQ2: "Q2. Which jewelry looks more luminous on your skin?",
+    quizA2_1: "Radiant Silver (Cool Tone)",
+    quizA2_2: "Rich Yellow Gold (Warm Tone)",
+    quizA2_3: "Rose Gold (Neutral Tone)",
+    quizQ3: "Q3. How does your skin react to strong sunlight?",
+    quizA3_1: "Burns & turns red easily (Cool Tone)",
+    quizA3_2: "Tans golden/brown without burning (Warm Tone)",
+    quizResultLabel: "Self-Diagnosis Undertone Prediction:",
+    quizMatchConfirm: "Concordance with AI Draping Matrix:", 
     eduEyebrow: "COLOR SCIENCE ACADEMY",
     eduTitlePrefix: "Personal Color — What is the Difference Between ",
     eduTitleColor: "Color",
@@ -341,6 +400,35 @@ const UI_TEXT = {
     stylingBannerDesc: "アメリカ人気ブランド（Zara US、Nordstrom、SSENSE）のリアルタイム在庫コーデをチェック。",
     stylingBannerBtn: "似合わせルックブックを見る",
     ethnicityTitle: "人種・肌トーン5選 (黒人・白人・東アジア・ラテン・東南アジア):",
+    studioTabDrape: "🎨 ドレープ診断",
+    studioTabLip: "💄 リップ試着 (Zamface)",
+    studioTabHair: "💇 ヘアカラー試着 (Vivaldi)",
+    studioTabWardrobe: "👗 服色チェッカー (Colorwise)",
+    studioTabQuiz: "🔮 セルフ診断クイズ",
+    lipTryOnTitle: "リアルタイムARリップ試着 (タップで塗布):",
+    lipTryOnDesc: "デパコス＆人気No.1リップをあなたのお顔に瞬時にバーチャル塗布。",
+    hairTryOnTitle: "リアルタイムヘアカラー髪色シミュレーター:",
+    hairTryOnDesc: "あなたのパーソナルカラーに最も似合うトレンド髪色を試着できます。",
+    wardrobeTitle: "お洋服カラーマッチチェッカー (お買い物相棒):",
+    wardrobeDesc: "気になっている洋服の色を選ぶと、あなたのシーズンとの相性度を瞬時に判定します。",
+    wardrobeMatchBest: "最高の一生モノ神カラー！ (顔色がパッと明るく)",
+    wardrobeMatchGood: "使いやすく上品なセカンドカラー",
+    wardrobeMatchWarn: "注意カラー (顔色が沈んで見えやすい)",
+    quizTitle: "3秒アンダートーンセルフ診断 (AI相互検証):",
+    quizDesc: "3つの質問に答えて、AIバーチャルドレープの結果と答え合わせをしましょう。",
+    quizQ1: "Q1. 手首の内側の血管の色は？",
+    quizA1_1: "青や紫に見える (ブルベ)",
+    quizA1_2: "緑やオリーブに見える (イエベ)",
+    quizA1_3: "両方混ざっている (ニュートラル)",
+    quizQ2: "Q2. 肌がきれいに見えるアクセサリーは？",
+    quizA2_1: "澄んだシルバー (ブルベ)",
+    quizA2_2: "華やかなゴールド (イエベ)",
+    quizA2_3: "ピンクゴールド (ニュートラル)",
+    quizQ3: "Q3. 強い日差しを浴びると肌はどうなる？",
+    quizA3_1: "すぐ赤くなりヒリヒリする (ブルベ)",
+    quizA3_2: "赤くならずすぐ黒く日焼けする (イエベ)",
+    quizResultLabel: "セルフ診断のアンダートーン予測:",
+    quizMatchConfirm: "AIドレープ診断との一致度:", 
     eduEyebrow: "色彩学マスタークラス · 公式ガイド",
     eduTitlePrefix: "パーソナルカラー — ",
     eduTitleColor: "色",
@@ -786,6 +874,39 @@ const ETHNICITY_SKIN_TONES = [
   },
 ];
 
+
+// ─── [Vivaldi Color 벤치마킹] 실시간 헤어 염색 프리셋 ────────────────────
+const HAIR_COLOR_PRESETS = [
+  { id: "jet_black", hex: "#111116", labels: { ko: "쿨 젯블랙", en: "Cool Jet Black", ja: "漆黒ジェットブラック" } },
+  { id: "dark_mocha", hex: "#2C1D18", labels: { ko: "다크 모카 에스프레소", en: "Dark Mocha Espresso", ja: "ダークモカ" } },
+  { id: "ash_brown", hex: "#4A4441", labels: { ko: "애쉬 그레이 브라운", en: "Ash Gray Brown", ja: "アッシュブラウン" } },
+  { id: "golden_beige", hex: "#7A5636", labels: { ko: "골든 밀크티 베이지", en: "Golden Honey Beige", ja: "ミルクティーベージュ" } },
+  { id: "wine_burgundy", hex: "#4E1C2B", labels: { ko: "딥 와인 버건디", en: "Deep Wine Burgundy", ja: "ワインバーガンディ" } },
+];
+
+// ─── [Zamface 벤치마킹] 실시간 AR 립스틱 착색 스와치 ───────────────────
+const VIRTUAL_LIP_SWATCHES = [
+  { id: "coral_peach", hex: "#FF7043", brand: "Dior Addict", labels: { ko: "코랄 피치 (샤인)", en: "Coral Peach Glow", ja: "コーラルピーチ" } },
+  { id: "dewy_rose", hex: "#F48FB1", brand: "Chanel Rouge", labels: { ko: "소프트 로즈핑크", en: "Soft Rose Pink", ja: "ローズピンク" } },
+  { id: "chili_brick", hex: "#C44D34", brand: "MAC Matte", labels: { ko: "칠리 브릭 레드", en: "Chili Brick Warm", ja: "チリブリック" } },
+  { id: "cherry_red", hex: "#C0392B", brand: "YSL Rouge", labels: { ko: "선명한 체리레드", en: "Vivid Cherry Red", ja: "チェリーレッド" } },
+  { id: "mute_plum", hex: "#8E44AD", brand: "Rom&nd Dewy", labels: { ko: "모브 딥 플럼", en: "Mauve Deep Plum", ja: "モーヴプラム" } },
+];
+
+// ─── [Colorwise.me 벤치마킹] 쇼핑 의상 컬러 매칭 체커 팔레트 ──────────────
+const WARDROBE_TEST_COLORS = [
+  { hex: "#FFFFFF", name: { ko: "퓨어 화이트", en: "Pure White", ja: "ピュアホワイト" }, type: "cool" },
+  { hex: "#1F2937", name: { ko: "미드나잇 챠콜", en: "Midnight Charcoal", ja: "チャコール" }, type: "cool" },
+  { hex: "#1E3A8A", name: { ko: "클래식 네이비", en: "Classic Navy", ja: "ネイビー" }, type: "cool" },
+  { hex: "#D4A373", name: { ko: "웜 카멜 베이지", en: "Warm Camel Beige", ja: "キャメルベージュ" }, type: "warm" },
+  { hex: "#E07A5F", name: { ko: "테라코타 오렌지", en: "Terracotta Rust", ja: "テラコッタ" }, type: "warm" },
+  { hex: "#F4A261", name: { ko: "살구 피치", en: "Soft Peach Coral", ja: "アプリコット" }, type: "warm" },
+  { hex: "#B7B7A4", name: { ko: "세이지 올리브", en: "Muted Sage Green", ja: "セージグリーン" }, type: "warm" },
+  { hex: "#9D8189", name: { ko: "더스티 라벤더", en: "Dusty Lavender", ja: "ダスティラベンダー" }, type: "cool" },
+  { hex: "#581845", name: { ko: "딥 버건디 와인", en: "Deep Wine Plum", ja: "バーガンディ" }, type: "cool" },
+  { hex: "#E9C46A", name: { ko: "머스타드 골드", en: "Mustard Gold", ja: "マスタード" }, type: "warm" },
+];
+
 export default function ColorHelperPage() {
   // ── 언어 상태 (기본 한국어, 쿼리/스토리지 지원) ─────────────────
   const [lang, setLang] = useState<LangType>("ko");
@@ -796,6 +917,16 @@ export default function ColorHelperPage() {
   const [isCustomPhoto, setIsCustomPhoto] = useState(false);
   const [resultTone, setResultTone] = useState<ColorToneData | null>(null);
   const [activeTab, setActiveTab] = useState<"result" | "cosmetics">("result");
+  const [studioTool, setStudioTool] = useState<"drape" | "lip" | "hair" | "wardrobe" | "quiz">("drape");
+  const [activeSkinHex, setActiveSkinHex] = useState<string>("#FDE8D7");
+  const [activeLipHex, setActiveLipHex] = useState<string>("#FF7043");
+  const [activeHairHex, setActiveHairHex] = useState<string>("#5D4037");
+  const [wardrobeColor, setWardrobeColor] = useState<typeof WARDROBE_TEST_COLORS[0] | null>(null);
+  const [quizAnswers, setQuizAnswers] = useState<{ vein: number | null; jewelry: number | null; sun: number | null }>({
+    vein: null,
+    jewelry: null,
+    sun: null,
+  });
 
   // 진단 티켓 관리 (비회원/게스트 100% 지원)
   const [tickets, setTickets] = useState<number>(0);
@@ -889,11 +1020,8 @@ export default function ColorHelperPage() {
     } catch (e) {}
   };
 
-  // ── 샘플 모델 / 피부색 로드 ────────────────────────────────
-  const applySkinTone = (skin: { skinHex: string; lipHex: string; hairHex: string; toneHint: string }) => {
-    setIsCustomPhoto(false);
-    setIsUnlocked(tickets > 0);
-
+  // ── [통합 캔버스 렌더러] 피부색 · 립스틱(AR) · 헤어 염색(Vivaldi) 실시간 동적 렌더링 ──
+  const renderCanvasPortrait = (skinHex: string, lipHex: string, hairHex: string) => {
     const cvs = document.createElement("canvas");
     cvs.width = 600;
     cvs.height = 750;
@@ -906,19 +1034,23 @@ export default function ColorHelperPage() {
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, 600, 750);
 
-    ctx.fillStyle = skin.hairHex;
+    // 헤어
+    ctx.fillStyle = hairHex;
     ctx.beginPath();
     ctx.ellipse(300, 360, 200, 260, 0, 0, Math.PI * 2);
     ctx.fill();
 
-    ctx.fillStyle = skin.skinHex;
+    // 목 & 어깨
+    ctx.fillStyle = skinHex;
     ctx.fillRect(250, 450, 100, 180);
 
+    // 얼굴 윤곽
     ctx.beginPath();
     ctx.ellipse(300, 360, 140, 180, 0, 0, Math.PI * 2);
     ctx.fill();
 
-    ctx.strokeStyle = skin.hairHex;
+    // 눈썹
+    ctx.strokeStyle = hairHex;
     ctx.lineWidth = 4;
     ctx.beginPath();
     ctx.arc(245, 305, 30, Math.PI * 1.15, Math.PI * 1.85);
@@ -927,35 +1059,48 @@ export default function ColorHelperPage() {
     ctx.arc(355, 305, 30, Math.PI * 1.15, Math.PI * 1.85);
     ctx.stroke();
 
+    // 눈동자
     ctx.fillStyle = "#2D3436";
     ctx.beginPath();
     ctx.ellipse(245, 335, 18, 9, 0, 0, Math.PI * 2);
     ctx.ellipse(355, 335, 18, 9, 0, 0, Math.PI * 2);
     ctx.fill();
 
+    // 치크 (볼터치 그라데이션)
     const cheekGrad1 = ctx.createRadialGradient(230, 400, 5, 230, 400, 45);
-    cheekGrad1.addColorStop(0, skin.lipHex + "55");
-    cheekGrad1.addColorStop(1, skin.skinHex + "00");
+    cheekGrad1.addColorStop(0, lipHex + "55");
+    cheekGrad1.addColorStop(1, skinHex + "00");
     ctx.fillStyle = cheekGrad1;
     ctx.beginPath();
     ctx.arc(230, 400, 45, 0, Math.PI * 2);
     ctx.fill();
 
     const cheekGrad2 = ctx.createRadialGradient(370, 400, 5, 370, 400, 45);
-    cheekGrad2.addColorStop(0, skin.lipHex + "55");
-    cheekGrad2.addColorStop(1, skin.skinHex + "00");
+    cheekGrad2.addColorStop(0, lipHex + "55");
+    cheekGrad2.addColorStop(1, skinHex + "00");
     ctx.fillStyle = cheekGrad2;
     ctx.beginPath();
     ctx.arc(370, 400, 45, 0, Math.PI * 2);
     ctx.fill();
 
-    ctx.fillStyle = skin.lipHex;
+    // 입술 (AR 립스틱 착색)
+    ctx.fillStyle = lipHex;
     ctx.beginPath();
     ctx.ellipse(300, 460, 38, 14, 0, 0, Math.PI * 2);
     ctx.fill();
 
     const dataUrl = cvs.toDataURL("image/png");
     setImageSrc(dataUrl);
+  };
+
+  const applySkinTone = (skin: { skinHex: string; lipHex: string; hairHex: string; toneHint: string }) => {
+    setIsCustomPhoto(false);
+    setIsUnlocked(tickets > 0);
+    setActiveSkinHex(skin.skinHex);
+    setActiveLipHex(skin.lipHex);
+    setActiveHairHex(skin.hairHex);
+
+    renderCanvasPortrait(skin.skinHex, skin.lipHex, skin.hairHex);
 
     triggerDiagnosis(skin.toneHint, {
       skin: skin.skinHex,
@@ -966,6 +1111,20 @@ export default function ColorHelperPage() {
 
   const loadPresetModel = (preset: (typeof PRESET_MODELS)[0]) => {
     applySkinTone(preset);
+  };
+
+  // [Zamface 장점] 실시간 립스틱 가상 착색
+  const changeLipColor = (lipHex: string) => {
+    setActiveLipHex(lipHex);
+    renderCanvasPortrait(activeSkinHex, lipHex, activeHairHex);
+    setSampledColors((prev) => ({ ...prev, lip: lipHex }));
+  };
+
+  // [Vivaldi Color 장점] 실시간 헤어 염색 컬러 체인지
+  const changeHairColor = (hairHex: string) => {
+    setActiveHairHex(hairHex);
+    renderCanvasPortrait(activeSkinHex, activeLipHex, hairHex);
+    setSampledColors((prev) => ({ ...prev, hair: hairHex }));
   };
 
   // ── 웹캠 시작 & 캡처 ─────────────────────────────────────────
@@ -1662,40 +1821,312 @@ export default function ColorHelperPage() {
               )}
             </div>
 
-            {/* 우측: 드레이핑 컬러 스와치 & 피부 지표 */}
-            <div className="md:col-span-6 space-y-6">
-              <div>
-                <h3 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-1.5">
-                  <Palette className="w-4 h-4 text-[#E07A5F]" />
-                  {t.swatchTitle}
-                </h3>
-                <p className="text-xs text-gray-500 mb-3">{t.swatchDesc}</p>
+            {/* 우측: 5대 스마트 뷰티 스튜디오 툴바 (드레이핑 / 립 피팅 / 헤어 염색 / 의상 매칭 / 자가진단) */}
+            <div className="md:col-span-6 space-y-5">
+              <div className="flex items-center gap-1 p-1 bg-gray-100/90 rounded-2xl overflow-x-auto no-scrollbar border border-gray-200">
+                <button
+                  onClick={() => setStudioTool("drape")}
+                  className={`px-3 py-2 rounded-xl text-xs font-black transition whitespace-nowrap ${
+                    studioTool === "drape"
+                      ? "bg-white text-gray-900 shadow-sm border border-gray-200"
+                      : "text-gray-500 hover:text-gray-900"
+                  }`}
+                >
+                  {t.studioTabDrape}
+                </button>
+                <button
+                  onClick={() => setStudioTool("lip")}
+                  className={`px-3 py-2 rounded-xl text-xs font-black transition whitespace-nowrap ${
+                    studioTool === "lip"
+                      ? "bg-white text-rose-600 shadow-sm border border-rose-200"
+                      : "text-gray-500 hover:text-gray-900"
+                  }`}
+                >
+                  {t.studioTabLip}
+                </button>
+                <button
+                  onClick={() => setStudioTool("hair")}
+                  className={`px-3 py-2 rounded-xl text-xs font-black transition whitespace-nowrap ${
+                    studioTool === "hair"
+                      ? "bg-white text-amber-700 shadow-sm border border-amber-200"
+                      : "text-gray-500 hover:text-gray-900"
+                  }`}
+                >
+                  {t.studioTabHair}
+                </button>
+                <button
+                  onClick={() => setStudioTool("wardrobe")}
+                  className={`px-3 py-2 rounded-xl text-xs font-black transition whitespace-nowrap ${
+                    studioTool === "wardrobe"
+                      ? "bg-white text-blue-600 shadow-sm border border-blue-200"
+                      : "text-gray-500 hover:text-gray-900"
+                  }`}
+                >
+                  {t.studioTabWardrobe}
+                </button>
+                <button
+                  onClick={() => setStudioTool("quiz")}
+                  className={`px-3 py-2 rounded-xl text-xs font-black transition whitespace-nowrap ${
+                    studioTool === "quiz"
+                      ? "bg-white text-purple-600 shadow-sm border border-purple-200"
+                      : "text-gray-500 hover:text-gray-900"
+                  }`}
+                >
+                  {t.studioTabQuiz}
+                </button>
+              </div>
 
-                {resultTone && (
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                    {resultTone.drapeSwatches.map((swatch) => (
+              {/* TOOL 1: 천 드레이핑 */}
+              {studioTool === "drape" && (
+                <div className="animate-fade-in">
+                  <h3 className="text-sm font-bold text-gray-900 mb-1 flex items-center gap-1.5">
+                    <Palette className="w-4 h-4 text-[#E07A5F]" />
+                    {t.swatchTitle}
+                  </h3>
+                  <p className="text-xs text-gray-500 mb-3">{t.swatchDesc}</p>
+
+                  {resultTone && (
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                      {resultTone.drapeSwatches.map((swatch) => (
+                        <button
+                          key={swatch.name[lang]}
+                          onClick={() => {
+                            setSelectedDrapeHex(swatch.hex);
+                            setSelectedDrapeName(swatch.name[lang]);
+                          }}
+                          className={`p-2.5 rounded-xl border flex flex-col items-center gap-1.5 transition ${
+                            selectedDrapeHex === swatch.hex
+                              ? "border-gray-900 ring-2 ring-gray-900 shadow-md bg-[#FFFBF9]"
+                              : "border-gray-200 hover:border-gray-300 bg-white"
+                          }`}
+                        >
+                          <div className="w-8 h-8 rounded-full shadow-inner border border-black/10" style={{ backgroundColor: swatch.hex }} />
+                          <span className="text-[11px] font-bold text-gray-900 truncate w-full text-center">
+                            {swatch.name[lang]}
+                          </span>
+                          <span className="text-[9px] text-gray-500">{swatch.desc[lang]}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* TOOL 2: [Zamface 벤치마킹] 실시간 AR 립스틱 착색 피팅 */}
+              {studioTool === "lip" && (
+                <div className="p-4 rounded-2xl bg-[#FFF8F8] border border-rose-200/90 animate-fade-in">
+                  <h3 className="text-sm font-extrabold text-gray-900 mb-1 flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4 text-rose-500" />
+                    {t.lipTryOnTitle}
+                  </h3>
+                  <p className="text-xs text-gray-600 mb-3.5 leading-relaxed">{t.lipTryOnDesc}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {VIRTUAL_LIP_SWATCHES.map((lip) => (
                       <button
-                        key={swatch.name[lang]}
-                        onClick={() => {
-                          setSelectedDrapeHex(swatch.hex);
-                          setSelectedDrapeName(swatch.name[lang]);
-                        }}
-                        className={`p-2.5 rounded-xl border flex flex-col items-center gap-1.5 transition ${
-                          selectedDrapeHex === swatch.hex
-                            ? "border-gray-900 ring-2 ring-gray-900 shadow-md"
-                            : "border-gray-200 hover:border-gray-300"
+                        key={lip.id}
+                        onClick={() => changeLipColor(lip.hex)}
+                        className={`p-3 rounded-xl border flex items-center gap-3 transition text-left ${
+                          activeLipHex === lip.hex
+                            ? "bg-white border-rose-500 ring-2 ring-rose-500/20 shadow-sm"
+                            : "bg-white/80 border-gray-200 hover:border-gray-300"
                         }`}
                       >
-                        <div className="w-8 h-8 rounded-full shadow-inner border border-black/10" style={{ backgroundColor: swatch.hex }} />
-                        <span className="text-[11px] font-bold text-gray-900 truncate w-full text-center">
-                          {swatch.name[lang]}
-                        </span>
-                        <span className="text-[9px] text-gray-500">{swatch.desc[lang]}</span>
+                        <div className="w-8 h-8 rounded-full shadow-inner border border-black/10 flex-shrink-0" style={{ backgroundColor: lip.hex }} />
+                        <div className="min-w-0">
+                          <span className="text-[10px] font-bold text-rose-600 block">{lip.brand}</span>
+                          <span className="text-xs font-black text-gray-900 truncate block">{lip.labels[lang]}</span>
+                        </div>
                       </button>
                     ))}
                   </div>
-                )}
-              </div>
+                </div>
+              )}
+
+              {/* TOOL 3: [Vivaldi Color 벤치마킹] 실시간 헤어 염색 시뮬레이션 */}
+              {studioTool === "hair" && (
+                <div className="p-4 rounded-2xl bg-[#FFFBF5] border border-amber-200/90 animate-fade-in">
+                  <h3 className="text-sm font-extrabold text-gray-900 mb-1 flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4 text-amber-600" />
+                    {t.hairTryOnTitle}
+                  </h3>
+                  <p className="text-xs text-gray-600 mb-3.5 leading-relaxed">{t.hairTryOnDesc}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {HAIR_COLOR_PRESETS.map((hair) => (
+                      <button
+                        key={hair.id}
+                        onClick={() => changeHairColor(hair.hex)}
+                        className={`p-3 rounded-xl border flex items-center gap-3 transition text-left ${
+                          activeHairHex === hair.hex
+                            ? "bg-white border-amber-600 ring-2 ring-amber-600/20 shadow-sm"
+                            : "bg-white/80 border-gray-200 hover:border-gray-300"
+                        }`}
+                      >
+                        <div className="w-8 h-8 rounded-full shadow-inner border border-black/10 flex-shrink-0" style={{ backgroundColor: hair.hex }} />
+                        <span className="text-xs font-black text-gray-900 truncate block">{hair.labels[lang]}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* TOOL 4: [Colorwise.me 벤치마킹] 쇼핑 의상 컬러 매칭 체커 */}
+              {studioTool === "wardrobe" && (
+                <div className="p-4 rounded-2xl bg-[#F0F7FF] border border-blue-200/90 animate-fade-in">
+                  <h3 className="text-sm font-extrabold text-gray-900 mb-1 flex items-center gap-1.5">
+                    <Shirt className="w-4 h-4 text-blue-600" />
+                    {t.wardrobeTitle}
+                  </h3>
+                  <p className="text-xs text-gray-600 mb-3 leading-relaxed">{t.wardrobeDesc}</p>
+                  <div className="grid grid-cols-5 gap-2 mb-3.5">
+                    {WARDROBE_TEST_COLORS.map((item) => (
+                      <button
+                        key={item.hex}
+                        onClick={() => setWardrobeColor(item)}
+                        className={`p-2 rounded-xl border flex flex-col items-center gap-1 transition ${
+                          wardrobeColor?.hex === item.hex
+                            ? "bg-white border-blue-600 ring-2 ring-blue-600/30 shadow-sm"
+                            : "bg-white/80 border-gray-200 hover:border-gray-300"
+                        }`}
+                      >
+                        <div className="w-7 h-7 rounded-full shadow-inner border border-black/10" style={{ backgroundColor: item.hex }} />
+                        <span className="text-[10px] font-bold text-gray-700 truncate w-full text-center">{item.name[lang]}</span>
+                      </button>
+                    ))}
+                  </div>
+
+                  {wardrobeColor && (
+                    <div className="p-3.5 rounded-xl bg-white border border-blue-200 shadow-sm">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-xs font-black text-gray-900 flex items-center gap-2">
+                          <span className="w-3.5 h-3.5 rounded-full border border-black/20" style={{ backgroundColor: wardrobeColor.hex }} />
+                          {wardrobeColor.name[lang]}
+                        </span>
+                        <span className={`text-xs font-black px-2 py-0.5 rounded-full ${
+                          (resultTone?.temperature === "WARM" && wardrobeColor.type === "warm") ||
+                          (resultTone?.temperature === "COOL" && wardrobeColor.type === "cool")
+                            ? "bg-emerald-100 text-emerald-800"
+                            : "bg-rose-100 text-rose-800"
+                        }`}>
+                          {(resultTone?.temperature === "WARM" && wardrobeColor.type === "warm") ||
+                          (resultTone?.temperature === "COOL" && wardrobeColor.type === "cool")
+                            ? "MATCH 98% (BEST)"
+                            : "CAUTION (MISMATCH)"}
+                        </span>
+                      </div>
+                      <p className="text-xs text-gray-600 font-medium">
+                        {(resultTone?.temperature === "WARM" && wardrobeColor.type === "warm") ||
+                        (resultTone?.temperature === "COOL" && wardrobeColor.type === "cool")
+                          ? t.wardrobeMatchBest
+                          : t.wardrobeMatchWarn}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* TOOL 5: [Vivaldi Color 벤치마킹] 3초 웜/쿨 언더톤 퀴즈 */}
+              {studioTool === "quiz" && (
+                <div className="p-4 rounded-2xl bg-[#FAF5FF] border border-purple-200/90 space-y-3.5 animate-fade-in">
+                  <h3 className="text-sm font-extrabold text-gray-900 mb-1 flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4 text-purple-600" />
+                    {t.quizTitle}
+                  </h3>
+                  <p className="text-xs text-gray-600 mb-2 leading-relaxed">{t.quizDesc}</p>
+
+                  <div className="space-y-3">
+                    <div>
+                      <div className="text-xs font-bold text-gray-800 mb-1.5">{t.quizQ1}</div>
+                      <div className="grid grid-cols-3 gap-1.5 text-[11px]">
+                        <button
+                          onClick={() => setQuizAnswers((p) => ({ ...p, vein: 0 }))}
+                          className={`p-2 rounded-xl border text-center transition font-semibold ${
+                            quizAnswers.vein === 0 ? "bg-purple-600 text-white border-purple-600 shadow-sm" : "bg-white text-gray-700 border-gray-200"
+                          }`}
+                        >
+                          {t.quizA1_1}
+                        </button>
+                        <button
+                          onClick={() => setQuizAnswers((p) => ({ ...p, vein: 1 }))}
+                          className={`p-2 rounded-xl border text-center transition font-semibold ${
+                            quizAnswers.vein === 1 ? "bg-purple-600 text-white border-purple-600 shadow-sm" : "bg-white text-gray-700 border-gray-200"
+                          }`}
+                        >
+                          {t.quizA1_2}
+                        </button>
+                        <button
+                          onClick={() => setQuizAnswers((p) => ({ ...p, vein: 2 }))}
+                          className={`p-2 rounded-xl border text-center transition font-semibold ${
+                            quizAnswers.vein === 2 ? "bg-purple-600 text-white border-purple-600 shadow-sm" : "bg-white text-gray-700 border-gray-200"
+                          }`}
+                        >
+                          {t.quizA1_3}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="text-xs font-bold text-gray-800 mb-1.5">{t.quizQ2}</div>
+                      <div className="grid grid-cols-3 gap-1.5 text-[11px]">
+                        <button
+                          onClick={() => setQuizAnswers((p) => ({ ...p, jewelry: 0 }))}
+                          className={`p-2 rounded-xl border text-center transition font-semibold ${
+                            quizAnswers.jewelry === 0 ? "bg-purple-600 text-white border-purple-600 shadow-sm" : "bg-white text-gray-700 border-gray-200"
+                          }`}
+                        >
+                          {t.quizA2_1}
+                        </button>
+                        <button
+                          onClick={() => setQuizAnswers((p) => ({ ...p, jewelry: 1 }))}
+                          className={`p-2 rounded-xl border text-center transition font-semibold ${
+                            quizAnswers.jewelry === 1 ? "bg-purple-600 text-white border-purple-600 shadow-sm" : "bg-white text-gray-700 border-gray-200"
+                          }`}
+                        >
+                          {t.quizA2_2}
+                        </button>
+                        <button
+                          onClick={() => setQuizAnswers((p) => ({ ...p, jewelry: 2 }))}
+                          className={`p-2 rounded-xl border text-center transition font-semibold ${
+                            quizAnswers.jewelry === 2 ? "bg-purple-600 text-white border-purple-600 shadow-sm" : "bg-white text-gray-700 border-gray-200"
+                          }`}
+                        >
+                          {t.quizA2_3}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="text-xs font-bold text-gray-800 mb-1.5">{t.quizQ3}</div>
+                      <div className="grid grid-cols-2 gap-1.5 text-[11px]">
+                        <button
+                          onClick={() => setQuizAnswers((p) => ({ ...p, sun: 0 }))}
+                          className={`p-2 rounded-xl border text-center transition font-semibold ${
+                            quizAnswers.sun === 0 ? "bg-purple-600 text-white border-purple-600 shadow-sm" : "bg-white text-gray-700 border-gray-200"
+                          }`}
+                        >
+                          {t.quizA3_1}
+                        </button>
+                        <button
+                          onClick={() => setQuizAnswers((p) => ({ ...p, sun: 1 }))}
+                          className={`p-2 rounded-xl border text-center transition font-semibold ${
+                            quizAnswers.sun === 1 ? "bg-purple-600 text-white border-purple-600 shadow-sm" : "bg-white text-gray-700 border-gray-200"
+                          }`}
+                        >
+                          {t.quizA3_2}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {quizAnswers.vein !== null && (
+                    <div className="p-3 rounded-xl bg-white border border-purple-200 text-xs font-bold text-purple-950 flex items-center justify-between shadow-xs">
+                      <span>{t.quizResultLabel}</span>
+                      <span className="px-2.5 py-1 rounded-full bg-purple-100 text-purple-900 font-extrabold">
+                        {quizAnswers.vein === 0 || quizAnswers.jewelry === 0 ? "COOL (여름/겨울 쿨)" : "WARM (봄/가을 웜)"}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )}
 
               {/* 지표 분석 박스 */}
               <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200/80 space-y-3">
