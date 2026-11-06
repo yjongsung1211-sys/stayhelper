@@ -2312,40 +2312,107 @@ export default function ColorHelperPage() {
                   </div>
                 )}
 
-                {/* Step 3 Left: Hair Tryon Tint */}
+                {/* Step 3 Left: Hair Tryon Tint with Precision Anatomical Mask (ZERO FACE/BG BLEEDING) */}
                 {comparisonStep === 3 && (
-                  <div 
-                    className="absolute inset-0 pointer-events-none transition-all duration-200"
-                    style={{ 
-                      backgroundColor: activeHairTryonHex,
-                      mixBlendMode: "color",
-                      opacity: hairIntensity / 100
-                    }}
-                  />
+                  <svg 
+                    className="absolute inset-0 w-full h-full pointer-events-none" 
+                    viewBox="0 0 100 100" 
+                    preserveAspectRatio="none"
+                  >
+                    <defs>
+                      <mask id="precisionHairMask">
+                        {/* Black base = hidden */}
+                        <rect width="100" height="100" fill="black" />
+                        
+                        {/* Crown of head (upper arch) */}
+                        <ellipse cx="50" cy="28" rx="36" ry="26" fill="white" />
+                        {/* Left hair curtain */}
+                        <ellipse cx="23" cy="52" rx="14" ry="28" fill="white" />
+                        {/* Right hair curtain */}
+                        <ellipse cx="77" cy="52" rx="14" ry="28" fill="white" />
+
+                        {/* SUBTRACT: Center Face Oval (Forehead down to Chin) */}
+                        <ellipse cx="50" cy="46" rx="22" ry="27" fill="black" />
+
+                        {/* SUBTRACT: Neck & Collar */}
+                        <polygon points="34,69 66,69 72,100 28,100" fill="black" />
+
+                        {/* SUBTRACT: Outer Background Corners */}
+                        <rect x="0" y="0" width="14" height="40" fill="black" />
+                        <rect x="86" y="0" width="14" height="40" fill="black" />
+                      </mask>
+                      
+                      <filter id="featherHair">
+                        <feGaussianBlur stdDeviation="1.6" />
+                      </filter>
+                    </defs>
+
+                    {/* The dyed hair layer */}
+                    <rect 
+                      width="100" 
+                      height="100" 
+                      fill={activeHairTryonHex} 
+                      mask="url(#precisionHairMask)" 
+                      filter="url(#featherHair)"
+                      style={{ 
+                        mixBlendMode: "color", 
+                        opacity: Math.min(0.92, (hairIntensity / 100) * 0.95)
+                      }} 
+                    />
+                  </svg>
                 )}
 
-                {/* Step 4 Left: Makeup Tryon Tint */}
+                {/* Step 4 Left: Makeup Tryon Tint with Precision Lip & Eye Ovals (ZERO CHEEK/HAIR BLEEDING) */}
                 {comparisonStep === 4 && (
-                  <>
-                    {/* Eye Shadow Tint */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    {/* Left Eye Shadow: Strictly above left eyelid */}
                     <div 
-                      className="absolute top-[35%] inset-x-0 h-[15%] pointer-events-none opacity-45"
+                      className="absolute rounded-[50%]"
                       style={{ 
-                        backgroundColor: activeEyeTryonHex,
+                        left: "37%", 
+                        top: "37.5%", 
+                        width: "13%", 
+                        height: "4.5%", 
+                        transform: "translate(-50%, -50%)",
+                        background: `radial-gradient(ellipse at center, ${activeEyeTryonHex} 30%, ${activeEyeTryonHex}55 60%, transparent 90%)`,
                         mixBlendMode: "multiply",
-                        filter: "blur(6px)"
+                        filter: "blur(2.5px)",
+                        opacity: 0.65
                       }}
                     />
-                    {/* Lip Tint */}
+
+                    {/* Right Eye Shadow: Strictly above right eyelid */}
                     <div 
-                      className="absolute top-[56%] inset-x-0 h-[12%] pointer-events-none opacity-70"
+                      className="absolute rounded-[50%]"
                       style={{ 
-                        backgroundColor: activeLipTryonHex,
-                        mixBlendMode: "color",
-                        filter: "blur(4px)"
+                        left: "63%", 
+                        top: "37.5%", 
+                        width: "13%", 
+                        height: "4.5%", 
+                        transform: "translate(-50%, -50%)",
+                        background: `radial-gradient(ellipse at center, ${activeEyeTryonHex} 30%, ${activeEyeTryonHex}55 60%, transparent 90%)`,
+                        mixBlendMode: "multiply",
+                        filter: "blur(2.5px)",
+                        opacity: 0.65
                       }}
                     />
-                  </>
+
+                    {/* Precision Lip Tint: Strictly on the lips (NO horizontal stripe, NO cheek bleeding!) */}
+                    <div 
+                      className="absolute rounded-[50%]"
+                      style={{ 
+                        left: "50%", 
+                        top: "58.5%", 
+                        width: "21%", 
+                        height: "6.5%", 
+                        transform: "translate(-50%, -50%)",
+                        background: `radial-gradient(ellipse at center, ${activeLipTryonHex} 40%, ${activeLipTryonHex}99 70%, transparent 100%)`,
+                        mixBlendMode: "color",
+                        filter: "blur(1.5px)",
+                        opacity: 0.85
+                      }}
+                    />
+                  </div>
                 )}
               </div>
             )}
