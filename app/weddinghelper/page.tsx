@@ -705,7 +705,7 @@ export default function WeddingHelperPage() {
                   className="px-4 py-2 rounded-full bg-[#1F181B] text-[#D4AF37] border border-[#D4AF37]/50 hover:bg-black hover:scale-[1.02] transition shadow-sm flex items-center gap-2 text-xs font-bold uppercase tracking-wider whitespace-nowrap cursor-pointer active:scale-95"
                 >
                   <Gem className="w-3.5 h-3.5 text-[#D4AF37]" />
-                  <span>VIP Studio</span>
+                  <span>Digital Wedding Invitation</span>
                   <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#D4AF37]/20 text-[#D4AF37] font-bold">Active</span>
                 </button>
                 <button 
@@ -733,7 +733,7 @@ export default function WeddingHelperPage() {
                   }}
                   className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium tracking-wider text-[#6E5D5C] hover:text-[#C87870] transition whitespace-nowrap cursor-pointer"
                 >
-                  <span>💌 Invitations</span>
+                  <span>💌 Digital Wedding Invitation</span>
                 </button>
                 <button 
                   type="button"
@@ -994,7 +994,7 @@ export default function WeddingHelperPage() {
             <span>•</span>
             <span>240 Haute Couture Masterpieces</span>
             <span>•</span>
-            <span>Bespoke Mobile Invitation Studio Included</span>
+            <span>Bespoke Digital Wedding Invitation Included</span>
           </div>
         </div>
       </section>
@@ -1358,7 +1358,7 @@ export default function WeddingHelperPage() {
                           </span>
                         </div>
                         <h3 className="text-sm sm:text-base font-bold text-[#1F181B] font-serif">
-                          Bespoke Mobile Wedding Invitation & Live Editor
+                          Bespoke Digital Wedding Invitation & Live Editor
                         </h3>
                       </div>
                     </div>
@@ -2783,7 +2783,7 @@ export default function WeddingHelperPage() {
                     </div>
                     <div className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#C87870] shrink-0 mt-0.5" />
-                      <span><strong>Mobile Invitation Kit</strong>: 10 bespoke invitation templates with live RSVP tracking</span>
+                      <span><strong>Digital Wedding Invitation</strong>: 10 bespoke templates with live RSVP tracking</span>
                     </div>
                     <div className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#C87870] shrink-0 mt-0.5" />
