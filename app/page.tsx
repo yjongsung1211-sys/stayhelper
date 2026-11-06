@@ -2235,191 +2235,53 @@ export default function ColorHelperPage() {
               window.addEventListener("pointerup", onPointerUp);
             }}
           >
-            {/* ── BASE LAYER: RIGHT SIDE (Natural / Dull / Basic) ── */}
-            <div className="absolute inset-0 w-full h-full overflow-hidden">
-              <img
-                src={imageSrc || ""}
-                alt="Portrait"
-                className="w-full h-full object-cover object-top"
-                style={
-                  comparisonStep === 2
-                    ? { filter: "brightness(0.94) saturate(0.85)" }
-                    : undefined
-                }
-              />
+            {/* ── IMAGE DISPLAY AREA (Country-Tailored Nano Banana Master Visuals) ── */}
+            {(() => {
+              const regionCode = lang === "ja" ? "ja" : lang === "ko" ? "ko" : "en";
+              const currentStepImage = isCustomPhoto && imageSrc 
+                ? imageSrc 
+                : `/nb_step${comparisonStep}_${regionCode}.jpg`;
 
-              {/* Step 2 Right: Worst Drape on Shoulders */}
-              {comparisonStep === 2 && (
-                <div 
-                  className="absolute bottom-0 inset-x-0 h-[36%] rounded-t-[50px] shadow-2xl transition-colors duration-300 flex items-center justify-center pointer-events-none"
-                  style={{ 
-                    backgroundColor: resultTone ? resultTone.worstColors[0]?.hex || "#7F8C8D" : "#7F8C8D",
-                    boxShadow: "inset 0 10px 25px rgba(0,0,0,0.25)"
-                  }}
-                >
-                  <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-black/50 text-white backdrop-blur-xs">
-                    {t.step2WorstBadge}
-                  </span>
+              return (
+                <div className="absolute inset-0 w-full h-full overflow-hidden">
+                  <img
+                    src={currentStepImage}
+                    alt={`Step ${comparisonStep} Showcase`}
+                    className="w-full h-full object-cover object-top"
+                  />
+
+                  {/* For user uploaded custom photo: show natural silk drape on shoulders */}
+                  {isCustomPhoto && comparisonStep === 2 && (
+                    <div 
+                      className="absolute bottom-0 inset-x-0 h-[36%] rounded-t-[50px] shadow-2xl transition-colors duration-300 flex items-center justify-center pointer-events-none"
+                      style={{ 
+                        backgroundColor: resultTone ? resultTone.bestColors[0]?.hex || "#FFA07A" : "#FFA07A",
+                        boxShadow: "inset 0 10px 25px rgba(0,0,0,0.25)"
+                      }}
+                    >
+                      <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-black/50 text-white backdrop-blur-xs">
+                        {t.step2BestBadge}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Step 5: Floating Match Score Badge 🔥 */}
+                  {comparisonStep === 5 && (
+                    <div className="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-md px-3 py-1 rounded-2xl shadow-xl border border-amber-200 flex items-center gap-1.5 z-20">
+                      <span className="text-base leading-none">🔥</span>
+                      <div className="text-right">
+                        <div className="text-[8px] font-black uppercase text-amber-700 tracking-wider leading-none mb-0.5">{t.step5MatchLabel}</div>
+                        <div className="text-sm font-black text-gray-900 leading-none">{OUTFIT_MATCH_PRESETS[selectedOutfitIndex]?.match || 98}%</div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
+              );
+            })()}
 
-              {/* Step 5: Outfit Overlay on Full Width */}
-              {comparisonStep === 5 && (
-                <div 
-                  className="absolute bottom-0 inset-x-0 h-[36%] rounded-t-[50px] shadow-2xl transition-colors duration-300 flex items-center justify-center pointer-events-none"
-                  style={{ 
-                    backgroundColor: OUTFIT_MATCH_PRESETS[selectedOutfitIndex].hex,
-                    boxShadow: "inset 0 10px 25px rgba(0,0,0,0.25)"
-                  }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 pointer-events-none" />
-                  <span className="relative z-10 text-[11px] font-extrabold px-3 py-1 rounded-full bg-black/40 text-white backdrop-blur-xs">
-                    {OUTFIT_MATCH_PRESETS[selectedOutfitIndex].name[lang]}
-                  </span>
-                </div>
-              )}
-            </div>
-
-            {/* ── CLIPPED LAYER: LEFT SIDE (Best / Glow / Tryon) ── */}
-            {(comparisonStep === 2 || comparisonStep === 3 || comparisonStep === 4) && (
-              <div 
-                className="absolute inset-0 w-full h-full overflow-hidden"
-                style={{ clipPath: `inset(0 ${100 - interactiveSplitPos}% 0 0)` }}
-              >
-                <img
-                  src={imageSrc || ""}
-                  alt="Portrait Left"
-                  className="w-full h-full object-cover object-top"
-                  style={
-                    comparisonStep === 2
-                      ? { filter: "brightness(1.06) saturate(1.08)" }
-                      : undefined
-                  }
-                />
-
-                {/* Step 2 Left: Best Drape on Shoulders */}
-                {comparisonStep === 2 && (
-                  <div 
-                    className="absolute bottom-0 inset-x-0 h-[36%] rounded-t-[50px] shadow-2xl transition-colors duration-300 flex items-center justify-center pointer-events-none"
-                    style={{ 
-                      backgroundColor: resultTone ? resultTone.bestColors[0]?.hex || "#FFA07A" : "#FFA07A",
-                      boxShadow: "inset 0 10px 25px rgba(0,0,0,0.25)"
-                    }}
-                  >
-                    <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-black/50 text-white backdrop-blur-xs">
-                      {t.step2BestBadge}
-                    </span>
-                  </div>
-                )}
-
-                {/* Step 3 Left: Hair Tryon Tint with Precision Anatomical Mask (ZERO FACE/BG BLEEDING) */}
-                {comparisonStep === 3 && (
-                  <svg 
-                    className="absolute inset-0 w-full h-full pointer-events-none" 
-                    viewBox="0 0 100 100" 
-                    preserveAspectRatio="none"
-                  >
-                    <defs>
-                      <mask id="precisionHairMask">
-                        {/* Black base = hidden */}
-                        <rect width="100" height="100" fill="black" />
-                        
-                        {/* Crown of head (upper arch) */}
-                        <ellipse cx="50" cy="28" rx="36" ry="26" fill="white" />
-                        {/* Left hair curtain */}
-                        <ellipse cx="23" cy="52" rx="14" ry="28" fill="white" />
-                        {/* Right hair curtain */}
-                        <ellipse cx="77" cy="52" rx="14" ry="28" fill="white" />
-
-                        {/* SUBTRACT: Center Face Oval (Forehead down to Chin) */}
-                        <ellipse cx="50" cy="46" rx="22" ry="27" fill="black" />
-
-                        {/* SUBTRACT: Neck & Collar */}
-                        <polygon points="34,69 66,69 72,100 28,100" fill="black" />
-
-                        {/* SUBTRACT: Outer Background Corners */}
-                        <rect x="0" y="0" width="14" height="40" fill="black" />
-                        <rect x="86" y="0" width="14" height="40" fill="black" />
-                      </mask>
-                      
-                      <filter id="featherHair">
-                        <feGaussianBlur stdDeviation="1.6" />
-                      </filter>
-                    </defs>
-
-                    {/* The dyed hair layer */}
-                    <rect 
-                      width="100" 
-                      height="100" 
-                      fill={activeHairTryonHex} 
-                      mask="url(#precisionHairMask)" 
-                      filter="url(#featherHair)"
-                      style={{ 
-                        mixBlendMode: "color", 
-                        opacity: Math.min(0.92, (hairIntensity / 100) * 0.95)
-                      }} 
-                    />
-                  </svg>
-                )}
-
-                {/* Step 4 Left: Makeup Tryon Tint with Precision Lip & Eye Ovals (ZERO CHEEK/HAIR BLEEDING) */}
-                {comparisonStep === 4 && (
-                  <div className="absolute inset-0 pointer-events-none">
-                    {/* Left Eye Shadow: Strictly above left eyelid */}
-                    <div 
-                      className="absolute rounded-[50%]"
-                      style={{ 
-                        left: "37%", 
-                        top: "37.5%", 
-                        width: "13%", 
-                        height: "4.5%", 
-                        transform: "translate(-50%, -50%)",
-                        background: `radial-gradient(ellipse at center, ${activeEyeTryonHex} 30%, ${activeEyeTryonHex}55 60%, transparent 90%)`,
-                        mixBlendMode: "multiply",
-                        filter: "blur(2.5px)",
-                        opacity: 0.65
-                      }}
-                    />
-
-                    {/* Right Eye Shadow: Strictly above right eyelid */}
-                    <div 
-                      className="absolute rounded-[50%]"
-                      style={{ 
-                        left: "63%", 
-                        top: "37.5%", 
-                        width: "13%", 
-                        height: "4.5%", 
-                        transform: "translate(-50%, -50%)",
-                        background: `radial-gradient(ellipse at center, ${activeEyeTryonHex} 30%, ${activeEyeTryonHex}55 60%, transparent 90%)`,
-                        mixBlendMode: "multiply",
-                        filter: "blur(2.5px)",
-                        opacity: 0.65
-                      }}
-                    />
-
-                    {/* Precision Lip Tint: Strictly on the lips (NO horizontal stripe, NO cheek bleeding!) */}
-                    <div 
-                      className="absolute rounded-[50%]"
-                      style={{ 
-                        left: "50%", 
-                        top: "58.5%", 
-                        width: "21%", 
-                        height: "6.5%", 
-                        transform: "translate(-50%, -50%)",
-                        background: `radial-gradient(ellipse at center, ${activeLipTryonHex} 40%, ${activeLipTryonHex}99 70%, transparent 100%)`,
-                        mixBlendMode: "color",
-                        filter: "blur(1.5px)",
-                        opacity: 0.85
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* Step 1: Dotted Facial Landmark Contours */}
+            {/* Step 1: Subtle Dotted Facial Landmark Contours */}
             {comparisonStep === 1 && (
-              <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-75" viewBox="0 0 100 120">
+              <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-60" viewBox="0 0 100 120">
                 <path d="M 28 42 Q 38 38 48 43" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
                 <path d="M 52 43 Q 62 38 72 42" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
                 <ellipse cx="38" cy="48" rx="8" ry="4.5" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
@@ -2429,17 +2291,6 @@ export default function ColorHelperPage() {
                 <path d="M 38 76 Q 50 72 62 76 Q 50 82 38 76" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
                 <path d="M 22 45 Q 26 85 50 102 Q 74 85 78 45" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
               </svg>
-            )}
-
-            {/* Step 5: Floating Match Score Badge 🔥 */}
-            {comparisonStep === 5 && (
-              <div className="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-md px-3 py-1 rounded-2xl shadow-xl border border-amber-200 flex items-center gap-1.5 z-20">
-                <span className="text-base leading-none">🔥</span>
-                <div className="text-right">
-                  <div className="text-[8px] font-black uppercase text-amber-700 tracking-wider leading-none mb-0.5">{t.step5MatchLabel}</div>
-                  <div className="text-sm font-black text-gray-900 leading-none">{OUTFIT_MATCH_PRESETS[selectedOutfitIndex].match}%</div>
-                </div>
-              </div>
             )}
 
             {/* ── DRAGGABLE DIVIDER LINE & HANDLE (< >) ── */}
