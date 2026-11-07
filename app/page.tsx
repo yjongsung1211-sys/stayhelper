@@ -1260,7 +1260,7 @@ const MAKEUP_EYE_PRESETS = [
   { id: "eye_3", hex: "#CFA47C", name: { ko: "소프트 샴페인", en: "Soft Champagne", ja: "ソフトシャンパン" } },
 ];
 
-const CARD_ASSET_VER = "?v=20261107_v10";
+const CARD_ASSET_VER = "?v=20261107_v11";
 
 export default function ColorHelperPage() {
   // ── 언어 상태 (기본 한국어, 쿼리/스토리지 지원) ─────────────────
@@ -2614,13 +2614,24 @@ export default function ColorHelperPage() {
                     </h3>
                   </div>
 
-                  <button
-                    onClick={downloadResultCard}
-                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-gray-900 hover:bg-black text-white text-xs font-bold shadow-md transition"
-                  >
-                    <Download className="w-4 h-4" />
-                    {t.saveInstaCard}
-                  </button>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <button
+                      onClick={() => {
+                        setIsPayModalOpen(true);
+                      }}
+                      className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-black shadow-md transition cursor-pointer"
+                    >
+                      <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                      <span>{lang === "ko" ? "📸 다른 사진 추가 진단 ($1)" : lang === "ja" ? "📸 別のお写真を追加診断 ($1)" : "📸 Diagnose Another Photo ($1)"}</span>
+                    </button>
+                    <button
+                      onClick={downloadResultCard}
+                      className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-gray-900 hover:bg-black text-white text-xs font-bold shadow-md transition cursor-pointer"
+                    >
+                      <Download className="w-4 h-4" />
+                      {t.saveInstaCard}
+                    </button>
+                  </div>
                 </div>
 
                 {/* ── 👑 업로드한 사진 맞춤형 베스트 착장 결과 쇼케이스 (Personalized Signature Showcase) ── */}
@@ -2874,6 +2885,35 @@ export default function ColorHelperPage() {
               </div>
             )}
 
+            {/* ── REPEAT PURCHASE BANNER: 다른 사진 $1 중복/추가 결제 유도 배너 ── */}
+            <div className="mt-8 p-6 rounded-3xl bg-gradient-to-r from-purple-900 via-indigo-900 to-neutral-900 text-white flex flex-col sm:flex-row items-center justify-between gap-5 shadow-2xl border border-purple-500/30">
+              <div className="text-left">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400 text-purple-950 text-[10px] font-black uppercase tracking-wider mb-2">
+                  ✨ MULTIPLE PHOTO DIAGNOSIS • $1
+                </span>
+                <h4 className="text-lg sm:text-xl font-black text-white">
+                  {lang === "ko" ? "다른 셀카나 친구·가족 사진도 $1에 추가 진단하기" : lang === "ja" ? "別のお写真やお友達・ご家族の写真も1回$1で追加診断" : "Diagnose Another Photo or Friend's Portrait for $1"}
+                </h4>
+                <p className="text-xs text-purple-200 mt-1 max-w-lg leading-relaxed">
+                  {lang === "ko" ? "자연광 셀카, 풀메이크업 사진, 혹은 계절별 사진마다 퍼스널컬러 매칭률이 달라집니다. 언제든 $1에 중복 결제하여 새로운 사진을 추가 진단해보세요." : lang === "ja" ? "自然光の自撮りやメイク後の写真など、お写真ごとに診断結果を比較できます。いつでも1回$1で重複購入・追加診断が可能です。" : "Compare your undertones across different lighting, makeup, and seasons. You can purchase additional diagnoses anytime for $1 per photo."}
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center gap-2.5 flex-shrink-0 w-full sm:w-auto">
+                <label className="w-full sm:w-auto px-5 py-3 rounded-2xl bg-white hover:bg-gray-100 text-purple-950 font-black text-xs shadow-xl transition cursor-pointer text-center flex items-center justify-center gap-2">
+                  <span>📸 {lang === "ko" ? "새 사진 올리고 $1 진단" : lang === "ja" ? "新写真をアップして$1診断" : "Upload Photo ($1)"}</span>
+                  <input type="file" accept="image/*" className="hidden" onChange={handleFileUpload} />
+                </label>
+                <button
+                  onClick={() => setIsPayModalOpen(true)}
+                  className="w-full sm:w-auto px-5 py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-[#E07A5F] hover:from-amber-600 hover:to-[#d0694e] text-white font-black text-xs shadow-xl transition cursor-pointer flex items-center justify-center gap-1.5"
+                >
+                  <Ticket className="w-4 h-4" />
+                  <span>{lang === "ko" ? "$1 추가 티켓 결제" : lang === "ja" ? "$1追加チケット購入" : "Buy $1 Pass"}</span>
+                </button>
+              </div>
+            </div>
+
             {/* ── STYLING HELPER FASHION LINK (오직 영어 버전에서만 노출 & stylinghelper.com 직행) ── */}
             {lang === "en" && (
               <div className="mt-10 p-6 rounded-2xl bg-gradient-to-r from-[#1A1715] to-[#2C2623] text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
@@ -2967,6 +3007,9 @@ export default function ColorHelperPage() {
                 <p className="text-[11px] text-gray-400 mt-1">
                   {lang === "ko" ? "12톤 퍼스널컬러 + 인생 립·헤어·의상 풀 진단" : lang === "ja" ? "12タイプパーソナルカラー＋リップ・ヘア・衣装フル診断" : "12-Season Personal Color + Full Makeup & Styling Diagnostic"}
                 </p>
+                <div className="mt-2.5 pt-2 border-t border-purple-500/30 text-[10px] text-amber-300 font-bold">
+                  {lang === "ko" ? "※ 사진 1장당 1회 정밀 진단 ($1) • 다른 사진이나 친구 사진도 언제든 $1에 중복 결제 가능" : lang === "ja" ? "※ 写真1枚につき1回精密診断 ($1) • 別のお写真もいつでも1回$1で重複購入・追加診断可能" : "※ $1 per photo diagnosis • Multiple photos or friends can be diagnosed anytime ($1 each)"}
+                </div>
               </button>
             </div>
 
