@@ -391,19 +391,19 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     curatorNote: 'Maintain a clean monochromatic base to let the sculpted drape of the blazer define the masculine silhouette.',
     colorPalette: ['#1C1D21', '#3A3D40', '#F2EFEB', '#59606D'],
     vibeTags: ['Sartorial', 'Milanese', 'Charcoal Wool', 'Masculine Poise'],
-    totalPrice: 1139,
+    totalPrice: 1545,
     pins: [
       {
         id: 'pin-m01-outer',
         x: 50,
         y: 28,
         category: 'Outer',
-        title: 'Essential Double-Breasted Suiting Blazer in Charcoal',
-        brand: 'Good American',
-        price: 229,
+        title: 'Chambers Stretch Wool Tailored Blazer in Deep Charcoal',
+        brand: 'Theory',
+        price: 495,
         retailer: 'Shopbop',
-        buyUrl: 'https://www.shopbop.com/essential-suiting-belted-blazer-good/vp/v=1/1533639687.htm',
-        kStyleTip: 'Structured chest canvas creates an athletic V-tapered silhouette.'
+        buyUrl: 'https://www.shopbop.com/chambers-stretch-wool-blazer-theory/vp/v=1/1547083302.htm',
+        kStyleTip: 'Tailored chest canvas and notched lapels create an athletic V-tapered silhouette.'
       },
       {
         id: 'pin-m01-top',
@@ -422,24 +422,24 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
         x: 50,
         y: 60,
         category: 'Bottom',
-        title: 'High-Waisted Evening Wide-Leg Fluid Trousers in Black',
-        brand: 'Vince',
-        price: 395,
+        title: 'Mayer Stretch Wool Tailored Trousers in Charcoal Black',
+        brand: 'Theory',
+        price: 285,
         retailer: 'Shopbop',
-        buyUrl: 'https://www.shopbop.com/high-waisted-evening-pant-vince/vp/v=1/1592110869.htm',
-        kStyleTip: 'Gentle flare through the calf breaks cleanly over leather derby shoes.'
+        buyUrl: 'https://www.shopbop.com/mayer-stretch-wool-pants-theory/vp/v=1/1504243366.htm',
+        kStyleTip: 'Precision pressed creases elongate the leg line with sharp architectural drape.'
       },
       {
         id: 'pin-m01-shoes',
         x: 50,
         y: 88,
         category: 'Shoes',
-        title: 'Polished Black Leather Classic Derby Loafer',
-        brand: 'Sam Edelman',
-        price: 175,
+        title: 'Original Achilles Low Leather Luxury Sneakers',
+        brand: 'Common Projects',
+        price: 425,
         retailer: 'Shopbop',
-        buyUrl: 'https://www.shopbop.com/lana-loafer-sam-edelman/vp/v=1/1528564778.htm',
-        kStyleTip: 'High-shine calfskin leather anchors the tailored trousers.'
+        buyUrl: 'https://www.shopbop.com/original-achilles-low-common-projects/vp/v=1/1504120901.htm',
+        kStyleTip: 'Minimalist Italian calfskin leather with gold foil serial number stamp.'
       },
       {
         id: 'pin-m01-eyewear',
@@ -469,19 +469,19 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     curatorNote: 'Combine utilitarian flight outerwear with casual heritage sneakers for effortless off-duty streetwear confidence.',
     colorPalette: ['#1E1C1A', '#3C4048', '#B2B1B9', '#FFFFFF'],
     vibeTags: ['Seongsu Core', 'Leather Bomber', 'Raw Denim', 'Urban Creative'],
-    totalPrice: 477,
+    totalPrice: 2024,
     pins: [
       {
         id: 'pin-m02-outer',
         x: 50,
         y: 28,
         category: 'Outer',
-        title: 'Liberty Cropped Zip Flight Bomber Jacket',
-        brand: 'New York',
-        price: 160,
+        title: 'Removable Collar Leather Flight Bomber Jacket in Vintage Lambskin',
+        brand: 'R13',
+        price: 1695,
         retailer: 'Shopbop',
-        buyUrl: 'https://www.shopbop.com/liberty-cropped-zip-hoodie-new/vp/v=1/1521282696.htm',
-        kStyleTip: 'Cropped waistline visually extends the leg line instantly.'
+        buyUrl: 'https://www.shopbop.com/removable-collar-leather-bomber-r13/vp/v=1/1570267442.htm',
+        kStyleTip: 'Distressed vintage lambskin leather with shearling collar matches Seoul streetwear aesthetic.'
       },
       {
         id: 'pin-m02-top',
@@ -500,12 +500,12 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
         x: 50,
         y: 62,
         category: 'Bottom',
-        title: 'Original Wide-Leg Raw Denim Trousers',
+        title: "501 '90s Relaxed Straight Raw Denim Jeans",
         brand: "Levi's",
-        price: 98,
+        price: 110,
         retailer: 'Shopbop',
-        buyUrl: 'https://www.shopbop.com/tote-usa-unisex-levis/vp/v=1/1571020987.htm',
-        kStyleTip: 'Unwashed raw indigo develops authentic personalized fades over time.'
+        buyUrl: 'https://www.shopbop.com/501-90s-levis/vp/v=1/1583221111.htm',
+        kStyleTip: 'Authentic 90s straight leg silhouette in rigid unwashed indigo denim.'
       },
       {
         id: 'pin-m02-shoes',
@@ -700,6 +700,12 @@ export default function StylingHelperRenewalPage() {
     look: EditorialMasterLook;
   } | null>(null);
 
+  // Lookbook Modal Try-On & Photo View Switcher State
+  const [modalViewMode, setModalViewMode] = useState<'fitted' | 'model'>('fitted');
+  const [cachedLookResults, setCachedLookResults] = useState<Record<string, string>>({});
+  const [isModalGenerating, setIsModalGenerating] = useState<boolean>(false);
+  const [modalProgressStage, setModalProgressStage] = useState<string>('');
+
   // Auth & Subscription state
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
@@ -878,6 +884,7 @@ export default function StylingHelperRenewalPage() {
           imageUrl: data.imageUrl,
           look: selectedTryOnLook
         });
+        setCachedLookResults((prev) => ({ ...prev, [selectedTryOnLook.id]: data.imageUrl }));
       } else {
         // High-precision graceful fallback to high-res master editorial look
         setStyledResult({
@@ -897,6 +904,69 @@ export default function StylingHelperRenewalPage() {
       clearTimeout(timer3);
       setIsGenerating(false);
       setProgressStage('');
+    }
+  };
+
+  // Synchronize modal view mode when activeLookModal opens
+  useEffect(() => {
+    if (activeLookModal) {
+      if (isCustomPhoto) {
+        setModalViewMode('fitted');
+      } else {
+        setModalViewMode('model');
+      }
+    }
+  }, [activeLookModal, isCustomPhoto]);
+
+  // Execute Virtual Try-On directly within Look Detail Modal
+  const handleExecuteModalStyling = async (look: EditorialMasterLook) => {
+    if (!isProSubscriber) {
+      setShowPaywallModal(true);
+      return;
+    }
+    if (!userPhoto) {
+      alert('Please select or upload your photo first.');
+      return;
+    }
+
+    setIsModalGenerating(true);
+    setModalProgressStage('Scanning body contour & draping authentic pieces...');
+
+    const timer1 = setTimeout(() => {
+      setModalProgressStage(`Draping authentic ${look.shortTitle} pieces...`);
+    }, 1500);
+
+    const timer2 = setTimeout(() => {
+      setModalProgressStage('Rendering 1:1 photorealistic textures & studio lighting...');
+    }, 3200);
+
+    try {
+      const res = await fetch('/api/generate-styling', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          styleId: look.id,
+          lookId: look.id,
+          userPhoto: userPhoto,
+          gender: look.gender
+        })
+      });
+      const data = await res.json();
+      if (data.ok && data.imageUrl) {
+        setCachedLookResults((prev) => ({ ...prev, [look.id]: data.imageUrl }));
+        setStyledResult({
+          imageUrl: data.imageUrl,
+          look: look
+        });
+        setSelectedTryOnLook(look);
+      }
+    } catch (err) {
+      console.warn('Modal styling error:', err);
+    } finally {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      setIsModalGenerating(false);
+      setModalProgressStage('');
     }
   };
 
@@ -1578,13 +1648,93 @@ export default function StylingHelperRenewalPage() {
               <X className="w-5 h-5" />
             </button>
 
-            {/* Left Column: Full-Bleed Editorial Visual with Hotspots */}
-            <div className="relative lg:w-1/2 aspect-[3/4] lg:aspect-auto bg-neutral-100 overflow-hidden">
-              <img
-                src={activeLookModal.imageUrl}
-                alt={activeLookModal.title}
-                className="w-full h-full object-cover object-top"
-              />
+            {/* Left Column: Full-Bleed Editorial Visual with Hotspots & Real User Photo Switcher */}
+            <div className="relative lg:w-1/2 aspect-[3/4] lg:aspect-auto bg-neutral-900 overflow-hidden flex flex-col justify-center">
+              {/* Top View Toggle Switcher (when user uploaded custom photo) */}
+              {isCustomPhoto && (
+                <div className="absolute top-4 left-4 z-20 flex items-center gap-1 p-1 rounded-full bg-neutral-950/85 backdrop-blur-md border border-white/10 shadow-xl">
+                  <button
+                    type="button"
+                    onClick={() => setModalViewMode('fitted')}
+                    className={`px-3 py-1 rounded-full text-xs font-semibold tracking-wide transition-all ${
+                      modalViewMode === 'fitted'
+                        ? 'bg-amber-400 text-neutral-950 shadow-sm'
+                        : 'text-neutral-300 hover:text-white'
+                    }`}
+                  >
+                    My Photo {cachedLookResults[activeLookModal.id] ? '(Fitted)' : ''}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setModalViewMode('model')}
+                    className={`px-3 py-1 rounded-full text-xs font-semibold tracking-wide transition-all ${
+                      modalViewMode === 'model'
+                        ? 'bg-white text-neutral-950 shadow-sm'
+                        : 'text-neutral-300 hover:text-white'
+                    }`}
+                  >
+                    Editorial Model
+                  </button>
+                </div>
+              )}
+
+              {/* Main Image Display: User's Fitted Photo vs Editorial Model */}
+              {modalViewMode === 'fitted' && isCustomPhoto ? (
+                cachedLookResults[activeLookModal.id] ? (
+                  <img
+                    src={cachedLookResults[activeLookModal.id]}
+                    alt="Fitted on User Photo"
+                    className="w-full h-full object-cover object-top animate-fadeIn"
+                  />
+                ) : (
+                  <div className="relative w-full h-full flex flex-col items-center justify-center bg-neutral-900">
+                    <img
+                      src={userPhoto}
+                      alt="Your Source Photo"
+                      className={`w-full h-full object-cover object-top ${
+                        isModalGenerating ? 'opacity-30 filter blur-sm' : 'opacity-85'
+                      }`}
+                    />
+                    {!isModalGenerating && (
+                      <div className="absolute inset-0 bg-neutral-950/45 backdrop-blur-[2px] flex flex-col items-center justify-center p-6 text-center">
+                        <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-amber-300 bg-neutral-950/80 px-3 py-1 rounded-full border border-amber-400/30 mb-3 shadow-md">
+                          Your Uploaded Photo
+                        </span>
+                        <h4 className="text-white font-serif text-lg sm:text-xl font-light mb-2">
+                          Ready to wear {activeLookModal.shortTitle}
+                        </h4>
+                        <button
+                          type="button"
+                          onClick={() => handleExecuteModalStyling(activeLookModal)}
+                          className="mt-2 px-6 py-3 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-neutral-950 text-xs uppercase tracking-wider font-bold shadow-xl hover:scale-105 transition-all flex items-center gap-2"
+                        >
+                          <Sparkles className="w-4 h-4 text-neutral-950" />
+                          <span>Drape This Look On My Photo</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )
+              ) : (
+                <img
+                  src={activeLookModal.imageUrl}
+                  alt={activeLookModal.title}
+                  className="w-full h-full object-cover object-top"
+                />
+              )}
+
+              {/* Modal Generating Spinner Overlay */}
+              {isModalGenerating && (
+                <div className="absolute inset-0 bg-neutral-950/75 backdrop-blur-sm z-30 flex flex-col items-center justify-center p-6 text-center text-white">
+                  <div className="w-12 h-12 rounded-full border-2 border-white/20 border-t-amber-300 animate-spin mb-4" />
+                  <div className="text-xs uppercase tracking-[0.2em] text-amber-300 font-semibold mb-2">
+                    Precision AI Virtual Fitting
+                  </div>
+                  <p className="text-sm font-medium text-neutral-200 max-w-xs">
+                    {modalProgressStage || 'Synthesizing tailored garments onto your silhouette...'}
+                  </p>
+                </div>
+              )}
 
               {/* Hotspot Toggle */}
               <div className="absolute bottom-4 left-4 z-10">
