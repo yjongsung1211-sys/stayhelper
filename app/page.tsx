@@ -99,19 +99,13 @@ const UI_TEXT = {
     lockDesc: "얼굴 사진을 기반으로 베스트 컬러 5종, 워스트 컬러, 찰떡 립스틱 3종 분석이 완료되었습니다. 단돈 $1로 즉시 해금하세요!",
     unlockBtn: "$1로 결과 즉시 해금하기 (PayPal / 카드)",
     modalTitle: "퍼스널 컬러 정밀 진단권 충전",
-    modalSubtitle: "청담동 15만 원 오프라인 진단을 1회 1,000원에 온라인에서 누리세요.",
+    modalSubtitle: "청담동 15만 원 오프라인 진단을 1회 $1에 온라인에서 누리세요.",
     singlePlanTag: "가장 인기 있는 기본형",
     singlePlanName: "1회 정밀 진단 티켓",
     singlePlanDesc: "12톤 분석 + 인생 립스틱 + 인스타 카드",
     singlePrice: "$1",
     singlePriceSub: "$1.00 USD",
-    triplePlanTag: "16% 할인 패키지",
-    triplePlanName: "3회 콤보 패키지",
-    triplePlanDesc: "친구·연인·가족과 함께 진단",
-    triplePrice: "$2",
-    triplePriceSub: "$2.00 USD",
     payWithPaypal: "페이팔로 $1 결제하기",
-    payTriplePaypal: "3회 콤보 ($2) 페이팔 결제하기",
     testPayBtn: "[관리자/검토용] 1초 즉시 테스트 결제 승인",
     stylingBannerTag: "StylingHelper Fashion Link",
     stylingBannerTitle: "내 톤에 딱 맞는 이번 주 럭셔리 OOTD",
@@ -255,9 +249,6 @@ const UI_TEXT = {
     paywallProofSuffix: "명의 사람들이 자신에게 가장 잘 어울리는 컬러를 오늘 발견했어요",
     paywallPlan1Title: "1회 정밀 리포트",
     paywallPlan1Price: "$1",
-    paywallPlan2Title: "무제한 VIP 패스",
-    paywallPlan2Badge: "인기",
-    paywallPlan2Price: "$2",
     paywallFeat1: "AI 퍼스널컬러 120개 개인 색상 정밀 진단",
     paywallFeat2: "사계절 12톤 상세 세부 톤 & 안색 효과 분석",
     paywallFeat3: "베스트 & 워스트 의상 컬러 30선 및 피해야 할 색상",
@@ -332,13 +323,7 @@ const UI_TEXT = {
     singlePlanDesc: "12-Tone Dossier + Top 3 Lipsticks + Instagram Card",
     singlePrice: "$1",
     singlePriceSub: "$1.00 USD",
-    triplePlanTag: "Best Value (16% OFF)",
-    triplePlanName: "3-Pass Family & Friends Combo",
-    triplePlanDesc: "Compare tones with your besties & family",
-    triplePrice: "$2",
-    triplePriceSub: "$2.00 USD",
     payWithPaypal: "Pay $1 with PayPal",
-    payTriplePaypal: "Pay $2 with PayPal (3-Pack)",
     stylingBannerTag: "StylingHelper Fashion Link",
     stylingBannerTitle: "Luxury Outfits Curated for Your Tone",
     stylingBannerDesc: "Shop live US retail inventory (Zara US, Nordstrom, SSENSE) matched to your color palette.",
@@ -481,9 +466,6 @@ const UI_TEXT = {
     paywallProofSuffix: "people discovered their perfect colors today",
     paywallPlan1Title: "Single Report",
     paywallPlan1Price: "$1",
-    paywallPlan2Title: "All-Access VIP",
-    paywallPlan2Badge: "POPULAR",
-    paywallPlan2Price: "$2",
     paywallFeat1: "AI Personal Color Diagnosis with 120 Personalized Shades",
     paywallFeat2: "4-Season 12-Tone Detailed Breakdown & Undertone Science",
     paywallFeat3: "Top 30 Best & Worst Outfit Palettes & Warning Colors",
@@ -552,19 +534,13 @@ const UI_TEXT = {
     lockDesc: "お顔写真に基づき、ベストカラー5選・苦手カラー・似合うデパコス神リップ3選の分析が完了しました。わずか $1 ですぐにロック解除できます！",
     unlockBtn: "150円で結果を今すぐ見る (PayPal / カード)",
     modalTitle: "パーソナルカラー診断チケットのチャージ",
-    modalSubtitle: "表参道・銀座サロンの1.5万円の診断体験を、オンラインなら1回150円でいつでも手軽に。",
+    modalSubtitle: "表参道・銀座サロンの1.5万円の診断体験を、オンラインならわずか $1 でいつでも手軽に。",
     singlePlanTag: "一番人気！お手軽お試し",
     singlePlanName: "1回 精密診断チケット",
     singlePlanDesc: "12タイプ詳細診断＋神リップ3選＋インスタカード",
     singlePrice: "$1",
     singlePriceSub: "$1.00 USD",
-    triplePlanTag: "16%お得なセット",
-    triplePlanName: "3回 お友達・家族シェアセット",
-    triplePlanDesc: "お友達や家族と一緒にパーソナルカラーを比較",
-    triplePrice: "$2",
-    triplePriceSub: "$2.00 USD",
     payWithPaypal: "PayPalで $1 を決済する",
-    payTriplePaypal: "PayPalで $2 を決済する (3回券)",
     testPayBtn: "[管理者・レビュー用] 1秒でテスト決済承認",
     stylingBannerTag: "StylingHelper Fashion Link",
     stylingBannerTitle: "あなたのシーズンに最も映える今週のラグジュアリーOOTD",
@@ -708,9 +684,6 @@ const UI_TEXT = {
     paywallProofSuffix: "人が今日、自分に似合うベストカラーを見つけました",
     paywallPlan1Title: "1回診断レポート",
     paywallPlan1Price: "$1",
-    paywallPlan2Title: "無制限VIPパス",
-    paywallPlan2Badge: "人気",
-    paywallPlan2Price: "$2",
     paywallFeat1: "AIパーソナルカラー120色パーソナル診断",
     paywallFeat2: "4シーズン12タイプ詳細サブトーン精密分析",
     paywallFeat3: "ベスト＆ワースト衣装カラー30選・NGカラー警告",
@@ -1287,7 +1260,7 @@ const MAKEUP_EYE_PRESETS = [
   { id: "eye_3", hex: "#CFA47C", name: { ko: "소프트 샴페인", en: "Soft Champagne", ja: "ソフトシャンパン" } },
 ];
 
-const CARD_ASSET_VER = "?v=20261107_v5";
+const CARD_ASSET_VER = "?v=20261107_v7";
 
 export default function ColorHelperPage() {
   // ── 언어 상태 (기본 한국어, 쿼리/스토리지 지원) ─────────────────
@@ -1719,18 +1692,13 @@ export default function ColorHelperPage() {
               height: 44,
             },
             createOrder: (_data: any, actions: any) => {
-              const currentPlan = selectedPlanRef.current;
-              const val = currentPlan === "single" ? "1.00" : "2.00";
               return actions.order.create({
                 purchase_units: [
                   {
-                    description:
-                      currentPlan === "single"
-                        ? "PersonalColorHelper 1-Pass Diagnostic Ticket"
-                        : "PersonalColorHelper 3-Pass Diagnostic Pack",
+                    description: "PersonalColorHelper 1-Pass Diagnostic Ticket ($1)",
                     amount: {
                       currency_code: currency,
-                      value: val,
+                      value: "1.00",
                     },
                   },
                 ],
@@ -2465,7 +2433,7 @@ export default function ColorHelperPage() {
                 const matchScore = activePreset.match;
 
                 // Gemini AI로 합성된 맞춤형 사진이 있으면 100% 최우선 표출, 아니면 원본 사진
-                const finalStyledPhoto = geminiTransformedImage || imageSrc || (lang === "ja" ? `/nb_step5_ja_raw.jpg${CARD_ASSET_VER}` : lang === "ko" ? `/nb_step5_outfit.jpg${CARD_ASSET_VER}` : `/nb_step5_en_raw.jpg${CARD_ASSET_VER}`);
+                const finalStyledPhoto = geminiTransformedImage || (isCustomPhoto && imageSrc ? imageSrc : (lang === "ja" ? `/nb_step5_ja_raw.jpg${CARD_ASSET_VER}` : lang === "ko" ? `/nb_step5_outfit.jpg${CARD_ASSET_VER}` : `/nb_step5_en_raw.jpg${CARD_ASSET_VER}`));
 
                 return (
                   <div className="absolute inset-0 w-full h-full overflow-hidden bg-gray-950">
@@ -2482,7 +2450,7 @@ export default function ColorHelperPage() {
                         <div className="w-12 h-12 rounded-full border-3 border-amber-400 border-t-transparent animate-spin mb-3 shadow-[0_0_20px_#f59e0b]" />
                         <span className="text-xs font-black text-amber-300 uppercase tracking-wider mb-1 flex items-center gap-1.5">
                           <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-                          Gemini AI Beauty Studio
+                          AI Beauty Studio
                         </span>
                         <p className="text-[11px] text-gray-300 max-w-xs leading-relaxed">
                           {lang === "ko" ? "올려주신 사진에 꼭 맞는 머리색과 화장을 실시간 합성 중입니다..." : lang === "ja" ? "お写真に最も似合うヘアカラーとメイクをAI合成中..." : "Synthesizing custom hair & makeup tailored to your portrait..."}
@@ -2579,8 +2547,8 @@ export default function ColorHelperPage() {
           {/* Step 5: Outfit Swatches with % Match Badges (🔥) + Gemini AI Makeover Button */}
           {comparisonStep === 5 && (
             <div className="w-full max-w-[340px] mb-4 space-y-2.5">
-              {/* Gemini AI Transformation Trigger Button */}
-              {imageSrc && !geminiTransformedImage && (
+              {/* AI Transformation Trigger Button */}
+              {isCustomPhoto && imageSrc && !geminiTransformedImage && (
                 <button
                   onClick={() => generateGeminiStyling()}
                   disabled={isGeneratingAiStyling}
@@ -2588,7 +2556,7 @@ export default function ColorHelperPage() {
                 >
                   <Sparkles className="w-4 h-4 text-amber-200 animate-spin" style={{ animationDuration: '4s' }} />
                   <span>
-                    {lang === "ko" ? "✨ Gemini AI 내 사진 맞춤 머리색·화장 합성하기" : lang === "ja" ? "✨ Gemini AI 私の写真に似合うヘア・メイクを合成" : "✨ Synthesize My Tailored Hair & Makeup with Gemini AI"}
+                    {lang === "ko" ? "✨ 내 사진 맞춤 헤어·메이크업 실시간 화보 생성" : lang === "ja" ? "✨ 私の写真に似合うヘア・メイクをAI生成" : "✨ Generate Tailored Hair & Makeup AI Look"}
                   </span>
                 </button>
               )}
@@ -2764,7 +2732,7 @@ export default function ColorHelperPage() {
                     {/* After: Personalized Signature Best Look (Drape at Chest, Chin 100% Clean & Free) */}
                     {(() => {
                       const curBestColor = resultTone.bestColors[resultActiveBestColorIndex] || resultTone.bestColors[0];
-                      const curPhoto = geminiTransformedImage || imageSrc || (lang === 'ja' ? '/nb_step1_ja_raw.jpg' : lang === 'ko' ? '/nb_step1_model.jpg' : '/nb_step1_en_raw.jpg');
+                      const curPhoto = geminiTransformedImage || (isCustomPhoto && imageSrc ? imageSrc : (lang === 'ja' ? `/nb_step1_ja_raw.jpg${CARD_ASSET_VER}` : lang === 'ko' ? `/nb_step1_ko_raw.jpg${CARD_ASSET_VER}` : `/nb_step1_en_raw.jpg${CARD_ASSET_VER}`));
 
                       return (
                         <div className="relative rounded-2xl overflow-hidden bg-gray-900 aspect-[3/4] border-3 border-amber-400 shadow-xl ring-4 ring-amber-400/20">
@@ -2781,7 +2749,7 @@ export default function ColorHelperPage() {
                               <div className="w-12 h-12 rounded-full border-3 border-amber-400 border-t-transparent animate-spin mb-3 shadow-[0_0_20px_#f59e0b]" />
                               <span className="text-xs font-black text-amber-300 uppercase tracking-wider mb-1 flex items-center gap-1.5">
                                 <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-                                Gemini AI Beauty Studio
+                                AI Beauty Studio
                               </span>
                               <p className="text-[11px] text-gray-300 max-w-xs leading-relaxed">
                                 {lang === "ko" ? "올려주신 사진에 꼭 맞는 머리색과 화장을 실시간 합성 중입니다..." : lang === "ja" ? "お写真に最も似合うヘアカラーとメイクをAI合成中..." : "Synthesizing custom hair & makeup tailored to your portrait..."}
@@ -2822,8 +2790,8 @@ export default function ColorHelperPage() {
                         <Sparkles className="w-4 h-4 text-amber-200 animate-spin" style={{ animationDuration: '4s' }} />
                         <span>
                           {isGeneratingAiStyling
-                            ? (lang === "ko" ? "✨ Gemini AI 맞춤 머리색·화장 합성 중..." : lang === "ja" ? "✨ Gemini AI 似合う髪色・メイクを合成中..." : "✨ Synthesizing Hair & Makeup with Gemini AI...")
-                            : (lang === "ko" ? "✨ Gemini AI 내 사진 맞춤 머리색·화장 합성하기" : lang === "ja" ? "✨ Gemini AI 私の写真に似合うヘア・メイクを合成" : "✨ Synthesize My Tailored Hair & Makeup with Gemini AI")}
+                            ? (lang === "ko" ? "✨ 맞춤 헤어·메이크업 AI 화보 생성 중..." : lang === "ja" ? "✨ 似合う髪色・メイクをAI生成中..." : "✨ Synthesizing Tailored Look with AI...")
+                            : (lang === "ko" ? "✨ 내 사진 맞춤 헤어·메이크업 AI 화보 생성" : lang === "ja" ? "✨ 私の写真に似合うヘア・メイクをAI生成" : "✨ Generate Tailored Hair & Makeup AI Look")}
                         </span>
                       </button>
                     </div>
@@ -3053,41 +3021,27 @@ export default function ColorHelperPage() {
               <p className="text-[10px] text-gray-400">{t.paywallProofSuffix}</p>
             </div>
 
-            {/* Pricing Cards: Single vs Unlimited */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
+            {/* Unified Single $1 Pass */}
+            <div className="mb-6">
               <button
                 onClick={() => {
                   setSelectedPlan("single");
                   setIsPayModalOpen(true);
                   setIsPaywallOpen(false);
                 }}
-                className={`p-3.5 rounded-2xl border text-center transition cursor-pointer ${
-                  selectedPlan === "single"
-                    ? "bg-neutral-900 border-amber-400 shadow-md ring-1 ring-amber-400/50"
-                    : "bg-neutral-950/80 border-neutral-800 hover:border-neutral-700"
-                }`}
+                className="w-full p-4 rounded-2xl border-2 border-purple-500 bg-neutral-900/90 shadow-xl text-center relative hover:border-purple-400 transition cursor-pointer"
               >
-                <div className="text-[11px] font-bold text-gray-400 mb-1">{t.paywallPlan1Title}</div>
-                <div className="text-sm font-black text-white">{t.paywallPlan1Price}</div>
-              </button>
-
-              <button
-                onClick={() => {
-                  setSelectedPlan("triple");
-                  setIsPayModalOpen(true);
-                  setIsPaywallOpen(false);
-                }}
-                className={`p-3.5 rounded-2xl border text-center relative transition cursor-pointer ${
-                  selectedPlan === "triple"
-                    ? "bg-neutral-900 border-purple-500 shadow-lg ring-2 ring-purple-500/50"
-                    : "bg-neutral-950/80 border-neutral-800 hover:border-neutral-700"
-                }`}
-              >
-                <span className="absolute -top-2 right-2 px-1.5 py-0.5 rounded-full bg-purple-600 text-white text-[9px] font-black uppercase shadow">
-                  {t.paywallPlan2Badge}
+                <span className="absolute -top-2.5 right-4 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white text-[10px] font-black uppercase shadow tracking-wider">
+                  ALL-IN-ONE
                 </span>
-                <div className="text-[11px] font-bold text-purple-300 mb-1">{t.paywallPlan2Title}</div>
-                <div className="text-sm font-black text-white">{t.paywallPlan2Price}</div>
+                <div className="text-xs font-bold text-purple-300 mb-1">{t.paywallPlan1Title}</div>
+                <div className="flex items-baseline justify-center gap-1.5">
+                  <span className="text-2xl font-black text-white">$1</span>
+                  <span className="text-xs text-gray-400 font-semibold">USD</span>
+                </div>
+                <p className="text-[11px] text-gray-400 mt-1">
+                  {lang === "ko" ? "12톤 퍼스널컬러 + 인생 립·헤어·의상 풀 진단" : lang === "ja" ? "12タイプパーソナルカラー＋リップ・ヘア・衣装フル診断" : "12-Season Personal Color + Full Makeup & Styling Diagnostic"}
+                </p>
               </button>
             </div>
 
@@ -3144,25 +3098,16 @@ export default function ColorHelperPage() {
               <p className="text-xs text-gray-500 mt-1">{t.modalSubtitle}</p>
             </div>
 
-            {/* 결제 상품 플랜 선택 */}
-            <div className="space-y-3 mb-5">
+            {/* 결제 상품 플랜 ($1 단일 상품) */}
+            <div className="mb-5">
               <div
-                onClick={() => setSelectedPlan("single")}
-                className={`p-4 rounded-2xl border-2 cursor-pointer transition relative flex items-center justify-between ${
-                  selectedPlan === "single"
-                    ? "border-[#E07A5F] bg-[#FFFBF9] shadow-md ring-2 ring-[#E07A5F]/20"
-                    : "border-gray-200 hover:border-gray-300 bg-white"
-                }`}
+                className="p-4 rounded-2xl border-2 border-[#E07A5F] bg-[#FFFBF9] shadow-md ring-2 ring-[#E07A5F]/20 flex items-center justify-between"
               >
                 <div className="flex items-center gap-3">
                   <div
-                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition ${
-                      selectedPlan === "single"
-                        ? "border-[#E07A5F] bg-[#E07A5F]"
-                        : "border-gray-300 bg-white"
-                    }`}
+                    className="w-5 h-5 rounded-full border-2 border-[#E07A5F] bg-[#E07A5F] flex items-center justify-center"
                   >
-                    {selectedPlan === "single" && <div className="w-2 h-2 rounded-full bg-white" />}
+                    <div className="w-2 h-2 rounded-full bg-white" />
                   </div>
                   <div>
                     <div className="text-[11px] font-bold text-[#E07A5F]">{t.singlePlanTag}</div>
@@ -3173,36 +3118,6 @@ export default function ColorHelperPage() {
                 <div className="text-right">
                   <div className="text-lg font-black text-gray-900">{t.singlePrice}</div>
                   <div className="text-[10px] text-gray-400 font-semibold">{t.singlePriceSub}</div>
-                </div>
-              </div>
-
-              <div
-                onClick={() => setSelectedPlan("triple")}
-                className={`p-4 rounded-2xl border-2 cursor-pointer transition relative flex items-center justify-between ${
-                  selectedPlan === "triple"
-                    ? "border-emerald-500 bg-emerald-50/40 shadow-md ring-2 ring-emerald-500/20"
-                    : "border-gray-200 hover:border-gray-300 bg-white"
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div
-                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition ${
-                      selectedPlan === "triple"
-                        ? "border-emerald-600 bg-emerald-600"
-                        : "border-gray-300 bg-white"
-                    }`}
-                  >
-                    {selectedPlan === "triple" && <div className="w-2 h-2 rounded-full bg-white" />}
-                  </div>
-                  <div>
-                    <div className="text-[11px] font-bold text-emerald-600">{t.triplePlanTag}</div>
-                    <div className="text-sm font-extrabold text-gray-900">{t.triplePlanName}</div>
-                    <div className="text-[11px] text-gray-500">{t.triplePlanDesc}</div>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="text-lg font-black text-gray-900">{t.triplePrice}</div>
-                  <div className="text-[10px] text-gray-400 font-semibold">{t.triplePriceSub}</div>
                 </div>
               </div>
             </div>
@@ -3222,17 +3137,15 @@ export default function ColorHelperPage() {
             <div className="space-y-2 pt-2 border-t border-gray-100">
               <button
                 disabled={paymentProcessing}
-                onClick={() => executePayment(selectedPlan)}
-                className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#0070BA] to-[#003087] hover:from-[#005ea6] hover:to-[#00256c] text-white font-extrabold text-xs shadow-md transition flex items-center justify-center gap-2"
+                onClick={() => executePayment("single")}
+                className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#0070BA] to-[#003087] hover:from-[#005ea6] hover:to-[#00256c] text-white font-extrabold text-xs shadow-md transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 {paymentProcessing ? (
                   <span>Processing...</span>
                 ) : (
                   <>
                     <span className="font-black italic tracking-wider">PayPal</span>
-                    <span>
-                      {selectedPlan === "single" ? t.payWithPaypal : t.payTriplePaypal}
-                    </span>
+                    <span>{t.payWithPaypal}</span>
                   </>
                 )}
               </button>
