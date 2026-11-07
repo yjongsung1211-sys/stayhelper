@@ -1287,6 +1287,8 @@ const MAKEUP_EYE_PRESETS = [
   { id: "eye_3", hex: "#CFA47C", name: { ko: "소프트 샴페인", en: "Soft Champagne", ja: "ソフトシャンパン" } },
 ];
 
+const CARD_ASSET_VER = "?v=20261107_v5";
+
 export default function ColorHelperPage() {
   // ── 언어 상태 (기본 한국어, 쿼리/스토리지 지원) ─────────────────
   const [lang, setLang] = useState<LangType>("ko");
@@ -2337,7 +2339,7 @@ export default function ColorHelperPage() {
                 return (
                   <div className="absolute inset-0 w-full h-full overflow-hidden">
                     <img
-                      src={isCustomPhoto && imageSrc ? imageSrc : `/nb_step1_${region}.jpg`}
+                      src={isCustomPhoto && imageSrc ? imageSrc : `/nb_step1_${region}.jpg${CARD_ASSET_VER}`}
                       alt="Step 1 Landmark Scan"
                       className="w-full h-full object-cover object-top"
                     />
@@ -2354,8 +2356,8 @@ export default function ColorHelperPage() {
 
               if (comparisonStep === 2) {
                 // Step 2: Real Draping Split (Left Emerald Green Best vs Right Sage Khaki Worst)
-                const rightWorst = `/nb_step2_${region}_worst_card.jpg`;
-                const leftBest = `/nb_step2_${region}_best_card.jpg`;
+                const rightWorst = `/nb_step2_${region}_worst_card.jpg${CARD_ASSET_VER}`;
+                const leftBest = `/nb_step2_${region}_best_card.jpg${CARD_ASSET_VER}`;
 
                 return (
                   <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -2393,8 +2395,8 @@ export default function ColorHelperPage() {
 
               if (comparisonStep === 3) {
                 // Step 3: Real Hair Dye Split (Right Natural Dark vs Left Selected Dyed Hair)
-                const rightDark = `/nb_step3_${region}_black_card.jpg`;
-                const leftDyed = `/nb_step3_${region}_${selectedHairKey}_card.jpg`;
+                const rightDark = `/nb_step3_${region}_black_card.jpg${CARD_ASSET_VER}`;
+                const leftDyed = `/nb_step3_${region}_${selectedHairKey}_card.jpg${CARD_ASSET_VER}`;
 
                 return (
                   <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -2424,8 +2426,8 @@ export default function ColorHelperPage() {
 
               if (comparisonStep === 4) {
                 // Step 4: Real Makeup Split (Right Bare Face vs Left Selected Glam Lip Makeup)
-                const rightBare = `/nb_step4_${region}_bare_card.jpg`;
-                const leftGlam = `/nb_step4_${region}_${selectedLipKey}_card.jpg`;
+                const rightBare = `/nb_step4_${region}_bare_card.jpg${CARD_ASSET_VER}`;
+                const leftGlam = `/nb_step4_${region}_${selectedLipKey}_card.jpg${CARD_ASSET_VER}`;
 
                 return (
                   <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -2463,7 +2465,7 @@ export default function ColorHelperPage() {
                 const matchScore = activePreset.match;
 
                 // Gemini AI로 합성된 맞춤형 사진이 있으면 100% 최우선 표출, 아니면 원본 사진
-                const finalStyledPhoto = geminiTransformedImage || imageSrc || (lang === "ja" ? "/nb_step5_ja_raw.jpg" : lang === "ko" ? "/nb_step5_outfit.jpg" : "/nb_step5_en_raw.jpg");
+                const finalStyledPhoto = geminiTransformedImage || imageSrc || (lang === "ja" ? `/nb_step5_ja_raw.jpg${CARD_ASSET_VER}` : lang === "ko" ? `/nb_step5_outfit.jpg${CARD_ASSET_VER}` : `/nb_step5_en_raw.jpg${CARD_ASSET_VER}`);
 
                 return (
                   <div className="absolute inset-0 w-full h-full overflow-hidden bg-gray-950">
