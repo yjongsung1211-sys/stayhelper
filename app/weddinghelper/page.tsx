@@ -1441,7 +1441,7 @@ export default function WeddingHelperPage() {
             ) : (
               <div className="flex items-center justify-center gap-2.5 sm:gap-3.5 text-center flex-wrap">
                 <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 fill-[#F3E5AB] text-[#F3E5AB] shrink-0" />
-                <span className="leading-snug">결제하고 240장 사진 제작하기 (Pay $19 &amp; Create All 240 Masterpieces)</span>
+                <span className="leading-snug font-serif tracking-widest text-sm sm:text-base">PAY $19 &amp; CREATE ALL 240 BESPOKE MASTERPIECES</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0 group-hover:translate-x-1 transition-transform" />
               </div>
             )}
@@ -1555,7 +1555,7 @@ export default function WeddingHelperPage() {
                   className="flex-1 py-3.5 rounded-full bg-gradient-to-r from-[#B85E55] via-[#C58968] to-[#9E6F28] text-white font-bold uppercase text-xs tracking-wider transition hover:opacity-95 cursor-pointer shadow-md flex items-center justify-center gap-2"
                 >
                   <Sparkles className="w-3.5 h-3.5 fill-[#F3E5AB] text-[#F3E5AB]" />
-                  <span>결제하고 240장 사진 제작하기</span>
+                  <span className="font-serif tracking-wider">PAY $19 &amp; CREATE ALL 240 MASTERPIECES</span>
                 </button>
                 <button
                   type="button"
