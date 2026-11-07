@@ -190,49 +190,54 @@ export async function POST(request: NextRequest) {
     }
 
     const key = process.env.GEMINI_API_KEY || '';
-    const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash-image';
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
+    const preferredModel = process.env.GEMINI_MODEL || 'gemini-2.5-flash-image';
+    const modelsToTry = [preferredModel, 'gemini-3.1-flash-image', 'gemini-2.5-flash-image'].filter((v, i, a) => a.indexOf(v) === i);
 
     let generatedImageUrl = '';
 
     if (key) {
-      try {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            contents: [
-              {
-                parts: requestParts,
-              },
-            ],
-            generationConfig: {
-              responseModalities: ['IMAGE'],
+      for (const currentModel of modelsToTry) {
+        if (generatedImageUrl) break;
+        try {
+          const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${currentModel}:generateContent?key=${key}`;
+          const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
             },
-          }),
-          signal: AbortSignal.timeout(55000),
-        });
+            body: JSON.stringify({
+              contents: [
+                {
+                  parts: requestParts,
+                },
+              ],
+              generationConfig: {
+                responseModalities: ['IMAGE'],
+              },
+            }),
+            signal: AbortSignal.timeout(52000),
+          });
 
-        if (response.ok) {
-          const data = await response.json();
-          const candidate = data.candidates?.[0];
-          const parts = candidate?.content?.parts || [];
-          for (const part of parts) {
-            const inline = part.inlineData || part.inline_data;
-            if (inline?.data) {
-              const resMime = inline.mimeType || inline.mime_type || 'image/jpeg';
-              generatedImageUrl = `data:${resMime};base64,${inline.data}`;
-              break;
+          if (response.ok) {
+            const data = await response.json();
+            const candidate = data.candidates?.[0];
+            const parts = candidate?.content?.parts || [];
+            for (const part of parts) {
+              const inline = part.inlineData || part.inline_data;
+              if (inline?.data) {
+                const resMime = inline.mimeType || inline.mime_type || 'image/jpeg';
+                generatedImageUrl = `data:${resMime};base64,${inline.data}`;
+                break;
+              }
             }
+            if (generatedImageUrl) break;
+          } else {
+            const errText = await response.text();
+            console.warn(`[WeddingHelper ${currentModel} Error]:`, response.status, errText);
           }
-        } else {
-          const errText = await response.text();
-          console.warn('[WeddingHelper Gemini API Error]:', response.status, errText);
+        } catch (geminiErr: any) {
+          console.warn(`[WeddingHelper ${currentModel} Fallback]:`, geminiErr?.message);
         }
-      } catch (geminiErr: any) {
-        console.warn('[WeddingHelper Gemini Fallback]:', geminiErr?.message);
       }
     }
 
