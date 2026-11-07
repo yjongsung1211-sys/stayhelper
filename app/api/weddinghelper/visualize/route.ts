@@ -80,29 +80,36 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // 2. High-fashion radiant floral wedding prompt with strict facial lock, flawless glass skin, and slim silhouette
-    const promptText = `You are a world-renowned Vogue Wedding & Harper's Bazaar master bridal photographer.
-Transform the uploaded real couple from the input image into an ultra-luxury, breathtaking wedding masterpiece set at ${preset.venueName} in ${preset.destination}.
-Specific Scene Angle & Concept: ${angleTitle}.
+    // 2. High-fashion Vogue celebrity wedding photoshoot prompt: Jaw-dropping beauty, flawless glass-skin, slim silhouette & romantic chemistry
+    const promptText = `You are the world's most celebrated Vogue Weddings and Harper's Bazaar celebrity master bridal photographer (in the visual style of Annie Leibovitz and Mario Testino).
+This is an iconic, ultra-luxury high-fashion WEDDING PHOTOSHOOT. It must be breathtakingly beautiful, glamorous, deeply romantic, and jaw-droppingly gorgeous.
 
-[CRITICAL RULE 1: 100% EXACT FACIAL IDENTITY LOCK - DO NOT ALTER FACES]
-- You MUST preserve the exact real facial features, bone structure, and expressions of BOTH individuals from the input image.
-- BRIDE: Preserve her exact natural double eyelids, her eye shape, her authentic gentle smile, her real cheek dimple, her authentic nose bridge, and her natural jawline. DO NOT replace her with a generic AI face or alter her unique identity. She must be instantly recognizable as the exact real woman from the photo.
-- GROOM: Preserve his exact eyes, eyebrows, facial contours, authentic warm smile, and recognizable likeness. He must be instantly recognizable as the exact real man from the photo.
+[CORE ESSENCE: CELEBRITY WEDDING EDITORIAL MASTERPIECE]
+- This is NOT a plain portrait or stiff snapshot. It is an awe-inspiring, magazine-cover luxury wedding photoshoot overflowing with romance, glamour, and emotional intimacy.
+- Both the bride and groom must look exceptionally stunning, charismatic, and radiant like top-tier film stars on their wedding day.
+
+[CRITICAL RULE 1: 100% EXACT FACIAL IDENTITY LOCK WITH GOD-TIER CELEBRITY BEAUTY]
+- You MUST preserve the authentic recognizable facial identities, eye shapes, and smiles of BOTH individuals from the input image:
+  - BRIDE: Preserve her exact natural deep double eyelids, her eye geometry, her authentic gentle smile, her cute cheek dimple, and delicate facial proportions. Elevate her into breathtaking bridal royalty with high-end celebrity bridal makeup: luminous dewy porcelain skin, subtle glossy rose lips, defined fluttery eyelashes, and a soft, captivating romantic gaze.
+  - GROOM: Preserve his exact eyes, eyebrows, facial contours, authentic warm smile, and recognizable likeness. Elevate him into a dashing, handsome, charismatic leading man with clean-shaven chiseled features.
 
 [CRITICAL RULE 2: FLAWLESS LUXURY PORCELAIN GLASS-SKIN (HIGHEST BEAUTY STANDARD)]
-- Unconditionally render BOTH the bride and groom with the most radiant, flawless, luminous bridal glass-skin.
+- Unconditionally render BOTH individuals with the most radiant, flawless, luminous bridal glass-skin.
 - Clear, smooth, dewy complexion with refined micro-texture, zero blemishes, healthy natural glow, and luxury Korean aesthetic clinic porcelain radiance.
 
-[CRITICAL RULE 3: UNCONDITIONALLY SLIM & HIGH-FASHION BODY SILHOUETTES]
+[CRITICAL RULE 3: UNCONDITIONALLY SLIM, TALL & HIGH-FASHION BODY SILHOUETTES]
 - BOTH individuals MUST be rendered with an ultra-slim, tall, and elegant high-fashion physique.
-- GROOM SILHOUETTE: Very slim, tall, lean athletic build with broad straight shoulders, flat abdomen, and a narrow tapered waist. Fitted in a modern ultra-slim-fit bespoke midnight black tuxedo with silk satin shawl lapels.
-- BRIDE SILHOUETTE: Ultra-slender, delicate, graceful hourglass figure with defined sculpted collarbones, slender toned arms, long swan neck, and a tiny snatched waist. Wearing a figure-flattering haute couture French chantilly lace mermaid/column gown tailored to an ethereal, ultra-slender high-fashion bridal frame.
+- BRIDE SILHOUETTE: Ultra-slender, delicate, statuesque hourglass figure with defined sculpted collarbones, slender toned arms, long graceful swan neck, and a tiny snatched waist. Wearing an exquisite haute couture French chantilly lace & satin gown that hugs her slender figure, paired with a long, floating translucent sheer Cathedral veil catching the sunlight.
+- GROOM SILHOUETTE: Tall, lean, athletic slim build with broad straight shoulders, flat abdomen, narrow tapered waist, and sharp posture. Wearing an impeccably tailored ultra-slim bespoke black-tie Italian tuxedo with silk satin shawl lapels.
 
-[CRITICAL RULE 4: SPECIFIC SCENE ANGLE & FLORAL ARCHITECTURE]
-- Scene Concept & Pose: ${angleTitle}. Dynamic wedding photography composition tailored strictly to this angle.
-- Setting: Majestic iconic sanctuary view of "${preset.venueName}" (${preset.destination}) with lavish cascading white garden roses, blush peonies, floating orchids, and warm golden hour sunlight.
-- Photorealistic 8K Hasselblad bridal look. Celebratory, romantic, flawless elegance.`;
+[CRITICAL RULE 4: DYNAMIC ROMANTIC POSING & CHEMISTRY]
+- Scene Concept & Pose: ${angleTitle}.
+- Intimate, passionate, and natural bridal posing: The groom gently embraces her waist, bringing her close; the bride gently rests one hand on his lapel, holding a lavish bridal bouquet of fragrant white garden roses, peonies, and delicate ranunculus. They share a tender, deeply in love, radiant romantic look.
+
+[CRITICAL RULE 5: BREATHTAKING VENUE, LIGHTING & ATMOSPHERE]
+- Setting: Majestic iconic sanctuary view of "${preset.venueName}" (${preset.destination}) overlooking the sweeping landscape.
+- Adorned with a breathtaking, lavish floral arch of cascading white roses, blooming peonies, and hanging orchids.
+- Golden hour sunflare and romantic amber rim-lighting tracing their hair and veil, glowing candlelight, subtle floating petals in the air, soft cinematic bokeh (f/1.8 lens), 8K Hasselblad camera clarity. Celebratory, awe-inspiring, pure luxury romance.`;
 
     const key = process.env.GEMINI_API_KEY || '';
     const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash-image';
