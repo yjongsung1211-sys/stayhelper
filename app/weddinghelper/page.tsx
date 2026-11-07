@@ -1334,6 +1334,126 @@ export default function WeddingHelperPage() {
               </div>
             </div>
           )}
+
+          {/* Precision Couple Height & Weight Proportions */}
+          <div className="mt-7 pt-6 border-t border-[#F2E5DC] text-left font-sans">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#B85E55] flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+                Tailored Body Proportions & Fit
+              </span>
+              <span className="text-[11px] text-[#9E8B88]">
+                Exact 1:1 Silhouette Matching
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Groom Proportions */}
+              <div className="p-4 rounded-2xl bg-[#FFFDFB] border border-[#EBDCD3] space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-[#1F181B] flex items-center gap-1.5">
+                    🤵 Groom Silhouette
+                  </span>
+                  <span className="text-[10px] text-[#A89895] uppercase">Tuxedo Proportions</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2.5">
+                  <div>
+                    <label className="text-[10px] text-[#8C7A78] block mb-1 font-medium">Height (cm)</label>
+                    <input 
+                      type="number"
+                      value={groomHeight}
+                      onChange={e => setGroomHeight(e.target.value)}
+                      placeholder="180"
+                      className="w-full py-2 px-3 rounded-xl border border-[#E0D2CB] text-xs font-semibold text-[#1F181B] focus:outline-none focus:border-[#C87870] bg-white text-center"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-[#8C7A78] block mb-1 font-medium">Weight (kg)</label>
+                    <input 
+                      type="number"
+                      value={groomWeight}
+                      onChange={e => setGroomWeight(e.target.value)}
+                      placeholder="75"
+                      className="w-full py-2 px-3 rounded-xl border border-[#E0D2CB] text-xs font-semibold text-[#1F181B] focus:outline-none focus:border-[#C87870] bg-white text-center"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Bride Proportions */}
+              <div className="p-4 rounded-2xl bg-[#FFFDFB] border border-[#EBDCD3] space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-[#1F181B] flex items-center gap-1.5">
+                    👰 Bride Silhouette
+                  </span>
+                  <span className="text-[10px] text-[#A89895] uppercase">Couture Gown Fit</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2.5">
+                  <div>
+                    <label className="text-[10px] text-[#8C7A78] block mb-1 font-medium">Height (cm)</label>
+                    <input 
+                      type="number"
+                      value={brideHeight}
+                      onChange={e => setBrideHeight(e.target.value)}
+                      placeholder="165"
+                      className="w-full py-2 px-3 rounded-xl border border-[#E0D2CB] text-xs font-semibold text-[#1F181B] focus:outline-none focus:border-[#C87870] bg-white text-center"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-[#8C7A78] block mb-1 font-medium">Weight (kg)</label>
+                    <input 
+                      type="number"
+                      value={brideWeight}
+                      onChange={e => setBrideWeight(e.target.value)}
+                      placeholder="50"
+                      className="w-full py-2 px-3 rounded-xl border border-[#E0D2CB] text-xs font-semibold text-[#1F181B] focus:outline-none focus:border-[#C87870] bg-white text-center"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 🌟 결제하고 240장 사진 제작하는 메인 버튼 */}
+          <button
+            type="button"
+            id="create-masterpiece-main-btn"
+            onClick={() => {
+              setSelectedPlan('grand');
+              if (user?.isVip) {
+                handleGenerateWedding();
+              } else {
+                setIsCheckoutOpen(true);
+              }
+            }}
+            disabled={isGenerating}
+            className={`mt-8 w-full py-5 sm:py-6 px-6 sm:px-10 rounded-2xl font-bold uppercase tracking-[0.14em] text-xs sm:text-sm flex items-center justify-center gap-3 sm:gap-4 transition shadow-xl active:scale-[0.99] cursor-pointer relative overflow-hidden group ${
+              isGenerating 
+                ? 'bg-[#EAE2DC] text-[#9A8A87] cursor-not-allowed' 
+                : 'bg-gradient-to-r from-[#B85E55] via-[#C58968] to-[#9E6F28] text-white hover:opacity-95 shadow-[0_12px_40px_rgba(184,94,85,0.45)]'
+            }`}
+          >
+            {isGenerating ? (
+              <div className="flex items-center justify-center gap-3">
+                <RefreshCw className="w-5 h-5 animate-spin text-white shrink-0" />
+                <span className="font-serif italic capitalize text-sm sm:text-base">{generationStep}</span>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center gap-2.5 sm:gap-3.5 text-center flex-wrap">
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 fill-[#F3E5AB] text-[#F3E5AB] shrink-0" />
+                <span className="leading-snug">결제하고 240장 사진 제작하기 (Pay $19 &amp; Create All 240 Masterpieces)</span>
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0 group-hover:translate-x-1 transition-transform" />
+              </div>
+            )}
+          </button>
+
+          <div className="mt-5 flex items-center justify-center gap-5 text-xs text-[#8C7A78] flex-wrap font-sans">
+            <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-[#C87870]" /> Single $19 All-Access Pass (All 12 Worlds Included)</span>
+            <span>•</span>
+            <span>240 Haute Couture Masterpieces</span>
+            <span>•</span>
+            <span>Free Digital Wedding Invitation Included</span>
+          </div>
         </div>
 
         {/* The Haute Studio Reassurance Banner (Zero Prompt Leak) */}
@@ -1426,19 +1546,16 @@ export default function WeddingHelperPage() {
                 <span>Your $19 VIP Pass is Active!</span>
               </span>
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                {/* Hidden per CEO instruction */}
                 <button
                   type="button"
                   onClick={() => {
-                    setVisualizedResult({
-                      imageUrl: currentTheme.heroImage,
-                      theme: currentTheme,
-                      products: currentTheme.products,
-                      venueBookingUrl: currentTheme.stayHelperRef || 'https://www.thestayhelper.com',
-                    });
+                    handleGenerateWedding();
                   }}
-                  className="flex-1 py-3.5 rounded-full bg-[#1F181B] text-[#D4AF37] border border-[#D4AF37]/50 hover:bg-black font-bold uppercase text-xs tracking-wider transition cursor-pointer"
+                  className="flex-1 py-3.5 rounded-full bg-gradient-to-r from-[#B85E55] via-[#C58968] to-[#9E6F28] text-white font-bold uppercase text-xs tracking-wider transition hover:opacity-95 cursor-pointer shadow-md flex items-center justify-center gap-2"
                 >
-                  View 240 Masterpiece Collection
+                  <Sparkles className="w-3.5 h-3.5 fill-[#F3E5AB] text-[#F3E5AB]" />
+                  <span>결제하고 240장 사진 제작하기</span>
                 </button>
                 <button
                   type="button"
