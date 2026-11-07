@@ -78,6 +78,8 @@ const UI_TEXT = {
     bestStyledPhotoBadge: "베스트 맞춤 착장",
     switchBestColorLabel: "베스트 컬러 실시간 착장:",
     switchBestLipLabel: "추천 시그니처 립:",
+    beforeCaption: "착장 전 자연 안색",
+    afterCaption: "베스트 톤 안색 & 페이스라인 극대화",
     tabResult: "12톤 진단 결과 & 컬러 팔레트",
     tabCosmetics: "인생 립스틱 & 파우치 처방전",
     saveInstaCard: "인스타 스토리 카드 저장",
@@ -303,6 +305,8 @@ const UI_TEXT = {
     bestStyledPhotoBadge: "Best Color Styled",
     switchBestColorLabel: "Try Best Drapery Color:",
     switchBestLipLabel: "Try Signature Lipstick:",
+    beforeCaption: "Natural Complexion (Before)",
+    afterCaption: "Complexion Glow & Radiance Maximized",
     tabResult: "12-Tone Report & Palette",
     tabCosmetics: "Signature Lipsticks & Pouch",
     saveInstaCard: "Export Instagram Story Card",
@@ -527,6 +531,8 @@ const UI_TEXT = {
     bestStyledPhotoBadge: "ベストカラー着用",
     switchBestColorLabel: "ベストカラー着せ替え:",
     switchBestLipLabel: "おすすめリップ:",
+    beforeCaption: "着用前の素肌感 (Before)",
+    afterCaption: "透明感・血色感アップ (After)",
     tabResult: "12タイプ診断結果＆カラーパレット",
     tabCosmetics: "人生神リップ＆コスメ処方箋",
     saveInstaCard: "インスタストーリー用画像を保存",
@@ -1305,6 +1311,8 @@ export default function ColorHelperPage() {
   const [selectedLipKey, setSelectedLipKey] = useState<string>("rose");
   const [isPaywallOpen, setIsPaywallOpen] = useState(false);
   const [resultTone, setResultTone] = useState<ColorToneData | null>(null);
+  const [geminiTransformedImage, setGeminiTransformedImage] = useState<string | null>(null);
+  const [isGeneratingAiStyling, setIsGeneratingAiStyling] = useState<boolean>(false);
   const [resultActiveBestColorIndex, setResultActiveBestColorIndex] = useState<number>(0);
   const [resultActiveLipIndex, setResultActiveLipIndex] = useState<number>(0);
   const [activeTab, setActiveTab] = useState<"result" | "cosmetics">("result");
@@ -1797,6 +1805,9 @@ export default function ColorHelperPage() {
         localStorage.setItem("colorhelper_tickets", newBalance.toString());
         setIsUnlocked(true);
         setIsPayModalOpen(false);
+        if (imageSrc && resultTone) {
+          generateGeminiStyling(imageSrc, resultTone);
+        }
         setPaymentSuccessNotice(
           lang === "ko"
             ? (lang === "ko" ? `결제 승인 완료! ${addTickets}회 진단권이 충전되어 즉시 해금되었습니다.` : lang === "ja" ? `決済完了！${addTickets}回分の診断チケットがチャージされ、レポートが解除されました。` : `Payment Approved! ${addTickets} diagnosis pass credited & full report unlocked.`)
@@ -1923,6 +1934,42 @@ export default function ColorHelperPage() {
     link.download = `PersonalColorHelper_${resultTone.id}_${lang}.png`;
     link.href = cvs.toDataURL("image/png");
     link.click();
+  };
+
+  // ── Gemini AI 퍼스널 스타일링 실시간 합성 (머리색 + 메이크업 + 의상 1:1 맞춤 합성) ──
+  const generateGeminiStyling = async (photoBase64?: string, toneData?: ColorToneData) => {
+    const targetImage = photoBase64 || imageSrc;
+    const targetTone = toneData || resultTone;
+    if (!targetImage) return;
+
+    try {
+      setIsGeneratingAiStyling(true);
+      const res = await fetch("/api/colorhelper/transform", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          image: targetImage,
+          toneId: targetTone?.id || "spring-light",
+          seasonName: targetTone?.seasonNames[lang] || targetTone?.seasonNames["en"] || "Spring Warm Light",
+          bestColorName: targetTone?.bestColors[0]?.name[lang] || targetTone?.bestColors[0]?.name["en"] || "Peach Coral",
+          bestColorHex: targetTone?.bestColors[0]?.hex || "#FFA07A",
+          lipName: targetTone?.cosmetics?.lips[0]?.name || "Coral Glow",
+          lipHex: targetTone?.cosmetics?.lips[0]?.hex || "#E07A5F",
+          hairName: targetTone?.temperature === "WARM" ? "Warm Honey Chestnut Brown" : "Cool Ash Mocha Brown",
+        }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && data.transformedImage) {
+          setGeminiTransformedImage(data.transformedImage);
+        }
+      }
+    } catch (e) {
+      console.error("Gemini AI styling error:", e);
+    } finally {
+      setIsGeneratingAiStyling(false);
+    }
   };
 
   return (
@@ -2438,43 +2485,45 @@ export default function ColorHelperPage() {
                 const outfitHex = activePreset.hex;
                 const matchScore = activePreset.match;
 
-                // 사용자가 올린 실제 사진(imageSrc)이 있으면 100% 최우선으로 이 자리에 표출! 없으면 지역별 단독 마스터 모델 사진
-                const basePortrait = imageSrc || (lang === "ja" ? "/nb_step5_ja_raw.jpg" : lang === "ko" ? "/nb_step5_outfit.jpg" : "/nb_step5_en_raw.jpg");
+                // Gemini AI로 합성된 맞춤형 사진이 있으면 100% 최우선 표출, 아니면 원본 사진
+                const finalStyledPhoto = geminiTransformedImage || imageSrc || (lang === "ja" ? "/nb_step5_ja_raw.jpg" : lang === "ko" ? "/nb_step5_outfit.jpg" : "/nb_step5_en_raw.jpg");
 
                 return (
                   <div className="absolute inset-0 w-full h-full overflow-hidden bg-gray-950">
-                    {/* 1. Base Portrait: Uploaded Photo */}
+                    {/* 1. Base Portrait: Gemini AI Synthesized Tailored Portrait or Uploaded Photo */}
                     <img 
-                      src={basePortrait} 
+                      src={finalStyledPhoto} 
                       alt="Tailored Recommended Styling" 
                       className="w-full h-full object-cover object-top transition-all duration-500 brightness-[1.03] contrast-[1.02]" 
                     />
-                    
-                    {/* 2. Real-time Tailored Signature Outfit Overlay matching the selected swatch */}
-                    <div 
-                      className="absolute inset-x-0 bottom-0 h-[44%] pointer-events-none transition-all duration-500 shadow-2xl"
-                      style={{
-                        background: `linear-gradient(to bottom, transparent 0%, ${outfitHex}dd 28%, ${outfitHex} 100%)`,
-                        clipPath: 'polygon(0% 32%, 18% 25%, 35% 22%, 50% 25%, 65% 22%, 82% 25%, 100% 32%, 100% 100%, 0% 100%)'
-                      }}
-                    >
-                      {/* Luxury Silk/Linen Fabric Highlights */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-70 mix-blend-overlay" />
-                    </div>
 
-                    {/* 3. Subtle Harmonized Lip Touch for Total Look */}
-                    <div 
-                      className="absolute pointer-events-none rounded-full blur-[2px] transition-colors duration-300"
-                      style={{
-                        left: '43%',
-                        top: '52%',
-                        width: '14%',
-                        height: '4%',
-                        backgroundColor: outfitHex,
-                        opacity: 0.45,
-                        mixBlendMode: 'color'
-                      }}
-                    />
+                    {/* Gemini AI Synthesis Loading Overlay */}
+                    {isGeneratingAiStyling && (
+                      <div className="absolute inset-0 z-30 bg-black/80 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center text-white">
+                        <div className="w-12 h-12 rounded-full border-3 border-amber-400 border-t-transparent animate-spin mb-3 shadow-[0_0_20px_#f59e0b]" />
+                        <span className="text-xs font-black text-amber-300 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                          <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+                          Gemini AI Beauty Studio
+                        </span>
+                        <p className="text-[11px] text-gray-300 max-w-xs leading-relaxed">
+                          {lang === "ko" ? "올려주신 사진에 꼭 맞는 머리색과 화장을 실시간 합성 중입니다..." : lang === "ja" ? "お写真に最も似合うヘアカラーとメイクをAI合成中..." : "Synthesizing custom hair & makeup tailored to your portrait..."}
+                        </p>
+                      </div>
+                    )}
+                    
+                    {/* 2. Real-time Tailored Signature Drapery (Chest/Neck level, ZERO Chin Clipping) */}
+                    {!geminiTransformedImage && (
+                      <div 
+                        className="absolute inset-x-0 bottom-0 h-[22%] pointer-events-none transition-all duration-500 shadow-2xl"
+                        style={{
+                          background: `linear-gradient(to bottom, transparent 0%, ${outfitHex}ee 20%, ${outfitHex} 100%)`,
+                          clipPath: 'polygon(0% 40%, 25% 65%, 50% 75%, 75% 65%, 100% 40%, 100% 100%, 0% 100%)'
+                        }}
+                      >
+                        {/* Luxury Silk Fabric Highlight */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-70 mix-blend-overlay" />
+                      </div>
+                    )}
 
                     {/* Floating Gold Crown Badge: Personalized Recommendation */}
                     <div className="absolute top-3.5 left-3.5 bg-gradient-to-r from-amber-500 to-[#E07A5F] text-white px-3 py-1 rounded-2xl shadow-xl border border-white/30 flex items-center gap-1.5 z-20">
@@ -2575,9 +2624,24 @@ export default function ColorHelperPage() {
             </div>
           )}
 
-          {/* Step 5: Outfit Swatches with % Match Badges (🔥) */}
+          {/* Step 5: Outfit Swatches with % Match Badges (🔥) + Gemini AI Makeover Button */}
           {comparisonStep === 5 && (
-            <div className="w-full max-w-[340px] mb-4 flex items-center justify-between gap-1.5 px-1">
+            <div className="w-full max-w-[340px] mb-4 space-y-2.5">
+              {/* Gemini AI Transformation Trigger Button */}
+              {imageSrc && !geminiTransformedImage && (
+                <button
+                  onClick={() => generateGeminiStyling()}
+                  disabled={isGeneratingAiStyling}
+                  className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 hover:from-purple-700 hover:to-amber-600 text-white font-extrabold text-xs shadow-md transition flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <Sparkles className="w-4 h-4 text-amber-200 animate-spin" style={{ animationDuration: '4s' }} />
+                  <span>
+                    {lang === "ko" ? "✨ Gemini AI 내 사진 맞춤 머리색·화장 합성하기" : lang === "ja" ? "✨ Gemini AI 私の写真に似合うヘア・メイクを合成" : "✨ Synthesize My Tailored Hair & Makeup with Gemini AI"}
+                  </span>
+                </button>
+              )}
+              
+              <div className="flex items-center justify-between gap-1.5 px-1">
               {OUTFIT_MATCH_PRESETS.map((outfit, idx) => (
                 <button
                   key={outfit.id}
@@ -2597,6 +2661,7 @@ export default function ColorHelperPage() {
                   />
                 </button>
               ))}
+              </div>
             </div>
           )}
 
@@ -2727,7 +2792,7 @@ export default function ColorHelperPage() {
                     </p>
                   </div>
 
-                  {/* Before vs After Dual Comparison Cards */}
+                  {/* Before vs After Dual Comparison Cards (Zero Chin Clipping, 100% Face Preserved) */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-2xl mx-auto mb-6">
                     {/* Before: Original Photo */}
                     <div className="relative rounded-2xl overflow-hidden bg-gray-900 aspect-[3/4] border-2 border-gray-200 shadow-md">
@@ -2740,70 +2805,89 @@ export default function ColorHelperPage() {
                         {t.originalPhotoBadge}
                       </div>
                       <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent text-center text-white text-xs font-bold">
-                        착장 전 본연의 안색
+                        {t.beforeCaption}
                       </div>
                     </div>
 
-                    {/* After: Personalized Signature Best Look with Tailored Drape & Lip */}
+                    {/* After: Personalized Signature Best Look (Drape at Chest, Chin 100% Clean & Free) */}
                     {(() => {
                       const curBestColor = resultTone.bestColors[resultActiveBestColorIndex] || resultTone.bestColors[0];
-                      const curLip = resultTone.cosmetics.lips[resultActiveLipIndex] || resultTone.cosmetics.lips[0];
-                      const curPhoto = imageSrc || (lang === 'ja' ? '/nb_step1_ja_raw.jpg' : lang === 'ko' ? '/nb_step1_model.jpg' : '/nb_step1_en_raw.jpg');
+                      const curPhoto = geminiTransformedImage || imageSrc || (lang === 'ja' ? '/nb_step1_ja_raw.jpg' : lang === 'ko' ? '/nb_step1_model.jpg' : '/nb_step1_en_raw.jpg');
 
                       return (
                         <div className="relative rounded-2xl overflow-hidden bg-gray-900 aspect-[3/4] border-3 border-amber-400 shadow-xl ring-4 ring-amber-400/20">
-                          {/* Base Portrait with Tone-up Glow */}
+                          {/* Base Portrait with Natural Complexion Glow */}
                           <img 
                             src={curPhoto} 
                             alt="After Tailored Styling" 
-                            className="w-full h-full object-cover object-top brightness-105 contrast-[1.03]"
+                            className="w-full h-full object-cover object-top brightness-105 contrast-[1.02] saturate-[1.03]"
                           />
 
-                          {/* Real-time Tailored Signature Best Drape Fabric */}
-                          <div 
-                            className="absolute inset-x-0 bottom-0 h-[38%] pointer-events-none transition-colors duration-500 shadow-2xl"
-                            style={{
-                              background: `linear-gradient(to bottom, transparent 0%, ${curBestColor.hex}dd 30%, ${curBestColor.hex} 100%)`,
-                              clipPath: 'polygon(0% 35%, 18% 28%, 35% 25%, 50% 28%, 65% 25%, 82% 28%, 100% 35%, 100% 100%, 0% 100%)'
-                            }}
-                          >
-                            {/* Fabric Texture Wave Highlight */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-60 mix-blend-overlay" />
-                          </div>
+                          {/* Gemini AI Synthesis Loading Overlay */}
+                          {isGeneratingAiStyling && (
+                            <div className="absolute inset-0 z-30 bg-black/80 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center text-white">
+                              <div className="w-12 h-12 rounded-full border-3 border-amber-400 border-t-transparent animate-spin mb-3 shadow-[0_0_20px_#f59e0b]" />
+                              <span className="text-xs font-black text-amber-300 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                                <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+                                Gemini AI Beauty Studio
+                              </span>
+                              <p className="text-[11px] text-gray-300 max-w-xs leading-relaxed">
+                                {lang === "ko" ? "올려주신 사진에 꼭 맞는 머리색과 화장을 실시간 합성 중입니다..." : lang === "ja" ? "お写真に最も似合うヘアカラーとメイクをAI合成中..." : "Synthesizing custom hair & makeup tailored to your portrait..."}
+                              </p>
+                            </div>
+                          )}
 
-                          {/* Subtle Signature Lip Glow */}
-                          <div 
-                            className="absolute pointer-events-none rounded-full blur-[2px] transition-colors duration-300"
-                            style={{
-                              left: '43%',
-                              top: '52%',
-                              width: '14%',
-                              height: '4%',
-                              backgroundColor: curLip.hex,
-                              opacity: 0.65,
-                              mixBlendMode: 'color'
-                            }}
-                          />
+                          {/* Real-time Tailored Signature Best Drape (Chest level, NEVER cuts or covers chin!) */}
+                          {!geminiTransformedImage && (
+                            <div 
+                              className="absolute inset-x-0 bottom-0 h-[22%] pointer-events-none transition-colors duration-500 shadow-2xl"
+                              style={{
+                                background: `linear-gradient(to bottom, transparent 0%, ${curBestColor.hex}ee 25%, ${curBestColor.hex} 100%)`,
+                                clipPath: 'polygon(0% 40%, 25% 65%, 50% 75%, 75% 65%, 100% 40%, 100% 100%, 0% 100%)'
+                              }}
+                            >
+                              {/* Fabric Texture Wave Highlight */}
+                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-70 mix-blend-overlay" />
+                            </div>
+                          )}
 
                           {/* Gold Crown After Badge */}
-                          <div className="absolute top-3 left-3 bg-gradient-to-r from-amber-500 to-[#E07A5F] text-white text-[10px] font-black px-3 py-1 rounded-full shadow-lg border border-white/30 flex items-center gap-1">
+                          <div className="absolute top-3 left-3 bg-gradient-to-r from-amber-500 to-[#E07A5F] text-white text-[10px] font-black px-3 py-1 rounded-full shadow-lg border border-white/30 flex items-center gap-1 z-10">
                             <Sparkles className="w-3 h-3 text-amber-200" />
                             {t.bestStyledPhotoBadge}
                           </div>
 
-                          {/* Current Applied Palette Tag */}
-                          <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/90 via-black/60 to-transparent text-center text-white">
+                          {/* Current Applied Palette Tag (100% Multi-Language, ZERO Korean on EN/JA) */}
+                          <div className="absolute inset-x-0 bottom-0 p-2.5 bg-gradient-to-t from-black/90 via-black/50 to-transparent text-center text-white z-10 pointer-events-none">
                             <div className="text-[10px] font-bold text-amber-300 uppercase tracking-wider mb-0.5">
-                              ✨ {curBestColor.name[lang]} DRAPE + {curLip.name}
+                              ✨ {curBestColor.name[lang]}
                             </div>
                             <div className="text-xs font-black">
-                              얼굴 윤곽 리프팅 & 생기 극대화 완료
+                              {t.afterCaption}
                             </div>
                           </div>
                         </div>
                       );
                     })()}
                   </div>
+
+                  {/* Gemini AI Makeover Action Button for Uploaded Portrait */}
+                  {imageSrc && (
+                    <div className="flex justify-center mb-5">
+                      <button
+                        onClick={() => generateGeminiStyling(imageSrc, resultTone)}
+                        disabled={isGeneratingAiStyling}
+                        className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 hover:from-purple-700 hover:to-amber-600 text-white font-black text-xs sm:text-sm shadow-xl hover:scale-105 transition flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                      >
+                        <Sparkles className="w-4 h-4 text-amber-200 animate-spin" style={{ animationDuration: '4s' }} />
+                        <span>
+                          {isGeneratingAiStyling
+                            ? (lang === "ko" ? "✨ Gemini AI 맞춤 머리색·화장 합성 중..." : lang === "ja" ? "✨ Gemini AI 似合う髪色・メイクを合成中..." : "✨ Synthesizing Hair & Makeup with Gemini AI...")
+                            : (lang === "ko" ? "✨ Gemini AI 내 사진 맞춤 머리색·화장 합성하기" : lang === "ja" ? "✨ Gemini AI 私の写真に似合うヘア・メイクを合成" : "✨ Synthesize My Tailored Hair & Makeup with Gemini AI")}
+                        </span>
+                      </button>
+                    </div>
+                  )}
 
                   {/* Interactive Swatches for Instant Best Color & Lip Switching */}
                   <div className="bg-white/80 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-amber-200/80 max-w-xl mx-auto space-y-3.5">
@@ -2831,29 +2915,7 @@ export default function ColorHelperPage() {
                       </div>
                     </div>
 
-                    {/* 2. Signature Lipstick Chips */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-gray-100">
-                      <span className="text-xs font-black text-gray-800 flex items-center gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5 text-rose-500" />
-                        {t.switchBestLipLabel}
-                      </span>
-                      <div className="flex items-center gap-2">
-                        {resultTone.cosmetics.lips.map((lip, lidx) => (
-                          <button
-                            key={lip.name + lidx}
-                            onClick={() => setResultActiveLipIndex(lidx)}
-                            className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-extrabold transition-all cursor-pointer ${
-                              resultActiveLipIndex === lidx
-                                ? "bg-rose-600 text-white shadow-md scale-105 ring-2 ring-rose-300"
-                                : "bg-white text-gray-700 border border-gray-200 hover:border-gray-400 shadow-2xs"
-                            }`}
-                          >
-                            <span className="w-3 h-3 rounded-full border border-black/10" style={{ backgroundColor: lip.hex }} />
-                            <span>{lip.brand} {lip.name}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
+
                   </div>
                 </div>
 
