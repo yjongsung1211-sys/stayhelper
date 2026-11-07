@@ -13,12 +13,12 @@ worst_drape_en = Image.open('scratch/en_worst_drape_315.jpg').convert('RGB')
 best_drape_en.save('public/nb_step2_en_best_card.jpg', quality=95)
 worst_drape_en.save('public/nb_step2_en_worst_card.jpg', quality=95)
 
-# Japanese & Korean: Use these two flawless studio drape photos as the gold standard
-best_drape_en.save('public/nb_step2_ko_best_card.jpg', quality=95)
-worst_drape_en.save('public/nb_step2_ko_worst_card.jpg', quality=95)
-
-best_drape_en.save('public/nb_step2_ja_best_card.jpg', quality=95)
-worst_drape_en.save('public/nb_step2_ja_worst_card.jpg', quality=95)
+# Japanese & Korean: Use their authentic regional model draping portraits
+import shutil
+shutil.copy('scratch/test_ja_best.jpg', 'public/nb_step2_ja_best_card.jpg')
+shutil.copy('scratch/test_ja_worst.jpg', 'public/nb_step2_ja_worst_card.jpg')
+shutil.copy('scratch/test_ko_real_drape_best.jpg', 'public/nb_step2_ko_best_card.jpg')
+shutil.copy('scratch/test_ko_real_drape_worst.jpg', 'public/nb_step2_ko_worst_card.jpg')
 
 print("Step 2 assets updated successfully with authentic studio draping portraits!")
 

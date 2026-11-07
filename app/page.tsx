@@ -31,6 +31,7 @@ import {
   Shirt,
   Crown,
   Droplet,
+  RotateCcw,
 } from "lucide-react";
 
 // ─── 다국어 언어 타입 ─────────────────────────────────────────
@@ -228,7 +229,11 @@ const UI_TEXT = {
     step5Title: "무엇을 입든 자신감을 느껴보세요",
     step5Desc: "내 얼굴과 가장 조화로운 옷 색상과 실시간 매칭률(%)을 확인해보세요.",
     step5MatchLabel: "적합도",
-    step5UnlockBtn: "내 전체 결과 & 베스트 컬러 잠금 해제",
+    step5UnlockBtn: "🔒 $1 결제하고 전체 결과 보기",
+    fullResetBtn: "완전 리셋",
+    resetSuccessMsg: "모든 사진과 진단 상태가 완전 초기화되었습니다.",
+    uploadGuidePrompt: "내 얼굴 사진을 등록하거나 아래 모델을 선택해주세요",
+    uploadGuideSub: "사진 등록 즉시 5단계 실시간 퍼스널컬러 진단이 시작됩니다.",
     
     // AI 스캔 애니메이션
     scanTitle: "AI 퍼스널컬러 진단 / 나의 주요 컬러 특징",
@@ -445,7 +450,11 @@ const UI_TEXT = {
     step5Title: "Feel absolute confidence in every outfit you wear",
     step5Desc: "Check real-time outfit harmony scores (%) and discover what makes you shine.",
     step5MatchLabel: "match",
-    step5UnlockBtn: "Unlock Full Analysis & Color Palettes",
+    step5UnlockBtn: "🔒 Pay $1 to Unlock Full Results",
+    fullResetBtn: "Reset All",
+    resetSuccessMsg: "All photos and diagnostic states have been completely reset.",
+    uploadGuidePrompt: "Upload your portrait photo or choose a preset model below",
+    uploadGuideSub: "The 5-step interactive personal color analysis will begin immediately upon photo selection.",
     
     // AI Scan Animation
     scanTitle: "AI Personal Color Diagnosis / Key Color Attributes",
@@ -663,7 +672,11 @@ const UI_TEXT = {
     step5Title: "どんな服を着ても自信が持てるスタイルを手に入れましょう",
     step5Desc: "顔映りを引き立てる服の色とリアルタイム適合率(%)を確認しましょう。",
     step5MatchLabel: "適合度",
-    step5UnlockBtn: "完全な診断結果とベストカラーを解除する",
+    step5UnlockBtn: "🔒 $1で決済して診断結果を見る",
+    fullResetBtn: "完全リセット",
+    resetSuccessMsg: "全ての診断状態と写真が完全にリセットされました。",
+    uploadGuidePrompt: "お顔写真を登録するか、下のモデルを選択してください",
+    uploadGuideSub: "写真登録後、すぐに5ステップのパーソナルカラー体験がスタートします。",
     
     // AIスキャンアニメーション
     scanTitle: "AIパーソナルカラー診断 / あなたの主要カラー特徴",
@@ -1260,7 +1273,7 @@ const MAKEUP_EYE_PRESETS = [
   { id: "eye_3", hex: "#CFA47C", name: { ko: "소프트 샴페인", en: "Soft Champagne", ja: "ソフトシャンパン" } },
 ];
 
-const CARD_ASSET_VER = "?v=20261107_v12";
+const CARD_ASSET_VER = "?v=20261108_v1";
 
 export default function ColorHelperPage() {
   // ── 언어 상태 (기본 한국어, 쿼리/스토리지 지원) ─────────────────
@@ -1284,6 +1297,7 @@ export default function ColorHelperPage() {
   const [selectedOutfitIndex, setSelectedOutfitIndex] = useState<number>(3); // 96% match default
   const [selectedHairKey, setSelectedHairKey] = useState<string>("copper");
   const [selectedLipKey, setSelectedLipKey] = useState<string>("rose");
+  const [hasStartedDiagnosis, setHasStartedDiagnosis] = useState<boolean>(false);
   const [isPaywallOpen, setIsPaywallOpen] = useState(false);
   const [resultTone, setResultTone] = useState<ColorToneData | null>(null);
   const [geminiTransformedImage, setGeminiTransformedImage] = useState<string | null>(null);
@@ -1375,7 +1389,8 @@ export default function ColorHelperPage() {
       }
     } catch (e) {}
 
-    loadPresetModel(PRESET_MODELS[0]);
+    applySkinTone(PRESET_MODELS[0]);
+    setHasStartedDiagnosis(false);
   }, []);
 
   const switchLanguage = (newLang: LangType) => {
@@ -1409,8 +1424,37 @@ export default function ColorHelperPage() {
     });
   };
 
+  const handleFullReset = () => {
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.removeItem("colorhelper_tickets");
+        localStorage.removeItem("colorhelper_user_photo");
+      } catch (e) {}
+    }
+    setTickets(0);
+    setIsUnlocked(false);
+    setImageSrc(null);
+    setUploadedUserPhoto(null);
+    setIsCustomPhoto(false);
+    setGeminiTransformedImage(null);
+    setComparisonStep(1);
+    setIsScanning(false);
+    setScanProgress(0);
+    setSelectedOutfitIndex(3);
+    setHasStartedDiagnosis(false);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+    alert(t.resetSuccessMsg);
+  };
   const loadPresetModel = (preset: (typeof PRESET_MODELS)[0]) => {
+    setHasStartedDiagnosis(true);
     applySkinTone(preset);
+    setComparisonStep(1);
+    setTimeout(() => {
+      const el = document.getElementById("interactive-comparison-section");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }, 100);
   };
 
   // [Zamface 장점] 실시간 립스틱 가상 착색 (사용자 사진 업로드 시 사진 보존!)
@@ -1465,6 +1509,7 @@ export default function ColorHelperPage() {
     setImageSrc(dataUrl);
     setUploadedUserPhoto(dataUrl);
     setIsCustomPhoto(true);
+    setHasStartedDiagnosis(true);
 
     checkTicketAndAnalyze(cvs);
   };
@@ -1478,6 +1523,7 @@ export default function ColorHelperPage() {
       setImageSrc(url);
       setUploadedUserPhoto(url);
       setIsCustomPhoto(true);
+      setHasStartedDiagnosis(true);
 
       const img = new Image();
       img.onload = () => {
@@ -1912,6 +1958,16 @@ export default function ColorHelperPage() {
             </button>
           </div>
 
+          {/* 완전 리셋 버튼 */}
+          <button
+            onClick={handleFullReset}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold transition border border-gray-200 shadow-2xs cursor-pointer"
+            title={t.fullResetBtn}
+          >
+            <RotateCcw className="w-3.5 h-3.5 text-gray-500" />
+            <span>{t.fullResetBtn}</span>
+          </button>
+
           {/* 잔여 진단권 & 페이팔 충전 배지 (비회원/게스트 100% 즉시 이용) */}
           <button
             onClick={() => setIsPayModalOpen(true)}
@@ -2172,8 +2228,23 @@ export default function ColorHelperPage() {
         </div>
       )}
 
-      {/* ── 5-STEP GUIDED INTERACTIVE COMPARISON (Color Analysis App 벤치마킹) ── */}
-      <div className="mb-10 p-5 sm:p-8 rounded-3xl bg-gradient-to-b from-purple-50/50 via-white to-gray-50 border border-purple-100 shadow-xl">
+      {/* ── 5-STEP GUIDED INTERACTIVE COMPARISON (사진 등록 시 노출) ── */}
+      {!hasStartedDiagnosis && (
+        <div className="mb-8 p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-purple-50/60 to-white border border-purple-100 text-center shadow-xs">
+          <div className="w-12 h-12 mx-auto rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center mb-3 shadow-inner">
+            <Sparkles className="w-6 h-6 animate-pulse" />
+          </div>
+          <h3 className="text-base sm:text-lg font-black text-gray-900 mb-1.5">
+            {t.uploadGuidePrompt}
+          </h3>
+          <p className="text-xs text-gray-500 max-w-md mx-auto leading-relaxed">
+            {t.uploadGuideSub}
+          </p>
+        </div>
+      )}
+
+      {hasStartedDiagnosis && (
+        <div id="interactive-comparison-section" className="mb-10 p-5 sm:p-8 rounded-3xl bg-gradient-to-b from-purple-50/50 via-white to-gray-50 border border-purple-100 shadow-xl animate-fade-in">
         {/* Stepper Dots (1 ~ 5) */}
         <div className="flex items-center justify-center gap-2 mb-6">
           {[1, 2, 3, 4, 5].map((stepNum) => (
@@ -2486,27 +2557,7 @@ export default function ColorHelperPage() {
                 </button>
               )}
               
-              <div className="flex items-center justify-between gap-1.5 px-1">
-              {OUTFIT_MATCH_PRESETS.map((outfit, idx) => (
-                <button
-                  key={outfit.id}
-                  onClick={() => setSelectedOutfitIndex(idx)}
-                  className={`flex flex-col items-center gap-1 p-1 rounded-2xl transition border cursor-pointer ${
-                    selectedOutfitIndex === idx
-                      ? "border-purple-600 bg-purple-50 ring-2 ring-purple-200 scale-105"
-                      : "border-transparent hover:bg-gray-100"
-                  }`}
-                >
-                  <span className="text-[9px] font-black text-amber-700 bg-white/90 px-1 rounded shadow-2xs">
-                    🔥{outfit.match}%
-                  </span>
-                  <div 
-                    className="w-10 h-10 rounded-full border-2 border-white shadow-md"
-                    style={{ backgroundColor: outfit.hex }}
-                  />
-                </button>
-              ))}
-              </div>
+
             </div>
           )}
 
@@ -2537,19 +2588,31 @@ export default function ColorHelperPage() {
             </button>
           ) : (
             <button
-              onClick={() => setIsPaywallOpen(true)}
-              className="w-full max-w-[320px] py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-700 hover:to-indigo-700 text-white font-black text-sm shadow-2xl transition flex items-center justify-center gap-2 animate-pulse cursor-pointer"
+              onClick={() => {
+                if (isUnlocked) {
+                  const el = document.getElementById("detailed-report-section");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                } else {
+                  setIsPayModalOpen(true);
+                }
+              }}
+              className="w-full max-w-[340px] py-4 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-700 hover:to-indigo-700 text-white font-black text-sm shadow-2xl transition flex items-center justify-center gap-2 animate-pulse cursor-pointer"
             >
               <Crown className="w-4 h-4 text-amber-300" />
-              <span>{t.step5UnlockBtn}</span>
+              <span>
+                {isUnlocked
+                  ? (lang === "ko" ? "진단 결과 리포트 확인하기 ↓" : lang === "ja" ? "診断結果レポートを見る ↓" : "View Full Diagnostic Report ↓")
+                  : t.step5UnlockBtn}
+              </span>
             </button>
           )}
         </div>
       </div>
+      )}
 
-      {/* ── STEP 3: 상세 결과 리포트 (잠금 및 결제 연동) ───────────── */}
-      {resultTone && (
-        <section className="bg-white rounded-3xl p-6 sm:p-10 shadow-lg border border-gray-200 mb-8 relative overflow-hidden">
+      {/* ── STEP 3: 상세 결과 리포트 (결제 완료 후 또는 5단계 완료 시 노출) ───────────── */}
+      {hasStartedDiagnosis && (isUnlocked || comparisonStep === 5) && resultTone && (
+        <section id="detailed-report-section" className="bg-white rounded-3xl p-6 sm:p-10 shadow-lg border border-gray-200 mb-8 relative overflow-hidden">
           <div
             className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-20 pointer-events-none -mr-20 -mt-20"
             style={{ backgroundColor: selectedDrapeHex }}
@@ -3101,25 +3164,7 @@ export default function ColorHelperPage() {
               <div id="paypal-button-container" className="min-h-[96px] w-full" />
             </div>
 
-            {/* 직접 결제 및 테스트 승인 버튼 */}
-            <div className="space-y-2 pt-2 border-t border-gray-100">
-              <button
-                disabled={paymentProcessing}
-                onClick={() => executePayment("single")}
-                className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#0070BA] to-[#003087] hover:from-[#005ea6] hover:to-[#00256c] text-white font-extrabold text-xs shadow-md transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
-              >
-                {paymentProcessing ? (
-                  <span>Processing...</span>
-                ) : (
-                  <>
-                    <span className="font-black italic tracking-wider">PayPal</span>
-                    <span>{t.payWithPaypal}</span>
-                  </>
-                )}
-              </button>
 
-
-            </div>
 
             {/* 지원 결제 수단 & 신뢰 배지 */}
             <div className="mt-4 pt-3 border-t border-gray-100 text-center">
