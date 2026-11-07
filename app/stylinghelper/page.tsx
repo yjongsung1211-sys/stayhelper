@@ -719,10 +719,14 @@ export default function StylingHelperRenewalPage() {
   const studioRef = useRef<HTMLElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Sync Auth state & clear legacy trial locks
+  // Sync Auth state & check Pro subscription (Query param ?pro=true enables instant test mode)
   useEffect(() => {
     try {
       localStorage.removeItem('styling_free_trial_used');
+      const searchParams = new URLSearchParams(window.location.search);
+      if (searchParams.get('pro') === 'true') {
+        localStorage.setItem('styling_is_pro_subscriber', 'true');
+      }
       const isPro = localStorage.getItem('styling_is_pro_subscriber') === 'true';
       setIsProSubscriber(isPro);
 
@@ -778,6 +782,11 @@ export default function StylingHelperRenewalPage() {
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isProSubscriber) {
+      setShowPaywallModal(true);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+      return;
+    }
     const file = e.target.files?.[0];
     if (file) {
       processImageFile(file, file.name);
@@ -788,6 +797,10 @@ export default function StylingHelperRenewalPage() {
     e.preventDefault();
     e.stopPropagation();
     setIsDragging(false);
+    if (!isProSubscriber) {
+      setShowPaywallModal(true);
+      return;
+    }
     const file = e.dataTransfer.files?.[0];
     if (file && file.type.startsWith('image/')) {
       processImageFile(file, file.name);
@@ -809,15 +822,24 @@ export default function StylingHelperRenewalPage() {
     (userPhoto.startsWith('data:image/') ||
       (!userPhoto.includes('/images/models/') && !userPhoto.includes('/images/looks/')));
 
-  // Open Look directly in Try-On Studio
+  // Open Look directly in Try-On Studio (Pro Exclusive)
   const handleDirectTryOn = (look: EditorialMasterLook) => {
     setSelectedTryOnLook(look);
     setActiveLookModal(null);
+    if (!isProSubscriber) {
+      setShowPaywallModal(true);
+      return;
+    }
     studioRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // Generate Virtual Try-On (100% Free & Unlimited)
+  // Generate Virtual Try-On (Strict Pro Subscription Required)
   const handleExecuteStyling = async () => {
+    if (!isProSubscriber) {
+      setShowPaywallModal(true);
+      return;
+    }
+
     if (!userPhoto) {
       alert('Please select a sample model or upload your photo first.');
       return;
@@ -975,7 +997,13 @@ export default function StylingHelperRenewalPage() {
 
             {/* Primary Action Button */}
             <button
-              onClick={() => studioRef.current?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => {
+                if (!isProSubscriber) {
+                  setShowPaywallModal(true);
+                } else {
+                  studioRef.current?.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
               className="px-4 sm:px-5 py-2 rounded-full bg-neutral-950 hover:bg-black text-white text-xs uppercase tracking-[0.14em] font-medium shadow-sm transition-all hover:scale-[1.02]"
             >
               Try on My Photo
@@ -1009,17 +1037,23 @@ export default function StylingHelperRenewalPage() {
 
           {/* Clear Subtitle Proposition */}
           <p className="max-w-2xl mx-auto text-base sm:text-lg text-neutral-600 font-normal leading-relaxed mb-10">
-            Handcrafted wardrobe capsules styled with authentic runway pieces from Shopbop & Nordstrom. Click any piece to shop official US retailers, or upload your photo for an instant 1:1 photorealistic fitting.
+            Handcrafted wardrobe capsules styled with authentic runway pieces from Shopbop & Nordstrom. Click any piece to shop official US retailers, or subscribe to Pro to try on your photo with 1:1 photorealistic fitting.
           </p>
 
           {/* Action CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <button
-              onClick={() => studioRef.current?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => {
+                if (!isProSubscriber) {
+                  setShowPaywallModal(true);
+                } else {
+                  studioRef.current?.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
               className="w-full sm:w-auto px-8 py-4 rounded-full bg-neutral-950 hover:bg-black text-white text-xs uppercase tracking-[0.18em] font-medium shadow-md transition-all hover:scale-[1.02] flex items-center justify-center gap-2.5"
             >
-              <Wand2 className="w-4 h-4 text-amber-300" />
-              <span>Style My Photo for Free</span>
+              <Sparkles className="w-4 h-4 text-amber-300" />
+              <span>{isProSubscriber ? 'Try On on My Photo' : 'Try On (Pro Membership Required)'}</span>
               <ArrowRight className="w-4 h-4 text-neutral-400" />
             </button>
 
@@ -1218,8 +1252,8 @@ export default function StylingHelperRenewalPage() {
                     onClick={() => handleDirectTryOn(look)}
                     className="text-xs uppercase tracking-wider font-semibold text-amber-700 hover:text-amber-800 flex items-center gap-1 transition-colors"
                   >
-                    <span>Style My Photo</span>
-                    <Wand2 className="w-3.5 h-3.5" />
+                    <span>{isProSubscriber ? 'Style My Photo' : 'Try On (Pro)'}</span>
+                    {isProSubscriber ? <Wand2 className="w-3.5 h-3.5" /> : <Lock className="w-3.5 h-3.5 text-amber-600" />}
                   </button>
                 </div>
               </div>
@@ -1417,24 +1451,34 @@ export default function StylingHelperRenewalPage() {
                   </div>
                 </div>
 
-                {/* Primary Execute Button */}
-                <button
-                  onClick={handleExecuteStyling}
-                  disabled={isGenerating}
-                  className="w-full py-4 rounded-full bg-neutral-950 hover:bg-black disabled:bg-neutral-400 text-white text-xs uppercase tracking-[0.18em] font-semibold shadow-md transition-all flex items-center justify-center gap-2"
-                >
-                  {isGenerating ? (
-                    <>
-                      <RefreshCw className="w-4 h-4 animate-spin text-amber-300" />
-                      <span>{progressStage || 'Synthesizing Runway Look...'}</span>
-                    </>
-                  ) : (
-                    <>
-                      <Wand2 className="w-4 h-4 text-amber-300" />
-                      <span>Execute Virtual Fitting (Free)</span>
-                    </>
-                  )}
-                </button>
+                {/* Primary Execute Button - Strictly Subscription-Only */}
+                {isProSubscriber ? (
+                  <button
+                    onClick={handleExecuteStyling}
+                    disabled={isGenerating}
+                    className="w-full py-4 rounded-full bg-neutral-950 hover:bg-black disabled:bg-neutral-400 text-white text-xs uppercase tracking-[0.18em] font-semibold shadow-md transition-all flex items-center justify-center gap-2"
+                  >
+                    {isGenerating ? (
+                      <>
+                        <RefreshCw className="w-4 h-4 animate-spin text-amber-300" />
+                        <span>{progressStage || 'Synthesizing Runway Look...'}</span>
+                      </>
+                    ) : (
+                      <>
+                        <Wand2 className="w-4 h-4 text-amber-300" />
+                        <span>Execute Virtual Fitting (Pro Unlimited)</span>
+                      </>
+                    )}
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setShowPaywallModal(true)}
+                    className="w-full py-4 rounded-full bg-gradient-to-r from-amber-600 via-amber-700 to-amber-800 hover:from-amber-500 hover:to-amber-700 text-white text-xs uppercase tracking-[0.18em] font-semibold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
+                  >
+                    <Lock className="w-4 h-4 text-amber-200" />
+                    <span>Subscribe to Pro to Try On ($19/mo)</span>
+                  </button>
+                )}
               </div>
 
               {/* Right Column (7 Cols): Canvas & Result Viewport */}
@@ -1662,8 +1706,8 @@ export default function StylingHelperRenewalPage() {
                   onClick={() => handleDirectTryOn(activeLookModal)}
                   className="flex-1 py-3.5 rounded-full bg-neutral-950 hover:bg-black text-white text-xs uppercase tracking-[0.16em] font-semibold text-center transition-all flex items-center justify-center gap-2"
                 >
-                  <Wand2 className="w-4 h-4 text-amber-300" />
-                  <span>Style My Photo with This Look</span>
+                  {isProSubscriber ? <Wand2 className="w-4 h-4 text-amber-300" /> : <Lock className="w-4 h-4 text-amber-300" />}
+                  <span>{isProSubscriber ? 'Style My Photo with This Look' : 'Try On (Pro Membership Required)'}</span>
                 </button>
               </div>
             </div>
@@ -1688,20 +1732,24 @@ export default function StylingHelperRenewalPage() {
               <Sparkles className="w-6 h-6 text-amber-600" />
             </div>
 
-            <span className="text-[10px] uppercase font-semibold tracking-[0.25em] text-neutral-400">
-              StylingHelper Pro Member
+            <span className="text-[10px] uppercase font-semibold tracking-[0.25em] text-amber-600">
+              StylingHelper Pro Membership
             </span>
             <h3 className="font-serif text-2xl sm:text-3xl font-light text-neutral-950 mt-1 mb-3">
-              Unlock Unlimited Runway Swaps
+              Subscription Required for Virtual Try-On
             </h3>
             <p className="text-xs sm:text-sm text-neutral-600 mb-6 font-normal leading-relaxed">
-              Your free trial has been activated. Upgrade to Pro for unlimited 4K fittings, exclusive runway capsule previews, and VIP stock sentinel alerts.
+              Virtual Runway Fitting Atelier is exclusively reserved for Pro Subscribers. Subscribe now for unlimited 4K photorealistic outfit fittings, zero-watermark lookbook exports, and VIP stock sentinel alerts.
             </p>
 
             <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200 text-left mb-6 space-y-2">
               <div className="flex items-center gap-2 text-xs text-neutral-800 font-medium">
                 <Check className="w-4 h-4 text-emerald-600" />
                 <span>Unlimited photorealistic outfit swaps (4K Ultra-HD)</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-neutral-800 font-medium">
+                <Check className="w-4 h-4 text-emerald-600" />
+                <span>Zero watermark & high-resolution runway export</span>
               </div>
               <div className="flex items-center gap-2 text-xs text-neutral-800 font-medium">
                 <Check className="w-4 h-4 text-emerald-600" />
@@ -1719,7 +1767,7 @@ export default function StylingHelperRenewalPage() {
               rel="noopener noreferrer"
               className="w-full py-4 rounded-full bg-neutral-950 hover:bg-black text-white text-xs uppercase tracking-[0.18em] font-semibold shadow-md transition-all block text-center"
             >
-              Upgrade to Pro ($19 / month)
+              Subscribe to Pro ($19 / month)
             </a>
             <p className="text-[11px] text-neutral-400 mt-3">
               Secured by PayPal 256-bit encryption · Cancel anytime with 1 click
