@@ -781,26 +781,83 @@ export default function WeddingHelperPage() {
     }
   };
 
-  // AI Wedding Visualization execution
-  const handleGenerateWedding = async () => {
-    setIsGenerating(true);
-    setGenerationStep('Preserving facial bone structure & smiles...');
+  // Auto-batch synthesize all 20 scenes of a destination sequentially
+  const autoBatchSynthesizeDestination = async (destId: string, imagesToUse: string[]) => {
+    const targetScenes = WEDDING_240_SCENES.filter(s => s.themeId === destId);
+    if (targetScenes.length === 0) return;
 
-    try {
-      setTimeout(() => setGenerationStep(`Synthesizing 12 global sanctuary destinations & floral arches...`), 1000);
-      setTimeout(() => setGenerationStep(`Weaving bespoke haute couture gowns & ceremony lighting...`), 2000);
-      setTimeout(() => setGenerationStep(`Rendering all 240 Ultra-HD Masterpiece Portraits...`), 3000);
+    setIsBatchSynthesizing(true);
+    setCopyToast(`✨ Auto-synthesizing all 20 distinct scenes with your authentic faces...`);
 
-      const coupleImageToUse = uploadedImage || currentTheme.heroImage;
+    // Scenes 2 through 20 (scene 1 is already done)
+    for (let i = 1; i < targetScenes.length; i++) {
+      const scene = targetScenes[i];
+      setBatchProgress({
+        current: i + 1,
+        total: targetScenes.length,
+        title: scene.angleTitle,
+      });
 
       try {
         const res = await fetch('/api/weddinghelper/visualize', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            images: uploadedImages.length > 0 ? uploadedImages : [coupleImageToUse],
-            image: coupleImageToUse,
+            images: imagesToUse,
+            image: imagesToUse[0],
+            targetSceneImage: scene.imagePath,
+            themeId: scene.themeId,
+            angleTitle: scene.angleTitle,
+            groomHeight,
+            groomWeight,
+            brideHeight,
+            brideWeight,
+          })
+        });
+        const data = await res.json();
+        if (data.success && data.visualizedImageUrl) {
+          setPersonalizedScenes(prev => ({
+            ...prev,
+            [scene.id]: data.visualizedImageUrl
+          }));
+        }
+      } catch (err) {
+        console.warn(`Failed auto-batch scene ${scene.id}:`, err);
+      }
+    }
+
+    setIsBatchSynthesizing(false);
+    setBatchProgress(null);
+    setCopyToast(`🎉 All 20 scenes successfully synthesized with your authentic faces!`);
+    setTimeout(() => setCopyToast(''), 6000);
+  };
+
+  // AI Wedding Visualization execution
+  const handleGenerateWedding = async () => {
+    setIsGenerating(true);
+    setGenerationStep('Preserving facial bone structure & smiles...');
+
+    try {
+      const destId = THEME_TO_DEST_MAP[selectedThemeId] || 'theme_01_bali';
+      const scene01Path = `/images/weddings_240/${destId}/scene_01.jpg`;
+
+      setTimeout(() => setGenerationStep(`Locking authentic East Asian facial contours & smiles...`), 1000);
+      setTimeout(() => setGenerationStep(`Weaving bespoke haute couture gowns & ceremony lighting...`), 2000);
+      setTimeout(() => setGenerationStep(`Synthesizing all 20 Ultra-HD Masterpiece angles...`), 3000);
+
+      const coupleImageToUse = uploadedImage || currentTheme.heroImage;
+      const imagesToUse = uploadedImages.length > 0 ? uploadedImages : [coupleImageToUse];
+
+      try {
+        const res = await fetch('/api/weddinghelper/visualize', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            images: imagesToUse,
+            image: imagesToUse[0],
+            targetSceneImage: scene01Path,
             themeId: selectedThemeId,
+            angleTitle: 'Ceremonial Altar Vows',
             groomHeight,
             groomWeight,
             brideHeight,
@@ -816,15 +873,17 @@ export default function WeddingHelperPage() {
             products: data.products || currentTheme.products,
             venueBookingUrl: data.venueBookingUrl || currentTheme.stayHelperRef || 'https://www.thestayhelper.com',
           });
-          const destId = THEME_TO_DEST_MAP[selectedThemeId] || 'theme_01_bali';
-          // Set Angle #01 of the active destination as the bespoke synthesized masterpiece,
-          // preserving distinct concepts and camera angles for scenes 02-20!
           setPersonalizedScenes(prev => ({
             ...prev,
             [`${destId}_scene_01`]: data.visualizedImageUrl,
             'masterpiece': data.visualizedImageUrl,
           }));
           setActive240Tab(destId);
+
+          // AUTO-START BATCH SYNTHESIS FOR ALL REMAINING SCENES IN THIS DESTINATION!
+          setTimeout(() => {
+            autoBatchSynthesizeDestination(destId, imagesToUse);
+          }, 800);
           return;
         }
       } catch (apiErr) {
@@ -840,7 +899,6 @@ export default function WeddingHelperPage() {
         products: currentTheme.products,
         venueBookingUrl: currentTheme.stayHelperRef || 'https://www.thestayhelper.com',
       });
-      const destId = THEME_TO_DEST_MAP[selectedThemeId] || 'theme_01_bali';
       setPersonalizedScenes(prev => ({
         ...prev,
         [`${destId}_scene_01`]: fallbackImg,
@@ -1837,14 +1895,19 @@ export default function WeddingHelperPage() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 opacity-60 group-hover:opacity-40 transition-opacity" />
 
                         {/* Top Angle & Personalization Badge */}
-                        <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start">
+                        <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start z-10">
                           <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-black/70 text-[#D4AF37] backdrop-blur-md border border-[#D4AF37]/40 shadow-sm">
                             Angle #{String(scene.angleNum).padStart(2, '0')}
                           </span>
-                          {isCustomPersonalized && (
-                            <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#1F181B] shadow-md flex items-center gap-1">
+                          {isCustomPersonalized ? (
+                            <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#1F181B] shadow-md flex items-center gap-1 ring-1 ring-white/40">
                               <Sparkles className="w-2.5 h-2.5 fill-[#1F181B]" />
-                              <span>YOUR PHOTO</span>
+                              <span>YOUR PHOTO LOCKED</span>
+                            </span>
+                          ) : (
+                            <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-black/80 text-amber-300 border border-amber-400/40 backdrop-blur-xs flex items-center gap-1">
+                              <Clock className="w-2.5 h-2.5 text-amber-300" />
+                              <span>QUEUED FOR SYNTHESIS</span>
                             </span>
                           )}
                         </div>

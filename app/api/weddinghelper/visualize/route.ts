@@ -5,10 +5,11 @@
  * POST /api/weddinghelper/visualize
  * 
  * 1. 최대 3장의 고객 참조 사진(커플 사진 + 신부 클로즈업 + 신랑 클로즈업)을 수신하여
- *    신랑/신부의 쌍꺼풀, 보조개, 눈매, 미소 등 3D 안면 기하학을 100% 정밀 식별.
- * 2. 각도별 카드의 원본 콘셉트 사진(targetSceneImage, 예: scene_18 난로 씬)을 함께 로드하여,
+ *    신랑/신부의 동양인(한국인) 고유 이목구비, 쌍꺼풀, 보조개, 눈매, 미소 등 
+ *    3D 안면 기하학을 인종 변조(Caucasianize/Westernize) 없이 100% 정밀 보존.
+ * 2. 각도별 카드의 원본 콘셉트 사진(targetSceneImage)을 함께 로드하여,
  *    해당 카드의 원래 배경, 카메라 앵글, 포즈(착석/키스/포옹 등), 조명을 100% 보존하면서
- *    고객의 얼굴과 슬림한 체형, 도자기 물광 피부로 정밀 합성 렌더링합니다.
+ *    고객의 실제 얼굴과 슬림한 체형, 도자기 물광 피부로 정밀 합성 렌더링합니다.
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -114,67 +115,67 @@ export async function POST(request: NextRequest) {
       targetScenePart = parseBase64(targetSceneImage) ? { inlineData: parseBase64(targetSceneImage)! } : null;
     }
 
-    // 3. Construct Precise Multimodal Prompt
+    // 3. Construct Bulletproof Multimodal Prompt with Strict East Asian / Korean Identity Lock
     const numUserPhotos = userImageParts.length;
     const hasTargetScene = targetScenePart !== null;
 
     let promptText = '';
     if (hasTargetScene) {
-      // Scenario A: Synthesizing into an EXACT CARD CONCEPT (Target Scene Image provided)
-      promptText = `You are the world's most acclaimed Vogue Weddings and Harper's Bazaar celebrity master bridal photographer.
-This is an iconic, ultra-luxury high-fashion WEDDING PHOTOSHOOT. It must be breathtakingly beautiful, glamorous, deeply romantic, and jaw-droppingly gorgeous.
+      promptText = `You are a world-class master celebrity bridal photographer and portrait artist specializing in ultra-luxury Asian and Korean celebrity weddings (Cheongdam-dong top atelier standard).
 
 [INPUT IMAGES SPECIFICATION]
-- Images 1 through ${numUserPhotos}: REAL CLIENT REFERENCE PHOTOS (Real Bride and Groom).
-  * Study these reference photos with extreme precision. Extract the exact facial identity, eye shapes, natural double eyelids, gentle authentic smiles, cute cheek dimple (if present), nose bridge, lips, and facial bone structure of BOTH individuals (Bride and Groom).
-- Image ${numUserPhotos + 1} (The Final Image): TARGET SCENE & COMPOSITION REFERENCE.
-  * Concept Title: "${angleTitle}" at ${preset.venueName} (${preset.destination}).
-  * This final image defines the EXACT scene, camera angle, venue background, lighting atmosphere, and the couple's physical pose and positioning (e.g. sitting by the terracotta fireplace on an Amalfi terrace, standing by a balcony overlooking the Eiffel Tower, or walking hand-in-hand).
+- Images 1 to ${numUserPhotos}: REAL CLIENT REFERENCE PHOTOS of the REAL COUPLE (Bride and Groom).
+- Image ${numUserPhotos + 1} (Final Image): TARGET SCENE CONCEPT REFERENCE IMAGE ("${angleTitle}" at ${preset.venueName}).
 
-[YOUR MISSION: SEAMLESS CELEBRITY WEDDING FUSION & RE-RENDERING]
-Re-create and synthesize the TARGET SCENE (the final image) with Vogue editorial perfection:
+[CRITICAL RULE 0: 100% ABSOLUTE ETHNICITY & FACIAL IDENTITY LOCK - ZERO ALTERATION]
+- The couple in Reference Images 1 to ${numUserPhotos} are EAST ASIAN (KOREAN).
+- You MUST 100% PRESERVE THEIR EXACT EAST ASIAN ETHNIC HERITAGE, FACIAL BONE STRUCTURE, AND AUTHENTIC LIKENESS.
+- DO NOT Caucasianize, Westernize, or replace them with foreign-looking models. Absolutely NO European noses, foreign eyelid creases, or altered bone structures!
+- BRIDE: 100% preserve her authentic East Asian eye contours, her natural deep double eyelids, delicate nose bridge, cute cheek dimple, gentle lips, and exact authentic facial proportions. Elevate her with celebrity bridal glow: soft dewy rose lips, fluttery lashes, and pristine porcelain skin.
+- GROOM: 100% preserve his authentic East Asian eyes, eyebrows, clean masculine jawline, and handsome genuine smile.
+- Their friends and family MUST immediately recognize them without any doubt: "That is 100% our bride and groom!"
 
-1. 100% PRESERVE THE EXACT SCENE CONCEPT & POSE:
-   - KEEP THE EXACT SAME ENVIRONMENT & COMPOSITION as shown in the Target Scene Reference Image: The exact venue background, architecture, seating or standing arrangement, distance from camera, depth of field, and lighting (e.g. glowing firelight, golden hour ocean sunset, or palace chandeliers).
-   - The couple MUST adopt the EXACT pose, posture, and seating/standing configuration seen in the Target Scene Reference Image. Do NOT alter the scene into a generic altar!
+[CRITICAL RULE 1: EXACT SCENE & COMPOSITION LOCK FROM TARGET SCENE IMAGE]
+- Look at Image ${numUserPhotos + 1} (Target Scene Image).
+- Maintain the EXACT background venue, setting, architecture, camera angle, distance, lighting, and mood shown in that Target Scene Image.
+- The couple MUST adopt the EXACT pose, posture, and seating/standing configuration shown in the Target Scene (e.g. if sitting together by the coastal fireplace, they MUST be sitting together by that fireplace).
+- Seamlessly replace the faces of the models in the Target Scene with the authentic faces of the real Bride and Groom.
 
-2. 100% PRECISE FACIAL IDENTITY LOCK FROM REFERENCE PHOTOS:
-   - REPLACE the faces of the models in the Target Scene with the authentic faces of the real Bride and Groom from Reference Images 1 to ${numUserPhotos}:
-   - BRIDE: 100% match her authentic eyes, deep double eyelids, natural eye contours, cheek dimple, and loving smile. Elevate her with celebrity bridal glam: refined fluttery lashes, soft rose lips, and breathtaking radiant beauty.
-   - GROOM: 100% match his authentic eyes, eyebrows, nose, jawline, and handsome warm smile. Clean-shaven, charismatic, leading-man allure.
+[CRITICAL RULE 2: FLAWLESS KOREAN LUXURY PORCELAIN GLASS-SKIN]
+- Flawless, luminous, Korean luxury aesthetic clinic porcelain glass-skin (수분 물광 피부).
+- Dewy, micro-refined complexion, healthy natural radiance, zero blemishes.
 
-3. FLAWLESS LUXURY PORCELAIN GLASS-SKIN:
-   - Unconditionally render BOTH individuals with radiant, luminous, Korean luxury aesthetic clinic porcelain glass-skin. Dewy, micro-refined texture, perfectly hydrated, zero blemishes, healthy natural glow.
+[CRITICAL RULE 3: UNCONDITIONALLY SLIM & STATUESQUE HIGH-FASHION BODY SILHOUETTES]
+- BRIDE: Slender, tall, elegant hourglass figure with sculpted collarbones, slim toned arms, graceful swan neck, and tiny snatched waist in haute couture bridal attire.
+- GROOM: Tall, athletic lean slim build with broad square shoulders, flat stomach, and sharp tapered waist in bespoke Italian tuxedo.
 
-4. UNCONDITIONALLY SLIM & STATUESQUE HIGH-FASHION BODY SILHOUETTES:
-   - BRIDE SILHOUETTE: Ultra-slender, tall, elegant hourglass figure with sculpted collarbones, slim toned arms, graceful swan neck, and tiny snatched waist. Dressed in the haute couture bridal gown from the target scene or bespoke French lace gown.
-   - GROOM SILHOUETTE: Tall, athletic lean slim build with broad square shoulders, flat stomach, and sharp tapered waist in an ultra-tailored bespoke Italian tuxedo.
-
-5. EDITORIAL PERFECTION:
-   - 8K Hasselblad resolution, filmic romantic atmosphere, soft natural bokeh, magazine-cover masterpiece.`;
+[CRITICAL RULE 4: 8K CINEMATIC WEDDING QUALITY]
+- 8K Hasselblad resolution, filmic romantic lighting, natural bokeh, breathtaking Vogue Weddings cover masterpiece.`;
     } else {
-      // Scenario B: Standalone Masterpiece Synthesis (no specific target scene image, use destination preset)
-      promptText = `You are the world's most acclaimed Vogue Weddings and Harper's Bazaar celebrity master bridal photographer.
-This is an iconic, ultra-luxury high-fashion WEDDING PHOTOSHOOT. It must be breathtakingly beautiful, glamorous, deeply romantic, and jaw-droppingly gorgeous.
+      promptText = `You are a world-class master celebrity bridal photographer and portrait artist specializing in ultra-luxury Asian and Korean celebrity weddings (Cheongdam-dong top atelier standard).
 
 [INPUT IMAGES SPECIFICATION]
-- Images 1 through ${numUserPhotos}: REAL CLIENT REFERENCE PHOTOS (Real Bride and Groom).
-  * Study these reference photos with extreme precision. Extract the exact facial identity, eye shapes, natural double eyelids, gentle authentic smiles, cute cheek dimple (if present), nose bridge, lips, and facial bone structure of BOTH individuals (Bride and Groom).
+- Images 1 to ${numUserPhotos}: REAL CLIENT REFERENCE PHOTOS of the REAL COUPLE (Bride and Groom).
+- Concept: "${angleTitle}" at ${preset.venueName} (${preset.destination}).
 
-[SCENE CONCEPT: ${angleTitle}]
-- Venue: Majestic iconic sanctuary view of "${preset.venueName}" (${preset.destination}).
+[CRITICAL RULE 0: 100% ABSOLUTE ETHNICITY & FACIAL IDENTITY LOCK - ZERO ALTERATION]
+- The couple in Reference Images 1 to ${numUserPhotos} are EAST ASIAN (KOREAN).
+- You MUST 100% PRESERVE THEIR EXACT EAST ASIAN ETHNIC HERITAGE, FACIAL BONE STRUCTURE, AND AUTHENTIC LIKENESS.
+- DO NOT Caucasianize, Westernize, or replace them with foreign-looking models. Absolutely NO European noses, foreign eyelid creases, or altered bone structures!
+- BRIDE: 100% preserve her authentic East Asian eye contours, her natural deep double eyelids, delicate nose bridge, cute cheek dimple, gentle lips, and exact authentic facial proportions.
+- GROOM: 100% preserve his authentic East Asian eyes, eyebrows, clean masculine jawline, and handsome genuine smile.
+- Their friends and family MUST immediately recognize them without any doubt: "That is 100% our bride and groom!"
 
-[CRITICAL RULES]
-1. 100% EXACT FACIAL IDENTITY LOCK:
-   - BRIDE: 100% match her authentic eyes, deep double eyelids, natural eye contours, cheek dimple, and loving smile. Breathtaking celebrity bridal glam.
-   - GROOM: 100% match his authentic eyes, eyebrows, nose, jawline, and handsome warm smile.
-2. FLAWLESS PORCELAIN GLASS-SKIN:
-   - Radiant, luminous, Korean luxury aesthetic clinic porcelain glass-skin. Dewy, micro-refined texture, zero blemishes.
-3. UNCONDITIONALLY SLIM & HIGH-FASHION BODY SILHOUETTES:
-   - Bride: Ultra-slender hourglass figure, sculpted collarbones, slim arms, tiny waist.
-   - Groom: Tall, athletic lean slim build, broad shoulders, tapered waist.
-4. ROMANTIC EDITORIAL POSE & LIGHTING:
-   - Romantic, intimate chemistry, golden hour rim-lighting, 8K Hasselblad clarity, Vogue Weddings cover quality.`;
+[CRITICAL RULE 1: FLAWLESS KOREAN LUXURY PORCELAIN GLASS-SKIN]
+- Flawless, luminous, Korean luxury aesthetic clinic porcelain glass-skin (수분 물광 피부).
+- Dewy, micro-refined complexion, healthy natural radiance, zero blemishes.
+
+[CRITICAL RULE 2: UNCONDITIONALLY SLIM & HIGH-FASHION SILHOUETTES]
+- Bride: Slender, tall, elegant hourglass figure, sculpted collarbones, slim arms, tiny waist.
+- Groom: Tall, athletic lean slim build, broad square shoulders, tapered waist in bespoke tuxedo.
+
+[CRITICAL RULE 3: BREATHTAKING EDITORIAL ATMOSPHERE]
+- Romantic chemistry, golden hour rim-lighting, 8K Hasselblad clarity, Vogue Weddings cover quality.`;
     }
 
     // 4. Assemble API payload parts
@@ -235,7 +236,7 @@ This is an iconic, ultra-luxury high-fashion WEDDING PHOTOSHOOT. It must be brea
       }
     }
 
-    // Fallback: if Gemini fails or times out, return user's primary photo or targetSceneImage
+    // Fallback
     if (!generatedImageUrl) {
       if (userImageParts[0]?.inlineData?.data) {
         generatedImageUrl = `data:${userImageParts[0].inlineData.mimeType};base64,${userImageParts[0].inlineData.data}`;
