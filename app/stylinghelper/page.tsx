@@ -30,7 +30,8 @@ import {
   Shirt,
   AlertTriangle,
   Sliders,
-  ChevronDown
+  ChevronDown,
+  Trash2
 } from 'lucide-react';
 
 // =================================================================
@@ -795,6 +796,21 @@ export default function StylingHelperRenewalPage() {
     }
   };
 
+  // Clear / Remove Uploaded Photo & Reset to Default Model
+  const handleClearPhoto = () => {
+    setUserPhoto(REALISTIC_SAMPLE_MODELS[0].url);
+    setUserPhotoName(`Preset: ${REALISTIC_SAMPLE_MODELS[0].label}`);
+    setStyledResult(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const isCustomPhoto =
+    Boolean(userPhoto) &&
+    (userPhoto.startsWith('data:image/') ||
+      (!userPhoto.includes('/images/models/') && !userPhoto.includes('/images/looks/')));
+
   // Open Look directly in Try-On Studio
   const handleDirectTryOn = (look: EditorialMasterLook) => {
     setSelectedTryOnLook(look);
@@ -1264,9 +1280,21 @@ export default function StylingHelperRenewalPage() {
                     <label className="text-xs uppercase tracking-wider font-semibold text-neutral-800">
                       Step 1: Choose or Upload Photo
                     </label>
-                    <span className="text-[11px] text-neutral-500">
-                      {userPhotoName}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      {isCustomPhoto && (
+                        <button
+                          type="button"
+                          onClick={handleClearPhoto}
+                          className="text-[11px] font-semibold text-rose-600 hover:text-rose-700 underline underline-offset-2 flex items-center gap-1 transition-colors"
+                        >
+                          <Trash2 className="w-3 h-3" />
+                          <span>Remove Photo</span>
+                        </button>
+                      )}
+                      <span className="text-[11px] text-neutral-500 truncate max-w-[130px]">
+                        {userPhotoName}
+                      </span>
+                    </div>
                   </div>
 
                   {/* Preset Realistic Models Grid */}
@@ -1295,6 +1323,49 @@ export default function StylingHelperRenewalPage() {
                     ))}
                   </div>
 
+                  {/* Uploaded Photo Active Card (When user uploaded photo) */}
+                  {isCustomPhoto ? (
+                    <div className="rounded-2xl border border-neutral-300 bg-neutral-50 p-4 mb-3">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <img
+                            src={userPhoto}
+                            alt="Uploaded photo"
+                            className="w-12 h-14 object-cover rounded-xl border border-neutral-300 shadow-sm flex-shrink-0"
+                          />
+                          <div className="min-w-0">
+                            <div className="text-xs font-bold text-neutral-950 truncate">
+                              {userPhotoName}
+                            </div>
+                            <div className="text-[11px] text-emerald-600 font-medium flex items-center gap-1 mt-0.5">
+                              <CheckCircle2 className="w-3 h-3 flex-shrink-0" />
+                              <span>Photo ready for virtual fitting</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 flex-shrink-0">
+                          <button
+                            type="button"
+                            onClick={() => fileInputRef.current?.click()}
+                            className="px-3 py-1.5 rounded-full bg-white hover:bg-neutral-100 border border-neutral-200 text-neutral-800 text-[11px] font-semibold transition-all"
+                          >
+                            Change
+                          </button>
+                          <button
+                            type="button"
+                            onClick={handleClearPhoto}
+                            className="px-3 py-1.5 rounded-full bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-700 text-[11px] font-semibold transition-all flex items-center gap-1"
+                            title="Remove uploaded photo"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                            <span>Remove</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ) : null}
+
                   {/* Drag & Drop Upload Zone */}
                   <div
                     onDragOver={(e) => {
@@ -1322,7 +1393,7 @@ export default function StylingHelperRenewalPage() {
                         <Upload className="w-4 h-4" />
                       </div>
                       <div className="text-xs font-medium text-neutral-900">
-                        Drop your full-body photo here, or{' '}
+                        {isCustomPhoto ? 'Drop a new photo to replace, or ' : 'Drop your full-body photo here, or '}
                         <button
                           type="button"
                           onClick={() => fileInputRef.current?.click()}
@@ -1394,6 +1465,31 @@ export default function StylingHelperRenewalPage() {
               {/* Right Column (7 Cols): Canvas & Result Viewport */}
               <div className="lg:col-span-7 flex flex-col items-center justify-center">
                 <div className="relative w-full aspect-[3/4] max-w-md rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-200 shadow-md">
+                  {/* Floating Action: Remove / Clear Photo */}
+                  {isCustomPhoto && !isGenerating && (
+                    <button
+                      type="button"
+                      onClick={handleClearPhoto}
+                      className="absolute top-3.5 right-3.5 z-20 px-3.5 py-1.5 rounded-full bg-neutral-950/80 hover:bg-rose-600 text-white text-xs font-semibold tracking-wide backdrop-blur-md shadow-lg flex items-center gap-1.5 transition-all group"
+                      title="Clear photo & reset to default model"
+                    >
+                      <Trash2 className="w-3.5 h-3.5 text-rose-300 group-hover:text-white transition-colors" />
+                      <span>Remove Photo</span>
+                    </button>
+                  )}
+
+                  {/* Floating Action: Reset to Original Photo when styled */}
+                  {styledResult && !isGenerating && (
+                    <button
+                      type="button"
+                      onClick={() => setStyledResult(null)}
+                      className="absolute top-3.5 left-3.5 z-20 px-3 py-1.5 rounded-full bg-neutral-950/80 hover:bg-neutral-900 text-white text-xs font-medium tracking-wide backdrop-blur-md shadow-lg flex items-center gap-1.5 transition-all"
+                      title="View original source photo"
+                    >
+                      <RefreshCw className="w-3.5 h-3.5 text-amber-300" />
+                      <span>Original Photo</span>
+                    </button>
+                  )}
                   {styledResult ? (
                     <img
                       src={styledResult.imageUrl}
