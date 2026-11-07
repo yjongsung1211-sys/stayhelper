@@ -313,7 +313,7 @@ export default function WeddingHelperPage() {
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
-  const [user, setUser] = useState<{ email: string; isVip: boolean; plan?: 'single' | 'trio' | 'grand' } | null>({ email: 'ceo.test@weddinghelper.love', isVip: true, plan: 'grand' });
+  const [user, setUser] = useState<{ email: string; isVip: boolean; plan?: 'single' | 'trio' | 'grand' } | null>(null);
   // 240 Masterpiece Collection & ZIP Download States
   const [active240Tab, setActive240Tab] = useState<string>('all');
   const [activeLightboxScene, setActiveLightboxScene] = useState<Wedding240Scene | null>(null);
@@ -994,12 +994,15 @@ export default function WeddingHelperPage() {
     setCopyToast(`🎉 The Grand 12 VIP Pass Activated ($19 Special)! Permanently linked to ${payerEmail}.`);
     setTimeout(() => setCopyToast(''), 5000);
 
-    if (uploadedImage) {
+    const destId = THEME_TO_DEST_MAP[selectedThemeId] || 'theme_01_bali';
+    if (uploadedImage || uploadedImages.length > 0) {
       setTimeout(() => {
         handleGenerateWedding();
       }, 400);
     } else {
-      setIsInvitationOpen(true);
+      setTimeout(() => {
+        router.push(`/weddinghelper/gallery?dest=${destId}`);
+      }, 500);
     }
   };
 
