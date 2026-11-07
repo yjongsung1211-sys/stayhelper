@@ -1260,7 +1260,7 @@ const MAKEUP_EYE_PRESETS = [
   { id: "eye_3", hex: "#CFA47C", name: { ko: "소프트 샴페인", en: "Soft Champagne", ja: "ソフトシャンパン" } },
 ];
 
-const CARD_ASSET_VER = "?v=20261107_v11";
+const CARD_ASSET_VER = "?v=20261107_v12";
 
 export default function ColorHelperPage() {
   // ── 언어 상태 (기본 한국어, 쿼리/스토리지 지원) ─────────────────
