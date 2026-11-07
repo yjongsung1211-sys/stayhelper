@@ -2242,6 +2242,7 @@ export default function StayHelperLuxuryShowcase() {
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(true);
   const [isEnded, setIsEnded] = useState<boolean>(false);
+  const [isVideoBuffering, setIsVideoBuffering] = useState<boolean>(false);
   const [isDesktop, setIsDesktop] = useState<boolean | null>(null);
 
   const getActiveVideo = (): HTMLVideoElement | null => {
@@ -2382,19 +2383,21 @@ export default function StayHelperLuxuryShowcase() {
     }
   };
 
-  // Idle prefetch top 4 featured stays after initial render
+  // Idle prefetch immediately adjacent stays to conserve bandwidth
   useEffect(() => {
-    const prefetchFeatured = () => {
-      ["stay-01", "stay-02", "stay-03", "stay-04"].forEach((id) => prefetchStay(id));
+    const prefetchAdjacent = () => {
+      const nextIdx = (currentIndex + 1) % ALL_STAYS.length;
+      const prevIdx = (currentIndex - 1 + ALL_STAYS.length) % ALL_STAYS.length;
+      [ALL_STAYS[nextIdx].id, ALL_STAYS[prevIdx].id].forEach((id) => prefetchStay(id));
     };
     if (typeof window !== "undefined") {
       if ("requestIdleCallback" in window) {
-        (window as any).requestIdleCallback(prefetchFeatured);
+        (window as any).requestIdleCallback(prefetchAdjacent);
       } else {
-        setTimeout(prefetchFeatured, 1200);
+        setTimeout(prefetchAdjacent, 1500);
       }
     }
-  }, []);
+  }, [currentIndex]);
 
 
   // 100% Resilient Autoplay Orchestrator on stay selection and desktop switch
@@ -2438,6 +2441,7 @@ export default function StayHelperLuxuryShowcase() {
 
   const handleSelectStay = (id: string) => {
     if (id === selectedStayId) return;
+    setIsVideoBuffering(true);
     prefetchStay(id);
     setSelectedStayId(id);
     setIsEnded(false);
@@ -2547,23 +2551,35 @@ export default function StayHelperLuxuryShowcase() {
         <div className="lg:hidden absolute inset-0 w-full h-full z-0 overflow-hidden">
           {/* 100% Full-Bleed Video Background (Unmounted on desktop to prevent duplicate decoding and stuttering) */}
           {isDesktop === false && (
-            <video
-              ref={mobileVideoRef}
-              key="mobile-master-player"
-              src={currentStay.videoSrc}
-              poster={currentStay.posterSrc}
-              playsInline
-              autoPlay
-              preload="auto"
-              muted={isMuted}
-              onEnded={() => handleNextStay()}
-              className="w-full h-full object-cover"
-              onClick={() => {
-                if (isMuted) toggleMute();
-                else if (isEnded) restartVideo();
-                else handleBookingAction(currentStay.bookingUrl);
-              }}
-            />
+            <>
+              <video
+                ref={mobileVideoRef}
+                key="mobile-master-player"
+                src={currentStay.videoSrc}
+                poster={currentStay.posterSrc}
+                playsInline
+                autoPlay
+                preload="auto"
+                muted={isMuted}
+                onEnded={() => handleNextStay()}
+                onPlaying={() => setIsVideoBuffering(false)}
+                onWaiting={() => setIsVideoBuffering(true)}
+                onCanPlay={() => setIsVideoBuffering(false)}
+                className="w-full h-full object-cover"
+                onClick={() => {
+                  if (isMuted) toggleMute();
+                  else if (isEnded) restartVideo();
+                  else handleBookingAction(currentStay.bookingUrl);
+                }}
+              />
+              {isVideoBuffering && (
+                <img
+                  src={currentStay.posterSrc}
+                  alt={currentStay.name}
+                  className="absolute inset-0 w-full h-full object-cover z-10 pointer-events-none transition-opacity duration-300"
+                />
+              )}
+            </>
           )}
 
           {/* High-Visibility Mobile Sound Unlock Badge */}
@@ -2693,8 +2709,8 @@ export default function StayHelperLuxuryShowcase() {
               key={`desktop-hero-${heroBackground}`}
               src={heroBackground}
               alt={currentStay.name}
-              loading="lazy"
-              decoding="async"
+              loading="eager"
+              decoding="sync"
               className="w-full h-full object-cover object-center scale-[1.01] transition-opacity duration-700 ease-out"
             />
             <div className="absolute inset-0 bg-black/20" />
@@ -2843,23 +2859,35 @@ export default function StayHelperLuxuryShowcase() {
                 <div className="relative w-[340px] aspect-[9/16] rounded-[22px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.85)] border border-white/20 bg-black/60 backdrop-blur-xs transition-transform duration-500 group-hover:scale-[1.01]">
                   {/* Desktop Video (Unmounted on mobile to prevent duplicate decoding and stuttering) */}
                   {isDesktop === true && (
-                    <video
-                      ref={desktopVideoRef}
-                      key="desktop-master-player"
-                      src={currentStay.videoSrc}
-                      poster={currentStay.posterSrc}
-                      playsInline
-                      autoPlay
-                      preload="auto"
-                      muted={isMuted}
-                      onEnded={() => handleNextStay()}
-                      className="w-full h-full object-cover cursor-pointer"
-                      onClick={() => {
-                        if (isMuted) toggleMute();
-                        else if (isEnded) restartVideo();
-                        else handleBookingAction(currentStay.bookingUrl);
-                      }}
-                    />
+                    <>
+                      <video
+                        ref={desktopVideoRef}
+                        key="desktop-master-player"
+                        src={currentStay.videoSrc}
+                        poster={currentStay.posterSrc}
+                        playsInline
+                        autoPlay
+                        preload="auto"
+                        muted={isMuted}
+                        onEnded={() => handleNextStay()}
+                        onPlaying={() => setIsVideoBuffering(false)}
+                        onWaiting={() => setIsVideoBuffering(true)}
+                        onCanPlay={() => setIsVideoBuffering(false)}
+                        className="w-full h-full object-cover cursor-pointer"
+                        onClick={() => {
+                          if (isMuted) toggleMute();
+                          else if (isEnded) restartVideo();
+                          else handleBookingAction(currentStay.bookingUrl);
+                        }}
+                      />
+                      {isVideoBuffering && (
+                        <img
+                          src={currentStay.posterSrc}
+                          alt={currentStay.name}
+                          className="absolute inset-0 w-full h-full object-cover z-20 pointer-events-none transition-opacity duration-300"
+                        />
+                      )}
+                    </>
                   )}
 
                   {/* Desktop Prominent Sound Floating Badge */}
