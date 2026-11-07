@@ -1260,7 +1260,7 @@ const MAKEUP_EYE_PRESETS = [
   { id: "eye_3", hex: "#CFA47C", name: { ko: "소프트 샴페인", en: "Soft Champagne", ja: "ソフトシャンパン" } },
 ];
 
-const CARD_ASSET_VER = "?v=20261107_v8";
+const CARD_ASSET_VER = "?v=20261107_v10";
 
 export default function ColorHelperPage() {
   // ── 언어 상태 (기본 한국어, 쿼리/스토리지 지원) ─────────────────
@@ -2358,7 +2358,7 @@ export default function ColorHelperPage() {
                 const matchScore = activePreset.match;
 
                 // Gemini AI로 합성된 맞춤형 사진이 있으면 100% 최우선 표출, 아니면 원본 사진
-                const finalStyledPhoto = geminiTransformedImage || (isCustomPhoto && imageSrc ? imageSrc : (lang === "ja" ? `/nb_step5_ja_raw.jpg${CARD_ASSET_VER}` : lang === "ko" ? `/nb_step5_outfit.jpg${CARD_ASSET_VER}` : `/nb_step5_en_raw.jpg${CARD_ASSET_VER}`));
+                const finalStyledPhoto = geminiTransformedImage || (isCustomPhoto && imageSrc ? imageSrc : `/nb_step5_${region}_${themeKey}_card.jpg${CARD_ASSET_VER}`);
 
                 return (
                   <div className="absolute inset-0 w-full h-full overflow-hidden bg-gray-950">
@@ -2642,7 +2642,7 @@ export default function ColorHelperPage() {
                     {/* Before: Original Photo */}
                     <div className="relative rounded-2xl overflow-hidden bg-gray-900 aspect-[3/4] border-2 border-gray-200 shadow-md">
                       <img 
-                        src={imageSrc || (lang === 'ja' ? '/nb_step1_ja.jpg' : lang === 'ko' ? '/nb_step1_ko.jpg' : '/nb_step1_en.jpg')} 
+                        src={imageSrc || (lang === 'ja' ? `/nb_step1_ja_raw.jpg${CARD_ASSET_VER}` : lang === 'ko' ? `/nb_step1_ko_raw.jpg${CARD_ASSET_VER}` : `/nb_step1_en_raw.jpg${CARD_ASSET_VER}`)} 
                         alt="Before Original Portrait" 
                         className="w-full h-full object-cover object-top"
                       />
