@@ -705,7 +705,6 @@ export default function StylingHelperRenewalPage() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
   const [isProSubscriber, setIsProSubscriber] = useState<boolean>(false);
-  const [freeTrialUsed, setFreeTrialUsed] = useState<boolean>(false);
   const [showPaywallModal, setShowPaywallModal] = useState<boolean>(false);
 
   // Report Modal state
@@ -720,12 +719,11 @@ export default function StylingHelperRenewalPage() {
   const studioRef = useRef<HTMLElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Sync Auth & Trial state from localStorage
+  // Sync Auth state & clear legacy trial locks
   useEffect(() => {
     try {
-      const trialUsed = localStorage.getItem('styling_free_trial_used') === 'true';
+      localStorage.removeItem('styling_free_trial_used');
       const isPro = localStorage.getItem('styling_is_pro_subscriber') === 'true';
-      setFreeTrialUsed(trialUsed);
       setIsProSubscriber(isPro);
 
       const syncUser = () => {
@@ -818,15 +816,10 @@ export default function StylingHelperRenewalPage() {
     studioRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // Generate Virtual Try-On
+  // Generate Virtual Try-On (100% Free & Unlimited)
   const handleExecuteStyling = async () => {
     if (!userPhoto) {
       alert('Please select a sample model or upload your photo first.');
-      return;
-    }
-
-    if (freeTrialUsed && !isProSubscriber) {
-      setShowPaywallModal(true);
       return;
     }
 
@@ -863,24 +856,12 @@ export default function StylingHelperRenewalPage() {
           imageUrl: data.imageUrl,
           look: selectedTryOnLook
         });
-        if (!isProSubscriber) {
-          setFreeTrialUsed(true);
-          try {
-            localStorage.setItem('styling_free_trial_used', 'true');
-          } catch (e) {}
-        }
       } else {
         // High-precision graceful fallback to high-res master editorial look
         setStyledResult({
           imageUrl: selectedTryOnLook.imageUrl,
           look: selectedTryOnLook
         });
-        if (!isProSubscriber) {
-          setFreeTrialUsed(true);
-          try {
-            localStorage.setItem('styling_free_trial_used', 'true');
-          } catch (e) {}
-        }
       }
     } catch (err) {
       console.warn('Styling synthesis fallback:', err);
@@ -888,12 +869,6 @@ export default function StylingHelperRenewalPage() {
         imageUrl: selectedTryOnLook.imageUrl,
         look: selectedTryOnLook
       });
-      if (!isProSubscriber) {
-        setFreeTrialUsed(true);
-        try {
-          localStorage.setItem('styling_free_trial_used', 'true');
-        } catch (e) {}
-      }
     } finally {
       clearTimeout(timer1);
       clearTimeout(timer2);
@@ -1456,7 +1431,7 @@ export default function StylingHelperRenewalPage() {
                   ) : (
                     <>
                       <Wand2 className="w-4 h-4 text-amber-300" />
-                      <span>Execute Virtual Fitting</span>
+                      <span>Execute Virtual Fitting (Free)</span>
                     </>
                   )}
                 </button>
