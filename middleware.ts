@@ -5,11 +5,18 @@ export function middleware(request: NextRequest) {
   const host = request.headers.get('x-forwarded-host') || request.headers.get('host') || '';
   const pathname = request.nextUrl.pathname;
 
-  // When accessing via weddinghelper.love, serve WeddingHelper at root '/'
-  if (host.includes('weddinghelper') && pathname === '/') {
-    const url = request.nextUrl.clone();
-    url.pathname = '/weddinghelper';
-    return NextResponse.rewrite(url);
+  // When accessing via weddinghelper.love, serve WeddingHelper at root '/' and gallery at '/gallery'
+  if (host.includes('weddinghelper')) {
+    if (pathname === '/') {
+      const url = request.nextUrl.clone();
+      url.pathname = '/weddinghelper';
+      return NextResponse.rewrite(url);
+    }
+    if (pathname === '/gallery') {
+      const url = request.nextUrl.clone();
+      url.pathname = '/weddinghelper/gallery';
+      return NextResponse.rewrite(url);
+    }
   }
 
   // When accessing via thestayhelper.com or any stayhelper domain, serve StayHelper at root '/'

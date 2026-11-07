@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import JSZip from 'jszip';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { 
   Heart, Sparkles, Upload, ArrowRight, ShieldCheck, 
   MapPin, CheckCircle2, ChevronRight, Gem, Calendar,
@@ -297,6 +298,7 @@ function dataUrlToBlobUrl(dataUrl: string): string {
 }
 
 export default function WeddingHelperPage() {
+  const router = useRouter();
   useEffect(() => {
     document.title = 'WeddingHelper · Where Forever Begins | Curated Luxury Weddings';
   }, []);
@@ -866,87 +868,29 @@ export default function WeddingHelperPage() {
     setTimeout(() => setCopyToast(''), 6000);
   };
 
-  // AI Wedding Visualization execution
+  // AI Wedding Visualization execution -> Redirect to dedicated 240 Masterpiece Gallery
   const handleGenerateWedding = async () => {
     setIsGenerating(true);
     setGenerationStep('Preserving facial bone structure & smiles...');
 
-    // Smooth scroll down to 240 Masterpiece Gallery so couple watches synthesis live
-    setTimeout(() => {
-      const galleryEl = document.getElementById('masterpiece-gallery-section');
-      if (galleryEl) {
-        galleryEl.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 120);
-
     try {
       const destId = THEME_TO_DEST_MAP[selectedThemeId] || 'theme_01_bali';
-      const scene01Path = `/images/weddings_240/${destId}/scene_01.jpg`;
-
-      setTimeout(() => setGenerationStep(`Locking authentic East Asian facial contours & smiles...`), 1000);
-      setTimeout(() => setGenerationStep(`Weaving bespoke haute couture gowns & ceremony lighting...`), 2000);
-      setTimeout(() => setGenerationStep(`Synthesizing all 20 Ultra-HD Masterpiece angles...`), 3000);
-
       const coupleImageToUse = uploadedImage || currentTheme.heroImage;
       const imagesToUse = uploadedImages.length > 0 ? uploadedImages : [coupleImageToUse];
 
+      // Save photos, preferences and proportions to localStorage for the dedicated gallery
       try {
-        const res = await fetch('/api/weddinghelper/visualize', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            images: imagesToUse,
-            image: imagesToUse[0],
-            targetSceneImage: scene01Path,
-            themeId: selectedThemeId,
-            angleTitle: 'Ceremonial Altar Vows',
-            groomHeight,
-            groomWeight,
-            brideHeight,
-            brideWeight,
-          })
-        });
-
-        const data = await res.json();
-        if (data.success && data.isAiGenerated && data.visualizedImageUrl) {
-          const safeUrl = dataUrlToBlobUrl(data.visualizedImageUrl);
-          setVisualizedResult({
-            imageUrl: safeUrl,
-            theme: currentTheme,
-            products: data.products || currentTheme.products,
-            venueBookingUrl: data.venueBookingUrl || currentTheme.stayHelperRef || 'https://www.thestayhelper.com',
-          });
-          setPersonalizedScenes(prev => ({
-            ...prev,
-            [`${destId}_scene_01`]: safeUrl,
-            'masterpiece': safeUrl,
-          }));
-          setActive240Tab(destId);
-
-          // Auto-start batch synthesis with safe delay
-          setTimeout(() => {
-            autoBatchSynthesizeDestination(destId, imagesToUse);
-          }, 1500);
-          return;
-        } else {
-          setCopyToast('⚠️ Gemini AI is busy. Tap "Pay & Create" to try again in a few moments.');
-        }
-      } catch (apiErr) {
-        console.warn('API route error:', apiErr);
-        setCopyToast('⚠️ Connection timeout. Please tap to try again.');
+        localStorage.setItem('weddinghelper_uploaded_images', JSON.stringify(imagesToUse));
+        localStorage.setItem('weddinghelper_proportions', JSON.stringify({ groomHeight, groomWeight, brideHeight, brideWeight }));
+        localStorage.setItem('weddinghelper_selected_theme', selectedThemeId);
+      } catch (storageErr) {
+        console.warn('LocalStorage save error:', storageErr);
       }
 
-      // When synthesis is pending, show themes without false personalization badge
-      setActive240Tab(destId);
+      // Redirect immediately to the dedicated high-speed 240 Masterpiece Gallery
+      router.push(`/weddinghelper/gallery?dest=${destId}&autoSynthesize=true`);
     } catch (err) {
-      console.warn('Visualization fallback:', err);
-      setVisualizedResult({
-        imageUrl: currentTheme.heroImage,
-        theme: currentTheme,
-        products: currentTheme.products,
-        venueBookingUrl: currentTheme.stayHelperRef || 'https://www.thestayhelper.com',
-      });
-      setActive240Tab('all');
+      console.warn('Redirect error:', err);
     } finally {
       setIsGenerating(false);
       setGenerationStep('');
@@ -1092,17 +1036,13 @@ export default function WeddingHelperPage() {
 
             {/* Wedding Atelier Navigation */}
             <nav className="hidden lg:flex items-center gap-6 text-xs tracking-wider text-[#6E645E] border-l border-[#EAE3D9] pl-6 font-medium">
-              <button 
-                type="button"
-                onClick={() => {
-                  const el = document.getElementById('masterpiece-gallery-section');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }}
+              <Link 
+                href="/weddinghelper/gallery"
                 className="hover:text-[#1C1917] transition cursor-pointer flex items-center gap-1.5 font-bold text-[#C5A059]"
               >
                 <Sparkles className="w-3.5 h-3.5 fill-[#C5A059]" />
                 <span>240 Masterpiece Portfolio</span>
-              </button>
+              </Link>
               <button 
                 type="button"
                 onClick={() => {
@@ -1707,10 +1647,10 @@ export default function WeddingHelperPage() {
       </section>
 
 
-            {/* 5. 240 Haute Couture Masterpiece Collection (Permanent On-Page Showcase) */}
+            {/* 5. 240 Haute Couture Masterpiece Collection Showcase Portal */}
       <section id="masterpiece-gallery-section" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#120E10] text-white border-t border-white/10 z-10 relative font-sans">
         <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
+          {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-8 border-b border-white/10">
             <div>
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C5A059]/15 border border-[#C5A059]/40 text-[#EAD8B1] text-xs font-bold uppercase tracking-widest mb-3">
@@ -1721,376 +1661,112 @@ export default function WeddingHelperPage() {
                 240 Editorial Camera Angles Across 12 Destinations
               </h2>
               <p className="text-white/60 text-sm sm:text-base mt-2.5 max-w-2xl font-sans leading-relaxed">
-                Every destination is crafted with 20 distinct cinematic vantage points — wide sanctuary panoramic views, emotional vow close-ups, candlelit toasts, and sunset silhouettes. Personalized with your authentic faces and bespoke proportions.
+                Every destination is crafted with 20 distinct cinematic vantage points — wide sanctuary panoramic views, emotional vow close-ups, candlelit toasts, and sunset silhouettes. Now organized in our dedicated high-speed gallery.
               </p>
             </div>
 
             <div className="flex items-center gap-3 shrink-0 flex-wrap">
-              {/* ZIP Download All Button */}
-              <button
-                type="button"
-                onClick={handleDownloadAll240Zip}
-                disabled={isDownloadingZip}
-                className="px-6 py-3.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F59E0B] to-[#D4AF37] text-[#1F181B] font-extrabold text-xs uppercase tracking-wider hover:opacity-95 shadow-lg flex items-center gap-2.5 cursor-pointer active:scale-95 disabled:opacity-50"
+              <Link
+                href="/weddinghelper/gallery"
+                className="px-6 py-3.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F59E0B] to-[#D4AF37] text-[#1F181B] font-extrabold text-xs uppercase tracking-wider hover:opacity-95 shadow-lg flex items-center gap-2.5 transition active:scale-95 cursor-pointer"
               >
-                {isDownloadingZip ? (
-                  <>
-                    <RefreshCw className="w-4 h-4 animate-spin text-[#1F181B]" />
-                    <span>Packaging ZIP ({zipProgress}%)...</span>
-                  </>
-                ) : (
-                  <>
-                    <Download className="w-4 h-4 text-[#1F181B]" />
-                    <span>Download All 240 Photos (ZIP)</span>
-                  </>
-                )}
-              </button>
+                <Sparkles className="w-4 h-4 text-[#1F181B]" />
+                <span>Open Dedicated 240 Gallery</span>
+                <ArrowRight className="w-4 h-4 text-[#1F181B]" />
+              </Link>
             </div>
           </div>
 
-          {/* Destination Tabs Bar */}
-          <div className="bg-[#1C1719] rounded-2xl border border-white/10 p-2.5 mb-8 flex items-center gap-2 overflow-x-auto scrollbar-thin">
-            <button
-              type="button"
-              onClick={() => setActive240Tab('all')}
-              className={`px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition cursor-pointer ${
-                active240Tab === 'all'
-                  ? 'bg-[#D4AF37] text-[#1F181B] shadow-md ring-2 ring-[#D4AF37]/50'
-                  : 'bg-white/5 text-white/80 hover:bg-white/15'
-              }`}
-            >
-              All 240 Scenes (240)
-            </button>
-            {DESTINATION_240_CONFIGS.map((dest, idx) => {
-              const isActive = active240Tab === dest.id;
-              return (
-                <button
-                  key={dest.id}
-                  type="button"
-                  onClick={() => setActive240Tab(dest.id)}
-                  className={`px-3.5 py-2.5 rounded-xl text-xs font-semibold tracking-wider whitespace-nowrap transition cursor-pointer flex items-center gap-1.5 ${
-                    isActive
-                      ? 'bg-[#D4AF37] text-[#1F181B] font-bold shadow-md'
-                      : 'bg-white/5 text-white/70 hover:bg-white/15'
-                  }`}
-                >
-                  <span className="opacity-70 font-mono">#{idx + 1}</span>
-                  <span>{dest.title.split(' ')[0]} {dest.title.split(' ')[1] || ''}</span>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-black/40 text-white/90">20</span>
-                </button>
-              );
-            })}
+          {/* 4-Destination Curated Preview Cards (Ultra-fast, zero lag) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {[
+              {
+                id: 'theme_01_bali',
+                title: 'Bali Rainforest Chapel',
+                dest: 'Ubud, Bali, Indonesia',
+                img: '/images/weddings_240/theme_01_bali/scene_01.jpg',
+                angles: '20 Masterpiece Angles',
+              },
+              {
+                id: 'theme_02_amalfi',
+                title: 'Amalfi Cliffside Romance',
+                dest: 'Positano & Ravello, Italy',
+                img: '/images/weddings_240/theme_02_amalfi/scene_01.jpg',
+                angles: '20 Masterpiece Angles',
+              },
+              {
+                id: 'theme_03_lake_como',
+                title: 'Lake Como Historic Villa',
+                dest: 'Lake Como, Italy',
+                img: '/images/weddings_240/theme_03_lake_como/scene_01.jpg',
+                angles: '20 Masterpiece Angles',
+              },
+              {
+                id: 'theme_04_paris',
+                title: 'Paris Private Château',
+                dest: 'Chantilly & Paris, France',
+                img: '/images/weddings_240/theme_04_paris/scene_01.jpg',
+                angles: '20 Masterpiece Angles',
+              },
+            ].map((card) => (
+              <Link
+                key={card.id}
+                href={`/weddinghelper/gallery?dest=${card.id}`}
+                className="group relative bg-[#1E181B] rounded-2xl overflow-hidden border border-white/10 hover:border-[#D4AF37] transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col"
+              >
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-black/40">
+                  <Image
+                    src={card.img}
+                    alt={card.title}
+                    fill
+                    unoptimized
+                    sizes="(max-width: 640px) 100vw, 25vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 opacity-70 group-hover:opacity-40 transition-opacity" />
+                  <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-black/70 text-[#D4AF37] backdrop-blur-md border border-[#D4AF37]/40 shadow-sm">
+                    {card.angles}
+                  </div>
+                  <div className="absolute bottom-3 left-3 right-3 text-white">
+                    <h3 className="font-serif text-lg font-normal group-hover:text-[#D4AF37] transition-colors">{card.title}</h3>
+                    <p className="text-[11px] text-white/60">{card.dest}</p>
+                  </div>
+                </div>
+                <div className="p-3.5 bg-[#181315] border-t border-white/5 flex items-center justify-between text-xs text-[#D4AF37] font-bold">
+                  <span>View 20 Angles</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            ))}
           </div>
 
-          {/* Destination Subheader & Batch Synthesize Button */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+          {/* Big Action Portal Card */}
+          <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-[#1C1719] via-[#241C1E] to-[#1A1416] border border-[#D4AF37]/40 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
             <div>
-              <h3 className="text-white font-serif text-2xl font-normal">
-                {active240Tab === 'all' 
-                  ? 'Complete 240 Haute Couture Masterpiece Portfolio' 
-                  : DESTINATION_240_CONFIGS.find(d => d.id === active240Tab)?.title}
+              <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] block mb-2">
+                FAST DEDICATED EXPERIENCE
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-serif text-white font-normal">
+                Ready to Explore All 240 Masterpiece Angles?
               </h3>
-              <p className="text-white/60 text-xs sm:text-sm mt-0.5">
-                {active240Tab === 'all'
-                  ? 'Showing all 240 ultra-high definition editorial angles across 12 destinations'
-                  : `${DESTINATION_240_CONFIGS.find(d => d.id === active240Tab)?.venue} · ${DESTINATION_240_CONFIGS.find(d => d.id === active240Tab)?.dest}`}
+              <p className="text-xs sm:text-sm text-white/60 mt-2 max-w-xl">
+                Open the dedicated gallery to browse all 12 global destinations, synthesize with your uploaded face, and download lossless print-ready 4K files or complete 240-photo ZIP archives.
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={handleBatchSynthesizeActiveTab}
-                className={`px-5 py-2.5 rounded-full font-extrabold text-xs uppercase tracking-wider transition flex items-center gap-2 shadow-lg cursor-pointer ${
-                  isBatchSynthesizing
-                    ? 'bg-red-600 hover:bg-red-700 text-white animate-pulse'
-                    : 'bg-gradient-to-r from-[#D4AF37] via-[#F59E0B] to-[#D4AF37] text-[#1F181B] hover:opacity-95'
-                }`}
+            <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0">
+              <Link
+                href="/weddinghelper/gallery"
+                className="px-8 py-4 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#1F181B] font-extrabold text-xs uppercase tracking-wider hover:opacity-95 transition shadow-xl flex items-center gap-2.5 active:scale-95 cursor-pointer"
               >
-                <Sparkles className="w-4 h-4" />
-                <span>
-                  {isBatchSynthesizing
-                    ? `Pause Batch (${batchProgress?.current}/${batchProgress?.total})`
-                    : `✨ Synthesize All ${WEDDING_240_SCENES.filter(s => active240Tab === 'all' || s.themeId === active240Tab).length} Scenes`}
-                </span>
-              </button>
-              <span className="text-xs text-[#D4AF37] font-bold uppercase tracking-wider hidden sm:inline-block">
-                {WEDDING_240_SCENES.filter(s => active240Tab === 'all' || s.themeId === active240Tab).length} Masterpieces
-              </span>
+                <Sparkles className="w-4 h-4 text-[#1F181B]" />
+                <span>Open Dedicated 240 Gallery</span>
+                <ArrowRight className="w-4 h-4 text-[#1F181B]" />
+              </Link>
             </div>
-          </div>
-
-          {/* Batch Synthesis Progress Bar */}
-          {isBatchSynthesizing && batchProgress && (
-            <div className="mb-8 p-4 rounded-2xl bg-[#1E1719] border border-[#D4AF37] shadow-xl">
-              <div className="flex items-center justify-between text-xs text-white mb-2">
-                <span className="font-bold text-[#D4AF37] flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 animate-spin text-[#D4AF37]" />
-                  Synthesizing Scene {batchProgress.current} of {batchProgress.total}: &quot;{batchProgress.title}&quot;
-                </span>
-                <span className="font-mono text-[#D4AF37]">
-                  {Math.round((batchProgress.current / batchProgress.total) * 100)}%
-                </span>
-              </div>
-              <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
-                <div 
-                  className="h-full bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] transition-all duration-300"
-                  style={{ width: `${(batchProgress.current / batchProgress.total) * 100}%` }}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* 🌟 AI Transformed Couple Masterpiece Hero Spotlight */}
-          {visualizedResult && (
-            <div className="mb-12 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#20181B] via-[#2A1D22] to-[#1E1719] border-2 border-[#D4AF37] shadow-[0_12px_45px_rgba(212,175,55,0.25)] flex flex-col md:flex-row items-center gap-6 sm:gap-8">
-              <div className="relative w-full md:w-80 h-96 sm:h-[420px] rounded-2xl overflow-hidden border-2 border-[#D4AF37]/80 shadow-[0_0_30px_rgba(212,175,55,0.3)] shrink-0 group">
-                <Image
-                  src={visualizedResult.imageUrl}
-                  alt="Your Personalized AI Wedding Masterpiece"
-                  fill
-                  unoptimized
-                  className="object-cover"
-                />
-                <div className="absolute top-3 left-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/85 text-[#D4AF37] border border-[#D4AF37]/60 text-[10px] font-extrabold uppercase tracking-widest backdrop-blur-md shadow-lg">
-                  <Sparkles className="w-3.5 h-3.5 fill-[#D4AF37]" />
-                  <span>Transformed from Your Photo</span>
-                </div>
-              </div>
-
-              <div className="flex-1 text-center md:text-left space-y-3 font-sans">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#D4AF37] text-[11px] font-extrabold uppercase tracking-wider">
-                  <span>✦ AI FACIAL & SILHOUETTE SYNTHESIS COMPLETE</span>
-                </div>
-                <h4 className="text-2xl sm:text-3xl font-serif text-white font-normal">
-                  Your Sacred Vows at {currentTheme.venueName}
-                </h4>
-                <p className="text-white/70 text-xs sm:text-sm leading-relaxed max-w-xl">
-                  Custom synthesized with your uploaded couple photograph. 100% of your authentic facial features, romantic chemistry, and tailored proportions ({groomHeight}cm / {groomWeight}kg groom & {brideHeight}cm / {brideWeight}kg bride) have been preserved and fitted in bespoke couture wedding attire.
-                </p>
-
-                <div className="flex flex-wrap items-center gap-3 pt-3 justify-center md:justify-start">
-                  <a
-                    href={visualizedResult.imageUrl}
-                    download="WeddingHelper_Your_Personalized_Masterpiece.jpg"
-                    className="px-6 py-3 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#1F181B] font-extrabold text-xs uppercase tracking-wider hover:opacity-95 transition flex items-center gap-2 shadow-lg"
-                  >
-                    <Download className="w-4 h-4 text-[#1F181B]" />
-                    <span>Download Your Masterpiece (JPG)</span>
-                  </a>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setInvitationData(prev => ({ ...prev, coverPhoto: visualizedResult.imageUrl }));
-                      setIsDemoMode(false);
-                      setIsInvitationOpen(true);
-                      setCopyToast('💌 Set your personalized photo as your Digital Invitation Cover!');
-                      setTimeout(() => setCopyToast(''), 3500);
-                    }}
-                    className="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition flex items-center gap-2 border border-white/20 cursor-pointer"
-                  >
-                    <Heart className="w-4 h-4 fill-[#D4AF37] text-[#D4AF37]" />
-                    <span>Set as Digital Invitation Cover</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Grid of Scenes */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-5">
-            {WEDDING_240_SCENES
-              .filter(s => active240Tab === 'all' || s.themeId === active240Tab)
-              .map((scene) => {
-                const isCustomPersonalized = Boolean(personalizedScenes[scene.id]);
-                const displayImage = personalizedScenes[scene.id] || scene.imagePath;
-
-                return (
-                  <div 
-                    key={scene.id}
-                    className={`group relative bg-[#1E181B] rounded-2xl overflow-hidden border transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col ${
-                      isCustomPersonalized
-                        ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/70 shadow-[0_0_25px_rgba(212,175,55,0.35)]'
-                        : 'border-white/10 hover:border-[#D4AF37]/60'
-                    }`}
-                  >
-                    {/* Image Thumbnail */}
-                    <div 
-                      className="relative aspect-[3/4] w-full overflow-hidden bg-black/40 cursor-pointer"
-                      onClick={() => setActiveLightboxScene({ ...scene, imagePath: displayImage })}
-                    >
-                      <Image
-                        src={displayImage}
-                        alt={scene.angleTitle}
-                        fill
-                        unoptimized
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 opacity-60 group-hover:opacity-40 transition-opacity" />
-
-                      {/* Top Angle & Personalization Badge */}
-                      <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start z-10">
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-black/70 text-[#D4AF37] backdrop-blur-md border border-[#D4AF37]/40 shadow-sm">
-                          Angle #{String(scene.angleNum).padStart(2, '0')}
-                        </span>
-                        {isCustomPersonalized ? (
-                          <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#1F181B] shadow-md flex items-center gap-1 ring-1 ring-white/40">
-                            <Sparkles className="w-2.5 h-2.5 fill-[#1F181B]" />
-                            <span>YOUR PHOTO LOCKED</span>
-                          </span>
-                        ) : transformingSceneId === scene.id ? (
-                          <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-gradient-to-r from-amber-400 to-yellow-500 text-black shadow-md flex items-center gap-1 ring-1 ring-white/50 animate-pulse">
-                            <RefreshCw className="w-2.5 h-2.5 animate-spin text-black" />
-                            <span>SYNTHESIZING...</span>
-                          </span>
-                        ) : (
-                          <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-black/80 text-amber-300 border border-amber-400/40 backdrop-blur-xs flex items-center gap-1">
-                            <Clock className="w-2.5 h-2.5 text-amber-300" />
-                            <span>QUEUED FOR SYNTHESIS</span>
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Zoom Icon on Hover */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                        <div className="w-10 h-10 rounded-full bg-black/70 text-[#D4AF37] flex items-center justify-center border border-[#D4AF37]/50 shadow-xl">
-                          <Eye className="w-5 h-5" />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Card Footer Details */}
-                    <div className="p-3 bg-[#1A1517] border-t border-white/5 flex flex-col justify-between flex-1">
-                      <div>
-                        <p className="text-white font-medium text-xs truncate" title={scene.angleTitle}>
-                          {scene.angleTitle}
-                        </p>
-                        <p className="text-white/50 text-[10px] truncate mt-0.5">
-                          {scene.themeTitle.split(' ')[0]} · {scene.destination.split(',')[0]}
-                        </p>
-                      </div>
-
-                      <div className="flex flex-col gap-1.5 mt-2.5 pt-2 border-t border-white/5">
-                        {!isCustomPersonalized && (
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleTransformSingleScene(scene);
-                            }}
-                            disabled={transformingSceneId === scene.id}
-                            className="w-full py-1.5 px-2 rounded-lg bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#1F181B] text-[10px] font-extrabold uppercase tracking-wider transition hover:opacity-95 flex items-center justify-center gap-1 shadow-md cursor-pointer disabled:opacity-50"
-                          >
-                            {transformingSceneId === scene.id ? (
-                              <>
-                                <RefreshCw className="w-3 h-3 animate-spin text-[#1F181B]" />
-                                <span>Synthesizing...</span>
-                              </>
-                            ) : (
-                              <>
-                                <Sparkles className="w-3 h-3 fill-[#1F181B] text-[#1F181B]" />
-                                <span>Synthesize with My Face</span>
-                              </>
-                            )}
-                          </button>
-                        )}
-
-                        <div className="flex items-center gap-1.5">
-                          <a
-                            href={displayImage}
-                            download={`WeddingHelper_${scene.themeId}_Angle_${scene.angleNum}.jpg`}
-                            className="flex-1 py-1.5 px-2 rounded-lg bg-white/10 hover:bg-white/20 text-white/90 text-[10px] font-bold uppercase tracking-wider transition text-center flex items-center justify-center gap-1"
-                          >
-                            <Download className="w-3 h-3 text-[#D4AF37]" />
-                            <span>JPG</span>
-                          </a>
-
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setInvitationData(prev => ({ ...prev, coverPhoto: displayImage }));
-                              setIsDemoMode(false);
-                              setIsInvitationOpen(true);
-                              setCopyToast(`💌 Set "${scene.angleTitle}" as your Invitation Cover!`);
-                              setTimeout(() => setCopyToast(''), 3500);
-                            }}
-                            className="flex-1 py-1.5 px-2 rounded-lg bg-[#D4AF37]/20 hover:bg-[#D4AF37]/30 text-[#D4AF37] text-[10px] font-bold uppercase tracking-wider transition text-center flex items-center justify-center gap-1 cursor-pointer"
-                            title="Set as Invitation Cover"
-                          >
-                            <Heart className="w-3 h-3 fill-[#D4AF37]" />
-                            <span>Invite</span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
           </div>
         </div>
       </section>
-
-      {/* Lightbox Zoom Modal (Always functional when activeLightboxScene is selected) */}
-      {activeLightboxScene && (
-        <div className="fixed inset-0 z-60 bg-black/95 backdrop-blur-2xl flex items-center justify-center p-4">
-          <button
-            type="button"
-            onClick={() => setActiveLightboxScene(null)}
-            className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition border border-white/20 z-20 cursor-pointer"
-          >
-            <X className="w-6 h-6" />
-          </button>
-
-          <div className="relative max-w-5xl w-full h-[85vh] flex flex-col items-center justify-center">
-            <div className="relative w-full h-full">
-              <Image
-                src={activeLightboxScene.imagePath}
-                alt={activeLightboxScene.angleTitle}
-                fill
-                unoptimized
-                className="object-contain"
-              />
-            </div>
-
-            <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-4 w-full px-4 text-white">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">
-                  Angle #{String(activeLightboxScene.angleNum).padStart(2, '0')} · {activeLightboxScene.themeTitle}
-                </span>
-                <h5 className="text-lg font-serif">{activeLightboxScene.angleTitle}</h5>
-                <p className="text-xs text-white/60">{activeLightboxScene.venueName} · {activeLightboxScene.destination}</p>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <a
-                  href={activeLightboxScene.imagePath}
-                  download={`WeddingHelper_${activeLightboxScene.themeId}_Angle_${activeLightboxScene.angleNum}.jpg`}
-                  className="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition flex items-center gap-2 border border-white/20"
-                >
-                  <Download className="w-4 h-4 text-[#D4AF37]" />
-                  <span>Download JPG</span>
-                </a>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setInvitationData(prev => ({ ...prev, coverPhoto: activeLightboxScene.imagePath }));
-                    setActiveLightboxScene(null);
-                    setIsDemoMode(false);
-                    setIsInvitationOpen(true);
-                    setCopyToast(`💌 Set "${activeLightboxScene.angleTitle}" as your Invitation Cover!`);
-                    setTimeout(() => setCopyToast(''), 3500);
-                  }}
-                  className="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#B85E55] text-white font-bold text-xs uppercase tracking-wider transition flex items-center gap-2 shadow-lg cursor-pointer"
-                >
-                  <Heart className="w-4 h-4 fill-white" />
-                  <span>Set as Invitation Cover</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* 5. Mobile Wedding Invitation Kit Modal (Gated for $79 The Grand 12 VIP Pass) */}
       {isInvitationOpen && (() => {
@@ -3759,16 +3435,12 @@ export default function WeddingHelperPage() {
             &ldquo;Every love story is beautiful, but yours should be timeless.&rdquo;
           </p>
           <div className="flex items-center gap-6 text-[#8A7977] font-medium">
-            <button 
-              type="button"
-              onClick={() => {
-                const el = document.getElementById('masterpiece-gallery-section');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
+            <Link 
+              href="/weddinghelper/gallery"
               className="hover:text-[#1F181B] transition cursor-pointer"
             >
               240 Masterpiece Portfolio
-            </button>
+            </Link>
             <button 
               type="button"
               onClick={() => {
