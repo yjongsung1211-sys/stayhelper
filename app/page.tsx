@@ -1276,9 +1276,9 @@ const MAKEUP_LIP_PRESETS = [
 ];
 
 const MAKEUP_EYE_PRESETS = [
-  { id: "eye_1", hex: "#5B6A72", matchingLipKey: "red", name: { ko: "스모키 슬레이트", en: "Smoky Slate", ja: "スモーキースレート" } },
-  { id: "eye_2", hex: "#8C6D58", matchingLipKey: "rose", name: { ko: "웜 브라운", en: "Warm Brown", ja: "ウォームブラウン" } },
-  { id: "eye_3", hex: "#C8A282", matchingLipKey: "nude", name: { ko: "소프트 누드", en: "Soft Nude", ja: "ソフトヌード" } },
+  { id: "eye_1", hex: "#4A5A63", name: { ko: "스모키 슬레이트", en: "Smoky Slate", ja: "スモーキースレート" } },
+  { id: "eye_2", hex: "#8D5B3E", name: { ko: "웜 브라운", en: "Warm Brown", ja: "ウォームブラウン" } },
+  { id: "eye_3", hex: "#CFA47C", name: { ko: "소프트 샴페인", en: "Soft Champagne", ja: "ソフトシャンパン" } },
 ];
 
 export default function ColorHelperPage() {
@@ -2562,14 +2562,7 @@ export default function ColorHelperPage() {
                   {MAKEUP_EYE_PRESETS.map((ep) => (
                     <button
                       key={ep.id}
-                      onClick={() => {
-                        setActiveEyeTryonHex(ep.hex);
-                        if (ep.matchingLipKey) {
-                          setSelectedLipKey(ep.matchingLipKey);
-                          const matchingLip = MAKEUP_LIP_PRESETS.find(lp => lp.colorKey === ep.matchingLipKey);
-                          if (matchingLip) setActiveLipTryonHex(matchingLip.hex);
-                        }
-                      }}
+                      onClick={() => setActiveEyeTryonHex(ep.hex)}
                       className={`w-7 h-7 rounded-full border-2 transition cursor-pointer ${
                         activeEyeTryonHex === ep.hex ? "border-purple-600 scale-110 ring-2 ring-purple-300" : "border-white"
                       }`}
