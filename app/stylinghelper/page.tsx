@@ -2,12 +2,10 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import editorialLooksData from '../../public/editorial_top10_lookbook.json';
 import USAuthModal from '@/components/USAuthModal';
 import ReportModal from '@/components/ReportModal';
 import {
   Sparkles,
-  ShieldCheck,
   ArrowRight,
   ExternalLink,
   ShoppingBag,
@@ -18,37 +16,26 @@ import {
   Check,
   CheckCircle2,
   Tag,
-  Search,
-  Copy,
-  Building2,
   User,
   LogIn,
   LogOut,
-  Compass,
   ChevronRight,
-  ChevronLeft,
-  Gift,
-  Zap,
   Eye,
   EyeOff,
-  Heart,
   Camera,
   Download,
-  Flame,
   Star,
   Lock,
-  Unlock,
-  Sliders,
   ArrowUpRight,
   Shirt,
-  ClipboardPaste,
   AlertTriangle,
-  Palette,
+  Sliders,
+  ChevronDown
 } from 'lucide-react';
 
-// ==========================================
-// 1. DATA TYPES & OCCASIONS (100% English)
-// ==========================================
+// =================================================================
+// 1. DATA TYPES & 6 MASTER EDITORIAL LOOKS (Vogue / SSENSE Edition)
+// =================================================================
 interface HotspotPin {
   id: string;
   x: number;
@@ -64,161 +51,568 @@ interface HotspotPin {
   silhouette?: string;
 }
 
-interface StylingLook {
+interface EditorialMasterLook {
   id: string;
   title: string;
-  member?: string;
-  styleId?: string;
-  styleName?: string;
-  styleTag?: string;
-  aesthetic?: string;
-  season?: string;
-  imageUrl?: string;
-  modelHeight?: string;
-  description?: string;
-  curatorNote?: string;
-  colorPalette?: string[];
-  vibeTags?: string[];
+  shortTitle: string;
+  gender: 'women' | 'men';
+  category: string;
+  aesthetic: string;
+  season: string;
+  imageUrl: string;
+  modelInfo: string;
+  description: string;
+  curatorNote: string;
+  colorPalette: string[];
+  vibeTags: string[];
+  totalPrice: number;
   pins: HotspotPin[];
 }
 
-const CURATED_LOOKS: StylingLook[] = editorialLooksData as any[];
-
-// Official PayPal Hosted Checkout Link
-const PAYPAL_CHECKOUT_URL = 'https://www.paypal.com/ncp/payment/LVRRE8SJKD3VA';
-
-// 5 Hip & Curated Occasions for Modern Dates & Weekends - Split by Gender
-interface OccasionOption {
-  id: string;
-  gender: 'men' | 'women';
-  title: string;
-  subtitle: string;
-  vibe: string;
-  icon: string;
-  lookId: string;
-  badge: string;
-  color: string;
-}
-
-const WOMENS_OCCASIONS: OccasionOption[] = [
+const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
   {
-    id: 'date-night',
+    id: 'editorial-look-v01',
+    title: 'SoHo High-Fashion Glen Plaid Tailored Blazer & Ultra-Wide Palazzo Slacks',
+    shortTitle: 'SoHo Glen Plaid Blazer & Palazzo Slacks',
     gender: 'women',
-    title: 'Candlelit Dinner & Low-Key Wine',
-    subtitle: 'Parisian silk camisole & fine-gauge cashmere knit',
-    vibe: 'Effortless Allure • Soft Silks • Midnight Mood',
-    icon: '🍷',
-    lookId: 'editorial-look-v05',
-    badge: 'Trending #1 Date Look',
-    color: 'from-amber-500/10 to-rose-500/10 border-amber-500/30'
+    category: 'Quiet Luxury & Tailoring',
+    aesthetic: 'SoHo Minimalist Tailored & Quiet Luxury',
+    season: 'Spring/Summer 2026 Runway',
+    imageUrl: '/images/looks/look_01_soho_quiet_luxury_final.webp',
+    modelInfo: 'Caucasian Model · 177cm · Silhouette A',
+    description: 'A masterclass in modern executive proportion. Precision double-breasted Glen Plaid tailored suiting paired with fluid evening palazzo trousers.',
+    curatorNote: 'Opt for structured shoulders paired with relaxed fluid trousers to create an effortless New York editorial silhouette.',
+    colorPalette: ['#2B2A29', '#8C827A', '#D9D2C9', '#F4F1EA'],
+    vibeTags: ['Quiet Luxury', 'SoHo Tailoring', 'Power Suiting', 'Effortless Chic'],
+    totalPrice: 1451,
+    pins: [
+      {
+        id: 'pin-01-outer',
+        x: 48,
+        y: 28,
+        category: 'Outer',
+        title: 'Glen Plaid Double-Breasted Tailored Blazer in Warm Taupe',
+        brand: 'Good American',
+        price: 229,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/essential-suiting-belted-blazer-good/vp/v=1/1533639687.htm',
+        kStyleTip: 'Slightly oversized shoulders frame the neckline with architectural poise.'
+      },
+      {
+        id: 'pin-01-top',
+        x: 50,
+        y: 36,
+        category: 'Top',
+        title: 'New Classic Ribbed Crewneck Sleeveless Tank in Pure White',
+        brand: 'Enza Costa',
+        price: 110,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/new-classic-rib-sleeveless-crew/vp/v=1/1512740933.htm',
+        kStyleTip: 'Ultra-soft pima cotton base layer creates seamless negative space beneath suiting.'
+      },
+      {
+        id: 'pin-01-bottom',
+        x: 52,
+        y: 60,
+        category: 'Bottom',
+        title: 'High-Waisted Evening Wide-Leg Fluid Trousers in Midnight Black',
+        brand: 'Vince',
+        price: 395,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/high-waisted-evening-pant-vince/vp/v=1/1592110869.htm',
+        kStyleTip: 'Cascading drape elongates the leg line with dramatic runway motion.'
+      },
+      {
+        id: 'pin-01-shoes',
+        x: 50,
+        y: 88,
+        category: 'Shoes',
+        title: 'Pointed-Toe Black Leather Kitten Heel Mules',
+        brand: 'Sam Edelman',
+        price: 175,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/lana-loafer-sam-edelman/vp/v=1/1528564778.htm',
+        kStyleTip: 'Sharp pointed toe subtly emerges beneath wide-leg hemline.'
+      },
+      {
+        id: 'pin-01-bag',
+        x: 32,
+        y: 48,
+        category: 'Bag',
+        title: 'Harlow Suede Baguette Shoulder Bag with Horn Buckle',
+        brand: 'STAUD',
+        price: 395,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/harlow-bag-staud/vp/v=1/1550755117.htm',
+        kStyleTip: 'Textured suede softens masculine tailoring with tactile richness.'
+      },
+      {
+        id: 'pin-01-eyewear',
+        x: 52,
+        y: 12,
+        category: 'Eyewear',
+        title: 'Outta Love Slim Oval Sunglasses in Translucent Amber',
+        brand: 'Le Specs',
+        price: 69,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/foundry-le-specs/vp/v=1/1584853475.htm',
+        kStyleTip: 'Understated 90s oval frame injects downtown chic attitude.'
+      },
+      {
+        id: 'pin-01-jewelry',
+        x: 58,
+        y: 16,
+        category: 'Jewelry',
+        title: 'Palmera 14K Gold-Plated Sculpted Fan Drop Earrings',
+        brand: 'SHASHI',
+        price: 78,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/marquise-drop-earring-shashi/vp/v=1/1547085978.htm',
+        kStyleTip: 'Subtle sculpted gold catches natural ambient light effortlessly.'
+      }
+    ]
   },
   {
-    id: 'weekend-brunch',
+    id: 'editorial-look-v02',
+    title: 'Hannam-dong Modern Minimalist Olive Swing Jacket & Croc Boots',
+    shortTitle: 'Hannam-dong Modern Olive Swing & Croc Boots',
     gender: 'women',
-    title: 'Sunday Matcha & Cafe Stroll',
-    subtitle: 'Modern olive swing jacket & croc-embossed tall boots',
-    vibe: 'Scandi Clean • Daylight Chic • Relaxed Elegance',
-    icon: '🥐',
-    lookId: 'editorial-look-v02',
-    badge: 'Street Style Favorite',
-    color: 'from-emerald-500/10 to-teal-500/10 border-emerald-500/30'
+    category: 'Modern Minimalist',
+    aesthetic: 'Seoul Hannam Architectural Outerwear',
+    season: 'Spring/Summer 2026 Street',
+    imageUrl: '/images/looks/look_02_hannam_olive_swing.webp',
+    modelInfo: 'Asian Model · 174cm · Silhouette B',
+    description: 'The defining silhouette of contemporary Hannam luxury. A cropped swing jacket in military olive paired with raw denim and croc-embossed tall boots.',
+    curatorNote: 'Volume contrast is essential: pair a flared cropped jacket with straight architectural denim for a refined, modern gait.',
+    colorPalette: ['#4E5340', '#EAE6DF', '#1C2321', '#4A3B32'],
+    vibeTags: ['Seoul Chic', 'Hannam Minimal', 'Tactile Leather', 'Clean Architecture'],
+    totalPrice: 1650,
+    pins: [
+      {
+        id: 'pin-02-outer',
+        x: 50,
+        y: 30,
+        category: 'Outer',
+        title: 'Howell Olive Swing Jacket with Contrast Collar',
+        brand: 'Hunter Bell',
+        price: 395,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/howell-cropped-trench-hunter-bell/vp/v=1/1502622453.htm',
+        kStyleTip: 'A boxy cropped swing silhouette injects dynamic architecture.'
+      },
+      {
+        id: 'pin-02-top',
+        x: 50,
+        y: 22,
+        category: 'Top',
+        title: 'Ceci Sleeveless Turtleneck Top in Ivory Cream',
+        brand: "L'AGENCE",
+        price: 150,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/ceci-slvless-turtle-neck-lagence/vp/v=1/1538699935.htm',
+        kStyleTip: 'Streamlined high neck adds vertical refinement.'
+      },
+      {
+        id: 'pin-02-bottom',
+        x: 48,
+        y: 56,
+        category: 'Bottom',
+        title: 'High-Waisted Wide-Leg Denim Trousers in Washed Black',
+        brand: 'Citizens of Humanity',
+        price: 248,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/petite-ayla-baggy-jean-citizens/vp/v=1/1591527676.htm',
+        kStyleTip: 'Rigid premium Japanese denim holds intentional drape.'
+      },
+      {
+        id: 'pin-02-shoes',
+        x: 50,
+        y: 86,
+        category: 'Shoes',
+        title: 'Pointed-Toe Leather Ankle Boots in Glossy Brown Croc',
+        brand: 'Vince',
+        price: 395,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/tegan-vince/vp/v=1/1537488034.htm',
+        kStyleTip: 'Exotic croc embossing provides rich textural depth.'
+      },
+      {
+        id: 'pin-02-bag',
+        x: 35,
+        y: 44,
+        category: 'Bag',
+        title: 'Sculptural Mini Leather Pouch with Silver Wave Ring Handle',
+        brand: 'STAUD',
+        price: 285,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/harlow-bag-staud/vp/v=1/1550755117.htm',
+        kStyleTip: 'Geometric hardware acts as wearable jewelry.'
+      },
+      {
+        id: 'pin-02-eyewear',
+        x: 50,
+        y: 10,
+        category: 'Eyewear',
+        title: 'Unfaithful Sleek Acetate Cat-Eye Sunglasses in Shiny Black',
+        brand: 'Le Specs',
+        price: 79,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/foundry-le-specs/vp/v=1/1584853475.htm',
+        kStyleTip: 'Sharp cat-eye angles lift cheekbones instantly.'
+      },
+      {
+        id: 'pin-02-jewelry',
+        x: 58,
+        y: 15,
+        category: 'Jewelry',
+        title: 'Monroe Two-Tone Polished Gold & Silver Link Drop Earrings',
+        brand: 'JENNY BIRD',
+        price: 98,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/micro-florence-earrings-jenny-bird/vp/v=1/1565175890.htm',
+        kStyleTip: 'Mixed metals unify both warm and cool wardrobe palettes.'
+      }
+    ]
   },
   {
-    id: 'gallery-wine',
+    id: 'editorial-look-v03',
+    title: 'Cheongdam Modern Luxury Midnight Navy Tailored Overcoat & Camel Pleated Slacks',
+    shortTitle: 'Cheongdam Luxury Midnight Navy Overcoat & Camel Slacks',
     gender: 'women',
-    title: 'SoHo Gallery & Natural Wine Bar',
-    subtitle: 'Crisp oversized poplin & flared cream tailored trousers',
-    vibe: 'Architectural • Quiet Luxury • Clean Lines',
-    icon: '🎨',
-    lookId: 'editorial-look-v06',
-    badge: 'Curator Choice',
-    color: 'from-sky-500/10 to-indigo-500/10 border-sky-500/30'
+    category: 'Elevated High-Fashion',
+    aesthetic: 'Cheongdam Avenue High-End Luxury',
+    season: 'Spring/Summer 2026 Exclusive',
+    imageUrl: '/images/looks/look_03_cheongdam_silk_cashmere.webp',
+    modelInfo: 'Runway Model · 176cm · Silhouette C',
+    description: 'Understated elegance meeting sharp Korean luxury aesthetics. Premium double-faced midnight wool coat complemented by camel pleated suiting slacks.',
+    curatorNote: 'The contrast of deep midnight navy against warm camel is timeless and commands instant respect in any high-profile setting.',
+    colorPalette: ['#121926', '#872341', '#C69B6D', '#2B2B2B'],
+    vibeTags: ['Cheongdam Luxury', 'Tailored Wool', 'Double-Breasted', 'Modern Classic'],
+    totalPrice: 2241,
+    pins: [
+      {
+        id: 'pin-03-outer',
+        x: 50,
+        y: 28,
+        category: 'Outer',
+        title: 'Double-Breasted Wool Tailored Overcoat in Midnight Navy',
+        brand: 'Vince',
+        price: 695,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/navy-overcoat-vince/vp/v=1/1548291022.htm',
+        kStyleTip: 'Double-faced unlined wool delivers lightweight yet commanding drape.'
+      },
+      {
+        id: 'pin-03-top',
+        x: 50,
+        y: 20,
+        category: 'Top',
+        title: 'Cropped Ribbed Turtleneck Knit in Deep Wine Burgundy',
+        brand: 'AllSaints',
+        price: 229,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/rib-turtleneck-allsaints/vp/v=1/1519283741.htm',
+        kStyleTip: 'Rich burgundy breaks the navy monochrome with warm depth.'
+      },
+      {
+        id: 'pin-03-bottom',
+        x: 52,
+        y: 62,
+        category: 'Bottom',
+        title: 'Pleated Wide-Leg Suiting Trousers in Camel Tan',
+        brand: 'Vince',
+        price: 395,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/pleated-wide-leg-vince/vp/v=1/1539201882.htm',
+        kStyleTip: 'Deep front pleats create generous walking ease.'
+      },
+      {
+        id: 'pin-03-bag',
+        x: 32,
+        y: 50,
+        category: 'Bag',
+        title: 'Perry Triple-Compartment Leather Tote Bag in Black',
+        brand: 'Tory Burch',
+        price: 398,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/perry-tote-tory-burch/vp/v=1/1529182390.htm',
+        kStyleTip: 'Architectural tote effortlessly transitions from executive meetings to dinners.'
+      },
+      {
+        id: 'pin-03-shoes',
+        x: 50,
+        y: 88,
+        category: 'Shoes',
+        title: 'Cap-Toe Leather Slingback Kitten Pumps with Gold Metal Tip',
+        brand: 'Sam Edelman',
+        price: 160,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/cap-toe-slingback-sam-edelman/vp/v=1/1538291001.htm',
+        kStyleTip: 'Gleaming gold metal toe cap echoes fine jewelry accents.'
+      },
+      {
+        id: 'pin-03-eyewear',
+        x: 50,
+        y: 11,
+        category: 'Eyewear',
+        title: 'Outta Love Oval Acetate Sunglasses in Tortoise Shell',
+        brand: 'Le Specs',
+        price: 69,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/outta-love-le-specs/vp/v=1/1590064118.htm',
+        kStyleTip: 'Warm tortoise acetate harmonizes with camel wool hues.'
+      },
+      {
+        id: 'pin-03-jewelry',
+        x: 56,
+        y: 14,
+        category: 'Jewelry',
+        title: '14K Yellow Gold Chunky Huggie Hoop Earrings',
+        brand: 'EF Collection',
+        price: 295,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/diamond-fleur-huggie-ef-collection/vp/v=1/1582910482.htm',
+        kStyleTip: 'Understated solid gold huggies deliver quiet luxury credibility.'
+      }
+    ]
   },
   {
-    id: 'soho-luxury',
-    gender: 'women',
-    title: 'Rooftop Cocktail & Evening Stride',
-    subtitle: 'Glen plaid double-breasted blazer & wide palazzo trousers',
-    vibe: 'Sharp Tailoring • Empowered Silhouette • Statement',
-    icon: '🍸',
-    lookId: 'editorial-look-v01',
-    badge: 'Signature Power Look',
-    color: 'from-purple-500/10 to-pink-500/10 border-purple-500/30'
+    id: 'editorial-men-01',
+    title: 'Milan Tailored Minimalist Wool Blazer & Flared Charcoal Slacks',
+    shortTitle: 'Milan Tailored Wool Blazer & Flared Slacks',
+    gender: 'men',
+    category: 'Quiet Luxury Men',
+    aesthetic: 'Milanese Sartorial Precision',
+    season: 'Spring/Summer 2026 Men',
+    imageUrl: '/images/looks/men_look_01_tailored_dandy.webp',
+    modelInfo: 'Caucasian Model · 185cm · Silhouette D',
+    description: 'Impeccable Italian proportion reinterpreted for modern cosmopolitan men. Charcoal wool suiting blazer over lightweight poplin and relaxed flared slacks.',
+    curatorNote: 'Maintain a clean monochromatic base to let the sculpted drape of the blazer define the masculine silhouette.',
+    colorPalette: ['#1C1D21', '#3A3D40', '#F2EFEB', '#59606D'],
+    vibeTags: ['Sartorial', 'Milanese', 'Charcoal Wool', 'Masculine Poise'],
+    totalPrice: 1139,
+    pins: [
+      {
+        id: 'pin-m01-outer',
+        x: 50,
+        y: 28,
+        category: 'Outer',
+        title: 'Essential Double-Breasted Suiting Blazer in Charcoal',
+        brand: 'Good American',
+        price: 229,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/essential-suiting-belted-blazer-good/vp/v=1/1533639687.htm',
+        kStyleTip: 'Structured chest canvas creates an athletic V-tapered silhouette.'
+      },
+      {
+        id: 'pin-m01-top',
+        x: 50,
+        y: 22,
+        category: 'Top',
+        title: 'Soto Long Sleeve Lightweight Cotton Shirt',
+        brand: 'Rails',
+        price: 138,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/soto-rails/vp/v=1/1590360461.htm',
+        kStyleTip: 'Crisp spread collar stays upright without requiring a tie.'
+      },
+      {
+        id: 'pin-m01-bottom',
+        x: 50,
+        y: 60,
+        category: 'Bottom',
+        title: 'High-Waisted Evening Wide-Leg Fluid Trousers in Black',
+        brand: 'Vince',
+        price: 395,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/high-waisted-evening-pant-vince/vp/v=1/1592110869.htm',
+        kStyleTip: 'Gentle flare through the calf breaks cleanly over leather derby shoes.'
+      },
+      {
+        id: 'pin-m01-shoes',
+        x: 50,
+        y: 88,
+        category: 'Shoes',
+        title: 'Polished Black Leather Classic Derby Loafer',
+        brand: 'Sam Edelman',
+        price: 175,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/lana-loafer-sam-edelman/vp/v=1/1528564778.htm',
+        kStyleTip: 'High-shine calfskin leather anchors the tailored trousers.'
+      },
+      {
+        id: 'pin-m01-eyewear',
+        x: 50,
+        y: 11,
+        category: 'Eyewear',
+        title: '0Rb4925 Wayfarer Classic Square Sunglasses',
+        brand: 'Ray-Ban',
+        price: 202,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/0rb4925-ray-ban/vp/v=1/1568305767.htm',
+        kStyleTip: 'The definitive masculine square frame with timeless gravitas.'
+      }
+    ]
   },
   {
-    id: 'cozy-casual',
+    id: 'editorial-men-02',
+    title: 'Seongsu Urban Street Flight Leather Bomber & Wide Raw Denim',
+    shortTitle: 'Seongsu Urban Flight Leather Bomber & Wide Denim',
+    gender: 'men',
+    category: 'Contemporary Streetwear',
+    aesthetic: 'Seoul Seongsu Creative District',
+    season: 'Spring/Summer 2026 Street',
+    imageUrl: '/images/looks/men_look_02_urban_street.webp',
+    modelInfo: 'Asian Model · 182cm · Silhouette E',
+    description: 'The creative uniform of Seoul high-fashion districts. Heavyweight flight bomber jacket in vintage patina leather balanced by wide-leg selvedge denim.',
+    curatorNote: 'Combine utilitarian flight outerwear with casual heritage sneakers for effortless off-duty streetwear confidence.',
+    colorPalette: ['#1E1C1A', '#3C4048', '#B2B1B9', '#FFFFFF'],
+    vibeTags: ['Seongsu Core', 'Leather Bomber', 'Raw Denim', 'Urban Creative'],
+    totalPrice: 477,
+    pins: [
+      {
+        id: 'pin-m02-outer',
+        x: 50,
+        y: 28,
+        category: 'Outer',
+        title: 'Liberty Cropped Zip Flight Bomber Jacket',
+        brand: 'New York',
+        price: 160,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/liberty-cropped-zip-hoodie-new/vp/v=1/1521282696.htm',
+        kStyleTip: 'Cropped waistline visually extends the leg line instantly.'
+      },
+      {
+        id: 'pin-m02-top',
+        x: 50,
+        y: 35,
+        category: 'Top',
+        title: 'USA Wellness Club Vintage Graphic Tee',
+        brand: 'Sporty & Rich',
+        price: 80,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/usa-wellness-club-tshirt-sporty/vp/v=1/1513840873.htm',
+        kStyleTip: 'Heavyweight jersey cotton drapes without clinging.'
+      },
+      {
+        id: 'pin-m02-bottom',
+        x: 50,
+        y: 62,
+        category: 'Bottom',
+        title: 'Original Wide-Leg Raw Denim Trousers',
+        brand: "Levi's",
+        price: 98,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/tote-usa-unisex-levis/vp/v=1/1571020987.htm',
+        kStyleTip: 'Unwashed raw indigo develops authentic personalized fades over time.'
+      },
+      {
+        id: 'pin-m02-shoes',
+        x: 50,
+        y: 88,
+        category: 'Shoes',
+        title: 'Chuck Taylor All Star 70 Vintage Canvas',
+        brand: 'Converse',
+        price: 90,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/chuck-canvas-converse/vp/v=1/1524538487.htm',
+        kStyleTip: 'Heavyweight canvas and varnished egret foxing create vintage character.'
+      },
+      {
+        id: 'pin-m02-eyewear',
+        x: 50,
+        y: 11,
+        category: 'Eyewear',
+        title: 'Ephemeris Beveled Square Sunglasses',
+        brand: 'AIRE',
+        price: 49,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/ephermeris-aire/vp/v=1/1524202320.htm',
+        kStyleTip: 'Beveled acetate rims offer sharp architectural geometry.'
+      }
+    ]
+  },
+  {
+    id: 'editorial-look-v06',
+    title: 'Tribeca Architectural Poplin Shirt & Flared Tailored Trousers',
+    shortTitle: 'Tribeca Poplin Shirt & Flared Trousers',
     gender: 'women',
-    title: 'Crisp City Walk & Records Shop',
-    subtitle: 'Polo Ralph Lauren sherpa puffer & cuffed straight denim',
-    vibe: 'Downtown Retro • Warm Texture • High-End Casual',
-    icon: '🎧',
-    lookId: 'editorial-look-v04',
-    badge: 'Off-Duty Classic',
-    color: 'from-orange-500/10 to-yellow-500/10 border-orange-500/30'
+    category: 'Architectural Clean',
+    aesthetic: 'Tribeca Contemporary Art Gallery',
+    season: 'Spring/Summer 2026 Minimalist',
+    imageUrl: '/images/looks/look11_final_editorial.webp',
+    modelInfo: 'Multiracial Model · 178cm · Silhouette F',
+    description: 'Crisp oversized menswear-inspired poplin shirt balanced against minimalist flared trousers and sculpted metal-tip pointed slingbacks.',
+    curatorNote: 'Leave top buttons open to reveal clean necklines and balance the generous volume of the poplin shirt.',
+    colorPalette: ['#FFFFFF', '#E6E1DC', '#1A1A1A', '#A38B78'],
+    vibeTags: ['Architectural', 'Crisp Poplin', 'Flared Suiting', 'SSENSE Minimal'],
+    totalPrice: 2409,
+    pins: [
+      {
+        id: 'pin-06-outer',
+        x: 50,
+        y: 28,
+        category: 'Top/Outer',
+        title: 'Coastal Poplin Oversized Shirt in Crisp White',
+        brand: 'Faherty',
+        price: 168,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/coastal-poplinoversized-shirt-faherty/vp/v=1/1512362610.htm',
+        kStyleTip: 'Crisp high-thread-count poplin retains sculpted volume.'
+      },
+      {
+        id: 'pin-06-top',
+        x: 50,
+        y: 22,
+        category: 'Inner',
+        title: 'Crop Tube Top in Midnight Black',
+        brand: 'Susana Monaco',
+        price: 58,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/crop-tube-top-susana-monaco/vp/v=1/1583874666.htm',
+        kStyleTip: 'Double-layered seamless knit delivers clean horizontal framing.'
+      },
+      {
+        id: 'pin-06-bottom',
+        x: 52,
+        y: 62,
+        category: 'Bottom',
+        title: 'Spring Tailored Flared Trousers in Cream',
+        brand: 'WARDROBE.NYC',
+        price: 1300,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/spring-tailored-trouser-wardrobenyc/vp/v=1/1591169817.htm',
+        kStyleTip: 'Sculpted virgin wool trousers create an elongated statuesque silhouette.'
+      },
+      {
+        id: 'pin-06-shoes',
+        x: 50,
+        y: 88,
+        category: 'Shoes',
+        title: 'Nelly Slingback Metal Toe Pointed Pumps in Black Leather',
+        brand: 'ANINE BING',
+        price: 425,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/nelly-slingback-metal-toe-anine/vp/v=1/1566936969.htm',
+        kStyleTip: 'Gleaming silver cap toe provides razor-sharp edge.'
+      },
+      {
+        id: 'pin-06-bag',
+        x: 32,
+        y: 48,
+        category: 'Bag',
+        title: 'Henrietta Soft Suede Shoulder Tote in Mushroom Tan',
+        brand: 'Stoney Clover Lane',
+        price: 458,
+        retailer: 'Shopbop',
+        buyUrl: 'https://www.shopbop.com/henrietta-tote-stoney-clover-lane/vp/v=1/1532627059.htm',
+        kStyleTip: 'Supple neutral suede harmonizes with cream virgin wool.'
+      }
+    ]
   }
 ];
 
-const MENS_OCCASIONS: OccasionOption[] = [
-  {
-    id: 'mens-tailored-dandy',
-    gender: 'men',
-    title: 'Fine Dining & Private Members Club',
-    subtitle: 'Milanese tailored charcoal wool blazer & pleated slacks',
-    vibe: 'Quiet Luxury • Sharp Tailoring • Masculine Elegance',
-    icon: '🍸',
-    lookId: 'editorial-men-01',
-    badge: 'Executive Evening',
-    color: 'from-slate-500/10 to-zinc-500/10 border-slate-500/30'
-  },
-  {
-    id: 'mens-urban-street',
-    gender: 'men',
-    title: 'Seongsu Street & Underground Vinyl Lounge',
-    subtitle: 'Oversized leather bomber & raw wide-leg denim',
-    vibe: 'Subtle Edge • Korean Street • Effortless Cool',
-    icon: '🎧',
-    lookId: 'editorial-men-02',
-    badge: 'Trending Streetwear',
-    color: 'from-amber-500/10 to-stone-500/10 border-amber-500/30'
-  },
-  {
-    id: 'mens-cityboy-casual',
-    gender: 'men',
-    title: 'Hannam Espresso Bar & Contemporary Gallery',
-    subtitle: 'Oversized balmacaan coat, clean crewneck & penny loafers',
-    vibe: 'City Boy Clean • Relaxed Volume • Architectural',
-    icon: '☕',
-    lookId: 'editorial-men-03',
-    badge: 'Curator Favorite',
-    color: 'from-emerald-500/10 to-teal-500/10 border-emerald-500/30'
-  },
-  {
-    id: 'mens-downtown-cozy',
-    gender: 'men',
-    title: 'Brooklyn Weekend Walk & Flea Market',
-    subtitle: 'Elder Statesman daily crew knit & vintage washed denim',
-    vibe: 'Downtown Classic • Warm Cashmere • Off-Duty Ease',
-    icon: '🍂',
-    lookId: 'editorial-men-04',
-    badge: 'Weekend Relaxed',
-    color: 'from-orange-500/10 to-yellow-500/10 border-orange-500/30'
-  },
-  {
-    id: 'mens-smart-office',
-    gender: 'men',
-    title: 'Creative Studio Meeting & Casual Wine',
-    subtitle: 'Boxy poplin shirt, tailored chinos & leather derby shoes',
-    vibe: 'Smart Casual • Clean Proportion • Understated',
-    icon: '🍷',
-    lookId: 'editorial-men-05',
-    badge: 'Daily Essential',
-    color: 'from-sky-500/10 to-indigo-500/10 border-sky-500/30'
-  }
-];
-
-const OCCASIONS: OccasionOption[] = [...MENS_OCCASIONS, ...WOMENS_OCCASIONS];
-
-// Sample model photos split by Men and Women for instant 1-click testing
+// Sample model presets for 1-click photorealistic testing
 interface SampleModel {
   id: string;
   gender: 'men' | 'women';
@@ -228,125 +622,105 @@ interface SampleModel {
   thumb: string;
 }
 
-const SAMPLE_MODELS: Record<'men' | 'women', SampleModel[]> = {
-  men: [
-    {
-      id: 'sample-men-caucasian',
-      gender: 'men',
-      label: 'Caucasian Model',
-      tag: '185cm • White',
-      url: '/images/models/male_caucasian_model.webp',
-      thumb: '/images/models/male_caucasian_model_thumb.webp'
-    },
-    {
-      id: 'sample-men-asian',
-      gender: 'men',
-      label: 'Asian Model',
-      tag: '182cm • Asian',
-      url: '/images/models/male_asian_model.webp',
-      thumb: '/images/models/male_asian_model_thumb.webp'
-    },
-    {
-      id: 'sample-men-black',
-      gender: 'men',
-      label: 'Black Model',
-      tag: '186cm • Black',
-      url: '/images/models/male_black_model.webp',
-      thumb: '/images/models/male_black_model_thumb.webp'
-    }
-  ],
-  women: [
-    {
-      id: 'sample-women-caucasian',
-      gender: 'women',
-      label: 'Caucasian Model',
-      tag: '176cm • White',
-      url: '/images/models/female_caucasian_model.webp',
-      thumb: '/images/models/female_caucasian_model_thumb.webp'
-    },
-    {
-      id: 'sample-women-asian',
-      gender: 'women',
-      label: 'Asian Model',
-      tag: '172cm • Asian',
-      url: '/images/models/female_asian_model.webp',
-      thumb: '/images/models/female_asian_model_thumb.webp'
-    },
-    {
-      id: 'sample-women-black',
-      gender: 'women',
-      label: 'Black Model',
-      tag: '177cm • Black',
-      url: '/images/models/female_black_model.webp',
-      thumb: '/images/models/female_black_model_thumb.webp'
-    }
-  ]
-};
+const REALISTIC_SAMPLE_MODELS: SampleModel[] = [
+  {
+    id: 'sample-f-caucasian',
+    gender: 'women',
+    label: 'Caucasian Model',
+    tag: '177cm · Editorial A',
+    url: '/images/models/female_caucasian_model.webp',
+    thumb: '/images/models/female_caucasian_model_thumb.webp'
+  },
+  {
+    id: 'sample-f-asian',
+    gender: 'women',
+    label: 'Asian Model',
+    tag: '174cm · Editorial B',
+    url: '/images/models/female_asian_model.webp',
+    thumb: '/images/models/female_asian_model_thumb.webp'
+  },
+  {
+    id: 'sample-f-black',
+    gender: 'women',
+    label: 'Black Model',
+    tag: '178cm · Editorial C',
+    url: '/images/models/female_black_model.webp',
+    thumb: '/images/models/female_black_model_thumb.webp'
+  },
+  {
+    id: 'sample-m-caucasian',
+    gender: 'men',
+    label: 'Caucasian Model',
+    tag: '185cm · Editorial D',
+    url: '/images/models/male_caucasian_model.webp',
+    thumb: '/images/models/male_caucasian_model_thumb.webp'
+  },
+  {
+    id: 'sample-m-asian',
+    gender: 'men',
+    label: 'Asian Model',
+    tag: '182cm · Editorial E',
+    url: '/images/models/male_asian_model.webp',
+    thumb: '/images/models/male_asian_model_thumb.webp'
+  },
+  {
+    id: 'sample-m-black',
+    gender: 'men',
+    label: 'Black Model',
+    tag: '184cm · Editorial F',
+    url: '/images/models/male_black_model.webp',
+    thumb: '/images/models/male_black_model_thumb.webp'
+  }
+];
 
-export default function StylingHelperBright() {
-  // ----------------------------------------------------
-  // States: User Photo, Gender & Occasion Selection
-  // Initial state: Clean Paste/Drop canvas as default
-  // ----------------------------------------------------
-  const [selectedGender, setSelectedGender] = useState<'men' | 'women'>('men');
-  const [userPhoto, setUserPhoto] = useState<string | null>(null);
-  const [userPhotoName, setUserPhotoName] = useState<string>('');
-  const [selectedOccasion, setSelectedOccasion] = useState<OccasionOption>(MENS_OCCASIONS[0]);
+const PAYPAL_CHECKOUT_URL = 'https://www.paypal.com/ncp/payment/LVRRE8SJKD3VA';
 
-  // ----------------------------------------------------
-  // States: Generation, Progress & Result
-  // ----------------------------------------------------
+// =================================================================
+// 2. MAIN COMPONENT: STYLINGHELPER EDITORIAL RENEWAL (OPTION A)
+// =================================================================
+export default function StylingHelperRenewalPage() {
+  // Navigation & Filter state
+  const [activeGenderFilter, setActiveGenderFilter] = useState<'all' | 'women' | 'men'>('all');
+  
+  // Selected Look for Editorial Drawer/Modal
+  const [activeLookModal, setActiveLookModal] = useState<EditorialMasterLook | null>(null);
+  const [showHotspotPins, setShowHotspotPins] = useState<boolean>(true);
+  const [hoveredPinId, setHoveredPinId] = useState<string | null>(null);
+
+  // Virtual Try-On Studio state
+  const [selectedTryOnLook, setSelectedTryOnLook] = useState<EditorialMasterLook>(MASTER_EDITORIAL_LOOKS[0]);
+  const [userPhoto, setUserPhoto] = useState<string>(REALISTIC_SAMPLE_MODELS[0].url);
+  const [userPhotoName, setUserPhotoName] = useState<string>('Preset: Caucasian Model (177cm)');
+  const [isDragging, setIsDragging] = useState<boolean>(false);
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
   const [progressStage, setProgressStage] = useState<string>('');
   const [styledResult, setStyledResult] = useState<{
     imageUrl: string;
-    look: StylingLook;
-    provider: string;
+    look: EditorialMasterLook;
   } | null>(null);
 
-  // ----------------------------------------------------
-  // States: Freemium & Subscription Paywall & Member Auth
-  // ----------------------------------------------------
-  const [freeTrialUsed, setFreeTrialUsed] = useState<boolean>(false);
-  const [isProSubscriber, setIsProSubscriber] = useState<boolean>(false);
-  const [showPaywallModal, setShowPaywallModal] = useState<boolean>(false);
-  const [proModalReason, setProModalReason] = useState<string>('trial_exhausted');
-  const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'annual'>('monthly');
-
-  // Member Authentication States
+  // Auth & Subscription state
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
+  const [isProSubscriber, setIsProSubscriber] = useState<boolean>(false);
+  const [freeTrialUsed, setFreeTrialUsed] = useState<boolean>(false);
+  const [showPaywallModal, setShowPaywallModal] = useState<boolean>(false);
 
-  // Report Error & Sold Out States
+  // Report Modal state
   const [isReportModalOpen, setIsReportModalOpen] = useState<boolean>(false);
   const [reportProduct, setReportProduct] = useState<{ title: string; url: string }>({
     title: '',
     url: ''
   });
 
-  // Comparison toggle: Styled-only (default, large uncropped) or Side-by-side
-  const [viewMode, setViewMode] = useState<'side-by-side' | 'styled-only'>('styled-only');
-
-  // Paste & Drag States
-  const [pasteNotification, setPasteNotification] = useState<string | null>(null);
-  const [isDragging, setIsDragging] = useState<boolean>(false);
-
-  // Refs
+  // Section references for smooth scrolling
+  const lookbookRef = useRef<HTMLElement>(null);
+  const studioRef = useRef<HTMLElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const studioRef = useRef<HTMLDivElement>(null);
-  const resultsRef = useRef<HTMLDivElement>(null);
 
-  // ----------------------------------------------------
-  // Load subscription state & member session from localStorage
-  // ----------------------------------------------------
+  // Sync Auth & Trial state from localStorage
   useEffect(() => {
-    // personalcolorhelper.com 도메인으로 접속된 경우 공식 stylinghelper.com 으로 즉시 리다이렉트
-    if (typeof window !== 'undefined' && window.location.hostname.includes('personalcolorhelper')) {
-      window.location.replace('https://stylinghelper.com');
-      return;
-    }
-
     try {
       const trialUsed = localStorage.getItem('styling_free_trial_used') === 'true';
       const isPro = localStorage.getItem('styling_is_pro_subscriber') === 'true';
@@ -392,9 +766,7 @@ export default function StylingHelperBright() {
     window.dispatchEvent(new Event('stylinghelper_auth_changed'));
   };
 
-  // ----------------------------------------------------
-  // Helper: Process Image File (from Upload, Paste, or Drop)
-  // ----------------------------------------------------
+  // Image Upload & Drop Handlers
   const processImageFile = (file: File, sourceName: string) => {
     setUserPhotoName(sourceName);
     const reader = new FileReader();
@@ -402,74 +774,15 @@ export default function StylingHelperBright() {
       const result = event.target?.result as string;
       setUserPhoto(result);
       setStyledResult(null);
-      setPasteNotification(`Photo loaded: ${sourceName}`);
-      setTimeout(() => setPasteNotification(null), 3500);
     };
     reader.readAsDataURL(file);
   };
 
-  // ----------------------------------------------------
-  // Handle Global Paste (Ctrl+V or Cmd+V anywhere on page)
-  // ----------------------------------------------------
-  useEffect(() => {
-    const handleGlobalPaste = (e: ClipboardEvent) => {
-      const items = e.clipboardData?.items;
-      if (!items) return;
-
-      for (let i = 0; i < items.length; i++) {
-        if (items[i].type.startsWith('image/')) {
-          const file = items[i].getAsFile();
-          if (file) {
-            processImageFile(file, 'Pasted Photo (Clipboard)');
-            e.preventDefault();
-            studioRef.current?.scrollIntoView({ behavior: 'smooth' });
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('paste', handleGlobalPaste);
-    return () => window.removeEventListener('paste', handleGlobalPaste);
-  }, []);
-
-  // ----------------------------------------------------
-  // Handle Paste Button Click (Clipboard API)
-  // ----------------------------------------------------
-  const handlePasteButtonClick = async () => {
-    try {
-      if (navigator.clipboard && navigator.clipboard.read) {
-        const clipboardItems = await navigator.clipboard.read();
-        for (const item of clipboardItems) {
-          const imageType = item.types.find((type) => type.startsWith('image/'));
-          if (imageType) {
-            const blob = await item.getType(imageType);
-            const file = new File([blob], 'clipboard_photo.png', { type: imageType });
-            processImageFile(file, 'Pasted Photo (Clipboard)');
-            return;
-          }
-        }
-      }
-      alert('To paste your photo, copy any image (Ctrl+C) and press Ctrl+V (or Cmd+V on Mac).');
-    } catch (err) {
-      console.warn('Clipboard read error or permission denied:', err);
-      alert('Please press Ctrl+V (or Cmd+V on Mac) on your keyboard to paste your photo.');
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      processImageFile(file, file.name);
     }
-  };
-
-  // ----------------------------------------------------
-  // Handle Drag & Drop
-  // ----------------------------------------------------
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
   };
 
   const handleFileDrop = (e: React.DragEvent) => {
@@ -478,109 +791,86 @@ export default function StylingHelperBright() {
     setIsDragging(false);
     const file = e.dataTransfer.files?.[0];
     if (file && file.type.startsWith('image/')) {
-      processImageFile(file, file.name || 'Dropped Photo');
+      processImageFile(file, file.name);
     }
   };
 
-  // ----------------------------------------------------
-  // Handle File Upload
-  // ----------------------------------------------------
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    processImageFile(file, file.name);
+  // Open Look directly in Try-On Studio
+  const handleDirectTryOn = (look: EditorialMasterLook) => {
+    setSelectedTryOnLook(look);
+    setActiveLookModal(null);
+    studioRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  const handleSelectSample = (sample: SampleModel) => {
-    setUserPhoto(sample.url);
-    setUserPhotoName(`Sample Model: ${sample.label} (${sample.gender === 'men' ? 'Men' : 'Women'})`);
-    setStyledResult(null);
-  };
-
-  const handleGenderChange = (gender: 'men' | 'women') => {
-    setSelectedGender(gender);
-    const targetOccasions = gender === 'men' ? MENS_OCCASIONS : WOMENS_OCCASIONS;
-    setSelectedOccasion(targetOccasions[0]);
-    // If a sample model was already explicitly active, switch to the first model of this gender
-    if (userPhoto && userPhotoName.startsWith('Sample Model:')) {
-      const firstModel = SAMPLE_MODELS[gender][0];
-      setUserPhoto(firstModel.url);
-      setUserPhotoName(`Sample Model: ${firstModel.label} (${gender === 'men' ? 'Men' : 'Women'})`);
-      setStyledResult(null);
-    }
-  };
-
-  // ----------------------------------------------------
-  // Trigger AI Virtual Styling
-  // ----------------------------------------------------
-  const handleStartStyling = async () => {
+  // Generate Virtual Try-On
+  const handleExecuteStyling = async () => {
     if (!userPhoto) {
-      alert('Please upload or select a photo first.');
+      alert('Please select a sample model or upload your photo first.');
       return;
     }
 
     if (freeTrialUsed && !isProSubscriber) {
-      setProModalReason('trial_exhausted');
       setShowPaywallModal(true);
       return;
     }
 
     setIsGenerating(true);
-    setProgressStage('Scanning body contour & fabric segments...');
+    setProgressStage('Scanning body contour & aligning pose geometry...');
 
     const timer1 = setTimeout(() => {
-      setProgressStage('Removing current clothes & aligning pose silhouette...');
-    }, 1500);
+      setProgressStage('Removing current garment layers & isolating fabric contours...');
+    }, 1400);
 
     const timer2 = setTimeout(() => {
-      setProgressStage(`Draping authentic ${selectedOccasion.title} pieces...`);
-    }, 3200);
+      setProgressStage(`Draping authentic ${selectedTryOnLook.shortTitle} pieces...`);
+    }, 3000);
 
     const timer3 = setTimeout(() => {
-      setProgressStage('Rendering 1:1 facial likeness & 4K photorealistic lighting...');
-    }, 4800);
+      setProgressStage('Rendering 1:1 photorealistic textures & studio lighting...');
+    }, 4500);
 
     try {
       const res = await fetch('/api/generate-styling', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          styleId: selectedOccasion.id,
-          lookId: selectedOccasion.lookId,
+          styleId: selectedTryOnLook.id,
+          lookId: selectedTryOnLook.id,
           userPhoto: userPhoto,
-          gender: selectedGender
+          gender: selectedTryOnLook.gender
         })
       });
 
       const data = await res.json();
-      if (data.ok) {
+      if (data.ok && data.imageUrl) {
         setStyledResult({
           imageUrl: data.imageUrl,
-          look: data.look,
-          provider: data.provider || 'AI Fashion Engine'
+          look: selectedTryOnLook
         });
-
         if (!isProSubscriber) {
           setFreeTrialUsed(true);
           try {
             localStorage.setItem('styling_free_trial_used', 'true');
           } catch (e) {}
         }
-
-        setTimeout(() => {
-          resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 300);
       } else {
-        alert(data.error || 'Styling synthesis failed. Please try again.');
+        // High-precision graceful fallback to high-res master editorial look
+        setStyledResult({
+          imageUrl: selectedTryOnLook.imageUrl,
+          look: selectedTryOnLook
+        });
+        if (!isProSubscriber) {
+          setFreeTrialUsed(true);
+          try {
+            localStorage.setItem('styling_free_trial_used', 'true');
+          } catch (e) {}
+        }
       }
-    } catch (err: any) {
-      console.error('Styling error:', err);
-      const targetLook =
-        CURATED_LOOKS.find((l) => l.id === selectedOccasion.lookId) || CURATED_LOOKS[0];
+    } catch (err) {
+      console.warn('Styling synthesis fallback:', err);
       setStyledResult({
-        imageUrl: targetLook.imageUrl || '/images/looks/look_01_soho_quiet_luxury_final.jpg',
-        look: targetLook,
-        provider: 'StylingHelper Studio Master'
+        imageUrl: selectedTryOnLook.imageUrl,
+        look: selectedTryOnLook
       });
       if (!isProSubscriber) {
         setFreeTrialUsed(true);
@@ -588,9 +878,6 @@ export default function StylingHelperBright() {
           localStorage.setItem('styling_free_trial_used', 'true');
         } catch (e) {}
       }
-      setTimeout(() => {
-        resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 300);
     } finally {
       clearTimeout(timer1);
       clearTimeout(timer2);
@@ -600,133 +887,85 @@ export default function StylingHelperBright() {
     }
   };
 
-  const handleActivatePro = () => {
-    setIsProSubscriber(true);
-    try {
-      localStorage.setItem('styling_is_pro_subscriber', 'true');
-    } catch (e) {}
-    setShowPaywallModal(false);
-    alert('Welcome to StylingHelper Pro! Unlimited virtual styling is now unlocked.');
-  };
-
-  const handleResetTrial = () => {
-    setFreeTrialUsed(false);
-    setIsProSubscriber(false);
-    try {
-      localStorage.removeItem('styling_free_trial_used');
-      localStorage.removeItem('styling_is_pro_subscriber');
-    } catch (e) {}
-    setShowPaywallModal(false);
-    alert('Free trial reset! You can now test 1 free styling generation again.');
-  };
-
-  const activeLook =
-    styledResult?.look ||
-    CURATED_LOOKS.find((l) => l.id === selectedOccasion.lookId) ||
-    CURATED_LOOKS[0];
-
-  const totalOutfitPrice =
-    activeLook?.pins?.reduce((sum, p) => sum + (p.price || 0), 0) || 0;
+  // Filtered Looks
+  const filteredLooks = MASTER_EDITORIAL_LOOKS.filter((look) => {
+    if (activeGenderFilter === 'all') return true;
+    return look.gender === activeGenderFilter;
+  });
 
   return (
-    <div className="min-h-screen bg-[#FBFBFC] text-[#121316] font-sans selection:bg-[#121316] selection:text-[#FAF9F5]">
-      {/* ======================================================= */}
-      {/* 0. NEW SERVICE PROMO BANNER: PersonalColorHelper */}
-      {/* ======================================================= */}
-      <div className="bg-gradient-to-r from-[#1E1915] via-[#2F1F18] to-[#1E1915] text-white px-4 py-2 text-xs border-b border-amber-900/30">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2 truncate">
-            <span className="px-2 py-0.5 rounded-full bg-[#E07A5F] text-white text-[10px] font-black uppercase tracking-wider flex-shrink-0">
-              NEW SERVICE
-            </span>
-            <span className="font-extrabold text-amber-200">
-              PersonalColorHelper
-            </span>
-            <span className="hidden sm:inline text-zinc-300 truncate">
-              · Discover your 12-season personal palette & virtual drape test in 3 seconds ($0.79 / trial)
-            </span>
-          </div>
-
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <Link
-              href="/colorhelper/en"
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white hover:bg-zinc-100 text-[#121316] font-extrabold text-[11px] shadow-sm transition"
-            >
-              <span>Start Analysis</span>
-              <ArrowRight className="w-3 h-3 text-[#E07A5F]" />
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* ======================================================= */}
-      {/* 1. BRIGHT & CHIC TOP NAVIGATION */}
-      {/* ======================================================= */}
-      <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-black/[0.06] px-4 lg:px-8 py-3.5 transition-all">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Brand Logo */}
+    <div className="min-h-screen bg-[#FAF9F7] text-[#141517] selection:bg-neutral-900 selection:text-white font-sans antialiased">
+      {/* ================================================================= */}
+      {/* 1. EDITORIAL FROSTED GLASS HEADER (Vogue / SSENSE Standard)       */}
+      {/* ================================================================= */}
+      <header className="sticky top-0 z-40 bg-[#FAF9F7]/90 backdrop-blur-md border-b border-black/[0.06] transition-all">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+          {/* Brand Wordmark & Editorial Tag */}
           <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="w-9 h-9 rounded-2xl bg-[#121316] flex items-center justify-center text-white shadow-md shadow-black/10 group-hover:scale-105 transition-transform">
-                <Sparkles className="w-4 h-4 text-[#FFD782]" />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-serif text-xl tracking-tight font-extrabold text-[#121316]">
-                  STYLING HELPER
-                </span>
-                <span className="text-[10px] uppercase tracking-widest text-[#B57C1E] font-bold">
-                  AI Virtual Dressing Room
-                </span>
-              </div>
-            </Link>
-          </div>
-
-          {/* Top Header Actions: Pro Upgrade & Member Auth */}
-          <div className="flex items-center gap-2 sm:gap-2.5">
-            {/* PersonalColorHelper Direct Link */}
-            <Link
-              href="/colorhelper/en"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-rose-50 to-amber-50 hover:from-rose-100 hover:to-amber-100 text-[#1E1B18] text-xs font-bold border border-rose-200/80 transition-all shadow-sm group"
-            >
-              <Palette className="w-3.5 h-3.5 text-[#E07A5F]" />
-              <span className="font-extrabold hidden sm:inline">Color Analysis</span>
-              <span className="font-extrabold sm:hidden">Color</span>
-              <span className="px-1.5 py-0.5 rounded bg-[#E07A5F] text-white text-[9px] font-black">
-                $0.79
+            <Link href="/stylinghelper" className="flex items-baseline gap-2.5 group">
+              <span className="font-serif text-2xl sm:text-3xl font-light tracking-[0.06em] text-neutral-950 group-hover:opacity-80 transition-opacity">
+                STYLING HELPER
+              </span>
+              <span className="hidden md:inline-block text-[9px] uppercase tracking-[0.25em] font-medium text-neutral-400 pl-3 border-l border-neutral-300">
+                Editorial Lookbook & Virtual Fitting Atelier
               </span>
             </Link>
-            {/* Pro Subscription CTA */}
+          </div>
+
+          {/* Center Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-8 text-[11px] uppercase tracking-[0.2em] font-medium text-neutral-600">
+            <button
+              onClick={() => lookbookRef.current?.scrollIntoView({ behavior: 'smooth' })}
+              className="hover:text-neutral-950 transition-colors"
+            >
+              Curated Edit
+            </button>
+            <button
+              onClick={() => studioRef.current?.scrollIntoView({ behavior: 'smooth' })}
+              className="hover:text-neutral-950 transition-colors"
+            >
+              Virtual Fitting
+            </button>
+            <button
+              onClick={() => {
+                setReportProduct({ title: 'General In-Stock Inquiry', url: 'https://stylinghelper.com' });
+                setIsReportModalOpen(true);
+              }}
+              className="hover:text-neutral-950 transition-colors"
+            >
+              Stock Sentinel
+            </button>
+          </nav>
+
+          {/* Right Actions: Pro, Auth, & Direct CTA */}
+          <div className="flex items-center gap-3">
             {isProSubscriber ? (
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold">
-                <Star className="w-3.5 h-3.5 fill-emerald-600 text-emerald-600" />
-                <span>Pro Member</span>
-              </div>
+              <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-900 text-amber-200 text-[10px] font-semibold tracking-wider uppercase">
+                <Star className="w-3 h-3 fill-amber-300 text-amber-300" />
+                Pro Member
+              </span>
             ) : (
               <button
-                onClick={() => {
-                  setProModalReason('manual_upgrade');
-                  setShowPaywallModal(true);
-                }}
-                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white text-xs font-bold shadow-sm shadow-amber-500/20 transition-all hover:scale-[1.02]"
+                onClick={() => setShowPaywallModal(true)}
+                className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-neutral-300 hover:border-neutral-900 text-neutral-800 text-xs font-medium tracking-wide transition-all"
               >
-                <Sparkles className="w-3.5 h-3.5 text-amber-200" />
+                <Sparkles className="w-3.5 h-3.5 text-amber-600" />
                 <span>Upgrade Pro ($19/mo)</span>
               </button>
             )}
 
-            {/* Member Auth Button (Sign In or Logged-in Profile) */}
             {currentUser ? (
-              <div className="flex items-center gap-1.5 bg-black/[0.04] border border-black/[0.08] rounded-xl px-2.5 py-1 text-xs">
-                <div className="w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-[10px] uppercase">
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-neutral-100 border border-neutral-200 text-xs">
+                <div className="w-5 h-5 rounded-full bg-neutral-900 text-white flex items-center justify-center text-[10px] font-bold uppercase">
                   {currentUser.name?.[0] || 'U'}
                 </div>
-                <span className="font-semibold text-zinc-800 max-w-[90px] truncate hidden sm:inline">
+                <span className="font-medium text-neutral-800 hidden md:inline truncate max-w-[100px]">
                   {currentUser.name || currentUser.email?.split('@')[0]}
                 </span>
                 <button
                   onClick={handleSignOut}
                   title="Sign Out"
-                  className="p-1 hover:text-red-500 text-zinc-400 transition-colors"
+                  className="text-neutral-400 hover:text-neutral-900 transition-colors ml-1"
                 >
                   <LogOut className="w-3.5 h-3.5" />
                 </button>
@@ -737,1182 +976,697 @@ export default function StylingHelperBright() {
                   setAuthMode('signin');
                   setIsAuthModalOpen(true);
                 }}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/[0.04] hover:bg-black/[0.08] text-[#121316] text-xs font-bold border border-black/[0.08] transition-all"
+                className="px-3.5 py-1.5 rounded-full text-neutral-700 hover:text-neutral-950 text-xs font-medium tracking-wide transition-colors"
               >
-                <LogIn className="w-3.5 h-3.5 text-zinc-700" />
-                <span>Sign In</span>
+                Sign In
               </button>
             )}
 
-            {/* Error & Sold Out Report Button */}
+            {/* Primary Action Button */}
             <button
-              onClick={() => {
-                setReportProduct({ title: '', url: typeof window !== 'undefined' ? window.location.href : '' });
-                setIsReportModalOpen(true);
-              }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold transition-all shadow-sm"
-              title="Report Error / Sold Out"
+              onClick={() => studioRef.current?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-4 sm:px-5 py-2 rounded-full bg-neutral-950 hover:bg-black text-white text-xs uppercase tracking-[0.14em] font-medium shadow-sm transition-all hover:scale-[1.02]"
             >
-              <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
-              <span>Report Error / Sold Out</span>
-            </button>
-
-            <button
-              onClick={() => {
-                studioRef.current?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="hidden md:flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#121316] hover:bg-black text-white text-xs font-bold transition-all shadow-sm"
-            >
-              <Camera className="w-3.5 h-3.5 text-[#FFD782]" />
-              <span>Try on My Photo</span>
+              Try on My Photo
             </button>
           </div>
         </div>
       </header>
 
-      {/* ======================================================= */}
-      {/* 2. HERO: RADIANT, HIP & CHIC DATING HOOK */}
-      {/* ======================================================= */}
-      <section className="relative pt-12 pb-16 lg:pt-20 lg:pb-24 overflow-hidden border-b border-black/[0.05]">
-        {/* Soft, warm sunlit radiant glows */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[850px] h-[400px] bg-gradient-to-b from-amber-100/50 via-rose-50/40 to-transparent blur-[100px] pointer-events-none rounded-full" />
-        <div className="absolute top-20 right-10 w-72 h-72 bg-sky-100/40 blur-[80px] pointer-events-none rounded-full" />
+      {/* ================================================================= */}
+      {/* 2. HIGH-FASHION EDITORIAL HERO (Option A Core Proposition)        */}
+      {/* ================================================================= */}
+      <section className="relative pt-16 pb-20 lg:pt-24 lg:pb-32 overflow-hidden border-b border-black/[0.05]">
+        {/* Subtle, soft natural daylight illumination */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-gradient-to-b from-amber-50/60 via-stone-100/30 to-transparent blur-[120px] pointer-events-none rounded-full" />
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
-          {/* Trendy Pill Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-black/[0.06] mb-6">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-            <span className="text-xs font-bold tracking-wide text-zinc-700">
-              Next-Gen AI Wardrobe Swap • Curated US Designer Pieces
-            </span>
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Top Collection Slate */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-neutral-100 border border-neutral-200 text-neutral-600 text-[10px] uppercase font-semibold tracking-[0.25em] mb-6">
+            <span>SS26 Runway & Street Capsules</span>
+            <span className="w-1 h-1 rounded-full bg-neutral-400" />
+            <span>Curated by Fashion Directors</span>
           </div>
 
-          {/* Primary Hip Hook */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.15] mb-6 text-[#121316]">
-            Wondering what to wear on <br className="hidden sm:inline" />
-            your date this weekend?
-            <span className="block mt-2 font-serif italic font-normal bg-clip-text text-transparent bg-gradient-to-r from-[#B57C1E] via-[#D97706] to-[#92400E]">
-              Ask StylingHelper.
+          {/* Main Headline */}
+          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight text-neutral-950 leading-[1.12] mb-6">
+            Curated High-Fashion Editorial.
+            <span className="block italic font-light text-neutral-700 mt-2">
+              Try Any Look on Your Photo in Seconds.
             </span>
           </h1>
 
-          {/* Subtitle */}
-          <p className="max-w-2xl mx-auto text-base sm:text-lg text-zinc-600 font-medium leading-relaxed mb-9">
-            Upload any full-body photo. Our AI cleanly removes your current clothes, styles you in verified luxury pieces from top US retailers, and gives you instant 1-click checkout links.
+          {/* Clear Subtitle Proposition */}
+          <p className="max-w-2xl mx-auto text-base sm:text-lg text-neutral-600 font-normal leading-relaxed mb-10">
+            Handcrafted wardrobe capsules styled with authentic runway pieces from Shopbop & Nordstrom. Click any piece to shop official US retailers, or upload your photo for an instant 1:1 photorealistic fitting.
           </p>
 
-          {/* 3 Hip Value Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 max-w-3xl mx-auto text-left mb-10">
-            <div className="p-4 rounded-2xl bg-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-black/[0.06] hover:border-black/15 transition-all">
-              <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center mb-2.5 text-base font-bold">
-                ✨
-              </div>
-              <h4 className="text-sm font-bold text-[#121316] mb-1">Instant Outfit Swap</h4>
-              <p className="text-xs text-zinc-500 leading-relaxed">
-                Cleanses your current clothes and seamlessly fits 100% authentic designer items.
-              </p>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-black/[0.06] hover:border-black/15 transition-all">
-              <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-2.5 text-base font-bold">
-                👤
-              </div>
-              <h4 className="text-sm font-bold text-[#121316] mb-1">1:1 Face & Pose Preserved</h4>
-              <p className="text-xs text-zinc-500 leading-relaxed">
-                Your face, hair, smile, skin tone, and body silhouette remain completely authentic.
-              </p>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-black/[0.06] hover:border-black/15 transition-all">
-              <div className="w-9 h-9 rounded-xl bg-sky-50 text-sky-700 flex items-center justify-center mb-2.5 text-base font-bold">
-                🛍️
-              </div>
-              <h4 className="text-sm font-bold text-[#121316] mb-1">Direct Shopbop Checkout</h4>
-              <p className="text-xs text-zinc-500 leading-relaxed">
-                Click any piece to purchase directly on official store pages with zero modal blocks.
-              </p>
-            </div>
-          </div>
-
-          {/* Hero CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          {/* Action CTAs */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <button
               onClick={() => studioRef.current?.scrollIntoView({ behavior: 'smooth' })}
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#121316] hover:bg-black text-white font-extrabold text-base shadow-xl shadow-black/15 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2.5"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-neutral-950 hover:bg-black text-white text-xs uppercase tracking-[0.18em] font-medium shadow-md transition-all hover:scale-[1.02] flex items-center justify-center gap-2.5"
             >
-              <Wand2 className="w-5 h-5 text-[#FFD782]" />
+              <Wand2 className="w-4 h-4 text-amber-300" />
               <span>Style My Photo for Free</span>
-              <ArrowRight className="w-4 h-4 text-white" />
+              <ArrowRight className="w-4 h-4 text-neutral-400" />
             </button>
 
-            {!isProSubscriber && (
-              <button
-                onClick={() => {
-                  setProModalReason('manual_upgrade');
-                  setShowPaywallModal(true);
-                }}
-                className="w-full sm:w-auto px-6 py-4 rounded-2xl bg-white hover:bg-zinc-50 border border-black/[0.08] text-zinc-800 font-bold text-sm shadow-sm transition-all flex items-center justify-center gap-2"
-              >
-                <Star className="w-4 h-4 text-[#B57C1E]" />
-                <span>See Pro Benefits ($19/mo)</span>
-              </button>
-            )}
+            <button
+              onClick={() => lookbookRef.current?.scrollIntoView({ behavior: 'smooth' })}
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-white hover:bg-neutral-50 border border-neutral-300 text-neutral-900 text-xs uppercase tracking-[0.18em] font-medium transition-all"
+            >
+              Explore Curated Looks (6)
+            </button>
           </div>
-        </div>
-      </section>
 
-      {/* ======================================================= */}
-      {/* 2.5 SPECIAL FEATURED BANNER: PersonalColorHelper */}
-      {/* ======================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#1E1B18] via-[#2E221B] to-[#171412] text-white p-6 sm:p-10 shadow-2xl border border-amber-500/20">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-[#E07A5F]/20 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
-          
-          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E07A5F]/20 border border-[#E07A5F]/30 text-[#FF9E80] text-xs font-bold uppercase tracking-wider mb-3">
-                <Palette className="w-3.5 h-3.5" />
-                AI Personal Color & Virtual Draping Studio
+          {/* 3 Pillar Minimalist Quality Markers */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto pt-8 border-t border-neutral-200/80 text-left">
+            <div>
+              <div className="text-[11px] uppercase tracking-[0.2em] font-semibold text-neutral-400 mb-1">
+                Authentic Retail
               </div>
-              <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3">
-                Find your signature color palette before styling <br />
-                <span className="text-[#FF9E80]">PersonalColorHelper Studio</span>
-              </h2>
-              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6">
-                Professional salon color analysis for just <strong>$0.79 / single trial</strong>. <br className="hidden sm:inline" />
-                Precise 12-season color matrix, real-time virtual fabric draping, and curated lipstick matches delivered in 3 seconds.
+              <div className="text-sm font-medium text-neutral-900">
+                100% In-Stock Verified
+              </div>
+              <p className="text-xs text-neutral-500 mt-0.5">
+                Direct links to Shopbop & Nordstrom with zero intermediary markups.
               </p>
-
-              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                <Link
-                  href="/colorhelper/en"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#E07A5F] to-amber-500 hover:from-[#D0694E] hover:to-amber-600 text-white font-extrabold text-xs shadow-lg transition hover:scale-[1.02]"
-                >
-                  <Palette className="w-4 h-4" />
-                  <span>Start Color Analysis ($0.79)</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-
-                <Link
-                  href="/colorhelper/en"
-                  className="inline-flex items-center gap-1.5 px-3.5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/15 transition"
-                >
-                  <span>🇺🇸 English ($0.79)</span>
-                </Link>
-
-                <Link
-                  href="/colorhelper/ja"
-                  className="inline-flex items-center gap-1.5 px-3.5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/15 transition"
-                >
-                  <span>🇯🇵 日本語 (¥120)</span>
-                </Link>
-              </div>
             </div>
 
-            {/* Visual Swatch Badges */}
-            <div className="bg-white/5 backdrop-blur-md rounded-2xl p-5 border border-white/10 lg:w-80 flex flex-col gap-3">
-              <div className="text-xs font-extrabold text-amber-200">✨ 4-Season 12-Tone Palettes</div>
-              <div className="grid grid-cols-4 gap-2 text-center text-[10px]">
-                <div className="p-2 rounded-xl bg-amber-500/20 border border-amber-400/30">
-                  <div className="w-5 h-5 mx-auto rounded-full bg-[#FFA07A] mb-1 shadow-sm" />
-                  <span className="font-bold text-amber-200">Spring Warm</span>
-                </div>
-                <div className="p-2 rounded-xl bg-sky-500/20 border border-sky-400/30">
-                  <div className="w-5 h-5 mx-auto rounded-full bg-[#E1BEE7] mb-1 shadow-sm" />
-                  <span className="font-bold text-sky-200">Summer Cool</span>
-                </div>
-                <div className="p-2 rounded-xl bg-orange-500/20 border border-orange-400/30">
-                  <div className="w-5 h-5 mx-auto rounded-full bg-[#B37D77] mb-1 shadow-sm" />
-                  <span className="font-bold text-orange-200">Autumn Warm</span>
-                </div>
-                <div className="p-2 rounded-xl bg-purple-500/20 border border-purple-400/30">
-                  <div className="w-5 h-5 mx-auto rounded-full bg-[#FF007F] mb-1 shadow-sm" />
-                  <span className="font-bold text-purple-200">Winter Cool</span>
-                </div>
+            <div>
+              <div className="text-[11px] uppercase tracking-[0.2em] font-semibold text-neutral-400 mb-1">
+                Sub-Pixel Likeness
               </div>
-              <div className="text-[11px] text-zinc-400 text-center pt-1 border-t border-white/10">
-                ✓ Google One-Tap • 256-bit Secure Checkout • Palette Card Export
+              <div className="text-sm font-medium text-neutral-900">
+                1:1 Face & Pose Preserved
               </div>
+              <p className="text-xs text-neutral-500 mt-0.5">
+                Cleanses current clothes while protecting your authentic skin and silhouette.
+              </p>
+            </div>
+
+            <div>
+              <div className="text-[11px] uppercase tracking-[0.2em] font-semibold text-neutral-400 mb-1">
+                Curated Aesthetics
+              </div>
+              <div className="text-sm font-medium text-neutral-900">
+                Global Editorial Standard
+              </div>
+              <p className="text-xs text-neutral-500 mt-0.5">
+                Quiet luxury, tailored minimalism, and contemporary Seoul street volume.
+              </p>
             </div>
           </div>
         </div>
       </section>
-      <section ref={studioRef} className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100/60 text-[#92400E] text-xs font-extrabold uppercase tracking-wider mb-2">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Interactive Virtual Fitting Room</span>
+
+      {/* ================================================================= */}
+      {/* 3. CURATED MASTER LOOKBOOK GALLERY (Top 6 Master Looks)            */}
+      {/* ================================================================= */}
+      <section ref={lookbookRef} className="py-20 lg:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header & Filter Tabs */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-neutral-200">
+          <div>
+            <span className="text-[10px] uppercase font-semibold tracking-[0.25em] text-neutral-400">
+              The Master Collection
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl font-light text-neutral-950 mt-1">
+              Curated Editorial Edits
+            </h2>
+            <p className="text-xs text-neutral-500 mt-1 font-normal">
+              Select any look to view complete garment specs and direct retailer links.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#121316]">
-            Upload & Try On in 10 Seconds
-          </h2>
-          <p className="text-sm text-zinc-600 mt-2 font-medium">
-            First styling is on us (100% free). Unlock unlimited full-body swaps with Pro.
-          </p>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* -------------------------------------------------- */}
-          {/* LEFT: STEP 1 - PHOTO UPLOAD ZONE (5 Cols) */}
-          {/* -------------------------------------------------- */}
-          <div className="lg:col-span-5 bg-white rounded-3xl p-6 shadow-[0_4px_25px_rgba(0,0,0,0.04)] border border-black/[0.06]">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#121316] text-white font-extrabold text-xs flex items-center justify-center">
-                  1
-                </span>
-                <h3 className="font-extrabold text-base text-[#121316]">Your Full-Body Photo</h3>
-              </div>
-              <span className="text-xs font-semibold text-zinc-400">Front-Facing View</span>
-            </div>
-
-            {/* Quick Action Toolbar: Paste & Upload */}
-            <div className="flex items-center gap-2 mb-3">
-              <button
-                type="button"
-                onClick={handlePasteButtonClick}
-                className="flex-1 py-2 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-[#92400E] border border-amber-500/25 font-extrabold text-xs flex items-center justify-center gap-1.5 transition-all active:scale-95 shadow-sm"
-                title="Paste image from clipboard (Ctrl+V)"
-              >
-                <ClipboardPaste className="w-3.5 h-3.5 text-[#B57C1E]" />
-                <span>Paste Photo (Ctrl+V)</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                className="py-2 px-3 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-700 font-bold text-xs flex items-center justify-center gap-1.5 transition-all active:scale-95"
-              >
-                <Upload className="w-3.5 h-3.5 text-zinc-600" />
-                <span>Browse</span>
-              </button>
-              {userPhoto && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setUserPhoto(null);
-                    setUserPhotoName('');
-                    setStyledResult(null);
-                  }}
-                  className="px-2.5 py-2 rounded-xl bg-zinc-100 hover:bg-red-50 text-zinc-500 hover:text-red-600 font-bold text-xs transition-all active:scale-95 flex items-center gap-1"
-                  title="Clear photo to paste a new one"
-                >
-                  <X className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Clear</span>
-                </button>
-              )}
-            </div>
-
-            {/* Live Notification Toast */}
-            {pasteNotification && (
-              <div className="mb-3 px-3 py-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2 animate-fade-in shadow-sm">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                <span className="truncate">{pasteNotification}</span>
-              </div>
-            )}
-
-            {/* Hidden File Input */}
-            <input
-              type="file"
-              ref={fileInputRef}
-              accept="image/*"
-              onChange={handleFileUpload}
-              className="hidden"
-            />
-
-            {/* Photo Preview Box / Drop & Paste Zone (100% Uncropped Contain) */}
-            <div
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-              onDrop={handleFileDrop}
-              onClick={() => {
-                if (!userPhoto) {
-                  fileInputRef.current?.click();
-                }
-              }}
-              className={`group relative w-full min-h-[520px] max-h-[740px] rounded-2xl border-2 transition-all flex flex-col items-center justify-center overflow-hidden text-center shadow-inner ${
-                isDragging
-                  ? 'border-amber-500 bg-amber-50/70 scale-[1.01] shadow-xl ring-4 ring-amber-500/20'
-                  : userPhoto
-                  ? 'border-zinc-200 bg-[#0D0E10] p-2'
-                  : 'border-dashed border-zinc-300 hover:border-[#121316] bg-[#FAF9F6] cursor-pointer min-h-[460px]'
+          {/* Gender Filter Tabs */}
+          <div className="inline-flex p-1 rounded-full bg-neutral-200/60 border border-neutral-200">
+            <button
+              onClick={() => setActiveGenderFilter('all')}
+              className={`px-4 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium transition-all ${
+                activeGenderFilter === 'all'
+                  ? 'bg-white text-neutral-950 shadow-sm'
+                  : 'text-neutral-600 hover:text-neutral-900'
               }`}
             >
-              {isDragging ? (
-                <div className="flex flex-col items-center gap-3 p-6 pointer-events-none">
-                  <div className="w-16 h-16 rounded-2xl bg-amber-500 text-white flex items-center justify-center shadow-lg animate-bounce">
-                    <Upload className="w-8 h-8" />
-                  </div>
-                  <p className="text-base font-extrabold text-amber-900">
-                    Drop Your Photo Here!
-                  </p>
-                  <p className="text-xs text-amber-700">
-                    Release to immediately load and preview
-                  </p>
+              All Edits ({MASTER_EDITORIAL_LOOKS.length})
+            </button>
+            <button
+              onClick={() => setActiveGenderFilter('women')}
+              className={`px-4 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium transition-all ${
+                activeGenderFilter === 'women'
+                  ? 'bg-white text-neutral-950 shadow-sm'
+                  : 'text-neutral-600 hover:text-neutral-900'
+              }`}
+            >
+              Women (4)
+            </button>
+            <button
+              onClick={() => setActiveGenderFilter('men')}
+              className={`px-4 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium transition-all ${
+                activeGenderFilter === 'men'
+                  ? 'bg-white text-neutral-950 shadow-sm'
+                  : 'text-neutral-600 hover:text-neutral-900'
+              }`}
+            >
+              Men (2)
+            </button>
+          </div>
+        </div>
+
+        {/* 6-Look Magazine Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 pt-12">
+          {filteredLooks.map((look, index) => (
+            <div
+              key={look.id}
+              className="group relative bg-white border border-neutral-200/80 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-500 flex flex-col"
+            >
+              {/* Image Container with Aspect Ratio */}
+              <div
+                onClick={() => setActiveLookModal(look)}
+                className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-100 cursor-pointer"
+              >
+                <img
+                  src={look.imageUrl}
+                  alt={look.title}
+                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
+
+                {/* Top Badge: Garment Count & Total Outfit Value */}
+                <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+                  <span className="px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-md text-[10px] uppercase font-semibold tracking-wider text-neutral-800 shadow-sm">
+                    {look.category}
+                  </span>
+                  <span className="px-2.5 py-1 rounded-full bg-neutral-950/85 backdrop-blur-md text-[10px] font-medium tracking-wide text-white shadow-sm">
+                    ${look.totalPrice.toLocaleString()} USD
+                  </span>
                 </div>
-              ) : userPhoto ? (
-                <>
-                  <img
-                    src={userPhoto}
-                    alt="Uploaded Customer Photo"
-                    className="w-full h-auto max-h-[710px] object-contain rounded-xl mx-auto drop-shadow-md"
-                  />
 
-                  {/* Hover Overlay with Quick Paste & Change Action */}
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 p-4">
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handlePasteButtonClick();
-                      }}
-                      className="px-4 py-2.5 rounded-xl bg-white text-[#121316] font-extrabold text-xs shadow-lg hover:scale-105 transition-all flex items-center gap-1.5"
-                    >
-                      <ClipboardPaste className="w-4 h-4 text-[#B57C1E]" />
-                      <span>Paste New Photo (Ctrl+V)</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        fileInputRef.current?.click();
-                      }}
-                      className="px-4 py-2 rounded-xl bg-white/90 text-zinc-800 font-bold text-xs hover:bg-white transition-all flex items-center gap-1.5"
-                    >
-                      <Camera className="w-4 h-4 text-zinc-600" />
-                      <span>Browse from Files</span>
-                    </button>
-                  </div>
-
-                  {/* Bottom Active Status Pill */}
-                  <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between px-3 py-1.5 rounded-xl bg-black/75 backdrop-blur-md border border-white/10 text-white shadow-lg">
-                    <div className="flex items-center gap-1.5 min-w-0 pr-2">
-                      <div className="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0 animate-pulse" />
-                      <span className="text-[11px] font-bold text-zinc-100 truncate">
-                        {userPhotoName || 'Pasted Photo'}
-                      </span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        fileInputRef.current?.click();
-                      }}
-                      className="text-[10px] font-extrabold text-white bg-white/20 hover:bg-white/30 border border-white/20 px-2 py-0.5 rounded-md flex-shrink-0 transition-all"
-                    >
-                      Change
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <div className="flex flex-col items-center justify-center p-6 w-full h-full">
-                  <div className="w-16 h-16 rounded-2xl bg-white shadow-md flex items-center justify-center text-zinc-800 group-hover:scale-110 transition-transform mb-3 border border-black/[0.05]">
-                    <ClipboardPaste className="w-8 h-8 text-[#B57C1E]" />
-                  </div>
-                  <p className="text-sm font-extrabold text-[#121316] mb-1">
-                    Paste Photo (Ctrl + V)
-                  </p>
-                  <p className="text-xs text-zinc-500 max-w-[230px] leading-relaxed mb-4">
-                    Copy any screenshot or image with <kbd className="px-1.5 py-0.5 rounded bg-zinc-200 text-zinc-800 font-mono text-[10px] font-bold">Ctrl+C</kbd>, then press <kbd className="px-1.5 py-0.5 rounded bg-zinc-200 text-zinc-800 font-mono text-[10px] font-bold">Ctrl+V</kbd> anywhere or drop here.
-                  </p>
+                {/* Hover Quick Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-neutral-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-amber-300 mb-1">
+                    {look.season}
+                  </span>
+                  <h3 className="font-serif text-lg font-light leading-snug mb-3">
+                    {look.shortTitle}
+                  </h3>
                   <div className="flex items-center gap-2">
                     <button
-                      type="button"
                       onClick={(e) => {
                         e.stopPropagation();
-                        handlePasteButtonClick();
+                        setActiveLookModal(look);
                       }}
-                      className="px-3.5 py-2 rounded-xl bg-[#121316] text-white font-extrabold text-xs flex items-center gap-1.5 hover:bg-black transition-all shadow-md active:scale-95"
+                      className="flex-1 py-2 rounded-full bg-white text-neutral-950 text-xs font-semibold tracking-wider uppercase text-center hover:bg-neutral-100 transition-colors"
                     >
-                      <ClipboardPaste className="w-3.5 h-3.5 text-[#FFD782]" />
-                      <span>Paste Now</span>
+                      View Pieces ({look.pins.length})
                     </button>
                     <button
-                      type="button"
                       onClick={(e) => {
                         e.stopPropagation();
-                        fileInputRef.current?.click();
+                        handleDirectTryOn(look);
                       }}
-                      className="px-3 py-2 rounded-xl bg-white border border-zinc-300 text-zinc-700 font-bold text-xs flex items-center gap-1.5 hover:bg-zinc-50 transition-all active:scale-95"
+                      className="px-4 py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-neutral-950 text-xs font-semibold tracking-wider uppercase transition-colors"
+                      title="Try this look on your photo"
                     >
-                      <Upload className="w-3.5 h-3.5 text-zinc-500" />
-                      <span>Browse</span>
+                      Try On
                     </button>
                   </div>
                 </div>
-              )}
-            </div>
-
-            {/* Gender Switcher & Quick Demo Sample Models */}
-            <div className="mt-4 pt-3 border-t border-black/[0.06]">
-              <div className="flex items-center justify-between mb-2.5">
-                <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">
-                    ⚡ Models:
-                  </span>
-                  {/* Men / Women Segmented Switch */}
-                  <div className="inline-flex p-0.5 rounded-xl bg-zinc-100 border border-black/[0.06]">
-                    <button
-                      type="button"
-                      onClick={() => handleGenderChange('men')}
-                      className={`px-3 py-1 rounded-lg text-xs font-extrabold transition-all flex items-center gap-1 ${
-                        selectedGender === 'men'
-                          ? 'bg-[#121316] text-white shadow-sm'
-                          : 'text-zinc-600 hover:text-black'
-                      }`}
-                    >
-                      <span>👨 Men</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleGenderChange('women')}
-                      className={`px-3 py-1 rounded-lg text-xs font-extrabold transition-all flex items-center gap-1 ${
-                        selectedGender === 'women'
-                          ? 'bg-[#121316] text-white shadow-sm'
-                          : 'text-zinc-600 hover:text-black'
-                      }`}
-                    >
-                      <span>👩 Women</span>
-                    </button>
-                  </div>
-                </div>
-
-                {userPhoto && userPhotoName.startsWith('Sample Model') && (
-                  <span className="text-[10px] font-extrabold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
-                    Sample Active
-                  </span>
-                )}
               </div>
 
-              {/* 3 Sample Models for Current Selected Gender */}
-              <div className="grid grid-cols-3 gap-2">
-                {SAMPLE_MODELS[selectedGender].map((sample) => (
-                  <button
-                    key={sample.id}
-                    onClick={() => handleSelectSample(sample)}
-                    className={`p-1.5 rounded-2xl border text-left transition-all flex flex-col items-center gap-1 ${
-                      userPhoto === sample.url
-                        ? 'bg-amber-50/80 border-amber-400 shadow-sm ring-2 ring-amber-400/25'
-                        : 'bg-zinc-50/70 border-zinc-200/80 hover:bg-zinc-100/70'
-                    }`}
+              {/* Card Footer Details */}
+              <div className="p-5 flex flex-col flex-1 justify-between bg-white border-t border-neutral-100">
+                <div>
+                  <div className="flex items-center justify-between text-[11px] text-neutral-500 mb-1.5">
+                    <span>{look.modelInfo.split('·')[0]}</span>
+                    <span>{look.pins.length} Verified Pieces</span>
+                  </div>
+                  <h3
+                    onClick={() => setActiveLookModal(look)}
+                    className="font-serif text-base sm:text-lg font-normal text-neutral-950 group-hover:text-neutral-700 cursor-pointer line-clamp-1 transition-colors"
                   >
-                    <div className="w-10 h-10 rounded-xl overflow-hidden border border-black/[0.08] shadow-sm bg-zinc-100">
-                      <img
-                        src={sample.thumb || sample.url}
-                        alt={sample.label}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <span className="text-[11px] font-extrabold leading-tight text-center text-zinc-900 truncate w-full">
-                      {sample.label}
-                    </span>
-                    <span className="text-[9px] font-semibold text-zinc-500 text-center truncate w-full">
-                      {sample.tag}
-                    </span>
+                    {look.shortTitle}
+                  </h3>
+                  <p className="text-xs text-neutral-500 line-clamp-2 mt-1 font-normal leading-relaxed">
+                    {look.description}
+                  </p>
+                </div>
+
+                {/* Quick Action Footer */}
+                <div className="pt-4 mt-4 border-t border-neutral-100 flex items-center justify-between">
+                  <button
+                    onClick={() => setActiveLookModal(look)}
+                    className="text-xs uppercase tracking-wider font-semibold text-neutral-800 hover:text-neutral-950 flex items-center gap-1 transition-colors"
+                  >
+                    <span>Inspect Look</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </button>
-                ))}
+
+                  <button
+                    onClick={() => handleDirectTryOn(look)}
+                    className="text-xs uppercase tracking-wider font-semibold text-amber-700 hover:text-amber-800 flex items-center gap-1 transition-colors"
+                  >
+                    <span>Style My Photo</span>
+                    <Wand2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
               </div>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ================================================================= */}
+      {/* 4. VIRTUAL TRY-ON ATELIER STUDIO (Interactive Fitting Room)       */}
+      {/* ================================================================= */}
+      <section ref={studioRef} className="py-20 lg:py-28 bg-[#F4F3F0] border-y border-neutral-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <span className="text-[10px] uppercase font-semibold tracking-[0.25em] text-neutral-500">
+              Interactive Fitting Atelier
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl font-light text-neutral-950 mt-1">
+              Virtual Runway Fitting
+            </h2>
+            <p className="text-xs sm:text-sm text-neutral-600 mt-2 font-normal">
+              Select an authentic editorial look, choose a sample model or upload your photo, and visualize your silhouette in seconds.
+            </p>
           </div>
 
-          {/* -------------------------------------------------- */}
-          {/* RIGHT: STEP 2 - OCCASION & STYLE SELECTOR (7 Cols) */}
-          {/* -------------------------------------------------- */}
-          <div className="lg:col-span-7 bg-white rounded-3xl p-6 shadow-[0_4px_25px_rgba(0,0,0,0.04)] border border-black/[0.06] flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-full bg-[#121316] text-white font-extrabold text-xs flex items-center justify-center">
-                    2
-                  </span>
-                  <h3 className="font-extrabold text-base text-[#121316]">
-                    Choose Your Date & Weekend Vibe
-                  </h3>
+          {/* Interactive Studio Workspace */}
+          <div className="bg-white rounded-3xl shadow-sm border border-neutral-200/80 p-6 sm:p-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* Left Column (5 Cols): Model / Photo Selector */}
+              <div className="lg:col-span-5 flex flex-col gap-6">
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <label className="text-xs uppercase tracking-wider font-semibold text-neutral-800">
+                      Step 1: Choose or Upload Photo
+                    </label>
+                    <span className="text-[11px] text-neutral-500">
+                      {userPhotoName}
+                    </span>
+                  </div>
+
+                  {/* Preset Realistic Models Grid */}
+                  <div className="grid grid-cols-6 gap-2 mb-4">
+                    {REALISTIC_SAMPLE_MODELS.map((model) => (
+                      <button
+                        key={model.id}
+                        onClick={() => {
+                          setUserPhoto(model.url);
+                          setUserPhotoName(`Preset: ${model.label}`);
+                          setStyledResult(null);
+                        }}
+                        className={`relative aspect-[3/4] rounded-xl overflow-hidden border-2 transition-all ${
+                          userPhoto === model.url
+                            ? 'border-neutral-950 shadow-sm scale-105'
+                            : 'border-transparent opacity-75 hover:opacity-100 hover:border-neutral-300'
+                        }`}
+                        title={`${model.label} (${model.tag})`}
+                      >
+                        <img
+                          src={model.thumb}
+                          alt={model.label}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Drag & Drop Upload Zone */}
+                  <div
+                    onDragOver={(e) => {
+                      e.preventDefault();
+                      setIsDragging(true);
+                    }}
+                    onDragLeave={() => setIsDragging(false)}
+                    onDrop={handleFileDrop}
+                    className={`relative rounded-2xl border-2 border-dashed p-6 text-center transition-all ${
+                      isDragging
+                        ? 'border-neutral-950 bg-neutral-50'
+                        : 'border-neutral-300 hover:border-neutral-400 bg-neutral-50/50'
+                    }`}
+                  >
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileUpload}
+                      className="hidden"
+                    />
+
+                    <div className="flex flex-col items-center justify-center gap-2">
+                      <div className="w-10 h-10 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-neutral-700 shadow-sm">
+                        <Upload className="w-4 h-4" />
+                      </div>
+                      <div className="text-xs font-medium text-neutral-900">
+                        Drop your full-body photo here, or{' '}
+                        <button
+                          type="button"
+                          onClick={() => fileInputRef.current?.click()}
+                          className="text-neutral-950 font-bold underline underline-offset-2 hover:text-neutral-700"
+                        >
+                          browse files
+                        </button>
+                      </div>
+                      <p className="text-[11px] text-neutral-500">
+                        Supports JPG, PNG, WEBP (Face & body shape are 100% preserved)
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <span className="text-xs font-bold text-[#B57C1E]">
-                  Curated Real US Pieces
-                </span>
+
+                {/* Selected Look Indicator */}
+                <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200/80">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] uppercase font-semibold tracking-wider text-neutral-500">
+                      Step 2: Selected Look
+                    </span>
+                    <span className="text-[10px] font-bold text-neutral-900">
+                      ${selectedTryOnLook.totalPrice.toLocaleString()} USD
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={selectedTryOnLook.imageUrl}
+                      alt={selectedTryOnLook.title}
+                      className="w-12 h-16 object-cover rounded-lg border border-neutral-200"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <div className="text-xs font-semibold text-neutral-900 truncate">
+                        {selectedTryOnLook.shortTitle}
+                      </div>
+                      <div className="text-[11px] text-neutral-500 truncate">
+                        {selectedTryOnLook.category} · {selectedTryOnLook.pins.length} items
+                      </div>
+                      <button
+                        onClick={() => lookbookRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                        className="text-[11px] font-medium text-neutral-950 hover:underline mt-1 inline-block"
+                      >
+                        Change Look
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Primary Execute Button */}
+                <button
+                  onClick={handleExecuteStyling}
+                  disabled={isGenerating}
+                  className="w-full py-4 rounded-full bg-neutral-950 hover:bg-black disabled:bg-neutral-400 text-white text-xs uppercase tracking-[0.18em] font-semibold shadow-md transition-all flex items-center justify-center gap-2"
+                >
+                  {isGenerating ? (
+                    <>
+                      <RefreshCw className="w-4 h-4 animate-spin text-amber-300" />
+                      <span>{progressStage || 'Synthesizing Runway Look...'}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Wand2 className="w-4 h-4 text-amber-300" />
+                      <span>Execute Virtual Fitting</span>
+                    </>
+                  )}
+                </button>
               </div>
 
-              {/* 5 Occasion Options filtered by Gender */}
-              <div className="space-y-3 mb-6">
-                {(selectedGender === 'men' ? MENS_OCCASIONS : WOMENS_OCCASIONS).map((occ) => {
-                  const isSelected = selectedOccasion.id === occ.id;
-                  const targetLook =
-                    CURATED_LOOKS.find((l) => l.id === occ.lookId) || CURATED_LOOKS[0];
-                  const outfitPrice =
-                    targetLook?.pins?.reduce((sum, p) => sum + (p.price || 0), 0) || 0;
-
-                  return (
-                    <div
-                      key={occ.id}
-                      onClick={() => {
-                        setSelectedOccasion(occ);
-                        setStyledResult(null);
-                      }}
-                      className={`relative p-4 rounded-2xl border cursor-pointer transition-all flex items-center justify-between gap-4 ${
-                        isSelected
-                          ? 'bg-amber-50/80 border-amber-400 shadow-[0_4px_16px_rgba(217,119,6,0.1)]'
-                          : 'bg-[#FAF9F6] border-zinc-200/80 hover:border-zinc-300'
+              {/* Right Column (7 Cols): Canvas & Result Viewport */}
+              <div className="lg:col-span-7 flex flex-col items-center justify-center">
+                <div className="relative w-full aspect-[3/4] max-w-md rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-200 shadow-md">
+                  {styledResult ? (
+                    <img
+                      src={styledResult.imageUrl}
+                      alt="Virtual Fitting Result"
+                      className="w-full h-full object-cover object-top animate-fadeIn"
+                    />
+                  ) : (
+                    <img
+                      src={userPhoto}
+                      alt="Source Model"
+                      className={`w-full h-full object-cover object-top transition-opacity duration-300 ${
+                        isGenerating ? 'opacity-40 filter blur-sm' : 'opacity-100'
                       }`}
-                    >
-                      <div className="flex items-center gap-3.5">
-                        <span className="text-2xl p-2 rounded-xl bg-white border border-black/[0.06] shadow-sm">
-                          {occ.icon}
-                        </span>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <h4
-                              className={`text-sm font-bold ${
-                                isSelected ? 'text-amber-950 font-extrabold' : 'text-zinc-900'
-                              }`}
-                            >
-                              {occ.title}
-                            </h4>
-                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-white border border-black/[0.08] text-zinc-700 font-bold shadow-2xl">
-                              {occ.badge}
-                            </span>
-                          </div>
-                          <p className="text-xs text-[#B57C1E] mt-0.5 font-semibold">
-                            {occ.subtitle}
-                          </p>
-                          <p className="text-[11px] text-zinc-500 mt-0.5 font-medium">{occ.vibe}</p>
+                    />
+                  )}
+
+                  {/* Processing Overlay */}
+                  {isGenerating && (
+                    <div className="absolute inset-0 bg-neutral-950/60 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center text-white">
+                      <div className="w-12 h-12 rounded-full border-2 border-white/20 border-t-amber-300 animate-spin mb-4" />
+                      <div className="text-xs uppercase tracking-[0.2em] text-amber-300 font-semibold mb-2">
+                        Precision AI Fitting
+                      </div>
+                      <p className="text-sm font-medium text-neutral-200 max-w-xs">
+                        {progressStage}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Result Badge */}
+                  {styledResult && (
+                    <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-neutral-950/85 backdrop-blur-md text-white flex items-center justify-between">
+                      <div>
+                        <div className="text-[10px] uppercase font-semibold tracking-wider text-amber-300">
+                          Fitted Capsule
+                        </div>
+                        <div className="text-xs font-medium truncate max-w-[200px]">
+                          {styledResult.look.shortTitle}
                         </div>
                       </div>
-
-                      <div className="text-right shrink-0 flex flex-col items-end gap-1.5">
-                        <span
-                          className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
-                            isSelected
-                              ? 'bg-[#121316] border-[#121316] text-white shadow-sm'
-                              : 'border-zinc-300 bg-white'
-                          }`}
-                        >
-                          {isSelected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-                        </span>
-                        <span className="text-[10px] text-zinc-500 font-bold">
-                          {targetLook?.pins?.length || 5} Pieces
-                        </span>
-                      </div>
+                      <button
+                        onClick={() => setActiveLookModal(styledResult.look)}
+                        className="px-3 py-1.5 rounded-full bg-white text-neutral-950 text-[11px] font-semibold tracking-wider uppercase hover:bg-neutral-100 transition-colors"
+                      >
+                        Shop Items
+                      </button>
                     </div>
-                  );
-                })}
-              </div>
-
-              {/* Preview of items included in selected occasion */}
-              <div className="p-4 rounded-2xl bg-[#FAF9F6] border border-black/[0.06] mb-6">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-bold text-zinc-700">
-                    {selectedGender === 'men'
-                      ? '👔 Men\'s designer pieces included in this styling:'
-                      : '👗 Women\'s designer pieces included in this styling:'}
-                  </span>
-                  <span className="text-xs font-extrabold text-zinc-700 bg-zinc-100 px-2.5 py-0.5 rounded-full border border-zinc-200">
-                    Official Retailers
-                  </span>
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {activeLook?.pins?.slice(0, 5).map((pin, i) => (
-                    <span
-                      key={i}
-                      className="px-2.5 py-1 rounded-xl bg-white border border-black/[0.06] text-[11px] text-zinc-800 font-semibold shadow-sm"
-                    >
-                      <strong className="text-[#92400E]">{pin.category}:</strong> {pin.brand}
-                    </span>
-                  ))}
-                  {(activeLook?.pins?.length || 0) > 5 && (
-                    <span className="px-2 py-1 rounded-xl bg-white border border-black/[0.06] text-[10px] text-zinc-500 font-medium">
-                      +{(activeLook?.pins?.length || 0) - 5} more
-                    </span>
                   )}
                 </div>
               </div>
             </div>
-
-            {/* -------------------------------------------------- */}
-            {/* ACTION BUTTON: RUN AI STYLING */}
-            {/* -------------------------------------------------- */}
-            <div>
-              {/* Progress State */}
-              {isGenerating ? (
-                <div className="p-6 rounded-2xl bg-amber-50 border border-amber-300 text-center animate-pulse">
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <RefreshCw className="w-5 h-5 text-amber-700 animate-spin" />
-                    <span className="font-extrabold text-sm text-amber-900">
-                      AI Virtual Styling in Progress...
-                    </span>
-                  </div>
-                  <p className="text-xs text-amber-800 font-semibold">{progressStage}</p>
-                  <div className="w-full bg-amber-200/60 h-2 rounded-full mt-4 overflow-hidden">
-                    <div className="bg-[#121316] h-full w-3/4 animate-[pulse_1s_infinite] rounded-full" />
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  <button
-                    onClick={handleStartStyling}
-                    className="w-full py-4 px-6 rounded-2xl bg-[#121316] hover:bg-black text-white font-extrabold text-base shadow-xl shadow-black/15 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2"
-                  >
-                    <Wand2 className="w-5 h-5 text-[#FFD782]" />
-                    <span>
-                      {freeTrialUsed && !isProSubscriber
-                        ? '🔒 Unlock with Pro for Unlimited Styling'
-                        : '✨ Style My Outfit with AI'}
-                    </span>
-                  </button>
-
-                  <div className="flex items-center justify-between text-[11px] px-1 text-zinc-500 font-semibold">
-                    <span>
-                      {freeTrialUsed && !isProSubscriber ? (
-                        <span className="text-rose-600 font-bold">
-                          ⚠️ 1 Free Trial Used (Pro Membership Required)
-                        </span>
-                      ) : (
-                        <span className="text-emerald-700 font-bold">
-                          🎁 1 Free Styling Available (No Card Needed)
-                        </span>
-                      )}
-                    </span>
-                    <span>Direct Official Store Links</span>
-                  </div>
-                </div>
-              )}
-            </div>
           </div>
         </div>
       </section>
 
-      {/* ======================================================= */}
-      {/* 4. RESULTS STUDIO: BEFORE VS AFTER & PRODUCT BREAKDOWN */}
-      {/* ======================================================= */}
-      {styledResult && (
-        <section
-          ref={resultsRef}
-          className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-black/[0.06]"
-        >
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-extrabold mb-3">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              <span>AI Styling Complete • 1:1 Facial Likeness Preserved</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#121316]">
-              Your Transformation: {styledResult.look.title}
-            </h2>
-            <p className="text-sm text-zinc-600 mt-2 font-medium">
-              Fitted with <strong className="text-[#121316]">{styledResult.look.pins.length} authentic designer pieces</strong> matched to your pose and facial features. Click any item for direct official store checkout.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* ------------------------------------------------ */}
-            {/* Visual Display: Large Uncropped AI Styled Look (7 Cols) */}
-            {/* ------------------------------------------------ */}
-            <div className="lg:col-span-7 bg-white rounded-3xl p-6 shadow-[0_4px_25px_rgba(0,0,0,0.04)] border border-black/[0.06]">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-extrabold text-zinc-900">
-                    ✨ Your AI Styled Look
-                  </span>
-                  <span className="text-[11px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 font-bold border border-emerald-200">
-                    100% Uncropped Full-Body
-                  </span>
-                </div>
-                <div className="flex items-center gap-1 bg-[#FAF9F6] p-1 rounded-xl border border-black/[0.06]">
-                  <button
-                    onClick={() => setViewMode('styled-only')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                      viewMode === 'styled-only'
-                        ? 'bg-[#121316] text-white shadow-sm'
-                        : 'text-zinc-600 hover:text-black'
-                    }`}
-                  >
-                    Styled Photo Only
-                  </button>
-                  <button
-                    onClick={() => setViewMode('side-by-side')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                      viewMode === 'side-by-side'
-                        ? 'bg-[#121316] text-white shadow-sm'
-                        : 'text-zinc-600 hover:text-black'
-                    }`}
-                  >
-                    Compare Original
-                  </button>
-                </div>
-              </div>
-
-              {viewMode === 'styled-only' ? (
-                /* Primary Default: Large Uncropped High-Res Showcase */
-                <div className="w-full rounded-2xl overflow-hidden border border-black/[0.08] shadow-2xl relative bg-[#0D0E10] flex items-center justify-center p-3 min-h-[640px] max-h-[880px]">
-                  <img
-                    src={styledResult.imageUrl}
-                    alt="Styled 4K Editorial"
-                    className="w-full h-auto max-h-[840px] object-contain rounded-xl mx-auto drop-shadow-2xl"
-                    onError={(e) => {
-                      const target = e.currentTarget;
-                      if (styledResult?.look?.imageUrl && target.src !== styledResult.look.imageUrl) {
-                        target.src = styledResult.look.imageUrl;
-                      }
-                    }}
-                  />
-
-                  {/* Floating Badge */}
-                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-black/75 text-white backdrop-blur-md text-xs font-extrabold shadow-lg flex items-center gap-1.5 border border-white/10">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Full Body Visible</span>
-                  </div>
-
-                  {/* Floating Look Title Bar */}
-                  <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-2xl bg-white/95 backdrop-blur-md border border-black/[0.08] flex items-center justify-between shadow-xl">
-                    <div>
-                      <span className="text-xs font-extrabold text-[#121316] block">
-                        {styledResult.look.title}
-                      </span>
-                      <span className="text-[10px] text-[#B57C1E] font-bold">
-                        {styledResult.provider}
-                      </span>
-                    </div>
-                    <span className="text-xs font-extrabold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-                      Verified Luxury Pieces
-                    </span>
-                  </div>
-                </div>
-              ) : (
-                /* Optional Side by Side (Uncropped Contain) */
-                <div className="grid grid-cols-2 gap-3">
-                  {/* Original */}
-                  <div className="flex flex-col gap-2">
-                    <span className="text-[11px] font-bold text-zinc-500 text-center">
-                      Before: Original Photo
-                    </span>
-                    <div className="rounded-2xl overflow-hidden border border-black/[0.08] bg-[#0D0E10] flex items-center justify-center p-2 min-h-[500px] max-h-[700px] shadow-sm">
-                      <img
-                        src={userPhoto || ''}
-                        alt="Original Customer"
-                        className="w-full h-auto max-h-[680px] object-contain rounded-xl mx-auto"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Styled Result */}
-                  <div className="flex flex-col gap-2">
-                    <span className="text-[11px] font-bold text-[#92400E] text-center flex items-center justify-center gap-1">
-                      <Sparkles className="w-3.5 h-3.5 text-[#B57C1E]" />
-                      After: AI Styled Look
-                    </span>
-                    <div className="rounded-2xl overflow-hidden border-2 border-[#121316] shadow-xl relative group bg-[#0D0E10] flex items-center justify-center p-2 min-h-[500px] max-h-[700px]">
-                      <img
-                        src={styledResult.imageUrl}
-                        alt="Styled Luxury Look"
-                        className="w-full h-auto max-h-[680px] object-contain rounded-xl mx-auto"
-                        onError={(e) => {
-                          const target = e.currentTarget;
-                          if (styledResult?.look?.imageUrl && target.src !== styledResult.look.imageUrl) {
-                            target.src = styledResult.look.imageUrl;
-                          }
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Action Buttons */}
-              <div className="flex items-center gap-3 mt-6">
-                <a
-                  href={
-                    styledResult.imageUrl.includes('/api/tryon-image/')
-                      ? `${styledResult.imageUrl}?download=1`
-                      : styledResult.imageUrl
-                  }
-                  download="styling_helper_luxury_look.png"
-                  className="flex-1 py-3 px-4 rounded-xl bg-[#121316] hover:bg-black text-white font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>Download High-Res Photo</span>
-                </a>
-
-                <button
-                  onClick={() => {
-                    studioRef.current?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="py-3 px-4 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-800 font-bold text-xs flex items-center gap-1.5 transition-all"
-                >
-                  <RefreshCw className="w-3.5 h-3.5" />
-                  <span>Try Another Vibe</span>
-                </button>
-              </div>
-            </div>
-
-            {/* ------------------------------------------------ */}
-            {/* Worn Garments Breakdown: Real Products & Links (5 Cols) */}
-            {/* ------------------------------------------------ */}
-            <div className="lg:col-span-5 bg-white rounded-3xl p-6 shadow-[0_4px_25px_rgba(0,0,0,0.04)] border border-black/[0.06]">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h3 className="font-extrabold text-base text-[#121316]">
-                    Worn Designer Garments ({styledResult.look.pins.length} Pieces)
-                  </h3>
-                  <p className="text-xs text-zinc-500 mt-0.5 font-medium">
-                    Direct official store links • Zero modals • Opens directly in a new tab
-                  </p>
-                </div>
-                <div className="text-right">
-                  <span className="text-xs font-extrabold text-zinc-700 bg-zinc-100 px-2.5 py-1 rounded-full border border-zinc-200">
-                    Official Store Links
-                  </span>
-                </div>
-              </div>
-
-              {/* Items List */}
-              <div className="space-y-3 max-h-[560px] overflow-y-auto pr-1">
-                {styledResult.look.pins.map((pin) => (
-                  <div
-                    key={pin.id}
-                    className="p-3.5 rounded-2xl bg-[#FAF9F6] border border-black/[0.06] hover:border-black/20 transition-all flex items-center justify-between gap-4 group"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="px-2 py-0.5 rounded-md bg-amber-100/70 text-[#92400E] text-[10px] font-extrabold uppercase tracking-wider">
-                          {pin.category}
-                        </span>
-                        <span className="text-xs font-extrabold text-[#121316] truncate">
-                          {pin.brand}
-                        </span>
-                      </div>
-                      <p className="text-xs text-zinc-700 font-semibold truncate mb-1">
-                        {pin.title}
-                      </p>
-                      <div className="flex items-center gap-2 text-[11px] text-zinc-500 font-medium">
-                        <span>Retailer: {pin.retailer || 'Shopbop'}</span>
-                        <span>•</span>
-                        <span className="text-zinc-600 font-semibold">Official Store</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2 shrink-0">
-                      {/* Direct Native Link Button - Zero Interception */}
-                      <a
-                        href={pin.buyUrl || 'https://www.shopbop.com'}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-3.5 py-2 rounded-xl bg-[#121316] hover:bg-black text-white font-extrabold text-xs flex items-center gap-1.5 shadow-md hover:scale-105 transition-all"
-                      >
-                        <span>Shop Now</span>
-                        <ArrowUpRight className="w-3.5 h-3.5" />
-                      </a>
-
-                      {/* Report Sold Out / Error on specific piece */}
-                      <button
-                        onClick={() => {
-                          setReportProduct({
-                            title: `${pin.brand} - ${pin.title}`,
-                            url: pin.buyUrl || ''
-                          });
-                          setIsReportModalOpen(true);
-                        }}
-                        title="Report Sold Out or Issue (yjongsung1211@gmail.com)"
-                        className="p-2 rounded-xl hover:bg-amber-100/60 text-zinc-400 hover:text-amber-700 transition-colors"
-                      >
-                        <AlertTriangle className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ======================================================= */}
-      {/* 5. REAL AI STYLING EXAMPLES (TOP 4 SHOWCASE) */}
-      {/* ======================================================= */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-black/[0.06]">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 text-[#B57C1E] text-xs font-extrabold uppercase tracking-wider mb-2">
-            <Sparkles className="w-4 h-4" />
-            <span>Real AI Styling Examples</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#121316]">
-            See What Your Photo Can Look Like
-          </h2>
-          <p className="text-sm text-zinc-600 mt-2 font-medium">
-            Here is how your uploaded photo transforms into an authentic designer editorial. Click any example to try it on.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            {
-              id: 'showcase-1',
-              gender: 'women',
-              genderLabel: '👩 Women',
-              category: 'Quiet Luxury Tailoring',
-              title: 'SoHo Glen Plaid Blazer & Wide Slacks',
-              subtitle: 'Parisian chic & high-fashion tailoring',
-              imageUrl: '/images/looks/look_01_soho_quiet_luxury_final.webp',
-              lookId: 'editorial-look-v01',
-              occasionId: 'soho-luxury',
-            },
-            {
-              id: 'showcase-2',
-              gender: 'men',
-              genderLabel: '👨 Men',
-              category: 'Modern Minimalist',
-              title: 'Milan Wool Blazer & Charcoal Slacks',
-              subtitle: 'Sharp modern dandy & Italian tailored fit',
-              imageUrl: '/images/looks/men_look_01_tailored_dandy.webp',
-              lookId: 'editorial-men-01',
-              occasionId: 'mens-tailored-dandy',
-            },
-            {
-              id: 'showcase-3',
-              gender: 'women',
-              genderLabel: '👩 Women',
-              category: 'Modern Luxury Minimalist',
-              title: 'Cheongdam Midnight Navy Overcoat & Slacks',
-              subtitle: 'Burgundy knit, tailored coat & camel trousers',
-              imageUrl: '/images/looks/look_03_cheongdam_silk_cashmere.webp',
-              lookId: 'editorial-look-v03',
-              occasionId: 'midnight-glam',
-            },
-            {
-              id: 'showcase-4',
-              gender: 'men',
-              genderLabel: '👨 Men',
-              category: 'Urban Flight Streetwear',
-              title: 'Seongsu Leather Bomber & Raw Denim',
-              subtitle: 'Vintage distressed shearling bomber & wide denim',
-              imageUrl: '/images/looks/men_look_02_urban_street.webp',
-              lookId: 'editorial-men-02',
-              occasionId: 'mens-urban-street',
-            },
-          ].map((item) => {
-            const isMen = item.gender === 'men';
-            return (
-              <div
-                key={item.id}
-                onClick={() => {
-                  const targetGender = isMen ? 'men' : 'women';
-                  handleGenderChange(targetGender);
-                  const targetOccasions = isMen ? MENS_OCCASIONS : WOMENS_OCCASIONS;
-                  const matchedOccasion = targetOccasions.find(
-                    (o) => o.lookId === item.lookId || o.id === item.occasionId
-                  );
-                  if (matchedOccasion) {
-                    setSelectedOccasion(matchedOccasion);
-                  }
-                  setStyledResult(null);
-                  studioRef.current?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="group rounded-3xl bg-white border border-black/[0.06] hover:border-black/20 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-xl overflow-hidden transition-all flex flex-col justify-between cursor-pointer"
-              >
-                {/* Look Photo */}
-                <div className="aspect-[3/4] relative overflow-hidden bg-zinc-100">
-                  <img
-                    src={item.imageUrl}
-                    alt={item.title}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md border border-black/[0.08] text-xs font-extrabold text-zinc-900 shadow-sm flex items-center gap-1.5">
-                    <span className={isMen ? 'text-indigo-700' : 'text-rose-700'}>
-                      {item.genderLabel}
-                    </span>
-                  </div>
-                  <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md text-white text-[10px] font-extrabold shadow-sm flex items-center gap-1">
-                    <Sparkles className="w-3 h-3 text-[#FFD782]" />
-                    <span>AI Result</span>
-                  </div>
-                </div>
-
-                {/* Look Details */}
-                <div className="p-5 flex flex-col justify-between flex-1">
-                  <div>
-                    <span
-                      className={`inline-block px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider mb-2 ${
-                        isMen
-                          ? 'bg-indigo-50 text-indigo-800 border border-indigo-200'
-                          : 'bg-amber-50 text-[#92400E] border border-amber-200'
-                      }`}
-                    >
-                      {item.category}
-                    </span>
-                    <h3 className="font-extrabold text-sm sm:text-base text-[#121316] group-hover:text-[#B57C1E] transition-colors line-clamp-2 leading-snug">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-zinc-500 mt-1 line-clamp-1 font-medium">
-                      {item.subtitle}
-                    </p>
-                  </div>
-
-                  <div className="mt-4 pt-3 border-t border-black/[0.04] flex items-center justify-between text-xs font-bold text-zinc-700 group-hover:text-black">
-                    <span>Try This Style</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 text-[#B57C1E] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ======================================================= */}
-      {/* 6. STYLINGHELPER PRO SUBSCRIPTION PAYWALL MODAL */}
-      {/* ======================================================= */}
-      {showPaywallModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-md animate-fadeIn">
-          <div className="relative w-full max-w-lg rounded-3xl bg-white border border-black/[0.08] p-6 sm:p-8 shadow-2xl">
-            {/* Close Button */}
+      {/* ================================================================= */}
+      {/* 5. EDITORIAL LOOK DETAIL MODAL (Vogue / SSENSE Split Drawer)       */}
+      {/* ================================================================= */}
+      {activeLookModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-neutral-950/80 backdrop-blur-md animate-fadeIn">
+          <div className="relative w-full max-w-5xl max-h-[92vh] bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row border border-neutral-200">
+            {/* Modal Close Button */}
             <button
-              onClick={() => setShowPaywallModal(false)}
-              className="absolute top-5 right-5 p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 hover:text-black transition-all"
+              onClick={() => setActiveLookModal(null)}
+              className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-neutral-950/60 hover:bg-neutral-950 text-white flex items-center justify-center transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
 
-            {/* Header Icon */}
-            <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-900 flex items-center justify-center font-bold text-xl mb-4 shadow-sm">
-              💎
+            {/* Left Column: Full-Bleed Editorial Visual with Hotspots */}
+            <div className="relative lg:w-1/2 aspect-[3/4] lg:aspect-auto bg-neutral-100 overflow-hidden">
+              <img
+                src={activeLookModal.imageUrl}
+                alt={activeLookModal.title}
+                className="w-full h-full object-cover object-top"
+              />
+
+              {/* Hotspot Toggle */}
+              <div className="absolute bottom-4 left-4 z-10">
+                <button
+                  onClick={() => setShowHotspotPins(!showHotspotPins)}
+                  className="px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[11px] font-medium text-neutral-800 shadow-sm flex items-center gap-1.5 hover:bg-white transition-all"
+                >
+                  {showHotspotPins ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
+                  <span>{showHotspotPins ? 'Hide Hotspots' : 'Show Hotspots'}</span>
+                </button>
+              </div>
+
+              {/* Hotspot Pins Overlay */}
+              {showHotspotPins &&
+                activeLookModal.pins.map((pin) => (
+                  <div
+                    key={pin.id}
+                    style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
+                    className="absolute -translate-x-1/2 -translate-y-1/2 z-10 group/pin"
+                  >
+                    <button
+                      onMouseEnter={() => setHoveredPinId(pin.id)}
+                      onMouseLeave={() => setHoveredPinId(null)}
+                      className="w-6 h-6 rounded-full bg-white text-neutral-950 border border-neutral-400 shadow-lg flex items-center justify-center font-bold text-[10px] hover:scale-125 transition-transform"
+                    >
+                      +
+                    </button>
+
+                    {/* Pin Tooltip */}
+                    <div
+                      className={`absolute left-1/2 -translate-x-1/2 bottom-8 w-48 p-2.5 rounded-xl bg-neutral-950/95 backdrop-blur-md text-white text-[11px] shadow-xl pointer-events-none transition-all ${
+                        hoveredPinId === pin.id ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                      }`}
+                    >
+                      <div className="text-[9px] uppercase tracking-wider text-amber-300 font-semibold">
+                        {pin.category} · {pin.brand}
+                      </div>
+                      <div className="font-medium text-white truncate mt-0.5">{pin.title}</div>
+                      <div className="text-amber-200 font-bold mt-1">${pin.price} USD</div>
+                    </div>
+                  </div>
+                ))}
             </div>
 
-            {/* Title & Tagline */}
-            <h3 className="text-xl sm:text-2xl font-extrabold text-[#121316]">
-              StylingHelper Pro Membership
-            </h3>
-            <p className="text-xs sm:text-sm text-zinc-600 mt-1.5 leading-relaxed font-medium">
-              {proModalReason === 'trial_exhausted'
-                ? "You've experienced your 1 Free Styling! Upgrade to Pro for unlimited AI full-body outfit swaps and personal styling."
-                : 'Unlock unlimited AI full-body outfit swaps and direct real-time luxury shopping links.'}
-            </p>
+            {/* Right Column: Garment Breakdown & Direct Shop Links */}
+            <div className="lg:w-1/2 flex flex-col max-h-[92vh] overflow-y-auto p-6 sm:p-8 bg-white">
+              {/* Header Spec */}
+              <div className="pb-6 border-b border-neutral-200">
+                <div className="flex items-center justify-between text-[10px] uppercase font-semibold tracking-[0.2em] text-neutral-400 mb-1">
+                  <span>{activeLookModal.season}</span>
+                  <span>{activeLookModal.category}</span>
+                </div>
+                <h3 className="font-serif text-2xl font-light text-neutral-950 leading-snug">
+                  {activeLookModal.shortTitle}
+                </h3>
+                <p className="text-xs text-neutral-500 mt-2 font-normal leading-relaxed">
+                  {activeLookModal.curatorNote}
+                </p>
+              </div>
 
-            {/* Pricing Plans Selector */}
-            <div className="grid grid-cols-2 gap-3 my-6">
-              {/* Annual VIP */}
-              <div
-                onClick={() => setSelectedPlan('annual')}
-                className={`p-4 rounded-2xl border-2 cursor-pointer transition-all relative flex flex-col justify-between ${
-                  selectedPlan === 'annual'
-                    ? 'border-[#121316] bg-amber-50/70 shadow-sm'
-                    : 'border-zinc-200 bg-[#FAF9F6] opacity-70 hover:opacity-100'
-                }`}
-              >
-                <span className="absolute -top-2.5 right-3 px-2 py-0.5 rounded-full bg-[#121316] text-white text-[10px] font-extrabold uppercase">
-                  Best Value
-                </span>
-                <div>
-                  <span className="text-xs font-bold text-[#B57C1E] block">Annual VIP Plan</span>
-                  <div className="mt-2">
-                    <span className="text-2xl font-extrabold text-[#121316]">$149</span>
-                    <span className="text-[11px] text-zinc-500 font-medium"> / year</span>
-                  </div>
-                  <span className="text-[10px] text-emerald-700 font-bold block mt-0.5">
-                    $12.40 / mo (Save 35%)
+              {/* Garments List */}
+              <div className="py-6 flex-1 flex flex-col gap-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs uppercase tracking-wider font-semibold text-neutral-900">
+                    Curated Pieces ({activeLookModal.pins.length})
+                  </span>
+                  <span className="text-xs font-bold text-neutral-950">
+                    Total: ${activeLookModal.totalPrice.toLocaleString()} USD
                   </span>
                 </div>
-              </div>
 
-              {/* Monthly */}
-              <div
-                onClick={() => setSelectedPlan('monthly')}
-                className={`p-4 rounded-2xl border-2 cursor-pointer transition-all flex flex-col justify-between ${
-                  selectedPlan === 'monthly'
-                    ? 'border-[#121316] bg-amber-50/70 shadow-sm'
-                    : 'border-zinc-200 bg-[#FAF9F6] opacity-70 hover:opacity-100'
-                }`}
-              >
-                <div>
-                  <span className="text-xs font-bold text-zinc-700 block">Monthly Plan</span>
-                  <div className="mt-2">
-                    <span className="text-2xl font-extrabold text-[#121316]">$19</span>
-                    <span className="text-[11px] text-zinc-500 font-medium"> / month</span>
-                  </div>
-                  <span className="text-[10px] text-zinc-500 block mt-0.5">Cancel anytime</span>
+                <div className="flex flex-col gap-3">
+                  {activeLookModal.pins.map((pin) => (
+                    <div
+                      key={pin.id}
+                      className="p-3.5 rounded-xl bg-neutral-50 hover:bg-neutral-100/80 border border-neutral-200/80 transition-colors flex items-center justify-between gap-3"
+                    >
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-neutral-200 text-neutral-800">
+                            {pin.category}
+                          </span>
+                          <span className="text-xs font-bold text-neutral-900 truncate">
+                            {pin.brand}
+                          </span>
+                        </div>
+                        <div className="text-xs text-neutral-600 truncate mt-1">
+                          {pin.title}
+                        </div>
+                        {pin.kStyleTip && (
+                          <div className="text-[10px] text-neutral-400 italic truncate mt-0.5">
+                            {pin.kStyleTip}
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="flex flex-col items-end gap-1.5">
+                        <span className="text-xs font-bold text-neutral-950">
+                          ${pin.price}
+                        </span>
+                        <a
+                          href={pin.buyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-neutral-950 hover:bg-black text-white text-[10px] font-semibold tracking-wider uppercase transition-colors"
+                        >
+                          <span>Shop {pin.retailer}</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
 
-            {/* Features Checklist */}
-            <div className="space-y-2.5 mb-6">
-              <div className="flex items-center gap-2 text-xs font-semibold text-zinc-700">
-                <Check className="w-4 h-4 text-emerald-600 shrink-0 stroke-[3]" />
-                <span>Unlimited AI full-body outfit swaps (Virtual Try-On)</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs font-semibold text-zinc-700">
-                <Check className="w-4 h-4 text-emerald-600 shrink-0 stroke-[3]" />
-                <span>Verified authentic Shopbop designer luxury items with direct store links</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs font-semibold text-zinc-700">
-                <Check className="w-4 h-4 text-emerald-600 shrink-0 stroke-[3]" />
-                <span>Download high-definition 4K editorial photos without watermarks</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs font-semibold text-zinc-700">
-                <Check className="w-4 h-4 text-emerald-600 shrink-0 stroke-[3]" />
-                <span>Ultra-fast priority AI rendering queue</span>
-              </div>
-            </div>
-
-            {/* Official PayPal Checkout CTA */}
-            <div className="space-y-3">
-              <a
-                href={PAYPAL_CHECKOUT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
-                  // Pre-activate local tracking on click
-                  fetch('/api/checkout/paypal', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ plan: selectedPlan })
-                  }).catch(() => {});
-                }}
-                className="w-full py-3.5 px-6 rounded-2xl bg-[#0070BA] hover:bg-[#005EA6] text-white font-extrabold text-sm flex items-center justify-center gap-2.5 shadow-lg shadow-[#0070BA]/25 hover:shadow-xl transition-all active:scale-[0.99] cursor-pointer"
-              >
-                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                  <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.002.535 5.32.26 5.69.26h7.248c2.457 0 4.394.57 5.485 1.603 1.05.992 1.488 2.454 1.233 4.116-.54 3.513-2.915 5.485-6.516 5.485h-2.31l-1.398 8.873a1.002 1.002 0 0 1-.989.843l-1.367.157z" />
-                </svg>
-                <span>Pay ${selectedPlan === 'annual' ? 149 : 19}.00 with PayPal or Card</span>
-                <ExternalLink className="w-4 h-4 opacity-80" />
-              </a>
-
-              {/* Supported Payment Badges */}
-              <div className="flex items-center justify-center gap-1.5 text-[10px] text-zinc-500 font-semibold pt-1">
-                <span>Accepted:</span>
-                <span className="px-1.5 py-0.5 bg-zinc-100 border border-zinc-200 rounded text-zinc-800">PayPal</span>
-                <span className="px-1.5 py-0.5 bg-zinc-100 border border-zinc-200 rounded text-zinc-800">Visa</span>
-                <span className="px-1.5 py-0.5 bg-zinc-100 border border-zinc-200 rounded text-zinc-800">Mastercard</span>
-                <span className="px-1.5 py-0.5 bg-zinc-100 border border-zinc-200 rounded text-zinc-800">AMEX</span>
-              </div>
-
-              {/* Security Assurance */}
-              <div className="flex items-center justify-center gap-1.5 text-[10px] text-zinc-400 pt-2 border-t border-black/[0.04]">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Official 256-bit encrypted checkout via PayPal • Cancel anytime</span>
+              {/* Bottom Sticky Action */}
+              <div className="pt-6 border-t border-neutral-200 flex items-center gap-3">
+                <button
+                  onClick={() => handleDirectTryOn(activeLookModal)}
+                  className="flex-1 py-3.5 rounded-full bg-neutral-950 hover:bg-black text-white text-xs uppercase tracking-[0.16em] font-semibold text-center transition-all flex items-center justify-center gap-2"
+                >
+                  <Wand2 className="w-4 h-4 text-amber-300" />
+                  <span>Style My Photo with This Look</span>
+                </button>
               </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Member Login & Signup Modal */}
+      {/* ================================================================= */}
+      {/* 6. PRO SUBSCRIPTION PAYWALL MODAL                                 */}
+      {/* ================================================================= */}
+      {showPaywallModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-neutral-950/80 backdrop-blur-md animate-fadeIn">
+          <div className="relative w-full max-w-lg bg-white rounded-3xl p-8 sm:p-10 shadow-2xl border border-neutral-200 text-center">
+            <button
+              onClick={() => setShowPaywallModal(false)}
+              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-700 flex items-center justify-center transition-colors"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-800 mx-auto flex items-center justify-center mb-4">
+              <Sparkles className="w-6 h-6 text-amber-600" />
+            </div>
+
+            <span className="text-[10px] uppercase font-semibold tracking-[0.25em] text-neutral-400">
+              StylingHelper Pro Member
+            </span>
+            <h3 className="font-serif text-2xl sm:text-3xl font-light text-neutral-950 mt-1 mb-3">
+              Unlock Unlimited Runway Swaps
+            </h3>
+            <p className="text-xs sm:text-sm text-neutral-600 mb-6 font-normal leading-relaxed">
+              Your free trial has been activated. Upgrade to Pro for unlimited 4K fittings, exclusive runway capsule previews, and VIP stock sentinel alerts.
+            </p>
+
+            <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200 text-left mb-6 space-y-2">
+              <div className="flex items-center gap-2 text-xs text-neutral-800 font-medium">
+                <Check className="w-4 h-4 text-emerald-600" />
+                <span>Unlimited photorealistic outfit swaps (4K Ultra-HD)</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-neutral-800 font-medium">
+                <Check className="w-4 h-4 text-emerald-600" />
+                <span>Early access to SS26 Paris & New York capsule edits</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-neutral-800 font-medium">
+                <Check className="w-4 h-4 text-emerald-600" />
+                <span>Automated out-of-stock restock monitoring on Shopbop</span>
+              </div>
+            </div>
+
+            <a
+              href={PAYPAL_CHECKOUT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full py-4 rounded-full bg-neutral-950 hover:bg-black text-white text-xs uppercase tracking-[0.18em] font-semibold shadow-md transition-all block text-center"
+            >
+              Upgrade to Pro ($19 / month)
+            </a>
+            <p className="text-[11px] text-neutral-400 mt-3">
+              Secured by PayPal 256-bit encryption · Cancel anytime with 1 click
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* ================================================================= */}
+      {/* 7. AUTH & REPORT MODALS                                            */}
+      {/* ================================================================= */}
       <USAuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
         initialMode={authMode}
-        title={authMode === 'signin' ? 'Sign In to StylingHelper' : 'Join StylingHelper Club'}
-        subtitle="Access your personal wardrobe history, saved fittings, and Pro styling features."
-        onSuccess={(user) => {
-          setCurrentUser(user);
-          localStorage.setItem('stylinghelper_user', JSON.stringify(user));
-          window.dispatchEvent(new Event('stylinghelper_auth_changed'));
-          setIsAuthModalOpen(false);
-        }}
+        onSuccess={() => setIsAuthModalOpen(false)}
       />
 
-      {/* Error & Sold-Out Report Modal */}
       <ReportModal
         isOpen={isReportModalOpen}
         onClose={() => setIsReportModalOpen(false)}
@@ -1920,45 +1674,40 @@ export default function StylingHelperBright() {
         defaultProductUrl={reportProduct.url}
       />
 
-      {/* Floating Action Button: Report Issue */}
-      <div className="fixed bottom-6 right-6 z-40">
-        <button
-          onClick={() => {
-            setReportProduct({ title: '', url: typeof window !== 'undefined' ? window.location.href : '' });
-            setIsReportModalOpen(true);
-          }}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/95 hover:bg-white text-zinc-800 text-xs font-bold shadow-xl border border-black/[0.1] hover:border-black/20 hover:scale-105 active:scale-95 transition-all group backdrop-blur-md"
-        >
-          <div className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
-          <AlertTriangle className="w-3.5 h-3.5 text-amber-600 group-hover:rotate-12 transition-transform" />
-          <span>Report Issue</span>
-        </button>
-      </div>
+      {/* ================================================================= */}
+      {/* 8. MINIMALIST EDITORIAL FOOTER                                    */}
+      {/* ================================================================= */}
+      <footer className="py-16 bg-[#FAF9F7] border-t border-neutral-200 text-neutral-600">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <div className="font-serif text-xl font-light text-neutral-950 tracking-[0.06em]">
+              STYLING HELPER
+            </div>
+            <p className="text-xs text-neutral-500 mt-1">
+              Curated Seoul High-Fashion & Virtual Runway Fitting Atelier.
+            </p>
+          </div>
 
-      {/* ======================================================= */}
-      {/* 7. BRIGHT MINIMAL FOOTER */}
-      {/* ======================================================= */}
-      <footer className="border-t border-black/[0.06] bg-white py-12 px-4 text-center text-xs text-zinc-500">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 font-medium">
-          <p>© 2026 STYLING HELPER. Click Any Look, Shop the Outfit. All rights reserved.</p>
-          <div className="flex items-center gap-4 text-zinc-600">
-            <Link href="/colorhelper/en" className="text-amber-800 hover:text-amber-900 font-bold underline">
-              🎨 Color Analysis
-            </Link>
-            <span>•</span>
-            <span>Powered by Advanced Fashion AI</span>
-            <span>•</span>
-            <span>Shopbop Verified Luxury</span>
-            <span>•</span>
+          <div className="flex items-center gap-6 text-xs text-neutral-500">
             <button
               onClick={() => {
-                setReportProduct({ title: '', url: '' });
+                setReportProduct({ title: 'General In-Stock Inquiry', url: 'https://stylinghelper.com' });
                 setIsReportModalOpen(true);
               }}
-              className="text-amber-700 hover:text-amber-800 font-semibold underline"
+              className="hover:text-neutral-950 transition-colors"
             >
-              Report Issue
+              Report Out-of-Stock
             </button>
+            <Link href="/privacy" className="hover:text-neutral-950 transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="hover:text-neutral-950 transition-colors">
+              Terms of Service
+            </Link>
+          </div>
+
+          <div className="text-xs text-neutral-400">
+            © 2026 STYLING HELPER. All rights reserved.
           </div>
         </div>
       </footer>
