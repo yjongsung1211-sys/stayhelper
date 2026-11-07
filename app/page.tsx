@@ -72,6 +72,12 @@ const UI_TEXT = {
     warmLabel: "웜(Warm)",
     brightnessLabel: "피부 밝기 (Value):",
     saturationLabel: "채도 (Chroma):",
+    customResultTitle: "업로드한 사진 맞춤형 베스트 스타일링 결과",
+    customResultSubtitle: "당신의 얼굴에 가장 잘 어울리는 베스트 컬러를 입혀 안색과 윤곽이 극대화된 모습을 확인하세요.",
+    originalPhotoBadge: "내 원본 사진",
+    bestStyledPhotoBadge: "베스트 맞춤 착장",
+    switchBestColorLabel: "베스트 컬러 실시간 착장:",
+    switchBestLipLabel: "추천 시그니처 립:",
     tabResult: "12톤 진단 결과 & 컬러 팔레트",
     tabCosmetics: "인생 립스틱 & 파우치 처방전",
     saveInstaCard: "인스타 스토리 카드 저장",
@@ -291,6 +297,12 @@ const UI_TEXT = {
     warmLabel: "Warm Tone",
     brightnessLabel: "Skin Lightness (Value):",
     saturationLabel: "Chroma Saturation:",
+    customResultTitle: "Your Personalized Signature Best Styling",
+    customResultSubtitle: "See your complexion illuminate with signature tailored best colors applied directly to your portrait.",
+    originalPhotoBadge: "Original Portrait",
+    bestStyledPhotoBadge: "Best Color Styled",
+    switchBestColorLabel: "Try Best Drapery Color:",
+    switchBestLipLabel: "Try Signature Lipstick:",
     tabResult: "12-Tone Report & Palette",
     tabCosmetics: "Signature Lipsticks & Pouch",
     saveInstaCard: "Export Instagram Story Card",
@@ -509,6 +521,12 @@ const UI_TEXT = {
     warmLabel: "イエベ (Warm)",
     brightnessLabel: "肌の明るさ (明度):",
     saturationLabel: "鮮やかさ (彩度):",
+    customResultTitle: "アップロード写真に合わせたベストスタイリング結果",
+    customResultSubtitle: "あなたに最も似合うベストカラーをまとい、肌の透明感と血色感が引き立つ瞬間をご確認ください。",
+    originalPhotoBadge: "元の写真",
+    bestStyledPhotoBadge: "ベストカラー着用",
+    switchBestColorLabel: "ベストカラー着せ替え:",
+    switchBestLipLabel: "おすすめリップ:",
     tabResult: "12タイプ診断結果＆カラーパレット",
     tabCosmetics: "人生神リップ＆コスメ処方箋",
     saveInstaCard: "インスタストーリー用画像を保存",
@@ -1258,9 +1276,9 @@ const MAKEUP_LIP_PRESETS = [
 ];
 
 const MAKEUP_EYE_PRESETS = [
-  { id: "eye_1", hex: "#5B6A72", name: { ko: "스모키 슬레이트", en: "Smoky Slate", ja: "スモーキースレート" } },
-  { id: "eye_2", hex: "#8C6D58", name: { ko: "웜 브라운", en: "Warm Brown", ja: "ウォームブラウン" } },
-  { id: "eye_3", hex: "#C8A282", name: { ko: "소프트 누드", en: "Soft Nude", ja: "ソフトヌード" } },
+  { id: "eye_1", hex: "#5B6A72", matchingLipKey: "red", name: { ko: "스모키 슬레이트", en: "Smoky Slate", ja: "スモーキースレート" } },
+  { id: "eye_2", hex: "#8C6D58", matchingLipKey: "rose", name: { ko: "웜 브라운", en: "Warm Brown", ja: "ウォームブラウン" } },
+  { id: "eye_3", hex: "#C8A282", matchingLipKey: "nude", name: { ko: "소프트 누드", en: "Soft Nude", ja: "ソフトヌード" } },
 ];
 
 export default function ColorHelperPage() {
@@ -1287,6 +1305,8 @@ export default function ColorHelperPage() {
   const [selectedLipKey, setSelectedLipKey] = useState<string>("rose");
   const [isPaywallOpen, setIsPaywallOpen] = useState(false);
   const [resultTone, setResultTone] = useState<ColorToneData | null>(null);
+  const [resultActiveBestColorIndex, setResultActiveBestColorIndex] = useState<number>(0);
+  const [resultActiveLipIndex, setResultActiveLipIndex] = useState<number>(0);
   const [activeTab, setActiveTab] = useState<"result" | "cosmetics">("result");
   const [studioTool, setStudioTool] = useState<"drape" | "custom" | "outfit" | "cosme" | "quiz">("custom");
   const [customColorInput, setCustomColorInput] = useState<string>("#FFA07A");
@@ -2372,35 +2392,7 @@ export default function ColorHelperPage() {
                     >
                       <img src={leftGlam} alt="Glam Makeup" className="w-full h-full object-cover object-top" />
                       
-                      {/* Real-time Dynamic Eye Shadow Tint Overlay on Eyelids */}
-                      <div className="absolute inset-0 pointer-events-none">
-                        {/* Left Eyelid Shadow */}
-                        <div 
-                          className="absolute rounded-full blur-[2px] transition-all duration-300"
-                          style={{
-                            left: '34%',
-                            top: '30.5%',
-                            width: '13%',
-                            height: '4.5%',
-                            backgroundColor: activeEyeTryonHex,
-                            opacity: 0.78,
-                            mixBlendMode: 'multiply'
-                          }}
-                        />
-                        {/* Right Eyelid Shadow */}
-                        <div 
-                          className="absolute rounded-full blur-[2px] transition-all duration-300"
-                          style={{
-                            left: '54.5%',
-                            top: '30.5%',
-                            width: '13%',
-                            height: '4.5%',
-                            backgroundColor: activeEyeTryonHex,
-                            opacity: 0.78,
-                            mixBlendMode: 'multiply'
-                          }}
-                        />
-                      </div>
+
                     </div>
 
                     {/* Draggable Divider Handle */}
@@ -2496,7 +2488,14 @@ export default function ColorHelperPage() {
                   {MAKEUP_EYE_PRESETS.map((ep) => (
                     <button
                       key={ep.id}
-                      onClick={() => setActiveEyeTryonHex(ep.hex)}
+                      onClick={() => {
+                        setActiveEyeTryonHex(ep.hex);
+                        if (ep.matchingLipKey) {
+                          setSelectedLipKey(ep.matchingLipKey);
+                          const matchingLip = MAKEUP_LIP_PRESETS.find(lp => lp.colorKey === ep.matchingLipKey);
+                          if (matchingLip) setActiveLipTryonHex(matchingLip.hex);
+                        }
+                      }}
                       className={`w-7 h-7 rounded-full border-2 transition cursor-pointer ${
                         activeEyeTryonHex === ep.hex ? "border-purple-600 scale-110 ring-2 ring-purple-300" : "border-white"
                       }`}
@@ -2645,6 +2644,150 @@ export default function ColorHelperPage() {
                     <Download className="w-4 h-4" />
                     {t.saveInstaCard}
                   </button>
+                </div>
+
+                {/* ── 👑 업로드한 사진 맞춤형 베스트 착장 결과 쇼케이스 (Personalized Signature Showcase) ── */}
+                <div className="mb-10 p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-amber-500/10 via-purple-500/5 to-white border-2 border-amber-400/40 shadow-xl">
+                  <div className="text-center max-w-xl mx-auto mb-6">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500 text-white text-[11px] font-black uppercase tracking-wider shadow-sm mb-2">
+                      👑 100% MATCH • SIGNATURE COLOR FIT
+                    </span>
+                    <h4 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">
+                      {t.customResultTitle}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-1 leading-relaxed">
+                      {t.customResultSubtitle}
+                    </p>
+                  </div>
+
+                  {/* Before vs After Dual Comparison Cards */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-2xl mx-auto mb-6">
+                    {/* Before: Original Photo */}
+                    <div className="relative rounded-2xl overflow-hidden bg-gray-900 aspect-[3/4] border-2 border-gray-200 shadow-md">
+                      <img 
+                        src={imageSrc || (lang === 'ja' ? '/nb_step1_ja.jpg' : lang === 'ko' ? '/nb_step1_ko.jpg' : '/nb_step1_en.jpg')} 
+                        alt="Before Original Portrait" 
+                        className="w-full h-full object-cover object-top"
+                      />
+                      <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-xs text-white text-[10px] font-black px-2.5 py-1 rounded-full border border-white/20">
+                        {t.originalPhotoBadge}
+                      </div>
+                      <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent text-center text-white text-xs font-bold">
+                        착장 전 본연의 안색
+                      </div>
+                    </div>
+
+                    {/* After: Personalized Signature Best Look with Tailored Drape & Lip */}
+                    {(() => {
+                      const curBestColor = resultTone.bestColors[resultActiveBestColorIndex] || resultTone.bestColors[0];
+                      const curLip = resultTone.cosmetics.lips[resultActiveLipIndex] || resultTone.cosmetics.lips[0];
+                      const curPhoto = imageSrc || (lang === 'ja' ? '/nb_step1_ja_raw.jpg' : lang === 'ko' ? '/nb_step1_model.jpg' : '/nb_step1_en_raw.jpg');
+
+                      return (
+                        <div className="relative rounded-2xl overflow-hidden bg-gray-900 aspect-[3/4] border-3 border-amber-400 shadow-xl ring-4 ring-amber-400/20">
+                          {/* Base Portrait with Tone-up Glow */}
+                          <img 
+                            src={curPhoto} 
+                            alt="After Tailored Styling" 
+                            className="w-full h-full object-cover object-top brightness-105 contrast-[1.03]"
+                          />
+
+                          {/* Real-time Tailored Signature Best Drape Fabric */}
+                          <div 
+                            className="absolute inset-x-0 bottom-0 h-[38%] pointer-events-none transition-colors duration-500 shadow-2xl"
+                            style={{
+                              background: `linear-gradient(to bottom, transparent 0%, ${curBestColor.hex}dd 30%, ${curBestColor.hex} 100%)`,
+                              clipPath: 'polygon(0% 35%, 18% 28%, 35% 25%, 50% 28%, 65% 25%, 82% 28%, 100% 35%, 100% 100%, 0% 100%)'
+                            }}
+                          >
+                            {/* Fabric Texture Wave Highlight */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-60 mix-blend-overlay" />
+                          </div>
+
+                          {/* Subtle Signature Lip Glow */}
+                          <div 
+                            className="absolute pointer-events-none rounded-full blur-[2px] transition-colors duration-300"
+                            style={{
+                              left: '43%',
+                              top: '52%',
+                              width: '14%',
+                              height: '4%',
+                              backgroundColor: curLip.hex,
+                              opacity: 0.65,
+                              mixBlendMode: 'color'
+                            }}
+                          />
+
+                          {/* Gold Crown After Badge */}
+                          <div className="absolute top-3 left-3 bg-gradient-to-r from-amber-500 to-[#E07A5F] text-white text-[10px] font-black px-3 py-1 rounded-full shadow-lg border border-white/30 flex items-center gap-1">
+                            <Sparkles className="w-3 h-3 text-amber-200" />
+                            {t.bestStyledPhotoBadge}
+                          </div>
+
+                          {/* Current Applied Palette Tag */}
+                          <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/90 via-black/60 to-transparent text-center text-white">
+                            <div className="text-[10px] font-bold text-amber-300 uppercase tracking-wider mb-0.5">
+                              ✨ {curBestColor.name[lang]} DRAPE + {curLip.name}
+                            </div>
+                            <div className="text-xs font-black">
+                              얼굴 윤곽 리프팅 & 생기 극대화 완료
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })()}
+                  </div>
+
+                  {/* Interactive Swatches for Instant Best Color & Lip Switching */}
+                  <div className="bg-white/80 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-amber-200/80 max-w-xl mx-auto space-y-3.5">
+                    {/* 1. Best Drapery Color Chips */}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <span className="text-xs font-black text-gray-800 flex items-center gap-1.5">
+                        <Palette className="w-3.5 h-3.5 text-[#E07A5F]" />
+                        {t.switchBestColorLabel}
+                      </span>
+                      <div className="flex items-center gap-2">
+                        {resultTone.bestColors.slice(0, 5).map((col, idx) => (
+                          <button
+                            key={col.hex + idx}
+                            onClick={() => setResultActiveBestColorIndex(idx)}
+                            className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-extrabold transition-all cursor-pointer ${
+                              resultActiveBestColorIndex === idx
+                                ? "bg-gray-900 text-white shadow-md scale-105 ring-2 ring-amber-400"
+                                : "bg-white text-gray-700 border border-gray-200 hover:border-gray-400 shadow-2xs"
+                            }`}
+                          >
+                            <span className="w-3 h-3 rounded-full border border-black/10" style={{ backgroundColor: col.hex }} />
+                            <span>{col.name[lang]}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* 2. Signature Lipstick Chips */}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-gray-100">
+                      <span className="text-xs font-black text-gray-800 flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5 text-rose-500" />
+                        {t.switchBestLipLabel}
+                      </span>
+                      <div className="flex items-center gap-2">
+                        {resultTone.cosmetics.lips.map((lip, lidx) => (
+                          <button
+                            key={lip.name + lidx}
+                            onClick={() => setResultActiveLipIndex(lidx)}
+                            className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-extrabold transition-all cursor-pointer ${
+                              resultActiveLipIndex === lidx
+                                ? "bg-rose-600 text-white shadow-md scale-105 ring-2 ring-rose-300"
+                                : "bg-white text-gray-700 border border-gray-200 hover:border-gray-400 shadow-2xs"
+                            }`}
+                          >
+                            <span className="w-3 h-3 rounded-full border border-black/10" style={{ backgroundColor: lip.hex }} />
+                            <span>{lip.brand} {lip.name}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="p-5 rounded-2xl bg-[#FFFBF9] border border-[#E07A5F]/20 mb-8">
