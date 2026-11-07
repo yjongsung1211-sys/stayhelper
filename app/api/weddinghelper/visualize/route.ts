@@ -1,14 +1,19 @@
 /**
  * =========================================================================
- * WEDDINGHELPER AI VISUALIZE API ROUTE
+ * WEDDINGHELPER AI MULTI-PHOTO & TARGET SCENE SYNTHESIZE API ROUTE
  * =========================================================================
  * POST /api/weddinghelper/visualize
- * 커플 사진 1장과 12대 테마 중 1개를 받아, 신랑신부 얼굴을 보존하면서
- * 전 세계 최고급 베뉴의 럭셔리 웨딩 화보를 실시간 렌더링하고
- * 100% In-Stock 정품 드레스/주얼리 및 베뉴 예약 링크를 반환합니다.
+ * 
+ * 1. 최대 3장의 고객 참조 사진(커플 사진 + 신부 클로즈업 + 신랑 클로즈업)을 수신하여
+ *    신랑/신부의 쌍꺼풀, 보조개, 눈매, 미소 등 3D 안면 기하학을 100% 정밀 식별.
+ * 2. 각도별 카드의 원본 콘셉트 사진(targetSceneImage, 예: scene_18 난로 씬)을 함께 로드하여,
+ *    해당 카드의 원래 배경, 카메라 앵글, 포즈(착석/키스/포옹 등), 조명을 100% 보존하면서
+ *    고객의 얼굴과 슬림한 체형, 도자기 물광 피부로 정밀 합성 렌더링합니다.
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import fs from 'fs';
+import path from 'path';
 import { WEDDING_12_PRESETS } from '@/lib/wedding-presets';
 
 const DEST_TO_THEME_MAP: Record<string, string> = {
@@ -26,15 +31,39 @@ const DEST_TO_THEME_MAP: Record<string, string> = {
   'theme_12_swiss_alps': 'swiss-alps',
 };
 
-
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
+
+function parseBase64(imgString: string): { mimeType: string; data: string } | null {
+  if (!imgString) return null;
+  if (imgString.startsWith('data:')) {
+    const match = imgString.match(/^data:([^;]+);base64,(.+)$/);
+    if (match) {
+      return { mimeType: match[1], data: match[2] };
+    }
+  } else if (imgString.startsWith('/')) {
+    try {
+      const localPath = path.join(process.cwd(), 'public', imgString.replace(/^\//, ''));
+      if (fs.existsSync(localPath)) {
+        const buf = fs.readFileSync(localPath);
+        const ext = path.extname(localPath).toLowerCase();
+        const mimeType = ext === '.png' ? 'image/png' : ext === '.webp' ? 'image/webp' : 'image/jpeg';
+        return { mimeType, data: buf.toString('base64') };
+      }
+    } catch (e) {
+      console.error('Error reading local image:', imgString, e);
+    }
+  }
+  return null;
+}
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const {
       image,
+      images,
+      targetSceneImage,
       themeId = 'bali-jungle',
       coupleNames = 'The Couple',
       clientId = 'guest',
@@ -45,9 +74,17 @@ export async function POST(request: NextRequest) {
       angleTitle = 'Ceremonial Altar Vows',
     } = body;
 
-    if (!image || typeof image !== 'string') {
+    // Collect user photos (support array of up to 3 photos or single legacy image)
+    const rawUserImages: string[] = [];
+    if (Array.isArray(images) && images.length > 0) {
+      rawUserImages.push(...images.filter(Boolean));
+    } else if (image && typeof image === 'string') {
+      rawUserImages.push(image);
+    }
+
+    if (rawUserImages.length === 0) {
       return NextResponse.json(
-        { error: 'A couple photograph is required to visualize your luxury wedding.' },
+        { error: 'At least one couple photograph is required to synthesize your luxury wedding.' },
         { status: 400 }
       );
     }
@@ -55,61 +92,101 @@ export async function POST(request: NextRequest) {
     const resolvedThemeId = DEST_TO_THEME_MAP[themeId] || themeId;
     const preset = WEDDING_12_PRESETS[resolvedThemeId] || WEDDING_12_PRESETS[themeId] || WEDDING_12_PRESETS['bali-jungle'];
 
-    // 1. Base64 separation
-    let mimeType = 'image/jpeg';
-    let base64Data = image;
-
-    if (image.startsWith('data:')) {
-      const match = image.match(/^data:([^;]+);base64,(.+)$/);
-      if (match) {
-        mimeType = match[1];
-        base64Data = match[2];
-      }
-    } else if (image.startsWith('/')) {
-      try {
-        const fs = require('fs');
-        const path = require('path');
-        const localPath = path.join(process.cwd(), 'public', image.replace(/^\//, ''));
-        if (fs.existsSync(localPath)) {
-          const buf = fs.readFileSync(localPath);
-          base64Data = buf.toString('base64');
-          mimeType = image.endsWith('.png') ? 'image/png' : 'image/jpeg';
-        }
-      } catch (e) {
-        console.error('Error reading local sample couple image:', e);
+    // 1. Process User Reference Photos (up to 3 photos)
+    const userImageParts: Array<{ inlineData: { mimeType: string; data: string } }> = [];
+    for (const rawImg of rawUserImages.slice(0, 3)) {
+      const parsed = parseBase64(rawImg);
+      if (parsed) {
+        userImageParts.push({ inlineData: parsed });
       }
     }
 
-    // 2. High-fashion Vogue celebrity wedding photoshoot prompt: Jaw-dropping beauty, flawless glass-skin, slim silhouette & romantic chemistry
-    const promptText = `You are the world's most celebrated Vogue Weddings and Harper's Bazaar celebrity master bridal photographer (in the visual style of Annie Leibovitz and Mario Testino).
+    if (userImageParts.length === 0) {
+      return NextResponse.json(
+        { error: 'Failed to process uploaded photographs.' },
+        { status: 400 }
+      );
+    }
+
+    // 2. Process Target Scene Concept Image (if provided)
+    let targetScenePart: { inlineData: { mimeType: string; data: string } } | null = null;
+    if (targetSceneImage && typeof targetSceneImage === 'string') {
+      targetScenePart = parseBase64(targetSceneImage) ? { inlineData: parseBase64(targetSceneImage)! } : null;
+    }
+
+    // 3. Construct Precise Multimodal Prompt
+    const numUserPhotos = userImageParts.length;
+    const hasTargetScene = targetScenePart !== null;
+
+    let promptText = '';
+    if (hasTargetScene) {
+      // Scenario A: Synthesizing into an EXACT CARD CONCEPT (Target Scene Image provided)
+      promptText = `You are the world's most acclaimed Vogue Weddings and Harper's Bazaar celebrity master bridal photographer.
 This is an iconic, ultra-luxury high-fashion WEDDING PHOTOSHOOT. It must be breathtakingly beautiful, glamorous, deeply romantic, and jaw-droppingly gorgeous.
 
-[CORE ESSENCE: CELEBRITY WEDDING EDITORIAL MASTERPIECE]
-- This is NOT a plain portrait or stiff snapshot. It is an awe-inspiring, magazine-cover luxury wedding photoshoot overflowing with romance, glamour, and emotional intimacy.
-- Both the bride and groom must look exceptionally stunning, charismatic, and radiant like top-tier film stars on their wedding day.
+[INPUT IMAGES SPECIFICATION]
+- Images 1 through ${numUserPhotos}: REAL CLIENT REFERENCE PHOTOS (Real Bride and Groom).
+  * Study these reference photos with extreme precision. Extract the exact facial identity, eye shapes, natural double eyelids, gentle authentic smiles, cute cheek dimple (if present), nose bridge, lips, and facial bone structure of BOTH individuals (Bride and Groom).
+- Image ${numUserPhotos + 1} (The Final Image): TARGET SCENE & COMPOSITION REFERENCE.
+  * Concept Title: "${angleTitle}" at ${preset.venueName} (${preset.destination}).
+  * This final image defines the EXACT scene, camera angle, venue background, lighting atmosphere, and the couple's physical pose and positioning (e.g. sitting by the terracotta fireplace on an Amalfi terrace, standing by a balcony overlooking the Eiffel Tower, or walking hand-in-hand).
 
-[CRITICAL RULE 1: 100% EXACT FACIAL IDENTITY LOCK WITH GOD-TIER CELEBRITY BEAUTY]
-- You MUST preserve the authentic recognizable facial identities, eye shapes, and smiles of BOTH individuals from the input image:
-  - BRIDE: Preserve her exact natural deep double eyelids, her eye geometry, her authentic gentle smile, her cute cheek dimple, and delicate facial proportions. Elevate her into breathtaking bridal royalty with high-end celebrity bridal makeup: luminous dewy porcelain skin, subtle glossy rose lips, defined fluttery eyelashes, and a soft, captivating romantic gaze.
-  - GROOM: Preserve his exact eyes, eyebrows, facial contours, authentic warm smile, and recognizable likeness. Elevate him into a dashing, handsome, charismatic leading man with clean-shaven chiseled features.
+[YOUR MISSION: SEAMLESS CELEBRITY WEDDING FUSION & RE-RENDERING]
+Re-create and synthesize the TARGET SCENE (the final image) with Vogue editorial perfection:
 
-[CRITICAL RULE 2: FLAWLESS LUXURY PORCELAIN GLASS-SKIN (HIGHEST BEAUTY STANDARD)]
-- Unconditionally render BOTH individuals with the most radiant, flawless, luminous bridal glass-skin.
-- Clear, smooth, dewy complexion with refined micro-texture, zero blemishes, healthy natural glow, and luxury Korean aesthetic clinic porcelain radiance.
+1. 100% PRESERVE THE EXACT SCENE CONCEPT & POSE:
+   - KEEP THE EXACT SAME ENVIRONMENT & COMPOSITION as shown in the Target Scene Reference Image: The exact venue background, architecture, seating or standing arrangement, distance from camera, depth of field, and lighting (e.g. glowing firelight, golden hour ocean sunset, or palace chandeliers).
+   - The couple MUST adopt the EXACT pose, posture, and seating/standing configuration seen in the Target Scene Reference Image. Do NOT alter the scene into a generic altar!
 
-[CRITICAL RULE 3: UNCONDITIONALLY SLIM, TALL & HIGH-FASHION BODY SILHOUETTES]
-- BOTH individuals MUST be rendered with an ultra-slim, tall, and elegant high-fashion physique.
-- BRIDE SILHOUETTE: Ultra-slender, delicate, statuesque hourglass figure with defined sculpted collarbones, slender toned arms, long graceful swan neck, and a tiny snatched waist. Wearing an exquisite haute couture French chantilly lace & satin gown that hugs her slender figure, paired with a long, floating translucent sheer Cathedral veil catching the sunlight.
-- GROOM SILHOUETTE: Tall, lean, athletic slim build with broad straight shoulders, flat abdomen, narrow tapered waist, and sharp posture. Wearing an impeccably tailored ultra-slim bespoke black-tie Italian tuxedo with silk satin shawl lapels.
+2. 100% PRECISE FACIAL IDENTITY LOCK FROM REFERENCE PHOTOS:
+   - REPLACE the faces of the models in the Target Scene with the authentic faces of the real Bride and Groom from Reference Images 1 to ${numUserPhotos}:
+   - BRIDE: 100% match her authentic eyes, deep double eyelids, natural eye contours, cheek dimple, and loving smile. Elevate her with celebrity bridal glam: refined fluttery lashes, soft rose lips, and breathtaking radiant beauty.
+   - GROOM: 100% match his authentic eyes, eyebrows, nose, jawline, and handsome warm smile. Clean-shaven, charismatic, leading-man allure.
 
-[CRITICAL RULE 4: DYNAMIC ROMANTIC POSING & CHEMISTRY]
-- Scene Concept & Pose: ${angleTitle}.
-- Intimate, passionate, and natural bridal posing: The groom gently embraces her waist, bringing her close; the bride gently rests one hand on his lapel, holding a lavish bridal bouquet of fragrant white garden roses, peonies, and delicate ranunculus. They share a tender, deeply in love, radiant romantic look.
+3. FLAWLESS LUXURY PORCELAIN GLASS-SKIN:
+   - Unconditionally render BOTH individuals with radiant, luminous, Korean luxury aesthetic clinic porcelain glass-skin. Dewy, micro-refined texture, perfectly hydrated, zero blemishes, healthy natural glow.
 
-[CRITICAL RULE 5: BREATHTAKING VENUE, LIGHTING & ATMOSPHERE]
-- Setting: Majestic iconic sanctuary view of "${preset.venueName}" (${preset.destination}) overlooking the sweeping landscape.
-- Adorned with a breathtaking, lavish floral arch of cascading white roses, blooming peonies, and hanging orchids.
-- Golden hour sunflare and romantic amber rim-lighting tracing their hair and veil, glowing candlelight, subtle floating petals in the air, soft cinematic bokeh (f/1.8 lens), 8K Hasselblad camera clarity. Celebratory, awe-inspiring, pure luxury romance.`;
+4. UNCONDITIONALLY SLIM & STATUESQUE HIGH-FASHION BODY SILHOUETTES:
+   - BRIDE SILHOUETTE: Ultra-slender, tall, elegant hourglass figure with sculpted collarbones, slim toned arms, graceful swan neck, and tiny snatched waist. Dressed in the haute couture bridal gown from the target scene or bespoke French lace gown.
+   - GROOM SILHOUETTE: Tall, athletic lean slim build with broad square shoulders, flat stomach, and sharp tapered waist in an ultra-tailored bespoke Italian tuxedo.
+
+5. EDITORIAL PERFECTION:
+   - 8K Hasselblad resolution, filmic romantic atmosphere, soft natural bokeh, magazine-cover masterpiece.`;
+    } else {
+      // Scenario B: Standalone Masterpiece Synthesis (no specific target scene image, use destination preset)
+      promptText = `You are the world's most acclaimed Vogue Weddings and Harper's Bazaar celebrity master bridal photographer.
+This is an iconic, ultra-luxury high-fashion WEDDING PHOTOSHOOT. It must be breathtakingly beautiful, glamorous, deeply romantic, and jaw-droppingly gorgeous.
+
+[INPUT IMAGES SPECIFICATION]
+- Images 1 through ${numUserPhotos}: REAL CLIENT REFERENCE PHOTOS (Real Bride and Groom).
+  * Study these reference photos with extreme precision. Extract the exact facial identity, eye shapes, natural double eyelids, gentle authentic smiles, cute cheek dimple (if present), nose bridge, lips, and facial bone structure of BOTH individuals (Bride and Groom).
+
+[SCENE CONCEPT: ${angleTitle}]
+- Venue: Majestic iconic sanctuary view of "${preset.venueName}" (${preset.destination}).
+
+[CRITICAL RULES]
+1. 100% EXACT FACIAL IDENTITY LOCK:
+   - BRIDE: 100% match her authentic eyes, deep double eyelids, natural eye contours, cheek dimple, and loving smile. Breathtaking celebrity bridal glam.
+   - GROOM: 100% match his authentic eyes, eyebrows, nose, jawline, and handsome warm smile.
+2. FLAWLESS PORCELAIN GLASS-SKIN:
+   - Radiant, luminous, Korean luxury aesthetic clinic porcelain glass-skin. Dewy, micro-refined texture, zero blemishes.
+3. UNCONDITIONALLY SLIM & HIGH-FASHION BODY SILHOUETTES:
+   - Bride: Ultra-slender hourglass figure, sculpted collarbones, slim arms, tiny waist.
+   - Groom: Tall, athletic lean slim build, broad shoulders, tapered waist.
+4. ROMANTIC EDITORIAL POSE & LIGHTING:
+   - Romantic, intimate chemistry, golden hour rim-lighting, 8K Hasselblad clarity, Vogue Weddings cover quality.`;
+    }
+
+    // 4. Assemble API payload parts
+    const requestParts: any[] = [{ text: promptText }];
+    // Add all user reference photos
+    for (const uPart of userImageParts) {
+      requestParts.push(uPart);
+    }
+    // Add target scene image if available
+    if (targetScenePart) {
+      requestParts.push(targetScenePart);
+    }
 
     const key = process.env.GEMINI_API_KEY || '';
     const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash-image';
@@ -117,8 +194,7 @@ This is an iconic, ultra-luxury high-fashion WEDDING PHOTOSHOOT. It must be brea
 
     let generatedImageUrl = '';
 
-    // Direct Gemini 2.5 Flash Image call
-    if (key && base64Data) {
+    if (key) {
       try {
         const response = await fetch(apiUrl, {
           method: 'POST',
@@ -128,10 +204,7 @@ This is an iconic, ultra-luxury high-fashion WEDDING PHOTOSHOOT. It must be brea
           body: JSON.stringify({
             contents: [
               {
-                parts: [
-                  { text: promptText },
-                  { inlineData: { mimeType, data: base64Data } },
-                ],
+                parts: requestParts,
               },
             ],
             generationConfig: {
@@ -162,12 +235,12 @@ This is an iconic, ultra-luxury high-fashion WEDDING PHOTOSHOOT. It must be brea
       }
     }
 
-    // Fallback: prioritize the couple's authentic uploaded photo over foreign stock photos
+    // Fallback: if Gemini fails or times out, return user's primary photo or targetSceneImage
     if (!generatedImageUrl) {
-      if (base64Data && mimeType) {
-        generatedImageUrl = `data:${mimeType};base64,${base64Data}`;
+      if (userImageParts[0]?.inlineData?.data) {
+        generatedImageUrl = `data:${userImageParts[0].inlineData.mimeType};base64,${userImageParts[0].inlineData.data}`;
       } else {
-        generatedImageUrl = preset.heroImage;
+        generatedImageUrl = targetSceneImage || preset.heroImage;
       }
     }
 

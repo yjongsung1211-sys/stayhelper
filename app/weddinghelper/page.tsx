@@ -283,6 +283,9 @@ export default function WeddingHelperPage() {
   const [selectedThemeId, setSelectedThemeId] = useState<string>('bali-jungle');
   const [filterCategory, setFilterCategory] = useState<'all' | 'western' | 'heritage' | 'global_killer'>('all');
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+  const [isBatchSynthesizing, setIsBatchSynthesizing] = useState(false);
+  const [batchProgress, setBatchProgress] = useState<{ current: number; total: number; title: string } | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationStep, setGenerationStep] = useState('');
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
@@ -297,16 +300,18 @@ export default function WeddingHelperPage() {
 
   const handleTransformSingleScene = async (scene: Wedding240Scene) => {
     if (transformingSceneId) return;
-    const coupleImg = uploadedImage || currentTheme.heroImage;
+    const imagesToUse = uploadedImages.length > 0 ? uploadedImages : (uploadedImage ? [uploadedImage] : [currentTheme.heroImage]);
     setTransformingSceneId(scene.id);
-    setCopyToast(`✨ Synthesizing "${scene.angleTitle}" with your couple photo...`);
+    setCopyToast(`✨ Synthesizing "${scene.angleTitle}" with your authentic faces & exact concept...`);
 
     try {
       const res = await fetch('/api/weddinghelper/visualize', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          image: coupleImg,
+          images: imagesToUse,
+          image: imagesToUse[0],
+          targetSceneImage: scene.imagePath,
           themeId: scene.themeId,
           angleTitle: scene.angleTitle,
           groomHeight,
@@ -321,7 +326,7 @@ export default function WeddingHelperPage() {
           ...prev,
           [scene.id]: data.visualizedImageUrl
         }));
-        setCopyToast(`🎉 Transformed "${scene.angleTitle}" with your faces successfully!`);
+        setCopyToast(`🎉 Successfully transformed "${scene.angleTitle}" with your faces!`);
       } else {
         setCopyToast('✨ Angle transformed successfully!');
       }
@@ -331,6 +336,68 @@ export default function WeddingHelperPage() {
       setTransformingSceneId(null);
       setTimeout(() => setCopyToast(''), 4000);
     }
+  };
+
+  // Batch synthesize all 20 scenes of the currently active destination
+  const handleBatchSynthesizeActiveTab = async () => {
+    if (isBatchSynthesizing) {
+      setIsBatchSynthesizing(false);
+      setBatchProgress(null);
+      setCopyToast('🛑 Batch synthesis paused.');
+      setTimeout(() => setCopyToast(''), 3000);
+      return;
+    }
+
+    const targetScenes = WEDDING_240_SCENES.filter(
+      s => active240Tab === 'all' || s.themeId === active240Tab
+    );
+    if (targetScenes.length === 0) return;
+
+    setIsBatchSynthesizing(true);
+    const imagesToUse = uploadedImages.length > 0 ? uploadedImages : (uploadedImage ? [uploadedImage] : [currentTheme.heroImage]);
+
+    setCopyToast(`✨ Synthesizing all ${targetScenes.length} scenes in this destination with your faces...`);
+
+    for (let i = 0; i < targetScenes.length; i++) {
+      const scene = targetScenes[i];
+      setBatchProgress({
+        current: i + 1,
+        total: targetScenes.length,
+        title: scene.angleTitle,
+      });
+
+      try {
+        const res = await fetch('/api/weddinghelper/visualize', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            images: imagesToUse,
+            image: imagesToUse[0],
+            targetSceneImage: scene.imagePath,
+            themeId: scene.themeId,
+            angleTitle: scene.angleTitle,
+            groomHeight,
+            groomWeight,
+            brideHeight,
+            brideWeight,
+          })
+        });
+        const data = await res.json();
+        if (data.success && data.visualizedImageUrl) {
+          setPersonalizedScenes(prev => ({
+            ...prev,
+            [scene.id]: data.visualizedImageUrl
+          }));
+        }
+      } catch (err) {
+        console.warn(`Failed batch scene ${scene.id}:`, err);
+      }
+    }
+
+    setIsBatchSynthesizing(false);
+    setBatchProgress(null);
+    setCopyToast(`🎉 All ${targetScenes.length} scenes synthesized with your faces and tailored bodies!`);
+    setTimeout(() => setCopyToast(''), 5000);
   };
   const [isDownloadingZip, setIsDownloadingZip] = useState(false);
   const [zipProgress, setZipProgress] = useState(0);
@@ -527,6 +594,9 @@ export default function WeddingHelperPage() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const photoUploadInputRef = useRef<HTMLInputElement>(null);
+  const slot1InputRef = useRef<HTMLInputElement>(null);
+  const slot2InputRef = useRef<HTMLInputElement>(null);
+  const slot3InputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const checkHash = () => {
@@ -646,12 +716,51 @@ export default function WeddingHelperPage() {
     });
   };
 
-  // Photo upload handler with auto-compression
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const compressed = await compressImage(file);
+  // Slot-based photo upload handler for up to 3 reference photos
+  const handleSlotUpload = async (slotIdx: number, file: File) => {
+    const compressed = await compressImage(file);
+    setUploadedImages(prev => {
+      const next = [...prev];
+      while (next.length <= slotIdx) next.push('');
+      next[slotIdx] = compressed;
+      return next;
+    });
+    if (slotIdx === 0 || !uploadedImage) {
       setUploadedImage(compressed);
+    }
+    setCopyToast(`✨ Photo #${slotIdx + 1} added for enhanced 3D facial recognition!`);
+    setTimeout(() => setCopyToast(''), 3000);
+  };
+
+  const handleRemovePhoto = (slotIdx: number) => {
+    setUploadedImages(prev => {
+      const next = [...prev];
+      next.splice(slotIdx, 1);
+      if (next.length > 0) {
+        setUploadedImage(next[0]);
+      } else {
+        setUploadedImage(null);
+      }
+      return next;
+    });
+  };
+
+  // Photo upload handler with auto-compression (supports multiple files)
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      const newImages: string[] = [];
+      for (let i = 0; i < Math.min(files.length, 3); i++) {
+        const compressed = await compressImage(files[i]);
+        newImages.push(compressed);
+      }
+      setUploadedImages(prev => {
+        const merged = [...prev, ...newImages].slice(0, 3);
+        if (merged.length > 0) setUploadedImage(merged[0]);
+        return merged;
+      });
+      setCopyToast(`✨ ${newImages.length} photo(s) loaded for 100% facial recognition!`);
+      setTimeout(() => setCopyToast(''), 3500);
     }
   };
 
@@ -689,6 +798,7 @@ export default function WeddingHelperPage() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
+            images: uploadedImages.length > 0 ? uploadedImages : [coupleImageToUse],
             image: coupleImageToUse,
             themeId: selectedThemeId,
             groomHeight,
@@ -997,15 +1107,200 @@ export default function WeddingHelperPage() {
           <div className="absolute bottom-6 left-6 text-[#D4AF37]/50 text-sm">❦</div>
           <div className="absolute bottom-6 right-6 text-[#D4AF37]/50 text-sm">❦</div>
 
-          <input 
+                    <input 
             type="file" 
             ref={fileInputRef} 
             onChange={handleFileUpload} 
             accept="image/*" 
+            multiple
+            className="hidden" 
+          />
+          <input 
+            type="file" 
+            ref={slot1InputRef} 
+            onChange={(e) => { const f = e.target.files?.[0]; if (f) handleSlotUpload(0, f); }} 
+            accept="image/*" 
+            className="hidden" 
+          />
+          <input 
+            type="file" 
+            ref={slot2InputRef} 
+            onChange={(e) => { const f = e.target.files?.[0]; if (f) handleSlotUpload(1, f); }} 
+            accept="image/*" 
+            className="hidden" 
+          />
+          <input 
+            type="file" 
+            ref={slot3InputRef} 
+            onChange={(e) => { const f = e.target.files?.[0]; if (f) handleSlotUpload(2, f); }} 
+            accept="image/*" 
             className="hidden" 
           />
 
-          {!uploadedImage ? (
+          {/* 3-Photo Multi-Angle Recognition Header */}
+          <div className="mb-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-left">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF3EF] border border-[#E8A598]/60 text-[#B85E55] text-[11px] font-bold uppercase tracking-wider mb-1.5">
+                <Sparkles className="w-3 h-3 text-[#D4AF37]" />
+                <span>3-Photo 3D Facial Identity Studio</span>
+              </div>
+              <h3 className="text-lg sm:text-xl font-serif text-[#1F181B] font-normal">
+                Upload 1 to 3 Photographs for 100% Facial Lock
+              </h3>
+              <p className="text-xs text-[#8C7A78] mt-0.5">
+                Supplying 3 photos (Couple + Bride Close-up + Groom Close-up) locks authentic double eyelids, dimples & bone structure.
+              </p>
+            </div>
+
+            {uploadedImages.length > 0 && (
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="px-4 py-2 rounded-full bg-white border border-[#C87870] text-[#C87870] font-bold text-xs hover:bg-[#FAF3EF] transition flex items-center gap-1.5 shrink-0 shadow-xs cursor-pointer"
+              >
+                <Upload className="w-3.5 h-3.5" />
+                <span>Add / Replace Photos</span>
+              </button>
+            )}
+          </div>
+
+          {/* 3-Slot Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mb-6">
+            {/* Slot 1: Couple Photo */}
+            <div className="flex flex-col">
+              <div className="flex items-center justify-between text-[11px] font-bold mb-1.5 text-[#1F181B] px-1">
+                <span>1. Couple Photo</span>
+                <span className="text-[#C87870] text-[10px] uppercase font-bold">Required</span>
+              </div>
+              {uploadedImages[0] ? (
+                <div className="relative h-48 rounded-2xl overflow-hidden border-2 border-[#C87870] shadow-sm group">
+                  <Image src={uploadedImages[0]} alt="Couple Photo" fill className="object-cover" />
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => slot1InputRef.current?.click()}
+                      className="px-2.5 py-1 rounded-full bg-white text-[#1F181B] text-[11px] font-bold shadow-md hover:bg-neutral-100 cursor-pointer"
+                    >
+                      Replace
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleRemovePhoto(0)}
+                      className="px-2.5 py-1 rounded-full bg-red-600 text-white text-[11px] font-bold shadow-md hover:bg-red-700 cursor-pointer"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                  <div className="absolute bottom-2 left-2 px-2 py-0.5 rounded-full bg-black/70 text-white text-[10px] font-bold backdrop-blur-xs">
+                    ✓ Couple Full Photo
+                  </div>
+                </div>
+              ) : (
+                <div
+                  onClick={() => slot1InputRef.current?.click()}
+                  className="h-48 rounded-2xl border-2 border-dashed border-[#EBDCD3] hover:border-[#C87870] bg-[#FFFDFB] hover:bg-[#FFFDFC] flex flex-col items-center justify-center p-4 text-center cursor-pointer transition group"
+                >
+                  <div className="w-10 h-10 rounded-full bg-[#FAF3EF] flex items-center justify-center text-[#B85E55] group-hover:scale-110 transition mb-2">
+                    <Heart className="w-5 h-5 fill-[#C87870]/20 stroke-[#C87870]" />
+                  </div>
+                  <span className="text-xs font-bold text-[#1F181B]">Couple Photo</span>
+                  <span className="text-[10px] text-[#9E8B88] mt-1">Full scene & chemistry</span>
+                  <span className="mt-2.5 text-[10px] text-[#C87870] font-bold underline">Click to Upload</span>
+                </div>
+              )}
+            </div>
+
+            {/* Slot 2: Bride Close-Up */}
+            <div className="flex flex-col">
+              <div className="flex items-center justify-between text-[11px] font-bold mb-1.5 text-[#1F181B] px-1">
+                <span>2. Bride Face</span>
+                <span className="text-[#D4AF37] text-[10px] uppercase font-bold">100% Lock</span>
+              </div>
+              {uploadedImages[1] ? (
+                <div className="relative h-48 rounded-2xl overflow-hidden border-2 border-[#D4AF37] shadow-sm group">
+                  <Image src={uploadedImages[1]} alt="Bride Face Close-Up" fill className="object-cover" />
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => slot2InputRef.current?.click()}
+                      className="px-2.5 py-1 rounded-full bg-white text-[#1F181B] text-[11px] font-bold shadow-md hover:bg-neutral-100 cursor-pointer"
+                    >
+                      Replace
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleRemovePhoto(1)}
+                      className="px-2.5 py-1 rounded-full bg-red-600 text-white text-[11px] font-bold shadow-md hover:bg-red-700 cursor-pointer"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                  <div className="absolute bottom-2 left-2 px-2 py-0.5 rounded-full bg-black/70 text-[#D4AF37] text-[10px] font-bold backdrop-blur-xs">
+                    ✓ Bride Face Locked
+                  </div>
+                </div>
+              ) : (
+                <div
+                  onClick={() => slot2InputRef.current?.click()}
+                  className="h-48 rounded-2xl border-2 border-dashed border-[#EBDCD3] hover:border-[#D4AF37] bg-[#FFFDFB] hover:bg-[#FFFDFC] flex flex-col items-center justify-center p-4 text-center cursor-pointer transition group"
+                >
+                  <div className="w-10 h-10 rounded-full bg-[#FAF3EF] flex items-center justify-center text-[#B85E55] group-hover:scale-110 transition mb-2">
+                    <Sparkles className="w-5 h-5 text-[#D4AF37]" />
+                  </div>
+                  <span className="text-xs font-bold text-[#1F181B]">Bride Close-Up</span>
+                  <span className="text-[10px] text-[#9E8B88] mt-1">Double eyelids & dimples</span>
+                  <span className="mt-2.5 text-[10px] text-[#D4AF37] font-bold underline">+ Add Bride Photo</span>
+                </div>
+              )}
+            </div>
+
+            {/* Slot 3: Groom Close-Up */}
+            <div className="flex flex-col">
+              <div className="flex items-center justify-between text-[11px] font-bold mb-1.5 text-[#1F181B] px-1">
+                <span>3. Groom Face</span>
+                <span className="text-[#D4AF37] text-[10px] uppercase font-bold">100% Lock</span>
+              </div>
+              {uploadedImages[2] ? (
+                <div className="relative h-48 rounded-2xl overflow-hidden border-2 border-[#D4AF37] shadow-sm group">
+                  <Image src={uploadedImages[2]} alt="Groom Face Close-Up" fill className="object-cover" />
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => slot3InputRef.current?.click()}
+                      className="px-2.5 py-1 rounded-full bg-white text-[#1F181B] text-[11px] font-bold shadow-md hover:bg-neutral-100 cursor-pointer"
+                    >
+                      Replace
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleRemovePhoto(2)}
+                      className="px-2.5 py-1 rounded-full bg-red-600 text-white text-[11px] font-bold shadow-md hover:bg-red-700 cursor-pointer"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                  <div className="absolute bottom-2 left-2 px-2 py-0.5 rounded-full bg-black/70 text-[#D4AF37] text-[10px] font-bold backdrop-blur-xs">
+                    ✓ Groom Face Locked
+                  </div>
+                </div>
+              ) : (
+                <div
+                  onClick={() => slot3InputRef.current?.click()}
+                  className="h-48 rounded-2xl border-2 border-dashed border-[#EBDCD3] hover:border-[#D4AF37] bg-[#FFFDFB] hover:bg-[#FFFDFC] flex flex-col items-center justify-center p-4 text-center cursor-pointer transition group"
+                >
+                  <div className="w-10 h-10 rounded-full bg-[#FAF3EF] flex items-center justify-center text-[#B85E55] group-hover:scale-110 transition mb-2">
+                    <Gem className="w-5 h-5 text-[#D4AF37]" />
+                  </div>
+                  <span className="text-xs font-bold text-[#1F181B]">Groom Close-Up</span>
+                  <span className="text-[10px] text-[#9E8B88] mt-1">Jawline & handsome smile</span>
+                  <span className="mt-2.5 text-[10px] text-[#D4AF37] font-bold underline">+ Add Groom Photo</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Quick Upload Drag & Drop Bar */}
+          {uploadedImages.length === 0 && (
             <div 
               onClick={() => fileInputRef.current?.click()}
               onDragEnter={(e) => { e.preventDefault(); e.stopPropagation(); setIsDragging(true); }}
@@ -1016,309 +1311,29 @@ export default function WeddingHelperPage() {
                 e.stopPropagation();
                 setIsDragging(false);
                 if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-                  const file = e.dataTransfer.files[0];
-                  if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = (event) => {
-                      if (event.target?.result) {
-                        setUploadedImage(event.target.result as string);
-                        setCopyToast('✨ Couple photograph dropped successfully!');
-                        setTimeout(() => setCopyToast(''), 3500);
-                      }
-                    };
-                    reader.readAsDataURL(file);
+                  const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/')).slice(0, 3);
+                  if (files.length > 0) {
+                    Promise.all(files.map(f => compressImage(f))).then(compressedList => {
+                      setUploadedImages(compressedList);
+                      setUploadedImage(compressedList[0]);
+                      setCopyToast(`✨ ${compressedList.length} photo(s) dropped successfully!`);
+                      setTimeout(() => setCopyToast(''), 3500);
+                    });
                   }
                 }
               }}
-              className={`border-2 border-dashed rounded-[32px] p-10 sm:p-14 cursor-pointer transition-all duration-300 text-center group relative overflow-hidden ${
+              className={`border-2 border-dashed rounded-2xl p-6 cursor-pointer transition-all duration-300 text-center mb-6 ${
                 isDragging
-                  ? 'border-[#C87870] bg-[#FFF2EE] ring-4 ring-[#C87870]/20 scale-[1.01] shadow-xl'
-                  : 'border-[#EBDCD3] hover:border-[#C87870] bg-[#FFFDFB] hover:bg-[#FFFDFC]'
+                  ? 'border-[#C87870] bg-[#FFF2EE] ring-4 ring-[#C87870]/20'
+                  : 'border-[#EBDCD3] hover:border-[#C87870] bg-[#FAF5F1]'
               }`}
             >
-              <div className={`w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full bg-gradient-to-tr from-[#FCEBE7] to-[#FFF4E8] flex items-center justify-center text-[#B85E55] transition shadow-inner ${
-                isDragging ? 'scale-110 ring-4 ring-[#C87870]/30' : 'group-hover:scale-105'
-              }`}>
-                <Heart className="w-9 h-9 sm:w-10 sm:h-10 fill-[#C87870]/20 stroke-[#C87870]" />
-              </div>
-
-              <h4 className="mt-5 text-xl sm:text-2xl font-serif text-[#1F181B] tracking-wide">
-                {isDragging ? (
-                  <span className="text-[#C87870] font-medium animate-pulse">Release to Drop Your Couple Photograph ✨</span>
-                ) : (
-                  <>
-                    Drop your couple photograph here, or <span className="text-[#C87870] underline font-medium">choose from album</span>
-                  </>
-                )}
-              </h4>
-
-              <p className="mt-2.5 text-xs sm:text-sm text-[#8C7A78] max-w-md mx-auto leading-relaxed">
-                JPG, PNG, HEIC up to 20MB. Drag & drop files directly or press <kbd className="px-1.5 py-0.5 rounded bg-[#FAF1EC] border border-[#E4D5CE] text-[11px] font-mono text-[#5C4D4D] font-bold">Ctrl+V</kbd> to paste from clipboard.
-              </p>
-
-              {/* Badges for Drag & Drop and Clipboard Paste */}
-              <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FAF3EF] border border-[#EBDCD3] text-[10px] font-semibold text-[#8C6D1F]">
-                  <span>📂 Drag & Drop Ready</span>
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FAF3EF] border border-[#EBDCD3] text-[10px] font-semibold text-[#8C6D1F]">
-                  <span>📋 Ctrl+V Clipboard Paste</span>
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FAF3EF] border border-[#EBDCD3] text-[10px] font-semibold text-[#8C6D1F]">
-                  <span>✨ 1-Click Test Couples Below</span>
-                </span>
-              </div>
-            </div>
-          ) : (
-            <div className="relative rounded-[32px] overflow-hidden bg-white border border-[#E8DCD4] shadow-md">
-              <div className="relative h-80 sm:h-96 w-full">
-                <Image 
-                  src={uploadedImage} 
-                  alt="Couple preview" 
-                  fill 
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-5 bg-[#FAF5F1] flex items-center justify-between text-sm">
-                <span className="text-[#5C4D4D] font-medium flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-[#C87870]" /> Your Love Story is Ready
-                </span>
-                <button 
-                  onClick={() => fileInputRef.current?.click()}
-                  className="text-[#C87870] font-bold hover:underline"
-                >
-                  Choose Another Photo
-                </button>
+              <div className="flex items-center justify-center gap-2 text-xs font-bold text-[#1F181B]">
+                <Upload className="w-4 h-4 text-[#C87870]" />
+                <span>Drag & drop 1 to 3 photos here, or select from device (or press Ctrl+V)</span>
               </div>
             </div>
           )}
-
-          {/* Precision Couple Height & Weight Proportions */}
-          <div className="mt-7 pt-6 border-t border-[#F2E5DC] text-left">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#B85E55] flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-                Tailored Body Proportions & Fit
-              </span>
-              <span className="text-[11px] text-[#9E8B88]">
-                Exact 1:1 Silhouette Matching
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Groom Proportions */}
-              <div className="p-4 rounded-2xl bg-[#FFFDFB] border border-[#EBDCD3] space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#1F181B] flex items-center gap-1.5">
-                    🤵 Groom Silhouette
-                  </span>
-                  <span className="text-[10px] text-[#A89895] uppercase">Tuxedo Proportions</span>
-                </div>
-                <div className="grid grid-cols-2 gap-2.5">
-                  <div>
-                    <label className="text-[10px] text-[#8C7A78] block mb-1 font-medium">Height (cm)</label>
-                    <input 
-                      type="number"
-                      value={groomHeight}
-                      onChange={e => setGroomHeight(e.target.value)}
-                      placeholder="180"
-                      className="w-full py-2 px-3 rounded-xl border border-[#E0D2CB] text-xs font-semibold text-[#1F181B] focus:outline-none focus:border-[#C87870] bg-white text-center"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-[10px] text-[#8C7A78] block mb-1 font-medium">Weight (kg)</label>
-                    <input 
-                      type="number"
-                      value={groomWeight}
-                      onChange={e => setGroomWeight(e.target.value)}
-                      placeholder="75"
-                      className="w-full py-2 px-3 rounded-xl border border-[#E0D2CB] text-xs font-semibold text-[#1F181B] focus:outline-none focus:border-[#C87870] bg-white text-center"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Bride Proportions */}
-              <div className="p-4 rounded-2xl bg-[#FFFDFB] border border-[#EBDCD3] space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#1F181B] flex items-center gap-1.5">
-                    👰 Bride Silhouette
-                  </span>
-                  <span className="text-[10px] text-[#A89895] uppercase">Couture Gown Fit</span>
-                </div>
-                <div className="grid grid-cols-2 gap-2.5">
-                  <div>
-                    <label className="text-[10px] text-[#8C7A78] block mb-1 font-medium">Height (cm)</label>
-                    <input 
-                      type="number"
-                      value={brideHeight}
-                      onChange={e => setBrideHeight(e.target.value)}
-                      placeholder="165"
-                      className="w-full py-2 px-3 rounded-xl border border-[#E0D2CB] text-xs font-semibold text-[#1F181B] focus:outline-none focus:border-[#C87870] bg-white text-center"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-[10px] text-[#8C7A78] block mb-1 font-medium">Weight (kg)</label>
-                    <input 
-                      type="number"
-                      value={brideWeight}
-                      onChange={e => setBrideWeight(e.target.value)}
-                      placeholder="50"
-                      className="w-full py-2 px-3 rounded-xl border border-[#E0D2CB] text-xs font-semibold text-[#1F181B] focus:outline-none focus:border-[#C87870] bg-white text-center"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Primary Action Button under body proportions */}
-          <button
-            type="button"
-            id="create-masterpiece-main-btn"
-            onClick={handlePayAndCreate}
-            disabled={isGenerating}
-            className={`mt-8 w-full py-5 sm:py-6 px-6 sm:px-10 rounded-2xl font-bold uppercase tracking-[0.14em] text-xs sm:text-sm flex items-center justify-center gap-3 sm:gap-4 transition shadow-xl active:scale-[0.99] cursor-pointer relative overflow-hidden group ${
-              isGenerating 
-                ? 'bg-[#EAE2DC] text-[#9A8A87] cursor-not-allowed' 
-                : 'bg-gradient-to-r from-[#B85E55] via-[#C58968] to-[#9E6F28] text-white hover:opacity-95 shadow-[0_12px_40px_rgba(184,94,85,0.45)]'
-            }`}
-          >
-            {isGenerating ? (
-              <div className="flex items-center justify-center gap-3">
-                <RefreshCw className="w-5 h-5 animate-spin text-white shrink-0" />
-                <span className="font-serif italic capitalize text-sm sm:text-base">{generationStep}</span>
-              </div>
-            ) : (
-              <div className="flex items-center justify-center gap-2.5 sm:gap-3.5 text-center flex-wrap">
-                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 fill-[#F3E5AB] text-[#F3E5AB] shrink-0" />
-                <span className="leading-snug">CREATE MY 240 BESPOKE MASTERPIECES</span>
-                <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-emerald-500/25 text-emerald-200 border border-emerald-400/40 font-extrabold tracking-wider uppercase shrink-0 shadow-xs">
-                  FREE TEST UNLOCKED
-                </span>
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0 group-hover:translate-x-1 transition-transform" />
-              </div>
-            )}
-          </button>
-
-          <div className="mt-5 flex items-center justify-center gap-5 text-xs text-[#8C7A78] flex-wrap">
-            <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-[#C87870]" /> Single $19 All-Access Pass (All 12 Worlds Included)</span>
-            <span>•</span>
-            <span>240 Haute Couture Masterpieces</span>
-            <span>•</span>
-            <span>Free Digital Wedding Invitation Included</span>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. The Grand 12 Cathedral Arch Worlds */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#F2E5DC] z-10 relative">
-        <div className="mb-12 space-y-6">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
-            <div>
-              <span className="text-xs font-sans font-bold tracking-[0.25em] text-[#C87870] uppercase block mb-2">
-                ✦ 12 GLOBAL SANCTUARY PORTFOLIO · REAL EDITORIAL EXAMPLES
-              </span>
-              <h2 className="text-3xl sm:text-5xl font-light text-[#1F181B]">
-                The Grand 12 Wedding Masterpiece Portfolio
-              </h2>
-            </div>
-            <p className="text-xs font-sans text-[#8C7A78] max-w-md leading-relaxed">
-              All 12 sanctuary destinations (240 scenes) are 100% included in your single $19 pass. Browse real editorial examples crafted for discerning couples.
-            </p>
-          </div>
-
-          {/* Category Tabs - Fully Responsive Multi-Device Pill Navigation */}
-          <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 pt-2 pb-4 border-b border-[#F2E5DC] font-sans overflow-x-auto no-scrollbar">
-            {[
-              { key: 'all', label: 'All 12 Worlds' },
-              { key: 'western', label: 'Classic European & Resort (5)' },
-              { key: 'heritage', label: 'Royal Heritage (3)' },
-              { key: 'global_killer', label: 'Exotic & Winter (4)' }
-            ].map(tab => (
-              <button
-                key={tab.key}
-                onClick={() => setFilterCategory(tab.key as any)}
-                className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-semibold tracking-wider transition whitespace-nowrap ${
-                  filterCategory === tab.key 
-                    ? 'bg-[#C87870] text-white font-bold shadow-[0_4px_14px_rgba(200,120,112,0.3)]' 
-                    : 'bg-white border border-[#EBDCD3] text-[#7C6E6D] hover:text-[#1F181B] hover:border-[#C87870]'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* 12 Cathedral Arch Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {themeList.map(theme => {
-            const isSelected = selectedThemeId === theme.id;
-            
-  return (
-              <div 
-                key={theme.id}
-                onClick={() => setSelectedThemeId(theme.id)}
-                className={`group relative rounded-t-[90px] rounded-b-[32px] overflow-hidden bg-white border transition duration-500 cursor-pointer flex flex-col ${
-                  isSelected 
-                    ? 'border-[#C87870] shadow-[0_20px_50px_rgba(200,120,112,0.25)] ring-2 ring-[#C87870]' 
-                    : 'border-[#F2E5DC] hover:border-[#DEB9B3] shadow-sm hover:shadow-xl'
-                }`}
-              >
-                {/* Cathedral Arch Image Box */}
-                <div className="relative h-72 w-full overflow-hidden bg-[#FAF3EF]">
-                  <Image 
-                    src={theme.heroImage} 
-                    alt={theme.title} 
-                    fill 
-                    unoptimized
-                    priority
-                    className="object-cover group-hover:scale-108 transition duration-1000"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-                  {/* Badges */}
-                  <div className="absolute top-6 left-6 flex items-center gap-2">
-                    <span className="px-4 py-1.5 rounded-full text-[11px] font-sans font-bold tracking-wider uppercase bg-white/95 backdrop-blur-md text-[#B85E55] border border-[#E8A598]/50 shadow-md">
-                      Example #{theme.number} · {theme.badge}
-                    </span>
-                  </div>
-
-                  {/* Destination Tag */}
-                  <div className="absolute bottom-4 left-6 flex items-center gap-1.5 text-xs text-white font-sans font-medium drop-shadow-lg">
-                    <MapPin className="w-3.5 h-3.5 text-[#F3E5AB]" />
-                    <span>{theme.destination}</span>
-                  </div>
-                </div>
-
-                {/* Content Box */}
-                <div className="p-7 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-2xl text-[#1F181B] font-normal group-hover:text-[#B85E55] transition">
-                      {theme.title}
-                    </h3>
-                    <p className="text-xs text-[#B85E55] mt-1.5 italic font-medium">
-                      Sanctuary: {theme.venueName}
-                    </p>
-                    <p className="text-xs font-sans text-[#7C6E6D] mt-3.5 line-clamp-2 leading-relaxed">
-                      {theme.description}
-                    </p>
-                  </div>
-
-                  {/* Attire preview */}
-                  <div className="mt-6 pt-5 border-t border-[#F7EFE9] space-y-3 text-xs font-sans leading-relaxed">
-                    <div className="text-[#6E5E5D] break-words">
-                      <span className="text-[#1F181B] font-semibold">Gown:</span> {theme.brideAttire}
-                    </div>
-                    <div className="text-[#6E5E5D] break-words">
-                      <span className="text-[#1F181B] font-semibold">Tuxedo:</span> {theme.groomAttire}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
         </div>
 
         {/* The Haute Studio Reassurance Banner (Zero Prompt Leak) */}
@@ -1568,10 +1583,51 @@ export default function WeddingHelperPage() {
                       : `${DESTINATION_240_CONFIGS.find(d => d.id === active240Tab)?.venue} · ${DESTINATION_240_CONFIGS.find(d => d.id === active240Tab)?.dest}`}
                   </p>
                 </div>
-                <span className="text-xs text-[#D4AF37] font-bold uppercase tracking-wider">
-                  {WEDDING_240_SCENES.filter(s => active240Tab === 'all' || s.themeId === active240Tab).length} Masterpieces Available
-                </span>
+                <div className="flex items-center gap-3">
+                  {/* Batch Synthesize All Scenes Button */}
+                  <button
+                    type="button"
+                    onClick={handleBatchSynthesizeActiveTab}
+                    className={`px-4 sm:px-5 py-2.5 rounded-full font-extrabold text-xs uppercase tracking-wider transition flex items-center gap-2 shadow-lg cursor-pointer ${
+                      isBatchSynthesizing
+                        ? 'bg-red-600 hover:bg-red-700 text-white animate-pulse'
+                        : 'bg-gradient-to-r from-[#D4AF37] via-[#F59E0B] to-[#D4AF37] text-[#1F181B] hover:opacity-95'
+                    }`}
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    <span>
+                      {isBatchSynthesizing
+                        ? `Pause Batch (${batchProgress?.current}/${batchProgress?.total})`
+                        : `✨ Synthesize All ${WEDDING_240_SCENES.filter(s => active240Tab === 'all' || s.themeId === active240Tab).length} Scenes`}
+                    </span>
+                  </button>
+
+                  <span className="hidden sm:inline-block text-xs text-[#D4AF37] font-bold uppercase tracking-wider">
+                    {WEDDING_240_SCENES.filter(s => active240Tab === 'all' || s.themeId === active240Tab).length} Masterpieces
+                  </span>
+                </div>
               </div>
+
+                            {/* Batch Synthesis Progress Bar */}
+              {isBatchSynthesizing && batchProgress && (
+                <div className="mb-6 p-4 rounded-2xl bg-[#1E1719] border border-[#D4AF37] shadow-xl">
+                  <div className="flex items-center justify-between text-xs text-white mb-2">
+                    <span className="font-bold text-[#D4AF37] flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 animate-spin text-[#D4AF37]" />
+                      Synthesizing Scene {batchProgress.current} of {batchProgress.total}: &quot;{batchProgress.title}&quot;
+                    </span>
+                    <span className="font-mono text-[#D4AF37]">
+                      {Math.round((batchProgress.current / batchProgress.total) * 100)}%
+                    </span>
+                  </div>
+                  <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                    <div 
+                      className="h-full bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] transition-all duration-300"
+                      style={{ width: `${(batchProgress.current / batchProgress.total) * 100}%` }}
+                    />
+                  </div>
+                </div>
+              )}
 
               {/* 🌟 AI Transformed Couple Masterpiece Hero Spotlight */}
               {visualizedResult && (

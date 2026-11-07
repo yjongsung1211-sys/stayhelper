@@ -2439,30 +2439,7 @@ export default function ColorHelperPage() {
                     >
                       <img src={leftGlam} alt="Glam Makeup" className="w-full h-full object-cover object-top" />
                       
-                      {/* Precise Anatomical Eyelid Shadow Layer (Zero Smudge, 100% Iris & Eyelash Preserved) */}
-                      <svg 
-                        className="absolute inset-0 w-full h-full pointer-events-none transition-all duration-300"
-                        viewBox="0 0 315 445"
-                        style={{ mixBlendMode: 'color', opacity: 0.88 }}
-                      >
-                        <defs>
-                          <filter id="eye-glow-filter" x="-30%" y="-30%" width="160%" height="160%">
-                            <feGaussianBlur stdDeviation="3.2" />
-                          </filter>
-                        </defs>
-                        {/* Left Eyelid Curved Arch */}
-                        <path 
-                          d="M 80,146 Q 105,133 131,146 Q 105,139 80,146 Z" 
-                          fill={activeEyeTryonHex} 
-                          filter="url(#eye-glow-filter)" 
-                        />
-                        {/* Right Eyelid Curved Arch */}
-                        <path 
-                          d="M 184,146 Q 210,133 234,146 Q 210,139 184,146 Z" 
-                          fill={activeEyeTryonHex} 
-                          filter="url(#eye-glow-filter)" 
-                        />
-                      </svg>
+
                     </div>
 
                     {/* Draggable Divider Handle */}
@@ -2511,19 +2488,7 @@ export default function ColorHelperPage() {
                       </div>
                     )}
                     
-                    {/* 2. Real-time Tailored Signature Drapery (Chest/Neck level, ZERO Chin Clipping) */}
-                    {!geminiTransformedImage && (
-                      <div 
-                        className="absolute inset-x-0 bottom-0 h-[22%] pointer-events-none transition-all duration-500 shadow-2xl"
-                        style={{
-                          background: `linear-gradient(to bottom, transparent 0%, ${outfitHex}ee 20%, ${outfitHex} 100%)`,
-                          clipPath: 'polygon(0% 40%, 25% 65%, 50% 75%, 75% 65%, 100% 40%, 100% 100%, 0% 100%)'
-                        }}
-                      >
-                        {/* Luxury Silk Fabric Highlight */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-70 mix-blend-overlay" />
-                      </div>
-                    )}
+
 
                     {/* Floating Gold Crown Badge: Personalized Recommendation */}
                     <div className="absolute top-3.5 left-3.5 bg-gradient-to-r from-amber-500 to-[#E07A5F] text-white px-3 py-1 rounded-2xl shadow-xl border border-white/30 flex items-center gap-1.5 z-20">
@@ -2605,22 +2570,7 @@ export default function ColorHelperPage() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between px-1 text-[11px] font-bold text-gray-600">
-                <span>{t.step4EyeLabel}:</span>
-                <div className="flex items-center gap-2">
-                  {MAKEUP_EYE_PRESETS.map((ep) => (
-                    <button
-                      key={ep.id}
-                      onClick={() => setActiveEyeTryonHex(ep.hex)}
-                      className={`w-7 h-7 rounded-full border-2 transition cursor-pointer ${
-                        activeEyeTryonHex === ep.hex ? "border-purple-600 scale-110 ring-2 ring-purple-300" : "border-white"
-                      }`}
-                      style={{ backgroundColor: ep.hex }}
-                      title={ep.name[lang]}
-                    />
-                  ))}
-                </div>
-              </div>
+
             </div>
           )}
 
@@ -2837,19 +2787,7 @@ export default function ColorHelperPage() {
                             </div>
                           )}
 
-                          {/* Real-time Tailored Signature Best Drape (Chest level, NEVER cuts or covers chin!) */}
-                          {!geminiTransformedImage && (
-                            <div 
-                              className="absolute inset-x-0 bottom-0 h-[22%] pointer-events-none transition-colors duration-500 shadow-2xl"
-                              style={{
-                                background: `linear-gradient(to bottom, transparent 0%, ${curBestColor.hex}ee 25%, ${curBestColor.hex} 100%)`,
-                                clipPath: 'polygon(0% 40%, 25% 65%, 50% 75%, 75% 65%, 100% 40%, 100% 100%, 0% 100%)'
-                              }}
-                            >
-                              {/* Fabric Texture Wave Highlight */}
-                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-70 mix-blend-overlay" />
-                            </div>
-                          )}
+
 
                           {/* Gold Crown After Badge */}
                           <div className="absolute top-3 left-3 bg-gradient-to-r from-amber-500 to-[#E07A5F] text-white text-[10px] font-black px-3 py-1 rounded-full shadow-lg border border-white/30 flex items-center gap-1 z-10">
