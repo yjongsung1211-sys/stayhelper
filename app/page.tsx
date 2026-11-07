@@ -1260,7 +1260,7 @@ const MAKEUP_EYE_PRESETS = [
   { id: "eye_3", hex: "#CFA47C", name: { ko: "소프트 샴페인", en: "Soft Champagne", ja: "ソフトシャンパン" } },
 ];
 
-const CARD_ASSET_VER = "?v=20261107_v7";
+const CARD_ASSET_VER = "?v=20261107_v8";
 
 export default function ColorHelperPage() {
   // ── 언어 상태 (기본 한국어, 쿼리/스토리지 지원) ─────────────────
@@ -1358,15 +1358,8 @@ export default function ColorHelperPage() {
         if (savedLang && ["ko", "en", "ja"].includes(savedLang)) {
           setLang(savedLang);
         } else {
-          // 브라우저 언어 스마트 자동 감지 (한국어: ko, 일본어: ja, 그 외 전 세계 글로벌: en)
-          const browserLang = (navigator.language || (navigator as any).userLanguage || "").toLowerCase();
-          if (browserLang.startsWith("ko")) {
-            setLang("ko");
-          } else if (browserLang.startsWith("ja")) {
-            setLang("ja");
-          } else {
-            setLang("en");
-          }
+          // 한국어("ko") 기본 최우선 고정
+          setLang("ko");
         }
       }
 
@@ -1396,76 +1389,8 @@ export default function ColorHelperPage() {
   };
 
   // ── [통합 캔버스 렌더러] 피부색 · 립스틱(AR) · 헤어 염색(Vivaldi) 실시간 동적 렌더링 ──
-  const renderCanvasPortrait = (skinHex: string, lipHex: string, hairHex: string) => {
-    const cvs = document.createElement("canvas");
-    cvs.width = 600;
-    cvs.height = 750;
-    const ctx = cvs.getContext("2d");
-    if (!ctx) return;
-
-    const grad = ctx.createLinearGradient(0, 0, 0, 750);
-    grad.addColorStop(0, "#F7F5F3");
-    grad.addColorStop(1, "#E8E2DD");
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 600, 750);
-
-    // 헤어
-    ctx.fillStyle = hairHex;
-    ctx.beginPath();
-    ctx.ellipse(300, 360, 200, 260, 0, 0, Math.PI * 2);
-    ctx.fill();
-
-    // 목 & 어깨
-    ctx.fillStyle = skinHex;
-    ctx.fillRect(250, 450, 100, 180);
-
-    // 얼굴 윤곽
-    ctx.beginPath();
-    ctx.ellipse(300, 360, 140, 180, 0, 0, Math.PI * 2);
-    ctx.fill();
-
-    // 눈썹
-    ctx.strokeStyle = hairHex;
-    ctx.lineWidth = 4;
-    ctx.beginPath();
-    ctx.arc(245, 305, 30, Math.PI * 1.15, Math.PI * 1.85);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(355, 305, 30, Math.PI * 1.15, Math.PI * 1.85);
-    ctx.stroke();
-
-    // 눈동자
-    ctx.fillStyle = "#2D3436";
-    ctx.beginPath();
-    ctx.ellipse(245, 335, 18, 9, 0, 0, Math.PI * 2);
-    ctx.ellipse(355, 335, 18, 9, 0, 0, Math.PI * 2);
-    ctx.fill();
-
-    // 치크 (볼터치 그라데이션)
-    const cheekGrad1 = ctx.createRadialGradient(230, 400, 5, 230, 400, 45);
-    cheekGrad1.addColorStop(0, lipHex + "55");
-    cheekGrad1.addColorStop(1, skinHex + "00");
-    ctx.fillStyle = cheekGrad1;
-    ctx.beginPath();
-    ctx.arc(230, 400, 45, 0, Math.PI * 2);
-    ctx.fill();
-
-    const cheekGrad2 = ctx.createRadialGradient(370, 400, 5, 370, 400, 45);
-    cheekGrad2.addColorStop(0, lipHex + "55");
-    cheekGrad2.addColorStop(1, skinHex + "00");
-    ctx.fillStyle = cheekGrad2;
-    ctx.beginPath();
-    ctx.arc(370, 400, 45, 0, Math.PI * 2);
-    ctx.fill();
-
-    // 입술 (AR 립스틱 착색)
-    ctx.fillStyle = lipHex;
-    ctx.beginPath();
-    ctx.ellipse(300, 460, 38, 14, 0, 0, Math.PI * 2);
-    ctx.fill();
-
-    const dataUrl = cvs.toDataURL("image/png");
-    setImageSrc(dataUrl);
+  const renderCanvasPortrait = (_skinHex: string, _lipHex: string, _hairHex: string) => {
+    // 2D 캔버스 만화 캐릭터 더미 전면 비활성화: 실제 고화질 모델 실사 화보 100% 영구 보존
   };
 
   const applySkinTone = (skin: { skinHex: string; lipHex: string; hairHex: string; toneHint: string }) => {
@@ -2464,7 +2389,7 @@ export default function ColorHelperPage() {
                     <div className="absolute top-3.5 left-3.5 bg-gradient-to-r from-amber-500 to-[#E07A5F] text-white px-3 py-1 rounded-2xl shadow-xl border border-white/30 flex items-center gap-1.5 z-20">
                       <span className="text-xs">👑</span>
                       <span className="text-[10px] font-black uppercase tracking-wider">
-                        {imageSrc ? (lang === "ko" ? "내 사진 맞춤 추천" : lang === "ja" ? "マイ写真カスタム推奨" : "Personalized Fit") : (lang === "ko" ? "AI 맞춤 추천 착장" : lang === "ja" ? "AI推奨スタイリング" : "AI Recommended Look")}
+                        {(isCustomPhoto && imageSrc) ? (lang === "ko" ? "내 사진 맞춤 추천" : lang === "ja" ? "マイ写真カスタム推奨" : "Personalized Fit") : (lang === "ko" ? "AI 맞춤 추천 착장" : lang === "ja" ? "AI推奨スタイリング" : "AI Recommended Look")}
                       </span>
                     </div>
 
