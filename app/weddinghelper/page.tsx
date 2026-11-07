@@ -1049,51 +1049,46 @@ export default function WeddingHelperPage() {
   
   return (
     <div className="min-h-screen bg-[#FFFDFC] text-[#2C2426] font-serif antialiased selection:bg-[#E8A598]/30 relative overflow-hidden">
-      {/* 🌸 Floating Romantic Petals Overlay & Ambient Glows */}
+      {/* 🏛️ Aman & Hermès Architectural Warm Ivory Ambient Glow */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Soft Breathing Ambient Lights */}
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[1300px] h-[750px] bg-gradient-to-b from-[#FCEBE7]/80 via-[#FFF1E0]/50 to-transparent blur-[140px]" />
-        <div className="absolute top-[28%] -right-48 w-[700px] h-[700px] bg-gradient-to-br from-[#FEE5DF]/60 via-[#FFF7ED]/40 to-transparent blur-[150px]" />
-        <div className="absolute top-[60%] -left-48 w-[800px] h-[800px] bg-gradient-to-tr from-[#FCEBE7]/60 via-[#FFF3E8]/40 to-transparent blur-[160px]" />
-
-        {/* Gentle Rose Petal Silhouettes */}
-        <div className="absolute top-[12%] left-[8%] text-[#E8A598]/30 animate-pulse text-2xl">🌸</div>
-        <div className="absolute top-[22%] right-[10%] text-[#D4AF37]/30 animate-bounce duration-1000 text-xl">✨</div>
-        <div className="absolute top-[45%] left-[5%] text-[#E8A598]/25 text-3xl">🪷</div>
-        <div className="absolute top-[70%] right-[7%] text-[#E8A598]/30 animate-pulse text-2xl">🌸</div>
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1400px] h-[800px] bg-gradient-to-b from-[#F7F2E7]/70 via-[#FDFBF7]/40 to-transparent blur-[160px]" />
+        <div className="absolute top-[25%] -right-40 w-[800px] h-[800px] bg-gradient-to-br from-[#F5EEDB]/50 via-[#FAF8F5]/30 to-transparent blur-[180px]" />
+        <div className="absolute top-[60%] -left-40 w-[900px] h-[900px] bg-gradient-to-tr from-[#F4ECE1]/50 via-[#FDFBF7]/30 to-transparent blur-[190px]" />
+        {/* Subtle Architectural Grid Lines */}
+        <div className="absolute inset-0 bg-[radial-gradient(#E8DFD3_1px,transparent_1px)] [background-size:48px_48px] opacity-[0.25]" />
       </div>
 
-      {/* 1. Global Navigation Bar */}
-      <header className="sticky top-0 z-50 bg-[#FFFDFC]/85 backdrop-blur-xl border-b border-[#F4EBE3] shadow-[0_4px_30px_rgba(200,130,117,0.06)] font-sans">
+      {/* 1. Aman / Hermès Prestige Global Header */}
+      <header className="sticky top-0 z-50 bg-[#FDFBF7]/90 backdrop-blur-xl border-b border-[#EAE3D9] shadow-[0_2px_24px_rgba(30,24,20,0.03)] font-sans">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Link href="/weddinghelper" className="flex items-center gap-3 group">
-              <span className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#E8A598] via-[#F3E5AB] to-[#D4AF37] flex items-center justify-center text-white font-serif font-bold text-base shadow-[0_4px_16px_rgba(232,165,152,0.45)] group-hover:scale-105 transition">
+          <div className="flex items-center gap-8">
+            <Link href="/weddinghelper" className="flex items-center gap-3.5 group">
+              <span className="w-10 h-10 rounded-full bg-[#1C1917] border border-[#C5A059]/40 flex items-center justify-center text-[#EAD8B1] font-serif font-bold text-base shadow-sm group-hover:border-[#C5A059] transition">
                 W
               </span>
               <div>
-                <span className="text-xl font-serif tracking-[0.22em] text-[#1E1719] font-normal block leading-none">
-                  WEDDING<span className="text-[#C87870] font-medium">HELPER</span>
+                <span className="text-xl font-serif tracking-[0.22em] text-[#1C1917] font-normal block leading-none">
+                  WEDDING<span className="text-[#C5A059] font-medium">HELPER</span>
                 </span>
-                <span className="text-[9px] tracking-[0.35em] text-[#9E8B88] uppercase block mt-1 font-medium font-sans">
-                  Where Forever Begins • Curated Luxury
+                <span className="text-[9px] tracking-[0.35em] text-[#8C827A] uppercase block mt-1.5 font-medium font-sans">
+                  The Haute Couture Wedding Atelier · Est. 2026
                 </span>
               </div>
             </Link>
 
             {/* Helper Ecosystem Switcher */}
-            <nav className="hidden lg:flex items-center gap-4 text-xs tracking-wider text-[#8A7977] border-l border-[#EDE3DC] pl-6 font-medium">
-              <a href="https://www.thestayhelper.com" target="_blank" rel="noreferrer" className="hover:text-[#C87870] transition cursor-pointer">StayHelper (Venues)</a>
-              <span className="text-[#E0D2CB]">/</span>
-              <a href="https://www.stylinghelper.com" target="_blank" rel="noreferrer" className="hover:text-[#C87870] transition cursor-pointer">StylingHelper (Fashion)</a>
-              <span className="text-[#E0D2CB]">/</span>
-              <a href="https://roomhelper.vercel.app" target="_blank" rel="noreferrer" className="hover:text-[#C87870] transition">RoomHelper (Home)</a>
+            <nav className="hidden lg:flex items-center gap-4 text-xs tracking-wider text-[#8C827A] border-l border-[#EAE3D9] pl-6 font-medium">
+              <a href="https://www.thestayhelper.com" target="_blank" rel="noreferrer" className="hover:text-[#1C1917] transition cursor-pointer">StayHelper (Venues)</a>
+              <span className="text-[#D8CEBE]">/</span>
+              <a href="https://www.stylinghelper.com" target="_blank" rel="noreferrer" className="hover:text-[#1C1917] transition cursor-pointer">StylingHelper (Fashion)</a>
+              <span className="text-[#D8CEBE]">/</span>
+              <a href="https://roomhelper.vercel.app" target="_blank" rel="noreferrer" className="hover:text-[#1C1917] transition">RoomHelper (Home)</a>
             </nav>
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {user ? (
-              /* When Logged In as VIP: Clean Single Clickable Studio Button & Logout */
+              /* When Logged In as VIP: Clean Atelier VIP Badge & Logout */
               <div className="flex items-center gap-3">
                 <button
                   type="button"
@@ -1102,11 +1097,11 @@ export default function WeddingHelperPage() {
                     setIsDemoMode(false);
                     setIsInvitationOpen(true);
                   }}
-                  className="px-4 py-2 rounded-full bg-[#1F181B] text-[#D4AF37] border border-[#D4AF37]/50 hover:bg-black hover:scale-[1.02] transition shadow-sm flex items-center gap-2 text-xs font-bold uppercase tracking-wider whitespace-nowrap cursor-pointer active:scale-95"
+                  className="px-4 py-2 rounded-full bg-[#1C1917] text-[#EAD8B1] border border-[#C5A059]/50 hover:bg-[#2B2623] hover:scale-[1.01] transition shadow-sm flex items-center gap-2 text-xs font-bold uppercase tracking-wider whitespace-nowrap cursor-pointer active:scale-95"
                 >
-                  <Gem className="w-3.5 h-3.5 text-[#D4AF37]" />
+                  <Gem className="w-3.5 h-3.5 text-[#C5A059]" />
                   <span>VIP STUDIO</span>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#D4AF37]/20 text-[#D4AF37] font-extrabold tracking-wider">ACTIVE</span>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#C5A059]/20 text-[#C5A059] font-extrabold tracking-wider">ACTIVE</span>
                 </button>
                 <button 
                   type="button"
@@ -1116,13 +1111,13 @@ export default function WeddingHelperPage() {
                     setCopyToast('Logged out successfully.');
                     setTimeout(() => setCopyToast(''), 2500);
                   }}
-                  className="text-xs text-[#8A7977] hover:text-[#C87870] underline whitespace-nowrap cursor-pointer"
+                  className="text-xs text-[#8C827A] hover:text-[#1C1917] underline whitespace-nowrap cursor-pointer"
                 >
                   Log out
                 </button>
               </div>
             ) : (
-              /* When Guest: Sleek Navigation Trio */
+              /* When Guest: Refined Atelier Buttons */
               <div className="flex items-center gap-2 sm:gap-3">
                 <button 
                   type="button"
@@ -1131,23 +1126,23 @@ export default function WeddingHelperPage() {
                     setIsDemoMode(true);
                     setIsInvitationOpen(true);
                   }}
-                  className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium tracking-wider text-[#6E5D5C] hover:text-[#C87870] transition whitespace-nowrap cursor-pointer"
+                  className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium tracking-wider text-[#6E645E] hover:text-[#1C1917] transition whitespace-nowrap cursor-pointer"
                 >
                   <span>💌 Free Digital Wedding Invitation</span>
                 </button>
                 <button 
                   type="button"
                   onClick={() => setIsLoginOpen(true)}
-                  className="px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-full border border-[#D8C7BD] text-[#4A3B39] hover:bg-[#FAF3EF] hover:border-[#C87870] transition bg-white shadow-xs whitespace-nowrap cursor-pointer"
+                  className="px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-full border border-[#D8CEBE] text-[#3D3530] hover:bg-[#F5EEDB] transition bg-white shadow-xs whitespace-nowrap cursor-pointer"
                 >
                   Log In
                 </button>
                 <button 
                   type="button"
                   onClick={() => setIsCheckoutOpen(true)}
-                  className="px-5 py-2 text-xs font-bold uppercase tracking-wider rounded-full bg-gradient-to-r from-[#B85E55] via-[#C58968] to-[#9E6F28] text-white hover:opacity-95 transition shadow-[0_4px_16px_rgba(184,94,85,0.35)] flex items-center gap-1.5 whitespace-nowrap cursor-pointer active:scale-95"
+                  className="px-5 py-2 text-xs font-bold uppercase tracking-wider rounded-full bg-[#1C1917] text-[#EAD8B1] border border-[#C5A059]/40 hover:bg-[#2B2623] transition shadow-md flex items-center gap-1.5 whitespace-nowrap cursor-pointer active:scale-95"
                 >
-                  <Sparkles className="w-3.5 h-3.5 text-[#F3E5AB]" />
+                  <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
                   <span>VIP Pass · $19</span>
                 </button>
               </div>
@@ -1156,33 +1151,33 @@ export default function WeddingHelperPage() {
         </div>
       </header>
 
-      {/* 2. Romantic Hero Section */}
-      <section className="relative pt-16 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center z-10">
-        {/* Poetic Ribbon Badge */}
-        <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full border border-[#E8A598]/60 bg-white/90 text-[#B85E55] text-xs font-serif italic tracking-wider mb-8 shadow-[0_4px_20px_rgba(232,165,152,0.2)]">
-          <Flower2 className="w-4 h-4 text-[#C87870]" />
-          <span>A Love Story Written in Fragrant Blooms & Eternal Vows</span>
-          <span className="text-[#D4AF37]">✦</span>
+      {/* 2. Aman & Hermès Architectural Hero Section */}
+      <section className="relative pt-20 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center z-10">
+        {/* Prestige Atelier Badge */}
+        <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-[#D8CEBE] bg-[#FAF8F5] text-[#8C7A68] text-xs font-sans tracking-[0.2em] uppercase mb-8 shadow-xs">
+          <span className="text-[#C5A059]">✦</span>
+          <span>HAUTE COUTURE WEDDING ATELIER · 12 SANCTUARY WORLDS</span>
+          <span className="text-[#C5A059]">✦</span>
         </div>
 
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light text-[#1F181B] tracking-tight max-w-5xl mx-auto leading-[1.18]">
-          Two Hearts, One Eternal Glance <br />
-          <span className="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#B85E55] via-[#C58968] to-[#9E6F28]">
-            Amidst a Million Blooming Florals
+        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif text-[#1C1917] tracking-tight max-w-5xl mx-auto leading-[1.15] font-light">
+          The Art of Forever. <br />
+          <span className="italic font-normal text-[#C5A059]">
+            Immortalized in Haute Couture.
           </span>
         </h1>
 
-        <p className="mt-7 text-base sm:text-lg text-[#6E5D5C] max-w-2xl mx-auto font-light leading-relaxed font-sans">
-          Upload just one candid photo of the one you love. Our AI preserves your real loving expressions while weaving an unforgettable editorial masterpiece inside the world&apos;s most breathtaking sanctuary chapels.
+        <p className="mt-6 text-base sm:text-lg text-[#6E645E] max-w-3xl mx-auto font-light leading-relaxed font-sans">
+          Preserving your authentic East Asian facial contours, natural smiles, and loving chemistry. Seamlessly synthesized across 12 of the world&apos;s most sacred sanctuary destination chapels with bespoke Italian tuxedos and couture silk gowns.
         </p>
 
-        {/* Romantic Upload Altar Box (Grand Scale) */}
-        <div className="mt-12 max-w-3xl mx-auto p-8 sm:p-12 rounded-[42px] bg-white/95 border border-[#F2E5DC] shadow-[0_35px_90px_rgba(200,120,112,0.15)] backdrop-blur-md relative font-sans">
-          {/* Subtle Golden Floral Corner Accents */}
-          <div className="absolute top-6 left-6 text-[#D4AF37]/50 text-sm">❦</div>
-          <div className="absolute top-6 right-6 text-[#D4AF37]/50 text-sm">❦</div>
-          <div className="absolute bottom-6 left-6 text-[#D4AF37]/50 text-sm">❦</div>
-          <div className="absolute bottom-6 right-6 text-[#D4AF37]/50 text-sm">❦</div>
+        {/* 🌟 3-Step Bespoke Atelier Studio (Aman / Hermès Ivory Minimalism) */}
+        <div className="mt-14 max-w-4xl mx-auto p-8 sm:p-12 rounded-[36px] bg-[#FAF8F5] border border-[#EAE3D9] shadow-[0_20px_60px_rgba(28,25,23,0.06)] relative font-sans">
+          {/* Subtle Atelier Corner Marks */}
+          <div className="absolute top-6 left-6 text-[#C5A059]/40 text-xs font-mono">+</div>
+          <div className="absolute top-6 right-6 text-[#C5A059]/40 text-xs font-mono">+</div>
+          <div className="absolute bottom-6 left-6 text-[#C5A059]/40 text-xs font-mono">+</div>
+          <div className="absolute bottom-6 right-6 text-[#C5A059]/40 text-xs font-mono">+</div>
 
                     <input 
             type="file" 
@@ -1214,18 +1209,18 @@ export default function WeddingHelperPage() {
             className="hidden" 
           />
 
-          {/* 3-Photo Multi-Angle Recognition Header */}
-          <div className="mb-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-left">
+          {/* Step 02: Biometric Facial Identity Vault */}
+          <div className="mb-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-left border-b border-[#EAE3D9] pb-6">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF3EF] border border-[#E8A598]/60 text-[#B85E55] text-[11px] font-bold uppercase tracking-wider mb-1.5">
-                <Sparkles className="w-3 h-3 text-[#D4AF37]" />
-                <span>3-Photo 3D Facial Identity Studio</span>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#D8CEBE] text-[#8C7A68] text-[11px] font-bold uppercase tracking-wider mb-2 shadow-xs">
+                <Sparkles className="w-3 h-3 text-[#C5A059]" />
+                <span>BIOMETRIC FACIAL IDENTITY VAULT · 100% ETHNIC LIKENESS</span>
               </div>
-              <h3 className="text-lg sm:text-xl font-serif text-[#1F181B] font-normal">
-                Upload 1 to 3 Photographs for 100% Facial Lock
+              <h3 className="text-xl sm:text-2xl font-serif text-[#1C1917] font-normal">
+                Provide Reference Photographs for Absolute Facial Lock
               </h3>
-              <p className="text-xs text-[#8C7A78] mt-0.5">
-                Supplying 3 photos (Couple + Bride Close-up + Groom Close-up) locks authentic double eyelids, dimples & bone structure.
+              <p className="text-xs text-[#7A7068] mt-1">
+                Upload up to 3 photos (Couple + Bride Close-Up + Groom Close-Up). Locks authentic East Asian double eyelids, dimples, and genuine smiles without alteration.
               </p>
             </div>
 
@@ -1491,7 +1486,7 @@ export default function WeddingHelperPage() {
             </div>
           </div>
 
-          {/* 🌟 결제하고 240장 사진 제작하는 메인 버튼 */}
+          {/* 🌟 The Grand Atelier Masterpiece Button (Aman / Hermès Obsidian & Gold) */}
           <button
             type="button"
             id="create-masterpiece-main-btn"
@@ -1504,22 +1499,22 @@ export default function WeddingHelperPage() {
               }
             }}
             disabled={isGenerating}
-            className={`mt-8 w-full py-5 sm:py-6 px-6 sm:px-10 rounded-2xl font-bold uppercase tracking-[0.14em] text-xs sm:text-sm flex items-center justify-center gap-3 sm:gap-4 transition shadow-xl active:scale-[0.99] cursor-pointer relative overflow-hidden group ${
+            className={`mt-8 w-full py-5 sm:py-6 px-6 sm:px-10 rounded-2xl font-bold uppercase tracking-[0.16em] text-xs sm:text-sm flex items-center justify-center gap-3 sm:gap-4 transition-all duration-300 shadow-xl active:scale-[0.99] cursor-pointer relative overflow-hidden border ${
               isGenerating 
-                ? 'bg-[#EAE2DC] text-[#9A8A87] cursor-not-allowed' 
-                : 'bg-gradient-to-r from-[#B85E55] via-[#C58968] to-[#9E6F28] text-white hover:opacity-95 shadow-[0_12px_40px_rgba(184,94,85,0.45)]'
+                ? 'bg-[#EAE5DE] text-[#9C9288] border-transparent cursor-not-allowed' 
+                : 'bg-[#1C1917] text-[#EAD8B1] border-[#C5A059]/60 hover:bg-[#2B2623] hover:border-[#C5A059] shadow-[0_12px_36px_rgba(28,25,23,0.35)]'
             }`}
           >
             {isGenerating ? (
               <div className="flex items-center justify-center gap-3">
-                <RefreshCw className="w-5 h-5 animate-spin text-white shrink-0" />
-                <span className="font-serif italic capitalize text-sm sm:text-base">{generationStep}</span>
+                <RefreshCw className="w-5 h-5 animate-spin text-[#1C1917] shrink-0" />
+                <span className="font-serif italic capitalize text-sm sm:text-base text-[#1C1917]">{generationStep}</span>
               </div>
             ) : (
               <div className="flex items-center justify-center gap-2.5 sm:gap-3.5 text-center flex-wrap">
-                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 fill-[#F3E5AB] text-[#F3E5AB] shrink-0" />
-                <span className="leading-snug font-serif tracking-widest text-sm sm:text-base">PAY $19 &amp; CREATE ALL 240 BESPOKE MASTERPIECES</span>
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0 group-hover:translate-x-1 transition-transform" />
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 fill-[#C5A059] text-[#C5A059] shrink-0" />
+                <span className="leading-snug font-serif tracking-[0.18em] text-sm sm:text-base">PAY $19 &amp; CREATE ALL 240 BESPOKE MASTERPIECES</span>
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-[#EAD8B1] shrink-0 group-hover:translate-x-1 transition-transform" />
               </div>
             )}
           </button>
@@ -1533,105 +1528,105 @@ export default function WeddingHelperPage() {
           </div>
         </div>
 
-        {/* The Haute Studio Reassurance Banner (Zero Prompt Leak) */}
-        <div className="mt-16 p-8 sm:p-12 rounded-[40px] bg-gradient-to-r from-[#FAF5F1] via-[#FFF9F6] to-[#FAF3EF] border border-[#E8DCD4] shadow-sm flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+        {/* The Haute Studio Reassurance Banner (Aman Warm Ivory) */}
+        <div className="mt-16 p-8 sm:p-12 rounded-[32px] bg-[#FAF8F5] border border-[#EAE3D9] shadow-sm flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
           <div className="max-w-2xl">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#D4AF37]/30 text-[#8C6D1F] text-[10px] font-sans font-bold tracking-widest uppercase shadow-xs mb-3">
-              <Sparkles className="w-3 h-3 text-[#D4AF37]" />
-              <span>Proprietary 8K AI Haute Studio Engine</span>
+            <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#D8CEBE] text-[#8C7A68] text-[10px] font-sans font-bold tracking-widest uppercase shadow-xs mb-3">
+              <Sparkles className="w-3 h-3 text-[#C5A059]" />
+              <span>PROPRIETARY 8K HAUTE ATELIER ENGINE</span>
             </span>
-            <h3 className="text-3xl sm:text-4xl font-serif text-[#1F181B] font-light">
-              Bespoke 20-Angle Haute Wedding Collection
+            <h3 className="text-3xl sm:text-4xl font-serif text-[#1C1917] font-light">
+              Bespoke 20-Angle Masterpiece Collection
             </h3>
-            <p className="text-xs font-sans text-[#7C6E6D] mt-2.5 leading-relaxed">
-              Every ceremonial render automatically synthesizes 20 distinct cinematic vantage points — wide architectural panoramic shots, emotional vow close-ups, candlelit receptions, and intimate sunset silhouettes — precision-tailored to your exact groom & bride proportions.
+            <p className="text-xs font-sans text-[#6E645E] mt-2.5 leading-relaxed">
+              Every destination automatically synthesizes 20 distinct cinematic vantage points — wide sanctuary panoramic views, emotional vow close-ups, candlelit champagne toasts, and intimate sunset silhouettes — tailored to your exact authentic facial contours and proportions.
             </p>
           </div>
           <button
-            onClick={() => window.scrollTo({ top: 300, behavior: 'smooth' })}
-            className="px-8 py-4 rounded-full bg-[#1F181B] text-white text-xs font-sans font-bold uppercase tracking-wider hover:bg-[#C87870] transition shadow-md flex items-center gap-2.5 whitespace-nowrap"
+            type="button"
+            onClick={() => window.scrollTo({ top: 350, behavior: 'smooth' })}
+            className="px-8 py-4 rounded-full bg-[#1C1917] text-[#EAD8B1] border border-[#C5A059]/40 hover:bg-[#2B2623] text-xs font-sans font-bold uppercase tracking-wider transition shadow-md flex items-center gap-2.5 whitespace-nowrap cursor-pointer"
           >
-            <span>Create Your Dream Wedding</span>
-            <ArrowRight className="w-4 h-4" />
+            <span>Create Your Bespoke Wedding</span>
+            <ArrowRight className="w-4 h-4 text-[#C5A059]" />
           </button>
         </div>
       </section>
 
-      {/* 4. The Grand 12 VIP All-Access Pass & PayPal Checkout Section */}
-      <section id="pricing-checkout-section" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#F2E5DC] z-10 relative">
+      {/* 4. The Grand 12 VIP All-Access Pass (Aman Warm Ivory & Obsidian) */}
+      <section id="pricing-checkout-section" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#EAE3D9] z-10 relative">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-sans font-bold tracking-[0.25em] bg-[#FAF0E6] text-[#B85E55] border border-[#E8A598]/50 uppercase">
-            <Gem className="w-3.5 h-3.5 text-[#C87870]" />
-            <span>THE GRAND 12 VIP ALL-ACCESS PASS · LAUNCH SPECIAL 76% OFF</span>
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-sans font-bold tracking-[0.2em] bg-[#F7F2E7] text-[#8C7A68] border border-[#D8CEBE] uppercase shadow-xs">
+            <Gem className="w-3.5 h-3.5 text-[#C5A059]" />
+            <span>THE GRAND 12 VIP ALL-ACCESS PASS · SPECIAL INAUGURAL RATE</span>
           </span>
-          <h2 className="text-4xl sm:text-5xl font-serif text-[#1F181B] font-light tracking-wide leading-tight">
+          <h2 className="text-4xl sm:text-5xl font-serif text-[#1C1917] font-light tracking-wide leading-tight">
             One Single $19 Pass. Forever Yours.
           </h2>
-          <p className="text-base sm:text-lg font-sans text-[#7C6E6D] leading-relaxed">
-            No subscriptions. No recurring monthly fees. Instant lifetime access to all 240 haute couture masterpiece portraits across 12 destinations, plus the complete Digital Wedding Invitation Studio.
+          <p className="text-base sm:text-lg font-sans text-[#6E645E] leading-relaxed">
+            Zero subscriptions. Zero recurring fees. Instant lifetime access to all 240 haute couture masterpiece portraits across 12 destinations, plus the complete Digital Wedding Invitation Studio.
           </p>
         </div>
 
         {/* Pricing Card */}
-        <div className="max-w-2xl mx-auto bg-white/95 backdrop-blur-xl rounded-[36px] border border-[#D4AF37]/50 shadow-[0_20px_60px_rgba(212,175,55,0.15)] p-8 sm:p-12 relative overflow-hidden font-sans">
-          {/* Top Gold Ribbon */}
-          <div className="absolute top-0 right-0 bg-gradient-to-l from-[#D4AF37] to-[#B85E55] text-white text-[11px] font-extrabold uppercase tracking-widest px-6 py-2 rounded-bl-2xl shadow-md">
-            All-Inclusive All-Access Pass
+        <div className="max-w-2xl mx-auto bg-[#FAF8F5] rounded-[32px] border border-[#D8CEBE] shadow-[0_20px_50px_rgba(28,25,23,0.06)] p-8 sm:p-12 relative overflow-hidden font-sans">
+          {/* Top Gold Foil Badge */}
+          <div className="absolute top-0 right-0 bg-[#1C1917] text-[#EAD8B1] border-b border-l border-[#C5A059]/40 text-[10px] font-extrabold uppercase tracking-widest px-5 py-2 rounded-bl-xl shadow-sm">
+            ALL 12 DESTINATIONS INCLUDED
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 border-b border-[#F5ECE5] pb-8">
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 border-b border-[#EAE3D9] pb-8">
             <div>
-              <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#B85E55] block">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#8C7A68] block">
                 The Grand 12 VIP Pass
               </span>
-              <h3 className="text-2xl sm:text-3xl font-serif text-[#1F181B] font-semibold mt-1">
+              <h3 className="text-2xl sm:text-3xl font-serif text-[#1C1917] font-semibold mt-1">
                 Lifetime Couple Access
               </h3>
             </div>
             <div className="flex items-baseline gap-2">
-              <span className="line-through text-lg text-[#9E8B88] font-sans">$79</span>
-              <span className="text-5xl font-serif font-extrabold text-[#1F181B] tracking-tight">$19</span>
-              <span className="text-xs font-bold text-[#8A7977] uppercase tracking-wider">USD / single pay</span>
+              <span className="line-through text-lg text-[#9C9288] font-sans">$79</span>
+              <span className="text-5xl font-serif font-extrabold text-[#1C1917] tracking-tight">$19</span>
+              <span className="text-xs font-bold text-[#8C827A] uppercase tracking-wider">USD / single pay</span>
             </div>
           </div>
 
           {/* Features Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8 text-sm text-[#3E3230]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8 text-sm text-[#2E2825]">
             <div className="flex items-start gap-2.5">
-              <CheckCircle2 className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 text-[#C5A059] shrink-0 mt-0.5" />
               <span><strong>240 Masterpiece Portraits</strong>: 20 Ultra-HD angles across all 12 destinations</span>
             </div>
             <div className="flex items-start gap-2.5">
-              <CheckCircle2 className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 text-[#C5A059] shrink-0 mt-0.5" />
               <span><strong>8K Canvas Print-Ready</strong>: 300 DPI lossless high-res files for framing</span>
             </div>
             <div className="flex items-start gap-2.5">
-              <CheckCircle2 className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 text-[#C5A059] shrink-0 mt-0.5" />
               <span><strong>Digital Invitation Studio</strong>: All 10 luxury templates, RSVP & real BGM</span>
             </div>
             <div className="flex items-start gap-2.5">
-              <CheckCircle2 className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 text-[#C5A059] shrink-0 mt-0.5" />
               <span><strong>1-Click ZIP Download</strong>: Download all 240 photos organized by theme</span>
             </div>
           </div>
 
           {/* Action Button */}
           {user?.plan === 'grand' ? (
-            <div className="p-4 rounded-2xl bg-[#FAF5F1] border border-[#D4AF37]/50 text-center space-y-2">
-              <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#B85E55]">
-                <CheckCircle2 className="w-4 h-4 text-[#D4AF37]" />
+            <div className="p-4 rounded-2xl bg-white border border-[#D8CEBE] text-center space-y-2">
+              <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#1C1917]">
+                <CheckCircle2 className="w-4 h-4 text-[#C5A059]" />
                 <span>Your $19 VIP Pass is Active!</span>
               </span>
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                {/* Hidden per CEO instruction */}
                 <button
                   type="button"
                   onClick={() => {
                     handleGenerateWedding();
                   }}
-                  className="flex-1 py-3.5 rounded-full bg-gradient-to-r from-[#B85E55] via-[#C58968] to-[#9E6F28] text-white font-bold uppercase text-xs tracking-wider transition hover:opacity-95 cursor-pointer shadow-md flex items-center justify-center gap-2"
+                  className="flex-1 py-3.5 rounded-full bg-[#1C1917] text-[#EAD8B1] border border-[#C5A059]/40 font-bold uppercase text-xs tracking-wider transition hover:bg-[#2B2623] cursor-pointer shadow-md flex items-center justify-center gap-2"
                 >
-                  <Sparkles className="w-3.5 h-3.5 fill-[#F3E5AB] text-[#F3E5AB]" />
+                  <Sparkles className="w-3.5 h-3.5 fill-[#C5A059] text-[#C5A059]" />
                   <span className="font-serif tracking-wider">PAY $19 &amp; CREATE ALL 240 MASTERPIECES</span>
                 </button>
                 <button
@@ -1640,7 +1635,7 @@ export default function WeddingHelperPage() {
                     setIsDemoMode(false);
                     setIsInvitationOpen(true);
                   }}
-                  className="flex-1 py-3.5 rounded-full bg-gradient-to-r from-[#B85E55] to-[#9E6F28] text-white font-bold uppercase text-xs tracking-wider transition hover:opacity-95 cursor-pointer shadow-md"
+                  className="flex-1 py-3.5 rounded-full bg-white border border-[#D8CEBE] text-[#1C1917] font-bold uppercase text-xs tracking-wider transition hover:bg-[#F7F2E7] cursor-pointer shadow-xs"
                 >
                   Open Invitation Studio
                 </button>
@@ -1653,16 +1648,16 @@ export default function WeddingHelperPage() {
                 setSelectedPlan('grand');
                 setIsCheckoutOpen(true);
               }}
-              className="w-full py-5 rounded-2xl bg-gradient-to-r from-[#B85E55] via-[#C58968] to-[#9E6F28] text-white font-bold uppercase tracking-widest text-sm hover:opacity-95 transition shadow-[0_10px_35px_rgba(184,94,85,0.4)] flex items-center justify-center gap-3 cursor-pointer active:scale-95"
+              className="w-full py-5 rounded-2xl bg-[#1C1917] text-[#EAD8B1] border border-[#C5A059]/50 font-bold uppercase tracking-widest text-sm hover:bg-[#2B2623] transition shadow-lg flex items-center justify-center gap-3 cursor-pointer active:scale-95"
             >
-              <Gem className="w-5 h-5 text-[#F3E5AB]" />
+              <Gem className="w-5 h-5 text-[#C5A059]" />
               <span>Pay $19 with PayPal / Credit Card</span>
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-5 h-5 text-[#C5A059]" />
             </button>
           )}
 
-          <div className="mt-5 flex items-center justify-center gap-4 text-xs text-[#8A7977] pt-2 border-t border-[#F5ECE5]">
-            <span className="flex items-center gap-1"><ShieldCheck className="w-4 h-4 text-[#C87870]" /> Verified PayPal Checkout</span>
+          <div className="mt-5 flex items-center justify-center gap-4 text-xs text-[#8C827A] pt-2 border-t border-[#EAE3D9]">
+            <span className="flex items-center gap-1"><ShieldCheck className="w-4 h-4 text-[#C5A059]" /> Verified PayPal Checkout</span>
             <span>•</span>
             <span>Instant Digital Access</span>
             <span>•</span>
