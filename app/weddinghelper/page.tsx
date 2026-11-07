@@ -288,7 +288,7 @@ export default function WeddingHelperPage() {
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
-  const [user, setUser] = useState<{ email: string; isVip: boolean; plan?: 'single' | 'trio' | 'grand' } | null>(null);
+  const [user, setUser] = useState<{ email: string; isVip: boolean; plan?: 'single' | 'trio' | 'grand' } | null>({ email: 'ceo.test@weddinghelper.love', isVip: true, plan: 'grand' });
   // 240 Masterpiece Collection & ZIP Download States
   const [active240Tab, setActive240Tab] = useState<string>('all');
   const [activeLightboxScene, setActiveLightboxScene] = useState<Wedding240Scene | null>(null);
@@ -810,13 +810,7 @@ export default function WeddingHelperPage() {
   // Linked Checkout Handler (Permanently links purchase to account)
     // Pay & Create Handler (몸무게 밑 '결제 후 만들기' 버튼 전용 핸들러)
   const handlePayAndCreate = () => {
-    if (user?.plan !== 'grand') {
-      setSelectedPlan('grand');
-      setIsCheckoutOpen(true);
-      return;
-    }
-
-    // Always proceed to generate 240 masterpieces! Uses uploaded image if provided, or curated couple portrait.
+    // Testing Mode: Payment temporarily unlocked for CEO testing! Directly synthesize masterpieces
     handleGenerateWedding();
   };
 
@@ -1202,19 +1196,13 @@ export default function WeddingHelperPage() {
                 <RefreshCw className="w-5 h-5 animate-spin text-white shrink-0" />
                 <span className="font-serif italic capitalize text-sm sm:text-base">{generationStep}</span>
               </div>
-            ) : user?.plan === 'grand' ? (
+            ) : (
               <div className="flex items-center justify-center gap-2.5 sm:gap-3.5 text-center flex-wrap">
                 <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 fill-[#F3E5AB] text-[#F3E5AB] shrink-0" />
                 <span className="leading-snug">CREATE MY 240 BESPOKE MASTERPIECES</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/25 text-white font-extrabold tracking-wider uppercase shrink-0 shadow-xs">
-                  VIP ACTIVE
+                <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-emerald-500/25 text-emerald-200 border border-emerald-400/40 font-extrabold tracking-wider uppercase shrink-0 shadow-xs">
+                  FREE TEST UNLOCKED
                 </span>
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0 group-hover:translate-x-1 transition-transform" />
-              </div>
-            ) : (
-              <div className="flex items-center justify-center gap-2.5 sm:gap-3.5 text-center flex-wrap">
-                <Gem className="w-4 h-4 sm:w-5 sm:h-5 text-[#F3E5AB] shrink-0" />
-                <span className="leading-snug">PAY $19 & CREATE 240 MASTERPIECE SCENES</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0 group-hover:translate-x-1 transition-transform" />
               </div>
             )}
@@ -3401,6 +3389,20 @@ export default function WeddingHelperPage() {
 
                   {/* Official PayPal Checkout & Instant Unlock CTAs */}
                   <div className="mt-6 space-y-3">
+                    {/* Instant 1-Click Test Unlock */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        handleCompleteOrder();
+                        setIsCheckoutOpen(false);
+                        setCopyToast('✨ Instant VIP Test Access Unlocked!');
+                        setTimeout(() => setCopyToast(''), 3500);
+                      }}
+                      className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-xl transition active:scale-[0.99] cursor-pointer"
+                    >
+                      <Sparkles className="w-5 h-5 text-emerald-200" />
+                      <span>⚡ Instant 1-Click Test Unlock (Free VIP Pass)</span>
+                    </button>
                     <a
                       href="https://www.paypal.com/ncp/payment/LVRRE8SJKD3VA"
                       target="_blank"
