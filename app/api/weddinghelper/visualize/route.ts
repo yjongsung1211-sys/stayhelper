@@ -11,6 +11,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { WEDDING_12_PRESETS } from '@/lib/wedding-presets';
 
+const DEST_TO_THEME_MAP: Record<string, string> = {
+  'theme_01_bali': 'bali-jungle',
+  'theme_02_amalfi': 'amalfi-cliff',
+  'theme_03_lake_como': 'lake-como',
+  'theme_04_paris': 'paris-palace',
+  'theme_05_nyc': 'nyc-penthouse',
+  'theme_06_hanok': 'korean-hanok',
+  'theme_07_kyoto': 'kyoto-zen',
+  'theme_08_udaipur': 'rajasthan-palace',
+  'theme_09_santorini': 'santorini-cliff',
+  'theme_10_cabo': 'cabo-ocean',
+  'theme_11_liwa': 'dubai-mirage',
+  'theme_12_swiss_alps': 'swiss-alps',
+};
+
+
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
 
@@ -36,7 +52,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const preset = WEDDING_12_PRESETS[themeId] || WEDDING_12_PRESETS['bali-jungle'];
+    const resolvedThemeId = DEST_TO_THEME_MAP[themeId] || themeId;
+    const preset = WEDDING_12_PRESETS[resolvedThemeId] || WEDDING_12_PRESETS[themeId] || WEDDING_12_PRESETS['bali-jungle'];
 
     // 1. Base64 separation
     let mimeType = 'image/jpeg';
@@ -63,24 +80,29 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // 2. High-fashion radiant floral wedding prompt
-    const promptText = `You are a world-renowned Vogue Wedding & Harper's Bazaar luxury bridal photographer.
-Transform the uploaded couple from the input image into an ultra-luxury, radiant wedding masterpiece set at ${preset.venueName} in ${preset.destination}.
-Specific Scene Angle: ${angleTitle}.
+    // 2. High-fashion radiant floral wedding prompt with strict facial lock, flawless glass skin, and slim silhouette
+    const promptText = `You are a world-renowned Vogue Wedding & Harper's Bazaar master bridal photographer.
+Transform the uploaded real couple from the input image into an ultra-luxury, breathtaking wedding masterpiece set at ${preset.venueName} in ${preset.destination}.
+Specific Scene Angle & Concept: ${angleTitle}.
 
-[STEP 1: COUPLE FACIAL & IDENTITY FIDELITY (HIGHEST PRIORITY)]
-- 100% preserve the exact facial identities, eyes, nose, romantic smile, bone structure, and skin tone of BOTH the bride and groom from the uploaded image.
-- Both persons must look exactly like the real couple in the input photo on their wedding day.
+[CRITICAL RULE 1: 100% EXACT FACIAL IDENTITY LOCK - DO NOT ALTER FACES]
+- You MUST preserve the exact real facial features, bone structure, and expressions of BOTH individuals from the input image.
+- BRIDE: Preserve her exact natural double eyelids, her eye shape, her authentic gentle smile, her real cheek dimple, her authentic nose bridge, and her natural jawline. DO NOT replace her with a generic AI face or alter her unique identity. She must be instantly recognizable as the exact real woman from the photo.
+- GROOM: Preserve his exact eyes, eyebrows, facial contours, authentic warm smile, and recognizable likeness. He must be instantly recognizable as the exact real man from the photo.
 
-[STEP 2: TAILORED PROPORTIONS & ATTIRE]
-- GROOM SILHOUETTE: Height ${groomHeight} cm, Weight ${groomWeight} kg. Bespoke black-tie wedding tuxedo fitting his exact masculine build, with silk lapel and delicate rose boutonnière.
-- BRIDE SILHOUETTE: Height ${brideHeight} cm, Weight ${brideWeight} kg. Handcrafted haute couture French lace & pure silk wedding gown tailored to her exact feminine silhouette, holding a lush bridal bouquet of white blush peonies and sweet peas.
+[CRITICAL RULE 2: FLAWLESS LUXURY PORCELAIN GLASS-SKIN (HIGHEST BEAUTY STANDARD)]
+- Unconditionally render BOTH the bride and groom with the most radiant, flawless, luminous bridal glass-skin.
+- Clear, smooth, dewy complexion with refined micro-texture, zero blemishes, healthy natural glow, and luxury Korean aesthetic clinic porcelain radiance.
 
-[STEP 3: LAVISH FLORALS & DESTINATION BACKDROP]
-- Grand, lavish wedding ceremony surrounded by cascading garden roses, creamy peonies, floating orchids, and glowing candlelight.
-- Majestic iconic architectural sanctuary view of "${preset.venueName}" (${preset.destination}) with warm golden hour sunlight.
-- Cinematic angle: ${angleTitle}.
-- Photorealistic 8K Hasselblad look. Celebratory, radiant, elegant, zero distortions, no cartoon effects.`;
+[CRITICAL RULE 3: UNCONDITIONALLY SLIM & HIGH-FASHION BODY SILHOUETTES]
+- BOTH individuals MUST be rendered with an ultra-slim, tall, and elegant high-fashion physique.
+- GROOM SILHOUETTE: Very slim, tall, lean athletic build with broad straight shoulders, flat abdomen, and a narrow tapered waist. Fitted in a modern ultra-slim-fit bespoke midnight black tuxedo with silk satin shawl lapels.
+- BRIDE SILHOUETTE: Ultra-slender, delicate, graceful hourglass figure with defined sculpted collarbones, slender toned arms, long swan neck, and a tiny snatched waist. Wearing a figure-flattering haute couture French chantilly lace mermaid/column gown tailored to an ethereal, ultra-slender high-fashion bridal frame.
+
+[CRITICAL RULE 4: SPECIFIC SCENE ANGLE & FLORAL ARCHITECTURE]
+- Scene Concept & Pose: ${angleTitle}. Dynamic wedding photography composition tailored strictly to this angle.
+- Setting: Majestic iconic sanctuary view of "${preset.venueName}" (${preset.destination}) with lavish cascading white garden roses, blush peonies, floating orchids, and warm golden hour sunlight.
+- Photorealistic 8K Hasselblad bridal look. Celebratory, romantic, flawless elegance.`;
 
     const key = process.env.GEMINI_API_KEY || '';
     const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash-image';

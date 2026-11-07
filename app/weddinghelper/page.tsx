@@ -707,18 +707,12 @@ export default function WeddingHelperPage() {
             venueBookingUrl: data.venueBookingUrl || currentTheme.stayHelperRef || 'https://www.thestayhelper.com',
           });
           const destId = THEME_TO_DEST_MAP[selectedThemeId] || 'theme_01_bali';
-          const allPersonalized: Record<string, string> = {};
-          // Transform ALL 240 scenes across all 12 destinations with the couple's bespoke synthesis
-          DESTINATION_240_CONFIGS.forEach((dest) => {
-            for (let i = 1; i <= 20; i++) {
-              const pad = String(i).padStart(2, '0');
-              allPersonalized[`${dest.id}_scene_${pad}`] = data.visualizedImageUrl;
-            }
-          });
-          allPersonalized['masterpiece'] = data.visualizedImageUrl;
+          // Set Angle #01 of the active destination as the bespoke synthesized masterpiece,
+          // preserving distinct concepts and camera angles for scenes 02-20!
           setPersonalizedScenes(prev => ({
             ...prev,
-            ...allPersonalized
+            [`${destId}_scene_01`]: data.visualizedImageUrl,
+            'masterpiece': data.visualizedImageUrl,
           }));
           setActive240Tab(destId);
           return;
@@ -737,18 +731,10 @@ export default function WeddingHelperPage() {
         venueBookingUrl: currentTheme.stayHelperRef || 'https://www.thestayhelper.com',
       });
       const destId = THEME_TO_DEST_MAP[selectedThemeId] || 'theme_01_bali';
-      const allFallbackPersonalized: Record<string, string> = {};
-      // Ensure all 240 scenes are transformed with the couple's photo
-      DESTINATION_240_CONFIGS.forEach((dest) => {
-        for (let i = 1; i <= 20; i++) {
-          const pad = String(i).padStart(2, '0');
-          allFallbackPersonalized[`${dest.id}_scene_${pad}`] = fallbackImg;
-        }
-      });
-      allFallbackPersonalized['masterpiece'] = fallbackImg;
       setPersonalizedScenes(prev => ({
         ...prev,
-        ...allFallbackPersonalized
+        [`${destId}_scene_01`]: fallbackImg,
+        'masterpiece': fallbackImg,
       }));
       setActive240Tab(destId);
     } catch (err) {
@@ -1650,8 +1636,8 @@ export default function WeddingHelperPage() {
                 {WEDDING_240_SCENES
                   .filter(s => active240Tab === 'all' || s.themeId === active240Tab)
                   .map((scene) => {
-                    const isCustomPersonalized = Boolean(visualizedResult?.imageUrl || personalizedScenes[scene.id]);
-                    const displayImage = personalizedScenes[scene.id] || visualizedResult?.imageUrl || scene.imagePath;
+                    const isCustomPersonalized = Boolean(personalizedScenes[scene.id]);
+                    const displayImage = personalizedScenes[scene.id] || scene.imagePath;
 
                     return (
                     <div 
@@ -1709,34 +1695,61 @@ export default function WeddingHelperPage() {
                           </p>
                         </div>
 
-                        <div className="flex items-center gap-1.5 mt-2.5 pt-2 border-t border-white/5">
-                          {/* Quick Download Button */}
-                          <a
-                            href={scene.imagePath}
-                            download={`WeddingHelper_${scene.themeId}_Angle_${scene.angleNum}.jpg`}
-                            className="flex-1 py-1.5 px-2 rounded-lg bg-white/10 hover:bg-white/20 text-white/90 text-[10px] font-bold uppercase tracking-wider transition text-center flex items-center justify-center gap-1"
-                          >
-                            <Download className="w-3 h-3 text-[#D4AF37]" />
-                            <span>JPG</span>
-                          </a>
+                        <div className="flex flex-col gap-1.5 mt-2.5 pt-2 border-t border-white/5">
+                          {/* Synthesize Angle with My Face Button */}
+                          {!isCustomPersonalized && (
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleTransformSingleScene(scene);
+                              }}
+                              disabled={transformingSceneId === scene.id}
+                              className="w-full py-1.5 px-2 rounded-lg bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#1F181B] text-[10px] font-extrabold uppercase tracking-wider transition hover:opacity-95 flex items-center justify-center gap-1 shadow-md cursor-pointer disabled:opacity-50"
+                            >
+                              {transformingSceneId === scene.id ? (
+                                <>
+                                  <RefreshCw className="w-3 h-3 animate-spin text-[#1F181B]" />
+                                  <span>Synthesizing...</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Sparkles className="w-3 h-3 fill-[#1F181B] text-[#1F181B]" />
+                                  <span>Synthesize with My Face</span>
+                                </>
+                              )}
+                            </button>
+                          )}
 
-                          {/* Set as Invitation Cover Photo */}
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setInvitationData(prev => ({ ...prev, coverPhoto: scene.imagePath }));
-                              setVisualizedResult(null);
-                              setIsDemoMode(false);
-                              setIsInvitationOpen(true);
-                              setCopyToast(`💌 Set "${scene.angleTitle}" as your Invitation Cover!`);
-                              setTimeout(() => setCopyToast(''), 3500);
-                            }}
-                            className="flex-1 py-1.5 px-2 rounded-lg bg-[#D4AF37]/20 hover:bg-[#D4AF37]/30 text-[#D4AF37] text-[10px] font-bold uppercase tracking-wider transition text-center flex items-center justify-center gap-1"
-                            title="Set as Invitation Cover"
-                          >
-                            <Heart className="w-3 h-3 fill-[#D4AF37]" />
-                            <span>Invite</span>
-                          </button>
+                          <div className="flex items-center gap-1.5">
+                            {/* Quick Download Button */}
+                            <a
+                              href={displayImage}
+                              download={`WeddingHelper_${scene.themeId}_Angle_${scene.angleNum}.jpg`}
+                              className="flex-1 py-1.5 px-2 rounded-lg bg-white/10 hover:bg-white/20 text-white/90 text-[10px] font-bold uppercase tracking-wider transition text-center flex items-center justify-center gap-1"
+                            >
+                              <Download className="w-3 h-3 text-[#D4AF37]" />
+                              <span>JPG</span>
+                            </a>
+
+                            {/* Set as Invitation Cover Photo */}
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setInvitationData(prev => ({ ...prev, coverPhoto: displayImage }));
+                                setVisualizedResult(null);
+                                setIsDemoMode(false);
+                                setIsInvitationOpen(true);
+                                setCopyToast(`💌 Set "${scene.angleTitle}" as your Invitation Cover!`);
+                                setTimeout(() => setCopyToast(''), 3500);
+                              }}
+                              className="flex-1 py-1.5 px-2 rounded-lg bg-[#D4AF37]/20 hover:bg-[#D4AF37]/30 text-[#D4AF37] text-[10px] font-bold uppercase tracking-wider transition text-center flex items-center justify-center gap-1"
+                              title="Set as Invitation Cover"
+                            >
+                              <Heart className="w-3 h-3 fill-[#D4AF37]" />
+                              <span>Invite</span>
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
