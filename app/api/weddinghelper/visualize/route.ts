@@ -133,9 +133,13 @@ Specific Scene Angle: ${angleTitle}.
       }
     }
 
-    // Fallback: theme hero image if generation timed out
+    // Fallback: prioritize the couple's authentic uploaded photo over foreign stock photos
     if (!generatedImageUrl) {
-      generatedImageUrl = preset.heroImage;
+      if (base64Data && mimeType) {
+        generatedImageUrl = `data:${mimeType};base64,${base64Data}`;
+      } else {
+        generatedImageUrl = preset.heroImage;
+      }
     }
 
     return NextResponse.json({

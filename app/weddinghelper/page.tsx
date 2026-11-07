@@ -206,6 +206,21 @@ interface Wedding240Scene {
   imagePath: string;
 }
 
+const THEME_TO_DEST_MAP: Record<string, string> = {
+  'bali-jungle': 'theme_01_bali',
+  'amalfi-cliff': 'theme_02_amalfi',
+  'lake-como': 'theme_03_lake_como',
+  'paris-palace': 'theme_04_paris',
+  'nyc-penthouse': 'theme_05_nyc',
+  'korean-hanok': 'theme_06_hanok',
+  'kyoto-zen': 'theme_07_kyoto',
+  'rajasthan-palace': 'theme_08_udaipur',
+  'santorini-cliff': 'theme_09_santorini',
+  'cabo-ocean': 'theme_10_cabo',
+  'dubai-mirage': 'theme_11_liwa',
+  'swiss-alps': 'theme_12_swiss_alps',
+};
+
 const DESTINATION_240_CONFIGS = [
   { id: 'theme_01_bali', title: 'Bali Rainforest Infinity Chapel', dest: 'Ubud, Bali, Indonesia', venue: 'The Edge Bali & Mandapa Ritz-Carlton' },
   { id: 'theme_02_amalfi', title: 'Amalfi Coast Cliffside Romance', dest: 'Positano & Ravello, Italy', venue: 'Villa Cimbrone & Belmond Caruso' },
@@ -690,13 +705,18 @@ export default function WeddingHelperPage() {
             products: data.products || currentTheme.products,
             venueBookingUrl: data.venueBookingUrl || currentTheme.stayHelperRef || 'https://www.thestayhelper.com',
           });
+          const destId = THEME_TO_DEST_MAP[selectedThemeId] || 'theme_01_bali';
+          const newPersonalized: Record<string, string> = {};
+          for (let i = 1; i <= 20; i++) {
+            const pad = String(i).padStart(2, '0');
+            newPersonalized[`${destId}_scene_${pad}`] = data.visualizedImageUrl;
+          }
+          newPersonalized['masterpiece'] = data.visualizedImageUrl;
           setPersonalizedScenes(prev => ({
             ...prev,
-            [`${currentTheme.id}_scene_01`]: data.visualizedImageUrl,
-            [`${currentTheme.id}_scene_02`]: data.visualizedImageUrl,
-            'masterpiece': data.visualizedImageUrl
+            ...newPersonalized
           }));
-          setActive240Tab('all');
+          setActive240Tab(destId);
           return;
         }
       } catch (apiErr) {
@@ -712,12 +732,18 @@ export default function WeddingHelperPage() {
         products: currentTheme.products,
         venueBookingUrl: currentTheme.stayHelperRef || 'https://www.thestayhelper.com',
       });
+      const destId = THEME_TO_DEST_MAP[selectedThemeId] || 'theme_01_bali';
+      const fallbackPersonalized: Record<string, string> = {};
+      for (let i = 1; i <= 20; i++) {
+        const pad = String(i).padStart(2, '0');
+        fallbackPersonalized[`${destId}_scene_${pad}`] = fallbackImg;
+      }
+      fallbackPersonalized['masterpiece'] = fallbackImg;
       setPersonalizedScenes(prev => ({
         ...prev,
-        [`${currentTheme.id}_scene_01`]: fallbackImg,
-        'masterpiece': fallbackImg
+        ...fallbackPersonalized
       }));
-      setActive240Tab('all');
+      setActive240Tab(destId);
     } catch (err) {
       console.warn('Visualization fallback:', err);
       setVisualizedResult({
@@ -1179,7 +1205,7 @@ export default function WeddingHelperPage() {
             ) : user?.plan === 'grand' ? (
               <div className="flex items-center justify-center gap-2.5 sm:gap-3.5 text-center flex-wrap">
                 <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 fill-[#F3E5AB] text-[#F3E5AB] shrink-0" />
-                <span className="leading-snug">CREATE MY 240 MASTERPIECES · {currentTheme.title}</span>
+                <span className="leading-snug">CREATE MY 240 BESPOKE MASTERPIECES</span>
                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/25 text-white font-extrabold tracking-wider uppercase shrink-0 shadow-xs">
                   VIP ACTIVE
                 </span>
@@ -1954,7 +1980,7 @@ export default function WeddingHelperPage() {
                         title={isBgmPlaying ? 'Pause BGM' : 'Play Romantic BGM'}
                       >
                         {isBgmPlaying ? <Volume2 className="w-3.5 h-3.5 text-[#B85E55] animate-pulse" /> : <VolumeX className="w-3.5 h-3.5" />}
-                        <span className="max-w-[130px] truncate text-[11px] font-medium">{invitationData.bgmTitle || 'Romantic Piano'}</span>
+                        <span className="text-[11px] font-medium whitespace-nowrap">{invitationData.bgmTitle || 'Romantic Piano (Canon in D)'}</span>
                       </button>
 
                       {/* View Mode Switcher (Visible on mobile/tablet or for full focus) */}
