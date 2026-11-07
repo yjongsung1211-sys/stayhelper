@@ -2392,7 +2392,30 @@ export default function ColorHelperPage() {
                     >
                       <img src={leftGlam} alt="Glam Makeup" className="w-full h-full object-cover object-top" />
                       
-
+                      {/* Precise Anatomical Eyelid Shadow Layer (Zero Smudge, 100% Iris & Eyelash Preserved) */}
+                      <svg 
+                        className="absolute inset-0 w-full h-full pointer-events-none transition-all duration-300"
+                        viewBox="0 0 315 445"
+                        style={{ mixBlendMode: 'color', opacity: 0.88 }}
+                      >
+                        <defs>
+                          <filter id="eye-glow-filter" x="-30%" y="-30%" width="160%" height="160%">
+                            <feGaussianBlur stdDeviation="3.2" />
+                          </filter>
+                        </defs>
+                        {/* Left Eyelid Curved Arch */}
+                        <path 
+                          d="M 80,146 Q 105,133 131,146 Q 105,139 80,146 Z" 
+                          fill={activeEyeTryonHex} 
+                          filter="url(#eye-glow-filter)" 
+                        />
+                        {/* Right Eyelid Curved Arch */}
+                        <path 
+                          d="M 184,146 Q 210,133 234,146 Q 210,139 184,146 Z" 
+                          fill={activeEyeTryonHex} 
+                          filter="url(#eye-glow-filter)" 
+                        />
+                      </svg>
                     </div>
 
                     {/* Draggable Divider Handle */}
@@ -2409,20 +2432,71 @@ export default function ColorHelperPage() {
               }
 
               if (comparisonStep === 5) {
-                // Step 5: Total Styling Match (Outfit + Makeup + Hair Color coordinated by theme)
-                const themeKey = OUTFIT_MATCH_PRESETS[selectedOutfitIndex]?.themeKey || "brown";
-                const outfitImg = `/nb_step5_${region}_${themeKey}_card.jpg`;
+                // Step 5: 올린 사진을 기반으로 한 최종 맞춤형 추천 사진이 바로 이 자리에 정확히 표출!
+                const activePreset = OUTFIT_MATCH_PRESETS[selectedOutfitIndex] || OUTFIT_MATCH_PRESETS[3];
+                const themeKey = activePreset.themeKey || "cream";
+                const outfitHex = activePreset.hex;
+                const matchScore = activePreset.match;
+
+                // 사용자가 올린 실제 사진(imageSrc)이 있으면 100% 최우선으로 이 자리에 표출! 없으면 지역별 단독 마스터 모델 사진
+                const basePortrait = imageSrc || (lang === "ja" ? "/nb_step5_ja_raw.jpg" : lang === "ko" ? "/nb_step5_outfit.jpg" : "/nb_step5_en_raw.jpg");
 
                 return (
-                  <div className="absolute inset-0 w-full h-full overflow-hidden">
-                    <img src={outfitImg} alt="Total Styling Fit" className="w-full h-full object-cover object-top transition-opacity duration-300" />
+                  <div className="absolute inset-0 w-full h-full overflow-hidden bg-gray-950">
+                    {/* 1. Base Portrait: Uploaded Photo */}
+                    <img 
+                      src={basePortrait} 
+                      alt="Tailored Recommended Styling" 
+                      className="w-full h-full object-cover object-top transition-all duration-500 brightness-[1.03] contrast-[1.02]" 
+                    />
                     
+                    {/* 2. Real-time Tailored Signature Outfit Overlay matching the selected swatch */}
+                    <div 
+                      className="absolute inset-x-0 bottom-0 h-[44%] pointer-events-none transition-all duration-500 shadow-2xl"
+                      style={{
+                        background: `linear-gradient(to bottom, transparent 0%, ${outfitHex}dd 28%, ${outfitHex} 100%)`,
+                        clipPath: 'polygon(0% 32%, 18% 25%, 35% 22%, 50% 25%, 65% 22%, 82% 25%, 100% 32%, 100% 100%, 0% 100%)'
+                      }}
+                    >
+                      {/* Luxury Silk/Linen Fabric Highlights */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-70 mix-blend-overlay" />
+                    </div>
+
+                    {/* 3. Subtle Harmonized Lip Touch for Total Look */}
+                    <div 
+                      className="absolute pointer-events-none rounded-full blur-[2px] transition-colors duration-300"
+                      style={{
+                        left: '43%',
+                        top: '52%',
+                        width: '14%',
+                        height: '4%',
+                        backgroundColor: outfitHex,
+                        opacity: 0.45,
+                        mixBlendMode: 'color'
+                      }}
+                    />
+
+                    {/* Floating Gold Crown Badge: Personalized Recommendation */}
+                    <div className="absolute top-3.5 left-3.5 bg-gradient-to-r from-amber-500 to-[#E07A5F] text-white px-3 py-1 rounded-2xl shadow-xl border border-white/30 flex items-center gap-1.5 z-20">
+                      <span className="text-xs">👑</span>
+                      <span className="text-[10px] font-black uppercase tracking-wider">
+                        {imageSrc ? (lang === "ko" ? "내 사진 맞춤 추천" : lang === "ja" ? "マイ写真カスタム推奨" : "Personalized Fit") : (lang === "ko" ? "AI 맞춤 추천 착장" : lang === "ja" ? "AI推奨スタイリング" : "AI Recommended Look")}
+                      </span>
+                    </div>
+
                     {/* Floating Match Score Badge 🔥 */}
                     <div className="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-md px-3 py-1 rounded-2xl shadow-xl border border-amber-200 flex items-center gap-1.5 z-20">
                       <span className="text-base leading-none">🔥</span>
                       <div className="text-right">
                         <div className="text-[8px] font-black uppercase text-amber-700 tracking-wider leading-none mb-0.5">MATCH</div>
-                        <div className="text-sm font-black text-gray-900 leading-none">{OUTFIT_MATCH_PRESETS[selectedOutfitIndex]?.match}%</div>
+                        <div className="text-sm font-black text-gray-900 leading-none">{matchScore}%</div>
+                      </div>
+                    </div>
+
+                    {/* Bottom Status Banner */}
+                    <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/90 via-black/50 to-transparent text-center text-white pointer-events-none z-10">
+                      <div className="text-[10px] font-extrabold text-amber-300 uppercase tracking-wider">
+                        {activePreset.name[lang]} • {matchScore}% HARMONY
                       </div>
                     </div>
                   </div>
