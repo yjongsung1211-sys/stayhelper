@@ -2013,7 +2013,7 @@ export default function ColorHelperPage() {
       </header>
 
       {/* ── STEP 1: 사진 등록 & 1초 프리셋 모델 선택 ──────────────── */}
-      <section className="bg-white rounded-3xl p-5 sm:p-8 lg:p-10 shadow-lg border border-gray-200/90 mb-8 overflow-hidden">
+      <section className="bg-white rounded-3xl p-4 sm:p-7 lg:p-8 shadow-lg border border-gray-200/90 mb-8 overflow-hidden max-w-full box-border">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 sm:gap-6 mb-7 pb-6 border-b border-gray-100">
           <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
             <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-2xl bg-gradient-to-tr from-amber-100 to-[#E07A5F]/20 text-[#E07A5F] flex items-center justify-center shadow-inner flex-shrink-0">
@@ -2027,7 +2027,7 @@ export default function ColorHelperPage() {
             </div>
           </div>
 
-          <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 w-full lg:w-auto justify-start sm:justify-end">
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 max-w-full justify-start sm:justify-end flex-shrink-0">
             <input
               type="file"
               ref={fileInputRef}
@@ -2241,13 +2241,11 @@ export default function ColorHelperPage() {
                       className="w-full h-full object-cover object-top"
                     />
                     {/* Clean Face Scanner Laser Overlay */}
-                    <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center p-6">
-                      <div className="w-[72%] h-[68%] rounded-[48%] border-2 border-dashed border-white/70 shadow-[0_0_20px_rgba(255,255,255,0.4)] relative flex items-center justify-center">
-                        <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_#22d3ee] animate-pulse" />
-                        <span className="absolute -bottom-3 bg-black/70 text-white text-[9px] font-black px-2.5 py-0.5 rounded-full border border-white/30 backdrop-blur-xs">
-                          AI FACE CALIBRATED
-                        </span>
-                      </div>
+                    <div className="absolute inset-x-0 bottom-4 pointer-events-none flex items-center justify-center z-20">
+                      <span className="bg-black/75 text-emerald-400 text-[10px] font-black px-3 py-1 rounded-full border border-emerald-500/40 backdrop-blur-md shadow-lg flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                        AI FACIAL LANDMARKS DETECTED (100% FIT)
+                      </span>
                     </div>
                   </div>
                 );
