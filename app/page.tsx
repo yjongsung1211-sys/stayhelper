@@ -1235,26 +1235,26 @@ const WARDROBE_TEST_COLORS = [
 
 // ─── [Color Analysis App 벤치마킹] 실시간 가상 비교 온보딩 프리셋 ─────────────
 const OUTFIT_MATCH_PRESETS = [
-  { id: "outfit_1", hex: "#E0834B", match: 84, name: { ko: "웜 앰버 오렌지", en: "Warm Amber Orange", ja: "アンバーオレンジ" } },
-  { id: "outfit_2", hex: "#633B26", match: 84, name: { ko: "체스트넛 브라운", en: "Chestnut Brown", ja: "チェスナットブラウン" } },
-  { id: "outfit_3", hex: "#625D43", match: 84, name: { ko: "올리브 카키", en: "Olive Khaki", ja: "オリーブカーキ" } },
-  { id: "outfit_4", hex: "#E9E5A8", match: 96, name: { ko: "소프트 버터 옐로우", en: "Soft Butter Yellow", ja: "バターイエロー" } },
-  { id: "outfit_5", hex: "#3A5335", match: 75, name: { ko: "딥 포레스트 그린", en: "Deep Forest Green", ja: "フォレストグリーン" } },
+  { id: "outfit_1", themeKey: "orange", hex: "#E0834B", match: 84, name: { ko: "웜 앰버 오렌지", en: "Warm Amber Orange", ja: "アンバーオレンジ" } },
+  { id: "outfit_2", themeKey: "brown", hex: "#633B26", match: 84, name: { ko: "체스트넛 브라운", en: "Chestnut Brown", ja: "チェスナットブラウン" } },
+  { id: "outfit_3", themeKey: "khaki", hex: "#625D43", match: 84, name: { ko: "올리브 카키", en: "Olive Khaki", ja: "オリーブカーキ" } },
+  { id: "outfit_4", themeKey: "cream", hex: "#E9E5A8", match: 96, name: { ko: "소프트 버터 옐로우", en: "Soft Butter Yellow", ja: "バターイエロー" } },
+  { id: "outfit_5", themeKey: "green", hex: "#3A5335", match: 75, name: { ko: "딥 포레스트 그린", en: "Deep Forest Green", ja: "フォレストグリーン" } },
 ];
 
 const HAIR_TRYON_PRESETS = [
-  { id: "hair_1", hex: "#B85D19", name: { ko: "웜 코퍼", en: "Warm Copper", ja: "ウォームカッパー" } },
-  { id: "hair_2", hex: "#4A2E1B", name: { ko: "다크 초콜릿", en: "Dark Chocolate", ja: "ダークチョコレート" } },
-  { id: "hair_3", hex: "#C49756", name: { ko: "허니 골드", en: "Honey Gold", ja: "ハニーゴールド" } },
-  { id: "hair_4", hex: "#6B2D5C", name: { ko: "리치 버건디", en: "Rich Burgundy", ja: "リッチバーガンディ" } },
-  { id: "hair_5", hex: "#1F2421", name: { ko: "제트 블랙", en: "Jet Black", ja: "ジェットブラック" } },
+  { id: "hair_1", colorKey: "copper", hex: "#B85D19", name: { ko: "웜 코퍼", en: "Warm Copper", ja: "ウォームカッパー" } },
+  { id: "hair_2", colorKey: "brown", hex: "#4A2E1B", name: { ko: "다크 초콜릿", en: "Dark Chocolate", ja: "ダークチョコレート" } },
+  { id: "hair_3", colorKey: "gold", hex: "#C49756", name: { ko: "허니 골드", en: "Honey Gold", ja: "ハニーゴールド" } },
+  { id: "hair_4", colorKey: "purple", hex: "#6B2D5C", name: { ko: "리치 버건디", en: "Rich Burgundy", ja: "リッチバーガンディ" } },
+  { id: "hair_5", colorKey: "black", hex: "#1F2421", name: { ko: "제트 블랙", en: "Jet Black", ja: "ジェットブラック" } },
 ];
 
 const MAKEUP_LIP_PRESETS = [
-  { id: "lip_1", hex: "#DE6B7E", name: { ko: "베리 핑크", en: "Berry Pink", ja: "ベリーピンク" } },
-  { id: "lip_2", hex: "#B23B30", name: { ko: "루비 레드", en: "Ruby Red", ja: "ルビーレッド" } },
-  { id: "lip_3", hex: "#FF6F91", name: { ko: "피치 코랄", en: "Peach Coral", ja: "ピーチコーラル" } },
-  { id: "lip_4", hex: "#C47C8B", name: { ko: "소프트 플럼", en: "Soft Plum", ja: "ソフトプラム" } },
+  { id: "lip_1", colorKey: "rose", hex: "#DE6B7E", name: { ko: "베리 핑크", en: "Berry Pink", ja: "ベリーピンク" } },
+  { id: "lip_2", colorKey: "red", hex: "#B23B30", name: { ko: "루비 레드", en: "Ruby Red", ja: "ルビーレッド" } },
+  { id: "lip_3", colorKey: "pink", hex: "#FF6F91", name: { ko: "피치 코랄", en: "Peach Coral", ja: "ピーチコーラル" } },
+  { id: "lip_4", colorKey: "nude", hex: "#C47C8B", name: { ko: "소프트 플럼", en: "Soft Plum", ja: "ソフトプラム" } },
 ];
 
 const MAKEUP_EYE_PRESETS = [
@@ -1283,6 +1283,8 @@ export default function ColorHelperPage() {
   const [activeLipTryonHex, setActiveLipTryonHex] = useState<string>("#DE6B7E");
   const [activeEyeTryonHex, setActiveEyeTryonHex] = useState<string>("#5B6A72");
   const [selectedOutfitIndex, setSelectedOutfitIndex] = useState<number>(3); // 96% match default
+  const [selectedHairKey, setSelectedHairKey] = useState<string>("copper");
+  const [selectedLipKey, setSelectedLipKey] = useState<string>("rose");
   const [isPaywallOpen, setIsPaywallOpen] = useState(false);
   const [resultTone, setResultTone] = useState<ColorToneData | null>(null);
   const [activeTab, setActiveTab] = useState<"result" | "cosmetics">("result");
@@ -2012,20 +2014,20 @@ export default function ColorHelperPage() {
 
       {/* ── STEP 1: 사진 등록 & 1초 프리셋 모델 선택 ──────────────── */}
       <section className="bg-white rounded-3xl p-6 sm:p-10 shadow-lg border border-gray-200/90 mb-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 sm:gap-6 mb-7 pb-6 border-b border-gray-100">
-          <div className="flex items-center gap-3.5 sm:gap-4">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-amber-100 to-[#E07A5F]/20 text-[#E07A5F] flex items-center justify-center shadow-inner flex-shrink-0">
-              <Camera className="w-6 h-6 sm:w-7 sm:h-7" />
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 sm:gap-6 mb-7 pb-6 border-b border-gray-100">
+          <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
+            <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-2xl bg-gradient-to-tr from-amber-100 to-[#E07A5F]/20 text-[#E07A5F] flex items-center justify-center shadow-inner flex-shrink-0">
+              <Camera className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <div>
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-gray-900 tracking-tight">
+            <div className="min-w-0">
+              <h2 className="text-lg sm:text-2xl font-black text-gray-900 tracking-tight truncate">
                 {t.uploadTitle}
               </h2>
-              <p className="text-xs sm:text-sm text-gray-500 mt-1 max-w-lg leading-relaxed">{t.uploadDesc}</p>
+              <p className="text-xs text-gray-500 mt-0.5 max-w-md leading-relaxed">{t.uploadDesc}</p>
             </div>
           </div>
 
-          <div className="flex flex-wrap sm:flex-nowrap items-center gap-2.5 sm:gap-3 w-full md:w-auto">
+          <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto flex-shrink-0">
             <input
               type="file"
               ref={fileInputRef}
@@ -2035,18 +2037,18 @@ export default function ColorHelperPage() {
             />
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-800 font-extrabold text-xs sm:text-sm border border-gray-300 shadow-sm hover:shadow transition"
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-800 font-extrabold text-xs sm:text-sm border border-gray-300 shadow-sm hover:shadow transition whitespace-nowrap"
             >
-              <Upload className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
+              <Upload className="w-4 h-4 text-gray-700" />
               <span>{t.uploadFileBtn}</span>
             </button>
 
             {!cameraActive ? (
               <button
                 onClick={startCamera}
-                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-[#E07A5F] hover:from-amber-600 hover:to-[#D0694E] text-white font-extrabold text-xs sm:text-sm shadow-md hover:shadow-lg transition transform hover:-translate-y-0.5"
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-[#E07A5F] hover:from-amber-600 hover:to-[#D0694E] text-white font-extrabold text-xs sm:text-sm shadow-md hover:shadow-lg transition whitespace-nowrap"
               >
-                <Camera className="w-4 h-4 sm:w-5 sm:h-5" />
+                <Camera className="w-4 h-4 text-white" />
                 <span>{t.cameraBtn}</span>
               </button>
             ) : (
@@ -2100,9 +2102,7 @@ export default function ColorHelperPage() {
         </div>
       </section>
 
-      {/* ── STEP 2: 가상 드레이핑 스튜디오 ─────────────────────────── */}
-      {imageSrc && (
-        <section className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-200/80 mb-8">
+
       {/* ── AI 실시간 랜드마크 스캐닝 & 체크리스트 화면 (f25ca9ca.jpg & b9ec68bc.jpg) ── */}
       {isScanning && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
@@ -2235,89 +2235,163 @@ export default function ColorHelperPage() {
               window.addEventListener("pointerup", onPointerUp);
             }}
           >
-            {/* ── IMAGE DISPLAY AREA (Country-Tailored Nano Banana Master Visuals) ── */}
+            {/* ── IMAGE DISPLAY AREA (Real Interactive Before/After Split & Swatches) ── */}
             {(() => {
-              const regionCode = lang === "ja" ? "ja" : lang === "ko" ? "ko" : "en";
-              const currentStepImage = isCustomPhoto && imageSrc 
-                ? imageSrc 
-                : `/nb_step${comparisonStep}_${regionCode}.jpg`;
+              const region = lang === "ja" ? "ja" : lang === "ko" ? "ko" : "en";
 
-              return (
-                <div className="absolute inset-0 w-full h-full overflow-hidden">
-                  <img
-                    src={currentStepImage}
-                    alt={`Step ${comparisonStep} Showcase`}
-                    className="w-full h-full object-cover object-top"
-                  />
+              if (comparisonStep === 1) {
+                // Step 1: AI Facial Landmark Scan with 100% Precise Anatomical Fit
+                return (
+                  <div className="absolute inset-0 w-full h-full overflow-hidden">
+                    <img
+                      src={isCustomPhoto && imageSrc ? imageSrc : `/nb_step1_${region}.jpg`}
+                      alt="Step 1 Landmark Scan"
+                      className="w-full h-full object-cover object-top"
+                    />
+                    {/* Precise Anatomical Dotted Landmarks fitted 100% to Face (viewBox 0 0 315 445) */}
+                    <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-85" viewBox="0 0 315 445">
+                      {/* Eyebrows */}
+                      <path d="M 102 144 Q 124 135 144 144" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="4,3" />
+                      <path d="M 171 144 Q 191 135 213 144" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="4,3" />
+                      {/* Eyes */}
+                      <ellipse cx="124" cy="155" rx="18" ry="9" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="4,3" />
+                      <ellipse cx="191" cy="155" rx="18" ry="9" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="4,3" />
+                      {/* Nose Bridge & Tip */}
+                      <path d="M 157 142 L 157 195" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="4,3" />
+                      <path d="M 144 195 Q 157 201 170 195" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="4,3" />
+                      {/* Lips */}
+                      <path d="M 134 238 Q 157 230 180 238 Q 157 248 134 238" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="4,3" />
+                      {/* Jawline & Chin */}
+                      <path d="M 95 175 Q 105 235 157 280 Q 209 235 219 175" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="4,3" />
+                    </svg>
+                  </div>
+                );
+              }
 
-                  {/* For user uploaded custom photo: show natural silk drape on shoulders */}
-                  {isCustomPhoto && comparisonStep === 2 && (
+              if (comparisonStep === 2) {
+                // Step 2: Real Draping Split (Left Emerald Green Best vs Right Sage Khaki Worst)
+                const rightWorst = `/nb_step2_${region}_worst_card.jpg`;
+                const leftBest = `/nb_step2_${region}_best_card.jpg`;
+
+                return (
+                  <div className="absolute inset-0 w-full h-full overflow-hidden">
+                    {/* Right Base: Sage Khaki (Worst) */}
+                    <img src={rightWorst} alt="Sage Khaki Worst" className="absolute inset-0 w-full h-full object-cover object-top" />
+                    
+                    {/* Left Clipped: Emerald Green (Best) */}
                     <div 
-                      className="absolute bottom-0 inset-x-0 h-[36%] rounded-t-[50px] shadow-2xl transition-colors duration-300 flex items-center justify-center pointer-events-none"
-                      style={{ 
-                        backgroundColor: resultTone ? resultTone.bestColors[0]?.hex || "#FFA07A" : "#FFA07A",
-                        boxShadow: "inset 0 10px 25px rgba(0,0,0,0.25)"
-                      }}
+                      className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none"
+                      style={{ clipPath: `inset(0 ${100 - interactiveSplitPos}% 0 0)` }}
                     >
-                      <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-black/50 text-white backdrop-blur-xs">
-                        {t.step2BestBadge}
-                      </span>
+                      <img src={leftBest} alt="Emerald Green Best" className="w-full h-full object-cover object-top" />
                     </div>
-                  )}
 
-                  {/* Step 5: Floating Match Score Badge 🔥 */}
-                  {comparisonStep === 5 && (
+                    {/* Draggable Divider Handle */}
+                    <div 
+                      className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg pointer-events-none z-30"
+                      style={{ left: `${interactiveSplitPos}%` }}
+                    >
+                      <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-white shadow-2xl border-2 border-white flex items-center justify-center overflow-hidden">
+                        <div className="w-1/2 h-full bg-emerald-600 flex items-center justify-center text-white text-[11px] font-black">
+                          ✓
+                        </div>
+                        <div className="w-1/2 h-full bg-rose-600 flex items-center justify-center text-white text-[11px] font-black">
+                          ✕
+                        </div>
+                        <div className="absolute w-5 h-5 rounded-full bg-white text-gray-800 text-[9px] font-black flex items-center justify-center shadow">
+                          &lt;&gt;
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              if (comparisonStep === 3) {
+                // Step 3: Real Hair Dye Split (Right Natural Dark vs Left Selected Dyed Hair)
+                const rightDark = `/nb_step3_${region}_black_card.jpg`;
+                const leftDyed = `/nb_step3_${region}_${selectedHairKey}_card.jpg`;
+
+                return (
+                  <div className="absolute inset-0 w-full h-full overflow-hidden">
+                    {/* Right Base: Natural Dark Hair */}
+                    <img src={rightDark} alt="Natural Dark Hair" className="absolute inset-0 w-full h-full object-cover object-top" />
+                    
+                    {/* Left Clipped: Selected Dyed Hair Color */}
+                    <div 
+                      className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none"
+                      style={{ clipPath: `inset(0 ${100 - interactiveSplitPos}% 0 0)` }}
+                    >
+                      <img src={leftDyed} alt="Dyed Hair Color" className="w-full h-full object-cover object-top" />
+                    </div>
+
+                    {/* Draggable Divider Handle */}
+                    <div 
+                      className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg pointer-events-none z-30"
+                      style={{ left: `${interactiveSplitPos}%` }}
+                    >
+                      <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-white shadow-xl border-2 border-purple-600 text-purple-700 flex items-center justify-center font-black text-xs">
+                        &lt;&gt;
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              if (comparisonStep === 4) {
+                // Step 4: Real Makeup Split (Right Bare Face vs Left Selected Glam Lip Makeup)
+                const rightBare = `/nb_step4_${region}_bare_card.jpg`;
+                const leftGlam = `/nb_step4_${region}_${selectedLipKey}_card.jpg`;
+
+                return (
+                  <div className="absolute inset-0 w-full h-full overflow-hidden">
+                    {/* Right Base: Natural Bare Face */}
+                    <img src={rightBare} alt="Natural Bare Face" className="absolute inset-0 w-full h-full object-cover object-top" />
+                    
+                    {/* Left Clipped: Selected Glam Lip & Eye Makeup */}
+                    <div 
+                      className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none"
+                      style={{ clipPath: `inset(0 ${100 - interactiveSplitPos}% 0 0)` }}
+                    >
+                      <img src={leftGlam} alt="Glam Makeup" className="w-full h-full object-cover object-top" />
+                    </div>
+
+                    {/* Draggable Divider Handle */}
+                    <div 
+                      className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg pointer-events-none z-30"
+                      style={{ left: `${interactiveSplitPos}%` }}
+                    >
+                      <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-white shadow-xl border-2 border-purple-600 text-purple-700 flex items-center justify-center font-black text-xs">
+                        &lt;&gt;
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              if (comparisonStep === 5) {
+                // Step 5: Total Styling Match (Outfit + Makeup + Hair Color coordinated by theme)
+                const themeKey = OUTFIT_MATCH_PRESETS[selectedOutfitIndex]?.themeKey || "brown";
+                const outfitImg = `/nb_step5_${region}_${themeKey}_card.jpg`;
+
+                return (
+                  <div className="absolute inset-0 w-full h-full overflow-hidden">
+                    <img src={outfitImg} alt="Total Styling Fit" className="w-full h-full object-cover object-top transition-opacity duration-300" />
+                    
+                    {/* Floating Match Score Badge 🔥 */}
                     <div className="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-md px-3 py-1 rounded-2xl shadow-xl border border-amber-200 flex items-center gap-1.5 z-20">
                       <span className="text-base leading-none">🔥</span>
                       <div className="text-right">
-                        <div className="text-[8px] font-black uppercase text-amber-700 tracking-wider leading-none mb-0.5">{t.step5MatchLabel}</div>
-                        <div className="text-sm font-black text-gray-900 leading-none">{OUTFIT_MATCH_PRESETS[selectedOutfitIndex]?.match || 98}%</div>
+                        <div className="text-[8px] font-black uppercase text-amber-700 tracking-wider leading-none mb-0.5">MATCH</div>
+                        <div className="text-sm font-black text-gray-900 leading-none">{OUTFIT_MATCH_PRESETS[selectedOutfitIndex]?.match}%</div>
                       </div>
                     </div>
-                  )}
-                </div>
-              );
+                  </div>
+                );
+              }
+
+              return null;
             })()}
-
-            {/* Step 1: Subtle Dotted Facial Landmark Contours */}
-            {comparisonStep === 1 && (
-              <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-60" viewBox="0 0 100 120">
-                <path d="M 28 42 Q 38 38 48 43" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
-                <path d="M 52 43 Q 62 38 72 42" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
-                <ellipse cx="38" cy="48" rx="8" ry="4.5" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
-                <ellipse cx="62" cy="48" rx="8" ry="4.5" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
-                <path d="M 50 43 L 50 64" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
-                <path d="M 44 65 Q 50 67 56 65" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
-                <path d="M 38 76 Q 50 72 62 76 Q 50 82 38 76" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
-                <path d="M 22 45 Q 26 85 50 102 Q 74 85 78 45" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
-              </svg>
-            )}
-
-            {/* ── DRAGGABLE DIVIDER LINE & HANDLE (< >) ── */}
-            {(comparisonStep === 2 || comparisonStep === 3 || comparisonStep === 4) && (
-              <div 
-                className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg pointer-events-none z-30"
-                style={{ left: `${interactiveSplitPos}%` }}
-              >
-                {comparisonStep === 2 ? (
-                  <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-white shadow-2xl border-2 border-white flex items-center justify-center overflow-hidden">
-                    <div className="w-1/2 h-full bg-emerald-600 flex items-center justify-center text-white text-[11px] font-black">
-                      ✓
-                    </div>
-                    <div className="w-1/2 h-full bg-rose-600 flex items-center justify-center text-white text-[11px] font-black">
-                      ✕
-                    </div>
-                    <div className="absolute w-5 h-5 rounded-full bg-white text-gray-800 text-[9px] font-black flex items-center justify-center shadow">
-                      &lt;&gt;
-                    </div>
-                  </div>
-                ) : (
-                  <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-white shadow-xl border-2 border-purple-600 text-purple-700 flex items-center justify-center font-black text-xs">
-                    &lt;&gt;
-                  </div>
-                )}
-              </div>
-            )}
           </div>
 
           {/* ── SWATCHES & CONTROLS SPECIFIC TO STEP ── */}
@@ -2328,7 +2402,10 @@ export default function ColorHelperPage() {
                 {HAIR_TRYON_PRESETS.map((h) => (
                   <button
                     key={h.id}
-                    onClick={() => setActiveHairTryonHex(h.hex)}
+                    onClick={() => {
+                      setActiveHairTryonHex(h.hex);
+                      setSelectedHairKey(h.colorKey || h.id);
+                    }}
                     className={`w-9 h-9 rounded-full transition-transform border-2 cursor-pointer ${
                       activeHairTryonHex === h.hex
                         ? "border-purple-600 scale-110 shadow-md ring-2 ring-purple-300"
@@ -2362,7 +2439,10 @@ export default function ColorHelperPage() {
                   {MAKEUP_LIP_PRESETS.map((lp) => (
                     <button
                       key={lp.id}
-                      onClick={() => setActiveLipTryonHex(lp.hex)}
+                      onClick={() => {
+                        setActiveLipTryonHex(lp.hex);
+                        setSelectedLipKey(lp.colorKey || lp.id);
+                      }}
                       className={`w-7 h-7 rounded-full border-2 transition cursor-pointer ${
                         activeLipTryonHex === lp.hex ? "border-purple-600 scale-110 ring-2 ring-purple-300" : "border-white"
                       }`}
@@ -2453,836 +2533,6 @@ export default function ColorHelperPage() {
           )}
         </div>
       </div>
-
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <Layers className="w-5 h-5 text-[#E07A5F]" />
-              <h2 className="text-lg sm:text-xl font-bold text-gray-900">{t.drapingTitle}</h2>
-            </div>
-
-            <button
-              onClick={() => setSplitView(!splitView)}
-              className={`text-xs px-3 py-1.5 rounded-lg border font-semibold transition flex items-center gap-1.5 ${
-                splitView ? "bg-[#E07A5F] text-white border-[#E07A5F]" : "bg-gray-100 text-gray-700 border-gray-200 hover:bg-gray-200"
-              }`}
-            >
-              <Sliders className="w-3.5 h-3.5" />
-              {t.splitToggle} ({splitView ? "ON" : "OFF"})
-            </button>
-          </div>
-
-          <p className="text-xs sm:text-sm text-gray-500 mb-6">{t.drapingDesc}</p>
-
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            {/* 좌측: 실시간 캔버스 뷰어 */}
-            <div className="md:col-span-6 flex flex-col items-center">
-              {uploadedUserPhoto && (
-                <div className="w-full max-w-[340px] flex items-center justify-between mb-2 px-1">
-                  <span className="text-[11px] font-extrabold text-gray-700 flex items-center gap-1.5">
-                    <Camera className="w-3.5 h-3.5 text-[#E07A5F]" />
-                    {isCustomPhoto 
-                      ? (lang === "ko" ? "내 사진 적용 중" : lang === "ja" ? "マイ写真適用中" : "My Uploaded Portrait") 
-                      : (lang === "ko" ? "샘플 모델 적용 중" : lang === "ja" ? "サンプルモデル" : "Preset Model")}
-                  </span>
-                  {!isCustomPhoto && (
-                    <button
-                      onClick={() => {
-                        setImageSrc(uploadedUserPhoto);
-                        setIsCustomPhoto(true);
-                      }}
-                      className="px-2.5 py-1 rounded-full bg-[#E07A5F] text-white text-[11px] font-extrabold shadow-sm hover:bg-[#D0694E] transition"
-                    >
-                      {lang === "ko" ? "📸 내 사진으로 보기" : lang === "ja" ? "📸 マイ写真に戻す" : "📸 Return to My Photo"}
-                    </button>
-                  )}
-                </div>
-              )}
-              <div className="relative w-full max-w-[340px] aspect-[4/5] rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-gray-100">
-                <div className="relative w-full h-[70%] overflow-hidden bg-neutral-900">
-                  <img src={imageSrc} alt="Facial Canvas" className="w-full h-full object-cover object-top" />
-                  <div
-                    className="absolute w-3.5 h-3.5 rounded-full border-2 border-white shadow-lg pointer-events-none"
-                    style={{ left: `${skinPoint.x}%`, top: `${skinPoint.y}%`, backgroundColor: sampledColors.skin }}
-                  />
-                  <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] text-white font-medium flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full" style={{ backgroundColor: sampledColors.skin }} />
-                    {t.skinDetected}
-                  </div>
-                </div>
-
-                <div className="relative w-full h-[30%] overflow-hidden flex shadow-inner transition-colors duration-300">
-                  {!splitView ? (
-                    <div
-                      className="w-full h-full flex items-center justify-center p-3 relative transition-all duration-300"
-                      style={{ backgroundColor: selectedDrapeHex }}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/20 pointer-events-none" />
-                      <span className="relative z-10 text-xs font-extrabold px-3 py-1 rounded-full bg-black/40 backdrop-blur-md text-white shadow-sm">
-                        {selectedDrapeName}
-                      </span>
-                    </div>
-                  ) : (
-                    <div className="w-full h-full flex relative">
-                      <div
-                        className="h-full flex items-center justify-center text-center relative"
-                        style={{ width: `${splitSliderPos}%`, backgroundColor: "#FFA07A" }}
-                      >
-                        <span className="text-[11px] font-bold text-white bg-black/50 px-2 py-0.5 rounded-full">
-                          {t.splitWarm}
-                        </span>
-                      </div>
-                      <div className="h-full flex-1 flex items-center justify-center text-center relative" style={{ backgroundColor: "#A594B3" }}>
-                        <span className="text-[11px] font-bold text-white bg-black/50 px-2 py-0.5 rounded-full">
-                          {t.splitCool}
-                        </span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* ── 5대 인종/글로벌 피부색 실시간 변경 툴바 (흑인·백인·황인·라틴·동남아) ── */}
-              <div className="mt-4 w-full max-w-[340px] bg-gray-50/95 rounded-2xl p-3 border border-gray-200 shadow-sm">
-                <div className="text-[11px] font-bold text-gray-700 mb-2 flex items-center justify-between">
-                  <span>{t.ethnicityTitle}</span>
-                </div>
-                <div className="grid grid-cols-5 gap-1.5">
-                  {ETHNICITY_SKIN_TONES.map((eth) => (
-                    <button
-                      key={eth.id}
-                      onClick={() => applySkinTone(eth)}
-                      className="flex flex-col items-center p-1.5 rounded-xl border border-gray-200 hover:border-[#E07A5F] hover:bg-white transition group text-center"
-                      title={eth.labels[lang]}
-                    >
-                      <div
-                        className="w-7 h-7 rounded-full shadow-inner border-2 border-white mb-1 group-hover:scale-110 transition-transform"
-                        style={{ backgroundColor: eth.skinHex }}
-                      />
-                      <span className="text-[9px] font-bold text-gray-700 leading-tight truncate w-full group-hover:text-[#E07A5F]">
-                        {eth.labels[lang]}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {splitView && (
-                <div className="w-full max-w-[340px] mt-3">
-                  <div className="flex justify-between text-[11px] text-gray-500 mb-1">
-                    <span>{t.splitWarm}</span>
-                    <span>{t.splitCool}</span>
-                  </div>
-                  <input
-                    type="range"
-                    min="20"
-                    max="80"
-                    value={splitSliderPos}
-                    onChange={(e) => setSplitSliderPos(Number(e.target.value))}
-                    className="w-full accent-[#E07A5F]"
-                  />
-                </div>
-              )}
-            </div>
-
-            {/* 우측: 5대 인터랙티브 뷰티 스튜디오 (자유 컬러 피커 · 추천 옷색상 피팅 · 찰떡 화장품 · 드레이핑 · 퀴즈) */}
-            <div className="md:col-span-6 space-y-4">
-              <div className="flex items-center gap-1 p-1 bg-gray-100 rounded-2xl overflow-x-auto no-scrollbar border border-gray-200">
-                <button
-                  onClick={() => setStudioTool("custom")}
-                  className={`px-3 py-2 rounded-xl text-xs font-black transition whitespace-nowrap flex items-center gap-1 ${
-                    studioTool === "custom"
-                      ? "bg-white text-gray-900 shadow-sm border border-gray-200"
-                      : "text-gray-500 hover:text-gray-900"
-                  }`}
-                >
-                  {t.studioTabCustom}
-                </button>
-                <button
-                  onClick={() => setStudioTool("outfit")}
-                  className={`px-3 py-2 rounded-xl text-xs font-black transition whitespace-nowrap flex items-center gap-1 ${
-                    studioTool === "outfit"
-                      ? "bg-white text-blue-600 shadow-sm border border-blue-200"
-                      : "text-gray-500 hover:text-gray-900"
-                  }`}
-                >
-                  {t.studioTabOutfit}
-                </button>
-                <button
-                  onClick={() => setStudioTool("cosme")}
-                  className={`px-3 py-2 rounded-xl text-xs font-black transition whitespace-nowrap flex items-center gap-1 ${
-                    studioTool === "cosme"
-                      ? "bg-white text-rose-600 shadow-sm border border-rose-200"
-                      : "text-gray-500 hover:text-gray-900"
-                  }`}
-                >
-                  {t.studioTabCosme}
-                </button>
-                <button
-                  onClick={() => setStudioTool("drape")}
-                  className={`px-3 py-2 rounded-xl text-xs font-black transition whitespace-nowrap flex items-center gap-1 ${
-                    studioTool === "drape"
-                      ? "bg-white text-emerald-700 shadow-sm border border-emerald-200"
-                      : "text-gray-500 hover:text-gray-900"
-                  }`}
-                >
-                  {t.studioTabDrape}
-                </button>
-                <button
-                  onClick={() => setStudioTool("quiz")}
-                  className={`px-3 py-2 rounded-xl text-xs font-black transition whitespace-nowrap flex items-center gap-1 ${
-                    studioTool === "quiz"
-                      ? "bg-white text-purple-600 shadow-sm border border-purple-200"
-                      : "text-gray-500 hover:text-gray-900"
-                  }`}
-                >
-                  {t.studioTabQuiz}
-                </button>
-              </div>
-
-              {/* ── TOOL 1: [내 사진 자유 컬러 피커] 18대 스펙트럼 & 커스텀 피커 ── */}
-              {studioTool === "custom" && (
-                <div className="p-4 rounded-2xl bg-[#FFFBF8] border border-amber-200/90 shadow-sm animate-fade-in">
-                  <h3 className="text-sm font-extrabold text-gray-900 mb-1 flex items-center gap-1.5">
-                    <Palette className="w-4 h-4 text-[#E07A5F]" />
-                    {t.customPickerTitle}
-                  </h3>
-                  <p className="text-xs text-gray-500 mb-3.5 leading-relaxed">{t.customPickerDesc}</p>
-
-                  {/* 직접 고르는 컬러 피커 인풋 */}
-                  <div className="flex items-center gap-3 p-3 bg-white rounded-xl border border-gray-200 mb-3.5 shadow-2xs">
-                    <input
-                      type="color"
-                      value={customColorInput}
-                      onChange={(e) => {
-                        const hex = e.target.value;
-                        setCustomColorInput(hex);
-                        setSelectedDrapeHex(hex);
-                        setSelectedDrapeName(lang === "ko" ? `직접 선택 (${hex})` : lang === "ja" ? `カスタム色 (${hex})` : `Custom Color (${hex})`);
-                      }}
-                      className="w-10 h-10 rounded-xl cursor-pointer border-0 bg-transparent p-0 flex-shrink-0"
-                    />
-                    <div className="flex-1 min-w-0">
-                      <span className="text-[10px] font-bold text-gray-500 block">{t.customColorInputLabel}</span>
-                      <span className="text-xs font-black text-gray-900">{customColorInput}</span>
-                    </div>
-                    <button
-                      onClick={() => {
-                        setSelectedDrapeHex(customColorInput);
-                        setSelectedDrapeName(customColorInput);
-                      }}
-                      className="px-3 py-1.5 rounded-xl bg-gray-900 hover:bg-black text-white text-xs font-extrabold shadow-sm transition"
-                    >
-                      {t.cosmeTryBtn}
-                    </button>
-                  </div>
-
-                  {/* 18대 대표 스펙트럼 팔레트 칩 */}
-                  <div className="grid grid-cols-6 gap-1.5">
-                    {CUSTOM_SPECTRUM_COLORS.map((col) => (
-                      <button
-                        key={col.hex}
-                        onClick={() => {
-                          setSelectedDrapeHex(col.hex);
-                          setSelectedDrapeName(col.name[lang]);
-                          setCustomColorInput(col.hex);
-                        }}
-                        className={`p-1.5 rounded-xl border flex flex-col items-center gap-1 transition ${
-                          selectedDrapeHex === col.hex
-                            ? "bg-white border-gray-900 ring-2 ring-gray-900 shadow-md scale-105 z-10"
-                            : "bg-white/80 border-gray-200 hover:border-gray-300"
-                        }`}
-                        title={col.name[lang]}
-                      >
-                        <div className="w-6 h-6 rounded-full shadow-inner border border-black/10" style={{ backgroundColor: col.hex }} />
-                        <span className="text-[9px] font-bold text-gray-700 truncate w-full text-center">{col.name[lang]}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* ── TOOL 2: [어울리는 옷 색상 피팅] 외투 · 상의 · 원피스 ── */}
-              {studioTool === "outfit" && (
-                <div className="p-4 rounded-2xl bg-[#F0F7FF] border border-blue-200/90 shadow-sm animate-fade-in space-y-3.5">
-                  <div>
-                    <h3 className="text-sm font-extrabold text-gray-900 mb-1 flex items-center gap-1.5">
-                      <Shirt className="w-4 h-4 text-blue-600" />
-                      {t.outfitTitle}
-                    </h3>
-                    <p className="text-xs text-gray-500 leading-relaxed">{t.outfitDesc}</p>
-                  </div>
-
-                  {/* 1. 아우터 & 코트 */}
-                  <div className="p-3 bg-white rounded-xl border border-blue-100 shadow-2xs">
-                    <span className="text-xs font-black text-gray-900 block mb-2">{t.outfitOuterTitle}</span>
-                    <div className="grid grid-cols-4 gap-2">
-                      {[
-                        { hex: "#D4A373", name: { ko: "트렌치 카멜", en: "Trench Camel", ja: "キャメル" } },
-                        { hex: "#1E3A8A", name: { ko: "캐시미어 네이비", en: "Cashmere Navy", ja: "ネイビー" } },
-                        { hex: "#374151", name: { ko: "슬레이트 챠콜", en: "Slate Charcoal", ja: "チャコール" } },
-                        { hex: "#E5E7EB", name: { ko: "오트밀 멜란지", en: "Oatmeal Melange", ja: "オートミール" } },
-                      ].map((item) => (
-                        <button
-                          key={item.hex}
-                          onClick={() => {
-                            setSelectedDrapeHex(item.hex);
-                            setSelectedDrapeName(`${lang === "ko" ? "[아우터] " : lang === "ja" ? "[アウター] " : "[Outer] "}${item.name[lang]}`);
-                          }}
-                          className={`p-2 rounded-xl border flex flex-col items-center gap-1 transition ${
-                            selectedDrapeHex === item.hex
-                              ? "bg-blue-50 border-blue-600 ring-2 ring-blue-600/30 shadow-sm"
-                              : "border-gray-200 hover:border-gray-300"
-                          }`}
-                        >
-                          <div className="w-6 h-6 rounded-full shadow-inner border border-black/10" style={{ backgroundColor: item.hex }} />
-                          <span className="text-[10px] font-bold text-gray-800 truncate w-full text-center">{item.name[lang]}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* 2. 상의 & 니트/블라우스 */}
-                  <div className="p-3 bg-white rounded-xl border border-blue-100 shadow-2xs">
-                    <span className="text-xs font-black text-gray-900 block mb-2">{t.outfitTopTitle}</span>
-                    <div className="grid grid-cols-4 gap-2">
-                      {[
-                        { hex: "#FDE047", name: { ko: "버터 크림", en: "Butter Cream", ja: "バタークリーム" } },
-                        { hex: "#FDBA74", name: { ko: "소프트 피치", en: "Soft Peach", ja: "ピーチ" } },
-                        { hex: "#F9A8D4", name: { ko: "베이비 핑크", en: "Baby Pink", ja: "ベビーピンク" } },
-                        { hex: "#7DD3FC", name: { ko: "스카이 블루", en: "Sky Blue", ja: "スカイブルー" } },
-                      ].map((item) => (
-                        <button
-                          key={item.hex}
-                          onClick={() => {
-                            setSelectedDrapeHex(item.hex);
-                            setSelectedDrapeName(`${lang === "ko" ? "[상의] " : lang === "ja" ? "[トップス] " : "[Top] "}${item.name[lang]}`);
-                          }}
-                          className={`p-2 rounded-xl border flex flex-col items-center gap-1 transition ${
-                            selectedDrapeHex === item.hex
-                              ? "bg-blue-50 border-blue-600 ring-2 ring-blue-600/30 shadow-sm"
-                              : "border-gray-200 hover:border-gray-300"
-                          }`}
-                        >
-                          <div className="w-6 h-6 rounded-full shadow-inner border border-black/10" style={{ backgroundColor: item.hex }} />
-                          <span className="text-[10px] font-bold text-gray-800 truncate w-full text-center">{item.name[lang]}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* 3. 원피스 & 정장 수트 */}
-                  <div className="p-3 bg-white rounded-xl border border-blue-100 shadow-2xs">
-                    <span className="text-xs font-black text-gray-900 block mb-2">{t.outfitDressTitle}</span>
-                    <div className="grid grid-cols-4 gap-2">
-                      {[
-                        { hex: "#1D4ED8", name: { ko: "로열 코발트", en: "Royal Cobalt", ja: "コバルト" } },
-                        { hex: "#BE185D", name: { ko: "딥 마젠타", en: "Deep Magenta", ja: "マゼンタ" } },
-                        { hex: "#047857", name: { ko: "에메랄드 그린", en: "Emerald Green", ja: "エメラルド" } },
-                        { hex: "#9A3412", name: { ko: "테라코타 러스", en: "Terracotta Rust", ja: "テラコッタ" } },
-                      ].map((item) => (
-                        <button
-                          key={item.hex}
-                          onClick={() => {
-                            setSelectedDrapeHex(item.hex);
-                            setSelectedDrapeName(`${lang === "ko" ? "[원피스] " : lang === "ja" ? "[ワンピース] " : "[Dress] "}${item.name[lang]}`);
-                          }}
-                          className={`p-2 rounded-xl border flex flex-col items-center gap-1 transition ${
-                            selectedDrapeHex === item.hex
-                              ? "bg-blue-50 border-blue-600 ring-2 ring-blue-600/30 shadow-sm"
-                              : "border-gray-200 hover:border-gray-300"
-                          }`}
-                        >
-                          <div className="w-6 h-6 rounded-full shadow-inner border border-black/10" style={{ backgroundColor: item.hex }} />
-                          <span className="text-[10px] font-bold text-gray-800 truncate w-full text-center">{item.name[lang]}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* 4. 워스트 피해야 할 옷색상 */}
-                  <div className="p-3 bg-rose-50/60 rounded-xl border border-rose-200/90">
-                    <span className="text-xs font-black text-rose-900 block mb-1.5">{t.outfitWorstTitle}</span>
-                    <div className="grid grid-cols-3 gap-2">
-                      {[
-                        { hex: "#713F12", name: { ko: "탁한 황토색", en: "Muted Ochre", ja: "くすみ黄土色" } },
-                        { hex: "#4B5563", name: { ko: "칙칙한 그레이", en: "Dull Ash Gray", ja: "濁りグレー" } },
-                        { hex: "#831843", name: { ko: "극단 쿨 플럼", en: "Extreme Plum", ja: "極端プラム" } },
-                      ].map((item) => (
-                        <button
-                          key={item.hex}
-                          onClick={() => {
-                            setSelectedDrapeHex(item.hex);
-                            setSelectedDrapeName(`${lang === "ko" ? "[워스트 주의] " : lang === "ja" ? "[注意] " : "[Caution] "}${item.name[lang]}`);
-                          }}
-                          className="p-1.5 rounded-lg border border-rose-200 bg-white flex items-center gap-1.5 text-left hover:border-rose-400 transition"
-                        >
-                          <div className="w-5 h-5 rounded-full border border-black/10 flex-shrink-0" style={{ backgroundColor: item.hex }} />
-                          <span className="text-[10px] font-bold text-rose-900 truncate">{item.name[lang]}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* ── TOOL 3: [내 톤 찰떡 화장품 TOP 6] 실물 발색 & 올리브영/백화점 1위 ── */}
-              {studioTool === "cosme" && (
-                <div className="p-4 rounded-2xl bg-[#FFF8F8] border border-rose-200/90 shadow-sm animate-fade-in space-y-3">
-                  <div>
-                    <h3 className="text-sm font-extrabold text-gray-900 mb-1 flex items-center gap-1.5">
-                      <Sparkles className="w-4 h-4 text-rose-500" />
-                      {t.cosmeTitle}
-                    </h3>
-                    <p className="text-xs text-gray-500 leading-relaxed">{t.cosmeDesc}</p>
-                  </div>
-
-                  <div className="space-y-2.5">
-                    {TOP_COSMETICS_SHOWCASE.map((cosme, idx) => (
-                      <div
-                        key={cosme.id}
-                        className="p-3 rounded-xl bg-white border border-rose-100 flex items-center justify-between gap-3 shadow-2xs hover:border-rose-300 transition"
-                      >
-                        <div className="flex items-center gap-2.5 min-w-0">
-                          <span className="w-6 h-6 rounded-full bg-rose-500/10 text-rose-700 font-black text-xs flex items-center justify-center flex-shrink-0">
-                            {idx + 1}
-                          </span>
-                          <div
-                            className="w-8 h-8 rounded-full border border-black/10 shadow-inner flex-shrink-0"
-                            style={{ backgroundColor: cosme.hex }}
-                          />
-                          <div className="min-w-0">
-                            <span className="text-[10px] font-bold text-rose-600 block">{cosme.category[lang]}</span>
-                            <span className="text-xs font-black text-gray-900 truncate block">{cosme.names[lang]}</span>
-                            <span className="text-[10px] text-gray-400 font-semibold">{cosme.prices[lang]}</span>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-1.5 flex-shrink-0">
-                          <button
-                            onClick={() => {
-                              setSelectedDrapeHex(cosme.hex);
-                              setSelectedDrapeName(cosme.names[lang]);
-                              changeLipColor(cosme.hex);
-                            }}
-                            className="px-2.5 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-extrabold text-[11px] border border-rose-200 transition"
-                          >
-                            {t.cosmeTryBtn}
-                          </button>
-                          <a
-                            href={`https://www.google.com/search?q=${encodeURIComponent(cosme.brand + " " + cosme.names[lang])}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 transition"
-                            title={t.cosmeShopBtn}
-                          >
-                            <ExternalLink className="w-3.5 h-3.5" />
-                          </a>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* ── TOOL 4: [12톤 기본 드레이핑] ── */}
-              {studioTool === "drape" && (
-                <div className="p-4 rounded-2xl bg-white border border-gray-200/90 shadow-sm animate-fade-in">
-                  <h3 className="text-sm font-bold text-gray-900 mb-1 flex items-center gap-1.5">
-                    <Palette className="w-4 h-4 text-[#E07A5F]" />
-                    {t.swatchTitle}
-                  </h3>
-                  <p className="text-xs text-gray-500 mb-3.5">{t.swatchDesc}</p>
-
-                  {resultTone && (
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                      {resultTone.drapeSwatches.map((swatch) => (
-                        <button
-                          key={swatch.name[lang]}
-                          onClick={() => {
-                            setSelectedDrapeHex(swatch.hex);
-                            setSelectedDrapeName(swatch.name[lang]);
-                          }}
-                          className={`p-2.5 rounded-xl border flex flex-col items-center gap-1.5 transition ${
-                            selectedDrapeHex === swatch.hex
-                              ? "border-gray-900 ring-2 ring-gray-900 shadow-md bg-[#FFFBF9]"
-                              : "border-gray-200 hover:border-gray-300 bg-white"
-                          }`}
-                        >
-                          <div className="w-8 h-8 rounded-full shadow-inner border border-black/10" style={{ backgroundColor: swatch.hex }} />
-                          <span className="text-[11px] font-bold text-gray-900 truncate w-full text-center">
-                            {swatch.name[lang]}
-                          </span>
-                          <span className="text-[9px] text-gray-500">{swatch.desc[lang]}</span>
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* ── TOOL 5: [자가진단 퀴즈] ── */}
-              {studioTool === "quiz" && (
-                <div className="p-4 rounded-2xl bg-[#FAF5FF] border border-purple-200/90 space-y-3.5 animate-fade-in shadow-sm">
-                  <h3 className="text-sm font-extrabold text-gray-900 mb-1 flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4 text-purple-600" />
-                    {t.quizTitle}
-                  </h3>
-                  <p className="text-xs text-gray-600 mb-2 leading-relaxed">{t.quizDesc}</p>
-
-                  <div className="space-y-3">
-                    <div>
-                      <div className="text-xs font-bold text-gray-800 mb-1.5">{t.quizQ1}</div>
-                      <div className="grid grid-cols-3 gap-1.5 text-[11px]">
-                        <button
-                          onClick={() => setQuizAnswers((p) => ({ ...p, vein: 0 }))}
-                          className={`p-2 rounded-xl border text-center transition font-semibold ${
-                            quizAnswers.vein === 0 ? "bg-purple-600 text-white border-purple-600 shadow-sm" : "bg-white text-gray-700 border-gray-200"
-                          }`}
-                        >
-                          {t.quizA1_1}
-                        </button>
-                        <button
-                          onClick={() => setQuizAnswers((p) => ({ ...p, vein: 1 }))}
-                          className={`p-2 rounded-xl border text-center transition font-semibold ${
-                            quizAnswers.vein === 1 ? "bg-purple-600 text-white border-purple-600 shadow-sm" : "bg-white text-gray-700 border-gray-200"
-                          }`}
-                        >
-                          {t.quizA1_2}
-                        </button>
-                        <button
-                          onClick={() => setQuizAnswers((p) => ({ ...p, vein: 2 }))}
-                          className={`p-2 rounded-xl border text-center transition font-semibold ${
-                            quizAnswers.vein === 2 ? "bg-purple-600 text-white border-purple-600 shadow-sm" : "bg-white text-gray-700 border-gray-200"
-                          }`}
-                        >
-                          {t.quizA1_3}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="text-xs font-bold text-gray-800 mb-1.5">{t.quizQ2}</div>
-                      <div className="grid grid-cols-3 gap-1.5 text-[11px]">
-                        <button
-                          onClick={() => setQuizAnswers((p) => ({ ...p, jewelry: 0 }))}
-                          className={`p-2 rounded-xl border text-center transition font-semibold ${
-                            quizAnswers.jewelry === 0 ? "bg-purple-600 text-white border-purple-600 shadow-sm" : "bg-white text-gray-700 border-gray-200"
-                          }`}
-                        >
-                          {t.quizA2_1}
-                        </button>
-                        <button
-                          onClick={() => setQuizAnswers((p) => ({ ...p, jewelry: 1 }))}
-                          className={`p-2 rounded-xl border text-center transition font-semibold ${
-                            quizAnswers.jewelry === 1 ? "bg-purple-600 text-white border-purple-600 shadow-sm" : "bg-white text-gray-700 border-gray-200"
-                          }`}
-                        >
-                          {t.quizA2_2}
-                        </button>
-                        <button
-                          onClick={() => setQuizAnswers((p) => ({ ...p, jewelry: 2 }))}
-                          className={`p-2 rounded-xl border text-center transition font-semibold ${
-                            quizAnswers.jewelry === 2 ? "bg-purple-600 text-white border-purple-600 shadow-sm" : "bg-white text-gray-700 border-gray-200"
-                          }`}
-                        >
-                          {t.quizA2_3}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="text-xs font-bold text-gray-800 mb-1.5">{t.quizQ3}</div>
-                      <div className="grid grid-cols-2 gap-1.5 text-[11px]">
-                        <button
-                          onClick={() => setQuizAnswers((p) => ({ ...p, sun: 0 }))}
-                          className={`p-2 rounded-xl border text-center transition font-semibold ${
-                            quizAnswers.sun === 0 ? "bg-purple-600 text-white border-purple-600 shadow-sm" : "bg-white text-gray-700 border-gray-200"
-                          }`}
-                        >
-                          {t.quizA3_1}
-                        </button>
-                        <button
-                          onClick={() => setQuizAnswers((p) => ({ ...p, sun: 1 }))}
-                          className={`p-2 rounded-xl border text-center transition font-semibold ${
-                            quizAnswers.sun === 1 ? "bg-purple-600 text-white border-purple-600 shadow-sm" : "bg-white text-gray-700 border-gray-200"
-                          }`}
-                        >
-                          {t.quizA3_2}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {quizAnswers.vein !== null && (
-                    <div className="p-3 rounded-xl bg-white border border-purple-200 text-xs font-bold text-purple-950 flex items-center justify-between shadow-xs">
-                      <span>{t.quizResultLabel}</span>
-                      <span className="px-2.5 py-1 rounded-full bg-purple-100 text-purple-900 font-extrabold">
-                        {quizAnswers.vein === 0 || quizAnswers.jewelry === 0 
-                      ? (lang === "ko" ? "COOL (여름/겨울 쿨)" : lang === "ja" ? "COOL (ブルベ夏/冬)" : "COOL (Summer / Winter Cool)")
-                      : (lang === "ko" ? "WARM (봄/가을 웜)" : lang === "ja" ? "WARM (イエベ春/秋)" : "WARM (Spring / Autumn Warm)")}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              )}
-              {/* 지표 분석 박스 */}
-              <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200/80 space-y-3">
-                <div className="text-xs font-bold text-gray-800 flex items-center justify-between">
-                  <span>{t.metricTitle}</span>
-                  <span className="text-[11px] font-normal text-gray-500">{t.metricSubtitle}</span>
-                </div>
-
-                <div>
-                  <div className="flex justify-between text-xs text-gray-600 mb-1">
-                    <span className="flex items-center gap-1"><Snowflake className="w-3 h-3 text-sky-500" /> {t.coolLabel}</span>
-                    <span className="font-bold text-gray-800">
-                      {sampledColors.warmScore >= 50 ? `Warm (${sampledColors.warmScore}%)` : `Cool (${100 - sampledColors.warmScore}%)`}
-                    </span>
-                    <span className="flex items-center gap-1">{t.warmLabel} <Flame className="w-3 h-3 text-amber-500" /></span>
-                  </div>
-                  <div className="h-2 rounded-full bg-gradient-to-r from-sky-400 via-purple-300 to-amber-500 overflow-hidden relative">
-                    <div className="absolute top-0 bottom-0 w-2.5 bg-black rounded-full shadow -ml-1 border border-white" style={{ left: `${sampledColors.warmScore}%` }} />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-3 pt-2 border-t border-gray-200 text-xs">
-                  <div>
-                    <span className="text-gray-500">{t.brightnessLabel}</span>
-                    <span className="ml-1.5 font-bold text-gray-900">{sampledColors.brightness}%</span>
-                  </div>
-                  <div>
-                    <span className="text-gray-500">{t.saturationLabel}</span>
-                    <span className="ml-1.5 font-bold text-gray-900">{sampledColors.saturation}%</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── SECTION: 색과 톤의 차이는 무엇인가? (색채학 공식 마스터클래스) ─── */}
-      <section className="bg-white rounded-3xl p-6 sm:p-10 shadow-lg border border-gray-200/90 mb-8">
-        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-100 border border-gray-200 text-gray-600 text-[11px] font-bold tracking-wider uppercase mb-2">
-            <span>{t.eduEyebrow}</span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">
-            {t.eduTitlePrefix}
-            <span className="text-rose-500">{t.eduTitleColor}</span>
-            {t.eduTitleAnd}
-            <span className="text-sky-600">{t.eduTitleTone}</span>
-            {t.eduTitleSuffix}
-          </h2>
-        </div>
-
-        <div className="space-y-6">
-          {/* 1. 색 (Color) = 색상의 차이 */}
-          <div className="p-6 rounded-3xl bg-[#FFF8F8] border border-rose-200/90 shadow-sm">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
-              <div className="max-w-md">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="w-6 h-6 rounded-full bg-rose-500 text-white font-black text-xs flex items-center justify-center shadow-sm">
-                    1
-                  </span>
-                  <h3 className="text-base sm:text-lg font-black text-gray-900">
-                    {t.eduStep1Badge}
-                  </h3>
-                </div>
-                <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed">
-                  {t.eduStep1Desc}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-4 gap-2.5 sm:gap-3 w-full md:w-auto">
-                <div className="flex flex-col items-center justify-start text-center">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#EF4444] shadow-md mx-auto mb-2 border border-black/10" />
-                  <span className="text-xs sm:text-sm font-black text-gray-900 whitespace-nowrap text-center block leading-none">{t.colorRed}</span>
-                </div>
-                <div className="flex flex-col items-center justify-start text-center">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#FACC15] shadow-md mx-auto mb-2 border border-black/10" />
-                  <span className="text-xs sm:text-sm font-black text-gray-900 whitespace-nowrap text-center block leading-none">{t.colorYellow}</span>
-                </div>
-                <div className="flex flex-col items-center justify-start text-center">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#2563EB] shadow-md mx-auto mb-2 border border-black/10" />
-                  <span className="text-xs sm:text-sm font-black text-gray-900 whitespace-nowrap text-center block leading-none">{t.colorBlue}</span>
-                </div>
-                <div className="flex flex-col items-center justify-start text-center">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#10B981] shadow-md mx-auto mb-2 border border-black/10" />
-                  <span className="text-xs sm:text-sm font-black text-gray-900 whitespace-nowrap text-center block leading-none">{t.colorGreen}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* 2. 톤 (Tone) = 색의 성질 */}
-          <div className="p-6 rounded-3xl bg-[#F0F7FF] border border-sky-200/90 shadow-sm">
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
-              <div className="max-w-md">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="w-6 h-6 rounded-full bg-sky-600 text-white font-black text-xs flex items-center justify-center shadow-sm">
-                    2
-                  </span>
-                  <h3 className="text-base sm:text-lg font-black text-gray-900">
-                    {t.eduStep2Badge}
-                  </h3>
-                </div>
-                <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed">
-                  {t.eduStep2Desc}
-                </p>
-              </div>
-
-              <div>
-                <span className="text-[11px] font-bold text-sky-900 block mb-2 text-center lg:text-right">
-                  {t.eduStep2Sub}
-                </span>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
-                  <div className="p-3 rounded-2xl bg-[#BAE6FD] text-center border border-sky-300/60 shadow-sm">
-                    <div className="text-xs font-black text-sky-950 mb-0.5">{t.toneLight}</div>
-                    <div className="text-[10px] text-sky-900/80 font-semibold">{t.toneLightDesc}</div>
-                  </div>
-                  <div className="p-3 rounded-2xl bg-[#2563EB] text-center shadow-md text-white border border-blue-600">
-                    <div className="text-xs font-black mb-0.5">{t.toneVivid}</div>
-                    <div className="text-[10px] text-blue-100 font-semibold">{t.toneVividDesc}</div>
-                  </div>
-                  <div className="p-3 rounded-2xl bg-[#64748B] text-center shadow-sm text-white border border-slate-600">
-                    <div className="text-xs font-black mb-0.5">{t.toneMute}</div>
-                    <div className="text-[10px] text-slate-200 font-semibold">{t.toneMuteDesc}</div>
-                  </div>
-                  <div className="p-3 rounded-2xl bg-[#0F2537] text-center shadow-md text-white border border-black/40">
-                    <div className="text-xs font-black mb-0.5">{t.toneDeep}</div>
-                    <div className="text-[10px] text-gray-300 font-semibold">{t.toneDeepDesc}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* 3. 퍼스널 컬러의 4계절 톤 */}
-          <div className="p-6 sm:p-7 rounded-3xl bg-[#FFFDF7] border border-amber-200/90 shadow-sm">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="w-6 h-6 rounded-full bg-amber-500 text-white font-black text-xs flex items-center justify-center shadow-sm">
-                3
-              </span>
-              <h3 className="text-base sm:text-lg font-black text-gray-900">
-                {t.eduStep3Badge}
-              </h3>
-            </div>
-            <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed mb-6">
-              {t.eduStep3Desc}
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* 봄 웜톤 */}
-              <div className="p-5 rounded-2xl bg-[#FFF9F5] border border-rose-100 flex flex-col items-center text-center">
-                <span className="px-3 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-black mb-3">
-                  {t.springWarmName}
-                </span>
-                <div className="grid grid-cols-4 gap-1.5 mb-3 w-full max-w-[200px]">
-                  {["#FFF7ED", "#FFEDD5", "#C27837", "#6B3B1A", "#FDA4AF", "#FB923C", "#EF4444", "#A3E635"].map((hex) => (
-                    <div key={hex} className="aspect-square rounded-lg shadow-sm border border-black/5" style={{ backgroundColor: hex }} />
-                  ))}
-                </div>
-                <span className="text-[11px] font-bold text-gray-700">{t.springWarmDesc}</span>
-              </div>
-
-              {/* 여름 쿨톤 */}
-              <div className="p-5 rounded-2xl bg-[#F8FAFC] border border-sky-100 flex flex-col items-center text-center">
-                <span className="px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-xs font-black mb-3">
-                  {t.summerCoolName}
-                </span>
-                <div className="grid grid-cols-4 gap-1.5 mb-3 w-full max-w-[200px]">
-                  {["#F8FAFC", "#FCE7F3", "#E2E8F0", "#94A3B8", "#475569", "#1E293B", "#F43F5E", "#818CF8"].map((hex) => (
-                    <div key={hex} className="aspect-square rounded-lg shadow-sm border border-black/5" style={{ backgroundColor: hex }} />
-                  ))}
-                </div>
-                <span className="text-[11px] font-bold text-gray-700">{t.summerCoolDesc}</span>
-              </div>
-
-              {/* 가을 웜톤 */}
-              <div className="p-5 rounded-2xl bg-[#FFFDF5] border border-amber-100 flex flex-col items-center text-center">
-                <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-black mb-3">
-                  {t.autumnWarmName}
-                </span>
-                <div className="grid grid-cols-4 gap-1.5 mb-3 w-full max-w-[200px]">
-                  {["#F5EBE0", "#D97706", "#B45309", "#78350F", "#E07A5F", "#9A3412", "#4D5C2C", "#701A75"].map((hex) => (
-                    <div key={hex} className="aspect-square rounded-lg shadow-sm border border-black/5" style={{ backgroundColor: hex }} />
-                  ))}
-                </div>
-                <span className="text-[11px] font-bold text-gray-700">{t.autumnWarmDesc}</span>
-              </div>
-
-              {/* 겨울 쿨톤 */}
-              <div className="p-5 rounded-2xl bg-[#F5F7FB] border border-indigo-100 flex flex-col items-center text-center">
-                <span className="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 text-xs font-black mb-3">
-                  {t.winterCoolName}
-                </span>
-                <div className="grid grid-cols-4 gap-1.5 mb-3 w-full max-w-[200px]">
-                  {["#0F172A", "#1E1B4B", "#312E81", "#FDF2F8", "#BE185D", "#2563EB", "#831843", "#581C87"].map((hex) => (
-                    <div key={hex} className="aspect-square rounded-lg shadow-sm border border-black/5" style={{ backgroundColor: hex }} />
-                  ))}
-                </div>
-                <span className="text-[11px] font-bold text-gray-700">{t.winterCoolDesc}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* 4. 핵심 정리 */}
-          <div className="p-6 sm:p-7 rounded-3xl bg-emerald-50/80 border-2 border-emerald-300 shadow-sm">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-sm">
-                <Check className="w-4 h-4" />
-              </div>
-              <h3 className="text-base sm:text-lg font-black text-emerald-950">
-                {t.eduSummaryTitle}
-              </h3>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
-              <div className="p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
-                <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[10px] font-bold inline-block mb-1.5">
-                  {t.eduSumColorTag}
-                </span>
-                <h4 className="text-sm font-black text-gray-900 mb-1">{t.eduSumColorTitle}</h4>
-                <p className="text-xs text-gray-500 font-medium">{t.eduSumColorDesc}</p>
-                <div className="flex items-center gap-1.5 mt-3">
-                  <span className="w-3 h-3 rounded-full bg-[#EF4444]" />
-                  <span className="w-3 h-3 rounded-full bg-[#FACC15]" />
-                  <span className="w-3 h-3 rounded-full bg-[#2563EB]" />
-                  <span className="w-3 h-3 rounded-full bg-[#10B981]" />
-                  <span className="text-[10px] text-gray-400">...</span>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
-                <span className="px-2 py-0.5 rounded-full bg-sky-100 text-sky-700 text-[10px] font-bold inline-block mb-1.5">
-                  {t.eduSumToneTag}
-                </span>
-                <h4 className="text-sm font-black text-gray-900 mb-1">{t.eduSumToneTitle}</h4>
-                <p className="text-xs text-gray-500 font-medium">{t.eduSumToneDesc}</p>
-                <div className="flex items-center gap-1.5 mt-3">
-                  <span className="w-3 h-3 rounded-full bg-[#BAE6FD]" />
-                  <span className="w-3 h-3 rounded-full bg-[#2563EB]" />
-                  <span className="w-3 h-3 rounded-full bg-[#64748B]" />
-                  <span className="w-3 h-3 rounded-full bg-[#0F2537]" />
-                  <span className="text-[10px] text-gray-400">...</span>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-white border-2 border-emerald-500 shadow-md relative overflow-hidden">
-                <span className="px-2 py-0.5 rounded-full bg-emerald-600 text-white text-[10px] font-black inline-block mb-1.5 shadow-sm">
-                  {t.eduSumCoreTag}
-                </span>
-                <h4 className="text-sm font-black text-emerald-950 mb-1">{t.eduSumCoreTitle}</h4>
-                <p className="text-xs text-emerald-800 font-bold leading-relaxed">{t.eduSumCoreDesc}</p>
-                <div className="mt-3 flex items-center gap-1 text-[11px] font-extrabold text-emerald-700">
-                  <span>{t.eduSumCoreRec}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ── STEP 3: 상세 결과 리포트 (잠금 및 결제 연동) ───────────── */}
       {resultTone && (
