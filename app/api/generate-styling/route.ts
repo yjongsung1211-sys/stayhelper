@@ -203,10 +203,10 @@ export async function POST(req: NextRequest) {
             const base64Data = firstPart.inlineData.data;
             const mimeType = firstPart.inlineData.mimeType || 'image/png';
             const imgBuffer = Buffer.from(base64Data, 'base64');
-            fs.writeFileSync(outAbsPath, imgBuffer);
+            try { fs.writeFileSync(outAbsPath, imgBuffer); } catch(e) {}
             isSuccess = true;
             activeProvider = 'Nano Banana Face-Preserving AI (Google Gemini)';
-            generatedDataUrl = `/api/tryon-image/${outFilename}`;
+            generatedDataUrl = `data:${mimeType};base64,${base64Data}`;
             console.log(`[Nano Banana API] SUCCESS! Generated image saved to ${outFilename}`);
           } else {
             console.warn('[Nano Banana API] No inlineData in candidates:', nanoJson?.candidates?.[0]);
@@ -274,7 +274,7 @@ export async function POST(req: NextRequest) {
     // so the customer and CEO ALWAYS receive a stunning 4K result without any error screens!
     // =========================================================================
     let finalImageUrl = generatedDataUrl || `/images/tryon/${outFilename}`;
-    if (!isSuccess || !fs.existsSync(outAbsPath)) {
+    if (!isSuccess) {
       if (isMale) {
         finalImageUrl = targetLook.imageUrl || '/images/looks/men_look_01_tailored_dandy.webp';
         activeProvider = 'StylingHelper Studio Master (Gentleman Editorial)';
