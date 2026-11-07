@@ -2013,7 +2013,7 @@ export default function ColorHelperPage() {
       </header>
 
       {/* ── STEP 1: 사진 등록 & 1초 프리셋 모델 선택 ──────────────── */}
-      <section className="bg-white rounded-3xl p-6 sm:p-10 shadow-lg border border-gray-200/90 mb-8">
+      <section className="bg-white rounded-3xl p-5 sm:p-8 lg:p-10 shadow-lg border border-gray-200/90 mb-8 overflow-hidden">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 sm:gap-6 mb-7 pb-6 border-b border-gray-100">
           <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
             <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-2xl bg-gradient-to-tr from-amber-100 to-[#E07A5F]/20 text-[#E07A5F] flex items-center justify-center shadow-inner flex-shrink-0">
@@ -2027,7 +2027,7 @@ export default function ColorHelperPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto flex-shrink-0">
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 w-full lg:w-auto justify-start sm:justify-end">
             <input
               type="file"
               ref={fileInputRef}
@@ -2037,7 +2037,7 @@ export default function ColorHelperPage() {
             />
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-800 font-extrabold text-xs sm:text-sm border border-gray-300 shadow-sm hover:shadow transition whitespace-nowrap"
+              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 font-extrabold text-xs sm:text-sm border border-gray-300 shadow-xs transition"
             >
               <Upload className="w-4 h-4 text-gray-700" />
               <span>{t.uploadFileBtn}</span>
@@ -2046,7 +2046,7 @@ export default function ColorHelperPage() {
             {!cameraActive ? (
               <button
                 onClick={startCamera}
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-[#E07A5F] hover:from-amber-600 hover:to-[#D0694E] text-white font-extrabold text-xs sm:text-sm shadow-md hover:shadow-lg transition whitespace-nowrap"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-[#E07A5F] hover:from-amber-600 hover:to-[#D0694E] text-white font-extrabold text-xs sm:text-sm shadow-sm transition"
               >
                 <Camera className="w-4 h-4 text-white" />
                 <span>{t.cameraBtn}</span>
@@ -2111,22 +2111,14 @@ export default function ColorHelperPage() {
             <div className="relative w-44 h-52 mx-auto mb-5 rounded-2xl overflow-hidden shadow-lg border-2 border-purple-300">
               <img src={imageSrc || ""} alt="Scanned Portrait" className="w-full h-full object-cover object-top" />
               
-              {/* Landmark Overlay Lines */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-80" viewBox="0 0 100 120">
-                {/* Eyebrows */}
-                <path d="M 28 42 Q 38 38 48 43" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
-                <path d="M 52 43 Q 62 38 72 42" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
-                {/* Eyes */}
-                <ellipse cx="38" cy="48" rx="8" ry="4.5" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
-                <ellipse cx="62" cy="48" rx="8" ry="4.5" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
-                {/* Nose bridge & tip */}
-                <path d="M 50 43 L 50 64" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
-                <path d="M 44 65 Q 50 67 56 65" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
-                {/* Lips */}
-                <path d="M 38 76 Q 50 72 62 76 Q 50 82 38 76" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
-                {/* Facial Jawline */}
-                <path d="M 22 45 Q 26 85 50 102 Q 74 85 78 45" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="2,2" />
-              </svg>
+              {/* Clean AI Laser Scanning Beam (Zero Misalignment, High-Tech Studio Scan) */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                <div 
+                  className="w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_#22d3ee] animate-bounce"
+                  style={{ animationDuration: "1.8s" }}
+                />
+                <div className="absolute inset-x-4 top-1/4 bottom-1/4 border border-dashed border-white/60 rounded-3xl" />
+              </div>
 
               {/* Pulse Scan Line */}
               <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-purple-400 to-transparent shadow-[0_0_12px_#A855F7] animate-pulse top-1/2 -translate-y-1/2" />
@@ -2248,22 +2240,15 @@ export default function ColorHelperPage() {
                       alt="Step 1 Landmark Scan"
                       className="w-full h-full object-cover object-top"
                     />
-                    {/* Precise Anatomical Dotted Landmarks fitted 100% to Face (viewBox 0 0 315 445) */}
-                    <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-85" viewBox="0 0 315 445">
-                      {/* Eyebrows */}
-                      <path d="M 102 144 Q 124 135 144 144" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="4,3" />
-                      <path d="M 171 144 Q 191 135 213 144" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="4,3" />
-                      {/* Eyes */}
-                      <ellipse cx="124" cy="155" rx="18" ry="9" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="4,3" />
-                      <ellipse cx="191" cy="155" rx="18" ry="9" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="4,3" />
-                      {/* Nose Bridge & Tip */}
-                      <path d="M 157 142 L 157 195" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="4,3" />
-                      <path d="M 144 195 Q 157 201 170 195" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="4,3" />
-                      {/* Lips */}
-                      <path d="M 134 238 Q 157 230 180 238 Q 157 248 134 238" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="4,3" />
-                      {/* Jawline & Chin */}
-                      <path d="M 95 175 Q 105 235 157 280 Q 209 235 219 175" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="4,3" />
-                    </svg>
+                    {/* Clean Face Scanner Laser Overlay */}
+                    <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center p-6">
+                      <div className="w-[72%] h-[68%] rounded-[48%] border-2 border-dashed border-white/70 shadow-[0_0_20px_rgba(255,255,255,0.4)] relative flex items-center justify-center">
+                        <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_#22d3ee] animate-pulse" />
+                        <span className="absolute -bottom-3 bg-black/70 text-white text-[9px] font-black px-2.5 py-0.5 rounded-full border border-white/30 backdrop-blur-xs">
+                          AI FACE CALIBRATED
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 );
               }

@@ -26,6 +26,7 @@ export async function POST(request: NextRequest) {
       groomWeight = '75',
       brideHeight = '165',
       brideWeight = '50',
+      angleTitle = 'Ceremonial Altar Vows',
     } = body;
 
     if (!image || typeof image !== 'string') {
@@ -37,7 +38,7 @@ export async function POST(request: NextRequest) {
 
     const preset = WEDDING_12_PRESETS[themeId] || WEDDING_12_PRESETS['bali-jungle'];
 
-    // 1. Base64 분리
+    // 1. Base64 separation
     let mimeType = 'image/jpeg';
     let base64Data = image;
 
@@ -62,49 +63,38 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // 2. 고품격 화사한 생화 웨딩 프롬프트 빌드
+    // 2. High-fashion radiant floral wedding prompt
     const promptText = `You are a world-renowned Vogue Wedding & Harper's Bazaar luxury bridal photographer.
-Your task is to transform the uploaded couple's photo into an ultra-luxury, radiant wedding masterpiece set at ${preset.venueName} in ${preset.destination}.
+Transform the uploaded couple from the input image into an ultra-luxury, radiant wedding masterpiece set at ${preset.venueName} in ${preset.destination}.
+Specific Scene Angle: ${angleTitle}.
 
-[STEP 1: COUPLE FACIAL & BODY FIDELITY (CRITICAL)]
-- Preserve 100% of the bride and groom's authentic facial identity, exact facial features, smile, eye shapes, and romantic chemistry from the original photo.
-- BODY PROPORTIONS & REALISTIC SILHOUETTES:
-  * GROOM BODY SPECS: Height ${groomHeight} cm, Weight ${groomWeight} kg. Render an authentically proportioned masculine silhouette, athletic/tailored build matching his exact height and weight, with a bespoke tailored tuxedo drape.
-  * BRIDE BODY SPECS: Height ${brideHeight} cm, Weight ${brideWeight} kg. Render an authentically proportioned feminine silhouette matching her exact height and weight, with a customized couture gown fitting her real body shape gracefully.
-  * The height difference between the groom (${groomHeight} cm) and the bride (${brideHeight} cm) must be accurately and naturally depicted in their full-body posture.
-- Keep the couple naturally embracing, gazing at each other or facing the camera with joyous, radiant wedding smiles.
+[STEP 1: COUPLE FACIAL & IDENTITY FIDELITY (HIGHEST PRIORITY)]
+- 100% preserve the exact facial identities, eyes, nose, romantic smile, bone structure, and skin tone of BOTH the bride and groom from the uploaded image.
+- Both persons must look exactly like the real couple in the input photo on their wedding day.
 
-[STEP 2: ABUNDANT BLOOMING WEDDING FLORALS & CEREMONY SETTING (ESSENTIAL)]
-- The scene MUST be an unmistakable, lavish wedding ceremony filled with magnificent, blooming fresh floral arrangements.
-- Surrounding the couple: a grand, lush floral arch bursting with fragrant English garden roses, creamy white blush peonies, cascading sweet peas, hydrangeas, and delicate hanging orchids.
-- The ceremony aisle is lined with glowing glass pillar candles and a dense carpet of fresh rose petals.
-- Scene context: ${preset.promptDescription}
-- Breathtaking destination architectural backdrop of "${preset.venueName}" (${preset.destination}) seamlessly integrated with the glorious floral wonderland.
+[STEP 2: TAILORED PROPORTIONS & ATTIRE]
+- GROOM SILHOUETTE: Height ${groomHeight} cm, Weight ${groomWeight} kg. Bespoke black-tie wedding tuxedo fitting his exact masculine build, with silk lapel and delicate rose boutonnière.
+- BRIDE SILHOUETTE: Height ${brideHeight} cm, Weight ${brideWeight} kg. Handcrafted haute couture French lace & pure silk wedding gown tailored to her exact feminine silhouette, holding a lush bridal bouquet of white blush peonies and sweet peas.
 
-[STEP 3: HAUTE COUTURE ATTIRE & JEWELRY]
-- BRIDE: Dressed in ${preset.brideAttire}. She holds a lush, cascading fresh bridal bouquet of garden peonies and trailing ribbons.
-- GROOM: Dressed in ${preset.groomAttire} with a matching delicate floral boutonnière pinned to his lapel.
-- Realistic fabric textures (flowing pure silk, Chantilly lace, velvet, or 24K gold zardozi) catching warm sunlight.
+[STEP 3: LAVISH FLORALS & DESTINATION BACKDROP]
+- Grand, lavish wedding ceremony surrounded by cascading garden roses, creamy peonies, floating orchids, and glowing candlelight.
+- Majestic iconic architectural sanctuary view of "${preset.venueName}" (${preset.destination}) with warm golden hour sunlight.
+- Cinematic angle: ${angleTitle}.
+- Photorealistic 8K Hasselblad look. Celebratory, radiant, elegant, zero distortions, no cartoon effects.`;
 
-[STEP 4: ULTRA-HIGH-END EDITORIAL GLOW & LIGHTING]
-- Bathed in romantic, golden hour sunlight with soft creamy bokeh, glowing floral backlight, and gentle airborne rose petals.
-- Photorealistic 8K Hasselblad look. Radiant, romantic, joyful, and deeply celebratory.
-- Absolutely NO text overlays, NO watermarks, NO distortions. Output only the single photographic wedding masterpiece.`;
-
-    const key = process.env.GEMINI_API_KEY;
+    const key = process.env.GEMINI_API_KEY || '';
     const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash-image';
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
 
     let generatedImageUrl = '';
 
-    // 실제 Gemini 호출 (API 키가 유효할 경우)
-    if (key && !key.startsWith('AQ.mock') && !image.startsWith('/')) {
+    // Direct Gemini 2.5 Flash Image call
+    if (key && base64Data) {
       try {
         const response = await fetch(apiUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'x-goog-api-key': key,
           },
           body: JSON.stringify({
             contents: [
@@ -119,7 +109,7 @@ Your task is to transform the uploaded couple's photo into an ultra-luxury, radi
               responseModalities: ['IMAGE'],
             },
           }),
-          signal: AbortSignal.timeout(50000),
+          signal: AbortSignal.timeout(55000),
         });
 
         if (response.ok) {
@@ -134,13 +124,16 @@ Your task is to transform the uploaded couple's photo into an ultra-luxury, radi
               break;
             }
           }
+        } else {
+          const errText = await response.text();
+          console.warn('[WeddingHelper Gemini API Error]:', response.status, errText);
         }
       } catch (geminiErr: any) {
         console.warn('[WeddingHelper Gemini Fallback]:', geminiErr?.message);
       }
     }
 
-    // 폴백: 시뮬레이션용 테마 대표 고화질 이미지
+    // Fallback: theme hero image if generation timed out
     if (!generatedImageUrl) {
       generatedImageUrl = preset.heroImage;
     }

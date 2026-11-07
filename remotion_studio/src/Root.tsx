@@ -1,4 +1,5 @@
 import { JapaneseGrammarLongformThumbnail } from "./JapaneseGrammarLongformThumbnail";
+import { JapaneseGrammarLongformThumbnailStage3 } from "./JapaneseGrammarLongformThumbnailStage3";
 import { JapaneseGrammarLongformThumbnailStage2 } from "./JapaneseGrammarLongformThumbnailStage2";
 import React from "react";
 import { Composition } from "remotion";
@@ -63,6 +64,7 @@ import { PostMotionStayHelperAmanKyoto } from "./PostMotionStayHelperAmanKyoto";
 import { PostMotionStayHelperSingita } from "./PostMotionStayHelperSingita";
 import { PostMotionStayHelperEdenRoc } from "./PostMotionStayHelperEdenRoc";
 import { PostMotionStayHelperUniversal, defaultStayHelperProps } from "./PostMotionStayHelperUniversal";
+import { PostMotionWeddingHelper, defaultWeddingHelperProps } from "./PostMotionWeddingHelper";
 import { PostMotionThursdayTest } from "./PostMotionThursdayTest";
 import { PostMotionLongformTest } from "./PostMotionLongformTest";
 import { PostMotionKoreanLoop } from "./PostMotionKoreanLoop";
@@ -1104,6 +1106,226 @@ export const RemotionRoot: React.FC = () => {
           nuanceTitle: "💡 Despedida Cálida ☀️",
           nuanceDesc: "Díselo a baristas, conductores o recepcionistas al salir; te recordarán con mucho cariño.",
           audioFile: "audio_es_shorts_31.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES32-TryOn"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Compras de Moda]",
+          categoryColor: "#ec4899",
+          categoryBg: "#fdf2f8",
+          title: "Probarse Ropa en Seúl 👗",
+          tagText: "MODA EN COREA",
+          korean: "이거 입어봐도 돼요?",
+          romanization: "[I-go i-bo-bwa-do dwe-yo?]",
+          english: '"¿Me puedo probar esto?"',
+          nuanceTitle: "💡 Tiendas de Ropa 👗",
+          nuanceDesc: "En tiendas de Hongdae pregunta siempre; en prendas blancas suelen pedir usar protector facial.",
+          audioFile: "audio_es_shorts_32.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES33-Spicy"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[K-Food Extremo]",
+          categoryColor: "#ef4444",
+          categoryBg: "#fef2f2",
+          title: "Pedir Comida Picante 🌶️",
+          tagText: "K-FOOD PICANTE",
+          korean: "맵게 해 주세요!",
+          romanization: "[Mep-kke je chu-se-yo!]",
+          english: '"Hágalo picante, por favor."',
+          nuanceTitle: "💡 Reto K-Food 🌶️",
+          nuanceDesc: "Díselo al mesero si amas el picante real coreano en tteokbokki o guisos.",
+          audioFile: "audio_es_shorts_33.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES34-WhereBoard"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Transporte en Seúl]",
+          categoryColor: "#2563eb",
+          categoryBg: "#eff6ff",
+          title: "Dónde Tomar el Transporte 🚇",
+          tagText: "TRANSPORTE",
+          korean: "어디서 타요?",
+          romanization: "[O-di-so t'a-yo?]",
+          english: '"¿Dónde se toma / sube?"',
+          nuanceTitle: "💡 Tip en Estaciones 🚇",
+          nuanceDesc: "En terminales grandes o paradas dobles, muestra el nombre de tu destino y usa esta frase.",
+          audioFile: "audio_es_shorts_34.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES35-Service"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Cultura del Servicio]",
+          categoryColor: "#f59e0b",
+          categoryBg: "#fffbeb",
+          title: "¿Regalo Gratis de la Casa? 🎁",
+          tagText: "SERVICIO GRATIS",
+          korean: "서비스예요?",
+          romanization: "[So-bi-seu-ye-yo?]",
+          english: '"¿Es cortesía de la casa?"',
+          nuanceTitle: "💡 Cultura en Seúl 🎁",
+          nuanceDesc: "En restaurantes a veces traen un platillo extra o bebida gratis como '서비스' [so-bi-seu].",
+          audioFile: "audio_es_shorts_35.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES36-SeeYou"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Amigos en Corea]",
+          categoryColor: "#10b981",
+          categoryBg: "#ecfdf5",
+          title: "Despedida Entre Amigos 👋",
+          tagText: "AMIGOS COREANOS",
+          korean: "다음에 또 봐요!",
+          romanization: "[Da-eum-e tto bwa-yo!]",
+          english: '"¡Nos vemos la próxima vez!"',
+          nuanceTitle: "💡 Despedida Cálida 👋",
+          nuanceDesc: "La frase perfecta para cerrar una velada o salida con amigos locales y mantener el contacto.",
+          audioFile: "audio_es_shorts_36.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES37-KakaoTalk"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Conectar con Amigos]",
+          categoryColor: "#f59e0b",
+          categoryBg: "#fffbeb",
+          title: "Pedir el KakaoTalk 📱",
+          tagText: "KAKAOTALK",
+          korean: "카톡 아이디 알려줄 수 있어요?",
+          romanization: "[K'a-t'ok a-i-di al-ryo-chul su i-so-yo?]",
+          english: '"¿Me das tu ID de KakaoTalk?"',
+          nuanceTitle: "💡 Tip Social en Corea 📱",
+          nuanceDesc: "En Corea casi nadie usa WhatsApp; el 99% se comunica por KakaoTalk. ¡Pide su ID para no perder el contacto!",
+          audioFile: "audio_es_shorts_37.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES38-Headache"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Farmacia y Salud]",
+          categoryColor: "#dc2626",
+          categoryBg: "#fef2f2",
+          title: "Medicina para el Dolor de Cabeza 💊",
+          tagText: "FARMACIA EN COREA",
+          korean: "두통약 하나 주세요.",
+          romanization: "[Du-t'ong-nyak ja-na chu-se-yo.]",
+          english: '"Deme medicina para el dolor de cabeza, por favor."',
+          nuanceTitle: "💡 Farmacias en Seúl 💊",
+          nuanceDesc: "En las farmacias ('약국' [yak-guk]) no requieres receta para analgésicos comunes. ¡Te entregarán una cajita al instante!",
+          audioFile: "audio_es_shorts_38.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES39-LessIce"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Cafeterías en Seúl]",
+          categoryColor: "#0284c7",
+          categoryBg: "#f0f9ff",
+          title: "Pedir Café con Poco Hielo 🧊",
+          tagText: "CAFÉ EN COREA",
+          korean: "얼음 적게 넣어주세요.",
+          romanization: "[Ol-eum cho-kke no-o-chu-se-yo.]",
+          english: '"Ponga poco hielo, por favor."',
+          nuanceTitle: "💡 Tip en Cafeterías ☕",
+          nuanceDesc: "En Corea suelen llenar el vaso con bastante hielo. Si dices esta frase tendrás más bebida y sabor concentrado.",
+          audioFile: "audio_es_shorts_39.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES40-BestMenu"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Restaurantes Locales]",
+          categoryColor: "#ea580c",
+          categoryBg: "#fff7ed",
+          title: "Preguntar el Plato Estrella 🍲",
+          tagText: "K-FOOD RECOMENDADO",
+          korean: "여기서 뭐가 제일 맛있어요?",
+          romanization: "[Yo-gi-so mwo-ga che-il ma-si-so-yo?]",
+          english: '"¿Qué es lo más delicioso aquí?"',
+          nuanceTitle: "💡 Secreto Gourmet 🍲",
+          nuanceDesc: "Los chefs locales adoran que les pidas su recomendación de la casa. ¡Te servirán su especialidad con el mejor trato!",
+          audioFile: "audio_es_shorts_40.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsES41-Weekend"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Saludos Semanales]",
+          categoryColor: "#10b981",
+          categoryBg: "#ecfdf5",
+          title: "Feliz Fin de Semana 🎉",
+          tagText: "VIERNES EN COREA",
+          korean: "주말 잘 보내세요!",
+          romanization: "[Chu-mal chal bo-ne-se-yo!]",
+          english: '"¡Que pase un buen fin de semana!"',
+          nuanceTitle: "💡 Saludo de Viernes 🎉",
+          nuanceDesc: "La despedida obligatoria de cada viernes al salir del trabajo, terminar clases o despedirte de conocidos en Corea.",
+          audioFile: "audio_es_shorts_41.wav",
         }}
       />
 
@@ -2762,6 +2984,17 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={defaultStayHelperProps}
       />
 
+      {/* ── [WeddingHelper 글로벌 럭셔리 데스티네이션 바이럴 릴스 (30초, 900프레임)] ── */}
+      <Composition
+        id="PostMotionWeddingHelper"
+        component={PostMotionWeddingHelper}
+        durationInFrames={900}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={defaultWeddingHelperProps}
+      />
+
       {/* ── [FirstMotion 코리안루프 (KoreanLoop) 바이럴 쇼츠 3편] ── */}
       <Composition
         id="KoreanLoopShortsNunchi"
@@ -3267,6 +3500,31 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
       />
+
+      {/* ── [3분 일본어 문법 롱폼 Stage 3 필수 형용사 활용 15문장] ── */}
+      <Composition
+        id="JapaneseGrammarLongformStage3"
+        component={PostMotionKoreanLoopSpanishLongform15}
+        durationInFrames={300}
+        fps={30}
+        width={1920}
+        height={1080}
+        defaultProps={defaultSpanishLongformProps}
+        calculateMetadata={({ props }) => ({
+          durationInFrames: Math.max(30, props.totalFrames),
+        })}
+      />
+
+      {/* ── [일본어 문법 롱폼 16:9 전용 썸네일 Stage 3] ── */}
+      <Composition
+        id="JapaneseGrammarLongformThumbnailStage3"
+        component={JapaneseGrammarLongformThumbnailStage3}
+        durationInFrames={1}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
 
     
 
@@ -3871,6 +4129,295 @@ export const RemotionRoot: React.FC = () => {
           title: "목요일 출근길 필수 인니어 3문장 🇮🇩 #Shorts",
           cardTimings: [{"startFrame": 10, "flipStartFrame": 112, "flipEndFrame": 112, "endFrame": 254}, {"startFrame": 254, "flipStartFrame": 369, "flipEndFrame": 369, "endFrame": 488}, {"startFrame": 488, "flipStartFrame": 585, "flipEndFrame": 585, "endFrame": 718}],
           cards: [{"indexBadge": "1 / 3", "primaryText": "Sudah Kamis, besok sudah Jumat!", "pronunciation": "[수다 카미스, 베속 수다 주맛!]", "meaning": "벌써 목요일, 내일이면 벌써 금요일이에요!", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• Kamis: 목요일<br />• Jumat: 금요일<br />• besok: 내일", "audio_lang": "Sudah Kamis, besok sudah Jumat!", "audio_ko": "벌써 목요일, 내일이면 벌써 금요일이에요!"}, {"indexBadge": "2 / 3", "primaryText": "Tinggal satu hari lagi menuju akhir pekan.", "pronunciation": "[팅갈 사투 하리 라기 머누주 악히르 뻐칸.]", "meaning": "주말까지 이제 딱 하루 남았어요.", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• tinggal satu hari lagi: '딱 하루 남았다'<br />• akhir pekan: 주말", "audio_lang": "Tinggal satu hari lagi menuju akhir pekan.", "audio_ko": "주말까지 이제 딱 하루 남았어요."}, {"indexBadge": "3 / 3", "primaryText": "Tetap semangat dan tuntaskan hari ini!", "pronunciation": "[뜨탑 스망앗 단 툰타스칸 하리 이니!]", "meaning": "계속 힘내서 오늘 하루도 멋지게 끝내봐요!", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• tetap semangat: '계속 힘내다, 파이팅을 유지하다'<br />• tuntaskan: 말끔히 끝내다, 완수하다", "audio_lang": "Tetap semangat dan tuntaskan hari ini!", "audio_ko": "계속 힘내서 오늘 하루도 멋지게 끝내봐요!"}],
+        }}
+      />
+    
+
+      <Composition
+        id="KoreanLoopShortsBulgeum"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Weekend Anticipation]",
+          categoryColor: "#e11d48",
+          categoryBg: "#ffe4e6",
+          title: "What Koreans Ask Right Before Friday Night 🔥 #Shorts",
+          tagText: "BURNING FRIDAY",
+          korean: "불금에 뭐해?",
+          romanization: "[Bul-geu-me mwo-hae?]",
+          english: "Any plans for Burning Friday night?",
+          nuanceTitle: "The 'Bul-geum' Hype",
+          nuanceDesc: "'Bul-geum' (불금) is short for 'Burning Friday'—the universal Korean equivalent of TGIF!",
+          audioFile: "audio_shorts_bulgeum.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsJjaejinda"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Pure Joy & Euphoria]",
+          categoryColor: "#4f46e5",
+          categoryBg: "#e0e7ff",
+          title: "Korea's Most Expressive Slang for 'I'm on Cloud Nine!' 🎉 #Shorts",
+          tagText: "PURE EUPHORIA",
+          korean: "오늘 기분 째진다!",
+          romanization: "[O-neul gi-bun jjae-jin-da!]",
+          english: "I'm on cloud nine today! Feeling amazing!",
+          nuanceTitle: "Splitting with Joy",
+          nuanceDesc: "'Jjaejinda' (째진다) literally means splitting with happiness—the ultimate good mood flex!",
+          audioFile: "audio_shorts_jjaejinda.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsKkuljaem"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Entertainment & Fun]",
+          categoryColor: "#d97706",
+          categoryBg: "#fffbeb",
+          title: "How Koreans Describe Something Crazy Fun & Addictive 🍯 #Shorts",
+          tagText: "HONEY FUN",
+          korean: "이거 완전 꿀잼이야!",
+          romanization: "[I-geo wan-jeon kkul-jae-mi-ya!]",
+          english: "This is crazy fun! Absolutely hilarious!",
+          nuanceTitle: "Honey-Sweet Entertainment",
+          nuanceDesc: "'Kkul-jaem' (꿀잼) combines 'Kkul' (Honey) + 'Jaemi' (Fun)—sweet, addictive entertainment!",
+          audioFile: "audio_shorts_kkuljaem.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsRecharge"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Weekend Healing]",
+          categoryColor: "#059669",
+          categoryBg: "#ecfdf5",
+          title: "What Every Exhausted Worker Dreams of Saying 🛌 #Shorts",
+          tagText: "WEEKEND REST",
+          korean: "주말에 푹 쉬어야지!",
+          romanization: "[Ju-ma-re puk swi-eo-ya-ji!]",
+          english: "I'm definitely resting deeply this weekend!",
+          nuanceTitle: "Deep Recharging Sleep",
+          nuanceDesc: "'Puk' (푹) means deeply, thoroughly, and peacefully—giving yourself permission to recharge!",
+          audioFile: "audio_shorts_recharge.wav",
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsCatchUp"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: "[Warm Promise]",
+          categoryColor: "#0284c7",
+          categoryBg: "#f0f9ff",
+          title: "The Most Natural Way to Say 'See You Next Time!' 👋 #Shorts",
+          tagText: "FRIENDSHIP PROMISE",
+          korean: "다음에 또 보자!",
+          romanization: "[Da-eu-me tto bo-ja!]",
+          english: "Let's definitely catch up again soon!",
+          nuanceTitle: "Promise of Next Meeting",
+          nuanceDesc: "Warm, casual closing phrase that keeps the friendship connection alive and smiling!",
+          audioFile: "audio_shorts_catchup.wav",
+        }}
+      />
+
+      {/* ── [FirstMotion 금요일 출근길 3-in-1 쇼츠: [금요일 출근길 필수 영어]] ── */}
+      <Composition
+        id="PostMotionFriCommute3in1EN"
+        component={PostMotion3in1Template}
+        durationInFrames={758}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          badgeText: "[금요일 출근길 필수 영어]",
+          badgeColor: "#2563eb",
+          badgeBg: "#eff6ff",
+          title: "금요일 출근길 필수 영어 3문장 🇺🇸 #Shorts",
+          cardTimings: [{"startFrame": 10, "flipStartFrame": 134, "flipEndFrame": 134, "endFrame": 298}, {"startFrame": 298, "flipStartFrame": 394, "flipEndFrame": 394, "endFrame": 520}, {"startFrame": 520, "flipStartFrame": 611, "flipEndFrame": 611, "endFrame": 753}],
+          cards: [{"indexBadge": "1 / 3", "primaryText": "TGIF! We finally made it to Friday!", "pronunciation": "[티지아이에프! 위 파이널리 메이드 잇 투 프라이데이!]", "meaning": "드디어 금요일! 이번 주도 잘 버텨냈어요!", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• TGIF: 'Thank God It's Friday (신이시여 감사합니다, 금요일입니다)'<br />• make it to: '~에 무사히 도달하다/도착하다'", "audio_lang": "TGIF! We finally made it to Friday!", "audio_ko": "드디어 금요일! 이번 주도 잘 버텨냈어요!"}, {"indexBadge": "2 / 3", "primaryText": "Just power through today, the weekend is here!", "pronunciation": "[저스트 파워 쓰루 투데이, 더 위켄드 이즈 히어!]", "meaning": "오늘 하루만 꾹 버티면 주말 시작이에요!", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• power through: '어렵고 힘든 일을 뚝심 있게 버텨내다'<br />• the weekend is here: 주말이 왔다", "audio_lang": "Just power through today, the weekend is here!", "audio_ko": "오늘 하루만 꾹 버티면 주말 시작이에요!"}, {"indexBadge": "3 / 3", "primaryText": "Leaving on the dot today, happy weekend!", "pronunciation": "[리빙 온 더 닷 투데이, 해피 위켄드!]", "meaning": "오늘은 무조건 칼퇴, 행복한 주말 보내세요!", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• on the dot: '정각에 딱 맞춰서(칼같이)'<br />• leave on the dot: 망설임 없이 정시 칼퇴하다", "audio_lang": "Leaving on the dot today, happy weekend!", "audio_ko": "오늘은 무조건 칼퇴, 행복한 주말 보내세요!"}],
+        }}
+      />
+
+      {/* ── [FirstMotion 금요일 출근길 3-in-1 쇼츠: [금요일 출근길 필수 일본어]] ── */}
+      <Composition
+        id="PostMotionFriCommute3in1JA"
+        component={PostMotion3in1Template}
+        durationInFrames={802}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          badgeText: "[금요일 출근길 필수 일본어]",
+          badgeColor: "#dc2626",
+          badgeBg: "#fef2f2",
+          title: "금요일 출근길 필수 일본어 3문장 🇯🇵 #Shorts",
+          cardTimings: [{"startFrame": 10, "flipStartFrame": 146, "flipEndFrame": 146, "endFrame": 317}, {"startFrame": 317, "flipStartFrame": 431, "flipEndFrame": 431, "endFrame": 561}, {"startFrame": 561, "flipStartFrame": 667, "flipEndFrame": 667, "endFrame": 797}],
+          cards: [{"indexBadge": "1 / 3", "primaryText": "やっと金曜日！今週もお疲れ様でした。", "pronunciation": "[얏토 킨요-비! 콘슈-모 오츠카레사마데시타.]", "meaning": "드디어 금요일! 이번 주도 정말 수고 많으셨어요.", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• やっと: '드디어, 마침내, 겨우'<br />• お疲れ様でした(おつかれさまでした): 수고하셨습니다", "audio_lang": "やっと金曜日！今週もお疲れ様でした。", "audio_ko": "드디어 금요일! 이번 주도 정말 수고 많으셨어요."}, {"indexBadge": "2 / 3", "primaryText": "今日一日乗り切れば、楽しい週末です！", "pronunciation": "[쿄- 이치니치 노리키레바, 타노시이 슈-마츠데스!]", "meaning": "오늘 하루만 잘 버티면 즐거운 주말이에요!", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• 乗り切る(のりきる): '고비를 잘 넘기다, 극복하다'<br />• 週末(しゅうまつ): 주말", "audio_lang": "今日一日乗り切れば、楽しい週末です！", "audio_ko": "오늘 하루만 잘 버티면 즐거운 주말이에요!"}, {"indexBadge": "3 / 3", "primaryText": "今日は定時で帰って、ゆっくり休もう！", "pronunciation": "[쿄-와 테-지데 카에테, 육쿠리 야수모-!]", "meaning": "오늘은 정시 칼퇴해서 푹 쉬어야지!", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• 定時(ていじ): 정시 (정규 근무시간)<br />• ゆっくり休む: 푹 쉬다, 여유롭게 쉬다", "audio_lang": "今日は定時で帰って、ゆっくり休もう！", "audio_ko": "오늘은 정시 칼퇴해서 푹 쉬어야지!"}],
+        }}
+      />
+
+      {/* ── [FirstMotion 금요일 출근길 3-in-1 쇼츠: [금요일 출근길 필수 스페인어]] ── */}
+      <Composition
+        id="PostMotionFriCommute3in1ES"
+        component={PostMotion3in1Template}
+        durationInFrames={667}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          badgeText: "[금요일 출근길 필수 스페인어]",
+          badgeColor: "#ea580c",
+          badgeBg: "#fff7ed",
+          title: "금요일 출근길 필수 스페인어 3문장 🇪🇸 #Shorts",
+          cardTimings: [{"startFrame": 10, "flipStartFrame": 107, "flipEndFrame": 107, "endFrame": 232}, {"startFrame": 232, "flipStartFrame": 314, "flipEndFrame": 314, "endFrame": 431}, {"startFrame": 431, "flipStartFrame": 525, "flipEndFrame": 525, "endFrame": 662}],
+          cards: [{"indexBadge": "1 / 3", "primaryText": "¡Por fin es viernes, llegó el fin de semana!", "pronunciation": "[포르 핀 에스 비에르네스, 예고 엘 핀 데 세마나!]", "meaning": "드디어 금요일, 주말이 찾아왔어요!", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• por fin: '마침내, 드디어'<br />• fin de semana: 주말 (줄여서 finde)", "audio_lang": "¡Por fin es viernes, llegó el fin de semana!", "audio_ko": "드디어 금요일, 주말이 찾아왔어요!"}, {"indexBadge": "2 / 3", "primaryText": "¡Un esfuerzo más y a descansar!", "pronunciation": "[운 에스푸에르소 마스 이 아 데스칸사르!]", "meaning": "조금만 더 힘내고 이제 푹 쉬어요!", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• un esfuerzo más: '마지막 한 번의 노력, 조금만 더 힘내기'<br />• descansar: 휴식하다, 쉬다", "audio_lang": "¡Un esfuerzo más y a descansar!", "audio_ko": "조금만 더 힘내고 이제 푹 쉬어요!"}, {"indexBadge": "3 / 3", "primaryText": "¡Hoy salgo puntual sin falta, buen finde!", "pronunciation": "[오이 살고 푼투알 신 팔타, 부엔 핀데!]", "meaning": "오늘은 무조건 칼퇴, 좋은 주말 보내세요!", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• salir puntual: 정시에 칼퇴하다<br />• sin falta: 틀림없이, 반드시", "audio_lang": "¡Hoy salgo puntual sin falta, buen finde!", "audio_ko": "오늘은 무조건 칼퇴, 좋은 주말 보내세요!"}],
+        }}
+      />
+
+      {/* ── [FirstMotion 금요일 출근길 3-in-1 쇼츠: [금요일 출근길 필수 중국어]] ── */}
+      <Composition
+        id="PostMotionFriCommute3in1ZH"
+        component={PostMotion3in1Template}
+        durationInFrames={712}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          badgeText: "[금요일 출근길 필수 중국어]",
+          badgeColor: "#d97706",
+          badgeBg: "#fffbeb",
+          title: "금요일 출근길 필수 중국어 3문장 🇨🇳 #Shorts",
+          cardTimings: [{"startFrame": 10, "flipStartFrame": 111, "flipEndFrame": 111, "endFrame": 251}, {"startFrame": 251, "flipStartFrame": 346, "flipEndFrame": 346, "endFrame": 472}, {"startFrame": 472, "flipStartFrame": 556, "flipEndFrame": 556, "endFrame": 707}],
+          cards: [{"indexBadge": "1 / 3", "primaryText": "终于周五了，这周大家都辛苦啦！", "pronunciation": "[중위 저우우러, 저 저우 다자 더우 신쿠 라!]", "meaning": "드디어 금요일, 이번 주 다들 수고 많으셨어요!", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• 终于(zhōngyú): '드디어, 마침내'<br />• 辛苦了(xīnkǔ le): 수고하셨습니다", "audio_lang": "终于周五了，这周大家都辛苦啦！", "audio_ko": "드디어 금요일, 이번 주 다들 수고 많으셨어요!"}, {"indexBadge": "2 / 3", "primaryText": "今天再加把劲，马上就能放假了。", "pronunciation": "[진톈 짜이 지아바진, 마상 지우 넝 팡지아 러.]", "meaning": "오늘 조금만 더 힘내면 바로 휴일이에요.", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• 加把劲(jiā bǎ jìn): '조금만 더 힘을 내다, 스퍼트를 올리다'<br />• 放假: 쉬다, 휴일/방학을 맞이하다", "audio_lang": "今天再加把劲，马上就能放假了。", "audio_ko": "오늘 조금만 더 힘내면 바로 휴일이에요."}, {"indexBadge": "3 / 3", "primaryText": "今天坚决不加班，准时下班！", "pronunciation": "[진톈 지안쥐에 부 지아반, 준스 시아반!]", "meaning": "오늘은 야근 절대 사절, 무조건 정시 칼퇴!", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• 准时下班(zhǔnshí xiàbān): 정시 퇴근하다 (칼퇴)<br />• 坚决(jiānjué): 단호하게, 굳세게", "audio_lang": "今天坚决不加班，准时下班！", "audio_ko": "오늘은 야근 절대 사절, 무조건 정시 칼퇴!"}],
+        }}
+      />
+
+      {/* ── [FirstMotion 금요일 출근길 3-in-1 쇼츠: [금요일 출근길 필수 인니어]] ── */}
+      <Composition
+        id="PostMotionFriCommute3in1ID"
+        component={PostMotion3in1Template}
+        durationInFrames={799}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          badgeText: "[금요일 출근길 필수 인니어]",
+          badgeColor: "#059669",
+          badgeBg: "#ecfdf5",
+          title: "금요일 출근길 필수 인니어 3문장 🇮🇩 #Shorts",
+          cardTimings: [{"startFrame": 10, "flipStartFrame": 131, "flipEndFrame": 131, "endFrame": 260}, {"startFrame": 260, "flipStartFrame": 393, "flipEndFrame": 393, "endFrame": 546}, {"startFrame": 546, "flipStartFrame": 669, "flipEndFrame": 669, "endFrame": 794}],
+          cards: [{"indexBadge": "1 / 3", "primaryText": "Akhirnya hari Jumat, selamat berakhir pekan!", "pronunciation": "[악히르냐 하리 주맛, 슬라맛 버르악히르 뻐칸!]", "meaning": "드디어 금요일, 행복한 주말 보내세요!", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• akhirnya: '마침내, 드디어'<br />• selamat berakhir pekan: 좋은 주말 보내세요", "audio_lang": "Akhirnya hari Jumat, selamat berakhir pekan!", "audio_ko": "드디어 금요일, 행복한 주말 보내세요!"}, {"indexBadge": "2 / 3", "primaryText": "Semangat hari ini, liburan sudah di depan mata.", "pronunciation": "[스망앗 하리 이니, 리부란 수다 디 드판 마타.]", "meaning": "오늘도 파이팅, 주말 휴일이 바로 눈앞이에요.", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• di depan mata: '눈앞에 있는, 코앞에 다가온'<br />• liburan: 휴일, 방학", "audio_lang": "Semangat hari ini, liburan sudah di depan mata.", "audio_ko": "오늘도 파이팅, 주말 휴일이 바로 눈앞이에요."}, {"indexBadge": "3 / 3", "primaryText": "Hari ini pulang tepat waktu, mau istirahat!", "pronunciation": "[하리 이니 풀랑 트팟 왁투, 마우 이스티라핫!]", "meaning": "오늘은 정시 칼퇴하고 푹 쉴 거예요!", "backSubtitle": "핵심 어휘 & 표현", "backMainQuote": "• tepat waktu: 정각에, 시간에 딱 맞춰 (칼퇴)<br />• istirahat: 휴식하다, 쉬다", "audio_lang": "Hari ini pulang tepat waktu, mau istirahat!", "audio_ko": "오늘은 정시 칼퇴하고 푹 쉴 거예요!"}],
+        }}
+      />
+    
+      <Composition
+        id="KoreanLoopShortsHanjan"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: '[Friday Hangout]',
+          categoryColor: '#d97706',
+          categoryBg: '#fef3c7',
+          title: 'How Koreans Ask \'Wanna Grab a Drink Tonight?\' 🍻 #Shorts',
+          tagText: 'TGIF DRINKS',
+          korean: '오늘 한잔할래?',
+          romanization: '[O-neul han-jan-hal-lae?]',
+          english: 'Do you want to grab a drink today?',
+          nuanceTitle: 'The Friday Magic Phrase',
+          nuanceDesc: '\'한잔\' literally means \'one glass,\' but culturally it\'s the warm Korean invitation to hang out, share drinks, and unwind together!',
+          audioFile: 'audio_shorts_hanjan.wav',
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsWeekendPlan"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: '[Weekend Plans]',
+          categoryColor: '#2563eb',
+          categoryBg: '#dbeafe',
+          title: 'The #1 Weekend Question Every Korean Asks 💬 #Shorts',
+          tagText: 'WEEKEND PLANS',
+          korean: '이번 주말에 뭐해?',
+          romanization: '[I-beon ju-ma-re mwo-hae?]',
+          english: 'What are you up to this weekend?',
+          nuanceTitle: 'Casual Connection',
+          nuanceDesc: 'The friendliest and most natural way to check someone\'s weekend plans or subtly suggest hanging out!',
+          audioFile: 'audio_shorts_weekendplan.wav',
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsBinge"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: '[Weekend Binge]',
+          categoryColor: '#7c3aed',
+          categoryBg: '#f3e8ff',
+          title: 'How Koreans Say \'Binge-Watching All Night!\' 🍿 #Shorts',
+          tagText: 'ALL-NIGHT BINGE',
+          korean: '오늘 밤새서 볼 거야!',
+          romanization: '[O-neul bam-sae-seo bol geo-ya!]',
+          english: 'I\'m binge-watching all night tonight!',
+          nuanceTitle: 'Friday Night Freedom',
+          nuanceDesc: '\'밤새다\' means staying up all night—a glorious Friday declaration for K-Drama lovers knowing there\'s no work tomorrow morning!',
+          audioFile: 'audio_shorts_binge.wav',
+        }}
+      />
+
+      <Composition
+        id="KoreanLoopShortsNeutjam"
+        component={PostMotionKoreanLoopAllInOne}
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          category: '[Saturday Healing]',
+          categoryColor: '#059669',
+          categoryBg: '#d1fae5',
+          title: 'The Sweetest Saturday Morning Wish in Korea 🛌 #Shorts',
+          tagText: 'SLEEPING IN',
+          korean: '내일 늦잠 잘 거야!',
+          romanization: '[Nae-il neut-jam jal geo-ya!]',
+          english: 'I\'m definitely sleeping in tomorrow!',
+          nuanceTitle: 'No Alarm Saturday',
+          nuanceDesc: '\'늦잠\' means oversleeping or sleeping in. Turning off the 7:00 AM alarm and sleeping in with zero guilt is the ultimate weekend luxury!',
+          audioFile: 'audio_shorts_neutjam.wav',
         }}
       />
     </>

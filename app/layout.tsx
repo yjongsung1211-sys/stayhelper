@@ -6,6 +6,53 @@ export async function generateMetadata(): Promise<Metadata> {
   const headersList = headers();
   const host = headersList.get('host') || '';
 
+  if (host.includes('weddinghelper') || host.includes('wedding')) {
+    return {
+      metadataBase: new URL('https://www.weddinghelper.love'),
+      title: 'WeddingHelper · Global AI Destination Wedding Photoshoot & Haute Mobile Invitation',
+      description:
+        'Transform one couple photo into breathtaking Lake Como, Paris Chateau & Bali 12 luxury destination wedding photoshoots in 3 seconds. Create bespoke digital wedding invitations with live BGM & RSVP.',
+      keywords: [
+        'WeddingHelper',
+        'AI Wedding Photoshoot',
+        'Destination Wedding',
+        'Lake Como Wedding',
+        'Paris Chateau Wedding',
+        'Luxury Mobile Invitation',
+        'Digital Wedding Invitation',
+        'Bespoke RSVP',
+        'Virtual Bridal Fitting'
+      ],
+      icons: {
+        icon: '/icon.svg',
+      },
+      openGraph: {
+        title: 'WeddingHelper — AI Destination Wedding Photoshoot & Luxury Mobile Invitation',
+        description:
+          '12 Global Luxury Destination Themes in 3 Seconds. Haute Couture Bridal Attire & Bespoke Mobile Invitations with Real BGM.',
+        url: 'https://www.weddinghelper.love',
+        siteName: 'WeddingHelper Global',
+        images: [
+          {
+            url: '/images/weddings/lake-como.jpg',
+            width: 1200,
+            height: 630,
+            alt: 'WeddingHelper 12 Grand Master Luxury Wedding Themes',
+          },
+        ],
+        locale: 'en_US',
+        type: 'website',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'WeddingHelper — AI Destination Wedding Photoshoot & Luxury Mobile Invitation',
+        description:
+          'Transform your couple photo into breathtaking Lake Como & Paris Chateau wedding photoshoots in 3 seconds.',
+        images: ['/images/weddings/lake-como.jpg'],
+      },
+    };
+  }
+
   if (host.includes('thestayhelper') || host.includes('stayhelper')) {
     return {
       metadataBase: new URL('https://www.thestayhelper.com'),
