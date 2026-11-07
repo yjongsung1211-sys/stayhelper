@@ -2064,10 +2064,32 @@ export default function ColorHelperPage() {
         </div>
 
         {cameraActive && (
-          <div className="relative w-full max-w-sm mx-auto aspect-[3/4] rounded-2xl overflow-hidden bg-black mb-6 border-4 border-[#E07A5F]">
+          <div className="relative w-full max-w-sm mx-auto aspect-[3/4] rounded-3xl overflow-hidden bg-black mb-6 border-4 border-[#E07A5F] shadow-2xl">
             <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover -scale-x-100" />
-            <div className="absolute inset-0 border-2 border-dashed border-white/60 rounded-full m-8 pointer-events-none flex items-center justify-center">
-              <span className="bg-black/60 text-white text-xs px-3 py-1 rounded-full">{t.cameraGuide}</span>
+            
+            {/* Perfectly Proportioned Oval Face Viewfinder with Dimmed Vignette */}
+            <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center">
+              {/* Header Guide Badge */}
+              <div className="absolute top-4 bg-black/80 backdrop-blur-md text-white text-xs font-black px-4 py-1.5 rounded-full border border-white/20 shadow-md">
+                🎯 {t.cameraGuide}
+              </div>
+
+              {/* True Facial Contour Oval Guide */}
+              <div 
+                className="w-[66%] h-[72%] border-2 border-dashed border-amber-400 rounded-[50%_/_60%] relative flex items-center justify-center"
+                style={{
+                  boxShadow: '0 0 0 9999px rgba(0, 0, 0, 0.45)'
+                }}
+              >
+                {/* Subtle Center Crosshair */}
+                <div className="w-3 h-0.5 bg-amber-400/60" />
+                <div className="h-3 w-0.5 bg-amber-400/60 absolute" />
+                
+                {/* Chin alignment bottom indicator */}
+                <span className="absolute -bottom-3 bg-amber-500 text-black text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow">
+                  CHIN LINE
+                </span>
+              </div>
             </div>
           </div>
         )}
@@ -2211,6 +2233,18 @@ export default function ColorHelperPage() {
           {/* Portrait Canvas with Split View & Virtual Try-on Overlays */}
           <div 
             className="relative w-full aspect-[9/13] sm:aspect-[3/4] max-w-[340px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-gray-900 select-none touch-none mx-auto cursor-ew-resize mb-4"
+            onMouseMove={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const x = Math.max(5, Math.min(rect.width - 5, e.clientX - rect.left));
+              setInteractiveSplitPos(Math.round((x / rect.width) * 100));
+            }}
+            onTouchMove={(e) => {
+              if (e.touches.length > 0) {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = Math.max(5, Math.min(rect.width - 5, e.touches[0].clientX - rect.left));
+                setInteractiveSplitPos(Math.round((x / rect.width) * 100));
+              }
+            }}
             onPointerDown={(e) => {
               const rect = e.currentTarget.getBoundingClientRect();
               const updatePos = (clientX: number) => {
@@ -2337,6 +2371,36 @@ export default function ColorHelperPage() {
                       style={{ clipPath: `inset(0 ${100 - interactiveSplitPos}% 0 0)` }}
                     >
                       <img src={leftGlam} alt="Glam Makeup" className="w-full h-full object-cover object-top" />
+                      
+                      {/* Real-time Dynamic Eye Shadow Tint Overlay on Eyelids */}
+                      <div className="absolute inset-0 pointer-events-none">
+                        {/* Left Eyelid Shadow */}
+                        <div 
+                          className="absolute rounded-full blur-[2px] transition-all duration-300"
+                          style={{
+                            left: '34%',
+                            top: '30.5%',
+                            width: '13%',
+                            height: '4.5%',
+                            backgroundColor: activeEyeTryonHex,
+                            opacity: 0.78,
+                            mixBlendMode: 'multiply'
+                          }}
+                        />
+                        {/* Right Eyelid Shadow */}
+                        <div 
+                          className="absolute rounded-full blur-[2px] transition-all duration-300"
+                          style={{
+                            left: '54.5%',
+                            top: '30.5%',
+                            width: '13%',
+                            height: '4.5%',
+                            backgroundColor: activeEyeTryonHex,
+                            opacity: 0.78,
+                            mixBlendMode: 'multiply'
+                          }}
+                        />
+                      </div>
                     </div>
 
                     {/* Draggable Divider Handle */}
@@ -2399,17 +2463,7 @@ export default function ColorHelperPage() {
                   />
                 ))}
               </div>
-              <div className="flex items-center gap-2 px-2 bg-gray-100 rounded-xl p-1.5 border border-gray-200">
-                <input
-                  type="range"
-                  min="25"
-                  max="100"
-                  value={hairIntensity}
-                  onChange={(e) => setHairIntensity(Number(e.target.value))}
-                  className="w-full accent-purple-600"
-                />
-                <Droplet className="w-4 h-4 text-purple-600 flex-shrink-0" />
-              </div>
+
             </div>
           )}
 
