@@ -50,33 +50,19 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // 2. High-fashion Beauty Studio Prompt for Gemini 2.5 Flash Image / Nano Banana
-    const promptText = `You are the world's most elite personal color stylist, celebrity makeup artist, and Vogue beauty director.
-Your mission is to perform a HIGH-END PERSONAL COLOR MAKEOVER on the individual in the input photograph.
+    // 2. High-precision Personal Color Styling Prompt for Gemini 2.5 Flash Image / Nano Banana
+    const promptText = `[TASK: REALISTIC PERSONAL COLOR STYLING EDIT - STRICT 1:1 FACIAL IDENTITY PRESERVATION]
+Edit the input portrait of this exact individual to demonstrate their best personal color styling.
 
-[CRITICAL REQUIREMENT 1: 100% IDENTICAL FACIAL IDENTITY LOCK]
-- You MUST preserve the exact authentic facial features, facial structure, eye shape, nose shape, lip shape, age, and natural likeness of the person in the photograph.
-- The person must be instantly and 100% recognizable as themselves, but looking their absolute healthiest, most radiant, and beautifully styled best.
+[CRITICAL IDENTITY RULES - 100% IDENTICAL LIKENESS LOCK]:
+1. EXACT FACE PRESERVATION: You MUST keep the EXACT SAME person. Do NOT replace them with an idealized model, K-pop idol, or stranger. Their authentic age, facial bone structure, jawline width, cheekbones, exact eye shape (monolid/eyelid contours, eye spacing, eye gaze), nose shape (bridge height, nostril width), and lip shape MUST remain 100% IDENTICAL to the input photograph.
+2. NO PLASTIC BEAUTY FILTER: Do NOT smooth out the face into an artificial anime, CGI, or plastic doll face. Retain authentic human skin texture, natural pores, and their genuine facial characteristics.
+3. HAIR STYLING: Keep their natural hairline and head geometry. Style their hair neatly in a sophisticated, flattering professional cut harmonized with their signature personal color tone: "${hairName}".
+4. WARDROBE TRANSFORMATION: Replace their casual clothes with a premium luxury tailored blazer or cashmere knitwear in their absolute best signature color: "${bestColorName}" (${bestColorHex}).
+5. GROOMING & REFINEMENT: Apply subtle, professional grooming: clean, even complexion with healthy natural radiance, neatly groomed eyebrows, and natural healthy lips (${lipName} ${lipHex}).
+6. PHOTOGRAPHY STANDARD: Clean high-end portrait studio lighting (soft key light, subtle rim light), crisp 8K DSLR portrait clarity, neutral studio background.
 
-[CRITICAL REQUIREMENT 2: TAILORED BEST PERSONAL COLOR HAIR STYLING]
-- Apply a salon-grade, lustrous, healthy hair color makeover perfectly harmonized with their personal color palette: "${seasonName}".
-- Hair Color: "${hairName}".
-- Render silky, voluminous, glossy hair with subtle dimensional light reflections, natural hair roots, and zero artificial wig appearance.
-
-[CRITICAL REQUIREMENT 3: TAILORED LUXURY MAKEUP SYNTHESIS]
-- Apply professional high-definition celebrity makeup tailored specifically to their skin undertone:
-  - LIPS: Flawless, hydrated, sheer-to-medium glossy tint in the signature shade "${lipName}" (${lipHex}). Soft gradient blending, natural lip texture.
-  - EYES & BROWS: Neatly groomed eyebrows. Subtle, flattering eyeshadow contouring matching their "${seasonName}" palette, soft lash definition, zero clumpy makeup.
-  - COMPLEXION: Dewy, luminous Korean glass-skin finish. Smooth, radiant, healthy porcelain glow that makes their face look vibrant and youthful.
-
-[CRITICAL REQUIREMENT 4: TAILORED LUXURY WARDROBE DRAPERY]
-- Dress the individual in a sophisticated, minimalist luxury cashmere/silk top or tailored blazer in their absolute best signature color: "${bestColorName}" (${bestColorHex}).
-- Elegant neckline (subtle crew neck or tailored V-lapel) that flatters their jawline and makes their complexion pop with radiance.
-
-[PHOTOGRAPHY STANDARD]
-- High-end beauty editorial studio lighting (soft diffused key light, subtle hair rim light).
-- Crisp 8K Hasselblad portrait camera clarity, shallow depth of field (f/2.0), neutral clean studio background.
-- Clean, realistic, jaw-dropping personal color transformation.`;
+The final image MUST be unmistakably the same person looking their absolute sharpest, most confident, and best styled self in their personal color!`;
 
     const key = process.env.GEMINI_API_KEY || '';
     const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash-image';

@@ -2827,34 +2827,7 @@ export default function ColorHelperPage() {
                     </div>
                   )}
 
-                  {/* Interactive Swatches for Instant Best Color & Lip Switching */}
-                  <div className="bg-white/80 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-amber-200/80 max-w-xl mx-auto space-y-3.5">
-                    {/* 1. Best Drapery Color Chips */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                      <span className="text-xs font-black text-gray-800 flex items-center gap-1.5">
-                        <Palette className="w-3.5 h-3.5 text-[#E07A5F]" />
-                        {t.switchBestColorLabel}
-                      </span>
-                      <div className="flex items-center gap-2">
-                        {resultTone.bestColors.slice(0, 5).map((col, idx) => (
-                          <button
-                            key={col.hex + idx}
-                            onClick={() => setResultActiveBestColorIndex(idx)}
-                            className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-extrabold transition-all cursor-pointer ${
-                              resultActiveBestColorIndex === idx
-                                ? "bg-gray-900 text-white shadow-md scale-105 ring-2 ring-amber-400"
-                                : "bg-white text-gray-700 border border-gray-200 hover:border-gray-400 shadow-2xs"
-                            }`}
-                          >
-                            <span className="w-3 h-3 rounded-full border border-black/10" style={{ backgroundColor: col.hex }} />
-                            <span>{col.name[lang]}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
 
-
-                  </div>
                 </div>
 
                 <div className="p-5 rounded-2xl bg-[#FFFBF9] border border-[#E07A5F]/20 mb-8">
