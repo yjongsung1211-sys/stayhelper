@@ -236,17 +236,35 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Fallback
-    if (!generatedImageUrl) {
-      if (userImageParts[0]?.inlineData?.data) {
-        generatedImageUrl = `data:${userImageParts[0].inlineData.mimeType};base64,${userImageParts[0].inlineData.data}`;
-      } else {
-        generatedImageUrl = targetSceneImage || preset.heroImage;
-      }
+    // Verification: ONLY mark as AI generated when Gemini actually returned a new image
+    const isAiGenerated = Boolean(generatedImageUrl && generatedImageUrl.startsWith('data:image/'));
+
+    if (!isAiGenerated) {
+      return NextResponse.json({
+        success: false,
+        isAiGenerated: false,
+        error: 'Gemini synthesis timed out or rate-limited. Please retry this angle.',
+        fallbackImageUrl: targetSceneImage || preset.heroImage,
+        theme: {
+          id: preset.id,
+          number: preset.number,
+          title: preset.title,
+          subtitle: preset.subtitle,
+          destination: preset.destination,
+          venueName: preset.venueName,
+          badge: preset.badge,
+          stayHelperRef: preset.stayHelperRef,
+        },
+        products: preset.products,
+        venueBookingUrl: preset.stayHelperRef 
+          ? `https://stayhelper.com/stays/${preset.stayHelperRef}` 
+          : `https://stayhelper.com?destination=${encodeURIComponent(preset.destination)}`,
+      }, { status: 200 });
     }
 
     return NextResponse.json({
       success: true,
+      isAiGenerated: true,
       visualizedImageUrl: generatedImageUrl,
       theme: {
         id: preset.id,

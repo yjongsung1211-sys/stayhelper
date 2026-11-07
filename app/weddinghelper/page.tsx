@@ -276,6 +276,26 @@ const WEDDING_240_SCENES: Wedding240Scene[] = DESTINATION_240_CONFIGS.flatMap((d
   });
 });
 
+// Converts heavy base64 data URLs into lightweight blob: URLs to prevent mobile browser memory overflow
+function dataUrlToBlobUrl(dataUrl: string): string {
+  if (!dataUrl || !dataUrl.startsWith('data:')) return dataUrl;
+  try {
+    const parts = dataUrl.split(',');
+    const mimeMatch = parts[0].match(/:(.*?);/);
+    const mime = mimeMatch ? mimeMatch[1] : 'image/jpeg';
+    const bstr = atob(parts[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    const blob = new Blob([u8arr], { type: mime });
+    return URL.createObjectURL(blob);
+  } catch (e) {
+    return dataUrl;
+  }
+}
+
 export default function WeddingHelperPage() {
   useEffect(() => {
     document.title = 'WeddingHelper · Where Forever Begins | Curated Luxury Weddings';
@@ -321,14 +341,15 @@ export default function WeddingHelperPage() {
         })
       });
       const data = await res.json();
-      if (data.success && data.visualizedImageUrl) {
+      if (data.success && data.isAiGenerated && data.visualizedImageUrl) {
+        const safeUrl = dataUrlToBlobUrl(data.visualizedImageUrl);
         setPersonalizedScenes(prev => ({
           ...prev,
-          [scene.id]: data.visualizedImageUrl
+          [scene.id]: safeUrl
         }));
         setCopyToast(`🎉 Successfully transformed "${scene.angleTitle}" with your faces!`);
       } else {
-        setCopyToast('✨ Angle transformed successfully!');
+        setCopyToast(`⚠️ Gemini AI rate-limited for this angle. Tap to retry in a moment.`);
       }
     } catch (e) {
       console.warn('Angle transform fallback', e);
@@ -681,7 +702,7 @@ export default function WeddingHelperPage() {
   });
 
   // Client-side high-resolution image compression (Guarantees Vercel 4.5MB limit is never exceeded)
-  const compressImage = (file: File, maxDim = 1600, quality = 0.85): Promise<string> => {
+  const compressImage = (file: File, maxDim = 960, quality = 0.72): Promise<string> => {
     return new Promise((resolve) => {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -792,11 +813,15 @@ export default function WeddingHelperPage() {
     // Scenes 2 through 20 (scene 1 is already done)
     for (let i = 1; i < targetScenes.length; i++) {
       const scene = targetScenes[i];
+      setTransformingSceneId(scene.id);
       setBatchProgress({
         current: i + 1,
         total: targetScenes.length,
         title: scene.angleTitle,
       });
+
+      // 2.5s cooldown delay to prevent Gemini Free Tier rate-limiting
+      await new Promise(r => setTimeout(r, 2500));
 
       try {
         const res = await fetch('/api/weddinghelper/visualize', {
@@ -815,14 +840,17 @@ export default function WeddingHelperPage() {
           })
         });
         const data = await res.json();
-        if (data.success && data.visualizedImageUrl) {
+        if (data.success && data.isAiGenerated && data.visualizedImageUrl) {
+          const safeUrl = dataUrlToBlobUrl(data.visualizedImageUrl);
           setPersonalizedScenes(prev => ({
             ...prev,
-            [scene.id]: data.visualizedImageUrl
+            [scene.id]: safeUrl
           }));
         }
       } catch (err) {
         console.warn(`Failed auto-batch scene ${scene.id}:`, err);
+      } finally {
+        setTransformingSceneId(null);
       }
     }
 
@@ -866,44 +894,35 @@ export default function WeddingHelperPage() {
         });
 
         const data = await res.json();
-        if (data.success && data.visualizedImageUrl) {
+        if (data.success && data.isAiGenerated && data.visualizedImageUrl) {
+          const safeUrl = dataUrlToBlobUrl(data.visualizedImageUrl);
           setVisualizedResult({
-            imageUrl: data.visualizedImageUrl,
+            imageUrl: safeUrl,
             theme: currentTheme,
             products: data.products || currentTheme.products,
             venueBookingUrl: data.venueBookingUrl || currentTheme.stayHelperRef || 'https://www.thestayhelper.com',
           });
           setPersonalizedScenes(prev => ({
             ...prev,
-            [`${destId}_scene_01`]: data.visualizedImageUrl,
-            'masterpiece': data.visualizedImageUrl,
+            [`${destId}_scene_01`]: safeUrl,
+            'masterpiece': safeUrl,
           }));
           setActive240Tab(destId);
 
-          // AUTO-START BATCH SYNTHESIS FOR ALL REMAINING SCENES IN THIS DESTINATION!
+          // Auto-start batch synthesis with safe delay
           setTimeout(() => {
             autoBatchSynthesizeDestination(destId, imagesToUse);
-          }, 800);
+          }, 1500);
           return;
+        } else {
+          setCopyToast('⚠️ Gemini AI is busy. Tap "Pay & Create" to try again in a few moments.');
         }
       } catch (apiErr) {
-        console.warn('API route fallback:', apiErr);
+        console.warn('API route error:', apiErr);
+        setCopyToast('⚠️ Connection timeout. Please tap to try again.');
       }
 
-      // Guaranteed fallback: display complete 240 Masterpiece Collection with user photo
-      await new Promise(r => setTimeout(r, 3800));
-      const fallbackImg = uploadedImage || currentTheme.heroImage;
-      setVisualizedResult({
-        imageUrl: fallbackImg,
-        theme: currentTheme,
-        products: currentTheme.products,
-        venueBookingUrl: currentTheme.stayHelperRef || 'https://www.thestayhelper.com',
-      });
-      setPersonalizedScenes(prev => ({
-        ...prev,
-        [`${destId}_scene_01`]: fallbackImg,
-        'masterpiece': fallbackImg,
-      }));
+      // When synthesis is pending, show themes without false personalization badge
       setActive240Tab(destId);
     } catch (err) {
       console.warn('Visualization fallback:', err);
@@ -1232,7 +1251,7 @@ export default function WeddingHelperPage() {
               </div>
               {uploadedImages[0] ? (
                 <div className="relative h-48 rounded-2xl overflow-hidden border-2 border-[#C87870] shadow-sm group">
-                  <Image src={uploadedImages[0]} alt="Couple Photo" fill className="object-cover" />
+                  <Image src={uploadedImages[0]} alt="Couple Photo" fill unoptimized className="object-cover" />
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
                     <button
                       type="button"
@@ -1276,7 +1295,7 @@ export default function WeddingHelperPage() {
               </div>
               {uploadedImages[1] ? (
                 <div className="relative h-48 rounded-2xl overflow-hidden border-2 border-[#D4AF37] shadow-sm group">
-                  <Image src={uploadedImages[1]} alt="Bride Face Close-Up" fill className="object-cover" />
+                  <Image src={uploadedImages[1]} alt="Bride Face Close-Up" fill unoptimized className="object-cover" />
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
                     <button
                       type="button"
@@ -1320,7 +1339,7 @@ export default function WeddingHelperPage() {
               </div>
               {uploadedImages[2] ? (
                 <div className="relative h-48 rounded-2xl overflow-hidden border-2 border-[#D4AF37] shadow-sm group">
-                  <Image src={uploadedImages[2]} alt="Groom Face Close-Up" fill className="object-cover" />
+                  <Image src={uploadedImages[2]} alt="Groom Face Close-Up" fill unoptimized className="object-cover" />
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
                     <button
                       type="button"
@@ -1888,6 +1907,7 @@ export default function WeddingHelperPage() {
                           src={displayImage}
                           alt={scene.angleTitle}
                           fill
+                          unoptimized
                           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
                         />
@@ -1903,6 +1923,11 @@ export default function WeddingHelperPage() {
                             <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#1F181B] shadow-md flex items-center gap-1 ring-1 ring-white/40">
                               <Sparkles className="w-2.5 h-2.5 fill-[#1F181B]" />
                               <span>YOUR PHOTO LOCKED</span>
+                            </span>
+                          ) : transformingSceneId === scene.id ? (
+                            <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-gradient-to-r from-amber-400 to-yellow-500 text-black shadow-md flex items-center gap-1 ring-1 ring-white/50 animate-pulse">
+                              <RefreshCw className="w-2.5 h-2.5 animate-spin text-black" />
+                              <span>SYNTHESIZING...</span>
                             </span>
                           ) : (
                             <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-black/80 text-amber-300 border border-amber-400/40 backdrop-blur-xs flex items-center gap-1">
