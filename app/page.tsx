@@ -1381,12 +1381,12 @@ export default function ColorHelperPage() {
       if (savedTickets !== null) {
         const count = parseInt(savedTickets, 10);
         setTickets(count);
-        setIsUnlocked(count > 0);
       } else {
         setTickets(0);
-        setIsUnlocked(false);
         localStorage.setItem("colorhelper_tickets", "0");
       }
+      // 항상 결제 전 상태로 시작 (Step 5 마지막에서 $1 결제 후 결과 잠금 해제)
+      setIsUnlocked(false);
     } catch (e) {}
 
     applySkinTone(PRESET_MODELS[0]);
@@ -1560,16 +1560,9 @@ export default function ColorHelperPage() {
       });
     }, 250);
 
-    if (tickets > 0) {
-      const newBalance = tickets - 1;
-      setTickets(newBalance);
-      localStorage.setItem("colorhelper_tickets", newBalance.toString());
-      setIsUnlocked(true);
-      analyzeCanvasImage(canvas);
-    } else {
-      setIsUnlocked(false);
-      analyzeCanvasImage(canvas);
-    }
+    // 5단계 인터랙티브 체험은 먼저 진행하고, 마지막 Step 5에서 결제하여 결과를 확인하도록 설정
+    setIsUnlocked(false);
+    analyzeCanvasImage(canvas);
   };
 
   const analyzeCanvasImage = (canvas: HTMLCanvasElement) => {
@@ -2586,23 +2579,29 @@ export default function ColorHelperPage() {
               <span>{comparisonStep === 1 ? t.step1Btn : t.step2Btn}</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
-          ) : (
+          ) : !isUnlocked ? (
             <button
-              onClick={() => {
-                if (isUnlocked) {
-                  const el = document.getElementById("detailed-report-section");
-                  if (el) el.scrollIntoView({ behavior: "smooth" });
-                } else {
-                  setIsPayModalOpen(true);
-                }
-              }}
+              onClick={() => setIsPayModalOpen(true)}
               className="w-full max-w-[340px] py-4 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-700 hover:to-indigo-700 text-white font-black text-sm shadow-2xl transition flex items-center justify-center gap-2 animate-pulse cursor-pointer"
             >
               <Crown className="w-4 h-4 text-amber-300" />
+              <span>{t.step5UnlockBtn}</span>
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                const el = document.getElementById("detailed-report-section");
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="w-full max-w-[340px] py-4 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 hover:from-emerald-700 hover:to-teal-700 text-white font-black text-sm shadow-2xl transition flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <CheckCircle2 className="w-4 h-4 text-emerald-200" />
               <span>
-                {isUnlocked
-                  ? (lang === "ko" ? "진단 결과 리포트 확인하기 ↓" : lang === "ja" ? "診断結果レポートを見る ↓" : "View Full Diagnostic Report ↓")
-                  : t.step5UnlockBtn}
+                {lang === "ko"
+                  ? "🎉 진단 결과 리포트 확인하기 ↓"
+                  : lang === "ja"
+                  ? "🎉 診断結果レポートを見る ↓"
+                  : "🎉 View Full Diagnostic Report ↓"}
               </span>
             </button>
           )}
@@ -2611,7 +2610,7 @@ export default function ColorHelperPage() {
       )}
 
       {/* ── STEP 3: 상세 결과 리포트 (결제 완료 후 또는 5단계 완료 시 노출) ───────────── */}
-      {hasStartedDiagnosis && (isUnlocked || comparisonStep === 5) && resultTone && (
+      {hasStartedDiagnosis && isUnlocked && resultTone && (
         <section id="detailed-report-section" className="bg-white rounded-3xl p-6 sm:p-10 shadow-lg border border-gray-200 mb-8 relative overflow-hidden">
           <div
             className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-20 pointer-events-none -mr-20 -mt-20"
