@@ -350,7 +350,8 @@ export default function WeddingHelperPage() {
         await Promise.all(
           batch.map(async (scene) => {
             try {
-              const res = await fetch(scene.imagePath);
+              const photoUrl = personalizedScenes[scene.id] || visualizedResult?.imageUrl || scene.imagePath;
+              const res = await fetch(photoUrl);
               const blob = await res.blob();
               const folderName = `${scene.themeId.replace('theme_', '')}_${scene.destination.split(',')[0].replace(/\s+/g, '_')}`;
               const fileName = `Angle_${String(scene.angleNum).padStart(2, '0')}_${scene.angleTitle.replace(/[^a-zA-Z0-9]/g, '_')}.jpg`;
@@ -706,15 +707,18 @@ export default function WeddingHelperPage() {
             venueBookingUrl: data.venueBookingUrl || currentTheme.stayHelperRef || 'https://www.thestayhelper.com',
           });
           const destId = THEME_TO_DEST_MAP[selectedThemeId] || 'theme_01_bali';
-          const newPersonalized: Record<string, string> = {};
-          for (let i = 1; i <= 20; i++) {
-            const pad = String(i).padStart(2, '0');
-            newPersonalized[`${destId}_scene_${pad}`] = data.visualizedImageUrl;
-          }
-          newPersonalized['masterpiece'] = data.visualizedImageUrl;
+          const allPersonalized: Record<string, string> = {};
+          // Transform ALL 240 scenes across all 12 destinations with the couple's bespoke synthesis
+          DESTINATION_240_CONFIGS.forEach((dest) => {
+            for (let i = 1; i <= 20; i++) {
+              const pad = String(i).padStart(2, '0');
+              allPersonalized[`${dest.id}_scene_${pad}`] = data.visualizedImageUrl;
+            }
+          });
+          allPersonalized['masterpiece'] = data.visualizedImageUrl;
           setPersonalizedScenes(prev => ({
             ...prev,
-            ...newPersonalized
+            ...allPersonalized
           }));
           setActive240Tab(destId);
           return;
@@ -733,15 +737,18 @@ export default function WeddingHelperPage() {
         venueBookingUrl: currentTheme.stayHelperRef || 'https://www.thestayhelper.com',
       });
       const destId = THEME_TO_DEST_MAP[selectedThemeId] || 'theme_01_bali';
-      const fallbackPersonalized: Record<string, string> = {};
-      for (let i = 1; i <= 20; i++) {
-        const pad = String(i).padStart(2, '0');
-        fallbackPersonalized[`${destId}_scene_${pad}`] = fallbackImg;
-      }
-      fallbackPersonalized['masterpiece'] = fallbackImg;
+      const allFallbackPersonalized: Record<string, string> = {};
+      // Ensure all 240 scenes are transformed with the couple's photo
+      DESTINATION_240_CONFIGS.forEach((dest) => {
+        for (let i = 1; i <= 20; i++) {
+          const pad = String(i).padStart(2, '0');
+          allFallbackPersonalized[`${dest.id}_scene_${pad}`] = fallbackImg;
+        }
+      });
+      allFallbackPersonalized['masterpiece'] = fallbackImg;
       setPersonalizedScenes(prev => ({
         ...prev,
-        ...fallbackPersonalized
+        ...allFallbackPersonalized
       }));
       setActive240Tab(destId);
     } catch (err) {
@@ -1643,8 +1650,8 @@ export default function WeddingHelperPage() {
                 {WEDDING_240_SCENES
                   .filter(s => active240Tab === 'all' || s.themeId === active240Tab)
                   .map((scene) => {
-                    const isCustomPersonalized = Boolean(personalizedScenes[scene.id] || (scene.angleNum === 1 && visualizedResult?.imageUrl && (active240Tab === 'all' || active240Tab === scene.themeId)));
-                    const displayImage = personalizedScenes[scene.id] || (scene.angleNum === 1 && visualizedResult?.imageUrl && (active240Tab === 'all' || active240Tab === scene.themeId) ? visualizedResult.imageUrl : scene.imagePath);
+                    const isCustomPersonalized = Boolean(visualizedResult?.imageUrl || personalizedScenes[scene.id]);
+                    const displayImage = personalizedScenes[scene.id] || visualizedResult?.imageUrl || scene.imagePath;
 
                     return (
                     <div 
