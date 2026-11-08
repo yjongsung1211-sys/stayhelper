@@ -178,15 +178,26 @@ export async function POST(request: NextRequest) {
 - Romantic chemistry, golden hour rim-lighting, 8K Hasselblad clarity, Vogue Weddings cover quality.`;
     }
 
-    // 4. Assemble API payload parts
+    // 4. Assemble Interleaved Multimodal API Payload with Strict Semantic Binding
     const requestParts: any[] = [{ text: promptText }];
-    // Add all user reference photos
-    for (const uPart of userImageParts) {
+
+    // Interleaved Client Couple Reference Photos with explicit semantic headers
+    userImageParts.forEach((uPart, idx) => {
+      requestParts.push({
+        text: `=== CLIENT REFERENCE PHOTO ${idx + 1} of ${userImageParts.length}: REAL CLIENT COUPLE (100% preserve their authentic East Asian / Korean facial bone structure, delicate eyes, and genuine smiles) ===`
+      });
       requestParts.push(uPart);
-    }
-    // Add target scene image if available
+    });
+
+    // Interleaved Target Wedding Scene Image with composition lock instruction
     if (targetScenePart) {
+      requestParts.push({
+        text: `=== TARGET WEDDING SCENE CONCEPT ("${angleTitle}" at ${preset.venueName}): Maintain this EXACT background architecture, lush landscape, camera angle, and posture; seamlessly transplant the authentic faces of the real client couple above ===`
+      });
       requestParts.push(targetScenePart);
+      requestParts.push({
+        text: `Now generate the final 8K Vogue Weddings standard photographic masterpiece where the real couple from the Client Reference Photos is seamlessly married in the setting of the Target Wedding Scene:`
+      });
     }
 
     const key = process.env.GEMINI_API_KEY || '';
