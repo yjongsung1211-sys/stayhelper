@@ -2513,7 +2513,7 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
   {
     "id": "editorial-look-v31",
     "title": "Daikanyama Layered Oversized Wool Trench & Wide Chinos",
-    "shortTitle": "Daikanyama Layered Oversized Wool Trench &",
+    "shortTitle": "Daikanyama Layered Oversized Wool Trench & Wide Chinos",
     "gender": "women",
     "category": "Elevated Off-Duty Casual",
     "aesthetic": "Elevated Off-Duty Casual",
@@ -4013,7 +4013,7 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
   {
     "id": "editorial-look-v43",
     "title": "Amalfi Cliffside Sculptural Linen Trench & Wedge Espadrilles",
-    "shortTitle": "Amalfi Cliffside Sculptural Linen Trench &",
+    "shortTitle": "Amalfi Cliffside Sculptural Linen Trench & Wedge Espadrilles",
     "gender": "women",
     "category": "Quiet Luxury & Minimal",
     "aesthetic": "Quiet Luxury & Minimal",
@@ -5013,7 +5013,7 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
   {
     "id": "editorial-look-v51",
     "title": "Mayfair Heritage Houndstooth Wool Trench & Knee Boots",
-    "shortTitle": "Mayfair Heritage Houndstooth Wool Trench &",
+    "shortTitle": "Mayfair Heritage Houndstooth Wool Trench & Knee Boots",
     "gender": "women",
     "category": "Quiet Luxury & Minimal",
     "aesthetic": "Quiet Luxury & Minimal",
@@ -5388,7 +5388,7 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
   {
     "id": "editorial-look-v54",
     "title": "Kensington Silk Foulard Blouse & Plaid Knife Pleated Skirt",
-    "shortTitle": "Kensington Silk Foulard Blouse & Plaid Kni",
+    "shortTitle": "Kensington Silk Foulard Blouse & Plaid Skirt",
     "gender": "women",
     "category": "Collegiate Preppy & Ivy",
     "aesthetic": "Collegiate Preppy & Ivy",
@@ -5888,7 +5888,7 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
   {
     "id": "editorial-look-v58",
     "title": "Belgravia Sculptural Double-Faced Wool Wrap & Beret",
-    "shortTitle": "Belgravia Sculptural Double-Faced Wool Wra",
+    "shortTitle": "Belgravia Sculptural Double-Faced Wool Wrap Coat",
     "gender": "women",
     "category": "Quiet Luxury & Minimal",
     "aesthetic": "Quiet Luxury & Minimal",
@@ -7138,7 +7138,7 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
   {
     "id": "editorial-look-v68",
     "title": "Helsinki Clean Architectural Wool Duster & Beret",
-    "shortTitle": "Helsinki Clean Architectural Wool Duster &",
+    "shortTitle": "Helsinki Clean Architectural Wool Duster & Beret",
     "gender": "women",
     "category": "Quiet Luxury & Minimal",
     "aesthetic": "Quiet Luxury & Minimal",
@@ -7388,7 +7388,7 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
   {
     "id": "editorial-look-v70",
     "title": "Scandi Gala Liquid Metallic Column Dress & Minimal Slide",
-    "shortTitle": "Scandi Gala Liquid Metallic Column Dress &",
+    "shortTitle": "Scandi Gala Liquid Metallic Column Dress & Minimal Slide",
     "gender": "women",
     "category": "Gala & Runway Glam",
     "aesthetic": "Gala & Runway Glam",
@@ -9138,7 +9138,7 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
   {
     "id": "editorial-look-v84",
     "title": "Bel-Air Silk Georgette Draped Shirtdress & Basket Tote",
-    "shortTitle": "Bel-Air Silk Georgette Draped Shirtdress &",
+    "shortTitle": "Bel-Air Silk Georgette Draped Shirtdress & Basket Tote",
     "gender": "women",
     "category": "Quiet Luxury & Minimal",
     "aesthetic": "Quiet Luxury & Minimal",
@@ -10480,14 +10480,15 @@ export default function StylingHelperRenewalPage() {
                   <span className="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[10px] uppercase font-bold tracking-wider text-neutral-800 shadow-sm">
                     {look.category}
                   </span>
-                  <span className="px-2.5 py-1 rounded-full bg-neutral-950/85 backdrop-blur-md text-[10px] font-bold tracking-wider uppercase text-amber-300 shadow-sm">
+                  <span className="px-2.5 py-1 rounded-full bg-neutral-900/90 backdrop-blur-md text-[10px] font-medium tracking-wider uppercase text-neutral-200 border border-white/20 shadow-sm flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#E5BE64]"></span>
                     Try-On Ready
                   </span>
                 </div>
 
                 {/* Hover Quick Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-neutral-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
-                  <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-amber-300 mb-1">
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/85 via-neutral-950/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-amber-200/90 mb-1">
                     {look.season}
                   </span>
                   <h3 className="font-serif text-lg font-light leading-snug mb-3">
@@ -10499,7 +10500,7 @@ export default function StylingHelperRenewalPage() {
                         e.stopPropagation();
                         setActiveLookModal(look);
                       }}
-                      className="flex-1 py-2 rounded-full bg-white text-neutral-950 text-xs font-semibold tracking-wider uppercase text-center hover:bg-neutral-100 transition-colors"
+                      className="flex-1 py-2 rounded-full bg-white hover:bg-neutral-100 text-neutral-950 text-xs font-semibold tracking-wider uppercase text-center transition-colors shadow-sm"
                     >
                       Style Blueprint
                     </button>
@@ -10508,7 +10509,7 @@ export default function StylingHelperRenewalPage() {
                         e.stopPropagation();
                         handleDirectTryOn(look);
                       }}
-                      className="px-4 py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-neutral-950 text-xs font-semibold tracking-wider uppercase transition-colors"
+                      className="px-5 py-2 rounded-full bg-neutral-950 hover:bg-black text-white text-xs font-semibold tracking-wider uppercase border border-white/25 transition-colors shadow-sm"
                       title="Try this look on your photo"
                     >
                       Try On
@@ -10522,7 +10523,7 @@ export default function StylingHelperRenewalPage() {
                 <div>
                   <div className="flex items-center justify-between text-[11px] text-neutral-500 mb-1.5">
                     <span className="font-medium text-neutral-600">{look.modelInfo.split('·')[0]}</span>
-                    <span className="text-[10px] font-bold text-amber-800 uppercase tracking-wider bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200/60">
+                    <span className="text-[10px] font-semibold text-neutral-700 uppercase tracking-wider bg-neutral-100 px-2.5 py-0.5 rounded-full border border-neutral-200/80">
                       {look.category}
                     </span>
                   </div>
@@ -10549,10 +10550,10 @@ export default function StylingHelperRenewalPage() {
 
                   <button
                     onClick={() => handleDirectTryOn(look)}
-                    className="text-xs uppercase tracking-wider font-semibold text-amber-700 hover:text-amber-800 flex items-center gap-1 transition-colors"
+                    className="text-xs uppercase tracking-wider font-semibold text-neutral-900 hover:text-black flex items-center gap-1.5 transition-colors"
                   >
                     <span>{isProSubscriber ? 'Style My Photo' : 'Try On (Pro)'}</span>
-                    {isProSubscriber ? <Wand2 className="w-3.5 h-3.5" /> : <Lock className="w-3.5 h-3.5 text-amber-600" />}
+                    {isProSubscriber ? <Wand2 className="w-3.5 h-3.5 text-neutral-700" /> : <Lock className="w-3.5 h-3.5 text-neutral-700" />}
                   </button>
                 </div>
               </div>
@@ -10585,8 +10586,8 @@ export default function StylingHelperRenewalPage() {
                     onClick={() => setModalViewMode('fitted')}
                     className={`px-3 py-1 rounded-full text-xs font-semibold tracking-wide transition-all ${
                       modalViewMode === 'fitted'
-                        ? 'bg-amber-400 text-neutral-950 shadow-sm'
-                        : 'text-neutral-300 hover:text-white'
+                        ? 'bg-white text-neutral-950 shadow-sm'
+                        : 'text-neutral-400 hover:text-white'
                     }`}
                   >
                     My Photo {cachedLookResults[activeLookModal.id] ? '(Fitted)' : ''}
@@ -10597,7 +10598,7 @@ export default function StylingHelperRenewalPage() {
                     className={`px-3 py-1 rounded-full text-xs font-semibold tracking-wide transition-all ${
                       modalViewMode === 'model'
                         ? 'bg-white text-neutral-950 shadow-sm'
-                        : 'text-neutral-300 hover:text-white'
+                        : 'text-neutral-400 hover:text-white'
                     }`}
                   >
                     Editorial Model
@@ -10624,7 +10625,7 @@ export default function StylingHelperRenewalPage() {
                     />
                     {!isModalGenerating && (
                       <div className="absolute inset-0 bg-neutral-950/45 backdrop-blur-[2px] flex flex-col items-center justify-center p-6 text-center">
-                        <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-amber-300 bg-neutral-950/80 px-3 py-1 rounded-full border border-amber-400/30 mb-3 shadow-md">
+                        <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-neutral-300 bg-neutral-950/80 px-3 py-1 rounded-full border border-white/20 mb-3 shadow-md">
                           Your Uploaded Photo
                         </span>
                         <h4 className="text-white font-serif text-lg sm:text-xl font-light mb-2">
@@ -10633,9 +10634,9 @@ export default function StylingHelperRenewalPage() {
                         <button
                           type="button"
                           onClick={() => handleExecuteModalStyling(activeLookModal)}
-                          className="mt-2 px-6 py-3 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-neutral-950 text-xs uppercase tracking-wider font-bold shadow-xl hover:scale-105 transition-all flex items-center gap-2"
+                          className="mt-2 px-6 py-3 rounded-full bg-white hover:bg-neutral-100 text-neutral-950 text-xs uppercase tracking-wider font-semibold shadow-xl hover:scale-105 transition-all flex items-center gap-2"
                         >
-                          <Sparkles className="w-4 h-4 text-neutral-950" />
+                          <Sparkles className="w-4 h-4 text-neutral-900" />
                           <span>Drape This Look On My Photo</span>
                         </button>
                       </div>
