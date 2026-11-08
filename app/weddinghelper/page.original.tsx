@@ -888,7 +888,29 @@ export default function WeddingHelperPage() {
       }
 
       // Redirect immediately to the dedicated high-speed 240 Masterpiece Gallery
-      router.push(`/weddinghelper/gallery?dest=${destId}&autoSynthesize=true`);
+      // Create permanent async order record on server
+      let orderIdParam = '';
+      try {
+        const orderRes = await fetch('/api/weddinghelper/order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: user?.email || 'vip.couple@wedding.com',
+            plan: 'grand',
+            selectedTheme: selectedThemeId,
+            proportions: { groomHeight, groomWeight, brideHeight, brideWeight },
+            clientImages: imagesToUse,
+          }),
+        });
+        const orderData = await orderRes.json();
+        if (orderData?.success && orderData.orderId) {
+          orderIdParam = `&orderId=${orderData.orderId}`;
+        }
+      } catch (orderErr) {
+        console.warn('Order create err:', orderErr);
+      }
+
+      router.push(`/weddinghelper/gallery?dest=${destId}&autoSynthesize=true${orderIdParam}`);
     } catch (err) {
       console.warn('Redirect error:', err);
     } finally {
