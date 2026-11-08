@@ -8,7 +8,15 @@ export const dynamic = "force-dynamic";
 const BOT_TOKEN = "8728900069:AAGQ1TiV7sPBXNwmfAs1GxxMnN0UTLgPZxs";
 const CHAT_ID = "8971100274";
 
-const MEMBERS_FILE = path.join(process.cwd(), "data", "stylinghelper_members.json");
+const TMP_FILE = path.join("/tmp", "stylinghelper_members.json");
+const LOCAL_FILE = path.join(process.cwd(), "data", "stylinghelper_members.json");
+
+function getStoragePath(): string {
+  if (process.env.VERCEL || process.platform === "linux") {
+    return TMP_FILE;
+  }
+  return LOCAL_FILE;
+}
 
 function sendTelegramNotification(text: string): Promise<boolean> {
   return new Promise((resolve) => {
@@ -45,16 +53,16 @@ function sendTelegramNotification(text: string): Promise<boolean> {
 
 function getMembers(): Record<string, any> {
   try {
-    if (!fs.existsSync(MEMBERS_FILE)) {
-      const dataDir = path.dirname(MEMBERS_FILE);
-      if (!fs.existsSync(dataDir)) {
-        fs.mkdirSync(dataDir, { recursive: true });
-      }
-      fs.writeFileSync(MEMBERS_FILE, JSON.stringify({}), "utf-8");
-      return {};
+    const targetFile = getStoragePath();
+    if (fs.existsSync(targetFile)) {
+      const data = fs.readFileSync(targetFile, "utf-8");
+      return JSON.parse(data || "{}");
     }
-    const data = fs.readFileSync(MEMBERS_FILE, "utf-8");
-    return JSON.parse(data || "{}");
+    if (fs.existsSync(LOCAL_FILE)) {
+      const data = fs.readFileSync(LOCAL_FILE, "utf-8");
+      return JSON.parse(data || "{}");
+    }
+    return {};
   } catch (err) {
     console.error("[StylingHelper Member DB Read Error]", err);
     return {};
@@ -62,14 +70,20 @@ function getMembers(): Record<string, any> {
 }
 
 function saveMembers(members: Record<string, any>) {
+  const targetFile = getStoragePath();
   try {
-    const dataDir = path.dirname(MEMBERS_FILE);
+    const dataDir = path.dirname(targetFile);
     if (!fs.existsSync(dataDir)) {
       fs.mkdirSync(dataDir, { recursive: true });
     }
-    fs.writeFileSync(MEMBERS_FILE, JSON.stringify(members, null, 2), "utf-8");
+    fs.writeFileSync(targetFile, JSON.stringify(members, null, 2), "utf-8");
   } catch (err) {
-    console.error("[StylingHelper Member DB Write Error]", err);
+    console.error(`[StylingHelper Member DB Write Error on ${targetFile}]`, err);
+    try {
+      fs.writeFileSync(TMP_FILE, JSON.stringify(members, null, 2), "utf-8");
+    } catch (tmpErr) {
+      console.error("[StylingHelper Member DB Write Error on /tmp]", tmpErr);
+    }
   }
 }
 
