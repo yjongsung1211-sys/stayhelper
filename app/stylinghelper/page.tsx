@@ -1269,8 +1269,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Quiet Luxury & Minimal",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_21_jiwoo_quiet_luxury.webp",
-    "modelInfo": "Jiwoo (지우) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo (지우) in Seoul Hannam-dong & Seongsu Art Zone. Hannam Asymmetrical Cashmere Cocoon & Split Hem Trousers, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Jiwoo · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo in Seoul Hannam-dong & Seongsu Art Zone. Hannam Asymmetrical Cashmere Cocoon & Split Hem Trousers, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -1394,8 +1394,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Modern Minimalist",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_22_minseo_modern_minimalist.webp",
-    "modelInfo": "Minseo (민서) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Minseo (민서) in Seoul Hannam-dong & Seongsu Art Zone. Seongsu Concrete Glass Minimalist Leather Blazer, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Minseo · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Minseo in Seoul Hannam-dong & Seongsu Art Zone. Seongsu Concrete Glass Minimalist Leather Blazer, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -1519,8 +1519,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Downtown Street Chic",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_23_sua_downtown_street.webp",
-    "modelInfo": "Sua (수아) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Sua (수아) in Seoul Hannam-dong & Seongsu Art Zone. Itaewon Understated Houndstooth Wool Tweed Overshirt, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Sua · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Sua in Seoul Hannam-dong & Seongsu Art Zone. Itaewon Understated Houndstooth Wool Tweed Overshirt, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -1644,8 +1644,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Elevated Off-Duty Casual",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_24_chaewon_elevated_casual.webp",
-    "modelInfo": "Chaewon (채원) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Chaewon (채원) in Seoul Hannam-dong & Seongsu Art Zone. Apgujeong Rodeo Relaxed Double Trench & Pleated Chinos, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Chaewon · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Chaewon in Seoul Hannam-dong & Seongsu Art Zone. Apgujeong Rodeo Relaxed Double Trench & Pleated Chinos, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -1769,8 +1769,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Quiet Luxury & Minimal",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_25_hana_quiet_luxury.webp",
-    "modelInfo": "Hana (하나) · 182cm / 6'0\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Hana (하나) in Seoul Hannam-dong & Seongsu Art Zone. Hannam Hill High-Neck Merino Tunic & Wide Silk Slacks, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Hana · 182cm / 6'0\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Hana in Seoul Hannam-dong & Seongsu Art Zone. Hannam Hill High-Neck Merino Tunic & Wide Silk Slacks, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -1894,8 +1894,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Downtown Street Chic",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_26_jiwoo_downtown_street.webp",
-    "modelInfo": "Jiwoo (지우) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo (지우) in Seoul Hannam-dong & Seongsu Art Zone. Seoul Forest Architectural Parka & Lug-Sole Ankle Boots, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Jiwoo · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo in Seoul Hannam-dong & Seongsu Art Zone. Seoul Forest Architectural Parka & Lug-Sole Ankle Boots, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -2019,8 +2019,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Modern Minimalist",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_27_minseo_modern_minimalist.webp",
-    "modelInfo": "Minseo (민서) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Minseo (민서) in Seoul Hannam-dong & Seongsu Art Zone. Dosan Boulevard Tailored Camel Hair Maxi Coat, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Minseo · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Minseo in Seoul Hannam-dong & Seongsu Art Zone. Dosan Boulevard Tailored Camel Hair Maxi Coat, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -2144,8 +2144,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Gala & Runway Glam",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_28_sua_gala_glam.webp",
-    "modelInfo": "Sua (수아) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Sua (수아) in Seoul Hannam-dong & Seongsu Art Zone. Cheongdam Modern Pleated Tailored Jumpsuit & Gold Cuff, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Sua · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Sua in Seoul Hannam-dong & Seongsu Art Zone. Cheongdam Modern Pleated Tailored Jumpsuit & Gold Cuff, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -2269,8 +2269,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Elevated Off-Duty Casual",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_29_chaewon_elevated_casual.webp",
-    "modelInfo": "Chaewon (채원) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Chaewon (채원) in Seoul Hannam-dong & Seongsu Art Zone. Seongsu Factory Washed Denim Duster & Western Boots, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Chaewon · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Chaewon in Seoul Hannam-dong & Seongsu Art Zone. Seongsu Factory Washed Denim Duster & Western Boots, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -2394,8 +2394,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Quiet Luxury & Minimal",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_30_hana_quiet_luxury.webp",
-    "modelInfo": "Hana (하나) · 182cm / 6'0\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Hana (하나) in Seoul Hannam-dong & Seongsu Art Zone. Samcheong Draped Wool Blanket Cape & Suede Riding Boots, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Hana · 182cm / 6'0\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Hana in Seoul Hannam-dong & Seongsu Art Zone. Samcheong Draped Wool Blanket Cape & Suede Riding Boots, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -2519,8 +2519,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Elevated Off-Duty Casual",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_31_jiwoo_elevated_casual.webp",
-    "modelInfo": "Jiwoo (지우) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo (지우) in Tokyo Daikanyama, Ginza & Harajuku. Daikanyama Layered Oversized Wool Trench & Wide Chinos, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Jiwoo · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo in Tokyo Daikanyama, Ginza & Harajuku. Daikanyama Layered Oversized Wool Trench & Wide Chinos, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -2644,8 +2644,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Modern Minimalist",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_32_minseo_modern_minimalist.webp",
-    "modelInfo": "Minseo (민서) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Minseo (민서) in Tokyo Daikanyama, Ginza & Harajuku. Ginza Sleek Architectural Minimalist Tailored Suit, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Minseo · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Minseo in Tokyo Daikanyama, Ginza & Harajuku. Ginza Sleek Architectural Minimalist Tailored Suit, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -2769,8 +2769,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Downtown Street Chic",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_33_sua_downtown_street.webp",
-    "modelInfo": "Sua (수아) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Sua (수아) in Tokyo Daikanyama, Ginza & Harajuku. Harajuku Avant-Garde Deconstructed Bomber & Chunky Boots, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Sua · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Sua in Tokyo Daikanyama, Ginza & Harajuku. Harajuku Avant-Garde Deconstructed Bomber & Chunky Boots, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -2894,8 +2894,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Quiet Luxury & Minimal",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_34_chaewon_quiet_luxury.webp",
-    "modelInfo": "Chaewon (채원) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Chaewon (채원) in Tokyo Daikanyama, Ginza & Harajuku. Omotesando Cashmere Turtleneck & Pleated Asymmetric Skirt, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Chaewon · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Chaewon in Tokyo Daikanyama, Ginza & Harajuku. Omotesando Cashmere Turtleneck & Pleated Asymmetric Skirt, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -3019,8 +3019,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Downtown Street Chic",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_35_hana_downtown_street.webp",
-    "modelInfo": "Hana (하나) · 182cm / 6'0\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Hana (하나) in Tokyo Daikanyama, Ginza & Harajuku. Shibuya High-End Technical Parka & Cargo Slacks, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Hana · 182cm / 6'0\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Hana in Tokyo Daikanyama, Ginza & Harajuku. Shibuya High-End Technical Parka & Cargo Slacks, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -3144,8 +3144,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Quiet Luxury & Minimal",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_36_jiwoo_quiet_luxury.webp",
-    "modelInfo": "Jiwoo (지우) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo (지우) in Tokyo Daikanyama, Ginza & Harajuku. Roppongi Hills Draped Silk Maxi Trench & Strappy Sandals, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Jiwoo · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo in Tokyo Daikanyama, Ginza & Harajuku. Roppongi Hills Draped Silk Maxi Trench & Strappy Sandals, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -3269,8 +3269,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Modern Minimalist",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_37_minseo_modern_minimalist.webp",
-    "modelInfo": "Minseo (민서) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Minseo (민서) in Tokyo Daikanyama, Ginza & Harajuku. Aoyama Sculptural Double-Breasted Wool Overcoat, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Minseo · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Minseo in Tokyo Daikanyama, Ginza & Harajuku. Aoyama Sculptural Double-Breasted Wool Overcoat, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -3394,8 +3394,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Gala & Runway Glam",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_38_sua_gala_glam.webp",
-    "modelInfo": "Sua (수아) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Sua (수아) in Tokyo Daikanyama, Ginza & Harajuku. Tokyo Midnight Velvet Slip & Kimono-Sleeve Duster, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Sua · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Sua in Tokyo Daikanyama, Ginza & Harajuku. Tokyo Midnight Velvet Slip & Kimono-Sleeve Duster, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -3519,8 +3519,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Elevated Off-Duty Casual",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_39_chaewon_elevated_casual.webp",
-    "modelInfo": "Chaewon (채원) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Chaewon (채원) in Tokyo Daikanyama, Ginza & Harajuku. Nakameguro Washed Japanese Selvedge Denim Jacket & Boots, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Chaewon · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Chaewon in Tokyo Daikanyama, Ginza & Harajuku. Nakameguro Washed Japanese Selvedge Denim Jacket & Boots, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -3644,8 +3644,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Gala & Runway Glam",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_40_hana_gala_glam.webp",
-    "modelInfo": "Hana (하나) · 182cm / 6'0\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Hana (하나) in Tokyo Daikanyama, Ginza & Harajuku. Ginza Six Bespoke Satin Lapel Evening Blazer & Stilettos, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Hana · 182cm / 6'0\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Hana in Tokyo Daikanyama, Ginza & Harajuku. Ginza Six Bespoke Satin Lapel Evening Blazer & Stilettos, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -3769,8 +3769,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Parisian & Riviera Chic",
     "season": "Spring / Summer 2026",
     "imageUrl": "/images/looks/look_41_jiwoo_parisian_riviera.webp",
-    "modelInfo": "Jiwoo (지우) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo (지우) in Portofino, Capri, Amalfi Coast & Lake Como. Portofino Silk Striped Overshirt & Linen Slacks, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Jiwoo · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo in Portofino, Capri, Amalfi Coast & Lake Como. Portofino Silk Striped Overshirt & Linen Slacks, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -3894,8 +3894,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Parisian & Riviera Chic",
     "season": "Spring / Summer 2026",
     "imageUrl": "/images/looks/look_42_minseo_parisian_riviera.webp",
-    "modelInfo": "Minseo (민서) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Minseo (민서) in Portofino, Capri, Amalfi Coast & Lake Como. Capri Marina Grande Ribbed Knit Halter & Silk Wrap Skirt, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Minseo · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Minseo in Portofino, Capri, Amalfi Coast & Lake Como. Capri Marina Grande Ribbed Knit Halter & Silk Wrap Skirt, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -4019,8 +4019,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Quiet Luxury & Minimal",
     "season": "Spring / Summer 2026",
     "imageUrl": "/images/looks/look_43_sua_quiet_luxury.webp",
-    "modelInfo": "Sua (수아) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Sua (수아) in Portofino, Capri, Amalfi Coast & Lake Como. Amalfi Cliffside Sculptural Linen Trench & Wedge Espadrilles, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Sua · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Sua in Portofino, Capri, Amalfi Coast & Lake Como. Amalfi Cliffside Sculptural Linen Trench & Wedge Espadrilles, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -4144,8 +4144,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Elevated Off-Duty Casual",
     "season": "Spring / Summer 2026",
     "imageUrl": "/images/looks/look_44_chaewon_elevated_casual.webp",
-    "modelInfo": "Chaewon (채원) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Chaewon (채원) in Portofino, Capri, Amalfi Coast & Lake Como. Positano Crochet Raffia Tunic & Tailored Bermuda Shorts, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Chaewon · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Chaewon in Portofino, Capri, Amalfi Coast & Lake Como. Positano Crochet Raffia Tunic & Tailored Bermuda Shorts, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -4269,8 +4269,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Gala & Runway Glam",
     "season": "Spring / Summer 2026",
     "imageUrl": "/images/looks/look_45_hana_gala_glam.webp",
-    "modelInfo": "Hana (하나) · 182cm / 6'0\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Hana (하나) in Portofino, Capri, Amalfi Coast & Lake Como. Bellagio Villa Terrace Fluid Pleated Silk Gown, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Hana · 182cm / 6'0\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Hana in Portofino, Capri, Amalfi Coast & Lake Como. Bellagio Villa Terrace Fluid Pleated Silk Gown, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -4394,8 +4394,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Parisian & Riviera Chic",
     "season": "Spring / Summer 2026",
     "imageUrl": "/images/looks/look_46_jiwoo_parisian_riviera.webp",
-    "modelInfo": "Jiwoo (지우) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo (지우) in Portofino, Capri, Amalfi Coast & Lake Como. Cinque Terre Marine Striped Boatneck & White Denim, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Jiwoo · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo in Portofino, Capri, Amalfi Coast & Lake Como. Cinque Terre Marine Striped Boatneck & White Denim, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -4519,8 +4519,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Quiet Luxury & Minimal",
     "season": "Spring / Summer 2026",
     "imageUrl": "/images/looks/look_47_minseo_quiet_luxury.webp",
-    "modelInfo": "Minseo (민서) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Minseo (민서) in Portofino, Capri, Amalfi Coast & Lake Como. Lake Como Fine Gauge Cashmere Cardigan & Wide Slacks, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Minseo · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Minseo in Portofino, Capri, Amalfi Coast & Lake Como. Lake Como Fine Gauge Cashmere Cardigan & Wide Slacks, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -4644,8 +4644,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Gala & Runway Glam",
     "season": "Spring / Summer 2026",
     "imageUrl": "/images/looks/look_48_sua_gala_glam.webp",
-    "modelInfo": "Sua (수아) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Sua (수아) in Portofino, Capri, Amalfi Coast & Lake Como. Ravello Gardens Draped Organza Halter Dress, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Sua · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Sua in Portofino, Capri, Amalfi Coast & Lake Como. Ravello Gardens Draped Organza Halter Dress, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -4769,8 +4769,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Elevated Off-Duty Casual",
     "season": "Spring / Summer 2026",
     "imageUrl": "/images/looks/look_49_chaewon_elevated_casual.webp",
-    "modelInfo": "Chaewon (채원) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Chaewon (채원) in Portofino, Capri, Amalfi Coast & Lake Como. Sorrento Sun-Washed Denim Vest & Fisherman Sandals, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Chaewon · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Chaewon in Portofino, Capri, Amalfi Coast & Lake Como. Sorrento Sun-Washed Denim Vest & Fisherman Sandals, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -4894,8 +4894,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Quiet Luxury & Minimal",
     "season": "Spring / Summer 2026",
     "imageUrl": "/images/looks/look_50_hana_quiet_luxury.webp",
-    "modelInfo": "Hana (하나) · 182cm / 6'0\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Hana (하나) in Portofino, Capri, Amalfi Coast & Lake Como. Tuscan Villa Evening Double-Faced Cashmere Duster, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Hana · 182cm / 6'0\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Hana in Portofino, Capri, Amalfi Coast & Lake Como. Tuscan Villa Evening Double-Faced Cashmere Duster, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -5019,8 +5019,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Quiet Luxury & Minimal",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_51_jiwoo_quiet_luxury.webp",
-    "modelInfo": "Jiwoo (지우) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo (지우) in London Mayfair, Savile Row & Shoreditch. Mayfair Heritage Houndstooth Wool Trench & Knee Boots, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Jiwoo · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo in London Mayfair, Savile Row & Shoreditch. Mayfair Heritage Houndstooth Wool Trench & Knee Boots, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -5144,8 +5144,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Collegiate Preppy & Ivy",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_52_minseo_collegiate_preppy.webp",
-    "modelInfo": "Minseo (민서) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Minseo (민서) in London Mayfair, Savile Row & Shoreditch. Savile Row Double-Breasted Pinstripe Suit & Oxford Loafers, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Minseo · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Minseo in London Mayfair, Savile Row & Shoreditch. Savile Row Double-Breasted Pinstripe Suit & Oxford Loafers, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -5269,8 +5269,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Downtown Street Chic",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_53_sua_downtown_street.webp",
-    "modelInfo": "Sua (수아) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Sua (수아) in London Mayfair, Savile Row & Shoreditch. Shoreditch Distressed Aviator Shearling & Combat Boots, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Sua · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Sua in London Mayfair, Savile Row & Shoreditch. Shoreditch Distressed Aviator Shearling & Combat Boots, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -5394,8 +5394,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Collegiate Preppy & Ivy",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_54_chaewon_collegiate_preppy.webp",
-    "modelInfo": "Chaewon (채원) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Chaewon (채원) in London Mayfair, Savile Row & Shoreditch. Kensington Silk Foulard Blouse & Plaid Knife Pleated Skirt, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Chaewon · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Chaewon in London Mayfair, Savile Row & Shoreditch. Kensington Silk Foulard Blouse & Plaid Knife Pleated Skirt, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -5519,8 +5519,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Elevated Off-Duty Casual",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_55_hana_elevated_casual.webp",
-    "modelInfo": "Hana (하나) · 182cm / 6'0\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Hana (하나) in London Mayfair, Savile Row & Shoreditch. Covent Garden Fine Cashmere Cable Knit & Corduroy Chinos, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Hana · 182cm / 6'0\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Hana in London Mayfair, Savile Row & Shoreditch. Covent Garden Fine Cashmere Cable Knit & Corduroy Chinos, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -5644,8 +5644,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Elevated Off-Duty Casual",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_56_jiwoo_elevated_casual.webp",
-    "modelInfo": "Jiwoo (지우) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo (지우) in London Mayfair, Savile Row & Shoreditch. Notting Hill Suede Belted Car Coat & Wide Straight Denim, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Jiwoo · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo in London Mayfair, Savile Row & Shoreditch. Notting Hill Suede Belted Car Coat & Wide Straight Denim, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -5769,8 +5769,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Modern Minimalist",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_57_minseo_modern_minimalist.webp",
-    "modelInfo": "Minseo (민서) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Minseo (민서) in London Mayfair, Savile Row & Shoreditch. SoHo London Black Patent Leather Trench & Pointed Boots, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Minseo · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Minseo in London Mayfair, Savile Row & Shoreditch. SoHo London Black Patent Leather Trench & Pointed Boots, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -5894,8 +5894,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Quiet Luxury & Minimal",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_58_sua_quiet_luxury.webp",
-    "modelInfo": "Sua (수아) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Sua (수아) in London Mayfair, Savile Row & Shoreditch. Belgravia Sculptural Double-Faced Wool Wrap & Beret, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Sua · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Sua in London Mayfair, Savile Row & Shoreditch. Belgravia Sculptural Double-Faced Wool Wrap & Beret, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -6019,8 +6019,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Modern Minimalist",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_59_chaewon_modern_minimalist.webp",
-    "modelInfo": "Chaewon (채원) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Chaewon (채원) in London Mayfair, Savile Row & Shoreditch. Tate Modern Contemporary Draped Asymmetric Dress & Mules, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Chaewon · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Chaewon in London Mayfair, Savile Row & Shoreditch. Tate Modern Contemporary Draped Asymmetric Dress & Mules, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -6144,8 +6144,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Gala & Runway Glam",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_60_hana_gala_glam.webp",
-    "modelInfo": "Hana (하나) · 182cm / 6'0\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Hana (하나) in London Mayfair, Savile Row & Shoreditch. Royal Opera House Midnight Velvet Gown & Opera Gloves, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Hana · 182cm / 6'0\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Hana in London Mayfair, Savile Row & Shoreditch. Royal Opera House Midnight Velvet Gown & Opera Gloves, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -6269,8 +6269,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Modern Minimalist",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_61_jiwoo_modern_minimalist.webp",
-    "modelInfo": "Jiwoo (지우) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo (지우) in Copenhagen Nyhavn & Stockholm Skeppsholmen. Copenhagen Oversized Wool Shacket & Tailored Wide Slacks, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Jiwoo · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo in Copenhagen Nyhavn & Stockholm Skeppsholmen. Copenhagen Oversized Wool Shacket & Tailored Wide Slacks, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -6394,8 +6394,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Modern Minimalist",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_62_minseo_modern_minimalist.webp",
-    "modelInfo": "Minseo (민서) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Minseo (민서) in Copenhagen Nyhavn & Stockholm Skeppsholmen. Stockholm Monochromatic Grey Cashmere Turtleneck & Culottes, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Minseo · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Minseo in Copenhagen Nyhavn & Stockholm Skeppsholmen. Stockholm Monochromatic Grey Cashmere Turtleneck & Culottes, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -6519,8 +6519,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Elevated Off-Duty Casual",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_63_sua_elevated_casual.webp",
-    "modelInfo": "Sua (수아) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Sua (수아) in Copenhagen Nyhavn & Stockholm Skeppsholmen. Nordic Chunky Fisherman Rib Knit & Raw Cuffed Denim, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Sua · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Sua in Copenhagen Nyhavn & Stockholm Skeppsholmen. Nordic Chunky Fisherman Rib Knit & Raw Cuffed Denim, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -6644,8 +6644,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Downtown Street Chic",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_64_chaewon_downtown_street.webp",
-    "modelInfo": "Chaewon (채원) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Chaewon (채원) in Copenhagen Nyhavn & Stockholm Skeppsholmen. Scandi Clean Padded Cocoon Shell & Chunky Lug Boots, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Chaewon · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Chaewon in Copenhagen Nyhavn & Stockholm Skeppsholmen. Scandi Clean Padded Cocoon Shell & Chunky Lug Boots, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -6769,8 +6769,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Quiet Luxury & Minimal",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_65_hana_quiet_luxury.webp",
-    "modelInfo": "Hana (하나) · 182cm / 6'0\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Hana (하나) in Copenhagen Nyhavn & Stockholm Skeppsholmen. Østerbro Minimalist Draped Trench & Square Leather Loafers, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Hana · 182cm / 6'0\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Hana in Copenhagen Nyhavn & Stockholm Skeppsholmen. Østerbro Minimalist Draped Trench & Square Leather Loafers, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -6894,8 +6894,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Downtown Street Chic",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_66_jiwoo_downtown_street.webp",
-    "modelInfo": "Jiwoo (지우) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo (지우) in Copenhagen Nyhavn & Stockholm Skeppsholmen. Vesterbro Street Pop Color Scarf & Distressed Leather Jacket, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Jiwoo · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo in Copenhagen Nyhavn & Stockholm Skeppsholmen. Vesterbro Street Pop Color Scarf & Distressed Leather Jacket, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -7019,8 +7019,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Modern Minimalist",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_67_minseo_modern_minimalist.webp",
-    "modelInfo": "Minseo (민서) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Minseo (민서) in Copenhagen Nyhavn & Stockholm Skeppsholmen. Aker Brygge Sleek Technical Trench & Rain Boots, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Minseo · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Minseo in Copenhagen Nyhavn & Stockholm Skeppsholmen. Aker Brygge Sleek Technical Trench & Rain Boots, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -7144,8 +7144,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Quiet Luxury & Minimal",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_68_sua_quiet_luxury.webp",
-    "modelInfo": "Sua (수아) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Sua (수아) in Copenhagen Nyhavn & Stockholm Skeppsholmen. Helsinki Clean Architectural Wool Duster & Beret, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Sua · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Sua in Copenhagen Nyhavn & Stockholm Skeppsholmen. Helsinki Clean Architectural Wool Duster & Beret, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -7269,8 +7269,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Elevated Off-Duty Casual",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_69_chaewon_elevated_casual.webp",
-    "modelInfo": "Chaewon (채원) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Chaewon (채원) in Copenhagen Nyhavn & Stockholm Skeppsholmen. Gothenburg Brushed Mohair Stripe Scarf & Minimal Slacks, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Chaewon · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Chaewon in Copenhagen Nyhavn & Stockholm Skeppsholmen. Gothenburg Brushed Mohair Stripe Scarf & Minimal Slacks, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -7394,8 +7394,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Gala & Runway Glam",
     "season": "Autumn / Winter 2026",
     "imageUrl": "/images/looks/look_70_hana_gala_glam.webp",
-    "modelInfo": "Hana (하나) · 182cm / 6'0\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Hana (하나) in Copenhagen Nyhavn & Stockholm Skeppsholmen. Scandi Gala Liquid Metallic Column Dress & Minimal Slide, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Hana · 182cm / 6'0\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Hana in Copenhagen Nyhavn & Stockholm Skeppsholmen. Scandi Gala Liquid Metallic Column Dress & Minimal Slide, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -7519,8 +7519,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Elevated Off-Duty Casual",
     "season": "Winter Special 2026",
     "imageUrl": "/images/looks/look_71_jiwoo_elevated_casual.webp",
-    "modelInfo": "Jiwoo (지우) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo (지우) in Aspen, St. Moritz, Megève & Whistler. St. Moritz Shearling Bomber & Cashmere Base, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Jiwoo · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo in Aspen, St. Moritz, Megève & Whistler. St. Moritz Shearling Bomber & Cashmere Base, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -7644,8 +7644,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Modern Minimalist",
     "season": "Winter Special 2026",
     "imageUrl": "/images/looks/look_72_minseo_modern_minimalist.webp",
-    "modelInfo": "Minseo (민서) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Minseo (민서) in Aspen, St. Moritz, Megève & Whistler. Aspen Monochromatic Cream Quilted Parka & Ski Pants, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Minseo · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Minseo in Aspen, St. Moritz, Megève & Whistler. Aspen Monochromatic Cream Quilted Parka & Ski Pants, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -7769,8 +7769,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Quiet Luxury & Minimal",
     "season": "Winter Special 2026",
     "imageUrl": "/images/looks/look_73_sua_quiet_luxury.webp",
-    "modelInfo": "Sua (수아) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Sua (수아) in Aspen, St. Moritz, Megève & Whistler. Megève Nordic Intarsia Wool Turtleneck & Suede Leggings, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Sua · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Sua in Aspen, St. Moritz, Megève & Whistler. Megève Nordic Intarsia Wool Turtleneck & Suede Leggings, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -7894,8 +7894,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Elevated Off-Duty Casual",
     "season": "Winter Special 2026",
     "imageUrl": "/images/looks/look_74_chaewon_elevated_casual.webp",
-    "modelInfo": "Chaewon (채원) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Chaewon (채원) in Aspen, St. Moritz, Megève & Whistler. Whistler Color-Block Retro Ski Jacket & Snow Boots, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Chaewon · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Chaewon in Aspen, St. Moritz, Megève & Whistler. Whistler Color-Block Retro Ski Jacket & Snow Boots, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -8019,8 +8019,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Quiet Luxury & Minimal",
     "season": "Winter Special 2026",
     "imageUrl": "/images/looks/look_75_hana_quiet_luxury.webp",
-    "modelInfo": "Hana (하나) · 182cm / 6'0\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Hana (하나) in Aspen, St. Moritz, Megève & Whistler. St. Moritz Grand Hotel Fireside Cashmere Cape & Suede Boots, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Hana · 182cm / 6'0\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Hana in Aspen, St. Moritz, Megève & Whistler. St. Moritz Grand Hotel Fireside Cashmere Cape & Suede Boots, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -8144,8 +8144,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Elevated Off-Duty Casual",
     "season": "Winter Special 2026",
     "imageUrl": "/images/looks/look_76_jiwoo_elevated_casual.webp",
-    "modelInfo": "Jiwoo (지우) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo (지우) in Aspen, St. Moritz, Megève & Whistler. Aspen Après-Ski Chunky Cable Turtleneck & Leather Trousers, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Jiwoo · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo in Aspen, St. Moritz, Megève & Whistler. Aspen Après-Ski Chunky Cable Turtleneck & Leather Trousers, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -8269,8 +8269,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Modern Minimalist",
     "season": "Winter Special 2026",
     "imageUrl": "/images/looks/look_77_minseo_modern_minimalist.webp",
-    "modelInfo": "Minseo (민서) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Minseo (민서) in Aspen, St. Moritz, Megève & Whistler. Cortina d'Ampezzo Tailored Wool Ski Overcoat & Visor, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Minseo · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Minseo in Aspen, St. Moritz, Megève & Whistler. Cortina d'Ampezzo Tailored Wool Ski Overcoat & Visor, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -8394,8 +8394,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Downtown Street Chic",
     "season": "Winter Special 2026",
     "imageUrl": "/images/looks/look_78_sua_downtown_street.webp",
-    "modelInfo": "Sua (수아) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Sua (수아) in Aspen, St. Moritz, Megève & Whistler. Zermatt Chalet Midnight Velvet Puffer & Wool Slacks, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Sua · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Sua in Aspen, St. Moritz, Megève & Whistler. Zermatt Chalet Midnight Velvet Puffer & Wool Slacks, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -8519,8 +8519,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Elevated Off-Duty Casual",
     "season": "Winter Special 2026",
     "imageUrl": "/images/looks/look_79_chaewon_elevated_casual.webp",
-    "modelInfo": "Chaewon (채원) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Chaewon (채원) in Aspen, St. Moritz, Megève & Whistler. Banff Heritage Plaid Fleece Shacket & Cuffed Denim, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Chaewon · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Chaewon in Aspen, St. Moritz, Megève & Whistler. Banff Heritage Plaid Fleece Shacket & Cuffed Denim, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -8644,8 +8644,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Gala & Runway Glam",
     "season": "Winter Special 2026",
     "imageUrl": "/images/looks/look_80_hana_gala_glam.webp",
-    "modelInfo": "Hana (하나) · 182cm / 6'0\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Hana (하나) in Aspen, St. Moritz, Megève & Whistler. Alpine Gala Liquid Gold Lurex Gown & Fur Bolero, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Hana · 182cm / 6'0\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Hana in Aspen, St. Moritz, Megève & Whistler. Alpine Gala Liquid Gold Lurex Gown & Fur Bolero, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -8769,8 +8769,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Downtown Street Chic",
     "season": "Spring / Summer 2026",
     "imageUrl": "/images/looks/look_81_jiwoo_downtown_street.webp",
-    "modelInfo": "Jiwoo (지우) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo (지우) in Venice Beach Boardwalk, Los Angeles. Venice Beach Sunset Cropped Suede Moto & Vintage Denim, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Jiwoo · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Jiwoo in Venice Beach Boardwalk, Los Angeles. Venice Beach Sunset Cropped Suede Moto & Vintage Denim, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -8894,8 +8894,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Parisian & Riviera Chic",
     "season": "Spring / Summer 2026",
     "imageUrl": "/images/looks/look_82_minseo_parisian_riviera.webp",
-    "modelInfo": "Minseo (민서) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Minseo (민서) in El Matador Beach, Malibu, California. Malibu Oceanfront Gauzy White Linen Duster & Slide Sandals, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Minseo · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Minseo in El Matador Beach, Malibu, California. Malibu Oceanfront Gauzy White Linen Duster & Slide Sandals, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -9019,8 +9019,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Elevated Off-Duty Casual",
     "season": "Spring / Summer 2026",
     "imageUrl": "/images/looks/look_83_sua_elevated_casual.webp",
-    "modelInfo": "Sua (수아) · 181cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Sua (수아) in Silver Lake Reservoir Cafe Patio, Los Angeles. Silver Lake Indie Ribbed Tank, Slouchy Alpaca Cardigan & Mules, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Sua · 181cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Sua in Silver Lake Reservoir Cafe Patio, Los Angeles. Silver Lake Indie Ribbed Tank, Slouchy Alpaca Cardigan & Mules, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -9144,8 +9144,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Quiet Luxury & Minimal",
     "season": "Spring / Summer 2026",
     "imageUrl": "/images/looks/look_84_hana_quiet_luxury.webp",
-    "modelInfo": "Hana (하나) · 182cm / 6'0\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Hana (하나) in Bel-Air Private Estate Garden, Los Angeles. Bel-Air Silk Georgette Draped Shirtdress & Basket Tote, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Hana · 182cm / 6'0\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Hana in Bel-Air Private Estate Garden, Los Angeles. Bel-Air Silk Georgette Draped Shirtdress & Basket Tote, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -9269,8 +9269,8 @@ const MASTER_EDITORIAL_LOOKS: EditorialMasterLook[] = [
     "aesthetic": "Modern Minimalist",
     "season": "Spring / Summer 2026",
     "imageUrl": "/images/looks/look_85_minseo_modern_minimalist.webp",
-    "modelInfo": "Minseo (민서) · 180cm / 5'11\" · Silhouette A",
-    "description": "Master editorial photograph of BLUE:NOTE's Minseo (민서) in Downtown LA Arts District, Los Angeles. Downtown LA Arts District Industrial Shell & Salomon Shoes, grounded in full-body vertical runway proportions.",
+    "modelInfo": "Minseo · 180cm / 5'11\" · Silhouette A",
+    "description": "Master editorial photograph of BLUE:NOTE's Minseo in Downtown LA Arts District, Los Angeles. Downtown LA Arts District Industrial Shell & Salomon Shoes, grounded in full-body vertical runway proportions.",
     "curatorNote": "Counterfactual Defect-Solution: High-density tailoring maintains structured lines with zero inner-crease distortion.",
     "colorPalette": [
       "#1A1A1A",
@@ -10010,27 +10010,27 @@ export default function StylingHelperRenewalPage() {
       {/* ================================================================= */}
       {/* 3. INTERACTIVE ONE-STOP FITTING ATELIER (Option A Unified Studio) */}
       {/* ================================================================= */}
-      <section ref={studioRef} className="py-16 lg:py-24 bg-[#0B0F17] text-white border-y border-neutral-800">
+      <section ref={studioRef} className="py-16 lg:py-24 bg-[#FBF9F5] border-y border-neutral-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-neutral-800/80">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-neutral-200">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-[11px] uppercase tracking-widest font-bold text-amber-300 mb-2">
-                <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-                <span>Interactive One-Stop Atelier · 실시간 원스톱 피팅 스튜디오</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/80 text-[10px] uppercase tracking-widest font-bold text-amber-900 mb-2">
+                <Sparkles className="w-3.5 h-3.5 text-amber-700" />
+                <span>Interactive One-Stop Atelier · Real-Time Fitting Studio</span>
               </div>
-              <h2 className="font-serif text-3xl sm:text-4xl font-light text-white leading-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl font-light text-neutral-950 leading-tight">
                 Virtual Runway Fitting Atelier
               </h2>
-              <p className="text-xs sm:text-sm text-neutral-400 mt-1 font-normal">
-                우측에서 3초 만에 상황과 스타일을 고르면, 좌측 내 실루엣에 즉시 장착되어 피팅할 수 있는 원스톱 스튜디오입니다.
+              <p className="text-xs sm:text-sm text-neutral-600 mt-1 font-normal">
+                Select your setting and aesthetic on the right. Your selected outfit instantly mounts to your silhouette on the left for seamless 4K virtual try-on.
               </p>
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="text-[11px] text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-3.5 py-1.5 rounded-full font-medium flex items-center gap-2 shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Real-Time IDM-VTON Engine Active</span>
+              <span className="text-[11px] text-emerald-800 bg-emerald-50 border border-emerald-200 px-3.5 py-1.5 rounded-full font-medium flex items-center gap-2 shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>IDM-VTON Precision Fitting Active</span>
               </span>
             </div>
           </div>
@@ -10039,7 +10039,7 @@ export default function StylingHelperRenewalPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* LEFT COLUMN (5 Cols): Real-Time Canvas Viewport & Drape Action */}
             <div className="lg:col-span-5 flex flex-col gap-4">
-              <div className="relative aspect-[3/4] w-full rounded-3xl overflow-hidden bg-neutral-900 border border-neutral-800 shadow-2xl">
+              <div className="relative aspect-[3/4] w-full rounded-3xl overflow-hidden bg-[#ECEAE4] border border-neutral-200 shadow-md">
                 {/* Floating Top Bar: Remove / Clear Photo */}
                 {isCustomPhoto && !isGenerating && (
                   <button
@@ -10084,7 +10084,7 @@ export default function StylingHelperRenewalPage() {
 
                 {/* Loading / Generating Spinner Overlay */}
                 {isGenerating && (
-                  <div className="absolute inset-0 bg-neutral-950/85 backdrop-blur-md z-30 flex flex-col items-center justify-center p-6 text-center text-white">
+                  <div className="absolute inset-0 bg-neutral-950/75 backdrop-blur-md z-30 flex flex-col items-center justify-center p-6 text-center text-white">
                     <div className="w-14 h-14 rounded-full border-2 border-white/20 border-t-amber-300 animate-spin mb-4" />
                     <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-amber-300 mb-2">
                       Precision 4K AI Try-On
@@ -10096,21 +10096,21 @@ export default function StylingHelperRenewalPage() {
                 )}
 
                 {/* Bottom Target Look Card Overlay */}
-                <div className="absolute bottom-4 left-4 right-4 z-20 p-3.5 rounded-2xl bg-neutral-950/90 backdrop-blur-md border border-white/10 shadow-xl flex items-center justify-between gap-3">
+                <div className="absolute bottom-4 left-4 right-4 z-20 p-3.5 rounded-2xl bg-white/95 backdrop-blur-md border border-neutral-200 shadow-xl flex items-center justify-between gap-3">
                   <div className="flex items-center gap-2.5 min-w-0">
                     <img
                       src={selectedTryOnLook.imageUrl}
                       alt={selectedTryOnLook.title}
-                      className="w-10 h-13 object-cover rounded-lg border border-white/20 shrink-0"
+                      className="w-10 h-13 object-cover rounded-lg border border-neutral-200 shrink-0"
                     />
                     <div className="min-w-0">
-                      <div className="text-[9px] uppercase font-bold tracking-widest text-amber-300">
-                        Target Outfit
+                      <div className="text-[9px] uppercase font-bold tracking-widest text-amber-700">
+                        Target Outfit Mounted
                       </div>
-                      <div className="text-xs font-semibold text-white truncate">
+                      <div className="text-xs font-semibold text-neutral-950 truncate">
                         {selectedTryOnLook.shortTitle}
                       </div>
-                      <div className="text-[10px] text-neutral-400 truncate">
+                      <div className="text-[10px] text-neutral-500 truncate">
                         {selectedTryOnLook.category}
                       </div>
                     </div>
@@ -10118,7 +10118,7 @@ export default function StylingHelperRenewalPage() {
 
                   <button
                     onClick={() => setActiveLookModal(selectedTryOnLook)}
-                    className="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-[11px] font-semibold tracking-wider uppercase shrink-0 transition-colors"
+                    className="px-3 py-1.5 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-800 text-[11px] font-semibold tracking-wider uppercase shrink-0 transition-colors"
                   >
                     Blueprint
                   </button>
@@ -10130,16 +10130,16 @@ export default function StylingHelperRenewalPage() {
                 <button
                   onClick={handleExecuteStyling}
                   disabled={isGenerating}
-                  className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-500 disabled:opacity-50 text-neutral-950 text-xs uppercase tracking-[0.18em] font-bold shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-2"
+                  className="w-full py-4 rounded-full bg-neutral-950 hover:bg-black disabled:opacity-50 text-white text-xs uppercase tracking-[0.18em] font-semibold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
                 >
                   {isGenerating ? (
                     <>
-                      <RefreshCw className="w-4 h-4 animate-spin text-neutral-950" />
+                      <RefreshCw className="w-4 h-4 animate-spin text-amber-300" />
                       <span>{progressStage || 'Synthesizing Runway Look...'}</span>
                     </>
                   ) : (
                     <>
-                      <Wand2 className="w-4 h-4 text-neutral-950" />
+                      <Wand2 className="w-4 h-4 text-amber-300" />
                       <span>Drape {selectedTryOnLook.shortTitle} on My Silhouette</span>
                     </>
                   )}
@@ -10147,24 +10147,24 @@ export default function StylingHelperRenewalPage() {
               ) : (
                 <button
                   onClick={() => setShowPaywallModal(true)}
-                  className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-400 hover:to-amber-600 text-white text-xs uppercase tracking-[0.18em] font-bold shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-2"
+                  className="w-full py-4 rounded-full bg-neutral-950 hover:bg-black text-white text-xs uppercase tracking-[0.18em] font-semibold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
                 >
-                  <Lock className="w-4 h-4 text-amber-200" />
+                  <Lock className="w-4 h-4 text-amber-300" />
                   <span>Subscribe to Pro to Try On ($19/mo)</span>
                 </button>
               )}
             </div>
 
             {/* RIGHT COLUMN (7 Cols): Control Studio (Silhouette + 3-Sec Curator + Recommended Looks) */}
-            <div className="lg:col-span-7 flex flex-col gap-6 bg-neutral-900/60 p-6 sm:p-8 rounded-3xl border border-neutral-800 shadow-xl">
+            <div className="lg:col-span-7 flex flex-col gap-6 bg-white p-6 sm:p-8 rounded-3xl border border-neutral-200 shadow-sm">
               {/* Step 1: Silhouette / Photo Selector */}
               <div>
                 <div className="flex items-center justify-between mb-2.5">
-                  <div className="text-xs uppercase tracking-wider font-bold text-neutral-300 flex items-center gap-2">
-                    <span className="w-4 h-4 rounded-full bg-amber-400 text-neutral-950 text-[10px] flex items-center justify-center font-bold">1</span>
-                    <span>내 실루엣 / 사진 선택</span>
+                  <div className="text-xs uppercase tracking-wider font-bold text-neutral-900 flex items-center gap-2">
+                    <span className="w-4 h-4 rounded-full bg-neutral-950 text-white text-[10px] flex items-center justify-center font-bold">1</span>
+                    <span>Select Silhouette or Upload Photo</span>
                   </div>
-                  <div className="text-[11px] text-neutral-400">
+                  <div className="text-[11px] text-neutral-500">
                     {userPhotoName}
                   </div>
                 </div>
@@ -10180,8 +10180,8 @@ export default function StylingHelperRenewalPage() {
                       }}
                       className={`relative aspect-[3/4] rounded-xl overflow-hidden border-2 transition-all ${
                         userPhoto === model.url
-                          ? 'border-amber-400 shadow-lg scale-105 ring-2 ring-amber-400/20'
-                          : 'border-neutral-800 opacity-60 hover:opacity-100 hover:border-neutral-600'
+                          ? 'border-neutral-950 shadow-md scale-105'
+                          : 'border-transparent opacity-65 hover:opacity-100 hover:border-neutral-300'
                       }`}
                       title={`${model.label} (${model.tag})`}
                     >
@@ -10202,52 +10202,51 @@ export default function StylingHelperRenewalPage() {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="flex-1 py-2.5 px-4 rounded-xl border border-dashed border-neutral-700 hover:border-amber-400/60 bg-neutral-950/50 hover:bg-neutral-950 text-neutral-300 text-xs font-medium transition-all flex items-center justify-center gap-2"
+                    className="flex-1 py-2.5 px-4 rounded-xl border border-dashed border-neutral-300 hover:border-neutral-950 bg-neutral-50 hover:bg-neutral-100 text-neutral-800 text-xs font-medium transition-all flex items-center justify-center gap-2"
                   >
-                    <Upload className="w-3.5 h-3.5 text-amber-300" />
-                    <span>{isCustomPhoto ? '다른 내 사진으로 교체하기' : '내 전신 사진 업로드 (얼굴·체형 100% 보존)'}</span>
+                    <Upload className="w-3.5 h-3.5 text-neutral-700" />
+                    <span>{isCustomPhoto ? 'Replace with Another Photo' : 'Upload Full-Body Photo (Face & Pose 100% Preserved)'}</span>
                   </button>
                   {isCustomPhoto && (
                     <button
                       type="button"
                       onClick={handleClearPhoto}
-                      className="px-3 py-2.5 rounded-xl bg-neutral-950 border border-neutral-800 text-rose-400 hover:text-rose-300 text-xs font-medium transition-colors"
+                      className="px-3 py-2.5 rounded-xl bg-white border border-neutral-200 text-rose-600 hover:text-rose-700 text-xs font-medium transition-colors"
                     >
-                      초기화
+                      Reset
                     </button>
                   )}
                 </div>
               </div>
 
-              {/* Step 2: 3-Second TPO & Mood Quick Selector */}
-              <div className="pt-4 border-t border-neutral-800 space-y-3.5">
-                <div className="text-xs uppercase tracking-wider font-bold text-neutral-300 flex items-center gap-2">
-                  <span className="w-4 h-4 rounded-full bg-amber-400 text-neutral-950 text-[10px] flex items-center justify-center font-bold">2</span>
-                  <span>상황(TPO) & 스타일 지정</span>
+              {/* Step 2: 3-Second Setting & Aesthetic Quick Selector */}
+              <div className="pt-4 border-t border-neutral-100 space-y-3.5">
+                <div className="text-xs uppercase tracking-wider font-bold text-neutral-900 flex items-center gap-2">
+                  <span className="w-4 h-4 rounded-full bg-neutral-950 text-white text-[10px] flex items-center justify-center font-bold">2</span>
+                  <span>Occasion & Aesthetic Direction</span>
                 </div>
 
-                {/* Occasion / TPO Pills */}
+                {/* Occasion / Setting Pills */}
                 <div className="flex flex-wrap gap-1.5">
                   {[
-                    { id: 'all', label: '모든 상황', icon: '✨' },
-                    { id: 'office', label: '오피스 미팅', icon: '🏢' },
-                    { id: 'casual', label: '주말 데일리', icon: '☕' },
-                    { id: 'gallery', label: '갤러리 데이트', icon: '🎨' },
-                    { id: 'resort', label: '휴양지 트래블', icon: '✈️' },
-                    { id: 'evening', label: '이브닝 파티', icon: '🍸' },
-                    { id: 'street', label: '어반 스트리트', icon: '🏙️' },
+                    { id: 'all', label: 'All Occasions' },
+                    { id: 'office', label: 'Private Office & Boardroom' },
+                    { id: 'casual', label: 'Weekend Brunch & Gallery' },
+                    { id: 'gallery', label: 'City Art & Evening Date' },
+                    { id: 'resort', label: 'Coastal Resort & Travel' },
+                    { id: 'evening', label: 'Gala & Dinner Soirée' },
+                    { id: 'street', label: 'Off-Duty Urban Street' },
                   ].map((item) => (
                     <button
                       key={item.id}
                       onClick={() => setCuratorOccasion(item.id)}
-                      className={`px-3 py-1 rounded-full text-xs font-medium transition-all flex items-center gap-1 ${
+                      className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
                         curatorOccasion === item.id
-                          ? 'bg-amber-400 text-neutral-950 font-bold shadow-sm'
-                          : 'bg-neutral-950 text-neutral-400 hover:text-white border border-neutral-800'
+                          ? 'bg-neutral-950 text-white font-semibold shadow-xs'
+                          : 'bg-neutral-100 hover:bg-neutral-200 text-neutral-700 border border-neutral-200/60'
                       }`}
                     >
-                      <span>{item.icon}</span>
-                      <span>{item.label}</span>
+                      {item.label}
                     </button>
                   ))}
                 </div>
@@ -10255,21 +10254,21 @@ export default function StylingHelperRenewalPage() {
                 {/* Aesthetic Mood Pills */}
                 <div className="flex flex-wrap gap-1.5">
                   {[
-                    { id: 'quiet luxury', label: '올드머니 & 콰이어트 럭셔리' },
-                    { id: 'minimalist', label: '모던 미니멀' },
-                    { id: 'preppy', label: '클래식 프레피' },
-                    { id: 'streetwear', label: '스트리트웨어' },
-                    { id: 'casual', label: '오프듀티 캐주얼' },
-                    { id: 'parisian', label: '파리지앵 트위드' },
-                    { id: 'glam', label: '갈라 글램' },
+                    { id: 'quiet luxury', label: 'Quiet Luxury & Old Money' },
+                    { id: 'minimalist', label: 'Architectural Minimalist' },
+                    { id: 'preppy', label: 'Collegiate Preppy & Ivy' },
+                    { id: 'streetwear', label: 'Contemporary Streetwear' },
+                    { id: 'casual', label: 'Elevated Off-Duty' },
+                    { id: 'parisian', label: 'Parisian Tweed' },
+                    { id: 'glam', label: 'Runway Glamour' },
                   ].map((item) => (
                     <button
                       key={item.id}
                       onClick={() => setCuratorMood(item.id)}
                       className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
                         curatorMood === item.id
-                          ? 'bg-white text-neutral-950 font-bold shadow-sm'
-                          : 'bg-neutral-950 text-neutral-400 hover:text-white border border-neutral-800'
+                          ? 'bg-amber-800 text-white font-semibold shadow-xs'
+                          : 'bg-neutral-100 hover:bg-neutral-200 text-neutral-700 border border-neutral-200/60'
                       }`}
                     >
                       {item.label}
@@ -10279,14 +10278,14 @@ export default function StylingHelperRenewalPage() {
               </div>
 
               {/* Step 3: Instant 4-Look Recommended Grid */}
-              <div className="pt-4 border-t border-neutral-800">
+              <div className="pt-4 border-t border-neutral-100">
                 <div className="flex items-center justify-between mb-3">
-                  <div className="text-xs uppercase tracking-wider font-bold text-neutral-300 flex items-center gap-2">
-                    <span className="w-4 h-4 rounded-full bg-amber-400 text-neutral-950 text-[10px] flex items-center justify-center font-bold">3</span>
-                    <span>추천 룩 원클릭 선택 (클릭 시 좌측 실루엣에 즉시 장착)</span>
+                  <div className="text-xs uppercase tracking-wider font-bold text-neutral-900 flex items-center gap-2">
+                    <span className="w-4 h-4 rounded-full bg-neutral-950 text-white text-[10px] flex items-center justify-center font-bold">3</span>
+                    <span>Curated Capsule Recommendations (Tap to Mount)</span>
                   </div>
-                  <div className="text-[11px] text-amber-300 font-medium">
-                    {recommendedLooks.length}개 최적 매칭
+                  <div className="text-[11px] text-amber-800 font-semibold bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200/60">
+                    {recommendedLooks.length} Best Matches
                   </div>
                 </div>
 
@@ -10297,25 +10296,25 @@ export default function StylingHelperRenewalPage() {
                       <div
                         key={look.id}
                         onClick={() => setSelectedTryOnLook(look)}
-                        className={`group cursor-pointer rounded-2xl overflow-hidden bg-neutral-950 border transition-all duration-300 flex flex-col relative ${
+                        className={`group cursor-pointer rounded-2xl overflow-hidden bg-white border transition-all duration-300 flex flex-col relative ${
                           isSelected
-                            ? 'border-amber-400 ring-2 ring-amber-400/30 shadow-xl scale-[1.02]'
-                            : 'border-neutral-800 hover:border-neutral-700 opacity-80 hover:opacity-100'
+                            ? 'border-neutral-950 ring-2 ring-neutral-950/20 shadow-md scale-[1.02]'
+                            : 'border-neutral-200 hover:border-neutral-400 opacity-85 hover:opacity-100'
                         }`}
                       >
                         {/* Match Pill */}
                         <div className="absolute top-2 left-2 z-10">
                           <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold tracking-wider uppercase ${
                             isSelected
-                              ? 'bg-amber-400 text-neutral-950'
-                              : 'bg-neutral-950/80 text-amber-300 border border-amber-400/30'
+                              ? 'bg-neutral-950 text-white'
+                              : 'bg-white/90 text-amber-800 border border-amber-300/80 shadow-xs'
                           }`}>
                             {idx === 0 ? '98% Match' : idx === 1 ? '95% Match' : '92% Match'}
                           </span>
                         </div>
 
                         {/* Image */}
-                        <div className="relative aspect-[3/4] overflow-hidden bg-neutral-900">
+                        <div className="relative aspect-[3/4] overflow-hidden bg-neutral-100">
                           <img
                             src={look.imageUrl}
                             alt={look.title}
@@ -10324,17 +10323,17 @@ export default function StylingHelperRenewalPage() {
                         </div>
 
                         {/* Look Info */}
-                        <div className="p-2.5 flex flex-col justify-between flex-1">
-                          <div className="text-[11px] font-medium text-white truncate">
+                        <div className="p-2.5 flex flex-col justify-between flex-1 bg-white">
+                          <div className="text-[11px] font-medium text-neutral-900 truncate">
                             {look.shortTitle}
                           </div>
-                          <div className="text-[9px] text-neutral-400 truncate mt-0.5">
+                          <div className="text-[9px] text-neutral-500 truncate mt-0.5">
                             {look.category}
                           </div>
 
-                          <div className="mt-2 pt-2 border-t border-neutral-800/80 flex items-center justify-between text-[10px]">
-                            <span className={isSelected ? 'text-amber-300 font-bold' : 'text-neutral-500'}>
-                              {isSelected ? '✓ 장착됨' : '선택하기'}
+                          <div className="mt-2 pt-2 border-t border-neutral-100 flex items-center justify-between text-[10px]">
+                            <span className={isSelected ? 'text-amber-800 font-bold' : 'text-neutral-500'}>
+                              {isSelected ? '✓ Mounted' : 'Tap to Mount'}
                             </span>
                             <button
                               type="button"
@@ -10342,7 +10341,7 @@ export default function StylingHelperRenewalPage() {
                                 e.stopPropagation();
                                 setActiveLookModal(look);
                               }}
-                              className="text-neutral-400 hover:text-white underline underline-offset-2"
+                              className="text-neutral-500 hover:text-neutral-950 underline underline-offset-2"
                             >
                               Blueprint
                             </button>
@@ -10359,9 +10358,9 @@ export default function StylingHelperRenewalPage() {
                 <button
                   type="button"
                   onClick={() => lookbookRef.current?.scrollIntoView({ behavior: 'smooth' })}
-                  className="inline-flex items-center gap-1.5 text-xs text-neutral-400 hover:text-amber-300 transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600 hover:text-neutral-950 transition-colors"
                 >
-                  <span>전체 89가지 추천 스타일 예시 모두 둘러보기 ↓</span>
+                  <span>Explore Complete 89-Look Master Archive ↓</span>
                   <ChevronDown className="w-3.5 h-3.5 animate-bounce" />
                 </button>
               </div>
@@ -10378,13 +10377,13 @@ export default function StylingHelperRenewalPage() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-neutral-200">
           <div>
             <span className="text-[10px] uppercase font-bold tracking-widest text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200/60 inline-block mb-1.5">
-              Curated Style Examples · 스타일 예시 쇼룸
+              Curated Style Examples · Editorial Showcase
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl font-light text-neutral-950 mt-1">
-              추천 스타일 전체 착장 예시 (89 Styles)
+              Curated Style Examples Showcase (89 Styles)
             </h2>
             <p className="text-xs text-neutral-500 mt-1 font-normal">
-              각 스타일별 실제 모델 착장 예시와 실루엣 연출 공식을 한눈에 둘러보고, 원하는 룩을 내 사진에 바로 입혀보실 수 있습니다.
+              Explore full-length editorial look examples and silhouette layering blueprints. Tap Try On on any look to immediately mount it in the atelier studio above.
             </p>
           </div>
 
