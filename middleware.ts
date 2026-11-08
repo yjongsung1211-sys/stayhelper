@@ -5,37 +5,43 @@ export function middleware(request: NextRequest) {
   const host = request.headers.get('x-forwarded-host') || request.headers.get('host') || '';
   const pathname = request.nextUrl.pathname;
 
-  // When accessing via weddinghelper.love, serve WeddingHelper at root '/' and gallery at '/gallery'
+  // When accessing via weddinghelper.love, serve WeddingHelper Coming Soon at all pages (except /invite if guest viewed)
   if (host.includes('weddinghelper')) {
-    if (pathname === '/') {
+    if (!pathname.startsWith('/invite')) {
       const url = request.nextUrl.clone();
       url.pathname = '/weddinghelper';
       return NextResponse.rewrite(url);
     }
-    if (pathname === '/gallery') {
-      const url = request.nextUrl.clone();
-      url.pathname = '/weddinghelper/gallery';
-      return NextResponse.rewrite(url);
-    }
   }
 
-  // When accessing via thestayhelper.com or any stayhelper domain, serve StayHelper at root '/'
-  if ((host.includes('thestayhelper') || host.includes('stayhelper')) && pathname === '/') {
+  // When accessing via thestayhelper.com or stayhelper
+  if (host.includes('thestayhelper') || host.includes('stayhelper')) {
     const url = request.nextUrl.clone();
     url.pathname = '/stayhelper';
     return NextResponse.rewrite(url);
   }
 
-  // When accessing via stylinghelper.com, serve StylingHelper at root '/'
-  if (host.includes('stylinghelper') && pathname === '/') {
+  // When accessing via roomhelper
+  if (host.includes('roomhelper')) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/roomhelper';
+    return NextResponse.rewrite(url);
+  }
+
+  // When accessing via stylinghelper.com
+  if (host.includes('stylinghelper')) {
     const url = request.nextUrl.clone();
     url.pathname = '/stylinghelper';
     return NextResponse.rewrite(url);
   }
 
-  // When accessing /stylinghelper via personalcolorhelper.com, redirect directly to official stylinghelper.com
-  if (host.includes('personalcolorhelper') && pathname.startsWith('/stylinghelper')) {
-    return NextResponse.redirect('https://stylinghelper.com', 301);
+  // When accessing via personalcolorhelper.com
+  if (host.includes('personalcolorhelper')) {
+    if (pathname !== '/') {
+      const url = request.nextUrl.clone();
+      url.pathname = '/';
+      return NextResponse.rewrite(url);
+    }
   }
 
   return NextResponse.next();
