@@ -9612,11 +9612,10 @@ export default function StylingHelperRenewalPage() {
   const handleDirectTryOn = (look: EditorialMasterLook) => {
     setSelectedTryOnLook(look);
     setActiveLookModal(null);
-    if (!isProSubscriber) {
-      setShowPaywallModal(true);
-      return;
-    }
     studioRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!isProSubscriber) {
+      // Optional subtle hint, but let them see the look in the studio first!
+    }
   };
 
   // Generate Virtual Try-On (Strict Pro Subscription Required)
@@ -9792,7 +9791,7 @@ export default function StylingHelperRenewalPage() {
     return list
       .filter((item) => item.score > 0)
       .sort((a, b) => b.score - a.score)
-      .slice(0, 3)
+      .slice(0, 4)
       .map((item) => item.look);
   }, [activeGenderFilter, curatorMood, curatorOccasion, curatorFit]);
 
@@ -10009,301 +10008,362 @@ export default function StylingHelperRenewalPage() {
       </section>
 
       {/* ================================================================= */}
-      {/* 3. VIRTUAL TRY-ON ATELIER STUDIO (Interactive Fitting Room)       */}
+      {/* 3. INTERACTIVE ONE-STOP FITTING ATELIER (Option A Unified Studio) */}
       {/* ================================================================= */}
-      <section ref={studioRef} className="py-20 lg:py-28 bg-[#F4F3F0] border-y border-neutral-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <span className="text-[10px] uppercase font-semibold tracking-[0.25em] text-neutral-500">
-              Interactive Fitting Atelier
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-light text-neutral-950 mt-1">
-              Virtual Runway Fitting
-            </h2>
-            <p className="text-xs sm:text-sm text-neutral-600 mt-2 font-normal">
-              Select an authentic editorial look, choose a sample model or upload your photo, and visualize your silhouette in seconds.
-            </p>
+      <section ref={studioRef} className="py-16 lg:py-24 bg-[#0B0F17] text-white border-y border-neutral-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-neutral-800/80">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-[11px] uppercase tracking-widest font-bold text-amber-300 mb-2">
+                <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                <span>Interactive One-Stop Atelier · 실시간 원스톱 피팅 스튜디오</span>
+              </div>
+              <h2 className="font-serif text-3xl sm:text-4xl font-light text-white leading-tight">
+                Virtual Runway Fitting Atelier
+              </h2>
+              <p className="text-xs sm:text-sm text-neutral-400 mt-1 font-normal">
+                우측에서 3초 만에 상황과 스타일을 고르면, 좌측 내 실루엣에 즉시 장착되어 피팅할 수 있는 원스톱 스튜디오입니다.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-3.5 py-1.5 rounded-full font-medium flex items-center gap-2 shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Real-Time IDM-VTON Engine Active</span>
+              </span>
+            </div>
           </div>
 
-          {/* Interactive Studio Workspace */}
-          <div className="bg-white rounded-3xl shadow-sm border border-neutral-200/80 p-6 sm:p-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              {/* Left Column (5 Cols): Model / Photo Selector */}
-              <div className="lg:col-span-5 flex flex-col gap-6">
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <label className="text-xs uppercase tracking-wider font-semibold text-neutral-800">
-                      Step 1: Choose or Upload Photo
-                    </label>
-                    <div className="flex items-center gap-2">
-                      {isCustomPhoto && (
-                        <button
-                          type="button"
-                          onClick={handleClearPhoto}
-                          className="text-[11px] font-semibold text-rose-600 hover:text-rose-700 underline underline-offset-2 flex items-center gap-1 transition-colors"
-                        >
-                          <Trash2 className="w-3 h-3" />
-                          <span>Remove Photo</span>
-                        </button>
-                      )}
-                      <span className="text-[11px] text-neutral-500 truncate max-w-[130px]">
-                        {userPhotoName}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Preset Realistic Models Grid */}
-                  <div className="grid grid-cols-6 gap-2 mb-4">
-                    {REALISTIC_SAMPLE_MODELS.map((model) => (
-                      <button
-                        key={model.id}
-                        onClick={() => {
-                          setUserPhoto(model.url);
-                          setUserPhotoName(`Preset: ${model.label}`);
-                          setStyledResult(null);
-                        }}
-                        className={`relative aspect-[3/4] rounded-xl overflow-hidden border-2 transition-all ${
-                          userPhoto === model.url
-                            ? 'border-neutral-950 shadow-sm scale-105'
-                            : 'border-transparent opacity-75 hover:opacity-100 hover:border-neutral-300'
-                        }`}
-                        title={`${model.label} (${model.tag})`}
-                      >
-                        <img
-                          src={model.thumb}
-                          alt={model.label}
-                          className="w-full h-full object-cover"
-                        />
-                      </button>
-                    ))}
-                  </div>
-
-                  {/* Uploaded Photo Active Card (When user uploaded photo) */}
-                  {isCustomPhoto ? (
-                    <div className="rounded-2xl border border-neutral-300 bg-neutral-50 p-4 mb-3">
-                      <div className="flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-3 min-w-0">
-                          <img
-                            src={userPhoto}
-                            alt="Uploaded photo"
-                            className="w-12 h-14 object-cover rounded-xl border border-neutral-300 shadow-sm flex-shrink-0"
-                          />
-                          <div className="min-w-0">
-                            <div className="text-xs font-bold text-neutral-950 truncate">
-                              {userPhotoName}
-                            </div>
-                            <div className="text-[11px] text-emerald-600 font-medium flex items-center gap-1 mt-0.5">
-                              <CheckCircle2 className="w-3 h-3 flex-shrink-0" />
-                              <span>Photo ready for virtual fitting</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-2 flex-shrink-0">
-                          <button
-                            type="button"
-                            onClick={() => fileInputRef.current?.click()}
-                            className="px-3 py-1.5 rounded-full bg-white hover:bg-neutral-100 border border-neutral-200 text-neutral-800 text-[11px] font-semibold transition-all"
-                          >
-                            Change
-                          </button>
-                          <button
-                            type="button"
-                            onClick={handleClearPhoto}
-                            className="px-3 py-1.5 rounded-full bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-700 text-[11px] font-semibold transition-all flex items-center gap-1"
-                            title="Remove uploaded photo"
-                          >
-                            <Trash2 className="w-3.5 h-3.5" />
-                            <span>Remove</span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  ) : null}
-
-                  {/* Drag & Drop Upload Zone */}
-                  <div
-                    onDragOver={(e) => {
-                      e.preventDefault();
-                      setIsDragging(true);
-                    }}
-                    onDragLeave={() => setIsDragging(false)}
-                    onDrop={handleFileDrop}
-                    className={`relative rounded-2xl border-2 border-dashed p-6 text-center transition-all ${
-                      isDragging
-                        ? 'border-neutral-950 bg-neutral-50'
-                        : 'border-neutral-300 hover:border-neutral-400 bg-neutral-50/50'
-                    }`}
+          {/* 2-Column Split Workspace */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            {/* LEFT COLUMN (5 Cols): Real-Time Canvas Viewport & Drape Action */}
+            <div className="lg:col-span-5 flex flex-col gap-4">
+              <div className="relative aspect-[3/4] w-full rounded-3xl overflow-hidden bg-neutral-900 border border-neutral-800 shadow-2xl">
+                {/* Floating Top Bar: Remove / Clear Photo */}
+                {isCustomPhoto && !isGenerating && (
+                  <button
+                    type="button"
+                    onClick={handleClearPhoto}
+                    className="absolute top-3.5 right-3.5 z-20 px-3.5 py-1.5 rounded-full bg-neutral-950/80 hover:bg-rose-600 text-white text-xs font-semibold tracking-wide backdrop-blur-md shadow-lg flex items-center gap-1.5 transition-all group"
+                    title="Clear photo & reset to default model"
                   >
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept="image/*"
-                      onChange={handleFileUpload}
-                      className="hidden"
-                    />
+                    <Trash2 className="w-3.5 h-3.5 text-rose-300 group-hover:text-white transition-colors" />
+                    <span>Remove Photo</span>
+                  </button>
+                )}
 
-                    <div className="flex flex-col items-center justify-center gap-2">
-                      <div className="w-10 h-10 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-neutral-700 shadow-sm">
-                        <Upload className="w-4 h-4" />
-                      </div>
-                      <div className="text-xs font-medium text-neutral-900">
-                        {isCustomPhoto ? 'Drop a new photo to replace, or ' : 'Drop your full-body photo here, or '}
-                        <button
-                          type="button"
-                          onClick={() => fileInputRef.current?.click()}
-                          className="text-neutral-950 font-bold underline underline-offset-2 hover:text-neutral-700"
-                        >
-                          browse files
-                        </button>
-                      </div>
-                      <p className="text-[11px] text-neutral-500">
-                        Supports JPG, PNG, WEBP (Face & body shape are 100% preserved)
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                {/* Floating Action: Reset to Original Photo when styled */}
+                {styledResult && !isGenerating && (
+                  <button
+                    type="button"
+                    onClick={() => setStyledResult(null)}
+                    className="absolute top-3.5 left-3.5 z-20 px-3.5 py-1.5 rounded-full bg-neutral-950/80 hover:bg-black text-white text-xs font-semibold tracking-wide backdrop-blur-md shadow-lg flex items-center gap-1.5 transition-all"
+                  >
+                    <RefreshCw className="w-3.5 h-3.5 text-amber-300" />
+                    <span>Reset View</span>
+                  </button>
+                )}
 
-                {/* Selected Look Indicator */}
-                <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200/80">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] uppercase font-semibold tracking-wider text-neutral-500">
-                      Step 2: Selected Look
+                {/* Main Canvas Viewport Image */}
+                {styledResult ? (
+                  <img
+                    src={styledResult.imageUrl}
+                    alt="AI Styled Silhouette"
+                    className="w-full h-full object-cover object-top animate-fadeIn"
+                  />
+                ) : (
+                  <img
+                    src={userPhoto}
+                    alt="Current Silhouette"
+                    className={`w-full h-full object-cover object-top transition-opacity ${
+                      isGenerating ? 'opacity-30 filter blur-sm' : 'opacity-100'
+                    }`}
+                  />
+                )}
+
+                {/* Loading / Generating Spinner Overlay */}
+                {isGenerating && (
+                  <div className="absolute inset-0 bg-neutral-950/85 backdrop-blur-md z-30 flex flex-col items-center justify-center p-6 text-center text-white">
+                    <div className="w-14 h-14 rounded-full border-2 border-white/20 border-t-amber-300 animate-spin mb-4" />
+                    <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-amber-300 mb-2">
+                      Precision 4K AI Try-On
                     </span>
-                    <span className="text-[10px] font-semibold text-amber-700 uppercase tracking-wider">
-                      {selectedTryOnLook.category}
-                    </span>
+                    <p className="text-sm font-medium text-neutral-200 max-w-xs">
+                      {progressStage || 'Draping tailored silhouette onto your proportions...'}
+                    </p>
                   </div>
-                  <div className="flex items-center gap-3">
+                )}
+
+                {/* Bottom Target Look Card Overlay */}
+                <div className="absolute bottom-4 left-4 right-4 z-20 p-3.5 rounded-2xl bg-neutral-950/90 backdrop-blur-md border border-white/10 shadow-xl flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2.5 min-w-0">
                     <img
                       src={selectedTryOnLook.imageUrl}
                       alt={selectedTryOnLook.title}
-                      className="w-12 h-16 object-cover rounded-lg border border-neutral-200"
+                      className="w-10 h-13 object-cover rounded-lg border border-white/20 shrink-0"
                     />
-                    <div className="flex-1 min-w-0">
-                      <div className="text-xs font-semibold text-neutral-900 truncate">
+                    <div className="min-w-0">
+                      <div className="text-[9px] uppercase font-bold tracking-widest text-amber-300">
+                        Target Outfit
+                      </div>
+                      <div className="text-xs font-semibold text-white truncate">
                         {selectedTryOnLook.shortTitle}
                       </div>
-                      <div className="text-[11px] text-neutral-500 truncate">
-                        {selectedTryOnLook.category} · {selectedTryOnLook.season}
+                      <div className="text-[10px] text-neutral-400 truncate">
+                        {selectedTryOnLook.category}
                       </div>
-                      <button
-                        onClick={() => lookbookRef.current?.scrollIntoView({ behavior: 'smooth' })}
-                        className="text-[11px] font-medium text-neutral-950 hover:underline mt-1 inline-block"
-                      >
-                        Change Look
-                      </button>
                     </div>
+                  </div>
+
+                  <button
+                    onClick={() => setActiveLookModal(selectedTryOnLook)}
+                    className="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-[11px] font-semibold tracking-wider uppercase shrink-0 transition-colors"
+                  >
+                    Blueprint
+                  </button>
+                </div>
+              </div>
+
+              {/* Primary Try-On Action Button */}
+              {isProSubscriber ? (
+                <button
+                  onClick={handleExecuteStyling}
+                  disabled={isGenerating}
+                  className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-500 disabled:opacity-50 text-neutral-950 text-xs uppercase tracking-[0.18em] font-bold shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-2"
+                >
+                  {isGenerating ? (
+                    <>
+                      <RefreshCw className="w-4 h-4 animate-spin text-neutral-950" />
+                      <span>{progressStage || 'Synthesizing Runway Look...'}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Wand2 className="w-4 h-4 text-neutral-950" />
+                      <span>Drape {selectedTryOnLook.shortTitle} on My Silhouette</span>
+                    </>
+                  )}
+                </button>
+              ) : (
+                <button
+                  onClick={() => setShowPaywallModal(true)}
+                  className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-400 hover:to-amber-600 text-white text-xs uppercase tracking-[0.18em] font-bold shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-2"
+                >
+                  <Lock className="w-4 h-4 text-amber-200" />
+                  <span>Subscribe to Pro to Try On ($19/mo)</span>
+                </button>
+              )}
+            </div>
+
+            {/* RIGHT COLUMN (7 Cols): Control Studio (Silhouette + 3-Sec Curator + Recommended Looks) */}
+            <div className="lg:col-span-7 flex flex-col gap-6 bg-neutral-900/60 p-6 sm:p-8 rounded-3xl border border-neutral-800 shadow-xl">
+              {/* Step 1: Silhouette / Photo Selector */}
+              <div>
+                <div className="flex items-center justify-between mb-2.5">
+                  <div className="text-xs uppercase tracking-wider font-bold text-neutral-300 flex items-center gap-2">
+                    <span className="w-4 h-4 rounded-full bg-amber-400 text-neutral-950 text-[10px] flex items-center justify-center font-bold">1</span>
+                    <span>내 실루엣 / 사진 선택</span>
+                  </div>
+                  <div className="text-[11px] text-neutral-400">
+                    {userPhotoName}
                   </div>
                 </div>
 
-                {/* Primary Execute Button - Strictly Subscription-Only */}
-                {isProSubscriber ? (
-                  <button
-                    onClick={handleExecuteStyling}
-                    disabled={isGenerating}
-                    className="w-full py-4 rounded-full bg-neutral-950 hover:bg-black disabled:bg-neutral-400 text-white text-xs uppercase tracking-[0.18em] font-semibold shadow-md transition-all flex items-center justify-center gap-2"
-                  >
-                    {isGenerating ? (
-                      <>
-                        <RefreshCw className="w-4 h-4 animate-spin text-amber-300" />
-                        <span>{progressStage || 'Synthesizing Runway Look...'}</span>
-                      </>
-                    ) : (
-                      <>
-                        <Wand2 className="w-4 h-4 text-amber-300" />
-                        <span>Execute Virtual Fitting (Pro Unlimited)</span>
-                      </>
-                    )}
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => setShowPaywallModal(true)}
-                    className="w-full py-4 rounded-full bg-gradient-to-r from-amber-600 via-amber-700 to-amber-800 hover:from-amber-500 hover:to-amber-700 text-white text-xs uppercase tracking-[0.18em] font-semibold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
-                  >
-                    <Lock className="w-4 h-4 text-amber-200" />
-                    <span>Subscribe to Pro to Try On ($19/mo)</span>
-                  </button>
-                )}
-              </div>
+                <div className="grid grid-cols-6 gap-2 mb-3">
+                  {REALISTIC_SAMPLE_MODELS.map((model) => (
+                    <button
+                      key={model.id}
+                      onClick={() => {
+                        setUserPhoto(model.url);
+                        setUserPhotoName(`Preset: ${model.label}`);
+                        setStyledResult(null);
+                      }}
+                      className={`relative aspect-[3/4] rounded-xl overflow-hidden border-2 transition-all ${
+                        userPhoto === model.url
+                          ? 'border-amber-400 shadow-lg scale-105 ring-2 ring-amber-400/20'
+                          : 'border-neutral-800 opacity-60 hover:opacity-100 hover:border-neutral-600'
+                      }`}
+                      title={`${model.label} (${model.tag})`}
+                    >
+                      <img src={model.thumb} alt={model.label} className="w-full h-full object-cover" />
+                    </button>
+                  ))}
+                </div>
 
-              {/* Right Column (7 Cols): Canvas & Result Viewport */}
-              <div className="lg:col-span-7 flex flex-col items-center justify-center">
-                <div className="relative w-full aspect-[3/4] max-w-md rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-200 shadow-md">
-                  {/* Floating Action: Remove / Clear Photo */}
-                  {isCustomPhoto && !isGenerating && (
+                {/* Upload Button */}
+                <div className="flex items-center gap-3">
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileUpload}
+                    className="hidden"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="flex-1 py-2.5 px-4 rounded-xl border border-dashed border-neutral-700 hover:border-amber-400/60 bg-neutral-950/50 hover:bg-neutral-950 text-neutral-300 text-xs font-medium transition-all flex items-center justify-center gap-2"
+                  >
+                    <Upload className="w-3.5 h-3.5 text-amber-300" />
+                    <span>{isCustomPhoto ? '다른 내 사진으로 교체하기' : '내 전신 사진 업로드 (얼굴·체형 100% 보존)'}</span>
+                  </button>
+                  {isCustomPhoto && (
                     <button
                       type="button"
                       onClick={handleClearPhoto}
-                      className="absolute top-3.5 right-3.5 z-20 px-3.5 py-1.5 rounded-full bg-neutral-950/80 hover:bg-rose-600 text-white text-xs font-semibold tracking-wide backdrop-blur-md shadow-lg flex items-center gap-1.5 transition-all group"
-                      title="Clear photo & reset to default model"
+                      className="px-3 py-2.5 rounded-xl bg-neutral-950 border border-neutral-800 text-rose-400 hover:text-rose-300 text-xs font-medium transition-colors"
                     >
-                      <Trash2 className="w-3.5 h-3.5 text-rose-300 group-hover:text-white transition-colors" />
-                      <span>Remove Photo</span>
+                      초기화
                     </button>
-                  )}
-
-                  {/* Floating Action: Reset to Original Photo when styled */}
-                  {styledResult && !isGenerating && (
-                    <button
-                      type="button"
-                      onClick={() => setStyledResult(null)}
-                      className="absolute top-3.5 left-3.5 z-20 px-3 py-1.5 rounded-full bg-neutral-950/80 hover:bg-neutral-900 text-white text-xs font-medium tracking-wide backdrop-blur-md shadow-lg flex items-center gap-1.5 transition-all"
-                      title="View original source photo"
-                    >
-                      <RefreshCw className="w-3.5 h-3.5 text-amber-300" />
-                      <span>Original Photo</span>
-                    </button>
-                  )}
-                  {styledResult ? (
-                    <img
-                      src={styledResult.imageUrl}
-                      alt="Virtual Fitting Result"
-                      className="w-full h-full object-cover object-top animate-fadeIn"
-                    />
-                  ) : (
-                    <img
-                      src={userPhoto}
-                      alt="Source Model"
-                      className={`w-full h-full object-cover object-top transition-opacity duration-300 ${
-                        isGenerating ? 'opacity-40 filter blur-sm' : 'opacity-100'
-                      }`}
-                    />
-                  )}
-
-                  {/* Processing Overlay */}
-                  {isGenerating && (
-                    <div className="absolute inset-0 bg-neutral-950/60 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center text-white">
-                      <div className="w-12 h-12 rounded-full border-2 border-white/20 border-t-amber-300 animate-spin mb-4" />
-                      <div className="text-xs uppercase tracking-[0.2em] text-amber-300 font-semibold mb-2">
-                        Precision AI Fitting
-                      </div>
-                      <p className="text-sm font-medium text-neutral-200 max-w-xs">
-                        {progressStage}
-                      </p>
-                    </div>
-                  )}
-
-                  {/* Result Badge */}
-                  {styledResult && (
-                    <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-neutral-950/85 backdrop-blur-md text-white flex items-center justify-between">
-                      <div>
-                        <div className="text-[10px] uppercase font-semibold tracking-wider text-amber-300">
-                          Fitted Capsule
-                        </div>
-                        <div className="text-xs font-medium truncate max-w-[200px]">
-                          {styledResult.look.shortTitle}
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => setActiveLookModal(styledResult.look)}
-                        className="px-3.5 py-1.5 rounded-full bg-white text-neutral-950 text-[11px] font-semibold tracking-wider uppercase hover:bg-neutral-100 transition-colors"
-                      >
-                        Style Blueprint
-                      </button>
-                    </div>
                   )}
                 </div>
+              </div>
+
+              {/* Step 2: 3-Second TPO & Mood Quick Selector */}
+              <div className="pt-4 border-t border-neutral-800 space-y-3.5">
+                <div className="text-xs uppercase tracking-wider font-bold text-neutral-300 flex items-center gap-2">
+                  <span className="w-4 h-4 rounded-full bg-amber-400 text-neutral-950 text-[10px] flex items-center justify-center font-bold">2</span>
+                  <span>상황(TPO) & 스타일 지정</span>
+                </div>
+
+                {/* Occasion / TPO Pills */}
+                <div className="flex flex-wrap gap-1.5">
+                  {[
+                    { id: 'all', label: '모든 상황', icon: '✨' },
+                    { id: 'office', label: '오피스 미팅', icon: '🏢' },
+                    { id: 'casual', label: '주말 데일리', icon: '☕' },
+                    { id: 'gallery', label: '갤러리 데이트', icon: '🎨' },
+                    { id: 'resort', label: '휴양지 트래블', icon: '✈️' },
+                    { id: 'evening', label: '이브닝 파티', icon: '🍸' },
+                    { id: 'street', label: '어반 스트리트', icon: '🏙️' },
+                  ].map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => setCuratorOccasion(item.id)}
+                      className={`px-3 py-1 rounded-full text-xs font-medium transition-all flex items-center gap-1 ${
+                        curatorOccasion === item.id
+                          ? 'bg-amber-400 text-neutral-950 font-bold shadow-sm'
+                          : 'bg-neutral-950 text-neutral-400 hover:text-white border border-neutral-800'
+                      }`}
+                    >
+                      <span>{item.icon}</span>
+                      <span>{item.label}</span>
+                    </button>
+                  ))}
+                </div>
+
+                {/* Aesthetic Mood Pills */}
+                <div className="flex flex-wrap gap-1.5">
+                  {[
+                    { id: 'quiet luxury', label: '올드머니 & 콰이어트 럭셔리' },
+                    { id: 'minimalist', label: '모던 미니멀' },
+                    { id: 'preppy', label: '클래식 프레피' },
+                    { id: 'streetwear', label: '스트리트웨어' },
+                    { id: 'casual', label: '오프듀티 캐주얼' },
+                    { id: 'parisian', label: '파리지앵 트위드' },
+                    { id: 'glam', label: '갈라 글램' },
+                  ].map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => setCuratorMood(item.id)}
+                      className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
+                        curatorMood === item.id
+                          ? 'bg-white text-neutral-950 font-bold shadow-sm'
+                          : 'bg-neutral-950 text-neutral-400 hover:text-white border border-neutral-800'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Step 3: Instant 4-Look Recommended Grid */}
+              <div className="pt-4 border-t border-neutral-800">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="text-xs uppercase tracking-wider font-bold text-neutral-300 flex items-center gap-2">
+                    <span className="w-4 h-4 rounded-full bg-amber-400 text-neutral-950 text-[10px] flex items-center justify-center font-bold">3</span>
+                    <span>추천 룩 원클릭 선택 (클릭 시 좌측 실루엣에 즉시 장착)</span>
+                  </div>
+                  <div className="text-[11px] text-amber-300 font-medium">
+                    {recommendedLooks.length}개 최적 매칭
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {recommendedLooks.map((look, idx) => {
+                    const isSelected = selectedTryOnLook.id === look.id;
+                    return (
+                      <div
+                        key={look.id}
+                        onClick={() => setSelectedTryOnLook(look)}
+                        className={`group cursor-pointer rounded-2xl overflow-hidden bg-neutral-950 border transition-all duration-300 flex flex-col relative ${
+                          isSelected
+                            ? 'border-amber-400 ring-2 ring-amber-400/30 shadow-xl scale-[1.02]'
+                            : 'border-neutral-800 hover:border-neutral-700 opacity-80 hover:opacity-100'
+                        }`}
+                      >
+                        {/* Match Pill */}
+                        <div className="absolute top-2 left-2 z-10">
+                          <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold tracking-wider uppercase ${
+                            isSelected
+                              ? 'bg-amber-400 text-neutral-950'
+                              : 'bg-neutral-950/80 text-amber-300 border border-amber-400/30'
+                          }`}>
+                            {idx === 0 ? '98% Match' : idx === 1 ? '95% Match' : '92% Match'}
+                          </span>
+                        </div>
+
+                        {/* Image */}
+                        <div className="relative aspect-[3/4] overflow-hidden bg-neutral-900">
+                          <img
+                            src={look.imageUrl}
+                            alt={look.title}
+                            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+
+                        {/* Look Info */}
+                        <div className="p-2.5 flex flex-col justify-between flex-1">
+                          <div className="text-[11px] font-medium text-white truncate">
+                            {look.shortTitle}
+                          </div>
+                          <div className="text-[9px] text-neutral-400 truncate mt-0.5">
+                            {look.category}
+                          </div>
+
+                          <div className="mt-2 pt-2 border-t border-neutral-800/80 flex items-center justify-between text-[10px]">
+                            <span className={isSelected ? 'text-amber-300 font-bold' : 'text-neutral-500'}>
+                              {isSelected ? '✓ 장착됨' : '선택하기'}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setActiveLookModal(look);
+                              }}
+                              className="text-neutral-400 hover:text-white underline underline-offset-2"
+                            >
+                              Blueprint
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Jump to 89 Archive */}
+              <div className="pt-2 text-center">
+                <button
+                  type="button"
+                  onClick={() => lookbookRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                  className="inline-flex items-center gap-1.5 text-xs text-neutral-400 hover:text-amber-300 transition-colors"
+                >
+                  <span>전체 89가지 추천 스타일 예시 모두 둘러보기 ↓</span>
+                  <ChevronDown className="w-3.5 h-3.5 animate-bounce" />
+                </button>
               </div>
             </div>
           </div>
@@ -10311,20 +10371,20 @@ export default function StylingHelperRenewalPage() {
       </section>
 
       {/* ================================================================= */}
-      {/* 4. CURATED MASTER LOOKBOOK GALLERY (Top 6 Master Looks)            */}
+      {/* 4. CURATED STYLE EXAMPLES SHOWCASE (89 Curated Looks)              */}
       {/* ================================================================= */}
       <section ref={lookbookRef} className="py-20 lg:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header & Filter Tabs */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-neutral-200">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-neutral-200">
           <div>
-            <span className="text-[10px] uppercase font-semibold tracking-[0.25em] text-neutral-400">
-              The Master Collection
+            <span className="text-[10px] uppercase font-bold tracking-widest text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200/60 inline-block mb-1.5">
+              Curated Style Examples · 스타일 예시 쇼룸
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl font-light text-neutral-950 mt-1">
-              Curated Editorial Edits
+              추천 스타일 전체 착장 예시 (89 Styles)
             </h2>
             <p className="text-xs text-neutral-500 mt-1 font-normal">
-              3초 맞춤 스타일 추천 또는 89가지 에디토리얼 아카이브에서 원하는 실루엣을 선택해 보세요.
+              각 스타일별 실제 모델 착장 예시와 실루엣 연출 공식을 한눈에 둘러보고, 원하는 룩을 내 사진에 바로 입혀보실 수 있습니다.
             </p>
           </div>
 
@@ -10364,254 +10424,6 @@ export default function StylingHelperRenewalPage() {
             </div>
           </div>
         </div>
-
-        {/* ================================================================= */}
-        {/* AI PERSONAL STYLE CURATOR: 3-SECOND BESPOKE RECOMMENDATION BOX    */}
-        {/* ================================================================= */}
-        <div className="mt-8 mb-16 rounded-3xl bg-[#0B0F17] text-white p-6 sm:p-10 border border-neutral-800/80 shadow-2xl relative overflow-hidden">
-          {/* Subtle Ambient Glow */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-
-          {/* Module Header */}
-          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-neutral-800">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-[11px] uppercase tracking-widest font-bold text-amber-300 mb-2">
-                <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-                <span>AI Bespoke Style Curator · 3초 맞춤 스타일 추천</span>
-              </div>
-              <h3 className="font-serif text-2xl sm:text-3xl font-light text-white leading-tight">
-                어떤 스타일과 상황을 찾으시나요?
-              </h3>
-              <p className="text-xs sm:text-sm text-neutral-400 mt-1 font-normal">
-                원하는 TPO와 무드를 선택하시면, 89가지 에디토리얼 아카이브 중 고객님께 가장 완벽한 3대 맞춤 룩을 즉시 큐레이션해 드립니다.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] text-amber-300/80 font-medium px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800">
-                실시간 큐레이션 활성화
-              </span>
-            </div>
-          </div>
-
-          {/* 3-Step Interactive Selector */}
-          <div className="relative z-10 py-6 space-y-5 border-b border-neutral-800/80">
-            {/* Step 1: Occasion / TPO */}
-            <div>
-              <div className="text-[11px] uppercase tracking-wider font-bold text-neutral-400 mb-2.5 flex items-center gap-2">
-                <span className="w-4 h-4 rounded-full bg-amber-400/20 text-amber-300 text-[10px] flex items-center justify-center font-mono">1</span>
-                <span>오늘 어떤 상황(TPO)에 입으시나요?</span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  { id: 'all', label: '모든 상황 (All)', icon: '✨' },
-                  { id: 'office', label: '오피스 & 비즈니스 미팅', icon: '🏢' },
-                  { id: 'casual', label: '주말 브런치 & 데일리', icon: '☕' },
-                  { id: 'gallery', label: '갤러리 & 데이트', icon: '🎨' },
-                  { id: 'resort', label: '휴양지 & 트래블', icon: '✈️' },
-                  { id: 'evening', label: '다이닝 & 이브닝 파티', icon: '🍸' },
-                  { id: 'street', label: '어반 스트리트 오프듀티', icon: '🏙️' },
-                ].map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => setCuratorOccasion(item.id)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 ${
-                      curatorOccasion === item.id
-                        ? 'bg-amber-400 text-neutral-950 font-bold shadow-md scale-[1.02]'
-                        : 'bg-neutral-900/90 text-neutral-300 hover:bg-neutral-800 hover:text-white border border-neutral-800'
-                    }`}
-                  >
-                    <span>{item.icon}</span>
-                    <span>{item.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Step 2: Aesthetic Mood */}
-            <div>
-              <div className="text-[11px] uppercase tracking-wider font-bold text-neutral-400 mb-2.5 flex items-center gap-2">
-                <span className="w-4 h-4 rounded-full bg-amber-400/20 text-amber-300 text-[10px] flex items-center justify-center font-mono">2</span>
-                <span>선호하는 스타일 무드는 무엇인가요?</span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  { id: 'quiet luxury', label: '올드머니 & 콰이어트 럭셔리' },
-                  { id: 'minimalist', label: '건축적 모던 미니멀' },
-                  { id: 'preppy', label: '클래식 프레피 & 아이비' },
-                  { id: 'streetwear', label: '컨템포러리 스트리트' },
-                  { id: 'casual', label: '엘리베이티드 오프듀티' },
-                  { id: 'parisian', label: '파리지앵 트위드' },
-                  { id: 'glam', label: '갈라 & 런웨이 글램' },
-                ].map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => setCuratorMood(item.id)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
-                      curatorMood === item.id
-                        ? 'bg-white text-neutral-950 font-bold shadow-md scale-[1.02]'
-                        : 'bg-neutral-900/90 text-neutral-300 hover:bg-neutral-800 hover:text-white border border-neutral-800'
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Step 3: Fit Focus */}
-            <div>
-              <div className="text-[11px] uppercase tracking-wider font-bold text-neutral-400 mb-2.5 flex items-center gap-2">
-                <span className="w-4 h-4 rounded-full bg-amber-400/20 text-amber-300 text-[10px] flex items-center justify-center font-mono">3</span>
-                <span>체형 실루엣 선호도</span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  { id: 'all', label: '전체 실루엣 밸런스' },
-                  { id: 'high-rise', label: '다리가 길어 보이는 하이웨이스트' },
-                  { id: 'tailored', label: '어깨선이 정돈된 테일러링' },
-                  { id: 'relaxed', label: '자연스러운 여유핏 & 루즈 드레이프' },
-                ].map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => setCuratorFit(item.id)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
-                      curatorFit === item.id
-                        ? 'bg-amber-300/20 text-amber-200 border border-amber-300/50 font-semibold'
-                        : 'bg-neutral-900/90 text-neutral-400 hover:bg-neutral-800 hover:text-neutral-200 border border-neutral-800'
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Curated Recommendations Result Spotlight (Top 3 Looks) */}
-          <div className="relative z-10 pt-8">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-amber-300">
-                  AI Style Recommendations · 맞춤 스타일 예시
-                </span>
-                <h4 className="font-serif text-xl sm:text-2xl font-light text-white mt-0.5">
-                  선택하신 스타일에 어울리는 착장 예시 (Top 3)
-                </h4>
-              </div>
-              <div className="text-xs text-neutral-400 hidden sm:block">
-                선택하신 스타일에 가장 최적화된 실루엣입니다.
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {recommendedLooks.map((look, idx) => (
-                <div
-                  key={look.id}
-                  className="group relative bg-neutral-900/90 rounded-2xl overflow-hidden border border-neutral-800 hover:border-amber-400/50 transition-all duration-300 flex flex-col shadow-xl"
-                >
-                  {/* Top Match Pill */}
-                  <div className="absolute top-3 left-3 z-10">
-                    <span className="px-2.5 py-1 rounded-full bg-neutral-950/85 backdrop-blur-md text-[10px] font-bold text-amber-300 border border-amber-400/40 uppercase tracking-wider shadow-md">
-                      ✨ {idx === 0 ? '98% Best Match' : idx === 1 ? '95% Strong Match' : '92% Ideal Match'}
-                    </span>
-                  </div>
-
-                  {/* Image Container */}
-                  <div
-                    onClick={() => setActiveLookModal(look)}
-                    className="relative aspect-[3/4] bg-neutral-950 cursor-pointer overflow-hidden"
-                  >
-                    <img
-                      src={look.imageUrl}
-                      alt={look.title}
-                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent opacity-80" />
-                    
-                    {/* Category pill on image */}
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] text-white">
-                      <span className="font-medium text-amber-200 uppercase tracking-wider text-[10px] px-2 py-0.5 rounded bg-neutral-950/60 backdrop-blur-sm border border-white/10">
-                        {look.category}
-                      </span>
-                      <span className="text-[10px] text-neutral-300">
-                        {look.season}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Card Content */}
-                  <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between bg-neutral-900">
-                    <div>
-                      <h5
-                        onClick={() => setActiveLookModal(look)}
-                        className="font-serif text-base sm:text-lg font-light text-white group-hover:text-amber-300 transition-colors cursor-pointer line-clamp-1"
-                      >
-                        {look.shortTitle}
-                      </h5>
-                      <p className="text-xs text-neutral-400 line-clamp-2 mt-1 leading-relaxed">
-                        {look.description}
-                      </p>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="pt-4 mt-4 border-t border-neutral-800/80 flex items-center gap-2">
-                      <button
-                        onClick={() => setActiveLookModal(look)}
-                        className="flex-1 py-2 rounded-full bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-semibold tracking-wider uppercase text-center transition-colors"
-                      >
-                        Style Blueprint
-                      </button>
-                      <button
-                        onClick={() => handleDirectTryOn(look)}
-                        className="flex-1 py-2 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-neutral-950 text-xs font-bold tracking-wider uppercase text-center shadow-md transition-all flex items-center justify-center gap-1"
-                      >
-                        <Sparkles className="w-3.5 h-3.5 text-neutral-950" />
-                        <span>Try On</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Hint to browse full collection */}
-            <div className="mt-8 text-center">
-              <button
-                onClick={() => {
-                  const el = document.getElementById('full-archive-section');
-                  el?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-neutral-400 hover:text-white transition-colors"
-              >
-                <span>전체 89가지 추천 스타일 예시 모두 둘러보기 (Explore All Examples)</span>
-                <ChevronDown className="w-4 h-4 animate-bounce" />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Anchor for scrolling down to full archive */}
-        <div id="full-archive-section" className="pt-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-5 border-b border-neutral-200">
-            <div>
-              <span className="text-[10px] uppercase font-bold tracking-widest text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200/60 inline-block mb-1.5">
-                Curated Style Examples · 스타일 예시 쇼룸
-              </span>
-              <h4 className="font-serif text-2xl sm:text-3xl font-light text-neutral-950">
-                추천 스타일 전체 착장 예시 (89 Styles)
-              </h4>
-              <p className="text-xs text-neutral-600 mt-1">
-                각 스타일별 실제 모델 착장 예시와 실루엣 연출 공식을 한눈에 둘러보실 수 있습니다.
-              </p>
-            </div>
-            <div className="text-xs font-semibold text-neutral-600 bg-neutral-100 px-3 py-1.5 rounded-full self-start sm:self-auto">
-              총 {filteredLooks.length}가지 스타일 착장 예시 제공
-            </div>
-          </div>
-        </div>
-
         {/* Aesthetic Vibe Filter Chips */}
         <div className="flex items-center gap-2 overflow-x-auto py-4 scrollbar-none border-b border-neutral-100">
           <span className="text-[10px] uppercase font-bold tracking-wider text-neutral-400 flex-shrink-0 mr-1">
