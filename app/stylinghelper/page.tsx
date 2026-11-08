@@ -9491,6 +9491,21 @@ export default function StylingHelperRenewalPage() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
   const [isProSubscriber, setIsProSubscriber] = useState<boolean>(false);
+  const [subscriptionDetails, setSubscriptionDetails] = useState<{
+    isPro: boolean;
+    isExpired: boolean;
+    daysRemaining: number;
+    paidAt: string | null;
+    expiresAt: string | null;
+    plan: string;
+  }>({
+    isPro: false,
+    isExpired: false,
+    daysRemaining: 0,
+    paidAt: null,
+    expiresAt: null,
+    plan: 'monthly'
+  });
   const [showPaywallModal, setShowPaywallModal] = useState<boolean>(false);
 
   // Report Modal state
@@ -9505,16 +9520,83 @@ export default function StylingHelperRenewalPage() {
   const studioRef = useRef<HTMLElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Sync Auth state & check Pro subscription (Query param ?pro=true enables instant test mode)
+  // Sync Auth state & check Pro subscription (Query param ?pro=true enables instant test mode with 30-day window)
   useEffect(() => {
     try {
       localStorage.removeItem('styling_free_trial_used');
       const searchParams = new URLSearchParams(window.location.search);
+      
+      // Admin / Testing direct activation (?pro=true grants exact 30-day cycle)
       if (searchParams.get('pro') === 'true') {
+        const nowIso = new Date().toISOString();
+        const expiresIso = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+        const adminSub = {
+          isPro: true,
+          isExpired: false,
+          daysRemaining: 30,
+          paidAt: nowIso,
+          expiresAt: expiresIso,
+          plan: 'monthly'
+        };
+        localStorage.setItem('styling_subscription', JSON.stringify(adminSub));
         localStorage.setItem('styling_is_pro_subscriber', 'true');
       }
-      const isPro = localStorage.getItem('styling_is_pro_subscriber') === 'true';
-      setIsProSubscriber(isPro);
+
+      // Precise 30-day expiration engine
+      const validateSubscription = () => {
+        try {
+          const rawSub = localStorage.getItem('styling_subscription');
+          if (rawSub) {
+            const sub = JSON.parse(rawSub);
+            const now = Date.now();
+            const expiresAtMs = sub.expiresAt ? new Date(sub.expiresAt).getTime() : 0;
+            
+            if (expiresAtMs && now >= expiresAtMs) {
+              // Exactly expired after 30 days
+              setIsProSubscriber(false);
+              setSubscriptionDetails({
+                isPro: false,
+                isExpired: true,
+                daysRemaining: 0,
+                paidAt: sub.paidAt || null,
+                expiresAt: sub.expiresAt,
+                plan: sub.plan || 'monthly'
+              });
+              localStorage.setItem('styling_is_pro_subscriber', 'false');
+            } else if (expiresAtMs) {
+              // Active with calculated remaining days
+              const days = Math.max(1, Math.ceil((expiresAtMs - now) / (1000 * 60 * 60 * 24)));
+              setIsProSubscriber(true);
+              setSubscriptionDetails({
+                isPro: true,
+                isExpired: false,
+                daysRemaining: days,
+                paidAt: sub.paidAt,
+                expiresAt: sub.expiresAt,
+                plan: sub.plan || 'monthly'
+              });
+              localStorage.setItem('styling_is_pro_subscriber', 'true');
+            }
+          } else {
+            const isPro = localStorage.getItem('styling_is_pro_subscriber') === 'true';
+            setIsProSubscriber(isPro);
+            if (isPro) {
+              const defaultExpires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+              setSubscriptionDetails({
+                isPro: true,
+                isExpired: false,
+                daysRemaining: 30,
+                paidAt: new Date().toISOString(),
+                expiresAt: defaultExpires,
+                plan: 'monthly'
+              });
+            }
+          }
+        } catch {
+          setIsProSubscriber(false);
+        }
+      };
+      validateSubscription();
 
       const syncUser = () => {
         try {
@@ -9523,7 +9605,29 @@ export default function StylingHelperRenewalPage() {
             localStorage.getItem('stayhelper_member') ||
             localStorage.getItem('stayhelper_user');
           if (stored) {
-            setCurrentUser(JSON.parse(stored));
+            const userObj = JSON.parse(stored);
+            setCurrentUser(userObj);
+            // Verify with server DB if email is present
+            if (userObj.email) {
+              fetch(`/api/stylinghelper/member?email=${encodeURIComponent(userObj.email)}`)
+                .then((r) => r.json())
+                .then((data) => {
+                  if (data.exists) {
+                    setIsProSubscriber(data.isPro);
+                    setSubscriptionDetails({
+                      isPro: data.isPro,
+                      isExpired: Boolean(data.isExpired),
+                      daysRemaining: data.daysRemaining || 0,
+                      paidAt: data.paidAt || null,
+                      expiresAt: data.expiresAt || null,
+                      plan: data.plan || 'monthly'
+                    });
+                    localStorage.setItem('styling_subscription', JSON.stringify(data));
+                    localStorage.setItem('styling_is_pro_subscriber', data.isPro ? 'true' : 'false');
+                  }
+                })
+                .catch(() => {});
+            }
           } else {
             setCurrentUser(null);
           }
@@ -9854,9 +9958,12 @@ export default function StylingHelperRenewalPage() {
           {/* Right Actions: Pro, Auth, & Direct CTA */}
           <div className="flex items-center gap-3">
             {isProSubscriber ? (
-              <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-900 text-amber-200 text-[10px] font-semibold tracking-wider uppercase">
+              <span
+                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-900 text-amber-200 text-[10px] font-semibold tracking-wider uppercase border border-amber-300/20 shadow-sm cursor-help"
+                title={subscriptionDetails.expiresAt ? `Pro valid until ${new Date(subscriptionDetails.expiresAt).toLocaleDateString()} (${subscriptionDetails.daysRemaining} days left)` : 'Pro Active'}
+              >
                 <Star className="w-3 h-3 fill-amber-300 text-amber-300" />
-                Pro Member
+                <span>PRO (D-{subscriptionDetails.daysRemaining || 30})</span>
               </span>
             ) : (
               <button
@@ -10832,7 +10939,7 @@ export default function StylingHelperRenewalPage() {
               Virtual Runway Fitting Atelier is exclusively reserved for Pro Subscribers. Subscribe now for unlimited 4K photorealistic outfit fittings, zero-watermark lookbook exports, and VIP stock sentinel alerts.
             </p>
 
-            <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200 text-left mb-6 space-y-2">
+            <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200 text-left mb-4 space-y-2">
               <div className="flex items-center gap-2 text-xs text-neutral-800 font-medium">
                 <Check className="w-4 h-4 text-emerald-600" />
                 <span>Unlimited photorealistic outfit swaps (4K Ultra-HD)</span>
@@ -10849,6 +10956,17 @@ export default function StylingHelperRenewalPage() {
                 <Check className="w-4 h-4 text-emerald-600" />
                 <span>Continuous high-fashion capsule drops & bespoke color harmony analysis</span>
               </div>
+            </div>
+
+            {/* Exact 30-Day Duration System Notice */}
+            <div className="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/60 text-left mb-6">
+              <div className="text-[11px] font-bold text-amber-900 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                <Star className="w-3 h-3 fill-amber-600 text-amber-600" />
+                <span>30-Day Billing Cycle · Recurring Monthly</span>
+              </div>
+              <p className="text-[11px] text-neutral-600 leading-relaxed font-normal">
+                Your Pro membership is active immediately upon payment and remains valid for exactly 30 calendar days. PayPal automatically manages the renewal every 30 days. You may cancel anytime with 1 click.
+              </p>
             </div>
 
             <a
