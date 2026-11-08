@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
       currency,
       ticketsAdded: tickets,
       activatedAt: new Date().toISOString(),
-      message: `성공적으로 ${tickets}회 진단권이 충전되었습니다.`,
+      message: "1회 정밀 진단 리포트가 성공적으로 해금되었습니다.",
     });
   } catch (error: any) {
     console.error("[ColorHelper Payment Error]:", error);
