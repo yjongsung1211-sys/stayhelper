@@ -3,25 +3,24 @@ import type { Metadata } from "next";
 import ServiceComingSoon from "@/components/ServiceComingSoon";
 
 export const metadata: Metadata = {
-  title: "RoomHelper • 마무리 작업 진행 중 (곧 돌아오겠습니다)",
+  title: "RoomHelper • Pre-Launch Final Polish (Back Soon)",
   description:
-    "룸헬퍼는 사이트 공개를 잠시 중단하고 모든 마무리 작업을 완료한 후 다시 공개할 예정입니다. 곧 돌아오겠습니다.",
+    "RoomHelper is temporarily paused while we complete final refinements and quality audits. We will be back soon with an elevated experience.",
 };
 
 export default function RoomHelperPage() {
   return (
     <ServiceComingSoon
-      serviceId="stay"
-      brandNameKo="룸헬퍼"
-      brandNameEn="RoomHelper"
-      categoryBadge="Curated World-Class Luxury Stays & Suites"
-      tagline="전 세계 5성급 럭셔리 스위트룸 큐레이션과 시네마틱 예약 경험을 위해 모든 마무리 작업을 진행하고 있습니다."
-      description="현재 룸헬퍼(RoomHelper)는 사이트 공개를 잠시 중단하고 모든 마무리 작업을 완료한 후 다시 공개될 예정입니다. 차원이 다른 완벽한 휴식과 감동으로 곧 돌아오겠습니다."
+      serviceId="room"
+      brandName="RoomHelper"
+      categoryBadge="AI Virtual Staging & Curated Living Space Studio"
+      tagline="We are finalizing our AI virtual staging engine and curated luxury interior product collections."
+      description="Public access is temporarily paused while we complete final rendering calibration and real-time product inventory sync. We will be back soon to transform your living spaces."
       accentColor="amber"
       completionTasks={[
-        "글로벌 5성급 럭셔리 리조트 및 스위트룸 프로모션 진위 검증 체계 고도화",
-        "호텔 공식 VIP 특전 및 룸 큐레이션 데이터 무결점 동기화",
-        "시네마틱 투어 비디오 플레이어 및 고속 스트리밍 인프라 최종 점검",
+        "AI virtual interior staging lighting & realistic material rendering engine",
+        "Curated designer furniture and authentic retail inventory sync",
+        "Interactive room comparison slider and ultra-responsive layout testing",
       ]}
     />
   );

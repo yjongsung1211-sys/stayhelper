@@ -3,25 +3,24 @@ import type { Metadata } from "next";
 import ServiceComingSoon from "@/components/ServiceComingSoon";
 
 export const metadata: Metadata = {
-  title: "RoomHelper • StayHelper • 마무리 작업 진행 중 (곧 돌아오겠습니다)",
+  title: "StayHelper • Pre-Launch Final Polish (Back Soon)",
   description:
-    "룸헬퍼(StayHelper)는 사이트 공개를 잠시 중단하고 모든 마무리 작업을 완료한 후 다시 공개할 예정입니다. 곧 돌아오겠습니다.",
+    "StayHelper is temporarily paused while we complete final refinements and quality audits. We will be back soon with an elevated experience.",
 };
 
 export default function StayHelperPage() {
   return (
     <ServiceComingSoon
       serviceId="stay"
-      brandNameKo="룸헬퍼 (StayHelper)"
-      brandNameEn="RoomHelper • StayHelper"
+      brandName="StayHelper"
       categoryBadge="Curated World-Class Luxury Stays & Suites"
-      tagline="전 세계 5성급 럭셔리 스위트룸 큐레이션과 시네마틱 예약 경험을 위해 모든 마무리 작업을 진행하고 있습니다."
-      description="현재 룸헬퍼(StayHelper)는 사이트 공개를 잠시 중단하고 모든 마무리 작업을 완료한 후 다시 공개될 예정입니다. 차원이 다른 완벽한 휴식과 감동으로 곧 돌아오겠습니다."
+      tagline="We are putting the finishing touches on our curated world-class 5-star luxury resort and suite experience."
+      description="Public access is temporarily paused while we finalize VIP privilege partnerships and cinematic booking interfaces. We will be back soon with an unparalleled sanctuary journey."
       accentColor="amber"
       completionTasks={[
-        "글로벌 5성급 럭셔리 리조트 및 스위트룸 프로모션 진위 검증 체계 고도화",
-        "호텔 공식 VIP 특전 및 룸 큐레이션 데이터 무결점 동기화",
-        "시네마틱 투어 비디오 플레이어 및 고속 스트리밍 인프라 최종 점검",
+        "Global 5-star luxury resort promotion authenticity verification engine",
+        "Official hotel VIP privileges and suite curation database synchronization",
+        "Cinematic 4K architectural tour player and high-speed streaming infrastructure",
       ]}
     />
   );
