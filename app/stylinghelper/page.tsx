@@ -9958,13 +9958,15 @@ export default function StylingHelperRenewalPage() {
           {/* Right Actions: Pro, Auth, & Direct CTA */}
           <div className="flex items-center gap-3">
             {isProSubscriber ? (
-              <span
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-900 text-amber-200 text-[10px] font-semibold tracking-wider uppercase border border-amber-300/20 shadow-sm cursor-help"
-                title={subscriptionDetails.expiresAt ? `Pro valid until ${new Date(subscriptionDetails.expiresAt).toLocaleDateString()} (${subscriptionDetails.daysRemaining} days left)` : 'Pro Active'}
-              >
-                <Star className="w-3 h-3 fill-amber-300 text-amber-300" />
-                <span>PRO (D-{subscriptionDetails.daysRemaining || 30})</span>
-              </span>
+              <div className="flex items-center gap-2">
+                <span
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950 text-emerald-300 text-[10px] font-bold tracking-wider uppercase border border-emerald-500/40 shadow-xs cursor-help"
+                  title={subscriptionDetails.expiresAt ? `Pro valid until ${new Date(subscriptionDetails.expiresAt).toLocaleDateString()} (${subscriptionDetails.daysRemaining} days left · 무제한 무료)` : 'Pro Active'}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span>구독중 · PRO ACTIVE (D-{subscriptionDetails.daysRemaining || 30})</span>
+                </span>
+              </div>
             ) : (
               <button
                 onClick={() => setShowPaywallModal(true)}
@@ -9977,12 +9979,23 @@ export default function StylingHelperRenewalPage() {
 
             {currentUser ? (
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-neutral-100 border border-neutral-200 text-xs">
-                <div className="w-5 h-5 rounded-full bg-neutral-900 text-white flex items-center justify-center text-[10px] font-bold uppercase">
-                  {currentUser.name?.[0] || 'U'}
+                <div className="w-5 h-5 rounded-full bg-neutral-950 text-white flex items-center justify-center text-[10px] font-bold uppercase">
+                  {currentUser.name?.[0] || currentUser.email?.[0] || 'U'}
                 </div>
-                <span className="font-medium text-neutral-800 hidden md:inline truncate max-w-[100px]">
-                  {currentUser.name || currentUser.email?.split('@')[0]}
-                </span>
+                <div className="hidden sm:flex flex-col text-left">
+                  <span className="font-semibold text-neutral-900 leading-tight">
+                    {currentUser.name || currentUser.email?.split('@')[0]}
+                  </span>
+                  {isProSubscriber ? (
+                    <span className="text-[9px] font-bold text-emerald-700 leading-tight">
+                      구독중 (D-{subscriptionDetails.daysRemaining || 30}일 무료 사용)
+                    </span>
+                  ) : (
+                    <span className="text-[9px] text-neutral-500 leading-tight">
+                      무료 체험회원
+                    </span>
+                  )}
+                </div>
                 <button
                   onClick={handleSignOut}
                   title="Sign Out"
@@ -10241,13 +10254,13 @@ export default function StylingHelperRenewalPage() {
                 >
                   {isGenerating ? (
                     <>
-                      <RefreshCw className="w-4 h-4 animate-spin text-amber-300" />
+                      <RefreshCw className="w-4 h-4 animate-spin text-emerald-300" />
                       <span>{progressStage || 'Synthesizing Runway Look...'}</span>
                     </>
                   ) : (
                     <>
-                      <Wand2 className="w-4 h-4 text-amber-300" />
-                      <span>Drape {selectedTryOnLook.shortTitle} on My Silhouette</span>
+                      <Wand2 className="w-4 h-4 text-emerald-400" />
+                      <span>구독회원 무료 피팅 · Drape on My Silhouette</span>
                     </>
                   )}
                 </button>
@@ -10659,8 +10672,8 @@ export default function StylingHelperRenewalPage() {
                     onClick={() => handleDirectTryOn(look)}
                     className="text-xs uppercase tracking-wider font-semibold text-neutral-900 hover:text-black flex items-center gap-1.5 transition-colors"
                   >
-                    <span>{isProSubscriber ? 'Style My Photo' : 'Try On (Pro)'}</span>
-                    {isProSubscriber ? <Wand2 className="w-3.5 h-3.5 text-neutral-700" /> : <Lock className="w-3.5 h-3.5 text-neutral-700" />}
+                    <span>{isProSubscriber ? '구독회원 무료 피팅' : 'Try On (Pro)'}</span>
+                    {isProSubscriber ? <Wand2 className="w-3.5 h-3.5 text-emerald-600" /> : <Lock className="w-3.5 h-3.5 text-neutral-700" />}
                   </button>
                 </div>
               </div>
@@ -10958,15 +10971,32 @@ export default function StylingHelperRenewalPage() {
               </div>
             </div>
 
-            {/* Exact 30-Day Duration System Notice */}
-            <div className="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/60 text-left mb-6">
-              <div className="text-[11px] font-bold text-amber-900 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                <Star className="w-3 h-3 fill-amber-600 text-amber-600" />
-                <span>30-Day Billing Cycle · Recurring Monthly</span>
+            {/* MANDATORY RECURRING BILLING & AUTO-RENEWAL DISCLOSURE (정기 결제 자동 갱신 필수 고지) */}
+            <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-300/80 text-left mb-5 space-y-2.5">
+              <div className="text-[11px] font-bold text-neutral-900 uppercase tracking-wider flex items-center justify-between border-b border-neutral-200/80 pb-2">
+                <span className="flex items-center gap-1.5">
+                  <RefreshCw className="w-3.5 h-3.5 text-neutral-800" />
+                  <span>Mandatory Recurring Billing Disclosure</span>
+                </span>
+                <span className="text-[10px] font-semibold text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded-full border border-amber-200/80 uppercase">
+                  Auto-Renewal
+                </span>
               </div>
-              <p className="text-[11px] text-neutral-600 leading-relaxed font-normal">
-                Your Pro membership is active immediately upon payment and remains valid for exactly 30 calendar days. PayPal automatically manages the renewal every 30 days. You may cancel anytime with 1 click.
-              </p>
+              
+              <ul className="text-xs text-neutral-600 space-y-2 leading-relaxed font-normal">
+                <li className="flex items-start gap-2">
+                  <span className="text-neutral-400 font-bold shrink-0 mt-0.5">•</span>
+                  <span><strong>Billing Frequency & Cycle:</strong> Billed at <strong>$19.00 USD once every 30 calendar days (monthly)</strong> via PayPal Recurring Billing.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-neutral-400 font-bold shrink-0 mt-0.5">•</span>
+                  <span><strong>Automatic Extension:</strong> Unless explicitly cancelled by the user prior to renewal, your subscription <strong>automatically renews for successive 1-month periods</strong> on each monthly billing date.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-neutral-400 font-bold shrink-0 mt-0.5">•</span>
+                  <span><strong>1-Click Cancellation Anytime:</strong> You may cancel anytime directly in your PayPal dashboard or by emailing concierge with zero penalty. Upon cancellation, your Pro benefits remain active until the conclusion of the paid 30-day term.</span>
+                </li>
+              </ul>
             </div>
 
             <a
@@ -10977,8 +11007,9 @@ export default function StylingHelperRenewalPage() {
             >
               Subscribe to Pro ($19 / month)
             </a>
-            <p className="text-[11px] text-neutral-400 mt-3">
-              Secured by PayPal 256-bit encryption · Cancel anytime with 1 click
+            
+            <p className="text-[11px] text-neutral-500 mt-3 leading-normal">
+              By clicking Subscribe, you authorize recurring monthly charges of $19/mo via PayPal until cancelled. Cancel anytime with 1 click.
             </p>
           </div>
         </div>
@@ -10991,7 +11022,31 @@ export default function StylingHelperRenewalPage() {
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
         initialMode={authMode}
-        onSuccess={() => setIsAuthModalOpen(false)}
+        onSuccess={(user) => {
+          if (user?.email) {
+            localStorage.setItem('stylinghelper_user', JSON.stringify(user));
+            fetch(`/api/stylinghelper/member?email=${encodeURIComponent(user.email)}`)
+              .then((r) => r.json())
+              .then((data) => {
+                if (data.exists && data.isPro) {
+                  setIsProSubscriber(true);
+                  setSubscriptionDetails({
+                    isPro: true,
+                    isExpired: false,
+                    daysRemaining: data.daysRemaining || 30,
+                    paidAt: data.paidAt || null,
+                    expiresAt: data.expiresAt || null,
+                    plan: data.plan || 'monthly'
+                  });
+                  localStorage.setItem('styling_subscription', JSON.stringify(data));
+                  localStorage.setItem('styling_is_pro_subscriber', 'true');
+                }
+              })
+              .catch(() => {});
+          }
+          setIsAuthModalOpen(false);
+          window.dispatchEvent(new Event('stylinghelper_auth_changed'));
+        }}
       />
 
       <ReportModal
@@ -11036,6 +11091,15 @@ export default function StylingHelperRenewalPage() {
           <div className="text-xs text-neutral-400">
             © 2026 STYLING HELPER. All rights reserved.
           </div>
+        </div>
+
+        {/* Mandatory Recurring Billing & Subscription Policy Disclosure */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-6 border-t border-neutral-200/80 text-[11px] text-neutral-500 leading-relaxed">
+          <div className="font-semibold text-neutral-700 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+            <RefreshCw className="w-3 h-3 text-neutral-600" />
+            <span>Mandatory Subscription & Recurring Billing Notice:</span>
+          </div>
+          StylingHelper Pro is a recurring monthly subscription ($19.00 USD / 30 calendar days). Membership access is activated immediately upon payment and remains valid for exactly 30 days. Unless cancelled by the subscriber prior to the renewal date, subscriptions automatically renew for successive 1-month periods via PayPal 30-day Recurring Billing. Subscribers may cancel recurring billing at any time through their PayPal account settings with zero cancellation fee, and Pro benefits will continue through the end of the paid 30-day billing cycle.
         </div>
       </footer>
     </div>
