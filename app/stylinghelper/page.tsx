@@ -10009,444 +10009,7 @@ export default function StylingHelperRenewalPage() {
       </section>
 
       {/* ================================================================= */}
-      {/* 3. CURATED MASTER LOOKBOOK GALLERY (Top 6 Master Looks)            */}
-      {/* ================================================================= */}
-      <section ref={lookbookRef} className="py-20 lg:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header & Filter Tabs */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-neutral-200">
-          <div>
-            <span className="text-[10px] uppercase font-semibold tracking-[0.25em] text-neutral-400">
-              The Master Collection
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-light text-neutral-950 mt-1">
-              Curated Editorial Edits
-            </h2>
-            <p className="text-xs text-neutral-500 mt-1 font-normal">
-              3초 맞춤 스타일 추천 또는 89가지 에디토리얼 아카이브에서 원하는 실루엣을 선택해 보세요.
-            </p>
-          </div>
-
-          {/* Gender Filter Tabs */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-            <div className="inline-flex p-1 rounded-full bg-neutral-200/60 border border-neutral-200">
-              <button
-                onClick={() => { setActiveGenderFilter('all'); setActiveAestheticFilter('all'); }}
-                className={`px-4 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium transition-all ${
-                  activeGenderFilter === 'all'
-                    ? 'bg-white text-neutral-950 shadow-sm'
-                    : 'text-neutral-600 hover:text-neutral-900'
-                }`}
-              >
-                All Styles ({MASTER_EDITORIAL_LOOKS.length})
-              </button>
-              <button
-                onClick={() => { setActiveGenderFilter('women'); }}
-                className={`px-4 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium transition-all ${
-                  activeGenderFilter === 'women'
-                    ? 'bg-white text-neutral-950 shadow-sm'
-                    : 'text-neutral-600 hover:text-neutral-900'
-                }`}
-              >
-                Women ({womenLooksCount})
-              </button>
-              <button
-                onClick={() => { setActiveGenderFilter('men'); }}
-                className={`px-4 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium transition-all ${
-                  activeGenderFilter === 'men'
-                    ? 'bg-white text-neutral-950 shadow-sm'
-                    : 'text-neutral-600 hover:text-neutral-900'
-                }`}
-              >
-                Men ({menLooksCount})
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* ================================================================= */}
-        {/* AI PERSONAL STYLE CURATOR: 3-SECOND BESPOKE RECOMMENDATION BOX    */}
-        {/* ================================================================= */}
-        <div className="mt-8 mb-16 rounded-3xl bg-[#0B0F17] text-white p-6 sm:p-10 border border-neutral-800/80 shadow-2xl relative overflow-hidden">
-          {/* Subtle Ambient Glow */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-
-          {/* Module Header */}
-          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-neutral-800">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-[11px] uppercase tracking-widest font-bold text-amber-300 mb-2">
-                <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-                <span>AI Bespoke Style Curator · 3초 맞춤 스타일 추천</span>
-              </div>
-              <h3 className="font-serif text-2xl sm:text-3xl font-light text-white leading-tight">
-                어떤 스타일과 상황을 찾으시나요?
-              </h3>
-              <p className="text-xs sm:text-sm text-neutral-400 mt-1 font-normal">
-                원하는 TPO와 무드를 선택하시면, 89가지 에디토리얼 아카이브 중 고객님께 가장 완벽한 3대 맞춤 룩을 즉시 큐레이션해 드립니다.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] text-amber-300/80 font-medium px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800">
-                실시간 큐레이션 활성화
-              </span>
-            </div>
-          </div>
-
-          {/* 3-Step Interactive Selector */}
-          <div className="relative z-10 py-6 space-y-5 border-b border-neutral-800/80">
-            {/* Step 1: Occasion / TPO */}
-            <div>
-              <div className="text-[11px] uppercase tracking-wider font-bold text-neutral-400 mb-2.5 flex items-center gap-2">
-                <span className="w-4 h-4 rounded-full bg-amber-400/20 text-amber-300 text-[10px] flex items-center justify-center font-mono">1</span>
-                <span>오늘 어떤 상황(TPO)에 입으시나요?</span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  { id: 'all', label: '모든 상황 (All)', icon: '✨' },
-                  { id: 'office', label: '오피스 & 비즈니스 미팅', icon: '🏢' },
-                  { id: 'casual', label: '주말 브런치 & 데일리', icon: '☕' },
-                  { id: 'gallery', label: '갤러리 & 데이트', icon: '🎨' },
-                  { id: 'resort', label: '휴양지 & 트래블', icon: '✈️' },
-                  { id: 'evening', label: '다이닝 & 이브닝 파티', icon: '🍸' },
-                  { id: 'street', label: '어반 스트리트 오프듀티', icon: '🏙️' },
-                ].map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => setCuratorOccasion(item.id)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 ${
-                      curatorOccasion === item.id
-                        ? 'bg-amber-400 text-neutral-950 font-bold shadow-md scale-[1.02]'
-                        : 'bg-neutral-900/90 text-neutral-300 hover:bg-neutral-800 hover:text-white border border-neutral-800'
-                    }`}
-                  >
-                    <span>{item.icon}</span>
-                    <span>{item.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Step 2: Aesthetic Mood */}
-            <div>
-              <div className="text-[11px] uppercase tracking-wider font-bold text-neutral-400 mb-2.5 flex items-center gap-2">
-                <span className="w-4 h-4 rounded-full bg-amber-400/20 text-amber-300 text-[10px] flex items-center justify-center font-mono">2</span>
-                <span>선호하는 스타일 무드는 무엇인가요?</span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  { id: 'quiet luxury', label: '올드머니 & 콰이어트 럭셔리' },
-                  { id: 'minimalist', label: '건축적 모던 미니멀' },
-                  { id: 'preppy', label: '클래식 프레피 & 아이비' },
-                  { id: 'streetwear', label: '컨템포러리 스트리트' },
-                  { id: 'casual', label: '엘리베이티드 오프듀티' },
-                  { id: 'parisian', label: '파리지앵 트위드' },
-                  { id: 'glam', label: '갈라 & 런웨이 글램' },
-                ].map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => setCuratorMood(item.id)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
-                      curatorMood === item.id
-                        ? 'bg-white text-neutral-950 font-bold shadow-md scale-[1.02]'
-                        : 'bg-neutral-900/90 text-neutral-300 hover:bg-neutral-800 hover:text-white border border-neutral-800'
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Step 3: Fit Focus */}
-            <div>
-              <div className="text-[11px] uppercase tracking-wider font-bold text-neutral-400 mb-2.5 flex items-center gap-2">
-                <span className="w-4 h-4 rounded-full bg-amber-400/20 text-amber-300 text-[10px] flex items-center justify-center font-mono">3</span>
-                <span>체형 실루엣 선호도</span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  { id: 'all', label: '전체 실루엣 밸런스' },
-                  { id: 'high-rise', label: '다리가 길어 보이는 하이웨이스트' },
-                  { id: 'tailored', label: '어깨선이 정돈된 테일러링' },
-                  { id: 'relaxed', label: '자연스러운 여유핏 & 루즈 드레이프' },
-                ].map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => setCuratorFit(item.id)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
-                      curatorFit === item.id
-                        ? 'bg-amber-300/20 text-amber-200 border border-amber-300/50 font-semibold'
-                        : 'bg-neutral-900/90 text-neutral-400 hover:bg-neutral-800 hover:text-neutral-200 border border-neutral-800'
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Curated Recommendations Result Spotlight (Top 3 Looks) */}
-          <div className="relative z-10 pt-8">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-amber-300">
-                  Recommended For You
-                </span>
-                <h4 className="font-serif text-xl sm:text-2xl font-light text-white mt-0.5">
-                  AI 추천 캡슐 컬렉션 (Top 3)
-                </h4>
-              </div>
-              <div className="text-xs text-neutral-400 hidden sm:block">
-                선택하신 스타일에 가장 최적화된 실루엣입니다.
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {recommendedLooks.map((look, idx) => (
-                <div
-                  key={look.id}
-                  className="group relative bg-neutral-900/90 rounded-2xl overflow-hidden border border-neutral-800 hover:border-amber-400/50 transition-all duration-300 flex flex-col shadow-xl"
-                >
-                  {/* Top Match Pill */}
-                  <div className="absolute top-3 left-3 z-10">
-                    <span className="px-2.5 py-1 rounded-full bg-neutral-950/85 backdrop-blur-md text-[10px] font-bold text-amber-300 border border-amber-400/40 uppercase tracking-wider shadow-md">
-                      ✨ {idx === 0 ? '98% Best Match' : idx === 1 ? '95% Strong Match' : '92% Ideal Match'}
-                    </span>
-                  </div>
-
-                  {/* Image Container */}
-                  <div
-                    onClick={() => setActiveLookModal(look)}
-                    className="relative aspect-[3/4] bg-neutral-950 cursor-pointer overflow-hidden"
-                  >
-                    <img
-                      src={look.imageUrl}
-                      alt={look.title}
-                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent opacity-80" />
-                    
-                    {/* Category pill on image */}
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] text-white">
-                      <span className="font-medium text-amber-200 uppercase tracking-wider text-[10px] px-2 py-0.5 rounded bg-neutral-950/60 backdrop-blur-sm border border-white/10">
-                        {look.category}
-                      </span>
-                      <span className="text-[10px] text-neutral-300">
-                        {look.season}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Card Content */}
-                  <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between bg-neutral-900">
-                    <div>
-                      <h5
-                        onClick={() => setActiveLookModal(look)}
-                        className="font-serif text-base sm:text-lg font-light text-white group-hover:text-amber-300 transition-colors cursor-pointer line-clamp-1"
-                      >
-                        {look.shortTitle}
-                      </h5>
-                      <p className="text-xs text-neutral-400 line-clamp-2 mt-1 leading-relaxed">
-                        {look.description}
-                      </p>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="pt-4 mt-4 border-t border-neutral-800/80 flex items-center gap-2">
-                      <button
-                        onClick={() => setActiveLookModal(look)}
-                        className="flex-1 py-2 rounded-full bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-semibold tracking-wider uppercase text-center transition-colors"
-                      >
-                        Style Blueprint
-                      </button>
-                      <button
-                        onClick={() => handleDirectTryOn(look)}
-                        className="flex-1 py-2 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-neutral-950 text-xs font-bold tracking-wider uppercase text-center shadow-md transition-all flex items-center justify-center gap-1"
-                      >
-                        <Sparkles className="w-3.5 h-3.5 text-neutral-950" />
-                        <span>Try On</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Hint to browse full collection */}
-            <div className="mt-8 text-center">
-              <button
-                onClick={() => {
-                  const el = document.getElementById('full-archive-section');
-                  el?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-neutral-400 hover:text-white transition-colors"
-              >
-                <span>전체 89가지 에디토리얼 아카이브 모두 둘러보기</span>
-                <ChevronDown className="w-4 h-4 animate-bounce" />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Anchor for scrolling down to full archive */}
-        <div id="full-archive-section" className="pt-4">
-          <div className="flex items-center justify-between pb-4">
-            <div>
-              <span className="text-[10px] uppercase font-bold tracking-widest text-neutral-400">
-                Full Collection Archive
-              </span>
-              <h4 className="font-serif text-xl sm:text-2xl font-light text-neutral-900">
-                전체 89가지 에디토리얼 룩북 아카이브
-              </h4>
-            </div>
-            <div className="text-xs text-neutral-500">
-              Showing {filteredLooks.length} curated looks
-            </div>
-          </div>
-        </div>
-
-        {/* Aesthetic Vibe Filter Chips */}
-        <div className="flex items-center gap-2 overflow-x-auto py-4 scrollbar-none border-b border-neutral-100">
-          <span className="text-[10px] uppercase font-bold tracking-wider text-neutral-400 flex-shrink-0 mr-1">
-            Vibe:
-          </span>
-          {[
-            { id: 'all', label: 'All Aesthetics' },
-            { id: 'quiet luxury', label: 'Quiet Luxury' },
-            { id: 'minimalist', label: 'Modern Minimalist' },
-            { id: 'parisian', label: 'Parisian Tweed' },
-            { id: 'street', label: 'Seoul Streetwear' },
-            { id: 'casual', label: 'Elevated Off-Duty' },
-            { id: 'preppy', label: 'Classic Preppy' },
-            { id: 'glam', label: 'Gala & Runway' },
-            { id: 'dandy', label: "Men's Sartorial" },
-          ].map((vibe) => (
-            <button
-              key={vibe.id}
-              onClick={() => setActiveAestheticFilter(vibe.id)}
-              className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
-                activeAestheticFilter === vibe.id
-                  ? 'bg-neutral-950 text-white shadow-sm'
-                  : 'bg-neutral-100 hover:bg-neutral-200 text-neutral-600'
-              }`}
-            >
-              {vibe.label}
-            </button>
-          ))}
-        </div>
-
-        {/* 6-Look Magazine Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 pt-12">
-          {filteredLooks.map((look, index) => (
-            <div
-              key={look.id}
-              className="group relative bg-white border border-neutral-200/80 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-500 flex flex-col"
-            >
-              {/* Image Container with Aspect Ratio */}
-              <div
-                onClick={() => setActiveLookModal(look)}
-                className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-100 cursor-pointer"
-              >
-                <img
-                  src={look.imageUrl}
-                  alt={look.title}
-                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                  loading="lazy"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/images/looks/look_01_soho_quiet_luxury_final.webp';
-                  }}
-                />
-
-                {/* Top Badge: Aesthetic Tag & Try-On Status (Zero Price shown on browsing card) */}
-                <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-                  <span className="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[10px] uppercase font-bold tracking-wider text-neutral-800 shadow-sm">
-                    {look.category}
-                  </span>
-                  <span className="px-2.5 py-1 rounded-full bg-neutral-950/85 backdrop-blur-md text-[10px] font-bold tracking-wider uppercase text-amber-300 shadow-sm">
-                    Try-On Ready
-                  </span>
-                </div>
-
-                {/* Hover Quick Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-neutral-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
-                  <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-amber-300 mb-1">
-                    {look.season}
-                  </span>
-                  <h3 className="font-serif text-lg font-light leading-snug mb-3">
-                    {look.shortTitle}
-                  </h3>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setActiveLookModal(look);
-                      }}
-                      className="flex-1 py-2 rounded-full bg-white text-neutral-950 text-xs font-semibold tracking-wider uppercase text-center hover:bg-neutral-100 transition-colors"
-                    >
-                      Style Blueprint
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDirectTryOn(look);
-                      }}
-                      className="px-4 py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-neutral-950 text-xs font-semibold tracking-wider uppercase transition-colors"
-                      title="Try this look on your photo"
-                    >
-                      Try On
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card Footer Details */}
-              <div className="p-5 flex flex-col flex-1 justify-between bg-white border-t border-neutral-100">
-                <div>
-                  <div className="flex items-center justify-between text-[11px] text-neutral-500 mb-1.5">
-                    <span className="font-medium text-neutral-600">{look.modelInfo.split('·')[0]}</span>
-                    <span className="text-[10px] font-bold text-amber-800 uppercase tracking-wider bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200/60">
-                      {look.category}
-                    </span>
-                  </div>
-                  <h3
-                    onClick={() => setActiveLookModal(look)}
-                    className="font-serif text-base sm:text-lg font-normal text-neutral-950 group-hover:text-neutral-700 cursor-pointer line-clamp-1 transition-colors"
-                  >
-                    {look.shortTitle}
-                  </h3>
-                  <p className="text-xs text-neutral-500 line-clamp-2 mt-1 font-normal leading-relaxed">
-                    {look.description}
-                  </p>
-                </div>
-
-                {/* Quick Action Footer */}
-                <div className="pt-4 mt-4 border-t border-neutral-100 flex items-center justify-between">
-                  <button
-                    onClick={() => setActiveLookModal(look)}
-                    className="text-xs uppercase tracking-wider font-semibold text-neutral-800 hover:text-neutral-950 flex items-center gap-1 transition-colors"
-                  >
-                    <span>Inspect Style</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </button>
-
-                  <button
-                    onClick={() => handleDirectTryOn(look)}
-                    className="text-xs uppercase tracking-wider font-semibold text-amber-700 hover:text-amber-800 flex items-center gap-1 transition-colors"
-                  >
-                    <span>{isProSubscriber ? 'Style My Photo' : 'Try On (Pro)'}</span>
-                    {isProSubscriber ? <Wand2 className="w-3.5 h-3.5" /> : <Lock className="w-3.5 h-3.5 text-amber-600" />}
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ================================================================= */}
-      {/* 4. VIRTUAL TRY-ON ATELIER STUDIO (Interactive Fitting Room)       */}
+      {/* 3. VIRTUAL TRY-ON ATELIER STUDIO (Interactive Fitting Room)       */}
       {/* ================================================================= */}
       <section ref={studioRef} className="py-20 lg:py-28 bg-[#F4F3F0] border-y border-neutral-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -10734,9 +10297,9 @@ export default function StylingHelperRenewalPage() {
                       </div>
                       <button
                         onClick={() => setActiveLookModal(styledResult.look)}
-                        className="px-3 py-1.5 rounded-full bg-white text-neutral-950 text-[11px] font-semibold tracking-wider uppercase hover:bg-neutral-100 transition-colors"
+                        className="px-3.5 py-1.5 rounded-full bg-white text-neutral-950 text-[11px] font-semibold tracking-wider uppercase hover:bg-neutral-100 transition-colors"
                       >
-                        Shop Items
+                        Style Blueprint
                       </button>
                     </div>
                   )}
@@ -10744,6 +10307,446 @@ export default function StylingHelperRenewalPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ================================================================= */}
+      {/* 4. CURATED MASTER LOOKBOOK GALLERY (Top 6 Master Looks)            */}
+      {/* ================================================================= */}
+      <section ref={lookbookRef} className="py-20 lg:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header & Filter Tabs */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-neutral-200">
+          <div>
+            <span className="text-[10px] uppercase font-semibold tracking-[0.25em] text-neutral-400">
+              The Master Collection
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl font-light text-neutral-950 mt-1">
+              Curated Editorial Edits
+            </h2>
+            <p className="text-xs text-neutral-500 mt-1 font-normal">
+              3초 맞춤 스타일 추천 또는 89가지 에디토리얼 아카이브에서 원하는 실루엣을 선택해 보세요.
+            </p>
+          </div>
+
+          {/* Gender Filter Tabs */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+            <div className="inline-flex p-1 rounded-full bg-neutral-200/60 border border-neutral-200">
+              <button
+                onClick={() => { setActiveGenderFilter('all'); setActiveAestheticFilter('all'); }}
+                className={`px-4 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium transition-all ${
+                  activeGenderFilter === 'all'
+                    ? 'bg-white text-neutral-950 shadow-sm'
+                    : 'text-neutral-600 hover:text-neutral-900'
+                }`}
+              >
+                All Styles ({MASTER_EDITORIAL_LOOKS.length})
+              </button>
+              <button
+                onClick={() => { setActiveGenderFilter('women'); }}
+                className={`px-4 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium transition-all ${
+                  activeGenderFilter === 'women'
+                    ? 'bg-white text-neutral-950 shadow-sm'
+                    : 'text-neutral-600 hover:text-neutral-900'
+                }`}
+              >
+                Women ({womenLooksCount})
+              </button>
+              <button
+                onClick={() => { setActiveGenderFilter('men'); }}
+                className={`px-4 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium transition-all ${
+                  activeGenderFilter === 'men'
+                    ? 'bg-white text-neutral-950 shadow-sm'
+                    : 'text-neutral-600 hover:text-neutral-900'
+                }`}
+              >
+                Men ({menLooksCount})
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* ================================================================= */}
+        {/* AI PERSONAL STYLE CURATOR: 3-SECOND BESPOKE RECOMMENDATION BOX    */}
+        {/* ================================================================= */}
+        <div className="mt-8 mb-16 rounded-3xl bg-[#0B0F17] text-white p-6 sm:p-10 border border-neutral-800/80 shadow-2xl relative overflow-hidden">
+          {/* Subtle Ambient Glow */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+
+          {/* Module Header */}
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-neutral-800">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-[11px] uppercase tracking-widest font-bold text-amber-300 mb-2">
+                <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                <span>AI Bespoke Style Curator · 3초 맞춤 스타일 추천</span>
+              </div>
+              <h3 className="font-serif text-2xl sm:text-3xl font-light text-white leading-tight">
+                어떤 스타일과 상황을 찾으시나요?
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-400 mt-1 font-normal">
+                원하는 TPO와 무드를 선택하시면, 89가지 에디토리얼 아카이브 중 고객님께 가장 완벽한 3대 맞춤 룩을 즉시 큐레이션해 드립니다.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] text-amber-300/80 font-medium px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800">
+                실시간 큐레이션 활성화
+              </span>
+            </div>
+          </div>
+
+          {/* 3-Step Interactive Selector */}
+          <div className="relative z-10 py-6 space-y-5 border-b border-neutral-800/80">
+            {/* Step 1: Occasion / TPO */}
+            <div>
+              <div className="text-[11px] uppercase tracking-wider font-bold text-neutral-400 mb-2.5 flex items-center gap-2">
+                <span className="w-4 h-4 rounded-full bg-amber-400/20 text-amber-300 text-[10px] flex items-center justify-center font-mono">1</span>
+                <span>오늘 어떤 상황(TPO)에 입으시나요?</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { id: 'all', label: '모든 상황 (All)', icon: '✨' },
+                  { id: 'office', label: '오피스 & 비즈니스 미팅', icon: '🏢' },
+                  { id: 'casual', label: '주말 브런치 & 데일리', icon: '☕' },
+                  { id: 'gallery', label: '갤러리 & 데이트', icon: '🎨' },
+                  { id: 'resort', label: '휴양지 & 트래블', icon: '✈️' },
+                  { id: 'evening', label: '다이닝 & 이브닝 파티', icon: '🍸' },
+                  { id: 'street', label: '어반 스트리트 오프듀티', icon: '🏙️' },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setCuratorOccasion(item.id)}
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 ${
+                      curatorOccasion === item.id
+                        ? 'bg-amber-400 text-neutral-950 font-bold shadow-md scale-[1.02]'
+                        : 'bg-neutral-900/90 text-neutral-300 hover:bg-neutral-800 hover:text-white border border-neutral-800'
+                    }`}
+                  >
+                    <span>{item.icon}</span>
+                    <span>{item.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Step 2: Aesthetic Mood */}
+            <div>
+              <div className="text-[11px] uppercase tracking-wider font-bold text-neutral-400 mb-2.5 flex items-center gap-2">
+                <span className="w-4 h-4 rounded-full bg-amber-400/20 text-amber-300 text-[10px] flex items-center justify-center font-mono">2</span>
+                <span>선호하는 스타일 무드는 무엇인가요?</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { id: 'quiet luxury', label: '올드머니 & 콰이어트 럭셔리' },
+                  { id: 'minimalist', label: '건축적 모던 미니멀' },
+                  { id: 'preppy', label: '클래식 프레피 & 아이비' },
+                  { id: 'streetwear', label: '컨템포러리 스트리트' },
+                  { id: 'casual', label: '엘리베이티드 오프듀티' },
+                  { id: 'parisian', label: '파리지앵 트위드' },
+                  { id: 'glam', label: '갈라 & 런웨이 글램' },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setCuratorMood(item.id)}
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+                      curatorMood === item.id
+                        ? 'bg-white text-neutral-950 font-bold shadow-md scale-[1.02]'
+                        : 'bg-neutral-900/90 text-neutral-300 hover:bg-neutral-800 hover:text-white border border-neutral-800'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Step 3: Fit Focus */}
+            <div>
+              <div className="text-[11px] uppercase tracking-wider font-bold text-neutral-400 mb-2.5 flex items-center gap-2">
+                <span className="w-4 h-4 rounded-full bg-amber-400/20 text-amber-300 text-[10px] flex items-center justify-center font-mono">3</span>
+                <span>체형 실루엣 선호도</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { id: 'all', label: '전체 실루엣 밸런스' },
+                  { id: 'high-rise', label: '다리가 길어 보이는 하이웨이스트' },
+                  { id: 'tailored', label: '어깨선이 정돈된 테일러링' },
+                  { id: 'relaxed', label: '자연스러운 여유핏 & 루즈 드레이프' },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setCuratorFit(item.id)}
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+                      curatorFit === item.id
+                        ? 'bg-amber-300/20 text-amber-200 border border-amber-300/50 font-semibold'
+                        : 'bg-neutral-900/90 text-neutral-400 hover:bg-neutral-800 hover:text-neutral-200 border border-neutral-800'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Curated Recommendations Result Spotlight (Top 3 Looks) */}
+          <div className="relative z-10 pt-8">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-amber-300">
+                  AI Style Recommendations · 맞춤 스타일 예시
+                </span>
+                <h4 className="font-serif text-xl sm:text-2xl font-light text-white mt-0.5">
+                  선택하신 스타일에 어울리는 착장 예시 (Top 3)
+                </h4>
+              </div>
+              <div className="text-xs text-neutral-400 hidden sm:block">
+                선택하신 스타일에 가장 최적화된 실루엣입니다.
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {recommendedLooks.map((look, idx) => (
+                <div
+                  key={look.id}
+                  className="group relative bg-neutral-900/90 rounded-2xl overflow-hidden border border-neutral-800 hover:border-amber-400/50 transition-all duration-300 flex flex-col shadow-xl"
+                >
+                  {/* Top Match Pill */}
+                  <div className="absolute top-3 left-3 z-10">
+                    <span className="px-2.5 py-1 rounded-full bg-neutral-950/85 backdrop-blur-md text-[10px] font-bold text-amber-300 border border-amber-400/40 uppercase tracking-wider shadow-md">
+                      ✨ {idx === 0 ? '98% Best Match' : idx === 1 ? '95% Strong Match' : '92% Ideal Match'}
+                    </span>
+                  </div>
+
+                  {/* Image Container */}
+                  <div
+                    onClick={() => setActiveLookModal(look)}
+                    className="relative aspect-[3/4] bg-neutral-950 cursor-pointer overflow-hidden"
+                  >
+                    <img
+                      src={look.imageUrl}
+                      alt={look.title}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent opacity-80" />
+                    
+                    {/* Category pill on image */}
+                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] text-white">
+                      <span className="font-medium text-amber-200 uppercase tracking-wider text-[10px] px-2 py-0.5 rounded bg-neutral-950/60 backdrop-blur-sm border border-white/10">
+                        {look.category}
+                      </span>
+                      <span className="text-[10px] text-neutral-300">
+                        {look.season}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Card Content */}
+                  <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between bg-neutral-900">
+                    <div>
+                      <h5
+                        onClick={() => setActiveLookModal(look)}
+                        className="font-serif text-base sm:text-lg font-light text-white group-hover:text-amber-300 transition-colors cursor-pointer line-clamp-1"
+                      >
+                        {look.shortTitle}
+                      </h5>
+                      <p className="text-xs text-neutral-400 line-clamp-2 mt-1 leading-relaxed">
+                        {look.description}
+                      </p>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="pt-4 mt-4 border-t border-neutral-800/80 flex items-center gap-2">
+                      <button
+                        onClick={() => setActiveLookModal(look)}
+                        className="flex-1 py-2 rounded-full bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-semibold tracking-wider uppercase text-center transition-colors"
+                      >
+                        Style Blueprint
+                      </button>
+                      <button
+                        onClick={() => handleDirectTryOn(look)}
+                        className="flex-1 py-2 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-neutral-950 text-xs font-bold tracking-wider uppercase text-center shadow-md transition-all flex items-center justify-center gap-1"
+                      >
+                        <Sparkles className="w-3.5 h-3.5 text-neutral-950" />
+                        <span>Try On</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Hint to browse full collection */}
+            <div className="mt-8 text-center">
+              <button
+                onClick={() => {
+                  const el = document.getElementById('full-archive-section');
+                  el?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-neutral-400 hover:text-white transition-colors"
+              >
+                <span>전체 89가지 추천 스타일 예시 모두 둘러보기 (Explore All Examples)</span>
+                <ChevronDown className="w-4 h-4 animate-bounce" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Anchor for scrolling down to full archive */}
+        <div id="full-archive-section" className="pt-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-5 border-b border-neutral-200">
+            <div>
+              <span className="text-[10px] uppercase font-bold tracking-widest text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200/60 inline-block mb-1.5">
+                Curated Style Examples · 스타일 예시 쇼룸
+              </span>
+              <h4 className="font-serif text-2xl sm:text-3xl font-light text-neutral-950">
+                추천 스타일 전체 착장 예시 (89 Styles)
+              </h4>
+              <p className="text-xs text-neutral-600 mt-1">
+                각 스타일별 실제 모델 착장 예시와 실루엣 연출 공식을 한눈에 둘러보실 수 있습니다.
+              </p>
+            </div>
+            <div className="text-xs font-semibold text-neutral-600 bg-neutral-100 px-3 py-1.5 rounded-full self-start sm:self-auto">
+              총 {filteredLooks.length}가지 스타일 착장 예시 제공
+            </div>
+          </div>
+        </div>
+
+        {/* Aesthetic Vibe Filter Chips */}
+        <div className="flex items-center gap-2 overflow-x-auto py-4 scrollbar-none border-b border-neutral-100">
+          <span className="text-[10px] uppercase font-bold tracking-wider text-neutral-400 flex-shrink-0 mr-1">
+            Vibe:
+          </span>
+          {[
+            { id: 'all', label: 'All Aesthetics' },
+            { id: 'quiet luxury', label: 'Quiet Luxury' },
+            { id: 'minimalist', label: 'Modern Minimalist' },
+            { id: 'parisian', label: 'Parisian Tweed' },
+            { id: 'street', label: 'Seoul Streetwear' },
+            { id: 'casual', label: 'Elevated Off-Duty' },
+            { id: 'preppy', label: 'Classic Preppy' },
+            { id: 'glam', label: 'Gala & Runway' },
+            { id: 'dandy', label: "Men's Sartorial" },
+          ].map((vibe) => (
+            <button
+              key={vibe.id}
+              onClick={() => setActiveAestheticFilter(vibe.id)}
+              className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
+                activeAestheticFilter === vibe.id
+                  ? 'bg-neutral-950 text-white shadow-sm'
+                  : 'bg-neutral-100 hover:bg-neutral-200 text-neutral-600'
+              }`}
+            >
+              {vibe.label}
+            </button>
+          ))}
+        </div>
+
+        {/* 6-Look Magazine Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 pt-12">
+          {filteredLooks.map((look, index) => (
+            <div
+              key={look.id}
+              className="group relative bg-white border border-neutral-200/80 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-500 flex flex-col"
+            >
+              {/* Image Container with Aspect Ratio */}
+              <div
+                onClick={() => setActiveLookModal(look)}
+                className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-100 cursor-pointer"
+              >
+                <img
+                  src={look.imageUrl}
+                  alt={look.title}
+                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  loading="lazy"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/images/looks/look_01_soho_quiet_luxury_final.webp';
+                  }}
+                />
+
+                {/* Top Badge: Aesthetic Tag & Try-On Status (Zero Price shown on browsing card) */}
+                <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+                  <span className="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[10px] uppercase font-bold tracking-wider text-neutral-800 shadow-sm">
+                    {look.category}
+                  </span>
+                  <span className="px-2.5 py-1 rounded-full bg-neutral-950/85 backdrop-blur-md text-[10px] font-bold tracking-wider uppercase text-amber-300 shadow-sm">
+                    Try-On Ready
+                  </span>
+                </div>
+
+                {/* Hover Quick Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-neutral-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-amber-300 mb-1">
+                    {look.season}
+                  </span>
+                  <h3 className="font-serif text-lg font-light leading-snug mb-3">
+                    {look.shortTitle}
+                  </h3>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveLookModal(look);
+                      }}
+                      className="flex-1 py-2 rounded-full bg-white text-neutral-950 text-xs font-semibold tracking-wider uppercase text-center hover:bg-neutral-100 transition-colors"
+                    >
+                      Style Blueprint
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDirectTryOn(look);
+                      }}
+                      className="px-4 py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-neutral-950 text-xs font-semibold tracking-wider uppercase transition-colors"
+                      title="Try this look on your photo"
+                    >
+                      Try On
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card Footer Details */}
+              <div className="p-5 flex flex-col flex-1 justify-between bg-white border-t border-neutral-100">
+                <div>
+                  <div className="flex items-center justify-between text-[11px] text-neutral-500 mb-1.5">
+                    <span className="font-medium text-neutral-600">{look.modelInfo.split('·')[0]}</span>
+                    <span className="text-[10px] font-bold text-amber-800 uppercase tracking-wider bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200/60">
+                      {look.category}
+                    </span>
+                  </div>
+                  <h3
+                    onClick={() => setActiveLookModal(look)}
+                    className="font-serif text-base sm:text-lg font-normal text-neutral-950 group-hover:text-neutral-700 cursor-pointer line-clamp-1 transition-colors"
+                  >
+                    {look.shortTitle}
+                  </h3>
+                  <p className="text-xs text-neutral-500 line-clamp-2 mt-1 font-normal leading-relaxed">
+                    {look.description}
+                  </p>
+                </div>
+
+                {/* Quick Action Footer */}
+                <div className="pt-4 mt-4 border-t border-neutral-100 flex items-center justify-between">
+                  <button
+                    onClick={() => setActiveLookModal(look)}
+                    className="text-xs uppercase tracking-wider font-semibold text-neutral-800 hover:text-neutral-950 flex items-center gap-1 transition-colors"
+                  >
+                    <span>Inspect Style</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </button>
+
+                  <button
+                    onClick={() => handleDirectTryOn(look)}
+                    className="text-xs uppercase tracking-wider font-semibold text-amber-700 hover:text-amber-800 flex items-center gap-1 transition-colors"
+                  >
+                    <span>{isProSubscriber ? 'Style My Photo' : 'Try On (Pro)'}</span>
+                    {isProSubscriber ? <Wand2 className="w-3.5 h-3.5" /> : <Lock className="w-3.5 h-3.5 text-amber-600" />}
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
