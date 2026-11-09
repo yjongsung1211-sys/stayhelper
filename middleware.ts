@@ -38,11 +38,14 @@ export function middleware(request: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
-  // 4. PersonalColorHelper (Temporarily Paused): Rewrite non-root to root '/' coming soon
+  // 4. PersonalColorHelper (Temporarily Paused for public domain, active for local development):
+  // When accessing via external personalcolorhelper domain, rewrite to /personalcolor-comingsoon
+  // Localhost or dev preview parameter (?preview=true) serves the active PersonalColorHelper app
   if (host.includes('personalcolorhelper')) {
-    if (pathname !== '/') {
+    const isDevPreview = request.nextUrl.searchParams.get('preview') === 'true' || request.nextUrl.searchParams.get('dev') === 'true';
+    if (!isDevPreview && pathname !== '/personalcolor-comingsoon') {
       const url = request.nextUrl.clone();
-      url.pathname = '/';
+      url.pathname = '/personalcolor-comingsoon';
       return NextResponse.rewrite(url);
     }
   }
