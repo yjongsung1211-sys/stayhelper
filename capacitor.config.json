@@ -1,0 +1,26 @@
+{
+  "appId": "com.yoonjongsung.notehelper",
+  "appName": "NoteHelper",
+  "webDir": "out",
+  "server": {
+    "url": "https://secondbrain-note.vercel.app/notehelper",
+    "cleartext": true,
+    "allowNavigation": [
+      "secondbrain-note.vercel.app",
+      "*.vercel.app",
+      "127.0.0.1",
+      "192.168.*.*"
+    ]
+  },
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": true,
+    "backgroundColor": "#111827"
+  },
+  "plugins": {
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
+    }
+  }
+}

@@ -31,6 +31,19 @@ import {
   ArrowLeft,
   Calendar,
 } from 'lucide-react';
+import {
+  renderInteractiveStructuredSummary,
+  InteractiveTranscriptView,
+  ScheduledMeetingsSection,
+  ExpansionCommandHub,
+  formatSecToMMSS,
+} from './intelligenceEngines';
+import {
+  LanguageStudyCoachingPanel,
+  buildLanguageCoachingData,
+  formatLanguageCoachingMarkdown,
+  GLOBAL_COACHING_LANGUAGES,
+} from './languageCoachingEngine';
 
 interface Note {
   id: string;
@@ -39,10 +52,22 @@ interface Note {
   durationSeconds: number;
   audioUrl?: string;
   source?: string;
+  targetLang?: string;
+  aiCoaching?: any;
   speakers?: string[];
+  categoryLabel?: string;
+  categoryFolder?: string;
   structuredSummary?: string;
   summary: string[];
   transcript: string;
+  actionOutputs?: Record<
+    string,
+    {
+      label: string;
+      content: string;
+      updatedAt: string;
+    }
+  >;
 }
 
 function renderBoldInline(text: string) {
@@ -161,12 +186,17 @@ export default function SecondBrainPage() {
   const [newNoteSheetOpen, setNewNoteSheetOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterTab, setFilterTab] = useState<'all' | 'hw' | 'audio'>('all');
+  const [filterTab, setFilterTab] = useState<'all' | 'hw' | 'audio' | 'lang' | 'biz'>('all');
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   // 녹음 및 AI 처리 상태
   const [isRecording, setIsRecording] = useState(false);
   const [recordingMode, setRecordingMode] = useState<'phone' | 'hw'>('hw');
+  const [recordingLang, setRecordingLang] = useState<string>('auto');
+  const [customRecLang, setCustomRecLang] = useState<string>('');
+  const [appInstallModalOpen, setAppInstallModalOpen] = useState<boolean>(false);
+  const [deferredPwaPrompt, setDeferredPwaPrompt] = useState<any>(null);
+  const wakeLockRef = useRef<any>(null);
   const [recordingSeconds, setRecordingSeconds] = useState(0);
   const [transcriptLive, setTranscriptLive] = useState('');
   const [micLevel, setMicLevel] = useState(0);
@@ -175,7 +205,36 @@ export default function SecondBrainPage() {
   const [isConnectingHw, setIsConnectingHw] = useState(false);
   const [isSyncingHw, setIsSyncingHw] = useState(false);
   const [statusBanner, setStatusBanner] = useState('');
-  const [copiedType, setCopiedType] = useState<'transcript' | 'summary' | null>(null);
+  const [copiedType, setCopiedType] = useState<'transcript' | 'summary' | 'action' | null>(null);
+  const [activeActionType, setActiveActionType] = useState<
+    'shorts_script' | 'language_review' | 'biz_plan' | 'share_message' | 'agent_dispatch'
+  >('shorts_script');
+
+  // 🎯 [1번 기능] 원음 오디오 실시간 타임스탬프 점프 & 현재 대화 하이라이트 상태
+  const [currentAudioTime, setCurrentAudioTime] = useState(0);
+  const pcAudioRef = useRef<HTMLAudioElement | null>(null);
+  const mobileAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  // 🧠 Ask My SecondBrain 통합 RAG 질의응답 상태
+  const [askQuery, setAskQuery] = useState('');
+  const [askReply, setAskReply] = useState('');
+  const [askCitations, setAskCitations] = useState<{ id: string; title: string; date: string }[]>([]);
+  const [isAsking, setIsAsking] = useState(false);
+
+  // 🎧 4개 국어 원어민 AI 쉐도잉 플레이어 상태
+  const [isShadowing, setIsShadowing] = useState(false);
+  const [shadowingSentence, setShadowingSentence] = useState('');
+  const [isExpandedView, setIsExpandedView] = useState(false);
+  // 🗂️ 페이지 길이 최적화: 상단/하단 메인 워크스페이스 탭 & 노트 상세 내부 서브탭 분리
+  const [mainViewTab, setMainViewTab] = useState<
+    'notes' | 'coaching' | 'schedule' | 'agents_crm' | 'ask'
+  >('notes');
+  const [noteDetailTab, setNoteDetailTab] = useState<
+    'summary' | 'transcript' | 'coaching' | 'action' | 'split'
+  >('summary');
+  const [showQuickRecordCards, setShowQuickRecordCards] = useState(false);
+  const autoRecordTriggeredRef = useRef<boolean>(false);
+  const deletedNoteIdsRef = useRef<Set<string>>(new Set());
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const recognitionRef = useRef<any>(null);
@@ -194,9 +253,16 @@ export default function SecondBrainPage() {
 
   const formatDuration = (sec: number) => {
     const s = Math.max(0, Math.round(sec || 0));
-    const mins = Math.floor(s / 60);
+    const hrs = Math.floor(s / 3600);
+    const mins = Math.floor((s % 3600) / 60);
     const secs = s % 60;
-    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    if (hrs > 0) {
+      return `${hrs}시간 ${mins}분 ${secs}초`;
+    }
+    if (mins > 0) {
+      return `${mins}분 ${secs}초`;
+    }
+    return `${secs}초`;
   };
 
   const formatShortTime = (iso: string) => {
@@ -229,14 +295,55 @@ export default function SecondBrainPage() {
     }
   };
 
+  const callHardwareApi = async (
+    action: 'status' | 'connect' | 'sync' | 'start-record' | 'stop-record',
+    payload: Record<string, any> = {}
+  ) => {
+    const localEndpoint =
+      action === 'status'
+        ? 'http://127.0.0.1:3099/status'
+        : `http://127.0.0.1:3099/${action}`;
+    try {
+      const controller = new AbortController();
+      const timeoutMs = action === 'status' ? 1200 : action === 'sync' ? 12000 : 8000;
+      const timer = setTimeout(() => controller.abort(), timeoutMs);
+      const res = await fetch(localEndpoint, {
+        method: action === 'status' ? 'GET' : 'POST',
+        ...(action !== 'status'
+          ? {
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            }
+          : {}),
+        signal: controller.signal,
+        cache: 'no-store',
+      });
+      clearTimeout(timer);
+      if (res.ok) {
+        return await res.json();
+      }
+    } catch {}
+
+    const res = await fetch('/api/secondbrain/device', {
+      method: action === 'status' ? 'GET' : 'POST',
+      ...(action !== 'status'
+        ? {
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action, ...payload }),
+          }
+        : {}),
+      cache: 'no-store',
+    });
+    return await res.json();
+  };
+
   const fetchDevice = async () => {
     try {
-      const res = await fetch('/api/secondbrain/device', { cache: 'no-store' });
-      const data = await res.json();
-      const d = data.device || data;
+      const data = await callHardwareApi('status');
+      const d = data.state || data.device || data;
       if (d) {
         setDevice({
-          isConnected: Boolean(d.isConnected),
+          isConnected: Boolean(d.connected ?? d.isConnected),
           connecting: Boolean(d.connecting),
           batteryLevel: d.batteryLevel ?? 100,
           isRecording: Boolean(d.isRecording),
@@ -272,28 +379,46 @@ export default function SecondBrainPage() {
       const res = await fetch(`/api/secondbrain/notes?${params.toString()}`, { cache: 'no-store' });
       const data = await res.json();
       if (Array.isArray(data.notes)) {
-        setNotes(data.notes);
+        const cleanList = data.notes.filter((n: Note) => !deletedNoteIdsRef.current.has(n.id));
+        setNotes(cleanList);
         setSelectedNote((prev) => {
-          if (!prev && data.notes.length > 0) return data.notes[0];
-          if (prev) {
-            const found = data.notes.find((n: Note) => n.id === prev.id);
-            return found || (data.notes.length > 0 ? data.notes[0] : null);
+          if (!prev && cleanList.length > 0) return cleanList[0];
+          if (prev && !deletedNoteIdsRef.current.has(prev.id)) {
+            const found = cleanList.find((n: Note) => n.id === prev.id);
+            return found || (cleanList.length > 0 ? cleanList[0] : null);
           }
-          return null;
+          return cleanList.length > 0 ? cleanList[0] : null;
         });
       }
     } catch {}
   };
 
   useEffect(() => {
-    document.title = 'SecondBrain AI 노트 · 세컨브레인 보이스 메모';
-    fetchDevice();
+    document.title = 'NoteHelper (노트헬퍼) · 스마트폰 회의록 정리 & AI 외국어 공부 앱';
+    if (typeof window !== 'undefined') {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/secondbrain-sw.js').catch(() => {});
+      }
+      const onBeforeInstall = (e: any) => {
+        e.preventDefault();
+        setDeferredPwaPrompt(e);
+      };
+      window.addEventListener('beforeinstallprompt', onBeforeInstall);
+      return () => window.removeEventListener('beforeinstallprompt', onBeforeInstall);
+    }
+  }, []);
+
+  useEffect(() => {
     fetchNotes();
-    const interval = setInterval(() => {
-      fetchDevice();
-      fetchNotes();
-    }, 3500);
-    return () => clearInterval(interval);
+    // 배터리 절약을 위해 상시 주기적 폴링(setInterval)을 제거하고,
+    // 화면을 다시 열 때(visibilitychange) 또는 녹음/검색 시에만 온디맨드로 불러옵니다.
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && !isRecordingRef.current) {
+        fetchNotes();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', onVisibilityChange);
   }, [searchQuery]);
 
   useEffect(() => {
@@ -302,38 +427,84 @@ export default function SecondBrainPage() {
       timerRef.current = setInterval(() => {
         setRecordingSeconds((prev) => prev + 1);
       }, 1000);
+
+      // 모바일 화면 꺼짐 방지(WakeLock) & 잠금화면 컨트롤(MediaSession) 활성화
+      if (typeof navigator !== 'undefined' && 'wakeLock' in navigator) {
+        (navigator as any).wakeLock
+          .request('screen')
+          .then((lock: any) => {
+            wakeLockRef.current = lock;
+          })
+          .catch(() => {});
+      }
+      if (typeof navigator !== 'undefined' && 'mediaSession' in navigator) {
+        try {
+          navigator.mediaSession.metadata = new MediaMetadata({
+            title: '🎙️ NoteHelper (노트헬퍼) 실시간 AI 녹음 중',
+            artist: 'NoteHelper Frontier AI',
+            album: '전 세계 다국어 음성 전사 & 요약',
+          });
+        } catch {}
+      }
     } else {
       if (timerRef.current) clearInterval(timerRef.current);
       setRecordingSeconds(0);
+      if (wakeLockRef.current) {
+        try {
+          wakeLockRef.current.release();
+        } catch {}
+        wakeLockRef.current = null;
+      }
     }
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [isRecording]);
 
-  // 실물 SecondBrain Note 실시간 BLE 연결 및 배터리/상태 점검 핸들러
+  // 스마트폰 브라우저/앱에서 직접 WebBluetooth로 실물 VoicePad(NoteHelper) BLE 페어링
+  const handleDirectMobileBlePair = async () => {
+    if (typeof navigator === 'undefined' || !(navigator as any).bluetooth) {
+      await handleConnectDevice();
+      return;
+    }
+    try {
+      setStatusBanner('📱 스마트폰 블루투스(BLE)로 실물 NoteHelper 기기를 직접 탐색합니다...');
+      const bleDevice = await (navigator as any).bluetooth.requestDevice({
+        acceptAllDevices: true,
+        optionalServices: ['battery_service', '0000180f-0000-1000-8000-00805f9b34fb'],
+      });
+      if (bleDevice) {
+        setDevice((prev) => ({
+          ...prev,
+          isConnected: true,
+          syncStatusText: `스마트폰 직접 BLE 연결됨 (${bleDevice.name || 'NoteHelper'})`,
+        }));
+        setStatusBanner(
+          `✅ 스마트폰 직접 블루투스 연결 완료: ${bleDevice.name || 'NoteHelper'} (클라우드 동기화 활성화)`
+        );
+      }
+    } catch {
+      await handleConnectDevice();
+    }
+  };
+
+  // 실물 NoteHelper 실시간 BLE 연결 및 배터리/상태 점검 핸들러
   const handleConnectDevice = async () => {
     if (isConnectingHw) return;
     setIsConnectingHw(true);
-    setStatusBanner('실물 SecondBrain Note (28:CD:9C:F3:32:12) BLE 연결 및 배터리 확인 중...');
+    setStatusBanner('실물 NoteHelper 기기 (28:CD:9C:F3:32:12) BLE 연결 및 내장 녹음 파일 확인 중...');
     try {
-      const res = await fetch('/api/secondbrain/device', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'connect' }),
-      });
-      const data = await res.json();
+      const data = await callHardwareApi('connect');
       await fetchDevice();
+      await fetchNotes();
       if (data.ok && (data.state?.connected || data.device?.isConnected)) {
         const bat = data.state?.batteryLevel ?? data.device?.batteryLevel ?? 100;
         setStatusBanner(
-          `✅ 실물 SecondBrain Note 연결 완료! (실시간 배터리 ${bat}%, 펌웨어 ${
-            data.state?.firmwareVersion || 'v1.4.5'
-          })`
+          `✅ 실물 NoteHelper 기기 연결 완료! (실시간 배터리 ${bat}%, 내장 녹음 자동 동기화 가동)`
         );
       } else {
         setStatusBanner(
-          '현재 실물 노트가 절전(오프라인) 상태입니다. 기기 버튼을 살짝 눌러 깨운 뒤 다시 탭하거나 [휴대폰으로 녹음]을 사용하세요.'
+          '현재 실물 노트가 절전(오프라인) 상태입니다. 실물 기기 버튼을 한 번 살짝 눌러 깨우시면 자동으로 즉시 연결 및 동기화됩니다!'
         );
       }
     } catch {
@@ -352,7 +523,8 @@ export default function SecondBrainPage() {
       const recognition = new SpeechRecognition();
       recognition.continuous = true;
       recognition.interimResults = true;
-      recognition.lang = 'ko-KR';
+      const foundLang = GLOBAL_COACHING_LANGUAGES.find((l) => l.code === recordingLang);
+      recognition.lang = foundLang ? foundLang.bcp47 : 'ko-KR';
 
       recognition.onresult = (event: any) => {
         let interim = '';
@@ -650,7 +822,7 @@ export default function SecondBrainPage() {
     }
   };
 
-  // 2) 실물 SecondBrain Note 하드웨어로 녹음 시작
+  // 2) 실물 NoteHelper 하드웨어로 녹음 시작
   const handleStartHardwareRecord = async () => {
     setNewNoteSheetOpen(false);
     manualLockUntilRef.current = Date.now() + 15000;
@@ -660,7 +832,7 @@ export default function SecondBrainPage() {
     finalTranscriptAccRef.current = '';
     setTranscriptLive('');
     setIsRecording(true);
-    setStatusBanner('📱 실물 SecondBrain Note 하드웨어 깨우기 및 녹음 시작 중...');
+    setStatusBanner('📱 실물 NoteHelper 하드웨어 깨우기 및 녹음 시작 중...');
 
     const isMobileBrowser =
       typeof navigator !== 'undefined' &&
@@ -673,15 +845,10 @@ export default function SecondBrainPage() {
     }
 
     try {
-      const res = await fetch('/api/secondbrain/device', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'start-record' }),
-      });
-      const data = await res.json();
+      const data = await callHardwareApi('start-record');
       await fetchDevice();
       if (data.ok && (data.state?.isRecording || data.device?.isRecording)) {
-        setStatusBanner('🔴 실물 SecondBrain Note 하드웨어 녹음 작동 중!');
+        setStatusBanner('🔴 실물 NoteHelper 하드웨어 녹음 작동 중!');
       } else {
         setStatusBanner('🎙️ 실시간 마이크 녹음 작동 중 (실물 노트 절전 모드 백업)');
       }
@@ -711,6 +878,7 @@ export default function SecondBrainPage() {
           reader.readAsDataURL(file);
         }));
 
+      const activeTargetLang = customRecLang.trim() || recordingLang || 'auto';
       const aiRes = await fetch('/api/secondbrain/process-audio', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -719,6 +887,7 @@ export default function SecondBrainPage() {
           duration: 30,
           audioBase64: base64Audio,
           mimeType: wavConverted ? 'audio/wav' : file.type || 'audio/wav',
+          targetLang: activeTargetLang,
         }),
       });
       const aiData = await aiRes.json();
@@ -732,6 +901,7 @@ export default function SecondBrainPage() {
             durationSeconds: aiData.analysis.durationSeconds,
             audioUrl: aiData.analysis.audioUrl,
             source: 'audio_upload',
+            targetLang: activeTargetLang !== 'auto' ? activeTargetLang : undefined,
             structuredSummary: aiData.analysis.structuredSummary,
             summary: aiData.analysis.summary,
             transcript: aiData.analysis.transcript,
@@ -752,7 +922,7 @@ export default function SecondBrainPage() {
     }
   };
 
-  // 녹음 즉시 중지 및 저장
+  // 녹음 즉시 중지 및 저장 (휴대폰 마이크 전용)
   const handleStopRecord = async () => {
     manualLockUntilRef.current = Date.now() + 6000;
     const capturedDuration = Math.max(1, recordingSeconds);
@@ -762,84 +932,12 @@ export default function SecondBrainPage() {
     setIsRecording(false);
     stopRealSpeechRecognition();
     setIsProcessing(true);
-    setStatusBanner('녹음 종료! 전체 음성 전사 및 AI 핵심 요약 생성 중...');
+    setStatusBanner('녹음 종료! 전체 음성 전사 및 회의록 요약 · 외국어 코칭 생성 중...');
 
     const { base64Audio, mimeType } = await stopLocalMediaRecorder();
 
-    let savedFromHw: Note | null = null;
-    if (recordingMode === 'hw') {
-      try {
-        const hwRes = await fetch('/api/secondbrain/device', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'stop-record',
-            liveTranscript: capturedText,
-          }),
-        });
-        const hwData = await hwRes.json();
-        if (hwData.newlySynced && hwData.newlySynced.length > 0) {
-          savedFromHw = hwData.newlySynced[0];
-        }
-      } catch {}
-    } else {
-      fetch('/api/secondbrain/device', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'stop-record' }),
-      }).catch(() => {});
-    }
-
-    if (savedFromHw) {
-      if (
-        base64Audio.length > 100 &&
-        (!savedFromHw.transcript ||
-          savedFromHw.transcript.includes('무음') ||
-          capturedText.length > savedFromHw.transcript.length)
-      ) {
-        try {
-          const aiRes = await fetch('/api/secondbrain/process-audio', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              text: capturedText,
-              duration: capturedDuration,
-              audioBase64: base64Audio,
-              mimeType,
-            }),
-          });
-          const aiData = await aiRes.json();
-          if (
-            aiData.success &&
-            aiData.analysis?.transcript &&
-            !aiData.analysis.transcript.includes('무음')
-          ) {
-            const updRes = await fetch('/api/secondbrain/notes', {
-              method: 'PUT',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                id: savedFromHw.id,
-                title: aiData.analysis.title || savedFromHw.title,
-                transcript: aiData.analysis.transcript,
-                structuredSummary: aiData.analysis.structuredSummary,
-                summary: aiData.analysis.summary,
-                audioUrl: savedFromHw.audioUrl || aiData.analysis.audioUrl,
-              }),
-            });
-            const updData = await updRes.json();
-            if (updData.note) savedFromHw = updData.note;
-          }
-        } catch {}
-      }
-      await fetchNotes();
-      setSelectedNote(savedFromHw);
-      setMobileDetailOpen(true);
-      setIsProcessing(false);
-      setStatusBanner('✅ 녹음 전사 · AI 요약 · 옵시디언(00_Inbox) 자동 저장이 완료되었습니다.');
-      return;
-    }
-
     try {
+      const activeTargetLang = customRecLang.trim() || recordingLang || 'auto';
       const aiRes = await fetch('/api/secondbrain/process-audio', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -848,6 +946,7 @@ export default function SecondBrainPage() {
           duration: capturedDuration,
           audioBase64: base64Audio,
           mimeType,
+          targetLang: activeTargetLang,
         }),
       });
       const aiData = await aiRes.json();
@@ -859,7 +958,8 @@ export default function SecondBrainPage() {
             title: aiData.analysis.title,
             durationSeconds: aiData.analysis.durationSeconds,
             audioUrl: aiData.analysis.audioUrl,
-            source: recordingMode === 'hw' ? 'hardware_ble_direct' : 'phone_mic',
+            source: 'phone_mic',
+            targetLang: activeTargetLang !== 'auto' ? activeTargetLang : undefined,
             structuredSummary: aiData.analysis.structuredSummary,
             summary: aiData.analysis.summary,
             transcript: aiData.analysis.transcript,
@@ -872,7 +972,7 @@ export default function SecondBrainPage() {
           setMobileDetailOpen(true);
         }
       }
-      setStatusBanner('✅ 녹음 전사 · AI 요약 · 옵시디언(00_Inbox) 자동 저장이 완료되었습니다.');
+      setStatusBanner('✅ 휴대폰 녹음 전사 · 회의록/외국어 AI 요약이 완료되었습니다.');
     } catch {
       setStatusBanner('녹음 저장 중 오류가 발생했습니다.');
     } finally {
@@ -888,35 +988,34 @@ export default function SecondBrainPage() {
     setIsProcessing(false);
     stopRealSpeechRecognition();
     stopLocalMediaRecorder().catch(() => {});
-    fetch('/api/secondbrain/device', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'stop-record' }),
-    }).catch(() => {});
-    setStatusBanner('녹음이 즉시 종료되었습니다.');
+    setStatusBanner('녹음이 취소되었습니다.');
   };
 
   // 기기 내장 녹음 파일 동기화
   const handleSyncHardware = async () => {
     setIsSyncingHw(true);
-    setStatusBanner('실물 세컨브레인 노트 내장 메모리의 녹음 파일을 확인하고 있습니다...');
+    setStatusBanner('실물 NoteHelper 내장 메모리의 녹음 파일을 확인하고 고속 동기화 중입니다...');
     try {
-      const res = await fetch('/api/secondbrain/device', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'sync', force: false }),
-      });
-      const data = await res.json();
+      const data = await callHardwareApi('sync', { force: false });
       await fetchDevice();
       await fetchNotes();
-      if (data.newlySynced && data.newlySynced.length > 0) {
+      if (data.backgroundSyncInProgress) {
+        if (data.newlySynced && data.newlySynced.length > 0) {
+          setSelectedNote(data.newlySynced[0]);
+        }
+        setStatusBanner(
+          `📥 대용량 실물 기기 녹음 고속 동기화 진행 중입니다! (${
+            data.state?.syncStatusText || '청크 단위 자동 이어받기 및 AI 전사 진행 중'
+          })`
+        );
+      } else if (data.newlySynced && data.newlySynced.length > 0) {
         setSelectedNote(data.newlySynced[0]);
         setStatusBanner(`✅ 실물 기기에서 신규 녹음 ${data.newlySynced.length}건을 가져왔습니다.`);
       } else {
         setStatusBanner('실물 기기의 모든 녹음 파일이 최신 상태로 동기화되어 있습니다.');
       }
     } catch {
-      setStatusBanner('기기 동기화 완료');
+      setStatusBanner('기기 동기화 확인 완료');
     } finally {
       setIsSyncingHw(false);
     }
@@ -965,29 +1064,37 @@ export default function SecondBrainPage() {
     }
   };
 
-  // 노트 삭제
+  // 노트 삭제 (삭제 후 폴링/클라우드 동기화로 인한 재생성 원천 차단)
   const handleDeleteNote = async (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
+    if (!window.confirm('이 노트를 삭제하시겠습니까?')) return;
+    deletedNoteIdsRef.current.add(id);
+    const remaining = notes.filter((n) => n.id !== id);
+    setNotes(remaining);
+    if (selectedNote?.id === id) {
+      setSelectedNote(remaining.length > 0 ? remaining[0] : null);
+      setMobileDetailOpen(false);
+    }
+    setStatusBanner('🗑️ 노트를 영구 삭제하고 클라우드·옵시디언에 동기화했습니다.');
     try {
       await fetch(`/api/secondbrain/notes?id=${encodeURIComponent(id)}`, {
         method: 'DELETE',
       });
-      const remaining = notes.filter((n) => n.id !== id);
-      setNotes(remaining);
-      if (selectedNote?.id === id) {
-        setSelectedNote(remaining.length > 0 ? remaining[0] : null);
-        setMobileDetailOpen(false);
-      }
     } catch {}
   };
 
   // 전체 전사 + 요약 텍스트 파일(.txt) 다운로드
   const handleDownloadTranscriptTxt = (note: Note) => {
     const cleanText = (note.transcript || '').replace(/^\[00:00:\d+\]\s*\[.*?\]\s*/, '').trim();
-    const structuredBlock =
+    const coaching = buildLanguageCoachingData(note);
+    const baseStructured =
       note.structuredSummary && note.structuredSummary.trim()
         ? note.structuredSummary.trim()
         : (note.summary || []).map((s, idx) => `${idx + 1}. ${s}`).join('\n');
+    const structuredBlock =
+      coaching && !baseStructured.includes('[언어 학습 전담 AI 코칭]')
+        ? `${baseStructured}${formatLanguageCoachingMarkdown(coaching)}`
+        : baseStructured;
     const content = [
       `제목: ${note.title}`,
       `녹음 일시: ${new Date(note.recordedAt).toLocaleString('ko-KR')}`,
@@ -1032,15 +1139,299 @@ export default function SecondBrainPage() {
   };
 
   // 클립보드 복사
-  const handleCopyText = (text: string, type: 'transcript' | 'summary') => {
+  const handleCopyText = (text: string, type: 'transcript' | 'summary' | 'action') => {
     navigator.clipboard.writeText(text);
     setCopiedType(type);
     setTimeout(() => setCopiedType(null), 2000);
   };
 
+  // 보이스 투 액션 (쇼츠 대본 / 3회독 복습 카드 / 실행 기획서 / 카톡·이메일 요약 초안 원클릭 변환 + 텔레그램 & 옵시디언 전송)
+  const handleVoiceToAction = async (
+    note: Note,
+    actionType: 'shorts_script' | 'language_review' | 'biz_plan' | 'share_message'
+  ) => {
+    setActiveActionType(actionType);
+    setIsProcessing(true);
+    const labelMap = {
+      shorts_script: '🎬 유튜브 쇼츠·릴스 6-Cut 대본',
+      language_review: '📚 무스트레스 3회독 복습 카드',
+      biz_plan: '📋 1인 기업 AI 실행 기획서',
+      share_message: '💬 참석자 공유용 카톡·이메일 요약 초안',
+    };
+    setStatusBanner(`${labelMap[actionType]} 생성 및 텔레그램·옵시디언 자동 전송 중...`);
+    try {
+      const res = await fetch('/api/secondbrain/action', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          noteId: note.id,
+          actionType,
+          note,
+        }),
+      });
+      const data = await res.json();
+      if (data.success && data.note) {
+        setSelectedNote(data.note);
+        await fetchNotes();
+        setStatusBanner(`✅ ${labelMap[actionType]} 생성 완료! (텔레그램 & 옵시디언 자동 저장됨)`);
+      } else {
+        setStatusBanner('변환 중 일시적인 오류가 발생했습니다.');
+      }
+    } catch {
+      setStatusBanner('변환 요청 중 오류가 발생했습니다.');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  // 🎯 [1번 기능] 타임스탬프 클릭 시 해당 초(秒)로 원음 오디오 즉시 점프 및 재생
+  const handleSeekAudio = (sec: number, label?: string) => {
+    const safeSec = Math.max(0, Number(sec) || 0);
+    setCurrentAudioTime(safeSec);
+    let played = false;
+    for (const el of [pcAudioRef.current, mobileAudioRef.current]) {
+      if (el) {
+        try {
+          el.currentTime = safeSec;
+          el.play().catch(() => {});
+          played = true;
+        } catch {}
+      }
+    }
+    if (played) {
+      setStatusBanner(
+        `🎯 [${formatSecToMMSS(safeSec)}] 시점 원음 오디오로 즉시 점프하여 재생합니다.${
+          label ? ` (${label})` : ''
+        }`
+      );
+    } else {
+      setStatusBanner(
+        `ℹ️ 현재 선택된 노트에는 원음 오디오 파일이 없거나 로드 중입니다. (${formatSecToMMSS(safeSec)})`
+      );
+    }
+  };
+
+  // 사전/CRM/일정 보드에서 특정 노트 선택 및 해당 타임스탬프 원음 즉시 점프
+  const handleSelectNoteAndSeek = (noteId: string, sec?: number, label?: string) => {
+    const found = notes.find((n) => n.id === noteId);
+    if (found) {
+      setSelectedNote(found);
+      setMainViewTab('notes');
+      if (sec !== undefined) {
+        setNoteDetailTab('transcript');
+      }
+      setMobileDetailOpen(true);
+      setTimeout(() => {
+        detailSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+        if (sec !== undefined) {
+          handleSeekAudio(sec, label);
+        }
+      }, 280);
+    }
+  };
+
+  // 🤖 [4번 기능] 음성 지시 → AI 에이전트 작업 큐(Task Queue) 원클릭 발주
+  const handleDispatchAgentTask = async (taskTitle: string, agentRole: string) => {
+    const targetNote = selectedNote || notes[0];
+    if (!targetNote) return;
+    setActiveActionType('agent_dispatch');
+    setIsProcessing(true);
+    setStatusBanner(`🤖 [${agentRole}] 에이전트에게 "${taskTitle.slice(0, 32)}..." 작업을 즉시 발주 중...`);
+    try {
+      const res = await fetch('/api/secondbrain/action', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          noteId: targetNote.id,
+          actionType: 'agent_dispatch',
+          taskTitle,
+          agentRole,
+          note: targetNote,
+        }),
+      });
+      const data = await res.json();
+      if (data.success && data.note) {
+        setSelectedNote(data.note);
+        await fetchNotes();
+        setStatusBanner(
+          `✅ [${agentRole}] 작업 실행 완료! (옵시디언 & 텔레그램 보고 완료 · 아래 산출물에서 확인하세요)`
+        );
+      } else {
+        setStatusBanner('에이전트 작업 발주 중 일시적인 오류가 발생했습니다.');
+      }
+    } catch {
+      setStatusBanner('에이전트 작업 발주 요청 실패');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  // 🧠 Ask NoteHelper: 내 모든 회의·수업 통합 RAG 검색 & 질의응답
+  const handleAskSecondBrain = async (customQuery?: string) => {
+    const q = (customQuery ?? askQuery).trim();
+    if (!q || isAsking) return;
+    if (customQuery) setAskQuery(customQuery);
+    setIsAsking(true);
+    setStatusBanner(`🧠 "${q}"에 대해 저장된 전체 NoteHelper 노트를 교차 검색 중...`);
+    try {
+      const res = await fetch('/api/secondbrain/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: q }),
+      });
+      const data = await res.json();
+      if (data.reply) {
+        setAskReply(data.reply);
+        setAskCitations(Array.isArray(data.citations) ? data.citations : []);
+        setStatusBanner(`✅ NoteHelper 통합 검색 완료 (근거 노트 ${data.citations?.length || 0}건 참조)`);
+      } else {
+        setAskReply(data.error || '답변을 생성하지 못했습니다.');
+      }
+    } catch {
+      setAskReply('질의응답 처리 중 일시적인 오류가 발생했습니다.');
+    } finally {
+      setIsAsking(false);
+    }
+  };
+
+  // ☀️ 08:30 모닝 인텔리전스 & 3회독 복습 브리핑 텔레그램 즉시 발송
+  const handleSendMorningBriefing = async () => {
+    setIsProcessing(true);
+    setStatusBanner('☀️ [모닝 인텔리전스 & 3회독 복습 브리핑]을 윤종성 대표님 텔레그램으로 발송 중...');
+    try {
+      const res = await fetch('/api/secondbrain/action', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ actionType: 'morning_briefing' }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatusBanner('✅ 모닝 인텔리전스 & 외국어 3회독 복습 브리핑이 대표님 텔레그램으로 발송되었습니다!');
+      } else {
+        setStatusBanner('모닝 브리핑 발송 중 일시적인 오류가 발생했습니다.');
+      }
+    } catch {
+      setStatusBanner('모닝 브리핑 발송 요청 실패');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  // 🎧 4개 국어 원어민 AI 쉐도잉 플레이어 (영어·일본어·중국어·스페인어·한국어 자동 감지 연속 발음)
+  const handleToggleShadowing = (note: Note) => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+      setStatusBanner('현재 브라우저는 원어민 음성 합성(TTS)을 지원하지 않습니다.');
+      return;
+    }
+
+    if (isShadowing) {
+      window.speechSynthesis.cancel();
+      setIsShadowing(false);
+      setShadowingSentence('');
+      setStatusBanner('⏹️ 원어민 AI 쉐도잉 재생을 중지했습니다.');
+      return;
+    }
+
+    const rawSource = [
+      note.structuredSummary || '',
+      note.actionOutputs?.language_review?.content || '',
+      note.transcript || '',
+    ].join('\n');
+
+    const lines = rawSource
+      .split(/\r?\n/)
+      .map((l) =>
+        l
+          .replace(/^[#*\-•>\d.)\s]+/, '')
+          .replace(/\[00:\d+:\d+\]\s*\[.*?\]\s*/g, '')
+          .replace(/Speaker\s*\d+\s*:\s*/gi, '')
+          .replace(/\*\*/g, '')
+          .trim()
+      )
+      .filter((l) => l.length >= 4 && l.length <= 180);
+
+    // 우선순위 1: 교정 표현 / 외국어 문장 추출
+    const foreignOrCorrected = lines.filter(
+      (l) =>
+        l.includes('교정 표현') ||
+        /[A-Za-z]{4,}/.test(l) ||
+        /[\u3040-\u30ff]/.test(l) ||
+        /[\u4e00-\u9fff]{2,}/.test(l) ||
+        /[áéíóúñ¿¡]/i.test(l)
+    );
+
+    const targetSentences = (foreignOrCorrected.length > 0 ? foreignOrCorrected : lines)
+      .map((l) => l.replace(/^✅\s*교정 표현\s*(\(원어민 표준\))?\s*:\s*/i, '').trim())
+      .filter((l) => l.length >= 3)
+      .slice(0, 8);
+
+    if (targetSentences.length === 0) {
+      setStatusBanner('쉐도잉할 문장이 없습니다.');
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+    setIsShadowing(true);
+    setStatusBanner(`🎧 원어민 AI 쉐도잉 시작 (총 ${targetSentences.length}문장 연속 발음)`);
+
+    const detectLang = (text: string): string => {
+      if (/[\u3040-\u30ff]/.test(text)) return 'ja-JP';
+      if (/[\u4e00-\u9fff]{2,}/.test(text) && !/[가-힣\u3040-\u30ff]/.test(text)) return 'zh-CN';
+      if (/[áéíóúñ¿¡]/i.test(text)) return 'es-ES';
+      if (/[A-Za-z]{4,}/.test(text) && !/[가-힣]/.test(text)) return 'en-US';
+      return 'ko-KR';
+    };
+
+    let idx = 0;
+    const speakNext = () => {
+      if (idx >= targetSentences.length) {
+        setIsShadowing(false);
+        setShadowingSentence('');
+        setStatusBanner('✅ 원어민 AI 쉐도잉 1회독 듣기가 완료되었습니다!');
+        return;
+      }
+      const sentence = targetSentences[idx++];
+      setShadowingSentence(sentence);
+      const utter = new SpeechSynthesisUtterance(sentence);
+      utter.lang = detectLang(sentence);
+      utter.rate = 0.92;
+      utter.onend = () => {
+        setTimeout(speakNext, 450);
+      };
+      utter.onerror = () => {
+        setIsShadowing(false);
+        setShadowingSentence('');
+      };
+      window.speechSynthesis.speak(utter);
+    };
+
+    speakNext();
+  };
+
+  // ⚡ 원터치 즉시 녹음 모드 (?record=1 접속 시 0.1초 만에 마이크 녹음 자동 시작!)
+  useEffect(() => {
+    if (typeof window === 'undefined' || autoRecordTriggeredRef.current) return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('record') === '1') {
+      autoRecordTriggeredRef.current = true;
+      const cleanUrl = window.location.pathname;
+      window.history.replaceState({}, '', cleanUrl);
+      setTimeout(() => {
+        handleStartPhoneRecord();
+      }, 300);
+    }
+  }, []);
+
   const filteredNotes = notes.filter((n) => {
-    if (filterTab === 'hw') return n.source === 'hardware_ble_direct';
-    if (filterTab === 'audio') return Boolean(n.audioUrl);
+    const isLang = Boolean(buildLanguageCoachingData(n));
+    if (filterTab === 'lang' && !isLang) return false;
+    if (filterTab === 'biz' && isLang) return false;
+    if (filterTab === 'audio' && !n.audioUrl) return false;
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      const hay = `${n.title || ''} ${n.structuredSummary || ''} ${n.transcript || ''}`.toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
     return true;
   });
 
@@ -1050,18 +1441,20 @@ export default function SecondBrainPage() {
 
   const playableAudioUrl = getPlayableAudioUrl(selectedNote?.audioUrl);
   const isHwBusyConnecting = isConnectingHw || Boolean(device.connecting);
+  const selectedNoteCoaching = selectedNote ? buildLanguageCoachingData(selectedNote) : null;
+  const languageStudyNotes = notes.filter((n) => Boolean(buildLanguageCoachingData(n)));
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] text-[#111111] font-sans antialiased">
-      {/* 숨겨진 오디오 파일 업로드 input */}
+    <div className="min-h-screen bg-[#F8FAFC] text-[#111827] font-sans antialiased">
+      {/* 숨겨진 안드로이드 오디오 파일 업로드 input (갤럭시 통화녹음 .m4a, .3ga, .amr 완벽 호환) */}
       <input
         ref={fileInputRef}
         type="file"
-        accept="audio/*,.wav,.mp3,.m4a,.webm,.ogg,.aac"
+        accept="audio/*,.m4a,.3ga,.amr,.3gp,.wav,.mp3,.webm,.ogg,.aac"
         onChange={handleAudioFileUpload}
         className="hidden"
       />
-      {/* 인앱 브라우저/권한 차단 시 휴대폰 기본 녹음기 즉시 호출 fallback input */}
+      {/* 안드로이드 기본 음성 녹음기 즉시 호출 input */}
       <input
         ref={nativeMicInputRef}
         type="file"
@@ -1072,221 +1465,293 @@ export default function SecondBrainPage() {
       />
 
       {/* ===================================================================== */}
-      {/* 1. 모바일 전용 앱 레이아웃 (< lg 화면: 첨부해주신 모바일 스크린샷 1:1 재현) */}
+      {/* 1. 모바일 전용 앱 레이아웃 (< lg 화면: 직관적인 3대 메뉴 & 깔끔한 문서 뷰) */}
       {/* ===================================================================== */}
-      <div className="lg:hidden min-h-screen flex flex-col bg-[#FFFFFF] text-[#111111] pb-24">
-        {/* 모바일 상세 뷰가 열렸을 때 */}
+      <div className="lg:hidden min-h-screen flex flex-col bg-[#F8FAFC] text-[#111827] pb-24">
         {mobileDetailOpen && selectedNote ? (
           <div className="flex-1 flex flex-col bg-[#FFFFFF]">
-            <header className="sticky top-0 z-20 bg-[#FFFFFF] border-b border-[#EAEAEA] px-4 py-3.5 flex items-center justify-between">
+            <header className="sticky top-0 z-20 bg-[#FFFFFF] border-b border-[#E2E8F0] px-4 py-3.5 flex items-center justify-between">
               <button
                 onClick={() => setMobileDetailOpen(false)}
-                className="flex items-center gap-1.5 text-sm font-bold text-[#111111] cursor-pointer"
+                className="flex items-center gap-1.5 text-sm font-bold text-[#111827] cursor-pointer"
               >
                 <ArrowLeft className="w-5 h-5" />
-                <span>AI 노트 목록</span>
+                <span>노트 목록</span>
               </button>
 
               <div className="flex items-center gap-2">
                 {playableAudioUrl && (
                   <button
                     onClick={() => handleDownloadAudioFile(selectedNote)}
-                    className="px-3 py-1.5 rounded-lg bg-[#F3F3F6] text-xs font-bold text-[#111111] flex items-center gap-1 cursor-pointer"
+                    className="px-3 py-1.5 rounded-lg bg-[#F1F5F9] text-xs font-semibold text-[#1E293B] flex items-center gap-1 cursor-pointer"
                   >
                     <Download className="w-3.5 h-3.5" />
-                    .wav
+                    원음
                   </button>
                 )}
                 <button
                   onClick={() => handleDownloadTranscriptTxt(selectedNote)}
-                  className="px-3 py-1.5 rounded-lg bg-[#111111] text-[#FFFFFF] text-xs font-bold flex items-center gap-1 cursor-pointer"
+                  className="px-3 py-1.5 rounded-lg bg-[#111827] text-[#FFFFFF] text-xs font-semibold flex items-center gap-1 cursor-pointer"
                 >
                   <Download className="w-3.5 h-3.5" />
-                  전사본(.txt)
+                  녹취록(.txt)
                 </button>
               </div>
             </header>
 
-            <div className="p-5 flex flex-col gap-5">
+            <div className="p-4 flex flex-col gap-5">
               <div>
-                <h1 className="text-xl font-bold text-[#111111] leading-snug">
+                <p className="text-xs font-medium text-[#64748B] mb-1.5">
+                  {new Date(selectedNote.recordedAt).toLocaleString('ko-KR')} ·{' '}
+                  {formatDuration(selectedNote.durationSeconds)}
+                </p>
+                <h1 className="text-xl font-bold text-[#111827] leading-snug">
                   {selectedNote.title}
                 </h1>
-                <p className="mt-1.5 text-xs font-medium text-[#666666] flex flex-wrap items-center gap-2">
-                  <span>
-                    {new Date(selectedNote.recordedAt).toLocaleString('ko-KR')} ·{' '}
-                    {formatDuration(selectedNote.durationSeconds)}
-                  </span>
-                  <span className="px-2 py-0.5 rounded-md bg-[#F3E8FF] text-[#6B21A8] text-[11px] font-bold">
-                    Obsidian 자동 저장됨
-                  </span>
-                </p>
               </div>
 
-              {/* 원음 오디오 플레이어 */}
+              {/* 오디오 플레이어 */}
               {playableAudioUrl && (
-                <div className="rounded-2xl bg-[#F7F7F9] border border-[#EAEAEA] p-4 flex flex-col gap-2.5">
-                  <div className="flex items-center justify-between text-xs font-bold text-[#111111]">
+                <div className="rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] p-3.5 flex flex-col gap-2">
+                  <div className="flex items-center justify-between text-xs font-semibold text-[#475569]">
                     <span className="flex items-center gap-1.5">
-                      <Volume2 className="w-4 h-4" />
-                      원음 오디오 재생
+                      <Volume2 className="w-4 h-4 text-[#111827]" />
+                      녹음 원음 듣기
                     </span>
-                    <button
-                      onClick={() => handleDownloadAudioFile(selectedNote)}
-                      className="underline font-bold cursor-pointer"
-                    >
-                      오디오 파일 다운로드
-                    </button>
+                    <span className="font-medium tabular-nums">
+                      {formatSecToMMSS(currentAudioTime)} / {formatDuration(selectedNote.durationSeconds)}
+                    </span>
                   </div>
                   <audio
+                    ref={mobileAudioRef}
                     key={playableAudioUrl}
                     controls
                     preload="metadata"
                     src={playableAudioUrl}
+                    onTimeUpdate={(e) => setCurrentAudioTime(e.currentTarget.currentTime)}
                     className="w-full h-10"
                   />
                 </div>
               )}
 
-              {/* [섹터 1] 구조화 심층 요약 */}
-              <div className="rounded-2xl bg-[#F9F9FB] border border-[#EAEAEA] p-4">
-                <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#EAEAEA]">
-                  <span className="text-sm font-bold text-[#111111] flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4" />
-                    [섹터 1] 전사 내용 구조화 요약
-                  </span>
-                  <div className="flex items-center gap-2.5">
+              {/* 깔끔한 언더라인 4대 탭 */}
+              <div className="flex items-center border-b border-[#E2E8F0] overflow-x-auto">
+                {(
+                  [
+                    { key: 'summary', label: '핵심 요약' },
+                    { key: 'transcript', label: '전체 대화 녹취록' },
+                    {
+                      key: 'coaching',
+                      label: `어학 피드백 · 시나리오${selectedNoteCoaching ? ' ●' : ''}`,
+                    },
+                    { key: 'action', label: 'AI 변환 · 쉐도잉' },
+                  ] as const
+                ).map((t) => {
+                  const active =
+                    noteDetailTab === t.key || (t.key === 'summary' && noteDetailTab === 'split');
+                  return (
                     <button
-                      onClick={() => handleReanalyzeNote(selectedNote)}
-                      disabled={isProcessing}
-                      className="text-xs font-bold text-[#111111] underline cursor-pointer"
+                      key={t.key}
+                      type="button"
+                      onClick={() => setNoteDetailTab(t.key)}
+                      className={`px-3.5 py-2.5 text-sm font-bold whitespace-nowrap border-b-2 transition-colors cursor-pointer ${
+                        active
+                          ? 'border-[#111827] text-[#111827]'
+                          : 'border-transparent text-[#64748B] hover:text-[#111827]'
+                      }`}
                     >
-                      다시 요약
+                      {t.label}
                     </button>
-                    <button
-                      onClick={() =>
-                        handleCopyText(
-                          selectedNote.structuredSummary || (selectedNote.summary || []).join('\n'),
-                          'summary'
-                        )
-                      }
-                      className="text-xs font-semibold text-[#555555] cursor-pointer"
-                    >
-                      {copiedType === 'summary' ? '복사됨' : '복사'}
-                    </button>
-                  </div>
-                </div>
-
-                {renderStructuredSummary(selectedNote)}
+                  );
+                })}
               </div>
 
-              {/* [섹터 2] 화자 분리 전문 녹취록 */}
-              <div className="rounded-2xl bg-[#FFFFFF] border border-[#EAEAEA] p-4">
-                <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#EAEAEA]">
-                  <span className="text-sm font-bold text-[#111111] flex items-center gap-1.5">
-                    <FileText className="w-4 h-4" />
-                    [섹터 2] 화자 분리 전문 녹취록 (Speaker Transcript)
-                  </span>
-                  <div className="flex items-center gap-3">
+              {/* 탭 1: 핵심 요약 */}
+              {(noteDetailTab === 'summary' || noteDetailTab === 'split') && (
+                <div className="py-1">
+                  <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#F1F5F9]">
+                    <span className="text-sm font-bold text-[#111827]">핵심 요약 노트</span>
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={() => handleReanalyzeNote(selectedNote)}
+                        disabled={isProcessing}
+                        className="text-xs font-semibold text-[#475569] underline cursor-pointer"
+                      >
+                        다시 요약
+                      </button>
+                      <button
+                        onClick={() =>
+                          handleCopyText(
+                            selectedNote.structuredSummary || (selectedNote.summary || []).join('\n'),
+                            'summary'
+                          )
+                        }
+                        className="text-xs font-semibold text-[#475569] cursor-pointer"
+                      >
+                        {copiedType === 'summary' ? '복사됨' : '복사'}
+                      </button>
+                    </div>
+                  </div>
+                  {renderInteractiveStructuredSummary(selectedNote, handleSeekAudio, setStatusBanner)}
+                </div>
+              )}
+
+              {/* 탭 2: 전체 대화 녹취록 */}
+              {noteDetailTab === 'transcript' && (
+                <div className="py-1">
+                  <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#F1F5F9]">
+                    <span className="text-sm font-bold text-[#111827]">전체 대화 녹취록</span>
                     <button
                       onClick={() => handleCopyText(cleanSelectedTranscript, 'transcript')}
-                      className="text-xs font-semibold text-[#555555] cursor-pointer"
+                      className="text-xs font-semibold text-[#475569] cursor-pointer"
                     >
-                      {copiedType === 'transcript' ? '복사됨' : '복사'}
-                    </button>
-                    <button
-                      onClick={() => handleDownloadTranscriptTxt(selectedNote)}
-                      className="text-xs font-bold text-[#111111] underline cursor-pointer"
-                    >
-                      .txt 다운로드
+                      {copiedType === 'transcript' ? '복사됨' : '전체 복사'}
                     </button>
                   </div>
+                  <InteractiveTranscriptView
+                    transcript={cleanSelectedTranscript}
+                    currentAudioTime={currentAudioTime}
+                    hasPlayableAudio={Boolean(playableAudioUrl)}
+                    onSeekAudio={handleSeekAudio}
+                    onStatus={setStatusBanner}
+                  />
                 </div>
-                <div className="text-[15px] font-medium text-[#111111] leading-relaxed whitespace-pre-wrap">
-                  {cleanSelectedTranscript || '(인식된 전사 텍스트가 없습니다)'}
+              )}
+
+              {/* 탭 3: 어학 문법 피드백 · 시나리오 (전 세계 모든 언어 AI 실시간 코칭 지원) */}
+              {noteDetailTab === 'coaching' && (
+                <div>
+                  <LanguageStudyCoachingPanel
+                    note={selectedNote}
+                    onSeekAudio={handleSeekAudio}
+                    onStatus={setStatusBanner}
+                    forceShow={true}
+                  />
                 </div>
-              </div>
+              )}
+
+              {/* 탭 4: AI 변환 & 원어민 발음 쉐도잉 */}
+              {noteDetailTab === 'action' && (
+                <div className="rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] p-4 flex flex-col gap-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="text-sm font-bold text-[#111827]">
+                      원하는 형태로 노트 변환하기
+                    </span>
+                    <button
+                      onClick={() => handleToggleShadowing(selectedNote)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 cursor-pointer ${
+                        isShadowing
+                          ? 'bg-[#DC2626] text-[#FFFFFF]'
+                          : 'bg-[#FFFFFF] border border-[#CBD5E1] text-[#111827]'
+                      }`}
+                    >
+                      <Volume2 className="w-3.5 h-3.5" />
+                      <span>{isShadowing ? '쉐도잉 중지' : '원어민 발음 연속 듣기'}</span>
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2.5">
+                    <button
+                      onClick={() => handleVoiceToAction(selectedNote, 'shorts_script')}
+                      disabled={isProcessing}
+                      className="py-3 px-3 rounded-xl bg-[#111827] text-[#FFFFFF] text-xs font-bold cursor-pointer disabled:opacity-50"
+                    >
+                      🎬 쇼츠 대본 만들기
+                    </button>
+                    <button
+                      onClick={() => handleVoiceToAction(selectedNote, 'language_review')}
+                      disabled={isProcessing}
+                      className="py-3 px-3 rounded-xl bg-[#FFFFFF] border border-[#CBD5E1] text-[#111827] text-xs font-bold cursor-pointer disabled:opacity-50"
+                    >
+                      📚 3회독 복습장 만들기
+                    </button>
+                    <button
+                      onClick={() => handleVoiceToAction(selectedNote, 'biz_plan')}
+                      disabled={isProcessing}
+                      className="py-3 px-3 rounded-xl bg-[#FFFFFF] border border-[#CBD5E1] text-[#111827] text-xs font-bold cursor-pointer disabled:opacity-50"
+                    >
+                      📋 보고서·기획서 작성
+                    </button>
+                    <button
+                      onClick={() => handleVoiceToAction(selectedNote, 'share_message')}
+                      disabled={isProcessing}
+                      className="py-3 px-3 rounded-xl bg-[#FFFFFF] border border-[#CBD5E1] text-[#111827] text-xs font-bold cursor-pointer disabled:opacity-50"
+                    >
+                      💬 카톡·이메일 요약본
+                    </button>
+                  </div>
+
+                  {selectedNote.actionOutputs &&
+                    Object.keys(selectedNote.actionOutputs).length > 0 && (
+                      <div className="rounded-xl bg-[#FFFFFF] border border-[#E2E8F0] p-4">
+                        <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-[#F1F5F9]">
+                          <span className="text-xs font-bold text-[#111827]">
+                            {(
+                              selectedNote.actionOutputs[activeActionType] ||
+                              Object.values(selectedNote.actionOutputs)[0]
+                            )?.label || 'AI 변환 결과'}
+                          </span>
+                          <button
+                            onClick={() =>
+                              handleCopyText(
+                                (
+                                  selectedNote.actionOutputs?.[activeActionType] ||
+                                  Object.values(selectedNote.actionOutputs || {})[0]
+                                )?.content || '',
+                                'action'
+                              )
+                            }
+                            className="text-xs font-bold text-[#111827] underline cursor-pointer"
+                          >
+                            {copiedType === 'action' ? '복사됨' : '복사'}
+                          </button>
+                        </div>
+                        <div className="text-sm text-[#1E293B] whitespace-pre-wrap leading-7 max-h-80 overflow-y-auto">
+                          {
+                            (
+                              selectedNote.actionOutputs[activeActionType] ||
+                              Object.values(selectedNote.actionOutputs)[0]
+                            )?.content
+                          }
+                        </div>
+                      </div>
+                    )}
+                </div>
+              )}
             </div>
           </div>
         ) : (
-          /* 모바일 메인 화면 (첨부 스크린샷과 동일한 구조) */
+          /* 모바일 메인 화면 */
           <div className="flex-1 flex flex-col px-4 pt-4">
-            {/* 상단 바: AI 노트 + (+ 기기) 칩 + 검색 + 더보기 */}
             <div className="flex items-center justify-between py-2">
-              <div className="flex items-center gap-2.5">
-                <h1 className="text-2xl font-bold tracking-tight text-[#111111]">AI 노트</h1>
-                <button
-                  onClick={handleConnectDevice}
-                  className="px-3 py-1 rounded-full bg-[#F2F2F6] hover:bg-[#E5E5EA] text-[#111111] text-xs font-semibold flex items-center gap-1 cursor-pointer"
-                >
-                  <Plus className="w-3.5 h-3.5" />
-                  <span>기기</span>
-                </button>
+              <div className="flex items-center gap-2">
+                <h1 className="text-xl font-bold text-[#111827]">NoteHelper (노트헬퍼)</h1>
+                <span className="px-2.5 py-0.5 rounded-full bg-[#F1F5F9] border border-[#E2E8F0] text-[#334155] text-[11px] font-bold">
+                  회의록 · 외국어 AI
+                </span>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <button
-                  onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
-                  className="p-2 rounded-full hover:bg-[#F2F2F6] text-[#111111] cursor-pointer"
+                  onClick={() => setAppInstallModalOpen(true)}
+                  className="px-2.5 py-2 rounded-xl bg-[#F3E8FF] text-[#6B21A8] text-xs font-bold flex items-center gap-1 cursor-pointer"
                 >
-                  <Search className="w-5 h-5" />
+                  <Smartphone className="w-3.5 h-3.5" />
+                  <span>앱·AI</span>
                 </button>
                 <button
-                  onClick={handleSyncHardware}
-                  className="p-2 rounded-full hover:bg-[#F2F2F6] text-[#111111] cursor-pointer"
-                  title="기기 녹음 파일 동기화"
+                  onClick={() => setNewNoteSheetOpen(true)}
+                  className="px-3.5 py-2 rounded-xl bg-[#111827] text-[#FFFFFF] text-xs font-bold flex items-center gap-1.5 cursor-pointer"
                 >
-                  <MoreHorizontal className="w-5 h-5" />
+                  <Plus className="w-4 h-4" />
+                  <span>새 녹음</span>
                 </button>
               </div>
             </div>
 
-            {mobileSearchOpen && (
-              <div className="my-2">
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="노트 제목 또는 전사 내용 검색..."
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#F5F5F7] border border-[#E5E5EA] text-sm font-medium text-[#111111] placeholder-[#888888] focus:outline-none"
-                />
-              </div>
-            )}
-
-            {/* 실물 SecondBrain Note 상태 바 (실제 클릭 시 BLE 연결·배터리 실시간 조회!) */}
-            <button
-              onClick={handleConnectDevice}
-              className="mt-3 w-full px-4 py-3.5 rounded-2xl bg-[#F5F5F8] hover:bg-[#ECECF2] border border-[#E5E5EA] flex items-center justify-between transition-colors cursor-pointer"
-            >
-              <div className="flex items-center gap-2.5">
-                <div className="w-1 h-4 rounded-full bg-[#111111]" />
-                <Smartphone className="w-4 h-4 text-[#111111]" />
-                <span className="text-sm font-semibold text-[#111111]">SecondBrain Note</span>
-              </div>
-
-              <div className="flex items-center gap-1.5 text-xs font-semibold">
-                {isHwBusyConnecting ? (
-                  <span className="flex items-center gap-1.5 text-[#555555]">
-                    <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                    다시 연결하는 중...
-                  </span>
-                ) : device.isConnected ? (
-                  <span className="flex items-center gap-1.5 text-[#047857]">
-                    <span className="w-2 h-2 rounded-full bg-[#10B981]" />
-                    연결됨 · ⚡ {device.batteryLevel}%
-                  </span>
-                ) : (
-                  <span className="flex items-center gap-1.5 text-[#666666]">
-                    <RefreshCw className="w-3.5 h-3.5" />
-                    탭하여 연결 ({device.batteryLevel}%)
-                  </span>
-                )}
-              </div>
-            </button>
-
-            {/* 상태 안내 메시지 */}
+            {/* 상태 배너 */}
             {(isProcessing || statusBanner) && (
-              <div className="mt-3 px-3.5 py-2.5 rounded-xl bg-[#111111] text-[#FFFFFF] text-xs font-semibold flex items-center justify-between">
+              <div className="mt-2 px-3.5 py-2.5 rounded-xl bg-[#111827] text-[#FFFFFF] text-xs font-semibold flex items-center justify-between">
                 <span className="truncate">{statusBanner}</span>
                 {!isProcessing && (
                   <button onClick={() => setStatusBanner('')} className="ml-2 underline shrink-0">
@@ -1296,50 +1761,31 @@ export default function SecondBrainPage() {
               </div>
             )}
 
-            {/* 녹음 진행 중일 때 모바일 라이브 카드 */}
+            {/* 녹음 중 카드 */}
             {isRecording && (
-              <div className="mt-4 p-4 rounded-2xl bg-[#FFF5F5] border-2 border-[#DC2626]">
+              <div className="mt-3 p-4 rounded-2xl bg-[#FEF2F2] border border-[#DC2626]">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-bold text-[#DC2626] flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-[#DC2626] animate-ping" />
-                    {recordingMode === 'hw' ? 'SecondBrain Note 녹음 중' : '휴대폰 마이크 실시간 녹음 중'}
+                    실시간 녹음 중
                   </span>
-                  <span className="text-xl font-bold font-mono text-[#111111]">
+                  <span className="text-lg font-bold font-medium tabular-nums text-[#111827]">
                     {formatDuration(recordingSeconds)}
                   </span>
                 </div>
-
-                {/* 실시간 마이크 입력 음량 게이지 + 녹음 용량 표시 */}
-                <div className="mb-2.5 px-3 py-2 rounded-xl bg-[#FFFFFF] border border-[#FECACA] flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-2 flex-1">
-                    <Mic className="w-4 h-4 text-[#DC2626] shrink-0" />
-                    <div className="flex-1 h-2.5 bg-[#F3F4F6] rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-[#DC2626] transition-all duration-100 rounded-full"
-                        style={{ width: `${Math.max(8, micLevel)}%` }}
-                      />
-                    </div>
-                  </div>
-                  <span className="text-[11px] font-mono font-bold text-[#444444] shrink-0">
-                    {(recordedBytes / 1024).toFixed(1)} KB 녹음됨
-                  </span>
-                </div>
-
-                <div className="p-3 rounded-xl bg-[#FFFFFF] border border-[#E5E5EA] text-sm font-medium text-[#111111] min-h-[56px] mb-3">
-                  {transcriptLive ||
-                    '🎙️ 고음질 원음이 실시간 녹음되고 있습니다. 말씀하신 후 아래 [녹음 완료 및 AI 요약] 버튼을 누르면 전체 전사 및 옵시디언 자동 저장이 실행됩니다.'}
+                <div className="p-3 rounded-xl bg-[#FFFFFF] border border-[#FECACA] text-sm text-[#1E293B] min-h-[48px] mb-3">
+                  {transcriptLive || '말씀하신 내용이 녹음되고 있습니다...'}
                 </div>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={handleStopRecord}
-                    className="flex-1 py-2.5 rounded-xl bg-[#111111] text-[#FFFFFF] text-sm font-bold flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="flex-1 py-2.5 rounded-xl bg-[#111827] text-[#FFFFFF] text-sm font-bold cursor-pointer"
                   >
-                    <Square className="w-4 h-4 fill-current" />
-                    녹음 완료 및 AI 요약
+                    녹음 완료 및 요약 저장
                   </button>
                   <button
                     onClick={handleForceStop}
-                    className="px-3.5 py-2.5 rounded-xl bg-[#FFFFFF] border border-[#DCDCE0] text-xs font-bold text-[#444444] cursor-pointer"
+                    className="px-3.5 py-2.5 rounded-xl bg-[#FFFFFF] border border-[#CBD5E1] text-xs font-bold text-[#475569] cursor-pointer"
                   >
                     취소
                   </button>
@@ -1347,285 +1793,483 @@ export default function SecondBrainPage() {
               </div>
             )}
 
-            {/* 예정된 회의 섹션 (모바일 스크린샷과 동일한 감성) */}
-            <div className="mt-6 pb-5 border-b border-[#F0F0F4]">
-              <h2 className="text-base font-bold text-[#555555] mb-3">예정된 회의</h2>
-              <div className="flex items-center gap-3 text-sm text-[#777777]">
-                <Calendar className="w-5 h-5 text-[#888888]" />
-                <span>예정된 회의가 없습니다</span>
-              </div>
-            </div>
-
-            {/* 소스 필터 줄 */}
-            <div className="py-3 flex items-center justify-end border-b border-[#F0F0F4]">
-              <button
-                onClick={() => setFilterTab(filterTab === 'all' ? 'hw' : 'all')}
-                className="text-xs font-semibold text-[#555555] flex items-center gap-1 cursor-pointer"
-              >
-                <span>소스</span>
-                <span className="font-bold text-[#111111]">
-                  {filterTab === 'all' ? '전체 노트' : 'SecondBrain 기기'}
-                </span>
-                <ChevronDown className="w-3.5 h-3.5 text-[#111111]" />
-              </button>
-            </div>
-
-            {/* 오늘 / 전체 노트 리스트 */}
-            <div className="mt-4 flex-1">
-              <h2 className="text-xl font-bold text-[#111111] mb-2">오늘</h2>
-              <div className="divide-y divide-[#F0F0F4]">
-                {filteredNotes.map((note) => (
-                  <div
-                    key={note.id}
-                    onClick={() => {
-                      setSelectedNote(note);
-                      setMobileDetailOpen(true);
-                    }}
-                    className="py-4 flex items-start justify-between gap-3 active:bg-[#F8F8FA] cursor-pointer"
-                  >
-                    <div className="min-w-0 flex-1">
-                      <h3 className="text-[16px] font-semibold text-[#111111] leading-snug line-clamp-2">
-                        {note.title}
-                      </h3>
-                      <div className="mt-2 flex items-center gap-2 text-xs font-medium text-[#777777]">
-                        <span>{formatShortTime(note.recordedAt)}</span>
-                        <span>·</span>
-                        <span>{ note.durationSeconds }s</span>
-                        <span>·</span>
-                        <Smartphone className="w-3.5 h-3.5 text-[#777777]" />
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={(e) => handleDeleteNote(note.id, e)}
-                      className="p-1.5 text-[#888888] hover:text-[#DC2626]"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+            {/* 모바일 탭 1: 내 노트 목록 */}
+            {mainViewTab === 'notes' && (
+              <div className="mt-3 flex-1 flex flex-col gap-3">
+                <div className="flex items-center gap-2">
+                  <div className="relative flex-1">
+                    <Search className="w-4 h-4 text-[#94A3B8] absolute left-3 top-1/2 -translate-y-1/2" />
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="노트 제목·내용 검색..."
+                      className="w-full pl-9 pr-3 py-2 rounded-xl bg-[#FFFFFF] border border-[#E2E8F0] text-sm text-[#111827] placeholder-[#94A3B8] focus:outline-none"
+                    />
                   </div>
-                ))}
-              </div>
-            </div>
+                </div>
 
-            {/* 하단 플로팅 [+ 새 노트] 버튼 */}
-            {!isRecording && (
-              <div className="fixed bottom-6 left-0 right-0 px-6 flex justify-center z-20 pointer-events-none">
-                <button
-                  onClick={() => setNewNoteSheetOpen(true)}
-                  className="pointer-events-auto px-6 py-3.5 rounded-full bg-[#111111] text-[#FFFFFF] font-bold text-sm shadow-lg flex items-center gap-2 cursor-pointer"
-                >
-                  <Plus className="w-4 h-4" />
-                  <span>새 노트</span>
-                </button>
+                <div className="flex items-center gap-1.5">
+                  {(
+                    [
+                      { key: 'all', label: `전체 (${notes.length})` },
+                      { key: 'lang', label: `어학 수업 (${languageStudyNotes.length})` },
+                      { key: 'biz', label: `비즈니스·회의 (${notes.length - languageStudyNotes.length})` },
+                    ] as const
+                  ).map((f) => (
+                    <button
+                      key={f.key}
+                      type="button"
+                      onClick={() => setFilterTab(f.key)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer ${
+                        filterTab === f.key
+                          ? 'bg-[#111827] text-[#FFFFFF]'
+                          : 'bg-[#FFFFFF] border border-[#E2E8F0] text-[#475569]'
+                      }`}
+                    >
+                      {f.label}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="flex flex-col gap-2.5">
+                  {filteredNotes.map((note) => {
+                    const isLang = Boolean(buildLanguageCoachingData(note));
+                    return (
+                      <div
+                        key={note.id}
+                        onClick={() => {
+                          setSelectedNote(note);
+                          setMobileDetailOpen(true);
+                        }}
+                        className="p-4 rounded-xl bg-[#FFFFFF] border border-[#E2E8F0] flex items-start justify-between gap-3 active:bg-[#F8FAFC] cursor-pointer"
+                      >
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span
+                              className={`px-2 py-0.5 rounded text-[11px] font-bold ${
+                                isLang
+                                  ? 'bg-[#EFF6FF] text-[#1D4ED8]'
+                                  : 'bg-[#F1F5F9] text-[#475569]'
+                              }`}
+                            >
+                              {isLang ? '어학 수업' : '회의 · 메모'}
+                            </span>
+                            <span className="text-xs text-[#64748B]">
+                              {formatShortDate(note.recordedAt)} · {formatDuration(note.durationSeconds)}
+                            </span>
+                          </div>
+                          <h3 className="text-[15.5px] font-bold text-[#111827] leading-snug line-clamp-2">
+                            {note.title}
+                          </h3>
+                        </div>
+
+                        <button
+                          onClick={(e) => handleDeleteNote(note.id, e)}
+                          className="p-1.5 text-[#94A3B8] hover:text-[#DC2626] shrink-0"
+                          title="노트 삭제"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             )}
+
+            {/* 모바일 탭 2: 어학 단어장 & 수업 준비 */}
+            {mainViewTab === 'coaching' && (
+              <div className="mt-4 flex flex-col gap-4">
+                <div className="p-4 rounded-xl bg-[#FFFFFF] border border-[#E2E8F0] flex flex-col gap-2.5">
+                  <span className="text-sm font-bold text-[#111827]">
+                    수업별 문법 교정 · 시나리오 보기
+                  </span>
+                  <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
+                    {languageStudyNotes.map((ln) => {
+                      const active = selectedNote?.id === ln.id;
+                      return (
+                        <button
+                          key={ln.id}
+                          type="button"
+                          onClick={() => setSelectedNote(ln)}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap cursor-pointer ${
+                            active
+                              ? 'bg-[#111827] text-[#FFFFFF]'
+                              : 'bg-[#F8FAFC] border border-[#E2E8F0] text-[#334155]'
+                          }`}
+                        >
+                          {ln.title.slice(0, 22)}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {selectedNote && (
+                  <LanguageStudyCoachingPanel
+                    note={selectedNote}
+                    onSeekAudio={handleSeekAudio}
+                    onStatus={setStatusBanner}
+                  />
+                )}
+
+                <ExpansionCommandHub
+                  notes={notes}
+                  selectedNote={selectedNote}
+                  isProcessing={isProcessing}
+                  onSelectNoteAndSeek={handleSelectNoteAndSeek}
+                  onDispatchAgentTask={handleDispatchAgentTask}
+                  onStatus={setStatusBanner}
+                  initialTab="vocab"
+                />
+              </div>
+            )}
+
+            {/* 모바일 탭 3: AI 비서 · 일정 · 프로젝트 */}
+            {(mainViewTab === 'ask' || mainViewTab === 'schedule' || mainViewTab === 'agents_crm') && (
+              <div className="mt-4 flex flex-col gap-4">
+                <div className="p-4 rounded-xl bg-[#FFFFFF] border border-[#E2E8F0] flex flex-col gap-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-bold text-[#111827]">
+                      전체 노트에 질문하기 (AI 비서)
+                    </span>
+                    <button
+                      onClick={handleSendMorningBriefing}
+                      disabled={isProcessing}
+                      className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-xs font-semibold text-[#334155] cursor-pointer"
+                    >
+                      ☀️ 모닝 브리핑
+                    </button>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={askQuery}
+                      onChange={(e) => setAskQuery(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') handleAskSecondBrain();
+                      }}
+                      placeholder="궁금한 내용을 물어보세요..."
+                      className="flex-1 px-3 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-sm text-[#111827]"
+                    />
+                    <button
+                      onClick={() => handleAskSecondBrain()}
+                      disabled={isAsking}
+                      className="px-4 py-2 rounded-xl bg-[#111827] text-[#FFFFFF] text-xs font-bold shrink-0 cursor-pointer"
+                    >
+                      {isAsking ? '검색 중...' : '질문'}
+                    </button>
+                  </div>
+
+                  {askReply && (
+                    <div className="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-sm text-[#1E293B] whitespace-pre-wrap leading-7">
+                      {askReply}
+                    </div>
+                  )}
+                </div>
+
+                <ScheduledMeetingsSection
+                  notes={notes}
+                  onSelectNote={(n) => {
+                    setSelectedNote(n);
+                    setMobileDetailOpen(true);
+                  }}
+                  onStartRecordForSchedule={() => handleStartPhoneRecord()}
+                  onStatus={setStatusBanner}
+                />
+
+                <ExpansionCommandHub
+                  notes={notes}
+                  selectedNote={selectedNote}
+                  isProcessing={isProcessing}
+                  onSelectNoteAndSeek={handleSelectNoteAndSeek}
+                  onDispatchAgentTask={handleDispatchAgentTask}
+                  onStatus={setStatusBanner}
+                  initialTab="agents"
+                />
+              </div>
+            )}
+
+            {/* 모바일 하단 3대 메뉴 바 */}
+            <nav className="fixed bottom-0 left-0 right-0 z-30 bg-[#FFFFFF] border-t border-[#E2E8F0] px-4 py-2 grid grid-cols-3 gap-2">
+              {(
+                [
+                  { key: 'notes', label: '📝 내 노트' },
+                  { key: 'coaching', label: '🎓 어학 단어장' },
+                  { key: 'ask', label: '🧠 AI 비서 · 일정' },
+                ] as const
+              ).map((t) => {
+                const active =
+                  mainViewTab === t.key ||
+                  (t.key === 'ask' && (mainViewTab === 'schedule' || mainViewTab === 'agents_crm'));
+                return (
+                  <button
+                    key={t.key}
+                    type="button"
+                    onClick={() => setMainViewTab(t.key)}
+                    className={`py-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
+                      active
+                        ? 'bg-[#111827] text-[#FFFFFF]'
+                        : 'text-[#475569] hover:bg-[#F1F5F9]'
+                    }`}
+                  >
+                    {t.label}
+                  </button>
+                );
+              })}
+            </nav>
           </div>
         )}
       </div>
 
       {/* ===================================================================== */}
-      {/* 2. PC 전용 워크스페이스 레이아웃 (>= lg 화면: Genspark Second Brain 스타일) */}
+      {/* 2. PC 전용 워크스페이스 레이아웃 (>= lg 화면: 좌측 노트 목록 + 우측 깔끔한 문서 뷰) */}
       {/* ===================================================================== */}
-      <div className="hidden lg:flex min-h-screen bg-[#FFFFFF] text-[#111111]">
-        {/* 좌측 사이드바 */}
+      <div className="hidden lg:flex min-h-screen bg-[#F8FAFC] text-[#111827]">
+        {/* 좌측 사이드바: 검색 + 카테고리 필터 + 깔끔한 단일 노트 목록 */}
         <aside
           className={`${
-            sidebarOpen ? 'w-64' : 'w-0 overflow-hidden'
-          } shrink-0 bg-[#F9F9FB] border-r border-[#EAEAEA] flex flex-col justify-between transition-all duration-200 select-none`}
+            sidebarOpen ? 'w-80' : 'w-0 overflow-hidden'
+          } shrink-0 bg-[#FFFFFF] border-r border-[#E2E8F0] flex flex-col justify-between transition-all duration-200 select-none`}
         >
-          <div className="p-3.5 flex flex-col gap-3">
+          <div className="p-4 flex flex-col gap-3.5 flex-1 min-h-0">
             {/* 상단 로고 */}
-            <div className="flex items-center justify-between px-1.5 py-1">
-              <div className="flex items-center gap-2.5">
-                <Brain className="w-5 h-5 text-[#111111]" />
-                <span className="font-bold text-[15px] tracking-tight text-[#111111]">
-                  Second Brain
+            <div className="flex items-center justify-between px-1">
+              <div className="flex items-center gap-2">
+                <Brain className="w-5 h-5 text-[#111827]" />
+                <span className="font-bold text-base tracking-tight text-[#111827]">
+                  NoteHelper (노트헬퍼)
                 </span>
               </div>
               <button
                 onClick={() => setSidebarOpen(false)}
-                className="p-1 rounded-md hover:bg-[#EAEAEA] text-[#555555] cursor-pointer"
+                className="p-1.5 rounded-lg hover:bg-[#F1F5F9] text-[#64748B] cursor-pointer"
                 title="사이드바 접기"
               >
                 <PanelLeft className="w-4 h-4" />
               </button>
             </div>
 
-            {/* + 만들기 또는 업로드 버튼 (클릭 시 3대 옵션 모달 오픈!) */}
+            {/* + 새 녹음 / 파일 업로드 버튼 */}
             {!isRecording ? (
               <button
                 onClick={() => setNewNoteSheetOpen(true)}
                 disabled={isProcessing}
-                className="w-full py-2.5 px-4 bg-[#18181B] hover:bg-[#000000] text-[#FFFFFF] rounded-xl font-semibold text-sm flex items-center justify-center gap-2 shadow-sm transition-colors cursor-pointer disabled:opacity-50"
+                className="w-full py-2.5 px-4 bg-[#111827] hover:bg-[#1E293B] text-[#FFFFFF] rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer disabled:opacity-50"
               >
                 <Plus className="w-4 h-4" />
-                <span>만들기 또는 업로드</span>
+                <span>새 녹음 · 파일 업로드</span>
               </button>
             ) : (
               <button
                 onClick={handleStopRecord}
-                className="w-full py-2.5 px-4 bg-[#DC2626] hover:bg-[#B91C1C] text-[#FFFFFF] rounded-xl font-semibold text-sm flex items-center justify-center gap-2 shadow-sm transition-colors cursor-pointer animate-pulse"
+                className="w-full py-2.5 px-4 bg-[#DC2626] hover:bg-[#B91C1C] text-[#FFFFFF] rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer"
               >
                 <Square className="w-4 h-4 fill-current" />
-                <span>녹음 즉시 중지 ({formatDuration(recordingSeconds)})</span>
+                <span>녹음 중지 ({formatDuration(recordingSeconds)})</span>
               </button>
             )}
 
-            {/* 기본 메뉴 */}
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] rounded-xl p-1.5 flex flex-col gap-0.5">
-              <button
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="w-full px-3 py-2 rounded-lg bg-[#F1F1F4] text-[#111111] font-semibold text-sm flex items-center gap-2.5 cursor-pointer"
-              >
-                <Home className="w-4 h-4 text-[#111111]" />
-                <span>홈</span>
-              </button>
-              <button
-                onClick={handleSyncHardware}
-                disabled={isSyncingHw || isRecording}
-                className="w-full px-3 py-2 rounded-lg hover:bg-[#F5F5F7] text-[#333333] font-medium text-sm flex items-center justify-between cursor-pointer disabled:opacity-50"
-              >
-                <span className="flex items-center gap-2.5">
-                  <RefreshCw className={`w-4 h-4 ${isSyncingHw ? 'animate-spin' : ''}`} />
-                  <span>기기 녹음 불러오기</span>
-                </span>
-                <span className="text-[11px] font-semibold text-[#111111] bg-[#EFEFF2] px-1.5 py-0.5 rounded">
-                  BLE
-                </span>
-              </button>
+            {/* 검색창 */}
+            <div className="relative">
+              <Search className="w-4 h-4 text-[#94A3B8] absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="노트 제목이나 내용 검색..."
+                className="w-full pl-9 pr-3 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-xs font-medium text-[#111827] placeholder-[#94A3B8] focus:outline-none focus:border-[#111827]"
+              />
             </div>
 
-            {/* ★ 실제 작동하는 SecondBrain Note 하드웨어 상태 버튼 (클릭 시 즉시 BLE 연결 및 배터리 갱신!) */}
-            <button
-              onClick={handleConnectDevice}
-              disabled={isHwBusyConnecting}
-              className="w-full bg-[#FFFFFF] hover:bg-[#F3F3F6] border border-[#EAEAEA] hover:border-[#111111] rounded-xl px-3.5 py-2.5 flex items-center justify-between text-xs transition-all cursor-pointer"
-              title="클릭하여 실물 SecondBrain Note 블루투스 연결 및 실시간 배터리를 확인합니다"
-            >
-              <span className="flex items-center gap-2 font-semibold text-[#111111]">
-                {isHwBusyConnecting ? (
-                  <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#111111]" />
-                ) : (
-                  <span
-                    className={`w-2.5 h-2.5 rounded-full ${
-                      device.isConnected ? 'bg-[#10B981]' : 'bg-[#A1A1AA]'
+            {/* 직관적인 3단 분류 필터 (전체 / 어학 수업 / 회의·비즈니스) */}
+            <div className="grid grid-cols-3 gap-1 bg-[#F1F5F9] p-1 rounded-xl">
+              {(
+                [
+                  { key: 'all', label: `전체 (${notes.length})` },
+                  { key: 'lang', label: `어학 (${languageStudyNotes.length})` },
+                  { key: 'biz', label: `회의 (${notes.length - languageStudyNotes.length})` },
+                ] as const
+              ).map((f) => (
+                <button
+                  key={f.key}
+                  type="button"
+                  onClick={() => setFilterTab(f.key)}
+                  className={`py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
+                    filterTab === f.key
+                      ? 'bg-[#FFFFFF] text-[#111827] shadow-2xs'
+                      : 'text-[#64748B] hover:text-[#111827]'
+                  }`}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+
+            {/* 노트 리스트 (한눈에 들어오는 깔끔한 카드형 리스트 + 우측 삭제 버튼) */}
+            <div className="flex-1 overflow-y-auto pr-1 space-y-1.5 min-h-0">
+              {filteredNotes.map((n) => {
+                const active = selectedNote?.id === n.id;
+                const isLang = Boolean(buildLanguageCoachingData(n));
+                return (
+                  <div
+                    key={n.id}
+                    onClick={() => {
+                      setSelectedNote(n);
+                      setMainViewTab('notes');
+                    }}
+                    className={`group px-3 py-2.5 rounded-xl border transition-all cursor-pointer flex items-start justify-between gap-2 ${
+                      active
+                        ? 'bg-[#111827] text-[#FFFFFF] border-[#111827]'
+                        : 'bg-[#FFFFFF] hover:bg-[#F8FAFC] text-[#111827] border-[#E2E8F0]'
                     }`}
-                  />
-                )}
-                <span>SecondBrain Note</span>
-              </span>
+                  >
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-1.5 mb-1">
+                        <span
+                          className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
+                            active
+                              ? 'bg-[#FFFFFF]/20 text-[#FFFFFF]'
+                              : isLang
+                              ? 'bg-[#EFF6FF] text-[#1D4ED8]'
+                              : 'bg-[#F1F5F9] text-[#475569]'
+                          }`}
+                        >
+                          {isLang ? '어학' : '회의'}
+                        </span>
+                        <span
+                          className={`text-[11px] ${
+                            active ? 'text-[#CBD5E1]' : 'text-[#64748B]'
+                          }`}
+                        >
+                          {formatShortDate(n.recordedAt)} · {formatDuration(n.durationSeconds)}
+                        </span>
+                      </div>
+                      <div className="text-[13.5px] font-semibold leading-snug line-clamp-2">
+                        {n.title}
+                      </div>
+                    </div>
 
-              <span className="flex items-center gap-1 font-semibold text-[#444444]">
-                {isHwBusyConnecting ? (
-                  <span>연결 중...</span>
-                ) : device.isConnected ? (
-                  <>
-                    <BatteryCharging className="w-3.5 h-3.5 text-[#047857]" />
-                    <span className="text-[#047857]">{device.batteryLevel}%</span>
-                  </>
-                ) : (
-                  <span className="text-[#777777]">탭하여 연결 ({device.batteryLevel}%)</span>
-                )}
-              </span>
-            </button>
+                    <button
+                      type="button"
+                      onClick={(e) => handleDeleteNote(n.id, e)}
+                      className={`p-1 rounded-md opacity-70 group-hover:opacity-100 transition-opacity cursor-pointer shrink-0 ${
+                        active
+                          ? 'text-[#CBD5E1] hover:text-[#FCA5A5] hover:bg-[#FFFFFF]/10'
+                          : 'text-[#94A3B8] hover:text-[#DC2626] hover:bg-[#FEF2F2]'
+                      }`}
+                      title="이 노트 영구 삭제"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
-            {/* 개인 노트 (녹음 리스트 트리) */}
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] rounded-xl p-2.5 flex flex-col gap-1 flex-1 min-h-[260px]">
-              <div className="flex items-center justify-between px-1.5 py-1 text-xs font-semibold text-[#666666]">
-                <span className="flex items-center gap-1.5">
-                  <ChevronDown className="w-3.5 h-3.5" />
-                  개인 노트 ({notes.length})
-                </span>
+          {/* 하단 스마트폰 클라우드 AI 동기화 상태 바 */}
+          <div className="p-3.5 border-t border-[#E2E8F0] bg-[#F8FAFC] flex flex-col gap-2">
+            <div className="flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2 font-semibold text-[#1E293B]">
+                <span className="w-2 h-2 rounded-full bg-[#10B981]" />
+                <span>휴대폰 녹음 · 회의록 · 어학 AI</span>
               </div>
 
-              <div className="flex flex-col gap-0.5 max-h-[42vh] overflow-y-auto pr-0.5">
-                {notes.map((n) => {
-                  const active = selectedNote?.id === n.id;
+              <button
+                onClick={() => fetchNotes()}
+                disabled={isRecording}
+                className="px-2.5 py-1 rounded-lg bg-[#FFFFFF] border border-[#E2E8F0] hover:border-[#111827] text-[#334155] text-[11px] font-semibold flex items-center gap-1 cursor-pointer disabled:opacity-50"
+              >
+                <RefreshCw className="w-3 h-3" />
+                <span>새로고침</span>
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        {/* 우측 메인 화면 */}
+        <div className="flex-1 flex flex-col min-w-0">
+          {/* 상단 헤더: 이해하기 쉬운 3대 메뉴만 깔끔하게 배치 */}
+          <header className="sticky top-0 z-20 bg-[#FFFFFF]/95 backdrop-blur border-b border-[#E2E8F0] px-8 py-3 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              {!sidebarOpen && (
+                <button
+                  onClick={() => setSidebarOpen(true)}
+                  className="p-2 rounded-lg hover:bg-[#F1F5F9] text-[#111827] cursor-pointer"
+                  title="노트 목록 열기"
+                >
+                  <PanelLeft className="w-4 h-4" />
+                </button>
+              )}
+
+              <div className="flex items-center gap-1.5 bg-[#F1F5F9] p-1 rounded-xl">
+                {(
+                  [
+                    { key: 'notes', label: '📝 내 노트 (요약 · 녹취록 · 코칭)' },
+                    { key: 'coaching', label: '🎓 다국어 단어장 · 수업 준비' },
+                    { key: 'ask', label: '🧠 AI 비서 · 일정 · 프로젝트' },
+                  ] as const
+                ).map((tab) => {
+                  const active =
+                    mainViewTab === tab.key ||
+                    (tab.key === 'ask' &&
+                      (mainViewTab === 'schedule' || mainViewTab === 'agents_crm'));
                   return (
                     <button
-                      key={n.id}
-                      onClick={() => {
-                        setSelectedNote(n);
-                        detailSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
-                      }}
-                      className={`w-full px-2.5 py-2 rounded-lg text-left text-[13px] flex items-center gap-2 transition-colors cursor-pointer ${
+                      key={tab.key}
+                      type="button"
+                      onClick={() => setMainViewTab(tab.key)}
+                      className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors cursor-pointer ${
                         active
-                          ? 'bg-[#111111] text-[#FFFFFF] font-semibold'
-                          : 'text-[#222222] hover:bg-[#F3F3F6] font-medium'
+                          ? 'bg-[#FFFFFF] text-[#111827] shadow-2xs'
+                          : 'text-[#475569] hover:text-[#111827]'
                       }`}
                     >
-                      <Folder className="w-3.5 h-3.5 shrink-0 opacity-75" />
-                      <span className="truncate flex-1">{n.title}</span>
+                      {tab.label}
                     </button>
                   );
                 })}
               </div>
             </div>
-          </div>
 
-          {/* 사이드바 하단 사용자 정보 */}
-          <div className="p-3.5 border-t border-[#EAEAEA] flex items-center justify-between text-xs font-medium text-[#444444]">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-[#111111] text-[#FFFFFF] flex items-center justify-center font-bold text-[11px]">
-                윤
-              </div>
-              <span className="font-semibold text-[#111111]">윤종성 대표</span>
+            <div className="flex items-center gap-2.5">
+              <button
+                onClick={() => setAppInstallModalOpen(true)}
+                className="px-3.5 py-2 rounded-xl bg-[#F3E8FF] hover:bg-[#E9D5FF] text-[#6B21A8] text-xs font-bold flex items-center gap-1.5 cursor-pointer"
+              >
+                <Smartphone className="w-3.5 h-3.5" />
+                <span>📲 모바일 앱 · 다국어 AI 허브</span>
+              </button>
+              <button
+                onClick={handleSendMorningBriefing}
+                disabled={isProcessing}
+                className="px-3.5 py-2 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-xs font-semibold text-[#334155] cursor-pointer disabled:opacity-50"
+              >
+                ☀️ 모닝 브리핑 받기
+              </button>
             </div>
-            <span className="text-[11px] text-[#666666]">무구독 직결</span>
-          </div>
-        </aside>
-
-        {/* 우측 메인 워크스페이스 */}
-        <div className="flex-1 flex flex-col min-w-0 bg-[#FFFFFF]">
-          {/* 상단 미니 헤더 */}
-          <header className="h-12 px-6 flex items-center justify-between border-b border-[#F0F0F0]">
-            <div className="flex items-center gap-3">
-              {!sidebarOpen && (
-                <button
-                  onClick={() => setSidebarOpen(true)}
-                  className="p-1.5 rounded-lg hover:bg-[#F3F3F6] text-[#111111] cursor-pointer"
-                  title="사이드바 열기"
-                >
-                  <PanelLeft className="w-4 h-4" />
-                </button>
-              )}
-              <span className="text-sm font-semibold text-[#111111]">
-                Second Brain · 음성 전사 및 AI 요약 워크스페이스
-              </span>
-            </div>
-
-            <button
-              onClick={handleConnectDevice}
-              className="flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-full bg-[#F5F5F7] hover:bg-[#EAEAEA] text-[#111111] cursor-pointer"
-            >
-              <Bluetooth className="w-3.5 h-3.5" />
-              <span>
-                {isHwBusyConnecting
-                  ? '실물 기기 연결 확인 중...'
-                  : device.isConnected
-                  ? `SecondBrain Note 연결됨 (배터리 ${device.batteryLevel}%)`
-                  : 'SecondBrain Note 연결하기'}
-              </span>
-            </button>
           </header>
 
-          {/* 메인 컨텐츠 컨테이너 */}
-          <main className="max-w-5xl w-full mx-auto px-6 py-8 flex flex-col gap-8">
-            {/* 상태 알림 배너 */}
+          {/* 본문 컨테이너 */}
+          <main className="max-w-4xl w-full mx-auto px-8 py-8 flex flex-col gap-6">
+            {/* 상태 안내 메시지 */}
             {(isProcessing || statusBanner) && (
-              <div className="px-4 py-3 rounded-xl bg-[#F7F7F9] border border-[#E5E5EA] flex items-center justify-between text-sm font-medium text-[#111111]">
+              <div className="px-4 py-3 rounded-xl bg-[#111827] text-[#FFFFFF] flex items-center justify-between text-sm font-medium">
                 <div className="flex items-center gap-2.5">
                   {isProcessing ? (
-                    <RefreshCw className="w-4 h-4 animate-spin text-[#111111]" />
+                    <RefreshCw className="w-4 h-4 animate-spin" />
                   ) : (
-                    <Sparkles className="w-4 h-4 text-[#111111]" />
+                    <Sparkles className="w-4 h-4" />
                   )}
                   <span>{statusBanner}</span>
                 </div>
                 {!isProcessing && (
                   <button
                     onClick={() => setStatusBanner('')}
-                    className="text-xs font-semibold text-[#666666] hover:text-[#111111] cursor-pointer"
+                    className="text-xs underline opacity-80 hover:opacity-100 cursor-pointer"
                   >
                     닫기
                   </button>
@@ -1633,456 +2277,546 @@ export default function SecondBrainPage() {
               </div>
             )}
 
-            {/* 상단 중앙 박스 */}
-            <div className="rounded-2xl border border-[#E6E6EA] bg-[#FFFFFF] shadow-[0_2px_12px_rgba(0,0,0,0.03)] overflow-hidden">
-              {isRecording ? (
-                <div className="p-6 bg-[#FFF5F5]">
-                  <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
-                    <div className="flex items-center gap-3">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#DC2626] text-[#FFFFFF] text-xs font-bold">
-                        <span className="w-2 h-2 rounded-full bg-[#FFFFFF] animate-ping" />
-                        {recordingMode === 'hw'
-                          ? '실물 SecondBrain Note 녹음 중'
-                          : 'PC/휴대폰 마이크 녹음 중'}
-                      </span>
-                      <span className="text-2xl font-bold font-mono text-[#111111]">
-                        {formatDuration(recordingSeconds)}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-2.5">
-                      <button
-                        onClick={handleStopRecord}
-                        className="px-5 py-2.5 rounded-xl bg-[#111111] hover:bg-[#000000] text-[#FFFFFF] text-sm font-semibold flex items-center gap-2 cursor-pointer"
-                      >
-                        <Square className="w-4 h-4 fill-current" />
-                        녹음 완료 및 AI 요약 저장
-                      </button>
-                      <button
-                        onClick={handleForceStop}
-                        className="px-3.5 py-2.5 rounded-xl bg-[#FFFFFF] border border-[#DCDCE0] hover:bg-[#F5F5F7] text-[#333333] text-sm font-semibold flex items-center gap-1.5 cursor-pointer"
-                      >
-                        <XCircle className="w-4 h-4" />
-                        강제 취소
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-[#FFFFFF] border border-[#E6E6EA] text-base font-medium text-[#111111] min-h-[72px] leading-relaxed">
-                    {transcriptLive || '말씀하시면 실시간으로 한국어 받아쓰기가 이곳에 표시됩니다...'}
-                  </div>
-                </div>
-              ) : (
-                <>
-                  <div className="p-5">
-                    <div className="text-[15px] text-[#777777] mb-6">
-                      실물 세컨브레인 노트로 녹음하거나, 오디오 파일을 업로드하여 전체 전사본 및 AI 핵심 요약을 확인하세요...
-                    </div>
-
-                    <div className="flex flex-wrap items-center justify-between gap-3">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <button
-                          onClick={() => setNewNoteSheetOpen(true)}
-                          className="px-3.5 py-1.5 rounded-full bg-[#111111] hover:bg-[#000000] text-[#FFFFFF] text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
-                        >
-                          <Plus className="w-3.5 h-3.5" />
-                          새 노트 녹음 · 파일 업로드
-                        </button>
-                        <button
-                          onClick={handleSyncHardware}
-                          disabled={isSyncingHw}
-                          className="px-3.5 py-1.5 rounded-full bg-[#F4F4F6] hover:bg-[#EAEAEE] text-[#111111] text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
-                        >
-                          <RefreshCw className={`w-3.5 h-3.5 ${isSyncingHw ? 'animate-spin' : ''}`} />
-                          기기 내장 녹음 동기화
-                        </button>
-                        {selectedNote && (
-                          <button
-                            onClick={() => handleReanalyzeNote(selectedNote)}
-                            disabled={isProcessing}
-                            className="px-3.5 py-1.5 rounded-full bg-[#F4F4F6] hover:bg-[#EAEAEE] text-[#111111] text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
-                          >
-                            <Zap className="w-3.5 h-3.5" />
-                            선택 노트 AI 재분석
-                          </button>
-                        )}
-                      </div>
-
-                      <div className="relative w-full sm:w-64">
-                        <Search className="w-3.5 h-3.5 text-[#777777] absolute left-3 top-1/2 -translate-y-1/2" />
-                        <input
-                          type="text"
-                          value={searchQuery}
-                          onChange={(e) => setSearchQuery(e.target.value)}
-                          placeholder="노트 제목 또는 전사 내용 검색..."
-                          className="w-full pl-8 pr-3 py-1.5 rounded-full bg-[#F5F5F7] text-xs font-medium text-[#111111] placeholder-[#888888] focus:outline-none focus:ring-1 focus:ring-[#111111]"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="px-5 py-2.5 bg-[#F8F8FA] border-t border-[#EFEFF2] flex items-center justify-between text-xs text-[#555555]">
-                    <span className="font-medium">커넥터</span>
-                    <div className="flex items-center gap-2 font-semibold text-[#111111]">
-                      <button
-                        onClick={handleConnectDevice}
-                        className="px-2 py-0.5 rounded bg-[#FFFFFF] border border-[#E5E5EA] hover:border-[#111111] flex items-center gap-1.5 cursor-pointer"
-                      >
-                        <span
-                          className={`w-1.5 h-1.5 rounded-full ${
-                            device.isConnected ? 'bg-[#10B981]' : 'bg-[#A1A1AA]'
-                          }`}
-                        />
-                        SecondBrain Note ({device.batteryLevel}%)
-                      </button>
-                      <span className="px-2 py-0.5 rounded bg-[#FFFFFF] border border-[#E5E5EA]">
-                        Qwen 2.5 한국어 요약
-                      </span>
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
-
-            {/* "여기서 시작하세요" 3단 카드 (휴대폰/PC 마이크 녹음 | SecondBrain Note 녹음 | 오디오 파일 가져오기) */}
-            <section>
-              <h2 className="text-sm font-bold text-[#111111] mb-3.5">여기서 시작하세요</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {/* 카드 1: 휴대폰/PC 마이크로 녹음 */}
-                <div
-                  onClick={handleStartPhoneRecord}
-                  className="group rounded-2xl border border-[#EAEAEA] hover:border-[#111111] bg-[#FAFAFC] hover:bg-[#FFFFFF] p-4 flex flex-col justify-between h-40 transition-all cursor-pointer shadow-[0_1px_4px_rgba(0,0,0,0.02)]"
-                >
-                  <div className="flex items-center gap-1.5 text-xs font-semibold text-[#666666]">
-                    <Mic className="w-3.5 h-3.5 text-[#111111]" />
-                    <span>Microphone →</span>
-                    <span className="text-[#111111] font-bold">즉시 녹음</span>
-                  </div>
-                  <div className="my-auto flex items-center justify-center">
-                    <div className="w-12 h-12 rounded-2xl bg-[#FFFFFF] text-[#111111] border border-[#E5E5EA] group-hover:bg-[#111111] group-hover:text-[#FFFFFF] flex items-center justify-center transition-colors shadow-sm">
-                      <Mic className="w-5 h-5" />
-                    </div>
-                  </div>
-                  <div className="text-xs font-bold text-[#111111]">휴대폰 · PC 마이크로 녹음</div>
-                </div>
-
-                {/* 카드 2: SecondBrain Note로 녹음 */}
-                <div
-                  onClick={handleStartHardwareRecord}
-                  className="group rounded-2xl border border-[#EAEAEA] hover:border-[#111111] bg-[#FAFAFC] hover:bg-[#FFFFFF] p-4 flex flex-col justify-between h-40 transition-all cursor-pointer shadow-[0_1px_4px_rgba(0,0,0,0.02)]"
-                >
-                  <div className="flex items-center justify-between text-xs font-semibold text-[#666666]">
-                    <span className="flex items-center gap-1.5">
-                      <Smartphone className="w-3.5 h-3.5 text-[#111111]" />
-                      <span className="text-[#111111] font-bold">SecondBrain Note</span>
+            {/* 녹음 진행 중 배너 */}
+            {isRecording && (
+              <div className="p-6 rounded-2xl border border-[#DC2626] bg-[#FEF2F2]">
+                <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
+                  <div className="flex items-center gap-3">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#DC2626] text-[#FFFFFF] text-xs font-bold">
+                      <span className="w-2 h-2 rounded-full bg-[#FFFFFF] animate-ping" />
+                      녹음 중
                     </span>
-                    <span
-                      className={`text-[11px] font-bold ${
-                        device.isConnected ? 'text-[#047857]' : 'text-[#777777]'
-                      }`}
+                    <span className="text-2xl font-bold font-medium tabular-nums text-[#111827]">
+                      {formatDuration(recordingSeconds)}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handleStopRecord}
+                      className="px-5 py-2.5 rounded-xl bg-[#111827] text-[#FFFFFF] text-sm font-bold flex items-center gap-2 cursor-pointer"
                     >
-                      {device.isConnected ? `연결됨 ${device.batteryLevel}%` : '대기 중'}
-                    </span>
-                  </div>
-                  <div className="my-auto flex items-center justify-center">
-                    <div className="w-12 h-12 rounded-2xl bg-[#FFFFFF] text-[#111111] border border-[#E5E5EA] group-hover:bg-[#111111] group-hover:text-[#FFFFFF] flex items-center justify-center transition-colors shadow-sm">
-                      <Smartphone className="w-5 h-5" />
-                    </div>
-                  </div>
-                  <div className="text-xs font-bold text-[#111111]">
-                    SecondBrain Note(으)로 녹음
+                      <Square className="w-4 h-4 fill-current" />
+                      녹음 완료 및 요약 저장
+                    </button>
+                    <button
+                      onClick={handleForceStop}
+                      className="px-3.5 py-2.5 rounded-xl bg-[#FFFFFF] border border-[#CBD5E1] text-[#475569] text-sm font-semibold cursor-pointer"
+                    >
+                      취소
+                    </button>
                   </div>
                 </div>
 
-                {/* 카드 3: 오디오 파일 가져오기 */}
-                <div
-                  onClick={() => fileInputRef.current?.click()}
-                  className="group rounded-2xl border border-[#EAEAEA] hover:border-[#111111] bg-[#FAFAFC] hover:bg-[#FFFFFF] p-4 flex flex-col justify-between h-40 transition-all cursor-pointer shadow-[0_1px_4px_rgba(0,0,0,0.02)]"
-                >
-                  <div className="flex items-center gap-1.5 text-xs font-semibold text-[#666666]">
-                    <Upload className="w-3.5 h-3.5 text-[#111111]" />
-                    <span>Audio Import →</span>
-                    <span className="text-[#111111] font-bold">파일 전사 · 요약</span>
-                  </div>
-                  <div className="my-auto flex items-center justify-center">
-                    <div className="w-12 h-12 rounded-2xl bg-[#FFFFFF] text-[#111111] border border-[#E5E5EA] group-hover:bg-[#111111] group-hover:text-[#FFFFFF] flex items-center justify-center transition-colors shadow-sm">
-                      <Upload className="w-5 h-5" />
-                    </div>
-                  </div>
-                  <div className="text-xs font-bold text-[#111111]">오디오 파일 가져오기</div>
+                <div className="p-4 rounded-xl bg-[#FFFFFF] border border-[#FECACA] text-[15.5px] text-[#1E293B] min-h-[64px] leading-7">
+                  {transcriptLive || '말씀하시면 실시간으로 받아쓰기가 표시됩니다...'}
                 </div>
               </div>
-            </section>
+            )}
 
-            {/* 선택한 녹음의 상세 워크스페이스 */}
-            {selectedNote && (
+            {/* =============================================================== */}
+            {/* 메뉴 1: 📝 내 노트 (깔끔한 단일 문서 리더) */}
+            {/* =============================================================== */}
+            {mainViewTab === 'notes' && selectedNote && (
               <section
                 ref={detailSectionRef}
-                className="rounded-2xl border border-[#E5E5EA] bg-[#FFFFFF] p-6 shadow-[0_2px_14px_rgba(0,0,0,0.03)] flex flex-col gap-6"
+                className="rounded-2xl border border-[#E2E8F0] bg-[#FFFFFF] p-7 lg:p-8 shadow-2xs flex flex-col gap-6"
               >
-                <div className="flex flex-wrap items-start justify-between gap-4 pb-5 border-b border-[#EFEFF2]">
-                  <div>
-                    <div className="flex items-center gap-2 text-xs font-semibold text-[#666666] mb-1">
-                      <span>선택된 노트</span>
-                      <span>·</span>
+                {/* 노트 문서 헤더 */}
+                <div className="flex flex-wrap items-start justify-between gap-4 pb-5 border-b border-[#E2E8F0]">
+                  <div className="space-y-2 flex-1 min-w-[260px]">
+                    <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-[#64748B]">
+                      <span
+                        className={`px-2.5 py-0.5 rounded-md font-bold ${
+                          selectedNoteCoaching
+                            ? 'bg-[#EFF6FF] text-[#1D4ED8]'
+                            : 'bg-[#F1F5F9] text-[#334155]'
+                        }`}
+                      >
+                        {selectedNoteCoaching ? '🎓 어학 수업 노트' : '📋 회의 · 비즈니스 노트'}
+                      </span>
                       <span>{new Date(selectedNote.recordedAt).toLocaleString('ko-KR')}</span>
                       <span>·</span>
-                      <span>{formatDuration(selectedNote.durationSeconds)}</span>
-                      <span className="px-2 py-0.5 rounded-md bg-[#F3E8FF] text-[#6B21A8] font-bold">
-                        Obsidian 자동 저장됨 (00_Inbox)
-                      </span>
+                      <span>녹음 길이 {formatDuration(selectedNote.durationSeconds)}</span>
                     </div>
-                    <h3 className="text-xl font-bold text-[#111111]">{selectedNote.title}</h3>
+                    <h1 className="text-2xl font-bold text-[#111827] leading-snug">
+                      {selectedNote.title}
+                    </h1>
                   </div>
 
                   <div className="flex flex-wrap items-center gap-2">
                     {playableAudioUrl && (
                       <button
                         onClick={() => handleDownloadAudioFile(selectedNote)}
-                        className="px-3.5 py-2 rounded-xl bg-[#F4F4F6] hover:bg-[#111111] text-[#111111] hover:text-[#FFFFFF] text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                        className="px-3.5 py-2 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-[#334155] text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
                       >
                         <Download className="w-3.5 h-3.5" />
-                        원음 오디오(.wav) 다운로드
+                        원음 파일(.wav)
                       </button>
                     )}
                     <button
                       onClick={() => handleDownloadTranscriptTxt(selectedNote)}
-                      className="px-3.5 py-2 rounded-xl bg-[#111111] hover:bg-[#000000] text-[#FFFFFF] text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                      className="px-3.5 py-2 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-[#334155] text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
                     >
                       <Download className="w-3.5 h-3.5" />
-                      전체 전사(.txt) 다운로드
+                      녹취록(.txt)
+                    </button>
+                    <button
+                      onClick={(e) => handleDeleteNote(selectedNote.id, e)}
+                      className="px-3 py-2 rounded-xl bg-[#FFFFFF] hover:bg-[#FEF2F2] border border-[#E2E8F0] hover:border-[#FECACA] text-[#64748B] hover:text-[#DC2626] text-xs font-semibold flex items-center gap-1 cursor-pointer"
+                      title="이 노트 삭제"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                      삭제
                     </button>
                   </div>
                 </div>
 
-                {/* 1. 원음 오디오 플레이어 */}
+                {/* 오디오 재생 바 */}
                 {playableAudioUrl && (
-                  <div className="rounded-xl bg-[#F8F8FA] border border-[#EAEAEA] p-4 flex flex-col gap-2.5">
-                    <div className="flex items-center justify-between text-xs font-bold text-[#111111]">
-                      <span className="flex items-center gap-1.5">
+                  <div className="rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] p-4 flex flex-col gap-2">
+                    <div className="flex items-center justify-between text-xs font-semibold text-[#475569]">
+                      <span className="flex items-center gap-1.5 text-[#111827]">
                         <Volume2 className="w-4 h-4" />
-                        원음 오디오 재생 (16kHz WAV)
+                        녹음 원음 재생 (본문의 시간 버튼을 누르면 해당 위치로 바로 이동합니다)
                       </span>
-                      <span className="text-[#666666] font-mono">
-                        {formatDuration(selectedNote.durationSeconds)}
+                      <span className="font-medium tabular-nums">
+                        {formatSecToMMSS(currentAudioTime)} / {formatDuration(selectedNote.durationSeconds)}
                       </span>
                     </div>
                     <audio
+                      ref={pcAudioRef}
                       key={playableAudioUrl}
                       controls
                       preload="metadata"
                       src={playableAudioUrl}
+                      onTimeUpdate={(e) => setCurrentAudioTime(e.currentTarget.currentTime)}
                       className="w-full h-10"
                     />
                   </div>
                 )}
 
-                {/* 2. [섹터 1] 구조화 심층 요약 + 3. [섹터 2] 화자 분리 전문 녹취록 */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-                  <div className="lg:col-span-6 rounded-xl bg-[#F9F9FB] border border-[#EAEAEA] p-5 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#EAEAEA]">
-                        <span className="text-sm font-bold text-[#111111] flex items-center gap-1.5">
-                          <Sparkles className="w-4 h-4" />
-                          [섹터 1] 전사 내용 구조화 요약 (Structured Summary)
-                        </span>
+                {/* 깔끔한 4대 언더라인 탭 바 */}
+                <div className="flex items-center justify-between border-b border-[#E2E8F0]">
+                  <div className="flex items-center gap-2">
+                    {(
+                      [
+                        { key: 'summary', label: '핵심 요약' },
+                        { key: 'transcript', label: '전체 대화 녹취록' },
+                        {
+                          key: 'coaching',
+                          label: `어학 문법 · 표현 코칭${selectedNoteCoaching ? ' ●' : ''}`,
+                        },
+                        { key: 'action', label: 'AI 변환 · 쉐도잉' },
+                      ] as const
+                    ).map((t) => {
+                      const active =
+                        noteDetailTab === t.key || (t.key === 'summary' && noteDetailTab === 'split');
+                      return (
                         <button
-                          onClick={() =>
-                            handleCopyText(
-                              selectedNote.structuredSummary ||
-                                (selectedNote.summary || []).join('\n'),
-                              'summary'
-                            )
-                          }
-                          className="text-xs font-semibold text-[#555555] hover:text-[#111111] flex items-center gap-1 cursor-pointer"
+                          key={t.key}
+                          type="button"
+                          onClick={() => setNoteDetailTab(t.key)}
+                          className={`px-4 py-3 text-[15px] font-bold border-b-2 transition-colors cursor-pointer ${
+                            active
+                              ? 'border-[#111827] text-[#111827]'
+                              : 'border-transparent text-[#64748B] hover:text-[#111827]'
+                          }`}
                         >
-                          {copiedType === 'summary' ? (
-                            <>
-                              <Check className="w-3.5 h-3.5" />
-                              복사됨
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-3.5 h-3.5" />
-                              복사
-                            </>
-                          )}
+                          {t.label}
                         </button>
-                      </div>
+                      );
+                    })}
+                  </div>
 
-                      <div className="max-h-[540px] overflow-y-auto pr-1.5">
-                        {renderStructuredSummary(selectedNote)}
-                      </div>
+                  {/* 복사 / 다시 요약 보조 버튼 */}
+                  {(noteDetailTab === 'summary' || noteDetailTab === 'split') && (
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={() => handleReanalyzeNote(selectedNote)}
+                        disabled={isProcessing}
+                        className="text-xs font-semibold text-[#64748B] hover:text-[#111827] flex items-center gap-1 cursor-pointer"
+                      >
+                        <RefreshCw className={`w-3.5 h-3.5 ${isProcessing ? 'animate-spin' : ''}`} />
+                        다시 요약
+                      </button>
+                      <button
+                        onClick={() =>
+                          handleCopyText(
+                            selectedNote.structuredSummary ||
+                              (selectedNote.summary || []).join('\n'),
+                            'summary'
+                          )
+                        }
+                        className="text-xs font-semibold text-[#64748B] hover:text-[#111827] flex items-center gap-1 cursor-pointer"
+                      >
+                        <Copy className="w-3.5 h-3.5" />
+                        {copiedType === 'summary' ? '복사됨' : '요약 복사'}
+                      </button>
                     </div>
+                  )}
 
+                  {noteDetailTab === 'transcript' && (
                     <button
-                      onClick={() => handleReanalyzeNote(selectedNote)}
-                      disabled={isProcessing}
-                      className="mt-5 w-full py-2 rounded-lg bg-[#FFFFFF] border border-[#DCDCE0] hover:border-[#111111] text-xs font-semibold text-[#111111] flex items-center justify-center gap-1.5 transition-colors cursor-pointer disabled:opacity-50"
+                      onClick={() => handleCopyText(cleanSelectedTranscript, 'transcript')}
+                      className="text-xs font-semibold text-[#64748B] hover:text-[#111827] flex items-center gap-1 cursor-pointer"
                     >
-                      <RefreshCw className={`w-3.5 h-3.5 ${isProcessing ? 'animate-spin' : ''}`} />
-                      AI로 내용 다시 분석·요약하기
+                      <Copy className="w-3.5 h-3.5" />
+                      {copiedType === 'transcript' ? '복사됨' : '녹취록 전체 복사'}
                     </button>
-                  </div>
-
-                  <div className="lg:col-span-6 rounded-xl bg-[#FFFFFF] border border-[#EAEAEA] p-5 flex flex-col">
-                    <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#EAEAEA]">
-                      <span className="text-sm font-bold text-[#111111] flex items-center gap-1.5">
-                        <FileText className="w-4 h-4" />
-                        [섹터 2] 화자 분리 전문 녹취록 (Speaker Transcript)
-                      </span>
-                      <div className="flex items-center gap-3">
-                        <button
-                          onClick={() => handleCopyText(cleanSelectedTranscript, 'transcript')}
-                          className="text-xs font-semibold text-[#555555] hover:text-[#111111] flex items-center gap-1 cursor-pointer"
-                        >
-                          {copiedType === 'transcript' ? (
-                            <>
-                              <Check className="w-3.5 h-3.5" />
-                              복사됨
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-3.5 h-3.5" />
-                              전문 복사
-                            </>
-                          )}
-                        </button>
-                        <button
-                          onClick={() => handleDownloadTranscriptTxt(selectedNote)}
-                          className="text-xs font-bold text-[#111111] hover:underline flex items-center gap-1 cursor-pointer"
-                        >
-                          <Download className="w-3.5 h-3.5" />
-                          .txt 다운로드
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="text-[14.5px] font-medium text-[#111111] leading-relaxed whitespace-pre-wrap break-keep min-h-[160px] max-h-[540px] overflow-y-auto pr-1.5">
-                      {cleanSelectedTranscript || '(인식된 전사 텍스트가 없습니다)'}
-                    </div>
-                  </div>
+                  )}
                 </div>
+
+                {/* 탭 1: 핵심 요약 */}
+                {(noteDetailTab === 'summary' || noteDetailTab === 'split') && (
+                  <div className="pt-1">
+                    {renderInteractiveStructuredSummary(
+                      selectedNote,
+                      handleSeekAudio,
+                      setStatusBanner
+                    )}
+                  </div>
+                )}
+
+                {/* 탭 2: 전체 대화 녹취록 */}
+                {noteDetailTab === 'transcript' && (
+                  <div className="pt-1">
+                    <InteractiveTranscriptView
+                      transcript={cleanSelectedTranscript}
+                      currentAudioTime={currentAudioTime}
+                      hasPlayableAudio={Boolean(playableAudioUrl)}
+                      onSeekAudio={handleSeekAudio}
+                      onStatus={setStatusBanner}
+                    />
+                  </div>
+                )}
+
+                {/* 탭 3: 어학 문법 · 표현 코칭 (전 세계 모든 언어 AI 코칭 지원) */}
+                {noteDetailTab === 'coaching' && (
+                  <div className="pt-1">
+                    <LanguageStudyCoachingPanel
+                      note={selectedNote}
+                      onSeekAudio={handleSeekAudio}
+                      onStatus={setStatusBanner}
+                      forceShow={true}
+                    />
+                  </div>
+                )}
+
+                {/* 탭 4: AI 변환 & 원어민 쉐도잉 */}
+                {noteDetailTab === 'action' && (
+                  <div className="rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] p-6 flex flex-col gap-4">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <div>
+                        <h4 className="text-base font-bold text-[#111827]">
+                          이 노트를 다른 문서로 변환하기
+                        </h4>
+                        <p className="text-sm text-[#64748B] mt-0.5">
+                          버튼을 누르면 쇼츠 대본, 3회독 복습장, 기획 보고서, 카톡 공유 메시지로 자동 작성됩니다.
+                        </p>
+                      </div>
+
+                      <button
+                        onClick={() => handleToggleShadowing(selectedNote)}
+                        className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer ${
+                          isShadowing
+                            ? 'bg-[#DC2626] text-[#FFFFFF]'
+                            : 'bg-[#FFFFFF] border border-[#CBD5E1] hover:border-[#111827] text-[#111827]'
+                        }`}
+                      >
+                        <Volume2 className="w-4 h-4" />
+                        <span>
+                          {isShadowing ? '⏹️ 원어민 발음 중지' : '🔊 외국어 문장 연속 발음 듣기'}
+                        </span>
+                      </button>
+                    </div>
+
+                    {isShadowing && shadowingSentence && (
+                      <div className="px-4 py-3 rounded-xl bg-[#111827] text-[#FFFFFF] text-sm font-medium flex items-center justify-between">
+                        <span>🎧 발음 재생 중: &ldquo;{shadowingSentence}&rdquo;</span>
+                      </div>
+                    )}
+
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
+                      <button
+                        onClick={() => handleVoiceToAction(selectedNote, 'shorts_script')}
+                        disabled={isProcessing}
+                        className="px-4 py-3 rounded-xl bg-[#111827] hover:bg-[#334155] text-[#FFFFFF] text-xs font-bold cursor-pointer disabled:opacity-50"
+                      >
+                        🎬 유튜브 쇼츠 대본
+                      </button>
+                      <button
+                        onClick={() => handleVoiceToAction(selectedNote, 'language_review')}
+                        disabled={isProcessing}
+                        className="px-4 py-3 rounded-xl bg-[#FFFFFF] border border-[#CBD5E1] hover:border-[#111827] text-[#111827] text-xs font-bold cursor-pointer disabled:opacity-50"
+                      >
+                        📚 3회독 복습 카드
+                      </button>
+                      <button
+                        onClick={() => handleVoiceToAction(selectedNote, 'biz_plan')}
+                        disabled={isProcessing}
+                        className="px-4 py-3 rounded-xl bg-[#FFFFFF] border border-[#CBD5E1] hover:border-[#111827] text-[#111827] text-xs font-bold cursor-pointer disabled:opacity-50"
+                      >
+                        📋 사업계획 · 보고서
+                      </button>
+                      <button
+                        onClick={() => handleVoiceToAction(selectedNote, 'share_message')}
+                        disabled={isProcessing}
+                        className="px-4 py-3 rounded-xl bg-[#FFFFFF] border border-[#CBD5E1] hover:border-[#111827] text-[#111827] text-xs font-bold cursor-pointer disabled:opacity-50"
+                      >
+                        💬 카톡 · 이메일 초안
+                      </button>
+                    </div>
+
+                    {selectedNote.actionOutputs &&
+                      Object.keys(selectedNote.actionOutputs).length > 0 && (
+                        <div className="mt-1 rounded-xl bg-[#FFFFFF] border border-[#E2E8F0] p-5">
+                          <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#F1F5F9]">
+                            <div className="flex flex-wrap items-center gap-2">
+                              {Object.entries(selectedNote.actionOutputs).map(([k, v]) => (
+                                <button
+                                  key={k}
+                                  onClick={() => setActiveActionType(k as any)}
+                                  className={`px-3 py-1 rounded-lg text-xs font-bold cursor-pointer ${
+                                    activeActionType === k
+                                      ? 'bg-[#111827] text-[#FFFFFF]'
+                                      : 'bg-[#F1F5F9] text-[#475569]'
+                                  }`}
+                                >
+                                  {v.label}
+                                </button>
+                              ))}
+                            </div>
+                            <button
+                              onClick={() =>
+                                handleCopyText(
+                                  (
+                                    selectedNote.actionOutputs?.[activeActionType] ||
+                                    Object.values(selectedNote.actionOutputs || {})[0]
+                                  )?.content || '',
+                                  'action'
+                                )
+                              }
+                              className="text-xs font-bold text-[#111827] hover:underline flex items-center gap-1 cursor-pointer"
+                            >
+                              <Copy className="w-3.5 h-3.5" />
+                              {copiedType === 'action' ? '복사됨' : '결과 복사'}
+                            </button>
+                          </div>
+                          <div className="text-[15px] text-[#1E293B] whitespace-pre-wrap leading-7 max-h-96 overflow-y-auto">
+                            {
+                              (
+                                selectedNote.actionOutputs[activeActionType] ||
+                                Object.values(selectedNote.actionOutputs)[0]
+                              )?.content
+                            }
+                          </div>
+                        </div>
+                      )}
+                  </div>
+                )}
               </section>
             )}
 
-            {/* 하단 "최근" 녹음 테이블 */}
-            <section>
-              <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-bold text-[#111111] mr-1">최근</span>
-                  <button
-                    onClick={() => setFilterTab('all')}
-                    className={`px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
-                      filterTab === 'all'
-                        ? 'bg-[#EEF2FF] text-[#1D4ED8] border border-[#C7D2FE]'
-                        : 'bg-[#F5F5F7] text-[#444444] hover:bg-[#EAEAEA]'
-                    }`}
-                  >
-                    <HardDrive className="w-3.5 h-3.5" />
-                    전체 노트 ({notes.length})
-                  </button>
-                  <button
-                    onClick={() => setFilterTab('hw')}
-                    className={`px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
-                      filterTab === 'hw'
-                        ? 'bg-[#ECFDF5] text-[#047857] border border-[#A7F3D0]'
-                        : 'bg-[#F5F5F7] text-[#444444] hover:bg-[#EAEAEA]'
-                    }`}
-                  >
-                    <Smartphone className="w-3.5 h-3.5" />
-                    SecondBrain Note 기기
-                  </button>
+            {/* =============================================================== */}
+            {/* 메뉴 2: 🎓 4개국어 단어장 · 수업 준비 */}
+            {/* =============================================================== */}
+            {mainViewTab === 'coaching' && (
+              <div className="flex flex-col gap-6">
+                <div className="rounded-2xl border border-[#E2E8F0] bg-[#FFFFFF] p-5 flex flex-col gap-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-bold text-[#111827]">
+                      수업별 1:1 문법 교정 · 더 좋은 대답/질문 · 실전 시나리오 ({languageStudyNotes.length}건)
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMainViewTab('notes');
+                        setNoteDetailTab('coaching');
+                      }}
+                      className="text-xs font-bold text-[#1D4ED8] hover:underline cursor-pointer"
+                    >
+                      노트 원음과 함께 보기 →
+                    </button>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {languageStudyNotes.map((ln) => {
+                      const active = selectedNote?.id === ln.id;
+                      return (
+                        <button
+                          key={ln.id}
+                          type="button"
+                          onClick={() => setSelectedNote(ln)}
+                          className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
+                            active
+                              ? 'bg-[#111827] text-[#FFFFFF]'
+                              : 'bg-[#F8FAFC] border border-[#E2E8F0] text-[#334155] hover:border-[#111827]'
+                          }`}
+                        >
+                          {ln.title}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
 
-                <div className="relative w-full sm:w-64">
-                  <Search className="w-3.5 h-3.5 text-[#888888] absolute left-3 top-1/2 -translate-y-1/2" />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="이름 또는 내용으로 필터링"
-                    className="w-full pl-8 pr-3 py-1.5 rounded-lg bg-[#F7F7F9] border border-[#EAEAEA] text-xs font-medium text-[#111111] placeholder-[#888888] focus:outline-none focus:border-[#111111]"
+                {selectedNote && (
+                  <LanguageStudyCoachingPanel
+                    note={selectedNote}
+                    onSeekAudio={(sec, label) => handleSelectNoteAndSeek(selectedNote.id, sec, label)}
+                    onStatus={setStatusBanner}
                   />
-                </div>
+                )}
+
+                <ExpansionCommandHub
+                  notes={notes}
+                  selectedNote={selectedNote}
+                  isProcessing={isProcessing}
+                  onSelectNoteAndSeek={handleSelectNoteAndSeek}
+                  onDispatchAgentTask={handleDispatchAgentTask}
+                  onStatus={setStatusBanner}
+                  initialTab="vocab"
+                />
               </div>
+            )}
 
-              <div className="border-t border-[#EAEAEA]">
-                <div className="grid grid-cols-12 gap-3 py-2.5 px-3 text-xs font-semibold text-[#777777] border-b border-[#F0F0F0]">
-                  <div className="col-span-5">제목</div>
-                  <div className="col-span-2">길이</div>
-                  <div className="col-span-2">만든 사람</div>
-                  <div className="col-span-2">녹음일</div>
-                  <div className="col-span-1 text-right">관리</div>
-                </div>
+            {/* =============================================================== */}
+            {/* 메뉴 3: 🧠 AI 비서 · 일정 · 프로젝트 */}
+            {/* =============================================================== */}
+            {(mainViewTab === 'ask' ||
+              mainViewTab === 'schedule' ||
+              mainViewTab === 'agents_crm') && (
+              <div className="flex flex-col gap-6">
+                {/* 1. 전체 노트 통합 질문 (Ask My SecondBrain) */}
+                <section className="rounded-2xl border border-[#E2E8F0] bg-[#FFFFFF] p-6 flex flex-col gap-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                      <h3 className="text-base font-bold text-[#111827]">
+                        🧠 전체 노트에 질문하기 (AI 비서)
+                      </h3>
+                      <p className="text-sm text-[#64748B] mt-0.5">
+                        저장된 회의록과 수업 노트를 한꺼번에 검색해 핵심 내용과 근거 노트를 찾아줍니다.
+                      </p>
+                    </div>
+                  </div>
 
-                <div className="divide-y divide-[#F2F2F5]">
-                  {filteredNotes.map((note) => {
-                    const isSel = selectedNote?.id === note.id;
-                    return (
-                      <div
-                        key={note.id}
-                        onClick={() => {
-                          setSelectedNote(note);
-                          detailSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
-                        }}
-                        className={`grid grid-cols-12 gap-3 items-center py-3 px-3 text-sm transition-colors cursor-pointer ${
-                          isSel ? 'bg-[#F4F4F7] font-semibold' : 'hover:bg-[#F9F9FB]'
-                        }`}
-                      >
-                        <div className="col-span-5 flex items-center gap-2.5 min-w-0">
-                          <span className="w-5 h-5 rounded bg-[#111111] text-[#FFFFFF] flex items-center justify-center text-[10px] font-bold shrink-0">
-                            녹
-                          </span>
-                          <span className="truncate text-[#111111]">{note.title}</span>
-                        </div>
+                  <div className="flex items-center gap-2.5">
+                    <input
+                      type="text"
+                      value={askQuery}
+                      onChange={(e) => setAskQuery(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') handleAskSecondBrain();
+                      }}
+                      placeholder="예: 화천퍼스트 AIDC 회의 핵심 요약 알려줘 / 외국어 수업에서 교정받은 표현 정리해줘"
+                      className="flex-1 px-4 py-2.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-sm text-[#111827] placeholder-[#94A3B8] focus:outline-none focus:border-[#111827]"
+                    />
+                    <button
+                      onClick={() => handleAskSecondBrain()}
+                      disabled={isAsking}
+                      className="px-5 py-2.5 rounded-xl bg-[#111827] hover:bg-[#334155] text-[#FFFFFF] text-sm font-bold shrink-0 cursor-pointer disabled:opacity-50"
+                    >
+                      {isAsking ? '검색 중...' : '질문하기'}
+                    </button>
+                  </div>
 
-                        <div className="col-span-2 text-xs font-mono text-[#555555]">
-                          {formatDuration(note.durationSeconds)}
-                        </div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-xs font-semibold text-[#64748B]">자주 찾는 질문:</span>
+                    <button
+                      onClick={() =>
+                        handleAskSecondBrain('화천퍼스트 AIDC 회의 핵심 요약과 결정 사항 알려줘')
+                      }
+                      className="px-3 py-1.5 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#111827] text-xs font-semibold text-[#334155] cursor-pointer"
+                    >
+                      ⚡ 화천퍼스트 · AIDC 핵심 요약
+                    </button>
+                    <button
+                      onClick={() =>
+                        handleAskSecondBrain(
+                          '내가 외국어 수업에서 교정받은 표현 정리해줘'
+                        )
+                      }
+                      className="px-3 py-1.5 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#111827] text-xs font-semibold text-[#334155] cursor-pointer"
+                    >
+                      🌐 다국어 교정 표현 모음
+                    </button>
+                    <button
+                      onClick={() =>
+                        handleAskSecondBrain('전체 회의록에서 앞으로 해야 할 일과 액션 아이템 정리해줘')
+                      }
+                      className="px-3 py-1.5 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#111827] text-xs font-semibold text-[#334155] cursor-pointer"
+                    >
+                      ✅ 미완료 할 일 · 액션 아이템
+                    </button>
+                  </div>
 
-                        <div className="col-span-2 flex items-center gap-1.5 text-xs text-[#333333]">
-                          <span className="w-4 h-4 rounded-full bg-[#1E293B] text-[#FFFFFF] text-[9px] font-bold flex items-center justify-center shrink-0">
-                            윤
-                          </span>
-                          <span className="truncate">윤종성</span>
-                        </div>
-
-                        <div className="col-span-2 text-xs text-[#555555]">
-                          {formatShortDate(note.recordedAt)}
-                        </div>
-
-                        <div className="col-span-1 flex items-center justify-end gap-1.5">
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDownloadTranscriptTxt(note);
-                            }}
-                            className="p-1 rounded hover:bg-[#EAEAEA] text-[#444444] cursor-pointer"
-                            title="전사본(.txt) 다운로드"
-                          >
-                            <Download className="w-3.5 h-3.5" />
-                          </button>
-                          <button
-                            onClick={(e) => handleDeleteNote(note.id, e)}
-                            className="p-1 rounded hover:bg-[#FEE2E2] text-[#666666] hover:text-[#DC2626] cursor-pointer"
-                            title="삭제"
-                          >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
+                  {askReply && (
+                    <div className="mt-1 p-5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex flex-col gap-3">
+                      <div className="flex items-center justify-between pb-2 border-b border-[#E2E8F0]">
+                        <span className="text-xs font-bold text-[#111827]">AI 비서 답변</span>
+                        <button
+                          onClick={() => setAskReply('')}
+                          className="text-xs font-semibold text-[#64748B] hover:text-[#111827] underline cursor-pointer"
+                        >
+                          닫기
+                        </button>
                       </div>
-                    );
-                  })}
-                </div>
+                      <div className="text-[15px] text-[#1E293B] whitespace-pre-wrap leading-7 max-h-96 overflow-y-auto">
+                        {askReply}
+                      </div>
+                      {askCitations.length > 0 && (
+                        <div className="pt-2 border-t border-[#E2E8F0] flex flex-wrap items-center gap-2">
+                          <span className="text-xs font-semibold text-[#64748B]">관련 노트:</span>
+                          {askCitations.map((c) => (
+                            <button
+                              key={c.id}
+                              onClick={() => {
+                                const found = notes.find((n) => n.id === c.id);
+                                if (found) {
+                                  setSelectedNote(found);
+                                  setMainViewTab('notes');
+                                }
+                              }}
+                              className="px-3 py-1 rounded-lg bg-[#FFFFFF] border border-[#E2E8F0] hover:border-[#111827] text-[#111827] text-xs font-semibold cursor-pointer"
+                            >
+                              📌 {c.title}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </section>
+
+                {/* 2. 예정된 회의 & 4개국어 수업 브리핑 */}
+                <ScheduledMeetingsSection
+                  notes={notes}
+                  onSelectNote={(n) => {
+                    setSelectedNote(n);
+                    setMainViewTab('notes');
+                  }}
+                  onStartRecordForSchedule={() => handleStartPhoneRecord()}
+                  onStatus={setStatusBanner}
+                />
+
+                {/* 3. AI 에이전트 작업 발주 & 프로젝트 CRM 보드 */}
+                <ExpansionCommandHub
+                  notes={notes}
+                  selectedNote={selectedNote}
+                  isProcessing={isProcessing}
+                  onSelectNoteAndSeek={handleSelectNoteAndSeek}
+                  onDispatchAgentTask={handleDispatchAgentTask}
+                  onStatus={setStatusBanner}
+                  initialTab="agents"
+                />
               </div>
-            </section>
+            )}
           </main>
         </div>
       </div>
 
       {/* ===================================================================== */}
-      {/* 3. 「새 노트」 바텀시트 / 모달 (첨부 모바일 스크린샷 하단 시트 1:1 재현!) */}
+      {/* 3. 「새 노트」 바텀시트 / 모달 (별도 기기 없이 휴대폰으로만 녹음 · 회의록 & 다국어 공부) */}
       {/* ===================================================================== */}
       {newNoteSheetOpen && (
         <div
@@ -2094,8 +2828,10 @@ export default function SecondBrainPage() {
             className="w-full lg:max-w-md bg-[#FFFFFF] text-[#111111] rounded-t-3xl lg:rounded-3xl p-6 shadow-2xl border-t lg:border border-[#EAEAEA]"
           >
             {/* 시트 헤더 */}
-            <div className="relative flex items-center justify-center pb-5 mb-2 border-b border-[#F0F0F4]">
-              <h3 className="text-base font-bold text-[#111111]">새 노트</h3>
+            <div className="relative flex items-center justify-center pb-4 mb-3 border-b border-[#F0F0F4]">
+              <h3 className="text-base font-bold text-[#111111]">
+                휴대폰 녹음 · 회의록 정리 &amp; 외국어 공부
+              </h3>
               <button
                 onClick={() => setNewNoteSheetOpen(false)}
                 className="absolute right-0 p-1.5 rounded-full hover:bg-[#F3F3F6] text-[#555555] cursor-pointer"
@@ -2104,43 +2840,185 @@ export default function SecondBrainPage() {
               </button>
             </div>
 
-            {/* 3가지 실행 항목 (스크린샷과 1:1 일치: 휴대폰으로 녹음 / SecondBrain Note로 녹음 / 오디오 파일 가져오기) */}
-            <div className="flex flex-col gap-1 py-2">
+            {/* 🌐 녹음·전사 언어 설정 (어느 언어든 제한 없이 지원!) */}
+            <div className="p-3.5 mb-3 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-extrabold text-[#111827]">
+                  🌐 회의록 / 외국어 공부 언어 선택 (모든 언어 지원)
+                </span>
+                <span className="text-[11px] font-bold text-[#6B21A8]">NoteHelper AI</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <select
+                  value={recordingLang}
+                  onChange={(e) => setRecordingLang(e.target.value)}
+                  className="flex-1 px-3 py-2 rounded-xl bg-[#FFFFFF] border border-[#CBD5E1] text-xs font-bold text-[#111827]"
+                >
+                  <option value="auto">🌐 자동 감지 (한국어 회의록 + 모든 외국어 수업)</option>
+                  <option value="ko">🇰🇷 한국어 비즈니스 회의록 (Korean)</option>
+                  {GLOBAL_COACHING_LANGUAGES.map((l) => (
+                    <option key={l.code} value={l.code}>
+                      {l.flag} {l.label} 회화 공부
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <input
+                type="text"
+                value={customRecLang}
+                onChange={(e) => setCustomRecLang(e.target.value)}
+                placeholder="기타 외국어 직접 입력 (예: 몽골어, 우즈베크어, 스웨덴어, 히브리어...)"
+                className="w-full px-3 py-1.5 rounded-xl bg-[#FFFFFF] border border-[#CBD5E1] text-xs font-medium text-[#111827]"
+              />
+            </div>
+
+            {/* 안드로이드 휴대폰 전용 실행 항목 (실시간 녹음 / 갤럭시 기본 녹음기 / 통화·음성 파일 불러오기) */}
+            <div className="flex flex-col gap-2 py-1">
               <button
                 onClick={handleStartPhoneRecord}
-                className="w-full px-4 py-4 rounded-2xl hover:bg-[#F5F5F8] flex items-center gap-4 text-left transition-colors cursor-pointer"
+                className="w-full px-4 py-4 rounded-2xl bg-[#111827] hover:bg-[#1E293B] text-[#FFFFFF] flex items-center justify-between text-left transition-colors cursor-pointer"
               >
-                <Mic className="w-5 h-5 text-[#111111] shrink-0" />
-                <span className="text-[16px] font-semibold text-[#111111]">휴대폰으로 녹음</span>
+                <div className="flex items-center gap-3.5">
+                  <Mic className="w-5 h-5 text-[#FFFFFF] shrink-0" />
+                  <div>
+                    <div className="text-[15.5px] font-bold text-[#FFFFFF]">
+                      안드로이드 마이크로 바로 녹음 시작
+                    </div>
+                    <div className="text-[11.5px] text-[#CBD5E1] mt-0.5">
+                      Gemini · Claude 실시간 전사 · 회의록 요약 · 외국어 교정
+                    </div>
+                  </div>
+                </div>
+                <span className="px-2.5 py-1 rounded-full bg-[#FFFFFF]/15 text-[11px] font-bold text-[#FFFFFF] shrink-0">
+                  즉시 녹음
+                </span>
               </button>
 
               <button
-                onClick={handleStartHardwareRecord}
-                className="w-full px-4 py-4 rounded-2xl hover:bg-[#F5F5F8] flex items-center justify-between text-left transition-colors cursor-pointer"
+                onClick={() => {
+                  setNewNoteSheetOpen(false);
+                  nativeMicInputRef.current?.click();
+                }}
+                className="w-full px-4 py-3.5 rounded-2xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] flex items-center justify-between text-left transition-colors cursor-pointer"
               >
-                <div className="flex items-center gap-4 min-w-0">
-                  <Smartphone className="w-5 h-5 text-[#111111] shrink-0" />
-                  <span className="text-[16px] font-semibold text-[#111111] truncate">
-                    SecondBrain Note(으)로 녹음
-                  </span>
+                <div className="flex items-center gap-3.5">
+                  <Smartphone className="w-5 h-5 text-[#047857] shrink-0" />
+                  <div>
+                    <div className="text-[14.5px] font-bold text-[#111827]">
+                      갤럭시 · 안드로이드 기본 음성녹음기 실행
+                    </div>
+                    <div className="text-[11.5px] text-[#64748B] mt-0.5">
+                      휴대폰 순정 녹음기로 장시간 녹음 완료 즉시 AI 자동 요약
+                    </div>
+                  </div>
                 </div>
-                <span
-                  className={`text-xs font-bold shrink-0 ml-2 ${
-                    device.isConnected ? 'text-[#047857]' : 'text-[#777777]'
-                  }`}
-                >
-                  {device.isConnected ? `연결됨 ${device.batteryLevel}%` : '탭하여 즉시 시작'}
-                </span>
+                <span className="text-[11px] font-bold text-[#047857] shrink-0">순정 녹음</span>
               </button>
 
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="w-full px-4 py-4 rounded-2xl hover:bg-[#F5F5F8] flex items-center gap-4 text-left transition-colors cursor-pointer"
+                className="w-full px-4 py-3.5 rounded-2xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] flex items-center justify-between text-left transition-colors cursor-pointer"
               >
-                <Upload className="w-5 h-5 text-[#111111] shrink-0" />
-                <span className="text-[16px] font-semibold text-[#111111]">
-                  오디오 파일 가져오기
+                <div className="flex items-center gap-3.5">
+                  <Upload className="w-5 h-5 text-[#111827] shrink-0" />
+                  <div>
+                    <div className="text-[14.5px] font-bold text-[#111827]">
+                      갤럭시 통화녹음 · 저장된 음성 파일 불러오기
+                    </div>
+                    <div className="text-[11.5px] text-[#64748B] mt-0.5">
+                      안드로이드 녹음 파일 완벽 지원 (.m4a · .3ga · .amr · .mp3 · .wav)
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ===================================================================== */}
+      {/* 4. 「🤖 안드로이드(갤럭시) 전용 앱 설치 & Gemini·Claude AI 연동」 모달 */}
+      {/* ===================================================================== */}
+      {appInstallModalOpen && (
+        <div
+          onClick={() => setAppInstallModalOpen(false)}
+          className="fixed inset-0 z-50 bg-black/50 flex items-end lg:items-center justify-center animate-fadeIn"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="w-full lg:max-w-lg bg-[#FFFFFF] text-[#111827] rounded-t-3xl lg:rounded-3xl p-6 shadow-2xl border border-[#E2E8F0] flex flex-col gap-4"
+          >
+            <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0]">
+              <div className="flex items-center gap-2">
+                <Smartphone className="w-5 h-5 text-[#047857]" />
+                <h3 className="text-base font-extrabold text-[#111827]">
+                  🤖 NoteHelper 안드로이드(Android) 전용 앱 &amp; AI 연동
+                </h3>
+              </div>
+              <button
+                onClick={() => setAppInstallModalOpen(false)}
+                className="p-1.5 rounded-full hover:bg-[#F1F5F9] text-[#64748B] cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-2 text-xs text-[#334155]">
+              <div className="flex items-center justify-between">
+                <span className="font-extrabold text-[#111827]">
+                  ⚡ Google Gemini &amp; Anthropic Claude 직결 엔진
                 </span>
+                <span className="px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#047857] font-bold">
+                  ● Android 전용 가동 중
+                </span>
+              </div>
+              <p className="leading-relaxed">
+                • <strong>비즈니스 회의록 자동 정리</strong>: 갤럭시 마이크로 실시간 녹음하거나 <strong>갤럭시 통화녹음(.m4a)</strong> 파일을 불러오면 전체 대화 전사부터 핵심 요약, 주요 결정 사항, 할 일(Action Items), 카톡·이메일 공유 초안까지 자동으로 완성합니다.
+              </p>
+              <p className="leading-relaxed">
+                • <strong>전 세계 모든 외국어 공부 도우미</strong>: 영어·중국어·일본어·스페인어·프랑스어·독일어·베트남어 등 어떤 외국어든 <strong>내가 틀린 문법 교정, 더 좋은 원어민 대답/질문, 실전 롤플레이 시나리오, 원어민 발음 쉐도잉</strong>을 생성합니다.
+              </p>
+            </div>
+
+            {deferredPwaPrompt && (
+              <button
+                type="button"
+                onClick={async () => {
+                  try {
+                    deferredPwaPrompt.prompt();
+                    await deferredPwaPrompt.userChoice;
+                    setDeferredPwaPrompt(null);
+                  } catch {}
+                }}
+                className="w-full py-3.5 px-4 rounded-2xl bg-[#047857] hover:bg-[#065F46] text-[#FFFFFF] text-sm font-bold flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <Download className="w-4 h-4" />
+                <span>🤖 안드로이드 홈 화면에 NoteHelper 전용 앱 1-Click 설치</span>
+              </button>
+            )}
+
+            <div className="p-4 rounded-xl bg-[#FAFAFC] border border-[#E2E8F0] space-y-2 text-xs">
+              <div className="font-bold text-[#111827]">
+                🤖 안드로이드(갤럭시) 스마트폰 앱 설치 방법 (2가지)
+              </div>
+              <p className="text-[#475569] leading-relaxed">
+                1️⃣ <strong>Chrome 1초 즉시 설치 (WebAPK)</strong>: 갤럭시 Chrome 브라우저 우측 상단 <strong>[⋮ 메뉴]</strong> ➔ <strong>[앱 설치]</strong> (또는 <strong>[홈 화면에 추가]</strong>)를 누르면 상단 주소창 없는 안드로이드 전용 앱으로 즉시 설치됩니다.
+              </p>
+              <p className="text-[#475569] leading-relaxed">
+                2️⃣ <strong>네이티브 Android APK 패키지</strong>: 프로젝트 내 <code>android/</code> 네이티브 모듈(패키지 ID: <code>com.yoonjongsung.notehelper</code>)을 통해 마이크 권한·화면 꺼짐 방지·통화녹음 파일 연동이 내장된 APK 빌드를 지원합니다.
+              </p>
+            </div>
+
+            <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#E2E8F0]">
+              <button
+                type="button"
+                onClick={() => {
+                  setAppInstallModalOpen(false);
+                  setNewNoteSheetOpen(true);
+                }}
+                className="px-4 py-2.5 rounded-xl bg-[#111827] text-[#FFFFFF] text-xs font-bold cursor-pointer"
+              >
+                🎙️ 바로 안드로이드 AI 녹음 시작하기
               </button>
             </div>
           </div>

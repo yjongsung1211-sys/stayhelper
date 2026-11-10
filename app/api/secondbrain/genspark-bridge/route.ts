@@ -33,7 +33,7 @@ export async function GET() {
     sessionExists,
     version: '1.0.2854 (CLI v1.15.3)',
     secondBrainReady: appFound && cliAvailable,
-    statusMessage: appFound ? '로컬 PC 잰스파크 슈퍼앱 및 세컨브레인 CLI 정상 연동 상태' : '잰스파크 프로그램 준비 완료'
+    statusMessage: appFound ? '로컬 PC NoteHelper (노트헬퍼) CLI 정상 연동 상태' : 'NoteHelper 프로그램 준비 완료'
   });
 }
 
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
       action: action || 'sync_to_genspark_cloud',
       syncedAt: new Date().toISOString(),
       noteId,
-      message: '잰스파크 세컨브레인 클라우드 지식 베이스로 성공적으로 동기화되었습니다.'
+      message: 'NoteHelper (노트헬퍼) 클라우드 지식 베이스로 성공적으로 동기화되었습니다.'
     });
   } catch (e: any) {
     return NextResponse.json({ success: false, error: e.message }, { status: 500 });

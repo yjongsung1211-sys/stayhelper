@@ -10,7 +10,7 @@
     "storageUsedGB": 0.01,
     "storageTotalGB": 58.2,
     "micStatus": "Dual MEMS Active (하드웨어 대기 중)",
-    "lastSyncedAt": "2026-11-09T09:29:41.799Z",
+    "lastSyncedAt": "2026-11-10T09:29:03.626Z",
     "pcLinked": true,
     "mobileLinked": true,
     "gensparkAppConnected": true,
@@ -20,9 +20,20 @@
     "isRecording": false,
     "recordStartedAt": null,
     "isSyncing": false,
-    "syncStatusText": "✅ 녹음 종료 완료",
-    "filesOnDeviceCount": 0,
-    "filesOnDevice": [],
+    "syncStatusText": "절전 보호 모드 (자동 BLE 스캔 해제됨)",
+    "filesOnDeviceCount": 1,
+    "filesOnDevice": [
+      {
+        "sn": 9,
+        "name": "e451d7.raw",
+        "size": 7276040,
+        "scene": 1,
+        "start_time": 1794228300,
+        "end_time": 1794231952,
+        "crc": "252967126",
+        "frame_size": 40
+      }
+    ],
     "action": "stop-record"
   },
   "deviceName": "SecondBrain Note",
@@ -39,10 +50,21 @@
   "isRecording": false,
   "recordStartedAt": null,
   "isSyncing": false,
-  "syncStatusText": "✅ 녹음 종료 완료",
-  "filesOnDeviceCount": 0,
-  "filesOnDevice": [],
-  "lastSyncedAt": "2026-11-09T09:29:41.799Z",
+  "syncStatusText": "절전 보호 모드 (자동 BLE 스캔 해제됨)",
+  "filesOnDeviceCount": 1,
+  "filesOnDevice": [
+    {
+      "sn": 9,
+      "name": "e451d7.raw",
+      "size": 7276040,
+      "scene": 1,
+      "start_time": 1794228300,
+      "end_time": 1794231952,
+      "crc": "252967126",
+      "frame_size": 40
+    }
+  ],
+  "lastSyncedAt": "2026-11-10T09:29:03.626Z",
   "mobilePublicUrl": "https://weekend-subaru-extends-stakeholders.trycloudflare.com/secondbrain",
   "zeroSubscriptionActive": true
 }

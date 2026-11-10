@@ -1,0 +1,26 @@
+{
+  "name": "NoteHelper (노트헬퍼) · 회의록 정리 & AI 외국어 공부 앱",
+  "short_name": "NoteHelper",
+  "description": "별도 기기 없이 휴대폰 녹음만으로 회의록 자동 정리 및 전 세계 모든 외국어 공부를 도와주는 AI 앱",
+  "start_url": "/notehelper",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#111827",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "🎙️ NoteHelper 원터치 즉시 녹음",
+      "short_name": "즉시 녹음",
+      "description": "앱을 열자마자 마이크 녹음을 시작합니다",
+      "url": "/secondbrain?record=1"
+    }
+  ]
+}

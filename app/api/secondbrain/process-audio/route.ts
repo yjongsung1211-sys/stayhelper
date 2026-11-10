@@ -8,7 +8,13 @@ import {
   transcribeWavBufferInNode,
   uploadAudioToCloudRepo,
   downloadAudioFromCloudRepo,
+  callCloudFrontierAi,
+  resolveUniversalLanguage,
 } from '@/app/secondbrain/cloudStore';
+import {
+  buildLanguageCoachingData,
+  formatLanguageCoachingMarkdown,
+} from '@/app/secondbrain/languageCoachingEngine';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -32,26 +38,40 @@ function getFfmpegBinary(): string {
 function formatDiarizedTranscript(raw: string): string {
   const clean = (raw || '').trim();
   if (!clean) return 'Speaker 1: (무음 또는 인식된 음성 없음)';
-  if (/^Speaker\s+\d+\s*:/m.test(clean)) return clean;
+  if (
+    /^(Speaker\s+\d+|선생님|중국어 선생님|윤종성(?:\s*대표)?|Andy|尹中盛|John|Johnson|Yong San|Jolene|Tutor)\s*:/m.test(
+      clean
+    ) ||
+    /^\[\d{2}:\d{2}\]/m.test(clean)
+  ) {
+    return clean;
+  }
   const lines = clean
     .split(/\n{2,}|\r?\n/)
     .map((s) => s.trim())
     .filter(Boolean);
   if (lines.length === 0) return `Speaker 1: ${clean}`;
   return lines
-    .map((l) => (/^Speaker\s+\d+\s*:/i.test(l) ? l : `Speaker 1: ${l}`))
+    .map((l) =>
+      /^(Speaker\s+\d+\s*:|\[\d{2}:\d{2}\]|[#■\-|➔❌✅=]|[A-Za-z가-힣\u4e00-\u9fff\s]{1,18}:)/i.test(l)
+        ? l
+        : `Speaker 1: ${l}`
+    )
     .join('\n\n');
 }
 
 function buildFallbackStructuredSummary(
   title: string,
   summaryList: string[],
-  durationSec: number
+  durationSec: number,
+  rawTranscript = ''
 ): string {
   const bullets =
     summaryList && summaryList.length > 0
       ? summaryList.map((s) => `- ${s}`).join('\n')
       : '- 녹취 및 전사된 핵심 내용 요약.';
+  const coaching = buildLanguageCoachingData({ title, transcript: rawTranscript });
+  const coachingMd = coaching ? formatLanguageCoachingMarkdown(coaching) : '';
   return `# ${title}
 
 ## 1. Main Discussion & Recorded Content
@@ -60,7 +80,7 @@ ${bullets}
 
 ## Key Decisions
 
-- 녹취 및 전사된 핵심 내용을 단일 녹음 섹터로 정리하여 옵시디언(\`00_Inbox\`) 및 세컨브레인 클라우드 허브에 보존한다.
+- 녹취 및 전사된 핵심 내용을 단일 녹음 섹터로 정리하여 옵시디언(\`00_Inbox\`) 및 NoteHelper (노트헬퍼) 클라우드 허브에 보존한다.
 
 ## Action Items
 
@@ -68,18 +88,10 @@ ${bullets}
 
 ## Key Numbers & Metrics
 
-- Recording duration: **${durationSec} seconds**.
-
-## Open Questions & Follow-ups
-
-- 추가 확인이 필요한 세부 수치나 일정은 후속 미팅에서 구체화한다.
-
-## Other Updates
-
-- SecondBrain Note 24/7 클라우드 및 로컬 AI 파이프라인으로 전사·요약 완료.`;
+- Recording duration: **${durationSec} seconds**.${coachingMd}`;
 }
 
-async function analyzeTranscriptWithAi(text: string, durationSec: number) {
+async function analyzeTranscriptWithAi(text: string, durationSec: number, targetLang?: string) {
   const clean = text.replace(/^\[.*?\]\s*(\[.*?\]\s*)*/g, '').trim();
   if (!clean || clean.includes('무음') || clean.includes('인식된 음성 없음')) {
     const title = `음성 녹음 (${durationSec}초)`;
@@ -92,40 +104,30 @@ async function analyzeTranscriptWithAi(text: string, durationSec: number) {
     };
   }
 
-  // 로컬 PC이고 긴 녹취록인 경우 로컬 Ollama 요약 시도 (5초 타임아웃으로 빠른 응답 보장)
-  if (!isCloudEnvironment() && clean.length > 180) {
+  // Cloud Frontier AI (Gemini / OpenAI / Cloud Gateway) + Local Ollama
+  if (clean.length > 40) {
     try {
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 5500);
-      const prompt = `당신은 전문 회의록 분석가 및 속기사입니다.
+      const langMeta = resolveUniversalLanguage(targetLang || 'auto');
+      const prompt = `당신은 전문 다국어 회의록 분석가 및 속기사입니다. (언어 힌트: ${langMeta.koName} / ${langMeta.nativeName})
 아래 [음성 전사 원문]을 읽고 다음 JSON 형식으로만 응답하세요.
 출력 JSON 필드:
-1. "title": 전체 대화/녹음의 핵심 주제를 아우르는 명확한 제목
-2. "diarizedTranscript": 화자별로 정리한 전문 녹취록 (예: "Speaker 1: ...")
-3. "summary": 핵심 요약 문장 리스트 (2~4개 항목 배열)
-4. "structuredSummary": 마크다운 구조 상세 요약문
+1. "title": 전체 대화/녹음의 핵심 주제를 아우르는 명확한 한국어 제목
+2. "diarizedTranscript": 화자별로 정리한 전문 녹취록 (원문 언어 그대로 유지, 예: "Speaker 1: ...")
+3. "summary": 한국어 핵심 요약 문장 리스트 (2~4개 항목 배열)
+4. "structuredSummary": 마크다운 구조 상세 요약문 (# 제목, ## 1. Main Discussion, ## Key Decisions, ## Action Items 포함)
 
 [음성 전사 원문]
 ${clean}`;
 
-      const res = await fetch('http://127.0.0.1:11434/api/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'qwen2.5:7b',
-          prompt,
-          format: 'json',
-          keep_alive: '24h',
-          stream: false,
-          options: { temperature: 0.1, num_predict: 1200 },
-        }),
-        signal: controller.signal,
+      const aiJsonStr = await callCloudFrontierAi(prompt, {
+        temperature: 0.15,
+        maxTokens: 1400,
+        jsonMode: true,
       });
-      clearTimeout(timer);
 
-      if (res.ok) {
-        const data = await res.json();
-        const parsed = JSON.parse(data.response || '{}');
+      if (aiJsonStr) {
+        const cleanJson = aiJsonStr.replace(/^```json\s*|\s*```$/g, '').trim();
+        const parsed = JSON.parse(cleanJson);
         const refinedTranscript = formatDiarizedTranscript(
           (parsed.diarizedTranscript || parsed.refinedTranscript || clean).trim()
         );
@@ -134,10 +136,20 @@ ${clean}`;
           Array.isArray(parsed.summary) && parsed.summary.length > 0
             ? parsed.summary.map((s: any) => String(s).trim()).filter(Boolean)
             : [clean.slice(0, 120)];
-        const structuredSummary =
-          parsed.structuredSummary && String(parsed.structuredSummary).includes('## Key')
+        const baseStructured =
+          parsed.structuredSummary && String(parsed.structuredSummary).includes('##')
             ? String(parsed.structuredSummary).trim()
-            : buildFallbackStructuredSummary(title, summary, durationSec);
+            : buildFallbackStructuredSummary(title, summary, durationSec, clean);
+        const coaching = buildLanguageCoachingData({
+          title,
+          transcript: clean,
+          structuredSummary: baseStructured,
+          targetLang,
+        });
+        const structuredSummary =
+          coaching && !baseStructured.includes('[언어 학습 전담 AI 코칭]')
+            ? `${baseStructured}${formatLanguageCoachingMarkdown(coaching)}`
+            : baseStructured;
         return { title, summary, structuredSummary, refinedTranscript };
       }
     } catch {}
@@ -154,7 +166,7 @@ ${clean}`;
   return {
     title,
     summary,
-    structuredSummary: buildFallbackStructuredSummary(title, summary, durationSec),
+    structuredSummary: buildFallbackStructuredSummary(title, summary, durationSec, clean),
     refinedTranscript: formatDiarizedTranscript(clean),
   };
 }
@@ -167,6 +179,7 @@ export async function POST(request: Request) {
     const audioBase64 = (body.audioBase64 as string) || '';
     const mimeType = (body.mimeType as string) || 'audio/wav';
     const existingAudioUrl = (body.audioUrl as string) || '';
+    const targetLang = (body.targetLang as string) || (body.lang as string) || 'auto';
 
     let savedAudioUrl = existingAudioUrl;
 
@@ -186,9 +199,11 @@ export async function POST(request: Request) {
       }
 
       if (wavBuf) {
-        const sttRes = await transcribeWavBufferInNode(wavBuf);
+        const sttRes = await transcribeWavBufferInNode(wavBuf, targetLang);
         if (sttRes.durationSec > 0) audioDuration = Math.round(sttRes.durationSec);
-        if (sttRes.transcript) rawText = sttRes.transcript;
+        if (sttRes.transcript && sttRes.transcript.length > rawText.length) {
+          rawText = sttRes.transcript;
+        }
         savedAudioUrl = `/api/secondbrain/audio/${wavFilename}`;
       }
     }
@@ -249,8 +264,8 @@ export async function POST(request: Request) {
 
           savedAudioUrl = `/api/secondbrain/audio/${wavFilename}`;
 
-          // Pure Node.js STT 실행 (Vercel Cloud & Local PC 공통 1.2초 고속 전사)
-          const sttResult = await transcribeWavBufferInNode(wavBuffer);
+          // Pure Node.js + Cloud Frontier STT 실행 (전 세계 모든 언어 지원)
+          const sttResult = await transcribeWavBufferInNode(wavBuffer, targetLang);
           if (sttResult.durationSec && sttResult.durationSec > 0) {
             audioDuration = Math.max(1, Math.round(sttResult.durationSec));
           }
@@ -263,7 +278,7 @@ export async function POST(request: Request) {
       }
     }
 
-    const analysis = await analyzeTranscriptWithAi(rawText, audioDuration);
+    const analysis = await analyzeTranscriptWithAi(rawText, audioDuration, targetLang);
 
     return NextResponse.json({
       success: true,
@@ -273,6 +288,7 @@ export async function POST(request: Request) {
         structuredSummary: analysis.structuredSummary,
         transcript: analysis.refinedTranscript,
         durationSeconds: audioDuration,
+        targetLang: targetLang !== 'auto' ? targetLang : undefined,
         audioUrl: savedAudioUrl || undefined,
       },
     });

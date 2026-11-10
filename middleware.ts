@@ -5,13 +5,13 @@ export function middleware(request: NextRequest) {
   const host = request.headers.get('x-forwarded-host') || request.headers.get('host') || '';
   const pathname = request.nextUrl.pathname;
 
-  // 0. SecondBrain 24/7 Cloud Hub: Always allow /secondbrain on any domain, and serve /secondbrain at root for secondbrain* hosts
-  if (pathname.startsWith('/secondbrain')) {
+  // 0. NoteHelper (노트헬퍼) 24/7 Cloud Hub: Always allow /notehelper and /secondbrain on any domain
+  if (pathname.startsWith('/notehelper') || pathname.startsWith('/secondbrain')) {
     return NextResponse.next();
   }
-  if (host.includes('secondbrain') && pathname === '/') {
+  if ((host.includes('notehelper') || host.includes('secondbrain')) && pathname === '/') {
     const url = request.nextUrl.clone();
-    url.pathname = '/secondbrain';
+    url.pathname = '/notehelper';
     return NextResponse.rewrite(url);
   }
 

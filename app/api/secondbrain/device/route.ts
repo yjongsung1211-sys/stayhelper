@@ -7,6 +7,7 @@ export const revalidate = 0;
 
 const DEVICE_FILE = path.join(process.cwd(), 'data', 'secondbrain_device.json');
 const BLE_SERVER_URL = 'http://127.0.0.1:3099';
+const PC_TUNNEL_BASE = 'https://weekend-subaru-extends-stakeholders.trycloudflare.com';
 
 function getDeviceData() {
   try {
@@ -19,7 +20,7 @@ function getDeviceData() {
   }
   return {
     device: {
-      model: 'SecondBrain Note (실물 BLE 직결)',
+      model: 'NoteHelper 기기 (실물 BLE 직결)',
       serialNumber: 'GSPK99012268A1M00069819F',
       macAddress: '28:CD:9C:F3:32:12',
       firmwareVersion: 'v1.4.5',
@@ -40,7 +41,7 @@ function getDeviceData() {
       isSyncing: false,
       syncStatusText: '실물 기기 BLE 연동 완료',
       filesOnDeviceCount: 7,
-      filesOnDevice: []
+      filesOnDevice: [],
     },
     isConnected: true,
     isRecording: false,
@@ -49,18 +50,20 @@ function getDeviceData() {
     storageUsedGb: 0.01,
     storageTotalGb: 58.2,
     serialNumber: 'GSPK99012268A1M00069819F',
-    firmwareVersion: 'v1.4.5'
+    firmwareVersion: 'v1.4.5',
   };
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   const fileData = getDeviceData();
+  const isFromProxy = request.headers.get('x-from-vercel-proxy') === '1';
+
   try {
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 1500);
+    const timer = setTimeout(() => controller.abort(), 1200);
     const res = await fetch(`${BLE_SERVER_URL}/status`, {
       signal: controller.signal,
-      cache: 'no-store'
+      cache: 'no-store',
     });
     clearTimeout(timer);
     if (res.ok) {
@@ -80,9 +83,13 @@ export async function GET() {
           recordStartedAt: s.recordStartedAt || null,
           isSyncing: Boolean(s.isSyncing),
           syncStatusText: s.syncStatusText || fileData.device?.syncStatusText || '실물 기기 대기 중',
-          filesOnDeviceCount: Array.isArray(s.filesOnDevice) ? s.filesOnDevice.length : (fileData.device?.filesOnDeviceCount ?? 0),
-          filesOnDevice: Array.isArray(s.filesOnDevice) ? s.filesOnDevice : (fileData.device?.filesOnDevice ?? []),
-          lastSyncedAt: s.lastSyncedAt || fileData.device?.lastSyncedAt || new Date().toISOString()
+          filesOnDeviceCount: Array.isArray(s.filesOnDevice)
+            ? s.filesOnDevice.length
+            : fileData.device?.filesOnDeviceCount ?? 0,
+          filesOnDevice: Array.isArray(s.filesOnDevice)
+            ? s.filesOnDevice
+            : fileData.device?.filesOnDevice ?? [],
+          lastSyncedAt: s.lastSyncedAt || fileData.device?.lastSyncedAt || new Date().toISOString(),
         };
         return NextResponse.json({
           ...fileData,
@@ -90,12 +97,28 @@ export async function GET() {
           isConnected: mergedDevice.isConnected,
           isRecording: mergedDevice.isRecording,
           isSyncing: mergedDevice.isSyncing,
-          device: mergedDevice
+          device: mergedDevice,
         });
       }
     }
   } catch {
-    // Fallback to fileData if BLE daemon is restarting
+    // Vercel 클라우드에서 호출된 경우 PC 터널 브릿지로 실시간 하드웨어 상태 조회
+    if (!isFromProxy) {
+      try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 2500);
+        const tunnelRes = await fetch(`${PC_TUNNEL_BASE}/api/secondbrain/device`, {
+          headers: { 'x-from-vercel-proxy': '1' },
+          signal: controller.signal,
+          cache: 'no-store',
+        });
+        clearTimeout(timer);
+        if (tunnelRes.ok) {
+          const tunnelData = await tunnelRes.json();
+          return NextResponse.json(tunnelData);
+        }
+      } catch {}
+    }
   }
   return NextResponse.json(fileData);
 }
@@ -104,8 +127,14 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const action = body.action;
+    const isFromProxy = request.headers.get('x-from-vercel-proxy') === '1';
 
-    if (action === 'start-record' || action === 'stop-record' || action === 'connect' || action === 'sync') {
+    if (
+      action === 'start-record' ||
+      action === 'stop-record' ||
+      action === 'connect' ||
+      action === 'sync'
+    ) {
       const endpoint =
         action === 'start-record'
           ? '/start-record'
@@ -117,14 +146,14 @@ export async function POST(request: Request) {
 
       try {
         const controller = new AbortController();
-        const timeoutMs = action === 'sync' ? 45000 : 12000;
+        const timeoutMs = action === 'sync' ? 15000 : 10000;
         const timer = setTimeout(() => controller.abort(), timeoutMs);
         const res = await fetch(`${BLE_SERVER_URL}${endpoint}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body),
           signal: controller.signal,
-          cache: 'no-store'
+          cache: 'no-store',
         });
         clearTimeout(timer);
         const bridgeJson = await res.json();
@@ -133,10 +162,32 @@ export async function POST(request: Request) {
           ok: bridgeJson.ok !== false,
           success: bridgeJson.ok !== false,
           ...bridgeJson,
-          device: latestData.device
+          device: latestData.device,
         });
       } catch (bridgeErr: any) {
-        // Fallback state update directly on file so UI never breaks even if BLE daemon is busy
+        // Vercel 클라우드에서 호출된 경우 PC 터널 브릿지로 하드웨어 제어/동기화 명령 전달
+        if (!isFromProxy) {
+          try {
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), 15000);
+            const tunnelRes = await fetch(`${PC_TUNNEL_BASE}/api/secondbrain/device`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-from-vercel-proxy': '1',
+              },
+              body: JSON.stringify(body),
+              signal: controller.signal,
+              cache: 'no-store',
+            });
+            clearTimeout(timer);
+            if (tunnelRes.ok) {
+              const tunnelData = await tunnelRes.json();
+              return NextResponse.json(tunnelData);
+            }
+          } catch {}
+        }
+
         const data = getDeviceData();
         if (action === 'start-record') {
           data.isRecording = true;
@@ -144,7 +195,7 @@ export async function POST(request: Request) {
             ...data.device,
             isRecording: true,
             recordStartedAt: new Date().toISOString(),
-            syncStatusText: '🔴 실시간 음성 녹음 작동 중'
+            syncStatusText: '🔴 실시간 음성 녹음 작동 중',
           };
         } else if (action === 'stop-record') {
           data.isRecording = false;
@@ -154,16 +205,18 @@ export async function POST(request: Request) {
             isRecording: false,
             recordStartedAt: null,
             isSyncing: false,
-            syncStatusText: '✅ 녹음 종료 완료'
+            syncStatusText: '✅ 녹음 종료 완료',
           };
         }
-        fs.writeFileSync(DEVICE_FILE, JSON.stringify(data, null, 2), 'utf-8');
+        try {
+          fs.writeFileSync(DEVICE_FILE, JSON.stringify(data, null, 2), 'utf-8');
+        } catch {}
         return NextResponse.json({
           ok: true,
           success: true,
           state: data.device,
           device: data.device,
-          warning: bridgeErr?.message
+          warning: bridgeErr?.message,
         });
       }
     }
@@ -172,12 +225,14 @@ export async function POST(request: Request) {
     data.device = {
       ...data.device,
       ...body,
-      lastSyncedAt: new Date().toISOString()
+      lastSyncedAt: new Date().toISOString(),
     };
     if (typeof body.isRecording === 'boolean') {
       data.isRecording = body.isRecording;
     }
-    fs.writeFileSync(DEVICE_FILE, JSON.stringify(data, null, 2), 'utf-8');
+    try {
+      fs.writeFileSync(DEVICE_FILE, JSON.stringify(data, null, 2), 'utf-8');
+    } catch {}
     return NextResponse.json({ ok: true, success: true, device: data.device, state: data.device });
   } catch (e: any) {
     return NextResponse.json({ ok: false, success: false, error: e.message }, { status: 500 });

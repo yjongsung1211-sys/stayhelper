@@ -1,108 +1,212 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import {
+  loadNotesData,
+  isCloudEnvironment,
+  formatDurationKorean,
+  detectNoteCategory,
+  callCloudFrontierAi,
+} from '@/app/secondbrain/cloudStore';
 
-const NOTES_FILE = path.join(process.cwd(), 'data', 'secondbrain_notes.json');
-
-function getNotesContext() {
-  try {
-    if (fs.existsSync(NOTES_FILE)) {
-      const data = JSON.parse(fs.readFileSync(NOTES_FILE, 'utf-8'));
-      return data.notes || [];
-    }
-  } catch (e) {
-    console.error('Error reading notes for chat context:', e);
-  }
-  return [];
-}
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export async function POST(request: Request) {
   try {
-    const { message } = await request.json();
-    if (!message) {
-      return NextResponse.json({ error: 'Message is required' }, { status: 400 });
+    const body = await request.json();
+    const rawQuery = String(body.query || body.message || '').trim();
+    if (!rawQuery) {
+      return NextResponse.json({ error: 'Query is required' }, { status: 400 });
     }
 
-    const notes = getNotesContext();
-    const query = message.toLowerCase();
+    const data = await loadNotesData();
+    const notes = data.notes || [];
+    const qLower = rawQuery.toLowerCase();
 
-    // RAG 메모리 검색 매칭
-    const relevantNotes = notes.filter((n: any) =>
-      n.title.toLowerCase().includes(query) ||
-      n.transcript.toLowerCase().includes(query) ||
-      (n.tags && n.tags.some((t: string) => query.includes(t.toLowerCase()))) ||
-      (n.summary && n.summary.some((s: string) => s.toLowerCase().includes(query)))
-    );
+    // Extract meaningful search tokens
+    const tokens = qLower
+      .replace(/[?.,!~"'()\[\]]/g, ' ')
+      .split(/\s+/)
+      .map((w) => w.replace(/(은|는|이|가|을|를|의|에|에서|로|으로|과|와|도|만|까지|부터|란|이란|뭐야|알려줘|보여줘|정리해줘|요약해줘)$/g, ''))
+      .filter((w) => w.length >= 2);
 
-    const targetNotes = relevantNotes.length > 0 ? relevantNotes : notes.slice(0, 3);
+    // Score each note by relevance
+    const scored = notes.map((n: any) => {
+      const hayTitle = String(n.title || '').toLowerCase();
+      const haySum = Array.isArray(n.summary) ? n.summary.join(' ').toLowerCase() : '';
+      const hayStruct = String(n.structuredSummary || '').toLowerCase();
+      const hayTrans = String(n.transcript || '').toLowerCase();
+      const hayTags = Array.isArray(n.tags) ? n.tags.join(' ').toLowerCase() : '';
 
-    // AI 세컨브레인 응답 생성 (잰스파크 Super Agent 스타일)
-    let replyText = '';
-    const citations = targetNotes.map((n: any) => ({
-      title: n.title,
-      id: n.id,
-      date: new Date(n.recordedAt).toLocaleDateString('ko-KR'),
-      source: n.deviceModel
-    }));
-
-    if (query.includes('액션') || query.includes('할 일') || query.includes('과제') || query.includes('남은')) {
-      const allActionItems: any[] = [];
-      notes.forEach((n: any) => {
-        if (n.actionItems) {
-          n.actionItems.forEach((act: any) => {
-            allActionItems.push({ ...act, sourceTitle: n.title });
-          });
-        }
-      });
-
-      const pending = allActionItems.filter((a) => !a.completed);
-      const completed = allActionItems.filter((a) => a.completed);
-
-      replyText = `🧠 **잰스파크 세컨브레인 메모리 분석 결과**\n\n현재 세컨브레인에 기록된 액션 아이템은 총 **${allActionItems.length}건** (진행 대기: ${pending.length}건 / 완료: ${completed.length}건)입니다.\n\n### ⏳ 진행 대기 과제:\n` +
-        pending.map((a, i) => `${i + 1}. **[${a.assignee}]** ${a.task} (기한: ${a.dueDate}) — *출처: ${a.sourceTitle}*`).join('\n') +
-        `\n\n### ✅ 최근 완료된 과제:\n` +
-        completed.map((a, i) => `${i + 1}. **[${a.assignee}]** ~~${a.task}~~`).join('\n') +
-        `\n\n💡 *대표님, 필요하시면 각 담당 에이전트(하나, 헤르메스 등)에게 즉시 추진 지시를 내리실 수 있습니다.*`;
-
-    } else if (query.includes('호텔') || query.includes('stayhelper') || query.includes('프로모션')) {
-      const stayNote = notes.find((n: any) => n.title.includes('StayHelper') || n.tags.includes('StayHelper'));
-      if (stayNote) {
-        replyText = `🏨 **잰스파크 세컨브레인 기억 인출**\n\n` +
-          `**회의명**: [${stayNote.title}](recorded: ${new Date(stayNote.recordedAt).toLocaleDateString('ko-KR')})\n` +
-          `**참여자**: ${stayNote.speakers.join(', ')}\n\n` +
-          `**📌 핵심 논의 및 합의 사항**:\n` +
-          stayNote.summary.map((s: string) => `- ${s}`).join('\n') +
-          `\n\n**🔍 실제 대화 발언록 인용**:\n> "${stayNote.transcript.split('\n')[0]}"\n> "${stayNote.transcript.split('\n')[1]}"\n\n` +
-          `StayHelper와 포라/버추오소 연계 프로모션 팩은 100% 무인 3중 검증 엔진과 자가치유 데몬을 통해 실시간 연동 완료 상태입니다.`;
-      } else {
-        replyText = `호텔 및 StayHelper 관련 기록을 세컨브레인에서 인출했습니다. 글로벌 50개 호텔 패키지와 PayPal 30일 리커링 빌링 표준 규격이 성공적으로 반영되어 있습니다.`;
+      let score = 0;
+      for (const tk of tokens) {
+        if (hayTitle.includes(tk)) score += 6;
+        if (hayTags.includes(tk)) score += 5;
+        if (haySum.includes(tk)) score += 4;
+        if (hayStruct.includes(tk)) score += 3;
+        if (hayTrans.includes(tk)) score += 2;
       }
 
-    } else if (query.includes('이메일') || query.includes('메일') || query.includes('보고서') || query.includes('초안')) {
-      replyText = `✍️ **잰스파크 AI 에이전트 자동 작성: 파트너사 회신 이메일 초안**\n\n` +
-        `**제목**: [Hwacheon First] 세컨브레인 합의안 기반 글로벌 제휴 후속 진행의 건\n\n` +
-        `안녕하세요, 파트너사 담당자님.\n` +
-        `Hwacheon First 윤종성 대표입니다.\n\n` +
-        `지난 미팅(세컨브레인 노트 기록 일시: ${new Date().toLocaleDateString('ko-KR')})에서 나누었던 논의를 바탕으로 정리된 핵심 사항을 공유드립니다.\n\n` +
-        `1. **실시간 프로모션 3중 검증**: 24/7 상시 자가치유 데몬을 통한 허위 딜 0% 보장\n` +
-        `2. **PayPal 30일 정기 구독 규정 준수**: 1-Click 해지 및 잔여 기간 보장 투명 정책\n` +
-        `3. **공식 제휴 서약**: 차주 초 본 계약 체결 일정 확정 희망\n\n` +
-        `세부 내용 검토 부탁드리며, 추가 논의가 필요하시면 언제든 말씀해 주십시오.\n\n` +
-        `감사합니다.\n윤종성 배상`;
+      if (
+        (qLower.includes('화천') || qLower.includes('일진') || qLower.includes('데이터센터') || qLower.includes('aidc') || qLower.includes('m&a')) &&
+        (hayTitle.includes('화천') || hayTitle.includes('aidc') || hayTitle.includes('데이터센터'))
+      ) {
+        score += 15;
+      }
+      if (
+        (qLower.includes('교정') || qLower.includes('표현') || qLower.includes('외국어') || qLower.includes('영어') || qLower.includes('일본어') || qLower.includes('중국어') || qLower.includes('스페인어')) &&
+        (hayTitle.includes('수업') || hayTrans.includes('교정 표현'))
+      ) {
+        score += 12;
+      }
+      return { note: n, score };
+    });
 
+    scored.sort((a, b) => b.score - a.score);
+    const matched = scored.filter((x) => x.score > 0).map((x) => x.note);
+    const targetNotes = matched.length > 0 ? matched.slice(0, 5) : notes.slice(0, 4);
+
+    const citations = targetNotes.map((n: any) => ({
+      id: n.id,
+      title: n.title,
+      date: new Date(n.recordedAt).toLocaleDateString('ko-KR'),
+      duration: formatDurationKorean(n.durationSeconds),
+      category: detectNoteCategory(n).categoryLabel,
+    }));
+
+    // 1) Try Cloud Frontier AI (Gemini / OpenAI / Cloud Gateway) + Local Ollama RAG
+    try {
+      const contextBlock = targetNotes
+        .slice(0, 4)
+        .map(
+          (n: any, idx: number) =>
+            `[노트 #${idx + 1}: ${n.title} (${new Date(n.recordedAt).toLocaleDateString('ko-KR')}) | 분류: ${
+              detectNoteCategory(n).categoryLabel
+            }]\n요약:\n${(n.summary || []).join('\n')}\n본문 발췌:\n${String(
+              n.transcript || ''
+            ).slice(0, 1100)}`
+        )
+        .join('\n\n---\n\n');
+
+      const aiAnswer = await callCloudFrontierAi(
+        `아래 [검색된 NoteHelper (노트헬퍼) 기록]을 근거로 윤종성 대표님의 질문에 대해 핵심 수치, 날짜, 외국어 표현(어떤 언어든 원문+발음+해석 포함), 출처 노트를 명시하여 명확하고 정중하게 답변하세요.\n\n[질문]\n${rawQuery}\n\n[검색된 NoteHelper (노트헬퍼) 기록]\n${contextBlock}`,
+        {
+          systemInstruction:
+            '당신은 윤종성 대표님의 전용 NoteHelper (노트헬퍼) 프론티어 AI 지식 비서입니다. 대표님의 회의록(AIDC 전력 M&A, 샘컴·퀀텀테크놀로지 딥테크), 5대 Helper 플랫폼, 전 세계 모든 외국어 회화 수업 및 보이스 메모를 기반으로 정확하게 답변합니다.',
+          temperature: 0.15,
+          maxTokens: 1100,
+        }
+      );
+
+      if (aiAnswer && aiAnswer.trim().length > 40) {
+        return NextResponse.json({
+          success: true,
+          reply: aiAnswer.trim(),
+          citations,
+          engine: 'Cloud Frontier AI',
+          timestamp: new Date().toISOString(),
+        });
+      }
+    } catch {}
+
+    // Cloud & Fallback Cross-Note Intelligence Synthesizer
+    let replyText = '';
+
+    if (
+      qLower.includes('교정') ||
+      qLower.includes('틀린') ||
+      qLower.includes('틀렸') ||
+      qLower.includes('표현') ||
+      qLower.includes('복습')
+    ) {
+      const langNotes = notes.filter((n: any) => detectNoteCategory(n).obsidianFolder.startsWith('02_Areas/'));
+      const extractedCorrections: string[] = [];
+      for (const ln of langNotes.slice(0, 6)) {
+        const lines = String(ln.transcript || '').split('\n');
+        for (let i = 0; i < lines.length; i++) {
+          if (lines[i].includes('✅ 교정 표현') || lines[i].includes('💬 대표님 표현')) {
+            extractedCorrections.push(`• **[${ln.title.slice(0, 14)}]** ${lines[i].trim()}`);
+            if (extractedCorrections.length >= 10) break;
+          }
+        }
+        if (extractedCorrections.length >= 10) break;
+      }
+
+      replyText = [
+        `🧠 **[Ask NoteHelper] 다국어 수업 핵심 교정 표현 통합 인출 (${langNotes.length}개 수업 분석)**`,
+        ``,
+        extractedCorrections.length > 0
+          ? extractedCorrections.join('\n')
+          : langNotes
+              .slice(0, 4)
+              .map((n: any) => `• **${n.title}**\n  - ${(n.summary && n.summary[0]) || ''}`)
+              .join('\n\n'),
+        ``,
+        `💡 *팁: 각 수업 노트를 클릭하신 뒤 상단의 **[🔊 원어민 발음 쉐도잉 듣기]** 버튼을 누르시면 위 문장들을 원어민 음성으로 연속 청취하실 수 있습니다.*`,
+      ].join('\n');
+    } else if (
+      qLower.includes('액션') ||
+      qLower.includes('할 일') ||
+      qLower.includes('과제') ||
+      qLower.includes('일정')
+    ) {
+      const actionLines: string[] = [];
+      for (const n of notes) {
+        if (Array.isArray(n.actionItems) && n.actionItems.length > 0) {
+          for (const a of n.actionItems) {
+            actionLines.push(
+              `• **[${a.assignee || '윤종성 대표'}]** ${a.task} *(출처: ${n.title.slice(0, 28)}...)*`
+            );
+          }
+        } else if (n.structuredSummary && String(n.structuredSummary).includes('## Action Items')) {
+          const sec = String(n.structuredSummary).split('## Action Items')[1]?.split('##')[0]?.trim();
+          if (sec) {
+            actionLines.push(`• **[${n.title.slice(0, 26)}]**\n  ${sec.split('\n')[0]}`);
+          }
+        }
+      }
+
+      replyText = [
+        `🧠 **[Ask NoteHelper] 전체 노트 Action Items & 핵심 실행 과제 종합**`,
+        ``,
+        actionLines.slice(0, 8).join('\n\n'),
+        ``,
+        `총 **${notes.length}개** NoteHelper (노트헬퍼) 메모리에서 추출된 실행 과제입니다.`,
+      ].join('\n');
     } else {
-      replyText = `🧠 **잰스파크 세컨브레인 지식 답변**\n\n` +
-        `대표님께서 질문하신 "${message}" 관련 내용을 세컨브레인 전체 ${notes.length}개의 녹음 메모리에서 종합 검색했습니다.\n\n` +
-        `**관련 회의 및 노트 기록**:\n` +
-        targetNotes.map((n: any) => `• **${n.title}** (${new Date(n.recordedAt).toLocaleDateString('ko-KR')}, ${n.speakers.join('/')})\n  - 요약: ${n.summary[0]}`).join('\n\n') +
-        `\n\n잰스파크 세컨브레인은 대표님의 모든 오프라인 미팅, 음성 아이디어, 실행 과제를 영구 보존하며 상황에 맞는 최적의 전략과 보고서를 실시간으로 도출해 드립니다. 추가로 확인하고 싶으신 내용이 있으신가요?`;
+      const blocks = targetNotes.map((n: any, idx: number) => {
+        const dateStr = new Date(n.recordedAt).toLocaleDateString('ko-KR');
+        const sumList = Array.isArray(n.summary) ? n.summary.slice(0, 3) : [];
+        // Find matching line in transcript if tokens exist
+        let matchingQuote = '';
+        if (tokens.length > 0 && n.transcript) {
+          const tLines = String(n.transcript)
+            .split('\n')
+            .map((l) => l.trim())
+            .filter((l) => l.length > 10);
+          const found = tLines.find((l) => tokens.some((tk) => l.toLowerCase().includes(tk)));
+          if (found) matchingQuote = `\n  - 💬 **원문 발언**: *"${found.slice(0, 140)}"*`;
+        }
+        return [
+          `### ${idx + 1}. ${n.title} (${dateStr} · ${formatDurationKorean(n.durationSeconds)})`,
+          ...sumList.map((s: string) => `- ${s}`),
+          matchingQuote,
+        ]
+          .filter(Boolean)
+          .join('\n');
+      });
+
+      replyText = [
+        `🧠 **[Ask NoteHelper] "${rawQuery}" 통합 메모리 검색 결과 (총 ${notes.length}개 노트 중 상위 ${targetNotes.length}건 매칭)**`,
+        ``,
+        blocks.join('\n\n'),
+      ].join('\n');
     }
 
     return NextResponse.json({
       success: true,
       reply: replyText,
       citations,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   } catch (e: any) {
     return NextResponse.json({ success: false, error: e.message }, { status: 500 });

@@ -24,6 +24,19 @@ export async function GET(
       fileBuffer = fs.readFileSync(tmpPath);
     } else {
       fileBuffer = await downloadAudioFromCloudRepo(safeName);
+      if (!fileBuffer && request.headers.get('x-from-vercel-proxy') !== '1') {
+        try {
+          const tunnelRes = await fetch(
+            `https://weekend-subaru-extends-stakeholders.trycloudflare.com/api/secondbrain/audio/${encodeURIComponent(
+              safeName
+            )}`,
+            { headers: { 'x-from-vercel-proxy': '1' } }
+          );
+          if (tunnelRes.ok) {
+            fileBuffer = Buffer.from(await tunnelRes.arrayBuffer());
+          }
+        } catch {}
+      }
       if (fileBuffer) {
         try {
           fs.mkdirSync(path.dirname(tmpPath), { recursive: true });
