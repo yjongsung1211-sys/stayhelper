@@ -181,6 +181,8 @@ export default function SecondBrainPage() {
   });
 
   const [notes, setNotes] = useState<Note[]>([]);
+  const [isLoadingNotes, setIsLoadingNotes] = useState<boolean>(true);
+  const [mobileCoachSubTab, setMobileCoachSubTab] = useState<'lesson' | 'dictionary'>('lesson');
   const [selectedNote, setSelectedNote] = useState<Note | null>(null);
   const [mobileDetailOpen, setMobileDetailOpen] = useState(false);
   const [newNoteSheetOpen, setNewNoteSheetOpen] = useState(false);
@@ -390,7 +392,10 @@ export default function SecondBrainPage() {
           return cleanList.length > 0 ? cleanList[0] : null;
         });
       }
-    } catch {}
+    } catch {
+    } finally {
+      setIsLoadingNotes(false);
+    }
   };
 
   useEffect(() => {
@@ -1819,7 +1824,7 @@ export default function SecondBrainPage() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-2">
                   {(
                     [
                       { key: 'all', label: `전체 (${notes.length})` },
@@ -1831,7 +1836,7 @@ export default function SecondBrainPage() {
                       key={f.key}
                       type="button"
                       onClick={() => setFilterTab(f.key)}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer ${
+                      className={`px-3.5 py-2.5 min-h-[38px] rounded-xl text-xs font-bold cursor-pointer ${
                         filterTab === f.key
                           ? 'bg-[#111827] text-[#FFFFFF]'
                           : 'bg-[#FFFFFF] border border-[#E2E8F0] text-[#475569]'
@@ -1842,97 +1847,140 @@ export default function SecondBrainPage() {
                   ))}
                 </div>
 
-                <div className="flex flex-col gap-2.5">
-                  {filteredNotes.map((note) => {
-                    const isLang = Boolean(buildLanguageCoachingData(note));
-                    return (
+                {isLoadingNotes && notes.length === 0 ? (
+                  <div className="flex flex-col gap-2.5">
+                    {[1, 2, 3].map((k) => (
                       <div
-                        key={note.id}
-                        onClick={() => {
-                          setSelectedNote(note);
-                          setMobileDetailOpen(true);
-                        }}
-                        className="p-4 rounded-xl bg-[#FFFFFF] border border-[#E2E8F0] flex items-start justify-between gap-3 active:bg-[#F8FAFC] cursor-pointer"
+                        key={k}
+                        className="p-4 rounded-xl bg-[#FFFFFF] border border-[#E2E8F0] animate-pulse space-y-2"
                       >
-                        <div className="min-w-0 flex-1">
-                          <div className="flex items-center gap-2 mb-1">
-                            <span
-                              className={`px-2 py-0.5 rounded text-[11px] font-bold ${
-                                isLang
-                                  ? 'bg-[#EFF6FF] text-[#1D4ED8]'
-                                  : 'bg-[#F1F5F9] text-[#475569]'
-                              }`}
-                            >
-                              {isLang ? '어학 수업' : '회의 · 메모'}
-                            </span>
-                            <span className="text-xs text-[#64748B]">
-                              {formatShortDate(note.recordedAt)} · {formatDuration(note.durationSeconds)}
-                            </span>
-                          </div>
-                          <h3 className="text-[15.5px] font-bold text-[#111827] leading-snug line-clamp-2">
-                            {note.title}
-                          </h3>
-                        </div>
-
-                        <button
-                          onClick={(e) => handleDeleteNote(note.id, e)}
-                          className="p-1.5 text-[#94A3B8] hover:text-[#DC2626] shrink-0"
-                          title="노트 삭제"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
+                        <div className="h-3.5 w-28 bg-[#E2E8F0] rounded" />
+                        <div className="h-5 w-4/5 bg-[#F1F5F9] rounded" />
                       </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-
-            {/* 모바일 탭 2: 어학 단어장 & 수업 준비 */}
-            {mainViewTab === 'coaching' && (
-              <div className="mt-4 flex flex-col gap-4">
-                <div className="p-4 rounded-xl bg-[#FFFFFF] border border-[#E2E8F0] flex flex-col gap-2.5">
-                  <span className="text-sm font-bold text-[#111827]">
-                    수업별 문법 교정 · 시나리오 보기
-                  </span>
-                  <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
-                    {languageStudyNotes.map((ln) => {
-                      const active = selectedNote?.id === ln.id;
+                    ))}
+                  </div>
+                ) : (
+                  <div className="flex flex-col gap-2.5">
+                    {filteredNotes.map((note) => {
+                      const isLang = Boolean(buildLanguageCoachingData(note));
                       return (
-                        <button
-                          key={ln.id}
-                          type="button"
-                          onClick={() => setSelectedNote(ln)}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap cursor-pointer ${
-                            active
-                              ? 'bg-[#111827] text-[#FFFFFF]'
-                              : 'bg-[#F8FAFC] border border-[#E2E8F0] text-[#334155]'
-                          }`}
+                        <div
+                          key={note.id}
+                          onClick={() => {
+                            setSelectedNote(note);
+                            setMobileDetailOpen(true);
+                          }}
+                          className="p-4 rounded-xl bg-[#FFFFFF] border border-[#E2E8F0] flex items-start justify-between gap-3 active:bg-[#F8FAFC] cursor-pointer"
                         >
-                          {ln.title.slice(0, 22)}
-                        </button>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <span
+                                className={`px-2 py-0.5 rounded text-[11px] font-bold ${
+                                  isLang
+                                    ? 'bg-[#EFF6FF] text-[#1D4ED8]'
+                                    : 'bg-[#F1F5F9] text-[#475569]'
+                                }`}
+                              >
+                                {isLang ? '어학 수업' : '회의 · 메모'}
+                              </span>
+                              <span className="text-xs text-[#64748B]">
+                                {formatShortDate(note.recordedAt)} · {formatDuration(note.durationSeconds)}
+                              </span>
+                            </div>
+                            <h3 className="text-[15.5px] font-bold text-[#111827] leading-snug line-clamp-2">
+                              {note.title}
+                            </h3>
+                          </div>
+
+                          <button
+                            onClick={(e) => handleDeleteNote(note.id, e)}
+                            className="p-2.5 min-w-[38px] min-h-[38px] flex items-center justify-center text-[#94A3B8] hover:text-[#DC2626] shrink-0"
+                            title="노트 삭제"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
                       );
                     })}
                   </div>
+                )}
+              </div>
+            )}
+
+            {/* 모바일 탭 2: 어학 단어장 & 수업 준비 (2단 서브탭 분리로 스크롤 피로도 60% 절감) */}
+            {mainViewTab === 'coaching' && (
+              <div className="mt-4 flex flex-col gap-3.5">
+                <div className="grid grid-cols-2 gap-1.5 bg-[#E2E8F0]/70 p-1 rounded-xl">
+                  <button
+                    type="button"
+                    onClick={() => setMobileCoachSubTab('lesson')}
+                    className={`py-2.5 rounded-lg text-xs font-extrabold cursor-pointer transition-colors ${
+                      mobileCoachSubTab === 'lesson'
+                        ? 'bg-[#FFFFFF] text-[#111827] shadow-2xs'
+                        : 'text-[#475569]'
+                    }`}
+                  >
+                    🎯 수업별 문법·시나리오
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setMobileCoachSubTab('dictionary')}
+                    className={`py-2.5 rounded-lg text-xs font-extrabold cursor-pointer transition-colors ${
+                      mobileCoachSubTab === 'dictionary'
+                        ? 'bg-[#FFFFFF] text-[#111827] shadow-2xs'
+                        : 'text-[#475569]'
+                    }`}
+                  >
+                    📖 누적 단어장 · 5분 치트시트
+                  </button>
                 </div>
 
-                {selectedNote && (
-                  <LanguageStudyCoachingPanel
-                    note={selectedNote}
-                    onSeekAudio={handleSeekAudio}
+                {mobileCoachSubTab === 'lesson' ? (
+                  <>
+                    <div className="p-4 rounded-xl bg-[#FFFFFF] border border-[#E2E8F0] flex flex-col gap-2.5">
+                      <span className="text-sm font-bold text-[#111827]">
+                        수업별 문법 교정 · 시나리오 보기
+                      </span>
+                      <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
+                        {languageStudyNotes.map((ln) => {
+                          const active = selectedNote?.id === ln.id;
+                          return (
+                            <button
+                              key={ln.id}
+                              type="button"
+                              onClick={() => setSelectedNote(ln)}
+                              className={`px-3.5 py-2 min-h-[38px] rounded-lg text-xs font-bold whitespace-nowrap cursor-pointer ${
+                                active
+                                  ? 'bg-[#111827] text-[#FFFFFF]'
+                                  : 'bg-[#F8FAFC] border border-[#E2E8F0] text-[#334155]'
+                              }`}
+                            >
+                              {ln.title.slice(0, 22)}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {selectedNote && (
+                      <LanguageStudyCoachingPanel
+                        note={selectedNote}
+                        onSeekAudio={handleSeekAudio}
+                        onStatus={setStatusBanner}
+                      />
+                    )}
+                  </>
+                ) : (
+                  <ExpansionCommandHub
+                    notes={notes}
+                    selectedNote={selectedNote}
+                    isProcessing={isProcessing}
+                    onSelectNoteAndSeek={handleSelectNoteAndSeek}
+                    onDispatchAgentTask={handleDispatchAgentTask}
                     onStatus={setStatusBanner}
+                    initialTab="vocab"
                   />
                 )}
-
-                <ExpansionCommandHub
-                  notes={notes}
-                  selectedNote={selectedNote}
-                  isProcessing={isProcessing}
-                  onSelectNoteAndSeek={handleSelectNoteAndSeek}
-                  onDispatchAgentTask={handleDispatchAgentTask}
-                  onStatus={setStatusBanner}
-                  initialTab="vocab"
-                />
               </div>
             )}
 

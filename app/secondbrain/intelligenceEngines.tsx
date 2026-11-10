@@ -726,7 +726,7 @@ export function extractAgentTasksFromNotes(selectedNote: any, allNotes: any[]): 
       const hwTasks: Omit<AgentTaskItem, 'id'>[] = [
         {
           title: '중국어 수업 교정 어휘 28선(舆情危机·词元·主体意识 등) 3회독 암기 카드 & 모닝 퀴즈 세팅',
-          agentRole: '🌐 4개국어 코칭 에이전트 & 수석비서 하나(Hana)',
+          agentRole: '🌐 다국어 코칭 에이전트 & 수석비서 하나(Hana)',
           badgeColor: 'bg-[#F3E8FF] text-[#6B21A8]',
           category: '외국어 코칭',
           noteId: n.id,
@@ -1131,7 +1131,7 @@ export function ScheduledMeetingsSection({
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <span className="px-2.5 py-1 rounded-md bg-[#111111] text-[#FFFFFF] text-xs font-bold">
-            📅 예정된 회의 &amp; 4개국어 수업
+            📅 예정된 회의 &amp; 다국어 수업
           </span>
           <span className="text-xs font-semibold text-[#555555]">
             일정을 클릭하면 직전 회의 요약 &amp; 수업 5분 전 외국어 치트시트가 즉시 열립니다
@@ -1459,7 +1459,7 @@ export function ExpansionCommandHub({
         </span>
       </div>
 
-      {/* 탭 1: 📖 4개 국어 누적 마스터 사전 & 다음 수업 5분 전 치트시트 */}
+      {/* 탭 1: 📖 다국어 누적 마스터 사전 & 다음 수업 5분 전 치트시트 */}
       {activeTab === 'vocab' && (
         <div className="flex flex-col gap-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
@@ -1651,7 +1651,7 @@ export function ExpansionCommandHub({
               <option value="🎬 유튜브 · 릴스 프로덕션 스튜디오">🎬 유튜브 · 릴스 스튜디오</option>
               <option value="⚡ AIDC 전력 M&A 전략팀">⚡ AIDC 전력 M&amp;A 전략팀</option>
               <option value="🔬 샘컴·퀀텀 딥테크 사업화팀">🔬 샘컴·퀀텀 딥테크팀</option>
-              <option value="🌐 4개국어 튜터링 코치">🌐 4개국어 튜터링 코치</option>
+              <option value="🌐 다국어 튜터링 코치">🌐 다국어 튜터링 코치</option>
             </select>
 
             <input
