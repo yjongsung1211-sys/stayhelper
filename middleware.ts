@@ -38,15 +38,12 @@ export function middleware(request: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
-  // 4. PersonalColorHelper (Temporarily Paused for public domain, active for local development):
-  // When accessing via external personalcolorhelper domain, rewrite to /personalcolor-comingsoon
-  // Localhost or dev preview parameter (?preview=true) serves the active PersonalColorHelper app
+  // 4. PersonalColorHelper (ACTIVE LIVE SERVICE): Serve PersonalColorHelper directly at root '/'
   if (host.includes('personalcolorhelper')) {
-    const isDevPreview = request.nextUrl.searchParams.get('preview') === 'true' || request.nextUrl.searchParams.get('dev') === 'true';
-    if (!isDevPreview && pathname !== '/personalcolor-comingsoon') {
+    if (pathname === '/personalcolorhelper' || pathname === '/colorhelper') {
       const url = request.nextUrl.clone();
-      url.pathname = '/personalcolor-comingsoon';
-      return NextResponse.rewrite(url);
+      url.pathname = '/';
+      return NextResponse.redirect(url, 301);
     }
   }
 
