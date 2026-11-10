@@ -1733,11 +1733,21 @@ export default function SecondBrainPage() {
 
               <div className="flex items-center gap-1.5">
                 <button
-                  onClick={() => setAppInstallModalOpen(true)}
-                  className="px-2.5 py-2 rounded-xl bg-[#F3E8FF] text-[#6B21A8] text-xs font-bold flex items-center gap-1 cursor-pointer"
+                  onClick={async () => {
+                    if (deferredPwaPrompt) {
+                      try {
+                        deferredPwaPrompt.prompt();
+                        await deferredPwaPrompt.userChoice;
+                        setDeferredPwaPrompt(null);
+                        return;
+                      } catch {}
+                    }
+                    setAppInstallModalOpen(true);
+                  }}
+                  className="px-2.5 py-2 rounded-xl bg-[#ECFDF5] border border-[#10B981] text-[#047857] text-xs font-extrabold flex items-center gap-1 cursor-pointer"
                 >
-                  <Smartphone className="w-3.5 h-3.5" />
-                  <span>앱·AI</span>
+                  <Download className="w-3.5 h-3.5" />
+                  <span>전용앱 설치</span>
                 </button>
                 <button
                   onClick={() => setNewNoteSheetOpen(true)}
@@ -2980,7 +2990,7 @@ export default function SecondBrainPage() {
               </p>
             </div>
 
-            {deferredPwaPrompt && (
+            {deferredPwaPrompt ? (
               <button
                 type="button"
                 onClick={async () => {
@@ -2990,22 +3000,29 @@ export default function SecondBrainPage() {
                     setDeferredPwaPrompt(null);
                   } catch {}
                 }}
-                className="w-full py-3.5 px-4 rounded-2xl bg-[#047857] hover:bg-[#065F46] text-[#FFFFFF] text-sm font-bold flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-4 px-4 rounded-2xl bg-[#047857] hover:bg-[#065F46] text-[#FFFFFF] text-sm font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer"
               >
                 <Download className="w-4 h-4" />
-                <span>🤖 안드로이드 홈 화면에 NoteHelper 전용 앱 1-Click 설치</span>
+                <span>📲 NoteHelper 안드로이드 전용 앱 지금 바로 설치하기</span>
               </button>
+            ) : (
+              <a
+                href="intent://secondbrain-note.vercel.app/notehelper#Intent;scheme=https;package=com.android.chrome;end"
+                className="w-full py-3.5 px-4 rounded-2xl bg-[#047857] hover:bg-[#065F46] text-[#FFFFFF] text-sm font-extrabold flex items-center justify-center gap-2 shadow-md text-center"
+              >
+                <Download className="w-4 h-4" />
+                <span>🤖 갤럭시 Chrome으로 열어서 전용 앱 설치하기</span>
+              </a>
             )}
 
-            <div className="p-4 rounded-xl bg-[#FAFAFC] border border-[#E2E8F0] space-y-2 text-xs">
-              <div className="font-bold text-[#111827]">
-                🤖 안드로이드(갤럭시) 스마트폰 앱 설치 방법 (2가지)
+            <div className="p-4 rounded-xl bg-[#ECFDF5] border border-[#10B981]/40 space-y-2 text-xs">
+              <div className="font-extrabold text-[#065F46] text-sm">
+                📲 갤럭시 바탕화면에 NoteHelper 전용 앱 다운받는 3초 순서
               </div>
-              <p className="text-[#475569] leading-relaxed">
-                1️⃣ <strong>Chrome 1초 즉시 설치 (WebAPK)</strong>: 갤럭시 Chrome 브라우저 우측 상단 <strong>[⋮ 메뉴]</strong> ➔ <strong>[앱 설치]</strong> (또는 <strong>[홈 화면에 추가]</strong>)를 누르면 상단 주소창 없는 안드로이드 전용 앱으로 즉시 설치됩니다.
-              </p>
-              <p className="text-[#475569] leading-relaxed">
-                2️⃣ <strong>네이티브 Android APK 패키지</strong>: 프로젝트 내 <code>android/</code> 네이티브 모듈(패키지 ID: <code>com.yoonjongsung.notehelper</code>)을 통해 마이크 권한·화면 꺼짐 방지·통화녹음 파일 연동이 내장된 APK 빌드를 지원합니다.
+              <p className="text-[#064E3B] leading-relaxed font-medium">
+                1️⃣ 위 초록색 <strong>[갤럭시 Chrome으로 열어서 전용 앱 설치하기]</strong> 버튼을 누르거나 Chrome에서 접속합니다.<br />
+                2️⃣ Chrome 화면 <strong>우측 맨 위 점 3개 [⋮] 버튼</strong>을 터치합니다.<br />
+                3️⃣ 메뉴에서 <strong>[앱 설치]</strong> 또는 <strong>[홈 화면에 추가]</strong> ➔ <strong>[설치]</strong>를 누르면 갤럭시 앱 서랍과 바탕화면에 <strong>NoteHelper 전용 어플</strong>이 즉시 다운로드·설치됩니다!
               </p>
             </div>
 

@@ -58,5 +58,7 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|images|videos|stays).*)'],
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|icon.svg|notehelper-192.png|notehelper-512.png|secondbrain-manifest.json|secondbrain-sw.js|images|videos|stays).*)',
+  ],
 };
