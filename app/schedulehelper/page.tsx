@@ -20,7 +20,7 @@ import {
     Smartphone,
 } from 'lucide-react';
 
-export type SourceChannel = 'kakao' | 'wechat' | 'whatsapp' | 'kakao_cal' | 'gmail';
+export type SourceChannel = 'kakao' | 'wechat' | 'whatsapp' | 'kakao_cal' | 'gmail' | 'secondbrain';
 export type DayKey = '월' | '화' | '수' | '목' | '금' | '토' | '일' | '미정';
 
 export interface ScheduleEventItem {
@@ -56,6 +56,11 @@ export interface ConnectedEmailItem {
 }
 
 const CHANNEL_META: Record<SourceChannel, { label: string; badge: string; placeholder: string }> = {
+    secondbrain: {
+        label: '세컨드브레인 메모 (자동 추출)',
+        badge: '세컨드브레인',
+        placeholder: '',
+    },
     gmail: {
         label: '이메일 (Gmail)',
         badge: '이메일',
@@ -167,6 +172,19 @@ const TIME_PRESETS: { label: string; start: string; end: string; note: string }[
     { label: '19:00 ~ 20:00', start: '19:00', end: '20:00', note: '저녁 과외' },
     { label: '21:45 ~ 22:45', start: '21:45', end: '22:45', note: '중국어 과외' },
 ];
+
+function calculateDurationLabel(start: string, end: string): string {
+    const [sh, sm] = (start || '14:00').split(':').map(Number);
+    const [eh, em] = (end || '15:00').split(':').map(Number);
+    if (isNaN(sh) || isNaN(sm) || isNaN(eh) || isNaN(em)) return '시간 설정됨';
+    let diff = (eh * 60 + em) - (sh * 60 + sm);
+    if (diff <= 0) diff += 24 * 60;
+    const hours = Math.floor(diff / 60);
+    const mins = diff % 60;
+    if (hours > 0 && mins > 0) return `${hours}시간 ${mins}분`;
+    if (hours > 0) return `${hours}시간`;
+    return `${mins}분`;
+}
 
 const INITIAL_VERIFIED_EVENTS: ScheduleEventItem[] = [
     {
@@ -737,6 +755,41 @@ export default function ScheduleHelperPage() {
                     if (localStorage.getItem('schedulehelper_bridge_v2') === null) {
                         setNoteHelperLinked(Boolean(json.data.noteHelperLinked));
                     }
+                    // 3. SecondBrain 커널이 메모에서 추출해 서버 스토어에 꽂은 항목을 로컬 목록에 합친다 (id 기준, 유실·중복 없음)
+                    const kernelEvents = (Array.isArray(json.data.events) ? json.data.events : []).filter(
+                        (it: ScheduleEventItem) => it && it.source === 'secondbrain'
+                    ) as ScheduleEventItem[];
+                    const kernelTodos = (Array.isArray(json.data.todos) ? json.data.todos : []).filter(
+                        (it: TodoTaskItem) => it && it.source === 'secondbrain'
+                    ) as TodoTaskItem[];
+                    if (kernelEvents.length > 0) {
+                        setEvents((prev) => {
+                            const have = new Set(prev.map((p) => p.id));
+                            const add = kernelEvents.filter((it) => !have.has(it.id));
+                            if (add.length === 0) return prev;
+                            const next = [...prev, ...add];
+                            try {
+                                localStorage.setItem('schedulehelper_events_v2', JSON.stringify(next));
+                            } catch {
+                                // ignore localStorage quota error
+                            }
+                            return next;
+                        });
+                    }
+                    if (kernelTodos.length > 0) {
+                        setTodos((prev) => {
+                            const have = new Set(prev.map((p) => p.id));
+                            const add = kernelTodos.filter((it) => !have.has(it.id));
+                            if (add.length === 0) return prev;
+                            const next = [...add, ...prev];
+                            try {
+                                localStorage.setItem('schedulehelper_todos_v2', JSON.stringify(next));
+                            } catch {
+                                // ignore localStorage quota error
+                            }
+                            return next;
+                        });
+                    }
                 }
             } catch {
                 // fallback to initial verified data
@@ -751,6 +804,9 @@ export default function ScheduleHelperPage() {
         nextLinked: boolean = noteHelperLinked,
         nextEmails: ConnectedEmailItem[] = connectedEmails
     ) => {
+        // 이번 저장에서 사용자가 지운 항목 id — 서버가 '모르는 항목'과 '지운 항목'을 구분하는 근거
+        const nextIds = new Set([...nextEvents.map((e) => e.id), ...nextTodos.map((t) => t.id)]);
+        const removedIds = [...events.map((e) => e.id), ...todos.map((t) => t.id)].filter((id) => !nextIds.has(id));
         setEvents(nextEvents);
         setTodos(nextTodos);
         setNoteHelperLinked(nextLinked);
@@ -771,6 +827,7 @@ export default function ScheduleHelperPage() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     action: 'save_all',
+                    removedIds,
                     events: nextEvents,
                     todos: nextTodos,
                     noteHelperLinked: nextLinked,
@@ -1591,89 +1648,135 @@ export default function ScheduleHelperPage() {
             </div>
 
             {/* ===================================================================== */}
-            {/* 모달 1: 새 일정 직접 추가 */}
+            {/* 모달 1: 새 일정 직접 추가 (직관적 · 경량화 · 고도화 스마트 모달) */}
             {/* ===================================================================== */}
             {showQuickAddModal && (
-                <div className="fixed inset-0 z-50 bg-slate-900/20 backdrop-blur-[2px] flex items-center justify-center p-4">
-                    <div className="max-w-md w-full rounded-2xl border border-slate-100 bg-white p-6 space-y-5 shadow-xl">
+                <div className="fixed inset-0 z-50 bg-slate-900/30 backdrop-blur-[3px] flex items-end sm:items-center justify-center p-0 sm:p-4">
+                    <div className="max-w-lg w-full rounded-t-3xl sm:rounded-3xl border border-slate-100 bg-white p-5 sm:p-6 space-y-4 shadow-2xl max-h-[92vh] overflow-y-auto">
+                        {/* 상단 헤더 */}
                         <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                            <h3 className="text-base font-bold text-slate-900">새 일정 직접 등록</h3>
+                            <div className="flex items-center gap-2">
+                                <div className="w-7 h-7 rounded-lg bg-[#EEF2FF] flex items-center justify-center">
+                                    <Clock className="w-4 h-4 text-[#4F46E5]" />
+                                </div>
+                                <h3 className="text-base font-extrabold text-slate-900">새 일정 등록</h3>
+                            </div>
                             <button
                                 onClick={() => setShowQuickAddModal(false)}
-                                className="p-1 rounded-lg text-slate-400 hover:bg-slate-50 cursor-pointer"
+                                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition cursor-pointer"
                             >
                                 <X className="w-4 h-4" />
                             </button>
                         </div>
 
+                        {/* 1. 자주 등록하는 일정 (원터치 1초 세팅) */}
+                        <div className="space-y-1.5">
+                            <span className="text-[11px] font-bold text-slate-400">⚡ 원클릭 빠른 템플릿</span>
+                            <div className="grid grid-cols-2 gap-1.5">
+                                {[
+                                    { t: '아침 수영 (스포츠센터)', c: 'routine', day: '화', start: '06:00', end: '07:00', p: '스포츠센터', icon: '🏊' },
+                                    { t: '영어 회화 (Tara 선생님)', c: 'tutoring', day: '수', start: '16:00', end: '17:00', p: 'Zoom 화상', icon: '🇬🇧' },
+                                    { t: '중국어 회화 (홍미 옥기)', c: 'tutoring', day: '월', start: '21:45', end: '22:45', p: 'Voov / 위챗', icon: '🇨🇳' },
+                                    { t: '비즈니스 전략 미팅', c: 'meeting', day: '금', start: '14:00', end: '15:00', p: '대면 / 화상', icon: '🤝' },
+                                ].map((tpl) => (
+                                    <button
+                                        key={tpl.t}
+                                        type="button"
+                                        onClick={() => {
+                                            setQuickType(tpl.c as any);
+                                            setQuickTitle(tpl.t);
+                                            setQuickDay(tpl.day as any);
+                                            applyTimePreset(tpl.start, tpl.end);
+                                            setQuickPlace(tpl.p);
+                                        }}
+                                        className="px-2.5 py-2 rounded-xl border border-slate-200/70 bg-[#F8FAFC] hover:bg-[#EEF2FF] hover:border-[#C7D2FE] text-left transition cursor-pointer flex items-center gap-2 group"
+                                    >
+                                        <span className="text-sm shrink-0">{tpl.icon}</span>
+                                        <div className="min-w-0 flex-1">
+                                            <div className="text-xs font-bold text-slate-800 truncate group-hover:text-[#4F46E5]">{tpl.t}</div>
+                                            <div className="text-[10px] text-slate-400 font-medium truncate">{tpl.day}요일 · {tpl.start}~{tpl.end}</div>
+                                        </div>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
                         <form onSubmit={handleQuickAddEvent} className="space-y-4">
-                            <div>
-                                <label className="block text-xs font-bold text-slate-500 mb-1.5">구분</label>
-                                <div className="grid grid-cols-3 gap-2">
-                                    {(
-                                        [
-                                            { k: 'tutoring', l: '어학 과외' },
-                                            { k: 'meeting', l: '미팅 · 약속' },
-                                            { k: 'routine', l: '운동 · 루틴' },
-                                        ] as const
-                                    ).map((item) => (
-                                        <button
-                                            key={item.k}
-                                            type="button"
-                                            onClick={() => setQuickType(item.k)}
-                                            className={`py-2 rounded-xl text-xs font-bold border cursor-pointer ${
-                                                quickType === item.k
-                                                    ? 'bg-[#4F46E5] text-white border-[#4F46E5]'
-                                                    : 'bg-[#F8FAFC] text-slate-600 border-slate-200'
-                                            }`}
-                                        >
-                                            {item.l}
-                                        </button>
-                                    ))}
+                            {/* 2. 카테고리 & 요일 원터치 바 */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                                <div>
+                                    <label className="block text-xs font-bold text-slate-500 mb-1">카테고리</label>
+                                    <div className="grid grid-cols-3 gap-1 bg-[#F4F6FB] p-1 rounded-xl">
+                                        {(
+                                            [
+                                                { k: 'tutoring', l: '과외·수업' },
+                                                { k: 'meeting', l: '미팅·약속' },
+                                                { k: 'routine', l: '운동·루틴' },
+                                            ] as const
+                                        ).map((item) => (
+                                            <button
+                                                key={item.k}
+                                                type="button"
+                                                onClick={() => setQuickType(item.k)}
+                                                className={`py-1.5 rounded-lg text-xs font-bold transition cursor-pointer text-center ${
+                                                    quickType === item.k
+                                                        ? 'bg-white text-[#4F46E5] shadow-xs'
+                                                        : 'text-slate-500 hover:text-slate-800'
+                                                }`}
+                                            >
+                                                {item.l}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div className="flex items-center justify-between mb-1">
+                                        <label className="text-xs font-bold text-slate-500">요일</label>
+                                        <span className="text-xs font-bold text-[#4F46E5]">{quickDay}요일</span>
+                                    </div>
+                                    <div className="grid grid-cols-7 gap-1">
+                                        {DAYS_ORDER.map((d) => (
+                                            <button
+                                                key={d}
+                                                type="button"
+                                                onClick={() => setQuickDay(d)}
+                                                className={`py-1.5 rounded-lg text-xs font-bold transition cursor-pointer text-center ${
+                                                    quickDay === d
+                                                        ? 'bg-[#4F46E5] text-white shadow-xs'
+                                                        : 'bg-[#F8FAFC] text-slate-700 hover:bg-slate-200/70'
+                                                }`}
+                                            >
+                                                {d}
+                                            </button>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
 
-                            {/* 요일 선택 (클릭) */}
-                            <div>
-                                <div className="flex items-center justify-between mb-1.5">
-                                    <label className="text-xs font-bold text-slate-500">요일 선택</label>
-                                    <span className="text-xs font-bold text-[#4F46E5]">{quickDay}요일</span>
-                                </div>
-                                <div className="grid grid-cols-7 gap-1">
-                                    {DAYS_ORDER.map((d) => (
-                                        <button
-                                            key={d}
-                                            type="button"
-                                            onClick={() => setQuickDay(d)}
-                                            className={`py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
-                                                quickDay === d
-                                                    ? 'bg-[#4F46E5] text-white shadow-sm'
-                                                    : 'bg-[#F8FAFC] text-slate-700 border border-slate-200/80 hover:bg-slate-100'
-                                            }`}
-                                        >
-                                            {d}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* 시간 선택 (시·분 단위 100% 클릭 및 선택) */}
-                            <div className="space-y-2.5 pt-1">
+                            {/* 3. 직관적인 일체형 스마트 타임 카드 (시·분 전수 클릭 지원) */}
+                            <div className="rounded-2xl border border-[#DCE7FE] bg-gradient-to-br from-[#F8FAFF] via-white to-[#F0FDF9] p-3.5 space-y-2.5 shadow-xs">
                                 <div className="flex items-center justify-between">
-                                    <label className="text-xs font-bold text-slate-500">시간 선택 (시·분 단위 클릭)</label>
-                                    <span className="text-xs font-extrabold text-[#4338CA] bg-[#EEF2FF] border border-[#DCE7FE] px-2.5 py-0.5 rounded-lg tabular-nums">
-                                        {quickStart} ~ {quickEnd}
+                                    <span className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                                        <Clock className="w-3.5 h-3.5 text-[#4F46E5]" />
+                                        <span>시간 설정 (시·분 단위 클릭)</span>
                                     </span>
+                                    <div className="flex items-center gap-1.5">
+                                        <span className="text-xs font-extrabold text-[#4338CA] bg-[#EEF2FF] border border-[#C7D2FE] px-2.5 py-0.5 rounded-lg tabular-nums">
+                                            {quickStart} ~ {quickEnd}
+                                        </span>
+                                        <span className="text-[11px] font-bold text-slate-500 bg-white border border-slate-200 px-2 py-0.5 rounded-lg tabular-nums">
+                                            {calculateDurationLabel(quickStart, quickEnd)}
+                                        </span>
+                                    </div>
                                 </div>
 
-                                {/* 1. 시작 시간: 시 & 분 드롭다운 + 분 단위 빠른 칩 */}
-                                <div className="rounded-xl border border-slate-200/90 bg-[#F8FAFC] p-3 space-y-2">
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                                            <Clock className="w-3.5 h-3.5 text-[#4F46E5]" />
+                                {/* 시작 & 종료 시간 선택 박스 */}
+                                <div className="grid grid-cols-2 gap-2.5">
+                                    {/* 시작 시간 박스 */}
+                                    <div className="bg-white border border-slate-200/90 rounded-xl p-2.5 shadow-xs focus-within:border-[#4F46E5]">
+                                        <div className="flex items-center justify-between text-[11px] font-bold text-slate-400 mb-1">
                                             <span>시작 시간</span>
-                                        </span>
-                                        <div className="flex items-center gap-1">
                                             <input
                                                 type="time"
                                                 value={quickStart}
@@ -1683,94 +1786,37 @@ export default function ScheduleHelperPage() {
                                                         setQuickTime(`${e.target.value} ~ ${quickEnd}`);
                                                     }
                                                 }}
-                                                className="text-xs font-bold text-slate-700 bg-white border border-slate-200 rounded-lg px-2 py-0.5 cursor-pointer focus:border-[#4F46E5]"
-                                                title="네이티브 시계 피커"
+                                                className="text-[11px] font-bold text-slate-600 bg-[#F8FAFC] border border-slate-200 rounded px-1.5 py-0.5 cursor-pointer"
+                                                title="시계 다이얼 피커 열기"
                                             />
                                         </div>
-                                    </div>
-
-                                    {/* 시(Hour) / 분(Minute) 드롭다운 셀렉트 */}
-                                    <div className="grid grid-cols-2 gap-2">
-                                        <div>
-                                            <span className="block text-[10px] text-slate-400 font-semibold mb-0.5">시 (Hour)</span>
+                                        <div className="flex items-center gap-1">
                                             <select
                                                 value={quickStart.split(':')[0] || '14'}
                                                 onChange={(e) => setStartTime(e.target.value, quickStart.split(':')[1] || '00')}
-                                                className="w-full rounded-lg bg-white border border-slate-200 px-2.5 py-1.5 text-xs text-slate-800 font-bold cursor-pointer focus:border-[#4F46E5]"
+                                                className="flex-1 bg-transparent text-sm sm:text-base font-extrabold text-slate-900 cursor-pointer focus:outline-none"
                                             >
                                                 {HOURS_OPTIONS.map((h) => (
-                                                    <option key={`sh-${h}`} value={h}>
-                                                        {h}시
-                                                    </option>
+                                                    <option key={`sh-${h}`} value={h}>{h}시</option>
                                                 ))}
                                             </select>
-                                        </div>
-                                        <div>
-                                            <span className="block text-[10px] text-slate-400 font-semibold mb-0.5">분 (0~59분 선택)</span>
+                                            <span className="text-slate-300 font-bold">:</span>
                                             <select
                                                 value={quickStart.split(':')[1] || '00'}
                                                 onChange={(e) => setStartTime(quickStart.split(':')[0] || '14', e.target.value)}
-                                                className="w-full rounded-lg bg-white border border-slate-200 px-2.5 py-1.5 text-xs text-slate-800 font-bold cursor-pointer focus:border-[#4F46E5]"
+                                                className="flex-1 bg-transparent text-sm sm:text-base font-extrabold text-[#4F46E5] cursor-pointer focus:outline-none"
                                             >
                                                 {MINUTES_OPTIONS.map((m) => (
-                                                    <option key={`sm-${m}`} value={m}>
-                                                        {m}분
-                                                    </option>
+                                                    <option key={`sm-${m}`} value={m}>{m}분</option>
                                                 ))}
                                             </select>
                                         </div>
                                     </div>
 
-                                    {/* 분 단위 바로 선택 칩 & -5분 / +5분 미세 조정 */}
-                                    <div className="flex items-center gap-1 flex-wrap pt-0.5">
-                                        <span className="text-[10px] text-slate-400 font-semibold mr-1">분 바로선택:</span>
-                                        {['00', '10', '15', '20', '30', '40', '45', '50'].map((min) => {
-                                            const curM = quickStart.split(':')[1] || '00';
-                                            const isSelected = curM === min;
-                                            return (
-                                                <button
-                                                    key={`s-min-${min}`}
-                                                    type="button"
-                                                    onClick={() => setStartTime(quickStart.split(':')[0] || '14', min)}
-                                                    className={`px-2 py-0.5 rounded-md text-[11px] font-bold transition cursor-pointer ${
-                                                        isSelected
-                                                            ? 'bg-[#4F46E5] text-white shadow-xs'
-                                                            : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'
-                                                    }`}
-                                                >
-                                                    {min}분
-                                                </button>
-                                            );
-                                        })}
-                                        <div className="flex items-center gap-1 ml-auto">
-                                            <button
-                                                type="button"
-                                                onClick={() => adjustMinutes('start', -5)}
-                                                className="px-1.5 py-0.5 rounded bg-white border border-slate-200 text-slate-600 text-[10px] font-bold hover:bg-slate-50 cursor-pointer"
-                                                title="5분 감소"
-                                            >
-                                                -5분
-                                            </button>
-                                            <button
-                                                type="button"
-                                                onClick={() => adjustMinutes('start', 5)}
-                                                className="px-1.5 py-0.5 rounded bg-white border border-slate-200 text-slate-600 text-[10px] font-bold hover:bg-slate-50 cursor-pointer"
-                                                title="5분 증가"
-                                            >
-                                                +5분
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* 2. 종료 시간: 시 & 분 드롭다운 + 분 단위 빠른 칩 */}
-                                <div className="rounded-xl border border-slate-200/90 bg-[#F8FAFC] p-3 space-y-2">
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                                            <Clock className="w-3.5 h-3.5 text-[#4F46E5]" />
+                                    {/* 종료 시간 박스 */}
+                                    <div className="bg-white border border-slate-200/90 rounded-xl p-2.5 shadow-xs focus-within:border-[#4F46E5]">
+                                        <div className="flex items-center justify-between text-[11px] font-bold text-slate-400 mb-1">
                                             <span>종료 시간</span>
-                                        </span>
-                                        <div className="flex items-center gap-1">
                                             <input
                                                 type="time"
                                                 value={quickEnd}
@@ -1780,174 +1826,180 @@ export default function ScheduleHelperPage() {
                                                         setQuickTime(`${quickStart} ~ ${e.target.value}`);
                                                     }
                                                 }}
-                                                className="text-xs font-bold text-slate-700 bg-white border border-slate-200 rounded-lg px-2 py-0.5 cursor-pointer focus:border-[#4F46E5]"
-                                                title="네이티브 시계 피커"
+                                                className="text-[11px] font-bold text-slate-600 bg-[#F8FAFC] border border-slate-200 rounded px-1.5 py-0.5 cursor-pointer"
+                                                title="시계 다이얼 피커 열기"
                                             />
                                         </div>
-                                    </div>
-
-                                    {/* 시(Hour) / 분(Minute) 드롭다운 셀렉트 */}
-                                    <div className="grid grid-cols-2 gap-2">
-                                        <div>
-                                            <span className="block text-[10px] text-slate-400 font-semibold mb-0.5">시 (Hour)</span>
+                                        <div className="flex items-center gap-1">
                                             <select
                                                 value={quickEnd.split(':')[0] || '15'}
                                                 onChange={(e) => setEndTime(e.target.value, quickEnd.split(':')[1] || '00')}
-                                                className="w-full rounded-lg bg-white border border-slate-200 px-2.5 py-1.5 text-xs text-slate-800 font-bold cursor-pointer focus:border-[#4F46E5]"
+                                                className="flex-1 bg-transparent text-sm sm:text-base font-extrabold text-slate-900 cursor-pointer focus:outline-none"
                                             >
                                                 {HOURS_OPTIONS.map((h) => (
-                                                    <option key={`eh-${h}`} value={h}>
-                                                        {h}시
-                                                    </option>
+                                                    <option key={`eh-${h}`} value={h}>{h}시</option>
                                                 ))}
                                             </select>
-                                        </div>
-                                        <div>
-                                            <span className="block text-[10px] text-slate-400 font-semibold mb-0.5">분 (0~59분 선택)</span>
+                                            <span className="text-slate-300 font-bold">:</span>
                                             <select
                                                 value={quickEnd.split(':')[1] || '00'}
                                                 onChange={(e) => setEndTime(quickEnd.split(':')[0] || '15', e.target.value)}
-                                                className="w-full rounded-lg bg-white border border-slate-200 px-2.5 py-1.5 text-xs text-slate-800 font-bold cursor-pointer focus:border-[#4F46E5]"
+                                                className="flex-1 bg-transparent text-sm sm:text-base font-extrabold text-[#4F46E5] cursor-pointer focus:outline-none"
                                             >
                                                 {MINUTES_OPTIONS.map((m) => (
-                                                    <option key={`em-${m}`} value={m}>
-                                                        {m}분
-                                                    </option>
+                                                    <option key={`em-${m}`} value={m}>{m}분</option>
                                                 ))}
                                             </select>
-                                        </div>
-                                    </div>
-
-                                    {/* 분 단위 바로 선택 칩 & -5분 / +5분 미세 조정 */}
-                                    <div className="flex items-center gap-1 flex-wrap pt-0.5">
-                                        <span className="text-[10px] text-slate-400 font-semibold mr-1">분 바로선택:</span>
-                                        {['00', '10', '15', '20', '30', '40', '45', '50'].map((min) => {
-                                            const curM = quickEnd.split(':')[1] || '00';
-                                            const isSelected = curM === min;
-                                            return (
-                                                <button
-                                                    key={`e-min-${min}`}
-                                                    type="button"
-                                                    onClick={() => setEndTime(quickEnd.split(':')[0] || '15', min)}
-                                                    className={`px-2 py-0.5 rounded-md text-[11px] font-bold transition cursor-pointer ${
-                                                        isSelected
-                                                            ? 'bg-[#4F46E5] text-white shadow-xs'
-                                                            : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'
-                                                    }`}
-                                                >
-                                                    {min}분
-                                                </button>
-                                            );
-                                        })}
-                                        <div className="flex items-center gap-1 ml-auto">
-                                            <button
-                                                type="button"
-                                                onClick={() => adjustMinutes('end', -5)}
-                                                className="px-1.5 py-0.5 rounded bg-white border border-slate-200 text-slate-600 text-[10px] font-bold hover:bg-slate-50 cursor-pointer"
-                                                title="5분 감소"
-                                            >
-                                                -5분
-                                            </button>
-                                            <button
-                                                type="button"
-                                                onClick={() => adjustMinutes('end', 5)}
-                                                className="px-1.5 py-0.5 rounded bg-white border border-slate-200 text-slate-600 text-[10px] font-bold hover:bg-slate-50 cursor-pointer"
-                                                title="5분 증가"
-                                            >
-                                                +5분
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* 3. 소요 시간 간편 연장 (+15분, +30분, +45분, +1시간, +1.5시간, +2시간) */}
-                                <div className="flex items-center gap-1.5 pt-0.5">
-                                    <span className="text-[11px] text-slate-400 font-semibold shrink-0">간편 연장:</span>
-                                    <div className="flex items-center gap-1 flex-wrap">
+                                {/* 분 단위 바로선택 & 소요시간 빠른 연장 바 */}
+                                <div className="flex items-center justify-between gap-1 flex-wrap pt-0.5">
+                                    <div className="flex items-center gap-1">
+                                        <span className="text-[10px] text-slate-400 font-bold mr-0.5">분:</span>
+                                        {['00', '15', '30', '45'].map((min) => (
+                                            <button
+                                                key={`quick-min-${min}`}
+                                                type="button"
+                                                onClick={() => {
+                                                    const [sh] = quickStart.split(':');
+                                                    setStartTime(sh || '14', min);
+                                                }}
+                                                className={`px-1.5 py-0.5 rounded text-[11px] font-bold transition cursor-pointer ${
+                                                    quickStart.split(':')[1] === min
+                                                        ? 'bg-[#4F46E5] text-white'
+                                                        : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'
+                                                }`}
+                                            >
+                                                :{min}
+                                            </button>
+                                        ))}
+                                        <button
+                                            type="button"
+                                            onClick={() => adjustMinutes('start', -5)}
+                                            className="px-1.5 py-0.5 rounded bg-white border border-slate-200 text-slate-600 text-[10px] font-bold hover:bg-slate-50 cursor-pointer ml-1"
+                                            title="시작 5분 감소"
+                                        >
+                                            -5m
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => adjustMinutes('start', 5)}
+                                            className="px-1.5 py-0.5 rounded bg-white border border-slate-200 text-slate-600 text-[10px] font-bold hover:bg-slate-50 cursor-pointer"
+                                            title="시작 5분 증가"
+                                        >
+                                            +5m
+                                        </button>
+                                    </div>
+
+                                    <div className="flex items-center gap-1 ml-auto">
+                                        <span className="text-[10px] text-slate-400 font-bold mr-0.5">소요:</span>
                                         {[
-                                            { label: '+15분', mins: 15 },
-                                            { label: '+30분', mins: 30 },
-                                            { label: '+45분', mins: 45 },
-                                            { label: '+1시간', mins: 60 },
-                                            { label: '+1.5시간', mins: 90 },
-                                            { label: '+2시간', mins: 120 },
+                                            { label: '30분', m: 30 },
+                                            { label: '1시간', m: 60 },
+                                            { label: '1.5시간', m: 90 },
+                                            { label: '+10분', m: 10 },
                                         ].map((dur) => (
                                             <button
-                                                key={dur.label}
+                                                key={`dur-${dur.label}`}
                                                 type="button"
-                                                onClick={() => addDurationMinutes(dur.mins)}
-                                                className="px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-[#EEF2FF] hover:text-[#4F46E5] text-slate-600 text-[11px] font-bold transition cursor-pointer"
+                                                onClick={() => addDurationMinutes(dur.m)}
+                                                className="px-2 py-0.5 rounded bg-white border border-slate-200 text-slate-700 hover:bg-[#EEF2FF] hover:text-[#4F46E5] text-[11px] font-bold transition cursor-pointer"
                                             >
                                                 {dur.label}
                                             </button>
                                         ))}
                                     </div>
                                 </div>
-
-                                {/* 4. 자주 쓰는 추천 시간대 원클릭 카드 */}
-                                <div className="space-y-1 pt-1">
-                                    <span className="block text-[11px] text-slate-400 font-semibold">자주 쓰는 시간대 원클릭</span>
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
-                                        {TIME_PRESETS.map((p) => {
-                                            const isSelected = quickStart === p.start && quickEnd === p.end;
-                                            return (
-                                                <button
-                                                    key={p.label}
-                                                    type="button"
-                                                    onClick={() => applyTimePreset(p.start, p.end)}
-                                                    className={`p-1.5 rounded-xl text-left border transition cursor-pointer ${
-                                                        isSelected
-                                                            ? 'bg-[#EEF2FF] border-[#4F46E5] text-[#4F46E5] shadow-sm'
-                                                            : 'bg-[#F8FAFC] border-slate-200/80 text-slate-600 hover:bg-slate-100'
-                                                    }`}
-                                                >
-                                                    <div className="text-[11px] font-extrabold tabular-nums leading-tight">{p.label}</div>
-                                                    <div className="text-[10px] text-slate-400 font-medium">{p.note}</div>
-                                                </button>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
                             </div>
 
-                            <div>
-                                <label className="block text-xs font-bold text-slate-500 mb-1.5">일정 제목</label>
+                            {/* 4. 일정 제목 입력 & 스마트 태그 */}
+                            <div className="space-y-1.5">
+                                <label className="block text-xs font-bold text-slate-500">일정 제목</label>
                                 <input
                                     type="text"
                                     value={quickTitle}
                                     onChange={(e) => setQuickTitle(e.target.value)}
-                                    placeholder="예: 영어 회화 과외 / 강남 미팅"
-                                    className="w-full rounded-xl bg-[#F8FAFC] border border-slate-200 px-3.5 py-2 text-sm text-slate-800"
+                                    placeholder="예: 영어 회화 과외 / 비즈니스 미팅"
+                                    className="w-full rounded-xl bg-[#F8FAFC] border border-slate-200/90 px-3.5 py-2.5 text-sm text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-[#4F46E5]"
                                     required
                                 />
+                                <div className="flex items-center gap-1 flex-wrap">
+                                    {[
+                                        '영어 회화 과외',
+                                        '중국어 회화 과외',
+                                        '아침 수영 세션',
+                                        '비즈니스 미팅',
+                                        '주간 기획 회의',
+                                    ].map((tag) => (
+                                        <button
+                                            key={`tag-${tag}`}
+                                            type="button"
+                                            onClick={() => setQuickTitle(tag)}
+                                            className="px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 text-[11px] font-medium transition cursor-pointer"
+                                        >
+                                            #{tag}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
 
-                            <div>
-                                <label className="block text-xs font-bold text-slate-500 mb-1.5">
-                                    장소 또는 온라인 링크 (선택)
-                                </label>
-                                <input
-                                    type="text"
-                                    value={quickPlace}
-                                    onChange={(e) => setQuickPlace(e.target.value)}
-                                    placeholder="예: Zoom / italki / 강남역"
-                                    className="w-full rounded-xl bg-[#F8FAFC] border border-slate-200 px-3.5 py-2 text-sm text-slate-800"
-                                />
+                            {/* 5. 장소 / 화상 링크 */}
+                            <div className="space-y-1.5">
+                                <label className="block text-xs font-bold text-slate-500">장소 또는 온라인 화상 (선택)</label>
+                                <div className="flex gap-2">
+                                    <input
+                                        type="text"
+                                        value={quickPlace}
+                                        onChange={(e) => setQuickPlace(e.target.value)}
+                                        placeholder="Zoom / Google Meet / 강남역 / 스포츠센터"
+                                        className="flex-1 rounded-xl bg-[#F8FAFC] border border-slate-200/90 px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-[#4F46E5]"
+                                    />
+                                    <div className="flex gap-1 shrink-0">
+                                        {['Zoom', 'Meet', '대면'].map((p) => (
+                                            <button
+                                                key={`place-${p}`}
+                                                type="button"
+                                                onClick={() => setQuickPlace(p)}
+                                                className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-[#EEF2FF] hover:text-[#4F46E5] text-slate-600 text-xs font-bold transition cursor-pointer"
+                                            >
+                                                {p}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
 
-                            <div className="flex justify-end gap-2 pt-2">
+                            {/* 6. 실시간 등록 미리보기 뱃지 */}
+                            {quickTitle.trim() && (
+                                <div className="rounded-xl border border-indigo-100 bg-[#F5F8FF] p-2.5 flex items-center justify-between text-xs">
+                                    <div className="flex items-center gap-2 truncate">
+                                        <span className="w-2 h-2 rounded-full bg-[#4F46E5] shrink-0" />
+                                        <span className="font-extrabold text-[#4338CA]">
+                                            [{quickDay}요일 {quickStart}~{quickEnd}]
+                                        </span>
+                                        <span className="font-bold text-slate-900 truncate">{quickTitle}</span>
+                                    </div>
+                                    {quickPlace && <span className="text-[11px] text-slate-500 shrink-0">{quickPlace}</span>}
+                                </div>
+                            )}
+
+                            {/* 버튼 액션 */}
+                            <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
                                 <button
                                     type="button"
                                     onClick={() => setShowQuickAddModal(false)}
-                                    className="px-4 py-2 rounded-xl bg-[#F8FAFC] text-slate-600 text-xs font-bold cursor-pointer"
+                                    className="px-4 py-2.5 rounded-xl bg-[#F8FAFC] hover:bg-slate-100 text-slate-600 text-xs font-bold transition cursor-pointer"
                                 >
                                     취소
                                 </button>
                                 <button
                                     type="submit"
-                                    className="px-5 py-2 rounded-xl bg-[#4F46E5] text-white text-xs font-bold cursor-pointer"
+                                    className="px-6 py-2.5 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-bold shadow-sm transition cursor-pointer flex items-center gap-1.5"
                                 >
-                                    등록하기
+                                    <Plus className="w-4 h-4" />
+                                    <span>일정 등록</span>
                                 </button>
                             </div>
                         </form>
