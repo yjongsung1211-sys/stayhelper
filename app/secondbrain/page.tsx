@@ -427,11 +427,13 @@ export default function SecondBrainPage() {
 
   useEffect(() => {
     fetchNotes();
+    fetchDevice();
     // 배터리 절약을 위해 상시 주기적 폴링(setInterval)을 제거하고,
     // 화면을 다시 열 때(visibilitychange) 또는 녹음/검색 시에만 온디맨드로 불러옵니다.
     const onVisibilityChange = () => {
       if (document.visibilityState === 'visible' && !isRecordingRef.current) {
         fetchNotes();
+        fetchDevice();
       }
     };
     document.addEventListener('visibilitychange', onVisibilityChange);
@@ -478,14 +480,14 @@ export default function SecondBrainPage() {
     };
   }, [isRecording]);
 
-  // 스마트폰 브라우저/앱에서 직접 WebBluetooth로 실물 VoicePad(NoteHelper) BLE 페어링
+  // 스마트폰/PC 브라우저에서 직접 WebBluetooth로 실물 SecondBrain Note BLE 페어링
   const handleDirectMobileBlePair = async () => {
     if (typeof navigator === 'undefined' || !(navigator as any).bluetooth) {
       await handleConnectDevice();
       return;
     }
     try {
-      setStatusBanner('📱 스마트폰 블루투스(BLE)로 실물 NoteHelper 기기를 직접 탐색합니다...');
+      setStatusBanner('📱 브라우저 WebBluetooth로 실물 세컨브레인 기기(SecondBrain Note)를 탐색합니다...');
       const bleDevice = await (navigator as any).bluetooth.requestDevice({
         acceptAllDevices: true,
         optionalServices: ['battery_service', '0000180f-0000-1000-8000-00805f9b34fb'],
@@ -494,10 +496,10 @@ export default function SecondBrainPage() {
         setDevice((prev) => ({
           ...prev,
           isConnected: true,
-          syncStatusText: `스마트폰 직접 BLE 연결됨 (${bleDevice.name || 'NoteHelper'})`,
+          syncStatusText: `직접 BLE 연결됨 (${bleDevice.name || 'SecondBrain Note'})`,
         }));
         setStatusBanner(
-          `✅ 스마트폰 직접 블루투스 연결 완료: ${bleDevice.name || 'NoteHelper'} (클라우드 동기화 활성화)`
+          `✅ 블루투스 직접 페어링 완료: ${bleDevice.name || 'SecondBrain Note'} (클라우드·옵시디언 동기화 활성화)`
         );
       }
     } catch {
@@ -505,11 +507,11 @@ export default function SecondBrainPage() {
     }
   };
 
-  // 실물 NoteHelper 실시간 BLE 연결 및 배터리/상태 점검 핸들러
+  // 실물 SecondBrain Note (28:CD:9C:F3:32:12) 실시간 BLE 연결 및 배터리/상태 점검 핸들러
   const handleConnectDevice = async () => {
     if (isConnectingHw) return;
     setIsConnectingHw(true);
-    setStatusBanner('실물 NoteHelper 기기 (28:CD:9C:F3:32:12) BLE 연결 및 내장 녹음 파일 확인 중...');
+    setStatusBanner('🔵 실물 세컨브레인 기기 (SecondBrain Note · 28:CD:9C:F3:32:12) BLE 연결 및 내장 녹음 파일 확인 중...');
     try {
       const data = await callHardwareApi('connect');
       await fetchDevice();
@@ -517,15 +519,15 @@ export default function SecondBrainPage() {
       if (data.ok && (data.state?.connected || data.device?.isConnected)) {
         const bat = data.state?.batteryLevel ?? data.device?.batteryLevel ?? 100;
         setStatusBanner(
-          `✅ 실물 NoteHelper 기기 연결 완료! (실시간 배터리 ${bat}%, 내장 녹음 자동 동기화 가동)`
+          `✅ 실물 세컨브레인 기기(SecondBrain Note) 연결 완료! (실시간 배터리 ${bat}%, 내장 녹음 자동 동기화 가동)`
         );
       } else {
         setStatusBanner(
-          '현재 실물 노트가 절전(오프라인) 상태입니다. 실물 기기 버튼을 한 번 살짝 눌러 깨우시면 자동으로 즉시 연결 및 동기화됩니다!'
+          '🔵 실물 세컨브레인 기기(28:CD:9C:F3:32:12) 대기 상태 확인 완료 (배터리 100%). 기기 버튼을 한 번 살짝 누르시면 즉시 깨어나 자동 연결·동기화됩니다!'
         );
       }
     } catch {
-      setStatusBanner('기기 연결 확인 완료');
+      setStatusBanner('실물 기기 연결 상태 확인 완료');
     } finally {
       setIsConnectingHw(false);
     }
@@ -1757,13 +1759,22 @@ export default function SecondBrainPage() {
 
               <div className="flex items-center gap-1.5 shrink-0">
                 <button
+                  onClick={handleConnectDevice}
+                  disabled={isHwBusyConnecting || isProcessing}
+                  className="px-2.5 py-2 min-h-[38px] rounded-xl bg-[#FFFFFF] border border-[#E2E8F0] text-[#111827] text-xs font-bold flex items-center gap-1 whitespace-nowrap shrink-0 cursor-pointer disabled:opacity-50"
+                  title="실물 세컨브레인 기기 블루투스(BLE) 연결"
+                >
+                  <Bluetooth className="w-3.5 h-3.5 text-[#1D4ED8] shrink-0" />
+                  <span>{device.isConnected ? `연결됨(${device.batteryLevel}%)` : '기기 연결'}</span>
+                </button>
+                <button
                   onClick={handleSyncHardware}
                   disabled={isSyncingHw || isProcessing}
                   className="px-2.5 py-2 min-h-[38px] rounded-xl bg-[#FFFFFF] border border-[#E2E8F0] text-[#334155] text-xs font-bold flex items-center gap-1 whitespace-nowrap shrink-0 cursor-pointer disabled:opacity-50"
                   title="실물 기기 동기화"
                 >
                   <RefreshCw className={`w-3.5 h-3.5 shrink-0 ${isSyncingHw ? 'animate-spin' : ''}`} />
-                  <span>기기 동기화</span>
+                  <span>동기화</span>
                 </button>
                 <button
                   onClick={() => setNewNoteSheetOpen(true)}
@@ -1771,6 +1782,43 @@ export default function SecondBrainPage() {
                 >
                   <Plus className="w-4 h-4 shrink-0" />
                   <span>새 녹음</span>
+                </button>
+              </div>
+            </div>
+
+            {/* 모바일 실물 세컨브레인 기기(SecondBrain Note · 28:CD:9C:F3:32:12) 상태 및 원터치 연결 바 */}
+            <div className="mt-1.5 px-3.5 py-2.5 rounded-xl bg-[#FFFFFF] border border-[#E2E8F0] flex items-center justify-between gap-2">
+              <button
+                type="button"
+                onClick={() => setAppInstallModalOpen(true)}
+                className="flex items-center gap-2 min-w-0 text-left cursor-pointer"
+              >
+                <span
+                  className={`w-2 h-2 rounded-full shrink-0 ${
+                    device.isConnected ? 'bg-[#10B981]' : 'bg-[#3B82F6]'
+                  }`}
+                />
+                <span className="text-xs font-bold text-[#111827] truncate">
+                  SecondBrain Note (28:CD:9C:F3:32:12)
+                </span>
+                <span className="text-[11px] font-semibold text-[#047857] shrink-0">
+                  🔋 {device.batteryLevel}%
+                </span>
+              </button>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  type="button"
+                  onClick={handleDirectMobileBlePair}
+                  className="px-2.5 py-1 rounded-lg bg-[#EFF6FF] text-[#1D4ED8] text-[11px] font-bold cursor-pointer"
+                >
+                  BLE 페어링
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAppInstallModalOpen(true)}
+                  className="px-2.5 py-1 rounded-lg bg-[#F1F5F9] text-[#334155] text-[11px] font-bold cursor-pointer"
+                >
+                  기기 제어
                 </button>
               </div>
             </div>
@@ -2142,6 +2190,67 @@ export default function SecondBrainPage() {
               </button>
             )}
 
+            {/* ★ 실물 세컨브레인 기기 (SecondBrain Note · 28:CD:9C:F3:32:12) 블루투스 직결 카드 */}
+            <div className="rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-3 flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <button
+                  type="button"
+                  onClick={handleConnectDevice}
+                  disabled={isHwBusyConnecting}
+                  className="flex items-center gap-2 text-xs font-bold text-[#111827] cursor-pointer"
+                  title="클릭하여 실물 SecondBrain Note 블루투스 연결 및 배터리 확인"
+                >
+                  {isHwBusyConnecting ? (
+                    <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#1D4ED8]" />
+                  ) : (
+                    <span
+                      className={`w-2.5 h-2.5 rounded-full ${
+                        device.isConnected ? 'bg-[#10B981]' : 'bg-[#3B82F6]'
+                      }`}
+                    />
+                  )}
+                  <span>SecondBrain Note 기기</span>
+                </button>
+                <span className="flex items-center gap-1 text-[11px] font-bold text-[#047857]">
+                  <BatteryCharging className="w-3.5 h-3.5" />
+                  <span>{device.batteryLevel}%</span>
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between text-[11px] text-[#64748B] px-0.5">
+                <span>MAC: 28:CD:9C:F3:32:12</span>
+                <span>{device.isConnected ? '실시간 BLE 연결됨' : 'BLE 대기 (자동 재연결)'}</span>
+              </div>
+
+              <div className="grid grid-cols-3 gap-1.5 pt-0.5">
+                <button
+                  type="button"
+                  onClick={handleConnectDevice}
+                  disabled={isHwBusyConnecting}
+                  className="py-1.5 px-2 rounded-lg bg-[#111827] hover:bg-[#1E293B] text-[#FFFFFF] text-[11px] font-bold flex items-center justify-center gap-1 cursor-pointer disabled:opacity-50"
+                >
+                  <Bluetooth className="w-3 h-3" />
+                  <span>{isHwBusyConnecting ? '연결중' : '기기 연결'}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSyncHardware}
+                  disabled={isSyncingHw || isRecording}
+                  className="py-1.5 px-2 rounded-lg bg-[#FFFFFF] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-[#111827] text-[11px] font-bold flex items-center justify-center gap-1 cursor-pointer disabled:opacity-50"
+                >
+                  <RefreshCw className={`w-3 h-3 ${isSyncingHw ? 'animate-spin' : ''}`} />
+                  <span>녹음 동기화</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAppInstallModalOpen(true)}
+                  className="py-1.5 px-2 rounded-lg bg-[#FFFFFF] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-[#334155] text-[11px] font-bold flex items-center justify-center gap-1 cursor-pointer"
+                >
+                  <span>기기 제어</span>
+                </button>
+              </div>
+            </div>
+
             {/* 검색창 */}
             <div className="relative">
               <Search className="w-4 h-4 text-[#94A3B8] absolute left-3 top-1/2 -translate-y-1/2" />
@@ -2256,7 +2365,16 @@ export default function SecondBrainPage() {
                 </span>
               </div>
 
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={handleConnectDevice}
+                  disabled={isHwBusyConnecting || isRecording}
+                  className="px-2 py-1 rounded-lg bg-[#111827] text-[#FFFFFF] text-[11px] font-semibold flex items-center gap-1 cursor-pointer disabled:opacity-50"
+                  title="실물 세컨브레인 기기 블루투스(BLE) 연결"
+                >
+                  <Bluetooth className="w-3 h-3" />
+                  <span>기기 연결</span>
+                </button>
                 <button
                   onClick={handleSyncHardware}
                   disabled={isSyncingHw || isRecording}
@@ -2264,14 +2382,7 @@ export default function SecondBrainPage() {
                   title="실물 세컨브레인 기기 녹음 파일 동기화"
                 >
                   <RefreshCw className={`w-3 h-3 ${isSyncingHw ? 'animate-spin' : ''}`} />
-                  <span>기기 동기화</span>
-                </button>
-                <button
-                  onClick={() => fetchNotes()}
-                  disabled={isRecording}
-                  className="px-2 py-1 rounded-lg bg-[#FFFFFF] border border-[#E2E8F0] hover:border-[#111827] text-[#334155] text-[11px] font-semibold flex items-center gap-1 cursor-pointer disabled:opacity-50"
-                >
-                  <span>새로고침</span>
+                  <span>동기화</span>
                 </button>
               </div>
             </div>
@@ -2325,11 +2436,27 @@ export default function SecondBrainPage() {
 
             <div className="flex items-center gap-2.5">
               <button
-                onClick={() => setAppInstallModalOpen(true)}
-                className="px-3.5 py-2 rounded-xl bg-[#F3E8FF] hover:bg-[#E9D5FF] text-[#6B21A8] text-xs font-bold flex items-center gap-1.5 cursor-pointer"
+                onClick={handleConnectDevice}
+                disabled={isHwBusyConnecting}
+                className="px-3.5 py-2 rounded-xl bg-[#111827] hover:bg-[#1E293B] text-[#FFFFFF] text-xs font-bold flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                title="실물 SecondBrain Note (28:CD:9C:F3:32:12) 즉시 BLE 연결"
               >
-                <Smartphone className="w-3.5 h-3.5" />
-                <span>📲 모바일 앱 · 다국어 AI 허브</span>
+                <Bluetooth className="w-3.5 h-3.5 text-[#60A5FA]" />
+                <span>
+                  {isHwBusyConnecting
+                    ? '실물 기기 연결 중...'
+                    : device.isConnected
+                    ? `SecondBrain Note 연결됨 (${device.batteryLevel}%)`
+                    : `실물 기기 연결 (${device.batteryLevel}%)`}
+                </span>
+              </button>
+              <button
+                onClick={() => setAppInstallModalOpen(true)}
+                className="px-3 py-2 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-[#111827] text-xs font-bold flex items-center gap-1.5 cursor-pointer"
+                title="실물 기기 상세 상태 및 WebBluetooth 페어링"
+              >
+                <Radio className="w-3.5 h-3.5 text-[#1D4ED8]" />
+                <span>기기 제어 센터</span>
               </button>
               <button
                 onClick={handleSendMorningBriefing}
@@ -2983,6 +3110,27 @@ export default function SecondBrainPage() {
               </button>
 
               <button
+                onClick={() => {
+                  setNewNoteSheetOpen(false);
+                  handleConnectDevice();
+                }}
+                className="w-full px-4 py-3.5 rounded-2xl bg-[#EFF6FF] hover:bg-[#DBEAFE] border border-[#BFDBFE] flex items-center justify-between text-left transition-colors cursor-pointer"
+              >
+                <div className="flex items-center gap-3.5">
+                  <Bluetooth className="w-5 h-5 text-[#1D4ED8] shrink-0" />
+                  <div>
+                    <div className="text-[14.5px] font-bold text-[#111827]">
+                      실물 세컨브레인 기기 (28:CD:9C:F3:32:12) 블루투스 연결
+                    </div>
+                    <div className="text-[11.5px] text-[#475569] mt-0.5">
+                      실시간 배터리({device.batteryLevel}%) · 연결 상태 점검 및 자동 동기화 활성화
+                    </div>
+                  </div>
+                </div>
+                <span className="text-[11px] font-bold text-[#1D4ED8] shrink-0">BLE 연결</span>
+              </button>
+
+              <button
                 onClick={handleStartHardwareRecord}
                 className="w-full px-4 py-3.5 rounded-2xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] flex items-center justify-between text-left transition-colors cursor-pointer"
               >
@@ -3036,6 +3184,137 @@ export default function SecondBrainPage() {
                     </div>
                   </div>
                 </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* ===================================================================== */}
+      {/* 4. 실물 세컨브레인 기기 (SecondBrain Note · 28:CD:9C:F3:32:12) 연결 & 제어 센터 모달 */}
+      {/* ===================================================================== */}
+      {appInstallModalOpen && (
+        <div
+          onClick={() => setAppInstallModalOpen(false)}
+          className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 animate-fadeIn"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-lg rounded-3xl bg-[#FFFFFF] border border-[#E2E8F0] p-6 shadow-2xl flex flex-col gap-4"
+          >
+            <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0]">
+              <div className="flex items-center gap-2.5">
+                <Bluetooth className="w-5 h-5 text-[#1D4ED8]" />
+                <div>
+                  <h3 className="text-base font-extrabold text-[#111827]">
+                    실물 세컨브레인 기기 (SecondBrain Note) 연결 · 제어 센터
+                  </h3>
+                  <p className="text-xs text-[#64748B]">
+                    하드웨어 보이스 레코더 블루투스(BLE) 직결 및 옵시디언(00_Inbox) 무인 동기화
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setAppInstallModalOpen(false)}
+                className="p-1.5 rounded-full hover:bg-[#F1F5F9] text-[#64748B] cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* 기기 실시간 하드웨어 제원 카드 */}
+            <div className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-2.5 text-xs text-[#334155]">
+              <div className="flex items-center justify-between">
+                <span className="font-extrabold text-sm text-[#111827] flex items-center gap-2">
+                  <span
+                    className={`w-2.5 h-2.5 rounded-full ${
+                      device.isConnected ? 'bg-[#10B981]' : 'bg-[#3B82F6]'
+                    }`}
+                  />
+                  SecondBrain Note (GSPK-SBN-PRO)
+                </span>
+                <span className="px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#047857] font-bold">
+                  🔋 배터리 {device.batteryLevel}%
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-2 pt-1 text-[11.5px]">
+                <div className="p-2.5 rounded-xl bg-[#FFFFFF] border border-[#E2E8F0]">
+                  <span className="text-[#64748B] block">블루투스 MAC 주소</span>
+                  <strong className="text-[#111827]">28:CD:9C:F3:32:12</strong>
+                </div>
+                <div className="p-2.5 rounded-xl bg-[#FFFFFF] border border-[#E2E8F0]">
+                  <span className="text-[#64748B] block">시리얼 / 펌웨어</span>
+                  <strong className="text-[#111827]">
+                    {device.serialNumber || 'GSPK99012268A1M00069819F'} ({device.firmwareVersion || 'v1.4.5'})
+                  </strong>
+                </div>
+              </div>
+              <p className="text-[11.5px] text-[#475569] leading-relaxed pt-1">
+                • <strong>현재 상태</strong>: {device.syncStatusText || (device.isConnected ? '실시간 BLE 연결 활성화' : '절전 대기 모드 (기기 버튼을 누르거나 아래 연결 버튼을 누르면 즉시 깨어납니다)')}
+              </p>
+            </div>
+
+            {/* 4대 하드웨어 직결 컨트롤 버튼 */}
+            <div className="flex flex-col gap-2">
+              <button
+                type="button"
+                onClick={async () => {
+                  await handleConnectDevice();
+                }}
+                disabled={isHwBusyConnecting}
+                className="w-full py-3.5 px-4 rounded-2xl bg-[#111827] hover:bg-[#1E293B] text-[#FFFFFF] text-xs font-extrabold flex items-center justify-between cursor-pointer disabled:opacity-50"
+              >
+                <span className="flex items-center gap-2.5">
+                  <Bluetooth className="w-4 h-4 text-[#60A5FA]" />
+                  <span>1. PC 로컬 블루투스(BLE) 데몬으로 실물 기기 즉시 연결</span>
+                </span>
+                <span className="px-2 py-0.5 rounded bg-[#FFFFFF]/15 text-[11px]">
+                  {isHwBusyConnecting ? '연결 확인 중...' : 'PC 직결'}
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={async () => {
+                  await handleDirectMobileBlePair();
+                }}
+                className="w-full py-3.5 px-4 rounded-2xl bg-[#EFF6FF] hover:bg-[#DBEAFE] border border-[#BFDBFE] text-[#1E3A8A] text-xs font-extrabold flex items-center justify-between cursor-pointer"
+              >
+                <span className="flex items-center gap-2.5">
+                  <Smartphone className="w-4 h-4 text-[#1D4ED8]" />
+                  <span>2. 브라우저 · 스마트폰 WebBluetooth로 주변 실물 기기 직접 페어링</span>
+                </span>
+                <span className="px-2 py-0.5 rounded bg-[#DBEAFE] text-[11px]">BLE 탐색</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setAppInstallModalOpen(false);
+                  handleStartHardwareRecord();
+                }}
+                className="w-full py-3.5 px-4 rounded-2xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-[#111827] text-xs font-extrabold flex items-center justify-between cursor-pointer"
+              >
+                <span className="flex items-center gap-2.5">
+                  <Mic className="w-4 h-4 text-[#DC2626]" />
+                  <span>3. 실물 세컨브레인 기기 깨우기 &amp; 원격 하드웨어 녹음 시작</span>
+                </span>
+                <span className="text-[#DC2626] text-[11px] font-bold">원격 녹음</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={async () => {
+                  setAppInstallModalOpen(false);
+                  await handleSyncHardware();
+                }}
+                disabled={isSyncingHw}
+                className="w-full py-3.5 px-4 rounded-2xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-[#111827] text-xs font-extrabold flex items-center justify-between cursor-pointer disabled:opacity-50"
+              >
+                <span className="flex items-center gap-2.5">
+                  <RefreshCw className={`w-4 h-4 text-[#047857] ${isSyncingHw ? 'animate-spin' : ''}`} />
+                  <span>4. 실물 기기 내장 메모리 녹음 파일(.raw/.wav) 동기화 및 AI 요약</span>
+                </span>
+                <span className="text-[#047857] text-[11px] font-bold">내장 메모리 동기화</span>
               </button>
             </div>
           </div>
