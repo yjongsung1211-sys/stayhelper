@@ -30,6 +30,7 @@ import {
   X,
   ArrowLeft,
   Calendar,
+  Radio,
 } from 'lucide-react';
 import {
   renderInteractiveStructuredSummary,
@@ -816,7 +817,7 @@ export default function SecondBrainPage() {
     }
   };
 
-  // 2) 실물 NoteHelper 하드웨어로 녹음 시작
+  // 2) 실물 세컨브레인(SecondBrain) 하드웨어로 녹음 시작
   const handleStartHardwareRecord = async () => {
     setNewNoteSheetOpen(false);
     manualLockUntilRef.current = Date.now() + 15000;
@@ -826,7 +827,7 @@ export default function SecondBrainPage() {
     finalTranscriptAccRef.current = '';
     setTranscriptLive('');
     setIsRecording(true);
-    setStatusBanner('📱 실물 NoteHelper 하드웨어 깨우기 및 녹음 시작 중...');
+    setStatusBanner('📱 실물 세컨브레인(SecondBrain) 하드웨어 깨우기 및 녹음 시작 중...');
 
     const isMobileBrowser =
       typeof navigator !== 'undefined' &&
@@ -842,9 +843,9 @@ export default function SecondBrainPage() {
       const data = await callHardwareApi('start-record');
       await fetchDevice();
       if (data.ok && (data.state?.isRecording || data.device?.isRecording)) {
-        setStatusBanner('🔴 실물 NoteHelper 하드웨어 녹음 작동 중!');
+        setStatusBanner('🔴 실물 세컨브레인(SecondBrain) 하드웨어 녹음 작동 중!');
       } else {
-        setStatusBanner('🎙️ 실시간 마이크 녹음 작동 중 (실물 노트 절전 모드 백업)');
+        setStatusBanner('🎙️ 실시간 마이크 녹음 작동 중 (실물 기기 절전 모드 백업)');
       }
     } catch {
       setStatusBanner('🎙️ 실시간 마이크 녹음 작동 중');
@@ -988,7 +989,7 @@ export default function SecondBrainPage() {
   // 기기 내장 녹음 파일 동기화
   const handleSyncHardware = async () => {
     setIsSyncingHw(true);
-    setStatusBanner('실물 NoteHelper 내장 메모리의 녹음 파일을 확인하고 고속 동기화 중입니다...');
+    setStatusBanner('실물 세컨브레인(SecondBrain) 내장 메모리의 녹음 파일을 확인하고 고속 동기화 중입니다...');
     try {
       const data = await callHardwareApi('sync', { force: false });
       await fetchDevice();
@@ -1260,13 +1261,13 @@ export default function SecondBrainPage() {
     }
   };
 
-  // 🧠 Ask NoteHelper: 내 모든 회의·수업 통합 RAG 검색 & 질의응답
+  // 🧠 Ask SecondBrain: 내 모든 회의·수업 통합 RAG 검색 & 질의응답
   const handleAskSecondBrain = async (customQuery?: string) => {
     const q = (customQuery ?? askQuery).trim();
     if (!q || isAsking) return;
     if (customQuery) setAskQuery(customQuery);
     setIsAsking(true);
-    setStatusBanner(`🧠 "${q}"에 대해 저장된 전체 NoteHelper 노트를 교차 검색 중...`);
+    setStatusBanner(`🧠 "${q}"에 대해 저장된 전체 세컨브레인 노트를 교차 검색 중...`);
     try {
       const res = await fetch('/api/secondbrain/chat', {
         method: 'POST',
@@ -1277,7 +1278,7 @@ export default function SecondBrainPage() {
       if (data.reply) {
         setAskReply(data.reply);
         setAskCitations(Array.isArray(data.citations) ? data.citations : []);
-        setStatusBanner(`✅ NoteHelper 통합 검색 완료 (근거 노트 ${data.citations?.length || 0}건 참조)`);
+        setStatusBanner(`✅ 세컨브레인 노트 통합 검색 완료 (근거 노트 ${data.citations?.length || 0}건 참조)`);
       } else {
         setAskReply(data.error || '답변을 생성하지 못했습니다.');
       }
@@ -1721,18 +1722,27 @@ export default function SecondBrainPage() {
               <div className="min-w-0">
                 <div className="flex items-center gap-1.5">
                   <h1 className="text-lg font-extrabold text-[#111827] tracking-tight whitespace-nowrap">
-                    NoteHelper
+                    세컨브레인 노트
                   </h1>
                   <span className="text-xs font-bold text-[#475569] whitespace-nowrap">
-                    (노트헬퍼)
+                    (SecondBrain)
                   </span>
                 </div>
                 <p className="text-[11px] font-semibold text-[#64748B] whitespace-nowrap">
-                  AI 회의록 정리 · 전 세계 다국어 학습
+                  AI 보이스 메모 · 어학 코칭 · 옵시디언(00_Inbox) 동기화
                 </p>
               </div>
 
               <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  onClick={handleSyncHardware}
+                  disabled={isSyncingHw || isProcessing}
+                  className="px-2.5 py-2 min-h-[38px] rounded-xl bg-[#FFFFFF] border border-[#E2E8F0] text-[#334155] text-xs font-bold flex items-center gap-1 whitespace-nowrap shrink-0 cursor-pointer disabled:opacity-50"
+                  title="실물 기기 동기화"
+                >
+                  <RefreshCw className={`w-3.5 h-3.5 shrink-0 ${isSyncingHw ? 'animate-spin' : ''}`} />
+                  <span>기기 동기화</span>
+                </button>
                 <button
                   onClick={() => setNewNoteSheetOpen(true)}
                   className="px-3 py-2 min-h-[38px] rounded-xl bg-[#111827] text-[#FFFFFF] text-xs font-bold flex items-center gap-1 whitespace-nowrap shrink-0 cursor-pointer"
@@ -2077,8 +2087,9 @@ export default function SecondBrainPage() {
               <div className="flex items-center gap-2">
                 <Brain className="w-5 h-5 text-[#111827]" />
                 <span className="font-bold text-base tracking-tight text-[#111827]">
-                  NoteHelper (노트헬퍼)
+                  세컨브레인 노트
                 </span>
+                <span className="text-[11px] font-semibold text-[#64748B]">SecondBrain</span>
               </div>
               <button
                 onClick={() => setSidebarOpen(false)}
@@ -2207,22 +2218,40 @@ export default function SecondBrainPage() {
             </div>
           </div>
 
-          {/* 하단 스마트폰 클라우드 AI 동기화 상태 바 */}
+          {/* 하단 세컨브레인 기기 · 옵시디언(00_Inbox) 동기화 상태 바 */}
           <div className="p-3.5 border-t border-[#E2E8F0] bg-[#F8FAFC] flex flex-col gap-2">
             <div className="flex items-center justify-between text-xs">
               <div className="flex items-center gap-2 font-semibold text-[#1E293B]">
-                <span className="w-2 h-2 rounded-full bg-[#10B981]" />
-                <span>휴대폰 녹음 · 회의록 · 어학 AI</span>
+                <span
+                  className={`w-2 h-2 rounded-full ${
+                    device.isConnected ? 'bg-[#10B981]' : 'bg-[#64748B]'
+                  }`}
+                />
+                <span>
+                  {device.isConnected
+                    ? `실물 기기 연결됨 (${device.batteryLevel}%)`
+                    : '옵시디언 · 클라우드 동기화'}
+                </span>
               </div>
 
-              <button
-                onClick={() => fetchNotes()}
-                disabled={isRecording}
-                className="px-2.5 py-1 rounded-lg bg-[#FFFFFF] border border-[#E2E8F0] hover:border-[#111827] text-[#334155] text-[11px] font-semibold flex items-center gap-1 cursor-pointer disabled:opacity-50"
-              >
-                <RefreshCw className="w-3 h-3" />
-                <span>새로고침</span>
-              </button>
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={handleSyncHardware}
+                  disabled={isSyncingHw || isRecording}
+                  className="px-2 py-1 rounded-lg bg-[#FFFFFF] border border-[#E2E8F0] hover:border-[#111827] text-[#334155] text-[11px] font-semibold flex items-center gap-1 cursor-pointer disabled:opacity-50"
+                  title="실물 세컨브레인 기기 녹음 파일 동기화"
+                >
+                  <RefreshCw className={`w-3 h-3 ${isSyncingHw ? 'animate-spin' : ''}`} />
+                  <span>기기 동기화</span>
+                </button>
+                <button
+                  onClick={() => fetchNotes()}
+                  disabled={isRecording}
+                  className="px-2 py-1 rounded-lg bg-[#FFFFFF] border border-[#E2E8F0] hover:border-[#111827] text-[#334155] text-[11px] font-semibold flex items-center gap-1 cursor-pointer disabled:opacity-50"
+                >
+                  <span>새로고침</span>
+                </button>
+              </div>
             </div>
           </div>
         </aside>
@@ -2867,7 +2896,7 @@ export default function SecondBrainPage() {
             {/* 시트 헤더 */}
             <div className="relative flex items-center justify-center pb-4 mb-3 border-b border-[#F0F0F4]">
               <h3 className="text-base font-bold text-[#111111]">
-                휴대폰 녹음 · 회의록 정리 &amp; 외국어 공부
+                세컨브레인 노트 새 녹음 · 파일 업로드
               </h3>
               <button
                 onClick={() => setNewNoteSheetOpen(false)}
@@ -2883,7 +2912,7 @@ export default function SecondBrainPage() {
                 <span className="text-xs font-extrabold text-[#111827]">
                   🌐 회의록 / 외국어 공부 언어 선택 (모든 언어 지원)
                 </span>
-                <span className="text-[11px] font-bold text-[#6B21A8]">NoteHelper AI</span>
+                <span className="text-[11px] font-bold text-[#6B21A8]">SecondBrain AI</span>
               </div>
               <div className="flex items-center gap-2">
                 <select
@@ -2909,7 +2938,7 @@ export default function SecondBrainPage() {
               />
             </div>
 
-            {/* 안드로이드 휴대폰 전용 실행 항목 (실시간 녹음 / 갤럭시 기본 녹음기 / 통화·음성 파일 불러오기) */}
+            {/* 세컨브레인 실행 항목 (마이크 녹음 / 실물 기기 녹음·동기화 / 음성 파일 불러오기) */}
             <div className="flex flex-col gap-2 py-1">
               <button
                 onClick={handleStartPhoneRecord}
@@ -2919,10 +2948,10 @@ export default function SecondBrainPage() {
                   <Mic className="w-5 h-5 text-[#FFFFFF] shrink-0" />
                   <div>
                     <div className="text-[15.5px] font-bold text-[#FFFFFF]">
-                      안드로이드 마이크로 바로 녹음 시작
+                      휴대폰 · PC 마이크로 바로 녹음 시작
                     </div>
                     <div className="text-[11.5px] text-[#CBD5E1] mt-0.5">
-                      Gemini · Claude 실시간 전사 · 회의록 요약 · 외국어 교정
+                      실시간 전사 · 회의록 요약 · 외국어 코칭 · 옵시디언 자동 저장
                     </div>
                   </div>
                 </div>
@@ -2932,24 +2961,42 @@ export default function SecondBrainPage() {
               </button>
 
               <button
+                onClick={handleStartHardwareRecord}
+                className="w-full px-4 py-3.5 rounded-2xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] flex items-center justify-between text-left transition-colors cursor-pointer"
+              >
+                <div className="flex items-center gap-3.5">
+                  <Bluetooth className="w-5 h-5 text-[#1D4ED8] shrink-0" />
+                  <div>
+                    <div className="text-[14.5px] font-bold text-[#111827]">
+                      실물 세컨브레인(SecondBrain) 기기로 녹음 시작
+                    </div>
+                    <div className="text-[11.5px] text-[#64748B] mt-0.5">
+                      실물 보이스 레코더 깨우기 및 실시간 백업 동시 녹음
+                    </div>
+                  </div>
+                </div>
+                <span className="text-[11px] font-bold text-[#1D4ED8] shrink-0">실물 기기</span>
+              </button>
+
+              <button
                 onClick={() => {
                   setNewNoteSheetOpen(false);
-                  nativeMicInputRef.current?.click();
+                  handleSyncHardware();
                 }}
                 className="w-full px-4 py-3.5 rounded-2xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] flex items-center justify-between text-left transition-colors cursor-pointer"
               >
                 <div className="flex items-center gap-3.5">
-                  <Smartphone className="w-5 h-5 text-[#047857] shrink-0" />
+                  <RefreshCw className="w-5 h-5 text-[#047857] shrink-0" />
                   <div>
                     <div className="text-[14.5px] font-bold text-[#111827]">
-                      갤럭시 · 안드로이드 기본 음성녹음기 실행
+                      실물 세컨브레인 내장 메모리 녹음 파일 동기화
                     </div>
                     <div className="text-[11.5px] text-[#64748B] mt-0.5">
-                      휴대폰 순정 녹음기로 장시간 녹음 완료 즉시 AI 자동 요약
+                      기기에 저장된 최신 녹음 파일을 가져와 AI 요약 및 옵시디언에 저장
                     </div>
                   </div>
                 </div>
-                <span className="text-[11px] font-bold text-[#047857] shrink-0">순정 녹음</span>
+                <span className="text-[11px] font-bold text-[#047857] shrink-0">동기화</span>
               </button>
 
               <button
@@ -2960,10 +3007,10 @@ export default function SecondBrainPage() {
                   <Upload className="w-5 h-5 text-[#111827] shrink-0" />
                   <div>
                     <div className="text-[14.5px] font-bold text-[#111827]">
-                      갤럭시 통화녹음 · 저장된 음성 파일 불러오기
+                      통화녹음 · 저장된 음성 파일 불러오기
                     </div>
                     <div className="text-[11.5px] text-[#64748B] mt-0.5">
-                      안드로이드 녹음 파일 완벽 지원 (.m4a · .3ga · .amr · .mp3 · .wav)
+                      녹음 파일 완벽 지원 (.m4a · .3ga · .amr · .mp3 · .wav)
                     </div>
                   </div>
                 </div>

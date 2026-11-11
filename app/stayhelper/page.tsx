@@ -2719,7 +2719,7 @@ export default function StayHelperLuxuryShowcase() {
           </div>
 
           {/* Desktop Header */}
-          <header className="relative z-30 w-full px-8 xl:px-14 pt-7 flex items-center justify-between gap-4 pointer-events-auto">
+          <header className="relative z-30 w-full px-8 xl:px-14 pt-7 flex items-center justify-between gap-4 pointer-events-auto shrink-0">
             <Link href="/stayhelper" className="flex items-center space-x-3 group shrink-0">
               <span className="text-2xl font-luxury-serif tracking-[0.26em] text-white uppercase font-light drop-shadow-md">
                 STAYHELPER
@@ -2800,7 +2800,7 @@ export default function StayHelperLuxuryShowcase() {
           </header>
 
           {/* Desktop Body: Left Typography & Right 9:16 Video Frame */}
-          <div className="relative z-20 max-w-[1440px] mx-auto w-full px-8 xl:px-14 flex-1 flex flex-row items-end justify-between gap-12 py-10 my-auto pointer-events-auto">
+          <div className="relative z-20 max-w-[1440px] mx-auto w-full px-8 xl:px-14 flex-1 flex flex-row items-end justify-between gap-12 py-6 my-auto pointer-events-auto min-h-0">
             {/* Left Label */}
             <div className="space-y-3 max-w-xl text-left drop-shadow-lg shrink-0">
               <div className="flex items-center gap-2">
@@ -2918,7 +2918,7 @@ export default function StayHelperLuxuryShowcase() {
           </div>
 
           {/* Desktop Timeline Dock */}
-          <div className="relative z-30 w-full px-8 xl:px-12 pb-7 flex flex-row items-center justify-between gap-4 pointer-events-auto">
+          <div className="relative z-30 w-full px-8 xl:px-12 pb-7 flex flex-row items-center justify-between gap-4 pointer-events-auto shrink-0">
             <div className="bg-black/60 backdrop-blur-2xl border border-white/20 rounded-xl px-4 py-2 shadow-2xl flex items-center gap-3 w-full max-w-[calc(100%-250px)] xl:max-w-[calc(100%-270px)] min-w-0">
               <button
                 type="button"

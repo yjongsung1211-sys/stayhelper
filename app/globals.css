@@ -20,16 +20,13 @@ html {
   scroll-behavior: smooth;
   background-color: #F8FAFC;
   color: #0F172A;
-  font-family: "Pretendard Variable", "Pretendard", "Inter", "Noto Sans KR", "Noto Sans SC", "Noto Sans JP", -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: "Pretendard Variable", "Pretendard", "Inter", "Noto Sans KR", "Noto Sans SC", "Noto Sans JP", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-body,
-.font-sans,
-.font-mono,
-code {
+body {
   background-color: #F8FAFC;
   color: #0F172A;
-  font-family: "Pretendard Variable", "Pretendard", "Inter", "Noto Sans KR", "Noto Sans SC", "Noto Sans JP", -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: "Pretendard Variable", "Pretendard", "Inter", "Noto Sans KR", "Noto Sans SC", "Noto Sans JP", -apple-system, BlinkMacSystemFont, sans-serif;
   overflow-x: hidden;
   min-height: 100vh;
   letter-spacing: -0.005em;
