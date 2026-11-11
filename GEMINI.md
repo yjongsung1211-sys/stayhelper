@@ -1,5 +1,120 @@
 # 프로젝트 운영 및 제작 원칙
 
+## 1-00000. 8대 글로벌 최상위 에이전트 스킬 실시간 활성화 및 집행 지침 (★대표 지침으로 영구 픽스)
+
+- **★ [8대 파워하우스 스킬 전사 즉각 가동 원칙] (Autonomous 8-Powerhouse Skill Activation - ★대표 지침 영구 픽스)**:
+  - 대표님의 지시나 개발·기획·분석 업무 발생 시, 아래 8대 최상위 글로벌 에이전트 스킬을 맥락에 맞추어 100% 자율 선제 발동(Proactive Invocation)하여 실행합니다.
+
+  1. **REA (Reverse Engineer Anything - morluto/rea)**:
+     - 바이너리, 컴파일된 앱, 외부 패키지, 빌드된 JS/Electron 번들, Android APK 분석 시 단순 소스 유추를 금지하고, REA MCP 도구와 증거 번들(Evidence Bundle)을 통해 역공학·디컴파일·API 종속성을 100% 실증 기반으로 분석 및 재구축합니다.
+  2. **슈퍼파워스 (Superpowers - obra/superpowers)**:
+     - 모든 신규 기능 구현 전 브레인스토밍(`brainstorming`), 결함 발생 시 원인 격리 체계적 디버깅(`systematic-debugging`), 구현 전 TDD(`test-driven-development`), 실행 전 계획 수립(`writing-plans`), 완료 보고 전 엄격한 검증(`verification-before-completion`)을 철저히 집행합니다.
+  3. **지스택 (gstack - Garry Tan / Y Combinator Suite)**:
+     - 비즈니스 전략, 신규 서비스 기획, 기능 검증 시 YC 창업자 모드로 CEO 기획 리뷰(`gstack@plan-ceo-review`), 디자인 검토(`gstack@design-review`), QA(`gstack@qa`), 릴리즈 준비를 거쳐 스타트업 린 실행력을 극대화합니다.
+  4. **애브리씽 클로드코드 (Everything Claude Code - affaan-m/ecc)**:
+     - 엔지니어링 표준 컨벤션(`ecc-conventions`), 지속적 자율 에이전트 루프(`continuous-agent-loop`), 지속적 학습(`continuous-learning-v2`), 토큰 효율적 라우팅 및 아키텍처 감사 품질 게이트를 상시 적용합니다.
+  5. **맷 포콕 스킬 (Matt Pocock Skills - mattpocock/skills)**:
+     - 모호하거나 중요한 요구사항 발생 시 수동적 수용을 금지하고, 심층 인터뷰 질의(`grill-me`), TDD 규격화(`tdd`), 구현 전 명확한 사양 정의(`to-spec`)를 거쳐 구현 실패율 0%를 달성합니다.
+  6. **애디 오스마니 에이전트 스킬 (Addy Osmani Agent Skills - addyosmani/agent-skills)**:
+     - 구글 크롬 총괄의 엔지니어링 원칙을 적용하여, 불필요한 과도 설계를 방지하는 코드 단순화(`code-simplification`), 성능 최적화(`performance-optimization`), 회귀 방지, 의심 기반 개발(`doubt-driven-development`), 스펙 주도 개발(`spec-driven-development`)을 의무화합니다.
+  7. **버셀 리액트 베스트 프랙틱스 (Vercel React Best Practices - vercel-labs/agent-skills)**:
+     - Helper 패밀리(Styling, Room, Stay, Color, Wedding 등) 및 Next.js 14 모든 프론트엔드 작업 시 Vercel 공식 표준(`vercel-react-best-practices`, `vercel-composition-patterns`, `vercel-optimize`)을 준수하여 번들 경량화, 서버 컴포넌트 우선 원칙, 최적의 렌더링 성능을 영구 보장합니다.
+  8. **아키파이 (Archify - tt-a1i/archify)**:
+     - 시스템 아키텍처, 데이터 파이프라인, 비즈니스 흐름, API 호출 시퀀스 보고 시 단순 텍스트 나열을 지양하고, 다크/라이트 인터랙티브 HTML 다이어그램 및 원페이지 설명서(Explainer)를 적극 생성하여 최고급 보고 품질을 제공합니다.
+
+- **★ [7대 전문 스택 전사 즉각 가동 원칙] (Autonomous 7-Specialist Stack Activation - ★대표 지침 영구 픽스)**:
+  1. **헤드룸 (Headroom - roman-ryzenadvanced/headroom-skill)**:
+     - 방대한 로그, 대규모 JSON, 수천 줄 코드베이스 및 검색 결과 전달 시 토큰 낭비를 원천 차단하기 위해 인컨텍스트 무손실 토큰 압축 및 최적화를 자율 가동합니다.
+  2. **에이전시 에이전츠 (Agency Agents - msitarzewski/agency-agents & Hermes Router)**:
+     - 엔지니어링, 디자인, 마케팅, 재무, 보안 등 18개 부서 283인 전문 디지털 에이전시 페르소나 및 Hermes 게이트웨이를 통해 극도로 전문화된 실행 워크플로우를 선제 적용합니다.
+  3. **루플로 (Ruflo - ruvnet/ruflo)**:
+     - 복잡 다중 에이전트 스웜(Swarm) 지휘, 적응형 벡터 메모리(HNSW/RAG), 자율 학습 오케스트레이션 메타 하네스로 대규모 작업을 병렬 조율합니다.
+  4. **컴피UI 익스퍼트 (ComfyUI Expert - mckruz/comfyui-expert)**:
+     - 로컬/원격 ComfyUI 워크플로우 빌드, 비디오 생성 파이프라인, LoRA 학습, 캐릭터 일관성 제어, 프롬프트 엔지니어링 및 오류 자가 치유를 전담합니다.
+  5. **포니테일 (Ponytail - dietrichgebert/ponytail)**:
+     - 7단계 의사결정 사다리(YAGNI, 기존 코드 재사용, 표준 라이브러리 우선)를 엄격히 집행하여 AI의 과도한 보일러플레이트, 불필요한 추상화 및 불필요 의존성 추가(코드 비대화)를 100% 척결합니다.
+  6. **오르카 (Orca - stablyai/orca)**:
+     - Git worktree 기반 격리 병렬 에이전트 플릿 구동, 지라/리니어 티켓 연동, 컴퓨터 유즈 및 엔터프라이즈 멀티 에이전트 오케스트레이션을 수행합니다.
+  7. **시큐리티 오딧 (Security Audit - Trail of Bits & Agentic Awesome)**:
+     - 최고 권위 사이버보안 전문기관 Trail of Bits의 96개 감사 규격 및 종합 보안 감사 스킬을 통해 공급망 리스크, 제로이즈, 인시큐어 디폴트, 취약점 전수 스캔 및 강화를 의무 집행합니다.
+
+## 1-0000. 딥테크 포트폴리오(샘컴·퀀텀테크놀로지) 인텔리전스 및 사업화 거버넌스 원칙 (★대표 지침으로 영구 픽스)
+
+- **★ [샘컴 ↔ 퀀텀테크놀로지 이원화 사업화 원칙] (Dual Deep-Tech Commercialization Engine - ★대표 지침 영구 픽스)**:
+  - **샘컴 (Semcom - 원천기술 R&D 모체)**: KAIST 교수진이 원천특허를 보유하고 총괄 전략가(윤주환 대표) 측이 딥테크 R&D 자금 **19억 원을 기투입**한 원천기술 벤처로, Beyond 5G / 6G 초고속·저전력 OFE(Optical Front-End) 광무선 데이터 전송 및 피지컬 AI 센싱 원천기술을 전담 보존합니다.
+  - **퀀텀테크놀로지 (Quantum Technology - 사업화·상장사 연계 디딤돌 법인)**: R&D에서 상용 모듈화로 가기 위한 **100억 원+ 규모의 자금 조달** 및 교수 창업 기업의 지분 경직성을 해소하기 위해 설립된 특수목적 사업화 법인입니다.
+  - **3각 거버넌스 불변 고정**: **대주주(KAIST 교수님, 원천기술 공신력) - 대표이사(최석진 대표, 양산·영업 총괄) - 감사 겸 AI BM 이네이블러(윤주환 대표, M&A 구조 설계 및 AI BM 탑재 밸류에이션 극대화)** 체제를 엄수합니다.
+  - **4대 타겟 응용처(Application)**: **드론(전파 교란 방지), 자율주행차(와이어링 감축 및 초고속 데이터 전송), 방위산업(스텔스 통신), 스마트홈·로보틱스(초저지연 센싱)**에 AI 비즈니스 모델(BM)을 결합하여 고부가가치 솔루션 기업으로 육성합니다.
+
+- **★ [AIDC 전력 M&A 판과의 철저한 독립 분리 원칙] (Strict Track Isolation - ★대표 지침 영구 픽스)**:
+  - 현재 화천퍼스트 및 일진전기·다스테크·동양산전·이지트로닉스·나인테크 등과 추진 중인 **AI 데이터센터(AIDC) 전력·수배전·냉각 인프라 상장사 M&A 판과 퀀텀테크놀로지 딜은 이해관계 충돌 방지 및 고유 기술 가치 보존을 위해 100% 상호 분리 독립 운영**합니다.
+
+- **★ [데이터센터 PUE 10배 포텐셜 & 상장사 디딤돌 원칙] (10x Value & Listing Stepping Stone - ★대표 지침 영구 픽스)**:
+  - 데이터센터 배선 체계가 구리선 ➔ 광섬유 ➔ 광무선(Optical Wireless Interconnect)으로 진화할 때 발열과 전력소모(PUE)를 근본적으로 해결하는 핵심 기술로서, **원천기술 포텐셜 10배 가치**를 견지합니다.
+  - 서울대 수리학과 70명 규모 'AI 네이션'을 전통 제조 상장사와 합병시켜 상장시킨 성공 모델과 마찬가지로, 코스닥 상장사 볼트온(Bolt-On) 또는 우회상장의 디딤돌로 기업가치를 폭발적으로 성장시킵니다.
+
+- **★ [인텔리전스 종합 분석 표준] (Dual-Track Fact & Market Intelligence - ★대표 지침 영구 픽스)**:
+  - 사내 모든 딥테크·M&A 분석 시 **내부 회의록(지배구조, 지분, 딜 조건 등 사실관계)**과 **외부 실시간 웹 서칭(학술 논문, 글로벌 시장 동향, 경쟁사 비교)**을 철저히 투트랙으로 교차 검증하여 종합 상신합니다.
+
+## 1-000. 1인 기업 전사 무인 자동화 및 AI 마케팅팀·16대 도구 자율 지휘 원칙 (★대표 지침으로 영구 픽스)
+
+- **★ [부팅 시 100% 무음 자동 가동 원칙] Windows Startup 무인 부트스트랩 (Zero-Click Startup Auto-Boot - ★대표 지침 영구 픽스)**:
+  - 대표님께서 PC를 켤 때마다 일일이 클릭하거나 콘솔창을 띄우는 수고를 전면 배제합니다.
+  - Windows 시작프로그램에 등록된 무음 VBScript(`Hermes_전사통합_무인부팅.vbs`)를 통해 화면 깜빡임 0%, 완전 무음 백그라운드로 **① 전사 마스터 오케스트레이터 데몬(`hermes_master_pipeline.py --mode daemon`), ② 24/7 사이트 순찰 데몬(`patrol_daemon.py`), ③ 스마트폰 텔레그램 리모컨 봇(`telegram_remote_commander.py`), ④ 로컬 AI 엔진(`ollama serve`), ⑤ 유튜브 24/7 쿼터 감지 및 자동 배출 데몬(`auto_drain_daemon.py`), ⑥ 모바일 사령탑 앱 브릿지 데몬(`antigravity_mobile_daemon.py`)**이 부팅 즉시 100% 자동 분리 실행(Detached)됩니다.
+
+- **★ [모바일 사령탑 전용 앱(Antigravity) 1순위 소통 & 카드릴스 텔레그램 발송 이원화 원칙] (Dual Mobile Channel Governance - ★대표 지침 영구 픽스)**:
+  - 대표님의 지침에 따라, 대표님과의 모바일 채널을 가장 편리한 기능별 이원화 체제로 영구 고정합니다:
+    1) **업무 지시 & 세컨브레인 사령탑**: **신규 전용 모바일 앱(`Antigravity` / `/antigravity`)**을 1순위 공식 채널로 고정하여 마이크 음성/텍스트 지시, 기사 자동 스크랩, 210+ Vault RAG 검색, 로컬 PC 원격 작업 큐를 처리합니다.
+    2) **카드릴스 & 숏폼 에셋 직속 수신**: **카드릴스(완제품 9:16 비디오, 카드뉴스 에셋, 원클릭 복사용 해시태그 코드블록)**는 스마트폰 갤러리로 즉시 저장하여 인스타그램에 가장 손쉽게 업로드하실 수 있도록 **기존처럼 텔레그램(Telegram)으로 100% 직속 발송**합니다.
+
+- **★ [16대 로컬 AI 런처 무인 자율 오케스트레이션] 대표님 클릭 0회 & 하나(Hana) 자동 판단 원칙 (16-Tool Autonomous Orchestration - ★대표 지침 영구 픽스)**:
+  - 대표님께 "bat 파일을 눌러주세요"라고 요구하는 행위를 영구적으로 엄격히 금지합니다.
+  - AI 수석 비서 **하나(Hana)**와 **마케팅팀**이 대표님의 요구 맥락에 맞추어 16대 로컬 AI 도구(InstantID, IDM-VTON, SAM 2, TripoSR, Depth Anything, Florence-2, MusicGen, LivePortrait, ChatTTS, Crawl4AI, Browser-Use, MoneyPrinterTurbo, Postiz, Wav2Lip 등)를 스스로 판단하여 백그라운드 파이프라인으로 즉시 구동하고, 100% 무결점 결과물만 직속 상신합니다.
+
+- **★ [585개 글로벌 최상위 스킬 자율 라우팅 허브] 대표님 검색 0회 & 하나(Hana) 자율 디스패치 원칙 (Autonomous 585-Skill Routing Hub - ★대표 지침 영구 픽스)**:
+  - 대표님께서 수백 개 스킬의 영문 명칭이나 호출 구문을 직접 찾거나 입력하실 필요가 일체 없습니다.
+  - AI 수석 비서 **하나(Hana)**가 대표님의 한마디 지시 의도와 작업 맥락을 0.01초 만에 파악하여, **8대 글로벌 파워하우스(REA, Superpowers, gstack, ECC, Matt Pocock, Addy Osmani, Vercel, Archify)**와 **7대 전문 스택(Headroom, Agency Agents 283인, Ruflo, ComfyUI, Ponytail, Orca, Security Audit)** 및 585개 전사 스킬 중 최적의 도구를 스스로 조합·선제 발동합니다.
+  - 라우팅 엔진(`scripts/build_hana_router.py`)과 사전 인덱스(`data/hana_skills_index.json`)를 연동하여 100% 무결점 완결 결과물만 대표님께 직속 상신합니다.
+
+- **★ [Browser-Use 기반 마케팅·순찰 무인 인텔리전스 연동] 24/7 사이트 딥 DOM 순찰 & 시장 트렌드 실시간 피딩 원칙 (Browser-Use Autonomous Intelligence - ★대표 지침 영구 픽스)**:
+  - 단순 HTTP 200 검사에 의존하지 않고, **헤드리스 Chromium 브라우저(Browser-Use / Playwright)**가 5대 Helper 사이트의 실제 렌더링 지연(ms), 인터랙티브 버튼(`Add to Bag`, `In Stock`, 예약 버튼) 100% 활성화 여부를 실시간 심층 순찰(`scripts/browser_use_auditor.py`)합니다.
+  - 동시에 글로벌 럭셔리 여행·퍼스널컬러·올드머니 패션의 실시간 고객 검색 의도와 손실회피 55.7% 훅킹 문구를 자동 스크랩하여 `data/marketing_insights.json`에 적재하고, **CMO 아테나(Athena)와 카피라이터 뮤즈(Muse)에게 무인 직속 피딩**하여 릴스/쇼츠 제작에 실시간 반영합니다.
+
+- **★ [대표님 부재 중 10분 마우스 미이동 감지 & Browser-Use 자율 업무 원칙] (Autonomous AFK Browser-Use Worker - ★대표 지침 영구 픽스)**:
+  - 대표님의 마우스/키보드가 **10분(600초) 이상 미이동 시 '부재 중(AFK)'으로 자동 판정**하고, 상시 가동 데몬(`scripts/afk_browser_worker.py`)이 백그라운드 헤드리스 Browser-Use를 즉각 자율 출격시킵니다.
+  - **부재 중 4대 전담 무인 업무**:
+    1) **Helper 5대 쇼룸 VIP 동선 딥 순찰**: 실제 버튼 클릭 및 실시간 재고 100% 검증 (결함 발견 시 0초 자가치유).
+    2) **글로벌 럭셔리 & 숏폼 마케팅 트렌드 스크랩**: 인스타/틱톡/핀터레스트 최신 바이럴 훅 & 손실회피 카피 수집.
+    3) **명품 해외 직구 세일 & 최저가 차익(Arbitrage) 발굴**: 노드스트롬/파페치 프라이빗 세일 레이더 동기화.
+    4) **[Lab TO Life] 과학 다큐 논문·특허 실증 수집**: PubMed/Nature 최신 피어리뷰 논문 아카이빙.
+  - **대표님 복귀 시 0.1초 즉시 제어권 반환**: 대표님께서 마우스를 움직이시면 즉각 작업을 안전하게 양보하고, 부재 중 수행한 업무 내역을 텔레그램으로 1장 요약 보고합니다.
+
+- **★ [전사 7대 핵심 사업 Browser-Use 무인 종합 순찰 및 자동화 원칙] (Omni-Business Browser-Use Autonomous Inspection - ★대표 지침 영구 픽스)**:
+  - 대표님의 지침에 따라, **지나월드(JinaWorld), 노트헬퍼(NoteHelper), 세컨드브레인 웹 노트 페이지(/secondbrain), 스케줄헬퍼(ScheduleHelper)**를 전사 감사 대상에 즉각 전면 편입하고, 전사 사업 영역 7대 트랙 전체로 무인 브라우저 점검을 영구 확대 적용합니다.
+  - **전사 7대 핵심 사업 점검 트랙**:
+    1) **Helper 패밀리 5대 쇼룸**: Styling, Stay, Color, Room, Wedding 실제 DOM 렌더링, LCP, 버튼 반응성, PayPal 30일 Recurring Disclosure 3중 고지, Pro 회원 연동 검증.
+    2) **생산성 & 세컨드브레인 3대 웹 서비스**: NoteHelper(음성 메모 PWA), SecondBrain 웹 노트 페이지(00_Inbox 실시간 노트/AI 코치), ScheduleHelper(스마트 캘린더/일정 스토어) DOM 컨트롤 요소 및 스토어 정합성 검증.
+    3) **4대 글로벌 유튜브 미디어 채널**: **지나월드(JinaWorld - 윤지나 가족 프로필 엄수, 따뜻한 순수 스토리텔링)** 채널 렌더링 및 재생 상태 + 3대 외국어 유튜브(KoreanLoop, Hola Coreano, LanguageLoop) 예약 큐 잔여 버퍼(최소 5일치 이상 유지, 부족 시 `hana_foreign_yt_manager.py --refill` 자동 가동).
+    4) **유튜브 과학 다큐 [Lab TO Life]**: Nature, PubMed 등 인용 학술 논문 실제 DOI 링크 유효성(HTTP 200) 및 Docu 05 골든 레퍼런스 규격 준수.
+    5) **딥테크 원천기술 포트폴리오 (샘컴 ↔ 퀀텀테크놀로지)**: Beyond 5G/6G 광무선(OWI) 원천특허 패밀리 권리 상태 모니터링(Google Patents/KIPRIS) 및 100억 IR 데이터룸 링크 무결점.
+    6) **AI 데이터센터(AIDC) 전력·수배전 M&A 판 (화천퍼스트 연합)**: 퀀텀테크놀로지와 철저한 독립 분리 하에, 일진전기·나인테크·이지트로닉스·동양산전 DART 전자공시 및 수주 보도자료 실시간 감시.
+    7) **1인 기업 인프라 & SecondBrain 데몬**: Next.js 14 서버(포트 3000), BLE 하드웨어 서버, SecondBrain 클라우드-로컬 볼트 무손실 동기화 및 회원 DB 정합성.
+  - **실행 엔진**: `scripts/omni_browser_auditor.py` (전사 단독/통합 순찰) 및 `scripts/afk_browser_worker.py` (대표님 10분 부재 시 무인 자동 집행), 실시간 종합 리포트(`reports/omni_business_audit_report.html`) 및 텔레그램 직속 상신.
+
+- **★ [릴스 및 쇼츠 대표님 직접 제작 원칙] (CEO Direct Reels & Shorts Creation - ★대표 지침 영구 픽스)**:
+  - 릴스 및 쇼츠 영상 콘텐츠의 기획, 편집, 비주얼 연출, 배포는 **윤종성 대표님께서 직접 100% 총괄**하십니다.
+  - AI 에이전트(하나 및 마케팅팀)는 영상을 임의로 렌더링하거나 SNS에 업로드하지 않으며, 대표님께서 영상을 만드실 때 즉시 참고하실 수 있는 **① 시장 핫 트렌드 키워드, ② 손실회피 55.7% 후킹 문구, ③ 쇼룸 실시간 재고(IN STOCK) 및 링크 무결점 인프라 지원**에만 전념합니다.
+
+- **★ [3대 외국어 유튜브(LanguageLoop, KoreanLoop, Hola Coreano) 하나(Hana) 전담 관리 원칙] (Triple Foreign YouTube Channel Autonomous Management - ★대표 지침 영구 픽스)**:
+  - **3대 채널 총괄 권한**: **랭귀지루프(LanguageLoop), 영어 채널(KoreanLoop), 스페인 채널(Hola Coreano)**의 커리큘럼 수립, 영상 제작 파이프라인 가동, 예약 큐 관리는 **수석 비서 하나(Hana)가 100% 전담 총괄**합니다.
+  - **예약 영상 끊김 방지(버퍼 5일 유지)**: 예약된 영상이 소진되기 전에 상시 큐 상태를 감시하여, 5일 치 미만으로 떨어지기 전에 다음 배치를 자동 예약 걸어 365일 무중단 업로드를 보장합니다.
+  - **월말 익월 정기 기획 원칙**: 매월 말일(25~28일)에 익월 1개월치 전체 커리큘럼(체계적 학습 + 흥미 유발 주제 엄선)을 사전 완성하여 윤종성 대표님께 결재 상신합니다.
+  - **11월 11일 ~ 30일(20일간) 마스터 플랜**: 4대 주차별 테마(K-Food, K-Drama/연애, K-Shopping/성수, K-Life/직장인 슬랭) 커리큘럼을 즉각 편철하고 상시 배치 제작 파이프라인을 가동합니다.
+
+- **★ [1인 기업 전담 AI 마케팅팀 상시 편제] 4대 전문 에이전트 자율 마케팅 원칙 (Autonomous Marketing Division - ★대표 지침 영구 픽스)**:
+  - 유료 광고비 지출 0원(비용 0원 원칙) 하에, **CMO 아테나(Athena, 총괄전략), 헤르메스-그로스(Growth, 쇼룸 CRO & VIP리드), 뮤즈(Muse, 바이럴 카피라이터), 헤라(Hera, 비주얼 에셋 & 옴니채널 배포관)** 4인 마케팅 본부가 상시 가동됩니다.
+  - 5대 Helper 쇼룸 전환율(CTR 3% 유지), 실시간 환율 연계 프로모션, 인스타그램/유튜브 숏폼 3초 완독형 바이럴(손실회피 55.7%), 옴니채널 예약 배포를 무인 자동 기획하며, 매일 08:30 모닝 브리핑 시 1장으로 대표님께 핵심 성과를 보고합니다.
+
 ## 1-00. Helper 패밀리 럭셔리 웹사이트 무인 표준 제작 원칙 (★5대 사이트 노하우 영구 픽스)
 
 - **★ [아키텍처 표준화] Next.js 14 App Router & TypeScript 무결점 원칙 (Zero-Error Next.js 14 - ★대표 지침으로 영구 픽스)**:
@@ -40,6 +155,10 @@
 
 ## 1-0. 유튜브 글로벌 과학 다큐멘터리 [Lab TO Life] 제작 규칙 (★대표 지침으로 영구 픽스)
 
+- **★ [전사 골든 레퍼런스 영구 고정] 오늘 제작 완료된 Docu 05 ("The Physics of Longevity")를 전편 불변 표준으로 고정 (Golden Benchmark Standard - ★대표 지침으로 영구 픽스)**:
+  - 대표님의 "다음부터 바뀌지 않게 오늘 영상을 기본으로 하게 저장해둬" 지침에 따라, **2026-11-09 완성된 Docu 05 ("The Physics of Longevity")를 향후 모든 [Lab TO Life] 과학 다큐멘터리의 공식 골든 레퍼런스(Golden Benchmark Standard)로 영구 고정**합니다.
+  - 모든 후속 에피소드는 `youtube_paper_studio/templates/docu_master_standard/`에 영구 보존된 4대 표준 템플릿 파이프라인(`generate_scientific_visuals_template.py`, `render_full_docu_template.py`, `render_cut_01_prestige_opening_template.py`, `render_cut_32_climax_outro_template.py`)을 100% 동일하게 복제하여 제작하며, 독자적인 임의 변형을 영구 금지합니다.
+
 - **★ [오프닝 필수 규격] 채널 이름 & 에피소드 제목 맨 앞 100% 필수 노출 원칙 (Brand Slate & Prestige Title First - ★대표 지침으로 영구 픽스)**:
   - 모든 유튜브 과학 다큐멘터리 영상의 첫 씬(Cut 01, 0.0s ~ 6.0s) 맨 앞에는 **공식 채널명(`Lab TO Life`)과 에피소드 정식 영문 제목이 100% 필수로 노출**되어야 합니다.
   - **0.0s ~ 1.8s (채널 브랜딩 슬레이트)**: 딥 블랙 앰비언트 배경 + 상단 공식 뱃지(`OFFICIAL CHANNEL • PEER-REVIEWED SCIENCE`) + 초대형 골드/화이트 채널명(`Lab TO Life`) + 골드 디바이더 + 글로벌 슬로건(`Translating World-Class Science into Daily Human Performance`)을 단독 표출하여 글로벌 방송사 수준의 공신력과 정체성을 확립합니다.
@@ -60,7 +179,8 @@
   - **글씨보다 상자가 항상 커야 하는 절대 원칙**: 버튼, 뱃지, 카드 헤더, 인포 박스 등 모든 상자는 글씨보다 반드시 훨씬 커야 하며, 글씨가 상자 밖으로 삐져나오거나 테두리에 닿는 현상을 영구적으로 엄격히 금지합니다.
   - 모든 슬레이트, 인포그래픽, 카드 내부 텍스트는 프레임 및 박스 외곽선으로부터 **최소 80~100px 이상의 안전 여백(Safe Margins)**을 100% 필수 확보합니다.
   - 박스나 캡슐 바깥으로 텍스트가 비어져 나가거나 선을 침범하는 사고를 방지하기 위해, 반드시 `draw.textbbox`를 통해 실제 렌더링 폭을 사전에 측정하고 여백이 부족할 경우 폰트 크기 축소나 줄바꿈, 2컬럼 레이아웃을 강제 적용합니다.
-  - **3단 카드 연결 브릿지 캡슐 간섭 0건 규격**: 카드와 카드 사이에 최소 **140px 이상의 물리적 간격(Clear Gap)**을 확보하고 그 정중앙에 110px 캡슐을 배치하여 양옆 카드 경계선에 캡슐 텍스트가 짓눌리거나 잘려 나가는 결함을 100% 원천 차단합니다.
+  - **3단 카드 연결 브릿지 캡슐 간섭 0건 규격**: 대칭 3단 카드 폭 460px(`C1: 80~540`, `C2: 730~1190`, `C3: 1380~1840`), 높이 610px(`230~840`), 좌우 안전 여백 80px를 엄수합니다. 카드 간 물리적 간격은 **정확히 190px 완전 확보**하고 그 정중앙(`Center X: 635 / 1285`)에 110px 브릿지 캡슐을 배치하여 **양옆 카드와의 안전 간격을 각 40px 영구 확보 (충돌/간섭 0건)**합니다.
+  - **[동적 가변 뱃지 & 2단 럭셔리 타이포 계층]**: 뱃지 상자는 반드시 `draw.textbbox`로 글자 폭을 동적 계산(`badge_w = num_w + 24px`, 좌우 12px 여백)하여 글씨가 상자를 삐져나가는 현상을 영구 박멸합니다. 카드 내부 항목은 `Tag` 1행(골드 볼드) + `Description` 2행(15pt 슬레이트 화이트) 2단 계층 및 자동 줄바꿈을 강제하여 우측 테두리 침범을 100% 원천 차단합니다.
   - 특수문자 및 수식 거듭제곱(`10⁻²³`), 이모지(`📌`, `🔔`), 특수 화살표(`➔`, `🠔`)로 인해 Windows 폰트에서 네모 상자(`□`)가 깨져 나오는 결함을 영구 방지하기 위해, 표준 렌더링 폰트와 호환되는 클린 ASCII 및 정밀 캡슐 표기법(`10^-23`, `ACTION >`, `< SENSORY`, `[KEY TAKEAWAY]`)만을 엄격히 사용합니다.
 
 - **★ [복잡 이론 다이어그램 가독성 극대화] 3단 글래스모피즘 아키텍처 원칙 (3-Pillar Glassmorphism Info-Design - ★대표 지침으로 영구 픽스)**:
@@ -82,6 +202,11 @@
 
 
 
+
+- **★ [B-roll 및 썸네일 100% Imagen 3(image-generator) AI 마스터피스 단독 생성 원칙 (Never Use Primitive Code Drawings - ★대표 지침으로 영구 픽스)]**:
+  - 다큐멘터리 B-roll 화보 및 유튜브 썸네일에 파이썬 PIL이나 단순 캔버스 코드로 2D 도형, 원, 선, 평면 박스를 그려 넣는 행위(초저품질 슬롭)를 영구적으로 엄격히 금지합니다.
+  - 이론 설명용 6대 다이어그램(글래스모피즘 아키텍처)을 제외한 **모든 B-roll 실사 화보 및 썸네일 3종 후보는 100% image-generator (Imagen 3) 전담 서브에이전트**를 호출하여 35mm 시네마틱 필름 질감, 키아로스쿠로 명암, BBC/내셔널지오그래픽급의 압도적인 실사 화보 및 초고화질(300 DPI, 16:9) 키 비주얼로 단독 생성합니다.
+  - 썸네일은 3D 입체 타이포그래피, 하버드/네이처/셀 공식 학술 뱃지, 드라마틱한 생체/분자 실사 비주얼이 완벽히 조화된 최고급 글로벌 방송사 규격으로 완성하여 대표님 사전 검수를 받습니다.
 
 ## 1. 카드뉴스 제작 규칙 (★Remotion 유기적 모션 릴스 & AI 나레이션 전면 픽스 원칙)
 
@@ -1042,6 +1167,12 @@ ead_file 이미지 뷰어)으로 실물 제품 사진의 형태와 색상이 타
 
 
 
+
+- **★ [24시간 롤링 쿼터 무인 자동 배출] 유튜브 24시간 업로드 한도 자동 대기 큐 및 쿼터 해제 즉시 자동 분할 업로드 원칙 (Zero-Intervention 24/7 Queue & Auto-Drain Quota Standard - ★대표 지침 영구 픽스)**:
+  - **렌더링 선행 100% 완료 원칙**: 유튜브 업로드 쿼터 제한 여부와 무관하게, 지시된 모든 영상(쇼츠 및 롱폼)은 로컬에서 Remotion WebGL 모션 렌더링, AI 듀얼 음성 합성, 고화질 썸네일, 설명글, 5대 태그 일체를 100% 선행 제작 완료합니다.
+  - **한도 도달 시 자동 대기 큐(`upload_queue_espanol.json`) 보존**: 유튜브 Data API 24시간 롤링 업로드 한도(`uploadLimitExceeded`, 계정당 일일 약 10개 한도)에 도달하더라도 절대 작업을 중단하거나 대표님께 재시도를 요구하지 않고, 잔여 비디오 전량을 대기 큐에 안전하게 등록합니다.
+  - **무인 자동 감지 및 즉시 분할 예약 업로드 (Auto-Drain Engine)**: 백그라운드 상주 데몬(`auto_drain_daemon.py`) 및 Windows 무인 부팅 파이프라인(`start_os_daemons.ps1`)에 편입되어 쿼터 해제 시점을 주기적으로 무음 감지하며, 쿼터가 풀리는 즉시 잔여 영상을 스페인 및 중남미 골든타임 스케줄로 자동 예약 발행합니다.
+  - **대표님 텔레그램 직속 무인 보고**: 분할 예약 업로드가 성공할 때마다 대표님 텔레그램으로 완료 리포트 및 라이브 예약 URL을 자동 전송하여 대표님의 개입 0회로 전량이 완전 자동 발행되도록 영구 보장합니다.
 
 - **★ 유튜브 영상 업로드 시 구독자 알림 전면 비활성화 원칙 (Zero-Notification Policy - notifySubscribers=False - ★대표 지침으로 영구 픽스)**:
   - **구독자 알림 전면 차단**: 아직은 구독자 피드 및 푸시 알림을 발송하지 않습니다.

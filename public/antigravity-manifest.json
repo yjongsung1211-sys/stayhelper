@@ -9,6 +9,16 @@
   "background_color": "#0B0F17",
   "theme_color": "#0B0F17",
   "orientation": "portrait",
+  "share_target": {
+    "action": "/antigravity",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
   "icons": [
     {
       "src": "/antigravity-192.png",

@@ -118,6 +118,39 @@ public class MainActivity extends Activity {
         });
 
         webView.loadUrl(APP_URL);
+        handleSendIntent(getIntent());
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        handleSendIntent(intent);
+    }
+
+    private void handleSendIntent(Intent intent) {
+        if (intent == null || webView == null) return;
+        String action = intent.getAction();
+        String type = intent.getType();
+
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            if ("text/plain".equals(type) || type.startsWith("text/")) {
+                String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+                String sharedTitle = intent.getStringExtra(Intent.EXTRA_SUBJECT);
+                if (sharedText != null && !sharedText.trim().isEmpty()) {
+                    try {
+                        String encodedText = java.net.URLEncoder.encode(sharedText.trim(), "UTF-8");
+                        String targetUrl = APP_URL + (APP_URL.contains("?") ? "&" : "?") + "shared_text=" + encodedText;
+                        if (sharedTitle != null && !sharedTitle.trim().isEmpty()) {
+                            targetUrl += "&shared_title=" + java.net.URLEncoder.encode(sharedTitle.trim(), "UTF-8");
+                        }
+                        webView.loadUrl(targetUrl);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
     }
 
     private void loadLuxuryFallback(WebView view) {

@@ -30,7 +30,36 @@ import {
   Video,
   Users,
   BookmarkPlus,
+  Search,
+  BookOpen,
+  X,
+  Copy,
+  Check,
+  Folder,
+  ArrowRight,
 } from 'lucide-react';
+
+interface VaultDocItem {
+  id: string;
+  filename: string;
+  title: string;
+  category: string;
+  subCategory?: string;
+  date: string;
+  mtime: number;
+  length: number;
+  tags: string[];
+  preview: string;
+  content?: string;
+}
+
+interface SharedArrival {
+  text: string;
+  title?: string;
+  status: 'processing' | 'success' | 'error';
+  message: string;
+  url?: string;
+}
 
 interface ChatMessage {
   id: string;
@@ -137,7 +166,7 @@ const SUGGESTED_PROMPTS = [
 ];
 
 export default function AntigravityMobilePage() {
-  const [activeTab, setActiveTab] = useState<'chat' | 'deck' | 'bridge' | 'apk'>('chat');
+  const [activeTab, setActiveTab] = useState<'chat' | 'vault' | 'deck' | 'bridge' | 'apk'>('chat');
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
   const [commandQueue, setCommandQueue] = useState<CommandItem[]>([]);
   const [pcStatus, setPcStatus] = useState<PcStatus>({
@@ -168,11 +197,123 @@ export default function AntigravityMobilePage() {
   const [memoSavedToast, setMemoSavedToast] = useState('');
   const [isSyncing, setIsSyncing] = useState(false);
 
+  // 1. 스마트폰 '공유하기(Share Target)' 실시간 수신 상태
+  const [sharedArrival, setSharedArrival] = useState<SharedArrival | null>(null);
+
+  // 2. 세컨브레인 Vault 전용 모바일 스포트라이트 상태
+  const [vaultDocs, setVaultDocs] = useState<VaultDocItem[]>([]);
+  const [vaultTotal, setVaultTotal] = useState(165);
+  const [vaultQuery, setVaultQuery] = useState('');
+  const [vaultCategory, setVaultCategory] = useState<string>('전체');
+  const [isVaultLoading, setIsVaultLoading] = useState(false);
+  const [selectedVaultDoc, setSelectedVaultDoc] = useState<VaultDocItem | null>(null);
+  const [isReadingFullDoc, setIsReadingFullDoc] = useState(false);
+  const [copiedDocId, setCopiedDocId] = useState<string | null>(null);
+
   const chatBottomRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const mediaStreamRef = useRef<MediaStream | null>(null);
   const mediaChunksRef = useRef<Blob[]>([]);
+
+  // 1-1. 스마트폰 공유 수신 처리 핸들러 (Web Share Target & Android Intent)
+  const handleIncomingShare = async (sharedRaw: string, sharedTitle?: string) => {
+    if (!sharedRaw) return;
+    setSharedArrival({
+      text: sharedRaw,
+      title: sharedTitle || '스마트폰 공유 콘텐츠',
+      status: 'processing',
+      message: '스마트폰에서 공유된 기사/링크를 감지하여 00_Inbox에 자동 스크랩 및 편철 중입니다...',
+    });
+
+    try {
+      const res = await fetch('/api/antigravity/vault', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: sharedRaw,
+          url: sharedRaw,
+          title: sharedTitle || '',
+        }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSharedArrival({
+          text: sharedRaw,
+          title: sharedTitle || '기사 자동 스크랩 완료',
+          status: 'success',
+          message: data.message || '기사가 성공적으로 스크랩되어 세컨브레인 00_Inbox에 영구 보관되었습니다.',
+          url: data.url,
+        });
+
+        // 챗 히스토리에 수신 보고 추가
+        const newMsg: ChatMessage = {
+          id: `share-${Date.now()}`,
+          role: 'assistant',
+          text: `📥 **[스마트폰 공유 기사 즉시 저장 완료]**\n\n${data.message || '공유해주신 기사 내용이 세컨브레인 Vault 00_Inbox에 성공적으로 스크랩 편철되었습니다.'}`,
+          timestamp: new Date().toISOString(),
+          tag: 'SMARTPHONE SHARE TARGET',
+          executedBy: 'Antigravity Share Engine',
+        };
+        setChatHistory((prev) => [...prev, newMsg]);
+        fetchVaultDocs(vaultQuery, vaultCategory);
+      } else {
+        setSharedArrival({
+          text: sharedRaw,
+          status: 'error',
+          message: data.error || '공유 처리 중 오류가 발생했습니다.',
+        });
+      }
+    } catch (e: any) {
+      setSharedArrival({
+        text: sharedRaw,
+        status: 'error',
+        message: e.message || '네트워크 통신 중 오류가 발생했습니다.',
+      });
+    }
+  };
+
+  // 2-1. 세컨브레인 문서 검색 및 로드 핸들러
+  const fetchVaultDocs = async (query = '', cat = '전체') => {
+    setIsVaultLoading(true);
+    try {
+      const params = new URLSearchParams();
+      if (query.trim()) params.set('q', query.trim());
+      if (cat && cat !== '전체') params.set('category', cat);
+      const res = await fetch(`/api/antigravity/vault?${params.toString()}`);
+      if (res.ok) {
+        const data = await res.json();
+        setVaultDocs(data.docs || []);
+        if (data.total) setVaultTotal(data.total);
+      }
+    } catch (e) {
+      console.error('Failed to fetch vault docs:', e);
+    } finally {
+      setIsVaultLoading(false);
+    }
+  };
+
+  // 2-2. 문서 상세 열기 (모바일 인스턴트 리더기)
+  const openDocReader = async (doc: VaultDocItem) => {
+    setSelectedVaultDoc(doc);
+    setIsReadingFullDoc(true);
+    try {
+      const res = await fetch(`/api/antigravity/vault?doc_id=${encodeURIComponent(doc.id)}`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.doc) {
+          setSelectedVaultDoc(data.doc);
+        }
+      }
+    } catch {}
+  };
+
+  // 2-3. 이 문서 관련 AI 비서에게 질문하기
+  const askAiAboutDoc = (doc: VaultDocItem) => {
+    setIsReadingFullDoc(false);
+    setActiveTab('chat');
+    setInputText(`[${doc.title}] 문서 내용 요약하고 앞으로의 사업 실행 전략 3가지 알려줘`);
+  };
 
   const encodeBlobToWav16k = async (blob: Blob): Promise<string | null> => {
     try {
@@ -277,6 +418,19 @@ export default function AntigravityMobilePage() {
         .catch(() => {});
     }
     fetchBridgeData();
+    fetchVaultDocs();
+
+    // 스마트폰 공유하기(Web Share Target & Android Intent) 파라미터 감지
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const shared = params.get('shared_text') || params.get('url') || params.get('text');
+      const title = params.get('shared_title') || params.get('title') || '';
+      if (shared) {
+        handleIncomingShare(shared, title);
+        window.history.replaceState({}, '', '/antigravity');
+      }
+    }
+
     const timer = setInterval(() => {
       fetchBridgeData(true);
     }, 8000);
@@ -588,6 +742,54 @@ export default function AntigravityMobilePage() {
         </div>
       </header>
 
+      {/* Smart Share Target Floating Arrival Banner */}
+      {sharedArrival && (
+        <div className="shrink-0 mx-3 mt-2 p-3 rounded-2xl bg-[#18202E] border border-[#E5BE64]/60 shadow-2xl flex flex-col gap-1.5 animate-fadeIn z-30">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              {sharedArrival.status === 'processing' ? (
+                <RefreshCw className="w-4 h-4 text-[#E5BE64] animate-spin shrink-0" />
+              ) : sharedArrival.status === 'success' ? (
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+              ) : (
+                <Terminal className="w-4 h-4 text-rose-400 shrink-0" />
+              )}
+              <span className="text-xs font-bold text-[#E5BE64]">
+                {sharedArrival.title || '스마트폰 공유 기사 수신'}
+              </span>
+            </div>
+            <button
+              onClick={() => setSharedArrival(null)}
+              className="text-slate-400 hover:text-slate-200 p-0.5"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+          <p className="text-[11px] text-slate-200 leading-relaxed break-all">
+            {sharedArrival.message}
+          </p>
+          {sharedArrival.status === 'success' && (
+            <div className="flex items-center gap-2 mt-1">
+              <button
+                onClick={() => {
+                  setActiveTab('vault');
+                  setVaultCategory('00_Inbox');
+                }}
+                className="text-[10px] font-bold px-2.5 py-1 rounded-lg bg-[#E5BE64] text-[#0B0F17] hover:bg-[#F3D382] transition cursor-pointer"
+              >
+                00_Inbox에서 확인하기
+              </button>
+              <button
+                onClick={() => setSharedArrival(null)}
+                className="text-[10px] text-slate-400 hover:text-slate-200 cursor-pointer"
+              >
+                닫기
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Main Content Area */}
       <main className="flex-1 overflow-y-auto px-3.5 py-3 space-y-3">
         {/* TAB 1: COMMAND CHAT */}
@@ -738,7 +940,157 @@ export default function AntigravityMobilePage() {
           </div>
         )}
 
-        {/* TAB 2: 11 EXECUTIVE ONE-TOUCH DECK */}
+        {/* TAB 2: SECOND BRAIN VAULT SPOTLIGHT & READER */}
+        {activeTab === 'vault' && (
+          <div className="space-y-3 pb-4">
+            {/* Top Search & Filter Card */}
+            <div className="p-3.5 rounded-2xl bg-gradient-to-br from-[#18202E] to-[#0F141C] border border-[#E5BE64]/30 space-y-2.5 shadow-md">
+              <div className="flex items-center justify-between">
+                <h2 className="text-sm font-bold text-[#E5BE64] flex items-center gap-1.5">
+                  <BookOpen className="w-4 h-4" />
+                  세컨브레인 Vault 스포트라이트
+                </h2>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#E5BE64]/20 text-[#E5BE64] border border-[#E5BE64]/30">
+                  {vaultTotal}개 전사 문서
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-300 leading-relaxed">
+                대표님의 회의록, 딥테크 M&amp;A, 어학 수업, 스크랩 기사를 0.05초 만에 검색하고 읽습니다.
+              </p>
+
+              {/* Instant Search Bar */}
+              <div className="relative">
+                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                <input
+                  type="text"
+                  value={vaultQuery}
+                  onChange={(e) => {
+                    setVaultQuery(e.target.value);
+                    fetchVaultDocs(e.target.value, vaultCategory);
+                  }}
+                  placeholder="단어 검색 (예: 샘컴, 일진전기, 중국어, 과외, NPU)"
+                  className="w-full pl-9 pr-8 py-2 rounded-xl bg-[#0B0F17] border border-slate-700/80 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#E5BE64]"
+                />
+                {vaultQuery && (
+                  <button
+                    onClick={() => {
+                      setVaultQuery('');
+                      fetchVaultDocs('', vaultCategory);
+                    }}
+                    className="absolute right-2.5 top-2.5 text-slate-400 hover:text-white"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+
+              {/* Category Filter Chips */}
+              <div className="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar pt-1">
+                {[
+                  { id: '전체', label: '전체' },
+                  { id: '00_Inbox', label: '📥 00_Inbox' },
+                  { id: '01_Projects', label: '💼 사업·M&A' },
+                  { id: '02_Areas', label: '🎓 과외·회화' },
+                  { id: '03_Resources', label: '🔬 논문·특허' },
+                  { id: '05_Daily_Notes', label: '📅 데일리' },
+                ].map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() => {
+                      setVaultCategory(cat.id);
+                      fetchVaultDocs(vaultQuery, cat.id);
+                    }}
+                    className={`shrink-0 px-2.5 py-1 rounded-lg text-[11px] font-semibold transition cursor-pointer ${
+                      vaultCategory === cat.id
+                        ? 'bg-[#E5BE64] text-[#0B0F17]'
+                        : 'bg-[#0B0F17] text-slate-400 hover:text-slate-200 border border-slate-800'
+                    }`}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Document Count Info Bar */}
+            <div className="flex items-center justify-between px-1 text-[11px] text-slate-400">
+              <span>
+                {vaultCategory === '전체' ? '전체 문서' : vaultCategory}: <b>{vaultDocs.length}</b>건 검색됨
+              </span>
+              <button
+                onClick={() => fetchVaultDocs(vaultQuery, vaultCategory)}
+                className="flex items-center gap-1 text-[10px] text-[#E5BE64] hover:underline cursor-pointer"
+              >
+                <RefreshCw className={`w-3 h-3 ${isVaultLoading ? 'animate-spin' : ''}`} />
+                새로고침
+              </button>
+            </div>
+
+            {/* Document Cards List */}
+            {isVaultLoading ? (
+              <div className="py-8 flex flex-col items-center justify-center text-slate-400 text-xs gap-2">
+                <RefreshCw className="w-5 h-5 animate-spin text-[#E5BE64]" />
+                <span>문서 인덱스를 검색하고 있습니다...</span>
+              </div>
+            ) : vaultDocs.length === 0 ? (
+              <div className="py-8 text-center text-slate-400 text-xs">
+                검색된 세컨브레인 문서가 없습니다.
+              </div>
+            ) : (
+              <div className="space-y-2">
+                {vaultDocs.map((doc) => {
+                  const getCategoryBadgeClass = (c: string) => {
+                    if (c.includes('Inbox')) return 'bg-amber-500/15 text-amber-300 border-amber-500/30';
+                    if (c.includes('Projects')) return 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30';
+                    if (c.includes('Areas')) return 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30';
+                    if (c.includes('Resources')) return 'bg-sky-500/15 text-sky-300 border-sky-500/30';
+                    return 'bg-slate-700/30 text-slate-300 border-slate-600/40';
+                  };
+
+                  return (
+                    <div
+                      key={doc.id}
+                      onClick={() => openDocReader(doc)}
+                      className="p-3.5 rounded-2xl bg-[#18202E]/90 hover:bg-[#1E293B] border border-slate-800 hover:border-[#E5BE64]/50 transition cursor-pointer space-y-2 group shadow-sm"
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="text-xs font-bold text-slate-100 group-hover:text-[#E5BE64] transition line-clamp-2 leading-snug">
+                          {doc.title}
+                        </h3>
+                        <span
+                          className={`text-[9px] font-bold px-1.5 py-0.5 rounded border shrink-0 ${getCategoryBadgeClass(
+                            doc.category
+                          )}`}
+                        >
+                          {doc.subCategory || doc.category}
+                        </span>
+                      </div>
+
+                      {doc.preview && (
+                        <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">
+                          {doc.preview}
+                        </p>
+                      )}
+
+                      <div className="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-slate-800/60">
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          {doc.date}
+                        </span>
+                        <div className="flex items-center gap-1 text-[#E5BE64] group-hover:translate-x-0.5 transition font-semibold">
+                          <span>열람하기</span>
+                          <ArrowRight className="w-3 h-3" />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* TAB 3: 11 EXECUTIVE ONE-TOUCH DECK */}
         {activeTab === 'deck' && (
           <div className="space-y-3.5 pb-4">
             <div className="p-3.5 rounded-2xl bg-gradient-to-br from-[#18202E] to-[#0F141C] border border-[#E5BE64]/30">
@@ -1043,48 +1395,145 @@ export default function AntigravityMobilePage() {
         </div>
       )}
 
-      {/* Bottom 4-Tab Native App Dock */}
-      <nav className="shrink-0 grid grid-cols-4 bg-[#0B0F17] border-t border-slate-800/90 py-1.5 px-2 z-20">
+      {/* Bottom 5-Tab Native App Dock */}
+      <nav className="shrink-0 grid grid-cols-5 bg-[#0B0F17] border-t border-slate-800/90 py-1.5 px-1.5 z-20">
         <button
           onClick={() => setActiveTab('chat')}
-          className={`flex flex-col items-center py-1 rounded-xl transition ${
+          className={`flex flex-col items-center py-1 rounded-xl transition cursor-pointer ${
             activeTab === 'chat' ? 'text-[#E5BE64]' : 'text-slate-400 hover:text-slate-200'
           }`}
         >
           <Sparkles className="w-4 h-4" />
-          <span className="text-[10px] font-semibold mt-1">대화·음성지시</span>
+          <span className="text-[10px] font-semibold mt-1">대화·지시</span>
+        </button>
+
+        <button
+          onClick={() => {
+            setActiveTab('vault');
+            fetchVaultDocs(vaultQuery, vaultCategory);
+          }}
+          className={`flex flex-col items-center py-1 rounded-xl transition cursor-pointer ${
+            activeTab === 'vault' ? 'text-[#E5BE64]' : 'text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          <BookOpen className="w-4 h-4" />
+          <span className="text-[10px] font-semibold mt-1">세컨브레인</span>
         </button>
 
         <button
           onClick={() => setActiveTab('deck')}
-          className={`flex flex-col items-center py-1 rounded-xl transition ${
+          className={`flex flex-col items-center py-1 rounded-xl transition cursor-pointer ${
             activeTab === 'deck' ? 'text-[#E5BE64]' : 'text-slate-400 hover:text-slate-200'
           }`}
         >
           <Zap className="w-4 h-4" />
-          <span className="text-[10px] font-semibold mt-1">원터치 사령탑</span>
+          <span className="text-[10px] font-semibold mt-1">원터치사령탑</span>
         </button>
 
         <button
           onClick={() => setActiveTab('bridge')}
-          className={`flex flex-col items-center py-1 rounded-xl transition ${
+          className={`flex flex-col items-center py-1 rounded-xl transition cursor-pointer ${
             activeTab === 'bridge' ? 'text-[#E5BE64]' : 'text-slate-400 hover:text-slate-200'
           }`}
         >
           <Cpu className="w-4 h-4" />
-          <span className="text-[10px] font-semibold mt-1">내 PC 브릿지</span>
+          <span className="text-[10px] font-semibold mt-1">내PC브릿지</span>
         </button>
 
         <button
           onClick={() => setActiveTab('apk')}
-          className={`flex flex-col items-center py-1 rounded-xl transition ${
+          className={`flex flex-col items-center py-1 rounded-xl transition cursor-pointer ${
             activeTab === 'apk' ? 'text-[#E5BE64]' : 'text-slate-400 hover:text-slate-200'
           }`}
         >
           <Smartphone className="w-4 h-4" />
-          <span className="text-[10px] font-semibold mt-1">메모·APK설치</span>
+          <span className="text-[10px] font-semibold mt-1">설정·APK</span>
         </button>
       </nav>
+
+      {/* Luxury Slide-Up Modal: Mobile Instant Document Reader */}
+      {isReadingFullDoc && selectedVaultDoc && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex flex-col justify-end animate-fadeIn">
+          <div className="bg-[#0F141C] border-t border-[#E5BE64]/40 rounded-t-3xl max-h-[88vh] flex flex-col shadow-2xl">
+            {/* Modal Header */}
+            <div className="p-4 border-b border-slate-800/80 flex items-center justify-between shrink-0">
+              <div className="flex items-center gap-2 overflow-hidden pr-2">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#E5BE64]/20 text-[#E5BE64] border border-[#E5BE64]/30 shrink-0">
+                  {selectedVaultDoc.category}
+                </span>
+                <h3 className="text-xs font-bold text-slate-100 truncate">
+                  {selectedVaultDoc.title}
+                </h3>
+              </div>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(selectedVaultDoc.content || selectedVaultDoc.preview || '');
+                    setCopiedDocId(selectedVaultDoc.id);
+                    setTimeout(() => setCopiedDocId(null), 2000);
+                  }}
+                  className="p-1.5 rounded-lg bg-[#18202E] text-slate-300 hover:text-white border border-slate-700 transition cursor-pointer"
+                  title="본문 복사"
+                >
+                  {copiedDocId === selectedVaultDoc.id ? (
+                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  ) : (
+                    <Copy className="w-3.5 h-3.5" />
+                  )}
+                </button>
+                <button
+                  onClick={() => {
+                    setIsReadingFullDoc(false);
+                    setSelectedVaultDoc(null);
+                  }}
+                  className="p-1.5 rounded-lg bg-[#18202E] text-slate-300 hover:text-white border border-slate-700 transition cursor-pointer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Body: Full Markdown Content */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-3 text-xs leading-relaxed text-slate-200">
+              <div className="flex items-center justify-between text-[11px] text-slate-400 pb-2 border-b border-slate-800">
+                <span className="flex items-center gap-1">
+                  <Clock className="w-3 h-3" />
+                  {selectedVaultDoc.date}
+                </span>
+                <span>분량: {selectedVaultDoc.length?.toLocaleString()}자</span>
+              </div>
+
+              {selectedVaultDoc.tags && selectedVaultDoc.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1 pb-1">
+                  {selectedVaultDoc.tags.map((t, idx) => (
+                    <span
+                      key={idx}
+                      className="text-[10px] px-2 py-0.5 rounded-md bg-[#18202E] text-[#E5BE64] border border-[#E5BE64]/20"
+                    >
+                      #{t}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              <div className="whitespace-pre-wrap font-sans text-slate-200 leading-relaxed space-y-2 pt-1 select-text">
+                {selectedVaultDoc.content || selectedVaultDoc.preview}
+              </div>
+            </div>
+
+            {/* Modal Footer: Action Button */}
+            <div className="p-3 bg-[#0B0F17] border-t border-slate-800 flex items-center gap-2 shrink-0">
+              <button
+                onClick={() => askAiAboutDoc(selectedVaultDoc)}
+                className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-[#E5BE64] to-[#C99C38] text-[#0B0F17] font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-[#E5BE64]/15 hover:opacity-95 transition cursor-pointer"
+              >
+                <Sparkles className="w-4 h-4" />
+                <span>이 문서 기반으로 AI에게 질문하기</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
