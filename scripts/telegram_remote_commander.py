@@ -57,7 +57,7 @@ from scripts.reddit_viral_agent import generate_reddit_draft, execute_reddit_pub
 from scripts.luxury_price_arbitrage_radar import scan_arbitrage_opportunities, TRACKED_DEALS
 from scripts.generate_daily_executive_briefing import generate_daily_note
 
-TELEGRAM_BOT_TOKEN = "8728900069:AAGQ1TiV7sPBXNwmfAs1GxxMnN0UTLgPZxs"
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8728900069:AAGQ1TiV7sPBXNwmfAs1GxxMnN0UTLgPZxs")
 TELEGRAM_CHAT_ID = "8971100274"
 BASE_URL = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
 PID_FILE = DATA_DIR / "telegram_commander.pid"
