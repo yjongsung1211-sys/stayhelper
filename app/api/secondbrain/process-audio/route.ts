@@ -80,7 +80,7 @@ ${bullets}
 
 ## Key Decisions
 
-- 녹취 및 전사된 핵심 내용을 단일 녹음 섹터로 정리하여 옵시디언(\`00_Inbox\`) 및 NoteHelper (노트헬퍼) 클라우드 허브에 보존한다.
+- 녹취 및 전사된 핵심 내용을 단일 녹음 섹터로 정리하여 옵시디언(\`00_Inbox\`) 및 세컨브레인 노트 (SecondBrain) 클라우드 허브에 보존한다.
 
 ## Action Items
 

@@ -1,32 +1,33 @@
 import type { Metadata } from 'next';
+import KernelPaletteMount from '@/components/secondbrain-kernel/KernelPaletteMount';
 
 export const metadata: Metadata = {
-  title: 'NoteHelper (노트헬퍼) · 스마트폰 회의록 정리 & AI 다국어 어학 공부 앱',
+  title: '세컨브레인 노트 · AI 보이스 메모 & 옵시디언 자동 동기화',
   description:
-    '별도 기기 없이 스마트폰 하나로 회의록 자동 요약·액션아이템 정리부터 전 세계 모든 외국어 회화 수업 1:1 문법 교정·복습까지 도와주는 AI 보이스 노트 앱',
+    '윤종성 대표 전용 AI 보이스 메모 허브 — 실시간 한국어 음성 녹음 · AI 핵심 요약 · 1:1 어학 코칭 · 옵시디언(00_Inbox) 24/7 자동 동기화',
   manifest: '/secondbrain-manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'NoteHelper',
+    title: '세컨브레인 노트',
   },
   icons: {
     icon: '/icon.svg',
   },
   openGraph: {
-    title: 'NoteHelper (노트헬퍼) — 스마트폰 회의록 정리 & AI 다국어 어학 공부 앱',
+    title: '세컨브레인 노트 — AI 보이스 메모 & 옵시디언 자동 동기화',
     description:
-      '별도 기기 없이 휴대폰 녹음만으로 회의록 핵심 정리 및 전 세계 모든 외국어 회화 공부를 도와주는 AI 노트 앱.',
+      '스마트폰·하드웨어 음성 녹음 즉시 한국어 전체 전사, AI 핵심 요약 및 옵시디언(00_Inbox) 24/7 자동 동기화.',
     url: 'https://secondbrain-note.vercel.app',
-    siteName: 'NoteHelper (노트헬퍼)',
+    siteName: '세컨브레인 노트',
     locale: 'ko_KR',
     type: 'website',
   },
   twitter: {
     card: 'summary',
-    title: 'NoteHelper (노트헬퍼) — 스마트폰 회의록 정리 & AI 다국어 어학 공부 앱',
+    title: '세컨브레인 노트 — AI 보이스 메모 & 옵시디언 자동 동기화',
     description:
-      '별도 기기 없이 휴대폰 녹음만으로 회의록 핵심 정리 및 전 세계 모든 외국어 회화 공부를 도와주는 AI 노트 앱.',
+      '스마트폰·하드웨어 음성 녹음 즉시 한국어 전체 전사, AI 핵심 요약 및 옵시디언(00_Inbox) 24/7 자동 동기화.',
   },
 };
 
@@ -35,5 +36,10 @@ export default function NoteHelperLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <KernelPaletteMount />
+    </>
+  );
 }

@@ -400,7 +400,29 @@ export default function SecondBrainPage() {
   };
 
   useEffect(() => {
-    document.title = 'NoteHelper (노트헬퍼) · 스마트폰 회의록 정리 & AI 외국어 공부 앱';
+    document.title = '세컨브레인 노트 (SecondBrain) · 윤종성 대표 전용 AI 보이스 메모 & 어학 코칭';
+    if (typeof window !== 'undefined') {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .getRegistrations()
+          .then((regs) => {
+            for (const reg of regs) {
+              reg.unregister().catch(() => {});
+            }
+          })
+          .catch(() => {});
+      }
+      if ('caches' in window) {
+        caches
+          .keys()
+          .then((keys) => {
+            for (const k of keys) {
+              caches.delete(k).catch(() => {});
+            }
+          })
+          .catch(() => {});
+      }
+    }
   }, []);
 
   useEffect(() => {

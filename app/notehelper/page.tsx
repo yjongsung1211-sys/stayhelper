@@ -770,6 +770,12 @@ export default function NoteHelperPage() {
           </div>
 
           <div className="flex items-center gap-1.5 shrink-0">
+            <Link
+              href="/secondbrain"
+              className="flex items-center gap-1.5 px-3 py-2 min-h-[36px] rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-extrabold transition whitespace-nowrap shrink-0 cursor-pointer shadow-sm"
+            >
+              <span>🧠 내 개인 세컨브레인 노트 열기</span>
+            </Link>
             {/* BYOK Cloud AI Connection Button */}
             <button
               onClick={() => setIsConfigOpen(true)}

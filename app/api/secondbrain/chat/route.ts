@@ -88,10 +88,10 @@ export async function POST(request: Request) {
         .join('\n\n---\n\n');
 
       const aiAnswer = await callCloudFrontierAi(
-        `아래 [검색된 NoteHelper (노트헬퍼) 기록]을 근거로 사용자님의 질문에 대해 핵심 수치, 날짜, 외국어 표현(어떤 언어든 원문+발음+해석 포함), 출처 노트를 명시하여 명확하고 정중하게 답변하세요.\n\n[질문]\n${rawQuery}\n\n[검색된 NoteHelper (노트헬퍼) 기록]\n${contextBlock}`,
+        `아래 [검색된 세컨브레인 노트 (SecondBrain) 기록]을 근거로 윤종성 대표님의 질문에 대해 핵심 수치, 날짜, 외국어 표현(어떤 언어든 원문+발음+해석 포함), 출처 노트를 명시하여 명확하고 정중하게 답변하세요.\n\n[질문]\n${rawQuery}\n\n[검색된 세컨브레인 노트 (SecondBrain) 기록]\n${contextBlock}`,
         {
           systemInstruction:
-            '당신은 사용자님의 전용 NoteHelper (노트헬퍼) 프론티어 AI 지식 비서입니다. 대표님의 회의록(AIDC 전력 M&A, 차세대 테크·딥테크 솔루션 딥테크), 5대 Helper 플랫폼, 전 세계 모든 외국어 회화 수업 및 보이스 메모를 기반으로 정확하게 답변합니다.',
+            '당신은 윤종성 대표님의 전용 세컨브레인 노트 (SecondBrain) 프론티어 AI 지식 비서입니다. 대표님의 회의록(AIDC 전력 M&A, 샘컴·퀀텀테크놀로지 딥테크), 5대 Helper 플랫폼, 전 세계 모든 외국어 회화 수업 및 보이스 메모를 기반으로 정확하게 답변합니다.',
           temperature: 0.15,
           maxTokens: 1100,
         }
@@ -170,7 +170,7 @@ export async function POST(request: Request) {
         ``,
         actionLines.slice(0, 8).join('\n\n'),
         ``,
-        `총 **${notes.length}개** NoteHelper (노트헬퍼) 메모리에서 추출된 실행 과제입니다.`,
+        `총 **${notes.length}개** 세컨브레인 노트 (SecondBrain) 메모리에서 추출된 실행 과제입니다.`,
       ].join('\n');
     } else {
       const blocks = targetNotes.map((n: any, idx: number) => {
