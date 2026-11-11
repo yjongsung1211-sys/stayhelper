@@ -320,7 +320,7 @@ export default function WeddingHelperPage() {
     <div className="min-h-screen bg-[#FFFDFC] text-[#1F181B] font-serif antialiased selection:bg-[#D4AF37]/20 relative overflow-hidden">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#1F181B] text-[#FAF8F5] px-5 py-3 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xl border border-[#D4AF37]/50 flex items-center gap-2 animate-bounce">
+        <div className="fixed bottom-6 right-6 z-50 bg-[#1F181B] text-[#FAF8F5] px-5 py-3 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xl border border-[#D4AF37]/50 flex items-center gap-2 transition-all duration-300">
           <Sparkles className="w-4 h-4 text-[#D4AF37]" />
           <span>{toastMessage}</span>
         </div>
@@ -381,7 +381,7 @@ export default function WeddingHelperPage() {
 
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-serif font-normal text-[#1F181B] tracking-tight leading-[1.15]">
           Your Dream Luxury Wedding in <br className="hidden sm:inline" />
-          <span className="font-extrabold bg-gradient-to-r from-[#1F181B] via-[#8C6D23] to-[#1F181B] bg-clip-text text-transparent italic">
+          <span className="font-serif font-bold text-[#8C6D23] italic">
             240 Haute Couture Masterpieces.
           </span>
         </h1>
