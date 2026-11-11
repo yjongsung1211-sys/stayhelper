@@ -338,10 +338,10 @@ def build_apk():
     sh_java_txt = sh_java_txt.replace("package com.yoonjongsung.antigravity;", "package com.yoonjongsung.schedulehelper;")
     sh_java_txt = sh_java_txt.replace(
         "https://secondbrain-note.vercel.app/antigravity",
-        "https://secondbrain-note.vercel.app/schedulehelper",
+        "https://thestayhelper.vercel.app/schedulehelper",
     ).replace(
         "https://thestayhelper.vercel.app/antigravity",
-        "https://secondbrain-note.vercel.app/schedulehelper",
+        "https://thestayhelper.vercel.app/schedulehelper",
     ).replace(
         "#0B0F17",
         "#FAFBFD",

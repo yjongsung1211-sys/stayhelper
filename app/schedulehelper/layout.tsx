@@ -27,6 +27,20 @@ export const metadata: Metadata = {
 export default function ScheduleHelperLayout({ children }: { children: React.ReactNode }) {
     return (
         <div className="min-h-screen bg-[#FAFBFD] text-slate-800 font-sans antialiased selection:bg-indigo-500 selection:text-white">
+            <style
+                dangerouslySetInnerHTML={{
+                    __html: `
+                        nextjs-portal,
+                        [data-nextjs-toast],
+                        [data-nextjs-dialog-overlay] {
+                            display: none !important;
+                            visibility: hidden !important;
+                            opacity: 0 !important;
+                            pointer-events: none !important;
+                        }
+                    `,
+                }}
+            />
             {children}
         </div>
     );

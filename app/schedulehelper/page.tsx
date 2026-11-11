@@ -591,7 +591,18 @@ export default function ScheduleHelperPage() {
             setDeferredPwaPrompt(e);
         };
         window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-        return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+        const removeNextJsDevOverlay = () => {
+            document.querySelectorAll('nextjs-portal').forEach((el) => el.remove());
+        };
+        removeNextJsDevOverlay();
+        const observer = new MutationObserver(removeNextJsDevOverlay);
+        observer.observe(document.documentElement, { childList: true, subtree: true });
+
+        return () => {
+            window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+            observer.disconnect();
+        };
     }, []);
 
     const handleInstallPwaApp = async () => {
@@ -1912,20 +1923,24 @@ export default function ScheduleHelperPage() {
                                 </button>
                             </div>
 
-                            {/* 3. 스마트폰 QR 스캔 */}
+                            {/* 3. 스마트폰 QR 스캔 (LTE/5G 클라우드 & Wi-Fi 즉시 연결) */}
                             <div className="rounded-2xl border border-slate-200/80 bg-[#F8FAFC] p-4 flex items-center gap-4">
                                 <img
-                                    src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://secondbrain-note.vercel.app/schedulehelper"
+                                    src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://thestayhelper.vercel.app/schedulehelper"
                                     alt="ScheduleHelper 모바일 앱 QR"
-                                    className="w-20 h-20 rounded-xl border border-slate-200 bg-white p-1.5 shrink-0"
+                                    className="w-24 h-24 rounded-xl border border-slate-200 bg-white p-1.5 shrink-0"
                                 />
-                                <div className="space-y-1 text-xs text-slate-600">
+                                <div className="space-y-1.5 text-xs text-slate-600 min-w-0">
                                     <div className="font-bold text-slate-900 text-sm">
-                                        📱 스마트폰 카메라로 QR 스캔
+                                        📱 스마트폰 카메라로 QR 스캔 (LTE / 5G / Wi-Fi)
                                     </div>
                                     <p className="leading-relaxed">
-                                        휴대폰 카메라로 스캔하면 모바일 ScheduleHelper로 바로 접속하여 APK 설치 또는 홈 화면에 추가할 수 있습니다.
+                                        카메라로 스캔하면 휴대폰에서 <strong>ScheduleHelper</strong>가 바로 열리며, APK 설치 또는 홈 화면에 추가할 수 있습니다.
                                     </p>
+                                    <div className="pt-1 space-y-0.5 text-[11px] text-slate-500 font-mono truncate">
+                                        <div>• 외부/LTE 주소: https://thestayhelper.vercel.app/schedulehelper</div>
+                                        <div>• 내부 Wi-Fi 주소: http://192.168.1.13:3000/schedulehelper</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
