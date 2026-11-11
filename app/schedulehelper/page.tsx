@@ -866,13 +866,13 @@ export default function ScheduleHelperPage() {
     const completedTodos = useMemo(() => todos.filter((t) => t.done), [todos]);
 
     return (
-        <div className="min-h-screen bg-[#FAFBFD] text-slate-800 font-sans antialiased flex">
+        <div className="min-h-screen bg-[#FAFBFD] text-slate-800 font-sans antialiased flex pb-20 lg:pb-8">
             {/* ===================================================================== */}
-            {/* 좌측 사이드바 (눈부시게 깨끗한 화이트 & 소프트 파스텔 포인트) */}
+            {/* 좌측 사이드바 (PC 전용 · 눈부시게 깨끗한 화이트 & 소프트 파스텔) */}
             {/* ===================================================================== */}
             <aside
                 className={`${
-                    sidebarOpen ? 'w-80' : 'w-0 overflow-hidden'
+                    sidebarOpen ? 'w-72' : 'w-0 overflow-hidden'
                 } hidden lg:flex shrink-0 bg-white border-r border-slate-100 flex-col justify-between transition-all duration-200 select-none shadow-[2px_0_16px_rgba(15,23,42,0.02)]`}
             >
                 <div className="p-4 flex flex-col gap-3.5 flex-1 min-h-0">
@@ -895,10 +895,10 @@ export default function ScheduleHelperPage() {
                         </button>
                     </div>
 
-                    {/* + 새 일정 등록 버튼 (무거운 검정 대신 화사한 인디고 블루) */}
+                    {/* + 새 일정 등록 버튼 */}
                     <button
                         onClick={() => setShowQuickAddModal(true)}
-                        className="w-full py-2.5 px-4 bg-[#4F46E5] hover:bg-[#4338CA] text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-colors shadow-[0_4px_12px_rgba(79,70,229,0.22)] cursor-pointer"
+                        className="w-full py-2.5 px-4 bg-[#4F46E5] hover:bg-[#4338CA] text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-colors shadow-[0_4px_12px_rgba(79,70,229,0.22)] cursor-pointer whitespace-nowrap"
                     >
                         <Plus className="w-4 h-4" />
                         <span>새 일정 직접 등록</span>
@@ -914,31 +914,6 @@ export default function ScheduleHelperPage() {
                             placeholder="일정, 선생님, 요일 검색..."
                             className="w-full pl-9 pr-3 py-2 rounded-xl bg-[#F8FAFC] border border-slate-200/80 text-xs font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#6366F1]"
                         />
-                    </div>
-
-                    {/* 4단 분류 필터 */}
-                    <div className="grid grid-cols-4 gap-1 bg-[#F4F6FB] p-1 rounded-xl">
-                        {(
-                            [
-                                { key: 'ALL', label: `전체(${events.length})` },
-                                { key: 'routine', label: '루틴' },
-                                { key: 'tutoring', label: '과외' },
-                                { key: 'meeting', label: '미팅' },
-                            ] as const
-                        ).map((f) => (
-                            <button
-                                key={f.key}
-                                type="button"
-                                onClick={() => setCategoryFilter(f.key)}
-                                className={`py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
-                                    categoryFilter === f.key
-                                        ? 'bg-white text-[#4F46E5] shadow-sm'
-                                        : 'text-slate-500 hover:text-slate-800'
-                                }`}
-                            >
-                                {f.label}
-                            </button>
-                        ))}
                     </div>
 
                     {/* 요일별 빠른 선택 리스트 */}
@@ -994,9 +969,9 @@ export default function ScheduleHelperPage() {
                                         {dayList.length === 0 ? (
                                             <div className="text-xs text-slate-400">일정 없음</div>
                                         ) : (
-                                            <div className="space-y-0.5">
+                                            <div className="space-y-1">
                                                 {dayList.map((ev) => (
-                                                    <div key={ev.id} className="text-xs truncate text-slate-600">
+                                                    <div key={ev.id} className="text-xs text-slate-600 leading-snug break-keep">
                                                         <strong className="mr-1 text-[#4338CA]">
                                                             {ev.time.split(' ')[0]}
                                                         </strong>
@@ -1022,107 +997,112 @@ export default function ScheduleHelperPage() {
                 </div>
 
                 {/* 하단 이메일 상태 바 */}
-                <div className="p-3.5 border-t border-slate-100 bg-[#FAFBFD] flex flex-col gap-2">
-                    <div className="flex items-center justify-between text-xs">
-                        <div className="flex items-center gap-2 font-semibold text-slate-700">
-                            <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                            <span>지메일 {connectedEmails.length}개 계정 연동됨</span>
-                        </div>
-                        <button
-                            onClick={() => setShowEmailModal(true)}
-                            className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 hover:border-[#6366F1] text-slate-700 text-[11px] font-semibold cursor-pointer"
-                        >
-                            관리
-                        </button>
+                <div className="p-3.5 border-t border-slate-100 bg-[#FAFBFD] flex items-center justify-between text-xs">
+                    <div className="flex items-center gap-2 font-semibold text-slate-700">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                        <span>이메일 {connectedEmails.length}개 연동됨</span>
                     </div>
+                    <button
+                        onClick={() => setShowEmailModal(true)}
+                        className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 hover:border-[#6366F1] text-slate-700 text-[11px] font-semibold cursor-pointer"
+                    >
+                        관리
+                    </button>
                 </div>
             </aside>
 
             {/* ===================================================================== */}
-            {/* 우측 메인 워크스페이스 (눈부시게 밝은 아이보리-화이트 캔버스) */}
+            {/* 우측 메인 워크스페이스 (모바일 & PC 모두 짤림 없는 깔끔한 레이아웃) */}
             {/* ===================================================================== */}
             <div className="flex-1 flex flex-col min-w-0 bg-[#FAFBFD]">
-                {/* 상단 헤더 */}
-                <header className="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-slate-100 px-4 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                        {!sidebarOpen && (
-                            <button
-                                onClick={() => setSidebarOpen(true)}
-                                className="hidden lg:inline-flex p-2 rounded-lg hover:bg-slate-50 text-slate-700 cursor-pointer"
-                                title="사이드바 열기"
-                            >
-                                <PanelLeft className="w-4 h-4" />
-                            </button>
-                        )}
+                {/* 상단 헤더: 불필요한 버튼 제거 + 한 줄 고정(whitespace-nowrap) */}
+                <header className="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-slate-100 px-3.5 sm:px-6 py-2.5">
+                    <div className="max-w-3xl mx-auto flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2 min-w-0">
+                            {!sidebarOpen && (
+                                <button
+                                    onClick={() => setSidebarOpen(true)}
+                                    className="hidden lg:inline-flex p-1.5 rounded-lg hover:bg-slate-50 text-slate-700 cursor-pointer shrink-0"
+                                    title="사이드바 열기"
+                                >
+                                    <PanelLeft className="w-4 h-4" />
+                                </button>
+                            )}
+                            <div className="w-7 h-7 rounded-lg bg-[#EEF2FF] flex items-center justify-center shrink-0">
+                                <Calendar className="w-4 h-4 text-[#4F46E5]" />
+                            </div>
+                            <div className="min-w-0">
+                                <div className="font-extrabold text-sm sm:text-base text-slate-900 leading-tight whitespace-nowrap">
+                                    스케줄헬퍼
+                                </div>
+                                <div className="text-[11px] text-slate-400 font-medium whitespace-nowrap">
+                                    {DAYS_INFO[0]?.dateStr}(월) ~ {DAYS_INFO[6]?.dateStr}(일)
+                                </div>
+                            </div>
+                        </div>
 
-                        <div className="flex items-center gap-1 bg-[#F4F6FB] p-1 rounded-xl">
-                            {(
-                                [
-                                    { key: 'schedule', label: '이번 주 일과표' },
-                                    { key: 'todos', label: `해야 할 일 (${pendingTodos.length})` },
-                                    { key: 'extractor', label: '카톡 · 위챗 · 메일 추출' },
-                                ] as const
-                            ).map((tab) => {
-                                const active = mainTab === tab.key;
-                                return (
-                                    <button
-                                        key={tab.key}
-                                        type="button"
-                                        onClick={() => setMainTab(tab.key)}
-                                        className={`px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-colors cursor-pointer ${
-                                            active
-                                                ? 'bg-white text-[#4F46E5] shadow-sm'
-                                                : 'text-slate-500 hover:text-slate-800'
-                                        }`}
-                                    >
-                                        {tab.label}
-                                    </button>
-                                );
-                            })}
+                        <div className="flex items-center gap-1.5 shrink-0">
+                            <button
+                                onClick={() => setShowQuickAddModal(true)}
+                                className="px-3 py-1.5 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-bold flex items-center gap-1 shadow-sm cursor-pointer whitespace-nowrap"
+                            >
+                                <Plus className="w-3.5 h-3.5" />
+                                <span>일정 추가</span>
+                            </button>
+                            <button
+                                onClick={() => setShowEmailModal(true)}
+                                className="px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#F8FAFC] border border-slate-200/80 text-slate-700 text-xs font-bold flex items-center gap-1 cursor-pointer whitespace-nowrap"
+                            >
+                                <Mail className="w-3.5 h-3.5 text-[#4F46E5]" />
+                                <span>메일({connectedEmails.length})</span>
+                            </button>
+                            <button
+                                onClick={() => setShowAppModal(true)}
+                                className="hidden sm:inline-flex px-2.5 py-1.5 rounded-xl bg-[#EEF2FF] hover:bg-[#E0E7FF] text-[#4338CA] text-xs font-bold items-center gap-1 cursor-pointer whitespace-nowrap"
+                            >
+                                <Smartphone className="w-3.5 h-3.5" />
+                                <span>앱 설치</span>
+                            </button>
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-2">
-                        <button
-                            onClick={() => setShowAppModal(true)}
-                            className="px-3.5 py-2 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-bold flex items-center gap-1.5 shadow-sm cursor-pointer"
-                        >
-                            <Smartphone className="w-3.5 h-3.5" />
-                            <span>앱 설치 · APK</span>
-                        </button>
-                        <button
-                            onClick={() => setShowEmailModal(true)}
-                            className="px-3.5 py-2 rounded-xl bg-white hover:bg-[#F8FAFC] border border-slate-200/80 text-slate-700 text-xs font-bold flex items-center gap-1.5 cursor-pointer"
-                        >
-                            <Mail className="w-3.5 h-3.5 text-[#4F46E5]" />
-                            <span>이메일 ({connectedEmails.length})</span>
-                        </button>
-                        <button
-                            onClick={() => setShowBridgeModal(true)}
-                            className="px-3.5 py-2 rounded-xl bg-white hover:bg-[#F8FAFC] border border-slate-200/80 text-xs font-semibold text-slate-600 flex items-center gap-1.5 cursor-pointer"
-                        >
-                            <Link2 className="w-3.5 h-3.5 text-slate-400" />
-                            <span>{noteHelperLinked ? 'NoteHelper 연동 ON' : 'NoteHelper 분리됨'}</span>
-                        </button>
-                        <Link
-                            href="/notehelper"
-                            className="px-3.5 py-2 rounded-xl bg-[#EEF2FF] hover:bg-[#E0E7FF] text-[#4338CA] border border-[#C7D2FE] text-xs font-bold flex items-center gap-1.5"
-                        >
-                            <span>NoteHelper</span>
-                            <ExternalLink className="w-3 h-3" />
-                        </Link>
+                    {/* 상단 3단 탭 스위치 (모바일에서도 줄바꿈 없이 깔끔하게 1줄 고정) */}
+                    <div className="max-w-3xl mx-auto mt-2.5 grid grid-cols-3 gap-1 bg-[#F4F6FB] p-1 rounded-xl">
+                        {(
+                            [
+                                { key: 'schedule', label: `주간 일정 (${events.length})` },
+                                { key: 'todos', label: `할 일 (${pendingTodos.length})` },
+                                { key: 'extractor', label: '카톡·메일 등록' },
+                            ] as const
+                        ).map((tab) => {
+                            const active = mainTab === tab.key;
+                            return (
+                                <button
+                                    key={tab.key}
+                                    type="button"
+                                    onClick={() => setMainTab(tab.key)}
+                                    className={`py-2 px-2 rounded-lg text-xs sm:text-sm font-bold transition-colors cursor-pointer whitespace-nowrap text-center ${
+                                        active
+                                            ? 'bg-white text-[#4F46E5] shadow-sm'
+                                            : 'text-slate-500 hover:text-slate-800'
+                                    }`}
+                                >
+                                    {tab.label}
+                                </button>
+                            );
+                        })}
                     </div>
                 </header>
 
                 {/* 본문 컨테이너 */}
-                <main className="max-w-4xl w-full mx-auto px-4 lg:px-8 py-8 flex flex-col gap-6">
+                <main className="max-w-3xl w-full mx-auto px-3.5 sm:px-6 py-4 sm:py-6 flex flex-col gap-4">
                     {/* 상태 알림 배너 */}
                     {statusBanner && (
-                        <div className="px-4 py-3 rounded-xl bg-[#EEF2FF] border border-[#C7D2FE] text-[#3730A3] flex items-center justify-between text-sm font-semibold shadow-sm">
+                        <div className="px-4 py-2.5 rounded-xl bg-[#EEF2FF] border border-[#C7D2FE] text-[#3730A3] flex items-center justify-between text-xs sm:text-sm font-semibold shadow-sm">
                             <span>{statusBanner}</span>
                             <button
                                 onClick={() => setStatusBanner('')}
-                                className="text-xs underline opacity-80 hover:opacity-100 cursor-pointer"
+                                className="text-xs underline opacity-80 hover:opacity-100 cursor-pointer ml-2 shrink-0"
                             >
                                 닫기
                             </button>
@@ -1130,267 +1110,193 @@ export default function ScheduleHelperPage() {
                     )}
 
                     {/* =============================================================== */}
-                    {/* 탭 1: 이번 주 일과표 (화사한 퓨어 화이트 & 소프트 파스텔 톤) */}
+                    {/* 탭 1: 주간 일정 (중복 요약 박스 제거 · 글자 짤림 0% · 한눈에 보기) */}
                     {/* =============================================================== */}
                     {mainTab === 'schedule' && (
                         <>
-                            {/* 상단 요약 헤더 카드 */}
-                            <section className="rounded-2xl border border-slate-100 bg-white p-6 lg:p-7 shadow-[0_4px_24px_rgba(15,23,42,0.03)] flex flex-col gap-5">
-                                <div className="flex flex-wrap items-start justify-between gap-4 pb-5 border-b border-slate-100">
-                                    <div className="space-y-1">
-                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-500">
-                                            <span className="px-2.5 py-0.5 rounded-full bg-[#EEF2FF] text-[#4F46E5] font-bold">
-                                                WEEKLY OVERVIEW
-                                            </span>
-                                            <span>
-                                                {DAYS_INFO[0]?.fullLabel} ~ {DAYS_INFO[6]?.fullLabel}
-                                            </span>
-                                        </div>
-                                        <h1 className="text-2xl font-bold text-slate-900 tracking-tight pt-0.5">
-                                            이번 주 주요 일정 및 스마트 플래너
-                                        </h1>
-                                    </div>
-
-                                    <div className="flex items-center gap-2">
-                                        <button
-                                            onClick={() => exportEventsToICS(events)}
-                                            className="px-3.5 py-2 rounded-xl bg-white hover:bg-[#F8FAFC] border border-slate-200/80 text-slate-700 text-xs font-bold flex items-center gap-1.5 cursor-pointer shadow-sm"
-                                            title="구글 캘린더 / 애플 캘린더용 .ics 파일 다운로드"
-                                        >
-                                            <Download className="w-3.5 h-3.5 text-[#4F46E5]" />
-                                            <span>캘린더 내보내기 (.ics)</span>
-                                        </button>
-                                        <button
-                                            onClick={() => setShowQuickAddModal(true)}
-                                            className="px-3.5 py-2 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-bold flex items-center gap-1.5 shadow-sm cursor-pointer"
-                                        >
-                                            <Plus className="w-3.5 h-3.5" />
-                                            <span>일정 추가</span>
-                                        </button>
-                                        <button
-                                            onClick={() => setMainTab('extractor')}
-                                            className="px-3.5 py-2 rounded-xl bg-[#F8FAFC] hover:bg-[#EEF2FF] border border-slate-200/80 text-slate-700 text-xs font-bold cursor-pointer"
-                                        >
-                                            + 카톡·메일 붙여넣기
-                                        </button>
-                                    </div>
+                            {/* 요일 선택 버튼 바 (전체 / 월 / 화 / 수 / 목 / 금 / 토 / 일 한 줄 배치) */}
+                            <section className="rounded-2xl border border-slate-100 bg-white p-3 sm:p-4 shadow-[0_2px_12px_rgba(15,23,42,0.02)] space-y-2.5">
+                                <div className="grid grid-cols-8 gap-1">
+                                    <button
+                                        type="button"
+                                        onClick={() => setSelectedDay('ALL')}
+                                        className={`py-2 rounded-xl text-xs font-extrabold transition cursor-pointer whitespace-nowrap flex flex-col items-center justify-center ${
+                                            selectedDay === 'ALL'
+                                                ? 'bg-[#4F46E5] text-white shadow-sm'
+                                                : 'bg-[#F8FAFC] text-slate-600 hover:bg-[#EEF2FF]'
+                                        }`}
+                                    >
+                                        <span>전체</span>
+                                        <span className="text-[10px] opacity-80 font-semibold">{filteredEvents.length}건</span>
+                                    </button>
+                                    {DAYS_INFO.map(({ key: d, isToday }) => {
+                                        const active = selectedDay === d;
+                                        const count = (eventsByDay[d] || []).length;
+                                        return (
+                                            <button
+                                                key={d}
+                                                type="button"
+                                                onClick={() => setSelectedDay(d)}
+                                                className={`py-2 rounded-xl text-xs font-extrabold transition cursor-pointer whitespace-nowrap flex flex-col items-center justify-center relative ${
+                                                    active
+                                                        ? 'bg-[#4F46E5] text-white shadow-sm'
+                                                        : isToday
+                                                          ? 'bg-[#EEF2FF] text-[#4F46E5] border border-[#C7D2FE]'
+                                                          : 'bg-[#F8FAFC] text-slate-700 hover:bg-slate-100'
+                                                }`}
+                                            >
+                                                <span>{d}</span>
+                                                <span
+                                                    className={`text-[10px] font-semibold ${
+                                                        active ? 'text-white/90' : count > 0 ? 'text-[#4F46E5]' : 'text-slate-400'
+                                                    }`}
+                                                >
+                                                    {isToday ? '오늘' : `${count}건`}
+                                                </span>
+                                            </button>
+                                        );
+                                    })}
                                 </div>
 
-                                {/* 오늘 & 예정 화사한 파스텔 요약 */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {/* 오늘 카드: 맑고 화사한 스카이-인디고 파스텔 */}
-                                    {(() => {
-                                        const todayItem = DAYS_INFO.find((d) => d.isToday) || DAYS_INFO[1];
-                                        const todayList = eventsByDay[todayItem.key] || [];
-                                        return (
-                                            <div className="rounded-2xl bg-gradient-to-br from-[#F5F8FF] via-white to-[#F0FDF9] border border-[#DCE7FE] p-4">
-                                                <div className="flex items-center justify-between mb-3">
-                                                    <span className="px-2.5 py-0.5 rounded-full bg-[#4F46E5] text-white text-xs font-bold">
-                                                        오늘 · {todayItem.fullLabel}
-                                                    </span>
-                                                    <span className="text-xs font-bold text-[#4F46E5]">
-                                                        {todayList.length}건
-                                                    </span>
-                                                </div>
-                                                {todayList.length === 0 ? (
-                                                    <div className="text-xs text-slate-400 py-2">
-                                                        오늘 등록된 일정이 없습니다.
-                                                    </div>
-                                                ) : (
-                                                    <ul className="space-y-2">
-                                                        {todayList.map((ev) => (
-                                                            <li
-                                                                key={ev.id}
-                                                                className="flex items-center gap-2.5 text-[13.5px] text-slate-800 bg-white border border-[#E0E7FF] rounded-xl px-3 py-2 shadow-[0_1px_4px_rgba(79,70,229,0.04)]"
-                                                            >
-                                                                <span className="font-extrabold tabular-nums text-xs px-2 py-0.5 rounded-md bg-[#EEF2FF] text-[#4338CA] shrink-0">
-                                                                    {ev.time}
-                                                                </span>
-                                                                <span className="truncate font-semibold">{ev.title}</span>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                )}
-                                            </div>
-                                        );
-                                    })()}
-
-                                    {/* 다가오는 일정 카드: 따스하고 화사한 피치-아이보리 파스텔 */}
-                                    {(() => {
-                                        const todayItem = DAYS_INFO.find((d) => d.isToday) || DAYS_INFO[1];
-                                        const upcomingDays = DAYS_INFO.filter((d) => d.key !== todayItem.key).slice(0, 3);
-                                        const upcomingEvents = upcomingDays.flatMap((d) => eventsByDay[d.key] || []);
-                                        return (
-                                            <div className="rounded-2xl bg-gradient-to-br from-[#FFFDF7] via-white to-[#FFF7ED] border border-[#FDE68A]/80 p-4">
-                                                <div className="flex items-center justify-between mb-3">
-                                                    <span className="px-2.5 py-0.5 rounded-full bg-[#FEF3C7] text-[#B45309] border border-[#FDE68A] text-xs font-bold">
-                                                        다가오는 일정 ({upcomingDays[0]?.key}~{upcomingDays[upcomingDays.length - 1]?.key}요일)
-                                                    </span>
-                                                    <span className="text-xs font-bold text-amber-600">
-                                                        {upcomingEvents.length}건
-                                                    </span>
-                                                </div>
-                                                {upcomingEvents.length === 0 ? (
-                                                    <div className="text-xs text-slate-400 py-2">
-                                                        다가오는 일정이 없습니다.
-                                                    </div>
-                                                ) : (
-                                                    <ul className="space-y-2">
-                                                        {upcomingEvents.slice(0, 4).map((ev) => (
-                                                            <li
-                                                                key={ev.id}
-                                                                className="flex items-center gap-2 text-[13.5px] text-slate-800 bg-white border border-[#FDE68A]/70 rounded-xl px-3 py-2 shadow-[0_1px_4px_rgba(245,158,11,0.04)]"
-                                                            >
-                                                                <span className="px-1.5 py-0.5 rounded bg-[#FEF3C7] text-[#B45309] text-[11px] font-bold shrink-0">
-                                                                    {ev.day}
-                                                                </span>
-                                                                <span className="font-bold tabular-nums text-xs text-slate-600 shrink-0">
-                                                                    {ev.time}
-                                                                </span>
-                                                                <span className="truncate font-semibold text-slate-800">
-                                                                    {ev.title}
-                                                                </span>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                )}
-                                            </div>
-                                        );
-                                    })()}
+                                {/* 카테고리 필터 (전체 / 과외·수업 / 운동·루틴 / 미팅·약속) */}
+                                <div className="grid grid-cols-4 gap-1.5 pt-0.5">
+                                    {(
+                                        [
+                                            { key: 'ALL', label: '전체 일정' },
+                                            { key: 'tutoring', label: '과외·수업' },
+                                            { key: 'routine', label: '운동·루틴' },
+                                            { key: 'meeting', label: '미팅·약속' },
+                                        ] as const
+                                    ).map((f) => (
+                                        <button
+                                            key={f.key}
+                                            type="button"
+                                            onClick={() => setCategoryFilter(f.key)}
+                                            className={`py-1.5 rounded-lg text-[11px] sm:text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                                                categoryFilter === f.key
+                                                    ? 'bg-[#EEF2FF] text-[#4338CA] border border-[#C7D2FE]'
+                                                    : 'bg-white text-slate-500 border border-slate-100 hover:bg-slate-50'
+                                            }`}
+                                        >
+                                            {f.label}
+                                        </button>
+                                    ))}
                                 </div>
                             </section>
 
-                            {/* 요일별 상세 타임라인 */}
-                            <section className="rounded-2xl border border-slate-100 bg-white p-6 lg:p-7 shadow-[0_4px_24px_rgba(15,23,42,0.03)] space-y-5">
-                                <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-100">
-                                    <div className="flex items-center gap-3">
-                                        <h2 className="text-lg font-bold text-slate-900">
-                                            {selectedDay === 'ALL'
-                                                ? '요일별 일과표 (월요일 ~ 일요일)'
-                                                : `${selectedDay}요일 일과표`}
-                                        </h2>
-                                        <div className="hidden sm:flex items-center gap-2 text-xs font-semibold text-slate-600">
-                                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#F5F8FF] border border-[#DCE7FE] text-[#4338CA]">
-                                                <span className="w-2 h-2 rounded-full bg-[#4F46E5]" /> 어학 과외
-                                            </span>
-                                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#F0FDF9] border border-[#CCFBF1] text-[#0F766E]">
-                                                <span className="w-2 h-2 rounded-full bg-[#14B8A6]" /> 고정 루틴
-                                            </span>
-                                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FFFBEB] border border-[#FDE68A] text-[#B45309]">
-                                                <span className="w-2 h-2 rounded-full bg-[#F59E0B]" /> 미팅·약속
-                                            </span>
-                                        </div>
-                                    </div>
-                                    {selectedDay !== 'ALL' && (
-                                        <button
-                                            onClick={() => setSelectedDay('ALL')}
-                                            className="text-xs font-bold text-[#4F46E5] underline cursor-pointer"
-                                        >
-                                            전체 요일 보기
-                                        </button>
-                                    )}
-                                </div>
-
-                                <div className="space-y-4">
-                                    {DAYS_INFO.filter((d) => selectedDay === 'ALL' || selectedDay === d.key).map(
-                                        ({ key: day, fullLabel, isToday }) => {
-                                            const dayEvents = eventsByDay[day] || [];
+                            {/* 요일별 일정 카드 리스트 (제목 짤림 0% · 전체 내용 표시) */}
+                            <section className="space-y-3">
+                                {DAYS_INFO.filter((d) => selectedDay === 'ALL' || selectedDay === d.key).map(
+                                    ({ key: day, fullLabel, isToday }) => {
+                                        const dayEvents = eventsByDay[day] || [];
+                                        if (selectedDay === 'ALL' && dayEvents.length === 0) {
                                             return (
                                                 <div
                                                     key={day}
-                                                    className={`rounded-2xl border p-4 transition ${
-                                                        isToday
-                                                            ? 'border-[#C7D2FE] bg-[#FCFDFF] shadow-[0_2px_12px_rgba(79,70,229,0.05)]'
-                                                            : 'border-slate-100 bg-white'
-                                                    }`}
+                                                    className="rounded-xl border border-slate-100 bg-white/80 px-4 py-2.5 flex items-center justify-between text-xs text-slate-400"
                                                 >
-                                                    <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
-                                                        <div className="flex items-center gap-2">
-                                                            <span className="text-base font-extrabold text-slate-900">
-                                                                {fullLabel}
-                                                            </span>
-                                                            {isToday && (
-                                                                <span className="px-2 py-0.5 rounded-full bg-[#4F46E5] text-white text-xs font-bold">
-                                                                    오늘
-                                                                </span>
-                                                            )}
-                                                        </div>
-                                                        <span className="px-2.5 py-0.5 rounded-full bg-[#F4F6FB] text-slate-600 text-xs font-bold">
-                                                            {dayEvents.length}건
-                                                        </span>
-                                                    </div>
-
-                                                    {dayEvents.length === 0 ? (
-                                                        <div className="text-sm text-slate-400 py-1.5">
-                                                            등록된 일정이 없습니다.
-                                                        </div>
-                                                    ) : (
-                                                        <div className="space-y-2.5">
-                                                            {dayEvents.map((ev) => {
-                                                                const tone = CATEGORY_TONE[ev.category];
-                                                                return (
-                                                                    <div
-                                                                        key={ev.id}
-                                                                        className={`rounded-xl border ${tone.cardBg} ${tone.leftBar} px-4 py-3 flex flex-wrap items-center justify-between gap-3 transition group`}
-                                                                    >
-                                                                        <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-4 min-w-0 flex-1">
-                                                                            <div
-                                                                                className={`inline-flex items-center gap-1.5 text-xs font-extrabold tabular-nums px-2.5 py-1 rounded-lg w-fit sm:w-32 shrink-0 ${tone.timePill}`}
-                                                                            >
-                                                                                <Clock className="w-3.5 h-3.5 opacity-75" />
-                                                                                <span>{ev.time}</span>
-                                                                            </div>
-                                                                            <div className="min-w-0 flex-1">
-                                                                                <div className="text-[15px] font-bold text-slate-900 leading-snug">
-                                                                                    {ev.title}
-                                                                                </div>
-                                                                                {ev.participantOrPlace && (
-                                                                                    <div className="flex items-center gap-1 text-xs text-slate-500 mt-0.5 font-medium">
-                                                                                        <MapPin className="w-3 h-3" />
-                                                                                        <span>{ev.participantOrPlace}</span>
-                                                                                    </div>
-                                                                                )}
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div className="flex items-center gap-2 shrink-0">
-                                                                            <span
-                                                                                className={`px-2.5 py-1 rounded-full text-xs font-bold ${tone.badgeClass}`}
-                                                                            >
-                                                                                {tone.label}
-                                                                            </span>
-                                                                            <button
-                                                                                onClick={() => deleteEvent(ev.id)}
-                                                                                title="일정 삭제"
-                                                                                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-white opacity-0 group-hover:opacity-100 transition cursor-pointer"
-                                                                            >
-                                                                                <Trash2 className="w-4 h-4" />
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                );
-                                                            })}
-                                                        </div>
-                                                    )}
+                                                    <span className="font-bold text-slate-500">{fullLabel}</span>
+                                                    <span>등록된 일정 없음</span>
                                                 </div>
                                             );
                                         }
-                                    )}
-                                </div>
+                                        return (
+                                            <div
+                                                key={day}
+                                                className={`rounded-2xl border p-4 sm:p-5 transition ${
+                                                    isToday
+                                                        ? 'border-[#C7D2FE] bg-white shadow-[0_4px_16px_rgba(79,70,229,0.06)]'
+                                                        : 'border-slate-100 bg-white shadow-[0_2px_10px_rgba(15,23,42,0.02)]'
+                                                }`}
+                                            >
+                                                <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="text-[15px] sm:text-base font-extrabold text-slate-900">
+                                                            {fullLabel}
+                                                        </span>
+                                                        {isToday && (
+                                                            <span className="px-2 py-0.5 rounded-full bg-[#4F46E5] text-white text-[11px] font-bold">
+                                                                오늘
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                    <span className="px-2.5 py-0.5 rounded-full bg-[#F4F6FB] text-[#4338CA] text-xs font-bold">
+                                                        {dayEvents.length}건
+                                                    </span>
+                                                </div>
+
+                                                {dayEvents.length === 0 ? (
+                                                    <div className="text-sm text-slate-400 py-2">
+                                                        등록된 일정이 없습니다.
+                                                    </div>
+                                                ) : (
+                                                    <div className="space-y-2.5">
+                                                        {dayEvents.map((ev) => {
+                                                            const tone = CATEGORY_TONE[ev.category];
+                                                            return (
+                                                                <div
+                                                                    key={ev.id}
+                                                                    className={`rounded-xl border ${tone.cardBg} ${tone.leftBar} p-3.5 transition`}
+                                                                >
+                                                                    {/* 상단: 시간 배지 + 카테고리 배지 + 삭제 버튼 */}
+                                                                    <div className="flex items-center justify-between gap-2 mb-1.5">
+                                                                        <div className="flex items-center gap-1.5 flex-wrap">
+                                                                            <span
+                                                                                className={`inline-flex items-center gap-1 text-xs font-extrabold tabular-nums px-2.5 py-0.5 rounded-lg whitespace-nowrap ${tone.timePill}`}
+                                                                            >
+                                                                                <Clock className="w-3 h-3 opacity-75" />
+                                                                                <span>{ev.time}</span>
+                                                                            </span>
+                                                                            <span
+                                                                                className={`px-2 py-0.5 rounded-full text-[11px] font-bold whitespace-nowrap ${tone.badgeClass}`}
+                                                                            >
+                                                                                {tone.label}
+                                                                            </span>
+                                                                        </div>
+                                                                        <button
+                                                                            onClick={() => deleteEvent(ev.id)}
+                                                                            title="일정 삭제"
+                                                                            className="p-1 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-white transition cursor-pointer shrink-0"
+                                                                        >
+                                                                            <Trash2 className="w-3.5 h-3.5" />
+                                                                        </button>
+                                                                    </div>
+
+                                                                    {/* 중단: 일정 제목 (짤림 없이 전체 문장 표시) */}
+                                                                    <div className="text-[15px] font-bold text-slate-900 leading-snug break-keep">
+                                                                        {ev.title}
+                                                                    </div>
+
+                                                                    {/* 하단: 장소 / 온라인 링크 */}
+                                                                    {ev.participantOrPlace && (
+                                                                        <div className="flex items-center gap-1 text-xs text-slate-500 mt-1 font-medium break-keep">
+                                                                            <MapPin className="w-3 h-3 shrink-0" />
+                                                                            <span>{ev.participantOrPlace}</span>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        );
+                                    }
+                                )}
                             </section>
 
-                            {/* 하단 이번 주 해야 할 일 (화사한 스카이-화이트 톤) */}
-                            <section className="rounded-2xl border border-slate-100 bg-white p-6 lg:p-7 shadow-[0_4px_24px_rgba(15,23,42,0.03)] space-y-4">
-                                <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                            {/* 하단 이번 주 해야 할 일 */}
+                            <section className="rounded-2xl border border-slate-100 bg-white p-4 sm:p-6 shadow-[0_2px_12px_rgba(15,23,42,0.02)] space-y-3.5">
+                                <div className="flex items-center justify-between pb-2.5 border-b border-slate-100">
                                     <div className="flex items-center gap-2">
-                                        <CheckSquare className="w-5 h-5 text-[#4F46E5]" />
-                                        <h2 className="text-lg font-bold text-slate-900">
-                                            이번 주 해야 할 일 ({pendingTodos.length}건 남음)
+                                        <CheckSquare className="w-4 h-4 text-[#4F46E5]" />
+                                        <h2 className="text-base font-bold text-slate-900">
+                                            이번 주 해야 할 일 ({pendingTodos.length}건)
                                         </h2>
                                     </div>
                                     <button
                                         onClick={() => setMainTab('todos')}
-                                        className="text-xs font-bold text-[#4F46E5] underline cursor-pointer"
+                                        className="text-xs font-bold text-[#4F46E5] cursor-pointer whitespace-nowrap"
                                     >
                                         전체 보기 →
                                     </button>
@@ -1401,14 +1307,14 @@ export default function ScheduleHelperPage() {
                                         type="text"
                                         value={newTodoTitle}
                                         onChange={(e) => setNewTodoTitle(e.target.value)}
-                                        placeholder="새로운 할 일을 입력하고 Enter를 누르세요..."
-                                        className="flex-1 rounded-xl bg-[#F8FAFC] border border-slate-200/80 focus:border-[#6366F1] focus:bg-white focus:outline-none px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400"
+                                        placeholder="할 일 입력 후 추가..."
+                                        className="flex-1 min-w-0 rounded-xl bg-[#F8FAFC] border border-slate-200/80 focus:border-[#6366F1] focus:bg-white focus:outline-none px-3.5 py-2 text-sm text-slate-800 placeholder-slate-400"
                                     />
                                     <button
                                         type="submit"
-                                        className="px-5 py-2.5 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs cursor-pointer shrink-0 shadow-sm"
+                                        className="px-4 py-2 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs cursor-pointer shrink-0 shadow-sm whitespace-nowrap"
                                     >
-                                        + 할 일 추가
+                                        + 추가
                                     </button>
                                 </form>
 
@@ -1416,22 +1322,22 @@ export default function ScheduleHelperPage() {
                                     {todos.map((td) => (
                                         <div
                                             key={td.id}
-                                            className={`rounded-xl border px-4 py-3 flex items-center justify-between gap-3 transition group ${
+                                            className={`rounded-xl border p-3.5 flex items-start justify-between gap-2.5 transition ${
                                                 td.done
                                                     ? 'bg-[#FAFBFD] border-slate-100 opacity-55'
                                                     : 'bg-[#F8FAFF] hover:bg-white border-[#E0E7FF] border-l-4 border-l-[#6366F1]'
                                             }`}
                                         >
-                                            <label className="flex items-start gap-3 cursor-pointer flex-1">
+                                            <label className="flex items-start gap-2.5 cursor-pointer flex-1 min-w-0">
                                                 <input
                                                     type="checkbox"
                                                     checked={td.done}
                                                     onChange={() => toggleTodo(td.id)}
                                                     className="mt-1 w-4 h-4 accent-[#4F46E5] rounded cursor-pointer shrink-0"
                                                 />
-                                                <div className="space-y-1">
+                                                <div className="space-y-1 min-w-0 flex-1">
                                                     <div
-                                                        className={`text-[14.5px] font-semibold leading-snug ${
+                                                        className={`text-sm font-semibold leading-snug break-keep ${
                                                             td.done
                                                                 ? 'line-through text-slate-400'
                                                                 : 'text-slate-800'
@@ -1439,21 +1345,21 @@ export default function ScheduleHelperPage() {
                                                     >
                                                         {td.title}
                                                     </div>
-                                                    <div className="flex items-center gap-2">
-                                                        <span className="px-2 py-0.5 rounded-md bg-white border border-[#DCE7FE] text-[#4338CA] text-[11px] font-bold">
+                                                    <div className="flex flex-wrap items-center gap-1.5">
+                                                        <span className="px-2 py-0.5 rounded-md bg-white border border-[#DCE7FE] text-[#4338CA] text-[11px] font-bold whitespace-nowrap">
                                                             기한: {td.dueTag}
                                                         </span>
-                                                        <span className="text-[11px] text-slate-400 font-medium">
-                                                            출처: {CHANNEL_META[td.source]?.badge || '이메일'}
+                                                        <span className="text-[11px] text-slate-400 font-medium whitespace-nowrap">
+                                                            {CHANNEL_META[td.source]?.badge || '이메일'}
                                                         </span>
                                                     </div>
                                                 </div>
                                             </label>
                                             <button
                                                 onClick={() => deleteTodo(td.id)}
-                                                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 opacity-0 group-hover:opacity-100 transition cursor-pointer"
+                                                className="p-1 rounded-lg text-slate-400 hover:text-rose-600 transition cursor-pointer shrink-0"
                                             >
-                                                <Trash2 className="w-4 h-4" />
+                                                <Trash2 className="w-3.5 h-3.5" />
                                             </button>
                                         </div>
                                     ))}
@@ -1466,82 +1372,79 @@ export default function ScheduleHelperPage() {
                     {/* 탭 2: 해야 할 일 체크리스트 */}
                     {/* =============================================================== */}
                     {mainTab === 'todos' && (
-                        <section className="rounded-2xl border border-slate-100 bg-white p-7 lg:p-8 shadow-[0_4px_24px_rgba(15,23,42,0.03)] space-y-6">
-                            <div className="pb-5 border-b border-slate-100 flex flex-wrap items-center justify-between gap-4">
-                                <div>
-                                    <span className="px-2.5 py-0.5 rounded-full font-bold text-xs bg-[#EEF2FF] text-[#4F46E5]">
-                                        TO-DO LIST
-                                    </span>
-                                    <h1 className="text-2xl font-bold text-slate-900 mt-2">
-                                        이번 주 해야 할 일 체크리스트
-                                    </h1>
-                                </div>
-                                <span className="px-3 py-1.5 rounded-xl bg-[#F5F8FF] border border-[#DCE7FE] text-[#4338CA] text-xs font-bold">
-                                    남은 할 일 {pendingTodos.length}건 · 완료 {completedTodos.length}건
+                        <section className="rounded-2xl border border-slate-100 bg-white p-4 sm:p-6 shadow-[0_2px_12px_rgba(15,23,42,0.02)] space-y-4">
+                            <div className="pb-3.5 border-b border-slate-100 flex items-center justify-between gap-2">
+                                <h1 className="text-lg font-extrabold text-slate-900">
+                                    이번 주 해야 할 일 체크리스트
+                                </h1>
+                                <span className="px-2.5 py-1 rounded-xl bg-[#F5F8FF] border border-[#DCE7FE] text-[#4338CA] text-xs font-bold whitespace-nowrap">
+                                    남음 {pendingTodos.length} · 완료 {completedTodos.length}
                                 </span>
                             </div>
 
-                            <form onSubmit={handleQuickAddTodo} className="flex flex-wrap gap-2">
+                            <form onSubmit={handleQuickAddTodo} className="flex flex-col sm:flex-row gap-2">
                                 <input
                                     type="text"
                                     value={newTodoTitle}
                                     onChange={(e) => setNewTodoTitle(e.target.value)}
-                                    placeholder="이번 주 해야 할 일을 입력하세요..."
-                                    className="flex-1 min-w-[220px] rounded-xl bg-[#F8FAFC] border border-slate-200 focus:border-[#6366F1] focus:bg-white focus:outline-none px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400"
+                                    placeholder="해야 할 일을 입력하세요..."
+                                    className="flex-1 min-w-0 rounded-xl bg-[#F8FAFC] border border-slate-200 focus:border-[#6366F1] focus:bg-white focus:outline-none px-3.5 py-2.5 text-sm text-slate-800 placeholder-slate-400"
                                 />
-                                <input
-                                    type="text"
-                                    value={newTodoDue}
-                                    onChange={(e) => setNewTodoDue(e.target.value)}
-                                    placeholder="기한 (예: 금요일까지)"
-                                    className="w-36 rounded-xl bg-[#F8FAFC] border border-slate-200 focus:border-[#6366F1] focus:bg-white focus:outline-none px-3.5 py-2.5 text-sm text-slate-800"
-                                />
-                                <button
-                                    type="submit"
-                                    className="px-5 py-2.5 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-sm cursor-pointer"
-                                >
-                                    + 추가
-                                </button>
+                                <div className="flex gap-2">
+                                    <input
+                                        type="text"
+                                        value={newTodoDue}
+                                        onChange={(e) => setNewTodoDue(e.target.value)}
+                                        placeholder="기한 (예: 금요일까지)"
+                                        className="flex-1 sm:w-36 rounded-xl bg-[#F8FAFC] border border-slate-200 focus:border-[#6366F1] focus:bg-white focus:outline-none px-3 py-2.5 text-sm text-slate-800"
+                                    />
+                                    <button
+                                        type="submit"
+                                        className="px-4 py-2.5 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs sm:text-sm cursor-pointer whitespace-nowrap shrink-0"
+                                    >
+                                        + 추가
+                                    </button>
+                                </div>
                             </form>
 
-                            <div className="space-y-2.5">
+                            <div className="space-y-2">
                                 {todos.map((td) => (
                                     <div
                                         key={td.id}
-                                        className={`rounded-xl border px-4 py-3.5 flex items-center justify-between gap-3 transition group ${
+                                        className={`rounded-xl border p-3.5 flex items-start justify-between gap-2.5 transition ${
                                             td.done
                                                 ? 'bg-[#FAFBFD] border-slate-100 opacity-55'
                                                 : 'bg-[#F8FAFF] hover:bg-white border-[#E0E7FF] border-l-4 border-l-[#6366F1]'
                                         }`}
                                     >
-                                        <label className="flex items-start gap-3 cursor-pointer flex-1">
+                                        <label className="flex items-start gap-2.5 cursor-pointer flex-1 min-w-0">
                                             <input
                                                 type="checkbox"
                                                 checked={td.done}
                                                 onChange={() => toggleTodo(td.id)}
                                                 className="mt-1 w-4 h-4 accent-[#4F46E5] rounded cursor-pointer shrink-0"
                                             />
-                                            <div className="space-y-1">
+                                            <div className="space-y-1 min-w-0 flex-1">
                                                 <div
-                                                    className={`text-[15px] font-semibold leading-snug ${
+                                                    className={`text-[15px] font-semibold leading-snug break-keep ${
                                                         td.done ? 'line-through text-slate-400' : 'text-slate-800'
                                                     }`}
                                                 >
                                                     {td.title}
                                                 </div>
-                                                <div className="flex items-center gap-2">
-                                                    <span className="px-2 py-0.5 rounded-md bg-white border border-[#DCE7FE] text-[#4338CA] text-xs font-bold">
+                                                <div className="flex flex-wrap items-center gap-1.5">
+                                                    <span className="px-2 py-0.5 rounded-md bg-white border border-[#DCE7FE] text-[#4338CA] text-xs font-bold whitespace-nowrap">
                                                         기한: {td.dueTag}
                                                     </span>
-                                                    <span className="text-xs text-slate-400 font-medium">
-                                                        출처: {CHANNEL_META[td.source]?.badge || '이메일'}
+                                                    <span className="text-xs text-slate-400 font-medium whitespace-nowrap">
+                                                        {CHANNEL_META[td.source]?.badge || '이메일'}
                                                     </span>
                                                 </div>
                                             </div>
                                         </label>
                                         <button
                                             onClick={() => deleteTodo(td.id)}
-                                            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 opacity-0 group-hover:opacity-100 transition cursor-pointer"
+                                            className="p-1 rounded-lg text-slate-400 hover:text-rose-600 transition cursor-pointer shrink-0"
                                         >
                                             <Trash2 className="w-4 h-4" />
                                         </button>
@@ -1555,20 +1458,17 @@ export default function ScheduleHelperPage() {
                     {/* 탭 3: 카톡 · 위챗 · 와츠앱 · 메일 추출 */}
                     {/* =============================================================== */}
                     {mainTab === 'extractor' && (
-                        <section className="rounded-2xl border border-slate-100 bg-white p-7 lg:p-8 shadow-[0_4px_24px_rgba(15,23,42,0.03)] space-y-6">
-                            <div className="pb-5 border-b border-slate-100">
-                                <span className="px-2.5 py-0.5 rounded-full font-bold text-xs bg-[#EEF2FF] text-[#4F46E5]">
-                                    SMART EXTRACTOR
-                                </span>
-                                <h1 className="text-2xl font-bold text-slate-900 mt-2">
-                                    대화 · 이메일 텍스트로 일정/할 일 자동 등록
+                        <section className="rounded-2xl border border-slate-100 bg-white p-4 sm:p-6 shadow-[0_2px_12px_rgba(15,23,42,0.02)] space-y-4">
+                            <div className="pb-3.5 border-b border-slate-100">
+                                <h1 className="text-lg font-extrabold text-slate-900">
+                                    카톡 · 메일 텍스트로 일정/할 일 자동 등록
                                 </h1>
-                                <p className="text-sm text-slate-500 mt-1">
+                                <p className="text-xs sm:text-sm text-slate-500 mt-1 break-keep">
                                     카카오톡, 위챗, 와츠앱 대화나 이메일 본문을 붙여넣으면 요일·시간과 할 일을 자동 분리합니다.
                                 </p>
                             </div>
 
-                            <div className="flex flex-wrap gap-2">
+                            <div className="flex flex-wrap gap-1.5">
                                 {(['gmail', 'kakao', 'wechat', 'whatsapp', 'kakao_cal'] as SourceChannel[]).map(
                                     (ch) => {
                                         const active = selectedChannel === ch;
@@ -1577,7 +1477,7 @@ export default function ScheduleHelperPage() {
                                                 key={ch}
                                                 type="button"
                                                 onClick={() => setSelectedChannel(ch)}
-                                                className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition cursor-pointer ${
+                                                className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition cursor-pointer whitespace-nowrap ${
                                                     active
                                                         ? 'bg-[#4F46E5] text-white border-[#4F46E5]'
                                                         : 'bg-[#F8FAFC] text-slate-600 border-slate-200 hover:border-[#6366F1]'
@@ -1593,15 +1493,15 @@ export default function ScheduleHelperPage() {
                             <textarea
                                 value={rawInput}
                                 onChange={(e) => setRawInput(e.target.value)}
-                                rows={7}
+                                rows={6}
                                 placeholder={CHANNEL_META[selectedChannel].placeholder}
-                                className="w-full rounded-xl bg-[#F8FAFC] border border-slate-200 focus:border-[#6366F1] focus:bg-white focus:outline-none p-4 text-sm text-slate-800 leading-relaxed"
+                                className="w-full rounded-xl bg-[#F8FAFC] border border-slate-200 focus:border-[#6366F1] focus:bg-white focus:outline-none p-3.5 text-sm text-slate-800 leading-relaxed"
                             />
 
-                            <div className="flex flex-wrap items-center justify-between gap-3">
-                                <label className="px-4 py-2.5 rounded-xl bg-[#F8FAFC] hover:bg-[#EEF2FF] border border-slate-200 text-xs font-bold text-slate-700 cursor-pointer flex items-center gap-2">
+                            <div className="flex items-center justify-between gap-2">
+                                <label className="px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] hover:bg-[#EEF2FF] border border-slate-200 text-xs font-bold text-slate-700 cursor-pointer flex items-center gap-1.5 whitespace-nowrap">
                                     <Upload className="w-4 h-4 text-[#4F46E5]" />
-                                    <span>파일 업로드 (.txt / .ics)</span>
+                                    <span>파일 업로드</span>
                                     <input
                                         type="file"
                                         accept=".txt,.ics,.csv"
@@ -1613,9 +1513,9 @@ export default function ScheduleHelperPage() {
                                 <button
                                     type="button"
                                     onClick={handleExtract}
-                                    className="px-6 py-2.5 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-sm cursor-pointer shadow-sm"
+                                    className="px-5 py-2.5 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs sm:text-sm cursor-pointer shadow-sm whitespace-nowrap"
                                 >
-                                    일정 및 할 일 추출하기
+                                    일정·할 일 자동 등록
                                 </button>
                             </div>
                         </section>
