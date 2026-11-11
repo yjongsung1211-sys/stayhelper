@@ -1,5 +1,5 @@
-const CACHE_NAME = 'secondbrain-mobile-app-v2';
-const PRECACHE_URLS = ['/secondbrain', '/secondbrain-manifest.json', '/icon.svg'];
+const CACHE_NAME = 'secondbrain-mobile-app-v3';
+const PRECACHE_URLS = ['/notehelper', '/secondbrain-manifest.json', '/icon.svg'];
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
@@ -29,7 +29,12 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const req = event.request;
-  if (req.method !== 'GET' || req.url.includes('/api/')) {
+  if (
+    req.method !== 'GET' ||
+    req.url.includes('/api/') ||
+    req.url.includes('/antigravity') ||
+    req.url.includes('/hana')
+  ) {
     return;
   }
   event.respondWith(

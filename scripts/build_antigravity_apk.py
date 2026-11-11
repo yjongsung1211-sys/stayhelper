@@ -119,13 +119,16 @@ def build_apk():
     shutil.copy2(manifest_src, staged_manifest)
     shutil.copy2(java_src, staged_java)
 
-    # Prepare res directory with app icon
+    # Prepare res directory with dedicated Antigravity app icon
     res_dir = BUILD_WORK_DIR / "res"
     drawable_dir = res_dir / "drawable"
     drawable_dir.mkdir(parents=True, exist_ok=True)
-    icon_src = BASE_DIR / "public" / "notehelper-192.png"
-    if icon_src.exists():
-        shutil.copy2(icon_src, drawable_dir / "ic_launcher.png")
+    ag_icon_src = BASE_DIR / "public" / "antigravity-192.png"
+    nh_icon_src = BASE_DIR / "public" / "notehelper-192.png"
+    if ag_icon_src.exists():
+        shutil.copy2(ag_icon_src, drawable_dir / "ic_launcher.png")
+    elif nh_icon_src.exists():
+        shutil.copy2(nh_icon_src, drawable_dir / "ic_launcher.png")
 
     # 1. Compile resources with aapt2
     compiled_res_zip = BUILD_WORK_DIR / "compiled_res.zip"
@@ -258,13 +261,19 @@ def build_apk():
     ).replace(
         "https://thestayhelper.vercel.app/antigravity",
         "https://secondbrain-note.vercel.app/notehelper",
+    ).replace(
+        'target.contains("/notehelper") || target.contains("/secondbrain")',
+        'target.contains("/antigravity")'
+    ).replace(
+        'url.contains("/notehelper") || url.contains("/secondbrain")',
+        'url.contains("/antigravity")'
     )
     nh_java.write_text(nh_java_txt, encoding="utf-8")
 
     nh_res = nh_work / "res" / "drawable"
     nh_res.mkdir(parents=True, exist_ok=True)
-    if icon_src.exists():
-        shutil.copy2(icon_src, nh_res / "ic_launcher.png")
+    if nh_icon_src.exists():
+        shutil.copy2(nh_icon_src, nh_res / "ic_launcher.png")
 
     nh_comp = nh_work / "compiled_res.zip"
     run_cmd([tools["aapt2"], "compile", "--dir", nh_work / "res", "-o", nh_comp])

@@ -124,7 +124,7 @@ const PROVIDER_INFO = {
     models: ['qwen2.5:3b', 'llama3.2:3b', 'mistral'],
     getKeyUrl: 'https://ollama.com',
     getKeyText: 'Ollama 공식 홈페이지 ↗',
-    desc: '인터넷 연결 없이 대표님 PC에서 비용 0원으로 오프라인 요약 구동',
+    desc: '인터넷 연결 없이 PC에서 비용 0원으로 오프라인 요약 구동',
   },
 };
 
@@ -782,22 +782,6 @@ export default function NoteHelperPage() {
               </span>
               <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" title="즉시 분석 가능 (무료 탑재)" />
             </button>
-
-            <a
-              href="/notehelper.apk"
-              download="NoteHelper.apk"
-              className="px-2.5 py-2 min-h-[36px] rounded-xl bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/40 text-purple-200 text-xs font-semibold flex items-center gap-1 whitespace-nowrap shrink-0 transition"
-            >
-              <Download className="w-3.5 h-3.5 shrink-0" />
-              <span>APK</span>
-            </a>
-
-            <Link
-              href="/antigravity"
-              className="px-2.5 py-2 min-h-[36px] rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-medium text-amber-300 flex items-center whitespace-nowrap shrink-0 transition"
-            >
-              👑 사령탑
-            </Link>
           </div>
         </div>
       </header>
@@ -1380,7 +1364,7 @@ export default function NoteHelperPage() {
             <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300 flex items-start gap-2.5">
               <ShieldCheck className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
               <p className="leading-relaxed">
-                <strong>100% 프라이버시 보장</strong>: 입력하신 API 키는 오직 대표님의 브라우저 로컬 저장소(LocalStorage)에만 암호화 보관되며, 서버 데이터베이스에 절대 저장되지 않습니다.
+                <strong>100% 프라이버시 보장</strong>: 입력하신 API 키는 오직 고객님의 브라우저 로컬 저장소(LocalStorage)에만 암호화 보관되며, 서버 데이터베이스에 절대 저장되지 않습니다.
               </p>
             </div>
 

@@ -4,7 +4,7 @@
   "short_name": "NoteHelper",
   "description": "별도 기기 없이 휴대폰 녹음만으로 회의록 자동 정리 및 전 세계 모든 외국어 공부를 도와주는 AI 앱",
   "start_url": "/notehelper",
-  "scope": "/",
+  "scope": "/notehelper",
   "display": "standalone",
   "background_color": "#111827",
   "theme_color": "#111827",

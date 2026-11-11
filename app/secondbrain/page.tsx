@@ -400,17 +400,6 @@ export default function SecondBrainPage() {
 
   useEffect(() => {
     document.title = 'NoteHelper (노트헬퍼) · 스마트폰 회의록 정리 & AI 외국어 공부 앱';
-    if (typeof window !== 'undefined') {
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/secondbrain-sw.js').catch(() => {});
-      }
-      const onBeforeInstall = (e: any) => {
-        e.preventDefault();
-        setDeferredPwaPrompt(e);
-      };
-      window.addEventListener('beforeinstallprompt', onBeforeInstall);
-      return () => window.removeEventListener('beforeinstallprompt', onBeforeInstall);
-    }
   }, []);
 
   useEffect(() => {

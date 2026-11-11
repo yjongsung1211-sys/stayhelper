@@ -264,6 +264,18 @@ export default function AntigravityMobilePage() {
   };
 
   useEffect(() => {
+    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .getRegistrations()
+        .then((regs) => {
+          for (const reg of regs) {
+            if (reg.active?.scriptURL?.includes('secondbrain')) {
+              reg.unregister().catch(() => {});
+            }
+          }
+        })
+        .catch(() => {});
+    }
     fetchBridgeData();
     const timer = setInterval(() => {
       fetchBridgeData(true);
@@ -512,7 +524,7 @@ export default function AntigravityMobilePage() {
       const data = await res.json();
       if (data.success) {
         setQuickMemoText('');
-        setMemoSavedToast('✅ 옵시디언 00_Inbox 및 NoteHelper에 즉시 저장되었습니다.');
+        setMemoSavedToast('✅ Antigravity 전용 보관함 및 옵시디언 00_Inbox에 즉시 저장되었습니다.');
         if (Array.isArray(data.chatHistory)) {
           setChatHistory(data.chatHistory);
         }
@@ -630,17 +642,17 @@ export default function AntigravityMobilePage() {
                     윤종성 대표님, 안티그래비티 &amp; 수석비서 하나 모바일 사령탑입니다. 상단 추천 명령을 터치하시거나 하단 마이크·채팅창으로 무엇이든 지시해 주세요.
                   </p>
                   <div className="grid grid-cols-2 gap-2 pt-1">
-                    <Link
-                      href="/notehelper"
-                      className="px-3 py-2 rounded-xl bg-[#0B0F17] border border-slate-700/80 text-xs font-semibold text-purple-300 text-center hover:border-purple-400 transition"
+                    <button
+                      onClick={() => setActiveTab('deck')}
+                      className="px-3 py-2 rounded-xl bg-[#0B0F17] border border-slate-700/80 text-xs font-semibold text-slate-200 text-center hover:border-[#E5BE64] transition cursor-pointer"
                     >
-                      🎙️ NoteHelper 열기
-                    </Link>
+                      ⚡ 원터치 사령탑 열기
+                    </button>
                     <button
                       onClick={() => setActiveTab('apk')}
                       className="px-3 py-2 rounded-xl bg-[#0B0F17] border border-[#E5BE64]/40 text-xs font-semibold text-[#E5BE64] text-center hover:bg-[#E5BE64]/10 transition cursor-pointer"
                     >
-                      📥 2대 전용앱(APK) 설치
+                      📥 안티그래비티 APK 설치
                     </button>
                   </div>
                 </div>
@@ -690,7 +702,7 @@ export default function AntigravityMobilePage() {
                       {!isUser && msg.citations && msg.citations.length > 0 && (
                         <div className="mt-2.5 pt-2 border-t border-slate-800/80 space-y-1">
                           <p className="text-[10px] font-semibold text-[#E5BE64]">
-                            📚 참조된 세컨드브레인 / 노트헬퍼 기록:
+                            📚 참조된 Antigravity 전용 지식 볼트:
                           </p>
                           {msg.citations.map((cit) => (
                             <div
@@ -803,36 +815,6 @@ export default function AntigravityMobilePage() {
                   </button>
                 );
               })}
-            </div>
-
-            {/* Integrated Ecosystem Direct Launchers */}
-            <div className="pt-2">
-              <h3 className="text-xs font-bold text-slate-300 mb-2 px-1">
-                🔗 전사 생산성 &amp; 쇼룸 바로가기 (앱 내 즉시 전환)
-              </h3>
-              <div className="grid grid-cols-3 gap-2">
-                <Link
-                  href="/notehelper"
-                  className="p-2.5 rounded-xl bg-[#18202E] border border-slate-800 hover:border-[#E5BE64]/40 text-center"
-                >
-                  <p className="text-xs font-bold text-[#E5BE64]">NoteHelper</p>
-                  <p className="text-[10px] text-slate-400 mt-0.5">음성녹음·전사</p>
-                </Link>
-                <Link
-                  href="/secondbrain"
-                  className="p-2.5 rounded-xl bg-[#18202E] border border-slate-800 hover:border-[#E5BE64]/40 text-center"
-                >
-                  <p className="text-xs font-bold text-emerald-400">SecondBrain</p>
-                  <p className="text-[10px] text-slate-400 mt-0.5">옵시디언·코치</p>
-                </Link>
-                <Link
-                  href="/schedulehelper"
-                  className="p-2.5 rounded-xl bg-[#18202E] border border-slate-800 hover:border-[#E5BE64]/40 text-center"
-                >
-                  <p className="text-xs font-bold text-sky-400">Schedule</p>
-                  <p className="text-[10px] text-slate-400 mt-0.5">스마트 캘린더</p>
-                </Link>
-              </div>
             </div>
           </div>
         )}
@@ -950,10 +932,10 @@ export default function AntigravityMobilePage() {
             <div className="p-4 rounded-2xl bg-[#18202E] border border-slate-800 space-y-2.5">
               <h2 className="text-sm font-bold text-[#E5BE64] flex items-center gap-1.5">
                 <BookmarkPlus className="w-4 h-4" />
-                1초 옵시디언 &amp; NoteHelper 빠른 메모
+                1초 Antigravity &amp; 옵시디언 전용 메모
               </h2>
               <p className="text-xs text-slate-400">
-                이동 중 떠오른 아이디어나 지시사항을 적으시면 내 PC 옵시디언 볼트(00_Inbox)와 NoteHelper에 동시 저장됩니다.
+                이동 중 떠오른 아이디어나 지시사항을 적으시면 내 PC 옵시디언 볼트(00_Inbox)와 Antigravity 전용 보관함에 즉시 저장됩니다.
               </p>
               <textarea
                 rows={3}
@@ -970,7 +952,7 @@ export default function AntigravityMobilePage() {
                 disabled={isLoading || !quickMemoText.trim()}
                 className="w-full py-2.5 rounded-xl bg-[#E5BE64] disabled:opacity-40 text-[#0B0F17] font-bold text-xs hover:bg-[#d8b052] transition"
               >
-                옵시디언 볼트 &amp; NoteHelper에 즉시 저장
+                Antigravity &amp; 옵시디언 볼트에 즉시 저장
               </button>
             </div>
 
@@ -985,7 +967,7 @@ export default function AntigravityMobilePage() {
                     안드로이드 전용 설치형 앱 (APK)
                   </h2>
                   <p className="text-[11px] text-[#E5BE64]">
-                    패키지: com.yoonjongsung.antigravity (v2.0 정식 서명판)
+                    패키지: com.yoonjongsung.antigravity (v2.1 정식 서명판)
                   </p>
                 </div>
               </div>
@@ -1000,16 +982,7 @@ export default function AntigravityMobilePage() {
                 className="w-full py-3 rounded-xl bg-gradient-to-r from-[#E5BE64] to-[#C89D42] text-[#0B0F17] font-extrabold text-xs flex items-center justify-center gap-2 shadow-md hover:opacity-95 transition"
               >
                 <Download className="w-4 h-4" />
-                1. 안티그래비티 &amp; 하나 APK 다운로드 (Antigravity_Hana.apk)
-              </a>
-
-              <a
-                href="/notehelper.apk"
-                download="NoteHelper.apk"
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-md hover:opacity-95 transition"
-              >
-                <Download className="w-4 h-4" />
-                2. 노트헬퍼 전용 APK 다운로드 (NoteHelper.apk)
+                안티그래비티 &amp; 하나 전용 APK 다운로드 (Antigravity_Hana.apk)
               </a>
 
               <div className="p-3 rounded-xl bg-[#0B0F17]/90 border border-slate-800 text-[11px] text-slate-400 space-y-1">

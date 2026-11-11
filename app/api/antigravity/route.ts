@@ -3,13 +3,10 @@ import fs from 'fs';
 import path from 'path';
 import { execFileSync } from 'child_process';
 import {
-  loadNotesData,
-  saveNotesData,
   isCloudEnvironment,
   getCloudToken,
   callCloudFrontierAi,
   detectNoteCategory,
-  formatDurationKorean,
 } from '@/app/secondbrain/cloudStore';
 
 export const dynamic = 'force-dynamic';
@@ -29,8 +26,18 @@ async function loadPrivateAntigravityNotes(): Promise<any[]> {
       if (list.length > 0) return list;
     }
   } catch {}
-  const data = await loadNotesData();
-  return data.notes || [];
+  return [];
+}
+
+async function savePrivateAntigravityNote(newNote: any): Promise<void> {
+  try {
+    const existing = await loadPrivateAntigravityNotes();
+    const updated = [newNote, ...existing];
+    if (!isCloudEnvironment()) {
+      fs.mkdirSync(path.dirname(LOCAL_PRIVATE_NOTES_FILE), { recursive: true });
+      fs.writeFileSync(LOCAL_PRIVATE_NOTES_FILE, JSON.stringify({ notes: updated }, null, 2), 'utf8');
+    }
+  } catch {}
 }
 
 export interface AntigravityCommandItem {
@@ -90,7 +97,7 @@ const DEFAULT_BRIDGE_STATE: AntigravityBridgeState = {
     {
       id: 'welcome-msg-1',
       role: 'assistant',
-      text: '윤종성 대표님, 안티그래비티(Antigravity) & 수석 비서 하나(Hana) 전용 모바일 사령탑에 오신 것을 환영합니다.\n\n이제 텔레그램을 거치지 않고 이 전용 앱에서 **음성/텍스트 지시, 210+ 옵시디언 볼트 & 노트헬퍼 회의록 검색, 7대 사업 무인 순찰, 신사업 인큐베이팅, 내 PC 원격 작업 실행**을 언제 어디서나(LTE/5G·Wi-Fi) 즉시 사용하실 수 있습니다.',
+      text: '윤종성 대표님, 안티그래비티(Antigravity) & 수석 비서 하나(Hana) 전용 모바일 사령탑에 오신 것을 환영합니다.\n\n이제 텔레그램을 거치지 않고 이 전용 앱에서 **음성/텍스트 지시, 210+ 옵시디언 볼트 & 전용 지식베이스 검색, 7대 사업 무인 순찰, 신사업 인큐베이팅, 내 PC 원격 작업 실행**을 언제 어디서나(LTE/5G·Wi-Fi) 즉시 사용하실 수 있습니다.',
       timestamp: new Date().toISOString(),
       tag: 'ANTIGRAVITY CORE',
       executedBy: 'Antigravity Mobile Engine',
@@ -411,7 +418,7 @@ async function generateQuickActionReport(action: string, topic: string, contextB
 export async function GET() {
   try {
     const { state } = await loadBridgeState();
-    const notesData = await loadNotesData();
+    const privateNotes = await loadPrivateAntigravityNotes();
 
     // Check if PC heartbeat is within last 5 minutes (or always true if running locally)
     const lastBeatMs = new Date(state.pcStatus.lastHeartbeat || Date.now()).getTime();
@@ -422,7 +429,7 @@ export async function GET() {
       pcStatus: {
         ...state.pcStatus,
         online: isFresh || Boolean(state.pcStatus.tunnelUrl),
-        notesCount: (notesData.notes || []).length,
+        notesCount: privateNotes.length,
       },
       chatHistory: state.chatHistory || [],
       commandQueue: state.commandQueue || [],
@@ -504,13 +511,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: true, chatHistory: state.chatHistory });
     }
 
-    // 3) Quick Memo -> Save directly to SecondBrain & Obsidian Vault
+    // 3) Quick Memo -> Save directly to Antigravity Private Vault & Obsidian Vault
     if (mode === 'memo') {
       const memoText = String(body.text || '').trim();
       if (!memoText) {
         return NextResponse.json({ success: false, error: '메모 내용을 입력해 주세요.' }, { status: 400 });
       }
-      const notesData = await loadNotesData();
       const nowIso = new Date().toISOString();
       const titleLine = memoText.split('\n')[0].slice(0, 48);
       const newNote = {
@@ -534,16 +540,15 @@ export async function POST(request: Request) {
         ],
         tags: ['Antigravity모바일', '00_Inbox', '빠른메모'],
       };
-      notesData.notes.unshift(newNote);
-      await saveNotesData(notesData);
+      await savePrivateAntigravityNote(newNote);
 
       const assistantMsg: AntigravityChatMessage = {
         id: `memo-ack-${Date.now()}`,
         role: 'assistant',
-        text: `📝 **[옵시디언 00_Inbox & NoteHelper 동시 저장 완료]**\n\n• **제목**: ${newNote.title}\n• **내용**: ${memoText}\n\n대표님의 세컨드브레인 볼트와 클라우드에 즉시 동기화되었습니다.`,
+        text: `📝 **[Antigravity 전용 보관함 & 옵시디언 00_Inbox 저장 완료]**\n\n• **제목**: ${newNote.title}\n• **내용**: ${memoText}\n\n대표님의 Antigravity 전용 지식 볼트와 클라우드에 즉시 동기화되었습니다.`,
         timestamp: nowIso,
         tag: 'VAULT SYNCED',
-        executedBy: 'SecondBrain Vault Bridge',
+        executedBy: 'Antigravity Vault Bridge',
       };
       state.chatHistory.push({
         id: `user-memo-${Date.now()}`,
@@ -675,7 +680,7 @@ export async function POST(request: Request) {
         .join('\n');
 
       const aiAnswer = await callCloudFrontierAi(
-        `[최근 대화 맥락]\n${recentChatContext || '없음'}\n\n[관련 세컨드브레인 & 노트헬퍼 회의록]\n${
+        `[최근 대화 맥락]\n${recentChatContext || '없음'}\n\n[관련 Antigravity 전용 지식 볼트 기록]\n${
           contextBlock || '관련 노트 없음'
         }\n\n[윤종성 대표님의 지시/질문]\n"${query}"\n\n위 지시에 대해 안티그래비티(Antigravity) 겸 수석 비서 하나(Hana)로서 핵심 수치, 사실관계, 실행 방안을 포함해 명쾌하게 답변하십시오.`,
         {

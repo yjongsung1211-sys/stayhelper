@@ -14,7 +14,7 @@ import {
 import {
   buildLanguageCoachingData,
   formatLanguageCoachingMarkdown,
-} from '@/app/secondbrain/languageCoachingEngine';
+} from '@/app/secondbrain/languageCoachingCore';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -282,11 +282,14 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
+      rawTranscript: rawText,
+      audioUrl: savedAudioUrl || undefined,
       analysis: {
         title: analysis.title,
         summary: analysis.summary,
         structuredSummary: analysis.structuredSummary,
         transcript: analysis.refinedTranscript,
+        refinedTranscript: analysis.refinedTranscript,
         durationSeconds: audioDuration,
         targetLang: targetLang !== 'auto' ? targetLang : undefined,
         audioUrl: savedAudioUrl || undefined,

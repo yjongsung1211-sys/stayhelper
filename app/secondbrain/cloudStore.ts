@@ -4,7 +4,7 @@ import { execFileSync } from 'child_process';
 import {
   buildLanguageCoachingData,
   formatLanguageCoachingMarkdown,
-} from './languageCoachingEngine';
+} from './languageCoachingCore';
 
 const LOCAL_NOTES_FILE = path.join(process.cwd(), 'data', 'secondbrain_notes.json');
 const TMP_NOTES_FILE = path.join('/tmp', 'secondbrain_notes.json');
@@ -314,7 +314,7 @@ export async function callCloudFrontierAi(
             role: 'system',
             content:
               options?.systemInstruction ||
-              'You are NoteHelper (노트헬퍼) Frontier AI Assistant for CEO Yoon Jong-sung. Respond accurately in Korean unless instructed otherwise.',
+              'You are NoteHelper (노트헬퍼) Frontier AI Assistant. Respond accurately in Korean unless instructed otherwise.',
           },
           { role: 'user', content: prompt },
         ],
@@ -1362,40 +1362,55 @@ export async function transcribeWavBufferInNode(
   }
 
   const googleKey = 'AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw';
-  const speechLang = resolvedLang.bcp47 || 'ko-KR';
-  const endpoint = `http://www.google.com/speech-api/v2/recognize?client=chromium&lang=${encodeURIComponent(
-    speechLang
-  )}&key=${googleKey}&pFilter=0`;
+  const primaryLang = resolvedLang.bcp47 || 'ko-KR';
+
+  const recognizeChunkWithLang = async (chunkBuf: Buffer, langBcp47: string): Promise<string> => {
+    try {
+      const endpoint = `http://www.google.com/speech-api/v2/recognize?client=chromium&lang=${encodeURIComponent(
+        langBcp47
+      )}&key=${googleKey}&pFilter=0`;
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': `audio/l16; rate=${sampleRate}` },
+        body: new Uint8Array(chunkBuf),
+      });
+      const text = await res.text();
+      const lines = text.split('\n').filter((l) => l.trim().length > 0);
+      for (const line of lines) {
+        try {
+          const parsed = JSON.parse(line);
+          if (Array.isArray(parsed.result) && parsed.result.length > 0) {
+            const alts = parsed.result[0]?.alternative;
+            if (Array.isArray(alts) && alts.length > 0) {
+              const best = alts
+                .slice(0, 2)
+                .reduce((a, b) =>
+                  (b.transcript || '').trim().length > (a.transcript || '').trim().length ? b : a
+                );
+              if (best && best.transcript) {
+                return cleanDomainTerms(best.transcript.trim());
+              }
+            }
+          }
+        } catch {}
+      }
+    } catch {}
+    return '';
+  };
 
   const results = await Promise.all(
     chunks.map(async (chunkBuf) => {
-      try {
-        const res = await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': `audio/l16; rate=${sampleRate}` },
-          body: new Uint8Array(chunkBuf),
-        });
-        const text = await res.text();
-        const lines = text.split('\n').filter((l) => l.trim().length > 0);
-        for (const line of lines) {
-          try {
-            const parsed = JSON.parse(line);
-            if (Array.isArray(parsed.result) && parsed.result.length > 0) {
-              const alts = parsed.result[0]?.alternative;
-              if (Array.isArray(alts) && alts.length > 0) {
-                const best = alts
-                  .slice(0, 2)
-                  .reduce((a, b) =>
-                    (b.transcript || '').trim().length > (a.transcript || '').trim().length ? b : a
-                  );
-                if (best && best.transcript) {
-                  return cleanDomainTerms(best.transcript.trim());
-                }
-              }
-            }
-          } catch {}
-        }
-      } catch {}
+      const primaryText = await recognizeChunkWithLang(chunkBuf, primaryLang);
+      if (primaryText) return primaryText;
+
+      const fallbackLangs = ['ko-KR', 'en-US', 'zh-CN', 'ja-JP'].filter((l) => l !== primaryLang);
+      const fallbackCandidates = await Promise.all(
+        fallbackLangs.map((l) => recognizeChunkWithLang(chunkBuf, l))
+      );
+      const nonEmpty = fallbackCandidates.filter(Boolean);
+      if (nonEmpty.length > 0) {
+        return nonEmpty.reduce((a, b) => (b.length > a.length ? b : a));
+      }
       return '';
     })
   );
