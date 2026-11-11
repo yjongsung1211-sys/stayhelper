@@ -147,6 +147,24 @@ function getWeekDaysList(): { key: DayKey; dateStr: string; fullLabel: string; i
 const DAYS_INFO = getWeekDaysList();
 const DAYS_ORDER: DayKey[] = ['월', '화', '수', '목', '금', '토', '일'];
 
+const TIME_SLOT_OPTIONS: string[] = [
+    '05:00', '05:30', '06:00', '06:30', '07:00', '07:30', '08:00', '08:30',
+    '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30',
+    '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30',
+    '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30',
+    '21:00', '21:30', '21:45', '22:00', '22:30', '22:45', '23:00', '23:30', '24:00',
+];
+
+const TIME_PRESETS: { label: string; start: string; end: string; note: string }[] = [
+    { label: '06:00 ~ 07:00', start: '06:00', end: '07:00', note: '수영 · 루틴' },
+    { label: '07:00 ~ 08:30', start: '07:00', end: '08:30', note: '아침 운동' },
+    { label: '10:00 ~ 11:00', start: '10:00', end: '11:00', note: '오전 과외' },
+    { label: '14:00 ~ 15:00', start: '14:00', end: '15:00', note: '오후 미팅' },
+    { label: '16:00 ~ 17:00', start: '16:00', end: '17:00', note: '영어 과외' },
+    { label: '19:00 ~ 20:00', start: '19:00', end: '20:00', note: '저녁 과외' },
+    { label: '21:45 ~ 22:45', start: '21:45', end: '22:45', note: '중국어 과외' },
+];
+
 const INITIAL_VERIFIED_EVENTS: ScheduleEventItem[] = [
     {
         id: 'demo-mon-kickoff',
@@ -574,11 +592,31 @@ export default function ScheduleHelperPage() {
 
     const [quickType, setQuickType] = useState<'tutoring' | 'meeting' | 'routine'>('meeting');
     const [quickDay, setQuickDay] = useState<DayKey>('수');
+    const [quickStart, setQuickStart] = useState<string>('14:00');
+    const [quickEnd, setQuickEnd] = useState<string>('15:00');
     const [quickTime, setQuickTime] = useState<string>('14:00 ~ 15:00');
     const [quickTitle, setQuickTitle] = useState<string>('');
     const [quickPlace, setQuickPlace] = useState<string>('');
     const [newTodoTitle, setNewTodoTitle] = useState<string>('');
     const [newTodoDue, setNewTodoDue] = useState<string>('이번 주 내');
+
+    const applyTimePreset = (start: string, end: string) => {
+        setQuickStart(start);
+        setQuickEnd(end);
+        setQuickTime(`${start} ~ ${end}`);
+    };
+
+    const addDurationMinutes = (minutes: number) => {
+        const [h, m] = quickStart.split(':').map(Number);
+        if (!isNaN(h) && !isNaN(m)) {
+            const totalMin = h * 60 + m + minutes;
+            const newH = Math.floor(totalMin / 60) % 24;
+            const newM = totalMin % 60;
+            const endStr = `${String(newH).padStart(2, '0')}:${String(newM).padStart(2, '0')}`;
+            setQuickEnd(endStr);
+            setQuickTime(`${quickStart} ~ ${endStr}`);
+        }
+    };
 
     const showToast = (msg: string) => {
         setStatusBanner(msg);
@@ -764,11 +802,12 @@ export default function ScheduleHelperPage() {
     const handleQuickAddEvent = (e: React.FormEvent) => {
         e.preventDefault();
         if (!quickTitle.trim()) return;
+        const timeVal = quickTime.trim() || `${quickStart} ~ ${quickEnd}`;
         const item: ScheduleEventItem = {
             id: `manual-ev-${Date.now()}`,
             source: quickType === 'tutoring' ? 'gmail' : 'kakao_cal',
             day: quickDay,
-            time: quickTime || '시간 미정',
+            time: timeVal,
             title: quickTitle.trim(),
             participantOrPlace: quickPlace.trim() || '직접 등록',
             rawSnippet: '직접 등록한 일정',
@@ -779,7 +818,7 @@ export default function ScheduleHelperPage() {
         setQuickTitle('');
         setQuickPlace('');
         setShowQuickAddModal(false);
-        showToast(`${quickDay}요일 ${quickTime} 일정이 등록되었습니다.`);
+        showToast(`${quickDay}요일 ${timeVal} 일정이 등록되었습니다.`);
     };
 
     const handleQuickAddTodo = (e: React.FormEvent) => {
@@ -1559,30 +1598,124 @@ export default function ScheduleHelperPage() {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-3">
-                                <div>
-                                    <label className="block text-xs font-bold text-slate-500 mb-1.5">요일</label>
-                                    <select
-                                        value={quickDay}
-                                        onChange={(e) => setQuickDay(e.target.value as DayKey)}
-                                        className="w-full rounded-xl bg-[#F8FAFC] border border-slate-200 px-3 py-2 text-sm text-slate-800 font-semibold"
-                                    >
-                                        {DAYS_ORDER.map((d) => (
-                                            <option key={d} value={d}>
-                                                {d}요일
-                                            </option>
-                                        ))}
-                                    </select>
+                            {/* 요일 선택 (클릭) */}
+                            <div>
+                                <div className="flex items-center justify-between mb-1.5">
+                                    <label className="text-xs font-bold text-slate-500">요일 선택</label>
+                                    <span className="text-xs font-bold text-[#4F46E5]">{quickDay}요일</span>
                                 </div>
-                                <div>
-                                    <label className="block text-xs font-bold text-slate-500 mb-1.5">시간</label>
-                                    <input
-                                        type="text"
-                                        value={quickTime}
-                                        onChange={(e) => setQuickTime(e.target.value)}
-                                        placeholder="예: 14:00 ~ 15:00"
-                                        className="w-full rounded-xl bg-[#F8FAFC] border border-slate-200 px-3 py-2 text-sm text-slate-800"
-                                    />
+                                <div className="grid grid-cols-7 gap-1">
+                                    {DAYS_ORDER.map((d) => (
+                                        <button
+                                            key={d}
+                                            type="button"
+                                            onClick={() => setQuickDay(d)}
+                                            className={`py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
+                                                quickDay === d
+                                                    ? 'bg-[#4F46E5] text-white shadow-sm'
+                                                    : 'bg-[#F8FAFC] text-slate-700 border border-slate-200/80 hover:bg-slate-100'
+                                            }`}
+                                        >
+                                            {d}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* 시간 선택 (100% 클릭 및 선택) */}
+                            <div className="space-y-2 pt-1">
+                                <div className="flex items-center justify-between">
+                                    <label className="text-xs font-bold text-slate-500">시간 선택 (클릭)</label>
+                                    <span className="text-xs font-extrabold text-[#4338CA] bg-[#EEF2FF] border border-[#DCE7FE] px-2.5 py-0.5 rounded-lg tabular-nums">
+                                        {quickStart} ~ {quickEnd}
+                                    </span>
+                                </div>
+
+                                {/* 시작 & 종료 시간 드롭다운 셀렉트 */}
+                                <div className="grid grid-cols-2 gap-2">
+                                    <div>
+                                        <span className="block text-[11px] text-slate-400 font-semibold mb-1">시작 시간</span>
+                                        <select
+                                            value={quickStart}
+                                            onChange={(e) => {
+                                                const newStart = e.target.value;
+                                                setQuickStart(newStart);
+                                                setQuickTime(`${newStart} ~ ${quickEnd}`);
+                                            }}
+                                            className="w-full rounded-xl bg-[#F8FAFC] border border-slate-200 px-3 py-2 text-sm text-slate-800 font-bold cursor-pointer focus:bg-white focus:border-[#4F46E5]"
+                                        >
+                                            {TIME_SLOT_OPTIONS.map((t) => (
+                                                <option key={`start-${t}`} value={t}>
+                                                    {t}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <span className="block text-[11px] text-slate-400 font-semibold mb-1">종료 시간</span>
+                                        <select
+                                            value={quickEnd}
+                                            onChange={(e) => {
+                                                const newEnd = e.target.value;
+                                                setQuickEnd(newEnd);
+                                                setQuickTime(`${quickStart} ~ ${newEnd}`);
+                                            }}
+                                            className="w-full rounded-xl bg-[#F8FAFC] border border-slate-200 px-3 py-2 text-sm text-slate-800 font-bold cursor-pointer focus:bg-white focus:border-[#4F46E5]"
+                                        >
+                                            {TIME_SLOT_OPTIONS.map((t) => (
+                                                <option key={`end-${t}`} value={t}>
+                                                    {t}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {/* 소요 시간 간편 연장 (+30분, +1시간, +1.5시간, +2시간) */}
+                                <div className="flex items-center gap-1.5 pt-0.5">
+                                    <span className="text-[11px] text-slate-400 font-semibold shrink-0">간편 연장:</span>
+                                    <div className="flex items-center gap-1 flex-wrap">
+                                        {[
+                                            { label: '+30분', mins: 30 },
+                                            { label: '+1시간', mins: 60 },
+                                            { label: '+1.5시간', mins: 90 },
+                                            { label: '+2시간', mins: 120 },
+                                        ].map((dur) => (
+                                            <button
+                                                key={dur.label}
+                                                type="button"
+                                                onClick={() => addDurationMinutes(dur.mins)}
+                                                className="px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-[#EEF2FF] hover:text-[#4F46E5] text-slate-600 text-[11px] font-bold transition cursor-pointer"
+                                            >
+                                                {dur.label}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* 자주 쓰는 추천 시간대 원클릭 카드 */}
+                                <div className="space-y-1 pt-1">
+                                    <span className="block text-[11px] text-slate-400 font-semibold">자주 쓰는 시간대 원클릭</span>
+                                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+                                        {TIME_PRESETS.map((p) => {
+                                            const isSelected = quickStart === p.start && quickEnd === p.end;
+                                            return (
+                                                <button
+                                                    key={p.label}
+                                                    type="button"
+                                                    onClick={() => applyTimePreset(p.start, p.end)}
+                                                    className={`p-1.5 rounded-xl text-left border transition cursor-pointer ${
+                                                        isSelected
+                                                            ? 'bg-[#EEF2FF] border-[#4F46E5] text-[#4F46E5] shadow-sm'
+                                                            : 'bg-[#F8FAFC] border-slate-200/80 text-slate-600 hover:bg-slate-100'
+                                                    }`}
+                                                >
+                                                    <div className="text-[11px] font-extrabold tabular-nums leading-tight">{p.label}</div>
+                                                    <div className="text-[10px] text-slate-400 font-medium">{p.note}</div>
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
                                 </div>
                             </div>
 
