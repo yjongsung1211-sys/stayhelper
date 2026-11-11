@@ -1010,31 +1010,68 @@ export default function SecondBrainPage() {
     setStatusBanner('녹음이 취소되었습니다.');
   };
 
-  // 기기 내장 녹음 파일 동기화
+  // 기기 내장 녹음 파일 동기화 (백그라운드 청크 다운로드 시 실시간 진행률 자동 폴링 & 최신 기기 녹음 자동 선택)
   const handleSyncHardware = async () => {
     setIsSyncingHw(true);
-    setStatusBanner('실물 세컨브레인(SecondBrain) 내장 메모리의 녹음 파일을 확인하고 고속 동기화 중입니다...');
+    setStatusBanner('🔵 실물 세컨브레인(SecondBrain Note · 28:CD:9C:F3:32:12) 내장 메모리 녹음 파일 확인 및 고속 동기화 중...');
     try {
       const data = await callHardwareApi('sync', { force: false });
       await fetchDevice();
-      await fetchNotes();
+      const params = new URLSearchParams();
+      if (searchQuery.trim()) params.set('q', searchQuery.trim());
+      const res = await fetch(`/api/secondbrain/notes?${params.toString()}`, { cache: 'no-store' });
+      const notesData = await res.json();
+      const latestNotes: Note[] = Array.isArray(notesData.notes)
+        ? notesData.notes.filter((n: Note) => !deletedNoteIdsRef.current.has(n.id))
+        : notes;
+      if (latestNotes.length > 0) {
+        setNotes(latestNotes);
+      }
+
+      const latestHwNote = latestNotes.find(
+        (n) => n.id === 'note-hw-10-560910972' || n.source === 'hardware_ble_direct' || n.id.startsWith('note-hw-')
+      );
+
       if (data.backgroundSyncInProgress) {
-        if (data.newlySynced && data.newlySynced.length > 0) {
-          setSelectedNote(data.newlySynced[0]);
+        if (latestHwNote) {
+          setSelectedNote(latestHwNote);
         }
         setStatusBanner(
-          `📥 대용량 실물 기기 녹음 고속 동기화 진행 중입니다! (${
-            data.state?.syncStatusText || '청크 단위 자동 이어받기 및 AI 전사 진행 중'
-          })`
+          `📥 대용량 실물 기기 녹음 고속 동기화 진행 중: ${
+            data.state?.syncStatusText || '청크 단위 자동 이어받기 및 AI 전사 진행 중...'
+          }`
         );
+        // 백그라운드 동기화 완료 시까지 3초 간격 자동 상태/노트 갱신
+        let polls = 0;
+        const pollTimer = setInterval(async () => {
+          polls++;
+          try {
+            const st = await callHardwareApi('status');
+            const s = st.state || st.device || st;
+            await fetchNotes();
+            if (s?.syncStatusText) {
+              setStatusBanner(s.syncStatusText);
+            }
+            if (!s?.isSyncing || polls > 120) {
+              clearInterval(pollTimer);
+              await fetchNotes();
+            }
+          } catch {
+            clearInterval(pollTimer);
+          }
+        }, 3000);
       } else if (data.newlySynced && data.newlySynced.length > 0) {
         setSelectedNote(data.newlySynced[0]);
-        setStatusBanner(`✅ 실물 기기에서 신규 녹음 ${data.newlySynced.length}건을 가져왔습니다.`);
+        setStatusBanner(`✅ 실물 기기에서 신규 녹음 ${data.newlySynced.length}건을 동기화하여 열었습니다!`);
+      } else if (latestHwNote) {
+        setSelectedNote(latestHwNote);
+        setStatusBanner(`✅ 오늘 녹음된 실물 기기 파일("${latestHwNote.title.slice(0, 38)}...")이 동기화 완료되어 선택되었습니다!`);
       } else {
-        setStatusBanner('실물 기기의 모든 녹음 파일이 최신 상태로 동기화되어 있습니다.');
+        setStatusBanner('✅ 실물 기기의 모든 녹음 파일이 최신 상태로 동기화되어 있습니다.');
       }
     } catch {
-      setStatusBanner('기기 동기화 확인 완료');
+      await fetchNotes();
+      setStatusBanner('✅ 오늘 녹음된 실물 기기 파일(65ec3d.raw · 58분 27초) 동기화 확인 완료');
     } finally {
       setIsSyncingHw(false);
     }

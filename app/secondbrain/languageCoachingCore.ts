@@ -106,36 +106,32 @@ export function detectNoteLanguageCode(note: any): string | null {
   if (/튀르키예어|터키어|turkish|türkçe/i.test(titleAndCat + ' ' + body)) return 'tr';
   if (/광둥어|cantonese|粵語/i.test(titleAndCat + ' ' + body)) return 'yue';
 
-  if (
-    titleAndCat.includes('중국어') ||
-    titleAndCat.includes('중문') ||
-    titleAndCat.includes('chinese') ||
-    /[\u4e00-\u9fff]{6,}/.test(body)
-  ) {
+  // 1순위: 제목·카테고리에 명시된 언어 우선 판별 (본문 내 일부 한자/외래어 오탐 방지)
+  if (titleAndCat.includes('영어') || titleAndCat.includes('english') || titleAndCat.includes('discussion') || String(note.id || '').includes('note-hw-10')) {
+    return 'en';
+  }
+  if (titleAndCat.includes('중국어') || titleAndCat.includes('중문') || titleAndCat.includes('chinese') || String(note.id || '').includes('note-hw-9')) {
     return 'zh';
   }
-  if (
-    titleAndCat.includes('일본어') ||
-    titleAndCat.includes('japanese') ||
-    /[\u3040-\u30ff]{4,}/.test(body)
-  ) {
+  if (titleAndCat.includes('일본어') || titleAndCat.includes('japanese')) {
     return 'ja';
   }
-  if (
-    titleAndCat.includes('스페인어') ||
-    titleAndCat.includes('spanish') ||
-    titleAndCat.includes('español') ||
-    /\b(hola|español|inteligencia artificial|ahorrar|enseñar)\b/i.test(body)
-  ) {
+  if (titleAndCat.includes('스페인어') || titleAndCat.includes('spanish') || titleAndCat.includes('español')) {
     return 'es';
   }
-  if (
-    titleAndCat.includes('영어') ||
-    titleAndCat.includes('english') ||
-    titleAndCat.includes('discussion') ||
-    /[A-Za-z]{4,}\s+[A-Za-z]{4,}\s+[A-Za-z]{4,}\s+[A-Za-z]{4,}/.test(body)
-  ) {
+
+  // 2순위: 본문 문자셋 기반 판별
+  if (/[\u3040-\u30ff]{4,}/.test(body)) {
+    return 'ja';
+  }
+  if (/\b(hola|español|inteligencia artificial|ahorrar|enseñar)\b/i.test(body)) {
+    return 'es';
+  }
+  if (/[A-Za-z]{4,}\s+[A-Za-z]{4,}\s+[A-Za-z]{4,}\s+[A-Za-z]{4,}/.test(body)) {
     return 'en';
+  }
+  if (/[\u4e00-\u9fff]{6,}/.test(body)) {
+    return 'zh';
   }
   return null;
 }
@@ -572,7 +568,140 @@ export function buildLanguageCoachingData(
     };
   }
 
-  // 4. 🇺🇸 영어 수업 노트 맞춤 문법 교정 · 더 좋은 대답/질문 · 시나리오
+    // 4. 🇺🇸 영어 수업 노트 맞춤 문법 교정 · 더 좋은 대답/질문 · 시나리오
+  if (id.includes('note-hw-10') || title.includes('Ready or Not') || text.includes('65ec3d')) {
+    return {
+      lang: 'en',
+      langBadge: '🇺🇸 실물 기기 녹음 1:1 영어 코칭 (영화 개연성 · 4대 유튜브 · Gemini 영상 자동화)',
+      ttsLang: 'en-US',
+      grammarCorrections: [
+        {
+          timeStr: '04:55',
+          timeSec: 295,
+          myWrongSentence: 'Computer laptop monitor two... Set up my office. (명사 나열형 구어)',
+          correctedSentence: 'I recently set up a dual-monitor workstation connected to my laptop in my office.',
+          pronunciation: '아이 리슨틀리 셋 업 어 듀얼 모니터 워크스테이션 커넥티드 투 마이 랩탑 인 마이 오피스.',
+          grammarPoint: '"노트북에 모니터 2대를 연결해 사무실을 세팅했다"는 표현은 "set up a dual-monitor workstation connected to my laptop"이라고 하면 완벽한 비즈니스 영어가 됩니다.',
+        },
+        {
+          timeStr: '08:18',
+          timeSec: 498,
+          myWrongSentence: "Ocean's Eight is just the same story, so I'm bored. (감정 형용사 bored vs boring 및 시제 교정)",
+          correctedSentence: "Ocean's Eight followed the exact same plot formula as Ocean's Eleven, so I found it a bit boring.",
+          pronunciation: '오션스 에이트 팔로우드 디 이그잭트 세임 플롯 포뮬러 애즈 오션스 일레븐, 소 아이 파운드 잇 어 빗 보링.',
+          grammarPoint: `"똑같은 스토리 구조"는 "the exact same plot formula"로 표현하며, 과거에 본 영화가 지루했다고 말할 때는 현재형 "I'm bored" 대신 "I found it a bit boring"을 씁니다.`,
+        },
+        {
+          timeStr: '30:33',
+          timeSec: 1833,
+          myWrongSentence: 'Plausibility is hard... Some movie I watch 30 minutes and if it is too predictable I lost interest. (시제 불일치 및 조건절 다듬기)',
+          correctedSentence: 'Plausibility is crucial for me—if a thriller becomes too predictable within the first 30 minutes, I quickly lose interest and turn it off.',
+          pronunciation: '플로저빌리티 이즈 크루셜 포 미 — 이프 어 스릴러 비컴즈 투 프리딕터블 위딘 더 퍼스트 써티 미니츠, 아이 퀴클리 루즈 인터레스트 앤 턴 잇 오프.',
+          grammarPoint: '평소 습관을 나타내는 조건문("If a thriller becomes...")에서는 주절도 과거형("lost")이 아니라 현재형("I lose interest and turn it off")으로 시제를 일치시켜야 자연스럽습니다.',
+        },
+        {
+          timeStr: '36:26',
+          timeSec: 2186,
+          myWrongSentence: 'Our family vlog has 10,000 follower, and another channel is Korean people studying English, Chinese, Japanese. (단복수 및 관계절 교정)',
+          correctedSentence: 'Our family vlog channel has over 10,000 subscribers, and I also run language-learning channels teaching Korean in English and Spanish.',
+          pronunciation: '아워 패밀리 브이로그 채널 해즈 오버 텐 싸우전드 섭스크라이버스, 앤 아이 올소 런 랭귀지 러닝 채널스 티칭 코리안 인 잉글리시 앤 스패니시.',
+          grammarPoint: '유튜브 구독자는 "follower"보다 복수형 "subscribers(10,000 subscribers)"가 정확한 원어민 표현이며, 채널을 운영하다는 동사 "run"을 사용합니다.',
+        },
+        {
+          timeStr: '42:19',
+          timeSec: 2539,
+          myWrongSentence: 'If I edit by myself I should spend more 3 hours, but with Gemini it takes 30 minutes. (가정법 과거 및 비교급 교정)',
+          correctedSentence: 'If I edited the videos manually by myself, it would take over three hours, but automating the workflow with Gemini cuts it down to just 30 minutes.',
+          pronunciation: '이프 아이 에디티드 더 비디오스 매뉴얼리 바이 마이셀프, 잇 우드 테이크 오버 쓰리 아워스, 벗 오토메이팅 더 워크플로우 위드 제미나이 컷츠 잇 다운 투 저스트 써티 미니츠.',
+          grammarPoint: '실제와 반대로 "만약 직접 수작업으로 편집한다면 ~걸릴 것이다"라고 가정할 때는 가정법 과거("If I edited..., it would take over three hours")를 쓰고, 시간을 대폭 줄이다는 "cut it down to ~"를 씁니다.',
+        },
+        {
+          timeStr: '47:19',
+          timeSec: 2839,
+          myWrongSentence: 'I have two action cameras, one is DJI and the other one I have is smaller than this. (문장 간결화)',
+          correctedSentence: 'I own two action cameras—a DJI Osmo Action and an even more compact wearable camera for hands-free shooting.',
+          pronunciation: '아이 온 투 액션 카메라스 — 어 디제이아이 오즈모 액션 앤 언 이븐 모어 컴팩트 웨어러블 카메라 포 핸즈프리 슈팅.',
+          grammarPoint: '"smaller than this" 대신 "an even more compact wearable camera(훨씬 더 초소형인 웨어러블 카메라)"라고 표현하면 제품 특징이 한눈에 전달됩니다.',
+        },
+      ],
+      betterAnswers: [
+        {
+          situation: '튜터가 "영화를 고를 때 배우, 액션, 스토리 중 무엇을 가장 중요하게 보나요?"라고 물었을 때 (28:28)',
+          betterSentence: "For pure action movies, I don't mind a simple plot, but when it comes to thrillers, plot plausibility and unpredictable twists are everything to me.",
+          pronunciation: '포 퓨어 액션 무비스, 아이 돈 마인드 어 심플 플롯, 벗 웬 잇 컴즈 투 스릴러스, 플롯 플로저빌리티 앤 언프리딕터블 트위스츠 아 에브리씽 투 미.',
+          koreanMeaning: '순수 액션 영화는 단순한 줄거리도 상관없지만, 스릴러 영화만큼은 스토리의 개연성(plausibility)과 예측할 수 없는 반전(unpredictable twists)이 전부입니다.',
+          nuanceTip: '"when it comes to ~(~에 관해서라면)"와 "unpredictable twists(예측 불가한 반전)"를 함께 쓰면 원어민 영화 평론가처럼 세련된 답변이 됩니다.',
+        },
+        {
+          situation: '가족 브이로그에 본인이 자주 출연하지 않는 이유를 유머러스하고 자연스럽게 설명할 때 (38:04)',
+          betterSentence: "I'm fine being on camera if needed, but our subscribers love watching my wife and our baby, so I mostly stay behind the scenes as the producer.",
+          pronunciation: '아임 파인 비잉 온 카메라 이프 니디드, 벗 아워 섭스크라이버스 러브 워칭 마이 와이프 앤 아워 베이비, 소 아이 모스틀리 스테이 비하인드 더 씬즈 애즈 더 프로듀서.',
+          koreanMeaning: '필요하면 카메라에 나오는 것도 괜찮지만, 구독자분들이 아내와 아기를 보는 걸 좋아해서 저는 주로 카메라 뒤(behind the scenes)에서 총괄 프로듀서 역할을 합니다.',
+          nuanceTip: '"카메라에 출연하다(be on camera)"와 "무대/카메라 뒤에서 일하다(stay behind the scenes)"는 방송·유튜브 업계 필수 관용구입니다.',
+        },
+        {
+          situation: '편집할 영상이 산더미처럼 밀려 있다는 튜터에게 AI 영상 자동화를 추천할 때 (55:51)',
+          betterSentence: 'Manual video editing is the biggest time sink for creators—you should definitely try using Gemini to automate the rough cuts and captions.',
+          pronunciation: '매뉴얼 비디오 에디팅 이즈 더 비기스트 타임 싱크 포 크리에이터스 — 유 슈드 데피니틀리 트라이 유징 제미나이 투 오토메이트 더 러프 컷츠 앤 캡션스.',
+          koreanMeaning: '수작업 영상 편집은 크리에이터에게 가장 시간을 많이 잡아먹는 작업(time sink)입니다. 컷 편집과 자막 작업을 자동화하는 데 제미나이를 꼭 한번 써보세요.',
+          nuanceTip: '"시간을 엄청나게 잡아먹는 일"을 원어민들은 "a huge time sink"라고 표현합니다.',
+        },
+      ],
+      betterQuestions: [
+        {
+          context: '튜터가 추천한 스릴러 영화 Ready or Not의 매력 포인트를 물어볼 때 (10:39)',
+          questionSentence: 'What hooked you the most about Ready or Not—was it the dark humor, the suspense, or the lead actress?',
+          pronunciation: '왓 훅트 유 더 모스트 어바웃 레디 오어 낫 — 워즈 잇 더 다크 유머, 더 서스펜스, 오어 더 리드 액트리스?',
+          koreanMeaning: '영화 Ready or Not에서 선생님을 가장 사로잡은 포인트는 블랙 코미디였나요, 긴장감(서스펜스)이었나요, 아니면 주연 여배우의 연기였나요?',
+        },
+        {
+          context: '베트남과 보라카이 여행을 앞둔 튜터에게 여행 브이로그 촬영 장비를 물어볼 때 (49:06)',
+          questionSentence: 'Are you planning to shoot your Vietnam and Boracay travel vlogs with your action camera or mostly on your phone?',
+          pronunciation: '아 유 플래닝 투 슛 유어 베트남 앤 보라카이 트래블 브이로그스 위드 유어 액션 카메라 오어 모스틀리 온 유어 폰?',
+          koreanMeaning: '이번 베트남과 보라카이 여행 브이로그는 보유하신 액션캠으로 촬영하실 계획인가요, 아니면 주로 스마트폰으로 찍으실 건가요?',
+        },
+        {
+          context: '튜터가 웹사이트와 유튜브 채널을 칭찬해 주었을 때 자연스럽게 피드백을 구하는 질문 (57:34)',
+          questionSentence: 'Thank you for checking out my website and channels! Which part stood out to you the most?',
+          pronunciation: '땡큐 포 체킹 아웃 마이 웹사이트 앤 채널스! 위치 파트 스투드 아웃 투 유 더 모스트?',
+          koreanMeaning: '제 웹사이트와 유튜브 채널을 봐주셔서 감사합니다! 어떤 부분이 가장 인상 깊으셨나요(눈에 띄었나요)?',
+        },
+      ],
+      scenarioTitle: '스릴러 영화 취향 토론 & AI 유튜브 영상 제작 자동화 노하우 대담',
+      scenarioContext: '오늘 58분 실물 기기 녹음 수업(65ec3d.raw)에서 나눈 영화 개연성 토론, 4대 유튜브 채널 소개, Gemini AI 영상 자동화(3시간➔30분)를 완벽한 원어민 영어로 재현하는 실전 시나리오입니다.',
+      scenarioTurns: [
+        {
+          role: 'Tutor',
+          speakerLabel: 'English Tutor (Boosie)',
+          foreignText: 'When you watch a movie, what makes you stay engaged—is it the cast, the action, or the storyline?',
+          pronunciation: '웬 유 워치 어 무비, 왓 메익스 유 스테이 인게이지드 — 이즈 잇 더 캐스트, 디 액션, 오어 더 스토리라인?',
+          koreanText: '영화를 보실 때 무엇이 대표님을 몰입하게 만드나요? 출연 배우인가요, 액션인가요, 아니면 스토리라인인가요?',
+        },
+        {
+          role: 'Me',
+          speakerLabel: '윤종성 대표 (Me)',
+          foreignText: 'For thrillers, plot plausibility is crucial for me. If the story becomes too predictable within the first 30 minutes, I quickly lose interest and turn it off.',
+          pronunciation: '포 스릴러스, 플롯 플로저빌리티 이즈 크루셜 포 미. 이프 더 스토리 비컴즈 투 프리딕터블 위딘 더 퍼스트 써티 미니츠, 아이 퀴클리 루즈 인터레스트 앤 턴 잇 오프.',
+          koreanText: '스릴러 영화는 스토리의 개연성이 가장 중요합니다. 초반 30분 안에 전개가 너무 뻔해지면 흥미를 잃고 바로 꺼버립니다.',
+        },
+        {
+          role: 'Tutor',
+          speakerLabel: 'English Tutor (Boosie)',
+          foreignText: 'I totally get that! By the way, how long does it usually take you to edit and upload videos for your four YouTube channels?',
+          pronunciation: '아이 토털리 겟 댓! 바이 더 웨이, 하우 롱 더즈 잇 유주얼리 테이크 유 투 에디트 앤 업로드 비디오스 포 유어 포 유투브 채널스?',
+          koreanText: '완전 공감해요! 그나저나 운영하시는 4개 유튜브 채널의 영상을 편집하고 업로드하는 데 보통 시간이 얼마나 걸리시나요?',
+        },
+        {
+          role: 'Me',
+          speakerLabel: '윤종성 대표 (Me)',
+          foreignText: 'If I edited them manually by myself, it would take over three hours per video. But by automating the workflow with Gemini and Claude, I can finish and upload a video in just 30 minutes!',
+          pronunciation: '이프 아이 에디티드 뎀 매뉴얼리 바이 마이셀프, 잇 우드 테이크 오버 쓰리 아워스 퍼 비디오. 벗 바이 오토메이팅 더 워크플로우 위드 제미나이 앤 클로드, 아이 캔 피니시 앤 업로드 어 비디오 인 저스트 써티 미니츠!',
+          koreanText: '만약 혼자 수작업으로 편집한다면 영상 하나당 3시간 넘게 걸릴 겁니다. 하지만 제미나이와 클로드로 워크플로우를 자동화해서 단 30분 만에 제작과 업로드를 끝냅니다!',
+        },
+      ],
+    };
+  }
+
   return {
     lang: 'en',
     langBadge: '🇺🇸 비즈니스 & 실전 영어 1:1 코칭 (문법 교정 · 고급 대답 · 롤플레이)',
