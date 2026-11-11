@@ -15,46 +15,61 @@ export function middleware(request: NextRequest) {
   ) {
     return NextResponse.next();
   }
-  if ((host.includes('notehelper') || host.includes('secondbrain')) && pathname === '/') {
+  if (host.includes('secondbrain') && pathname === '/') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/secondbrain';
+    return NextResponse.rewrite(url);
+  }
+  if (host.includes('notehelper') && pathname === '/') {
     const url = request.nextUrl.clone();
     url.pathname = '/notehelper';
     return NextResponse.rewrite(url);
   }
 
-  // 1. WeddingHelper (Temporarily Paused): Rewrite all routes to /weddinghelper coming soon (except /invite)
+  // 1. WeddingHelper (ACTIVE PRODUCTION SERVICE)
   if (host.includes('weddinghelper')) {
-    if (!pathname.startsWith('/invite')) {
+    if (pathname === '/') {
       const url = request.nextUrl.clone();
       url.pathname = '/weddinghelper';
       return NextResponse.rewrite(url);
     }
+    if (pathname === '/gallery') {
+      const url = request.nextUrl.clone();
+      url.pathname = '/weddinghelper/gallery';
+      return NextResponse.rewrite(url);
+    }
+    return NextResponse.next();
   }
 
-  // 2. StayHelper (ACTIVE SERVICE): Serve StayHelper live experience at root '/'
+  // 2. StayHelper (ACTIVE PRODUCTION SERVICE)
   if ((host.includes('thestayhelper') || host.includes('stayhelper')) && pathname === '/') {
     const url = request.nextUrl.clone();
     url.pathname = '/stayhelper';
     return NextResponse.rewrite(url);
   }
 
-  // 3. StylingHelper (Temporarily Paused): Rewrite all routes to /stylinghelper coming soon
+  // 3. StylingHelper (ACTIVE PRODUCTION SERVICE)
   if (host.includes('stylinghelper')) {
-    const url = request.nextUrl.clone();
-    url.pathname = '/stylinghelper';
-    return NextResponse.rewrite(url);
+    if (pathname === '/') {
+      const url = request.nextUrl.clone();
+      url.pathname = '/stylinghelper';
+      return NextResponse.rewrite(url);
+    }
+    return NextResponse.next();
   }
 
-  // 4. PersonalColorHelper (ACTIVE LIVE SERVICE): Serve PersonalColorHelper directly at root '/'
+  // 4. PersonalColorHelper (ACTIVE PRODUCTION SERVICE)
   if (host.includes('personalcolorhelper')) {
     if (pathname === '/personalcolorhelper' || pathname === '/colorhelper') {
       const url = request.nextUrl.clone();
       url.pathname = '/';
       return NextResponse.redirect(url, 301);
     }
+    return NextResponse.next();
   }
 
-  // 5. RoomHelper (Temporarily Paused): Rewrite to /roomhelper coming soon
-  if (host.includes('roomhelper')) {
+  // 5. RoomHelper
+  if (host.includes('roomhelper') && pathname === '/') {
     const url = request.nextUrl.clone();
     url.pathname = '/roomhelper';
     return NextResponse.rewrite(url);

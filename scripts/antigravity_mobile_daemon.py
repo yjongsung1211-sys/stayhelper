@@ -63,6 +63,17 @@ def execute_action_locally(action: str, query: str = "") -> str:
             raw = handle_ai_chief_chat(query or "현재 전사 핵심 현황을 요약해줘")
             return strip_html(raw)
 
+        # SecondBrain Sync Kernel 연동: 모바일에서 보낸 메모 한 줄을 볼트·그래프·ScheduleHelper 로 구조화
+        if action in ("capture", "memo", "note", "voice_memo"):
+            import secondbrain_sync_kernel as sbk
+            if not query.strip():
+                return "🧠 캡처할 메모 내용이 비어 있습니다."
+            return sbk.capture_via_daemon_or_local(query, source="antigravity_mobile")
+
+        if action in ("kernel", "kernel_status", "secondbrain_status"):
+            import secondbrain_sync_kernel as sbk
+            return sbk.kernel_status_report()
+
         if action == "status":
             skills_idx = DATA_DIR / "hana_skills_index.json"
             skills_cnt = 585
@@ -319,6 +330,7 @@ def run_daemon_loop():
     print(f"[*] Antigravity Mobile Bridge Daemon started (PID: {os.getpid()}, Tunnel: {tunnel_url or 'Cloud-Vault-Sync'})")
 
     last_cloud_beat = 0
+    last_s22_tick = 0
     while True:
         try:
             now = time.time()
@@ -326,6 +338,14 @@ def run_daemon_loop():
             sync_once_with_cloud(tunnel_url if (now - last_cloud_beat > 90) else "")
             if now - last_cloud_beat > 90:
                 last_cloud_beat = now
+            # Every 60 seconds, run Galaxy S22 24/7 Autonomous Worker tick (Voice Recorder Poll + Scheduled QA/Marketing)
+            if now - last_s22_tick > 60:
+                last_s22_tick = now
+                try:
+                    import hana_galaxy_s22_24h_worker
+                    hana_galaxy_s22_24h_worker.run_24h_tick()
+                except Exception:
+                    pass
         except Exception as e:
             print(f"[-] Daemon sync notice: {e}")
         time.sleep(6)

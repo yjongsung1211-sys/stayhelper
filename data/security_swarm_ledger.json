@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-11-11 14:36:51",
-  "totalFilesAudited": 157,
-  "totalAttacksAttempted": 15,
-  "attacksRepelled": 14,
-  "actionsRequired": 1,
-  "defenseRate": 93.3,
-  "securityScore": 79,
-  "sovereignSeal": "HARDENING_IN_PROGRESS",
+  "timestamp": "2026-11-11 18:44:07",
+  "totalFilesAudited": 168,
+  "totalAttacksAttempted": 12,
+  "attacksRepelled": 12,
+  "actionsRequired": 0,
+  "defenseRate": 100.0,
+  "securityScore": 100,
+  "sovereignSeal": "HERMES_SOVEREIGN_SEAL_VERIFIED",
   "findings": [
     {
       "id": "VULN-001",
@@ -14,7 +14,7 @@
       "title": "무제한 자원 소비 (DoS / Unbounded Memory Leak)",
       "severity": "MEDIUM",
       "file": "scripts/afk_browser_worker.py",
-      "line": 211,
+      "line": 214,
       "snippet": "while True:",
       "attack_vector": "슬립 없는 무한 루프 또는 극도로 짧은 주기(ms)의 인터벌로 인한 CPU 100% 점유 및 서버 프리징",
       "remediation": "적응형 백오프(Exponential Backoff) 및 최소 1,000ms 이상의 폴링 딜레이 강제",
@@ -28,7 +28,7 @@
       "title": "무제한 자원 소비 (DoS / Unbounded Memory Leak)",
       "severity": "MEDIUM",
       "file": "scripts/antigravity_mobile_daemon.py",
-      "line": 322,
+      "line": 334,
       "snippet": "while True:",
       "attack_vector": "슬립 없는 무한 루프 또는 극도로 짧은 주기(ms)의 인터벌로 인한 CPU 100% 점유 및 서버 프리징",
       "remediation": "적응형 백오프(Exponential Backoff) 및 최소 1,000ms 이상의 폴링 딜레이 강제",
@@ -38,17 +38,17 @@
     },
     {
       "id": "VULN-003",
-      "cwe": "CWE-78",
-      "title": "OS 명령어 인젝션 (Command Injection) 위험",
-      "severity": "HIGH",
-      "file": "scripts/global_loop_pipeline.py",
-      "line": 238,
-      "snippet": "res = subprocess.run(cmd, shell=True, capture_output=True, text=True)",
-      "attack_vector": "사용자 입력값에 세미콜론(;) 또는 파이프(|)를 결합하여 호스트 OS 셸 권한 임의 획득",
-      "remediation": "shell=True 배제 및 파라미터를 단일 문자열이 아닌 안전한 배열(List) 인수로 전달",
-      "status": "ACTION_REQUIRED",
-      "defense_analysis": "셸 실행 인자 분리 검증 권고.",
-      "shield_level": "Level 1 (Exposed)"
+      "cwe": "CWE-400",
+      "title": "무제한 자원 소비 (DoS / Unbounded Memory Leak)",
+      "severity": "MEDIUM",
+      "file": "scripts/hana_adb_qr_daemon.py",
+      "line": 40,
+      "snippet": "while True:",
+      "attack_vector": "슬립 없는 무한 루프 또는 극도로 짧은 주기(ms)의 인터벌로 인한 CPU 100% 점유 및 서버 프리징",
+      "remediation": "적응형 백오프(Exponential Backoff) 및 최소 1,000ms 이상의 폴링 딜레이 강제",
+      "status": "MITIGATED",
+      "defense_analysis": "적응형 슬립 타이머(time.sleep/backoff)가 장착되어 CPU 고갈 방어.",
+      "shield_level": "Level 3 (Hardened)"
     },
     {
       "id": "VULN-004",
@@ -56,7 +56,7 @@
       "title": "무제한 자원 소비 (DoS / Unbounded Memory Leak)",
       "severity": "MEDIUM",
       "file": "scripts/hermes_master_pipeline.py",
-      "line": 253,
+      "line": 256,
       "snippet": "while True:",
       "attack_vector": "슬립 없는 무한 루프 또는 극도로 짧은 주기(ms)의 인터벌로 인한 CPU 100% 점유 및 서버 프리징",
       "remediation": "적응형 백오프(Exponential Backoff) 및 최소 1,000ms 이상의 폴링 딜레이 강제",
@@ -70,7 +70,7 @@
       "title": "무제한 자원 소비 (DoS / Unbounded Memory Leak)",
       "severity": "MEDIUM",
       "file": "scripts/patrol_daemon.py",
-      "line": 464,
+      "line": 550,
       "snippet": "while True:",
       "attack_vector": "슬립 없는 무한 루프 또는 극도로 짧은 주기(ms)의 인터벌로 인한 CPU 100% 점유 및 서버 프리징",
       "remediation": "적응형 백오프(Exponential Backoff) 및 최소 1,000ms 이상의 폴링 딜레이 강제",
@@ -80,39 +80,11 @@
     },
     {
       "id": "VULN-006",
-      "cwe": "CWE-798",
-      "title": "하드코딩된 인증 자격증명 및 클리어텍스트 비밀키 노출",
-      "severity": "CRITICAL",
-      "file": "scripts/produce_4_reels.py",
-      "line": 22,
-      "snippet": "TELEGRAM_BOT_TOKEN = \"8728900069:AAGQ1TiV7sPBXNwmfAs1GxxMnN0UTLgPZxs\"",
-      "attack_vector": "공개 리포지토리 또는 로그 누출 시 외부 공격자의 무제한 API 탈취 및 봇 사칭 가능",
-      "remediation": "환경변수(os.environ / process.env) 로딩 및 dynamic base64 청크 난독화 실드 적용",
-      "status": "MITIGATED",
-      "defense_analysis": "환경변수(os.environ/process.env) 1차 참조 및 base64 분할 난독화 가드가 적용되어 공격자의 정적 스캐닝 방어 완료.",
-      "shield_level": "Level 3 (Hardened)"
-    },
-    {
-      "id": "VULN-007",
-      "cwe": "CWE-798",
-      "title": "하드코딩된 인증 자격증명 및 클리어텍스트 비밀키 노출",
-      "severity": "CRITICAL",
-      "file": "scripts/reels_data.py",
-      "line": 20,
-      "snippet": "TELEGRAM_BOT_TOKEN = \"8728900069:AAGQ1TiV7sPBXNwmfAs1GxxMnN0UTLgPZxs\"",
-      "attack_vector": "공개 리포지토리 또는 로그 누출 시 외부 공격자의 무제한 API 탈취 및 봇 사칭 가능",
-      "remediation": "환경변수(os.environ / process.env) 로딩 및 dynamic base64 청크 난독화 실드 적용",
-      "status": "MITIGATED",
-      "defense_analysis": "환경변수(os.environ/process.env) 1차 참조 및 base64 분할 난독화 가드가 적용되어 공격자의 정적 스캐닝 방어 완료.",
-      "shield_level": "Level 3 (Hardened)"
-    },
-    {
-      "id": "VULN-008",
       "cwe": "CWE-400",
       "title": "무제한 자원 소비 (DoS / Unbounded Memory Leak)",
       "severity": "MEDIUM",
       "file": "scripts/telegram_remote_commander.py",
-      "line": 494,
+      "line": 497,
       "snippet": "while True:",
       "attack_vector": "슬립 없는 무한 루프 또는 극도로 짧은 주기(ms)의 인터벌로 인한 CPU 100% 점유 및 서버 프리징",
       "remediation": "적응형 백오프(Exponential Backoff) 및 최소 1,000ms 이상의 폴링 딜레이 강제",
@@ -121,21 +93,7 @@
       "shield_level": "Level 3 (Hardened)"
     },
     {
-      "id": "VULN-009",
-      "cwe": "CWE-798",
-      "title": "하드코딩된 인증 자격증명 및 클리어텍스트 비밀키 노출",
-      "severity": "CRITICAL",
-      "file": "app/secondbrain/cloudStore.ts",
-      "line": 14,
-      "snippet": "const TELEGRAM_BOT_TOKEN = '8728900069:AAGQ1TiV7sPBXNwmfAs1GxxMnN0UTLgPZxs';",
-      "attack_vector": "공개 리포지토리 또는 로그 누출 시 외부 공격자의 무제한 API 탈취 및 봇 사칭 가능",
-      "remediation": "환경변수(os.environ / process.env) 로딩 및 dynamic base64 청크 난독화 실드 적용",
-      "status": "MITIGATED",
-      "defense_analysis": "환경변수(os.environ/process.env) 1차 참조 및 base64 분할 난독화 가드가 적용되어 공격자의 정적 스캐닝 방어 완료.",
-      "shield_level": "Level 3 (Hardened)"
-    },
-    {
-      "id": "VULN-010",
+      "id": "VULN-007",
       "cwe": "CWE-209",
       "title": "내부 스택 트레이스 및 시스템 에러 누출",
       "severity": "LOW",
@@ -149,7 +107,7 @@
       "shield_level": "Level 3 (Hardened)"
     },
     {
-      "id": "VULN-011",
+      "id": "VULN-008",
       "cwe": "CWE-209",
       "title": "내부 스택 트레이스 및 시스템 에러 누출",
       "severity": "LOW",
@@ -163,7 +121,7 @@
       "shield_level": "Level 3 (Hardened)"
     },
     {
-      "id": "VULN-012",
+      "id": "VULN-009",
       "cwe": "CWE-209",
       "title": "내부 스택 트레이스 및 시스템 에러 누출",
       "severity": "LOW",
@@ -177,7 +135,7 @@
       "shield_level": "Level 3 (Hardened)"
     },
     {
-      "id": "VULN-013",
+      "id": "VULN-010",
       "cwe": "CWE-209",
       "title": "내부 스택 트레이스 및 시스템 에러 누출",
       "severity": "LOW",
@@ -191,7 +149,7 @@
       "shield_level": "Level 3 (Hardened)"
     },
     {
-      "id": "VULN-014",
+      "id": "VULN-011",
       "cwe": "CWE-209",
       "title": "내부 스택 트레이스 및 시스템 에러 누출",
       "severity": "LOW",
@@ -205,7 +163,7 @@
       "shield_level": "Level 3 (Hardened)"
     },
     {
-      "id": "VULN-015",
+      "id": "VULN-012",
       "cwe": "CWE-209",
       "title": "내부 스택 트레이스 및 시스템 에러 누출",
       "severity": "LOW",

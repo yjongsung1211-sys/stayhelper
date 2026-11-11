@@ -5,7 +5,7 @@ import https from "https";
 
 export const dynamic = "force-dynamic";
 
-const BOT_TOKEN = "8728900069:AAGQ1TiV7sPBXNwmfAs1GxxMnN0UTLgPZxs";
+const BOT_TOKEN = (process.env.TELEGRAM_BOT_TOKEN ?? '');
 const CHAT_ID = "8971100274";
 
 const TMP_FILE = path.join("/tmp", "stylinghelper_members.json");

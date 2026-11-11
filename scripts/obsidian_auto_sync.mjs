@@ -40,10 +40,81 @@ function formatKoreanDate(isoStr) {
 
 function formatDurationHuman(seconds) {
   const sec = Math.max(0, Math.round(Number(seconds) || 0));
-  if (sec < 60) return `${sec}초`;
-  const mins = Math.floor(sec / 60);
+  const hrs = Math.floor(sec / 3600);
+  const mins = Math.floor((sec % 3600) / 60);
   const rem = sec % 60;
-  return rem > 0 ? `${mins}분 ${rem}초 (${sec}s)` : `${mins}분 (${sec}s)`;
+  if (hrs > 0) return `${hrs}시간 ${mins}분 ${rem}초`;
+  if (mins > 0) return `${mins}분 ${rem}초`;
+  return `${rem}초`;
+}
+
+function detectCategorySubfolder(note) {
+  const combined = `${note?.title || ''} ${(note?.tags || []).join(' ')} ${note?.source || ''} ${
+    note?.transcript || ''
+  }`.toLowerCase();
+
+  if (
+    combined.includes('일본어') ||
+    combined.includes('japanese') ||
+    /[\u3040-\u309F\u30A0-\u30FF]/.test(combined)
+  ) {
+    return '02_Areas/Japanese_Class';
+  }
+  if (
+    combined.includes('중국어') ||
+    combined.includes('chinese') ||
+    combined.includes('중문') ||
+    /[\u4E00-\u9FFF]{3,}/.test(combined)
+  ) {
+    return '02_Areas/Chinese_Class';
+  }
+  if (
+    combined.includes('스페인어') ||
+    combined.includes('spanish') ||
+    combined.includes('español')
+  ) {
+    return '02_Areas/Spanish_Class';
+  }
+  if (combined.includes('영어 수업') || combined.includes('english')) {
+    return '02_Areas/English_Class';
+  }
+  if (
+    combined.includes('화천퍼스트') ||
+    combined.includes('일진전기') ||
+    combined.includes('다스테크') ||
+    combined.includes('동양산전') ||
+    combined.includes('나인테크') ||
+    combined.includes('aidc') ||
+    combined.includes('데이터센터')
+  ) {
+    return '01_Projects/AIDC_화천퍼스트';
+  }
+  if (
+    combined.includes('퀀텀테크') ||
+    combined.includes('샘컴') ||
+    combined.includes('광무선') ||
+    combined.includes('ofe')
+  ) {
+    return '01_Projects/퀀텀테크놀로지_샘컴';
+  }
+  if (
+    combined.includes('스테이헬퍼') ||
+    combined.includes('스타일링헬퍼') ||
+    combined.includes('퍼스널컬러') ||
+    combined.includes('룸헬퍼') ||
+    combined.includes('웨딩헬퍼')
+  ) {
+    return '01_Projects/5대_Helper_플랫폼';
+  }
+  if (
+    combined.includes('유튜브') ||
+    combined.includes('쇼츠') ||
+    combined.includes('다큐') ||
+    combined.includes('lab to life')
+  ) {
+    return '01_Projects/유튜브_미디어스튜디오';
+  }
+  return null;
 }
 
 function extractAudioFilename(audioUrl) {
@@ -62,7 +133,12 @@ function extractAudioFilename(audioUrl) {
 function ensureDiarizedTranscript(rawTranscript) {
   const text = String(rawTranscript || '').trim();
   if (!text) return 'Speaker 1: (무음 또는 인식된 음성 없음)';
-  if (/^Speaker\s+\d+\s*:/m.test(text)) {
+  if (
+    /^(Speaker\s+\d+|선생님|중국어 선생님|윤종성(?:\s*대표)?|Andy|尹中盛|John|Johnson|Yong San|Jolene|Tutor)\s*:/m.test(
+      text
+    ) ||
+    /^\[\d{2}:\d{2}\]/m.test(text)
+  ) {
     return text;
   }
   const paragraphs = text
@@ -71,8 +147,14 @@ function ensureDiarizedTranscript(rawTranscript) {
     .filter(Boolean);
   if (paragraphs.length === 0) return `Speaker 1: ${text}`;
   return paragraphs
-    .map((line, idx) => {
-      if (/^Speaker\s+\d+\s*:/i.test(line)) return line;
+    .map((line) => {
+      if (
+        /^(Speaker\s+\d+\s*:|\[\d{2}:\d{2}\]|[#■\-|➔❌✅=📌]|[A-Za-z가-힣\u4e00-\u9fff\s]{1,18}:)/i.test(
+          line
+        )
+      ) {
+        return line;
+      }
       return `Speaker 1: ${line}`;
     })
     .join('\n\n');
@@ -220,6 +302,20 @@ export function syncNotesToObsidian() {
         ? `\n### 🔊 원본 녹음 오디오\n![[${vaultAudioRelPath}]]\n`
         : '';
 
+      const categorySubfolder = detectCategorySubfolder(note);
+      const actionOutputsObj = note.actionOutputs || {};
+      const actionOutputEntries = Object.values(actionOutputsObj).filter(
+        (entry) => entry && entry.content
+      );
+      const actionOutputsBlock =
+        actionOutputEntries.length > 0
+          ? `\n---\n\n## 🚀 [섹터 3] 보이스 투 액션 (Voice-to-Action) AI 파생 산출물\n\n` +
+            actionOutputEntries
+              .map((entry) => `### ${entry.label || 'AI 파생 문서'}\n\n${entry.content}`)
+              .join('\n\n---\n\n') +
+            '\n'
+          : '';
+
       // Single unified Recording Sector markdown file
       const mdContent = `---
 id: "${note.id || ''}"
@@ -229,6 +325,7 @@ duration_seconds: ${durationSec}
 device: "${String(deviceModel).replace(/"/g, '\\"')}"
 speakers: "${String(speakers).replace(/"/g, '\\"')}"
 source: "${source}"
+category_folder: "${categorySubfolder || '00_Inbox'}"
 ${vaultAudioRelPath ? `audio_file: "${vaultAudioRelPath}"\n` : ''}tags:
 ${yamlTags}
 ---
@@ -240,7 +337,9 @@ ${yamlTags}
 > - **녹음 길이**: ${durationHuman}
 > - **녹음 기기**: ${deviceModel}
 > - **참여 화자**: ${speakers}
-> - **보관 경로**: \`00_Inbox/${mdFilename}\`
+> - **보관 경로**: \`00_Inbox/${mdFilename}\`${
+        categorySubfolder ? ` & \`${categorySubfolder}/${safeTitle}.md\`` : ''
+      }
 ${audioEmbedBlock}
 ---
 
@@ -253,15 +352,28 @@ ${structuredSummary}
 ## 💬 [섹터 2] 화자 분리 전문 녹취록 (Speaker-Diarized Transcript)
 
 ${diarizedTranscript}
-
+${actionOutputsBlock}
 ---
-*이 문서는 SecondBrain Note 녹음에 대해 [1. 구조화 심층 요약]과 [2. 화자 분리 녹취록]을 하나의 녹음 섹터로 통합하여 옵시디언(\`00_Inbox\`)에 자동 동기화된 노트입니다.*
+*이 문서는 SecondBrain Note 녹음에 대해 [1. 구조화 심층 요약], [2. 화자 분리 녹취록], [3. 보이스 투 액션 파생 산출물]을 통합하여 옵시디언(\`00_Inbox\`${
+        categorySubfolder ? ` 및 \`${categorySubfolder}\`` : ''
+      })에 자동 동기화된 노트입니다.*
 `;
 
       fs.writeFileSync(mdFullPath, mdContent, 'utf8');
 
+      if (categorySubfolder) {
+        try {
+          const catDir = path.join(VAULT_DIR, categorySubfolder);
+          fs.mkdirSync(catDir, { recursive: true });
+          fs.writeFileSync(path.join(catDir, `${safeTitle}.md`), mdContent, 'utf8');
+        } catch (catErr) {
+          console.error('[Obsidian Sync] Category mirror error:', catErr.message);
+        }
+      }
+
       note.obsidianSynced = true;
       note.obsidianPath = `00_Inbox/${mdFilename}`;
+      note.categoryFolder = categorySubfolder || '00_Inbox';
       note.obsidianSyncedAt = nowIso;
 
       hubEntries.push({

@@ -52,7 +52,10 @@ PID_FILE = DATA_DIR / "afk_browser_worker.pid"
 AFK_LOG_FILE = DATA_DIR / "afk_browser_activity.json"
 
 # Telegram credentials
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8728900069:AAGQ1TiV7sPBXNwmfAs1GxxMnN0UTLgPZxs")
+import sys as _hermes_sys, pathlib as _hermes_pathlib  # 시크릿은 .env.local 에서 읽는다 (hermes_env.py)
+_hermes_sys.path.insert(0, str(next(p for p in _hermes_pathlib.Path(__file__).resolve().parents if (p / "hermes_env.py").exists())))
+from hermes_env import TELEGRAM_BOT_TOKEN as _HERMES_TG_TOKEN
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", _HERMES_TG_TOKEN)
 TELEGRAM_CHAT_ID = "8971100274"
 
 def get_system_idle_seconds() -> float:

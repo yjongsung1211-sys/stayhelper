@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import USAuthModal from '@/components/USAuthModal';
 import ReportModal from '@/components/ReportModal';
+import { LuxuryHotspotLayer } from '@/components/stylinghelper/LuxurySpecCard';
 import {
   Sparkles,
   ArrowRight,
@@ -10764,11 +10765,17 @@ export default function StylingHelperRenewalPage() {
                   </div>
                 )
               ) : (
-                <img
-                  src={activeLookModal.imageUrl}
-                  alt={activeLookModal.title}
-                  className="w-full h-full object-cover object-top"
-                />
+                <>
+                  <img
+                    src={activeLookModal.imageUrl}
+                    alt={activeLookModal.title}
+                    className="w-full h-full object-cover object-top"
+                  />
+                  {/* Live-verified hotspot pins → floating spec card (luxury_state_engine snapshot) */}
+                  {showHotspotPins && !isModalGenerating && (
+                    <LuxuryHotspotLayer lookId={activeLookModal.id} pins={activeLookModal.pins} />
+                  )}
+                </>
               )}
 
               {/* Modal Generating Spinner Overlay */}

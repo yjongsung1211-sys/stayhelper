@@ -45,7 +45,10 @@ OMNI_REPORT_JSON = DATA_DIR / "omni_business_audit_report.json"
 OMNI_REPORT_HTML = REPORTS_DIR / "omni_business_audit_report.html"
 
 # Telegram credentials
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8728900069:AAGQ1TiV7sPBXNwmfAs1GxxMnN0UTLgPZxs")
+import sys as _hermes_sys, pathlib as _hermes_pathlib  # 시크릿은 .env.local 에서 읽는다 (hermes_env.py)
+_hermes_sys.path.insert(0, str(next(p for p in _hermes_pathlib.Path(__file__).resolve().parents if (p / "hermes_env.py").exists())))
+from hermes_env import TELEGRAM_BOT_TOKEN as _HERMES_TG_TOKEN
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", _HERMES_TG_TOKEN)
 TELEGRAM_CHAT_ID = "8971100274"
 
 def send_telegram(message: str) -> bool:
@@ -133,6 +136,58 @@ async def audit_track1_helper_showrooms(browser) -> Dict[str, Any]:
         "showrooms": results,
         "total_interactive_elements": total_interactive
     }
+
+# ---------------------------------------------------------------------------
+# Track 1b: 쇼룸 연결 상품 재고·가격·컬러 정합성 (luxury_state_engine, 브라우저 미사용)
+# ---------------------------------------------------------------------------
+async def audit_track1b_luxury_inventory() -> Dict[str, Any]:
+    """순찰 타깃 상품을 3계층 교차 검증으로 판정한다. 판정 불가는 UNKNOWN 으로 그대로 보고한다."""
+    print("\n🔍 [Track 1b] 쇼룸 연결 상품 재고·가격·컬러 정합성 판정 (luxury_state_engine)...")
+    result: Dict[str, Any] = {
+        "track_name": "쇼룸 연결 상품 재고·가격·컬러 정합성",
+        "engine_available": False,
+        "duration_ms": 0,
+        "stats": {},
+        "items": [],
+    }
+    try:
+        sys.path.insert(0, str(SCRIPTS_DIR))
+        import luxury_state_engine as lse
+    except Exception as e:
+        result["error"] = f"엔진 로드 실패: {e}"
+        print(f"  ⚠️ {result['error']}")
+        return result
+
+    try:
+        items = json.loads(lse.PATROL_TARGETS_FILE.read_text(encoding="utf-8")) if lse.PATROL_TARGETS_FILE.exists() else []
+        snapshot = await lse.run_audit(lse.targets_from_patrol_items(items), merge_existing=True)
+    except Exception as e:
+        result["error"] = f"엔진 실행 실패: {e}"
+        print(f"  ⚠️ {result['error']}")
+        return result
+
+    result["engine_available"] = True
+    result["duration_ms"] = snapshot.duration_ms
+    result["stats"] = snapshot.stats
+    result["fx_usd_krw"] = snapshot.fx.rates.get("KRW")
+    result["fx_stale"] = snapshot.fx.stale
+    for sku in snapshot.skus:
+        best = sku.best_offer
+        reasons = sorted({r for o in sku.offers for r in o.reason_codes})
+        result["items"].append({
+            "sku_id": sku.sku_id,
+            "name": sku.model_name,
+            "status": sku.stock_status.value,
+            "reasons": reasons,
+            "best_boutique": best.boutique if best else None,
+            "best_price": f"{best.price_final.amount:,.0f} {best.price_final.currency}" if best and best.price_final else None,
+            "best_price_krw": best.price_krw if best else None,
+            "carousel_ignored": sum(o.carousel_products_ignored for o in sku.offers),
+        })
+        icon = {"IN_STOCK": "✅", "LOW_STOCK": "🟡", "SOLD_OUT": "🔴"}.get(sku.stock_status.value, "❔")
+        print(f"  {icon} [{sku.sku_id}] {sku.stock_status.value} ({', '.join(reasons) or '-'})")
+    print(f"  ⏱️ {len(snapshot.skus)}건 판정 {snapshot.duration_ms}ms (브라우저 미사용)")
+    return result
 
 # ---------------------------------------------------------------------------
 # Track 2: 생산성 & 세컨드브레인 3대 핵심 웹 서비스 (NoteHelper, SecondBrain, ScheduleHelper)
@@ -730,6 +785,38 @@ def generate_html_report(report_data: Dict[str, Any]) -> str:
       </div>
     </div>
 
+    <!-- Card 1b: 연결 상품 재고·가격·컬러 정합성 -->
+    <div class="card">
+      <div class="card-title">
+        <span>💎 연결 상품 재고·가격 정합성</span>
+        <span class="badge">3계층 교차 검증</span>
+      </div>
+"""
+    t1b = report_data.get("track1b_luxury_inventory", {})
+    if not t1b.get("engine_available"):
+        html += f"""
+      <div class="item-row">
+        <span class="item-label">엔진 상태</span>
+        <span class="item-val val-warn">{t1b.get('error', '미실행')}</span>
+      </div>
+"""
+    for it in t1b.get("items", []):
+        st = it.get("status")
+        st_class = "val-healthy" if st == "IN_STOCK" else "val-gold" if st == "LOW_STOCK" else "val-warn" if st == "SOLD_OUT" else "val-cyan"
+        note = it.get("best_price") or ", ".join(it.get("reasons") or []) or "-"
+        html += f"""
+      <div class="item-row">
+        <span class="item-label">{(it.get('name') or it.get('sku_id') or '')[:26]}</span>
+        <span class="item-val {st_class}">{st} · {note[:34]}</span>
+      </div>
+"""
+    html += f"""
+      <div class="item-row">
+        <span class="item-label">판정 소요 / 캐러셀 기각</span>
+        <span class="item-val val-gold">{t1b.get('duration_ms', 0)}ms / {t1b.get('stats', {}).get('carousel_products_ignored', 0)}건</span>
+      </div>
+    </div>
+
     <!-- Card 2: 생산성 & 세컨드브레인 3대 웹 서비스 -->
     <div class="card">
       <div class="card-title">
@@ -914,6 +1001,9 @@ async def run_omni_audit(send_telegram_briefing: bool = True) -> Dict[str, Any]:
 
         # Track 1: Helper 5대 쇼룸
         report["track1_helper"] = await audit_track1_helper_showrooms(browser)
+
+        # Track 1b: 쇼룸 연결 상품 재고·가격·컬러 정합성 (브라우저 없이 httpx 로 판정)
+        report["track1b_luxury_inventory"] = await audit_track1b_luxury_inventory()
 
         # Track 2: 생산성 & 세컨드브레인 3대 웹 서비스 (NoteHelper, SecondBrain, ScheduleHelper)
         report["track2_productivity"] = await audit_track2_productivity_services(browser)

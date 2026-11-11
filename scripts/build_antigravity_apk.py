@@ -412,6 +412,90 @@ def build_apk():
     shutil.copy2(sh_signed, sh_root)
     print(f"[+] SUCCESS! Signed ScheduleHelper APK built: {sh_pub} ({round(sh_pub.stat().st_size / 1024, 1)} KB)")
 
+    # 9. Also build HelperShowroom dedicated APK (com.yoonjongsung.showroom)
+    sr_work = SDK_DIR / "build_work_sr"
+    if sr_work.exists():
+        shutil.rmtree(sr_work)
+    sr_work.mkdir(parents=True, exist_ok=True)
+
+    sr_manifest = sr_work / "AndroidManifest.xml"
+    sr_manifest_txt = manifest_src.read_text(encoding="utf-8")
+    sr_manifest_txt = sr_manifest_txt.replace("com.yoonjongsung.antigravity", "com.yoonjongsung.showroom")
+    sr_manifest_txt = sr_manifest_txt.replace('android:label="Antigravity &amp; Hana"', 'android:label="Helper 5대 쇼룸 관제"')
+    sr_manifest.write_text(sr_manifest_txt, encoding="utf-8")
+
+    sr_java_dir = sr_work / "src" / "com" / "yoonjongsung" / "showroom"
+    sr_java_dir.mkdir(parents=True, exist_ok=True)
+    sr_java = sr_java_dir / "MainActivity.java"
+    sr_java_txt = java_src.read_text(encoding="utf-8")
+    sr_java_txt = sr_java_txt.replace("package com.yoonjongsung.antigravity;", "package com.yoonjongsung.showroom;")
+    sr_java_txt = sr_java_txt.replace(
+        "https://thestayhelper.vercel.app/antigravity",
+        "https://thestayhelper.vercel.app/stayhelper",
+    ).replace(
+        "#0B0F17",
+        "#FFFFFF",
+    ).replace(
+        "👑 ANTIGRAVITY &amp; HANA",
+        "🏛️ HELPER 5대 쇼룸 관제"
+    ).replace(
+        "사령탑 즉시 재접속",
+        "쇼룸 관제 다시 열기"
+    )
+    sr_java.write_text(sr_java_txt, encoding="utf-8")
+
+    sr_res = sr_work / "res" / "drawable"
+    sr_res.mkdir(parents=True, exist_ok=True)
+    sr_icon_src = BASE_DIR / "public" / "showroom-192.png"
+    if sr_icon_src.exists():
+        shutil.copy2(sr_icon_src, sr_res / "ic_launcher.png")
+    elif ag_icon_src.exists():
+        shutil.copy2(ag_icon_src, sr_res / "ic_launcher.png")
+
+    sr_comp = sr_work / "compiled_res.zip"
+    run_cmd([tools["aapt2"], "compile", "--dir", sr_work / "res", "-o", sr_comp])
+
+    sr_unsigned = sr_work / "unsigned.apk"
+    sr_r = sr_work / "gen"
+    sr_r.mkdir(parents=True, exist_ok=True)
+    run_cmd([
+        tools["aapt2"], "link", "-o", sr_unsigned, "-I", tools["android_jar"],
+        "--manifest", sr_manifest, "--java", sr_r, "--auto-add-overlay", sr_comp
+    ])
+
+    sr_classes = sr_work / "classes"
+    sr_classes.mkdir(parents=True, exist_ok=True)
+    run_cmd([
+        tools["javac"], "-source", "11", "-target", "11", "-encoding", "UTF-8",
+        "-cp", tools["android_jar"], "-d", sr_classes, sr_java, *list(sr_r.rglob("*.java"))
+    ])
+
+    run_cmd([
+        tools["java"], "-cp", tools["d8_jar"], "com.android.tools.r8.D8",
+        "--lib", tools["android_jar"], "--min-api", "26", "--output", sr_work,
+        *list(sr_classes.rglob("*.class"))
+    ])
+
+    with zipfile.ZipFile(sr_unsigned, "a", compression=zipfile.ZIP_DEFLATED) as zf:
+        zf.write(sr_work / "classes.dex", "classes.dex")
+
+    sr_aligned = sr_work / "aligned.apk"
+    run_cmd([tools["zipalign"], "-f", "-p", "4", sr_unsigned, sr_aligned])
+
+    sr_signed = sr_work / "HelperShowroom_Signed.apk"
+    run_cmd([
+        tools["java"], "-jar", tools["apksigner_jar"], "sign",
+        "--ks", keystore, "--ks-key-alias", "antigravity",
+        "--ks-pass", "pass:antigravity2026", "--key-pass", "pass:antigravity2026",
+        "--out", sr_signed, sr_aligned
+    ])
+
+    sr_pub = BASE_DIR / "public" / "helpershowroom.apk"
+    sr_root = BASE_DIR / "HelperShowroom.apk"
+    shutil.copy2(sr_signed, sr_pub)
+    shutil.copy2(sr_signed, sr_root)
+    print(f"[+] SUCCESS! Signed HelperShowroom APK built: {sr_pub} ({round(sr_pub.stat().st_size / 1024, 1)} KB)")
+
 
 if __name__ == "__main__":
     build_apk()

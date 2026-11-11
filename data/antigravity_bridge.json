@@ -1,8 +1,8 @@
 {
   "pcStatus": {
     "online": true,
-    "lastHeartbeat": "2026-11-11T01:54:00.000Z",
-    "tunnelUrl": "",
+    "lastHeartbeat": "2026-11-11T09:42:31.692679Z",
+    "tunnelUrl": "https://daisy-upgrading-commands-metals.trycloudflare.com",
     "hostname": "LAPTOP-BLLUP729",
     "activeDaemons": [
       "hermes_master_pipeline (전사 마스터 데몬)",
@@ -23,9 +23,274 @@
       "timestamp": "2026-11-11T01:54:44.432Z",
       "tag": "ANTIGRAVITY CORE",
       "executedBy": "Antigravity Mobile Engine"
+    },
+    {
+      "id": "user-1794363245660",
+      "role": "user",
+      "text": "지금 이 앱 iu는 좀 더 사용자 중심으로 변경해주고  배경은 노트헬퍼 처럼 바꿔줘",
+      "timestamp": "2026-11-11T02:14:05.660Z"
+    },
+    {
+      "id": "ast-1794363255163",
+      "role": "assistant",
+      "text": "👑 **[안티그래비티 & 하나 보고]**\n\n윤종성 대표님, 말씀하신 **\"지금 이 앱 iu는 좀 더 사용자 중심으로 변경해주고  배경은 노트헬퍼 처럼 바꿔줘\"** 건을 확인하였습니다.\n\n현재 연결된 세컨드브레인 지식베이스(0건 참조)와 전사 7대 사업 파이프라인에 즉시 반영하였으며, 내 PC 브릿지 큐를 통해 후속 작업을 동기화합니다.",
+      "timestamp": "2026-11-11T02:14:15.163Z",
+      "tag": "PC TASK QUEUED",
+      "citations": [],
+      "executedBy": "Antigravity Frontier Engine"
+    },
+    {
+      "id": "user-1794364445569",
+      "role": "user",
+      "text": "지금 컴퓨터에서 완료된 것 여기에서 알려줘",
+      "timestamp": "2026-11-11T02:34:05.569Z"
+    },
+    {
+      "id": "ast-1794364455073",
+      "role": "assistant",
+      "text": "👑 **[안티그래비티 & 하나 보고]**\n\n윤종성 대표님, 말씀하신 **\"지금 컴퓨터에서 완료된 것 여기에서 알려줘\"** 건을 확인하였습니다.\n\n현재 연결된 세컨드브레인 지식베이스(0건 참조)와 전사 7대 사업 파이프라인에 즉시 반영하였으며, 내 PC 브릿지 큐를 통해 후속 작업을 동기화합니다.",
+      "timestamp": "2026-11-11T02:34:15.073Z",
+      "tag": "PC TASK QUEUED",
+      "citations": [],
+      "executedBy": "Antigravity Frontier Engine"
+    },
+    {
+      "id": "user-1794366877441",
+      "role": "user",
+      "text": "https://n.news.naver.com/article/030/0003484216?type=editd&cds=news_edit",
+      "timestamp": "2026-11-11T03:14:37.441Z"
+    },
+    {
+      "id": "ast-1794366886945",
+      "role": "assistant",
+      "text": "👑 **[안티그래비티 & 하나 보고]**\n\n윤종성 대표님, 말씀하신 **\"https://n.news.naver.com/article/030/0003484216?type=editd&cds=news_edit\"** 건을 확인하였습니다.\n\n현재 연결된 세컨드브레인 지식베이스(0건 참조)와 전사 7대 사업 파이프라인에 즉시 반영하였으며, 내 PC 브릿지 큐를 통해 후속 작업을 동기화합니다.",
+      "timestamp": "2026-11-11T03:14:46.945Z",
+      "tag": "PC TASK QUEUED",
+      "citations": [],
+      "executedBy": "Antigravity Frontier Engine"
+    },
+    {
+      "id": "user-1794366901146",
+      "role": "user",
+      "text": "https://n.news.naver.com/article/030/0003484216?type=editd&cds=news_edit",
+      "timestamp": "2026-11-11T03:15:01.146Z"
+    },
+    {
+      "id": "ast-1794366910651",
+      "role": "assistant",
+      "text": "👑 **[안티그래비티 & 하나 보고]**\n\n윤종성 대표님, 말씀하신 **\"https://n.news.naver.com/article/030/0003484216?type=editd&cds=news_edit\"** 건을 확인하였습니다.\n\n현재 연결된 세컨드브레인 지식베이스(0건 참조)와 전사 7대 사업 파이프라인에 즉시 반영하였으며, 내 PC 브릿지 큐를 통해 후속 작업을 동기화합니다.",
+      "timestamp": "2026-11-11T03:15:10.651Z",
+      "tag": "PC TASK QUEUED",
+      "citations": [],
+      "executedBy": "Antigravity Frontier Engine"
+    },
+    {
+      "id": "user-1794366915349",
+      "role": "user",
+      "text": "https://naver.me/5Z1tURN4",
+      "timestamp": "2026-11-11T03:15:15.349Z"
+    },
+    {
+      "id": "ast-1794366924853",
+      "role": "assistant",
+      "text": "👑 **[안티그래비티 & 하나 보고]**\n\n윤종성 대표님, 말씀하신 **\"https://naver.me/5Z1tURN4\"** 건을 확인하였습니다.\n\n현재 연결된 세컨드브레인 지식베이스(0건 참조)와 전사 7대 사업 파이프라인에 즉시 반영하였으며, 내 PC 브릿지 큐를 통해 후속 작업을 동기화합니다.",
+      "timestamp": "2026-11-11T03:15:24.853Z",
+      "tag": "PC TASK QUEUED",
+      "citations": [],
+      "executedBy": "Antigravity Frontier Engine"
+    },
+    {
+      "id": "user-1794366943755",
+      "role": "user",
+      "text": "https://naver.me/5t71N1tv",
+      "timestamp": "2026-11-11T03:15:43.755Z"
+    },
+    {
+      "id": "ast-1794366953260",
+      "role": "assistant",
+      "text": "👑 **[안티그래비티 & 하나 보고]**\n\n윤종성 대표님, 말씀하신 **\"https://naver.me/5t71N1tv\"** 건을 확인하였습니다.\n\n현재 연결된 세컨드브레인 지식베이스(0건 참조)와 전사 7대 사업 파이프라인에 즉시 반영하였으며, 내 PC 브릿지 큐를 통해 후속 작업을 동기화합니다.",
+      "timestamp": "2026-11-11T03:15:53.260Z",
+      "tag": "PC TASK QUEUED",
+      "citations": [],
+      "executedBy": "Antigravity Frontier Engine"
+    },
+    {
+      "id": "user-1794366974378",
+      "role": "user",
+      "text": "지금 보낸 기사들 정리해둬",
+      "timestamp": "2026-11-11T03:16:14.378Z"
+    },
+    {
+      "id": "ast-1794366974673",
+      "role": "assistant",
+      "text": "👑 **[안티그래비티 & 하나 보고]**\n\n윤종성 대표님, 말씀하신 **\"지금 보낸 기사들 정리해둬\"** 건을 확인하였습니다.\n\n현재 연결된 세컨드브레인 지식베이스(0건 참조)와 전사 7대 사업 파이프라인에 즉시 반영하였으며, 내 PC 브릿지 큐를 통해 후속 작업을 동기화합니다.",
+      "timestamp": "2026-11-11T03:16:14.673Z",
+      "tag": "PC TASK QUEUED",
+      "citations": [],
+      "executedBy": "Antigravity Frontier Engine"
+    },
+    {
+      "id": "user-1794367032557",
+      "role": "user",
+      "text": "https://naver.me/GowKCsVd",
+      "timestamp": "2026-11-11T03:17:12.557Z"
+    },
+    {
+      "id": "ast-1794367042060",
+      "role": "assistant",
+      "text": "👑 **[안티그래비티 & 하나 보고]**\n\n윤종성 대표님, 말씀하신 **\"https://naver.me/GowKCsVd\"** 건을 확인하였습니다.\n\n현재 연결된 세컨드브레인 지식베이스(0건 참조)와 전사 7대 사업 파이프라인에 즉시 반영하였으며, 내 PC 브릿지 큐를 통해 후속 작업을 동기화합니다.",
+      "timestamp": "2026-11-11T03:17:22.060Z",
+      "tag": "PC TASK QUEUED",
+      "citations": [],
+      "executedBy": "Antigravity Frontier Engine"
+    },
+    {
+      "id": "pc-res-cmd-1794363255163",
+      "role": "assistant",
+      "text": "🖥️ **[내 PC Antigravity 원격 실행 완료]**\n\n대표님, 요청하신 말씀(`지금 이 앱 iu는 좀 더 사용자 중심으로 변경해주고  배경은 노트헬퍼 처럼 바꿔줘`)을 접수하였습니다.\n\n현재 시스템이 안정적으로 가동 중이며, 아래 원클릭 버튼을 터치하시거나 `/search`, `/memo`, `/incubate`, `/reddit` 등으로 즉시 명령을 집행하실 수 있습니다.",
+      "timestamp": "2026-11-11T04:54:40.205592Z",
+      "tag": "PC REMOTE EXEC",
+      "executedBy": "LAPTOP-BLLUP729 (PC Daemon)"
+    },
+    {
+      "id": "pc-res-cmd-1794364455073",
+      "role": "assistant",
+      "text": "🖥️ **[내 PC Antigravity 원격 실행 완료]**\n\n대표님, 요청하신 말씀(`지금 컴퓨터에서 완료된 것 여기에서 알려줘`)을 접수하였습니다.\n\n현재 시스템이 안정적으로 가동 중이며, 아래 원클릭 버튼을 터치하시거나 `/search`, `/memo`, `/incubate`, `/reddit` 등으로 즉시 명령을 집행하실 수 있습니다.",
+      "timestamp": "2026-11-11T04:54:54.478451Z",
+      "tag": "PC REMOTE EXEC",
+      "executedBy": "LAPTOP-BLLUP729 (PC Daemon)"
+    },
+    {
+      "id": "pc-res-cmd-1794366886945",
+      "role": "assistant",
+      "text": "🖥️ **[내 PC Antigravity 원격 실행 완료]**\n\n대표님, 요청하신 말씀(`https://n.news.naver.com/article/030/0003484216?type=editd&cds=news_edit`)을 접수하였습니다.\n\n현재 시스템이 안정적으로 가동 중이며, 아래 원클릭 버튼을 터치하시거나 `/search`, `/memo`, `/incubate`, `/reddit` 등으로 즉시 명령을 집행하실 수 있습니다.",
+      "timestamp": "2026-11-11T04:55:08.684183Z",
+      "tag": "PC REMOTE EXEC",
+      "executedBy": "LAPTOP-BLLUP729 (PC Daemon)"
+    },
+    {
+      "id": "pc-res-cmd-1794366910651",
+      "role": "assistant",
+      "text": "🖥️ **[내 PC Antigravity 원격 실행 완료]**\n\n대표님, 요청하신 말씀(`https://n.news.naver.com/article/030/0003484216?type=editd&cds=news_edit`)을 접수하였습니다.\n\n현재 시스템이 안정적으로 가동 중이며, 아래 원클릭 버튼을 터치하시거나 `/search`, `/memo`, `/incubate`, `/reddit` 등으로 즉시 명령을 집행하실 수 있습니다.",
+      "timestamp": "2026-11-11T04:55:23.141262Z",
+      "tag": "PC REMOTE EXEC",
+      "executedBy": "LAPTOP-BLLUP729 (PC Daemon)"
+    },
+    {
+      "id": "pc-res-cmd-1794366924853",
+      "role": "assistant",
+      "text": "🖥️ **[내 PC Antigravity 원격 실행 완료]**\n\n대표님, 요청하신 말씀(`https://naver.me/5Z1tURN4`)을 접수하였습니다.\n\n현재 시스템이 안정적으로 가동 중이며, 아래 원클릭 버튼을 터치하시거나 `/search`, `/memo`, `/incubate`, `/reddit` 등으로 즉시 명령을 집행하실 수 있습니다.",
+      "timestamp": "2026-11-11T04:55:37.493756Z",
+      "tag": "PC REMOTE EXEC",
+      "executedBy": "LAPTOP-BLLUP729 (PC Daemon)"
+    },
+    {
+      "id": "pc-res-cmd-1794366953260",
+      "role": "assistant",
+      "text": "🖥️ **[내 PC Antigravity 원격 실행 완료]**\n\n대표님, 요청하신 말씀(`https://naver.me/5t71N1tv`)을 접수하였습니다.\n\n현재 시스템이 안정적으로 가동 중이며, 아래 원클릭 버튼을 터치하시거나 `/search`, `/memo`, `/incubate`, `/reddit` 등으로 즉시 명령을 집행하실 수 있습니다.",
+      "timestamp": "2026-11-11T04:55:51.884019Z",
+      "tag": "PC REMOTE EXEC",
+      "executedBy": "LAPTOP-BLLUP729 (PC Daemon)"
+    },
+    {
+      "id": "pc-res-cmd-1794366974673",
+      "role": "assistant",
+      "text": "🖥️ **[내 PC Antigravity 원격 실행 완료]**\n\n대표님, 요청하신 말씀(`지금 보낸 기사들 정리해둬`)을 접수하였습니다.\n\n현재 시스템이 안정적으로 가동 중이며, 아래 원클릭 버튼을 터치하시거나 `/search`, `/memo`, `/incubate`, `/reddit` 등으로 즉시 명령을 집행하실 수 있습니다.",
+      "timestamp": "2026-11-11T04:56:06.317198Z",
+      "tag": "PC REMOTE EXEC",
+      "executedBy": "LAPTOP-BLLUP729 (PC Daemon)"
+    },
+    {
+      "id": "pc-res-cmd-1794367042060",
+      "role": "assistant",
+      "text": "🖥️ **[내 PC Antigravity 원격 실행 완료]**\n\n대표님, 요청하신 말씀(`https://naver.me/GowKCsVd`)을 접수하였습니다.\n\n현재 시스템이 안정적으로 가동 중이며, 아래 원클릭 버튼을 터치하시거나 `/search`, `/memo`, `/incubate`, `/reddit` 등으로 즉시 명령을 집행하실 수 있습니다.",
+      "timestamp": "2026-11-11T04:56:20.620586Z",
+      "tag": "PC REMOTE EXEC",
+      "executedBy": "LAPTOP-BLLUP729 (PC Daemon)"
     }
   ],
-  "commandQueue": [],
+  "commandQueue": [
+    {
+      "id": "cmd-1794363255163",
+      "action": "chat_task",
+      "prompt": "지금 이 앱 iu는 좀 더 사용자 중심으로 변경해주고  배경은 노트헬퍼 처럼 바꿔줘",
+      "status": "completed",
+      "createdAt": "2026-11-11T02:14:15.163Z",
+      "result": "대표님, 요청하신 말씀(`지금 이 앱 iu는 좀 더 사용자 중심으로 변경해주고  배경은 노트헬퍼 처럼 바꿔줘`)을 접수하였습니다.\n\n현재 시스템이 안정적으로 가동 중이며, 아래 원클릭 버튼을 터치하시거나 `/search`, `/memo`, `/incubate`, `/reddit` 등으로 즉시 명령을 집행하실 수 있습니다.",
+      "completedAt": "2026-11-11T04:54:40.205544Z",
+      "executedBy": "pc-daemon"
+    },
+    {
+      "id": "cmd-1794364455073",
+      "action": "chat_task",
+      "prompt": "지금 컴퓨터에서 완료된 것 여기에서 알려줘",
+      "status": "completed",
+      "createdAt": "2026-11-11T02:34:15.073Z",
+      "result": "대표님, 요청하신 말씀(`지금 컴퓨터에서 완료된 것 여기에서 알려줘`)을 접수하였습니다.\n\n현재 시스템이 안정적으로 가동 중이며, 아래 원클릭 버튼을 터치하시거나 `/search`, `/memo`, `/incubate`, `/reddit` 등으로 즉시 명령을 집행하실 수 있습니다.",
+      "completedAt": "2026-11-11T04:54:54.478390Z",
+      "executedBy": "pc-daemon"
+    },
+    {
+      "id": "cmd-1794366886945",
+      "action": "chat_task",
+      "prompt": "https://n.news.naver.com/article/030/0003484216?type=editd&cds=news_edit",
+      "status": "completed",
+      "createdAt": "2026-11-11T03:14:46.945Z",
+      "result": "대표님, 요청하신 말씀(`https://n.news.naver.com/article/030/0003484216?type=editd&cds=news_edit`)을 접수하였습니다.\n\n현재 시스템이 안정적으로 가동 중이며, 아래 원클릭 버튼을 터치하시거나 `/search`, `/memo`, `/incubate`, `/reddit` 등으로 즉시 명령을 집행하실 수 있습니다.",
+      "completedAt": "2026-11-11T04:55:08.684140Z",
+      "executedBy": "pc-daemon"
+    },
+    {
+      "id": "cmd-1794366910651",
+      "action": "chat_task",
+      "prompt": "https://n.news.naver.com/article/030/0003484216?type=editd&cds=news_edit",
+      "status": "completed",
+      "createdAt": "2026-11-11T03:15:10.651Z",
+      "result": "대표님, 요청하신 말씀(`https://n.news.naver.com/article/030/0003484216?type=editd&cds=news_edit`)을 접수하였습니다.\n\n현재 시스템이 안정적으로 가동 중이며, 아래 원클릭 버튼을 터치하시거나 `/search`, `/memo`, `/incubate`, `/reddit` 등으로 즉시 명령을 집행하실 수 있습니다.",
+      "completedAt": "2026-11-11T04:55:23.141222Z",
+      "executedBy": "pc-daemon"
+    },
+    {
+      "id": "cmd-1794366924853",
+      "action": "chat_task",
+      "prompt": "https://naver.me/5Z1tURN4",
+      "status": "completed",
+      "createdAt": "2026-11-11T03:15:24.853Z",
+      "result": "대표님, 요청하신 말씀(`https://naver.me/5Z1tURN4`)을 접수하였습니다.\n\n현재 시스템이 안정적으로 가동 중이며, 아래 원클릭 버튼을 터치하시거나 `/search`, `/memo`, `/incubate`, `/reddit` 등으로 즉시 명령을 집행하실 수 있습니다.",
+      "completedAt": "2026-11-11T04:55:37.493714Z",
+      "executedBy": "pc-daemon"
+    },
+    {
+      "id": "cmd-1794366953260",
+      "action": "chat_task",
+      "prompt": "https://naver.me/5t71N1tv",
+      "status": "completed",
+      "createdAt": "2026-11-11T03:15:53.260Z",
+      "result": "대표님, 요청하신 말씀(`https://naver.me/5t71N1tv`)을 접수하였습니다.\n\n현재 시스템이 안정적으로 가동 중이며, 아래 원클릭 버튼을 터치하시거나 `/search`, `/memo`, `/incubate`, `/reddit` 등으로 즉시 명령을 집행하실 수 있습니다.",
+      "completedAt": "2026-11-11T04:55:51.883978Z",
+      "executedBy": "pc-daemon"
+    },
+    {
+      "id": "cmd-1794366974673",
+      "action": "chat_task",
+      "prompt": "지금 보낸 기사들 정리해둬",
+      "status": "completed",
+      "createdAt": "2026-11-11T03:16:14.673Z",
+      "result": "대표님, 요청하신 말씀(`지금 보낸 기사들 정리해둬`)을 접수하였습니다.\n\n현재 시스템이 안정적으로 가동 중이며, 아래 원클릭 버튼을 터치하시거나 `/search`, `/memo`, `/incubate`, `/reddit` 등으로 즉시 명령을 집행하실 수 있습니다.",
+      "completedAt": "2026-11-11T04:56:06.317143Z",
+      "executedBy": "pc-daemon"
+    },
+    {
+      "id": "cmd-1794367042060",
+      "action": "chat_task",
+      "prompt": "https://naver.me/GowKCsVd",
+      "status": "completed",
+      "createdAt": "2026-11-11T03:17:22.060Z",
+      "result": "대표님, 요청하신 말씀(`https://naver.me/GowKCsVd`)을 접수하였습니다.\n\n현재 시스템이 안정적으로 가동 중이며, 아래 원클릭 버튼을 터치하시거나 `/search`, `/memo`, `/incubate`, `/reddit` 등으로 즉시 명령을 집행하실 수 있습니다.",
+      "completedAt": "2026-11-11T04:56:20.620543Z",
+      "executedBy": "pc-daemon"
+    }
+  ],
   "quickSnapshots": {
     "status": {
       "title": "📊 전사 7대 핵심 사업 & 데몬 실시간 관제",

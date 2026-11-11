@@ -27,7 +27,7 @@ class TestRufloSecuritySwarm(unittest.TestCase):
         # Create a mock vulnerable script in sandbox
         self.vuln_file = self.test_dir / "vuln_mock.py"
         self.vuln_file.write_text(
-            'TELEGRAM_BOT_TOKEN = "8728900069:AAGQ1TiV7sPBXNwmfAs1GxxMnN0UTLgPZxs"\n'
+            'TELEGRAM_BOT_TOKEN = "1234567890:AAEXAMPLEexampleEXAMPLEexampleEXAMP"\n'
             'import subprocess\n'
             'def run_cmd(user_input):\n'
             '    subprocess.run("echo " + user_input, shell=True)\n',

@@ -69,8 +69,21 @@ export async function POST(req: NextRequest) {
         const store = readStore();
 
         if (body.action === 'save_all') {
-            store.events = Array.isArray(body.events) ? body.events : store.events;
-            store.todos = Array.isArray(body.todos) ? body.todos : store.todos;
+            // SecondBrain 커널이 꽂은 항목 중 이 클라이언트가 아직 못 본 것은 통째 덮어쓰기에서 살려 둔다.
+            // 사용자가 명시적으로 지운 항목(removedIds)만 실제로 제거한다 — lost update 방지.
+            const removed = new Set<string>(Array.isArray(body.removedIds) ? body.removedIds.map(String) : []);
+            const keepUnseen = (incoming: any[], current: any[]) => {
+                const have = new Set(incoming.map((it) => it?.id));
+                return current.filter(
+                    (it) => it?.source === 'secondbrain' && !have.has(it.id) && !removed.has(String(it.id))
+                );
+            };
+            if (Array.isArray(body.events)) {
+                store.events = [...body.events, ...keepUnseen(body.events, store.events || [])];
+            }
+            if (Array.isArray(body.todos)) {
+                store.todos = [...keepUnseen(body.todos, store.todos || []), ...body.todos];
+            }
             if (typeof body.noteHelperLinked === 'boolean') {
                 store.noteHelperLinked = body.noteHelperLinked;
             }

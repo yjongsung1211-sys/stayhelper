@@ -1,4 +1,4 @@
-# Hermes Autonomous Enterprise - OS-Level Daemon Launcher
+﻿# Hermes Autonomous Enterprise - OS-Level Daemon Launcher
 # Self-healing, completely detached background daemons independent of terminal/IDE
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
@@ -90,6 +90,21 @@ Start-Process -FilePath $PythonExe -ArgumentList @('-u', $afkScript, '--idle-sec
 Write-Host '[9/10] Starting Antigravity & Hana Mobile Command Bridge Daemon...' -ForegroundColor Yellow
 $mobileBridgeScript = Join-Path $WorkDir 'scripts/antigravity_mobile_daemon.py'
 Start-Process -FilePath $PythonExe -ArgumentList @('-u', $mobileBridgeScript, '--daemon') -WindowStyle Hidden -WorkingDirectory $WorkDir
+
+# 11. SecondBrain Sync Kernel (Local-First delta sync + vault watcher + AI router, http://127.0.0.1:8787)
+Write-Host '[10/10] Starting SecondBrain Sync Kernel (vault watcher + delta sync API :8787)...' -ForegroundColor Yellow
+$kernelScript = Join-Path $WorkDir 'scripts/secondbrain_sync_kernel.py'
+$kernelPidFile = Join-Path $WorkDir 'data/secondbrain_kernel.pid'
+if (Test-Path $kernelPidFile) {
+    $oldKernelPid = (Get-Content $kernelPidFile -ErrorAction SilentlyContinue | Select-Object -First 1)
+    if ($oldKernelPid -match '^\d+$') {
+        $oldKernel = Get-WmiObject Win32_Process -Filter ('ProcessId=' + $oldKernelPid) -ErrorAction SilentlyContinue
+        if ($oldKernel -and $oldKernel.CommandLine -match 'secondbrain_sync_kernel.py') {
+            Stop-Process -Id $oldKernelPid -Force -ErrorAction SilentlyContinue
+        }
+    }
+}
+Start-Process -FilePath $PythonExe -ArgumentList @('-u', $kernelScript, 'serve') -WindowStyle Hidden -WorkingDirectory $WorkDir
 
 Start-Sleep -Seconds 3
 

@@ -36,37 +36,96 @@ def draw_dashed_ellipse(draw, bbox, fill=(255, 255, 255, 240), width=2, dash_deg
                 draw.line([pts[i], pts[i+1]], fill=fill, width=width)
         deg += dash_deg + gap_deg
 
-def add_scan_landmarks_step1(base_img, lx, ly):
+def add_scan_landmarks_korean_step1(base_img):
+    w, h = base_img.size
+    overlay = Image.new('RGBA', (w, h), (255, 255, 255, 0))
+    draw = ImageDraw.Draw(overlay)
+    
+    # 1. Left eyebrow (perfect fit)
+    draw_dashed_arc(draw, [(102, 146), (112, 142), (124, 141), (136, 143), (146, 148)], width=2)
+    # 2. Right eyebrow (perfect fit)
+    draw_dashed_arc(draw, [(165, 148), (176, 143), (188, 141), (200, 142), (210, 146)], width=2)
+
+    # 3. Left eye (around 124, 166)
+    draw_dashed_ellipse(draw, (108, 156, 142, 176), width=2)
+    # 4. Right eye (around 189, 161)
+    draw_dashed_ellipse(draw, (172, 152, 206, 172), width=2)
+
+    # 5. Nose bridge & nostrils
+    draw_dashed_arc(draw, [(156, 156), (156, 204)], width=2)
+    draw_dashed_arc(draw, [(143, 210), (148, 213), (156, 215), (164, 213), (169, 210)], width=2)
+
+    # 6. Lips
+    draw_dashed_ellipse(draw, (133, 231, 177, 249), width=2)
+
+    # 7. Jawline
+    jaw_pts = [
+        (85, 175), (80, 195), (86, 215), (94, 230), (103, 245),
+        (115, 260), (134, 275), (156, 282), (178, 275), (197, 260),
+        (208, 245), (216, 230), (222, 215), (226, 195), (225, 175)
+    ]
+    draw_dashed_arc(draw, jaw_pts, width=2)
+    
+    return Image.alpha_composite(base_img.convert('RGBA'), overlay).convert('RGB')
+
+def add_scan_landmarks_japanese_step1(base_img):
+    w, h = base_img.size
+    overlay = Image.new('RGBA', (w, h), (255, 255, 255, 0))
+    draw = ImageDraw.Draw(overlay)
+    
+    # 1. Eyebrows
+    draw_dashed_arc(draw, [(98, 142), (110, 137), (124, 135), (138, 137), (148, 143)], width=2)
+    draw_dashed_arc(draw, [(168, 143), (178, 137), (192, 135), (206, 137), (218, 142)], width=2)
+
+    # 2. Eyes
+    draw_dashed_ellipse(draw, (108, 156, 142, 176), width=2)
+    draw_dashed_ellipse(draw, (176, 153, 210, 173), width=2)
+
+    # 3. Nose bridge & nostrils
+    draw_dashed_arc(draw, [(158, 155), (158, 203)], width=2)
+    draw_dashed_arc(draw, [(143, 205), (148, 208), (158, 210), (168, 208), (173, 205)], width=2)
+
+    # 4. Lips
+    draw_dashed_ellipse(draw, (128, 230, 188, 252), width=2)
+
+    # 5. Jawline
+    jaw_pts = [
+        (85, 175), (80, 195), (86, 215), (94, 230), (105, 245), 
+        (118, 260), (136, 275), (158, 282), (180, 275), (198, 260), 
+        (210, 245), (220, 230), (226, 215), (230, 195), (228, 175)
+    ]
+    draw_dashed_arc(draw, jaw_pts, width=2)
+    
+    return Image.alpha_composite(base_img.convert('RGBA'), overlay).convert('RGB')
+
+def add_scan_landmarks_english_step1(base_img):
     w, h = base_img.size
     overlay = Image.new('RGBA', (w, h), (255, 255, 255, 0))
     draw = ImageDraw.Draw(overlay)
     
     # Eyebrows
-    draw_dashed_arc(draw, [(lx - 45, ly - 105), (lx - 31, ly - 113), (lx - 17, ly - 113), (lx - 7, ly - 107)], width=2)
-    draw_dashed_arc(draw, [(lx + 7, ly - 107), (lx + 17, ly - 113), (lx + 31, ly - 113), (lx + 45, ly - 105)], width=2)
+    draw_dashed_arc(draw, [(95, 142), (110, 136), (124, 134), (138, 136), (148, 142)], width=2)
+    draw_dashed_arc(draw, [(166, 142), (176, 136), (190, 134), (204, 136), (218, 142)], width=2)
     
     # Eyes
-    draw_dashed_ellipse(draw, (lx - 43, ly - 97, lx - 11, ly - 75), width=2)
-    draw_dashed_ellipse(draw, (lx + 11, ly - 97, lx + 43, ly - 75), width=2)
+    draw_dashed_ellipse(draw, (108, 154, 142, 174), width=2)
+    draw_dashed_ellipse(draw, (172, 154, 206, 174), width=2)
     
-    # Nose bridge & base
-    draw_dashed_arc(draw, [(lx, ly - 101), (lx, ly - 53)], width=2)
-    draw_dashed_arc(draw, [(lx - 10, ly - 53), (lx - 5, ly - 48), (lx, ly - 46), (lx + 5, ly - 48), (lx + 10, ly - 53)], width=2)
+    # Nose
+    draw_dashed_arc(draw, [(157, 152), (157, 202)], width=2)
+    draw_dashed_arc(draw, [(144, 204), (149, 208), (157, 210), (165, 208), (170, 204)], width=2)
     
     # Lips
-    draw_dashed_ellipse(draw, (lx - 22, ly - 9, lx + 22, ly + 9), width=2)
+    draw_dashed_ellipse(draw, (132, 222, 182, 244), width=2)
     
     # Jawline
     jaw_pts = [
-        (lx - 62, ly - 67), (lx - 58, ly - 39), (lx - 50, ly - 13),
-        (lx - 38, ly + 13), (lx - 20, ly + 33), (lx, ly + 43),
-        (lx + 20, ly + 33), (lx + 38, ly + 13), (lx + 50, ly - 13),
-        (lx + 58, ly - 39), (lx + 62, ly - 67)
+        (85, 170), (82, 195), (88, 215), (96, 232), (108, 248),
+        (122, 262), (138, 274), (157, 280), (176, 274), (192, 262),
+        (206, 248), (218, 232), (226, 215), (232, 195), (228, 170)
     ]
     draw_dashed_arc(draw, jaw_pts, width=2)
-    
-    final_img = Image.alpha_composite(base_img.convert('RGBA'), overlay).convert('RGB')
-    return final_img
+    return Image.alpha_composite(base_img.convert('RGBA'), overlay).convert('RGB')
 
 def realistic_shirt_dye(img, color_hex, neck_y=372):
     arr = np.array(img).astype(float)
@@ -84,7 +143,7 @@ def realistic_shirt_dye(img, color_hex, neck_y=372):
     lum = (arr[:, :, 0] * 0.299 + arr[:, :, 1] * 0.587 + arr[:, :, 2] * 0.114) / 255.0
     
     dye = np.array([r, g, b]).astype(float)
-    blended = dye * lum[:, :, np.newaxis]
+    blended = dye * (0.15 + 0.85 * lum[:, :, np.newaxis])
     
     mask = shirt_zone.astype(float)
     mask_im = Image.fromarray((mask * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(radius=1.5))
@@ -160,15 +219,25 @@ lip_presets = {
     'nude': '#C47C8B',
 }
 
+outfit_presets = {
+    'orange': '#E0834B',
+    'brown': '#633B26',
+    'khaki': '#625D43',
+    'cream': '#E9E5A8',
+    'green': '#3A5335'
+}
+
+# ==========================================
 # 1. PROCESS KOREAN MODEL (AUTHENTIC EAST ASIAN BEAUTY)
+# ==========================================
 print("Processing Korean Model...")
 ko_clean = Image.open('scratch/ko_clean_315x445.jpg').convert('RGB')
-ko_lx, ko_ly = 157, 239
+ko_lx, ko_ly = 155, 240
 
-# Step 1: WITH SCAN LANDMARKS ONLY
-add_scan_landmarks_step1(ko_clean, ko_lx, ko_ly).save('public/nb_step1_ko.jpg', quality=95)
+# Step 1: WITH SCAN LANDMARKS ONLY (PERFECT 100% FIT)
+add_scan_landmarks_korean_step1(ko_clean).save('public/nb_step1_ko.jpg', quality=95)
 
-# Steps 2-5: 100% CLEAN FACE (NO DOTTED LINES AT ALL!)
+# Steps 2-5: 100% CLEAN FACE (ZERO DOTTED LINES!)
 ko_clean.save('public/nb_step1_ko_raw.jpg', quality=95)
 ko_clean.save('public/nb_step1_model.jpg', quality=95)
 ko_clean.save('public/nb_step2_ko_raw.jpg', quality=95)
@@ -181,8 +250,7 @@ realistic_shirt_dye(ko_clean, '#00A86B', neck_y=372).save('public/nb_step2_ko_be
 realistic_shirt_dye(ko_clean, '#8A9A86', neck_y=372).save('public/nb_step2_ko_worst_card.jpg', quality=95)
 
 # Step 3: Realistic Hair Dye
-realistic_hair_dye = create_hair_dye(ko_clean, hair_presets['black'], intensity=0.9)
-realistic_hair_dye.save('public/nb_step3_ko_black_card.jpg', quality=95)
+create_hair_dye(ko_clean, hair_presets['black'], intensity=0.9).save('public/nb_step3_ko_black_card.jpg', quality=95)
 for hname, hhex in hair_presets.items():
     create_hair_dye(ko_clean, hhex).save(f'public/nb_step3_ko_{hname}_card.jpg', quality=95)
 
@@ -191,16 +259,22 @@ ko_clean.save('public/nb_step4_ko_bare_card.jpg', quality=95)
 for lname, lhex in lip_presets.items():
     create_lip_tint(ko_clean, lhex, ko_lx, ko_ly).save(f'public/nb_step4_ko_{lname}_card.jpg', quality=95)
 
-# Step 5: Tailored Soft Cream / Butter Yellow Outfit (Chic High-End Look)
-realistic_shirt_dye(ko_clean, '#F5E6CC', neck_y=372).save('public/nb_step5_outfit.jpg', quality=95)
+# Step 5: All 5 Outfit Colors for Interactive Clicking!
+for oname, ohex in outfit_presets.items():
+    realistic_shirt_dye(ko_clean, ohex, neck_y=372).save(f'public/nb_step5_ko_{oname}_card.jpg', quality=95)
+realistic_shirt_dye(ko_clean, outfit_presets['cream'], neck_y=372).save('public/nb_step5_outfit.jpg', quality=95)
 
+# ==========================================
 # 2. PROCESS JAPANESE MODEL
+# ==========================================
 print("Processing Japanese Model...")
 ja_clean = Image.open('scratch/ja_clean_portrait.jpg').convert('RGB')
-ja_lx, ja_ly = 159, 240
+ja_lx, ja_ly = 158, 241
 
-add_scan_landmarks_step1(ja_clean, ja_lx, ja_ly).save('public/nb_step1_ja.jpg', quality=95)
+# Step 1: WITH SCAN LANDMARKS ONLY (PERFECT 100% FIT)
+add_scan_landmarks_japanese_step1(ja_clean).save('public/nb_step1_ja.jpg', quality=95)
 
+# Steps 2-5: 100% CLEAN FACE (ZERO DOTTED LINES!)
 ja_clean.save('public/nb_step1_ja_raw.jpg', quality=95)
 ja_clean.save('public/nb_step2_ja_raw.jpg', quality=95)
 ja_clean.save('public/nb_step3_ja_raw.jpg', quality=95)
@@ -218,12 +292,21 @@ ja_clean.save('public/nb_step4_ja_bare_card.jpg', quality=95)
 for lname, lhex in lip_presets.items():
     create_lip_tint(ja_clean, lhex, ja_lx, ja_ly).save(f'public/nb_step4_ja_{lname}_card.jpg', quality=95)
 
+for oname, ohex in outfit_presets.items():
+    realistic_shirt_dye(ja_clean, ohex, neck_y=375).save(f'public/nb_step5_ja_{oname}_card.jpg', quality=95)
+
+# ==========================================
 # 3. PROCESS ENGLISH MODEL
+# ==========================================
 print("Processing English Model...")
-en_clean = Image.open('public/nb_step1_en.jpg').convert('RGB')
+en_clean = Image.open('public/nb_step1_en_clean.jpg').convert('RGB')
 en_lx, en_ly = 157, 228
 
-add_scan_landmarks_step1(en_clean, en_lx, en_ly).save('public/nb_step1_en_card.jpg', quality=95)
+# Step 1: WITH SCAN LANDMARKS ONLY
+add_scan_landmarks_english_step1(en_clean).save('public/nb_step1_en.jpg', quality=95)
+add_scan_landmarks_english_step1(en_clean).save('public/nb_step1_en_card.jpg', quality=95)
+
+# Steps 2-5: 100% CLEAN FACE (ZERO DOTTED LINES!)
 en_clean.save('public/nb_step1_en_raw.jpg', quality=95)
 en_clean.save('public/nb_step2_en_raw.jpg', quality=95)
 en_clean.save('public/nb_step3_en_raw.jpg', quality=95)
@@ -240,5 +323,8 @@ for hname, hhex in hair_presets.items():
 en_clean.save('public/nb_step4_en_bare_card.jpg', quality=95)
 for lname, lhex in lip_presets.items():
     create_lip_tint(en_clean, lhex, en_lx, en_ly).save(f'public/nb_step4_en_{lname}_card.jpg', quality=95)
+
+for oname, ohex in outfit_presets.items():
+    realistic_shirt_dye(en_clean, ohex, neck_y=370).save(f'public/nb_step5_en_{oname}_card.jpg', quality=95)
 
 print("All card assets regenerated successfully with 100% precision!")

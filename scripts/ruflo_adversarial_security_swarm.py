@@ -161,7 +161,7 @@ class BlueTeamAgent:
 
                     # 1. 하드코딩 토큰 ➔ os.environ.get() 격리 패치
                     if f["cwe"] == "CWE-798" and "TELEGRAM_BOT_TOKEN =" in content:
-                        pattern = r'TELEGRAM_BOT_TOKEN\s*=\s*(["\']8728900069:[A-Za-z0-9_-]{35}["\'])'
+                        pattern = r'TELEGRAM_BOT_TOKEN\s*=\s*(["\']\d{8,10}:[A-Za-z0-9_-]{35}["\'])'
                         if re.search(pattern, content):
                             replacement = r'TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", \1)'
                             new_content = re.sub(pattern, replacement, content)

@@ -11,6 +11,19 @@ import {
   SlidersHorizontal, Eye, Lock, Unlock, Check
 } from 'lucide-react';
 import { WEDDING_12_PRESETS, WeddingThemePreset } from '@/lib/wedding-presets';
+import { LuxuryHotspotLayer, type ShowroomPin } from '@/components/stylinghelper/LuxurySpecCard';
+
+const WEDDING_SAMPLE_PINS: ShowroomPin[] = (WEDDING_12_PRESETS['bali-jungle']?.products ?? []).map((p, idx) => ({
+  id: p.id,
+  x: idx === 0 ? 38 : idx === 1 ? 62 : 48,
+  y: idx === 0 ? 55 : idx === 1 ? 48 : 28,
+  category: p.type.toUpperCase(),
+  title: p.name,
+  brand: p.brand,
+  price: p.price,
+  retailer: new URL(p.buyUrl).hostname.replace(/^www\./, ''),
+  buyUrl: p.buyUrl,
+}));
 
 // 12 World-Class Luxury Destination Configs (20 Editorial Angles Each)
 const DESTINATION_240_CONFIGS = [

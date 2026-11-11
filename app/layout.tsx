@@ -4,7 +4,39 @@ import './globals.css';
 
 export async function generateMetadata(): Promise<Metadata> {
   const headersList = headers();
-  const host = headersList.get('host') || '';
+  const host = headersList.get('x-forwarded-host') || headersList.get('host') || '';
+
+  if (
+    host.includes('secondbrain') ||
+    host.includes('trycloudflare') ||
+    host.includes('localhost') ||
+    host.includes('127.0.0.1')
+  ) {
+    return {
+      metadataBase: new URL('https://secondbrain-note.vercel.app'),
+      title: 'SecondBrain AI 노트 · 세컨브레인 보이스 메모 & 옵시디언 자동 동기화',
+      description:
+        '실시간 음성 녹음 · AI 핵심 요약 · 옵시디언(00_Inbox) 24시간 자동 동기화 보이스 노트 허브',
+      icons: {
+        icon: '/icon.svg',
+      },
+      openGraph: {
+        title: 'SecondBrain AI 노트 — 세컨브레인 보이스 메모 & 옵시디언 자동 동기화',
+        description:
+          '스마트폰·하드웨어 음성 녹음 즉시 한국어 전체 전사, AI 핵심 요약 및 옵시디언(00_Inbox) 자동 동기화.',
+        url: 'https://secondbrain-note.vercel.app',
+        siteName: 'SecondBrain AI 노트',
+        locale: 'ko_KR',
+        type: 'website',
+      },
+      twitter: {
+        card: 'summary',
+        title: 'SecondBrain AI 노트 — 세컨브레인 보이스 메모 & 옵시디언 자동 동기화',
+        description:
+          '스마트폰·하드웨어 음성 녹음 즉시 한국어 전체 전사, AI 핵심 요약 및 옵시디언(00_Inbox) 자동 동기화.',
+      },
+    };
+  }
 
   if (host.includes('weddinghelper') || host.includes('wedding')) {
     return {
@@ -192,16 +224,22 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <head>
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <head suppressHydrationWarning>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* Guaranteed Full Tailwind CSS Engine (Zero 404 Chunk Issues) */}
-        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
         />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -209,7 +247,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 theme: {
                   extend: {
                     fontFamily: {
-                      sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                      sans: ['"Pretendard Variable"', 'Pretendard', 'Inter', '"Noto Sans KR"', '"Noto Sans SC"', '"Noto Sans JP"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                      mono: ['"Pretendard Variable"', 'Pretendard', 'Inter', '"Noto Sans KR"', '"Noto Sans SC"', '"Noto Sans JP"', 'sans-serif'],
                     }
                   }
                 }
@@ -242,12 +281,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 } catch (e) {}
                 return event;
               });
+              if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+                var s = document.createElement('script');
+                s.defer = true;
+                s.src = '/_vercel/insights/script.js';
+                document.head.appendChild(s);
+              }
             `,
           }}
         />
-        <script defer src="/_vercel/insights/script.js"></script>
       </head>
-      <body className="min-h-screen bg-[#FDFCFB] text-neutral-900 antialiased selection:bg-neutral-900 selection:text-white font-sans">
+      <body
+        suppressHydrationWarning
+        className="min-h-screen bg-[#FDFCFB] text-neutral-900 antialiased selection:bg-neutral-900 selection:text-white font-sans"
+      >
         {children}
       </body>
     </html>

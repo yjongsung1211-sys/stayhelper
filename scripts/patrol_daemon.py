@@ -28,7 +28,10 @@ sys.path.append(str(Path(__file__).resolve().parent))
 import memory_hub
 
 # 텔레그램 설정 (윤종성 대표님 전용)
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8728900069:AAGQ1TiV7sPBXNwmfAs1GxxMnN0UTLgPZxs")
+import sys as _hermes_sys, pathlib as _hermes_pathlib  # 시크릿은 .env.local 에서 읽는다 (hermes_env.py)
+_hermes_sys.path.insert(0, str(next(p for p in _hermes_pathlib.Path(__file__).resolve().parents if (p / "hermes_env.py").exists())))
+from hermes_env import TELEGRAM_BOT_TOKEN as _HERMES_TG_TOKEN
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", _HERMES_TG_TOKEN)
 TELEGRAM_CHAT_ID = "8971100274"
 
 # 상태 및 쿨다운 파일 경로
@@ -285,31 +288,70 @@ def send_telegram_message(message: str) -> bool:
         return False
 
 
+try:
+    import luxury_state_engine
+except Exception as _engine_import_error:  # httpx/pydantic 미설치 등
+    luxury_state_engine = None
+    print(f"⚠️ [luxury_state_engine] 로드 실패 — 재고 판정은 UNVERIFIED 로만 기록됩니다: {_engine_import_error}")
+
+# 화보 핀 레지스트리 전체 재검증 주기 (순찰 N라운드마다 1회). 0 이면 순찰 타깃만 본다.
+REGISTRY_AUDIT_EVERY_N_ROUNDS = int(os.getenv("LUXURY_REGISTRY_EVERY_N_ROUNDS", "3"))
+_patrol_round_no = 0
+
+
 def check_item_status(item: Dict[str, Any]) -> str:
     """
-    실시간 아이템 재고 및 링크 유효성 검사
-    - 404 확실한 결함 시에만 ERROR_404 반환
-    - 403, 429(Cloudflare/Bot 보호) 또는 SSL 경고는 정상 라이브로 간주하여 오탐 방지
+    단일 아이템 실시간 재고 판정 (luxury_state_engine 3계층 교차 검증)
+    - IN_STOCK  : 상태 트리·스키마 그래프·DOM 중 2계층 이상이 본상품 재고를 확인
+    - SOLD_OUT  : 본상품 품절 확정 / ERROR_404 : 상품 페이지 삭제(404·410)
+    - UNVERIFIED: 차단(403/429)·네트워크 오류·식별 실패·계층 충돌 — 정상으로도 품절로도 간주하지 않는다
     """
+    if luxury_state_engine is None:
+        return "UNVERIFIED"
     try:
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-        }
-        resp = requests.get(item["url"], headers=headers, timeout=5, allow_redirects=True, verify=False)
-        if resp.status_code == 404:
-            return "ERROR_404"
-        return "IN_STOCK"
-    except Exception:
-        # 네트워크 일시적 지연이나 SSL 이슈는 품절로 오탐하지 않음
-        return "IN_STOCK"
+        offer = luxury_state_engine.check_url(item["url"], expected_color=item.get("colorway"))
+        item["engine_reasons"] = offer.reason_codes
+        return luxury_state_engine.patrol_status(offer)
+    except Exception as e:
+        item["engine_reasons"] = [f"ENGINE_ERROR:{type(e).__name__}"]
+        return "UNVERIFIED"
+
+
+def check_all_item_statuses(items: List[Dict[str, Any]], include_registry: bool = False) -> Dict[str, str]:
+    """순찰 타깃 전체를 한 번의 비동기 배치로 판정하고 data/luxury_state_snapshot.json 을 갱신한다."""
+    if luxury_state_engine is None:
+        return {it["item_id"]: "UNVERIFIED" for it in items}
+    try:
+        skus = luxury_state_engine.run_patrol_audit(items, include_registry=include_registry)
+    except Exception as e:
+        print(f"⚠️ [luxury_state_engine] 배치 판정 실패: {e}")
+        return {it["item_id"]: "UNVERIFIED" for it in items}
+    statuses: Dict[str, str] = {}
+    for it in items:
+        sku = skus.get(it["item_id"])
+        if sku is None:
+            statuses[it["item_id"]] = "UNVERIFIED"
+            it["engine_reasons"] = ["NOT_AUDITED"]
+            continue
+        statuses[it["item_id"]] = luxury_state_engine.sku_patrol_status(sku)
+        it["engine_reasons"] = sorted({r for o in sku.offers for r in o.reason_codes})
+    return statuses
+
+
+def verify_alternative(item: Dict[str, Any], alt: Dict[str, Any]) -> bool:
+    """대체재도 같은 판정기를 통과해야 교체한다. 원본과 같은 URL 은 대체재가 아니다."""
+    if alt.get("url", "").rstrip("/") == str(item.get("url", "")).rstrip("/"):
+        return False
+    return check_item_status({"url": alt["url"]}) == "IN_STOCK"
 
 
 # -------------------------------------------------------------
 # 5. 무인 실시간 자가치유 (Auto-Healing)
 # -------------------------------------------------------------
-def execute_self_healing(item: Dict[str, Any], trigger_reason: str) -> bool:
+def execute_self_healing(item: Dict[str, Any], trigger_reason: str, verify_alt: bool = True) -> bool:
     """
     무인 실시간 자가치유 집행
+    - 대체재 재고를 엔진으로 먼저 확정한 뒤에만 교체 (verify_alt=False 는 --test-heal 시뮬레이션 전용)
     - 24시간 쿨다운 검사: 이미 알림이 나간 경우 텔레그램 발송 생략
     - 인메모리 & 파일 타겟 영구 교체: 다음 라운드에서 동일 결함 반복 감지 100% 방지
     - 대표님께 단 1회만 정확한 조치 리포트 발송
@@ -318,6 +360,31 @@ def execute_self_healing(item: Dict[str, Any], trigger_reason: str) -> bool:
     category = item.get("category", "bag")
     alt = ALTERNATIVE_ITEMS.get(category, ALTERNATIVE_ITEMS["bag"])
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    if verify_alt and not verify_alternative(item, alt):
+        # 재고가 확인되지 않은(또는 원본과 같은 URL 의) 대체재로는 교체하지 않는다.
+        item["status"] = trigger_reason
+        save_patrol_targets(ACTIVE_TARGETS)
+        memory_hub.record_stock_event(
+            platform=item["platform"], item_id=item_id, item_name=item["item_name"], mall=item["mall"],
+            status=trigger_reason, auto_healed=False,
+            details=f"대체재 미검증으로 자동 교체 보류: {alt['name']}"
+        )
+        print(f"[{now_str}] ⏸️ 자가치유 보류: '{item['item_name']}' {trigger_reason} — 검증된 대체재 없음")
+        if is_in_cooldown(item_id):
+            return False
+        sent = send_telegram_message(
+            f"⚠️ <b>[헤르메스 순찰: 수동 조치 필요]</b>\n\n"
+            f"• <b>발생 시각</b>: {now_str}\n"
+            f"• <b>대상 플랫폼</b>: <code>{item['platform']}</code>\n"
+            f"• <b>상품</b>: {item['item_name']}\n"
+            f"• <b>탐지 결함</b>: <b>{trigger_reason}</b> (본상품 기준 확정)\n\n"
+            f"대체재 후보 <code>{alt['name']}</code> 의 재고를 확인하지 못해 자동 교체하지 않았습니다.\n"
+            f"링크를 직접 교체해 주세요."
+        )
+        if sent:
+            register_cooldown(item_id, trigger_reason, "(대체재 미검증)")
+        return sent
 
     # 1. 영구 메모리 DB 기록 (항상 기록)
     memory_hub.record_stock_event(
@@ -392,17 +459,36 @@ def run_patrol_round(simulate_healing: bool = False):
     
     clean_count = 0
     healed_count = 0
-    
+    unverified_count = 0
+
+    # 전 타깃을 한 번의 비동기 배치로 판정 (N라운드마다 화보 핀 레지스트리 전체도 재검증)
+    global _patrol_round_no
+    _patrol_round_no += 1
+    include_registry = REGISTRY_AUDIT_EVERY_N_ROUNDS > 0 and _patrol_round_no % REGISTRY_AUDIT_EVERY_N_ROUNDS == 1
+    engine_statuses = check_all_item_statuses(ACTIVE_TARGETS, include_registry=include_registry)
+
     for idx, item in enumerate(ACTIVE_TARGETS):
         # 시뮬레이션 모드 또는 실시간 체크
         if simulate_healing and idx == 0:
             status = "SOLD_OUT"
         else:
-            status = check_item_status(item)
-            
+            status = engine_statuses.get(item["item_id"], "UNVERIFIED")
+
         if status in ("SOLD_OUT", "ERROR_404"):
-            execute_self_healing(item, status)
+            execute_self_healing(item, status, verify_alt=not (simulate_healing and idx == 0))
             healed_count += 1
+        elif status == "UNVERIFIED":
+            # 판정 불가는 정상 재고로 기록하지 않는다 (차단·식별 실패·계층 충돌 등)
+            memory_hub.record_stock_event(
+                platform=item["platform"],
+                item_id=item["item_id"],
+                item_name=item["item_name"],
+                mall=item["mall"],
+                status="UNVERIFIED",
+                auto_healed=False,
+                details="재고 판정 불가: " + ", ".join(item.get("engine_reasons") or ["UNKNOWN"])
+            )
+            unverified_count += 1
         else:
             memory_hub.record_stock_event(
                 platform=item["platform"],
@@ -411,11 +497,11 @@ def run_patrol_round(simulate_healing: bool = False):
                 mall=item["mall"],
                 status="IN_STOCK",
                 auto_healed=False,
-                details="Add To Bag 활성화 및 링크 정상"
+                details="본상품 재고 2계층 이상 교차 확인 (luxury_state_engine)"
             )
             clean_count += 1
-            
-    print(f"✅ [{now_str}] 순찰 완료: 정상 {clean_count}건, 자가치유/조치 {healed_count}건")
+
+    print(f"✅ [{now_str}] 순찰 완료: 재고 확정 {clean_count}건, 자가치유/조치 {healed_count}건, 판정 불가 {unverified_count}건")
 
     # 옵시디언 전사 볼트 무인 스냅샷 백업 (48시간 롤링 보존)
     try:

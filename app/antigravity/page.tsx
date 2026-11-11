@@ -724,6 +724,22 @@ export default function AntigravityMobilePage() {
         </div>
 
         <div className="flex items-center gap-1.5 shrink-0">
+          <Link
+            href="/secondbrain"
+            className="px-2.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold flex items-center gap-1 whitespace-nowrap shrink-0 transition cursor-pointer shadow-xs"
+            title="세컨브레인 노트 열기"
+          >
+            <FileText className="w-3.5 h-3.5 text-white shrink-0" />
+            <span>세컨브레인 노트</span>
+          </Link>
+          <Link
+            href="/secondbrain/kernel"
+            className="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 text-[#0F172A] text-xs font-bold flex items-center gap-1 whitespace-nowrap shrink-0 transition cursor-pointer shadow-2xs"
+            title="Local-First 동기화 커널 & 지식 그래프"
+          >
+            <Layers className="w-3.5 h-3.5 text-[#0F172A] shrink-0" />
+            <span className="hidden sm:inline">커널·그래프</span>
+          </Link>
           <button
             onClick={() => fetchBridgeData(false)}
             className="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-800 transition cursor-pointer shrink-0"

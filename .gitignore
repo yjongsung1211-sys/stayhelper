@@ -31,3 +31,8 @@ yarn-error.log*
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# SecondBrain Sync Kernel runtime (vault full-text index incl. confidential notes)
+data/secondbrain_kernel.db*
+data/secondbrain_kernel*.log
+data/secondbrain_kernel.pid

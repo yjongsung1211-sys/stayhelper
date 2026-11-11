@@ -5,12 +5,12 @@
     "firmwareVersion": "v1.4.5",
     "isConnected": false,
     "connectionType": "BLE 대기 중 (자동 재연결)",
-    "batteryLevel": 100,
+    "batteryLevel": 90,
     "isCharging": false,
     "storageUsedGB": 0.01,
     "storageTotalGB": 58.2,
     "micStatus": "Dual MEMS Active (하드웨어 대기 중)",
-    "lastSyncedAt": "2026-11-10T09:29:03.626Z",
+    "lastSyncedAt": "2026-11-11T09:37:15.772Z",
     "pcLinked": true,
     "mobileLinked": true,
     "gensparkAppConnected": true,
@@ -19,10 +19,22 @@
     "hardwareVersion": "v0.1.0",
     "isRecording": false,
     "recordStartedAt": null,
-    "isSyncing": false,
-    "syncStatusText": "절전 보호 모드 (자동 BLE 스캔 해제됨)",
-    "filesOnDeviceCount": 1,
+    "isSyncing": true,
+    "syncStatusText": "✅ 실물 기기 녹음 1건 전사 및 옵시디언·클라우드 자동 연동 완료!",
+    "filesOnDeviceCount": 5,
     "filesOnDevice": [
+      {
+        "sn": 10,
+        "name": "65ec3d.raw",
+        "size": 6985320,
+        "scene": 1,
+        "start_time": 1794380418,
+        "end_time": 1794383925,
+        "crc": "560910972",
+        "frame_size": 40,
+        "opus": 1084752896,
+        "marks": []
+      },
       {
         "sn": 9,
         "name": "e451d7.raw",
@@ -31,7 +43,45 @@
         "start_time": 1794228300,
         "end_time": 1794231952,
         "crc": "252967126",
-        "frame_size": 40
+        "frame_size": 40,
+        "opus": 1084752896,
+        "marks": []
+      },
+      {
+        "sn": 8,
+        "name": "475560.raw",
+        "size": 29200,
+        "scene": 1,
+        "start_time": 1794212174,
+        "end_time": 1794212189,
+        "crc": "1896867387",
+        "frame_size": 40,
+        "opus": 1084752896,
+        "marks": []
+      },
+      {
+        "sn": 2,
+        "name": "7e6cbb.raw",
+        "size": 14600,
+        "scene": 1,
+        "start_time": 1794192331,
+        "end_time": 1794192339,
+        "crc": "1659138492",
+        "frame_size": 40,
+        "opus": 1084752896,
+        "marks": []
+      },
+      {
+        "sn": 1,
+        "name": "172195.raw",
+        "size": 47320,
+        "scene": 1,
+        "start_time": 1794186749,
+        "end_time": 1794186773,
+        "crc": "4284548198",
+        "frame_size": 40,
+        "opus": 1084752896,
+        "marks": []
       }
     ],
     "action": "stop-record"
@@ -41,7 +91,7 @@
   "macAddress": "28:CD:9C:F3:32:12",
   "modelCode": "GSPK-SBN-PRO",
   "firmwareVersion": "v1.4.5",
-  "batteryLevel": 100,
+  "batteryLevel": 90,
   "isCharging": false,
   "storageUsedGb": 0.01,
   "storageTotalGb": 58.2,
@@ -49,10 +99,22 @@
   "isConnected": false,
   "isRecording": false,
   "recordStartedAt": null,
-  "isSyncing": false,
-  "syncStatusText": "절전 보호 모드 (자동 BLE 스캔 해제됨)",
-  "filesOnDeviceCount": 1,
+  "isSyncing": true,
+  "syncStatusText": "✅ 실물 기기 녹음 1건 전사 및 옵시디언·클라우드 자동 연동 완료!",
+  "filesOnDeviceCount": 5,
   "filesOnDevice": [
+    {
+      "sn": 10,
+      "name": "65ec3d.raw",
+      "size": 6985320,
+      "scene": 1,
+      "start_time": 1794380418,
+      "end_time": 1794383925,
+      "crc": "560910972",
+      "frame_size": 40,
+      "opus": 1084752896,
+      "marks": []
+    },
     {
       "sn": 9,
       "name": "e451d7.raw",
@@ -61,10 +123,48 @@
       "start_time": 1794228300,
       "end_time": 1794231952,
       "crc": "252967126",
-      "frame_size": 40
+      "frame_size": 40,
+      "opus": 1084752896,
+      "marks": []
+    },
+    {
+      "sn": 8,
+      "name": "475560.raw",
+      "size": 29200,
+      "scene": 1,
+      "start_time": 1794212174,
+      "end_time": 1794212189,
+      "crc": "1896867387",
+      "frame_size": 40,
+      "opus": 1084752896,
+      "marks": []
+    },
+    {
+      "sn": 2,
+      "name": "7e6cbb.raw",
+      "size": 14600,
+      "scene": 1,
+      "start_time": 1794192331,
+      "end_time": 1794192339,
+      "crc": "1659138492",
+      "frame_size": 40,
+      "opus": 1084752896,
+      "marks": []
+    },
+    {
+      "sn": 1,
+      "name": "172195.raw",
+      "size": 47320,
+      "scene": 1,
+      "start_time": 1794186749,
+      "end_time": 1794186773,
+      "crc": "4284548198",
+      "frame_size": 40,
+      "opus": 1084752896,
+      "marks": []
     }
   ],
-  "lastSyncedAt": "2026-11-10T09:29:03.626Z",
+  "lastSyncedAt": "2026-11-11T09:37:15.772Z",
   "mobilePublicUrl": "https://weekend-subaru-extends-stakeholders.trycloudflare.com/secondbrain",
   "zeroSubscriptionActive": true
 }

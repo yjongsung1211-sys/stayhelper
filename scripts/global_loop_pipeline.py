@@ -33,7 +33,10 @@ os.makedirs(AUDIO_DIR, exist_ok=True)
 os.makedirs(OUT_DIR, exist_ok=True)
 
 # Telegram Bot Credentials (from verified production config)
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8728900069:AAGQ1TiV7sPBXNwmfAs1GxxMnN0UTLgPZxs")
+import sys as _hermes_sys, pathlib as _hermes_pathlib  # 시크릿은 .env.local 에서 읽는다 (hermes_env.py)
+_hermes_sys.path.insert(0, str(next(p for p in _hermes_pathlib.Path(__file__).resolve().parents if (p / "hermes_env.py").exists())))
+from hermes_env import TELEGRAM_BOT_TOKEN as _HERMES_TG_TOKEN
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", _HERMES_TG_TOKEN)
 TELEGRAM_CHAT_ID = "8971100274"
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
 
@@ -233,9 +236,12 @@ def render_remotion_composition(composition_id: str, out_name: str, props: dict)
     with open(props_file, "w", encoding="utf-8") as f:
         f.write(props_json)
 
-    cmd = f'cmd.exe /c "cd /d \"{REMOTION_DIR}\" && npx remotion render src/index.ts {composition_id} \"{out_path}\" --props=\"{props_file}\""'
+    cmd_args = [
+        "cmd.exe", "/c", "npx", "remotion", "render",
+        "src/index.ts", composition_id, out_path, f"--props={props_file}"
+    ]
     print(f"\n🎬 [Rendering] {composition_id} -> {out_name}...")
-    res = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    res = subprocess.run(cmd_args, cwd=REMOTION_DIR, capture_output=True, text=True)
     
     if os.path.exists(props_file):
         try: os.remove(props_file)
