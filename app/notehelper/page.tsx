@@ -738,33 +738,33 @@ export default function NoteHelperPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0F17] text-slate-100 font-sans selection:bg-purple-500 selection:text-white pb-20">
+    <div className="min-h-screen bg-[#F4F6FB] text-[#0F172A] font-sans selection:bg-indigo-600 selection:text-white pb-20 overflow-x-hidden">
       {/* Toast Banner */}
       {toastMessage && (
-        <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-[#1E293B] border border-purple-500/40 text-purple-200 px-5 py-3 rounded-full text-sm font-medium shadow-2xl animate-fade-in flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-purple-400 animate-spin" />
-          <span>{toastMessage}</span>
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md bg-[#0F172A] border border-indigo-500/50 text-white px-4 py-3 rounded-2xl text-xs sm:text-sm font-semibold shadow-2xl animate-fade-in flex items-center gap-2.5">
+          <Sparkles className="w-4 h-4 text-amber-400 animate-spin shrink-0" />
+          <span className="truncate">{toastMessage}</span>
         </div>
       )}
 
-      {/* Top Navigation */}
-      <header className="border-b border-slate-800/80 bg-[#0F141C]/90 backdrop-blur sticky top-0 z-40">
+      {/* Top Navigation (Deep Black Header for Crisp White/Black Contrast) */}
+      <header className="border-b border-slate-800 bg-[#0F172A] text-white sticky top-0 z-40 shadow-md">
         <div className="max-w-6xl mx-auto px-3.5 py-3 flex items-center justify-between gap-2">
           <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-9 h-9 shrink-0 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-purple-900/30">
+            <div className="w-9 h-9 shrink-0 rounded-xl bg-gradient-to-tr from-violet-600 via-indigo-600 to-purple-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
               <Mic className="w-5 h-5 text-white" />
             </div>
             <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <h1 className="font-bold text-base sm:text-lg tracking-tight text-white whitespace-nowrap">
+              <div className="flex items-center gap-1.5">
+                <h1 className="font-extrabold text-base sm:text-lg tracking-tight text-white whitespace-nowrap">
                   NoteHelper
                 </h1>
-                <span className="hidden sm:inline-block text-[10px] font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30 px-2 py-0.5 rounded-full whitespace-nowrap">
-                  AI BYOK Studio
+                <span className="text-[10px] font-bold bg-indigo-500/25 text-indigo-200 border border-indigo-400/30 px-2 py-0.5 rounded-full whitespace-nowrap">
+                  노트헬퍼
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400 truncate">
-                회의록 정리 &amp; 다국어 AI 코칭
+              <p className="text-[11px] text-slate-300 truncate">
+                AI 회의록 정리 &amp; 다국어 어학 코칭
               </p>
             </div>
           </div>
@@ -773,11 +773,11 @@ export default function NoteHelperPage() {
             {/* BYOK Cloud AI Connection Button */}
             <button
               onClick={() => setIsConfigOpen(true)}
-              className="flex items-center gap-1.5 px-2.5 py-2 min-h-[36px] rounded-xl border border-slate-700 hover:border-purple-500/60 bg-slate-800/60 hover:bg-slate-800 text-xs font-medium transition whitespace-nowrap shrink-0 cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-2 min-h-[36px] rounded-xl border border-slate-700 hover:border-indigo-400 bg-slate-800/90 hover:bg-slate-800 text-xs font-semibold transition whitespace-nowrap shrink-0 cursor-pointer"
             >
-              <Sparkles className="w-3.5 h-3.5 text-purple-400 shrink-0" />
-              <span className="hidden sm:inline">AI 엔진:</span>
-              <span className="text-purple-300 font-semibold whitespace-nowrap">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+              <span className="hidden sm:inline text-slate-300">AI 엔진:</span>
+              <span className="text-white font-bold whitespace-nowrap">
                 {aiConfig.apiKey ? PROVIDER_INFO[aiConfig.provider]?.name.split(' ')[0] : '무료 AI'}
               </span>
               <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" title="즉시 분석 가능 (무료 탑재)" />
@@ -787,82 +787,100 @@ export default function NoteHelperPage() {
       </header>
 
       {/* Main Content Area */}
-      <main className="max-w-6xl mx-auto px-4 pt-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <main className="max-w-6xl mx-auto px-3.5 sm:px-4 pt-4 sm:pt-6 grid grid-cols-1 lg:grid-cols-12 gap-5">
         {/* Left Column: Recording & Input (5 Cols) */}
-        <section className="lg:col-span-5 space-y-5">
-          {/* Main Recording Cockpit */}
-          <div className="p-6 rounded-3xl bg-[#111722] border border-slate-800/90 shadow-2xl relative overflow-hidden">
-            <div className="flex items-center justify-between gap-2 mb-4">
-              <span className="text-xs font-semibold uppercase tracking-wider text-purple-400 flex items-center gap-1.5 whitespace-nowrap">
-                <Zap className="w-3.5 h-3.5 shrink-0" /> 실시간 보이스 녹음
+        <section className="lg:col-span-5 space-y-5 min-w-0">
+          {/* Main Recording Cockpit (Crisp White Card + Deep Black Mic Stage + Vibrant Accents) */}
+          <div className="p-4 sm:p-6 rounded-3xl bg-white border border-slate-200/90 shadow-xl relative overflow-hidden">
+            {/* Top Row: Title + Status Badge (Never Overflows) */}
+            <div className="flex items-center justify-between gap-2 mb-2.5">
+              <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 flex items-center gap-1.5 whitespace-nowrap">
+                <Zap className="w-4 h-4 text-amber-500 fill-amber-500 shrink-0" /> 실시간 보이스 녹음
               </span>
-              <div className="flex items-center gap-1 bg-slate-800/80 rounded-xl p-1 border border-slate-700/60 text-xs">
-                {(['ko', 'en', 'ja', 'es', 'zh'] as const).map((lang) => (
-                  <button
-                    key={lang}
-                    onClick={() => setTargetLang(lang)}
-                    className={`px-2.5 py-1.5 min-h-[32px] rounded-lg font-semibold transition cursor-pointer ${
-                      targetLang === lang ? 'bg-purple-600 text-white' : 'text-slate-400 hover:text-white'
-                    }`}
-                  >
-                    {lang.toUpperCase()}
-                  </button>
-                ))}
-              </div>
+              <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 whitespace-nowrap">
+                ● 다국어 자동 인식
+              </span>
             </div>
 
-            {/* Timer & Pulsing Circle */}
-            <div className="flex flex-col items-center justify-center py-6">
+            {/* Full-Width 5-Column Language Selector Bar (Zero Overflow on 360px Screens) */}
+            <div className="grid grid-cols-5 gap-1.5 bg-[#F1F5F9] rounded-2xl p-1.5 border border-slate-200/80 mb-4">
+              {(
+                [
+                  { code: 'ko', label: 'KO · 한' },
+                  { code: 'en', label: 'EN · 영' },
+                  { code: 'ja', label: 'JA · 일' },
+                  { code: 'es', label: 'ES · 스' },
+                  { code: 'zh', label: 'ZH · 중' },
+                ] as const
+              ).map(({ code, label }) => (
+                <button
+                  key={code}
+                  onClick={() => setTargetLang(code)}
+                  className={`py-2 min-h-[36px] rounded-xl text-xs font-extrabold transition text-center whitespace-nowrap cursor-pointer ${
+                    targetLang === code
+                      ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/70'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            {/* Deep Obsidian Black Recording Stage (Black & White Harmony + Vibrant Glow) */}
+            <div className="flex flex-col items-center justify-center py-6 px-4 rounded-2xl bg-gradient-to-b from-[#0F172A] via-[#131C31] to-[#1E1B4B] text-white shadow-inner border border-slate-800">
               <div
                 className={`w-24 h-24 rounded-full flex items-center justify-center transition-all duration-300 ${
                   isRecording
-                    ? 'bg-rose-500/20 border-2 border-rose-500 animate-pulse shadow-lg shadow-rose-900/40'
-                    : 'bg-purple-600/10 border-2 border-purple-500/40'
+                    ? 'bg-rose-500/25 border-2 border-rose-400 animate-pulse shadow-lg shadow-rose-500/40'
+                    : 'bg-indigo-500/20 border-2 border-indigo-400/50'
                 }`}
               >
                 <button
                   onClick={isRecording ? stopRecording : startRecording}
-                  className={`w-16 h-16 rounded-full flex items-center justify-center text-white shadow-xl transition-transform active:scale-95 ${
+                  className={`w-16 h-16 rounded-full flex items-center justify-center text-white shadow-xl transition-transform active:scale-95 cursor-pointer ${
                     isRecording
-                      ? 'bg-rose-600 hover:bg-rose-700 shadow-rose-600/50'
-                      : 'bg-gradient-to-tr from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 shadow-purple-600/50'
+                      ? 'bg-gradient-to-tr from-rose-600 to-pink-500 shadow-rose-600/50'
+                      : 'bg-gradient-to-tr from-violet-600 via-indigo-600 to-purple-500 hover:from-violet-500 hover:to-indigo-500 shadow-indigo-600/50'
                   }`}
                 >
                   {isRecording ? <MicOff className="w-7 h-7" /> : <Mic className="w-7 h-7" />}
                 </button>
               </div>
 
-              <div className="mt-4 text-center">
-                <div className="text-2xl font-mono font-bold tracking-tight text-white">
+              <div className="mt-3.5 text-center">
+                <div className="text-3xl font-mono font-extrabold tracking-tight text-white">
                   {formatSeconds(recordSeconds)}
                 </div>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-indigo-200/90 mt-1 font-medium">
                   {isRecording
-                    ? '말씀하시면 실시간으로 텍스트로 변환됩니다...'
-                    : '버튼을 눌러 회의, 수업, 메모를 녹음하세요'}
+                    ? '🔴 말씀하시면 실시간으로 텍스트로 변환됩니다...'
+                    : '마이크 버튼을 눌러 회의·외국어 수업을 녹음하세요'}
                 </p>
               </div>
 
               {/* Feature 5: Real-time Audio Waveform Visualizer */}
-              <div className="mt-3 flex items-center justify-center gap-1 h-12 px-4 py-1">
+              <div className="mt-3 flex items-center justify-center gap-1 h-10 px-2 py-1 w-full max-w-[260px] overflow-hidden">
                 {waveformBars.map((height, idx) => (
                   <div
                     key={idx}
                     style={{ height: `${isRecording ? height : 8}px` }}
-                    className={`w-1 rounded-full transition-all duration-75 ${
+                    className={`w-1 rounded-full transition-all duration-75 shrink-0 ${
                       isRecording
-                        ? 'bg-gradient-to-t from-purple-500 via-indigo-400 to-rose-400 shadow-[0_0_8px_rgba(168,85,247,0.6)]'
-                        : 'bg-slate-700/60'
+                        ? 'bg-gradient-to-t from-violet-400 via-fuchsia-400 to-amber-300 shadow-[0_0_8px_rgba(168,85,247,0.6)]'
+                        : 'bg-slate-600/70'
                     }`}
                   />
                 ))}
               </div>
 
               {/* Feature 3: Audio File Upload Button */}
-              <div className="mt-2 w-full max-w-xs">
-                <label className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl border border-slate-700/80 bg-slate-800/40 hover:bg-slate-800 text-slate-300 text-xs font-semibold cursor-pointer transition">
-                  <UploadCloud className="w-4 h-4 text-purple-400" />
-                  <span>{isUploadingAudio ? '오디오 전사 & 분석 중...' : '음성 파일 업로드 (.m4a, .mp3, .wav)'}</span>
+              <div className="mt-3 w-full">
+                <label className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-indigo-400/30 bg-white/10 hover:bg-white/15 text-white text-xs font-bold cursor-pointer transition">
+                  <UploadCloud className="w-4 h-4 text-amber-300 shrink-0" />
+                  <span className="truncate">
+                    {isUploadingAudio ? '오디오 전사 & 분석 중...' : '음성 파일 업로드 (.m4a, .mp3, .wav)'}
+                  </span>
                   <input
                     type="file"
                     accept="audio/*,.m4a,.mp3,.wav,.ogg,.webm,.aac"
@@ -874,38 +892,40 @@ export default function NoteHelperPage() {
               </div>
             </div>
 
-            {/* Live Transcript Preview Box */}
-            <div className="mt-2 p-3.5 rounded-2xl bg-[#090D14] border border-slate-800 text-xs min-h-[90px] max-h-[140px] overflow-y-auto leading-relaxed">
-              <div className="text-slate-300 whitespace-pre-wrap">
+            {/* Live Transcript Preview Box (Clean White/Slate Surface with Crisp Black Text) */}
+            <div className="mt-4 p-3.5 rounded-2xl bg-[#F8FAFC] border border-slate-200/90 text-xs min-h-[84px] max-h-[140px] overflow-y-auto leading-relaxed">
+              <div className="text-[#0F172A] font-medium whitespace-pre-wrap break-words">
                 {transcript || interimTranscript || (
-                  <span className="text-slate-600 italic">
-                    마이크에 대고 말씀하시거나, 아래 텍스트 상자에 회의록을 직접 붙여넣으세요.
+                  <span className="text-slate-400">
+                    마이크에 대고 말씀하시거나, 아래 텍스트 상자에 회의록·수업 내용을 직접 붙여넣으세요.
                   </span>
                 )}
-                {interimTranscript && <span className="text-purple-400 italic"> {interimTranscript}</span>}
+                {interimTranscript && <span className="text-indigo-600 font-semibold"> {interimTranscript}</span>}
               </div>
             </div>
 
             {/* Analyze Trigger Button */}
-            <div className="mt-4 flex gap-2">
+            <div className="mt-3.5 flex gap-2">
               <button
                 onClick={handleAnalyze}
                 disabled={isAnalyzing || (!transcript && !interimTranscript)}
-                className={`flex-1 py-3 px-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition ${
+                className={`flex-1 py-3.5 px-4 rounded-2xl font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition cursor-pointer ${
                   isAnalyzing || (!transcript && !interimTranscript)
-                    ? 'bg-slate-800 text-slate-500 cursor-not-allowed border border-slate-700'
-                    : 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-purple-900/30'
+                    ? 'bg-slate-100 text-slate-400 cursor-not-allowed border border-slate-200 shadow-none'
+                    : 'bg-gradient-to-r from-[#0F172A] via-[#312E81] to-[#4F46E5] hover:opacity-95 text-white shadow-indigo-500/20'
                 }`}
               >
-                <Sparkles className="w-4 h-4" />
-                {isAnalyzing ? 'AI가 요약 & 코칭 분석 중...' : '클라우드 AI로 즉시 분석하기'}
+                <Sparkles className="w-4 h-4 text-amber-300 shrink-0" />
+                <span className="truncate">
+                  {isAnalyzing ? 'AI가 요약 & 코칭 분석 중...' : '클라우드 AI로 즉시 분석하기'}
+                </span>
               </button>
               <button
                 onClick={() => {
                   setTranscript('');
                   setInterimTranscript('');
                 }}
-                className="px-3 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition"
+                className="px-3.5 py-3.5 rounded-2xl bg-slate-100 hover:bg-rose-50 text-slate-600 hover:text-rose-600 border border-slate-200 transition shrink-0 cursor-pointer"
                 title="텍스트 비우기"
               >
                 <Trash2 className="w-4 h-4" />
@@ -913,27 +933,27 @@ export default function NoteHelperPage() {
             </div>
 
             {/* Direct Textarea for pasting */}
-            <div className="mt-4 pt-4 border-t border-slate-800/80">
-              <label className="text-[11px] font-medium text-slate-400 block mb-1.5">
-                텍스트 직접 입력 / 붙여넣기:
+            <div className="mt-4 pt-3.5 border-t border-slate-200/80">
+              <label className="text-xs font-bold text-slate-700 block mb-1.5">
+                ✍️ 텍스트 직접 입력 / 붙여넣기:
               </label>
               <textarea
                 value={transcript}
                 onChange={(e) => setTranscript(e.target.value)}
-                placeholder="회의 녹취록이나 과외 대화 텍스트를 복사해서 붙여넣으셔도 완벽히 분석됩니다."
-                className="w-full h-20 p-2.5 bg-[#090D14] border border-slate-800 rounded-xl text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-purple-500/80 resize-none"
+                placeholder="회의 녹취록이나 외국어 과외 대화 텍스트를 복사해서 붙여넣으셔도 완벽히 분석됩니다."
+                className="w-full h-20 p-3 bg-[#F8FAFC] border border-slate-200 rounded-xl text-xs text-[#0F172A] placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white resize-none leading-relaxed"
               />
             </div>
           </div>
 
-          {/* Past Notes Sidebar / List */}
-          <div className="p-5 rounded-3xl bg-[#111722] border border-slate-800/90 shadow-xl">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                <BookOpen className="w-3.5 h-3.5 text-indigo-400" /> 로컬 보관함 ({notesHistory.length})
+          {/* Past Notes Sidebar / List (Clean White Card with Indigo/Emerald Accents) */}
+          <div className="p-4 sm:p-5 rounded-3xl bg-white border border-slate-200/90 shadow-lg">
+            <div className="flex items-center justify-between gap-2 mb-3">
+              <span className="text-xs font-extrabold uppercase tracking-wider text-[#0F172A] flex items-center gap-1.5">
+                <BookOpen className="w-4 h-4 text-indigo-600 shrink-0" /> 내 노트 보관함 ({notesHistory.length})
               </span>
-              <span className="text-[10px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
-                100% 로컬 저장됨
+              <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full whitespace-nowrap">
+                100% 자동 저장됨
               </span>
             </div>
 
@@ -942,15 +962,19 @@ export default function NoteHelperPage() {
                 <div
                   key={note.id}
                   onClick={() => setCurrentNote(note)}
-                  className={`p-3 rounded-2xl cursor-pointer transition border text-left flex items-start justify-between group ${
+                  className={`p-3 rounded-2xl cursor-pointer transition border text-left flex items-center justify-between gap-2 group ${
                     currentNote?.id === note.id
-                      ? 'bg-purple-950/30 border-purple-500/50 text-white'
-                      : 'bg-slate-900/60 border-slate-800/70 text-slate-300 hover:border-slate-700'
+                      ? 'bg-[#0F172A] border-[#0F172A] text-white shadow-md'
+                      : 'bg-[#F8FAFC] border-slate-200/90 text-[#0F172A] hover:border-indigo-300 hover:bg-indigo-50/40'
                   }`}
                 >
-                  <div className="truncate pr-2">
-                    <p className="font-semibold text-xs truncate">{note.title}</p>
-                    <p className="text-[10px] text-slate-500 mt-0.5">
+                  <div className="min-w-0 flex-1">
+                    <p className="font-bold text-xs truncate">{note.title}</p>
+                    <p
+                      className={`text-[10px] mt-0.5 truncate ${
+                        currentNote?.id === note.id ? 'text-indigo-200' : 'text-slate-500'
+                      }`}
+                    >
                       {new Date(note.createdAt).toLocaleDateString('ko-KR')} · {note.durationSeconds}초 ·{' '}
                       {note.providerUsed || 'Gemini'}
                     </p>
@@ -960,9 +984,13 @@ export default function NoteHelperPage() {
                       e.stopPropagation();
                       deleteNote(note.id);
                     }}
-                    className="opacity-0 group-hover:opacity-100 text-slate-500 hover:text-rose-400 p-1 transition"
+                    className={`p-2 rounded-lg transition shrink-0 ${
+                      currentNote?.id === note.id
+                        ? 'text-slate-300 hover:text-rose-300 hover:bg-white/10'
+                        : 'text-slate-400 hover:text-rose-600 hover:bg-rose-50'
+                    }`}
                   >
-                    <Trash2 className="w-3.5 h-3.5" />
+                    <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
               ))}
@@ -971,100 +999,99 @@ export default function NoteHelperPage() {
         </section>
 
         {/* Right Column: AI Structured Result View (7 Cols) */}
-        <section className="lg:col-span-7">
+        <section className="lg:col-span-7 min-w-0">
           {currentNote ? (
-            <div className="p-6 rounded-3xl bg-[#111722] border border-slate-800/90 shadow-2xl space-y-6">
+            <div className="p-4 sm:p-6 rounded-3xl bg-white border border-slate-200/90 shadow-xl space-y-5">
               {/* Note Header */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-800/80 gap-3">
-                <div>
-                  <h2 className="text-lg font-bold text-white tracking-tight leading-snug">
+              <div className="flex items-start justify-between pb-4 border-b border-slate-200 gap-3">
+                <div className="min-w-0">
+                  <span className="inline-block text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 mb-1.5">
+                    AI 분석 리포트 · {currentNote.providerUsed}
+                  </span>
+                  <h2 className="text-base sm:text-lg font-extrabold text-[#0F172A] tracking-tight leading-snug break-words">
                     {currentNote.title}
                   </h2>
-                  <p className="text-xs text-slate-400 mt-1 flex items-center gap-2">
-                    <span>{new Date(currentNote.createdAt).toLocaleString('ko-KR')}</span>
-                    <span>•</span>
-                    <span className="text-purple-400 font-medium">분석 AI: {currentNote.providerUsed}</span>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {new Date(currentNote.createdAt).toLocaleString('ko-KR')}
                   </p>
                 </div>
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() =>
-                      copyToClipboard(
-                        `# ${currentNote.title}\n\n## 핵심 요약\n${currentNote.summary
-                          .map((s) => `- ${s}`)
-                          .join('\n')}\n\n## 할 일\n${currentNote.actionItems
-                          .map((a) => `- [ ] ${a.task} (${a.assignee}, ${a.due})`)
-                          .join('\n')}`
-                      )
-                    }
-                    className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 text-xs flex items-center gap-1.5 transition"
-                  >
-                    {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                    <span>복사</span>
-                  </button>
-                </div>
+                <button
+                  onClick={() =>
+                    copyToClipboard(
+                      `# ${currentNote.title}\n\n## 핵심 요약\n${currentNote.summary
+                        .map((s) => `- ${s}`)
+                        .join('\n')}\n\n## 할 일\n${currentNote.actionItems
+                        .map((a) => `- [ ] ${a.task} (${a.assignee}, ${a.due})`)
+                        .join('\n')}`
+                    )
+                  }
+                  className="px-3 py-2 rounded-xl bg-[#0F172A] hover:bg-slate-800 text-white text-xs font-bold flex items-center gap-1.5 shrink-0 transition cursor-pointer"
+                >
+                  {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>복사</span>
+                </button>
               </div>
 
-              {/* Navigation Tabs */}
-              <div className="flex items-center gap-2 border-b border-slate-800/80 pb-2">
+              {/* Navigation Tabs (2x2 Grid on Mobile, 4 Columns on Tablet/Desktop -> Zero Overflow!) */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-[#F1F5F9] p-1.5 rounded-2xl border border-slate-200/80">
                 <button
                   onClick={() => setActiveTab('summary')}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+                  className={`py-2.5 px-2 rounded-xl text-xs font-extrabold transition flex items-center justify-center gap-1.5 whitespace-nowrap cursor-pointer ${
                     activeTab === 'summary'
-                      ? 'bg-purple-600 text-white shadow-md shadow-purple-900/30'
-                      : 'text-slate-400 hover:text-white'
+                      ? 'bg-[#0F172A] text-white shadow-md'
+                      : 'text-slate-600 hover:text-[#0F172A] hover:bg-white/60'
                   }`}
                 >
-                  <Sparkles className="w-3.5 h-3.5" /> 핵심 요약 (3줄)
+                  <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" /> 핵심 요약
                 </button>
                 <button
                   onClick={() => setActiveTab('actions')}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+                  className={`py-2.5 px-2 rounded-xl text-xs font-extrabold transition flex items-center justify-center gap-1.5 whitespace-nowrap cursor-pointer ${
                     activeTab === 'actions'
-                      ? 'bg-purple-600 text-white shadow-md shadow-purple-900/30'
-                      : 'text-slate-400 hover:text-white'
+                      ? 'bg-[#0F172A] text-white shadow-md'
+                      : 'text-slate-600 hover:text-[#0F172A] hover:bg-white/60'
                   }`}
                 >
-                  <CheckSquare className="w-3.5 h-3.5" /> 할 일 ({currentNote.actionItems.length})
+                  <CheckSquare className="w-3.5 h-3.5 text-emerald-400 shrink-0" /> 할 일 ({currentNote.actionItems.length})
                 </button>
                 <button
                   onClick={() => setActiveTab('coaching')}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+                  className={`py-2.5 px-2 rounded-xl text-xs font-extrabold transition flex items-center justify-center gap-1.5 whitespace-nowrap cursor-pointer ${
                     activeTab === 'coaching'
-                      ? 'bg-purple-600 text-white shadow-md shadow-purple-900/30'
-                      : 'text-slate-400 hover:text-white'
+                      ? 'bg-[#0F172A] text-white shadow-md'
+                      : 'text-slate-600 hover:text-[#0F172A] hover:bg-white/60'
                   }`}
                 >
-                  <Languages className="w-3.5 h-3.5" /> 어학 코칭
+                  <Languages className="w-3.5 h-3.5 text-violet-400 shrink-0" /> 어학 코칭
                 </button>
                 <button
                   onClick={() => setActiveTab('transcript')}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+                  className={`py-2.5 px-2 rounded-xl text-xs font-extrabold transition flex items-center justify-center gap-1.5 whitespace-nowrap cursor-pointer ${
                     activeTab === 'transcript'
-                      ? 'bg-purple-600 text-white shadow-md shadow-purple-900/30'
-                      : 'text-slate-400 hover:text-white'
+                      ? 'bg-[#0F172A] text-white shadow-md'
+                      : 'text-slate-600 hover:text-[#0F172A] hover:bg-white/60'
                   }`}
                 >
-                  <FileText className="w-3.5 h-3.5" /> 원본 녹취
+                  <FileText className="w-3.5 h-3.5 text-sky-400 shrink-0" /> 원본 녹취
                 </button>
               </div>
 
               {/* Tab 1: Executive Summary */}
               {activeTab === 'summary' && (
                 <div className="space-y-3 animate-fade-in">
-                  <h3 className="text-xs font-semibold text-purple-300 uppercase tracking-wider">
-                    Executive Takeaways
+                  <h3 className="text-xs font-extrabold text-indigo-700 uppercase tracking-wider">
+                    ✨ 핵심 요약 (Executive Takeaways)
                   </h3>
                   <div className="space-y-2.5">
                     {currentNote.summary.map((point, idx) => (
                       <div
                         key={idx}
-                        className="p-3.5 rounded-2xl bg-[#090D14] border border-slate-800/80 flex items-start gap-3"
+                        className="p-3.5 rounded-2xl bg-[#EEF2FF]/70 border border-indigo-200/80 flex items-start gap-3"
                       >
-                        <span className="w-5 h-5 rounded-full bg-purple-500/20 text-purple-300 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
+                        <span className="w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-extrabold flex-shrink-0 mt-0.5 shadow-sm">
                           {idx + 1}
                         </span>
-                        <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-medium">
+                        <p className="text-xs sm:text-sm text-[#0F172A] leading-relaxed font-semibold break-words">
                           {point}
                         </p>
                       </div>
@@ -1076,8 +1103,8 @@ export default function NoteHelperPage() {
               {/* Tab 2: Action Items */}
               {activeTab === 'actions' && (
                 <div className="space-y-3 animate-fade-in">
-                  <h3 className="text-xs font-semibold text-purple-300 uppercase tracking-wider">
-                    Action Items & Deadlines
+                  <h3 className="text-xs font-extrabold text-emerald-700 uppercase tracking-wider">
+                    ✅ 실행 과제 (Action Items)
                   </h3>
                   {currentNote.actionItems.length === 0 ? (
                     <p className="text-xs text-slate-500 py-6 text-center">추출된 할 일이 없습니다.</p>
@@ -1086,22 +1113,22 @@ export default function NoteHelperPage() {
                       {currentNote.actionItems.map((item, idx) => (
                         <div
                           key={idx}
-                          className="p-3.5 rounded-2xl bg-[#090D14] border border-slate-800/80 flex items-center justify-between gap-3"
+                          className="p-3.5 rounded-2xl bg-[#ECFDF5]/70 border border-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5"
                         >
-                          <div className="flex items-center gap-2.5">
+                          <div className="flex items-start gap-2.5 min-w-0">
                             <input
                               type="checkbox"
-                              className="w-4 h-4 rounded accent-purple-600 bg-slate-900 border-slate-700 cursor-pointer"
+                              className="w-4 h-4 mt-0.5 rounded accent-emerald-600 cursor-pointer shrink-0"
                             />
-                            <span className="text-xs sm:text-sm font-medium text-slate-200">
+                            <span className="text-xs sm:text-sm font-bold text-[#0F172A] break-words">
                               {item.task}
                             </span>
                           </div>
-                          <div className="flex items-center gap-2 flex-shrink-0">
-                            <span className="text-[10px] bg-slate-800 px-2 py-0.5 rounded text-slate-300 border border-slate-700">
+                          <div className="flex items-center gap-1.5 flex-shrink-0 pl-6 sm:pl-0">
+                            <span className="text-[10px] font-bold bg-white px-2.5 py-0.5 rounded-full text-slate-700 border border-slate-200">
                               {item.assignee || '본인'}
                             </span>
-                            <span className="text-[10px] bg-rose-500/10 text-rose-300 border border-rose-500/20 px-2 py-0.5 rounded">
+                            <span className="text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200 px-2.5 py-0.5 rounded-full">
                               {item.due || '기한 미정'}
                             </span>
                           </div>
@@ -1119,36 +1146,40 @@ export default function NoteHelperPage() {
                   {currentNote.languageCoaching?.grammarCorrections &&
                     currentNote.languageCoaching.grammarCorrections.length > 0 && (
                       <div className="space-y-2.5">
-                        <h4 className="text-xs font-semibold text-amber-300 uppercase tracking-wider">
+                        <h4 className="text-xs font-extrabold text-amber-700 uppercase tracking-wider">
                           ✍️ 문법 및 더 자연스러운 원어민 표현 교정
                         </h4>
-                        <div className="space-y-2">
+                        <div className="space-y-2.5">
                           {currentNote.languageCoaching.grammarCorrections.map((corr, idx) => (
                             <div
                               key={idx}
-                              className="p-3.5 rounded-2xl bg-[#090D14] border border-slate-800/80 space-y-1.5"
+                              className="p-3.5 rounded-2xl bg-[#FFFBEB] border border-amber-200 space-y-1.5"
                             >
-                              <div className="flex items-center justify-between gap-2 text-xs">
-                                <div className="flex items-center gap-2 flex-wrap">
-                                  <span className="line-through text-rose-400 font-mono">{corr.original}</span>
-                                  <ChevronRight className="w-3.5 h-3.5 text-slate-600 shrink-0" />
-                                  <span className="text-emerald-400 font-semibold font-mono">
+                              <div className="flex items-start justify-between gap-2 text-xs">
+                                <div className="flex items-center gap-1.5 flex-wrap min-w-0">
+                                  <span className="line-through text-rose-600 font-semibold break-words">
+                                    {corr.original}
+                                  </span>
+                                  <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                                  <span className="text-emerald-700 font-extrabold break-words">
                                     {corr.corrected}
                                   </span>
                                 </div>
                                 <button
                                   onClick={() => playPronunciation(corr.corrected, currentNote.targetLang)}
-                                  className={`p-1.5 rounded-lg border transition shrink-0 ${
+                                  className={`p-2 rounded-xl border transition shrink-0 cursor-pointer ${
                                     playingText === corr.corrected
-                                      ? 'bg-purple-600 text-white border-purple-400 shadow-[0_0_8px_rgba(168,85,247,0.5)] animate-pulse'
-                                      : 'bg-slate-800 text-slate-400 hover:text-purple-300 border-slate-700'
+                                      ? 'bg-indigo-600 text-white border-indigo-600 animate-pulse'
+                                      : 'bg-white text-indigo-700 hover:bg-indigo-50 border-indigo-200'
                                   }`}
                                   title="원어민 발음 듣기"
                                 >
-                                  <Volume2 className="w-3.5 h-3.5" />
+                                  <Volume2 className="w-4 h-4" />
                                 </button>
                               </div>
-                              <p className="text-[11px] text-slate-400 leading-relaxed">{corr.explanation}</p>
+                              <p className="text-xs text-slate-700 leading-relaxed font-medium">
+                                {corr.explanation}
+                              </p>
                             </div>
                           ))}
                         </div>
@@ -1159,29 +1190,29 @@ export default function NoteHelperPage() {
                   {currentNote.languageCoaching?.keyVocabulary &&
                     currentNote.languageCoaching.keyVocabulary.length > 0 && (
                       <div className="space-y-2.5">
-                        <h4 className="text-xs font-semibold text-indigo-300 uppercase tracking-wider">
-                          📚 핵심 어휘 & 뉘앙스
+                        <h4 className="text-xs font-extrabold text-indigo-700 uppercase tracking-wider">
+                          📚 핵심 어휘 &amp; 뉘앙스
                         </h4>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                           {currentNote.languageCoaching.keyVocabulary.map((v, idx) => (
                             <div
                               key={idx}
-                              className="p-3 rounded-2xl bg-[#090D14] border border-slate-800/80 space-y-1"
+                              className="p-3.5 rounded-2xl bg-[#F5F3FF] border border-violet-200 space-y-1"
                             >
                               <div className="flex items-center justify-between gap-2">
-                                <p className="text-xs font-bold text-indigo-300">{v.term}</p>
+                                <p className="text-xs font-extrabold text-violet-900 break-words">{v.term}</p>
                                 <button
                                   onClick={() => playPronunciation(v.term, currentNote.targetLang)}
-                                  className={`p-1 rounded-md border text-slate-400 hover:text-indigo-300 border-slate-700/80 bg-slate-800/80 transition shrink-0 ${
-                                    playingText === v.term ? 'bg-indigo-600 text-white animate-pulse' : ''
+                                  className={`p-1.5 rounded-lg border text-violet-700 hover:bg-violet-100 border-violet-200 bg-white transition shrink-0 cursor-pointer ${
+                                    playingText === v.term ? 'bg-violet-600 text-white animate-pulse' : ''
                                   }`}
                                   title="단어 발음 듣기"
                                 >
-                                  <Volume2 className="w-3 h-3" />
+                                  <Volume2 className="w-3.5 h-3.5" />
                                 </button>
                               </div>
-                              <p className="text-[11px] text-slate-300">{v.meaning}</p>
-                              <p className="text-[10px] text-slate-500 italic mt-1">"{v.example}"</p>
+                              <p className="text-xs font-semibold text-slate-800">{v.meaning}</p>
+                              <p className="text-[11px] text-slate-600 italic mt-1 break-words">&ldquo;{v.example}&rdquo;</p>
                             </div>
                           ))}
                         </div>
@@ -1190,22 +1221,29 @@ export default function NoteHelperPage() {
 
                   {/* Roleplay Next Step */}
                   {currentNote.languageCoaching?.roleplaySuggestion && (
-                    <div className="p-4 rounded-2xl bg-gradient-to-r from-purple-900/20 to-indigo-900/20 border border-purple-500/30">
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <h4 className="text-xs font-bold text-purple-300 flex items-center gap-1.5">
+                    <div className="p-4 rounded-2xl bg-gradient-to-r from-[#0F172A] to-[#1E1B4B] text-white border border-indigo-500/30 shadow-md">
+                      <div className="flex items-center justify-between gap-2 mb-1.5">
+                        <h4 className="text-xs font-extrabold text-amber-300 flex items-center gap-1.5">
                           💬 롤플레이 다음 추천 대답:
                         </h4>
                         <button
-                          onClick={() => playPronunciation(currentNote.languageCoaching?.roleplaySuggestion || '', currentNote.targetLang)}
-                          className={`p-1.5 rounded-lg border text-purple-300 border-purple-500/40 bg-purple-900/30 hover:bg-purple-900/50 transition shrink-0 ${
-                            playingText === currentNote.languageCoaching?.roleplaySuggestion ? 'bg-purple-600 text-white animate-pulse' : ''
+                          onClick={() =>
+                            playPronunciation(
+                              currentNote.languageCoaching?.roleplaySuggestion || '',
+                              currentNote.targetLang
+                            )
+                          }
+                          className={`p-2 rounded-xl border text-amber-300 border-amber-400/40 bg-white/10 hover:bg-white/20 transition shrink-0 cursor-pointer ${
+                            playingText === currentNote.languageCoaching?.roleplaySuggestion
+                              ? 'bg-amber-400 text-[#0F172A] animate-pulse'
+                              : ''
                           }`}
                           title="롤플레이 답변 원어민 발음 듣기"
                         >
-                          <Volume2 className="w-3.5 h-3.5" />
+                          <Volume2 className="w-4 h-4" />
                         </button>
                       </div>
-                      <p className="text-xs text-slate-200 italic leading-relaxed">
+                      <p className="text-xs text-slate-100 leading-relaxed break-words">
                         {currentNote.languageCoaching?.roleplaySuggestion}
                       </p>
                     </div>
@@ -1215,17 +1253,17 @@ export default function NoteHelperPage() {
 
               {/* Tab 4: Full Transcript */}
               {activeTab === 'transcript' && (
-                <div className="p-4 rounded-2xl bg-[#090D14] border border-slate-800/80 animate-fade-in text-xs text-slate-300 leading-relaxed whitespace-pre-wrap max-h-[350px] overflow-y-auto">
+                <div className="p-4 rounded-2xl bg-[#F8FAFC] border border-slate-200 animate-fade-in text-xs sm:text-sm text-[#0F172A] font-medium leading-relaxed whitespace-pre-wrap break-words max-h-[350px] overflow-y-auto">
                   {currentNote.transcript}
                 </div>
               )}
             </div>
           ) : (
-            <div className="p-12 rounded-3xl bg-[#111722] border border-slate-800/90 shadow-2xl text-center space-y-3">
-              <Mic className="w-12 h-12 text-slate-600 mx-auto" />
-              <h3 className="font-bold text-base text-white">녹음이나 노트를 선택해주세요</h3>
-              <p className="text-xs text-slate-400 max-w-sm mx-auto">
-                좌측 마이크 버튼을 눌러 새 음성 메모를 시작하거나, 보관함의 노트를 클릭하여 상세 분석을 확인하세요.
+            <div className="p-10 rounded-3xl bg-white border border-slate-200 shadow-lg text-center space-y-3">
+              <Mic className="w-12 h-12 text-indigo-500 mx-auto" />
+              <h3 className="font-extrabold text-base text-[#0F172A]">녹음이나 노트를 선택해주세요</h3>
+              <p className="text-xs text-slate-500 max-w-sm mx-auto">
+                마이크 버튼을 눌러 새 음성 메모를 시작하거나, 보관함의 노트를 클릭하여 상세 분석을 확인하세요.
               </p>
             </div>
           )}
