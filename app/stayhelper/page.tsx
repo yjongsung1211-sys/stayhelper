@@ -2399,6 +2399,34 @@ export default function StayHelperLuxuryShowcase() {
     }
   }, [currentIndex]);
 
+  // ── 럭셔리 클린룸 상태 엔진 (/api/luxury-state) 실시간 USD/KRW 환율 연동 ──
+  const [liveUsdKrw, setLiveUsdKrw] = useState<number | null>(null);
+  useEffect(() => {
+    let active = true;
+    fetch("/api/luxury-state", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!active || !data) return;
+        if (typeof data.fx?.usdKrw === "number") {
+          setLiveUsdKrw(data.fx.usdKrw);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const formatStayKrw = (priceStr?: string) => {
+    if (!liveUsdKrw || !priceStr) return null;
+    const m = priceStr.replace(/,/g, "").match(/(\d+(?:\.\d+)?)/);
+    if (!m) return null;
+    const usd = parseFloat(m[1]);
+    if (!Number.isFinite(usd) || usd <= 0) return null;
+    const krw = Math.round((usd * liveUsdKrw) / 1000) * 1000;
+    return `≈ ₩${krw.toLocaleString()}/박`;
+  };
+
 
   // 100% Resilient Autoplay Orchestrator on stay selection and desktop switch
   useEffect(() => {
@@ -2633,13 +2661,21 @@ export default function StayHelperLuxuryShowcase() {
             </div>
 
             {/* Stay Meta */}
-            <div>
+            <div className="flex items-center gap-1.5 flex-wrap">
               <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-[#E8D5B5] text-[10px] font-mono tracking-widest uppercase">
                 <span>№ {String(currentIndex + 1).padStart(2, "0")}</span>
                 <span className="text-white/40">·</span>
                 <span>{currentStay.numeral}</span>
                 <span className="text-white/40">·</span>
                 <span className="text-white font-medium">{currentStay.country}</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-[#D4AF37]/40 text-[#F3E5AB] text-[10px] font-mono">
+                <span>{currentStay.pricePerNight}</span>
+                {formatStayKrw(currentStay.priceAmount || currentStay.pricePerNight) && (
+                  <span className="text-white/80">
+                    ({formatStayKrw(currentStay.priceAmount || currentStay.pricePerNight)})
+                  </span>
+                )}
               </div>
             </div>
 
@@ -2803,13 +2839,22 @@ export default function StayHelperLuxuryShowcase() {
           <div className="relative z-20 max-w-[1440px] mx-auto w-full px-8 xl:px-14 flex-1 flex flex-row items-end justify-between gap-12 py-6 my-auto pointer-events-auto min-h-0">
             {/* Left Label */}
             <div className="space-y-3 max-w-xl text-left drop-shadow-lg shrink-0">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-[#E8D5B5] text-[11px] font-mono tracking-widest uppercase">
                   <span>№ {String(currentIndex + 1).padStart(2, "0")}</span>
                   <span className="text-white/40">·</span>
                   <span>{currentStay.numeral}</span>
                   <span className="text-white/40">·</span>
                   <span className="text-white font-medium">{currentStay.country}</span>
+                </div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#D4AF37]/40 text-[#F3E5AB] text-[11px] font-mono tracking-wider">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>{currentStay.pricePerNight}</span>
+                  {formatStayKrw(currentStay.priceAmount || currentStay.pricePerNight) && (
+                    <span className="text-white/80">
+                      ({formatStayKrw(currentStay.priceAmount || currentStay.pricePerNight)})
+                    </span>
+                  )}
                 </div>
               </div>
 

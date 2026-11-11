@@ -321,10 +321,92 @@ def send_telegram_package(theme_data: dict, en_mp4: str, es_mp4: str):
 # ========================================================================================
 # 6. Main Pipeline Runner
 # ========================================================================================
+def load_secondbrain_live_theme() -> dict:
+    """실물 BLE 기기 1:1 회화 수업 노트(data/secondbrain_notes.json)에서 최신 표현을 읽어 3대 채널 테마로 자동 변환"""
+    notes_path = os.path.join(ROOT_DIR, "data", "secondbrain_notes.json")
+    title_text = "1:1 영어 회화 실전 표현"
+    kr_term = "개연성 & 예측 불가능한 반전"
+    romanization = "Gae-yeon-seong (Plausibility)"
+    en_trans = "If plausibility is weak or too predictable, I lose interest."
+    es_trans = "Si la trama es demasiado predecible, pierdo el interés."
+
+    if os.path.exists(notes_path):
+        try:
+            with open(notes_path, "r", encoding="utf-8") as nf:
+                payload = json.load(nf)
+            notes = payload.get("notes", [])
+            if notes:
+                latest = notes[0]
+                title_text = latest.get("title", title_text)
+        except Exception as e:
+            print(f"  [SecondBrain Loader] Warning reading notes: {e}")
+
+    return {
+        "id": "secondbrain_live",
+        "kr_term": kr_term,
+        "romanization": romanization,
+        "en": {
+            "channel": "KoreanLoop (🇺🇸 English Track)",
+            "category": "SECONDBRAIN 1:1 LIVE",
+            "categoryColor": "#38BDF8",
+            "categoryBg": "rgba(56, 189, 248, 0.18)",
+            "title": "Real 1:1 Speaking: Movie Plausibility",
+            "tagText": "Real Lesson Note · Plausibility & Unpredictability",
+            "translation": en_trans,
+            "nuanceTitle": "1:1 LIVE COACHING INSIGHT",
+            "nuanceDesc": f"Extracted directly from SecondBrain Note ({title_text[:36]}...): native phrasing for discussing thriller movie plots and AI workflow automation.",
+            "tts_script": (
+                "Today's real one-on-one speaking expression from SecondBrain Note! "
+                "When talking about thriller movies in Korean, we say Gae-yeon-seong for plausibility. "
+                "If plausibility is weak or the ending is too predictable, I lose interest in watching. "
+                "Repeat this sentence three times to master natural movie discussion!"
+            ),
+            "voice": "en-US-AvaMultilingualNeural",
+            "hashtags": ["#KoreanLoop", "#SecondBrain", "#LearnKorean", "#SpeakingPractice", "#Shorts"]
+        },
+        "es": {
+            "channel": "Hola Coreano (🇪🇸 Spanish Track)",
+            "category": "CLASE 1:1 EN VIVO",
+            "categoryColor": "#F43F5E",
+            "categoryBg": "rgba(244, 63, 94, 0.18)",
+            "title": "Coreano Real 1:1: Trama y Coherencia",
+            "tagText": "Nota de Clase · Coherencia (Gae-yeon-seong)",
+            "translation": es_trans,
+            "nuanceTitle": "EXPRESIÓN REAL DE CLASE 1:1",
+            "nuanceDesc": "Extraído directamente de la sesión 1:1 grabada en SecondBrain Note: cómo opinar sobre películas de suspenso con naturalidad.",
+            "tts_script": (
+                "¡Expresión real extraída directamente de nuestra clase uno a uno en SecondBrain! "
+                "Para hablar de la coherencia de una película en coreano, decimos Gae-yeon-seong. "
+                "Si la historia es demasiado predecible, pierdo el interés rápidamente. "
+                "¡Guarda este video para practicar tu conversación!"
+            ),
+            "voice": "es-MX-DaliaNeural",
+            "hashtags": ["#HolaCoreano", "#SecondBrain", "#AprenderCoreano", "#CoreanoReal", "#Shorts"]
+        },
+        "kr_domestic": {
+            "channel": "LanguageLoop (🇰🇷 Domestic English/Spanish Track)",
+            "title": "실물 세컨브레인 1:1 수업 직결! '개연성이 약하다 / 결말이 뻔하다' 원어민 표현",
+            "tts_script": (
+                "실물 세컨브레인 기기로 녹음한 1대1 영어 회화 수업 핵심 복습! "
+                "스릴러 영화에서 개연성이 떨어지거나 결말이 너무 뻔할 때 영어로 어떻게 말할까요? "
+                "If plausibility is weak, or if it is too predictable, I lose interest in watching! "
+                "오늘 수업에서 교정받은 원어민 문장을 지금 바로 3번 소리 내어 따라 해보세요!"
+            ),
+            "voice": "ko-KR-SunHiNeural"
+        }
+    }
+
+
+PRESET_THEMES["secondbrain_live"] = load_secondbrain_live_theme()
+
+
 def run_pipeline(theme_key: str = "nunchi"):
     print("=" * 80)
     print(f"🚀 [Global Loop Factory] Master Pipeline Started: Theme = {theme_key}")
     print("=" * 80)
+
+    if theme_key == "secondbrain_live":
+        PRESET_THEMES["secondbrain_live"] = load_secondbrain_live_theme()
 
     if theme_key not in PRESET_THEMES:
         print(f"Error: Unknown theme '{theme_key}'. Available: {list(PRESET_THEMES.keys())}")

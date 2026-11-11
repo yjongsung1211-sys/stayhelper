@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
@@ -1611,6 +1611,29 @@ export default function ColorHelperPage() {
     selectedPlanRef.current = selectedPlan;
   }, [selectedPlan]);
 
+  // ── 럭셔리 클린룸 상태 엔진 (/api/luxury-state) 실시간 환율 & 재고 동기화 ──
+  const [luxuryFxKrw, setLuxuryFxKrw] = useState<number | null>(null);
+  const [luxurySkuCount, setLuxurySkuCount] = useState<number>(0);
+
+  useEffect(() => {
+    let active = true;
+    fetch("/api/luxury-state", { cache: "no-store" })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!active || !data) return;
+        if (typeof data.fx?.usdKrw === "number") {
+          setLuxuryFxKrw(Math.round(data.fx.usdKrw));
+        }
+        if (data.skus && typeof data.skus === "object") {
+          setLuxurySkuCount(Object.keys(data.skus).length);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+  }, []);
+
   // ── 페이팔 공식 JS SDK 실시간 로드 & 스마트 버튼 마운트 ───────────
   useEffect(() => {
     if (!isPayModalOpen) return;
@@ -2849,10 +2872,20 @@ export default function ColorHelperPage() {
             ) : (
               <div className="space-y-6">
                 <div>
-                  <h4 className="text-base font-bold text-gray-900 mb-1 flex items-center gap-2">
-                    <Heart className="w-4 h-4 text-rose-500" />
-                    {resultTone.titles[lang]} {t.lipTitle}
-                  </h4>
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
+                    <h4 className="text-base font-bold text-gray-900 flex items-center gap-2">
+                      <Heart className="w-4 h-4 text-rose-500" />
+                      {resultTone.titles[lang]} {t.lipTitle}
+                    </h4>
+                    {luxuryFxKrw && (
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-[10px] font-bold text-emerald-800">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        {lang === "ko"
+                          ? `LIVE 환율 $1 ≈ ₩${luxuryFxKrw.toLocaleString()} · 클린룸 재고 ${luxurySkuCount}종 동기화`
+                          : `LIVE FX $1 ≈ ₩${luxuryFxKrw.toLocaleString()} · ${luxurySkuCount} Verified SKUs`}
+                      </span>
+                    )}
+                  </div>
                   <p className="text-xs text-gray-500 mb-4">{t.lipDesc}</p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">

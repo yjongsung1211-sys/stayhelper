@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
+import KernelPaletteMount from '@/components/secondbrain-kernel/KernelPaletteMount';
 import {
     Calendar,
     Plus,
@@ -2112,6 +2113,7 @@ export default function ScheduleHelperPage() {
                     </div>
                 </div>
             )}
+            <KernelPaletteMount />
         </div>
     );
 }

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import KernelPaletteMount from '@/components/secondbrain-kernel/KernelPaletteMount';
 import {
   Mic,
   MicOff,
@@ -1430,6 +1431,7 @@ export default function NoteHelperPage() {
           </div>
         </div>
       )}
+      <KernelPaletteMount />
     </div>
   );
 }

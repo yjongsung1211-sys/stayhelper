@@ -6,8 +6,20 @@ import type { LuxuryStateResponse, LuxuryStateSnapshot, NormalizedLuxurySKU } fr
 export const dynamic = 'force-dynamic';
 
 const SNAPSHOT_PATH = path.join(process.cwd(), 'data', 'luxury_state_snapshot.json');
+const FX_CACHE_PATH = path.join(process.cwd(), 'data', 'luxury_fx_cache.json');
 
 let cache: { mtimeMs: number; snapshot: LuxuryStateSnapshot } | null = null;
+
+function loadFallbackFx(): { fetchedAt: string | null; usdKrw: number | null } {
+  try {
+    const raw = JSON.parse(fs.readFileSync(FX_CACHE_PATH, 'utf-8'));
+    const krw = typeof raw?.rates?.KRW === 'number' ? raw.rates.KRW : null;
+    const fetchedAt = typeof raw?.fetched_at === 'string' ? raw.fetched_at : null;
+    return { fetchedAt, usdKrw: krw };
+  } catch {
+    return { fetchedAt: null, usdKrw: null };
+  }
+}
 
 function loadSnapshot(): LuxuryStateSnapshot | null {
   try {
@@ -29,11 +41,16 @@ function loadSnapshot(): LuxuryStateSnapshot | null {
  */
 export async function GET(request: NextRequest) {
   const snapshot = loadSnapshot();
+  const fallbackFx = loadFallbackFx();
   if (!snapshot) {
     const empty: LuxuryStateResponse = {
       available: false,
       generatedAt: null,
-      fx: { fetchedAt: null, stale: true, usdKrw: null },
+      fx: {
+        fetchedAt: fallbackFx.fetchedAt,
+        stale: !fallbackFx.usdKrw,
+        usdKrw: fallbackFx.usdKrw,
+      },
       skus: {},
     };
     return NextResponse.json(empty, { headers: { 'Cache-Control': 'no-store' } });
@@ -46,13 +63,16 @@ export async function GET(request: NextRequest) {
     if (!wanted || wanted.has(sku.skuId)) skus[sku.skuId] = sku;
   }
 
+  const usdKrw = snapshot.fx?.rates?.KRW ?? fallbackFx.usdKrw ?? null;
+  const fetchedAt = snapshot.fx?.fetchedAt ?? fallbackFx.fetchedAt ?? null;
+
   const body: LuxuryStateResponse = {
     available: true,
     generatedAt: snapshot.generatedAt,
     fx: {
-      fetchedAt: snapshot.fx?.fetchedAt ?? null,
-      stale: snapshot.fx?.stale ?? true,
-      usdKrw: snapshot.fx?.rates?.KRW ?? null,
+      fetchedAt,
+      stale: usdKrw === null ? true : (snapshot.fx?.stale ?? false),
+      usdKrw,
     },
     skus,
   };

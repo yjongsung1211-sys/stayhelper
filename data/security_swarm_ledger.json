@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-11 18:44:07",
-  "totalFilesAudited": 168,
+  "timestamp": "2026-11-11 19:41:45",
+  "totalFilesAudited": 172,
   "totalAttacksAttempted": 12,
   "attacksRepelled": 12,
   "actionsRequired": 0,
@@ -84,7 +84,7 @@
       "title": "무제한 자원 소비 (DoS / Unbounded Memory Leak)",
       "severity": "MEDIUM",
       "file": "scripts/telegram_remote_commander.py",
-      "line": 497,
+      "line": 595,
       "snippet": "while True:",
       "attack_vector": "슬립 없는 무한 루프 또는 극도로 짧은 주기(ms)의 인터벌로 인한 CPU 100% 점유 및 서버 프리징",
       "remediation": "적응형 백오프(Exponential Backoff) 및 최소 1,000ms 이상의 폴링 딜레이 강제",

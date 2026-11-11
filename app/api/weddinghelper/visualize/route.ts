@@ -1,97 +1,71 @@
-/**
- * =========================================================================
- * WEDDINGHELPER AI MULTI-PHOTO & TARGET SCENE SYNTHESIZE API ROUTE
- * =========================================================================
- * POST /api/weddinghelper/visualize
- * 
- * 1. 최대 3장의 고객 참조 사진(커플 사진 + 신부 클로즈업 + 신랑 클로즈업)을 수신하여
- *    신랑/신부의 동양인(한국인) 고유 이목구비, 쌍꺼풀, 보조개, 눈매, 미소 등 
- *    3D 안면 기하학을 인종 변조(Caucasianize/Westernize) 없이 100% 정밀 보존.
- * 2. 각도별 카드의 원본 콘셉트 사진(targetSceneImage)을 함께 로드하여,
- *    해당 카드의 원래 배경, 카메라 앵글, 포즈(착석/키스/포옹 등), 조명을 100% 보존하면서
- *    고객의 실제 얼굴과 슬림한 체형, 도자기 물광 피부로 정밀 합성 렌더링합니다.
- */
-
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import { WEDDING_12_PRESETS } from '@/lib/wedding-presets';
 
 const DEST_TO_THEME_MAP: Record<string, string> = {
-  'theme_01_bali': 'bali-jungle',
-  'theme_02_amalfi': 'amalfi-cliff',
-  'theme_03_lake_como': 'lake-como',
-  'theme_04_paris': 'paris-palace',
-  'theme_05_nyc': 'nyc-penthouse',
-  'theme_06_hanok': 'korean-hanok',
-  'theme_07_kyoto': 'kyoto-zen',
-  'theme_08_udaipur': 'rajasthan-palace',
-  'theme_09_santorini': 'santorini-cliff',
-  'theme_10_cabo': 'cabo-ocean',
-  'theme_11_liwa': 'dubai-mirage',
-  'theme_12_swiss_alps': 'swiss-alps',
+  theme_01_bali: 'bali-jungle',
+  theme_02_amalfi: 'amalfi-cliffside',
+  theme_03_lake_como: 'lake-como',
+  theme_04_paris: 'paris-chateau',
+  theme_05_nyc: 'manhattan-skyline',
+  theme_06_hanok: 'korean-royal-hanbok',
+  theme_07_kyoto: 'japanese-zen-shrine',
+  theme_08_udaipur: 'indian-royal-palace',
+  theme_09_santorini: 'santorini-caldera',
+  theme_10_cabo: 'cabo-oceanfront',
+  theme_11_liwa: 'arabian-desert-dunes',
+  theme_12_swiss_alps: 'swiss-alpine-winter',
 };
 
-export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
+export const dynamic = 'force-dynamic';
 
-function parseBase64(imgString: string): { mimeType: string; data: string } | null {
-  if (!imgString) return null;
-  if (imgString.startsWith('data:')) {
-    const match = imgString.match(/^data:([^;]+);base64,(.+)$/);
-    if (match) {
-      return { mimeType: match[1], data: match[2] };
-    }
-  } else if (imgString.startsWith('/')) {
-    try {
-      const localPath = path.join(process.cwd(), 'public', imgString.replace(/^\//, ''));
-      if (fs.existsSync(localPath)) {
-        const buf = fs.readFileSync(localPath);
-        const ext = path.extname(localPath).toLowerCase();
-        const mimeType = ext === '.png' ? 'image/png' : ext === '.webp' ? 'image/webp' : 'image/jpeg';
-        return { mimeType, data: buf.toString('base64') };
-      }
-    } catch (e) {
-      console.error('Error reading local image:', imgString, e);
-    }
+function parseBase64(dataUrl: string): { mimeType: string; data: string } | null {
+  if (!dataUrl) return null;
+  const match = dataUrl.match(/^data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+);base64,(.+)$/);
+  if (match) {
+    return { mimeType: match[1], data: match[2] };
+  }
+  if (dataUrl.length > 200 && !dataUrl.startsWith('http') && !dataUrl.startsWith('/')) {
+    return { mimeType: 'image/jpeg', data: dataUrl };
   }
   return null;
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
-    const body = await request.json();
+    const body = await req.json();
     const {
       image,
       images,
       targetSceneImage,
-      themeId = 'bali-jungle',
+      themeId = 'theme_01_bali',
       coupleNames = 'The Couple',
       clientId = 'guest',
       groomHeight = '180',
       groomWeight = '75',
-      brideHeight = '165',
-      brideWeight = '50',
+      brideHeight = '167',
+      brideWeight = '49',
       angleTitle = 'Ceremonial Altar Vows',
     } = body;
 
-    // Collect user photos (support array of up to 3 photos or single legacy image)
     const rawUserImages: string[] = [];
     if (Array.isArray(images) && images.length > 0) {
-      rawUserImages.push(...images.filter(Boolean));
+      rawUserImages.push(...images);
     } else if (image && typeof image === 'string') {
       rawUserImages.push(image);
     }
 
     if (rawUserImages.length === 0) {
       return NextResponse.json(
-        { error: 'At least one couple photograph is required to synthesize your luxury wedding.' },
+        { success: false, error: 'At least one reference photo of the bride or groom is required.' },
         { status: 400 }
       );
     }
 
     const resolvedThemeId = DEST_TO_THEME_MAP[themeId] || themeId;
-    const preset = WEDDING_12_PRESETS[resolvedThemeId] || WEDDING_12_PRESETS[themeId] || WEDDING_12_PRESETS['bali-jungle'];
+    const preset = WEDDING_12_PRESETS[resolvedThemeId] || WEDDING_12_PRESETS['bali-jungle'];
 
     // 1. Process User Reference Photos (up to 3 photos)
     const userImageParts: Array<{ inlineData: { mimeType: string; data: string } }> = [];
@@ -104,130 +78,68 @@ export async function POST(request: NextRequest) {
 
     if (userImageParts.length === 0) {
       return NextResponse.json(
-        { error: 'Failed to process uploaded photographs.' },
+        { success: false, error: 'Could not parse uploaded images. Please upload valid JPG/PNG files.' },
         { status: 400 }
       );
     }
 
-    // 2. Process Target Scene Concept Image (if provided)
-    let targetScenePart: { inlineData: { mimeType: string; data: string } } | null = null;
-    if (targetSceneImage && typeof targetSceneImage === 'string') {
-      targetScenePart = parseBase64(targetSceneImage) ? { inlineData: parseBase64(targetSceneImage)! } : null;
-    }
+    // 2. Multimodal Prompt with Strict East Asian (Korean) Facial Identity Lock
+    // IMPORTANT: We do NOT pass the Caucasian stock photo as an image to Gemini.
+    // Instead, we pass ONLY the user's authentic reference photo(s), and rich, photographic art direction for the destination venue.
+    const promptText = `A cinematic, ultra-photorealistic 8K wedding portrait of the REAL East Asian Korean couple in the reference photo(s).
 
-    // 3. Construct Bulletproof Multimodal Prompt with Strict East Asian / Korean Identity Lock
-    const numUserPhotos = userImageParts.length;
-    const hasTargetScene = targetScenePart !== null;
+[CRITICAL REQUIREMENT 1: 100% KOREAN FACIAL LIKENESS & ETHNIC IDENTITY LOCK]
+- The man and woman in the reference photo(s) are the REAL BRIDE AND GROOM.
+- GROOM: You MUST 100% PRESERVE his exact Korean facial bone structure, eye shape (monolid/natural contour), clean eyebrows, masculine jawline, and genuine warm smile. Groom height: ${groomHeight}cm, weight: ${groomWeight}kg. He is styled with clean modern dapper hair, dressed in ${preset.groomAttire || 'a bespoke tailored ivory-cream Italian linen tuxedo with a black silk bow tie'}.
+- BRIDE: You MUST 100% PRESERVE her exact lovely Korean face, delicate eye contours, charming cheek dimples, refined nose bridge, and radiant genuine smile. Bride height: ${brideHeight}cm, weight: ${brideWeight}kg. Her hair is styled in an effortless romantic low chignon with delicate fresh bridal floral pins, dressed in ${preset.brideAttire || 'an exquisite haute couture backless mermaid lace bridal gown with an ethereal chapel train'}.
+- Both have luminous Korean luxury porcelain glass-skin (수분 물광 피부), natural dewy complexion with zero blemishes.
+- Zero Caucasianization, zero Westernization, zero replacement with stock models. Their friends and family MUST recognize them immediately: "That is 100% our bride and groom!"
 
-    let promptText = '';
-    if (hasTargetScene) {
-      promptText = `You are a world-class master celebrity bridal photographer and portrait artist specializing in ultra-luxury Asian and Korean celebrity weddings (Cheongdam-dong top atelier standard).
+[SETTING & COMPOSITION: ${angleTitle.toUpperCase()} AT ${preset.venueName.toUpperCase()}]
+- Destination: ${preset.destination} (${preset.venueName}).
+- Scene context: ${preset.promptDescription}.
+- Composition & Camera: Shot on Hasselblad H6D-100c with prime portrait lens, beautiful natural golden hour rim light highlighting the veil lace and tuxedo fabric, perfect depth of field, pristine luxury bridal atelier standard.`;
 
-[INPUT IMAGES SPECIFICATION]
-- Images 1 to ${numUserPhotos}: REAL CLIENT REFERENCE PHOTOS of the REAL COUPLE (Bride and Groom).
-- Image ${numUserPhotos + 1} (Final Image): TARGET SCENE CONCEPT REFERENCE IMAGE ("${angleTitle}" at ${preset.venueName}).
+    const requestParts: any[] = [
+      ...userImageParts,
+      { text: promptText },
+    ];
 
-[CRITICAL RULE 0: 100% ABSOLUTE ETHNICITY & FACIAL IDENTITY LOCK - ZERO ALTERATION]
-- The couple in Reference Images 1 to ${numUserPhotos} are EAST ASIAN (KOREAN).
-- You MUST 100% PRESERVE THEIR EXACT EAST ASIAN ETHNIC HERITAGE, FACIAL BONE STRUCTURE, AND AUTHENTIC LIKENESS.
-- DO NOT Caucasianize, Westernize, or replace them with foreign-looking models. Absolutely NO European noses, foreign eyelid creases, or altered bone structures!
-- BRIDE: 100% preserve her authentic East Asian eye contours, her natural deep double eyelids, delicate nose bridge, cute cheek dimple, gentle lips, and exact authentic facial proportions. Elevate her with celebrity bridal glow: soft dewy rose lips, fluttery lashes, and pristine porcelain skin.
-- GROOM: 100% preserve his authentic East Asian eyes, eyebrows, clean masculine jawline, and handsome genuine smile.
-- Their friends and family MUST immediately recognize them without any doubt: "That is 100% our bride and groom!"
+    const apiKey =
+      process.env.GEMINI_PAID_API_KEY ||
+      process.env.GEMINI_API_KEY ||
+      process.env.NEXT_PUBLIC_GEMINI_API_KEY ||
+      '';
 
-[CRITICAL RULE 1: EXACT SCENE & COMPOSITION LOCK FROM TARGET SCENE IMAGE]
-- Look at Image ${numUserPhotos + 1} (Target Scene Image).
-- Maintain the EXACT background venue, setting, architecture, camera angle, distance, lighting, and mood shown in that Target Scene Image.
-- The couple MUST adopt the EXACT pose, posture, and seating/standing configuration shown in the Target Scene (e.g. if sitting together by the coastal fireplace, they MUST be sitting together by that fireplace).
-- Seamlessly replace the faces of the models in the Target Scene with the authentic faces of the real Bride and Groom.
+    let generatedImageUrl: string | null = null;
+    let modelUsed: string | null = null;
 
-[CRITICAL RULE 2: FLAWLESS KOREAN LUXURY PORCELAIN GLASS-SKIN]
-- Flawless, luminous, Korean luxury aesthetic clinic porcelain glass-skin (수분 물광 피부).
-- Dewy, micro-refined complexion, healthy natural radiance, zero blemishes.
+    if (apiKey) {
+      const candidateModels = [
+        'gemini-2.5-flash-image',
+        'gemini-3.1-flash-image',
+      ];
 
-[CRITICAL RULE 3: UNCONDITIONALLY SLIM & STATUESQUE HIGH-FASHION BODY SILHOUETTES]
-- BRIDE: Slender, tall, elegant hourglass figure with sculpted collarbones, slim toned arms, graceful swan neck, and tiny snatched waist in haute couture bridal attire.
-- GROOM: Tall, athletic lean slim build with broad square shoulders, flat stomach, and sharp tapered waist in bespoke Italian tuxedo.
-
-[CRITICAL RULE 4: 8K CINEMATIC WEDDING QUALITY]
-- 8K Hasselblad resolution, filmic romantic lighting, natural bokeh, breathtaking Vogue Weddings cover masterpiece.`;
-    } else {
-      promptText = `You are a world-class master celebrity bridal photographer and portrait artist specializing in ultra-luxury Asian and Korean celebrity weddings (Cheongdam-dong top atelier standard).
-
-[INPUT IMAGES SPECIFICATION]
-- Images 1 to ${numUserPhotos}: REAL CLIENT REFERENCE PHOTOS of the REAL COUPLE (Bride and Groom).
-- Concept: "${angleTitle}" at ${preset.venueName} (${preset.destination}).
-
-[CRITICAL RULE 0: 100% ABSOLUTE ETHNICITY & FACIAL IDENTITY LOCK - ZERO ALTERATION]
-- The couple in Reference Images 1 to ${numUserPhotos} are EAST ASIAN (KOREAN).
-- You MUST 100% PRESERVE THEIR EXACT EAST ASIAN ETHNIC HERITAGE, FACIAL BONE STRUCTURE, AND AUTHENTIC LIKENESS.
-- DO NOT Caucasianize, Westernize, or replace them with foreign-looking models. Absolutely NO European noses, foreign eyelid creases, or altered bone structures!
-- BRIDE: 100% preserve her authentic East Asian eye contours, her natural deep double eyelids, delicate nose bridge, cute cheek dimple, gentle lips, and exact authentic facial proportions.
-- GROOM: 100% preserve his authentic East Asian eyes, eyebrows, clean masculine jawline, and handsome genuine smile.
-- Their friends and family MUST immediately recognize them without any doubt: "That is 100% our bride and groom!"
-
-[CRITICAL RULE 1: FLAWLESS KOREAN LUXURY PORCELAIN GLASS-SKIN]
-- Flawless, luminous, Korean luxury aesthetic clinic porcelain glass-skin (수분 물광 피부).
-- Dewy, micro-refined complexion, healthy natural radiance, zero blemishes.
-
-[CRITICAL RULE 2: UNCONDITIONALLY SLIM & HIGH-FASHION SILHOUETTES]
-- Bride: Slender, tall, elegant hourglass figure, sculpted collarbones, slim arms, tiny waist.
-- Groom: Tall, athletic lean slim build, broad square shoulders, tapered waist in bespoke tuxedo.
-
-[CRITICAL RULE 3: BREATHTAKING EDITORIAL ATMOSPHERE]
-- Romantic chemistry, golden hour rim-lighting, 8K Hasselblad clarity, Vogue Weddings cover quality.`;
-    }
-
-    // 4. Assemble Interleaved Multimodal API Payload with Strict Semantic Binding
-    const requestParts: any[] = [{ text: promptText }];
-
-    // Interleaved Client Couple Reference Photos with explicit semantic headers
-    userImageParts.forEach((uPart, idx) => {
-      requestParts.push({
-        text: `=== CLIENT REFERENCE PHOTO ${idx + 1} of ${userImageParts.length}: REAL CLIENT COUPLE (100% preserve their authentic East Asian / Korean facial bone structure, delicate eyes, and genuine smiles) ===`
-      });
-      requestParts.push(uPart);
-    });
-
-    // Interleaved Target Wedding Scene Image with composition lock instruction
-    if (targetScenePart) {
-      requestParts.push({
-        text: `=== TARGET WEDDING SCENE CONCEPT ("${angleTitle}" at ${preset.venueName}): Maintain this EXACT background architecture, lush landscape, camera angle, and posture; seamlessly transplant the authentic faces of the real client couple above ===`
-      });
-      requestParts.push(targetScenePart);
-      requestParts.push({
-        text: `Now generate the final 8K Vogue Weddings standard photographic masterpiece where the real couple from the Client Reference Photos is seamlessly married in the setting of the Target Wedding Scene:`
-      });
-    }
-
-    const key = process.env.GEMINI_API_KEY || '';
-    const preferredModel = process.env.GEMINI_MODEL || 'gemini-2.5-flash-image';
-    const modelsToTry = [preferredModel, 'gemini-3.1-flash-image', 'gemini-2.5-flash-image'].filter((v, i, a) => a.indexOf(v) === i);
-
-    let generatedImageUrl = '';
-
-    if (key) {
-      for (const currentModel of modelsToTry) {
-        if (generatedImageUrl) break;
+      for (const currentModel of candidateModels) {
         try {
-          const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${currentModel}:generateContent?key=${key}`;
-          const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              contents: [
-                {
-                  parts: requestParts,
+          const response = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/${currentModel}:generateContent?key=${apiKey}`,
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                contents: [
+                  {
+                    parts: requestParts,
+                  },
+                ],
+                generationConfig: {
+                  responseModalities: ['IMAGE'],
                 },
-              ],
-              generationConfig: {
-                responseModalities: ['IMAGE'],
-              },
-            }),
-            signal: AbortSignal.timeout(52000),
-          });
+              }),
+              signal: AbortSignal.timeout(52000),
+            }
+          );
 
           if (response.ok) {
             const data = await response.json();
@@ -238,6 +150,7 @@ export async function POST(request: NextRequest) {
               if (inline?.data) {
                 const resMime = inline.mimeType || inline.mime_type || 'image/jpeg';
                 generatedImageUrl = `data:${resMime};base64,${inline.data}`;
+                modelUsed = currentModel;
                 break;
               }
             }
@@ -252,7 +165,6 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Verification: ONLY mark as AI generated when Gemini actually returned a new image
     const isAiGenerated = Boolean(generatedImageUrl && generatedImageUrl.startsWith('data:image/'));
 
     if (!isAiGenerated) {
@@ -272,15 +184,14 @@ export async function POST(request: NextRequest) {
           stayHelperRef: preset.stayHelperRef,
         },
         products: preset.products,
-        venueBookingUrl: preset.stayHelperRef 
-          ? `https://stayhelper.com/stays/${preset.stayHelperRef}` 
-          : `https://stayhelper.com?destination=${encodeURIComponent(preset.destination)}`,
-      }, { status: 200 });
+        venueBookingUrl: preset.stayHelperRef || 'https://www.thestayhelper.com',
+      });
     }
 
     return NextResponse.json({
       success: true,
       isAiGenerated: true,
+      modelUsed,
       visualizedImageUrl: generatedImageUrl,
       theme: {
         id: preset.id,
@@ -293,15 +204,12 @@ export async function POST(request: NextRequest) {
         stayHelperRef: preset.stayHelperRef,
       },
       products: preset.products,
-      inStockGuaranteed: true,
-      venueBookingUrl: preset.stayHelperRef 
-        ? `https://stayhelper.com/stays/${preset.stayHelperRef}` 
-        : `https://stayhelper.com?destination=${encodeURIComponent(preset.destination)}`,
+      venueBookingUrl: preset.stayHelperRef || 'https://www.thestayhelper.com',
     });
   } catch (error: any) {
-    console.error('Error in /api/weddinghelper/visualize:', error);
+    console.error('WeddingHelper visualize API fatal error:', error);
     return NextResponse.json(
-      { error: error?.message || 'Failed to visualize wedding.' },
+      { success: false, error: error?.message || 'Server synthesis pipeline error' },
       { status: 500 }
     );
   }

@@ -624,6 +624,7 @@ export default function WeddingHelperPage() {
                 unoptimized 
                 className="object-cover" 
               />
+              <LuxuryHotspotLayer lookId="wedding_bali_sample" pins={WEDDING_SAMPLE_PINS} />
               <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md text-[#D4AF37] text-[10px] font-bold uppercase tracking-wider border border-[#D4AF37]/30">
                 Sample Preview • 1 of 240
               </div>
