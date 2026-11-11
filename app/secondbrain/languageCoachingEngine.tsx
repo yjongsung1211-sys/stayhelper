@@ -224,10 +224,10 @@ export function buildLanguageCoachingData(
           },
           {
             role: 'Me',
-            speakerLabel: '윤종성 대표',
+            speakerLabel: '담당자',
             foreignText: '我毕业于上海体育学院武术散打专业，那段经历培养了我持之以恒的耐力。',
             pronunciation: 'Wǒ bìyè yú Shànghǎi Tǐyù Xuéyuàn wǔshù sǎndǎ zhuānyè, nà duàn jīnglì péiyǎng le wǒ chízhīyǐhéng de nàilì.',
-            koreanText: '상해체육학원 우슈 산타 전공을 졸업했는데, 그 경험이 끝까지 지속하는 지구력을 길러주었습니다.',
+            koreanText: '꾸준히 운동과 자기계발을 병행해 온 경험이 프로젝트를 끝까지 완수하는 원동력이 되었습니다.',
           },
           {
             role: 'Tutor',
@@ -238,7 +238,7 @@ export function buildLanguageCoachingData(
           },
           {
             role: 'Me',
-            speakerLabel: '윤종성 대표',
+            speakerLabel: '담당자',
             foreignText: '我现在经营一家AI自动化一人企业，同时也在关注AI算力中心和长鑫存储等半导体动态。在中国用AI做一人公司的创业者多吗？',
             pronunciation: 'Wǒ xiànzài jīngyíng yì jiā AI zìdònghuà yìrén qǐyè, tóngshí yě zài guānzhù AI suànlì zhōngxīn hé Chángxīn Cúnchǔ děng bàndǎotǐ dòngtài. Zài Zhōngguó yòng AI zuò yìrén gōngsī de chuàngyèzhě duō ma?',
             koreanText: '현재 AI 자동화 1인 기업을 운영하면서 AI 데이터센터와 창신메모리(CXMT) 같은 반도체 동향도 주시하고 있습니다. 중국에서도 AI로 1인 기업을 하는 창업자가 많나요?',
@@ -349,7 +349,7 @@ export function buildLanguageCoachingData(
         },
         {
           role: 'Me',
-          speakerLabel: '윤종성 대표',
+          speakerLabel: '담당자',
           foreignText: '我最近满脑子都是AI数据中心和YouTube频道。我每天坚持制作要上传的视频，新频道的播放量已经破千了，正在耐心等待算法推荐。',
           pronunciation: 'Wǒ zuìjìn mǎnnǎozi dōu shì AI shùjù zhōngxīn hé YouTube píndào. Wǒ měitiān jiānchí zhìzuò yào shàngchuán de shìpín, xīn píndào de bōfàngliàng yǐjīng pòqiān le, zhèngzài nàixīn děngdài suànfǎ tuījiàn.',
           koreanText: '요즘 머릿속이 온통 AI 데이터센터와 유튜브 채널 생각뿐입니다. 매일 꾸준히 업로드할 영상을 제작하고 있는데 신규 채널 조회수가 이미 1,000회를 돌파해서 인내심을 갖고 알고리즘 추천을 기다리고 있습니다.',
@@ -363,7 +363,7 @@ export function buildLanguageCoachingData(
         },
         {
           role: 'Me',
-          speakerLabel: '윤종성 대표',
+          speakerLabel: '담당자',
           foreignText: '她适应得特别快！没想到才几个小时就把账号里的词元全花完了，所以我把容量大的账号分享给她了。',
           pronunciation: 'Tā shìyìng de tèbié kuài! Méi xiǎngdào cái jǐ gè xiǎoshí jiù bǎ zhànghào lǐ de cíyuán quán huā wán le, suǒyǐ wǒ bǎ róngliàng dà de zhànghào fēnxiǎng gěi tā le.',
           koreanText: '적응이 엄청 빨랐어요! 뜻밖에도 몇 시간 만에 계정 안의 토큰(词元)을 전부 다 써버려서, 제 대용량 계정을 공유해 주었습니다.',
@@ -377,7 +377,7 @@ export function buildLanguageCoachingData(
         },
         {
           role: 'Me',
-          speakerLabel: '윤종성 대표',
+          speakerLabel: '담당자',
           foreignText: '我给AI指示词，同时做七八个事情，只需要跳到别的页面确认结果。而且为了帮妻子照顾18个月大的女儿，我平时都不好意思约朋友。',
           pronunciation: 'Wǒ gěi AI zhǐshìcí, tóngshí zuò qī bā gè shìqing, zhǐ xūyào tiàodào bié de yèmiàn quèrèn jiéguǒ. Érqiě wèile bāng qīzi zhàogù shíbā gè yuè dà de nǚ’ér, wǒ píngshí dōu bù hǎoyìsi yuē péngyou.',
           koreanText: 'AI에게 프롬프트를 내려 동시에 7~8가지 일을 처리하고 다른 탭으로 넘어가 결과만 확인합니다. 그리고 아내가 18개월 딸을 돌보는 걸 돕기 위해 평소 친구 약속 잡기도 미안해서 가정에 집중하고 있습니다.',
@@ -454,10 +454,10 @@ export function buildLanguageCoachingData(
         },
         {
           role: 'Me',
-          speakerLabel: '윤종성 대표',
+          speakerLabel: '담당자',
           foreignText: '妻が神戸大学の学会に参加した時、一緒に行った京都の宇治が一番印象に残っています。抹茶も美味しくて静かな街でした。',
           pronunciation: '츠마가 코베다이가쿠노 각카이니 산카시타 토키, 잇쇼니 잇타 쿄토노 우지가 이치반 인쇼니 노콧테 이마스. 맛차모 오이시쿠테 시즈카나 마치데시타.',
-          koreanText: '아내가 고베대 학회에 참석했을 때 함께 갔던 교토 우지가 가장 인상에 남아 있습니다. 말차도 맛있고 고즈넉한 도시였습니다.',
+          koreanText: '해외 출장 중 방문했던 교토 우지가 가장 인상에 남아 있습니다. 말차도 맛있고 고즈넉한 도시였습니다.',
         },
         {
           role: 'Tutor',
@@ -468,7 +468,7 @@ export function buildLanguageCoachingData(
         },
         {
           role: 'Me',
-          speakerLabel: '윤종성 대표',
+          speakerLabel: '담당자',
           foreignText: '無理に暗記しようとせず、ストレスなしで3回繰り返して読むだけで自然に身につきます。先生もヨーロッパでおすすめの旅行先があれば教えてください！',
           pronunciation: '무리니 암키시요토 세즈, 스토레스 나시데 산카이 쿠리카에시테 요무 다케데 시젠니 미니츠키마스. 센세모 요롯파데 오스스메노 료코사키가 아레바 오시에테 쿠다사이!',
           koreanText: '억지로 외우려 하지 않고 스트레스 없이 3번 반복해 읽기만 해도 자연스럽게 몸에 뱁니다. 선생님께서도 유럽에서 추천하시는 여행지가 있다면 알려주세요!',
@@ -545,7 +545,7 @@ export function buildLanguageCoachingData(
         },
         {
           role: 'Me',
-          speakerLabel: '윤종성 대표',
+          speakerLabel: '담당자',
           foreignText: '¡Hola! Hoy hace un poco de frío en Seúl, pero tuve un día excelente trabajando desde casa.',
           pronunciation: '올라! 오이 아세 운 포코 데 프리오 엔 세울, 페로 투베 운 디아 엑셀렌테 트라바한도 데스데 카사.',
           koreanText: '안녕하세요! 오늘 서울은 조금 춥지만, 재택근무를 하며 아주 훌륭한 하루를 보냈습니다.',
@@ -559,7 +559,7 @@ export function buildLanguageCoachingData(
         },
         {
           role: 'Me',
-          speakerLabel: '윤종성 대표',
+          speakerLabel: '담당자',
           foreignText: 'Uso la IA para ahorrar tiempo y crear cinco páginas web y cuatro canales de YouTube. Además, hoy le enseñé a mi esposa a programar con la IA. ¿Y tú, cómo utilizas la IA en tu vida diaria?',
           pronunciation: '우소 라 이아 파라 아오라르 티엠포 이 크레아르 싱코 파히나스 웹 이 쿠아트로 카날레스 데 유투브. 아데마스, 오이 레 엔세녜 아 미 에스포사 아 프로그라마르 콘 라 이아. 이 투, 코모 우틸리사스 라 이아 엔 투 비다 디아리아?',
           koreanText: '시간을 아끼고 5개 웹페이지와 4개 유튜브 채널을 만들기 위해 AI를 씁니다. 게다가 오늘 아내에게 AI로 코딩하는 법을 가르쳐 주었어요. 선생님은 일상에서 AI를 어떻게 쓰시나요?',
@@ -635,7 +635,7 @@ export function buildLanguageCoachingData(
       },
       {
         role: 'Me',
-        speakerLabel: '윤종성 대표 (Me)',
+        speakerLabel: '학습자 (Me)',
         foreignText: "Things are going great! Instead of handling one task at a time, I delegate seven or eight tasks to my AI agents simultaneously and just review their deliverables.",
         pronunciation: '씽즈 아 고잉 그레이트! 인스테드 오브 핸들링 원 태스크 앳 어 타임, 아이 델리게이트 세븐 오어 에잇 태스크스 투 마이 에이아이 에이전츠 사이멀테이니슬리 앤 저스트 리뷰 데어 딜리버러블스.',
         koreanText: '아주 순조롭습니다! 한 번에 한 가지 일만 처리하는 대신 7~8가지 업무를 AI 에이전트들에게 동시에 위임하고 저는 결과물만 검토합니다.',
@@ -649,7 +649,7 @@ export function buildLanguageCoachingData(
       },
       {
         role: 'Me',
-        speakerLabel: '윤종성 대표 (Me)',
+        speakerLabel: '학습자 (Me)',
         foreignText: "Yes! She got so hooked on building websites with AI that she burned through all her tokens in just a few hours, so I shared my high-capacity account with her. How do you think education should evolve in this AI era?",
         pronunciation: '예스! 쉬 갓 소 훅트 온 빌딩 웹사이트 위드 에이아이 댓 쉬 번드 스루 올 허 토큰스 인 저스트 어 퓨 아워스, 소 아이 쉐어드 마이 하이캐패시티 어카운트 위드 허. 하우 두 유 씽크 에듀케이션 슈드 이볼브 인 디스 에이아이 에라?',
         koreanText: '네! 아내가 AI로 웹사이트 만드는 데 푹 빠져서 몇 시간 만에 토큰을 다 써버리는 바람에 제 대용량 계정을 공유해 주었습니다. 선생님께서는 이런 AI 시대에 교육이 어떻게 진화해야 한다고 보시나요?',
@@ -706,7 +706,7 @@ export function buildUniversalFallbackCoaching(note: any, langCode: string): Lan
         },
         {
           role: 'Me',
-          speakerLabel: '윤종성 대표 (Me)',
+          speakerLabel: '학습자 (Me)',
           foreignText: "Tout avance très bien ! Je dirige mes agents IA en parallèle pour maximiser notre productivité.",
           pronunciation: '뚜 따방스 트헤 비앙! 쥬 디히쥬 메 자장 이아 앙 빠할렐 뿌흐 막씨미제 노트흐 프호뒥띠비떼.',
           koreanText: '아주 순조롭습니다! 생산성을 극대화하기 위해 AI 에이전트들을 병렬로 지휘하고 있습니다.',
@@ -753,7 +753,7 @@ export function buildUniversalFallbackCoaching(note: any, langCode: string): Lan
         },
         {
           role: 'Me',
-          speakerLabel: '윤종성 대표 (Me)',
+          speakerLabel: '학습자 (Me)',
           foreignText: 'Ich koordiniere gleichzeitig sieben bis acht KI-Agenten und überprüfe nur noch die Endergebnisse.',
           pronunciation: '이히 코오르디니어레 글라이히차이티히 지벤 비스 아흐트 카이-아겐텐 운트 위버프뤼페 누어 노흐 디 엔트에어게브니세.',
           koreanText: '동시에 7~8개의 AI 에이전트를 조율하고 저는 최종 결과물만 검수합니다.',
@@ -800,7 +800,7 @@ export function buildUniversalFallbackCoaching(note: any, langCode: string): Lan
         },
         {
           role: 'Me',
-          speakerLabel: '윤종성 대표 (Me)',
+          speakerLabel: '학습자 (Me)',
           foreignText: 'Mọi thứ đang phát triển rất tốt! Tôi giao việc cho các tác nhân AI và chỉ kiểm tra kết quả cuối cùng.',
           pronunciation: '모이 트 당 팟 찌엔 젓 똣! 또이 자오 비엑 쩌 깍 딱 년 에이아이 바 찌 끼엠 짜 껫 꾸아 꾸오이 꿍.',
           koreanText: '모든 것이 아주 잘 발전하고 있습니다! AI 에이전트들에게 업무를 맡기고 최종 결과만 확인합니다.',

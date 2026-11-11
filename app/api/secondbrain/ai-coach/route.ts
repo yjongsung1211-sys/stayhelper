@@ -64,7 +64,7 @@ function buildUniversalCoachingFallback(
       },
       {
         role: 'Me',
-        speakerLabel: '윤종성 대표',
+        speakerLabel: '담당자',
         foreignText: firstSnippet.slice(0, 110),
         pronunciation: `${meta.koName} 실전 발화 연습`,
         koreanText: `${firstSnippet.slice(0, 110)} (노트 핵심 내용 발화)`,
@@ -88,7 +88,7 @@ export async function POST(request: Request) {
       note?.transcript || body.transcript || (note?.summary || []).join('\n') || title
     );
 
-    const prompt = `당신은 전 세계 모든 언어를 완벽하게 가르치는 윤종성 대표님 전담 1:1 원어민 AI 랭귀지 코치입니다.
+    const prompt = `당신은 전 세계 모든 언어를 완벽하게 가르치는 사용자님 전담 1:1 원어민 AI 랭귀지 코치입니다.
 목표 언어: ${meta.koName} (${meta.nativeName}, BCP-47: ${meta.bcp47})
 아래 [노트 제목]과 [대화/메모 원문]을 분석하여, 목표 언어(${meta.koName} / ${meta.nativeName})로 학습·복습·실전 회화를 할 수 있는 JSON 데이터를 생성하세요.
 만약 원문이 한국어나 다른 언어로 되어 있더라도, 해당 내용을 **${meta.koName}(${meta.nativeName})**로 어떻게 자연스럽게 말하고 질문하고 대화할지 변환하여 코칭해 주세요!
@@ -132,7 +132,7 @@ export async function POST(request: Request) {
     },
     {
       "role": "Me",
-      "speakerLabel": "윤종성 대표",
+      "speakerLabel": "담당자",
       "foreignText": "${meta.nativeName} 대답 대화문",
       "pronunciation": "발음기호 및 한글 발음",
       "koreanText": "한국어 해석"

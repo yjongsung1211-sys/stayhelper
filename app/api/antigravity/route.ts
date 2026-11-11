@@ -18,7 +18,20 @@ export const revalidate = 0;
 const CLOUD_REPO = 'yjongsung1211-sys/secondbrain-vault-sync';
 const BRIDGE_FILENAME = 'antigravity_bridge.json';
 const LOCAL_BRIDGE_FILE = path.join(process.cwd(), 'data', BRIDGE_FILENAME);
+const LOCAL_PRIVATE_NOTES_FILE = path.join(process.cwd(), 'data', 'antigravity_private_notes.json');
 const TMP_BRIDGE_FILE = path.join('/tmp', BRIDGE_FILENAME);
+
+async function loadPrivateAntigravityNotes(): Promise<any[]> {
+  try {
+    if (fs.existsSync(LOCAL_PRIVATE_NOTES_FILE)) {
+      const raw = JSON.parse(fs.readFileSync(LOCAL_PRIVATE_NOTES_FILE, 'utf8'));
+      const list = Array.isArray(raw) ? raw : raw.notes || [];
+      if (list.length > 0) return list;
+    }
+  } catch {}
+  const data = await loadNotesData();
+  return data.notes || [];
+}
 
 export interface AntigravityCommandItem {
   id: string;
@@ -264,8 +277,7 @@ function runLocalPythonAction(action: string, query: string): string | null {
 }
 
 async function buildKnowledgeContext(query: string) {
-  const data = await loadNotesData();
-  const notes = data.notes || [];
+  const notes = await loadPrivateAntigravityNotes();
   const qLower = (query || '').toLowerCase();
   const tokens = qLower
     .replace(/[?.,!~"'()\[\]]/g, ' ')

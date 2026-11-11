@@ -1302,7 +1302,7 @@ export default function SecondBrainPage() {
   // ☀️ 08:30 모닝 인텔리전스 & 3회독 복습 브리핑 텔레그램 즉시 발송
   const handleSendMorningBriefing = async () => {
     setIsProcessing(true);
-    setStatusBanner('☀️ [모닝 인텔리전스 & 3회독 복습 브리핑]을 윤종성 대표님 텔레그램으로 발송 중...');
+    setStatusBanner('☀️ [모닝 인텔리전스 & 3회독 복습 브리핑]을 생성 중...');
     try {
       const res = await fetch('/api/secondbrain/action', {
         method: 'POST',
@@ -1311,7 +1311,7 @@ export default function SecondBrainPage() {
       });
       const data = await res.json();
       if (data.success) {
-        setStatusBanner('✅ 모닝 인텔리전스 & 외국어 3회독 복습 브리핑이 대표님 텔레그램으로 발송되었습니다!');
+        setStatusBanner('✅ 모닝 인텔리전스 & 외국어 3회독 복습 브리핑이 생성되었습니다!');
       } else {
         setStatusBanner('모닝 브리핑 발송 중 일시적인 오류가 발생했습니다.');
       }
@@ -1744,29 +1744,6 @@ export default function SecondBrainPage() {
               </div>
 
               <div className="flex items-center gap-1.5 shrink-0">
-                <a
-                  href="/antigravity"
-                  className="px-2.5 py-2 min-h-[38px] rounded-xl bg-[#0B0F17] border border-[#E5BE64] text-[#E5BE64] text-xs font-extrabold flex items-center gap-1 whitespace-nowrap shrink-0"
-                >
-                  <span>👑 안티그래비티</span>
-                </a>
-                <button
-                  onClick={async () => {
-                    if (deferredPwaPrompt) {
-                      try {
-                        deferredPwaPrompt.prompt();
-                        await deferredPwaPrompt.userChoice;
-                        setDeferredPwaPrompt(null);
-                        return;
-                      } catch {}
-                    }
-                    setAppInstallModalOpen(true);
-                  }}
-                  className="px-2.5 py-2 min-h-[38px] rounded-xl bg-[#ECFDF5] border border-[#10B981] text-[#047857] text-xs font-extrabold flex items-center gap-1 whitespace-nowrap shrink-0 cursor-pointer"
-                >
-                  <Download className="w-3.5 h-3.5 shrink-0" />
-                  <span>앱 설치</span>
-                </button>
                 <button
                   onClick={() => setNewNoteSheetOpen(true)}
                   className="px-3 py-2 min-h-[38px] rounded-xl bg-[#111827] text-[#FFFFFF] text-xs font-bold flex items-center gap-1 whitespace-nowrap shrink-0 cursor-pointer"
@@ -1774,33 +1751,6 @@ export default function SecondBrainPage() {
                   <Plus className="w-4 h-4 shrink-0" />
                   <span>새 녹음</span>
                 </button>
-              </div>
-            </div>
-
-            {/* Antigravity & Hana 직통 배너 */}
-            <div className="mt-1.5 p-3 rounded-2xl bg-[#0B0F17] border border-[#E5BE64]/60 flex items-center justify-between gap-2 shadow-md">
-              <div className="min-w-0">
-                <div className="text-xs font-extrabold text-[#E5BE64] flex items-center gap-1">
-                  <span>👑 Antigravity &amp; Hana 전용 모바일 사령탑</span>
-                </div>
-                <p className="text-[11px] text-[#CBD5E1] truncate mt-0.5">
-                  텔레그램 없이 음성/채팅 지시 · 원터치 관제 · 내 PC 원격 연결
-                </p>
-              </div>
-              <div className="flex items-center gap-1.5 shrink-0">
-                <a
-                  href="/antigravity-hana.apk"
-                  download="Antigravity_Hana.apk"
-                  className="px-2.5 py-1.5 rounded-xl bg-[#18202E] border border-[#E5BE64]/50 text-[#E5BE64] text-[11px] font-bold whitespace-nowrap"
-                >
-                  APK 다운
-                </a>
-                <a
-                  href="/antigravity"
-                  className="px-3 py-1.5 rounded-xl bg-[#E5BE64] text-[#0B0F17] text-[11px] font-extrabold whitespace-nowrap"
-                >
-                  바로 열기 ➔
-                </a>
               </div>
             </div>
 
@@ -2090,13 +2040,13 @@ export default function SecondBrainPage() {
               </div>
             )}
 
-            {/* 모바일 하단 4대 메뉴 바 */}
-            <nav className="fixed bottom-0 left-0 right-0 z-30 bg-[#FFFFFF] border-t border-[#E2E8F0] px-3 py-2 grid grid-cols-4 gap-1.5">
+            {/* 모바일 하단 3대 메뉴 바 */}
+            <nav className="fixed bottom-0 left-0 right-0 z-30 bg-[#FFFFFF] border-t border-[#E2E8F0] px-4 py-2 grid grid-cols-3 gap-2">
               {(
                 [
                   { key: 'notes', label: '📝 내 노트' },
                   { key: 'coaching', label: '🎓 어학 단어장' },
-                  { key: 'ask', label: '🧠 AI 비서' },
+                  { key: 'ask', label: '🧠 AI 비서 · 일정' },
                 ] as const
               ).map((t) => {
                 const active =
@@ -2107,7 +2057,7 @@ export default function SecondBrainPage() {
                     key={t.key}
                     type="button"
                     onClick={() => setMainViewTab(t.key)}
-                    className={`py-2.5 rounded-xl text-[11px] font-bold transition-colors cursor-pointer ${
+                    className={`py-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
                       active
                         ? 'bg-[#111827] text-[#FFFFFF]'
                         : 'text-[#475569] hover:bg-[#F1F5F9]'
@@ -2117,12 +2067,6 @@ export default function SecondBrainPage() {
                   </button>
                 );
               })}
-              <a
-                href="/antigravity"
-                className="py-2.5 rounded-xl text-[11px] font-extrabold bg-[#0B0F17] text-[#E5BE64] border border-[#E5BE64]/60 flex items-center justify-center"
-              >
-                👑 안티그래비티
-              </a>
             </nav>
           </div>
         )}
@@ -2157,14 +2101,6 @@ export default function SecondBrainPage() {
             </div>
 
             {/* + 새 녹음 / 파일 업로드 버튼 */}
-            <a
-              href="/antigravity"
-              className="w-full py-2.5 px-4 bg-[#0B0F17] hover:bg-[#18202E] text-[#E5BE64] border border-[#E5BE64]/50 rounded-xl font-extrabold text-xs flex items-center justify-between transition-colors"
-            >
-              <span>👑 Antigravity &amp; Hana 사령탑</span>
-              <span>열기 ➔</span>
-            </a>
-
             {!isRecording ? (
               <button
                 onClick={() => setNewNoteSheetOpen(true)}
@@ -2820,7 +2756,7 @@ export default function SecondBrainPage() {
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') handleAskSecondBrain();
                       }}
-                      placeholder="예: 화천퍼스트 AIDC 회의 핵심 요약 알려줘 / 외국어 수업에서 교정받은 표현 정리해줘"
+                      placeholder="예: 오늘 회의 핵심 요약 알려줘 / 외국어 수업에서 교정받은 표현 정리해줘"
                       className="flex-1 px-4 py-2.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-sm text-[#111827] placeholder-[#94A3B8] focus:outline-none focus:border-[#111827]"
                     />
                     <button
@@ -2836,11 +2772,11 @@ export default function SecondBrainPage() {
                     <span className="text-xs font-semibold text-[#64748B]">자주 찾는 질문:</span>
                     <button
                       onClick={() =>
-                        handleAskSecondBrain('화천퍼스트 AIDC 회의 핵심 요약과 결정 사항 알려줘')
+                        handleAskSecondBrain('최근 비즈니스 회의 핵심 요약과 결정 사항 알려줘')
                       }
                       className="px-3 py-1.5 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#111827] text-xs font-semibold text-[#334155] cursor-pointer"
                     >
-                      ⚡ 화천퍼스트 · AIDC 핵심 요약
+                      ⚡ 최근 회의 핵심 요약
                     </button>
                     <button
                       onClick={() =>
@@ -3042,111 +2978,6 @@ export default function SecondBrainPage() {
                     </div>
                   </div>
                 </div>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ===================================================================== */}
-      {/* 4. 「🤖 안드로이드(갤럭시) 전용 앱 설치 & Gemini·Claude AI 연동」 모달 */}
-      {/* ===================================================================== */}
-      {appInstallModalOpen && (
-        <div
-          onClick={() => setAppInstallModalOpen(false)}
-          className="fixed inset-0 z-50 bg-black/50 flex items-end lg:items-center justify-center animate-fadeIn"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="w-full lg:max-w-lg bg-[#FFFFFF] text-[#111827] rounded-t-3xl lg:rounded-3xl p-6 shadow-2xl border border-[#E2E8F0] flex flex-col gap-4"
-          >
-            <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0]">
-              <div className="flex items-center gap-2">
-                <Smartphone className="w-5 h-5 text-[#047857]" />
-                <h3 className="text-base font-extrabold text-[#111827]">
-                  🤖 NoteHelper 안드로이드(Android) 전용 앱 &amp; AI 연동
-                </h3>
-              </div>
-              <button
-                onClick={() => setAppInstallModalOpen(false)}
-                className="p-1.5 rounded-full hover:bg-[#F1F5F9] text-[#64748B] cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-2 text-xs text-[#334155]">
-              <div className="flex items-center justify-between">
-                <span className="font-extrabold text-[#111827]">
-                  ⚡ Google Gemini &amp; Anthropic Claude 직결 엔진
-                </span>
-                <span className="px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#047857] font-bold">
-                  ● Android 전용 가동 중
-                </span>
-              </div>
-              <p className="leading-relaxed">
-                • <strong>비즈니스 회의록 자동 정리</strong>: 갤럭시 마이크로 실시간 녹음하거나 <strong>갤럭시 통화녹음(.m4a)</strong> 파일을 불러오면 전체 대화 전사부터 핵심 요약, 주요 결정 사항, 할 일(Action Items), 카톡·이메일 공유 초안까지 자동으로 완성합니다.
-              </p>
-              <p className="leading-relaxed">
-                • <strong>전 세계 모든 외국어 공부 도우미</strong>: 영어·중국어·일본어·스페인어·프랑스어·독일어·베트남어 등 어떤 외국어든 <strong>내가 틀린 문법 교정, 더 좋은 원어민 대답/질문, 실전 롤플레이 시나리오, 원어민 발음 쉐도잉</strong>을 생성합니다.
-              </p>
-            </div>
-
-            <a
-              href="/antigravity-hana.apk"
-              download="Antigravity_Hana.apk"
-              className="w-full py-3.5 px-4 rounded-2xl bg-[#0B0F17] hover:bg-[#18202E] border border-[#E5BE64] text-[#E5BE64] text-sm font-extrabold flex items-center justify-center gap-2 shadow-md text-center"
-            >
-              <Download className="w-4 h-4" />
-              <span>👑 Antigravity &amp; Hana 전용 APK 다운로드 (설치형 앱)</span>
-            </a>
-
-            {deferredPwaPrompt ? (
-              <button
-                type="button"
-                onClick={async () => {
-                  try {
-                    deferredPwaPrompt.prompt();
-                    await deferredPwaPrompt.userChoice;
-                    setDeferredPwaPrompt(null);
-                  } catch {}
-                }}
-                className="w-full py-4 px-4 rounded-2xl bg-[#047857] hover:bg-[#065F46] text-[#FFFFFF] text-sm font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer"
-              >
-                <Download className="w-4 h-4" />
-                <span>📲 NoteHelper 안드로이드 전용 앱 지금 바로 설치하기</span>
-              </button>
-            ) : (
-              <a
-                href="intent://secondbrain-note.vercel.app/notehelper#Intent;scheme=https;package=com.android.chrome;end"
-                className="w-full py-3.5 px-4 rounded-2xl bg-[#047857] hover:bg-[#065F46] text-[#FFFFFF] text-sm font-extrabold flex items-center justify-center gap-2 shadow-md text-center"
-              >
-                <Download className="w-4 h-4" />
-                <span>🤖 갤럭시 Chrome으로 열어서 전용 앱 설치하기</span>
-              </a>
-            )}
-
-            <div className="p-4 rounded-xl bg-[#ECFDF5] border border-[#10B981]/40 space-y-2 text-xs">
-              <div className="font-extrabold text-[#065F46] text-sm">
-                📲 갤럭시 바탕화면에 NoteHelper 전용 앱 다운받는 3초 순서
-              </div>
-              <p className="text-[#064E3B] leading-relaxed font-medium">
-                1️⃣ 위 초록색 <strong>[갤럭시 Chrome으로 열어서 전용 앱 설치하기]</strong> 버튼을 누르거나 Chrome에서 접속합니다.<br />
-                2️⃣ Chrome 화면 <strong>우측 맨 위 점 3개 [⋮] 버튼</strong>을 터치합니다.<br />
-                3️⃣ 메뉴에서 <strong>[앱 설치]</strong> 또는 <strong>[홈 화면에 추가]</strong> ➔ <strong>[설치]</strong>를 누르면 갤럭시 앱 서랍과 바탕화면에 <strong>NoteHelper 전용 어플</strong>이 즉시 다운로드·설치됩니다!
-              </p>
-            </div>
-
-            <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#E2E8F0]">
-              <button
-                type="button"
-                onClick={() => {
-                  setAppInstallModalOpen(false);
-                  setNewNoteSheetOpen(true);
-                }}
-                className="px-4 py-2.5 rounded-xl bg-[#111827] text-[#FFFFFF] text-xs font-bold cursor-pointer"
-              >
-                🎙️ 바로 안드로이드 AI 녹음 시작하기
               </button>
             </div>
           </div>

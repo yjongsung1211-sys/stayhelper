@@ -39,7 +39,7 @@ function formatDiarizedTranscript(raw: string): string {
   const clean = (raw || '').trim();
   if (!clean) return 'Speaker 1: (무음 또는 인식된 음성 없음)';
   if (
-    /^(Speaker\s+\d+|선생님|중국어 선생님|윤종성(?:\s*대표)?|Andy|尹中盛|John|Johnson|Yong San|Jolene|Tutor)\s*:/m.test(
+    /^(Speaker\s+\d+|선생님|중국어 선생님|사용자(?:\s*대표)?|Tutor|尹中盛|John|Johnson|Yong San|Tutor|Tutor)\s*:/m.test(
       clean
     ) ||
     /^\[\d{2}:\d{2}\]/m.test(clean)
@@ -84,7 +84,7 @@ ${bullets}
 
 ## Action Items
 
-- **윤종성 대표**: 전사된 녹취 요약 및 세부 사항 확인 후 후속 실행 진행. [In progress]
+- **담당자**: 전사된 녹취 요약 및 세부 사항 확인 후 후속 실행 진행. [In progress]
 
 ## Key Numbers & Metrics
 

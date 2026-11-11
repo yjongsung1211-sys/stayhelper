@@ -53,7 +53,7 @@ export async function POST(request: Request) {
       targetLang: body.targetLang || undefined,
       aiCoaching: body.aiCoaching || undefined,
       deviceModel: body.deviceModel || 'NoteHelper',
-      speakers: body.speakers || ['윤종성 대표'],
+      speakers: body.speakers || ['담당자'],
       tags: mergedTags,
       categoryLabel: cat.categoryLabel,
       categoryFolder: cat.obsidianFolder,

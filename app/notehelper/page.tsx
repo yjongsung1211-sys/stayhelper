@@ -659,13 +659,6 @@ export default function NoteHelperPage() {
             </button>
 
             <Link
-              href="/antigravity"
-              className="px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-xs font-extrabold text-amber-300 transition"
-            >
-              👑 Antigravity 사령탑 ↗
-            </Link>
-
-            <Link
               href="/schedulehelper"
               className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-300 transition"
             >
@@ -674,35 +667,6 @@ export default function NoteHelperPage() {
           </div>
         </div>
       </header>
-
-      {/* Antigravity & Hana Direct Banner */}
-      <div className="max-w-6xl mx-auto px-4 pt-4">
-        <div className="p-3.5 rounded-2xl bg-[#111722] border border-amber-500/50 flex flex-wrap items-center justify-between gap-3 shadow-lg">
-          <div>
-            <div className="text-sm font-extrabold text-amber-300">
-              👑 Antigravity &amp; Hana 전용 모바일 사령탑 (설치형 APK 지원)
-            </div>
-            <p className="text-xs text-slate-300 mt-0.5">
-              텔레그램 없이 음성/채팅 지시 · 11대 원터치 전사 관제 · 외부(LTE/5G) 내 PC 원격 연결
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <a
-              href="/antigravity-hana.apk"
-              download="Antigravity_Hana.apk"
-              className="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-amber-500/40 text-amber-300 text-xs font-bold"
-            >
-              📲 안드로이드 APK 다운
-            </a>
-            <Link
-              href="/antigravity"
-              className="px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-extrabold"
-            >
-              사령탑 바로 열기 ➔
-            </Link>
-          </div>
-        </div>
-      </div>
 
       {/* Main Content Area */}
       <main className="max-w-6xl mx-auto px-4 pt-6 grid grid-cols-1 lg:grid-cols-12 gap-6">

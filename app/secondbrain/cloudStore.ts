@@ -455,7 +455,7 @@ export function detectNoteCategory(note: any): {
     };
   }
   if (
-    combined.includes('화천퍼스트') ||
+    combined.includes('글로벌 인프라') ||
     combined.includes('일진전기') ||
     combined.includes('다스테크') ||
     combined.includes('동양산전') ||
@@ -464,22 +464,22 @@ export function detectNoteCategory(note: any): {
     combined.includes('데이터센터')
   ) {
     return {
-      categoryLabel: '⚡ AIDC 전력·인프라 M&A (화천퍼스트)',
-      obsidianFolder: '01_Projects/AIDC_화천퍼스트',
-      autoTags: ['AIDC', '화천퍼스트', 'M&A전략'],
+      categoryLabel: '⚡ AIDC 전력·인프라 M&A (글로벌 인프라)',
+      obsidianFolder: '01_Projects/AIDC_글로벌 인프라',
+      autoTags: ['AIDC', '글로벌 인프라', 'M&A전략'],
     };
   }
   if (
-    combined.includes('퀀텀테크') ||
-    combined.includes('샘컴') ||
+    combined.includes('딥테크') ||
+    combined.includes('차세대 테크') ||
     combined.includes('광무선') ||
     combined.includes('ofe') ||
     combined.includes('kaist')
   ) {
     return {
-      categoryLabel: '🔬 딥테크 포트폴리오 (샘컴·퀀텀테크놀로지)',
-      obsidianFolder: '01_Projects/퀀텀테크놀로지_샘컴',
-      autoTags: ['퀀텀테크놀로지', '샘컴', '딥테크'],
+      categoryLabel: '🔬 딥테크 포트폴리오 (차세대 테크·딥테크 솔루션)',
+      obsidianFolder: '01_Projects/딥테크 솔루션_차세대 테크',
+      autoTags: ['딥테크 솔루션', '차세대 테크', '딥테크'],
     };
   }
   if (
@@ -625,7 +625,7 @@ ${keyPoints.slice(0, 4).map((s, idx) => `${idx + 1}. **핵심 반영**: ${s}`).j
 ## 2. 부서별 자동 연동 및 후속 파이프라인 조치
 - **옵시디언 마스터 볼트(\`${cat.obsidianFolder}\`)**: 본 작업 결과물 및 실행 체크리스트 자동 기록 완료.
 - **전사 마케팅/미디어 파이프라인**: "${taskTitle}" 관련 키워드 기반 쇼룸·유튜브·릴스 기획 큐 연동 완료.
-- **윤종성 대표님 컨펌 사항**: 추가 수정 지시가 있으시면 NoteHelper (노트헬퍼)로 말씀해 주시거나 아래 작업 큐에서 후속 지시를 내려주세요.`;
+- **사용자님 컨펌 사항**: 추가 수정 지시가 있으시면 NoteHelper (노트헬퍼)로 말씀해 주시거나 아래 작업 큐에서 후속 지시를 내려주세요.`;
 
     if (!isCloudEnvironment()) {
       try {
@@ -659,15 +659,15 @@ ${keyPoints.slice(0, 4).map((s, idx) => `${idx + 1}. **핵심 반영**: ${s}`).j
     },
     language_review: {
       label: '📚 무스트레스 3회독 복습 · 문법 교정 · 더 좋은 대답/질문 · 시나리오',
-      prompt: `다음 노트 내용을 바탕으로 윤종성 대표님의 외국어 회화 실력 향상을 위한 종합 코칭 카드를 작성하세요.
+      prompt: `다음 노트 내용을 바탕으로 사용자님의 외국어 회화 실력 향상을 위한 종합 코칭 카드를 작성하세요.
 1) 내가 틀린 문법·어휘 바로잡기 (Before ➔ After & 왜 틀렸는지 문법 해설)
 2) 더 좋은 원어민 고급 대답(Better Answers) & 대화를 주도하는 스마트 질문(Better Questions)
-3) 실전 롤플레이 대화 시나리오 (선생님 ↔ 윤종성 대표 4~6턴 대화)
+3) 실전 롤플레이 대화 시나리오 (선생님 ↔ 담당자 4~6턴 대화)
 4) [1회독 소리내어 읽기 ➔ 2회독 상황 연상 ➔ 3회독 안 보고 말하기] 체크리스트를 포함하세요.`,
     },
     biz_plan: {
       label: '📋 1인 기업 AI 에이전트 연계 실행 기획서 & 브리핑',
-      prompt: `다음 노트 내용을 바탕으로 윤종성 대표님의 1인 기업(하나 비서·AI 마케팅팀·5대 Helper·AIDC/딥테크) 실행 기획서를 작성하세요.
+      prompt: `다음 노트 내용을 바탕으로 사용자님의 1인 기업(하나 비서·AI 마케팅팀·5대 Helper·AIDC/딥테크) 실행 기획서를 작성하세요.
 1) 핵심 비즈니스 기회 및 팩트 요약 2) 전사 시너지 연계 방안 3) 즉시 실행 Action Items 4) 주요 지표(KPI) 및 팔로업 메시지 초안을 포함하세요.`,
     },
     share_message: {
@@ -684,7 +684,7 @@ ${keyPoints.slice(0, 4).map((s, idx) => `${idx + 1}. **핵심 반영**: ${s}`).j
       )}\n\n[전사 전문]\n${transcript.slice(0, 3000)}`,
       {
         systemInstruction:
-          '당신은 윤종성 대표님의 전담 NoteHelper (노트헬퍼) AI 수석 비서 겸 다국어 코치입니다. 마크다운 형식으로 깔끔하고 즉시 실행 가능하게 작성하세요.',
+          '당신은 사용자님의 전담 NoteHelper (노트헬퍼) AI 수석 비서 겸 다국어 코치입니다. 마크다운 형식으로 깔끔하고 즉시 실행 가능하게 작성하세요.',
         temperature: 0.2,
         maxTokens: 1500,
       }
@@ -784,7 +784,7 @@ ${
 ## 1️⃣ 카카오톡 / 문자 단톡방 즉시 공유용 (복사해서 바로 전송)
 \`\`\`text
 [미팅/논의 핵심 요약 공유]
-안녕하세요, 윤종성입니다.
+안녕하세요, 사용자입니다.
 금일(${dateStr}) 논의 나눈 "${title}" 핵심 사항 정리하여 공유드립니다.
 
 ■ 주요 논의 및 합의 사항
@@ -800,7 +800,7 @@ ${keyPoints.slice(0, 3).map((s, idx) => `${idx + 1}. ${s}`).join('\n')}
 ## 2️⃣ 공식 비즈니스 팔로업 이메일 초안 (Email Template)
 - **제목(Subject)**: \`[Follow-up] ${dateStr} ${title} 주요 논의 결과 및 후속 일정 공유의 건\`
 - **본문**:
-> 안녕하십니까, 윤종성입니다.
+> 안녕하십니까, 사용자입니다.
 >
 > 금일 귀한 시간 내어 **"${title}"** 관련 깊이 있는 논의 함께해 주셔서 감사드립니다.
 > 미팅에서 다루어진 핵심 내용과 후속 진행 사항을 아래와 같이 정리하여 공유드립니다.
@@ -813,7 +813,7 @@ ${keyPoints.slice(0, 3).map((s, idx) => `${idx + 1}. ${s}`).join('\n')}
 > - 혹시 내용 중 수정이나 추가가 필요한 부분이 있으시면 언제든 회신 부탁드립니다.
 >
 > 감사합니다.
-> **윤종성 드림**`;
+> **사용자 드림**`;
     return { label: actionMeta.label, content };
   }
 
@@ -838,7 +838,7 @@ ${keyPoints.map((s) => `- ${s}`).join('\n')}
 ---
 
 ## 3. 단계별 실행 과제 (Action Items)
-- [ ] **[즉시 실행 (Today)]**: NoteHelper (노트헬퍼) 요약본 및 핵심 수치 최종 확인 (**윤종성 대표**)
+- [ ] **[즉시 실행 (Today)]**: NoteHelper (노트헬퍼) 요약본 및 핵심 수치 최종 확인 (**담당자**)
 - [ ] **[단기 과제 (D+3)]**: 관련 프로젝트 폴더(\`${cat.obsidianFolder}\`) 내 세부 실행안 및 파트너 공유용 자료 배포
 - [ ] **[중기 과제 (D+7)]**: 후속 미팅 또는 콘텐츠 배포 성과(전환율·조회수·딜 진척도) 점검
 

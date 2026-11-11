@@ -23,7 +23,7 @@ import android.webkit.WebViewClient;
 public class MainActivity extends Activity {
     private static final int REQ_PERMISSIONS = 1001;
     private static final int REQ_FILE_CHOOSER = 1002;
-    private static final String APP_URL = "https://secondbrain-note.vercel.app/antigravity";
+    private static final String APP_URL = "https://thestayhelper.vercel.app/antigravity";
 
     private WebView webView;
     private ValueCallback<Uri[]> filePathCallback;
