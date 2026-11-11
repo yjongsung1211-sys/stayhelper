@@ -166,7 +166,7 @@ const SUGGESTED_PROMPTS = [
 ];
 
 export default function AntigravityMobilePage() {
-  const [activeTab, setActiveTab] = useState<'chat' | 'vault' | 'deck' | 'bridge' | 'apk'>('chat');
+  const [activeTab, setActiveTab] = useState<'chat' | 'vault' | 'deck' | 'bridge' | 'memo'>('chat');
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
   const [commandQueue, setCommandQueue] = useState<CommandItem[]>([]);
   const [pcStatus, setPcStatus] = useState<PcStatus>({
@@ -731,14 +731,14 @@ export default function AntigravityMobilePage() {
           >
             <RefreshCw className={`w-4 h-4 ${isSyncing ? 'animate-spin text-slate-900' : ''}`} />
           </button>
-          <a
-            href="/antigravity-hana.apk"
-            download="Antigravity_Hana.apk"
-            className="px-2.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold flex items-center gap-1 transition shadow-xs"
+          <button
+            onClick={() => setActiveTab('memo')}
+            className="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-xs font-semibold flex items-center gap-1 transition cursor-pointer"
+            title="빠른 메모"
           >
-            <Download className="w-3.5 h-3.5" />
-            APK
-          </a>
+            <BookmarkPlus className="w-3.5 h-3.5" />
+            메모
+          </button>
         </div>
       </header>
 
@@ -851,10 +851,13 @@ export default function AntigravityMobilePage() {
                       ⚡ 원터치 사령탑 열기
                     </button>
                     <button
-                      onClick={() => setActiveTab('apk')}
+                      onClick={() => {
+                        setActiveTab('vault');
+                        fetchVaultDocs(vaultQuery, vaultCategory);
+                      }}
                       className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-900 text-xs font-semibold text-white text-center hover:bg-slate-800 transition cursor-pointer"
                     >
-                      📥 안티그래비티 APK 설치
+                      📚 세컨브레인 열람
                     </button>
                   </div>
                 </div>
@@ -1277,72 +1280,61 @@ export default function AntigravityMobilePage() {
           </div>
         )}
 
-        {/* TAB 4: QUICK MEMO & ANDROID APK INSTALLER */}
-        {activeTab === 'apk' && (
+        {/* TAB 5: QUICK MEMO & NOTE KEEPER */}
+        {activeTab === 'memo' && (
           <div className="space-y-3.5 pb-4">
             {/* Quick 1-Second Obsidian Memo */}
-            <div className="p-4 rounded-2xl bg-white border border-slate-200 space-y-2.5 shadow-xs">
-              <h2 className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                <BookmarkPlus className="w-4 h-4 text-slate-800" />
-                1초 Antigravity &amp; 옵시디언 전용 메모
-              </h2>
-              <p className="text-xs text-slate-600">
-                이동 중 떠오른 아이디어나 지시사항을 적으시면 내 PC 옵시디언 볼트(00_Inbox)와 Antigravity 전용 보관함에 즉시 저장됩니다.
+            <div className="p-4 rounded-2xl bg-white border border-slate-200 space-y-3 shadow-xs">
+              <div className="flex items-center justify-between">
+                <h2 className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                  <BookmarkPlus className="w-4 h-4 text-slate-800" />
+                  1초 빠른 메모 &amp; 옵시디언 동기화
+                </h2>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                  00_Inbox 직결
+                </span>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                이동 중 떠오른 아이디어나 지시사항을 적으시면 내 PC 옵시디언 볼트(00_Inbox)와 Antigravity 전용 보관함에 즉시 안전하게 저장됩니다.
               </p>
               <textarea
-                rows={3}
+                rows={5}
                 value={quickMemoText}
                 onChange={(e) => setQuickMemoText(e.target.value)}
                 placeholder="메모할 내용을 입력하거나 음성으로 말씀하세요..."
-                className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-800 focus:bg-white"
+                className="w-full p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-800 focus:bg-white leading-relaxed"
               />
               {memoSavedToast && (
                 <p className="text-xs text-emerald-700 font-medium">{memoSavedToast}</p>
               )}
-              <button
-                onClick={handleSaveQuickMemo}
-                disabled={isLoading || !quickMemoText.trim()}
-                className="w-full py-2.5 rounded-xl bg-slate-900 disabled:opacity-40 text-white font-bold text-xs hover:bg-slate-800 transition cursor-pointer"
-              >
-                Antigravity &amp; 옵시디언 볼트에 즉시 저장
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleSaveQuickMemo}
+                  disabled={isLoading || !quickMemoText.trim()}
+                  className="flex-1 py-2.5 rounded-xl bg-slate-900 disabled:opacity-40 text-white font-bold text-xs hover:bg-slate-800 transition cursor-pointer shadow-xs"
+                >
+                  Antigravity &amp; 옵시디언 볼트에 즉시 저장
+                </button>
+                {quickMemoText && (
+                  <button
+                    onClick={() => setQuickMemoText('')}
+                    className="px-3 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs transition cursor-pointer"
+                  >
+                    지우기
+                  </button>
+                )}
+              </div>
             </div>
 
-            {/* Dedicated Android APK Download Card */}
-            <div className="p-4 rounded-2xl bg-white border border-slate-200 space-y-3 shadow-xs">
-              <div className="flex items-center gap-2.5">
-                <div className="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-800">
-                  <Smartphone className="w-5 h-5" />
-                </div>
-                <div>
-                  <h2 className="text-sm font-bold text-slate-900">
-                    안드로이드 전용 설치형 앱 (APK)
-                  </h2>
-                  <p className="text-[11px] text-slate-500">
-                    패키지: com.yoonjongsung.antigravity (v2.1 정식 서명판)
-                  </p>
-                </div>
-              </div>
-
-              <p className="text-xs text-slate-600 leading-relaxed">
-                스마트폰에 독립 앱으로 설치하면 브라우저 주소창 없이 1초 만에 실행되며, 외부(LTE/5G)에서도 클라우드-PC 보안 브릿지를 통해 집/사무실 PC의 안티그래비티와 하나를 그대로 사용하실 수 있습니다.
+            {/* Quick Mobile Tips Card */}
+            <div className="p-3.5 rounded-2xl bg-white border border-slate-200 space-y-2 text-xs text-slate-600 shadow-xs">
+              <h3 className="font-semibold text-slate-900 flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-slate-700" />
+                스마트폰 활용 가이드
+              </h3>
+              <p className="text-[11px] text-slate-500 leading-relaxed">
+                설치된 <b>Antigravity</b> 앱에서 웹 기사의 [공유하기]를 누르면 자동으로 세컨브레인 00_Inbox에 스크랩 저장됩니다.
               </p>
-
-              <a
-                href="/antigravity-hana.apk"
-                download="Antigravity_Hana.apk"
-                className="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition cursor-pointer"
-              >
-                <Download className="w-4 h-4" />
-                안티그래비티 &amp; 하나 전용 APK 다운로드 (Antigravity_Hana.apk)
-              </a>
-
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-[11px] text-slate-600 space-y-1">
-                <p className="font-semibold text-slate-900">💡 휴대폰 설치 방법 (30초 완료):</p>
-                <p>1. 위 검정색 버튼을 눌러 `Antigravity_Hana.apk` 파일을 다운로드합니다.</p>
-                <p>2. 다운로드 완료 알림을 터치해 [설치]를 누릅니다. (최초 1회 &apos;출처를 알 수 없는 앱 허용&apos; 클릭)</p>
-                <p>3. 바탕화면에 생성된 **Antigravity** 아이콘을 터치해 언제 어디서나 편하게 사용하세요!</p>
-              </div>
             </div>
           </div>
         )}
@@ -1441,13 +1433,13 @@ export default function AntigravityMobilePage() {
         </button>
 
         <button
-          onClick={() => setActiveTab('apk')}
+          onClick={() => setActiveTab('memo')}
           className={`flex flex-col items-center py-1 rounded-xl transition cursor-pointer ${
-            activeTab === 'apk' ? 'text-slate-950 font-bold' : 'text-slate-400 hover:text-slate-700'
+            activeTab === 'memo' ? 'text-slate-950 font-bold' : 'text-slate-400 hover:text-slate-700'
           }`}
         >
-          <Smartphone className="w-4 h-4" />
-          <span className="text-[10px] mt-1">설정·APK</span>
+          <BookmarkPlus className="w-4 h-4" />
+          <span className="text-[10px] mt-1">빠른메모</span>
         </button>
       </nav>
 
