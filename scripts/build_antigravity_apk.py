@@ -231,13 +231,84 @@ def build_apk():
     shutil.copy2(signed_staged_apk, public_apk)
     shutil.copy2(signed_staged_apk, root_apk)
 
-    # Clean up legacy zip files in workspace tools if present
-    if LEGACY_SDK_DIR.exists():
-        shutil.rmtree(LEGACY_SDK_DIR, ignore_errors=True)
-
     size_kb = round(public_apk.stat().st_size / 1024, 1)
     print(f"[+] SUCCESS! Signed Android APK built: {public_apk} ({size_kb} KB)")
     print(f"[+] Root copy saved at: {root_apk}")
+
+    # Also build NoteHelper dedicated APK (com.yoonjongsung.notehelper)
+    nh_work = SDK_DIR / "build_work_nh"
+    if nh_work.exists():
+        shutil.rmtree(nh_work)
+    nh_work.mkdir(parents=True, exist_ok=True)
+
+    nh_manifest = nh_work / "AndroidManifest.xml"
+    nh_manifest_txt = manifest_src.read_text(encoding="utf-8")
+    nh_manifest_txt = nh_manifest_txt.replace("com.yoonjongsung.antigravity", "com.yoonjongsung.notehelper")
+    nh_manifest_txt = nh_manifest_txt.replace('android:label="Antigravity &amp; Hana"', 'android:label="NoteHelper (노트헬퍼)"')
+    nh_manifest.write_text(nh_manifest_txt, encoding="utf-8")
+
+    nh_java_dir = nh_work / "src" / "com" / "yoonjongsung" / "notehelper"
+    nh_java_dir.mkdir(parents=True, exist_ok=True)
+    nh_java = nh_java_dir / "MainActivity.java"
+    nh_java_txt = java_src.read_text(encoding="utf-8")
+    nh_java_txt = nh_java_txt.replace("package com.yoonjongsung.antigravity;", "package com.yoonjongsung.notehelper;")
+    nh_java_txt = nh_java_txt.replace(
+        "https://secondbrain-note.vercel.app/antigravity",
+        "https://secondbrain-note.vercel.app/notehelper",
+    ).replace(
+        "https://thestayhelper.vercel.app/antigravity",
+        "https://secondbrain-note.vercel.app/notehelper",
+    )
+    nh_java.write_text(nh_java_txt, encoding="utf-8")
+
+    nh_res = nh_work / "res" / "drawable"
+    nh_res.mkdir(parents=True, exist_ok=True)
+    if icon_src.exists():
+        shutil.copy2(icon_src, nh_res / "ic_launcher.png")
+
+    nh_comp = nh_work / "compiled_res.zip"
+    run_cmd([tools["aapt2"], "compile", "--dir", nh_work / "res", "-o", nh_comp])
+
+    nh_unsigned = nh_work / "unsigned.apk"
+    nh_r = nh_work / "gen"
+    nh_r.mkdir(parents=True, exist_ok=True)
+    run_cmd([
+        tools["aapt2"], "link", "-o", nh_unsigned, "-I", tools["android_jar"],
+        "--manifest", nh_manifest, "--java", nh_r, "--auto-add-overlay", nh_comp
+    ])
+
+    nh_classes = nh_work / "classes"
+    nh_classes.mkdir(parents=True, exist_ok=True)
+    run_cmd([
+        tools["javac"], "-source", "11", "-target", "11", "-encoding", "UTF-8",
+        "-cp", tools["android_jar"], "-d", nh_classes, nh_java, *list(nh_r.rglob("*.java"))
+    ])
+
+    run_cmd([
+        tools["java"], "-cp", tools["d8_jar"], "com.android.tools.r8.D8",
+        "--lib", tools["android_jar"], "--min-api", "26", "--output", nh_work,
+        *list(nh_classes.rglob("*.class"))
+    ])
+
+    with zipfile.ZipFile(nh_unsigned, "a", compression=zipfile.ZIP_DEFLATED) as zf:
+        zf.write(nh_work / "classes.dex", "classes.dex")
+
+    nh_aligned = nh_work / "aligned.apk"
+    run_cmd([tools["zipalign"], "-f", "-p", "4", nh_unsigned, nh_aligned])
+
+    nh_signed = nh_work / "NoteHelper_Signed.apk"
+    run_cmd([
+        tools["java"], "-jar", tools["apksigner_jar"], "sign",
+        "--ks", keystore, "--ks-key-alias", "antigravity",
+        "--ks-pass", "pass:antigravity2026", "--key-pass", "pass:antigravity2026",
+        "--out", nh_signed, nh_aligned
+    ])
+
+    nh_pub = BASE_DIR / "public" / "notehelper.apk"
+    nh_root = BASE_DIR / "NoteHelper.apk"
+    shutil.copy2(nh_signed, nh_pub)
+    shutil.copy2(nh_signed, nh_root)
+    print(f"[+] SUCCESS! Signed NoteHelper APK built: {nh_pub} ({round(nh_pub.stat().st_size / 1024, 1)} KB)")
 
 
 if __name__ == "__main__":

@@ -170,6 +170,75 @@ export default function AntigravityMobilePage() {
 
   const chatBottomRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const mediaStreamRef = useRef<MediaStream | null>(null);
+  const mediaChunksRef = useRef<Blob[]>([]);
+
+  const encodeBlobToWav16k = async (blob: Blob): Promise<string | null> => {
+    try {
+      const arrayBuf = await blob.arrayBuffer();
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioCtx) return null;
+      const ctx = new AudioCtx();
+      const audioBuffer = await ctx.decodeAudioData(arrayBuf.slice(0));
+      try {
+        await ctx.close();
+      } catch {}
+
+      const targetRate = 16000;
+      const srcRate = audioBuffer.sampleRate;
+      const numChannels = audioBuffer.numberOfChannels;
+      const srcLen = audioBuffer.length;
+      const dstLen = Math.max(1, Math.floor((srcLen * targetRate) / srcRate));
+
+      const monoSrc = new Float32Array(srcLen);
+      for (let ch = 0; ch < numChannels; ch++) {
+        const chData = audioBuffer.getChannelData(ch);
+        for (let i = 0; i < srcLen; i++) {
+          monoSrc[i] += chData[i] / numChannels;
+        }
+      }
+
+      const wavBytes = new ArrayBuffer(44 + dstLen * 2);
+      const view = new DataView(wavBytes);
+      const writeStr = (offset: number, s: string) => {
+        for (let i = 0; i < s.length; i++) view.setUint8(offset + i, s.charCodeAt(i));
+      };
+      writeStr(0, 'RIFF');
+      view.setUint32(4, 36 + dstLen * 2, true);
+      writeStr(8, 'WAVE');
+      writeStr(12, 'fmt ');
+      view.setUint32(16, 16, true);
+      view.setUint16(20, 1, true);
+      view.setUint16(22, 1, true);
+      view.setUint32(24, targetRate, true);
+      view.setUint32(28, targetRate * 2, true);
+      view.setUint16(32, 2, true);
+      view.setUint16(34, 16, true);
+      writeStr(36, 'data');
+      view.setUint32(40, dstLen * 2, true);
+
+      const ratio = srcRate / targetRate;
+      for (let i = 0; i < dstLen; i++) {
+        const srcIdx = i * ratio;
+        const idx0 = Math.floor(srcIdx);
+        const idx1 = Math.min(srcLen - 1, idx0 + 1);
+        const frac = srcIdx - idx0;
+        const sample = monoSrc[idx0] * (1 - frac) + monoSrc[idx1] * frac;
+        const clamped = Math.max(-1, Math.min(1, sample));
+        view.setInt16(44 + i * 2, clamped < 0 ? clamped * 0x8000 : clamped * 0x7fff, true);
+      }
+
+      const wavBlob = new Blob([wavBytes], { type: 'audio/wav' });
+      return await new Promise<string>((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve((reader.result as string) || '');
+        reader.readAsDataURL(wavBlob);
+      });
+    } catch {
+      return null;
+    }
+  };
 
   const fetchBridgeData = async (silent = false) => {
     if (!silent) setIsSyncing(true);
@@ -208,14 +277,89 @@ export default function AntigravityMobilePage() {
     }
   }, [chatHistory.length, activeTab]);
 
-  const toggleVoiceInput = () => {
+  const toggleVoiceInput = async () => {
     if (isListening) {
       try {
         recognitionRef.current?.stop();
       } catch {}
+      recognitionRef.current = null;
+
+      if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+        await new Promise<void>((resolve) => {
+          if (!mediaRecorderRef.current) return resolve();
+          mediaRecorderRef.current.onstop = () => resolve();
+          try {
+            mediaRecorderRef.current.stop();
+          } catch {
+            resolve();
+          }
+        });
+      }
+      mediaRecorderRef.current = null;
+      if (mediaStreamRef.current) {
+        mediaStreamRef.current.getTracks().forEach((t) => t.stop());
+        mediaStreamRef.current = null;
+      }
       setIsListening(false);
+
+      if (mediaChunksRef.current.length > 0) {
+        const mime = mediaChunksRef.current[0]?.type || 'audio/webm';
+        const blob = new Blob(mediaChunksRef.current, { type: mime });
+        mediaChunksRef.current = [];
+        try {
+          const wavDataUrl = await encodeBlobToWav16k(blob);
+          if (wavDataUrl) {
+            const res = await fetch('/api/secondbrain/process-audio', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                text: '',
+                duration: 5,
+                audioBase64: wavDataUrl,
+                mimeType: 'audio/wav',
+                targetLang: 'ko',
+              }),
+            });
+            const data = await res.json();
+            const sttText = (data?.analysis?.refinedTranscript || data?.rawTranscript || '')
+              .replace(/^Speaker\s+\d+\s*:\s*/gim, '')
+              .trim();
+            if (sttText && !sttText.includes('무음')) {
+              setInputText((prev) => (prev ? `${prev} ${sttText}` : sttText));
+            }
+          }
+        } catch {}
+      }
       return;
     }
+
+    mediaChunksRef.current = [];
+    try {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaStreamRef.current = stream;
+        const preferredTypes = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg'];
+        let chosenMime = '';
+        if (typeof MediaRecorder !== 'undefined' && typeof MediaRecorder.isTypeSupported === 'function') {
+          for (const t of preferredTypes) {
+            if (MediaRecorder.isTypeSupported(t)) {
+              chosenMime = t;
+              break;
+            }
+          }
+        }
+        const mr = chosenMime ? new MediaRecorder(stream, { mimeType: chosenMime }) : new MediaRecorder(stream);
+        mr.ondataavailable = (ev) => {
+          if (ev.data && ev.data.size > 0) {
+            mediaChunksRef.current.push(ev.data);
+          }
+        };
+        mr.start(300);
+        mediaRecorderRef.current = mr;
+        setIsListening(true);
+        return;
+      }
+    } catch {}
 
     const SpeechRecognition =
       typeof window !== 'undefined'
@@ -223,7 +367,7 @@ export default function AntigravityMobilePage() {
         : null;
 
     if (!SpeechRecognition) {
-      alert('이 기기 브라우저에서는 실시간 음성 인식을 지원하지 않습니다. 키보드 마이크 버튼을 사용해 주세요.');
+      alert('마이크 접근 권한을 허용해 주시거나 키보드 마이크 버튼을 사용해 주세요.');
       return;
     }
 
@@ -472,6 +616,35 @@ export default function AntigravityMobilePage() {
 
             {/* Conversation Stream */}
             <div className="space-y-3">
+              {chatHistory.length === 0 && (
+                <div className="p-4 rounded-2xl bg-[#18202E]/90 border border-[#E5BE64]/30 space-y-2.5 shadow-md">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#E5BE64]/15 text-[#E5BE64] border border-[#E5BE64]/30">
+                      ANTIGRAVITY &amp; HANA READY
+                    </span>
+                    <span className="text-[11px] text-emerald-400 font-semibold">
+                      ● 실시간 브릿지 정상
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-200 leading-relaxed">
+                    윤종성 대표님, 안티그래비티 &amp; 수석비서 하나 모바일 사령탑입니다. 상단 추천 명령을 터치하시거나 하단 마이크·채팅창으로 무엇이든 지시해 주세요.
+                  </p>
+                  <div className="grid grid-cols-2 gap-2 pt-1">
+                    <Link
+                      href="/notehelper"
+                      className="px-3 py-2 rounded-xl bg-[#0B0F17] border border-slate-700/80 text-xs font-semibold text-purple-300 text-center hover:border-purple-400 transition"
+                    >
+                      🎙️ NoteHelper 열기
+                    </Link>
+                    <button
+                      onClick={() => setActiveTab('apk')}
+                      className="px-3 py-2 rounded-xl bg-[#0B0F17] border border-[#E5BE64]/40 text-xs font-semibold text-[#E5BE64] text-center hover:bg-[#E5BE64]/10 transition cursor-pointer"
+                    >
+                      📥 2대 전용앱(APK) 설치
+                    </button>
+                  </div>
+                </div>
+              )}
               {chatHistory.map((msg) => {
                 const isUser = msg.role === 'user';
                 return (
@@ -827,7 +1000,16 @@ export default function AntigravityMobilePage() {
                 className="w-full py-3 rounded-xl bg-gradient-to-r from-[#E5BE64] to-[#C89D42] text-[#0B0F17] font-extrabold text-xs flex items-center justify-center gap-2 shadow-md hover:opacity-95 transition"
               >
                 <Download className="w-4 h-4" />
-                안드로이드 전용 APK 다운로드 (Antigravity_Hana.apk)
+                1. 안티그래비티 &amp; 하나 APK 다운로드 (Antigravity_Hana.apk)
+              </a>
+
+              <a
+                href="/notehelper.apk"
+                download="NoteHelper.apk"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-md hover:opacity-95 transition"
+              >
+                <Download className="w-4 h-4" />
+                2. 노트헬퍼 전용 APK 다운로드 (NoteHelper.apk)
               </a>
 
               <div className="p-3 rounded-xl bg-[#0B0F17]/90 border border-slate-800 text-[11px] text-slate-400 space-y-1">

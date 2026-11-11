@@ -167,6 +167,74 @@ export default function NoteHelperPage() {
   // References
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const recognitionRef = useRef<any>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const mediaChunksRef = useRef<Blob[]>([]);
+
+  const encodeBlobToWav16k = async (blob: Blob): Promise<string | null> => {
+    try {
+      const arrayBuf = await blob.arrayBuffer();
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioCtx) return null;
+      const ctx = new AudioCtx();
+      const audioBuffer = await ctx.decodeAudioData(arrayBuf.slice(0));
+      try {
+        await ctx.close();
+      } catch {}
+
+      const targetRate = 16000;
+      const srcRate = audioBuffer.sampleRate;
+      const numChannels = audioBuffer.numberOfChannels;
+      const srcLen = audioBuffer.length;
+      const dstLen = Math.max(1, Math.floor((srcLen * targetRate) / srcRate));
+
+      const monoSrc = new Float32Array(srcLen);
+      for (let ch = 0; ch < numChannels; ch++) {
+        const chData = audioBuffer.getChannelData(ch);
+        for (let i = 0; i < srcLen; i++) {
+          monoSrc[i] += chData[i] / numChannels;
+        }
+      }
+
+      const wavBytes = new ArrayBuffer(44 + dstLen * 2);
+      const view = new DataView(wavBytes);
+      const writeStr = (offset: number, s: string) => {
+        for (let i = 0; i < s.length; i++) view.setUint8(offset + i, s.charCodeAt(i));
+      };
+      writeStr(0, 'RIFF');
+      view.setUint32(4, 36 + dstLen * 2, true);
+      writeStr(8, 'WAVE');
+      writeStr(12, 'fmt ');
+      view.setUint32(16, 16, true);
+      view.setUint16(20, 1, true);
+      view.setUint16(22, 1, true);
+      view.setUint32(24, targetRate, true);
+      view.setUint32(28, targetRate * 2, true);
+      view.setUint16(32, 2, true);
+      view.setUint16(34, 16, true);
+      writeStr(36, 'data');
+      view.setUint32(40, dstLen * 2, true);
+
+      const ratio = srcRate / targetRate;
+      for (let i = 0; i < dstLen; i++) {
+        const srcIdx = i * ratio;
+        const idx0 = Math.floor(srcIdx);
+        const idx1 = Math.min(srcLen - 1, idx0 + 1);
+        const frac = srcIdx - idx0;
+        const sample = monoSrc[idx0] * (1 - frac) + monoSrc[idx1] * frac;
+        const clamped = Math.max(-1, Math.min(1, sample));
+        view.setInt16(44 + i * 2, clamped < 0 ? clamped * 0x8000 : clamped * 0x7fff, true);
+      }
+
+      const wavBlob = new Blob([wavBytes], { type: 'audio/wav' });
+      return await new Promise<string>((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve((reader.result as string) || '');
+        reader.readAsDataURL(wavBlob);
+      });
+    } catch {
+      return null;
+    }
+  };
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -318,59 +386,65 @@ export default function NoteHelperPage() {
     setIsAnalyzing(true);
     showToast(`🎙️ ${file.name} 파일을 전사 및 분석 중입니다. 잠시만 기다려주세요...`);
 
-    const reader = new FileReader();
-    reader.onload = async () => {
-      const dataUrl = reader.result as string;
-      const base64Data = dataUrl.split(',')[1];
-      const mimeType = file.type || 'audio/mp3';
+    try {
+      const wavDataUrl = await encodeBlobToWav16k(file);
+      const dataUrl =
+        wavDataUrl ||
+        (await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve((reader.result as string) || '');
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        }));
+      const base64Data = dataUrl.includes(',') ? dataUrl.split(',')[1] : dataUrl;
+      const mimeType = wavDataUrl ? 'audio/wav' : file.type || 'audio/wav';
 
-      try {
-        const res = await fetch('/api/notehelper/ai-proxy', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            provider: aiConfig.provider,
-            apiKey: aiConfig.apiKey,
-            model: aiConfig.model,
-            audioBase64: base64Data,
-            audioMimeType: mimeType,
-            targetLang,
-          }),
-        });
-
-        const json = await res.json();
-        if (!json.ok) throw new Error(json.error || '음성 파일 분석에 실패했습니다.');
-
-        const resultData = json.data;
-        const newNote: SavedNote = {
-          id: `note-${Date.now()}`,
-          title: resultData.title || `${file.name.replace(/\.[^/.]+$/, '')} 회의록`,
-          createdAt: new Date().toISOString(),
-          durationSeconds: Math.round(file.size / 16000) || 60,
-          transcript: resultData.transcript || '오디오 전사 완료',
-          summary: Array.isArray(resultData.summary) ? resultData.summary : [resultData.summary],
-          actionItems: Array.isArray(resultData.actionItems) ? resultData.actionItems : [],
-          languageCoaching: resultData.languageCoaching || {},
+      const res = await fetch('/api/notehelper/ai-proxy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          provider: aiConfig.provider,
+          apiKey: aiConfig.apiKey,
+          model: aiConfig.model,
+          audioBase64: base64Data,
+          audioMimeType: mimeType,
           targetLang,
-          providerUsed: `${PROVIDER_INFO[aiConfig.provider]?.name || 'Gemini'} (오디오 파일 분석)`,
-        };
+        }),
+      });
 
-        const updated = [newNote, ...notesHistory];
-        setNotesHistory(updated);
-        setCurrentNote(newNote);
-        localStorage.setItem('notehelper_saved_notes_v1', JSON.stringify(updated));
-        showToast(`✅ ${file.name} 파일의 전사 및 분석이 완료되었습니다!`);
-      } catch (err: any) {
-        showToast(`오디오 분석 실패: ${err.message}`);
-      } finally {
-        setIsUploadingAudio(false);
-        setIsAnalyzing(false);
-        e.target.value = '';
+      const json = await res.json();
+      if (!json.ok) throw new Error(json.error || '음성 파일 분석에 실패했습니다.');
+
+      const resultData = json.data;
+      if (resultData.transcript) {
+        setTranscript(resultData.transcript);
       }
-    };
-    reader.readAsDataURL(file);
-  };
+      const newNote: SavedNote = {
+        id: `note-${Date.now()}`,
+        title: resultData.title || `${file.name.replace(/\.[^/.]+$/, '')} 회의록`,
+        createdAt: new Date().toISOString(),
+        durationSeconds: Math.round(file.size / 16000) || 60,
+        transcript: resultData.transcript || '오디오 전사 완료',
+        summary: Array.isArray(resultData.summary) ? resultData.summary : [resultData.summary],
+        actionItems: Array.isArray(resultData.actionItems) ? resultData.actionItems : [],
+        languageCoaching: resultData.languageCoaching || {},
+        targetLang,
+        providerUsed: `${PROVIDER_INFO[aiConfig.provider]?.name || 'Gemini'} (오디오 파일 분석)`,
+      };
 
+      const updated = [newNote, ...notesHistory];
+      setNotesHistory(updated);
+      setCurrentNote(newNote);
+      localStorage.setItem('notehelper_saved_notes_v1', JSON.stringify(updated));
+      showToast(`✅ ${file.name} 파일의 전사 및 분석이 완료되었습니다!`);
+    } catch (err: any) {
+      showToast(`오디오 분석 실패: ${err.message}`);
+    } finally {
+      setIsUploadingAudio(false);
+      setIsAnalyzing(false);
+      e.target.value = '';
+    }
+  };
 
   // 1. Initial Load from LocalStorage
   useEffect(() => {
@@ -384,48 +458,13 @@ export default function NoteHelperPage() {
 
       const savedNotes = localStorage.getItem('notehelper_saved_notes_v1');
       if (savedNotes) {
-        const parsedNotes = JSON.parse(savedNotes);
+        const parsedNotes = JSON.parse(savedNotes).filter(
+          (n: SavedNote) => n && n.id !== 'note-welcome-sample'
+        );
         setNotesHistory(parsedNotes);
         if (parsedNotes.length > 0) {
           setCurrentNote(parsedNotes[0]);
         }
-      } else {
-        // Set sample welcome note
-        const welcomeNote: SavedNote = {
-          id: 'note-welcome-sample',
-          title: 'NoteHelper에 오신 것을 환영합니다! (샘플 회의록)',
-          createdAt: new Date().toISOString(),
-          durationSeconds: 45,
-          transcript:
-            '오늘 마케팅 전략 회의에서는 1인 기업 5대 플랫폼의 트래픽 유입 방안을 논의했습니다. 첫째, 레딧과 인스타그램 숏폼을 통한 오가닉 유입에 집중하고, 둘째, 퍼스널컬러헬퍼의 12톤 가상 드레이핑 체험을 바이럴 핵심으로 잡기로 했습니다. 다음 주 수요일까지 각 채널별 1차 반응 지표를 취합하여 리뷰하겠습니다.',
-          summary: [
-            '1인 기업 전사 5대 플랫폼의 트래픽 확대를 위한 오가닉 바이럴 집중 결정',
-            '퍼스널컬러헬퍼의 12톤 가상 드레이핑 기능을 숏폼 및 레딧의 핵심 유입 훅으로 활용',
-            '차주 수요일까지 채널별 초기 지표를 취합하여 2차 스프린트 회의 진행 예정',
-          ],
-          actionItems: [
-            { task: '레딧 및 인스타 숏폼 1차 반응 지표 취합', assignee: '마케팅팀', due: '차주 수요일' },
-            { task: '퍼스널컬러헬퍼 12톤 드레이핑 데모 영상 배포', assignee: '헤라 배포관', due: '오늘 밤' },
-          ],
-          languageCoaching: {
-            detectedLanguage: 'ko',
-            grammarCorrections: [
-              {
-                original: '회의를 논의했습니다',
-                corrected: '전략을 심도 있게 논의했습니다',
-                explanation: '보다 격식 있고 명확한 비즈니스 표현입니다.',
-              },
-            ],
-            keyVocabulary: [
-              { term: '오가닉 유입 (Organic Traffic)', meaning: '유료 광고비 지출 없이 콘텐츠의 자체 바이럴로 유입되는 자연 트래픽', example: '오가닉 유입을 극대화하여 CAC(고객획득비용)를 0원으로 유지합니다.' },
-            ],
-            roleplaySuggestion: '“좋습니다. 그럼 차주 수요일 회의 전까지 각 채널별 전환율 데이터를 노션 대시보드에 취합해 두겠습니다.”',
-          },
-          targetLang: 'ko',
-          providerUsed: 'Google Gemini',
-        };
-        setCurrentNote(welcomeNote);
-        setNotesHistory([welcomeNote]);
       }
     } catch (e) {
       console.error('LocalStorage load error:', e);
@@ -446,79 +485,163 @@ export default function NoteHelperPage() {
     };
   }, [isRecording]);
 
-  // 3. Web Speech API Handler
-  const startRecording = () => {
-    const SpeechRecognition =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-
-    if (!SpeechRecognition) {
-      showToast('이 브라우저는 실시간 음성인식을 지원하지 않습니다. 크롬 또는 사파리를 권장합니다.');
-      return;
-    }
+  // 3. Web Speech API + MediaRecorder WAV STT Handler
+  const startRecording = async () => {
+    setRecordSeconds(0);
+    setTranscript('');
+    setInterimTranscript('');
+    mediaChunksRef.current = [];
 
     try {
-      const recognition = new SpeechRecognition();
-      recognition.continuous = true;
-      recognition.interimResults = true;
-      recognition.lang =
-        targetLang === 'ko'
-          ? 'ko-KR'
-          : targetLang === 'en'
-          ? 'en-US'
-          : targetLang === 'ja'
-          ? 'ja-JP'
-          : targetLang === 'es'
-          ? 'es-ES'
-          : 'zh-CN';
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      micStreamRef.current = stream;
+      setIsRecording(true);
 
-      recognition.onstart = () => {
-        setIsRecording(true);
-        setRecordSeconds(0);
-        setTranscript('');
-        setInterimTranscript('');
-      };
-
-      recognition.onresult = (event: any) => {
-        let finalStr = '';
-        let interimStr = '';
-        for (let i = event.resultIndex; i < event.results.length; ++i) {
-          if (event.results[i].isFinal) {
-            finalStr += event.results[i][0].transcript + ' ';
-          } else {
-            interimStr += event.results[i][0].transcript;
+      // Start MediaRecorder for reliable server-side WAV transcription
+      const preferredTypes = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg'];
+      let chosenMime = '';
+      if (typeof MediaRecorder !== 'undefined' && typeof MediaRecorder.isTypeSupported === 'function') {
+        for (const t of preferredTypes) {
+          if (MediaRecorder.isTypeSupported(t)) {
+            chosenMime = t;
+            break;
           }
         }
-        if (finalStr) {
-          setTranscript((prev) => (prev ? prev + ' ' + finalStr.trim() : finalStr.trim()));
-        }
-        setInterimTranscript(interimStr);
-      };
-
-      recognition.onerror = (event: any) => {
-        console.warn('SpeechRecognition error:', event.error);
-        if (event.error !== 'no-speech') {
-          showToast(`마이크 인식 오류: ${event.error}`);
+      }
+      const mr = chosenMime ? new MediaRecorder(stream, { mimeType: chosenMime }) : new MediaRecorder(stream);
+      mr.ondataavailable = (ev) => {
+        if (ev.data && ev.data.size > 0) {
+          mediaChunksRef.current.push(ev.data);
         }
       };
+      mr.start(300);
+      mediaRecorderRef.current = mr;
 
-      recognition.onend = () => {
-        setIsRecording(false);
-      };
+      // Real-time waveform on the same stream
+      try {
+        const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+        const ctx = new AudioCtx();
+        audioContextRef.current = ctx;
+        const analyser = ctx.createAnalyser();
+        analyser.fftSize = 64;
+        analyserRef.current = analyser;
+        const source = ctx.createMediaStreamSource(stream);
+        source.connect(analyser);
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+        const updateWaveform = () => {
+          if (!analyserRef.current) return;
+          analyserRef.current.getByteFrequencyData(dataArray);
+          const bars: number[] = [];
+          const step = Math.max(1, Math.floor(bufferLength / 24));
+          for (let i = 0; i < 24; i++) {
+            const val = dataArray[i * step] || 0;
+            const height = Math.max(6, Math.min(48, Math.round((val / 255) * 44) + 6));
+            bars.push(height);
+          }
+          setWaveformBars(bars);
+          animationFrameRef.current = requestAnimationFrame(updateWaveform);
+        };
+        updateWaveform();
+      } catch {}
 
-      recognition.start();
-      recognitionRef.current = recognition;
-      startWaveform();
+      // Desktop live SpeechRecognition preview (avoid mobile mic conflict)
+      const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || '');
+      const SpeechRecognition =
+        (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      if (SpeechRecognition && !isMobile) {
+        try {
+          const recognition = new SpeechRecognition();
+          recognition.continuous = true;
+          recognition.interimResults = true;
+          recognition.lang =
+            targetLang === 'ko'
+              ? 'ko-KR'
+              : targetLang === 'en'
+              ? 'en-US'
+              : targetLang === 'ja'
+              ? 'ja-JP'
+              : targetLang === 'es'
+              ? 'es-ES'
+              : 'zh-CN';
+          recognition.onresult = (event: any) => {
+            let finalStr = '';
+            let interimStr = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+              if (event.results[i].isFinal) {
+                finalStr += event.results[i][0].transcript + ' ';
+              } else {
+                interimStr += event.results[i][0].transcript;
+              }
+            }
+            if (finalStr) {
+              setTranscript((prev) => (prev ? prev + ' ' + finalStr.trim() : finalStr.trim()));
+            }
+            setInterimTranscript(interimStr);
+          };
+          recognition.start();
+          recognitionRef.current = recognition;
+        } catch {}
+      }
     } catch (e: any) {
-      showToast(`음성 인식 시작 실패: ${e.message}`);
+      showToast(`마이크 시작 실패: ${e?.message || '마이크 권한을 허용해 주세요.'}`);
     }
   };
 
-  const stopRecording = () => {
+  const stopRecording = async () => {
+    setIsRecording(false);
     if (recognitionRef.current) {
-      recognitionRef.current.stop();
-      setIsRecording(false);
+      try {
+        recognitionRef.current.stop();
+      } catch {}
+      recognitionRef.current = null;
     }
+
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+      await new Promise<void>((resolve) => {
+        if (!mediaRecorderRef.current) return resolve();
+        mediaRecorderRef.current.onstop = () => resolve();
+        try {
+          mediaRecorderRef.current.stop();
+        } catch {
+          resolve();
+        }
+      });
+    }
+    mediaRecorderRef.current = null;
     stopWaveform();
+
+    if (mediaChunksRef.current.length > 0) {
+      const mime = mediaChunksRef.current[0]?.type || 'audio/webm';
+      const blob = new Blob(mediaChunksRef.current, { type: mime });
+      mediaChunksRef.current = [];
+      showToast('🎙️ 녹음된 음성을 AI로 정밀 전사 중입니다...');
+      try {
+        const wavDataUrl = await encodeBlobToWav16k(blob);
+        if (wavDataUrl) {
+          const res = await fetch('/api/secondbrain/process-audio', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              text: transcript,
+              duration: recordSeconds || 5,
+              audioBase64: wavDataUrl,
+              mimeType: 'audio/wav',
+              targetLang,
+            }),
+          });
+          const data = await res.json();
+          const sttText = (data?.analysis?.refinedTranscript || data?.rawTranscript || '').trim();
+          if (sttText && !sttText.includes('무음')) {
+            const cleanStt = sttText.replace(/^Speaker\s+\d+\s*:\s*/gim, '').trim();
+            if (cleanStt) {
+              setTranscript(cleanStt);
+              showToast('✅ 음성 녹음 전사가 완료되었습니다!');
+            }
+          }
+        }
+      } catch {}
+    }
   };
 
   // 4. Save AI Config
@@ -626,43 +749,54 @@ export default function NoteHelperPage() {
 
       {/* Top Navigation */}
       <header className="border-b border-slate-800/80 bg-[#0F141C]/90 backdrop-blur sticky top-0 z-40">
-        <div className="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-purple-900/30">
+        <div className="max-w-6xl mx-auto px-3.5 py-3 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-9 h-9 shrink-0 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-purple-900/30">
               <Mic className="w-5 h-5 text-white" />
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <h1 className="font-bold text-lg tracking-tight text-white">NoteHelper</h1>
-                <span className="text-[10px] font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30 px-2 py-0.5 rounded-full">
+                <h1 className="font-bold text-base sm:text-lg tracking-tight text-white whitespace-nowrap">
+                  NoteHelper
+                </h1>
+                <span className="hidden sm:inline-block text-[10px] font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30 px-2 py-0.5 rounded-full whitespace-nowrap">
                   AI BYOK Studio
                 </span>
               </div>
-              <p className="text-xs text-slate-400 hidden sm:block">
-                스마트폰 회의록 정리 & AI 다국어 어학 코칭 스튜디오
+              <p className="text-[11px] text-slate-400 truncate">
+                회의록 정리 &amp; 다국어 AI 코칭
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-1.5 shrink-0">
             {/* BYOK Cloud AI Connection Button */}
             <button
               onClick={() => setIsConfigOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-700 hover:border-purple-500/60 bg-slate-800/60 hover:bg-slate-800 text-xs font-medium transition cursor-pointer"
+              className="flex items-center gap-1.5 px-2.5 py-2 min-h-[36px] rounded-xl border border-slate-700 hover:border-purple-500/60 bg-slate-800/60 hover:bg-slate-800 text-xs font-medium transition whitespace-nowrap shrink-0 cursor-pointer"
             >
-              <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+              <Sparkles className="w-3.5 h-3.5 text-purple-400 shrink-0" />
               <span className="hidden sm:inline">AI 엔진:</span>
-              <span className="text-purple-300 font-semibold">
-                {aiConfig.apiKey ? PROVIDER_INFO[aiConfig.provider]?.name.split(' ')[0] : '기본 무료 AI'}
+              <span className="text-purple-300 font-semibold whitespace-nowrap">
+                {aiConfig.apiKey ? PROVIDER_INFO[aiConfig.provider]?.name.split(' ')[0] : '무료 AI'}
               </span>
-              <span className="w-2 h-2 rounded-full bg-emerald-400" title="즉시 분석 가능 (무료 탑재)" />
+              <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" title="즉시 분석 가능 (무료 탑재)" />
             </button>
 
-            <Link
-              href="/schedulehelper"
-              className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-300 transition"
+            <a
+              href="/notehelper.apk"
+              download="NoteHelper.apk"
+              className="px-2.5 py-2 min-h-[36px] rounded-xl bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/40 text-purple-200 text-xs font-semibold flex items-center gap-1 whitespace-nowrap shrink-0 transition"
             >
-              📅 스케줄헬퍼 ↗
+              <Download className="w-3.5 h-3.5 shrink-0" />
+              <span>APK</span>
+            </a>
+
+            <Link
+              href="/antigravity"
+              className="px-2.5 py-2 min-h-[36px] rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-medium text-amber-300 flex items-center whitespace-nowrap shrink-0 transition"
+            >
+              👑 사령탑
             </Link>
           </div>
         </div>
@@ -674,16 +808,16 @@ export default function NoteHelperPage() {
         <section className="lg:col-span-5 space-y-5">
           {/* Main Recording Cockpit */}
           <div className="p-6 rounded-3xl bg-[#111722] border border-slate-800/90 shadow-2xl relative overflow-hidden">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-semibold uppercase tracking-wider text-purple-400 flex items-center gap-1.5">
-                <Zap className="w-3.5 h-3.5" /> 실시간 보이스 녹음
+            <div className="flex items-center justify-between gap-2 mb-4">
+              <span className="text-xs font-semibold uppercase tracking-wider text-purple-400 flex items-center gap-1.5 whitespace-nowrap">
+                <Zap className="w-3.5 h-3.5 shrink-0" /> 실시간 보이스 녹음
               </span>
-              <div className="flex items-center gap-1 bg-slate-800/80 rounded-lg p-0.5 border border-slate-700/60 text-xs">
+              <div className="flex items-center gap-1 bg-slate-800/80 rounded-xl p-1 border border-slate-700/60 text-xs">
                 {(['ko', 'en', 'ja', 'es', 'zh'] as const).map((lang) => (
                   <button
                     key={lang}
                     onClick={() => setTargetLang(lang)}
-                    className={`px-2 py-0.5 rounded-md font-medium transition ${
+                    className={`px-2.5 py-1.5 min-h-[32px] rounded-lg font-semibold transition cursor-pointer ${
                       targetLang === lang ? 'bg-purple-600 text-white' : 'text-slate-400 hover:text-white'
                     }`}
                   >

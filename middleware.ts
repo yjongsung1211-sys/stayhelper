@@ -5,12 +5,13 @@ export function middleware(request: NextRequest) {
   const host = request.headers.get('x-forwarded-host') || request.headers.get('host') || '';
   const pathname = request.nextUrl.pathname;
 
-  // 0. Antigravity & NoteHelper 24/7 Cloud Hub: Always allow /antigravity, /hana, /notehelper, /secondbrain on any domain
+  // 0. Antigravity & NoteHelper 24/7 Cloud Hub: Always allow /antigravity, /hana, /notehelper, /secondbrain, /schedulehelper on any domain
   if (
     pathname.startsWith('/antigravity') ||
     pathname.startsWith('/hana') ||
     pathname.startsWith('/notehelper') ||
-    pathname.startsWith('/secondbrain')
+    pathname.startsWith('/secondbrain') ||
+    pathname.startsWith('/schedulehelper')
   ) {
     return NextResponse.next();
   }
@@ -64,6 +65,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|icon.svg|notehelper-192.png|notehelper-512.png|antigravity-hana.apk|antigravity-manifest.json|secondbrain-manifest.json|secondbrain-sw.js|images|videos|stays).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|icon.svg|notehelper-192.png|notehelper-512.png|antigravity-hana.apk|notehelper.apk|antigravity-manifest.json|manifest-schedulehelper.json|secondbrain-manifest.json|secondbrain-sw.js|images|videos|stays).*)',
   ],
 };
