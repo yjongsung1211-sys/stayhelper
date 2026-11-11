@@ -702,22 +702,22 @@ export default function AntigravityMobilePage() {
   };
 
   return (
-    <div className="flex flex-col h-[100dvh] max-w-md mx-auto bg-[#0B0F17] text-slate-100 overflow-hidden border-x border-slate-800/60 shadow-2xl">
-      {/* Top Luxury Executive Header */}
-      <header className="shrink-0 px-4 pt-3 pb-2.5 bg-[#0F141C]/95 backdrop-blur-md border-b border-slate-800/80 flex items-center justify-between z-20">
+    <div className="flex flex-col h-[100dvh] max-w-md mx-auto bg-slate-50 text-slate-900 overflow-hidden border-x border-slate-200 shadow-xl">
+      {/* Top Eye-Comfort Executive Header */}
+      <header className="shrink-0 px-4 pt-3 pb-2.5 bg-white/95 backdrop-blur-md border-b border-slate-200 flex items-center justify-between z-20 shadow-xs">
         <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#E5BE64] to-[#B68D38] flex items-center justify-center shadow-lg shadow-[#E5BE64]/15">
-            <Sparkles className="w-5 h-5 text-[#0B0F17]" />
+          <div className="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center shadow-sm">
+            <Sparkles className="w-5 h-5 text-white" />
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <h1 className="text-sm font-bold tracking-tight text-white">ANTIGRAVITY</h1>
-              <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-[#E5BE64]/15 text-[#E5BE64] border border-[#E5BE64]/30">
+              <h1 className="text-sm font-bold tracking-tight text-slate-900">ANTIGRAVITY</h1>
+              <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-300">
                 &amp; HANA
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <p className="text-[11px] text-slate-500 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               {pcStatus.hostname} 직결 · {pcStatus.skillsCount || 587} 스킬 가동
             </p>
           </div>
@@ -726,15 +726,15 @@ export default function AntigravityMobilePage() {
         <div className="flex items-center gap-1.5">
           <button
             onClick={() => fetchBridgeData(false)}
-            className="p-2 rounded-lg bg-[#18202E] hover:bg-slate-800 border border-slate-700/70 text-slate-300 transition"
+            className="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 transition cursor-pointer"
             title="실시간 동기화"
           >
-            <RefreshCw className={`w-4 h-4 ${isSyncing ? 'animate-spin text-[#E5BE64]' : ''}`} />
+            <RefreshCw className={`w-4 h-4 ${isSyncing ? 'animate-spin text-slate-900' : ''}`} />
           </button>
           <a
             href="/antigravity-hana.apk"
             download="Antigravity_Hana.apk"
-            className="px-2.5 py-1.5 rounded-lg bg-[#E5BE64]/15 hover:bg-[#E5BE64]/25 border border-[#E5BE64]/40 text-[#E5BE64] text-xs font-semibold flex items-center gap-1 transition"
+            className="px-2.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold flex items-center gap-1 transition shadow-xs"
           >
             <Download className="w-3.5 h-3.5" />
             APK
@@ -744,28 +744,28 @@ export default function AntigravityMobilePage() {
 
       {/* Smart Share Target Floating Arrival Banner */}
       {sharedArrival && (
-        <div className="shrink-0 mx-3 mt-2 p-3 rounded-2xl bg-[#18202E] border border-[#E5BE64]/60 shadow-2xl flex flex-col gap-1.5 animate-fadeIn z-30">
+        <div className="shrink-0 mx-3 mt-2 p-3.5 rounded-2xl bg-white border border-slate-300 shadow-lg flex flex-col gap-1.5 animate-fadeIn z-30">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               {sharedArrival.status === 'processing' ? (
-                <RefreshCw className="w-4 h-4 text-[#E5BE64] animate-spin shrink-0" />
+                <RefreshCw className="w-4 h-4 text-slate-700 animate-spin shrink-0" />
               ) : sharedArrival.status === 'success' ? (
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
               ) : (
-                <Terminal className="w-4 h-4 text-rose-400 shrink-0" />
+                <Terminal className="w-4 h-4 text-rose-600 shrink-0" />
               )}
-              <span className="text-xs font-bold text-[#E5BE64]">
+              <span className="text-xs font-bold text-slate-900">
                 {sharedArrival.title || '스마트폰 공유 기사 수신'}
               </span>
             </div>
             <button
               onClick={() => setSharedArrival(null)}
-              className="text-slate-400 hover:text-slate-200 p-0.5"
+              className="text-slate-400 hover:text-slate-700 p-0.5"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
-          <p className="text-[11px] text-slate-200 leading-relaxed break-all">
+          <p className="text-[11px] text-slate-700 leading-relaxed break-all">
             {sharedArrival.message}
           </p>
           {sharedArrival.status === 'success' && (
@@ -775,13 +775,13 @@ export default function AntigravityMobilePage() {
                   setActiveTab('vault');
                   setVaultCategory('00_Inbox');
                 }}
-                className="text-[10px] font-bold px-2.5 py-1 rounded-lg bg-[#E5BE64] text-[#0B0F17] hover:bg-[#F3D382] transition cursor-pointer"
+                className="text-[10px] font-bold px-3 py-1 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition cursor-pointer"
               >
                 00_Inbox에서 확인하기
               </button>
               <button
                 onClick={() => setSharedArrival(null)}
-                className="text-[10px] text-slate-400 hover:text-slate-200 cursor-pointer"
+                className="text-[10px] text-slate-500 hover:text-slate-800 cursor-pointer"
               >
                 닫기
               </button>
@@ -791,24 +791,24 @@ export default function AntigravityMobilePage() {
       )}
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-y-auto px-3.5 py-3 space-y-3">
+      <main className="flex-1 overflow-y-auto px-3.5 py-3 space-y-3 bg-slate-50">
         {/* TAB 1: COMMAND CHAT */}
         {activeTab === 'chat' && (
           <div className="flex flex-col space-y-3 pb-2">
             {/* PC Remote Execution Toggle Bar */}
-            <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-[#18202E]/90 border border-slate-800 text-xs">
+            <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs shadow-xs">
               <div className="flex items-center gap-2">
-                <Radio className={`w-4 h-4 ${dispatchToPc ? 'text-[#E5BE64]' : 'text-slate-400'}`} />
-                <span className="text-slate-200 font-medium">
+                <Radio className={`w-4 h-4 ${dispatchToPc ? 'text-slate-900' : 'text-slate-400'}`} />
+                <span className="text-slate-800 font-medium">
                   외부(LTE/5G) ↔ 내 PC 실시간 브릿지 동기화
                 </span>
               </div>
               <button
                 onClick={() => setDispatchToPc(!dispatchToPc)}
-                className={`px-2.5 py-1 rounded-full text-[11px] font-semibold transition ${
+                className={`px-2.5 py-1 rounded-full text-[11px] font-semibold transition cursor-pointer ${
                   dispatchToPc
-                    ? 'bg-[#E5BE64] text-[#0B0F17]'
-                    : 'bg-slate-800 text-slate-400 border border-slate-700'
+                    ? 'bg-slate-900 text-white'
+                    : 'bg-slate-100 text-slate-500 border border-slate-200'
                 }`}
               >
                 {dispatchToPc ? 'ON (PC 연동)' : '클라우드 단독'}
@@ -821,7 +821,7 @@ export default function AntigravityMobilePage() {
                 <button
                   key={idx}
                   onClick={() => handleSendChat(prompt)}
-                  className="shrink-0 px-3 py-1.5 rounded-full bg-[#18202E] hover:bg-slate-800 border border-slate-700/80 text-[11px] text-slate-300 hover:text-[#E5BE64] transition"
+                  className="shrink-0 px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-[11px] text-slate-700 hover:text-slate-950 font-medium transition cursor-pointer shadow-2xs"
                 >
                   {prompt}
                 </button>
@@ -831,28 +831,28 @@ export default function AntigravityMobilePage() {
             {/* Conversation Stream */}
             <div className="space-y-3">
               {chatHistory.length === 0 && (
-                <div className="p-4 rounded-2xl bg-[#18202E]/90 border border-[#E5BE64]/30 space-y-2.5 shadow-md">
+                <div className="p-4 rounded-2xl bg-white border border-slate-200 space-y-2.5 shadow-xs">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#E5BE64]/15 text-[#E5BE64] border border-[#E5BE64]/30">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-800 border border-slate-300">
                       ANTIGRAVITY &amp; HANA READY
                     </span>
-                    <span className="text-[11px] text-emerald-400 font-semibold">
+                    <span className="text-[11px] text-emerald-600 font-semibold">
                       ● 실시간 브릿지 정상
                     </span>
                   </div>
-                  <p className="text-xs text-slate-200 leading-relaxed">
+                  <p className="text-xs text-slate-700 leading-relaxed">
                     윤종성 대표님, 안티그래비티 &amp; 수석비서 하나 모바일 사령탑입니다. 상단 추천 명령을 터치하시거나 하단 마이크·채팅창으로 무엇이든 지시해 주세요.
                   </p>
                   <div className="grid grid-cols-2 gap-2 pt-1">
                     <button
                       onClick={() => setActiveTab('deck')}
-                      className="px-3 py-2 rounded-xl bg-[#0B0F17] border border-slate-700/80 text-xs font-semibold text-slate-200 text-center hover:border-[#E5BE64] transition cursor-pointer"
+                      className="px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-800 text-center hover:bg-slate-100 transition cursor-pointer"
                     >
                       ⚡ 원터치 사령탑 열기
                     </button>
                     <button
                       onClick={() => setActiveTab('apk')}
-                      className="px-3 py-2 rounded-xl bg-[#0B0F17] border border-[#E5BE64]/40 text-xs font-semibold text-[#E5BE64] text-center hover:bg-[#E5BE64]/10 transition cursor-pointer"
+                      className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-900 text-xs font-semibold text-white text-center hover:bg-slate-800 transition cursor-pointer"
                     >
                       📥 안티그래비티 APK 설치
                     </button>
@@ -867,16 +867,16 @@ export default function AntigravityMobilePage() {
                     className={`flex flex-col ${isUser ? 'items-end' : 'items-start'}`}
                   >
                     <div
-                      className={`max-w-[92%] rounded-2xl px-3.5 py-3 text-[13px] leading-relaxed shadow-md ${
+                      className={`max-w-[92%] rounded-2xl px-3.5 py-3 text-[13px] leading-relaxed shadow-xs ${
                         isUser
-                          ? 'bg-gradient-to-br from-[#E5BE64] to-[#C89D42] text-[#0B0F17] font-medium rounded-br-xs'
-                          : 'bg-[#18202E]/95 border border-slate-800/90 text-slate-100 rounded-bl-xs'
+                          ? 'bg-slate-900 text-white font-normal rounded-tr-xs'
+                          : 'bg-white border border-slate-200 text-slate-800 rounded-tl-xs'
                       }`}
                     >
                       {!isUser && (
-                        <div className="flex items-center justify-between gap-2 mb-1.5 pb-1.5 border-b border-slate-800/80">
+                        <div className="flex items-center justify-between gap-2 mb-1.5 pb-1.5 border-b border-slate-100">
                           <div className="flex items-center gap-1.5">
-                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#E5BE64]/15 text-[#E5BE64] border border-[#E5BE64]/30">
+                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
                               {msg.tag || 'ANTIGRAVITY'}
                             </span>
                             {msg.executedBy && (
@@ -887,11 +887,11 @@ export default function AntigravityMobilePage() {
                           </div>
                           <button
                             onClick={() => toggleSpeakMessage(msg)}
-                            className="p-1 rounded hover:bg-slate-800 text-slate-400 hover:text-[#E5BE64] transition"
+                            className="p-1 rounded hover:bg-slate-100 text-slate-400 hover:text-slate-800 transition cursor-pointer"
                             title="음성으로 듣기"
                           >
                             {speakingMsgId === msg.id ? (
-                              <VolumeX className="w-3.5 h-3.5 text-[#E5BE64]" />
+                              <VolumeX className="w-3.5 h-3.5 text-slate-900" />
                             ) : (
                               <Volume2 className="w-3.5 h-3.5" />
                             )}
@@ -902,14 +902,14 @@ export default function AntigravityMobilePage() {
                       <div className="whitespace-pre-wrap break-words">{msg.text}</div>
 
                       {!isUser && msg.citations && msg.citations.length > 0 && (
-                        <div className="mt-2.5 pt-2 border-t border-slate-800/80 space-y-1">
-                          <p className="text-[10px] font-semibold text-[#E5BE64]">
+                        <div className="mt-2.5 pt-2 border-t border-slate-100 space-y-1">
+                          <p className="text-[10px] font-semibold text-slate-800">
                             📚 참조된 Antigravity 전용 지식 볼트:
                           </p>
                           {msg.citations.map((cit) => (
                             <div
                               key={cit.id}
-                              className="text-[11px] text-slate-400 bg-[#0F141C] px-2 py-1 rounded border border-slate-800/70 truncate"
+                              className="text-[11px] text-slate-600 bg-slate-50 px-2 py-1 rounded border border-slate-200 truncate"
                             >
                               • [{cit.category}] {cit.title} ({cit.date})
                             </div>
@@ -917,7 +917,7 @@ export default function AntigravityMobilePage() {
                         </div>
                       )}
                     </div>
-                    <span className="text-[10px] text-slate-500 mt-1 px-1">
+                    <span className="text-[10px] text-slate-400 mt-1 px-1">
                       {new Date(msg.timestamp).toLocaleTimeString('ko-KR', {
                         hour: '2-digit',
                         minute: '2-digit',
@@ -928,8 +928,8 @@ export default function AntigravityMobilePage() {
               })}
 
               {isLoading && (
-                <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#18202E]/90 border border-[#E5BE64]/30 text-xs text-[#E5BE64]">
-                  <RefreshCw className="w-4 h-4 animate-spin shrink-0" />
+                <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-white border border-slate-200 text-xs text-slate-700 shadow-xs">
+                  <RefreshCw className="w-4 h-4 animate-spin text-slate-900 shrink-0" />
                   <span>
                     안티그래비티(Antigravity) &amp; 하나가 세컨드브레인과 PC 파이프라인을 실행 중입니다...
                   </span>
@@ -944,17 +944,17 @@ export default function AntigravityMobilePage() {
         {activeTab === 'vault' && (
           <div className="space-y-3 pb-4">
             {/* Top Search & Filter Card */}
-            <div className="p-3.5 rounded-2xl bg-gradient-to-br from-[#18202E] to-[#0F141C] border border-[#E5BE64]/30 space-y-2.5 shadow-md">
+            <div className="p-3.5 rounded-2xl bg-white border border-slate-200 space-y-2.5 shadow-xs">
               <div className="flex items-center justify-between">
-                <h2 className="text-sm font-bold text-[#E5BE64] flex items-center gap-1.5">
-                  <BookOpen className="w-4 h-4" />
+                <h2 className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                  <BookOpen className="w-4 h-4 text-slate-800" />
                   세컨브레인 Vault 스포트라이트
                 </h2>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#E5BE64]/20 text-[#E5BE64] border border-[#E5BE64]/30">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-300">
                   {vaultTotal}개 전사 문서
                 </span>
               </div>
-              <p className="text-[11px] text-slate-300 leading-relaxed">
+              <p className="text-[11px] text-slate-600 leading-relaxed">
                 대표님의 회의록, 딥테크 M&amp;A, 어학 수업, 스크랩 기사를 0.05초 만에 검색하고 읽습니다.
               </p>
 
@@ -969,7 +969,7 @@ export default function AntigravityMobilePage() {
                     fetchVaultDocs(e.target.value, vaultCategory);
                   }}
                   placeholder="단어 검색 (예: 샘컴, 일진전기, 중국어, 과외, NPU)"
-                  className="w-full pl-9 pr-8 py-2 rounded-xl bg-[#0B0F17] border border-slate-700/80 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#E5BE64]"
+                  className="w-full pl-9 pr-8 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-800 focus:bg-white"
                 />
                 {vaultQuery && (
                   <button
@@ -977,7 +977,7 @@ export default function AntigravityMobilePage() {
                       setVaultQuery('');
                       fetchVaultDocs('', vaultCategory);
                     }}
-                    className="absolute right-2.5 top-2.5 text-slate-400 hover:text-white"
+                    className="absolute right-2.5 top-2.5 text-slate-400 hover:text-slate-800"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
@@ -1002,8 +1002,8 @@ export default function AntigravityMobilePage() {
                     }}
                     className={`shrink-0 px-2.5 py-1 rounded-lg text-[11px] font-semibold transition cursor-pointer ${
                       vaultCategory === cat.id
-                        ? 'bg-[#E5BE64] text-[#0B0F17]'
-                        : 'bg-[#0B0F17] text-slate-400 hover:text-slate-200 border border-slate-800'
+                        ? 'bg-slate-900 text-white shadow-xs'
+                        : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
                     }`}
                   >
                     {cat.label}
@@ -1013,13 +1013,13 @@ export default function AntigravityMobilePage() {
             </div>
 
             {/* Document Count Info Bar */}
-            <div className="flex items-center justify-between px-1 text-[11px] text-slate-400">
+            <div className="flex items-center justify-between px-1 text-[11px] text-slate-500">
               <span>
                 {vaultCategory === '전체' ? '전체 문서' : vaultCategory}: <b>{vaultDocs.length}</b>건 검색됨
               </span>
               <button
                 onClick={() => fetchVaultDocs(vaultQuery, vaultCategory)}
-                className="flex items-center gap-1 text-[10px] text-[#E5BE64] hover:underline cursor-pointer"
+                className="flex items-center gap-1 text-[10px] text-slate-800 hover:underline cursor-pointer font-medium"
               >
                 <RefreshCw className={`w-3 h-3 ${isVaultLoading ? 'animate-spin' : ''}`} />
                 새로고침
@@ -1028,33 +1028,33 @@ export default function AntigravityMobilePage() {
 
             {/* Document Cards List */}
             {isVaultLoading ? (
-              <div className="py-8 flex flex-col items-center justify-center text-slate-400 text-xs gap-2">
-                <RefreshCw className="w-5 h-5 animate-spin text-[#E5BE64]" />
+              <div className="py-8 flex flex-col items-center justify-center text-slate-500 text-xs gap-2">
+                <RefreshCw className="w-5 h-5 animate-spin text-slate-900" />
                 <span>문서 인덱스를 검색하고 있습니다...</span>
               </div>
             ) : vaultDocs.length === 0 ? (
-              <div className="py-8 text-center text-slate-400 text-xs">
+              <div className="py-8 text-center text-slate-500 text-xs">
                 검색된 세컨브레인 문서가 없습니다.
               </div>
             ) : (
               <div className="space-y-2">
                 {vaultDocs.map((doc) => {
                   const getCategoryBadgeClass = (c: string) => {
-                    if (c.includes('Inbox')) return 'bg-amber-500/15 text-amber-300 border-amber-500/30';
-                    if (c.includes('Projects')) return 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30';
-                    if (c.includes('Areas')) return 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30';
-                    if (c.includes('Resources')) return 'bg-sky-500/15 text-sky-300 border-sky-500/30';
-                    return 'bg-slate-700/30 text-slate-300 border-slate-600/40';
+                    if (c.includes('Inbox')) return 'bg-amber-50 text-amber-800 border-amber-200';
+                    if (c.includes('Projects')) return 'bg-indigo-50 text-indigo-800 border-indigo-200';
+                    if (c.includes('Areas')) return 'bg-emerald-50 text-emerald-800 border-emerald-200';
+                    if (c.includes('Resources')) return 'bg-sky-50 text-sky-800 border-sky-200';
+                    return 'bg-slate-100 text-slate-700 border-slate-200';
                   };
 
                   return (
                     <div
                       key={doc.id}
                       onClick={() => openDocReader(doc)}
-                      className="p-3.5 rounded-2xl bg-[#18202E]/90 hover:bg-[#1E293B] border border-slate-800 hover:border-[#E5BE64]/50 transition cursor-pointer space-y-2 group shadow-sm"
+                      className="p-3.5 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 transition cursor-pointer space-y-2 group shadow-xs"
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <h3 className="text-xs font-bold text-slate-100 group-hover:text-[#E5BE64] transition line-clamp-2 leading-snug">
+                        <h3 className="text-xs font-bold text-slate-900 group-hover:text-slate-950 transition line-clamp-2 leading-snug">
                           {doc.title}
                         </h3>
                         <span
@@ -1067,17 +1067,17 @@ export default function AntigravityMobilePage() {
                       </div>
 
                       {doc.preview && (
-                        <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">
+                        <p className="text-[11px] text-slate-600 line-clamp-2 leading-relaxed">
                           {doc.preview}
                         </p>
                       )}
 
-                      <div className="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-slate-800/60">
+                      <div className="flex items-center justify-between text-[10px] text-slate-400 pt-1 border-t border-slate-100">
                         <span className="flex items-center gap-1">
                           <Clock className="w-3 h-3" />
                           {doc.date}
                         </span>
-                        <div className="flex items-center gap-1 text-[#E5BE64] group-hover:translate-x-0.5 transition font-semibold">
+                        <div className="flex items-center gap-1 text-slate-900 group-hover:translate-x-0.5 transition font-semibold">
                           <span>열람하기</span>
                           <ArrowRight className="w-3 h-3" />
                         </div>
@@ -1093,25 +1093,25 @@ export default function AntigravityMobilePage() {
         {/* TAB 3: 11 EXECUTIVE ONE-TOUCH DECK */}
         {activeTab === 'deck' && (
           <div className="space-y-3.5 pb-4">
-            <div className="p-3.5 rounded-2xl bg-gradient-to-br from-[#18202E] to-[#0F141C] border border-[#E5BE64]/30">
-              <h2 className="text-sm font-bold text-[#E5BE64] flex items-center gap-1.5">
-                <Zap className="w-4 h-4" />
+            <div className="p-3.5 rounded-2xl bg-white border border-slate-200 shadow-xs">
+              <h2 className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                <Zap className="w-4 h-4 text-slate-800" />
                 원터치 전사 사령탑 (One-Touch Executive Deck)
               </h2>
-              <p className="text-xs text-slate-300 mt-1">
+              <p className="text-xs text-slate-600 mt-1">
                 텔레그램 명령어 입력 없이 카드를 터치하면 안티그래비티와 하나가 즉시 실행하여 보고합니다.
               </p>
             </div>
 
             {selectedActionId && (
-              <div className="p-3.5 rounded-2xl bg-[#18202E] border border-[#E5BE64] space-y-2.5">
+              <div className="p-3.5 rounded-2xl bg-white border border-slate-300 space-y-2.5 shadow-sm">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#E5BE64]">
+                  <span className="text-xs font-bold text-slate-900">
                     🎯 상세 주제 / 타겟 입력 ({selectedActionId})
                   </span>
                   <button
                     onClick={() => setSelectedActionId(null)}
-                    className="text-xs text-slate-400 hover:text-white"
+                    className="text-xs text-slate-400 hover:text-slate-800 cursor-pointer"
                   >
                     닫기
                   </button>
@@ -1124,11 +1124,11 @@ export default function AntigravityMobilePage() {
                     QUICK_ACTIONS.find((a) => a.id === selectedActionId)?.placeholder ||
                     '주제를 입력하세요 (비워두면 기본 추천 주제로 실행)'
                   }
-                  className="w-full px-3 py-2 rounded-xl bg-[#0B0F17] border border-slate-700 text-xs text-white focus:outline-none focus:border-[#E5BE64]"
+                  className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-slate-800 focus:bg-white"
                 />
                 <button
                   onClick={() => handleExecuteQuickAction(selectedActionId, customTopic)}
-                  className="w-full py-2 rounded-xl bg-[#E5BE64] text-[#0B0F17] font-bold text-xs hover:bg-[#d8b052] transition"
+                  className="w-full py-2 rounded-xl bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 transition cursor-pointer"
                 >
                   즉시 실행하기
                 </button>
@@ -1148,20 +1148,20 @@ export default function AntigravityMobilePage() {
                         handleExecuteQuickAction(item.id);
                       }
                     }}
-                    className="flex flex-col items-start p-3.5 rounded-2xl bg-[#18202E]/90 hover:bg-[#1E293B] border border-slate-800 hover:border-[#E5BE64]/50 text-left transition group"
+                    className="flex flex-col items-start p-3.5 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 text-left transition group shadow-xs cursor-pointer"
                   >
                     <div className="w-full flex items-center justify-between mb-2">
-                      <div className="p-2 rounded-xl bg-[#0F141C] border border-slate-800 text-[#E5BE64] group-hover:scale-105 transition">
+                      <div className="p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-800 group-hover:scale-105 transition">
                         <IconComp className="w-4 h-4" />
                       </div>
-                      <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-[#E5BE64]/10 text-[#E5BE64] border border-[#E5BE64]/20">
+                      <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
                         {item.badge}
                       </span>
                     </div>
-                    <h3 className="text-xs font-bold text-white group-hover:text-[#E5BE64] transition">
+                    <h3 className="text-xs font-bold text-slate-900 group-hover:text-slate-950 transition">
                       {item.title}
                     </h3>
-                    <p className="text-[11px] text-slate-400 mt-0.5 line-clamp-2">
+                    <p className="text-[11px] text-slate-500 mt-0.5 line-clamp-2">
                       {item.subtitle}
                     </p>
                   </button>
@@ -1171,65 +1171,65 @@ export default function AntigravityMobilePage() {
           </div>
         )}
 
-        {/* TAB 3: PC BRIDGE & LIVE TASK QUEUE */}
+        {/* TAB 4: PC BRIDGE & LIVE TASK QUEUE */}
         {activeTab === 'bridge' && (
           <div className="space-y-3.5 pb-4">
-            <div className="p-4 rounded-2xl bg-[#18202E] border border-slate-800 space-y-3">
+            <div className="p-4 rounded-2xl bg-white border border-slate-200 space-y-3 shadow-xs">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Terminal className="w-4 h-4 text-[#E5BE64]" />
-                  <h2 className="text-sm font-bold text-white">내 PC 원격 브릿지 관제</h2>
+                  <Terminal className="w-4 h-4 text-slate-800" />
+                  <h2 className="text-sm font-bold text-slate-900">내 PC 원격 브릿지 관제</h2>
                 </div>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                   ● ONLINE ({pcStatus.hostname})
                 </span>
               </div>
 
               <div className="grid grid-cols-3 gap-2 text-center">
-                <div className="p-2.5 rounded-xl bg-[#0F141C] border border-slate-800/80">
-                  <p className="text-[10px] text-slate-400">활성 스킬</p>
-                  <p className="text-sm font-bold text-[#E5BE64] mt-0.5">
+                <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                  <p className="text-[10px] text-slate-500">활성 스킬</p>
+                  <p className="text-sm font-bold text-slate-900 mt-0.5">
                     {pcStatus.skillsCount || 587}개
                   </p>
                 </div>
-                <div className="p-2.5 rounded-xl bg-[#0F141C] border border-slate-800/80">
-                  <p className="text-[10px] text-slate-400">볼트/노트</p>
-                  <p className="text-sm font-bold text-white mt-0.5">
+                <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                  <p className="text-[10px] text-slate-500">볼트/노트</p>
+                  <p className="text-sm font-bold text-slate-900 mt-0.5">
                     {pcStatus.vaultDocsCount || 214}문서
                   </p>
                 </div>
-                <div className="p-2.5 rounded-xl bg-[#0F141C] border border-slate-800/80">
-                  <p className="text-[10px] text-slate-400">무인 데몬</p>
-                  <p className="text-sm font-bold text-emerald-400 mt-0.5">6대 가동</p>
+                <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                  <p className="text-[10px] text-slate-500">무인 데몬</p>
+                  <p className="text-sm font-bold text-emerald-700 mt-0.5">6대 가동</p>
                 </div>
               </div>
 
               <div className="space-y-1.5 pt-1">
-                <p className="text-[11px] font-semibold text-slate-300">
+                <p className="text-[11px] font-semibold text-slate-700">
                   ⚡ 부팅 시 100% 무음 가동 중인 백그라운드 데몬:
                 </p>
                 {(pcStatus.activeDaemons || []).map((d, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-[#0F141C] border border-slate-800/70 text-[11px]"
+                    className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-[11px]"
                   >
-                    <span className="text-slate-300">{d}</span>
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                    <span className="text-slate-800 font-medium">{d}</span>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Remote Command Queue History */}
-            <div className="p-4 rounded-2xl bg-[#18202E] border border-slate-800 space-y-2.5">
+            <div className="p-4 rounded-2xl bg-white border border-slate-200 space-y-2.5 shadow-xs">
               <div className="flex items-center justify-between">
-                <h3 className="text-xs font-bold text-[#E5BE64] flex items-center gap-1.5">
-                  <Layers className="w-4 h-4" />
+                <h3 className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                  <Layers className="w-4 h-4 text-slate-800" />
                   외부(LTE/5G) ➔ 내 PC 원격 작업 실행 큐
                 </h3>
                 <button
                   onClick={handleClearChat}
-                  className="text-[11px] text-slate-400 hover:text-rose-400 flex items-center gap-1"
+                  className="text-[11px] text-slate-500 hover:text-rose-600 flex items-center gap-1 cursor-pointer"
                 >
                   <Trash2 className="w-3 h-3" /> 대화 초기화
                 </button>
@@ -1248,24 +1248,24 @@ export default function AntigravityMobilePage() {
                     .map((cmd) => (
                       <div
                         key={cmd.id}
-                        className="p-2.5 rounded-xl bg-[#0F141C] border border-slate-800 text-xs space-y-1"
+                        className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1"
                       >
                         <div className="flex items-center justify-between">
-                          <span className="font-semibold text-[#E5BE64]">
+                          <span className="font-semibold text-slate-900">
                             [{cmd.action}] {cmd.prompt}
                           </span>
                           <span
-                            className={`text-[10px] px-1.5 py-0.5 rounded font-semibold ${
+                            className={`text-[10px] px-1.5 py-0.5 rounded font-semibold border ${
                               cmd.status === 'completed'
-                                ? 'bg-emerald-500/15 text-emerald-400'
-                                : 'bg-amber-500/15 text-amber-400'
+                                ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                                : 'bg-amber-50 text-amber-700 border-amber-200'
                             }`}
                           >
                             {cmd.status === 'completed' ? '실행 완료' : 'PC 실행 대기'}
                           </span>
                         </div>
                         {cmd.result && (
-                          <p className="text-[11px] text-slate-300 line-clamp-3 whitespace-pre-wrap">
+                          <p className="text-[11px] text-slate-600 line-clamp-3 whitespace-pre-wrap">
                             {cmd.result}
                           </p>
                         )}
@@ -1281,12 +1281,12 @@ export default function AntigravityMobilePage() {
         {activeTab === 'apk' && (
           <div className="space-y-3.5 pb-4">
             {/* Quick 1-Second Obsidian Memo */}
-            <div className="p-4 rounded-2xl bg-[#18202E] border border-slate-800 space-y-2.5">
-              <h2 className="text-sm font-bold text-[#E5BE64] flex items-center gap-1.5">
-                <BookmarkPlus className="w-4 h-4" />
+            <div className="p-4 rounded-2xl bg-white border border-slate-200 space-y-2.5 shadow-xs">
+              <h2 className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                <BookmarkPlus className="w-4 h-4 text-slate-800" />
                 1초 Antigravity &amp; 옵시디언 전용 메모
               </h2>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-600">
                 이동 중 떠오른 아이디어나 지시사항을 적으시면 내 PC 옵시디언 볼트(00_Inbox)와 Antigravity 전용 보관함에 즉시 저장됩니다.
               </p>
               <textarea
@@ -1294,52 +1294,52 @@ export default function AntigravityMobilePage() {
                 value={quickMemoText}
                 onChange={(e) => setQuickMemoText(e.target.value)}
                 placeholder="메모할 내용을 입력하거나 음성으로 말씀하세요..."
-                className="w-full p-3 rounded-xl bg-[#0B0F17] border border-slate-700 text-xs text-white focus:outline-none focus:border-[#E5BE64]"
+                className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-800 focus:bg-white"
               />
               {memoSavedToast && (
-                <p className="text-xs text-emerald-400 font-medium">{memoSavedToast}</p>
+                <p className="text-xs text-emerald-700 font-medium">{memoSavedToast}</p>
               )}
               <button
                 onClick={handleSaveQuickMemo}
                 disabled={isLoading || !quickMemoText.trim()}
-                className="w-full py-2.5 rounded-xl bg-[#E5BE64] disabled:opacity-40 text-[#0B0F17] font-bold text-xs hover:bg-[#d8b052] transition"
+                className="w-full py-2.5 rounded-xl bg-slate-900 disabled:opacity-40 text-white font-bold text-xs hover:bg-slate-800 transition cursor-pointer"
               >
                 Antigravity &amp; 옵시디언 볼트에 즉시 저장
               </button>
             </div>
 
             {/* Dedicated Android APK Download Card */}
-            <div className="p-4 rounded-2xl bg-gradient-to-br from-[#18202E] to-[#0F141C] border border-[#E5BE64]/50 space-y-3 shadow-lg">
+            <div className="p-4 rounded-2xl bg-white border border-slate-200 space-y-3 shadow-xs">
               <div className="flex items-center gap-2.5">
-                <div className="p-2.5 rounded-xl bg-[#E5BE64]/15 border border-[#E5BE64]/40 text-[#E5BE64]">
+                <div className="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-800">
                   <Smartphone className="w-5 h-5" />
                 </div>
                 <div>
-                  <h2 className="text-sm font-bold text-white">
+                  <h2 className="text-sm font-bold text-slate-900">
                     안드로이드 전용 설치형 앱 (APK)
                   </h2>
-                  <p className="text-[11px] text-[#E5BE64]">
+                  <p className="text-[11px] text-slate-500">
                     패키지: com.yoonjongsung.antigravity (v2.1 정식 서명판)
                   </p>
                 </div>
               </div>
 
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 스마트폰에 독립 앱으로 설치하면 브라우저 주소창 없이 1초 만에 실행되며, 외부(LTE/5G)에서도 클라우드-PC 보안 브릿지를 통해 집/사무실 PC의 안티그래비티와 하나를 그대로 사용하실 수 있습니다.
               </p>
 
               <a
                 href="/antigravity-hana.apk"
                 download="Antigravity_Hana.apk"
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-[#E5BE64] to-[#C89D42] text-[#0B0F17] font-extrabold text-xs flex items-center justify-center gap-2 shadow-md hover:opacity-95 transition"
+                className="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 안티그래비티 &amp; 하나 전용 APK 다운로드 (Antigravity_Hana.apk)
               </a>
 
-              <div className="p-3 rounded-xl bg-[#0B0F17]/90 border border-slate-800 text-[11px] text-slate-400 space-y-1">
-                <p className="font-semibold text-slate-200">💡 휴대폰 설치 방법 (30초 완료):</p>
-                <p>1. 위 골드 버튼을 눌러 `Antigravity_Hana.apk` 파일을 다운로드합니다.</p>
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-[11px] text-slate-600 space-y-1">
+                <p className="font-semibold text-slate-900">💡 휴대폰 설치 방법 (30초 완료):</p>
+                <p>1. 위 검정색 버튼을 눌러 `Antigravity_Hana.apk` 파일을 다운로드합니다.</p>
                 <p>2. 다운로드 완료 알림을 터치해 [설치]를 누릅니다. (최초 1회 &apos;출처를 알 수 없는 앱 허용&apos; 클릭)</p>
                 <p>3. 바탕화면에 생성된 **Antigravity** 아이콘을 터치해 언제 어디서나 편하게 사용하세요!</p>
               </div>
@@ -1350,15 +1350,15 @@ export default function AntigravityMobilePage() {
 
       {/* Chat Input Bar (Visible on Chat Tab) */}
       {activeTab === 'chat' && (
-        <div className="shrink-0 px-3 py-2.5 bg-[#0F141C] border-t border-slate-800/90">
+        <div className="shrink-0 px-3 py-2.5 bg-white border-t border-slate-200 shadow-md">
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={toggleVoiceInput}
-              className={`p-2.5 rounded-xl border transition shrink-0 ${
+              className={`p-2.5 rounded-xl border transition shrink-0 cursor-pointer ${
                 isListening
-                  ? 'bg-rose-500/20 border-rose-500 text-rose-400 animate-pulse'
-                  : 'bg-[#18202E] border-slate-700 text-slate-300 hover:text-[#E5BE64]'
+                  ? 'bg-rose-50 border-rose-300 text-rose-600 animate-pulse'
+                  : 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
               }`}
               title="음성으로 지시하기"
             >
@@ -1380,14 +1380,14 @@ export default function AntigravityMobilePage() {
                   ? '듣고 있습니다... 말씀해 주세요'
                   : '안티그래비티 & 하나에게 무엇이든 지시하세요...'
               }
-              className="flex-1 px-3.5 py-2.5 rounded-xl bg-[#18202E] border border-slate-700/80 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#E5BE64]"
+              className="flex-1 px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-800 focus:bg-white"
             />
 
             <button
               type="button"
               onClick={() => handleSendChat()}
               disabled={isLoading || !inputText.trim()}
-              className="p-2.5 rounded-xl bg-[#E5BE64] disabled:opacity-40 text-[#0B0F17] font-bold hover:bg-[#d8b052] transition shrink-0"
+              className="p-2.5 rounded-xl bg-slate-900 disabled:opacity-40 text-white font-bold hover:bg-slate-800 transition shrink-0 cursor-pointer"
             >
               <Send className="w-4 h-4" />
             </button>
@@ -1396,15 +1396,15 @@ export default function AntigravityMobilePage() {
       )}
 
       {/* Bottom 5-Tab Native App Dock */}
-      <nav className="shrink-0 grid grid-cols-5 bg-[#0B0F17] border-t border-slate-800/90 py-1.5 px-1.5 z-20">
+      <nav className="shrink-0 grid grid-cols-5 bg-white border-t border-slate-200 py-1.5 px-1.5 z-20 shadow-xs">
         <button
           onClick={() => setActiveTab('chat')}
           className={`flex flex-col items-center py-1 rounded-xl transition cursor-pointer ${
-            activeTab === 'chat' ? 'text-[#E5BE64]' : 'text-slate-400 hover:text-slate-200'
+            activeTab === 'chat' ? 'text-slate-950 font-bold' : 'text-slate-400 hover:text-slate-700'
           }`}
         >
           <Sparkles className="w-4 h-4" />
-          <span className="text-[10px] font-semibold mt-1">대화·지시</span>
+          <span className="text-[10px] mt-1">대화·지시</span>
         </button>
 
         <button
@@ -1413,55 +1413,55 @@ export default function AntigravityMobilePage() {
             fetchVaultDocs(vaultQuery, vaultCategory);
           }}
           className={`flex flex-col items-center py-1 rounded-xl transition cursor-pointer ${
-            activeTab === 'vault' ? 'text-[#E5BE64]' : 'text-slate-400 hover:text-slate-200'
+            activeTab === 'vault' ? 'text-slate-950 font-bold' : 'text-slate-400 hover:text-slate-700'
           }`}
         >
           <BookOpen className="w-4 h-4" />
-          <span className="text-[10px] font-semibold mt-1">세컨브레인</span>
+          <span className="text-[10px] mt-1">세컨브레인</span>
         </button>
 
         <button
           onClick={() => setActiveTab('deck')}
           className={`flex flex-col items-center py-1 rounded-xl transition cursor-pointer ${
-            activeTab === 'deck' ? 'text-[#E5BE64]' : 'text-slate-400 hover:text-slate-200'
+            activeTab === 'deck' ? 'text-slate-950 font-bold' : 'text-slate-400 hover:text-slate-700'
           }`}
         >
           <Zap className="w-4 h-4" />
-          <span className="text-[10px] font-semibold mt-1">원터치사령탑</span>
+          <span className="text-[10px] mt-1">원터치사령탑</span>
         </button>
 
         <button
           onClick={() => setActiveTab('bridge')}
           className={`flex flex-col items-center py-1 rounded-xl transition cursor-pointer ${
-            activeTab === 'bridge' ? 'text-[#E5BE64]' : 'text-slate-400 hover:text-slate-200'
+            activeTab === 'bridge' ? 'text-slate-950 font-bold' : 'text-slate-400 hover:text-slate-700'
           }`}
         >
           <Cpu className="w-4 h-4" />
-          <span className="text-[10px] font-semibold mt-1">내PC브릿지</span>
+          <span className="text-[10px] mt-1">내PC브릿지</span>
         </button>
 
         <button
           onClick={() => setActiveTab('apk')}
           className={`flex flex-col items-center py-1 rounded-xl transition cursor-pointer ${
-            activeTab === 'apk' ? 'text-[#E5BE64]' : 'text-slate-400 hover:text-slate-200'
+            activeTab === 'apk' ? 'text-slate-950 font-bold' : 'text-slate-400 hover:text-slate-700'
           }`}
         >
           <Smartphone className="w-4 h-4" />
-          <span className="text-[10px] font-semibold mt-1">설정·APK</span>
+          <span className="text-[10px] mt-1">설정·APK</span>
         </button>
       </nav>
 
-      {/* Luxury Slide-Up Modal: Mobile Instant Document Reader */}
+      {/* Eye-Comfort Slide-Up Modal: Mobile Instant Document Reader */}
       {isReadingFullDoc && selectedVaultDoc && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex flex-col justify-end animate-fadeIn">
-          <div className="bg-[#0F141C] border-t border-[#E5BE64]/40 rounded-t-3xl max-h-[88vh] flex flex-col shadow-2xl">
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex flex-col justify-end animate-fadeIn">
+          <div className="bg-white border-t border-slate-200 rounded-t-3xl max-h-[88vh] flex flex-col shadow-2xl">
             {/* Modal Header */}
-            <div className="p-4 border-b border-slate-800/80 flex items-center justify-between shrink-0">
+            <div className="p-4 border-b border-slate-200 flex items-center justify-between shrink-0">
               <div className="flex items-center gap-2 overflow-hidden pr-2">
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#E5BE64]/20 text-[#E5BE64] border border-[#E5BE64]/30 shrink-0">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200 shrink-0">
                   {selectedVaultDoc.category}
                 </span>
-                <h3 className="text-xs font-bold text-slate-100 truncate">
+                <h3 className="text-xs font-bold text-slate-900 truncate">
                   {selectedVaultDoc.title}
                 </h3>
               </div>
@@ -1472,11 +1472,11 @@ export default function AntigravityMobilePage() {
                     setCopiedDocId(selectedVaultDoc.id);
                     setTimeout(() => setCopiedDocId(null), 2000);
                   }}
-                  className="p-1.5 rounded-lg bg-[#18202E] text-slate-300 hover:text-white border border-slate-700 transition cursor-pointer"
+                  className="p-1.5 rounded-lg bg-slate-100 text-slate-700 hover:text-slate-900 hover:bg-slate-200 border border-slate-200 transition cursor-pointer"
                   title="본문 복사"
                 >
                   {copiedDocId === selectedVaultDoc.id ? (
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                    <Check className="w-3.5 h-3.5 text-emerald-600" />
                   ) : (
                     <Copy className="w-3.5 h-3.5" />
                   )}
@@ -1486,7 +1486,7 @@ export default function AntigravityMobilePage() {
                     setIsReadingFullDoc(false);
                     setSelectedVaultDoc(null);
                   }}
-                  className="p-1.5 rounded-lg bg-[#18202E] text-slate-300 hover:text-white border border-slate-700 transition cursor-pointer"
+                  className="p-1.5 rounded-lg bg-slate-100 text-slate-700 hover:text-slate-900 hover:bg-slate-200 border border-slate-200 transition cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -1494,8 +1494,8 @@ export default function AntigravityMobilePage() {
             </div>
 
             {/* Modal Body: Full Markdown Content */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-3 text-xs leading-relaxed text-slate-200">
-              <div className="flex items-center justify-between text-[11px] text-slate-400 pb-2 border-b border-slate-800">
+            <div className="flex-1 overflow-y-auto p-4 space-y-3 text-xs leading-relaxed text-slate-800">
+              <div className="flex items-center justify-between text-[11px] text-slate-500 pb-2 border-b border-slate-100">
                 <span className="flex items-center gap-1">
                   <Clock className="w-3 h-3" />
                   {selectedVaultDoc.date}
@@ -1508,7 +1508,7 @@ export default function AntigravityMobilePage() {
                   {selectedVaultDoc.tags.map((t, idx) => (
                     <span
                       key={idx}
-                      className="text-[10px] px-2 py-0.5 rounded-md bg-[#18202E] text-[#E5BE64] border border-[#E5BE64]/20"
+                      className="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200"
                     >
                       #{t}
                     </span>
@@ -1516,16 +1516,16 @@ export default function AntigravityMobilePage() {
                 </div>
               )}
 
-              <div className="whitespace-pre-wrap font-sans text-slate-200 leading-relaxed space-y-2 pt-1 select-text">
+              <div className="whitespace-pre-wrap font-sans text-slate-800 leading-relaxed space-y-2 pt-1 select-text">
                 {selectedVaultDoc.content || selectedVaultDoc.preview}
               </div>
             </div>
 
             {/* Modal Footer: Action Button */}
-            <div className="p-3 bg-[#0B0F17] border-t border-slate-800 flex items-center gap-2 shrink-0">
+            <div className="p-3 bg-white border-t border-slate-200 flex items-center gap-2 shrink-0">
               <button
                 onClick={() => askAiAboutDoc(selectedVaultDoc)}
-                className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-[#E5BE64] to-[#C99C38] text-[#0B0F17] font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-[#E5BE64]/15 hover:opacity-95 transition cursor-pointer"
+                className="flex-1 py-2.5 rounded-xl bg-slate-900 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm hover:bg-slate-800 transition cursor-pointer"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>이 문서 기반으로 AI에게 질문하기</span>
