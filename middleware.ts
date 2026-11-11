@@ -5,8 +5,13 @@ export function middleware(request: NextRequest) {
   const host = request.headers.get('x-forwarded-host') || request.headers.get('host') || '';
   const pathname = request.nextUrl.pathname;
 
-  // 0. NoteHelper (노트헬퍼) 24/7 Cloud Hub: Always allow /notehelper and /secondbrain on any domain
-  if (pathname.startsWith('/notehelper') || pathname.startsWith('/secondbrain')) {
+  // 0. Antigravity & NoteHelper 24/7 Cloud Hub: Always allow /antigravity, /hana, /notehelper, /secondbrain on any domain
+  if (
+    pathname.startsWith('/antigravity') ||
+    pathname.startsWith('/hana') ||
+    pathname.startsWith('/notehelper') ||
+    pathname.startsWith('/secondbrain')
+  ) {
     return NextResponse.next();
   }
   if ((host.includes('notehelper') || host.includes('secondbrain')) && pathname === '/') {
@@ -59,6 +64,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|icon.svg|notehelper-192.png|notehelper-512.png|secondbrain-manifest.json|secondbrain-sw.js|images|videos|stays).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|icon.svg|notehelper-192.png|notehelper-512.png|antigravity-hana.apk|antigravity-manifest.json|secondbrain-manifest.json|secondbrain-sw.js|images|videos|stays).*)',
   ],
 };

@@ -1,0 +1,24 @@
+{
+  "name": "Antigravity & Hana 모바일 사령탑",
+  "short_name": "Antigravity",
+  "description": "윤종성 대표님 전용 안티그래비티(Antigravity) & 수석 비서 하나(Hana) 통합 모바일 앱",
+  "start_url": "/antigravity",
+  "display": "standalone",
+  "background_color": "#0B0F17",
+  "theme_color": "#0B0F17",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/notehelper-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/notehelper-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

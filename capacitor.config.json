@@ -1,13 +1,14 @@
 {
-  "appId": "com.yoonjongsung.notehelper",
-  "appName": "NoteHelper",
+  "appId": "com.yoonjongsung.antigravity",
+  "appName": "Antigravity",
   "webDir": "out",
   "server": {
-    "url": "https://secondbrain-note.vercel.app/notehelper",
+    "url": "https://secondbrain-note.vercel.app/antigravity",
     "cleartext": true,
     "allowNavigation": [
       "secondbrain-note.vercel.app",
       "*.vercel.app",
+      "*.trycloudflare.com",
       "127.0.0.1",
       "192.168.*.*"
     ]
@@ -16,7 +17,7 @@
     "allowMixedContent": true,
     "captureInput": true,
     "webContentsDebuggingEnabled": true,
-    "backgroundColor": "#111827"
+    "backgroundColor": "#0B0F17"
   },
   "plugins": {
     "PushNotifications": {

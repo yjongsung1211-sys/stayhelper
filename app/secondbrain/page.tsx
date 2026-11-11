@@ -1744,6 +1744,12 @@ export default function SecondBrainPage() {
               </div>
 
               <div className="flex items-center gap-1.5 shrink-0">
+                <a
+                  href="/antigravity"
+                  className="px-2.5 py-2 min-h-[38px] rounded-xl bg-[#0B0F17] border border-[#E5BE64] text-[#E5BE64] text-xs font-extrabold flex items-center gap-1 whitespace-nowrap shrink-0"
+                >
+                  <span>👑 안티그래비티</span>
+                </a>
                 <button
                   onClick={async () => {
                     if (deferredPwaPrompt) {
@@ -1768,6 +1774,33 @@ export default function SecondBrainPage() {
                   <Plus className="w-4 h-4 shrink-0" />
                   <span>새 녹음</span>
                 </button>
+              </div>
+            </div>
+
+            {/* Antigravity & Hana 직통 배너 */}
+            <div className="mt-1.5 p-3 rounded-2xl bg-[#0B0F17] border border-[#E5BE64]/60 flex items-center justify-between gap-2 shadow-md">
+              <div className="min-w-0">
+                <div className="text-xs font-extrabold text-[#E5BE64] flex items-center gap-1">
+                  <span>👑 Antigravity &amp; Hana 전용 모바일 사령탑</span>
+                </div>
+                <p className="text-[11px] text-[#CBD5E1] truncate mt-0.5">
+                  텔레그램 없이 음성/채팅 지시 · 원터치 관제 · 내 PC 원격 연결
+                </p>
+              </div>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <a
+                  href="/antigravity-hana.apk"
+                  download="Antigravity_Hana.apk"
+                  className="px-2.5 py-1.5 rounded-xl bg-[#18202E] border border-[#E5BE64]/50 text-[#E5BE64] text-[11px] font-bold whitespace-nowrap"
+                >
+                  APK 다운
+                </a>
+                <a
+                  href="/antigravity"
+                  className="px-3 py-1.5 rounded-xl bg-[#E5BE64] text-[#0B0F17] text-[11px] font-extrabold whitespace-nowrap"
+                >
+                  바로 열기 ➔
+                </a>
               </div>
             </div>
 
@@ -2057,13 +2090,13 @@ export default function SecondBrainPage() {
               </div>
             )}
 
-            {/* 모바일 하단 3대 메뉴 바 */}
-            <nav className="fixed bottom-0 left-0 right-0 z-30 bg-[#FFFFFF] border-t border-[#E2E8F0] px-4 py-2 grid grid-cols-3 gap-2">
+            {/* 모바일 하단 4대 메뉴 바 */}
+            <nav className="fixed bottom-0 left-0 right-0 z-30 bg-[#FFFFFF] border-t border-[#E2E8F0] px-3 py-2 grid grid-cols-4 gap-1.5">
               {(
                 [
                   { key: 'notes', label: '📝 내 노트' },
                   { key: 'coaching', label: '🎓 어학 단어장' },
-                  { key: 'ask', label: '🧠 AI 비서 · 일정' },
+                  { key: 'ask', label: '🧠 AI 비서' },
                 ] as const
               ).map((t) => {
                 const active =
@@ -2074,7 +2107,7 @@ export default function SecondBrainPage() {
                     key={t.key}
                     type="button"
                     onClick={() => setMainViewTab(t.key)}
-                    className={`py-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
+                    className={`py-2.5 rounded-xl text-[11px] font-bold transition-colors cursor-pointer ${
                       active
                         ? 'bg-[#111827] text-[#FFFFFF]'
                         : 'text-[#475569] hover:bg-[#F1F5F9]'
@@ -2084,6 +2117,12 @@ export default function SecondBrainPage() {
                   </button>
                 );
               })}
+              <a
+                href="/antigravity"
+                className="py-2.5 rounded-xl text-[11px] font-extrabold bg-[#0B0F17] text-[#E5BE64] border border-[#E5BE64]/60 flex items-center justify-center"
+              >
+                👑 안티그래비티
+              </a>
             </nav>
           </div>
         )}
@@ -2118,6 +2157,14 @@ export default function SecondBrainPage() {
             </div>
 
             {/* + 새 녹음 / 파일 업로드 버튼 */}
+            <a
+              href="/antigravity"
+              className="w-full py-2.5 px-4 bg-[#0B0F17] hover:bg-[#18202E] text-[#E5BE64] border border-[#E5BE64]/50 rounded-xl font-extrabold text-xs flex items-center justify-between transition-colors"
+            >
+              <span>👑 Antigravity &amp; Hana 사령탑</span>
+              <span>열기 ➔</span>
+            </a>
+
             {!isRecording ? (
               <button
                 onClick={() => setNewNoteSheetOpen(true)}
@@ -3044,6 +3091,15 @@ export default function SecondBrainPage() {
                 • <strong>전 세계 모든 외국어 공부 도우미</strong>: 영어·중국어·일본어·스페인어·프랑스어·독일어·베트남어 등 어떤 외국어든 <strong>내가 틀린 문법 교정, 더 좋은 원어민 대답/질문, 실전 롤플레이 시나리오, 원어민 발음 쉐도잉</strong>을 생성합니다.
               </p>
             </div>
+
+            <a
+              href="/antigravity-hana.apk"
+              download="Antigravity_Hana.apk"
+              className="w-full py-3.5 px-4 rounded-2xl bg-[#0B0F17] hover:bg-[#18202E] border border-[#E5BE64] text-[#E5BE64] text-sm font-extrabold flex items-center justify-center gap-2 shadow-md text-center"
+            >
+              <Download className="w-4 h-4" />
+              <span>👑 Antigravity &amp; Hana 전용 APK 다운로드 (설치형 앱)</span>
+            </a>
 
             {deferredPwaPrompt ? (
               <button
