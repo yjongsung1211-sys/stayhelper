@@ -1,0 +1,190 @@
+{
+  "noteHelperLinked": false,
+  "connectedEmails": [
+    {
+      "id": "gmail-primary",
+      "email": "yjongsung1211@gmail.com",
+      "provider": "Gmail (기본)",
+      "status": "connected",
+      "lastSyncedAt": "2026-11-10T22:02:00+09:00"
+    },
+    {
+      "id": "gmail-secondary-woosu",
+      "email": "woosu1211@gmail.com",
+      "provider": "Gmail",
+      "status": "connected",
+      "lastSyncedAt": "2026-11-10T22:02:00+09:00"
+    },
+    {
+      "id": "gmail-tertiary-wushu",
+      "email": "wushu1211@gmail.com",
+      "provider": "Gmail",
+      "status": "connected",
+      "lastSyncedAt": "2026-11-10T22:02:00+09:00"
+    }
+  ],
+  "events": [
+    {
+      "id": "italki-mon-chinese",
+      "source": "gmail",
+      "day": "월",
+      "time": "21:45 ~ 22:45",
+      "title": "중국어 회화 과외 (AnndyZuo 선생님)",
+      "participantOrPlace": "italki 온라인 교실",
+      "rawSnippet": "Monday, 09 Nov 2026 21:45 Speaking in Chinese",
+      "category": "tutoring",
+      "createdAt": "2026-11-10T21:12:00+09:00"
+    },
+    {
+      "id": "routine-swim-tue",
+      "source": "kakao_cal",
+      "day": "화",
+      "time": "06:00 ~ 07:00",
+      "title": "아침 수영",
+      "participantOrPlace": "수영장 (화·목·토 고정)",
+      "rawSnippet": "화·목·토 아침 6시 수영",
+      "category": "routine",
+      "createdAt": "2026-11-10T09:00:00Z"
+    },
+    {
+      "id": "italki-tue-japanese",
+      "source": "gmail",
+      "day": "화",
+      "time": "08:00 ~ 09:00",
+      "title": "일본어 회화 과외 (혼마 유카 선생님)",
+      "participantOrPlace": "italki 온라인 교실",
+      "rawSnippet": "Tuesday, 10 Nov 2026 08:00 本間友香",
+      "category": "tutoring",
+      "createdAt": "2026-11-10T21:12:00+09:00"
+    },
+    {
+      "id": "gmail-tue-fora",
+      "source": "gmail",
+      "day": "화",
+      "time": "10:00 ~ 11:00",
+      "title": "Fora 어드바이저 킥오프 미팅",
+      "participantOrPlace": "Zoom 화상회의",
+      "rawSnippet": "Fora Advisor Kickoff at 10:00 on Tuesday, Nov 10",
+      "category": "meeting",
+      "createdAt": "2026-11-10T21:12:00+09:00"
+    },
+    {
+      "id": "italki-wed-english",
+      "source": "gmail",
+      "day": "수",
+      "time": "16:00 ~ 17:00",
+      "title": "영어 회화 과외 (Thayra 선생님)",
+      "participantOrPlace": "italki 온라인 교실",
+      "rawSnippet": "Wednesday, 11 Nov 2026 16:00 Thayra Abdurasid",
+      "category": "tutoring",
+      "createdAt": "2026-11-10T21:12:00+09:00"
+    },
+    {
+      "id": "routine-swim-thu",
+      "source": "kakao_cal",
+      "day": "목",
+      "time": "06:00 ~ 07:00",
+      "title": "아침 수영",
+      "participantOrPlace": "수영장 (화·목·토 고정)",
+      "rawSnippet": "화·목·토 아침 6시 수영",
+      "category": "routine",
+      "createdAt": "2026-11-10T09:00:00Z"
+    },
+    {
+      "id": "italki-thu-spanish",
+      "source": "gmail",
+      "day": "목",
+      "time": "10:00 ~ 11:00",
+      "title": "스페인어 회화 과외 (Arantza 선생님)",
+      "participantOrPlace": "italki 온라인 교실",
+      "rawSnippet": "Thursday, 12 Nov 2026 10:00 Arantza Sánchez",
+      "category": "tutoring",
+      "createdAt": "2026-11-10T21:12:00+09:00"
+    },
+    {
+      "id": "routine-swim-sat",
+      "source": "kakao_cal",
+      "day": "토",
+      "time": "06:00 ~ 07:00",
+      "title": "아침 수영",
+      "participantOrPlace": "수영장 (화·목·토 고정)",
+      "rawSnippet": "화·목·토 아침 6시 수영",
+      "category": "routine",
+      "createdAt": "2026-11-10T09:00:00Z"
+    },
+    {
+      "id": "italki-sun-english",
+      "source": "gmail",
+      "day": "일",
+      "time": "21:15 ~ 22:15",
+      "title": "영어 회화 과외 (Jolene 선생님)",
+      "participantOrPlace": "italki 온라인 교실",
+      "rawSnippet": "Sunday, 15 Nov 2026 21:15 Jolene Milton",
+      "category": "tutoring",
+      "createdAt": "2026-11-10T21:12:00+09:00"
+    }
+  ],
+  "todos": [
+    {
+      "id": "todo-italki-confirm-honma",
+      "source": "gmail",
+      "title": "일본어 과외(혼마 유카 선생님) 수업 완료 확인 및 피드백 버튼 누르기",
+      "dueTag": "목요일까지",
+      "priority": "high",
+      "done": true,
+      "rawSnippet": "本間友香 레슨 확인 (ID: 5229525028)",
+      "createdAt": "2026-11-10T21:12:00+09:00"
+    },
+    {
+      "id": "todo-italki-review-chinese",
+      "source": "gmail",
+      "title": "중국어 과외(AnndyZuo) 수업 노트 복습 — 어휘 20개 · 문법 9개",
+      "dueTag": "차주 월요일 전",
+      "priority": "high",
+      "done": false,
+      "rawSnippet": "Monday 09 Nov 수업 요약 (20 어휘, 9 문법, 2 연습 세트)",
+      "createdAt": "2026-11-10T21:12:00+09:00"
+    },
+    {
+      "id": "todo-woosu-genspark",
+      "source": "gmail",
+      "title": "Genspark Plus 월간 구독 자동 해지/만료 확인 (woosu1211 계정)",
+      "dueTag": "수요일 (11/11)",
+      "priority": "normal",
+      "done": true,
+      "rawSnippet": "젠스파크 AI 워크스페이스 구독 2026. 11. 11. 취소 예정",
+      "createdAt": "2026-11-10T21:39:00+09:00"
+    },
+    {
+      "id": "todo-fora-onboarding",
+      "source": "gmail",
+      "title": "Fora 어드바이저 기초 교육(Essentials Training) 수강 및 프로필 작성",
+      "dueTag": "이번 주 내",
+      "priority": "normal",
+      "done": false,
+      "rawSnippet": "Complete Essentials Training",
+      "createdAt": "2026-11-10T21:12:00+09:00"
+    },
+    {
+      "id": "todo-woosu-googleads",
+      "source": "gmail",
+      "title": "Google Ads 계정 보호용 패스키(Passkey) 등록 (woosu1211 계정)",
+      "dueTag": "이번 주 내",
+      "priority": "normal",
+      "done": false,
+      "rawSnippet": "Google Ads 패스키 설정",
+      "createdAt": "2026-11-10T21:39:00+09:00"
+    },
+    {
+      "id": "todo-hwacheon-doc",
+      "source": "gmail",
+      "title": "(주)화천퍼스트 법인등기부등본 2통 발급 및 이력서 발송",
+      "dueTag": "완료됨 (11/10)",
+      "priority": "normal",
+      "done": true,
+      "rawSnippet": "법인등기부 및 이력서 발송 완료",
+      "createdAt": "2026-11-10T21:12:00+09:00"
+    }
+  ],
+  "updatedAt": "2026-11-10T20:49:29.858Z"
+}

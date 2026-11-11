@@ -319,6 +319,99 @@ def build_apk():
     shutil.copy2(nh_signed, nh_root)
     print(f"[+] SUCCESS! Signed NoteHelper APK built: {nh_pub} ({round(nh_pub.stat().st_size / 1024, 1)} KB)")
 
+    # 8. Also build ScheduleHelper dedicated APK (com.yoonjongsung.schedulehelper)
+    sh_work = SDK_DIR / "build_work_sh"
+    if sh_work.exists():
+        shutil.rmtree(sh_work)
+    sh_work.mkdir(parents=True, exist_ok=True)
+
+    sh_manifest = sh_work / "AndroidManifest.xml"
+    sh_manifest_txt = manifest_src.read_text(encoding="utf-8")
+    sh_manifest_txt = sh_manifest_txt.replace("com.yoonjongsung.antigravity", "com.yoonjongsung.schedulehelper")
+    sh_manifest_txt = sh_manifest_txt.replace('android:label="Antigravity &amp; Hana"', 'android:label="ScheduleHelper (스케줄헬퍼)"')
+    sh_manifest.write_text(sh_manifest_txt, encoding="utf-8")
+
+    sh_java_dir = sh_work / "src" / "com" / "yoonjongsung" / "schedulehelper"
+    sh_java_dir.mkdir(parents=True, exist_ok=True)
+    sh_java = sh_java_dir / "MainActivity.java"
+    sh_java_txt = java_src.read_text(encoding="utf-8")
+    sh_java_txt = sh_java_txt.replace("package com.yoonjongsung.antigravity;", "package com.yoonjongsung.schedulehelper;")
+    sh_java_txt = sh_java_txt.replace(
+        "https://secondbrain-note.vercel.app/antigravity",
+        "https://secondbrain-note.vercel.app/schedulehelper",
+    ).replace(
+        "https://thestayhelper.vercel.app/antigravity",
+        "https://secondbrain-note.vercel.app/schedulehelper",
+    ).replace(
+        "#0B0F17",
+        "#FAFBFD",
+    ).replace(
+        'target.contains("/notehelper") || target.contains("/secondbrain")',
+        'target.contains("/antigravity")'
+    ).replace(
+        'url.contains("/notehelper") || url.contains("/secondbrain")',
+        'url.contains("/antigravity")'
+    ).replace(
+        "👑 ANTIGRAVITY &amp; HANA",
+        "📅 SCHEDULEHELPER (스케줄헬퍼)"
+    ).replace(
+        "사령탑 즉시 재접속",
+        "스케줄헬퍼 다시 열기"
+    )
+    sh_java.write_text(sh_java_txt, encoding="utf-8")
+
+    sh_res = sh_work / "res" / "drawable"
+    sh_res.mkdir(parents=True, exist_ok=True)
+    sh_icon_src = BASE_DIR / "public" / "schedulehelper-192.png"
+    if sh_icon_src.exists():
+        shutil.copy2(sh_icon_src, sh_res / "ic_launcher.png")
+    elif nh_icon_src.exists():
+        shutil.copy2(nh_icon_src, sh_res / "ic_launcher.png")
+
+    sh_comp = sh_work / "compiled_res.zip"
+    run_cmd([tools["aapt2"], "compile", "--dir", sh_work / "res", "-o", sh_comp])
+
+    sh_unsigned = sh_work / "unsigned.apk"
+    sh_r = sh_work / "gen"
+    sh_r.mkdir(parents=True, exist_ok=True)
+    run_cmd([
+        tools["aapt2"], "link", "-o", sh_unsigned, "-I", tools["android_jar"],
+        "--manifest", sh_manifest, "--java", sh_r, "--auto-add-overlay", sh_comp
+    ])
+
+    sh_classes = sh_work / "classes"
+    sh_classes.mkdir(parents=True, exist_ok=True)
+    run_cmd([
+        tools["javac"], "-source", "11", "-target", "11", "-encoding", "UTF-8",
+        "-cp", tools["android_jar"], "-d", sh_classes, sh_java, *list(sh_r.rglob("*.java"))
+    ])
+
+    run_cmd([
+        tools["java"], "-cp", tools["d8_jar"], "com.android.tools.r8.D8",
+        "--lib", tools["android_jar"], "--min-api", "26", "--output", sh_work,
+        *list(sh_classes.rglob("*.class"))
+    ])
+
+    with zipfile.ZipFile(sh_unsigned, "a", compression=zipfile.ZIP_DEFLATED) as zf:
+        zf.write(sh_work / "classes.dex", "classes.dex")
+
+    sh_aligned = sh_work / "aligned.apk"
+    run_cmd([tools["zipalign"], "-f", "-p", "4", sh_unsigned, sh_aligned])
+
+    sh_signed = sh_work / "ScheduleHelper_Signed.apk"
+    run_cmd([
+        tools["java"], "-jar", tools["apksigner_jar"], "sign",
+        "--ks", keystore, "--ks-key-alias", "antigravity",
+        "--ks-pass", "pass:antigravity2026", "--key-pass", "pass:antigravity2026",
+        "--out", sh_signed, sh_aligned
+    ])
+
+    sh_pub = BASE_DIR / "public" / "schedulehelper.apk"
+    sh_root = BASE_DIR / "ScheduleHelper.apk"
+    shutil.copy2(sh_signed, sh_pub)
+    shutil.copy2(sh_signed, sh_root)
+    print(f"[+] SUCCESS! Signed ScheduleHelper APK built: {sh_pub} ({round(sh_pub.stat().st_size / 1024, 1)} KB)")
+
 
 if __name__ == "__main__":
     build_apk()

@@ -1,7 +1,7 @@
 {
-  "name": "ScheduleHelper (스케줄헬퍼) - AI 1초 일정 파싱 스마트 캘린더",
+  "name": "ScheduleHelper (스케줄헬퍼) - 주간 일과 & 과외·할 일 플래너",
   "short_name": "ScheduleHelper",
-  "description": "카카오톡·지메일·메신저 대화를 1초 만에 스마트 캘린더와 할 일 목록으로 자동 변환하는 AI 스케줄러",
+  "description": "화·목·토 아침 수영 루틴, 지메일 과외/미팅 알림, 카톡·위챗·와츠앱 대화를 한눈에 관리하는 주간 스케줄러 앱",
   "start_url": "/schedulehelper",
   "scope": "/schedulehelper",
   "display": "standalone",
@@ -10,13 +10,13 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/notehelper-192.png",
+      "src": "/schedulehelper-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/notehelper-512.png",
+      "src": "/schedulehelper-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

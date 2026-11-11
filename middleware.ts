@@ -65,6 +65,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|icon.svg|notehelper-192.png|notehelper-512.png|antigravity-192.png|antigravity-512.png|antigravity-hana.apk|notehelper.apk|antigravity-manifest.json|manifest-schedulehelper.json|secondbrain-manifest.json|secondbrain-sw.js|images|videos|stays).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|icon.svg|notehelper-192.png|notehelper-512.png|schedulehelper-192.png|schedulehelper-512.png|antigravity-192.png|antigravity-512.png|antigravity-hana.apk|notehelper.apk|schedulehelper.apk|antigravity-manifest.json|manifest-schedulehelper.json|secondbrain-manifest.json|secondbrain-sw.js|images|videos|stays).*)',
   ],
 };
