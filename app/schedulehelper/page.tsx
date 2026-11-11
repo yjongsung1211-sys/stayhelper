@@ -147,6 +147,9 @@ function getWeekDaysList(): { key: DayKey; dateStr: string; fullLabel: string; i
 const DAYS_INFO = getWeekDaysList();
 const DAYS_ORDER: DayKey[] = ['월', '화', '수', '목', '금', '토', '일'];
 
+const HOURS_OPTIONS: string[] = Array.from({ length: 25 }, (_, i) => String(i).padStart(2, '0'));
+const MINUTES_OPTIONS: string[] = Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0'));
+
 const TIME_SLOT_OPTIONS: string[] = [
     '05:00', '05:30', '06:00', '06:30', '07:00', '07:30', '08:00', '08:30',
     '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30',
@@ -616,6 +619,38 @@ export default function ScheduleHelperPage() {
             setQuickEnd(endStr);
             setQuickTime(`${quickStart} ~ ${endStr}`);
         }
+    };
+
+    const adjustMinutes = (target: 'start' | 'end', deltaMinutes: number) => {
+        const current = target === 'start' ? quickStart : quickEnd;
+        const [h, m] = current.split(':').map(Number);
+        if (!isNaN(h) && !isNaN(m)) {
+            let total = h * 60 + m + deltaMinutes;
+            if (total < 0) total = 0;
+            if (total > 24 * 60) total = 24 * 60;
+            const newH = Math.min(24, Math.floor(total / 60));
+            const newM = total % 60;
+            const formatted = `${String(newH).padStart(2, '0')}:${String(newM).padStart(2, '0')}`;
+            if (target === 'start') {
+                setQuickStart(formatted);
+                setQuickTime(`${formatted} ~ ${quickEnd}`);
+            } else {
+                setQuickEnd(formatted);
+                setQuickTime(`${quickStart} ~ ${formatted}`);
+            }
+        }
+    };
+
+    const setStartTime = (h: string, m: string) => {
+        const formatted = `${h.padStart(2, '0')}:${m.padStart(2, '0')}`;
+        setQuickStart(formatted);
+        setQuickTime(`${formatted} ~ ${quickEnd}`);
+    };
+
+    const setEndTime = (h: string, m: string) => {
+        const formatted = `${h.padStart(2, '0')}:${m.padStart(2, '0')}`;
+        setQuickEnd(formatted);
+        setQuickTime(`${quickStart} ~ ${formatted}`);
     };
 
     const showToast = (msg: string) => {
@@ -1622,61 +1657,217 @@ export default function ScheduleHelperPage() {
                                 </div>
                             </div>
 
-                            {/* 시간 선택 (100% 클릭 및 선택) */}
-                            <div className="space-y-2 pt-1">
+                            {/* 시간 선택 (시·분 단위 100% 클릭 및 선택) */}
+                            <div className="space-y-2.5 pt-1">
                                 <div className="flex items-center justify-between">
-                                    <label className="text-xs font-bold text-slate-500">시간 선택 (클릭)</label>
+                                    <label className="text-xs font-bold text-slate-500">시간 선택 (시·분 단위 클릭)</label>
                                     <span className="text-xs font-extrabold text-[#4338CA] bg-[#EEF2FF] border border-[#DCE7FE] px-2.5 py-0.5 rounded-lg tabular-nums">
                                         {quickStart} ~ {quickEnd}
                                     </span>
                                 </div>
 
-                                {/* 시작 & 종료 시간 드롭다운 셀렉트 */}
-                                <div className="grid grid-cols-2 gap-2">
-                                    <div>
-                                        <span className="block text-[11px] text-slate-400 font-semibold mb-1">시작 시간</span>
-                                        <select
-                                            value={quickStart}
-                                            onChange={(e) => {
-                                                const newStart = e.target.value;
-                                                setQuickStart(newStart);
-                                                setQuickTime(`${newStart} ~ ${quickEnd}`);
-                                            }}
-                                            className="w-full rounded-xl bg-[#F8FAFC] border border-slate-200 px-3 py-2 text-sm text-slate-800 font-bold cursor-pointer focus:bg-white focus:border-[#4F46E5]"
-                                        >
-                                            {TIME_SLOT_OPTIONS.map((t) => (
-                                                <option key={`start-${t}`} value={t}>
-                                                    {t}
-                                                </option>
-                                            ))}
-                                        </select>
+                                {/* 1. 시작 시간: 시 & 분 드롭다운 + 분 단위 빠른 칩 */}
+                                <div className="rounded-xl border border-slate-200/90 bg-[#F8FAFC] p-3 space-y-2">
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                                            <Clock className="w-3.5 h-3.5 text-[#4F46E5]" />
+                                            <span>시작 시간</span>
+                                        </span>
+                                        <div className="flex items-center gap-1">
+                                            <input
+                                                type="time"
+                                                value={quickStart}
+                                                onChange={(e) => {
+                                                    if (e.target.value) {
+                                                        setQuickStart(e.target.value);
+                                                        setQuickTime(`${e.target.value} ~ ${quickEnd}`);
+                                                    }
+                                                }}
+                                                className="text-xs font-bold text-slate-700 bg-white border border-slate-200 rounded-lg px-2 py-0.5 cursor-pointer focus:border-[#4F46E5]"
+                                                title="네이티브 시계 피커"
+                                            />
+                                        </div>
                                     </div>
-                                    <div>
-                                        <span className="block text-[11px] text-slate-400 font-semibold mb-1">종료 시간</span>
-                                        <select
-                                            value={quickEnd}
-                                            onChange={(e) => {
-                                                const newEnd = e.target.value;
-                                                setQuickEnd(newEnd);
-                                                setQuickTime(`${quickStart} ~ ${newEnd}`);
-                                            }}
-                                            className="w-full rounded-xl bg-[#F8FAFC] border border-slate-200 px-3 py-2 text-sm text-slate-800 font-bold cursor-pointer focus:bg-white focus:border-[#4F46E5]"
-                                        >
-                                            {TIME_SLOT_OPTIONS.map((t) => (
-                                                <option key={`end-${t}`} value={t}>
-                                                    {t}
-                                                </option>
-                                            ))}
-                                        </select>
+
+                                    {/* 시(Hour) / 분(Minute) 드롭다운 셀렉트 */}
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <div>
+                                            <span className="block text-[10px] text-slate-400 font-semibold mb-0.5">시 (Hour)</span>
+                                            <select
+                                                value={quickStart.split(':')[0] || '14'}
+                                                onChange={(e) => setStartTime(e.target.value, quickStart.split(':')[1] || '00')}
+                                                className="w-full rounded-lg bg-white border border-slate-200 px-2.5 py-1.5 text-xs text-slate-800 font-bold cursor-pointer focus:border-[#4F46E5]"
+                                            >
+                                                {HOURS_OPTIONS.map((h) => (
+                                                    <option key={`sh-${h}`} value={h}>
+                                                        {h}시
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <span className="block text-[10px] text-slate-400 font-semibold mb-0.5">분 (0~59분 선택)</span>
+                                            <select
+                                                value={quickStart.split(':')[1] || '00'}
+                                                onChange={(e) => setStartTime(quickStart.split(':')[0] || '14', e.target.value)}
+                                                className="w-full rounded-lg bg-white border border-slate-200 px-2.5 py-1.5 text-xs text-slate-800 font-bold cursor-pointer focus:border-[#4F46E5]"
+                                            >
+                                                {MINUTES_OPTIONS.map((m) => (
+                                                    <option key={`sm-${m}`} value={m}>
+                                                        {m}분
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    {/* 분 단위 바로 선택 칩 & -5분 / +5분 미세 조정 */}
+                                    <div className="flex items-center gap-1 flex-wrap pt-0.5">
+                                        <span className="text-[10px] text-slate-400 font-semibold mr-1">분 바로선택:</span>
+                                        {['00', '10', '15', '20', '30', '40', '45', '50'].map((min) => {
+                                            const curM = quickStart.split(':')[1] || '00';
+                                            const isSelected = curM === min;
+                                            return (
+                                                <button
+                                                    key={`s-min-${min}`}
+                                                    type="button"
+                                                    onClick={() => setStartTime(quickStart.split(':')[0] || '14', min)}
+                                                    className={`px-2 py-0.5 rounded-md text-[11px] font-bold transition cursor-pointer ${
+                                                        isSelected
+                                                            ? 'bg-[#4F46E5] text-white shadow-xs'
+                                                            : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'
+                                                    }`}
+                                                >
+                                                    {min}분
+                                                </button>
+                                            );
+                                        })}
+                                        <div className="flex items-center gap-1 ml-auto">
+                                            <button
+                                                type="button"
+                                                onClick={() => adjustMinutes('start', -5)}
+                                                className="px-1.5 py-0.5 rounded bg-white border border-slate-200 text-slate-600 text-[10px] font-bold hover:bg-slate-50 cursor-pointer"
+                                                title="5분 감소"
+                                            >
+                                                -5분
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => adjustMinutes('start', 5)}
+                                                className="px-1.5 py-0.5 rounded bg-white border border-slate-200 text-slate-600 text-[10px] font-bold hover:bg-slate-50 cursor-pointer"
+                                                title="5분 증가"
+                                            >
+                                                +5분
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
 
-                                {/* 소요 시간 간편 연장 (+30분, +1시간, +1.5시간, +2시간) */}
+                                {/* 2. 종료 시간: 시 & 분 드롭다운 + 분 단위 빠른 칩 */}
+                                <div className="rounded-xl border border-slate-200/90 bg-[#F8FAFC] p-3 space-y-2">
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                                            <Clock className="w-3.5 h-3.5 text-[#4F46E5]" />
+                                            <span>종료 시간</span>
+                                        </span>
+                                        <div className="flex items-center gap-1">
+                                            <input
+                                                type="time"
+                                                value={quickEnd}
+                                                onChange={(e) => {
+                                                    if (e.target.value) {
+                                                        setQuickEnd(e.target.value);
+                                                        setQuickTime(`${quickStart} ~ ${e.target.value}`);
+                                                    }
+                                                }}
+                                                className="text-xs font-bold text-slate-700 bg-white border border-slate-200 rounded-lg px-2 py-0.5 cursor-pointer focus:border-[#4F46E5]"
+                                                title="네이티브 시계 피커"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* 시(Hour) / 분(Minute) 드롭다운 셀렉트 */}
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <div>
+                                            <span className="block text-[10px] text-slate-400 font-semibold mb-0.5">시 (Hour)</span>
+                                            <select
+                                                value={quickEnd.split(':')[0] || '15'}
+                                                onChange={(e) => setEndTime(e.target.value, quickEnd.split(':')[1] || '00')}
+                                                className="w-full rounded-lg bg-white border border-slate-200 px-2.5 py-1.5 text-xs text-slate-800 font-bold cursor-pointer focus:border-[#4F46E5]"
+                                            >
+                                                {HOURS_OPTIONS.map((h) => (
+                                                    <option key={`eh-${h}`} value={h}>
+                                                        {h}시
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <span className="block text-[10px] text-slate-400 font-semibold mb-0.5">분 (0~59분 선택)</span>
+                                            <select
+                                                value={quickEnd.split(':')[1] || '00'}
+                                                onChange={(e) => setEndTime(quickEnd.split(':')[0] || '15', e.target.value)}
+                                                className="w-full rounded-lg bg-white border border-slate-200 px-2.5 py-1.5 text-xs text-slate-800 font-bold cursor-pointer focus:border-[#4F46E5]"
+                                            >
+                                                {MINUTES_OPTIONS.map((m) => (
+                                                    <option key={`em-${m}`} value={m}>
+                                                        {m}분
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    {/* 분 단위 바로 선택 칩 & -5분 / +5분 미세 조정 */}
+                                    <div className="flex items-center gap-1 flex-wrap pt-0.5">
+                                        <span className="text-[10px] text-slate-400 font-semibold mr-1">분 바로선택:</span>
+                                        {['00', '10', '15', '20', '30', '40', '45', '50'].map((min) => {
+                                            const curM = quickEnd.split(':')[1] || '00';
+                                            const isSelected = curM === min;
+                                            return (
+                                                <button
+                                                    key={`e-min-${min}`}
+                                                    type="button"
+                                                    onClick={() => setEndTime(quickEnd.split(':')[0] || '15', min)}
+                                                    className={`px-2 py-0.5 rounded-md text-[11px] font-bold transition cursor-pointer ${
+                                                        isSelected
+                                                            ? 'bg-[#4F46E5] text-white shadow-xs'
+                                                            : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'
+                                                    }`}
+                                                >
+                                                    {min}분
+                                                </button>
+                                            );
+                                        })}
+                                        <div className="flex items-center gap-1 ml-auto">
+                                            <button
+                                                type="button"
+                                                onClick={() => adjustMinutes('end', -5)}
+                                                className="px-1.5 py-0.5 rounded bg-white border border-slate-200 text-slate-600 text-[10px] font-bold hover:bg-slate-50 cursor-pointer"
+                                                title="5분 감소"
+                                            >
+                                                -5분
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => adjustMinutes('end', 5)}
+                                                className="px-1.5 py-0.5 rounded bg-white border border-slate-200 text-slate-600 text-[10px] font-bold hover:bg-slate-50 cursor-pointer"
+                                                title="5분 증가"
+                                            >
+                                                +5분
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* 3. 소요 시간 간편 연장 (+15분, +30분, +45분, +1시간, +1.5시간, +2시간) */}
                                 <div className="flex items-center gap-1.5 pt-0.5">
                                     <span className="text-[11px] text-slate-400 font-semibold shrink-0">간편 연장:</span>
                                     <div className="flex items-center gap-1 flex-wrap">
                                         {[
+                                            { label: '+15분', mins: 15 },
                                             { label: '+30분', mins: 30 },
+                                            { label: '+45분', mins: 45 },
                                             { label: '+1시간', mins: 60 },
                                             { label: '+1.5시간', mins: 90 },
                                             { label: '+2시간', mins: 120 },
@@ -1693,7 +1884,7 @@ export default function ScheduleHelperPage() {
                                     </div>
                                 </div>
 
-                                {/* 자주 쓰는 추천 시간대 원클릭 카드 */}
+                                {/* 4. 자주 쓰는 추천 시간대 원클릭 카드 */}
                                 <div className="space-y-1 pt-1">
                                     <span className="block text-[11px] text-slate-400 font-semibold">자주 쓰는 시간대 원클릭</span>
                                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
