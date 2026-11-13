@@ -5,7 +5,9 @@ import {
   normalizeAudioUrl,
   detectNoteCategory,
   sendSecondBrainTelegramBriefing,
+  isCloudEnvironment,
 } from '@/app/secondbrain/cloudStore';
+import { getPcTunnelBase } from '../pcTunnel';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -15,7 +17,45 @@ export async function GET(request: Request) {
   const q = searchParams.get('q')?.toLowerCase() || '';
 
   const data = await loadNotesData();
-  let filtered = data.notes;
+  let notes = data.notes;
+
+  // The PC is the source of truth for fresh BLE recordings. Merge its live note
+  // list into the cloud list so read-only cloud credentials do not block display.
+  if (isCloudEnvironment() && request.headers.get('x-from-pc-tunnel') !== '1') {
+    try {
+      const tunnelBase = await getPcTunnelBase();
+      if (tunnelBase) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 8000);
+        try {
+          const pcRes = await fetch(`${tunnelBase}/api/secondbrain/notes`, {
+            headers: { 'x-from-pc-tunnel': '1' },
+            signal: controller.signal,
+            cache: 'no-store',
+          });
+          if (pcRes.ok) {
+            const pcData = await pcRes.json();
+            if (Array.isArray(pcData?.notes)) {
+              const merged = new Map<string, any>();
+              const noteKey = (note: any) =>
+                note?.hardwareSn != null
+                  ? `hardware:${note.hardwareSn}:${note.hardwareCrc || note.hardwareFileName || ''}`
+                  : `id:${note?.id || ''}`;
+              for (const note of notes) merged.set(noteKey(note), note);
+              for (const note of pcData.notes) merged.set(noteKey(note), note);
+              notes = Array.from(merged.values());
+            }
+          }
+        } finally {
+          clearTimeout(timer);
+        }
+      }
+    } catch {
+      // Keep the cloud list available if the PC tunnel is offline.
+    }
+  }
+
+  let filtered = notes;
 
   if (q) {
     filtered = filtered.filter(
