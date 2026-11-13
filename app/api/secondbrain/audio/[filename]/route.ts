@@ -27,14 +27,26 @@ export async function GET(
       fileBuffer = await downloadAudioFromCloudRepo(safeName);
       if (!fileBuffer && request.headers.get('x-from-vercel-proxy') !== '1') {
         try {
+          const headers: Record<string, string> = { 'x-from-vercel-proxy': '1' };
+          const range = request.headers.get('range');
+          if (range) headers.Range = range;
           const tunnelRes = await fetch(
             `${(await getPcTunnelBase()) || 'https://invalid.local'}/api/secondbrain/audio/${encodeURIComponent(
               safeName
             )}`,
-            { headers: { 'x-from-vercel-proxy': '1' } }
+            { headers, cache: 'no-store' }
           );
           if (tunnelRes.ok) {
-            fileBuffer = Buffer.from(await tunnelRes.arrayBuffer());
+            const proxyHeaders = new Headers();
+            for (const name of ['content-type', 'content-length', 'content-range', 'accept-ranges', 'cache-control']) {
+              const value = tunnelRes.headers.get(name);
+              if (value) proxyHeaders.set(name, value);
+            }
+            proxyHeaders.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+            return new NextResponse(tunnelRes.body, {
+              status: tunnelRes.status,
+              headers: proxyHeaders,
+            });
           }
         } catch {}
       }
