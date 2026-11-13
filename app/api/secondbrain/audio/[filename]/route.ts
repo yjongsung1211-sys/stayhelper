@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { getPcTunnelBase } from '../../pcTunnel';
 import fs from 'fs';
 import path from 'path';
 import { downloadAudioFromCloudRepo } from '@/app/secondbrain/cloudStore';
@@ -27,7 +28,7 @@ export async function GET(
       if (!fileBuffer && request.headers.get('x-from-vercel-proxy') !== '1') {
         try {
           const tunnelRes = await fetch(
-            `https://weekend-subaru-extends-stakeholders.trycloudflare.com/api/secondbrain/audio/${encodeURIComponent(
+            `${(await getPcTunnelBase()) || 'https://invalid.local'}/api/secondbrain/audio/${encodeURIComponent(
               safeName
             )}`,
             { headers: { 'x-from-vercel-proxy': '1' } }

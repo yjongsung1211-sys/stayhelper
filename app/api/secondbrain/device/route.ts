@@ -1,13 +1,56 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { spawn } from 'child_process';
+import { getPcTunnelBase } from '../pcTunnel';
+import { isCloudEnvironment } from '@/app/secondbrain/cloudStore';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 const DEVICE_FILE = path.join(process.cwd(), 'data', 'secondbrain_device.json');
 const BLE_SERVER_URL = 'http://127.0.0.1:3099';
-const PC_TUNNEL_BASE = 'https://weekend-subaru-extends-stakeholders.trycloudflare.com';
+
+let bleStartPromise: Promise<void> | null = null;
+
+async function isBleServerUp(): Promise<boolean> {
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 1200);
+    const res = await fetch(`${BLE_SERVER_URL}/status`, { signal: controller.signal, cache: 'no-store' });
+    clearTimeout(timer);
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+/** Starts the local BLE server (port 3099) if it is not running, so the UI buttons never depend on a manual restart. */
+async function ensureBleServer(): Promise<boolean> {
+  if (await isBleServerUp()) return true;
+  if (!bleStartPromise) {
+    bleStartPromise = (async () => {
+      const logDir = path.join(process.cwd(), 'logs');
+      fs.mkdirSync(logDir, { recursive: true });
+      const out = fs.openSync(path.join(logDir, 'ble_server.out.log'), 'a');
+      const err = fs.openSync(path.join(logDir, 'ble_server.err.log'), 'a');
+      const child = spawn(process.execPath, ['scripts/secondbrain_ble_server.mjs'], {
+        cwd: process.cwd(),
+        detached: true,
+        windowsHide: true,
+        stdio: ['ignore', out, err],
+      });
+      child.unref();
+      for (let i = 0; i < 20 && !(await isBleServerUp()); i++) {
+        await new Promise((r) => setTimeout(r, 500));
+      }
+    })().finally(() => {
+      bleStartPromise = null;
+    });
+  }
+  await bleStartPromise;
+  return isBleServerUp();
+}
 
 function getDeviceData() {
   try {
@@ -74,7 +117,8 @@ export async function GET(request: Request) {
           ...(fileData.device || {}),
           isConnected: Boolean(s.connected),
           connecting: Boolean(s.connecting),
-          batteryLevel: s.batteryLevel ?? fileData.device?.batteryLevel ?? 100,
+          batteryLevel: s.batteryLevel ?? null,
+          batteryUpdatedAt: s.batteryUpdatedAt ?? null,
           storageUsedGB: s.storageUsedGb ?? fileData.device?.storageUsedGB ?? 0.01,
           storageTotalGB: s.storageTotalGb ?? fileData.device?.storageTotalGB ?? 58.2,
           firmwareVersion: s.firmwareVersion ?? fileData.device?.firmwareVersion ?? 'v1.4.5',
@@ -107,7 +151,9 @@ export async function GET(request: Request) {
       try {
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), 2500);
-        const tunnelRes = await fetch(`${PC_TUNNEL_BASE}/api/secondbrain/device`, {
+        const tunnelBase = await getPcTunnelBase();
+        if (!tunnelBase) throw new Error('PC 터널 주소 없음 — PC가 꺼져 있거나 브릿지 데몬이 실행 중이 아닙니다');
+        const tunnelRes = await fetch(`${tunnelBase}/api/secondbrain/device`, {
           headers: { 'x-from-vercel-proxy': '1' },
           signal: controller.signal,
           cache: 'no-store',
@@ -145,8 +191,10 @@ export async function POST(request: Request) {
           : '/sync';
 
       try {
+        if (!isCloudEnvironment()) await ensureBleServer();
+        else throw new Error('cloud: forward to PC tunnel');
         const controller = new AbortController();
-        const timeoutMs = action === 'sync' ? 15000 : 10000;
+        const timeoutMs = action === 'sync' ? 15000 : action === 'connect' ? 55000 : 10000;
         const timer = setTimeout(() => controller.abort(), timeoutMs);
         const res = await fetch(`${BLE_SERVER_URL}${endpoint}`, {
           method: 'POST',
@@ -170,7 +218,9 @@ export async function POST(request: Request) {
           try {
             const controller = new AbortController();
             const timer = setTimeout(() => controller.abort(), 15000);
-            const tunnelRes = await fetch(`${PC_TUNNEL_BASE}/api/secondbrain/device`, {
+            const tunnelBase = await getPcTunnelBase();
+        if (!tunnelBase) throw new Error('PC 터널 주소 없음 — PC가 꺼져 있거나 브릿지 데몬이 실행 중이 아닙니다');
+        const tunnelRes = await fetch(`${tunnelBase}/api/secondbrain/device`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -189,6 +239,17 @@ export async function POST(request: Request) {
         }
 
         const data = getDeviceData();
+        // connect / sync must never pretend to succeed — surface the real reason to the UI
+        if (action === 'connect' || action === 'sync') {
+          const reason = `⛔ 기기 ${action === 'connect' ? '연결' : '동기화'} 실패: ${bridgeErr?.message || 'BLE 서버 응답 없음'}`;
+          return NextResponse.json({
+            ok: false,
+            success: false,
+            error: reason,
+            state: { ...data.device, isConnected: false, connecting: false, isSyncing: false, syncStatusText: reason },
+            device: { ...data.device, isConnected: false, syncStatusText: reason },
+          });
+        }
         if (action === 'start-record') {
           data.isRecording = true;
           data.device = {
