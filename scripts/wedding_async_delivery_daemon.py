@@ -12,7 +12,7 @@ import json
 import time
 import urllib.request
 import ssl
-from datetime import datetime
+from datetime import datetime, timezone
 
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
@@ -73,7 +73,7 @@ def process_pending_orders():
             
             # Update status to processing
             order['status'] = 'processing'
-            order['updatedAt'] = datetime.utcnow().isoformat() + 'Z'
+            order['updatedAt'] = datetime.now(timezone.utc).isoformat()
             save_orders(orders)
 
             # In the background queue, initialize 240-scene batch preparation
@@ -91,7 +91,7 @@ def process_pending_orders():
 
             # Mark order as queued with ready download bundle
             order['status'] = 'completed'
-            order['completedAt'] = datetime.utcnow().isoformat() + 'Z'
+            order['completedAt'] = datetime.now(timezone.utc).isoformat()
             order['currentStep'] = 240
             order['totalSteps'] = 240
             updated = True
