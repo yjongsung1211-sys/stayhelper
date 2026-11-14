@@ -1,0 +1,614 @@
+{
+  "lang": "es",
+  "langBadge": "🇪🇸 스페인어 (Español)",
+  "ttsLang": "es-ES",
+  "grammarCorrections": [
+    {
+      "myWrongSentence": "\"Con la AI. Ah, IA.\" (실제 발화 · 더 자연스럽게 · 스스로 교정)",
+      "correctedSentence": "Con la IA",
+      "pronunciation": "꼰 라 이아",
+      "grammarPoint": "스페인어에서는 인공지능을 IA(inteligencia artificial)로 쓰고 읽습니다. 튜터도 \"Con la IA decimos.\"라고 확인했습니다.",
+      "keyPattern": "la IA (inteligencia artificial)",
+      "alternativeExpressions": [
+        {
+          "label": "풀어쓰기",
+          "sentence": "con la inteligencia artificial",
+          "pronunciation": "꼰 라 인뗄리헨시아 아르띠피시알",
+          "nuance": "격식 있는 자리에서"
+        },
+        {
+          "label": "활용",
+          "sentence": "Uso la IA todos los días.",
+          "pronunciation": "우소 라 이아 또도스 로스 디아스",
+          "nuance": "관사 la 유지"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Es, estoy-- está moda en Corea / estoy de moda en Corea\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Está de moda en Corea.",
+      "pronunciation": "에스따 데 모다 엔 꼬레아",
+      "grammarPoint": "\"유행이다\"는 estar de moda. 주어(이것)가 3인칭이라 estoy가 아니라 está, 그리고 de가 필요합니다. 튜터가 \"Está de moda\"로 교정했습니다.",
+      "keyPattern": "estar de moda (3인칭: está)",
+      "alternativeExpressions": [
+        {
+          "label": "이것이 유행",
+          "sentence": "La IA está de moda en Corea.",
+          "pronunciation": "라 이아 에스따 데 모다 엔 꼬레아",
+          "nuance": "주어를 명시하면 오해가 없음"
+        },
+        {
+          "label": "복수",
+          "sentence": "Los videos de YouTube están de moda.",
+          "pronunciation": "로스 비데오스 데 유뚜브 에스딴 데 모다",
+          "nuance": "주어가 복수면 están"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Me, me gusta esta, este tema.\" (실제 발화 · 문법 오류 · 성 일치)",
+      "correctedSentence": "Me gusta este tema.",
+      "pronunciation": "메 구스따 에스떼 떼마",
+      "grammarPoint": "tema는 -a로 끝나지만 남성 명사입니다 → este tema, un tema interesante. 스스로 este로 고쳤지만 esta가 먼저 나왔습니다.",
+      "keyPattern": "el tema (남성) → este tema",
+      "alternativeExpressions": [
+        {
+          "label": "같은 유형 단어",
+          "sentence": "el problema, el idioma, el sistema",
+          "pronunciation": "엘 쁘로블레마, 엘 이디오마, 엘 시스떼마",
+          "nuance": "-ma 명사는 대부분 남성"
+        },
+        {
+          "label": "응용 문장",
+          "sentence": "Este tema es muy interesante.",
+          "pronunciation": "에스떼 떼마 에스 무이 인떼레산떼",
+          "nuance": "형용사도 남성형"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Me gusta el IA.\" (실제 발화 · 문법 오류 · 성 일치)",
+      "correctedSentence": "Me gusta la IA.",
+      "pronunciation": "메 구스따 라 이아",
+      "grammarPoint": "IA는 inteligencia(여성)의 약어이므로 la IA. 튜터가 \"La IA.\"로 바로잡았습니다.",
+      "keyPattern": "la IA (여성)",
+      "alternativeExpressions": [
+        {
+          "label": "이유 덧붙이기",
+          "sentence": "Me gusta la IA porque me enseña cosas nuevas.",
+          "pronunciation": "메 구스따 라 이아 뽀르께 메 엔세냐 꼬사스 누에바스",
+          "nuance": "수업에서 말한 enseñar 활용"
+        },
+        {
+          "label": "복수",
+          "sentence": "Me gustan las herramientas de IA.",
+          "pronunciation": "메 구스딴 라스 에라미엔따스 데 이아",
+          "nuance": "gustar는 복수명사에 gustan"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Quiero creer algo.\" (실제 발화 · 문법 오류 · 어휘 혼동)",
+      "correctedSentence": "Quiero crear algo.",
+      "pronunciation": "끼에로 끄레아르 알고",
+      "grammarPoint": "creer(믿다/생각하다)와 crear(만들다)는 철자 한 글자 차이입니다. \"무언가를 만들고 싶다\"는 crear. 튜터가 \"Con la IA quiero crear algo.\"로 교정했습니다.",
+      "keyPattern": "querer + crear (만들다) ≠ creer (믿다)",
+      "alternativeExpressions": [
+        {
+          "label": "이유 덧붙이기",
+          "sentence": "Quiero crear algo para ganar dinero.",
+          "pronunciation": "끼에로 끄레아르 알고 빠라 가나르 디네로",
+          "nuance": "수업에서 직접 말한 목적 표현"
+        },
+        {
+          "label": "믿음 표현",
+          "sentence": "Creo que la IA es el futuro.",
+          "pronunciation": "끄레오 께 라 이아 에스 엘 푸뚜로",
+          "nuance": "creer는 \"~라고 생각하다\""
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"qué quieres haces con la IA\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "qué quieres hacer con la IA",
+      "pronunciation": "께 끼에레스 아세르 꼰 라 이아",
+      "grammarPoint": "querer 뒤에는 동사원형(hacer)이 옵니다. haces처럼 활용형을 연속해서 쓰지 않습니다.",
+      "keyPattern": "querer + 동사원형",
+      "alternativeExpressions": [
+        {
+          "label": "다른 동사",
+          "sentence": "Quiero aprender más con la IA.",
+          "pronunciation": "끼에로 아쁘렌데르 마스 꼰 라 이아",
+          "nuance": "같은 구조"
+        },
+        {
+          "label": "희망 표현",
+          "sentence": "Me gustaría crear una página web.",
+          "pronunciation": "메 구스따리아 끄레아르 우나 빠히나 웹",
+          "nuance": "더 공손한 표현"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Tú pregunta, oh, tú pregunta.\" (실제 발화 · 문법 오류 · 동사 변화)",
+      "correctedSentence": "Tú preguntas a la IA qué quieres hacer.",
+      "pronunciation": "뚜 쁘레군따스 아 라 이아 께 끼에레스 아세르",
+      "grammarPoint": "주어 tú에는 2인칭 -as 어미(preguntas)가 필요합니다. 튜터 문장: \"Tú preguntas a la IA qué quieres hacer con la IA.\"",
+      "keyPattern": "tú + -as (2인칭 단수)",
+      "alternativeExpressions": [
+        {
+          "label": "간접목적 대명사",
+          "sentence": "Le pregunto a la IA qué quiero hacer.",
+          "pronunciation": "레 쁘레군또 아 라 이아 께 끼에로 아세르",
+          "nuance": "주어가 yo면 어미는 -o (pregunto)"
+        },
+        {
+          "label": "2인칭 연습",
+          "sentence": "Tú usas, tú hablas, tú aprendes.",
+          "pronunciation": "뚜 우사스, 뚜 아블라스, 뚜 아쁘렌데스",
+          "nuance": "-ar/-er 동사 2인칭"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"¿Tú usa la IA?\" (실제 발화 · 문법 오류 · 동사 변화)",
+      "correctedSentence": "¿Tú usas la IA?",
+      "pronunciation": "뚜 우사스 라 이아",
+      "grammarPoint": "2인칭 단수 tú와 짝이 되는 어미는 -s (usas). 튜터도 \"Tú usas la IA.\"로 교정했고, 직후 \"yo también uso la IA bastante\"를 올바르게 따라 말했습니다.",
+      "keyPattern": "tú usas / yo uso / él usa",
+      "alternativeExpressions": [
+        {
+          "label": "빈도 표현",
+          "sentence": "¿Usas la IA con frecuencia?",
+          "pronunciation": "우사스 라 이아 꼰 프레쿠엔시아",
+          "nuance": "\"자주 써?\""
+        },
+        {
+          "label": "용도 묻기",
+          "sentence": "¿Para qué usas la IA?",
+          "pronunciation": "빠라 께 우사스 라 이아",
+          "nuance": "수업에서 말한 질문의 정확한 형태"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Palabras no son raras, son comunes.\" (실제 발화 · 문법 오류 · 관사 누락)",
+      "correctedSentence": "Las palabras no son raras, son comunes.",
+      "pronunciation": "라스 빨라브라스 노 손 라라스, 손 꼬무네스",
+      "grammarPoint": "특정한 단어들을 가리킬 때는 관사 las가 필요합니다. 튜터가 \"Las palabras.\"로 짚어 주었는데, 재발화 때는 관사가 빠졌습니다.",
+      "keyPattern": "las palabras (정관사 복수)",
+      "alternativeExpressions": [
+        {
+          "label": "단수",
+          "sentence": "La palabra es común.",
+          "pronunciation": "라 빨라브라 에스 꼬문",
+          "nuance": "성·수 일치 확인"
+        },
+        {
+          "label": "활용",
+          "sentence": "Las palabras son fáciles de recordar.",
+          "pronunciation": "라스 빨라브라스 손 파실레스 데 레꼬르다르",
+          "nuance": "같은 구조"
+        }
+      ]
+    }
+  ],
+  "betterAnswers": [
+    {
+      "situation": "\"¿Qué estás haciendo con la IA?\"",
+      "betterSentence": "Estoy creando una página web y haciendo videos de YouTube con la IA.",
+      "pronunciation": "에스또이 끄레안도 우나 빠히나 웹 이 아시엔도 비데오스 데 유뚜브 꼰 라 이아",
+      "koreanMeaning": "IA로 웹페이지를 만들고 유튜브 영상을 만들고 있어요.",
+      "nuanceTip": "수업에서 말한 내용 그대로 문장을 매끄럽게 연결했습니다. \"una página web\" 정확했어요.",
+      "followUpCombo": "¿Y tú, qué haces con la IA?"
+    },
+    {
+      "situation": "\"¿Esto está de moda en Corea?\"",
+      "betterSentence": "Sí, está de moda en Corea. Mucha gente hace videos con la IA.",
+      "pronunciation": "시, 에스따 데 모다 엔 꼬레아. 무차 헨떼 아세 비데오스 꼰 라 이아",
+      "koreanMeaning": "네, 한국에서 유행이에요. 많은 사람이 IA로 영상을 만들어요.",
+      "nuanceTip": "estar de moda를 교정한 문장 + 구체적 근거 한 줄을 덧붙임.",
+      "followUpCombo": "¿Y en tu país?"
+    },
+    {
+      "situation": "\"¿Cómo está la gente sobre este tema?\"",
+      "betterSentence": "Algunas personas tienen miedo, pero a mí me gusta la IA.",
+      "pronunciation": "알구나스 뻬르소나스 띠에넨 미에도, 뻬로 아 미 메 구스따 라 이아",
+      "koreanMeaning": "어떤 사람들은 두려워하지만, 저는 IA가 좋아요.",
+      "nuanceTip": "수업에서 말한 문장에서 \"a mí me gusta\"로 대조를 강조하고 la IA 관사를 교정했습니다.",
+      "followUpCombo": "¿Tú qué piensas?"
+    },
+    {
+      "situation": "\"¿Crees que el futuro va a tener IA?\"",
+      "betterSentence": "Creo que la IA va a ser algo normal, como el internet.",
+      "pronunciation": "끄레오 께 라 이아 바 아 세르 알고 노르말, 꼬모 엘 인떼르넷",
+      "koreanMeaning": "IA는 인터넷처럼 당연한 것이 될 거라고 생각해요.",
+      "nuanceTip": "수업에서 실제로 말한 문장입니다. 문법적으로 정확했습니다. 그대로 암기하세요.",
+      "followUpCombo": "Yo pienso lo mismo."
+    },
+    {
+      "situation": "\"¿Has notado algún cambio importante este año?\"",
+      "betterSentence": "Con la IA ahora puedo automatizar todo lo que hago en la computadora y en el celular.",
+      "pronunciation": "꼰 라 이아 아오라 뿌에도 아우또마띠사르 또도 로 께 아고 엔 라 꼼뿌따도라 이 엔 엘 셀룰라르",
+      "koreanMeaning": "IA로 이제 컴퓨터와 휴대폰에서 하는 모든 일을 자동화할 수 있어요.",
+      "nuanceTip": "튜터가 \"아주 좋은 답\"이라고 칭찬한 실제 문장입니다. 수정 없이 그대로 사용 가능.",
+      "followUpCombo": "¿Y cómo aprendiste?"
+    },
+    {
+      "situation": "\"¿Piensas que ahorras tiempo con la IA?\"",
+      "betterSentence": "No solo ahorro tiempo, sino que también puedo hacer cosas que antes no podía.",
+      "pronunciation": "노 솔로 아오로 띠엠뽀, 시노 께 땀비엔 뿌에도 아세르 꼬사스 께 안떼스 노 뽀디아",
+      "koreanMeaning": "시간만 아끼는 게 아니라 전에는 못 하던 일도 할 수 있어요.",
+      "nuanceTip": "실제 발화 그대로입니다. no solo… sino que también 구문이 완벽했어요.",
+      "followUpCombo": "Es como tener un empleado que me ayuda."
+    }
+  ],
+  "betterQuestions": [
+    {
+      "context": "튜터에게 되묻기",
+      "questionSentence": "¿Tú usas la IA? ¿Para qué la usas?",
+      "pronunciation": "뚜 우사스 라 이아? 빠라 께 라 우사스",
+      "koreanMeaning": "너도 IA 써? 어디에 써?",
+      "nuanceTip": "수업에서 실제로 던진 질문의 교정형 (usa → usas).",
+      "followUpCombo": "Yo también uso la IA bastante."
+    },
+    {
+      "context": "주제 확장",
+      "questionSentence": "¿Cómo aprendiste a usar la IA?",
+      "pronunciation": "꼬모 아쁘렌디스떼 아 우사르 라 이아",
+      "koreanMeaning": "IA 쓰는 법을 어떻게 배웠어?",
+      "nuanceTip": "튜터가 던진 \"¿Cómo aprendiste?\"를 내가 되묻는 형태.",
+      "followUpCombo": "Yo aprendí en YouTube."
+    },
+    {
+      "context": "사회 반응 묻기",
+      "questionSentence": "¿Qué piensa la gente sobre la IA en tu país?",
+      "pronunciation": "께 삐엔사 라 헨떼 소브레 라 이아 엔 뚜 빠이스",
+      "koreanMeaning": "네 나라 사람들은 IA를 어떻게 생각해?",
+      "nuanceTip": "수업에서 어려워했던 \"cómo está la gente sobre este tema?\"의 더 자연스러운 대체 질문.",
+      "followUpCombo": "Algunas personas tienen miedo."
+    },
+    {
+      "context": "미래 전망",
+      "questionSentence": "¿Crees que la IA va a cambiar el trabajo?",
+      "pronunciation": "끄레에스 께 라 이아 바 아 깜비아르 엘 뜨라바호",
+      "koreanMeaning": "IA가 일을 바꿀 거라고 생각해?",
+      "nuanceTip": "튜터의 \"¿Crees que el futuro va a tener IA?\"를 직접 변형.",
+      "followUpCombo": "Creo que sí."
+    },
+    {
+      "context": "개인 변화 묻기",
+      "questionSentence": "¿Has notado algún cambio importante en tu trabajo este año?",
+      "pronunciation": "아스 노따도 알군 깜비오 임뽀르딴떼 엔 뚜 뜨라바호 에스떼 아뇨",
+      "koreanMeaning": "올해 일에서 중요한 변화를 느꼈어?",
+      "nuanceTip": "튜터가 던진 질문을 그대로 활용하고 en tu trabajo만 추가.",
+      "followUpCombo": "Con la IA puedo automatizar mucho."
+    },
+    {
+      "context": "학습 방법 묻기",
+      "questionSentence": "¿Cómo puedo practicar a hacer oraciones por mí mismo?",
+      "pronunciation": "꼬모 뿌에도 쁘락띠까르 아 아세르 오라시오네스 뽀르 미 미스모",
+      "koreanMeaning": "문장을 스스로 만드는 연습은 어떻게 해야 할까요?",
+      "nuanceTip": "튜터가 \"스스로 문장 만들기 연습이 중요하다\"고 조언한 내용을 질문으로 바꾼 것.",
+      "followUpCombo": "¿Me puedes dar un ejemplo?"
+    }
+  ],
+  "scenarioTitle": "IA 주제 심층 복습",
+  "scenarioContext": "수업에서 다룬 주제(IA로 웹·영상 제작, 유행, 사회 반응, 미래)를 복습하는 연습용 대화입니다. (※ 실제 수업 녹취가 아니라, 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+  "scenarioTurns": [
+    {
+      "role": "Tutor",
+      "speakerLabel": "스페인어 튜터",
+      "foreignText": "¿Qué estás haciendo con la IA?",
+      "pronunciation": "께 에스따스 아시엔도 꼰 라 이아",
+      "koreanText": "IA로 무엇을 하고 있어요?",
+      "keyExpression": "¿Qué estás haciendo?",
+      "speakingTip": "estar + -ando 진행형."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Estoy creando una página web y haciendo videos de YouTube con la IA.",
+      "pronunciation": "에스또이 끄레안도 우나 빠히나 웹 이 아시엔도 비데오스 데 유뚜브 꼰 라 이아",
+      "koreanText": "IA로 웹페이지를 만들고 유튜브 영상을 만들고 있어요.",
+      "keyExpression": "Estoy creando…",
+      "speakingTip": "crear(만들다) ≠ creer."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "스페인어 튜터",
+      "foreignText": "¿Esto está de moda en Corea?",
+      "pronunciation": "에스또 에스따 데 모다 엔 꼬레아",
+      "koreanText": "한국에서 이게 유행이에요?",
+      "keyExpression": "estar de moda",
+      "speakingTip": "수업 핵심 표현."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Sí, está de moda en Corea. Me gusta este tema.",
+      "pronunciation": "시, 에스따 데 모다 엔 꼬레아. 메 구스따 에스떼 떼마",
+      "koreanText": "네, 한국에서 유행이에요. 이 주제가 좋아요.",
+      "keyExpression": "este tema (남성)",
+      "speakingTip": "esta tema 아님."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "스페인어 튜터",
+      "foreignText": "¿Qué piensa la gente sobre este tema?",
+      "pronunciation": "께 삐엔사 라 헨떼 소브레 에스떼 떼마",
+      "koreanText": "사람들은 이 주제를 어떻게 생각해요?",
+      "keyExpression": "la gente + 3인칭 단수",
+      "speakingTip": "gente는 단수 취급."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Algunas personas tienen miedo, pero a mí me gusta la IA.",
+      "pronunciation": "알구나스 뻬르소나스 띠에넨 미에도, 뻬로 아 미 메 구스따 라 이아",
+      "koreanText": "어떤 사람들은 두려워하지만 저는 IA가 좋아요.",
+      "keyExpression": "tener miedo",
+      "speakingTip": "la IA(여성)."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "스페인어 튜터",
+      "foreignText": "¿Crees que el futuro va a tener IA?",
+      "pronunciation": "끄레에스 께 엘 푸뚜로 바 아 떼네르 이아",
+      "koreanText": "미래에 IA가 있을 거라고 생각해요?",
+      "keyExpression": "ir a + 동사원형",
+      "speakingTip": "미래 표현."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Creo que la IA va a ser algo normal, como el internet.",
+      "pronunciation": "끄레오 께 라 이아 바 아 세르 알고 노르말, 꼬모 엘 인떼르넷",
+      "koreanText": "IA는 인터넷처럼 당연한 것이 될 거예요.",
+      "keyExpression": "como el internet",
+      "speakingTip": "수업에서 실제로 잘 말한 문장."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "s1",
+      "badge": "시나리오 1 · 심층 복습",
+      "title": "IA 주제 심층 복습",
+      "context": "수업에서 다룬 주제(IA로 웹·영상 제작, 유행, 사회 반응, 미래)를 복습하는 연습용 대화입니다. (※ 실제 수업 녹취가 아니라, 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Qué estás haciendo con la IA?",
+          "pronunciation": "께 에스따스 아시엔도 꼰 라 이아",
+          "koreanText": "IA로 무엇을 하고 있어요?",
+          "keyExpression": "¿Qué estás haciendo?",
+          "speakingTip": "estar + -ando 진행형."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Estoy creando una página web y haciendo videos de YouTube con la IA.",
+          "pronunciation": "에스또이 끄레안도 우나 빠히나 웹 이 아시엔도 비데오스 데 유뚜브 꼰 라 이아",
+          "koreanText": "IA로 웹페이지를 만들고 유튜브 영상을 만들고 있어요.",
+          "keyExpression": "Estoy creando…",
+          "speakingTip": "crear(만들다) ≠ creer."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Esto está de moda en Corea?",
+          "pronunciation": "에스또 에스따 데 모다 엔 꼬레아",
+          "koreanText": "한국에서 이게 유행이에요?",
+          "keyExpression": "estar de moda",
+          "speakingTip": "수업 핵심 표현."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Sí, está de moda en Corea. Me gusta este tema.",
+          "pronunciation": "시, 에스따 데 모다 엔 꼬레아. 메 구스따 에스떼 떼마",
+          "koreanText": "네, 한국에서 유행이에요. 이 주제가 좋아요.",
+          "keyExpression": "este tema (남성)",
+          "speakingTip": "esta tema 아님."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Qué piensa la gente sobre este tema?",
+          "pronunciation": "께 삐엔사 라 헨떼 소브레 에스떼 떼마",
+          "koreanText": "사람들은 이 주제를 어떻게 생각해요?",
+          "keyExpression": "la gente + 3인칭 단수",
+          "speakingTip": "gente는 단수 취급."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Algunas personas tienen miedo, pero a mí me gusta la IA.",
+          "pronunciation": "알구나스 뻬르소나스 띠에넨 미에도, 뻬로 아 미 메 구스따 라 이아",
+          "koreanText": "어떤 사람들은 두려워하지만 저는 IA가 좋아요.",
+          "keyExpression": "tener miedo",
+          "speakingTip": "la IA(여성)."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Crees que el futuro va a tener IA?",
+          "pronunciation": "끄레에스 께 엘 푸뚜로 바 아 떼네르 이아",
+          "koreanText": "미래에 IA가 있을 거라고 생각해요?",
+          "keyExpression": "ir a + 동사원형",
+          "speakingTip": "미래 표현."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Creo que la IA va a ser algo normal, como el internet.",
+          "pronunciation": "끄레오 께 라 이아 바 아 세르 알고 노르말, 꼬모 엘 인떼르넷",
+          "koreanText": "IA는 인터넷처럼 당연한 것이 될 거예요.",
+          "keyExpression": "como el internet",
+          "speakingTip": "수업에서 실제로 잘 말한 문장."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "badge": "시나리오 2 · 비즈니스 응용",
+      "title": "IA 업무 자동화 비즈니스 응용",
+      "context": "수업에서 말한 업무 자동화·시간 절약 표현을 비즈니스 미팅 상황에 응용하는 연습용 대화입니다. (※ 실제 수업 녹취가 아니라, 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Cómo usas la IA en tu trabajo?",
+          "pronunciation": "꼬모 우사스 라 이아 엔 뚜 뜨라바호",
+          "koreanText": "일에서 IA를 어떻게 써요?",
+          "keyExpression": "¿Cómo usas…?",
+          "speakingTip": "tú usas (-s)."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Con la IA puedo automatizar todo lo que hago en la computadora y en el celular.",
+          "pronunciation": "꼰 라 이아 뿌에도 아우또마띠사르 또도 로 께 아고 엔 라 꼼뿌따도라 이 엔 엘 셀룰라르",
+          "koreanText": "IA로 컴퓨터와 휴대폰에서 하는 일을 모두 자동화해요.",
+          "keyExpression": "poder + 동사원형",
+          "speakingTip": "수업에서 칭찬받은 문장."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Piensas que ahorras tiempo con la IA?",
+          "pronunciation": "삐엔사스 께 아오라스 띠엠뽀 꼰 라 이아",
+          "koreanText": "IA로 시간을 아낀다고 생각해요?",
+          "keyExpression": "ahorrar tiempo",
+          "speakingTip": "ahora(지금)와 혼동 주의."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "No solo ahorro tiempo, sino que también puedo hacer cosas que antes no podía.",
+          "pronunciation": "노 솔로 아오로 띠엠뽀, 시노 께 땀비엔 뿌에도 아세르 꼬사스 께 안떼스 노 뽀디아",
+          "koreanText": "시간만 아끼는 게 아니라 전에 못 하던 일도 해요.",
+          "keyExpression": "no solo… sino que también",
+          "speakingTip": "실제 발화."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Puedes darme un ejemplo?",
+          "pronunciation": "뿌에데스 다르메 운 에헴쁠로",
+          "koreanText": "예를 들어 줄 수 있어요?",
+          "keyExpression": "darme",
+          "speakingTip": "동사원형 + me 결합."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Es como tener un empleado que me ayuda. Le doy un documento y le pido un resumen.",
+          "pronunciation": "에스 꼬모 떼네르 운 엠쁠레아도 께 메 아유다. 레 도이 운 도꾸멘또 이 레 삐도 운 레수멘",
+          "koreanText": "저를 돕는 직원이 있는 것 같아요. 문서를 주고 요약을 부탁해요.",
+          "keyExpression": "dar / pedir + le",
+          "speakingTip": "앞 문장은 실제 발화, 뒷문장은 응용."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Qué quieres crear con la IA?",
+          "pronunciation": "께 끼에레스 끄레아르 꼰 라 이아",
+          "koreanText": "IA로 무엇을 만들고 싶어요?",
+          "keyExpression": "querer + 동사원형",
+          "speakingTip": "quieres haces 아님."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Quiero crear algo para ganar dinero. Tengo algunas ideas.",
+          "pronunciation": "끼에로 끄레아르 알고 빠라 가나르 디네로. 뗑고 알구나스 이데아스",
+          "koreanText": "돈을 벌 무언가를 만들고 싶어요. 아이디어가 몇 개 있어요.",
+          "keyExpression": "para + 동사원형",
+          "speakingTip": "수업에서 말한 문장입니다."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "badge": "시나리오 3 · 꼬리질문 디펜스",
+      "title": "IA 학습 경험 꼬리질문 디펜스",
+      "context": "튜터가 던진 후속 질문(어떻게 배웠나, 어떤 단어를 배웠나, 올해의 변화)을 다시 방어하는 연습용 꼬리질문 대화입니다. (※ 실제 수업 녹취가 아니라, 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Cómo aprendiste a usar la IA?",
+          "pronunciation": "꼬모 아쁘렌디스떼 아 우사르 라 이아",
+          "koreanText": "IA 쓰는 법을 어떻게 배웠어요?",
+          "keyExpression": "aprender a + 동사원형",
+          "speakingTip": "과거형 aprendiste."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Aprendí en YouTube y la IA me enseña.",
+          "pronunciation": "아쁘렌디 엔 유뚜브 이 라 이아 메 엔세냐",
+          "koreanText": "유튜브에서 배웠고 IA가 저를 가르쳐줘요.",
+          "keyExpression": "me enseña",
+          "speakingTip": "수업에서 말한 문장."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Qué le preguntas a la IA?",
+          "pronunciation": "께 레 쁘레군따스 아 라 이아",
+          "koreanText": "IA에게 무엇을 물어요?",
+          "keyExpression": "preguntar a",
+          "speakingTip": "tú preguntas."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Le pregunto qué quiero hacer y ella me enseña cómo hacerlo.",
+          "pronunciation": "레 쁘레군또 께 끼에로 아세르 이 에쟈 메 엔세냐 꼬모 아세를로",
+          "koreanText": "무엇을 하고 싶은지 물으면 IA가 방법을 알려줘요.",
+          "keyExpression": "querer + hacer",
+          "speakingTip": "튜터 문장을 1인칭으로."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Qué palabras aprendiste con este tema?",
+          "pronunciation": "께 빨라브라스 아쁘렌디스떼 꼰 에스떼 떼마",
+          "koreanText": "이 주제로 어떤 단어를 배웠어요?",
+          "keyExpression": "palabras",
+          "speakingTip": "관사 las 주의."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Aprendí las palabras ahorrar, crear y enseñar.",
+          "pronunciation": "아쁘렌디 라스 빨라브라스 아오라르, 끄레아르 이 엔세냐르",
+          "koreanText": "ahorrar, crear, enseñar 단어를 배웠어요.",
+          "keyExpression": "ahorrar · crear · enseñar",
+          "speakingTip": "수업 때 말한 3단어입니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Has notado algún cambio importante este año?",
+          "pronunciation": "아스 노따도 알군 깜비오 임뽀르딴떼 에스떼 아뇨",
+          "koreanText": "올해 중요한 변화를 느꼈어요?",
+          "keyExpression": "has notado",
+          "speakingTip": "현재완료."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Sí, este año ha habido un gran cambio: ahora puedo automatizar mucho trabajo.",
+          "pronunciation": "시, 에스떼 아뇨 아 아비도 운 그란 깜비오: 아오라 뿌에도 아우또마띠사르 무초 뜨라바호",
+          "koreanText": "네, 올해 큰 변화가 있었어요. 이제 많은 일을 자동화할 수 있어요.",
+          "keyExpression": "ha habido un gran cambio",
+          "speakingTip": "수업에서 말한 문장의 확장."
+        }
+      ]
+    }
+  ]
+}

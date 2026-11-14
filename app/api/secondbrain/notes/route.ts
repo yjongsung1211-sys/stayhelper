@@ -62,7 +62,7 @@ export async function GET(request: Request) {
       (n: any) =>
         (n.title && n.title.toLowerCase().includes(q)) ||
         (n.transcript && n.transcript.toLowerCase().includes(q)) ||
-        (n.summary && n.summary.some((s: string) => s.toLowerCase().includes(q)))
+        ((Array.isArray(n.summary) && n.summary.some((s: any) => typeof s === "string" && s.toLowerCase().includes(q))) || (typeof n.summary === "string" && n.summary.toLowerCase().includes(q)))
     );
   }
 

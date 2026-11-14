@@ -1,3 +1,22 @@
+export function normalizeNoteObject(n: any): any {
+  if (!n) return n;
+  let cleanSummary: string[] = [];
+  if (Array.isArray(n.summary)) {
+    cleanSummary = n.summary.map((s: any) => String(s || '').trim()).filter(Boolean);
+  } else if (typeof n.summary === 'string' && n.summary.trim()) {
+    cleanSummary = n.summary
+      .split(/\r?\n/)
+      .map((s: string) => s.trim())
+      .filter((s: string) => s && !s.startsWith('#'));
+  }
+  return {
+    ...n,
+    summary: cleanSummary,
+    structuredSummary: typeof n.structuredSummary === 'string' ? n.structuredSummary : (typeof n.summary === 'string' ? n.summary : ''),
+    audioUrl: normalizeAudioUrl(n.audioUrl),
+  };
+}
+
 import fs from 'fs';
 import path from 'path';
 import { execFileSync } from 'child_process';
@@ -1072,7 +1091,7 @@ export async function loadNotesData(): Promise<{ notes: any[]; deletedIds: strin
           'utf8'
         );
       } catch {}
-      return { notes: cloudData.notes, deletedIds: cloudData.deletedIds || [] };
+      return { notes: (cloudData.notes || []).map(normalizeNoteObject), deletedIds: cloudData.deletedIds || [] };
     }
     try {
       if (fs.existsSync(TMP_NOTES_FILE)) {

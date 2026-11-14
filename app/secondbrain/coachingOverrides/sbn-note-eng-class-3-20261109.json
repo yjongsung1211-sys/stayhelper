@@ -1,0 +1,719 @@
+{
+  "lang": "en",
+  "langBadge": "🇺🇸 영어 · 남아공 튜터 Jolene 첫 수업 (실제 발화 기반 코칭)",
+  "ttsLang": "en-US",
+  "grammarCorrections": [
+    {
+      "myWrongSentence": "\"I, I, I, I was get married three years ago and my wife like, likes, uh, traveling\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I got married three years ago, and my wife loves traveling.",
+      "pronunciation": "아이 갓 매리드 쓰리 이어즈 어고, 앤 마이 와이프 러브스 트래블링",
+      "grammarPoint": "was get은 혼합형. \"결혼했다\"는 got married. 주어가 3인칭이라 likes/loves (본인이 정정함).",
+      "keyPattern": "I got married + 시점",
+      "alternativeExpressions": [
+        {
+          "label": "has been married",
+          "sentence": "We've been married for three years.",
+          "pronunciation": "위브 빈 매리드 포 쓰리 이어즈",
+          "nuance": "\"결혼 3년차\" 지속 표현"
+        },
+        {
+          "label": "loves",
+          "sentence": "My wife is a huge fan of traveling.",
+          "pronunciation": "마이 와이프 이즈 어 휴지 팬 오브 트래블링",
+          "nuance": "\"여행 광팬\""
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"so every, every single, mm, single travel, my wife s- spoke everything.\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "On every single trip, my wife did all the talking.",
+      "pronunciation": "온 에브리 싱글 트립, 마이 와이프 디드 올 더 토킹",
+      "grammarPoint": "travel은 동사/불가산 개념, \"한 번의 여행\"은 trip. \"다 말했다\"는 did all the talking.",
+      "keyPattern": "on every trip",
+      "alternativeExpressions": [
+        {
+          "label": "handled",
+          "sentence": "My wife handled all the communication.",
+          "pronunciation": "마이 와이프 핸들드 올 더 커뮤니케이션",
+          "nuance": "소통을 맡았다는 의미"
+        },
+        {
+          "label": "relied on",
+          "sentence": "I relied on my wife to speak for us.",
+          "pronunciation": "아이 릴라이드 온 마이 와이프 투 스픽 포 어스",
+          "nuance": "의존했다는 뉘앙스"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Why, why I learn English, uh, reason?\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Why am I learning English?",
+      "pronunciation": "와이 앰 아이 러닝 잉글리시",
+      "grammarPoint": "의문문은 의문사 + 조동사 + 주어: Why am I learning. 본인이 질문을 되묻는 용도로 사용.",
+      "keyPattern": "Why + am/do + 주어",
+      "alternativeExpressions": [
+        {
+          "label": "reason",
+          "sentence": "My reason for learning English is my wife.",
+          "pronunciation": "마이 리즌 포 러닝 잉글리시 이즈 마이 와이프",
+          "nuance": "답변을 바로 시작"
+        },
+        {
+          "label": "because",
+          "sentence": "I started because I wanted to travel with my wife.",
+          "pronunciation": "아이 스타티드 비커즈 아이 원티드 투 트래블 윗 마이 와이프",
+          "nuance": "이유 접속사"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I, I'm interest at, uh, learning languages.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I'm interested in learning languages.",
+      "pronunciation": "아임 인터레스티드 인 러닝 랭귀지스",
+      "grammarPoint": "interest는 명사, 감정 형용사는 interested + in. (튜터 별도 교정 없음)",
+      "keyPattern": "be interested in + V-ing",
+      "alternativeExpressions": [
+        {
+          "label": "into",
+          "sentence": "I'm really into learning languages.",
+          "pronunciation": "아임 리얼리 인투 러닝 랭귀지스",
+          "nuance": "구어체 \"푹 빠짐\""
+        },
+        {
+          "label": "passionate",
+          "sentence": "I'm passionate about languages.",
+          "pronunciation": "아임 패셔닛 어바웃 랭귀지스",
+          "nuance": "열정 강조"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I can speak, uh, in-influential, but, well, I s- I still learning.\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "I can't speak it fluently yet, but I'm still learning.",
+      "pronunciation": "아이 캔트 스픽 잇 플루언틀리 옛, 벗 아임 스틸 러닝",
+      "grammarPoint": "※ 녹취가 부정확할 수 있음. fluent(유창한)의 부사형 fluently 의도로 보이며, 진행형엔 be동사 필요(I'm still learning).",
+      "keyPattern": "speak + fluently / I'm still + V-ing",
+      "alternativeExpressions": [
+        {
+          "label": "not fluent",
+          "sentence": "I'm not fluent yet.",
+          "pronunciation": "아임 낫 플루언트 옛",
+          "nuance": "짧고 안전"
+        },
+        {
+          "label": "getting by",
+          "sentence": "I can get by, but I'm still learning.",
+          "pronunciation": "아이 캔 겟 바이, 벗 아임 스틸 러닝",
+          "nuance": "\"일상 소통은 된다\""
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"also we are not connect\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "We can't really communicate with each other.",
+      "pronunciation": "위 캔트 리얼리 커뮤니케이트 윗 이치 아더",
+      "grammarPoint": "be동사 + 동사원형 불가. connect는 \"연결하다\". 소통 불가는 can't communicate.",
+      "keyPattern": "can't communicate with",
+      "alternativeExpressions": [
+        {
+          "label": "understand",
+          "sentence": "We can't really understand each other.",
+          "pronunciation": "위 캔트 리얼리 언더스탠드 이치 아더",
+          "nuance": "언어 장벽 표현"
+        },
+        {
+          "label": "language barrier",
+          "sentence": "There's a language barrier between us.",
+          "pronunciation": "데어즈 어 랭귀지 배리어 비트윈 어스",
+          "nuance": "명사형 문장"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"swimming three time a week.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I go swimming three times a week.",
+      "pronunciation": "아이 고 스위밍 쓰리 타임즈 어 위크",
+      "grammarPoint": "횟수는 times (복수). 빈도: N times a week.",
+      "keyPattern": "N times a week",
+      "alternativeExpressions": [
+        {
+          "label": "twice",
+          "sentence": "I swim twice a week.",
+          "pronunciation": "아이 스윔 트와이스 어 위크",
+          "nuance": "once/twice는 times 없이"
+        },
+        {
+          "label": "work out",
+          "sentence": "I work out three times a week.",
+          "pronunciation": "아이 워크 아웃 쓰리 타임즈 어 위크",
+          "nuance": "운동 일반"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I, I don't eat carbo.\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "I used to avoid carbs.",
+      "pronunciation": "아이 유스트 투 어보이드 카브즈",
+      "grammarPoint": "탄수화물은 carbs (본인이 곧 \"carbs\"로 정정). 과거 습관은 used to, \"지금은 안 그렇다\"는 뜻을 반영.",
+      "keyPattern": "used to + 동사원형",
+      "alternativeExpressions": [
+        {
+          "label": "cut out",
+          "sentence": "I used to cut out carbs completely.",
+          "pronunciation": "아이 유스트 투 컷 아웃 카브즈 컴플리틀리",
+          "nuance": "\"끊다\""
+        },
+        {
+          "label": "high protein",
+          "sentence": "I used to eat only high-protein foods.",
+          "pronunciation": "아이 유스트 투 잇 온리 하이 프로틴 푸즈",
+          "nuance": "단백질 중심"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I, I, I got a parent, parental leave a, a, a year.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I took a year of parental leave.",
+      "pronunciation": "아이 툭 어 이어 오브 퍼렌털 리브",
+      "grammarPoint": "휴직은 take leave. 기간은 a year of parental leave.",
+      "keyPattern": "take + 기간 + of leave",
+      "alternativeExpressions": [
+        {
+          "label": "was on",
+          "sentence": "I was on parental leave for a year.",
+          "pronunciation": "아이 워즈 온 퍼렌털 리브 포 어 이어",
+          "nuance": "\"휴직 중이었다\""
+        },
+        {
+          "label": "paternity",
+          "sentence": "I took a year of paternity leave.",
+          "pronunciation": "아이 툭 어 이어 오브 퍼터니티 리브",
+          "nuance": "아빠 육아휴직은 paternity도 가능"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"my parents-in-law live Japan.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "My parents-in-law live in Japan.",
+      "pronunciation": "마이 페어런츠 인 로 리브 인 재팬",
+      "grammarPoint": "live 뒤에는 전치사 in (장소).",
+      "keyPattern": "live in + 장소",
+      "alternativeExpressions": [
+        {
+          "label": "based",
+          "sentence": "My in-laws are based in Japan.",
+          "pronunciation": "마이 인로즈 아 베이스트 인 재팬",
+          "nuance": "거주지 소개"
+        },
+        {
+          "label": "reside",
+          "sentence": "My in-laws reside in Japan.",
+          "pronunciation": "마이 인로즈 리자이드 인 재팬",
+          "nuance": "격식체"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I can't forgot the, the view.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I can't forget the view.",
+      "pronunciation": "아이 캔트 포겟 더 뷰",
+      "grammarPoint": "조동사 can't 뒤는 동사원형 (forget). forgot은 과거형.",
+      "keyPattern": "can't + 동사원형",
+      "alternativeExpressions": [
+        {
+          "label": "unforgettable",
+          "sentence": "The view was unforgettable.",
+          "pronunciation": "더 뷰 워즈 언포게터블",
+          "nuance": "형용사로 표현"
+        },
+        {
+          "label": "stuck",
+          "sentence": "That view stuck with me.",
+          "pronunciation": "댓 뷰 스턱 윗 미",
+          "nuance": "마음에 남았다"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"we sometime we stay each together with the local people.\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "We sometimes stayed with local people.",
+      "pronunciation": "위 섬타임즈 스테이드 윗 로컬 피플",
+      "grammarPoint": "빈도부사 sometimes, 과거 이야기는 stayed. each together는 불필요.",
+      "keyPattern": "stay with + 사람",
+      "alternativeExpressions": [
+        {
+          "label": "hosts",
+          "sentence": "We stayed with local hosts through Airbnb.",
+          "pronunciation": "위 스테이드 윗 로컬 호스츠 스루 에어비앤비",
+          "nuance": "구체적"
+        },
+        {
+          "label": "locals",
+          "sentence": "We stayed in homes owned by locals.",
+          "pronunciation": "위 스테이드 인 홈즈 온드 바이 로컬즈",
+          "nuance": "풀어 쓰기"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"we would go out, out the Indonesia, so we spent, um, uh, all, whole money.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "We were leaving Indonesia, so we had spent all our cash.",
+      "pronunciation": "위 워 리빙 인도네시아, 소 위 해드 스펜트 올 아워 캐시",
+      "grammarPoint": "\"곧 떠날 예정\"=we were leaving. 나라 앞 the 불필요. 먼저 일어난 일은 had spent, \"돈 전부\"는 all our money/cash.",
+      "keyPattern": "had + p.p. (먼저 일어난 일)",
+      "alternativeExpressions": [
+        {
+          "label": "ran out",
+          "sentence": "We had run out of cash by then.",
+          "pronunciation": "위 해드 란 아웃 오브 캐시 바이 덴",
+          "nuance": "\"바닥났다\""
+        },
+        {
+          "label": "spent",
+          "sentence": "We had spent all our Indonesian rupiah.",
+          "pronunciation": "위 해드 스펜트 올 아워 인도네시안 루피아",
+          "nuance": "구체 화폐"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"If, if, uh, if, if you know AI, you can, you can tackle anything.\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "If you know AI, you can handle almost anything.",
+      "pronunciation": "이프 유 노 에이아이, 유 캔 핸들 올모스트 에니씽",
+      "grammarPoint": "실제 문장은 의미가 통하지만 tackle anything은 과장. 앞 문장도 If someone is scared of AI taking their job, they should just learn it. 로 바꾸면 자연스러움.",
+      "keyPattern": "If someone is scared of X, they should + 동사",
+      "alternativeExpressions": [
+        {
+          "label": "rephrase",
+          "sentence": "If someone is scared that AI will take their job, they should just learn AI.",
+          "pronunciation": "이프 섬원 이즈 스케어드 댓 에이아이 윌 테이크 데어 잡, 데이 슈드 저스트 런 에이아이",
+          "nuance": "본인 발화(\"If someone feel scary that the AI taking the job\")의 정정형"
+        },
+        {
+          "label": "best way",
+          "sentence": "The best way to deal with the fear is to learn the tool.",
+          "pronunciation": "더 베스트 웨이 투 딜 윗 더 피어 이즈 투 런 더 툴",
+          "nuance": "조언형"
+        }
+      ]
+    }
+  ],
+  "betterAnswers": [
+    {
+      "situation": "영어를 배우기 시작한 이유를 말할 때",
+      "betterSentence": "I started learning English because my wife loves traveling, and I wanted to be able to talk for myself on our trips.",
+      "pronunciation": "아이 스타티드 러닝 잉글리시 비커즈 마이 와이프 러브스 트래블링, 앤 아이 원티드 투 비 에이블 투 톡 포 마이셀프 온 아워 트립스",
+      "koreanMeaning": "아내가 여행을 좋아해서, 여행 중 제가 직접 말하고 싶어 영어를 시작했어요.",
+      "nuanceTip": "수업 중 동기(아내와 여행)를 한 문장으로 정리.",
+      "followUpCombo": "And now I'm learning Spanish for my mother-in-law."
+    },
+    {
+      "situation": "우슈협회 업무를 소개할 때",
+      "betterSentence": "I work at the Wushu Association. I used to be an athlete and a coach, and now I work in the office, mainly on international affairs for the national team.",
+      "pronunciation": "아이 워크 앳 더 우슈 어소시에이션. 아이 유스트 투 비 언 애슬리트 앤 어 코치, 앤 나우 아이 워크 인 디 오피스, 메인리 온 인터내셔널 어페어즈 포 더 내셔널 팀",
+      "koreanMeaning": "우슈협회에서 일하고, 선수·코치였다가 지금은 국가대표 국제업무를 담당해요.",
+      "nuanceTip": "\"international just things\"를 international affairs로.",
+      "followUpCombo": "We compete in the Asian Games, not the Olympics."
+    },
+    {
+      "situation": "육아휴직 중 여행을 소개할 때",
+      "betterSentence": "During my parental leave, we traveled with our baby to Japan, Saipan, Europe, Southeast Asia, Australia, and New Zealand.",
+      "pronunciation": "듀링 마이 퍼렌털 리브, 위 트래블드 윗 아워 베이비 투 재팬, 사이판, 유럽, 사우스이스트 에이시아, 오스트레일리아, 앤 뉴질랜드",
+      "koreanMeaning": "육아휴직 동안 아기와 일본, 사이판, 유럽, 동남아, 호주, 뉴질랜드를 다녀왔어요.",
+      "nuanceTip": "나열 + during으로 기간 설정.",
+      "followUpCombo": "New Zealand was my favorite."
+    },
+    {
+      "situation": "뉴질랜드가 가장 좋았다고 말할 때",
+      "betterSentence": "If I could move anywhere, I'd choose New Zealand. I can't forget the scenery.",
+      "pronunciation": "이프 아이 쿠드 무브 에니웨어, 아이드 추즈 뉴질랜드. 아이 캔트 포겟 더 시너리",
+      "koreanMeaning": "어디로든 이사할 수 있다면 뉴질랜드를 택할 거예요. 풍경을 잊을 수 없어요.",
+      "nuanceTip": "가정법 If I could ~, I'd ~.",
+      "followUpCombo": "We'll visit Hobbiton on the North Island next time."
+    },
+    {
+      "situation": "공항 유모차 에피소드를 이야기할 때",
+      "betterSentence": "At the airport, they asked us to pay for the stroller in cash, but we had spent all our cash in Bali. Luckily, the staff let us go.",
+      "pronunciation": "앳 디 에어포트, 데이 애스크트 어스 투 페이 포 더 스트롤러 인 캐시, 벗 위 해드 스펜트 올 아워 캐시 인 발리. 럭킬리, 더 스태프 렛 어스 고",
+      "koreanMeaning": "공항에서 유모차 요금을 현금으로 내라 했는데 발리에서 현금을 다 써서... 다행히 보내 줬어요.",
+      "nuanceTip": "이야기는 과거, 먼저 일어난 일은 had p.p.",
+      "followUpCombo": "It was my only bad travel experience."
+    },
+    {
+      "situation": "AI가 일자리를 뺏는지 걱정되느냐는 질문에",
+      "betterSentence": "I'm not worried. Every new technology, like the internet or cars, made people panic, but it turned out to be just a tool. We still make the final decision.",
+      "pronunciation": "아임 낫 워리드. 에브리 뉴 테크놀로지, 라이크 디 인터넷 오어 카즈, 메이드 피플 패닉, 벗 잇 턴드 아웃 투 비 저스트 어 툴. 위 스틸 메익 더 파이널 디시전",
+      "koreanMeaning": "걱정 안 해요. 인터넷이나 자동차 때도 패닉이었지만 결국 도구였고, 최종 결정은 우리가 해요.",
+      "nuanceTip": "본인 주장(just a tool, final decision)을 정리.",
+      "followUpCombo": "So if you're scared, just learn AI."
+    }
+  ],
+  "betterQuestions": [
+    {
+      "context": "튜터의 이름을 처음 물을 때",
+      "questionSentence": "How would you like me to pronounce your name?",
+      "pronunciation": "하우 우드 유 라이크 미 투 프러나운스 유어 네임",
+      "koreanMeaning": "이름을 어떻게 발음하면 될까요?",
+      "nuanceTip": "정중한 would you like ~.",
+      "followUpCombo": "Is it okay if I call you Jolene?"
+    },
+    {
+      "context": "수업 방식을 요청할 때",
+      "questionSentence": "Could you give me a topic before each lesson so I can prepare?",
+      "pronunciation": "쿠드 유 기브 미 어 토픽 비포 이치 레슨 소 아이 캔 프리페어",
+      "koreanMeaning": "수업 전에 주제를 주시면 준비할 수 있어요.",
+      "nuanceTip": "본인이 말한 \"give me some topic\"의 정교화.",
+      "followUpCombo": "Maybe a movie or a person?"
+    },
+    {
+      "context": "질문을 못 알아들었을 때",
+      "questionSentence": "Sorry, could you say that in a simpler way?",
+      "pronunciation": "쏘리, 쿠드 유 세이 댓 인 어 심플러 웨이",
+      "koreanMeaning": "죄송해요, 더 쉽게 말씀해 주실래요?",
+      "nuanceTip": "본인의 \"You don't tell me\" 대체.",
+      "followUpCombo": "Could you type the question in the chat?"
+    },
+    {
+      "context": "튜터의 일/가족에 대해 물을 때",
+      "questionSentence": "You mentioned your partner is a graphic designer. Is he using AI tools?",
+      "pronunciation": "유 멘션드 유어 파트너 이즈 어 그래픽 디자이너. 이즈 히 유징 에이아이 툴즈",
+      "koreanMeaning": "파트너분이 그래픽 디자이너라 하셨죠. AI 도구를 쓰나요?",
+      "nuanceTip": "대화 내용을 언급해 질문 확장.",
+      "followUpCombo": "How does he feel about it?"
+    },
+    {
+      "context": "튜터의 여행 경험을 물을 때",
+      "questionSentence": "Which place has been your favorite to travel to, and why?",
+      "pronunciation": "위치 플레이스 해즈 빈 유어 페이버릿 투 트래블 투, 앤 와이",
+      "koreanMeaning": "가장 좋았던 여행지는 어디고 이유는요?",
+      "nuanceTip": "현재완료 + why.",
+      "followUpCombo": "Would you go back there?"
+    },
+    {
+      "context": "시차/시간대를 물을 때",
+      "questionSentence": "What time is it there right now?",
+      "pronunciation": "왓 타임 이즈 잇 데어 라이트 나우",
+      "koreanMeaning": "거기는 지금 몇 시예요?",
+      "nuanceTip": "본인이 이미 수업 끝에 활용.",
+      "followUpCombo": "Have you had lunch yet?"
+    }
+  ],
+  "scenarioTitle": "복습 시나리오 1: 자기소개와 여행 이야기",
+  "scenarioContext": "※ 이 대화는 수업 주제를 바탕으로 만든 연습용 스크립트이며, 실제 수업 녹취가 아닙니다. 첫 수업의 자기소개, 가족, 육아휴직 세계여행 주제를 정리해 말하는 연습 스크립트입니다.",
+  "scenarioTurns": [
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "Tell me about yourself, Johnson.",
+      "pronunciation": "텔 미 어바웃 유어셀프, 존슨",
+      "koreanText": "자기소개 해 주세요.",
+      "keyExpression": "Tell me about yourself",
+      "speakingTip": "짧은 3문장 구조."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "I work at the Wushu Association. I used to be a coach.",
+      "pronunciation": "아이 워크 앳 더 우슈 어소시에이션. 아이 유스트 투 비 어 코치",
+      "koreanText": "우슈협회에서 일하고 예전엔 코치였어요.",
+      "keyExpression": "used to be",
+      "speakingTip": "과거 직업 표현."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "Do you have children?",
+      "pronunciation": "두 유 해브 칠드런",
+      "koreanText": "자녀가 있어요?",
+      "keyExpression": "Do you have ~?",
+      "speakingTip": "짧게 답해도 충분."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Yes, a daughter. She's eighteen months old.",
+      "pronunciation": "예스, 어 도터. 쉬즈 에이틴 먼스 올드",
+      "koreanText": "네, 딸이 18개월이에요.",
+      "keyExpression": "N months old",
+      "speakingTip": "months 복수형."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "Where have you traveled with her?",
+      "pronunciation": "웨어 해브 유 트래블드 윗 허",
+      "koreanText": "딸과 어디를 여행했어요?",
+      "keyExpression": "Where have you ~?",
+      "speakingTip": "경험 질문."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "During my parental leave, we visited Japan, Europe, and New Zealand.",
+      "pronunciation": "듀링 마이 퍼렌털 리브, 위 비지티드 재팬, 유럽, 앤 뉴질랜드",
+      "koreanText": "육아휴직 중 일본, 유럽, 뉴질랜드를 갔어요.",
+      "keyExpression": "During my leave",
+      "speakingTip": "기간 표현."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "Which country was the best?",
+      "pronunciation": "위치 컨트리 워즈 더 베스트",
+      "koreanText": "어느 나라가 가장 좋았어요?",
+      "keyExpression": "the best",
+      "speakingTip": "비교 질문."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "New Zealand. I can't forget the scenery.",
+      "pronunciation": "뉴질랜드. 아이 캔트 포겟 더 시너리",
+      "koreanText": "뉴질랜드요. 풍경을 잊을 수 없어요.",
+      "keyExpression": "can't forget",
+      "speakingTip": "can't + 원형."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "s1",
+      "badge": "시나리오 1 · 심층 복습",
+      "title": "복습 시나리오 1: 자기소개와 여행 이야기",
+      "context": "※ 이 대화는 수업 주제를 바탕으로 만든 연습용 스크립트이며, 실제 수업 녹취가 아닙니다. 첫 수업의 자기소개, 가족, 육아휴직 세계여행 주제를 정리해 말하는 연습 스크립트입니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Tell me about yourself, Johnson.",
+          "pronunciation": "텔 미 어바웃 유어셀프, 존슨",
+          "koreanText": "자기소개 해 주세요.",
+          "keyExpression": "Tell me about yourself",
+          "speakingTip": "짧은 3문장 구조."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I work at the Wushu Association. I used to be a coach.",
+          "pronunciation": "아이 워크 앳 더 우슈 어소시에이션. 아이 유스트 투 비 어 코치",
+          "koreanText": "우슈협회에서 일하고 예전엔 코치였어요.",
+          "keyExpression": "used to be",
+          "speakingTip": "과거 직업 표현."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Do you have children?",
+          "pronunciation": "두 유 해브 칠드런",
+          "koreanText": "자녀가 있어요?",
+          "keyExpression": "Do you have ~?",
+          "speakingTip": "짧게 답해도 충분."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Yes, a daughter. She's eighteen months old.",
+          "pronunciation": "예스, 어 도터. 쉬즈 에이틴 먼스 올드",
+          "koreanText": "네, 딸이 18개월이에요.",
+          "keyExpression": "N months old",
+          "speakingTip": "months 복수형."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Where have you traveled with her?",
+          "pronunciation": "웨어 해브 유 트래블드 윗 허",
+          "koreanText": "딸과 어디를 여행했어요?",
+          "keyExpression": "Where have you ~?",
+          "speakingTip": "경험 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "During my parental leave, we visited Japan, Europe, and New Zealand.",
+          "pronunciation": "듀링 마이 퍼렌털 리브, 위 비지티드 재팬, 유럽, 앤 뉴질랜드",
+          "koreanText": "육아휴직 중 일본, 유럽, 뉴질랜드를 갔어요.",
+          "keyExpression": "During my leave",
+          "speakingTip": "기간 표현."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Which country was the best?",
+          "pronunciation": "위치 컨트리 워즈 더 베스트",
+          "koreanText": "어느 나라가 가장 좋았어요?",
+          "keyExpression": "the best",
+          "speakingTip": "비교 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "New Zealand. I can't forget the scenery.",
+          "pronunciation": "뉴질랜드. 아이 캔트 포겟 더 시너리",
+          "koreanText": "뉴질랜드요. 풍경을 잊을 수 없어요.",
+          "keyExpression": "can't forget",
+          "speakingTip": "can't + 원형."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "badge": "시나리오 2 · 비즈니스 응용",
+      "title": "비즈니스 응용: Hermes AI 멀티에이전트 소개",
+      "context": "※ 이 대화는 수업 주제를 바탕으로 만든 연습용 스크립트이며, 실제 수업 녹취가 아닙니다. 수업에서 설명한 Hermes 멀티에이전트와 AI 철학을 비즈니스 미팅용으로 확장한 연습 스크립트입니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "How do you use AI in your work?",
+          "pronunciation": "하우 두 유 유즈 에이아이 인 유어 웍",
+          "koreanText": "일에 AI를 어떻게 쓰세요?",
+          "keyExpression": "use AI for",
+          "speakingTip": "용도를 설명."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I build programs that help my work. Today I used the Hermes agent.",
+          "pronunciation": "아이 빌드 프로그램즈 댓 헬프 마이 웍. 투데이 아이 유스트 더 허메스 에이전트",
+          "koreanText": "업무를 돕는 프로그램을 만들어요. 오늘은 Hermes 에이전트를 썼어요.",
+          "keyExpression": "programs that help",
+          "speakingTip": "관계대명사 that."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What does it do exactly?",
+          "pronunciation": "왓 더즈 잇 두 이그잭틀리",
+          "koreanText": "정확히 뭘 하죠?",
+          "keyExpression": "What does it do?",
+          "speakingTip": "기능 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "It creates a team of agents with different roles, like a designer or a photographer.",
+          "pronunciation": "잇 크리에이츠 어 팀 오브 에이전츠 윗 디퍼런트 롤즈, 라이크 어 디자이너 오어 어 포토그래퍼",
+          "koreanText": "디자이너, 사진가 등 역할이 다른 에이전트 팀을 만들어요.",
+          "keyExpression": "with different roles",
+          "speakingTip": "역할 소개."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "And they talk to each other?",
+          "pronunciation": "앤 데이 톡 투 이치 아더",
+          "koreanText": "서로 대화하나요?",
+          "keyExpression": "talk to each other",
+          "speakingTip": "확인 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Yes. I give them a topic, and they discuss it and give me a result.",
+          "pronunciation": "예스. 아이 기브 뎀 어 토픽, 앤 데이 디스커스 잇 앤 기브 미 어 리절트",
+          "koreanText": "네, 주제를 주면 토론해서 결과를 줘요.",
+          "keyExpression": "give me a result",
+          "speakingTip": "과정 요약."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Does AI worry you about your job?",
+          "pronunciation": "더즈 에이아이 워리 유 어바웃 유어 잡",
+          "koreanText": "AI가 일자리를 위협한다고 걱정하나요?",
+          "keyExpression": "worry you",
+          "speakingTip": "꼬리질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "No. It's just a tool, and we make the final decision.",
+          "pronunciation": "노. 잇츠 저스트 어 툴, 앤 위 메익 더 파이널 디시전",
+          "koreanText": "아니요, 도구일 뿐이고 최종 결정은 우리가 해요.",
+          "keyExpression": "just a tool",
+          "speakingTip": "핵심 주장."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "badge": "시나리오 3 · 꼬리질문 디펜스",
+      "title": "꼬리질문 디펜스: 직업과 일정 질문에 답하기",
+      "context": "※ 이 대화는 수업 주제를 바탕으로 만든 연습용 스크립트이며, 실제 수업 녹취가 아닙니다. 튜터가 질문을 바꿔 물었던 상황(직업, 연중 일정)에서 명확히 답하는 연습 스크립트입니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What exactly do you do at the association?",
+          "pronunciation": "왓 이그잭틀리 두 유 두 앳 디 어소시에이션",
+          "koreanText": "협회에서 정확히 무슨 일을 하세요?",
+          "keyExpression": "What exactly",
+          "speakingTip": "구체 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I handle international affairs for the national team.",
+          "pronunciation": "아이 핸들 인터내셔널 어페어즈 포 더 내셔널 팀",
+          "koreanText": "국가대표 팀의 국제업무를 담당해요.",
+          "keyExpression": "handle",
+          "speakingTip": "업무 설명."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Do you help organize the competitions?",
+          "pronunciation": "두 유 헬프 오거나이즈 더 컴퍼티션즈",
+          "koreanText": "대회 조직도 돕나요?",
+          "keyExpression": "help organize",
+          "speakingTip": "확인 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Sometimes. Mainly, I prepare our team to attend international events.",
+          "pronunciation": "섬타임즈. 메인리, 아이 프리페어 아워 팀 투 어텐드 인터내셔널 이벤츠",
+          "koreanText": "가끔요. 주로 국제대회 참가를 준비해요.",
+          "keyExpression": "attend",
+          "speakingTip": "참가 표현."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Does your team compete all year or in seasons?",
+          "pronunciation": "더즈 유어 팀 컴피트 올 이어 오어 인 시즌즈",
+          "koreanText": "일 년 내내 경기하나요, 시즌제인가요?",
+          "keyExpression": "all year",
+          "speakingTip": "재질문 의도 이해."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "We compete all year round.",
+          "pronunciation": "위 컴피트 올 이어 라운드",
+          "koreanText": "일 년 내내 경기해요.",
+          "keyExpression": "all year round",
+          "speakingTip": "한 문장 답."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "How did your team do at the Asian Games?",
+          "pronunciation": "하우 디드 유어 팀 두 앳 디 에이전 게임즈",
+          "koreanText": "아시안게임 성적은 어땠어요?",
+          "keyExpression": "How did ~ do?",
+          "speakingTip": "성과 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "So-so. Not good, not bad, but we could have done better.",
+          "pronunciation": "소소. 낫 굿, 낫 배드, 벗 위 쿠드 해브 던 베터",
+          "koreanText": "그저 그랬어요. 더 잘할 수도 있었어요.",
+          "keyExpression": "could have done better",
+          "speakingTip": "아쉬움 표현."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,719 @@
+{
+  "lang": "en",
+  "langBadge": "🇺🇸 영어 (English)",
+  "ttsLang": "en-US",
+  "grammarCorrections": [
+    {
+      "myWrongSentence": "\"And her story keep changing, and sometime it was self-defense, and sometimes she admitted she wanted to kill\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Her story kept changing; sometimes it was self-defense, and sometimes she admitted she wanted to kill.",
+      "pronunciation": "허 스토리 켑트 체인징; 섬타임즈 잇 워즈 셀프 디펜스, 앤 섬타임즈 쉬 어드미티드 쉬 원티드 투 킬",
+      "grammarPoint": "과거 이야기이므로 keep은 kept(keep + -ing). 'sometime(언젠가)'이 아니라 반복 의미의 sometimes(복수)입니다.",
+      "keyPattern": "kept + -ing / sometimes ~, sometimes ~",
+      "alternativeExpressions": [
+        {
+          "label": "대조",
+          "sentence": "Her version of events kept shifting.",
+          "pronunciation": "허 버전 오브 이벤츠 켑트 쉬프팅",
+          "nuance": "version of events = 진술 내용"
+        },
+        {
+          "label": "신뢰도",
+          "sentence": "Her story wasn't consistent, so it's hard to trust.",
+          "pronunciation": "허 스토리 워즌트 컨시스턴트, 쏘 잇츠 하드 투 트러스트",
+          "nuance": "consistent = 일관된"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I, I'm not- I'm not woman, so, uh, I, I don't f-feel b-be, be raped.\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "I'm not a woman, so I can't really know how it feels to be assaulted.",
+      "pronunciation": "아임 낫 어 우먼, 쏘 아이 캔트 리얼리 노우 하우 잇 필즈 투 비 어설티드",
+      "grammarPoint": "직업·성별 같은 신분 명사 앞에는 a가 필요합니다(a woman). 'how it feels to be ~'로 '~가 어떤 느낌인지'를 표현하면 완성됩니다.",
+      "keyPattern": "I can't know how it feels to ~",
+      "alternativeExpressions": [
+        {
+          "label": "공감 표현",
+          "sentence": "I can only imagine how terrifying that must be.",
+          "pronunciation": "아이 캔 온리 이매진 하우 테러파잉 댓 머스트 비",
+          "nuance": "can only imagine = 상상만 할 뿐"
+        },
+        {
+          "label": "판단 보류",
+          "sentence": "So I don't think it's my place to judge.",
+          "pronunciation": "쏘 아이 돈트 씽크 잇츠 마이 플레이스 투 저지",
+          "nuance": "it's not my place to ~ = 내가 판단할 입장이 아님"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"if I was she, uh, if, if I was her, uh, I don't know, I kill people. So maybe I, I also kill y-y... I also kill people\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "If I were her, I might have killed someone too.",
+      "pronunciation": "이프 아이 워 허, 아이 마이트 해브 킬드 섬원 투",
+      "grammarPoint": "현실과 반대되는 가정은 If I were her(가정법), 결과절은 might/would (have p.p.)로 씁니다. 'I kill people'처럼 현재형은 가정의 의미가 전달되지 않습니다.",
+      "keyPattern": "If I were + 목적격, I would/might ~",
+      "alternativeExpressions": [
+        {
+          "label": "가정법 기본",
+          "sentence": "If I were in her position, I might have done the same.",
+          "pronunciation": "이프 아이 워 인 허 포지션, 아이 마이트 해브 던 더 세임",
+          "nuance": "in her position = 그녀 입장이라면"
+        },
+        {
+          "label": "조심스러운 표현",
+          "sentence": "I can partly understand the first one, but not the rest.",
+          "pronunciation": "아이 캔 파틀리 언더스탠드 더 퍼스트 원, 벗 낫 더 레스트",
+          "nuance": "부분적 이해를 명확히 한정"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I, I cannot doing to keeping, keeping doing that jo-job.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I couldn't keep doing that job.",
+      "pronunciation": "아이 쿠든트 킵 두잉 댓 잡",
+      "grammarPoint": "can/could 뒤에는 동사원형이 오고(cannot doing ✕), '계속 ~하다'는 keep + -ing입니다.",
+      "keyPattern": "couldn't/can't + 동사원형, keep + -ing",
+      "alternativeExpressions": [
+        {
+          "label": "이유 포함",
+          "sentence": "I couldn't go on like that because it was too dangerous.",
+          "pronunciation": "아이 쿠든트 고 온 라이크 댓 비커즈 잇 워즈 투 데인저러스",
+          "nuance": "go on = 계속하다"
+        },
+        {
+          "label": "이어서 말하기",
+          "sentence": "Once was enough; I knew a second time would be dangerous.",
+          "pronunciation": "원스 워즈 이너프; 아이 뉴 어 세컨드 타임 우드 비 데인저러스",
+          "nuance": "가정된 판단의 근거 제시"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"second and third and seven vic- she, she make a, make seven victim is, um, mm, uh, uh, I can't understand.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "She made seven victims, and I can't understand that.",
+      "pronunciation": "쉬 메이드 세븐 빅팀즈, 앤 아이 캔트 언더스탠드 댓",
+      "grammarPoint": "과거 사건은 made, 숫자 뒤 명사는 복수(seven victims). 'make victims'보다 'kill seven men'이나 'have seven victims'가 더 자연스럽습니다.",
+      "keyPattern": "숫자 + 복수명사 / 과거 시제 일치",
+      "alternativeExpressions": [
+        {
+          "label": "정확한 표현",
+          "sentence": "She killed seven men, and that part I can't understand.",
+          "pronunciation": "쉬 킬드 세븐 맨, 앤 댓 파트 아이 캔트 언더스탠드",
+          "nuance": "동사 kill이 가장 직접적"
+        },
+        {
+          "label": "한계 표현",
+          "sentence": "I could accept the first one, but not seven.",
+          "pronunciation": "아이 쿠드 억셉트 더 퍼스트 원, 벗 낫 세븐",
+          "nuance": "accept로 이해 범위를 구분"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I make a, a bank account and-\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "I opened a bank account and got the necessary permits.",
+      "pronunciation": "아이 오픈드 어 뱅크 어카운트 앤 갓 더 네서세리 퍼밋츠",
+      "grammarPoint": "계좌는 make가 아니라 open, '허가'는 permit/license/registration처럼 구체적으로 말합니다. 지난 일이므로 과거형입니다.",
+      "keyPattern": "open a bank account / get a license",
+      "alternativeExpressions": [
+        {
+          "label": "법인 설립",
+          "sentence": "I set up the company and opened a corporate account.",
+          "pronunciation": "아이 셋 업 더 컴퍼니 앤 오픈드 어 코퍼레이트 어카운트",
+          "nuance": "corporate account = 법인 계좌"
+        },
+        {
+          "label": "절차 표현",
+          "sentence": "I handled the registration and paperwork.",
+          "pronunciation": "아이 핸들드 더 레지스트레이션 앤 페이퍼워크",
+          "nuance": "paperwork = 행정 서류"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"but if my job, uh, finish, finished early, so I, I, I, I take her, her at 4:00 PM.\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "If I finish work early, I pick her up at 4:00 PM.",
+      "pronunciation": "이프 아이 피니시 워크 얼리, 아이 픽 허 업 앳 포 피엠",
+      "grammarPoint": "아이를 데리러 간다는 의미는 take가 아닌 pick (her) up입니다. 조건절은 현재형(finish)을 씁니다.",
+      "keyPattern": "pick someone up / If + 현재, 현재",
+      "alternativeExpressions": [
+        {
+          "label": "육아 일상",
+          "sentence": "I pick my daughter up from daycare around four.",
+          "pronunciation": "아이 픽 마이 도터 업 프럼 데이케어 어라운드 포",
+          "nuance": "from daycare로 출발 장소 명시"
+        },
+        {
+          "label": "조건",
+          "sentence": "On days I finish early, I get her at four.",
+          "pronunciation": "온 데이즈 아이 피니시 얼리, 아이 겟 허 앳 포",
+          "nuance": "get = 데려오다(구어)"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I'm not support, but, um, Tr- Trump, Trump is a not normal person\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I don't support him, but Trump isn't a normal person.",
+      "pronunciation": "아이 돈트 서포트 힘, 벗 트럼프 이즌트 어 노멀 퍼슨",
+      "grammarPoint": "일반동사 support는 부정할 때 do not을 쓰고(I'm not support ✕), 'a not normal'이 아니라 'not a normal person' 순서입니다.",
+      "keyPattern": "I don't + 동사, not a + 명사",
+      "alternativeExpressions": [
+        {
+          "label": "부드럽게",
+          "sentence": "I'm not a supporter, but I find him unpredictable.",
+          "pronunciation": "아임 낫 어 서포터, 벗 아이 파인드 힘 언프리딕터블",
+          "nuance": "unpredictable = 예측 불가"
+        },
+        {
+          "label": "논점 분리",
+          "sentence": "I don't support him, but I understand why some voters chose him.",
+          "pronunciation": "아이 돈트 서포트 힘, 벗 아이 언더스탠드 와이 섬 보터스 초즈 힘",
+          "nuance": "이해와 지지를 구분"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"she attacked, she at- attacked I- Iran is so, so bad, so wrong.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "He attacked Iran, which was really wrong.",
+      "pronunciation": "히 어택트 이란, 위치 워즈 리얼리 롱",
+      "grammarPoint": "트럼프를 가리킬 때 she가 섞였습니다(he). 또한 'attacked Iran is so bad'는 주어와 동사가 겹치므로 which / that was ~로 연결합니다.",
+      "keyPattern": "He ~, which was + 형용사",
+      "alternativeExpressions": [
+        {
+          "label": "평가 표현",
+          "sentence": "Attacking Iran was a big mistake in my view.",
+          "pronunciation": "어택킹 이란 워즈 어 빅 미스테이크 인 마이 뷰",
+          "nuance": "동명사 주어로 간결하게"
+        },
+        {
+          "label": "모순 지적",
+          "sentence": "He promised no more wars, but he started a new one.",
+          "pronunciation": "히 프라미스트 노 모어 워즈, 벗 히 스타티드 어 뉴 원",
+          "nuance": "promised ~, but ... 약속과 행동의 대비"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Korean, Korean so... Because Korea, Korea is so safe, so Korean, uh, how to say this? Doesn't have, doesn't have, uh, sense of urgency.\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "Because Korea is so safe, Koreans tend to lack a sense of urgency.",
+      "pronunciation": "비커즈 코리아 이즈 쏘 세이프, 코리안즈 텐드 투 랙 어 센스 오브 어전시",
+      "grammarPoint": "'한국인들'은 복수 Koreans, sense of urgency 앞에는 a가 필요합니다(a sense of urgency). 'lack'이나 'don't have'로 마무리하면 문장이 완성됩니다.",
+      "keyPattern": "Koreans tend to lack a sense of ~",
+      "alternativeExpressions": [
+        {
+          "label": "안전 의식",
+          "sentence": "Koreans aren't used to being on guard.",
+          "pronunciation": "코리안즈 아란트 유스트 투 빙 온 가드",
+          "nuance": "on guard = 경계하는"
+        },
+        {
+          "label": "경험 연결",
+          "sentence": "That's why people warn us to wear backpacks in front.",
+          "pronunciation": "댓츠 와이 피플 원 어스 투 웨어 백팩스 인 프런트",
+          "nuance": "실제 수업에서 말한 배낭 예시와 연결"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I think, mm, Korea is most, most safe, safer in se-\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "I think Korea is one of the safest countries in the world.",
+      "pronunciation": "아이 씽크 코리아 이즈 원 오브 더 세이피스트 컨트리즈 인 더 월드",
+      "grammarPoint": "'가장 안전한'은 the safest이고, 세계 기준이라 'one of the safest countries'가 더 정확하고 안전한 표현입니다.",
+      "keyPattern": "one of the + 최상급 + 복수명사",
+      "alternativeExpressions": [
+        {
+          "label": "근거 제시",
+          "sentence": "It's very safe: there are CCTVs everywhere and people leave phones on café tables.",
+          "pronunciation": "잇츠 베리 세이프: 데어 아 시시티비즈 에브리웨어 앤 피플 리브 폰즈 온 카페 테이블즈",
+          "nuance": "실제로 말한 근거를 문장으로"
+        },
+        {
+          "label": "비교",
+          "sentence": "It's much safer than many countries I've visited.",
+          "pronunciation": "잇츠 머치 세이퍼 댄 매니 컨트리즈 아이브 비지티드",
+          "nuance": "개인 경험 기반 비교"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I stayed China, so actually, yeah, I, I, I'm already familiar\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I stayed in China until I was 18, so I'm already used to being abroad.",
+      "pronunciation": "아이 스테이드 인 차이나 언틸 아이 워즈 에이틴, 쏘 아임 올레디 유스트 투 빙 어브로드",
+      "grammarPoint": "장소 앞 전치사 in이 빠졌습니다(stayed in China). '~에 익숙하다'는 be used to + -ing이며, 말씀하신 'used to be abroad'는 형태가 달라 의미가 바뀝니다.",
+      "keyPattern": "stay in + 장소 / be used to + -ing",
+      "alternativeExpressions": [
+        {
+          "label": "거주 이력",
+          "sentence": "I lived in China until I was 18.",
+          "pronunciation": "아이 리브드 인 차이나 언틸 아이 워즈 에이틴",
+          "nuance": "lived가 stayed보다 일반적"
+        },
+        {
+          "label": "적응력",
+          "sentence": "So living abroad never felt strange to me.",
+          "pronunciation": "쏘 리빙 어브로드 네버 펠트 스트레인지 투 미",
+          "nuance": "익숙함을 풀어 쓴 표현"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I choose, chosen,\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "So I chose the Philippines to learn English.",
+      "pronunciation": "쏘 아이 초즈 더 필리핀즈 투 런 잉글리시",
+      "grammarPoint": "choose의 과거형은 chose(chosen은 과거분사)입니다. 국가명은 the Philippines로 복수형을 씁니다.",
+      "keyPattern": "choose - chose - chosen / the Philippines",
+      "alternativeExpressions": [
+        {
+          "label": "이유 포함",
+          "sentence": "I chose the Philippines because the US and UK were too expensive.",
+          "pronunciation": "아이 초즈 더 필리핀즈 비커즈 디 유에스 앤 유케이 워 투 익스펜시브",
+          "nuance": "실제 이유를 한 문장으로"
+        },
+        {
+          "label": "비용 중심",
+          "sentence": "It was more affordable for studying English.",
+          "pronunciation": "잇 워즈 모어 어포더블 포 스터딩 잉글리시",
+          "nuance": "affordable = 부담 없는 가격"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"We left, we left two years, so, mm, someone\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "There are two years left, so a new president will come.",
+      "pronunciation": "데어 아 투 이어즈 레프트, 쏘 어 뉴 프레지던트 윌 컴",
+      "grammarPoint": "'남은 기간'은 left를 뒤에 붙인 'two years left'로 표현합니다. 주어(we)를 쓰면 '우리가 떠났다'는 뜻이 됩니다.",
+      "keyPattern": "There are + 기간 + left",
+      "alternativeExpressions": [
+        {
+          "label": "임기 표현",
+          "sentence": "He has two years left in office.",
+          "pronunciation": "히 해즈 투 이어즈 레프트 인 오피스",
+          "nuance": "in office = 재임 중"
+        },
+        {
+          "label": "희망 표현",
+          "sentence": "I hope things change after the next election.",
+          "pronunciation": "아이 호프 띵스 체인지 애프터 더 넥스트 일렉션",
+          "nuance": "희망은 I hope + 현재형"
+        }
+      ]
+    }
+  ],
+  "betterAnswers": [
+    {
+      "situation": "아일린 다큐에 대한 의견을 물을 때",
+      "betterSentence": "Her past can't justify murder, and I can't fully trust her story. I understand her childhood was terrible, but that doesn't excuse it.",
+      "pronunciation": "허 패스트 캔트 저스티파이 머더, 앤 아이 캔트 풀리 트러스트 허 스토리. 아이 언더스탠드 허 차일드후드 워즈 테러블, 벗 댓 더즌트 익스큐즈 잇",
+      "koreanMeaning": "과거가 살인을 정당화할 수 없고 그녀의 말도 다 믿기 어려워요. 어린 시절은 끔찍했지만 변명이 되진 않아요.",
+      "nuanceTip": "한 문장에서 이해 → 한계를 but으로 이어갑니다.",
+      "followUpCombo": "Still, I can partly understand the first case."
+    },
+    {
+      "situation": "공정한 재판이었는지 물을 때",
+      "betterSentence": "I don't think the trial was entirely fair, but with a jury of ten or more people, changing the lawyer wasn't the biggest issue.",
+      "pronunciation": "아이 돈트 씽크 더 트라이얼 워즈 인타이얼리 페어, 벗 위드 어 쥬리 오브 텐 오어 모어 피플, 체인징 더 로여 워즌트 더 비기스트 이슈",
+      "koreanMeaning": "재판이 완전히 공정했다고 보진 않지만 배심원이 있어서 변호사 교체가 가장 큰 문제는 아니었다고 봐요.",
+      "nuanceTip": "jury(배심원단)는 수업에서 튜터가 알려준 단어입니다.",
+      "followUpCombo": "To me, the bigger issue was her unstable life."
+    },
+    {
+      "situation": "이번 주에 뭘 했는지 물을 때",
+      "betterSentence": "This week I set up my new company, opened a bank account, and took care of the permits. In the afternoon I looked after my daughter.",
+      "pronunciation": "디스 윅 아이 셋 업 마이 뉴 컴퍼니, 오픈드 어 뱅크 어카운트, 앤 툭 케어 오브 더 퍼밋츠. 인 디 애프터눈 아이 룩트 애프터 마이 도터",
+      "koreanMeaning": "이번 주엔 새 회사를 세우고 계좌를 만들고 인허가를 처리했어요. 오후엔 딸을 돌봤어요.",
+      "nuanceTip": "나열은 A, B, and C 형태로 병렬을 맞춥니다.",
+      "followUpCombo": "Our business focuses on investment and consulting."
+    },
+    {
+      "situation": "한국의 치안에 대해 물을 때",
+      "betterSentence": "I think Korea is one of the safest countries. There are CCTVs everywhere, and people leave their phones on cafe tables when they order.",
+      "pronunciation": "아이 씽크 코리아 이즈 원 오브 더 세이피스트 컨트리즈. 데어 아 시시티비즈 에브리웨어, 앤 피플 리브 데어 폰즈 온 카페 테이블즈 웬 데이 오더",
+      "koreanMeaning": "한국은 가장 안전한 나라 중 하나예요. CCTV가 곳곳에 있고 카페에서 주문할 때 폰을 테이블에 두어도 돼요.",
+      "nuanceTip": "구체 예시가 설득력을 줍니다.",
+      "followUpCombo": "That's why Koreans often lack a sense of urgency abroad."
+    },
+    {
+      "situation": "20년 전 마닐라 어학연수 경험을 말할 때",
+      "betterSentence": "Twenty years ago, when I was 23, I studied English alone in Manila for three months. Back then, nobody had a smartphone, so I just followed street signs.",
+      "pronunciation": "트웬티 이어즈 어고, 웬 아이 워즈 트웬티쓰리, 아이 스터디드 잉글리시 얼론 인 마닐라 포 쓰리 먼쓰. 백 덴, 노바디 해드 어 스마트폰, 쏘 아이 저스트 팔로우드 스트리트 사인즈",
+      "koreanMeaning": "20년 전 23살에 마닐라에서 3개월 혼자 영어를 공부했어요. 그때는 스마트폰이 없어서 표지판을 따라갔어요.",
+      "nuanceTip": "Back then으로 과거 시점을 분명히 합니다.",
+      "followUpCombo": "That was the first time I felt scared in another country."
+    },
+    {
+      "situation": "트럼프에 대한 입장을 물을 때",
+      "betterSentence": "I don't support him. I understand why some Americans voted for him, but he promised no more wars and then attacked Iran.",
+      "pronunciation": "아이 돈트 서포트 힘. 아이 언더스탠드 와이 섬 어메리칸즈 보티드 포 힘, 벗 히 프라미스트 노 모어 워즈 앤 덴 어택트 이란",
+      "koreanMeaning": "지지하지 않아요. 왜 투표했는지는 이해하지만 전쟁 안 한다고 약속하고 이란을 공격했어요.",
+      "nuanceTip": "him / he를 일관되게 사용하세요(수업에서 she가 섞였던 부분).",
+      "followUpCombo": "Anyway, there are two years left."
+    }
+  ],
+  "betterQuestions": [
+    {
+      "context": "튜터가 치킨 소리를 사과했을 때",
+      "questionSentence": "No worries at all. What's it like living in the province?",
+      "pronunciation": "노 워리즈 앳 올. 왓츠 잇 라이크 리빙 인 더 프라빈스",
+      "koreanMeaning": "괜찮아요. 시골 생활은 어때요?",
+      "nuanceTip": "What's it like ~ing 는 경험을 묻는 질문입니다.",
+      "followUpCombo": "Do you ever miss the city?"
+    },
+    {
+      "context": "다큐에 대한 튜터의 의견이 궁금할 때",
+      "questionSentence": "How did your opinion change after watching the documentary?",
+      "pronunciation": "하우 디드 유어 오피니언 체인지 애프터 워칭 더 다큐멘터리",
+      "koreanMeaning": "다큐를 보고 의견이 어떻게 바뀌었어요?",
+      "nuanceTip": "How did ~ change 는 변화를 이끌어내는 질문입니다.",
+      "followUpCombo": "Which part affected you the most?"
+    },
+    {
+      "context": "튜터가 가족 안전 교육을 언급했을 때",
+      "questionSentence": "How do you think we should teach children to protect themselves?",
+      "pronunciation": "하우 두 유 씽크 위 슈드 티치 칠드런 투 프로텍트 뎀셀브즈",
+      "koreanMeaning": "아이들에게 스스로를 지키는 법을 어떻게 가르쳐야 할까요?",
+      "nuanceTip": "should로 의견을 묻습니다.",
+      "followUpCombo": "Did your father's advice help you?"
+    },
+    {
+      "context": "튜터의 나라 치안이 궁금할 때",
+      "questionSentence": "Is it safe to travel alone in the Philippines these days?",
+      "pronunciation": "이즈 잇 세이프 투 트래블 얼론 인 더 필리핀즈 디즈 데이즈",
+      "koreanMeaning": "요즘 필리핀에서 혼자 여행해도 안전한가요?",
+      "nuanceTip": "these days로 현재 상황을 묻습니다.",
+      "followUpCombo": "What should tourists be careful about?"
+    },
+    {
+      "context": "다음 수업 주제를 고를 때",
+      "questionSentence": "Could you recommend a topic or a movie for our next class?",
+      "pronunciation": "쿠쥬 레커멘드 어 토픽 오어 어 무비 포 아워 넥스트 클래스",
+      "koreanMeaning": "다음 수업용 주제나 영화를 추천해 주시겠어요?",
+      "nuanceTip": "Could you recommend ~ 는 정중한 요청입니다.",
+      "followUpCombo": "I'll watch it and share my thoughts."
+    },
+    {
+      "context": "튜터의 취미와 AI 영상에 대해 물을 때",
+      "questionSentence": "What kind of AI videos does your sister watch?",
+      "pronunciation": "왓 카인드 오브 에이아이 비디오즈 더즈 유어 시스터 워치",
+      "koreanMeaning": "언니는 어떤 AI 영상을 보나요?",
+      "nuanceTip": "does 뒤 동사원형 watch에 주의하세요.",
+      "followUpCombo": "Do you think AI videos are fun or misleading?"
+    }
+  ],
+  "scenarioTitle": "아일린 다큐 의견 심층 복습",
+  "scenarioContext": "수업에서 다룬 아일린 워노스 다큐 의견을 근거와 함께 영어로 말하는 연습입니다. (※ 수업 주제를 바탕으로 만든 연습용 스크립트이며 실제 수업 녹취가 아닙니다.)",
+  "scenarioTurns": [
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "What are your thoughts about the documentary?",
+      "pronunciation": "왓 아 유어 쏘츠 어바웃 더 다큐멘터리",
+      "koreanText": "다큐에 대한 생각이 어때요?",
+      "keyExpression": "What are your thoughts",
+      "speakingTip": "의견을 묻는 기본 질문입니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Her past can't justify murder, and I can't fully trust her words.",
+      "pronunciation": "허 패스트 캔트 저스티파이 머더, 앤 아이 캔트 풀리 트러스트 허 워즈",
+      "koreanText": "과거가 살인을 정당화하지 못하고 말도 다 믿긴 어려워요.",
+      "keyExpression": "can't justify",
+      "speakingTip": "두 가지 주장을 and로 연결."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "Did you feel sad for her or angry?",
+      "pronunciation": "디쥬 필 새드 포 허 오어 앵그리",
+      "koreanText": "그녀가 안쓰러웠나요, 화가 났나요?",
+      "keyExpression": "feel sad for",
+      "speakingTip": "감정 선택 질문."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Neither, really. Her story kept changing, so I don't know how much to believe.",
+      "pronunciation": "니더, 리얼리. 허 스토리 켑트 체인징, 쏘 아이 돈트 노우 하우 머치 투 빌리브",
+      "koreanText": "둘 다 아니에요. 이야기가 계속 바뀌어서 어디까지 믿을지 모르겠어요.",
+      "keyExpression": "kept changing",
+      "speakingTip": "kept + -ing."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "Do you understand why she did it?",
+      "pronunciation": "두 유 언더스탠드 와이 쉬 디드 잇",
+      "koreanText": "왜 그랬는지 이해해요?",
+      "keyExpression": "understand why",
+      "speakingTip": "이해 범위를 묻습니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Partly. If I were her, I might have reacted the same way the first time, but not seven times.",
+      "pronunciation": "파틀리. 이프 아이 워 허, 아이 마이트 해브 리액티드 더 세임 웨이 더 퍼스트 타임, 벗 낫 세븐 타임즈",
+      "koreanText": "부분적으로요. 제가 그녀라면 첫 번째엔 같게 반응했을 수도 있지만 일곱 번은 아니에요.",
+      "keyExpression": "If I were her",
+      "speakingTip": "가정법 were."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "Do you think she had a fair trial?",
+      "pronunciation": "두 유 씽크 쉬 해드 어 페어 트라이얼",
+      "koreanText": "공정한 재판을 받았다고 보세요?",
+      "keyExpression": "fair trial",
+      "speakingTip": "쟁점 질문."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Not entirely, but with a jury of ten or more people, changing the lawyer wasn't the biggest issue.",
+      "pronunciation": "낫 인타이얼리, 벗 위드 어 쥬리 오브 텐 오어 모어 피플, 체인징 더 로여 워즌트 더 비기스트 이슈",
+      "koreanText": "완전히는 아니지만 배심원이 있어 변호사 교체가 가장 큰 문제는 아니에요.",
+      "keyExpression": "jury",
+      "speakingTip": "단어 jury를 직접 써 보세요."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "s1",
+      "badge": "시나리오 1 · 심층 복습",
+      "title": "아일린 다큐 의견 심층 복습",
+      "context": "수업에서 다룬 아일린 워노스 다큐 의견을 근거와 함께 영어로 말하는 연습입니다. (※ 수업 주제를 바탕으로 만든 연습용 스크립트이며 실제 수업 녹취가 아닙니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What are your thoughts about the documentary?",
+          "pronunciation": "왓 아 유어 쏘츠 어바웃 더 다큐멘터리",
+          "koreanText": "다큐에 대한 생각이 어때요?",
+          "keyExpression": "What are your thoughts",
+          "speakingTip": "의견을 묻는 기본 질문입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Her past can't justify murder, and I can't fully trust her words.",
+          "pronunciation": "허 패스트 캔트 저스티파이 머더, 앤 아이 캔트 풀리 트러스트 허 워즈",
+          "koreanText": "과거가 살인을 정당화하지 못하고 말도 다 믿긴 어려워요.",
+          "keyExpression": "can't justify",
+          "speakingTip": "두 가지 주장을 and로 연결."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Did you feel sad for her or angry?",
+          "pronunciation": "디쥬 필 새드 포 허 오어 앵그리",
+          "koreanText": "그녀가 안쓰러웠나요, 화가 났나요?",
+          "keyExpression": "feel sad for",
+          "speakingTip": "감정 선택 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Neither, really. Her story kept changing, so I don't know how much to believe.",
+          "pronunciation": "니더, 리얼리. 허 스토리 켑트 체인징, 쏘 아이 돈트 노우 하우 머치 투 빌리브",
+          "koreanText": "둘 다 아니에요. 이야기가 계속 바뀌어서 어디까지 믿을지 모르겠어요.",
+          "keyExpression": "kept changing",
+          "speakingTip": "kept + -ing."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Do you understand why she did it?",
+          "pronunciation": "두 유 언더스탠드 와이 쉬 디드 잇",
+          "koreanText": "왜 그랬는지 이해해요?",
+          "keyExpression": "understand why",
+          "speakingTip": "이해 범위를 묻습니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Partly. If I were her, I might have reacted the same way the first time, but not seven times.",
+          "pronunciation": "파틀리. 이프 아이 워 허, 아이 마이트 해브 리액티드 더 세임 웨이 더 퍼스트 타임, 벗 낫 세븐 타임즈",
+          "koreanText": "부분적으로요. 제가 그녀라면 첫 번째엔 같게 반응했을 수도 있지만 일곱 번은 아니에요.",
+          "keyExpression": "If I were her",
+          "speakingTip": "가정법 were."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Do you think she had a fair trial?",
+          "pronunciation": "두 유 씽크 쉬 해드 어 페어 트라이얼",
+          "koreanText": "공정한 재판을 받았다고 보세요?",
+          "keyExpression": "fair trial",
+          "speakingTip": "쟁점 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Not entirely, but with a jury of ten or more people, changing the lawyer wasn't the biggest issue.",
+          "pronunciation": "낫 인타이얼리, 벗 위드 어 쥬리 오브 텐 오어 모어 피플, 체인징 더 로여 워즌트 더 비기스트 이슈",
+          "koreanText": "완전히는 아니지만 배심원이 있어 변호사 교체가 가장 큰 문제는 아니에요.",
+          "keyExpression": "jury",
+          "speakingTip": "단어 jury를 직접 써 보세요."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "badge": "시나리오 2 · 비즈니스 응용",
+      "title": "법인 설립과 근황 비즈니스 응용",
+      "context": "새 회사 설립과 현재 하는 일을 비즈니스 영어로 설명하는 연습입니다. (※ 수업 주제를 바탕으로 만든 연습용 스크립트이며 실제 수업 녹취가 아닙니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What have you been up to this week?",
+          "pronunciation": "왓 해브 유 빈 업 투 디스 윅",
+          "koreanText": "이번 주에 뭐 하고 지냈어요?",
+          "keyExpression": "been up to",
+          "speakingTip": "근황 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I set up my new company, opened a bank account, and took care of the permits.",
+          "pronunciation": "아이 셋 업 마이 뉴 컴퍼니, 오픈드 어 뱅크 어카운트, 앤 툭 케어 오브 더 퍼밋츠",
+          "koreanText": "새 회사를 세우고 계좌를 열고 인허가를 처리했어요.",
+          "keyExpression": "set up a company",
+          "speakingTip": "동사 병렬."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What does your company do?",
+          "pronunciation": "왓 더즈 유어 컴퍼니 두",
+          "koreanText": "회사는 무슨 일을 하나요?",
+          "keyExpression": "What does it do",
+          "speakingTip": "사업 내용 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "We focus on investment and consulting, mainly in Korea.",
+          "pronunciation": "위 포커스 온 인베스트먼트 앤 컨설팅, 메인리 인 코리아",
+          "koreanText": "주로 한국에서 투자와 컨설팅에 집중해요.",
+          "keyExpression": "focus on",
+          "speakingTip": "focus on + 명사."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "And how do you balance work and your daughter?",
+          "pronunciation": "앤 하우 두 유 밸런스 워크 앤 유어 도터",
+          "koreanText": "일과 딸 육아는 어떻게 병행해요?",
+          "keyExpression": "balance A and B",
+          "speakingTip": "균형 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "She goes to daycare, and if I finish early, I pick her up at four.",
+          "pronunciation": "쉬 고즈 투 데이케어, 앤 이프 아이 피니시 얼리, 아이 픽 허 업 앳 포",
+          "koreanText": "딸은 어린이집에 가고 일이 일찍 끝나면 4시에 데리러 가요.",
+          "keyExpression": "pick her up",
+          "speakingTip": "pick up 분리형."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Have you left your previous job yet?",
+          "pronunciation": "해브 유 레프트 유어 프리비어스 잡 옛",
+          "koreanText": "이전 직장은 아직 그만두지 않았나요?",
+          "keyExpression": "left your job",
+          "speakingTip": "현재완료 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Not officially. I'm using my remaining annual leave, and after that I'll resign.",
+          "pronunciation": "낫 어피셜리. 아임 유징 마이 리메이닝 애뉴얼 리브, 앤 애프터 댓 아일 리자인",
+          "koreanText": "공식적으론 아직이에요. 남은 연차를 쓰고 그다음에 사직할 거예요.",
+          "keyExpression": "annual leave",
+          "speakingTip": "leave = 휴가."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "badge": "시나리오 3 · 꼬리질문 디펜스",
+      "title": "치안·트럼프·마닐라 경험 꼬리질문 디펜스",
+      "context": "치안, 정치 의견, 마닐라 경험에 대한 후속 질문에 방어적으로 답하는 연습입니다. (※ 수업 주제를 바탕으로 만든 연습용 스크립트이며 실제 수업 녹취가 아닙니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Is Korea really that safe?",
+          "pronunciation": "이즈 코리아 리얼리 댓 세이프",
+          "koreanText": "한국이 정말 그렇게 안전해요?",
+          "keyExpression": "that safe",
+          "speakingTip": "반문 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I think it's one of the safest countries. There are CCTVs everywhere and people leave phones on cafe tables.",
+          "pronunciation": "아이 씽크 잇츠 원 오브 더 세이피스트 컨트리즈. 데어 아 시시티비즈 에브리웨어 앤 피플 리브 폰즈 온 카페 테이블즈",
+          "koreanText": "가장 안전한 나라 중 하나라고 생각해요. CCTV가 많고 폰을 카페 테이블에 두어요.",
+          "keyExpression": "one of the safest",
+          "speakingTip": "근거 포함."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Then why do Koreans get robbed abroad?",
+          "pronunciation": "덴 와이 두 코리안즈 겟 롭드 어브로드",
+          "koreanText": "그럼 왜 한국인이 해외에서 털리나요?",
+          "keyExpression": "get robbed",
+          "speakingTip": "꼬리 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Because Koreans tend to lack a sense of urgency when traveling.",
+          "pronunciation": "비커즈 코리안즈 텐드 투 랙 어 센스 오브 어전시 웬 트래블링",
+          "koreanText": "여행 때 위기의식이 부족한 경향이 있어서요.",
+          "keyExpression": "lack a sense of urgency",
+          "speakingTip": "a 관사."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Did you ever feel unsafe yourself?",
+          "pronunciation": "디쥬 에버 필 언세이프 유어셀프",
+          "koreanText": "직접 불안했던 적 있나요?",
+          "keyExpression": "feel unsafe",
+          "speakingTip": "경험 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Yes, in Manila twenty years ago. I was the only foreigner, and a kind woman told me to go back.",
+          "pronunciation": "예스, 인 마닐라 트웬티 이어즈 어고. 아이 워즈 디 온리 포리너, 앤 어 카인드 우먼 톨드 미 투 고 백",
+          "koreanText": "네, 20년 전 마닐라에서요. 외국인이 저뿐이었는데 친절한 여성이 돌아가라고 했어요.",
+          "keyExpression": "the only foreigner",
+          "speakingTip": "told me to + 동사."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Do you support Trump?",
+          "pronunciation": "두 유 서포트 트럼프",
+          "koreanText": "트럼프를 지지하세요?",
+          "keyExpression": "support",
+          "speakingTip": "직설적 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "No, I don't support him, but I understand why some voters chose him.",
+          "pronunciation": "노, 아이 돈트 서포트 힘, 벗 아이 언더스탠드 와이 섬 보터스 초즈 힘",
+          "koreanText": "아뇨, 지지하진 않지만 일부 유권자가 왜 선택했는지는 이해해요.",
+          "keyExpression": "don't support him",
+          "speakingTip": "he/him 일관."
+        }
+      ]
+    }
+  ]
+}

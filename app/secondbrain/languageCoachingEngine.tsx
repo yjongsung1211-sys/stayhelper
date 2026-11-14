@@ -15,6 +15,7 @@ import {
   buildLanguageCoachingData,
   buildUniversalFallbackCoaching,
   formatLanguageCoachingMarkdown,
+  isPlaceholderCoaching,
 } from './languageCoachingCore';
 
 export type {
@@ -52,11 +53,14 @@ export function LanguageStudyCoachingPanel({
   const [isGeneratingAi, setIsGeneratingAi] = useState<boolean>(false);
   const [subTab, setSubTab] = useState<'grammar' | 'better' | 'scenario'>('grammar');
   const [isPlayingScenario, setIsPlayingScenario] = useState(false);
+  const [scenarioIdx, setScenarioIdx] = useState(0);
+  const [hideMyLines, setHideMyLines] = useState(false);
 
   React.useEffect(() => {
     const det = detectNoteLanguageCode(note);
+    setScenarioIdx(0);
     if (det) setSelectedLang(det);
-    if (note?.aiCoaching) {
+    if (note?.aiCoaching && !isPlaceholderCoaching(note.aiCoaching)) {
       setLiveAiCoaching(note.aiCoaching);
     } else {
       setLiveAiCoaching(null);
@@ -114,6 +118,21 @@ export function LanguageStudyCoachingPanel({
 
   if (!coaching) return null;
 
+  const scenarioList =
+    coaching.scenarios && coaching.scenarios.length > 0
+      ? coaching.scenarios
+      : [
+          {
+            id: 'base',
+            badge: '시나리오',
+            title: coaching.scenarioTitle,
+            context: coaching.scenarioContext,
+            turns: coaching.scenarioTurns,
+          },
+        ];
+  const activeScenario = scenarioList[Math.min(scenarioIdx, scenarioList.length - 1)];
+  const totalTurns = scenarioList.reduce((n, s) => n + s.turns.length, 0);
+
   const handlePlayFullScenario = () => {
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
     if (isPlayingScenario) {
@@ -126,17 +145,17 @@ export function LanguageStudyCoachingPanel({
     window.speechSynthesis.cancel();
     setIsPlayingScenario(true);
     if (onStatus) {
-      onStatus(`🎭 [${coaching.scenarioTitle}] 전체 롤플레이 시나리오 연속 발음을 시작합니다.`);
+      onStatus(`🎭 [${activeScenario.title}] 전체 롤플레이 시나리오 연속 발음을 시작합니다.`);
     }
 
     let idx = 0;
     const playNextTurn = () => {
-      if (idx >= coaching.scenarioTurns.length) {
+      if (idx >= activeScenario.turns.length) {
         setIsPlayingScenario(false);
         if (onStatus) onStatus('✅ 롤플레이 시나리오 전체 대화 듣기가 완료되었습니다!');
         return;
       }
-      const turn = coaching.scenarioTurns[idx++];
+      const turn = activeScenario.turns[idx++];
       const utter = new SpeechSynthesisUtterance(turn.foreignText);
       utter.lang = coaching.ttsLang;
       utter.rate = 0.92;
@@ -248,7 +267,7 @@ export function LanguageStudyCoachingPanel({
             }`}
           >
             <MessageSquare className="w-4 h-4" />
-            <span>3. 실전 시나리오 ({coaching.scenarioTurns.length}턴)</span>
+            <span>3. 실전 시나리오 ({scenarioList.length > 1 ? `${scenarioList.length}편 · ` : ''}{totalTurns}턴)</span>
           </button>
         </div>
       </div>
@@ -315,6 +334,38 @@ export function LanguageStudyCoachingPanel({
                 <strong className="font-bold text-[#111827]">💡 핵심 문법 설명: </strong>
                 {item.grammarPoint}
               </div>
+
+              {item.keyPattern && (
+                <div className="px-4 py-2.5 rounded-xl bg-[#111827] text-[#FFFFFF] text-[13.5px] font-semibold">
+                  🧩 핵심 패턴 · {item.keyPattern}
+                </div>
+              )}
+
+              {item.alternativeExpressions && item.alternativeExpressions.length > 0 && (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-2.5">
+                  {item.alternativeExpressions.map((alt, ai) => (
+                    <div
+                      key={ai}
+                      className="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex flex-col gap-1.5"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-xs font-bold text-[#475569]">🔁 {alt.label}</span>
+                        <button
+                          type="button"
+                          onClick={() => speakNativePhrase(alt.sentence, coaching.ttsLang, onStatus)}
+                          className="px-2.5 py-1 rounded-lg bg-[#FFFFFF] border border-[#CBD5E1] hover:border-[#111827] text-[#334155] text-xs font-semibold flex items-center gap-1 cursor-pointer"
+                        >
+                          <Volume2 className="w-3 h-3" />
+                          듣기
+                        </button>
+                      </div>
+                      <div className="text-[15px] font-bold text-[#111827] leading-relaxed">{alt.sentence}</div>
+                      <div className="text-xs font-medium text-[#475569]">🗣️ {alt.pronunciation}</div>
+                      <div className="text-xs text-[#64748B] leading-relaxed">💬 {alt.nuance}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -357,6 +408,20 @@ export function LanguageStudyCoachingPanel({
                 <div className="pt-2 border-t border-[#F1F5F9] text-xs text-[#64748B] leading-relaxed">
                   📌 <strong className="text-[#334155]">표현 팁:</strong> {ans.nuanceTip}
                 </div>
+                {ans.followUpCombo && (
+                  <div className="px-3 py-2 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-[13px] text-[#334155] flex items-center justify-between gap-2">
+                    <span>
+                      ➕ <strong>이어 말하기 콤보:</strong> {ans.followUpCombo}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => speakNativePhrase(ans.followUpCombo!, coaching.ttsLang, onStatus)}
+                      className="shrink-0 p-1 rounded-md hover:bg-[#E2E8F0] cursor-pointer"
+                    >
+                      <Volume2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -392,6 +457,25 @@ export function LanguageStudyCoachingPanel({
                   🗣️ {q.pronunciation}
                 </div>
                 <div className="text-[14.5px] font-medium text-[#1E293B]">🇰🇷 {q.koreanMeaning}</div>
+                {q.nuanceTip && (
+                  <div className="pt-2 border-t border-[#F1F5F9] text-xs text-[#64748B] leading-relaxed">
+                    📌 <strong className="text-[#334155]">표현 팁:</strong> {q.nuanceTip}
+                  </div>
+                )}
+                {q.followUpCombo && (
+                  <div className="px-3 py-2 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-[13px] text-[#334155] flex items-center justify-between gap-2">
+                    <span>
+                      ➕ <strong>꼬리질문 콤보:</strong> {q.followUpCombo}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => speakNativePhrase(q.followUpCombo!, coaching.ttsLang, onStatus)}
+                      className="shrink-0 p-1 rounded-md hover:bg-[#E2E8F0] cursor-pointer"
+                    >
+                      <Volume2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -401,14 +485,47 @@ export function LanguageStudyCoachingPanel({
       {/* 탭 3: 3. 실전 롤플레이 대화 시나리오 */}
       {subTab === 'scenario' && (
         <div className="flex flex-col gap-4">
+          {scenarioList.length > 1 && (
+            <div className="flex flex-wrap items-center gap-2">
+              {scenarioList.map((s, si) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => {
+                    if (typeof window !== 'undefined' && 'speechSynthesis' in window) window.speechSynthesis.cancel();
+                    setIsPlayingScenario(false);
+                    setScenarioIdx(si);
+                  }}
+                  className={`px-3.5 py-2 rounded-xl text-xs font-bold cursor-pointer transition-colors ${
+                    si === scenarioIdx
+                      ? 'bg-[#111827] text-[#FFFFFF]'
+                      : 'bg-[#F8FAFC] border border-[#E2E8F0] text-[#475569] hover:text-[#111827]'
+                  }`}
+                >
+                  {s.badge} ({s.turns.length}턴)
+                </button>
+              ))}
+            </div>
+          )}
           <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex flex-wrap items-center justify-between gap-3">
             <div>
               <h5 className="text-base font-bold text-[#111827]">
-                🎭 {coaching.scenarioTitle}
+                🎭 {activeScenario.title}
               </h5>
-              <p className="text-sm text-[#475569] mt-1">{coaching.scenarioContext}</p>
+              <p className="text-sm text-[#475569] mt-1">{activeScenario.context}</p>
             </div>
 
+            <button
+              type="button"
+              onClick={() => setHideMyLines((v) => !v)}
+              className={`px-4 py-2 rounded-xl text-xs font-bold cursor-pointer border ${
+                hideMyLines
+                  ? 'bg-[#FEF3C7] border-[#FCD34D] text-[#92400E]'
+                  : 'bg-[#FFFFFF] border-[#CBD5E1] text-[#111827]'
+              }`}
+            >
+              {hideMyLines ? '👁️ 내 대사 보기' : '🙈 내 대사 가리고 말해보기'}
+            </button>
             <button
               type="button"
               onClick={handlePlayFullScenario}
@@ -426,7 +543,7 @@ export function LanguageStudyCoachingPanel({
           </div>
 
           <div className="space-y-3">
-            {coaching.scenarioTurns.map((turn, idx) => {
+            {activeScenario.turns.map((turn, idx) => {
               const isMe = turn.role === 'Me';
               return (
                 <div
@@ -455,13 +572,32 @@ export function LanguageStudyCoachingPanel({
                     </button>
                   </div>
 
-                  <div className="text-[16px] font-bold text-[#111827] leading-relaxed">
-                    {turn.foreignText}
-                  </div>
-                  <div className="text-sm font-medium tabular-nums text-[#475569]">
-                    🗣️ {turn.pronunciation}
-                  </div>
-                  <div className="text-[14.5px] text-[#334155]">🇰🇷 {turn.koreanText}</div>
+                  {isMe && hideMyLines ? (
+                    <div className="text-[14.5px] text-[#334155]">
+                      🇰🇷 {turn.koreanText}
+                      <span className="block text-xs text-[#92400E] mt-1">↑ 영어로 직접 말해본 뒤 '내 대사 보기'로 확인하세요.</span>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="text-[16px] font-bold text-[#111827] leading-relaxed">
+                        {turn.foreignText}
+                      </div>
+                      <div className="text-sm font-medium tabular-nums text-[#475569]">
+                        🗣️ {turn.pronunciation}
+                      </div>
+                      <div className="text-[14.5px] text-[#334155]">🇰🇷 {turn.koreanText}</div>
+                    </>
+                  )}
+                  {turn.keyExpression && (
+                    <div className="text-xs text-[#334155] pt-1.5 border-t border-[#F1F5F9]">
+                      🔑 <strong>핵심 표현:</strong> {turn.keyExpression}
+                    </div>
+                  )}
+                  {turn.speakingTip && (
+                    <div className="text-xs text-[#64748B]">
+                      🎙️ <strong className="text-[#334155]">발음 팁:</strong> {turn.speakingTip}
+                    </div>
+                  )}
                 </div>
               );
             })}

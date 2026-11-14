@@ -244,9 +244,15 @@ export function renderInteractiveStructuredSummary(
       : rawMd
   ).trim();
   if (!md) {
-    const items =
-      note.summary && note.summary.length > 0
-        ? note.summary
+    const rawSummary = note.summary;
+    const items: string[] =
+      Array.isArray(rawSummary) && rawSummary.length > 0
+        ? rawSummary.map((s) => String(s || '').trim()).filter(Boolean)
+        : typeof rawSummary === 'string' && (rawSummary as string).trim()
+        ? (rawSummary as string)
+            .split(/\r?\n/)
+            .map((s) => s.trim())
+            .filter((s) => s && !s.startsWith('#'))
         : [note.transcript || '요약할 내용이 없습니다.'];
     return (
       <ul className="space-y-3.5">
@@ -1188,7 +1194,7 @@ export function ScheduledMeetingsSection({
                 {relatedNote ? (
                   <div className="space-y-1.5 text-xs text-[#222222]">
                     <div className="font-bold text-[#111111]">{relatedNote.title}</div>
-                    {(relatedNote.summary || []).slice(0, 4).map((s: string, idx: number) => (
+                    {(Array.isArray(relatedNote.summary) ? relatedNote.summary : typeof relatedNote.summary === "string" ? [relatedNote.summary] : []).slice(0, 4).map((s: string, idx: number) => (
                       <div key={idx} className="leading-relaxed">
                         • {s}
                       </div>
@@ -1205,7 +1211,7 @@ export function ScheduledMeetingsSection({
                 <div className="font-extrabold text-[#111111]">
                   📌 직전 회의 핵심 브리핑: {relatedNote.title}
                 </div>
-                {(relatedNote.summary || []).map((s: string, idx: number) => (
+                {(Array.isArray(relatedNote.summary) ? relatedNote.summary : typeof relatedNote.summary === "string" ? [relatedNote.summary] : []).map((s: string, idx: number) => (
                   <div key={idx} className="leading-relaxed">
                     • {s}
                   </div>

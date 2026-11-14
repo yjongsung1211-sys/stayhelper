@@ -1,0 +1,719 @@
+{
+  "lang": "en",
+  "langBadge": "🇺🇸 영어 · 필리핀 튜터 회화 (실제 발화 기반 코칭)",
+  "ttsLang": "en-US",
+  "grammarCorrections": [
+    {
+      "myWrongSentence": "\"Uh, I watched, I watched the, was just 11.\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "I only watched the first one, Ocean's Eleven.",
+      "pronunciation": "아이 온리 워치드 더 퍼스트 원, 오션스 일레븐",
+      "grammarPoint": "문장이 끊김. \"~만 봤다\"는 only watched / just watched. 영화 제목은 Ocean's Eleven.",
+      "keyPattern": "I only watched + N",
+      "alternativeExpressions": [
+        {
+          "label": "just",
+          "sentence": "I just watched Ocean's Eleven and a bit of Twelve.",
+          "pronunciation": "아이 저스트 워치드 오션스 일레븐 앤 어 빗 오브 트웰브",
+          "nuance": "\"~만\"+\"조금\" 대비"
+        },
+        {
+          "label": "haven't yet",
+          "sentence": "I haven't seen Ocean's 8 yet.",
+          "pronunciation": "아이 해븐트 신 오션스 에잇 옛",
+          "nuance": "아직 못 본 영화"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I, I heard, I heard you, you, you, you're going to Hong Kong?\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "I heard you were going to Hong Kong.",
+      "pronunciation": "아이 허드 유 워 고잉 투 홍콩",
+      "grammarPoint": "과거에 \"들은\" 내용이면 시제 일치: heard you were going.",
+      "keyPattern": "I heard (that) + 과거",
+      "alternativeExpressions": [
+        {
+          "label": "last time",
+          "sentence": "Last time you mentioned a trip to Hong Kong, right?",
+          "pronunciation": "라스트 타임 유 멘션드 어 트립 투 홍콩, 라이트",
+          "nuance": "확인 질문"
+        },
+        {
+          "label": "are you still",
+          "sentence": "Are you still planning to go to Hong Kong?",
+          "pronunciation": "아 유 스틸 플래닝 투 고 투 홍콩",
+          "nuance": "현재 계획 확인"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"So no, it's too long time to-\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "Six months is too long to wait for a vacation.",
+      "pronunciation": "식스 먼스 이즈 투 롱 투 웨이트 포 어 베케이션",
+      "grammarPoint": "\"too long time\"은 어색. too long (to wait) 또는 a long time.",
+      "keyPattern": "too long to + 동사",
+      "alternativeExpressions": [
+        {
+          "label": "a long time",
+          "sentence": "Six months is a long time to wait.",
+          "pronunciation": "식스 먼스 이즈 어 롱 타임 투 웨이트",
+          "nuance": "a long time 형태"
+        },
+        {
+          "label": "for me",
+          "sentence": "For me, six months feels too far away.",
+          "pronunciation": "포 미, 식스 먼스 필즈 투 파 어웨이",
+          "nuance": "개인 감각 표현"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"You, you, you got a-- already, already got a three vacation.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "You've already got three trips planned.",
+      "pronunciation": "유브 올레디 갓 쓰리 트립스 플랜드",
+      "grammarPoint": "숫자 앞 a 불필요, 복수형 필요. \"휴가\"는 trip/vacation 개수 표현. 현재완료.",
+      "keyPattern": "You've already + p.p.",
+      "alternativeExpressions": [
+        {
+          "label": "booked",
+          "sentence": "You've already booked three trips!",
+          "pronunciation": "유브 올레디 북트 쓰리 트립스",
+          "nuance": "예약 완료 뉘앙스"
+        },
+        {
+          "label": "lined up",
+          "sentence": "You have three vacations lined up.",
+          "pronunciation": "유 해브 쓰리 베케이션즈 라인드 업",
+          "nuance": "\"줄줄이 예정\""
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"recently, recently, I just, um, make a three website.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I recently made three websites.",
+      "pronunciation": "아이 리센틀리 메이드 쓰리 웹사이츠",
+      "grammarPoint": "과거 사건은 made, \"three\" 앞의 a 제거, websites 복수.",
+      "keyPattern": "I recently + 과거형",
+      "alternativeExpressions": [
+        {
+          "label": "built",
+          "sentence": "I recently built three websites with AI.",
+          "pronunciation": "아이 리센틀리 빌트 쓰리 웹사이츠 윗 에이아이",
+          "nuance": "build가 웹 제작에 자연스러움"
+        },
+        {
+          "label": "launched",
+          "sentence": "I launched three websites this month.",
+          "pronunciation": "아이 런치트 쓰리 웹사이츠 디스 먼스",
+          "nuance": "공개 배포 느낌"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"if, mm, AI remove-- is removed in my computer, so my business will, it, it will, will be shut down.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "If AI were removed from my computer, my business would shut down.",
+      "pronunciation": "이프 에이아이 워 리무브드 프롬 마이 컴퓨터, 마이 비즈니스 우드 셧 다운",
+      "grammarPoint": "비현실 가정은 If + 과거형(were), 주절 would. removed from (in 아님). so 불필요.",
+      "keyPattern": "If + 과거, would + 동사",
+      "alternativeExpressions": [
+        {
+          "label": "without AI",
+          "sentence": "Without AI, my business would grind to a halt.",
+          "pronunciation": "위다웃 에이아이, 마이 비즈니스 우드 그라인드 투 어 홀트",
+          "nuance": "간결한 가정"
+        },
+        {
+          "label": "slow down",
+          "sentence": "It would slow down a lot, but I could keep going.",
+          "pronunciation": "잇 우드 슬로우 다운 어 랏, 벗 아이 쿠드 킵 고잉",
+          "nuance": "본인 뒤 발언과 일관"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I subscribe all, all-- subscribe all, all of it.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I subscribe to all of them.",
+      "pronunciation": "아이 서브스크라이브 투 올 오브 뎀",
+      "grammarPoint": "subscribe는 전치사 to. 복수(Claude, Gemini)는 them.",
+      "keyPattern": "subscribe to + N",
+      "alternativeExpressions": [
+        {
+          "label": "pay for",
+          "sentence": "I pay for all of them.",
+          "pronunciation": "아이 페이 포 올 오브 뎀",
+          "nuance": "\"유료 결제\""
+        },
+        {
+          "label": "have plans",
+          "sentence": "I have paid plans for both.",
+          "pronunciation": "아이 해브 페이드 플랜즈 포 보스",
+          "nuance": "구독 플랜 표현"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"but s-many horse rider became to car rider, driver.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "but many horse riders became drivers.",
+      "pronunciation": "벗 메니 호스 라이더즈 비케임 드라이버즈",
+      "grammarPoint": "became 뒤에 to 불필요. 복수 riders. 자동차 \"운전자\"는 drivers.",
+      "keyPattern": "became + 명사",
+      "alternativeExpressions": [
+        {
+          "label": "turned into",
+          "sentence": "Many horse riders turned into drivers.",
+          "pronunciation": "메니 호스 라이더즈 턴드 인투 드라이버즈",
+          "nuance": "변화 느낌"
+        },
+        {
+          "label": "switched",
+          "sentence": "Many of them switched to driving cars.",
+          "pronunciation": "메니 오브 뎀 스위치트 투 드라이빙 카즈",
+          "nuance": "전환"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I made a Instagram, and, and I don't know how to marketing.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I made an Instagram account, and I don't know how to market it.",
+      "pronunciation": "아이 메이드 언 인스타그램 어카운트, 앤 아이 돈트 노 하우 투 마켓 잇",
+      "grammarPoint": "an + 모음, 계정은 account. marketing은 명사, 동사는 market (how to market it).",
+      "keyPattern": "how to + 동사원형",
+      "alternativeExpressions": [
+        {
+          "label": "promote",
+          "sentence": "I don't know how to promote my website yet.",
+          "pronunciation": "아이 돈트 노 하우 투 프로모트 마이 웹사이트 옛",
+          "nuance": "홍보"
+        },
+        {
+          "label": "get traffic",
+          "sentence": "I don't know how to get people to visit.",
+          "pronunciation": "아이 돈트 노 하우 투 겟 피플 투 비짓",
+          "nuance": "방문자 유입"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"it was too ridiculous, so I, I can't control my laugh.\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "It was so ridiculous that I couldn't stop laughing.",
+      "pronunciation": "잇 워즈 소 리디큘러스 댓 아이 쿠든트 스탑 래핑",
+      "grammarPoint": "시제 과거(couldn't), \"웃음을 못 참다\"는 couldn't stop laughing. too ~ so ~ 중복 정리.",
+      "keyPattern": "so + 형용사 + that",
+      "alternativeExpressions": [
+        {
+          "label": "hold back",
+          "sentence": "I couldn't hold back my laughter.",
+          "pronunciation": "아이 쿠든트 홀드 백 마이 래프터",
+          "nuance": "조금 문어적"
+        },
+        {
+          "label": "crack up",
+          "sentence": "I cracked up the whole time.",
+          "pronunciation": "아이 크랙트 업 더 홀 타임",
+          "nuance": "구어체"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I got a little high po- po-pi, popism? ... Phobia, yeah. High phobia.\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "I have a bit of a fear of heights.",
+      "pronunciation": "아이 해브 어 빗 오브 어 피어 오브 하이츠",
+      "grammarPoint": "\"high phobia\"는 일반 표현이 아님. 고소공포증 = fear of heights / acrophobia.",
+      "keyPattern": "a fear of heights",
+      "alternativeExpressions": [
+        {
+          "label": "acrophobia",
+          "sentence": "I have mild acrophobia.",
+          "pronunciation": "아이 해브 마일드 아크로포비아",
+          "nuance": "의학/전문 용어"
+        },
+        {
+          "label": "get scared",
+          "sentence": "I get scared when I'm up high.",
+          "pronunciation": "아이 겟 스케어드 웬 아임 업 하이",
+          "nuance": "쉬운 구어체"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"She do take care baby, and she r- she ride, go to ride. I take care of baby.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "She takes care of the baby, then she goes riding, and I take care of the baby while she's out.",
+      "pronunciation": "쉬 테익스 케어 오브 더 베이비, 덴 쉬 고즈 라이딩",
+      "grammarPoint": "3인칭 takes, take care of + the baby. do take는 강조형(She does take care of)이므로 구조 불일치. ride는 go riding.",
+      "keyPattern": "take care of + 대상 / go + V-ing",
+      "alternativeExpressions": [
+        {
+          "label": "take turns",
+          "sentence": "We take turns looking after the baby.",
+          "pronunciation": "위 테익 턴즈 루킹 애프터 더 베이비",
+          "nuance": "\"번갈아\" 자연스러움"
+        },
+        {
+          "label": "look after",
+          "sentence": "I look after the baby while she rides.",
+          "pronunciation": "아이 룩 애프터 더 베이비 와일 쉬 라이즈",
+          "nuance": "look after = 돌보다"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"if now I plan, plan to Europe with my baby, I, I, I don't want.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "If I planned a trip to Europe with my baby now, I wouldn't want to.",
+      "pronunciation": "이프 아이 플랜드 어 트립 투 유럽 윗 마이 베이비 나우, 아이 우든트 원트 투",
+      "grammarPoint": "가정은 If + 과거 / would not. plan to Europe → plan a trip to Europe. 튜터가 되물을 정도로 의미가 흐려짐.",
+      "keyPattern": "If I + 과거, I wouldn't",
+      "alternativeExpressions": [
+        {
+          "label": "honestly",
+          "sentence": "Honestly, I wouldn't take my baby to Europe now.",
+          "pronunciation": "아너스틀리, 아이 우든트 테익 마이 베이비 투 유럽 나우",
+          "nuance": "간결한 의견"
+        },
+        {
+          "label": "harder now",
+          "sentence": "It's harder now that she can walk and run.",
+          "pronunciation": "잇츠 하더 나우 댓 쉬 캔 워크 앤 런",
+          "nuance": "이유 연결"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"looking cozy and ha-ha-has a, it has, ha-has a playground. Playroom.\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "I look for a cozy hotel that has a playroom.",
+      "pronunciation": "아이 룩 포 어 코지 호텔 댓 해즈 어 플레이룸",
+      "grammarPoint": "\"찾다\"는 look for. looking cozy는 \"편안해 보이는\"이라는 뜻. 관계대명사 that/which로 연결.",
+      "keyPattern": "look for + N + that has ~",
+      "alternativeExpressions": [
+        {
+          "label": "must-have",
+          "sentence": "A playroom is a must-have for us.",
+          "pronunciation": "어 플레이룸 이즈 어 머스트 해브 포 어스",
+          "nuance": "필수 조건"
+        },
+        {
+          "label": "family-friendly",
+          "sentence": "We look for family-friendly hotels with a kids' room.",
+          "pronunciation": "위 룩 포 패밀리 프렌들리 호텔즈 윗 어 키즈 룸",
+          "nuance": "\"가족 친화적\""
+        }
+      ]
+    }
+  ],
+  "betterAnswers": [
+    {
+      "situation": "오션스 일레븐 감상을 말할 때",
+      "betterSentence": "I liked how the team worked together and everyone had a different role. Even though they're thieves, I found myself rooting for them.",
+      "pronunciation": "아이 라이크트 하우 더 팀 웍트 투게더 앤 에브리원 해드 어 디퍼런트 롤. 이븐 도 데이어 띠브즈, 아이 파운드 마이셀프 루팅 포 뎀",
+      "koreanMeaning": "팀워크와 역할 분담이 좋았고, 도둑인데도 응원하게 됐어요.",
+      "nuanceTip": "실제 수업에서 말한 내용을 구조화. rooting for = 응원하다.",
+      "followUpCombo": "And it's old, but still very stylish."
+    },
+    {
+      "situation": "AI로 웹사이트를 만든다고 소개할 때",
+      "betterSentence": "I recently built three websites with AI. It only took about two days each, and AI taught me the process.",
+      "pronunciation": "아이 리센틀리 빌트 쓰리 웹사이츠 윗 에이아이. 잇 온리 툭 어바웃 투 데이즈 이치, 앤 에이아이 토트 미 더 프로세스",
+      "koreanMeaning": "최근 AI로 웹사이트 3개를 만들었고, 각각 이틀쯤 걸렸어요.",
+      "nuanceTip": "took + 시간. 본인 발언(Just two days)을 완전한 문장으로.",
+      "followUpCombo": "One of them is a travel website."
+    },
+    {
+      "situation": "AI가 일자리를 없앨지 묻는 질문에",
+      "betterSentence": "Some old jobs disappear, but new ones are created. When cars appeared, many horse riders became drivers.",
+      "pronunciation": "섬 올드 잡스 디서피어, 벗 뉴 원즈 아 크리에이티드. 웬 카즈 어피어드, 메니 호스 라이더즈 비케임 드라이버즈",
+      "koreanMeaning": "일부 직업은 사라져도 새 직업이 생겨요. 자동차 때 마부가 운전자가 됐듯이요.",
+      "nuanceTip": "본인 주장 + 올바른 became 사용.",
+      "followUpCombo": "So I'm not afraid of AI."
+    },
+    {
+      "situation": "길리섬 가족여행 계획을 말할 때",
+      "betterSentence": "I'd like to go to Gili. I want to chill and snorkel, and my wife can ride a horse while I swim.",
+      "pronunciation": "아이드 라이크 투 고 투 길리. 아이 원트 투 칠 앤 스노클, 앤 마이 와이프 캔 라이드 어 홀스 와일 아이 스윔",
+      "koreanMeaning": "길리섬에 가고 싶고 쉬면서 스노클링하고, 아내는 승마하는 동안 저는 수영할 거예요.",
+      "nuanceTip": "while = ~하는 동안. 본인 발언(She ride, and I'm swimming) 정리.",
+      "followUpCombo": "I'll watch the baby when she rides."
+    },
+    {
+      "situation": "아이와 여행할 때 호텔 기준을 말할 때",
+      "betterSentence": "The most important thing is the hotel. I look for a cozy place with a playroom and a good breakfast.",
+      "pronunciation": "더 모스트 임포턴트 씽 이즈 더 호텔. 아이 룩 포 어 코지 플레이스 윗 어 플레이룸 앤 어 굿 브렉퍼스트",
+      "koreanMeaning": "가장 중요한 건 호텔이에요. 아늑하고 놀이방과 좋은 조식이 있는 곳을 찾아요.",
+      "nuanceTip": "\"look for + 명사 + with ~\" 구조.",
+      "followUpCombo": "Breakfast is important because the baby can eat there."
+    },
+    {
+      "situation": "공포영화/한국 영화 감상을 말할 때",
+      "betterSentence": "It was fun, but the story was a bit unusual and ridiculous. I couldn't stop laughing.",
+      "pronunciation": "잇 워즈 펀, 벗 더 스토리 워즈 어 빗 언유주얼 앤 리디큘러스. 아이 쿠든트 스탑 래핑",
+      "koreanMeaning": "재미있었지만 이야기가 좀 황당해서 웃음을 참을 수 없었어요.",
+      "nuanceTip": "\"좀 황당\" 의 영어: unusual / ridiculous / absurd.",
+      "followUpCombo": "It's called The People Upstairs."
+    }
+  ],
+  "betterQuestions": [
+    {
+      "context": "튜터의 핼러윈/필리핀 문화가 궁금할 때",
+      "questionSentence": "What do people do in the Philippines on November 1st?",
+      "pronunciation": "왓 두 피플 두 인 더 필리핀즈 온 노벰버 퍼스트",
+      "koreanMeaning": "필리핀에서는 11월 1일에 뭘 하나요?",
+      "nuanceTip": "문화 질문 기본형.",
+      "followUpCombo": "Is it a family holiday?"
+    },
+    {
+      "context": "튜터가 6개월 전부터 여행을 계획한다는 말에",
+      "questionSentence": "How do you plan a trip six months ahead? What do you research first?",
+      "pronunciation": "하우 두 유 플랜 어 트립 식스 먼스 어헤드? 왓 두 유 리서치 퍼스트",
+      "koreanMeaning": "6개월 전에 어떻게 계획하세요? 뭘 먼저 조사하나요?",
+      "nuanceTip": "ahead = 미리.",
+      "followUpCombo": "Do you book flights first?"
+    },
+    {
+      "context": "튜터 출신/언어 이야기에서",
+      "questionSentence": "How did you decide to learn Spanish if you grew up in the Philippines?",
+      "pronunciation": "하우 디드 유 디사이드 투 런 스패니시 이프 유 그류 업 인 더 필리핀즈",
+      "koreanMeaning": "필리핀에서 자랐는데 스페인어는 어떻게 배우게 됐나요?",
+      "nuanceTip": "배경에 근거한 질문.",
+      "followUpCombo": "Do you speak it at home?"
+    },
+    {
+      "context": "한국 문화 인기를 궁금해할 때",
+      "questionSentence": "Why do you think Korean culture is so popular there?",
+      "pronunciation": "와이 두 유 씽크 코리안 컬처 이즈 소 파퓰러 데어",
+      "koreanMeaning": "그곳에서 한국 문화가 왜 인기라고 생각하세요?",
+      "nuanceTip": "본인 실제 질문 \"why people like...\"의 정교화.",
+      "followUpCombo": "Do young people copy K-pop fashion?"
+    },
+    {
+      "context": "튜터가 영화를 추천할 때",
+      "questionSentence": "Is Ocean's 8 easier to understand than the other ones?",
+      "pronunciation": "이즈 오션스 에잇 이저 투 언더스탠드 댄 디 아더 원즈",
+      "koreanMeaning": "오션스 8은 다른 편보다 이해하기 쉬운가요?",
+      "nuanceTip": "비교급 질문.",
+      "followUpCombo": "What should I focus on while watching?"
+    },
+    {
+      "context": "튜터가 웹사이트를 보고 있을 때",
+      "questionSentence": "What do you think I should improve on my website?",
+      "pronunciation": "왓 두 유 씽크 아이 슈드 임프루브 온 마이 웹사이트",
+      "koreanMeaning": "제 웹사이트에서 개선할 점이 뭐라고 보세요?",
+      "nuanceTip": "피드백 요청 표현.",
+      "followUpCombo": "Is it easy to scroll on your phone?"
+    }
+  ],
+  "scenarioTitle": "복습 시나리오 1: 오션스 11 리뷰와 영화 대화",
+  "scenarioContext": "※ 이 대화는 수업 주제를 바탕으로 만든 연습용 스크립트이며, 실제 수업 녹취가 아닙니다. 수업에서 다룬 오션스 일레븐 감상, 한국 영화 이야기를 정확한 문장으로 복습하는 연습 스크립트입니다.",
+  "scenarioTurns": [
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "What was the last movie you watched?",
+      "pronunciation": "왓 워즈 더 라스트 무비 유 워치트",
+      "koreanText": "마지막으로 본 영화가 뭐예요?",
+      "keyExpression": "last movie you watched",
+      "speakingTip": "관계절 생략."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "I watched Ocean's Eleven, and a little of Ocean's Twelve.",
+      "pronunciation": "아이 워치트 오션스 일레븐, 앤 어 리틀 오브 오션스 트웰브",
+      "koreanText": "오션스 일레븐을 보고 12는 조금 봤어요.",
+      "keyExpression": "a little of",
+      "speakingTip": "일부만 봤다는 표현."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "What was your reaction?",
+      "pronunciation": "왓 워즈 유어 리액션",
+      "koreanText": "반응이 어땠어요?",
+      "keyExpression": "reaction",
+      "speakingTip": "감상 질문."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "I liked the teamwork. Everyone had a different role.",
+      "pronunciation": "아이 라이크트 더 팀웍. 에브리원 해드 어 디퍼런트 롤",
+      "koreanText": "팀워크가 좋았고 모두 역할이 달랐어요.",
+      "keyExpression": "different role",
+      "speakingTip": "이유 제시."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "They're thieves, though. Did you root for them?",
+      "pronunciation": "데이어 띠브즈, 도. 디드 유 루트 포 뎀",
+      "koreanText": "도둑인데요. 응원했나요?",
+      "keyExpression": "root for",
+      "speakingTip": "구어체 동사구."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Yes, I did. It's old, but it's still very stylish.",
+      "pronunciation": "예스, 아이 디드. 잇츠 올드, 벗 잇츠 스틸 베리 스타일리쉬",
+      "koreanText": "네, 오래됐지만 여전히 세련됐어요.",
+      "keyExpression": "old, but still",
+      "speakingTip": "대비 접속."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "Did you watch any Korean movies?",
+      "pronunciation": "디드 유 워치 애니 코리안 무비즈",
+      "koreanText": "한국 영화도 봤나요?",
+      "keyExpression": "any Korean movies",
+      "speakingTip": "의문문 any."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Yes, The People Upstairs. It was ridiculous, and I couldn't stop laughing.",
+      "pronunciation": "예스, 더 피플 업스테어즈. 잇 워즈 리디큘러스, 앤 아이 쿠든트 스탑 래핑",
+      "koreanText": "네, 이웃집 사람들이요. 황당해서 웃음이 안 멈췄어요.",
+      "keyExpression": "couldn't stop laughing",
+      "speakingTip": "과거 불가능."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "s1",
+      "badge": "시나리오 1 · 심층 복습",
+      "title": "복습 시나리오 1: 오션스 11 리뷰와 영화 대화",
+      "context": "※ 이 대화는 수업 주제를 바탕으로 만든 연습용 스크립트이며, 실제 수업 녹취가 아닙니다. 수업에서 다룬 오션스 일레븐 감상, 한국 영화 이야기를 정확한 문장으로 복습하는 연습 스크립트입니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What was the last movie you watched?",
+          "pronunciation": "왓 워즈 더 라스트 무비 유 워치트",
+          "koreanText": "마지막으로 본 영화가 뭐예요?",
+          "keyExpression": "last movie you watched",
+          "speakingTip": "관계절 생략."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I watched Ocean's Eleven, and a little of Ocean's Twelve.",
+          "pronunciation": "아이 워치트 오션스 일레븐, 앤 어 리틀 오브 오션스 트웰브",
+          "koreanText": "오션스 일레븐을 보고 12는 조금 봤어요.",
+          "keyExpression": "a little of",
+          "speakingTip": "일부만 봤다는 표현."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What was your reaction?",
+          "pronunciation": "왓 워즈 유어 리액션",
+          "koreanText": "반응이 어땠어요?",
+          "keyExpression": "reaction",
+          "speakingTip": "감상 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I liked the teamwork. Everyone had a different role.",
+          "pronunciation": "아이 라이크트 더 팀웍. 에브리원 해드 어 디퍼런트 롤",
+          "koreanText": "팀워크가 좋았고 모두 역할이 달랐어요.",
+          "keyExpression": "different role",
+          "speakingTip": "이유 제시."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "They're thieves, though. Did you root for them?",
+          "pronunciation": "데이어 띠브즈, 도. 디드 유 루트 포 뎀",
+          "koreanText": "도둑인데요. 응원했나요?",
+          "keyExpression": "root for",
+          "speakingTip": "구어체 동사구."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Yes, I did. It's old, but it's still very stylish.",
+          "pronunciation": "예스, 아이 디드. 잇츠 올드, 벗 잇츠 스틸 베리 스타일리쉬",
+          "koreanText": "네, 오래됐지만 여전히 세련됐어요.",
+          "keyExpression": "old, but still",
+          "speakingTip": "대비 접속."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Did you watch any Korean movies?",
+          "pronunciation": "디드 유 워치 애니 코리안 무비즈",
+          "koreanText": "한국 영화도 봤나요?",
+          "keyExpression": "any Korean movies",
+          "speakingTip": "의문문 any."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Yes, The People Upstairs. It was ridiculous, and I couldn't stop laughing.",
+          "pronunciation": "예스, 더 피플 업스테어즈. 잇 워즈 리디큘러스, 앤 아이 쿠든트 스탑 래핑",
+          "koreanText": "네, 이웃집 사람들이요. 황당해서 웃음이 안 멈췄어요.",
+          "keyExpression": "couldn't stop laughing",
+          "speakingTip": "과거 불가능."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "badge": "시나리오 2 · 비즈니스 응용",
+      "title": "비즈니스 응용: AI 웹사이트 시연과 마케팅",
+      "context": "※ 이 대화는 수업 주제를 바탕으로 만든 연습용 스크립트이며, 실제 수업 녹취가 아닙니다. 수업의 AI 웹사이트(StayHelper 등) 시연 장면을 비즈니스 소개로 확장한 연습 스크립트입니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What do you do with AI?",
+          "pronunciation": "왓 두 유 두 윗 에이아이",
+          "koreanText": "AI로 뭘 하세요?",
+          "keyExpression": "do with AI",
+          "speakingTip": "용도 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I make websites, videos, and photos with AI.",
+          "pronunciation": "아이 메이크 웹사이츠, 비디오즈, 앤 포토즈 윗 에이아이",
+          "koreanText": "웹사이트, 영상, 사진을 만들어요.",
+          "keyExpression": "make A, B, and C",
+          "speakingTip": "나열."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "How long does it take to build a website?",
+          "pronunciation": "하우 롱 더즈 잇 테이크 투 빌드 어 웹사이트",
+          "koreanText": "웹사이트 만드는 데 얼마나 걸려요?",
+          "keyExpression": "How long does it take",
+          "speakingTip": "기간 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "About two days, because AI teaches me everything.",
+          "pronunciation": "어바웃 투 데이즈, 비커즈 에이아이 티치즈 미 에브리씽",
+          "koreanText": "이틀쯤요, AI가 다 가르쳐 주니까요.",
+          "keyExpression": "teaches me",
+          "speakingTip": "3인칭 단수 -es."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Which AI tools do you pay for?",
+          "pronunciation": "위치 에이아이 툴즈 두 유 페이 포",
+          "koreanText": "어떤 AI 도구에 돈을 내요?",
+          "keyExpression": "pay for",
+          "speakingTip": "구독 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I subscribe to Claude and Gemini.",
+          "pronunciation": "아이 서브스크라이브 투 클로드 앤 제미니",
+          "koreanText": "Claude와 Gemini를 구독해요.",
+          "keyExpression": "subscribe to",
+          "speakingTip": "전치사 to."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "How will you get visitors to your site?",
+          "pronunciation": "하우 윌 유 겟 비지터스 투 유어 사이트",
+          "koreanText": "방문자는 어떻게 모을 건가요?",
+          "keyExpression": "get visitors",
+          "speakingTip": "마케팅 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I made an Instagram account, and I'll ask AI how to market it.",
+          "pronunciation": "아이 메이드 언 인스타그램 어카운트, 앤 아일 애스크 에이아이 하우 투 마켓 잇",
+          "koreanText": "인스타 계정을 만들었고 AI에게 홍보법을 물을 거예요.",
+          "keyExpression": "how to market it",
+          "speakingTip": "to + 동사원형."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "badge": "시나리오 3 · 꼬리질문 디펜스",
+      "title": "꼬리질문 디펜스: 가족여행과 AI 일자리 질문",
+      "context": "※ 이 대화는 수업 주제를 바탕으로 만든 연습용 스크립트이며, 실제 수업 녹취가 아닙니다. 튜터의 꼬리질문(AI가 없어지면? 일자리 걱정? 아이와 여행?)에 대비한 연습 스크립트입니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What if AI were removed from your computer?",
+          "pronunciation": "왓 이프 에이아이 워 리무브드 프롬 유어 컴퓨터",
+          "koreanText": "AI가 없어진다면요?",
+          "keyExpression": "What if + 과거",
+          "speakingTip": "가정 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "My business would slow down a lot, but I could keep going.",
+          "pronunciation": "마이 비즈니스 우드 슬로우 다운 어 랏, 벗 아이 쿠드 킵 고잉",
+          "koreanText": "많이 느려지겠지만 계속할 수 있어요.",
+          "keyExpression": "would / could",
+          "speakingTip": "가정 답변."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Are you afraid of losing your job to AI?",
+          "pronunciation": "아 유 어프레이드 오브 루징 유어 잡 투 에이아이",
+          "koreanText": "AI에게 일자리를 뺏길까 두렵나요?",
+          "keyExpression": "afraid of",
+          "speakingTip": "직설 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "No. Some jobs disappear, but new ones are created.",
+          "pronunciation": "노. 섬 잡스 디서피어, 벗 뉴 원즈 아 크리에이티드",
+          "koreanText": "아니요, 사라지는 일도 있지만 새 일이 생겨요.",
+          "keyExpression": "new ones",
+          "speakingTip": "ones로 반복 회피."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "How do you travel with a baby?",
+          "pronunciation": "하우 두 유 트래블 윗 어 베이비",
+          "koreanText": "아기와 어떻게 여행하세요?",
+          "keyExpression": "travel with a baby",
+          "speakingTip": "실용 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "We take turns. She rides, and I look after the baby.",
+          "pronunciation": "위 테익 턴즈. 쉬 라이즈, 앤 아이 룩 애프터 더 베이비",
+          "koreanText": "번갈아 해요. 아내가 말 타면 제가 아기를 봐요.",
+          "keyExpression": "take turns",
+          "speakingTip": "교대 표현."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What do you look for in a hotel?",
+          "pronunciation": "왓 두 유 룩 포 인 어 호텔",
+          "koreanText": "호텔에서 뭘 보세요?",
+          "keyExpression": "look for",
+          "speakingTip": "선호 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "A cozy place with a playroom and a good breakfast.",
+          "pronunciation": "어 코지 플레이스 윗 어 플레이룸 앤 어 굿 브렉퍼스트",
+          "koreanText": "놀이방과 좋은 조식이 있는 아늑한 곳이요.",
+          "keyExpression": "with a playroom",
+          "speakingTip": "명사구 답변."
+        }
+      ]
+    }
+  ]
+}

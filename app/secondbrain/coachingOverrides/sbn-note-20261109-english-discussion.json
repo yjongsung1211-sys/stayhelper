@@ -1,0 +1,719 @@
+{
+  "lang": "en",
+  "langBadge": "🇺🇸 영어 (English)",
+  "ttsLang": "en-US",
+  "grammarCorrections": [
+    {
+      "myWrongSentence": "\"usually in Korea we don't-- it don't happen a lot of earthquake or something disaster.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "In Korea, we don't have many earthquakes or other disasters.",
+      "pronunciation": "인 코리아 위 돈트 해브 메니 어쓰퀘익스 오어 아더 디재스터스",
+      "grammarPoint": "'it don't'는 주어·동사 불일치이고, earthquake는 복수형이 필요합니다. 재난 일반은 'other disasters'로 표현하세요.",
+      "keyPattern": "We don't have many + 복수명사",
+      "alternativeExpressions": [
+        {
+          "label": "발생 빈도",
+          "sentence": "Natural disasters rarely happen in Korea.",
+          "pronunciation": "내추럴 디재스터스 레어리 해픈 인 코리아",
+          "nuance": "rarely = 거의 ~하지 않다"
+        },
+        {
+          "label": "비교",
+          "sentence": "Korea is relatively safe from earthquakes.",
+          "pronunciation": "코리아 이즈 렐러티블리 세이프 프럼 어쓰퀘익스",
+          "nuance": "relatively = 비교적"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I think I should prepare water and something food, and at, at least seven days.\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "I think I should prepare water and some food for at least seven days.",
+      "pronunciation": "아이 띵크 아이 슈드 프리페어 워터 앤 썸 푸드 포 앳 리스트 세븐 데이즈",
+      "grammarPoint": "긍정문에서는 something food가 아니라 some food, 기간은 for at least + 기간 입니다.",
+      "keyPattern": "for at least + 기간",
+      "alternativeExpressions": [
+        {
+          "label": "대비 표현",
+          "sentence": "I'd keep at least a week of food and water at home.",
+          "pronunciation": "아이드 킵 앳 리스트 어 위크 오브 푸드 앤 워터 앳 홈",
+          "nuance": "keep ... at home 비축하다"
+        },
+        {
+          "label": "stockpile",
+          "sentence": "I should stockpile enough supplies for a week.",
+          "pronunciation": "아이 슈드 스톡파일 이너프 서플라이즈 포 어 위크",
+          "nuance": "튜터가 쓴 stockpile 활용"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"restaurant, restaurant is nine, nine o'clock just close.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Restaurants closed at 9 p.m.",
+      "pronunciation": "레스토랑츠 클로즈드 앳 나인 피엠",
+      "grammarPoint": "시각 앞에는 at, 과거의 일은 과거형 closed. 대표님은 곧바로 'Was closed.'라고 스스로 고쳤습니다.",
+      "keyPattern": "close/closed at + 시각",
+      "alternativeExpressions": [
+        {
+          "label": "규제 설명",
+          "sentence": "Restaurants had to close by 9 p.m.",
+          "pronunciation": "레스토랑츠 해드 투 클로즈 바이 나인 피엠",
+          "nuance": "by = 늦어도 ~까지"
+        },
+        {
+          "label": "영업시간",
+          "sentence": "Business hours were limited to 9 p.m.",
+          "pronunciation": "비즈니스 아워즈 워 리미티드 투 나인 피엠",
+          "nuance": "공식적인 표현"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"so many people don't, didn't get getting together. Get together.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Many people didn't get together.",
+      "pronunciation": "메니 피플 디든트 겟 투게더",
+      "grammarPoint": "didn't 뒤에는 동사원형만 옵니다. getting이 아니라 get together. 대표님이 마지막에 'Get together.'로 스스로 고쳤습니다.",
+      "keyPattern": "didn't + 동사원형",
+      "alternativeExpressions": [
+        {
+          "label": "제한 설명",
+          "sentence": "People avoided gathering in groups.",
+          "pronunciation": "피플 어보이디드 개더링 인 그룹스",
+          "nuance": "avoid + -ing"
+        },
+        {
+          "label": "인원 제한",
+          "sentence": "Gatherings were limited to five people.",
+          "pronunciation": "개더링스 워 리미티드 투 파이브 피플",
+          "nuance": "수동태 표현"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"we, uh, no one use cash in Korea.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "No one uses cash in Korea.",
+      "pronunciation": "노 원 유지즈 캐시 인 코리아",
+      "grammarPoint": "no one은 단수 취급이므로 동사에 -s가 붙습니다.",
+      "keyPattern": "No one + 동사-s",
+      "alternativeExpressions": [
+        {
+          "label": "거의 없음",
+          "sentence": "Hardly anyone uses cash in Korea.",
+          "pronunciation": "하들리 에니원 유지즈 캐시 인 코리아",
+          "nuance": "Hardly anyone = 거의 아무도 ~않다"
+        },
+        {
+          "label": "일상",
+          "sentence": "Almost everyone pays by phone or card.",
+          "pronunciation": "올모스트 에브리원 페이즈 바이 폰 오어 카드",
+          "nuance": "pay by + 수단"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"because I'm, I make a, I m- I'm, I make five websites\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "I've been busy because I'm building five websites.",
+      "pronunciation": "아이브 빈 비지 비커즈 아임 빌딩 파이브 웹사이츠",
+      "grammarPoint": "진행 중인 일은 현재진행형 I'm building이 자연스럽고, make보다 build를 많이 씁니다.",
+      "keyPattern": "be busy -ing / be building",
+      "alternativeExpressions": [
+        {
+          "label": "단순화",
+          "sentence": "I'm working on five websites.",
+          "pronunciation": "아임 워킹 온 파이브 웹사이츠",
+          "nuance": "work on = 작업 중"
+        },
+        {
+          "label": "운영",
+          "sentence": "I run five websites.",
+          "pronunciation": "아이 런 파이브 웹사이츠",
+          "nuance": "이미 운영 중일 때"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"it was finished, uh, at eight percent, and now I just do, do, left twenty percent to just fix.\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "It's about 80 percent done, and I have 20 percent left to fix.",
+      "pronunciation": "잇츠 어바웃 에이티 퍼센트 던 앤 아이 해브 트웬티 퍼센트 레프트 투 픽스",
+      "grammarPoint": "진행률은 'about 80 percent done', 남은 일은 'have + 수치 + left to + 동사'입니다.",
+      "keyPattern": "have + 수량 + left to + 동사",
+      "alternativeExpressions": [
+        {
+          "label": "출시 전",
+          "sentence": "It's almost ready; I just need to polish it.",
+          "pronunciation": "잇츠 올모스트 레디 아이 저스트 니드 투 폴리시 잇",
+          "nuance": "polish = 다듬다"
+        },
+        {
+          "label": "남은 일",
+          "sentence": "There is only 20 percent of the work left.",
+          "pronunciation": "데어 이즈 온리 트웬티 퍼센트 오브 더 웍 레프트",
+          "nuance": "남은 비율 표현"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Be- before we have, we have AI, I have a idea.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Before AI, I had an idea, but I could not make it real.",
+      "pronunciation": "비포 에이아이 아이 해드 언 아이디어 벗 아이 쿠드 낫 메이크 잇 리얼",
+      "grammarPoint": "idea는 모음으로 시작하므로 an idea. 과거 이야기는 had로 맞춥니다.",
+      "keyPattern": "an + 모음 소리 명사 / 과거형",
+      "alternativeExpressions": [
+        {
+          "label": "AI 이후",
+          "sentence": "Now AI lets me turn ideas into real products.",
+          "pronunciation": "나우 에이아이 렛츠 미 턴 아이디어즈 인투 리얼 프로덕츠",
+          "nuance": "turn A into B"
+        },
+        {
+          "label": "간단히",
+          "sentence": "AI makes my ideas real.",
+          "pronunciation": "에이아이 메이크스 마이 아이디어즈 리얼",
+          "nuance": "짧은 대답"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I had spend time take some transportations\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I would have to spend time taking transportation.",
+      "pronunciation": "아이 우드 해브 투 스펜드 타임 테이킹 트랜스포테이션",
+      "grammarPoint": "'had spend'는 형태가 맞지 않습니다. have to + 동사원형, spend time + -ing 입니다. transportation은 불가산.",
+      "keyPattern": "spend time + -ing",
+      "alternativeExpressions": [
+        {
+          "label": "출퇴근",
+          "sentence": "I would waste time commuting.",
+          "pronunciation": "아이 우드 웨이스트 타임 커뮤팅",
+          "nuance": "waste time -ing"
+        },
+        {
+          "label": "재택",
+          "sentence": "I work from home, so I skip the commute.",
+          "pronunciation": "아이 웍 프럼 홈 소 아이 스킵 더 커뮤트",
+          "nuance": "skip the commute"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"it let me feel freedom.\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "It makes me feel free.",
+      "pronunciation": "잇 메이크스 미 필 프리",
+      "grammarPoint": "freedom은 명사라 feel 뒤에는 형용사 free가 자연스럽습니다. 주어 it이 현재 사실이면 makes.",
+      "keyPattern": "make + 목적어 + 동사원형/형용사",
+      "alternativeExpressions": [
+        {
+          "label": "자유 강조",
+          "sentence": "I feel a real sense of freedom.",
+          "pronunciation": "아이 필 어 리얼 센스 오브 프리덤",
+          "nuance": "a sense of freedom"
+        },
+        {
+          "label": "시간 통제",
+          "sentence": "I can manage my own time.",
+          "pronunciation": "아이 캔 매니지 마이 오운 타임",
+          "nuance": "manage time"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Korea is just average in the world, I think. ... we, we cheaper than Australia and USA\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "We are cheaper than Australia and the USA.",
+      "pronunciation": "위 아 치퍼 댄 오스트레일리아 앤 더 유에스에이",
+      "grammarPoint": "비교급 문장에도 be동사가 필요하고, 나라 약어 USA 앞에는 the를 씁니다.",
+      "keyPattern": "be + 비교급 + than",
+      "alternativeExpressions": [
+        {
+          "label": "비교 설명",
+          "sentence": "Prices in Korea are lower than in the USA.",
+          "pronunciation": "프라이시즈 인 코리아 아 로워 댄 인 더 유에스에이",
+          "nuance": "가격 중심 비교"
+        },
+        {
+          "label": "중간",
+          "sentence": "Korea is somewhere in the middle.",
+          "pronunciation": "코리아 이즈 섬웨어 인 더 미들",
+          "nuance": "중간 수준"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Compared the Europe and America or Australia-\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Compared to Europe, America, or Australia, Korea is cheaper.",
+      "pronunciation": "컴페어드 투 유럽 아메리카 오어 오스트레일리아 코리아 이즈 치퍼",
+      "grammarPoint": "'compared'는 'to/with'와 함께 씁니다. 나라 이름 앞에 the는 불필요.",
+      "keyPattern": "Compared to + 명사",
+      "alternativeExpressions": [
+        {
+          "label": "대안",
+          "sentence": "In comparison with Europe, ...",
+          "pronunciation": "인 컴패리슨 윗 유럽",
+          "nuance": "조금 더 격식"
+        },
+        {
+          "label": "간단",
+          "sentence": "Korea is cheaper than most Western countries.",
+          "pronunciation": "코리아 이즈 치퍼 댄 모스트 웨스턴 컨트리즈",
+          "nuance": "most + 복수명사"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Korean is workaholic, so we should work-\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Koreans are workaholics, so we have to work a lot.",
+      "pronunciation": "코리안즈 아 워커홀릭스 소 위 해브 투 웍 어 랏",
+      "grammarPoint": "workaholic은 명사로 '일 중독자'이므로 복수 주어와 맞춰 Koreans are workaholics 입니다. 'Korea is workaholic'은 어색합니다.",
+      "keyPattern": "Koreans are workaholics",
+      "alternativeExpressions": [
+        {
+          "label": "문화 설명",
+          "sentence": "Work culture in Korea is very intense.",
+          "pronunciation": "웍 컬처 인 코리아 이즈 베리 인텐스",
+          "nuance": "work culture"
+        },
+        {
+          "label": "긴 근무",
+          "sentence": "Many people work long hours.",
+          "pronunciation": "메니 피플 웍 롱 아워즈",
+          "nuance": "long hours"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I did doing for te-ten years.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I've been doing it for ten years.",
+      "pronunciation": "아이브 빈 두잉 잇 포 텐 이어즈",
+      "grammarPoint": "'for + 기간'과 함께 지금까지 이어진 일은 현재완료진행 have been -ing 를 씁니다.",
+      "keyPattern": "have been + -ing for + 기간",
+      "alternativeExpressions": [
+        {
+          "label": "단순",
+          "sentence": "I've done it for ten years.",
+          "pronunciation": "아이브 던 잇 포 텐 이어즈",
+          "nuance": "현재완료"
+        },
+        {
+          "label": "시작 시점",
+          "sentence": "I started ten years ago and I still do it.",
+          "pronunciation": "아이 스타티드 텐 이어즈 어고 앤 아이 스틸 두 잇",
+          "nuance": "ago + 지금도"
+        }
+      ]
+    }
+  ],
+  "betterAnswers": [
+    {
+      "situation": "한국의 재난 대비 상황을 묻는 질문에 답할 때",
+      "betterSentence": "We rarely have natural disasters in Korea, but I think I should keep a week of water and food at home.",
+      "pronunciation": "위 레어리 해브 내추럴 디재스터스 인 코리아 벗 아이 띵크 아이 슈드 킵 어 위크 오브 워터 앤 푸드 앳 홈",
+      "koreanMeaning": "한국엔 자연재해가 드물지만 집에 일주일치 물과 음식을 두어야 할 것 같아요.",
+      "nuanceTip": "rarely는 빈도 부사로 have 앞에.",
+      "followUpCombo": "We should also keep a little cash."
+    },
+    {
+      "situation": "한국의 현금 사용 현황을 설명할 때",
+      "betterSentence": "Almost no one uses cash in Korea. We pay with our phones or cards, and even on buses.",
+      "pronunciation": "올모스트 노 원 유지즈 캐시 인 코리아 위 페이 윗 아워 폰즈 오어 카즈 앤 이븐 온 버시즈",
+      "koreanMeaning": "한국에서는 현금을 거의 안 써요. 폰이나 카드, 버스에서도요.",
+      "nuanceTip": "Almost no one + 동사-s.",
+      "followUpCombo": "I've never thought about what happens if the systems go down."
+    },
+    {
+      "situation": "코로나 락다운 경험을 말할 때",
+      "betterSentence": "During COVID, restaurants had to close at 9 p.m., and we could only meet in small groups.",
+      "pronunciation": "듀링 코비드 레스토랑츠 해드 투 클로즈 앳 나인 피엠 앤 위 쿠드 온리 밋 인 스몰 그룹스",
+      "koreanMeaning": "코로나 때는 식당이 밤 9시에 닫았고 소규모로만 모일 수 있었어요.",
+      "nuanceTip": "had to + 동사원형 = 의무.",
+      "followUpCombo": "Korea has a strong night culture, so it was a big change."
+    },
+    {
+      "situation": "업무를 질문받고 프로젝트를 설명할 때",
+      "betterSentence": "I've been busy because I'm building five websites. They're about 80 percent done.",
+      "pronunciation": "아이브 빈 비지 비커즈 아임 빌딩 파이브 웹사이츠 데이어 어바웃 에이티 퍼센트 던",
+      "koreanMeaning": "웹사이트 5개를 만드느라 바빴고 80% 정도 완성됐어요.",
+      "nuanceTip": "be done = 완료.",
+      "followUpCombo": "I have 20 percent left to fix."
+    },
+    {
+      "situation": "재택근무의 장점을 말할 때",
+      "betterSentence": "The best part of working from home is that I can control my own time, and it makes me feel free.",
+      "pronunciation": "더 베스트 파트 오브 워킹 프럼 홈 이즈 댓 아이 캔 컨트롤 마이 오운 타임 앤 잇 메이크스 미 필 프리",
+      "koreanMeaning": "재택근무의 가장 좋은 점은 내 시간을 스스로 관리할 수 있고 자유롭다는 거예요.",
+      "nuanceTip": "The best part of -ing is that ...",
+      "followUpCombo": "I don't have to commute."
+    },
+    {
+      "situation": "AI 시대 변화에 대한 의견을 말할 때",
+      "betterSentence": "I think the world changes too fast to control, so we have to adapt, and AI is a great opportunity.",
+      "pronunciation": "아이 띵크 더 월드 체인지스 투 패스트 투 컨트롤 소 위 해브 투 어댑트 앤 에이아이 이즈 어 그레이트 아퍼튜니티",
+      "koreanMeaning": "세상은 통제하기엔 너무 빨리 변하니 적응해야 하고 AI는 좋은 기회라고 생각해요.",
+      "nuanceTip": "adapt to + 명사.",
+      "followUpCombo": "Cars and smartphones changed the world too."
+    }
+  ],
+  "betterQuestions": [
+    {
+      "situation": "튜터가 보낸 기사를 이해했는지 확인할 때",
+      "betterSentence": "Do you mean people should stockpile food, water, and even cash?",
+      "pronunciation": "두 유 민 피플 슈드 스톡파일 푸드 워터 앤 이븐 캐시",
+      "koreanMeaning": "사람들이 식량, 물, 심지어 현금까지 비축해야 한다는 뜻인가요?",
+      "nuanceTip": "Do you mean ...?로 의도를 확인합니다.",
+      "followUpCombo": "What does the article say about it?"
+    },
+    {
+      "situation": "상대국의 현금 사용을 물을 때",
+      "betterSentence": "Do many people still use cash in South Africa?",
+      "pronunciation": "두 메니 피플 스틸 유즈 캐시 인 사우스 아프리카",
+      "koreanMeaning": "남아공에서는 아직도 현금을 많이 쓰나요?",
+      "nuanceTip": "still은 '여전히'.",
+      "followUpCombo": "What about people without bank accounts?"
+    },
+    {
+      "situation": "이해 못했을 때 되묻기",
+      "betterSentence": "Sorry, I didn't catch that. Could you say it again, please?",
+      "pronunciation": "쏘리 아이 디든트 캐치 댓 쿠드 유 세이 잇 어겐 플리즈",
+      "koreanMeaning": "죄송해요, 못 알아들었어요. 다시 말씀해 주시겠어요?",
+      "nuanceTip": "I don't get you보다 정중합니다.",
+      "followUpCombo": "Could you speak a little slower?"
+    },
+    {
+      "situation": "비상 시 결제 방법에 대해 물을 때",
+      "betterSentence": "What would happen if the payment systems went down for a day?",
+      "pronunciation": "왓 우드 해픈 이프 더 페이먼트 시스템즈 웬트 다운 포 어 데이",
+      "koreanMeaning": "결제 시스템이 하루 동안 멈추면 어떻게 될까요?",
+      "nuanceTip": "가정법: if + 과거형, would + 동사원형.",
+      "followUpCombo": "Should we all carry some cash?"
+    },
+    {
+      "situation": "프랑스 시위 이야기 후 의견을 물을 때",
+      "betterSentence": "Why do you think protests become violent in some countries?",
+      "pronunciation": "와이 두 유 띵크 프로테스츠 비컴 바이올런트 인 썸 컨트리즈",
+      "koreanMeaning": "왜 일부 나라에서는 시위가 폭력적이 된다고 생각하세요?",
+      "nuanceTip": "become + 형용사.",
+      "followUpCombo": "Are protests peaceful in your country?"
+    },
+    {
+      "situation": "물가·에너지 문제를 물을 때",
+      "betterSentence": "How has the cost of living changed in your country recently?",
+      "pronunciation": "하우 해즈 더 코스트 오브 리빙 체인지드 인 유어 컨트리 리슨틀리",
+      "koreanMeaning": "최근 그 나라의 생활비가 어떻게 변했나요?",
+      "nuanceTip": "현재완료로 최근 변화를 묻습니다.",
+      "followUpCombo": "Did oil prices affect your daily life?"
+    }
+  ],
+  "scenarioTitle": "재난 대비·현금 없는 사회·AI 프로젝트 토론 복습",
+  "scenarioContext": "이 시나리오는 수업에서 다룬 기사 주제(재난 대비, 비상 시 현금, 한국의 디지털 결제)를 바탕으로 만든 연습용 스크립트이며, 실제 대화 녹취가 아닙니다.",
+  "scenarioTurns": [
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "Is it common for people in Korea to carry cash?",
+      "pronunciation": "이즈 잇 커먼 포 피플 인 코리아 투 캐리 캐시",
+      "koreanText": "한국에서는 현금을 들고 다니는 게 흔한가요?",
+      "keyExpression": "Is it common for ... to",
+      "speakingTip": "가주어 구문."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "No, almost no one uses cash. We pay by phone or card.",
+      "pronunciation": "노 올모스트 노 원 유지즈 캐시 위 페이 바이 폰 오어 카드",
+      "koreanText": "아니요, 거의 아무도 현금을 안 써요. 폰이나 카드로 내요.",
+      "keyExpression": "No one uses",
+      "speakingTip": "동사에 -s."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "What would you do if the payment systems went down?",
+      "pronunciation": "왓 우드 유 두 이프 더 페이먼트 시스템즈 웬트 다운",
+      "koreanText": "결제 시스템이 멈추면 어떻게 하시겠어요?",
+      "keyExpression": "would ... if",
+      "speakingTip": "가정법."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Honestly, I've never thought about it. Maybe I should keep some cash.",
+      "pronunciation": "어니스틀리 아이브 네버 쏘트 어바웃 잇 메이비 아이 슈드 킵 썸 캐시",
+      "koreanText": "솔직히 생각해 본 적 없어요. 현금을 좀 두어야겠네요.",
+      "keyExpression": "I've never thought about",
+      "speakingTip": "현재완료 경험."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "How long could you live on your supplies at home?",
+      "pronunciation": "하우 롱 쿠드 유 리브 온 유어 서플라이즈 앳 홈",
+      "koreanText": "집에 있는 비축품으로 얼마나 버틸 수 있나요?",
+      "keyExpression": "live on",
+      "speakingTip": "~에 의존해 살다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "I think I should prepare water and some food for at least seven days.",
+      "pronunciation": "아이 띵크 아이 슈드 프리페어 워터 앤 썸 푸드 포 앳 리스트 세븐 데이즈",
+      "koreanText": "최소 7일치 물과 식량을 준비해야 할 것 같아요.",
+      "keyExpression": "for at least",
+      "speakingTip": "기간 표현."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "Do natural disasters happen often in Korea?",
+      "pronunciation": "두 내추럴 디재스터스 해픈 오픈 인 코리아",
+      "koreanText": "한국에는 자연재해가 자주 일어나나요?",
+      "keyExpression": "happen often",
+      "speakingTip": "빈도 부사."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Not really. We don't have many earthquakes in Korea.",
+      "pronunciation": "낫 리얼리 위 돈트 해브 메니 어쓰퀘익스 인 코리아",
+      "koreanText": "그렇진 않아요. 지진은 많지 않아요.",
+      "keyExpression": "don't have many",
+      "speakingTip": "셀 수 있는 복수."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "s1",
+      "badge": "시나리오 1 · 심층 복습",
+      "title": "재난 대비와 현금 없는 사회",
+      "context": "이 시나리오는 수업에서 다룬 기사 주제(재난 대비, 비상 시 현금, 한국의 디지털 결제)를 바탕으로 만든 연습용 스크립트이며, 실제 대화 녹취가 아닙니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Is it common for people in Korea to carry cash?",
+          "pronunciation": "이즈 잇 커먼 포 피플 인 코리아 투 캐리 캐시",
+          "koreanText": "한국에서는 현금을 들고 다니는 게 흔한가요?",
+          "keyExpression": "Is it common for ... to",
+          "speakingTip": "가주어 구문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "No, almost no one uses cash. We pay by phone or card.",
+          "pronunciation": "노 올모스트 노 원 유지즈 캐시 위 페이 바이 폰 오어 카드",
+          "koreanText": "아니요, 거의 아무도 현금을 안 써요. 폰이나 카드로 내요.",
+          "keyExpression": "No one uses",
+          "speakingTip": "동사에 -s."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What would you do if the payment systems went down?",
+          "pronunciation": "왓 우드 유 두 이프 더 페이먼트 시스템즈 웬트 다운",
+          "koreanText": "결제 시스템이 멈추면 어떻게 하시겠어요?",
+          "keyExpression": "would ... if",
+          "speakingTip": "가정법."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Honestly, I've never thought about it. Maybe I should keep some cash.",
+          "pronunciation": "어니스틀리 아이브 네버 쏘트 어바웃 잇 메이비 아이 슈드 킵 썸 캐시",
+          "koreanText": "솔직히 생각해 본 적 없어요. 현금을 좀 두어야겠네요.",
+          "keyExpression": "I've never thought about",
+          "speakingTip": "현재완료 경험."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "How long could you live on your supplies at home?",
+          "pronunciation": "하우 롱 쿠드 유 리브 온 유어 서플라이즈 앳 홈",
+          "koreanText": "집에 있는 비축품으로 얼마나 버틸 수 있나요?",
+          "keyExpression": "live on",
+          "speakingTip": "~에 의존해 살다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I think I should prepare water and some food for at least seven days.",
+          "pronunciation": "아이 띵크 아이 슈드 프리페어 워터 앤 썸 푸드 포 앳 리스트 세븐 데이즈",
+          "koreanText": "최소 7일치 물과 식량을 준비해야 할 것 같아요.",
+          "keyExpression": "for at least",
+          "speakingTip": "기간 표현."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Do natural disasters happen often in Korea?",
+          "pronunciation": "두 내추럴 디재스터스 해픈 오픈 인 코리아",
+          "koreanText": "한국에는 자연재해가 자주 일어나나요?",
+          "keyExpression": "happen often",
+          "speakingTip": "빈도 부사."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Not really. We don't have many earthquakes in Korea.",
+          "pronunciation": "낫 리얼리 위 돈트 해브 메니 어쓰퀘익스 인 코리아",
+          "koreanText": "그렇진 않아요. 지진은 많지 않아요.",
+          "keyExpression": "don't have many",
+          "speakingTip": "셀 수 있는 복수."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "badge": "시나리오 2 · 비즈니스 응용",
+      "title": "5개 웹사이트 프로젝트 피칭",
+      "context": "이 시나리오는 수업에서 언급된 5개 웹사이트(인테리어, 스타일링, 여행, 퍼스널컬러, 웨딩) 주제를 비즈니스 소개로 확장한 연습용 스크립트이며, 실제 대화 녹취가 아닙니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "How has work been? I haven't seen you for two weeks.",
+          "pronunciation": "하우 해즈 웍 빈 아이 해븐트 씬 유 포 투 위크스",
+          "koreanText": "일은 어때요? 2주 동안 못 봤네요.",
+          "keyExpression": "How has work been",
+          "speakingTip": "현재완료."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I've been busy because I'm building five websites.",
+          "pronunciation": "아이브 빈 비지 비커즈 아임 빌딩 파이브 웹사이츠",
+          "koreanText": "웹사이트 5개를 만드느라 바빴어요.",
+          "keyExpression": "I'm building",
+          "speakingTip": "진행형."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What are they for?",
+          "pronunciation": "왓 아 데이 포",
+          "koreanText": "그것들은 무엇을 위한 거예요?",
+          "keyExpression": "What ... for",
+          "speakingTip": "목적 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "One is for interior design, one is for styling, and the others are for travel, personal color, and wedding photos.",
+          "pronunciation": "원 이즈 포 인테리어 디자인 원 이즈 포 스타일링 앤 디 아더스 아 포 트래블 퍼스널 컬러 앤 웨딩 포토즈",
+          "koreanText": "하나는 인테리어, 하나는 스타일링, 나머지는 여행, 퍼스널컬러, 웨딩 사진용이에요.",
+          "keyExpression": "One is ... the others",
+          "speakingTip": "나열 구조."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "How does the interior service work?",
+          "pronunciation": "하우 더즈 디 인테리어 서비스 웍",
+          "koreanText": "인테리어 서비스는 어떻게 작동하나요?",
+          "keyExpression": "How does ... work",
+          "speakingTip": "서비스 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Users upload a photo of their room, and we suggest furniture with links and prices.",
+          "pronunciation": "유저스 업로드 어 포토 오브 데어 룸 앤 위 서제스트 퍼니처 윗 링크스 앤 프라이시즈",
+          "koreanText": "사용자가 방 사진을 올리면 링크와 가격이 있는 가구를 제안해요.",
+          "keyExpression": "suggest",
+          "speakingTip": "단수/복수 주의."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "How far along is the project?",
+          "pronunciation": "하우 파 얼롱 이즈 더 프로젝트",
+          "koreanText": "프로젝트는 얼마나 진행됐나요?",
+          "keyExpression": "How far along",
+          "speakingTip": "진행도 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "It's about 80 percent done, and I have 20 percent left to fix.",
+          "pronunciation": "잇츠 어바웃 에이티 퍼센트 던 앤 아이 해브 트웬티 퍼센트 레프트 투 픽스",
+          "koreanText": "약 80% 완성됐고 20%는 고쳐야 해요.",
+          "keyExpression": "left to fix",
+          "speakingTip": "남은 양."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "badge": "시나리오 3 · 꼬리질문 디펜스",
+      "title": "AI 시대와 재택근무 꼬리질문",
+      "context": "이 시나리오는 수업에서 나온 AI·재택근무·세상의 변화 주제를 바탕으로 한 꼬리질문 연습용 스크립트이며, 실제 대화 녹취가 아닙니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Why did you start building with AI?",
+          "pronunciation": "와이 디드 유 스타트 빌딩 윗 에이아이",
+          "koreanText": "왜 AI로 만들기 시작했나요?",
+          "keyExpression": "start -ing",
+          "speakingTip": "시작하다 + -ing."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Before AI, I had an idea, but I could not make it real.",
+          "pronunciation": "비포 에이아이 아이 해드 언 아이디어 벗 아이 쿠드 낫 메이크 잇 리얼",
+          "koreanText": "AI 이전에는 아이디어는 있었지만 현실로 만들 수 없었어요.",
+          "keyExpression": "an idea",
+          "speakingTip": "a/an 구분."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What is the best part of working from home?",
+          "pronunciation": "왓 이즈 더 베스트 파트 오브 워킹 프럼 홈",
+          "koreanText": "재택근무의 가장 좋은 점은 무엇인가요?",
+          "keyExpression": "best part of",
+          "speakingTip": "장점 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I can control my own time, so it makes me feel free.",
+          "pronunciation": "아이 캔 컨트롤 마이 오운 타임 소 잇 메이크스 미 필 프리",
+          "koreanText": "내 시간을 관리할 수 있어서 자유로워요.",
+          "keyExpression": "makes me feel free",
+          "speakingTip": "make + 목적어 + 형용사."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Are you worried about how fast the world is changing?",
+          "pronunciation": "아 유 워리드 어바웃 하우 패스트 더 월드 이즈 체인징",
+          "koreanText": "세상이 얼마나 빨리 변하는지 걱정되나요?",
+          "keyExpression": "worried about",
+          "speakingTip": "전치사 about."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Not really. I think we have to adapt, and AI is a good opportunity.",
+          "pronunciation": "낫 리얼리 아이 띵크 위 해브 투 어댑트 앤 에이아이 이즈 어 굿 아퍼튜니티",
+          "koreanText": "별로요. 적응해야 하고 AI는 기회라고 생각해요.",
+          "keyExpression": "adapt",
+          "speakingTip": "adapt to와 구분."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "How do you spend your free time outside of work?",
+          "pronunciation": "하우 두 유 스펜드 유어 프리 타임 아웃사이드 오브 웍",
+          "koreanText": "일 외에는 여가를 어떻게 보내나요?",
+          "keyExpression": "spend time",
+          "speakingTip": "spend + 시간 + -ing."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I've been swimming once a week for ten years, and I also play with my daughter.",
+          "pronunciation": "아이브 빈 스위밍 원스 어 위크 포 텐 이어즈 앤 아이 올소 플레이 윗 마이 도터",
+          "koreanText": "10년간 주 1회 수영했고 딸과도 놀아요.",
+          "keyExpression": "I've been swimming",
+          "speakingTip": "현재완료진행."
+        }
+      ]
+    }
+  ]
+}

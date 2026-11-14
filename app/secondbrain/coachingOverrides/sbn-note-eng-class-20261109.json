@@ -1,0 +1,740 @@
+{
+  "lang": "en",
+  "langBadge": "🇺🇸 영어 (English)",
+  "ttsLang": "en-US",
+  "grammarCorrections": [
+    {
+      "myWrongSentence": "\"Maybe network, network is not influent.\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "Maybe the network isn't stable today.",
+      "pronunciation": "메이비 더 네트워크 이즌트 스테이블 투데이",
+      "grammarPoint": "'influent'는 '유창한'에 가까운 단어로 네트워크 상태에는 쓰지 않습니다. 연결 상태는 stable/good/fast로 말합니다.",
+      "keyPattern": "The network/connection is (not) stable.",
+      "alternativeExpressions": [
+        {
+          "label": "더 일상적으로",
+          "sentence": "My connection is bad today.",
+          "pronunciation": "마이 커넥션 이즈 배드 투데이",
+          "nuance": "가장 쉽고 자연스러운 구어체"
+        },
+        {
+          "label": "지연 강조",
+          "sentence": "There's a lot of lag on my side.",
+          "pronunciation": "데어즈 어 랏 오브 랙 온 마이 사이드",
+          "nuance": "화상 수업의 끊김·지연을 설명할 때"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Oh, uh, how fix it?\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "How do I fix it?",
+      "pronunciation": "하우 두 아이 픽스 잇",
+      "grammarPoint": "의문사 뒤에는 do/can 같은 조동사와 주어가 필요합니다: How + do/can + I + 동사원형.",
+      "keyPattern": "How do/can I + 동사원형?",
+      "alternativeExpressions": [
+        {
+          "label": "정중하게",
+          "sentence": "Is there a way to fix it?",
+          "pronunciation": "이즈 데어 어 웨이 투 픽스 잇",
+          "nuance": "상대에게 방법을 물을 때 부드러운 표현"
+        },
+        {
+          "label": "도움 요청",
+          "sentence": "Can you help me fix it?",
+          "pronunciation": "캔 유 헬프 미 픽스 잇",
+          "nuance": "같이 해결하자는 뉘앙스"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"You had, you had a flu.\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "You had the flu.",
+      "pronunciation": "유 해드 더 플루",
+      "grammarPoint": "병 이름 flu/cold는 보통 the flu, a cold로 씁니다. 'a flu'는 어색합니다.",
+      "keyPattern": "have/had the flu, have a cold",
+      "alternativeExpressions": [
+        {
+          "label": "감기",
+          "sentence": "You caught a cold.",
+          "pronunciation": "유 컷 어 콜드",
+          "nuance": "감기는 a cold와 catch를 함께 씁니다"
+        },
+        {
+          "label": "증상 질문",
+          "sentence": "Do you still have a fever?",
+          "pronunciation": "두 유 스틸 해브 어 피버",
+          "nuance": "아픈 상대 안부를 구체적으로"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I wake up.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I woke up.",
+      "pronunciation": "아이 웨이크 업",
+      "grammarPoint": "지난 일(오늘 아침)을 말할 때는 과거형 woke up을 씁니다. 수업 중 튜터가 'I woke up'으로 직접 고쳐 주었습니다.",
+      "keyPattern": "과거 사건 → 과거형 (wake→woke)",
+      "alternativeExpressions": [
+        {
+          "label": "시각 포함",
+          "sentence": "I woke up at 5 a.m. today.",
+          "pronunciation": "아이 웨이크 업 앳 파이브 에이엠 투데이",
+          "nuance": "구체적 시각을 붙이면 더 명확"
+        },
+        {
+          "label": "일찍 일어남",
+          "sentence": "I got up really early this morning.",
+          "pronunciation": "아이 갓 업 리얼리 얼리 디스 모닝",
+          "nuance": "get up은 침대에서 몸을 일으킨다는 뉘앙스"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I did something, AI thing and passed five- or four hours.\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "I worked on some AI stuff and spent four or five hours on it.",
+      "pronunciation": "아이 웍트 온 썸 에이아이 스터프 앤 스펜트 포 오어 파이브 아워즈 온 잇",
+      "grammarPoint": "시간을 '보내다'는 pass가 아니라 spend (spend + 시간 + on/-ing)입니다.",
+      "keyPattern": "spend + 시간 + on 명사 / -ing",
+      "alternativeExpressions": [
+        {
+          "label": "-ing 형태",
+          "sentence": "I spent four hours working on AI projects.",
+          "pronunciation": "아이 스펜트 포 아워즈 워킹 온 에이아이 프로젝츠",
+          "nuance": "spend + 시간 + -ing"
+        },
+        {
+          "label": "덜 구체적",
+          "sentence": "I was busy with AI work for hours.",
+          "pronunciation": "아이 워즈 비지 윗 에이아이 웍 포 아워즈",
+          "nuance": "정확한 시간을 모를 때"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Recently, I just did this, um, AI, using AI, make something and now I got a, I got five sites and five YouTube channel.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Recently I've been using AI to make things, and now I have five sites and five YouTube channels.",
+      "pronunciation": "리슨틀리 아이브 빈 유징 에이아이 투 메이크 띵스 앤 나우 아이 해브 파이브 사이츠 앤 파이브 유튜브 채널스",
+      "grammarPoint": "최근부터 계속해 온 일은 현재완료진행(have been -ing), 목적은 to + 동사원형, 복수 명사는 channels처럼 -s가 필요합니다.",
+      "keyPattern": "I've been -ing / to + 동사원형 / 복수형 -s",
+      "alternativeExpressions": [
+        {
+          "label": "간단히",
+          "sentence": "I've been building sites and YouTube channels with AI.",
+          "pronunciation": "아이브 빈 빌딩 사이츠 앤 유튜브 채널스 윗 에이아이",
+          "nuance": "핵심만 짧게"
+        },
+        {
+          "label": "성과 강조",
+          "sentence": "With AI, I now run five sites and five channels.",
+          "pronunciation": "윗 에이아이 아이 나우 런 파이브 사이츠 앤 파이브 채널스",
+          "nuance": "run은 운영하다"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"it's my first time make some like this videos, so now my result is n- not, mm, good and satisfy.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "It's my first time making videos like this, so I'm not satisfied with the result yet.",
+      "pronunciation": "잇츠 마이 퍼스트 타임 메이킹 비디오즈 라이크 디스 소 아임 낫 새티스파이드 윗 더 리절트 옛",
+      "grammarPoint": "first time 뒤는 -ing, 'like this'는 명사 뒤, 감정 형용사 satisfied(만족한)와 satisfying(만족스러운)을 구분합니다.",
+      "keyPattern": "It's my first time + -ing / be satisfied with",
+      "alternativeExpressions": [
+        {
+          "label": "더 겸손하게",
+          "sentence": "They're not great yet, but I'm learning.",
+          "pronunciation": "데이어 낫 그레이트 옛 벗 아임 러닝",
+          "nuance": "아직 부족하지만 배우는 중이라는 태도"
+        },
+        {
+          "label": "도전 강조",
+          "sentence": "It's new to me, so I'm still experimenting.",
+          "pronunciation": "잇츠 뉴 투 미 소 아임 스틸 익스페리멘팅",
+          "nuance": "experiment는 시도해 보는 중"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I'm interesting of that, so I wanna watch or, or I wanna use\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Everything I make is what I'm interested in, so I want to watch or use it myself.",
+      "pronunciation": "에브리띵 아이 메이크 이즈 왓 아임 인터레스티드 인 소 아이 원 투 워치 오어 유즈 잇 마이셀프",
+      "grammarPoint": "사람 주어에는 interested in (-ed), 사물에는 interesting. 전치사는 of가 아니라 in.",
+      "keyPattern": "be interested in + 명사",
+      "alternativeExpressions": [
+        {
+          "label": "취향 표현",
+          "sentence": "I only make things I'd actually use.",
+          "pronunciation": "아이 온리 메이크 띵스 아이드 액추얼리 유즈",
+          "nuance": "내가 쓰려고 만든다는 의미"
+        },
+        {
+          "label": "관심 표현",
+          "sentence": "I build what I'm curious about.",
+          "pronunciation": "아이 빌드 왓 아임 큐리어스 어바웃",
+          "nuance": "curious about은 호기심"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I, I trust the, the doctor than me.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I trust the doctor more than myself.",
+      "pronunciation": "아이 트러스트 더 닥터 모어 댄 마이셀프",
+      "grammarPoint": "'than'은 비교급(more)과 짝입니다. 나 자신과 비교할 때는 myself가 자연스럽습니다.",
+      "keyPattern": "trust A more than B",
+      "alternativeExpressions": [
+        {
+          "label": "신뢰 표현",
+          "sentence": "I'd rather trust a doctor's advice.",
+          "pronunciation": "아이드 래더 트러스트 어 닥터스 어드바이스",
+          "nuance": "'~하는 편이 낫다'"
+        },
+        {
+          "label": "안심 표현",
+          "sentence": "Doctors know best, so I just follow their advice.",
+          "pronunciation": "닥터스 노 베스트 소 아이 저스트 팔로우 데어 어드바이스",
+          "nuance": "조언을 따른다는 의미"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"once to see a doctor just, uh, three dollars, US dollar.\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "One doctor visit costs only about three US dollars.",
+      "pronunciation": "원 닥터 비짓 코스츠 온리 어바웃 쓰리 유에스 달러스",
+      "grammarPoint": "문장에 동사가 빠졌습니다. 가격은 'cost'로 말하고, 방문은 'a doctor's visit'입니다.",
+      "keyPattern": "A costs about + 금액",
+      "alternativeExpressions": [
+        {
+          "label": "to 부정사",
+          "sentence": "It only costs about three dollars to see a doctor.",
+          "pronunciation": "잇 온리 코스츠 어바웃 쓰리 달러스 투 씨 어 닥터",
+          "nuance": "It costs ... to ~ 구조"
+        },
+        {
+          "label": "비교",
+          "sentence": "A clinic visit in Korea is really cheap.",
+          "pronunciation": "어 클리닉 비짓 인 코리아 이즈 리얼리 칩",
+          "nuance": "가격이 싸다는 일반 표현"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Sleep is most- important thing when you, when you see.\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "Sleep is the most important thing when you're sick.",
+      "pronunciation": "슬립 이즈 더 모스트 임포턴트 띵 웬 유어 식",
+      "grammarPoint": "최상급 앞에는 the가 필요하고, 'when you see'는 'when you're sick'이어야 의미가 통합니다.",
+      "keyPattern": "the most + 형용사 + 명사",
+      "alternativeExpressions": [
+        {
+          "label": "조언형",
+          "sentence": "When you are sick, get as much sleep as you can.",
+          "pronunciation": "웬 유 아 식 겟 애즈 머치 슬립 애즈 유 캔",
+          "nuance": "직접적인 조언"
+        },
+        {
+          "label": "우선순위",
+          "sentence": "Rest comes first when you are ill.",
+          "pronunciation": "레스트 컴즈 퍼스트 웬 유 아 일",
+          "nuance": "come first = 최우선"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Maybe a few days later just can see snowing.\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "We might see snow in a few days.",
+      "pronunciation": "위 마이트 씨 스노우 인 어 퓨 데이즈",
+      "grammarPoint": "'~후에'는 later가 아니라 in + 기간, 가능성은 might/may, 눈이 오는 것을 보다는 see snow가 자연스럽습니다.",
+      "keyPattern": "in + 기간 / might + 동사원형",
+      "alternativeExpressions": [
+        {
+          "label": "날씨 예보",
+          "sentence": "It will probably snow in a few days.",
+          "pronunciation": "잇 윌 프라바블리 스노우 인 어 퓨 데이즈",
+          "nuance": "날씨 가능성 표현"
+        },
+        {
+          "label": "기대감",
+          "sentence": "I think we'll get our first snow soon.",
+          "pronunciation": "아이 띵크 윌 겟 아워 퍼스트 스노우 순",
+          "nuance": "first snow = 첫눈"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"In class I will be chatty person. ... our class will be changed, uh, listening class.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "In class I'm a chatty person. Otherwise, our class would turn into a listening class.",
+      "pronunciation": "인 클래스 아임 어 채티 퍼슨 아더와이즈 아워 클래스 우드 턴 인투 어 리스닝 클래스",
+      "grammarPoint": "습관·성향은 현재형 I'm, 단수 명사에는 a가 필요하고 '~로 바뀌다'는 turn into 입니다.",
+      "keyPattern": "turn into + 명사",
+      "alternativeExpressions": [
+        {
+          "label": "이유 설명",
+          "sentence": "If I stay quiet, the class gets awkward.",
+          "pronunciation": "이프 아이 스테이 콰이어트 더 클래스 겟츠 어크워드",
+          "nuance": "조건문 현재형"
+        },
+        {
+          "label": "의도 설명",
+          "sentence": "I talk a lot to keep the lesson active.",
+          "pronunciation": "아이 톡 어 랏 투 킵 더 레슨 액티브",
+          "nuance": "to + 동사원형으로 목적 표현"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"after I finished class, uh, I'm more tired, so I take the rest few, few minute.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "After class I'm more tired, so I take a short rest for a few minutes.",
+      "pronunciation": "애프터 클래스 아임 모어 타이어드 소 아이 테이크 어 숏 레스트 포 어 퓨 미닛츠",
+      "grammarPoint": "a rest는 a와 함께, 'a few' 뒤에는 복수형 minutes가 옵니다. 수업이 끝난 뒤의 습관은 현재형으로 맞춥니다.",
+      "keyPattern": "a few + 복수명사 / take a rest",
+      "alternativeExpressions": [
+        {
+          "label": "짧게",
+          "sentence": "I rest for a few minutes after class.",
+          "pronunciation": "아이 레스트 포 어 퓨 미닛츠 애프터 클래스",
+          "nuance": "가장 간단한 형태"
+        },
+        {
+          "label": "낮잠",
+          "sentence": "I usually take a short break to recharge.",
+          "pronunciation": "아이 유절리 테이크 어 숏 브레이크 투 리차지",
+          "nuance": "recharge = 충전"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"now is more comfortable to take, take s- take the class.\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "It's more comfortable to take the class now.",
+      "pronunciation": "잇츠 모어 컴퍼터블 투 테이크 더 클래스 나우",
+      "grammarPoint": "비교 문장은 가주어 It으로 시작하면 자연스럽습니다. now는 문장 끝이나 앞에 둡니다.",
+      "keyPattern": "It's more + 형용사 + to + 동사원형",
+      "alternativeExpressions": [
+        {
+          "label": "변화 표현",
+          "sentence": "Lessons feel much easier now.",
+          "pronunciation": "레슨즈 필 머치 이지어 나우",
+          "nuance": "feel + 형용사"
+        },
+        {
+          "label": "비교 표현",
+          "sentence": "I'm far more relaxed in class than before.",
+          "pronunciation": "아임 파 모어 릴랙스트 인 클래스 댄 비포",
+          "nuance": "과거와 현재 비교"
+        }
+      ]
+    }
+  ],
+  "betterAnswers": [
+    {
+      "situation": "아프다고 말한 튜터에게 위로하기",
+      "betterSentence": "I hope you feel better soon. Please get some rest after class.",
+      "pronunciation": "아이 호프 유 필 베터 순 플리즈 겟 썸 레스트 애프터 클래스",
+      "koreanMeaning": "빨리 나으시길 바랍니다. 수업 끝나고 쉬세요.",
+      "nuanceTip": "충고는 should보다 Please로 시작하면 부드럽습니다.",
+      "followUpCombo": "Is there anything I can do to help?"
+    },
+    {
+      "situation": "네트워크 지연을 설명할 때",
+      "betterSentence": "My connection isn't stable today, so there may be some delay.",
+      "pronunciation": "마이 커넥션 이즌트 스테이블 투데이 소 데어 메이 비 썸 딜레이",
+      "koreanMeaning": "오늘 연결이 불안정해서 지연이 있을 수 있어요.",
+      "nuanceTip": "'delay'는 셀 수 있는 명사로도, 불가산으로도 쓰입니다.",
+      "followUpCombo": "Can you hear me clearly now?"
+    },
+    {
+      "situation": "AI로 사이트와 채널을 만든다고 소개할 때",
+      "betterSentence": "I've been using AI to build five websites and five YouTube channels.",
+      "pronunciation": "아이브 빈 유징 에이아이 투 빌드 파이브 웹사이츠 앤 파이브 유튜브 채널스",
+      "koreanMeaning": "저는 AI로 웹사이트 5개와 유튜브 채널 5개를 만들어 왔어요.",
+      "nuanceTip": "'have been -ing'로 현재까지 계속된 일을 표현합니다.",
+      "followUpCombo": "It's my first time making videos, so I'm still learning."
+    },
+    {
+      "situation": "한국에서 아플 때 어떻게 하는지 답할 때",
+      "betterSentence": "In Korea, we usually go to a small clinic, see a doctor, and pick up medicine at a pharmacy.",
+      "pronunciation": "인 코리아 위 유절리 고 투 어 스몰 클리닉 씨 어 닥터 앤 픽업 메디슨 앳 어 파마시",
+      "koreanMeaning": "한국에서는 보통 동네 병원에 가서 진료받고 약국에서 약을 받아요.",
+      "nuanceTip": "pick up medicine은 약을 수령한다는 일상 표현입니다.",
+      "followUpCombo": "A visit costs only about three US dollars."
+    },
+    {
+      "situation": "겨울을 싫어한다고 말할 때",
+      "betterSentence": "I'm not a fan of winter, so I mostly stay home and drink tea.",
+      "pronunciation": "아임 낫 어 팬 오브 윈터 소 아이 모슬리 스테이 홈 앤 드링크 티",
+      "koreanMeaning": "겨울을 좋아하지 않아서 주로 집에서 차를 마셔요.",
+      "nuanceTip": "'not a fan of'는 'hate'보다 부드럽습니다.",
+      "followUpCombo": "It was 7 degrees in Korea today."
+    },
+    {
+      "situation": "수업 방식에 대한 느낌을 설명할 때",
+      "betterSentence": "I talk a lot in class, because otherwise it would turn into a listening class.",
+      "pronunciation": "아이 톡 어 랏 인 클래스 비커즈 아더와이즈 잇 우드 턴 인투 어 리스닝 클래스",
+      "koreanMeaning": "말을 많이 해요. 안 그러면 듣기 수업이 되어버리니까요.",
+      "nuanceTip": "otherwise = 그렇지 않으면, would + 동사원형으로 가정.",
+      "followUpCombo": "I'm much less nervous than when I started."
+    }
+  ],
+  "betterQuestions": [
+    {
+      "situation": "튜터의 컨디션을 물을 때",
+      "betterSentence": "How are you feeling today? Is your voice getting better?",
+      "pronunciation": "하우 아 유 필링 투데이 이즈 유어 보이스 게팅 베터",
+      "koreanMeaning": "오늘 몸은 어떠세요? 목소리는 좀 나아지고 있나요?",
+      "nuanceTip": "아픈 사람에게는 How are you feeling?이 자연스럽습니다.",
+      "followUpCombo": "Did you take any medicine?"
+    },
+    {
+      "situation": "자메이카 민간요법을 더 물을 때",
+      "betterSentence": "What do people in Jamaica usually do when they catch a cold?",
+      "pronunciation": "왓 두 피플 인 자메이카 유절리 두 웬 데이 캐치 어 콜드",
+      "koreanMeaning": "자메이카 사람들은 감기에 걸리면 보통 어떻게 하나요?",
+      "nuanceTip": "'catch a cold'가 '감기에 걸리다'입니다.",
+      "followUpCombo": "How does it taste?"
+    },
+    {
+      "situation": "낯선 단어를 확인할 때",
+      "betterSentence": "What does 'bush' mean? Is it smaller than a tree?",
+      "pronunciation": "왓 더즈 부쉬 민 이즈 잇 스몰러 댄 어 트리",
+      "koreanMeaning": "'bush'가 무슨 뜻이에요? 나무보다 작은가요?",
+      "nuanceTip": "단어 뜻은 What does ... mean? 한 문장으로 묻습니다.",
+      "followUpCombo": "Can you give me an example sentence?"
+    },
+    {
+      "situation": "상대의 일에 대해 물을 때",
+      "betterSentence": "How many students do you teach today?",
+      "pronunciation": "하우 메니 스튜던츠 두 유 티치 투데이",
+      "koreanMeaning": "오늘은 학생을 몇 명 가르치세요?",
+      "nuanceTip": "How many 뒤에는 복수명사가 옵니다.",
+      "followUpCombo": "Do you ever cancel classes when you are sick?"
+    },
+    {
+      "situation": "상대 나라의 날씨를 물을 때",
+      "betterSentence": "What is the weather like in Jamaica right now?",
+      "pronunciation": "왓 이즈 더 웨더 라이크 인 자메이카 라이트 나우",
+      "koreanMeaning": "지금 자메이카 날씨는 어때요?",
+      "nuanceTip": "What is ... like?는 상태를 묻는 기본 패턴.",
+      "followUpCombo": "Is it hot all year round?"
+    },
+    {
+      "situation": "수업을 마무리하며 배려할 때",
+      "betterSentence": "Should we finish early today? I think you need some rest.",
+      "pronunciation": "슈드 위 피니시 얼리 투데이 아이 띵크 유 니드 썸 레스트",
+      "koreanMeaning": "오늘은 일찍 끝낼까요? 쉬셔야 할 것 같아요.",
+      "nuanceTip": "Should we ...?는 부드러운 제안입니다.",
+      "followUpCombo": "Please take care and feel better soon."
+    }
+  ],
+  "scenarioTitle": "독감·AI 프로젝트·한국 병원 이야기 복습",
+  "scenarioContext": "이 시나리오는 수업에서 다룬 주제(독감, 네트워크 지연, AI 작업, 한국 병원)를 바탕으로 만든 연습용 스크립트이며, 실제 대화 녹취가 아닙니다.",
+  "scenarioTurns": [
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "How are you feeling today? I heard you had the flu.",
+      "pronunciation": "하우 아 유 필링 투데이 아이 허드 유 해드 더 플루",
+      "koreanText": "오늘 몸은 어떠세요? 독감이었다고 들었어요.",
+      "keyExpression": "had the flu",
+      "speakingTip": "the flu 로 굳혀서 외우세요."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "I'm much better, thank you. I woke up early and my head still hurts a little.",
+      "pronunciation": "아임 머치 베터 땡큐 아이 웨이크 업 얼리 앤 마이 헤드 스틸 허츠 어 리틀",
+      "koreanText": "많이 나아졌어요. 일찍 일어났고 머리가 조금 아파요.",
+      "keyExpression": "woke up",
+      "speakingTip": "과거형 woke를 또렷하게."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "Did you take any medicine?",
+      "pronunciation": "디드 유 테이크 에니 메디슨",
+      "koreanText": "약은 드셨어요?",
+      "keyExpression": "take medicine",
+      "speakingTip": "medicine의 강세는 첫 음절."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Yes, I did. I'll rest after class. Is the connection okay on your side?",
+      "pronunciation": "예스 아이 디드 아윌 레스트 애프터 클래스 이즈 더 커넥션 오케이 온 유어 사이드",
+      "koreanText": "네. 수업 후에 쉴게요. 그쪽 연결은 괜찮나요?",
+      "keyExpression": "on your side",
+      "speakingTip": "상대 쪽 상황을 물을 때."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "It's a bit unstable today, so there might be some delay.",
+      "pronunciation": "잇츠 어 빗 언스테이블 투데이 소 데어 마이트 비 썸 딜레이",
+      "koreanText": "오늘 조금 불안정해서 지연이 있을 수 있어요.",
+      "keyExpression": "unstable",
+      "speakingTip": "a bit를 앞에 붙이면 부드럽습니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "No problem. What did you do this morning?",
+      "pronunciation": "노 프라블럼 왓 디드 유 두 디스 모닝",
+      "koreanText": "괜찮아요. 오늘 아침엔 무엇을 했나요?",
+      "keyExpression": "What did you do",
+      "speakingTip": "did 뒤에는 동사원형."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "I woke up at five and spent four hours working on AI projects.",
+      "pronunciation": "아이 웨이크 업 앳 파이브 앤 스펜트 포 아워즈 워킹 온 에이아이 프로젝츠",
+      "koreanText": "5시에 일어나서 4시간 동안 AI 프로젝트를 했어요.",
+      "keyExpression": "spent ... working on",
+      "speakingTip": "spend + 시간 + -ing"
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "That's a long time. Please get some sleep today.",
+      "pronunciation": "댓츠 어 롱 타임 플리즈 겟 썸 슬립 투데이",
+      "koreanText": "오래 하셨네요. 오늘은 좀 주무세요.",
+      "keyExpression": "get some sleep",
+      "speakingTip": "get + 명사로 자연스럽게."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "s1",
+      "badge": "시나리오 1 · 심층 복습",
+      "title": "아픈 튜터와의 안부와 일상 대화",
+      "context": "이 시나리오는 수업에서 다룬 주제(독감, 네트워크 지연, AI 작업, 한국 병원)를 바탕으로 만든 연습용 스크립트이며, 실제 대화 녹취가 아닙니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "How are you feeling today? I heard you had the flu.",
+          "pronunciation": "하우 아 유 필링 투데이 아이 허드 유 해드 더 플루",
+          "koreanText": "오늘 몸은 어떠세요? 독감이었다고 들었어요.",
+          "keyExpression": "had the flu",
+          "speakingTip": "the flu 로 굳혀서 외우세요."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I'm much better, thank you. I woke up early and my head still hurts a little.",
+          "pronunciation": "아임 머치 베터 땡큐 아이 웨이크 업 얼리 앤 마이 헤드 스틸 허츠 어 리틀",
+          "koreanText": "많이 나아졌어요. 일찍 일어났고 머리가 조금 아파요.",
+          "keyExpression": "woke up",
+          "speakingTip": "과거형 woke를 또렷하게."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Did you take any medicine?",
+          "pronunciation": "디드 유 테이크 에니 메디슨",
+          "koreanText": "약은 드셨어요?",
+          "keyExpression": "take medicine",
+          "speakingTip": "medicine의 강세는 첫 음절."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Yes, I did. I'll rest after class. Is the connection okay on your side?",
+          "pronunciation": "예스 아이 디드 아윌 레스트 애프터 클래스 이즈 더 커넥션 오케이 온 유어 사이드",
+          "koreanText": "네. 수업 후에 쉴게요. 그쪽 연결은 괜찮나요?",
+          "keyExpression": "on your side",
+          "speakingTip": "상대 쪽 상황을 물을 때."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "It's a bit unstable today, so there might be some delay.",
+          "pronunciation": "잇츠 어 빗 언스테이블 투데이 소 데어 마이트 비 썸 딜레이",
+          "koreanText": "오늘 조금 불안정해서 지연이 있을 수 있어요.",
+          "keyExpression": "unstable",
+          "speakingTip": "a bit를 앞에 붙이면 부드럽습니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "No problem. What did you do this morning?",
+          "pronunciation": "노 프라블럼 왓 디드 유 두 디스 모닝",
+          "koreanText": "괜찮아요. 오늘 아침엔 무엇을 했나요?",
+          "keyExpression": "What did you do",
+          "speakingTip": "did 뒤에는 동사원형."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "I woke up at five and spent four hours working on AI projects.",
+          "pronunciation": "아이 웨이크 업 앳 파이브 앤 스펜트 포 아워즈 워킹 온 에이아이 프로젝츠",
+          "koreanText": "5시에 일어나서 4시간 동안 AI 프로젝트를 했어요.",
+          "keyExpression": "spent ... working on",
+          "speakingTip": "spend + 시간 + -ing"
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "That's a long time. Please get some sleep today.",
+          "pronunciation": "댓츠 어 롱 타임 플리즈 겟 썸 슬립 투데이",
+          "koreanText": "오래 하셨네요. 오늘은 좀 주무세요.",
+          "keyExpression": "get some sleep",
+          "speakingTip": "get + 명사로 자연스럽게."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "badge": "시나리오 2 · 비즈니스 응용",
+      "title": "AI 사이트 프로젝트 소개",
+      "context": "이 시나리오는 수업에서 언급된 AI 웹사이트·유튜브 채널 주제를 비즈니스 상황으로 확장한 연습용 스크립트이며, 실제 대화 녹취가 아닙니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Tell me about your projects. What are you working on?",
+          "pronunciation": "텔 미 어바웃 유어 프로젝츠 왓 아 유 워킹 온",
+          "koreanText": "프로젝트에 대해 말해 주세요. 무엇을 하고 있나요?",
+          "keyExpression": "work on",
+          "speakingTip": "진행 중일 때 working on."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I've been building five websites and five YouTube channels with AI.",
+          "pronunciation": "아이브 빈 빌딩 파이브 웹사이츠 앤 파이브 유튜브 채널스 윗 에이아이",
+          "koreanText": "AI로 웹사이트 5개와 유튜브 채널 5개를 만들고 있어요.",
+          "keyExpression": "I've been building",
+          "speakingTip": "복수 -s 주의."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What is the idea behind the review site?",
+          "pronunciation": "왓 이즈 디 아이디어 비하인드 더 리뷰 사이트",
+          "koreanText": "리뷰 사이트의 아이디어는 무엇인가요?",
+          "keyExpression": "the idea behind",
+          "speakingTip": "idea 앞 a/an/the."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I want to read, but I don't want to read too much, so I make summaries and short videos.",
+          "pronunciation": "아이 원 투 리드 벗 아이 돈트 원 투 리드 투 머치 소 아이 메이크 서머리즈 앤 숏 비디오즈",
+          "koreanText": "읽고 싶지만 너무 많이 읽긴 싫어서 요약과 짧은 영상을 만들어요.",
+          "keyExpression": "summaries",
+          "speakingTip": "summary의 복수는 summaries."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "How do you feel about the results so far?",
+          "pronunciation": "하우 두 유 필 어바웃 더 리절츠 소 파",
+          "koreanText": "지금까지 결과는 어떻게 느끼세요?",
+          "keyExpression": "How do you feel about",
+          "speakingTip": "의견 묻기."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "It's my first time making videos like this, so I'm not satisfied yet.",
+          "pronunciation": "잇츠 마이 퍼스트 타임 메이킹 비디오즈 라이크 디스 소 아임 낫 새티스파이드 옛",
+          "koreanText": "이런 영상은 처음이라 아직 만족스럽지 않아요.",
+          "keyExpression": "be satisfied with",
+          "speakingTip": "-ed 형용사."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What is your goal for this year?",
+          "pronunciation": "왓 이즈 유어 골 포 디스 이어",
+          "koreanText": "올해 목표는 무엇인가요?",
+          "keyExpression": "goal for",
+          "speakingTip": "for + 기간."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I'm aiming to launch about a hundred sites, apps, or channels.",
+          "pronunciation": "아임 에이밍 투 런치 어바웃 어 헌드레드 사이츠 앱스 오어 채널스",
+          "koreanText": "사이트, 앱, 채널을 100개쯤 출시하는 게 목표예요.",
+          "keyExpression": "aim to",
+          "speakingTip": "aim to + 동사원형."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "badge": "시나리오 3 · 꼬리질문 디펜스",
+      "title": "한국 병원과 날씨에 대한 꼬리질문",
+      "context": "이 시나리오는 수업에서 나온 한국 병원·날씨·수업 방식 이야기를 바탕으로 한 꼬리질문 연습용 스크립트이며, 실제 대화 녹취가 아닙니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What do you do in Korea when you have the flu?",
+          "pronunciation": "왓 두 유 두 인 코리아 웬 유 해브 더 플루",
+          "koreanText": "한국에서는 독감에 걸리면 어떻게 하나요?",
+          "keyExpression": "when you have",
+          "speakingTip": "현재 습관 표현."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "We usually go to a small clinic and see a doctor, then get a prescription.",
+          "pronunciation": "위 유절리 고 투 어 스몰 클리닉 앤 씨 어 닥터 덴 겟 어 프리스크립션",
+          "koreanText": "보통 작은 병원에서 진료받고 처방전을 받아요.",
+          "keyExpression": "get a prescription",
+          "speakingTip": "prescription 강세 두 번째."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Is it expensive to see a doctor there?",
+          "pronunciation": "이즈 잇 익스펜시브 투 씨 어 닥터 데어",
+          "koreanText": "그곳에서 병원 가는 건 비싼가요?",
+          "keyExpression": "see a doctor",
+          "speakingTip": "진료받다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "No, a visit only costs about three US dollars.",
+          "pronunciation": "노 어 비짓 온리 코스츠 어바웃 쓰리 유에스 달러스",
+          "koreanText": "아니요, 진료비는 약 3달러예요.",
+          "keyExpression": "costs about",
+          "speakingTip": "동사 cost 사용."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "That's cheap! How is the weather in Korea right now?",
+          "pronunciation": "댓츠 칩 하우 이즈 더 웨더 인 코리아 라이트 나우",
+          "koreanText": "싸네요! 지금 한국 날씨는 어때요?",
+          "keyExpression": "How is the weather",
+          "speakingTip": "날씨 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "It's about 7 degrees, so we might see snow in a few days.",
+          "pronunciation": "잇츠 어바웃 세븐 디그리즈 소 위 마이트 씨 스노우 인 어 퓨 데이즈",
+          "koreanText": "약 7도라 며칠 후 눈이 올지도 몰라요.",
+          "keyExpression": "in a few days",
+          "speakingTip": "미래 기간은 in."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Do you like winter?",
+          "pronunciation": "두 유 라이크 윈터",
+          "koreanText": "겨울 좋아하세요?",
+          "keyExpression": "Do you like",
+          "speakingTip": "짧은 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Not really. I'm not a fan of winter, so I mostly stay home and drink tea.",
+          "pronunciation": "낫 리얼리 아임 낫 어 팬 오브 윈터 소 아이 모슬리 스테이 홈 앤 드링크 티",
+          "koreanText": "별로요. 겨울을 안 좋아해서 주로 집에서 차를 마셔요.",
+          "keyExpression": "not a fan of",
+          "speakingTip": "부드러운 부정."
+        }
+      ]
+    }
+  ]
+}

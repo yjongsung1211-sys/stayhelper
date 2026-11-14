@@ -1,0 +1,719 @@
+{
+  "lang": "en",
+  "langBadge": "🇺🇸 영어 (English)",
+  "ttsLang": "en-US",
+  "grammarCorrections": [
+    {
+      "myWrongSentence": "\"I'm just wake up, so a little sleepy.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I just woke up, so I'm a little sleepy.",
+      "pronunciation": "아이 저스트 웨이크 업 → 아이 저스트 워크 업, 쏘 아임 어 리틀 슬리피",
+      "grammarPoint": "'방금 ~했다'는 just + 과거형(woke). 'I'm + 동사원형'은 불가능하고, sleepy 앞에는 주어+be(I'm)가 필요합니다.",
+      "keyPattern": "I just + 과거형, so I'm + 형용사",
+      "alternativeExpressions": [
+        {
+          "label": "진행 상태",
+          "sentence": "I'm still waking up, so I'm a bit sleepy.",
+          "pronunciation": "아임 스틸 웨이킹 업, 쏘 아임 어 빗 슬리피",
+          "nuance": "'아직 잠이 덜 깼다'는 느낌"
+        },
+        {
+          "label": "구어체",
+          "sentence": "I just got up, so I'm kind of groggy.",
+          "pronunciation": "아이 저스트 갓 업, 쏘 아임 카인더 그라기",
+          "nuance": "groggy = 잠이 덜 깨 멍한"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Yeah, I, I u- usually wake up six.\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "I usually wake up at six.",
+      "pronunciation": "아이 유주얼리 웨이크 업 앳 식스",
+      "grammarPoint": "시각 앞에는 전치사 at이 필요합니다.",
+      "keyPattern": "wake up at + 시각",
+      "alternativeExpressions": [
+        {
+          "label": "일상 루틴",
+          "sentence": "I'm usually up by six.",
+          "pronunciation": "아임 유주얼리 업 바이 식스",
+          "nuance": "'6시쯤엔 일어나 있다'는 자연스러운 구어"
+        },
+        {
+          "label": "이유 덧붙이기",
+          "sentence": "I go to bed early, so I wake up around six.",
+          "pronunciation": "아이 고 투 베드 얼리, 쏘 아이 웨이크 업 어라운드 식스",
+          "nuance": "around로 '대략'을 표현"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"why I want to, want to study English because I, I need to, I need to conversation with the foreigner\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I want to study English because I need to have conversations with foreigners.",
+      "pronunciation": "아이 원트 투 스터디 잉글리시 비커즈 아이 니드 투 해브 컨버세이션스 위드 포리너스",
+      "grammarPoint": "conversation은 명사라 'need to' 뒤에 바로 올 수 없습니다. 'have conversations / talk with'로 동사를 넣고, the foreigner 대신 복수 foreigners를 씁니다.",
+      "keyPattern": "need to + 동사 (talk / have conversations) with + 복수명사",
+      "alternativeExpressions": [
+        {
+          "label": "동사로 간단히",
+          "sentence": "I need to talk with foreigners.",
+          "pronunciation": "아이 니드 투 토크 위드 포리너스",
+          "nuance": "talk with가 가장 쉽고 자연스러움"
+        },
+        {
+          "label": "목적 강조",
+          "sentence": "I want to be able to chat with people from other countries.",
+          "pronunciation": "아이 원트 투 비 에이블 투 챗 위드 피플 프럼 아더 컨트리즈",
+          "nuance": "'능력'을 강조하는 표현"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I very often go to the abroad to travel with my, with my wife.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I often go abroad to travel with my wife.",
+      "pronunciation": "아이 오픈 고 어브로드 투 트래블 위드 마이 와이프",
+      "grammarPoint": "abroad는 부사라 the/to 없이 'go abroad'. very often보다 often 또는 quite often이 더 자연스럽습니다.",
+      "keyPattern": "go abroad / travel abroad (the, to 없음)",
+      "alternativeExpressions": [
+        {
+          "label": "빈도 표현",
+          "sentence": "We travel overseas quite often.",
+          "pronunciation": "위 트래블 오버시즈 콰이트 오픈",
+          "nuance": "overseas도 같은 뜻"
+        },
+        {
+          "label": "변화 서술",
+          "sentence": "I used to dislike traveling, but now we go abroad a lot.",
+          "pronunciation": "아이 유스트 투 디스라이크 트래블링, 벗 나우 위 고 어브로드 어 랏",
+          "nuance": "used to로 과거와 현재 대비"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"uh, if I can speak English the more, mm, I can connect, I, I can connect with them.\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "The more English I can speak, the more I can connect with them.",
+      "pronunciation": "더 모어 잉글리시 아이 캔 스픽, 더 모어 아이 캔 커넥트 위드 뎀",
+      "grammarPoint": "'~할수록 더 ~하다'는 The + 비교급 ~, the + 비교급 ~ 구조입니다. the more를 문장 끝에 붙이면 어색합니다.",
+      "keyPattern": "The more A, the more B",
+      "alternativeExpressions": [
+        {
+          "label": "If 구문",
+          "sentence": "If I can speak English well, I can connect with local people.",
+          "pronunciation": "이프 아이 캔 스픽 잉글리시 웰, 아이 캔 커넥트 위드 로컬 피플",
+          "nuance": "조건 중심의 단순한 문장"
+        },
+        {
+          "label": "목표 표현",
+          "sentence": "Speaking English lets me connect with local people.",
+          "pronunciation": "스피킹 잉글리시 렛츠 미 커넥트 위드 로컬 피플",
+          "nuance": "동명사 주어로 간결하게"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Few, a few weeks ago I work, I worked at office, but I quit the, that job and n- now I just, uh, make, make, make my own business.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "A few weeks ago I was working at an office, but I quit that job and now I run my own business.",
+      "pronunciation": "어 퓨 윅스 어고 아이 워즈 워킹 앳 언 오피스, 벗 아이 퀴트 댓 잡 앤 나우 아이 런 마이 오운 비즈니스",
+      "grammarPoint": "과거 시점은 worked로 통일하고, 장소는 at an office/in an office처럼 관사가 필요합니다. '사업을 하다'는 make가 아니라 run/start/have입니다.",
+      "keyPattern": "run / start my own business",
+      "alternativeExpressions": [
+        {
+          "label": "창업",
+          "sentence": "I quit my job to start my own business.",
+          "pronunciation": "아이 퀴트 마이 잡 투 스타트 마이 오운 비즈니스",
+          "nuance": "'창업했다'는 start"
+        },
+        {
+          "label": "독립",
+          "sentence": "I left the company and now I work for myself.",
+          "pronunciation": "아이 레프트 더 컴퍼니 앤 나우 아이 워크 포 마이셀프",
+          "nuance": "work for myself = 프리랜서/개인 사업 느낌"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"before I retire, retire I was, I will be retire. Uh, that's correct?\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "I could already imagine my whole career path until I retire.",
+      "pronunciation": "아이 쿠드 올레디 이매진 마이 홀 커리어 패스 언틸 아이 리타이어",
+      "grammarPoint": "하고 싶은 말은 '은퇴할 때까지의 길이 훤히 보였다'입니다. 본인이 '맞나요?'라고 물었던 will be retire는 틀렸고(will retire), 이 문장은 'I can imagine ~ until I retire'로 풀면 됩니다.",
+      "keyPattern": "I could already imagine/see + 목적어",
+      "alternativeExpressions": [
+        {
+          "label": "미래가 보임",
+          "sentence": "I could see exactly how the next 20 years would go.",
+          "pronunciation": "아이 쿠드 씨 이그잭틀리 하우 더 넥스트 트웬티 이어즈 우드 고",
+          "nuance": "구체적인 기간 표현"
+        },
+        {
+          "label": "지루함 표현",
+          "sentence": "It felt predictable, so I got bored.",
+          "pronunciation": "잇 펠트 프리딕터블, 쏘 아이 갓 보어드",
+          "nuance": "predictable = 예측 가능해서 지루한"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"she want to go out m- uh, many time a day.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "She wants to go out many times a day.",
+      "pronunciation": "쉬 원츠 투 고 아웃 매니 타임즈 어 데이",
+      "grammarPoint": "주어가 3인칭 단수면 동사에 -s(wants)를 붙이고, many 뒤에는 복수(times)가 옵니다.",
+      "keyPattern": "3인칭 단수 -s / many + 복수명사",
+      "alternativeExpressions": [
+        {
+          "label": "자연스럽게",
+          "sentence": "She wants to go outside several times a day.",
+          "pronunciation": "쉬 원츠 투 고 아웃사이드 세버럴 타임즈 어 데이",
+          "nuance": "several = 몇 번"
+        },
+        {
+          "label": "아이 에너지",
+          "sentence": "She's full of energy and wants to be outside all day.",
+          "pronunciation": "쉬즈 풀 오브 에너지 앤 원츠 투 비 아웃사이드 올 데이",
+          "nuance": "아이의 활동성을 묘사"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"today we, we will go to zoo for her. So I, I'm so exciting.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Today we're going to the zoo for her, and I'm so excited!",
+      "pronunciation": "투데이 위어 고잉 투 더 주 포 허, 앤 아임 쏘 익사이티드",
+      "grammarPoint": "감정을 느끼는 사람 주어는 과거분사형 excited, 감정을 일으키는 대상은 exciting. 또한 zoo 앞에는 the가 필요합니다.",
+      "keyPattern": "I'm excited / It's exciting",
+      "alternativeExpressions": [
+        {
+          "label": "기대감",
+          "sentence": "I'm really looking forward to it.",
+          "pronunciation": "아임 리얼리 루킹 포워드 투 잇",
+          "nuance": "look forward to + 명사/동명사"
+        },
+        {
+          "label": "아이 중심",
+          "sentence": "I can't wait to see her reaction.",
+          "pronunciation": "아이 캔트 웨이트 투 씨 허 리액션",
+          "nuance": "구체적 기대 표현"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Now I make, uh, video, uh, are learn, l-learn foreigner language for Korean.\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "I make videos that help Koreans learn foreign languages.",
+      "pronunciation": "아이 메이크 비디오즈 댓 헬프 코리안즈 런 포린 랭귀지스",
+      "grammarPoint": "'~가 배우도록 돕는 영상'은 videos that help + 목적어 + 동사원형으로 표현합니다. foreigner는 사람, 외국어는 foreign language입니다.",
+      "keyPattern": "videos that help + 사람 + 동사원형",
+      "alternativeExpressions": [
+        {
+          "label": "채널 소개",
+          "sentence": "I run a channel for Koreans who want to learn foreign languages.",
+          "pronunciation": "아이 런 어 채널 포 코리안즈 후 원트 투 런 포린 랭귀지스",
+          "nuance": "관계대명사 who로 대상 설명"
+        },
+        {
+          "label": "한 줄 요약",
+          "sentence": "It's a language-learning channel for Korean speakers.",
+          "pronunciation": "잇츠 어 랭귀지 러닝 채널 포 코리안 스피커즈",
+          "nuance": "명사구로 간결하게"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Because most of work is AI did.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Because AI does most of the work.",
+      "pronunciation": "비커즈 에이아이 더즈 모스트 오브 더 워크",
+      "grammarPoint": "'AI가 대부분을 한다'는 AI를 주어로 하는 능동문입니다. is + did는 한 문장에 동사가 겹쳐 틀립니다.",
+      "keyPattern": "AI does most of the + 명사",
+      "alternativeExpressions": [
+        {
+          "label": "위임 표현",
+          "sentence": "I let AI handle most of the work.",
+          "pronunciation": "아이 렛 에이아이 핸들 모스트 오브 더 워크",
+          "nuance": "let + 목적어 + 동사원형"
+        },
+        {
+          "label": "아이디어 중심",
+          "sentence": "I come up with the ideas and AI does the rest.",
+          "pronunciation": "아이 컴 업 위드 디 아이디어즈 앤 에이아이 더즈 더 레스트",
+          "nuance": "'나머지는 AI'라는 역할 분담"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"my f-my feeling is I got, uh, so many, so many employer. So I, I, I'm a big boss\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "I feel like I have so many employees, like I'm a big boss.",
+      "pronunciation": "아이 필 라이크 아이 해브 쏘 매니 임플로이즈, 라이크 아임 어 빅 보스",
+      "grammarPoint": "employer는 '고용주'이고 '직원'은 employee입니다. 'my feeling is'보다 'I feel like'가 자연스럽습니다. (AI 직원 비유를 쓴 점은 훌륭했습니다.)",
+      "keyPattern": "I feel like + 절 / employer vs employee",
+      "alternativeExpressions": [
+        {
+          "label": "비유 확장",
+          "sentence": "It's like running a company with an AI team.",
+          "pronunciation": "잇츠 라이크 러닝 어 컴퍼니 위드 언 에이아이 팀",
+          "nuance": "AI 팀을 거느린 CEO 비유"
+        },
+        {
+          "label": "업무 배분",
+          "sentence": "I assign tasks to AI agents, and they deliver.",
+          "pronunciation": "아이 어사인 태스크스 투 에이아이 에이전트스, 앤 데이 딜리버",
+          "nuance": "assign / deliver 비즈니스 동사"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"before they can-- they choose the, uh, some s-some company help, help, help them. But they, now they can d-do, they can do, mm, themself.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "They used to hire a company to help them, but now they can do it themselves.",
+      "pronunciation": "데이 유스트 투 하이어 어 컴퍼니 투 헬프 뎀, 벗 나우 데이 캔 두 잇 뎀셀브즈",
+      "grammarPoint": "'과거에는 ~했다'는 used to, 재귀대명사는 themselves(복수)이며 do 뒤에 it이 필요합니다.",
+      "keyPattern": "used to ~, but now ... themselves",
+      "alternativeExpressions": [
+        {
+          "label": "대조",
+          "sentence": "In the past they needed an agency, but now a phone is enough.",
+          "pronunciation": "인 더 패스트 데이 니디드 언 에이전시, 벗 나우 어 폰 이즈 이너프",
+          "nuance": "핵심 대비 구조"
+        },
+        {
+          "label": "스스로 해결",
+          "sentence": "They can handle it on their own now.",
+          "pronunciation": "데이 캔 핸들 잇 온 데어 오운 나우",
+          "nuance": "on their own = 스스로"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"if someone cannot, cannot use A-AI, they, he, he is cannot, he, he cannot survive in the future, I think.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "If someone can't use AI, they won't be able to survive in the future, I think.",
+      "pronunciation": "이프 섬원 캔트 유즈 에이아이, 데이 원트 비 에이블 투 서바이브 인 더 퓨처, 아이 씽크",
+      "grammarPoint": "미래 조건문에서 결과절은 will not be able to를 쓰고, 'he is cannot'처럼 be와 cannot을 겹치지 않습니다. 단수 someone은 they로 받으면 자연스럽습니다.",
+      "keyPattern": "If + 현재, 주어 + won't be able to",
+      "alternativeExpressions": [
+        {
+          "label": "부드럽게",
+          "sentence": "People who can't use AI may fall behind.",
+          "pronunciation": "피플 후 캔트 유즈 에이아이 메이 폴 비하인드",
+          "nuance": "fall behind = 뒤처지다"
+        },
+        {
+          "label": "비유 연결",
+          "sentence": "AI will be as essential as the smartphone.",
+          "pronunciation": "에이아이 윌 비 애즈 에센셜 애즈 더 스마트폰",
+          "nuance": "스마트폰 비유로 이어가기"
+        }
+      ]
+    }
+  ],
+  "betterAnswers": [
+    {
+      "situation": "튜터가 소개와 영어 공부 이유를 물을 때",
+      "betterSentence": "I live in Seoul with my wife and our daughter. I want to improve my English so I can talk with local people when we travel.",
+      "pronunciation": "아이 리브 인 서울 위드 마이 와이프 앤 아워 도터. 아이 원트 투 임프루브 마이 잉글리시 쏘 아이 캔 토크 위드 로컬 피플 웬 위 트래블",
+      "koreanMeaning": "저는 아내, 딸과 서울에 살아요. 여행할 때 현지인과 대화하고 싶어서 영어를 향상시키고 싶어요.",
+      "nuanceTip": "so I can ~ 으로 '목적'을 한 번에 연결하면 문장이 매끄럽습니다.",
+      "followUpCombo": "Especially, I want to chat casually, not just order food."
+    },
+    {
+      "situation": "직장을 그만두고 가업·사업을 하게 된 이유를 설명할 때",
+      "betterSentence": "I quit my office job because I could already see my whole career path until retirement, and it felt boring.",
+      "pronunciation": "아이 퀴트 마이 오피스 잡 비커즈 아이 쿠드 올레디 씨 마이 홀 커리어 패스 언틸 리타이어먼트, 앤 잇 펠트 보어링",
+      "koreanMeaning": "은퇴까지의 길이 훤히 보여서 지루해 회사를 그만뒀어요.",
+      "nuanceTip": "retire(동사) 대신 until retirement(명사)로 쓰면 문장이 간단해집니다.",
+      "followUpCombo": "So now I help my parents' business and create my own projects."
+    },
+    {
+      "situation": "AI로 유튜브 두 채널을 운영한다고 설명할 때",
+      "betterSentence": "I run two YouTube channels with AI: one teaches foreign languages to Koreans, and the other is my daughter's travel channel.",
+      "pronunciation": "아이 런 투 유튜브 채널스 위드 에이아이: 원 티치스 포린 랭귀지스 투 코리안즈, 앤 디 아더 이즈 마이 도터스 트래블 채널",
+      "koreanMeaning": "AI로 유튜브 채널 두 개를 운영해요. 하나는 한국인을 위한 외국어, 다른 하나는 딸의 여행 채널이에요.",
+      "nuanceTip": "one ~, and the other ... 구조로 두 가지를 깔끔하게 나눕니다.",
+      "followUpCombo": "AI handles most of the editing, so it's not too much work."
+    },
+    {
+      "situation": "AI 직원을 거느린 빅보스 비유를 설명할 때",
+      "betterSentence": "It feels like I'm a big boss with several AI employees. I give them tasks and they get things done.",
+      "pronunciation": "잇 필즈 라이크 아임 어 빅 보스 위드 세버럴 에이아이 임플로이즈. 아이 기브 뎀 태스크스 앤 데이 겟 띵스 던",
+      "koreanMeaning": "저는 AI 직원 여럿을 둔 빅보스 같아요. 일을 주면 알아서 해내요.",
+      "nuanceTip": "employees(직원) 단어를 정확히 쓰고, get things done으로 결과를 강조합니다.",
+      "followUpCombo": "The difference is, they never get tired."
+    },
+    {
+      "situation": "AI가 일자리에 미치는 영향을 말할 때",
+      "betterSentence": "Many places in Korea use AI now. Even restaurants can make menus and posters themselves with just a phone.",
+      "pronunciation": "매니 플레이시즈 인 코리아 유즈 에이아이 나우. 이븐 레스토랑츠 캔 메이크 메뉴스 앤 포스터스 템셀브즈 위드 저스트 어 폰",
+      "koreanMeaning": "한국에서는 이제 많은 곳이 AI를 써요. 식당도 폰만으로 메뉴와 포스터를 직접 만들어요.",
+      "nuanceTip": "even + 명사로 의외의 사례를 강조합니다.",
+      "followUpCombo": "They used to hire an outside company for that."
+    },
+    {
+      "situation": "AI 의존 우려에 대해 의견을 말할 때",
+      "betterSentence": "I think AI is like the smartphone or the internet. We couldn't imagine it before, but now we can't live without it.",
+      "pronunciation": "아이 씽크 에이아이 이즈 라이크 더 스마트폰 오어 디 인터넷. 위 쿠든트 이매진 잇 비포, 벗 나우 위 캔트 리브 위다웃 잇",
+      "koreanMeaning": "AI는 스마트폰이나 인터넷 같아요. 예전엔 상상 못했지만 지금은 없이는 못 살죠.",
+      "nuanceTip": "과거 vs 현재 대조는 before / now로 단순하게.",
+      "followUpCombo": "Some people are scared of it, but I don't think they need to be."
+    }
+  ],
+  "betterQuestions": [
+    {
+      "context": "튜터의 하루 일과가 궁금할 때",
+      "questionSentence": "What does a typical day look like for you?",
+      "pronunciation": "왓 더즈 어 티피컬 데이 룩 라이크 포 유",
+      "koreanMeaning": "평소 하루는 어떻게 보내세요?",
+      "nuanceTip": "열린 질문으로 대화를 길게 이끕니다.",
+      "followUpCombo": "And what's the best part of your day?"
+    },
+    {
+      "context": "시차(한국 아침 7시 vs 튜터 자정)를 얘기할 때",
+      "questionSentence": "How do you manage to stay up so late for classes?",
+      "pronunciation": "하우 두 유 매니지 투 스테이 업 쏘 레이트 포 클래시즈",
+      "koreanMeaning": "수업하느라 이렇게 늦게까지 어떻게 깨어 계세요?",
+      "nuanceTip": "How do you manage to ~는 대단함을 담은 질문입니다.",
+      "followUpCombo": "Do you prefer working at night?"
+    },
+    {
+      "context": "튜터가 AI를 의사처럼 쓴다고 했을 때",
+      "questionSentence": "How much do you trust AI's answers when it comes to health?",
+      "pronunciation": "하우 머치 두 유 트러스트 에이아이스 앤서스 웬 잇 컴스 투 헬스",
+      "koreanMeaning": "건강 문제에서 AI 답변을 얼마나 신뢰하세요?",
+      "nuanceTip": "when it comes to + 주제로 범위를 좁힙니다.",
+      "followUpCombo": "Do you always check with a doctor afterward?"
+    },
+    {
+      "context": "튜터가 AI 의존을 걱정할 때",
+      "questionSentence": "What do you think is the healthy way to use AI?",
+      "pronunciation": "왓 두 유 씽크 이즈 더 헬시 웨이 투 유즈 에이아이",
+      "koreanMeaning": "AI를 건강하게 쓰는 방법은 뭐라고 생각하세요?",
+      "nuanceTip": "상대 의견을 묻는 What do you think로 반론 대신 질문을 던집니다.",
+      "followUpCombo": "Should schools limit it for kids?"
+    },
+    {
+      "context": "여행 중 현지인과 소통하는 팁을 구할 때",
+      "questionSentence": "What's the best way to practice speaking before a trip?",
+      "pronunciation": "왓츠 더 베스트 웨이 투 프랙티스 스피킹 비포 어 트립",
+      "koreanMeaning": "여행 전에 말하기를 연습하는 가장 좋은 방법은 뭔가요?",
+      "nuanceTip": "the best way to + 동사 패턴은 조언 요청의 기본형입니다.",
+      "followUpCombo": "Could you recommend some useful travel phrases?"
+    },
+    {
+      "context": "문법 피드백 방식을 정할 때",
+      "questionSentence": "Could you point out my mistakes after I finish speaking?",
+      "pronunciation": "쿠쥬 포인트 아웃 마이 미스테이크스 애프터 아이 피니시 스피킹",
+      "koreanMeaning": "제가 말을 끝낸 뒤에 실수를 짚어주시겠어요?",
+      "nuanceTip": "point out은 '짚어주다'. 흐름을 끊지 않는 피드백 요청입니다.",
+      "followUpCombo": "And could you give me better ways to say it?"
+    }
+  ],
+  "scenarioTitle": "자기소개와 사업 이야기 심층 복습",
+  "scenarioContext": "수업에서 다룬 자기소개, 퇴사와 사업, 가업을 영어로 다시 말해보는 연습입니다. (※ 수업 주제를 바탕으로 만든 연습용 스크립트이며 실제 수업 녹취가 아닙니다.)",
+  "scenarioTurns": [
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "Could you introduce yourself and tell me why you're learning English?",
+      "pronunciation": "쿠쥬 인트로듀스 유어셀프 앤 텔 미 와이 유어 러닝 잉글리시",
+      "koreanText": "자기소개와 영어 공부 이유를 말씀해 주시겠어요?",
+      "keyExpression": "introduce yourself",
+      "speakingTip": "질문은 두 가지니 순서대로 답하세요."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "I live in Seoul with my wife and daughter. I want to talk with local people when we travel.",
+      "pronunciation": "아이 리브 인 서울 위드 마이 와이프 앤 도터. 아이 원트 투 토크 위드 로컬 피플 웬 위 트래블",
+      "koreanText": "저는 서울에서 아내, 딸과 살아요. 여행할 때 현지인과 대화하고 싶어요.",
+      "keyExpression": "talk with local people",
+      "speakingTip": "with 뒤 복수명사를 확인하세요."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "Do you work for a company at the moment?",
+      "pronunciation": "두 유 워크 포 어 컴퍼니 앳 더 모먼트",
+      "koreanText": "지금 회사에 다니세요?",
+      "keyExpression": "at the moment",
+      "speakingTip": "현재 상황을 묻는 질문입니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "No. I quit my office job a few weeks ago and now I run my own business.",
+      "pronunciation": "노. 아이 퀴트 마이 오피스 잡 어 퓨 윅스 어고 앤 나우 아이 런 마이 오운 비즈니스",
+      "koreanText": "아니요. 몇 주 전에 퇴사했고 지금은 제 사업을 해요.",
+      "keyExpression": "run my own business",
+      "speakingTip": "ago는 과거형과 함께 씁니다."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "What made you decide to quit?",
+      "pronunciation": "왓 메이드 유 디사이드 투 퀴트",
+      "koreanText": "왜 그만두기로 하셨나요?",
+      "keyExpression": "What made you decide",
+      "speakingTip": "이유를 묻는 자연스러운 표현입니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "I could already imagine my whole career path until retirement, and it felt boring.",
+      "pronunciation": "아이 쿠드 올레디 이매진 마이 홀 커리어 패스 언틸 리타이어먼트, 앤 잇 펠트 보어링",
+      "koreanText": "은퇴까지의 길이 훤히 그려져서 지루했어요.",
+      "keyExpression": "could already imagine",
+      "speakingTip": "until 뒤에 명사 retirement를 써도 됩니다."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "So what do you do now?",
+      "pronunciation": "쏘 왓 두 유 두 나우",
+      "koreanText": "그럼 지금은 무슨 일을 하세요?",
+      "keyExpression": "What do you do now",
+      "speakingTip": "근황 질문의 기본형입니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "I help my parents with our family business, and I create YouTube videos using AI.",
+      "pronunciation": "아이 헬프 마이 페어런츠 위드 아워 패밀리 비즈니스, 앤 아이 크리에이트 유튜브 비디오즈 유징 에이아이",
+      "koreanText": "부모님의 가업을 돕고, AI로 유튜브 영상을 만들어요.",
+      "keyExpression": "help ~ with ...",
+      "speakingTip": "help 사람 with 일 구조입니다."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "s1",
+      "badge": "시나리오 1 · 심층 복습",
+      "title": "자기소개와 사업 이야기 심층 복습",
+      "context": "수업에서 다룬 자기소개, 퇴사와 사업, 가업을 영어로 다시 말해보는 연습입니다. (※ 수업 주제를 바탕으로 만든 연습용 스크립트이며 실제 수업 녹취가 아닙니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Could you introduce yourself and tell me why you're learning English?",
+          "pronunciation": "쿠쥬 인트로듀스 유어셀프 앤 텔 미 와이 유어 러닝 잉글리시",
+          "koreanText": "자기소개와 영어 공부 이유를 말씀해 주시겠어요?",
+          "keyExpression": "introduce yourself",
+          "speakingTip": "질문은 두 가지니 순서대로 답하세요."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I live in Seoul with my wife and daughter. I want to talk with local people when we travel.",
+          "pronunciation": "아이 리브 인 서울 위드 마이 와이프 앤 도터. 아이 원트 투 토크 위드 로컬 피플 웬 위 트래블",
+          "koreanText": "저는 서울에서 아내, 딸과 살아요. 여행할 때 현지인과 대화하고 싶어요.",
+          "keyExpression": "talk with local people",
+          "speakingTip": "with 뒤 복수명사를 확인하세요."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Do you work for a company at the moment?",
+          "pronunciation": "두 유 워크 포 어 컴퍼니 앳 더 모먼트",
+          "koreanText": "지금 회사에 다니세요?",
+          "keyExpression": "at the moment",
+          "speakingTip": "현재 상황을 묻는 질문입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "No. I quit my office job a few weeks ago and now I run my own business.",
+          "pronunciation": "노. 아이 퀴트 마이 오피스 잡 어 퓨 윅스 어고 앤 나우 아이 런 마이 오운 비즈니스",
+          "koreanText": "아니요. 몇 주 전에 퇴사했고 지금은 제 사업을 해요.",
+          "keyExpression": "run my own business",
+          "speakingTip": "ago는 과거형과 함께 씁니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What made you decide to quit?",
+          "pronunciation": "왓 메이드 유 디사이드 투 퀴트",
+          "koreanText": "왜 그만두기로 하셨나요?",
+          "keyExpression": "What made you decide",
+          "speakingTip": "이유를 묻는 자연스러운 표현입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I could already imagine my whole career path until retirement, and it felt boring.",
+          "pronunciation": "아이 쿠드 올레디 이매진 마이 홀 커리어 패스 언틸 리타이어먼트, 앤 잇 펠트 보어링",
+          "koreanText": "은퇴까지의 길이 훤히 그려져서 지루했어요.",
+          "keyExpression": "could already imagine",
+          "speakingTip": "until 뒤에 명사 retirement를 써도 됩니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "So what do you do now?",
+          "pronunciation": "쏘 왓 두 유 두 나우",
+          "koreanText": "그럼 지금은 무슨 일을 하세요?",
+          "keyExpression": "What do you do now",
+          "speakingTip": "근황 질문의 기본형입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I help my parents with our family business, and I create YouTube videos using AI.",
+          "pronunciation": "아이 헬프 마이 페어런츠 위드 아워 패밀리 비즈니스, 앤 아이 크리에이트 유튜브 비디오즈 유징 에이아이",
+          "koreanText": "부모님의 가업을 돕고, AI로 유튜브 영상을 만들어요.",
+          "keyExpression": "help ~ with ...",
+          "speakingTip": "help 사람 with 일 구조입니다."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "badge": "시나리오 2 · 비즈니스 응용",
+      "title": "AI 활용과 비즈니스 응용",
+      "context": "AI 유튜브 채널과 AI 직원 비유를 비즈니스 맥락에서 설명해 보는 연습입니다. (※ 수업 주제를 바탕으로 만든 연습용 스크립트이며 실제 수업 녹취가 아닙니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What kind of videos do you make with AI?",
+          "pronunciation": "왓 카인드 오브 비디오즈 두 유 메이크 위드 에이아이",
+          "koreanText": "AI로 어떤 영상을 만드세요?",
+          "keyExpression": "What kind of videos",
+          "speakingTip": "종류를 묻는 질문입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I make language-learning videos for Koreans and travel shorts for my daughter's channel.",
+          "pronunciation": "아이 메이크 랭귀지 러닝 비디오즈 포 코리안즈 앤 트래블 쇼츠 포 마이 도터스 채널",
+          "koreanText": "한국인을 위한 어학 영상과 딸 채널의 여행 쇼츠를 만들어요.",
+          "keyExpression": "language-learning videos",
+          "speakingTip": "복합 명사는 하이픈으로 연결합니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Isn't it a lot of work to edit everything?",
+          "pronunciation": "이즌트 잇 어 랏 오브 워크 투 에딧 에브리띵",
+          "koreanText": "다 편집하려면 일이 많지 않나요?",
+          "keyExpression": "a lot of work",
+          "speakingTip": "부정 의문문에는 사실대로 답하세요."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Not really, because AI does most of the work. I just come up with the ideas.",
+          "pronunciation": "낫 리얼리, 비커즈 에이아이 더즈 모스트 오브 더 워크. 아이 저스트 컴 업 위드 디 아이디어즈",
+          "koreanText": "별로요. AI가 대부분 해주고 저는 아이디어만 내요.",
+          "keyExpression": "AI does most of the work",
+          "speakingTip": "does 뒤 목적어는 the work입니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "That sounds like having a team.",
+          "pronunciation": "댓 사운즈 라이크 해빙 어 팀",
+          "koreanText": "팀을 가진 것 같네요.",
+          "keyExpression": "sounds like",
+          "speakingTip": "sound like + 명사/동명사."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Exactly. I feel like a big boss with several AI employees. I assign tasks and they deliver.",
+          "pronunciation": "이그잭틀리. 아이 필 라이크 어 빅 보스 위드 세버럴 에이아이 임플로이즈. 아이 어사인 태스크스 앤 데이 딜리버",
+          "koreanText": "맞아요. AI 직원 여럿을 둔 빅보스 같고, 일을 주면 해내요.",
+          "keyExpression": "assign tasks",
+          "speakingTip": "employee와 employer를 구분하세요."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Could this replace marketing agencies?",
+          "pronunciation": "쿠드 디스 리플레이스 마케팅 에이전시스",
+          "koreanText": "마케팅 대행사를 대체할 수 있을까요?",
+          "keyExpression": "replace",
+          "speakingTip": "가능성은 could로 묻습니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "For small businesses, yes. They used to hire a company, but now they can do it themselves.",
+          "pronunciation": "포 스몰 비즈니시즈, 예스. 데이 유스트 투 하이어 어 컴퍼니, 벗 나우 데이 캔 두 잇 뎀셀브즈",
+          "koreanText": "소규모 사업자는 그래요. 예전엔 업체를 썼지만 지금은 직접 해요.",
+          "keyExpression": "used to ~ but now",
+          "speakingTip": "themselves를 잊지 마세요."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "badge": "시나리오 3 · 꼬리질문 디펜스",
+      "title": "AI 의존 논쟁 꼬리질문 디펜스",
+      "context": "AI 의존에 대한 우려 질문에 근거를 들어 방어하는 연습입니다. (※ 수업 주제를 바탕으로 만든 연습용 스크립트이며 실제 수업 녹취가 아닙니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Don't you worry that people rely on AI too much?",
+          "pronunciation": "돈트 유 워리 댓 피플 릴라이 온 에이아이 투 머치",
+          "koreanText": "사람들이 AI에 너무 의존한다고 걱정되지 않으세요?",
+          "keyExpression": "rely on",
+          "speakingTip": "rely 뒤에는 on이 옵니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I understand the concern, but I think AI is like the smartphone or the internet.",
+          "pronunciation": "아이 언더스탠드 더 컨선, 벗 아이 씽크 에이아이 이즈 라이크 더 스마트폰 오어 디 인터넷",
+          "koreanText": "우려는 이해하지만 AI는 스마트폰이나 인터넷과 비슷해요.",
+          "keyExpression": "I understand the concern, but",
+          "speakingTip": "공감 후 반론하는 구조입니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "But phones didn't make decisions for us.",
+          "pronunciation": "벗 폰즈 디든트 메이크 디시전스 포 어스",
+          "koreanText": "하지만 폰이 우리 대신 결정하진 않았잖아요.",
+          "keyExpression": "make decisions",
+          "speakingTip": "반박 질문입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "True, so I use AI as a first step and then I check, for example with a doctor.",
+          "pronunciation": "트루, 쏘 아이 유즈 에이아이 애즈 어 퍼스트 스텝 앤 덴 아이 체크, 포 이그잼플 위드 어 닥터",
+          "koreanText": "맞아요. 그래서 AI는 첫 단계로 쓰고 의사 등으로 확인해요.",
+          "keyExpression": "as a first step",
+          "speakingTip": "첫 단계 전략을 말하세요."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What about children doing homework with AI?",
+          "pronunciation": "왓 어바웃 칠드런 두잉 홈워크 위드 에이아이",
+          "koreanText": "아이들이 AI로 숙제하는 건요?",
+          "keyExpression": "What about",
+          "speakingTip": "화제를 바꾸는 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Kids will probably use it as a normal tool, so they need to learn how to use it wisely.",
+          "pronunciation": "키즈 윌 프라바블리 유즈 잇 애즈 어 노멀 툴, 쏘 데이 니드 투 런 하우 투 유즈 잇 와이즐리",
+          "koreanText": "아이들은 AI를 일반 도구로 쓸 테니 현명하게 쓰는 법을 배워야 해요.",
+          "keyExpression": "how to use it wisely",
+          "speakingTip": "learn how to + 동사."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "So you think people who avoid AI will fall behind?",
+          "pronunciation": "쏘 유 씽크 피플 후 어보이드 에이아이 윌 폴 비하인드",
+          "koreanText": "AI를 피하는 사람은 뒤처질 거라고 보세요?",
+          "keyExpression": "fall behind",
+          "speakingTip": "확인 질문입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I think so. If someone can't use AI, they won't be able to survive in the future.",
+          "pronunciation": "아이 씽크 쏘. 이프 섬원 캔트 유즈 에이아이, 데이 원트 비 에이블 투 서바이브 인 더 퓨처",
+          "koreanText": "그렇게 생각해요. AI를 못 쓰면 미래에 살아남기 어려울 거예요.",
+          "keyExpression": "won't be able to",
+          "speakingTip": "'he is cannot'을 피하세요."
+        }
+      ]
+    }
+  ]
+}

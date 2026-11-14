@@ -88,9 +88,15 @@ function renderBoldInline(text: string) {
 function renderStructuredSummary(note: Note) {
   const md = (note.structuredSummary || '').trim();
   if (!md) {
-    const items =
-      note.summary && note.summary.length > 0
-        ? note.summary
+    const rawSummary = note.summary;
+    const items: string[] =
+      Array.isArray(rawSummary) && rawSummary.length > 0
+        ? rawSummary.map((s) => String(s || '').trim()).filter(Boolean)
+        : typeof rawSummary === 'string' && (rawSummary as string).trim()
+        ? (rawSummary as string)
+            .split(/\r?\n/)
+            .map((s) => s.trim())
+            .filter((s) => s && !s.startsWith('#'))
         : [note.transcript || '요약할 내용이 없습니다.'];
     return (
       <ul className="space-y-2.5">
@@ -154,7 +160,8 @@ function renderStructuredSummary(note: Note) {
 interface DeviceInfo {
   isConnected: boolean;
   connecting?: boolean;
-  batteryLevel: number;
+  batteryLevel: number | null;
+  batteryUpdatedAt?: string | null;
   isRecording?: boolean;
   syncStatusText?: string;
   serialNumber?: string;
@@ -174,7 +181,8 @@ export default function SecondBrainPage() {
   const [device, setDevice] = useState<DeviceInfo>({
     isConnected: false,
     connecting: false,
-    batteryLevel: 100,
+    batteryLevel: null,
+    batteryUpdatedAt: null,
     isRecording: false,
     syncStatusText: '대기 중 (탭하여 연결)',
     serialNumber: 'GSPK99012268A1M00069819F',
@@ -282,8 +290,10 @@ export default function SecondBrainPage() {
   };
 
   const formatShortDate = (iso: string) => {
+    if (!iso) return '최근 기록';
     try {
       const d = new Date(iso);
+      if (isNaN(d.getTime())) return '최근 기록';
       const now = new Date();
       const isToday = d.toDateString() === now.toDateString();
       const timeStr = d.toLocaleTimeString('ko-KR', {
@@ -294,7 +304,7 @@ export default function SecondBrainPage() {
       if (isToday) return `오늘 ${timeStr}`;
       return `${d.getMonth() + 1}월 ${d.getDate()}일 ${timeStr}`;
     } catch {
-      return iso;
+      return iso || '최근 기록';
     }
   };
 
@@ -348,7 +358,8 @@ export default function SecondBrainPage() {
         setDevice({
           isConnected: Boolean(d.connected ?? d.isConnected),
           connecting: Boolean(d.connecting),
-          batteryLevel: d.batteryLevel ?? 100,
+          batteryLevel: typeof d.batteryLevel === 'number' ? d.batteryLevel : null,
+          batteryUpdatedAt: d.batteryUpdatedAt ?? null,
           isRecording: Boolean(d.isRecording),
           syncStatusText: d.syncStatusText || '',
           serialNumber: d.serialNumber || 'GSPK99012268A1M00069819F',
@@ -374,6 +385,14 @@ export default function SecondBrainPage() {
       }
     } catch {}
   };
+
+  // Real battery only: live reading when connected, last reading (with time) when not, '—' if never read
+  const batteryText =
+    device.batteryLevel == null
+      ? '—'
+      : device.isConnected
+      ? `${device.batteryLevel}%`
+      : `${device.batteryLevel}%${device.batteryUpdatedAt ? ` (${new Date(device.batteryUpdatedAt).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })} 기준)` : ''}`;
 
   const fetchNotes = async () => {
     try {
@@ -517,13 +536,13 @@ export default function SecondBrainPage() {
       await fetchDevice();
       await fetchNotes();
       if (data.ok && (data.state?.connected || data.device?.isConnected)) {
-        const bat = data.state?.batteryLevel ?? data.device?.batteryLevel ?? 100;
+        const bat = data.state?.batteryLevel ?? data.device?.batteryLevel ?? '확인 중';
         setStatusBanner(
           `✅ 실물 세컨브레인 기기(SecondBrain Note) 연결 완료! (실시간 배터리 ${bat}%, 내장 녹음 자동 동기화 가동)`
         );
       } else {
         setStatusBanner(
-          '🔵 실물 세컨브레인 기기(28:CD:9C:F3:32:12) 대기 상태 확인 완료 (배터리 100%). 기기 버튼을 한 번 살짝 누르시면 즉시 깨어나 자동 연결·동기화됩니다!'
+          data.error || data.state?.syncStatusText || '기기를 찾지 못했습니다. 기기 버튼을 눌러 깨운 뒤 다시 연결해 주세요.'
         );
       }
     } catch {
@@ -1146,7 +1165,7 @@ export default function SecondBrainPage() {
     const baseStructured =
       note.structuredSummary && note.structuredSummary.trim()
         ? note.structuredSummary.trim()
-        : (note.summary || []).map((s, idx) => `${idx + 1}. ${s}`).join('\n');
+        : (Array.isArray(note.summary) ? note.summary : typeof note.summary === "string" ? [note.summary] : []).map((s, idx) => `${idx + 1}. ${s}`).join('\n');
     const structuredBlock =
       coaching && !baseStructured.includes('[언어 학습 전담 AI 코칭]')
         ? `${baseStructured}${formatLanguageCoachingMarkdown(coaching)}`
@@ -1638,7 +1657,7 @@ export default function SecondBrainPage() {
                       <button
                         onClick={() =>
                           handleCopyText(
-                            selectedNote.structuredSummary || (selectedNote.summary || []).join('\n'),
+                            selectedNote.structuredSummary || (Array.isArray(selectedNote.summary) ? selectedNote.summary : typeof selectedNote.summary === "string" ? [selectedNote.summary] : []).join('\n'),
                             'summary'
                           )
                         }
@@ -1802,7 +1821,7 @@ export default function SecondBrainPage() {
                   title="실물 세컨브레인 기기 블루투스(BLE) 연결"
                 >
                   <Bluetooth className="w-3.5 h-3.5 text-[#1D4ED8] shrink-0" />
-                  <span>{device.isConnected ? `연결됨(${device.batteryLevel}%)` : '기기 연결'}</span>
+                  <span>{device.isConnected ? `연결됨(${batteryText})` : '기기 연결'}</span>
                 </button>
                 <button
                   onClick={handleSyncHardware}
@@ -1839,7 +1858,7 @@ export default function SecondBrainPage() {
                   SecondBrain Note (28:CD:9C:F3:32:12)
                 </span>
                 <span className="text-[11px] font-semibold text-[#047857] shrink-0">
-                  🔋 {device.batteryLevel}%
+                  🔋 {batteryText}
                 </span>
               </button>
               <div className="flex items-center gap-1.5 shrink-0">
@@ -2248,9 +2267,14 @@ export default function SecondBrainPage() {
                   )}
                   <span>SecondBrain Note 기기</span>
                 </button>
-                <span className="flex items-center gap-1 text-[11px] font-bold text-[#047857]">
+                <span
+                  className={`flex items-center gap-1 text-[11px] font-bold ${
+                    device.isConnected ? 'text-[#047857]' : 'text-[#94A3B8]'
+                  }`}
+                  title={device.isConnected ? '기기에서 실시간으로 읽은 배터리' : '기기 미연결 — 마지막으로 읽은 값'}
+                >
                   <BatteryCharging className="w-3.5 h-3.5" />
-                  <span>{device.batteryLevel}%</span>
+                  <span>{batteryText}</span>
                 </span>
               </div>
 
@@ -2397,7 +2421,7 @@ export default function SecondBrainPage() {
                 />
                 <span>
                   {device.isConnected
-                    ? `실물 기기 연결됨 (${device.batteryLevel}%)`
+                    ? `실물 기기 연결됨 (${batteryText})`
                     : '옵시디언 · 클라우드 동기화'}
                 </span>
               </div>
@@ -2483,8 +2507,8 @@ export default function SecondBrainPage() {
                   {isHwBusyConnecting
                     ? '실물 기기 연결 중...'
                     : device.isConnected
-                    ? `SecondBrain Note 연결됨 (${device.batteryLevel}%)`
-                    : `실물 기기 연결 (${device.batteryLevel}%)`}
+                    ? `SecondBrain Note 연결됨 (${batteryText})`
+                    : `실물 기기 연결 (${batteryText})`}
                 </span>
               </button>
               <button
@@ -2696,7 +2720,7 @@ export default function SecondBrainPage() {
                         onClick={() =>
                           handleCopyText(
                             selectedNote.structuredSummary ||
-                              (selectedNote.summary || []).join('\n'),
+                              (Array.isArray(selectedNote.summary) ? selectedNote.summary : typeof selectedNote.summary === "string" ? [selectedNote.summary] : []).join('\n'),
                             'summary'
                           )
                         }
@@ -3160,7 +3184,7 @@ export default function SecondBrainPage() {
                       실물 세컨브레인 기기 (28:CD:9C:F3:32:12) 블루투스 연결
                     </div>
                     <div className="text-[11.5px] text-[#475569] mt-0.5">
-                      실시간 배터리({device.batteryLevel}%) · 연결 상태 점검 및 자동 동기화 활성화
+                      실시간 배터리({batteryText}) · 연결 상태 점검 및 자동 동기화 활성화
                     </div>
                   </div>
                 </div>
@@ -3270,7 +3294,7 @@ export default function SecondBrainPage() {
                   SecondBrain Note (GSPK-SBN-PRO)
                 </span>
                 <span className="px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#047857] font-bold">
-                  🔋 배터리 {device.batteryLevel}%
+                  🔋 배터리 {batteryText}
                 </span>
               </div>
               <div className="grid grid-cols-2 gap-2 pt-1 text-[11.5px]">

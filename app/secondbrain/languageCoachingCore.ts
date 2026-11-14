@@ -1,3 +1,5 @@
+import { enrichCoaching } from './languageCoachingRich';
+
 function parseTimeStrToSec(timeStr?: string): number | null {
   if (!timeStr) return null;
   const clean = timeStr.replace(/[\[\]]/g, '').trim();
@@ -15,6 +17,8 @@ export interface GrammarCorrectionItem {
   correctedSentence: string;
   pronunciation: string;
   grammarPoint: string;
+  keyPattern?: string;
+  alternativeExpressions?: Array<{ label: string; sentence: string; pronunciation: string; nuance: string }>;
 }
 
 export interface BetterResponseItem {
@@ -23,6 +27,7 @@ export interface BetterResponseItem {
   pronunciation: string;
   koreanMeaning: string;
   nuanceTip: string;
+  followUpCombo?: string;
 }
 
 export interface BetterQuestionItem {
@@ -30,6 +35,8 @@ export interface BetterQuestionItem {
   questionSentence: string;
   pronunciation: string;
   koreanMeaning: string;
+  nuanceTip?: string;
+  followUpCombo?: string;
 }
 
 export interface ScenarioTurn {
@@ -38,6 +45,16 @@ export interface ScenarioTurn {
   foreignText: string;
   pronunciation: string;
   koreanText: string;
+  keyExpression?: string;
+  speakingTip?: string;
+}
+
+export interface ScenarioModule {
+  id: string;
+  badge: string;
+  title: string;
+  context: string;
+  turns: ScenarioTurn[];
 }
 
 export interface LanguageCoachingData {
@@ -50,6 +67,7 @@ export interface LanguageCoachingData {
   scenarioTitle: string;
   scenarioContext: string;
   scenarioTurns: ScenarioTurn[];
+  scenarios?: ScenarioModule[];
 }
 
 export const GLOBAL_COACHING_LANGUAGES = [
@@ -140,12 +158,25 @@ export function isLanguageStudyNote(note: any): boolean {
   return detectNoteLanguageCode(note) !== null;
 }
 
+export function isPlaceholderCoaching(ac: any): boolean {
+  const s = ac?.grammarCorrections?.[0]?.correctedSentence;
+  return typeof s === 'string' && /^\[[^\]]*원어민 비즈니스 표현\]/.test(s);
+}
+
 export function buildLanguageCoachingData(
   note: any,
   overrideLang?: string
 ): LanguageCoachingData | null {
+  const base = buildBaseLanguageCoachingData(note, overrideLang);
+  return base ? enrichCoaching(base, note) : null;
+}
+
+function buildBaseLanguageCoachingData(
+  note: any,
+  overrideLang?: string
+): LanguageCoachingData | null {
   if (!note) return null;
-  if (note.aiCoaching && (!overrideLang || note.aiCoaching.lang === overrideLang)) {
+  if (note.aiCoaching && !isPlaceholderCoaching(note.aiCoaching) && (!overrideLang || note.aiCoaching.lang === overrideLang)) {
     return note.aiCoaching as LanguageCoachingData;
   }
   const lang = overrideLang || detectNoteLanguageCode(note);
@@ -985,7 +1016,11 @@ export function formatLanguageCoachingMarkdown(data: LanguageCoachingData): stri
           c.myWrongSentence
         }\n- **✅ 바른 원어민 문장 (After)**: **${c.correctedSentence}**\n- **🗣️ 발음 가이드**: \`${
           c.pronunciation
-        }\`\n- **💡 핵심 문법·어법 해설**: ${c.grammarPoint}`
+        }\`\n- **💡 핵심 문법·어법 해설**: ${c.grammarPoint}${
+          c.keyPattern ? `\n- **🧩 핵심 패턴**: ${c.keyPattern}` : ''
+        }${(c.alternativeExpressions || [])
+          .map((x) => `\n- **🔁 ${x.label}**: ${x.sentence} (\`${x.pronunciation}\`) — ${x.nuance}`)
+          .join('')}`
     )
     .join('\n\n');
 
@@ -1009,10 +1044,22 @@ export function formatLanguageCoachingMarkdown(data: LanguageCoachingData): stri
     )
     .join('\n\n');
 
-  const scenLines = data.scenarioTurns
+  const scenLines = (
+    data.scenarios && data.scenarios.length
+      ? data.scenarios
+      : [{ id: 'base', badge: '', title: data.scenarioTitle, context: data.scenarioContext, turns: data.scenarioTurns }]
+  )
     .map(
-      (t) =>
-        `- **${t.speakerLabel}**: **${t.foreignText}**\n  - 발음: \`${t.pronunciation}\`\n  - 해석: (${t.koreanText})`
+      (s) =>
+        `${data.scenarios && data.scenarios.length ? `\n#### ${s.badge} — ${s.title}\n> ${s.context}\n` : ''}` +
+        s.turns
+          .map(
+            (t) =>
+              `- **${t.speakerLabel}**: **${t.foreignText}**\n  - 발음: \`${t.pronunciation}\`\n  - 해석: (${t.koreanText})${
+                t.keyExpression ? `\n  - 🔑 핵심 표현: ${t.keyExpression}` : ''
+              }${t.speakingTip ? `\n  - 🎙️ 발음 팁: ${t.speakingTip}` : ''}`
+          )
+          .join('\n')
     )
     .join('\n');
 

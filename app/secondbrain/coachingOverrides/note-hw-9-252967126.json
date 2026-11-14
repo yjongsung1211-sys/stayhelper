@@ -1,0 +1,747 @@
+{
+  "lang": "zh",
+  "langBadge": "🇨🇳 중국어 (中文)",
+  "ttsLang": "zh-CN",
+  "grammarCorrections": [
+    {
+      "timeStr": "[02:55]",
+      "timeSec": 175,
+      "myWrongSentence": "\"日本现在不怎么做芯片本身，但是他们做半导体需要的东西……那个叫什么？还有设备还是很强。\" (실제 발화 02:55 · 문장 미완성)",
+      "correctedSentence": "日本现在不怎么生产芯片本身，但是半导体需要的材料和设备，日本还是很强。",
+      "pronunciation": "rì běn xiàn zài bù zěn me shēng chǎn xīn piàn běn shēn, dàn shì bàn dǎo tǐ xū yào de cái liào hé shè bèi, rì běn hái shì hěn qiáng.",
+      "grammarPoint": "'반도체를 만들 때 필요한 것…'이라고 말을 돌리다 멈춘 부분입니다. 선생님이 알려 준 단어 材料(소재)를 넣으면 한 문장으로 깔끔하게 끝납니다. 'A, 但是 B 还是很强' 구조는 그대로 좋습니다.",
+      "keyPattern": "半导体的材料和设备 + 还是很强",
+      "alternativeExpressions": [
+        {
+          "label": "더 간결하게",
+          "sentence": "日本在半导体材料和设备方面依然领先。",
+          "pronunciation": "rì běn zài bàn dǎo tǐ cái liào hé shè bèi fāng miàn yī rán lǐng xiān.",
+          "nuance": "依然领先은 뉴스·비즈니스 자리에서 쓰는 단정적인 표현입니다."
+        },
+        {
+          "label": "강점 강조",
+          "sentence": "说到半导体材料，日本仍然是世界领先的。",
+          "pronunciation": "shuō dào bàn dǎo tǐ cái liào, rì běn réng rán shì shì jiè lǐng xiān de.",
+          "nuance": "说到 ~ 로 화제를 고정한 뒤 말하면 설명이 또렷해집니다."
+        }
+      ]
+    },
+    {
+      "timeStr": "[08:24]",
+      "timeSec": 504,
+      "myWrongSentence": "\"然后我对那个方向是不太感兴趣，所以我没仔细看。\" (실제 발화 08:24 · 어색한 표현)",
+      "correctedSentence": "我对这方面不太感兴趣，所以没仔细看。",
+      "pronunciation": "wǒ duì zhè fāng miàn bù tài gǎn xìng qù, suǒ yǐ méi zǐ xì kàn.",
+      "grammarPoint": "'对 + 대상 + 感兴趣'에서 '对' 뒤에는 '那个方向'보다 '这方面/这类新闻'이 자연스럽고, 부정은 '不太感兴趣' 앞에 '是'를 넣지 않아도 됩니다. 의미는 통하지만 '是…不太'는 강조 용법이라 여기서는 어색합니다.",
+      "keyPattern": "对 + 대상 + 不太感兴趣",
+      "alternativeExpressions": [
+        {
+          "label": "뉴스 맥락",
+          "sentence": "我对八卦新闻不太感兴趣，所以只是扫了一眼。",
+          "pronunciation": "wǒ duì bā guà xīn wén bù tài gǎn xìng qù, suǒ yǐ zhǐ shì sǎo le yī yǎn.",
+          "nuance": "扫了一眼는 '훑어봤다'는 구어 표현입니다."
+        },
+        {
+          "label": "관심 없음(담백)",
+          "sentence": "这类新闻我不怎么关心，就没细看。",
+          "pronunciation": "zhè lèi xīn wén wǒ bù zěn me guān xīn, jiù méi xì kàn.",
+          "nuance": "不怎么关心은 감정 없이 담백하게 선을 긋는 말투입니다."
+        }
+      ]
+    },
+    {
+      "timeStr": "[08:47]",
+      "timeSec": 527,
+      "myWrongSentence": "\"NVIDIA 有了老板的危险？危机吗？\" (실제 발화 08:47 · 문장 미완성)",
+      "correctedSentence": "NVIDIA 因为老板的个人问题陷入了舆情危机。",
+      "pronunciation": "NVIDIA yīn wèi lǎo bǎn de gè rén wèn tí xiàn rù le yú qíng wēi jī.",
+      "grammarPoint": "이 부분은 '오너 리스크'를 중국어로 몰라 말이 끊긴 대목이고, 선생님이 舆情危机를 알려 주었습니다. '因为 + 원인, 陷入了 + 위기'로 문장을 완성하면 오너 개인 이슈가 회사 위기로 번진다는 뜻이 정확해집니다.",
+      "keyPattern": "因为 ~ 陷入了舆情危机",
+      "alternativeExpressions": [
+        {
+          "label": "주가 영향까지",
+          "sentence": "老板的个人问题影响了公司的股价。",
+          "pronunciation": "lǎo bǎn de gè rén wèn tí yǐng xiǎng le gōng sī de gǔ jià.",
+          "nuance": "影响了 ~ 的股价는 결과를 구체적으로 말할 때 씁니다."
+        },
+        {
+          "label": "오너 리스크 개념",
+          "sentence": "这属于老板个人带来的舆情风险。",
+          "pronunciation": "zhè shǔ yú lǎo bǎn gè rén dài lái de yú qíng fēng xiǎn.",
+          "nuance": "舆情风险은 '여론 리스크'로 위기보다 한 단계 약한 표현입니다."
+        }
+      ]
+    },
+    {
+      "timeStr": "[12:03]",
+      "timeSec": 723,
+      "myWrongSentence": "\"但是他做了这种的，怎么说呢\" (실제 발화 12:03 · 어색한 표현)",
+      "correctedSentence": "但是他这次做的事有点“出格”了。",
+      "pronunciation": "dàn shì tā zhè cì zuò de shì yǒu diǎn \"chū gé\" le.",
+      "grammarPoint": "'做了这种的'는 명사가 빠져 어색합니다. '这种事' 또는 '做的事'처럼 명사를 살려야 합니다. 말이 막힌 자리에 선생님이 알려 준 出格(평소 이미지에서 벗어난 일탈)를 쓰면 가장 정확합니다.",
+      "keyPattern": "有点 + 出格 + 了",
+      "alternativeExpressions": [
+        {
+          "label": "이미지와 다른 행동",
+          "sentence": "他的做法和大家心目中的形象不一样，让人有点失望。",
+          "pronunciation": "tā de zuò fǎ hé dà jiā xīn mù zhōng de xíng xiàng bù yí yàng, ràng rén yǒu diǎn shī wàng.",
+          "nuance": "和 ~ 不一样로 이미지 차이를 말하면 出格를 몰라도 전달됩니다."
+        },
+        {
+          "label": "도를 넘다",
+          "sentence": "他这次做得有点过分了。",
+          "pronunciation": "tā zhè cì zuò dé yǒu diǎn guò fèn le.",
+          "nuance": "过分了는 出格보다 비난의 강도가 더 셉니다."
+        }
+      ]
+    },
+    {
+      "timeStr": "[13:33]",
+      "timeSec": 813,
+      "myWrongSentence": "\"因为突然变冷了，老年龄的人就会去世，这几天。\" (실제 발화 13:33 · 어색한 표현)",
+      "correctedSentence": "因为天气突然变冷了，这几天上了年纪的人去世得比较多。",
+      "pronunciation": "yīn wèi tiān qì tū rán biàn lěng le, zhè jǐ tiān shàng le nián jì de rén qù shì dé bǐ jiào duō.",
+      "grammarPoint": "'老年龄'는 중국어 단어가 아니라 '老年人/上了年纪的人'이라고 해야 합니다. '这几天'은 문장 끝보다 앞에 두고, '去世得比较多'로 정도를 붙이면 자연스럽습니다.",
+      "keyPattern": "天气突然变冷 + 老年人去世得比较多",
+      "alternativeExpressions": [
+        {
+          "label": "간단하게",
+          "sentence": "天气突然变冷，老年人去世的比较多。",
+          "pronunciation": "tiān qì tū rán biàn lěng, lǎo nián rén qù shì de bǐ jiào duō.",
+          "nuance": "老年人 하나로 충분하고, 去世는 死보다 정중합니다."
+        },
+        {
+          "label": "더 완곡하게",
+          "sentence": "这几天天气骤冷，不少年纪大的人走了。",
+          "pronunciation": "zhè jǐ tiān tiān qì zhòu lěng, bù shǎo nián jì dà de rén zǒu le.",
+          "nuance": "走了는 '세상을 떴다'를 돌려 말하는 구어입니다."
+        }
+      ]
+    },
+    {
+      "timeStr": "[15:58]",
+      "timeSec": 958,
+      "myWrongSentence": "\"我满脑子里就想怎么把我现在做的事情、要做的事情简单一点，然后自动化，通过 AI。\" (실제 발화 15:58 · 어색한 표현)",
+      "correctedSentence": "我满脑子都在想怎么通过 AI 把现在做的和以后要做的事情简化并自动化。",
+      "pronunciation": "wǒ mǎn nǎo zi dōu zài xiǎng zěn me tōng guò AI bǎ xiàn zài zuò de hé yǐ hòu yào zuò de shì qíng jiǎn huà bìng zì dòng huà.",
+      "grammarPoint": "선생님이 가르쳐 준 '满脑子都是 ~'는 '满脑子' 뒤에 '里'를 붙이지 않고 '都是/都在想'로 이어갑니다. '通过 AI'는 문장 끝에 덧붙이기보다 '怎么' 뒤로 당겨야 방법이 분명해집니다.",
+      "keyPattern": "满脑子都是 / 满脑子都在想 ~",
+      "alternativeExpressions": [
+        {
+          "label": "명사형",
+          "sentence": "我满脑子都是自动化。",
+          "pronunciation": "wǒ mǎn nǎo zi dōu shì zì dòng huà.",
+          "nuance": "满脑子都是 + 명사로 짧게 끝낼 수 있습니다."
+        },
+        {
+          "label": "효율 강조",
+          "sentence": "我最近一门心思都在想怎么用 AI 提高效率。",
+          "pronunciation": "wǒ zuì jìn yī mén xīn sī dōu zài xiǎng zěn me yòng AI tí gāo xiào lǜ.",
+          "nuance": "一门心思는 '한 가지에만 몰두'를 뜻합니다."
+        }
+      ]
+    },
+    {
+      "timeStr": "[17:52]",
+      "timeSec": 1072,
+      "myWrongSentence": "\"所以现在关注的人不少\" (실제 발화 17:52 · 더 자연스럽게)",
+      "correctedSentence": "所以现在订阅者不少。",
+      "pronunciation": "suǒ yǐ xiàn zài dìng yuè zhě bù shǎo.",
+      "grammarPoint": "선생님이 'YouTube에서는 关注 대신 订阅者(구독자) 또는 粉丝(팬)'라고 바로잡아 준 표현입니다. 웨이보는 关注, 유튜브는 订阅를 쓰는 차이를 기억하세요.",
+      "keyPattern": "订阅者 / 粉丝 + 不少",
+      "alternativeExpressions": [
+        {
+          "label": "팬 중심",
+          "sentence": "粉丝不少。",
+          "pronunciation": "fěn sī bù shǎo.",
+          "nuance": "粉丝는 구독 여부보다 '팬층' 의미가 강합니다."
+        },
+        {
+          "label": "수량 표현",
+          "sentence": "已经有不少订阅者了。",
+          "pronunciation": "yǐ jīng yǒu bù shǎo dìng yuè zhě le.",
+          "nuance": "已经有 ~ 了는 지금까지의 성과를 말할 때 자연스럽습니다."
+        }
+      ]
+    },
+    {
+      "timeStr": "[24:25]",
+      "timeSec": 1465,
+      "myWrongSentence": "\"你试过 YouTube 的频道吗？\" (실제 발화 24:25 · 더 자연스럽게)",
+      "correctedSentence": "你试过经营 YouTube 频道吗？",
+      "pronunciation": "nǐ shì guò jīng yíng YouTube pín dào ma?",
+      "grammarPoint": "'试过 + 동사' 구조라 '试过' 뒤에 동사 经营(운영하다)이 필요합니다. 선생님도 같은 문형 '我没有试过经营 YouTube 的频道'로 답했습니다.",
+      "keyPattern": "试过 + 동사 + 목적어",
+      "alternativeExpressions": [
+        {
+          "label": "경험 묻기",
+          "sentence": "你有没有运营过 YouTube 频道？",
+          "pronunciation": "nǐ yǒu méi yǒu yùn yíng guò YouTube pín dào?",
+          "nuance": "运营도 经营과 비슷하게 쓰며 IT 업계에서 더 흔합니다."
+        },
+        {
+          "label": "의향 묻기",
+          "sentence": "你想不想自己做一个 YouTube 频道？",
+          "pronunciation": "nǐ xiǎng bù xiǎng zì jǐ zuò yí gè YouTube pín dào?",
+          "nuance": "想不想는 경험이 아니라 의향을 묻는 문장입니다."
+        }
+      ]
+    },
+    {
+      "timeStr": "[34:15]",
+      "timeSec": 2055,
+      "myWrongSentence": "\"我们以前做不了的东西会做，所以挺开心、挺兴奋。\" (실제 발화 34:15 · 문법 오류)",
+      "correctedSentence": "以前做不了的东西现在也能做了，所以我挺开心、挺兴奋的。",
+      "pronunciation": "yǐ qián zuò bù liǎo de dōng xī xiàn zài yě néng zuò le, suǒ yǐ wǒ tǐng kāi xīn, tǐng xīng fèn de.",
+      "grammarPoint": "'会'는 '배워서 할 줄 안다/미래'의 느낌이라 '이전에는 못 했지만 지금은 가능하다'는 뜻에는 '现在也能做了'가 맞습니다. 변화를 나타내는 '了'도 필요합니다.",
+      "keyPattern": "以前 + 做不了 + 现在能做了",
+      "alternativeExpressions": [
+        {
+          "label": "가능→현실",
+          "sentence": "以前我们做不到的事，现在都能实现了。",
+          "pronunciation": "yǐ qián wǒ men zuò bú dào de shì, xiàn zài dōu néng shí xiàn le.",
+          "nuance": "做不到 ↔ 能实现으로 대비를 주면 설득력이 올라갑니다."
+        },
+        {
+          "label": "AI 효과",
+          "sentence": "AI 让很多不可能变成了可能。",
+          "pronunciation": "AI ràng hěn duō bù kě néng biàn chéng le kě néng.",
+          "nuance": "让 + 목적어 + 变成了 ~ 는 변화를 압축해 말합니다."
+        }
+      ]
+    },
+    {
+      "timeStr": "[39:15]",
+      "timeSec": 2355,
+      "myWrongSentence": "\"这种需要学 Ownership……老板精神吗？\" (실제 발화 39:15 · 문장 미완성)",
+      "correctedSentence": "这种需要培养“主体意识”。",
+      "pronunciation": "zhè zhǒng xū yào péi yǎng \"zhǔ tǐ yì shí\".",
+      "grammarPoint": "오너십을 중국어로 몰라 멈춘 부분이고, 선생님이 主体意识(주체의식)를 알려 주었습니다. '学'는 기술·지식 습득에 쓰므로 태도·의식에는 '培养(기르다)'가 어울립니다.",
+      "keyPattern": "需要培养 + 主体意识",
+      "alternativeExpressions": [
+        {
+          "label": "책임감 포함",
+          "sentence": "这需要培养自主意识和责任感。",
+          "pronunciation": "zhè xū yào péi yǎng zì zhǔ yì shí hé zé rèn gǎn.",
+          "nuance": "自主意识는 '스스로 판단하는 힘'을 가리킵니다."
+        },
+        {
+          "label": "주인의식",
+          "sentence": "每个人都要有主人翁精神。",
+          "pronunciation": "měi gè rén dōu yào yǒu zhǔ rén wēng jīng shén.",
+          "nuance": "主人翁精神은 조직에서 쓰는 관용적 표현입니다."
+        }
+      ]
+    },
+    {
+      "timeStr": "[41:05]",
+      "timeSec": 2465,
+      "myWrongSentence": "\"以后不是在谁的下面做最基本的工作\" (실제 발화 41:05 · 문법 오류)",
+      "correctedSentence": "以后不再是在别人手下做最基础的工作，而是每个人都当老板。",
+      "pronunciation": "yǐ hòu bù zài shì zài bié rén shǒu xià zuò zuì jī chǔ de gōng zuò, ér shì měi gè rén dōu dāng lǎo bǎn.",
+      "grammarPoint": "'不是'는 현재의 사실을 부정하고, '앞으로는 더 이상 ~이 아니다'는 '不再是'입니다. '在谁的下面'보다 '在别人手下'가 숙어에 가깝고, '最基本'보다 '最基础'가 일의 수준을 말할 때 자연스럽습니다.",
+      "keyPattern": "不再是 ~，而是 ~",
+      "alternativeExpressions": [
+        {
+          "label": "결정권 강조",
+          "sentence": "以后基础工作交给 AI，人负责做决定。",
+          "pronunciation": "yǐ hòu jī chǔ gōng zuò jiāo gěi AI, rén fù zé zuò jué dìng.",
+          "nuance": "交给 ~ 로 업무 분담을 분명히 합니다."
+        },
+        {
+          "label": "주체성",
+          "sentence": "以后每个人都是自己的老板。",
+          "pronunciation": "yǐ hòu měi gè rén dōu shì zì jǐ de lǎo bǎn.",
+          "nuance": "自己的老板는 1인 기업을 가리키는 흔한 말입니다."
+        }
+      ]
+    },
+    {
+      "timeStr": "[44:15]",
+      "timeSec": 2655,
+      "myWrongSentence": "\"所以 AI 时代西方国家比较更强一点吧。\" (실제 발화 44:15 · 문법 오류)",
+      "correctedSentence": "所以在 AI 时代，西方国家可能更强一点。",
+      "pronunciation": "suǒ yǐ zài AI shí dài, xī fāng guó jiā kě néng gèng qiáng yì diǎn.",
+      "grammarPoint": "'比较'와 '更'는 둘 다 정도 부사라 한 문장에 함께 쓰면 겹칩니다. '比较强'(비교적 강함) 또는 '更强一点'(더 강함) 중 하나만 고르세요.",
+      "keyPattern": "比较 + 형용사 / 更 + 형용사 + 一点",
+      "alternativeExpressions": [
+        {
+          "label": "比较 사용",
+          "sentence": "所以 AI 时代西方国家比较有优势。",
+          "pronunciation": "suǒ yǐ AI shí dài xī fāng guó jiā bǐ jiào yǒu yōu shì.",
+          "nuance": "比较 + 有优势는 '비교적 유리하다'는 완곡한 평가입니다."
+        },
+        {
+          "label": "비교 강조",
+          "sentence": "西方国家的优势会更大一些。",
+          "pronunciation": "xī fāng guó jiā de yōu shì huì gèng dà yī xiē.",
+          "nuance": "更大一些는 비교 대상이 이미 있을 때 씁니다."
+        }
+      ]
+    },
+    {
+      "timeStr": "[46:05]",
+      "timeSec": 2765,
+      "myWrongSentence": "\"现在拿到日本的工作签证比以前很难得到。\" (실제 발화 46:05 · 문법 오류)",
+      "correctedSentence": "现在拿到日本的工作签证比以前难多了。",
+      "pronunciation": "xiàn zài ná dào rì běn de gōng zuò qiān zhèng bǐ yǐ qián nán duō le.",
+      "grammarPoint": "'比' 비교문에서는 '很/非常' 같은 정도 부사를 형용사 앞에 쓸 수 없습니다. '难多了/难得多/更难'처럼 차이를 뒤에 붙입니다.",
+      "keyPattern": "A 比 B + 形容词 + 多了",
+      "alternativeExpressions": [
+        {
+          "label": "拿 사용",
+          "sentence": "现在日本的工作签证比以前难拿得多。",
+          "pronunciation": "xiàn zài rì běn de gōng zuò qiān zhèng bǐ yǐ qián nán ná dé duō.",
+          "nuance": "难拿는 '받기 어렵다'는 구어적 결합입니다."
+        },
+        {
+          "label": "정책 설명",
+          "sentence": "日本工作签证现在很难拿，比以前严格多了。",
+          "pronunciation": "rì běn gōng zuò qiān zhèng xiàn zài hěn nán ná, bǐ yǐ qián yán gé duō le.",
+          "nuance": "严格多了는 심사 강화 맥락에 자주 쓰입니다."
+        }
+      ]
+    },
+    {
+      "timeStr": "[47:45]",
+      "timeSec": 2865,
+      "myWrongSentence": "\"有日本的定住权？\" (실제 발화 47:45 · 어색한 표현)",
+      "correctedSentence": "我丈母娘和丈人有日本的永住权。",
+      "pronunciation": "wǒ zhàng mǔ niáng hé zhàng rén yǒu rì běn de yǒng zhù quán.",
+      "grammarPoint": "선생님이 '永住权(영주권)'으로 바로잡아 준 표현입니다. 定住는 일본 비자 용어와 섞인 말이라 중국어로는 永住权이 맞습니다. 丈母娘·丈人은 구어, 岳父岳母는 조금 더 격식 있는 말입니다.",
+      "keyPattern": "有 + 日本的永住权",
+      "alternativeExpressions": [
+        {
+          "label": "격식체",
+          "sentence": "我岳父岳母拿到了日本永住权。",
+          "pronunciation": "wǒ yuè fù yuè mǔ ná dào le rì běn yǒng zhù quán.",
+          "nuance": "拿到了는 '취득했다'는 결과를 강조합니다."
+        },
+        {
+          "label": "정책 연결",
+          "sentence": "日本永住权的申请条件收紧了很多。",
+          "pronunciation": "rì běn yǒng zhù quán de shēn qǐng tiáo jiàn shōu jǐn le hěn duō.",
+          "nuance": "收紧는 선생님이 쓴 '정책 강화'를 뜻하는 표현입니다."
+        }
+      ]
+    }
+  ],
+  "betterAnswers": [
+    {
+      "situation": "선생님이 '최근 어떤 뉴스를 보나요'라고 묻는 상황",
+      "betterSentence": "我平时经常看韩国、中国、日本、台湾的半导体和 AI 新闻，所以很关注这些行业的动态。",
+      "pronunciation": "wǒ píng shí jīng cháng kàn hán guó, zhōng guó, rì běn, tái wān de bàn dǎo tǐ hé AI xīn wén, suǒ yǐ hěn guān zhù zhè xiē háng yè de dòng tài.",
+      "koreanMeaning": "저는 평소 한·중·일·대만의 반도체와 AI 뉴스를 자주 보고 산업 동향을 눈여겨봅니다.",
+      "nuanceTip": "关注는 '지켜보다'라는 뜻으로 선생님이 알려 준 표현입니다. 行业动态를 함께 쓰면 업계 소식이라는 범위가 분명해집니다.",
+      "followUpCombo": "最近有没有什么新的变化？"
+    },
+    {
+      "situation": "채널을 운영하는 노하우를 묻는 상황",
+      "betterSentence": "没有什么特别的方法，就是固定主题，坚持上传，然后耐心等算法的变化。",
+      "pronunciation": "méi yǒu shén me tè bié de fāng fǎ, jiù shì gù dìng zhǔ tí, jiān chí shàng chuán, rán hòu nài xīn děng suàn fǎ de biàn huà.",
+      "koreanMeaning": "특별한 방법은 없고, 주제를 고정해 꾸준히 올리며 알고리즘이 바뀌기를 인내심 있게 기다립니다.",
+      "nuanceTip": "固定主题·坚持上传·耐心은 수업에서 직접 배운 어휘 조합입니다. 算法는 '알고리즘'입니다.",
+      "followUpCombo": "你觉得最需要耐心的是哪个阶段？"
+    },
+    {
+      "situation": "운동 경험이 일에 준 영향을 묻는 상황",
+      "betterSentence": "体育让我学会了坚持，也有了比较强的耐力，做事情比较能持之以恒。",
+      "pronunciation": "tǐ yù ràng wǒ xué huì le jiān chí, yě yǒu le bǐ jiào qiáng de nài lì, zuò shì qíng bǐ jiào néng chí zhī yǐ héng.",
+      "koreanMeaning": "운동 덕분에 끈기와 지구력이 생겨 일을 꾸준히 이어가는 편입니다.",
+      "nuanceTip": "耐力(지구력)·持之以恒은 선생님이 수업에서 알려 준 단어입니다. 比较能 ~ 는 과장 없이 담백합니다.",
+      "followUpCombo": "这种能力对你现在的工作有什么帮助？"
+    },
+    {
+      "situation": "AI와 일하는 방식이 달라졌는지 묻는 상황",
+      "betterSentence": "我同时让几个 AI 处理不同的任务，做好以后我再检查，不满意就让它修改。",
+      "pronunciation": "wǒ tóng shí ràng jǐ gè AI chǔ lǐ bù tóng de rèn wù, zuò hǎo yǐ hòu wǒ zài jiǎn chá, bù mǎn yì jiù ràng tā xiū gǎi.",
+      "koreanMeaning": "여러 AI에게 서로 다른 작업을 맡기고, 끝나면 제가 확인하고 마음에 안 들면 수정시킵니다.",
+      "nuanceTip": "同时 + 让 + AI + 동사 구조로 병렬 작업을 설명합니다. 修改는 '수정하다'입니다.",
+      "followUpCombo": "这样一天能多做多少事情？"
+    },
+    {
+      "situation": "학교 교육이 어떻게 바뀌어야 하는지 묻는 상황",
+      "betterSentence": "我觉得学校应该少考背诵，多培养提问、分析和行动的能力。",
+      "pronunciation": "wǒ jué de xué xiào yīng gāi shǎo kǎo bèi sòng, duō péi yǎng tí wèn, fēn xī hé xíng dòng de néng lì.",
+      "koreanMeaning": "학교는 암기 시험을 줄이고 질문하고 분석하고 실행하는 능력을 더 길러야 한다고 봅니다.",
+      "nuanceTip": "少 + 동사, 多 + 동사 대구로 의견을 짧게 정리할 수 있습니다. 分析·行动力는 본문에서 쓴 단어입니다.",
+      "followUpCombo": "那考试应该怎么出题？"
+    },
+    {
+      "situation": "아이가 생긴 뒤 변화를 묻는 상황",
+      "betterSentence": "有了孩子以后，我们有了更多共同话题，夫妻关系也越来越好了。",
+      "pronunciation": "yǒu le hái zi yǐ hòu, wǒ men yǒu le gèng duō gòng tóng huà tí, fū qī guān xì yě yuè lái yuè hǎo le.",
+      "koreanMeaning": "아이가 생기고 나서 공통 화제가 늘어 부부 관계도 점점 좋아졌습니다.",
+      "nuanceTip": "共同话题는 선생님이 쓴 표현입니다. 有了 ~ 以后는 변화의 시점을 알려 줍니다.",
+      "followUpCombo": "你觉得最大的变化是什么？"
+    }
+  ],
+  "betterQuestions": [
+    {
+      "context": "舆情危机 개념을 확장할 때",
+      "questionSentence": "“舆情危机”和“公关危机”有什么区别？",
+      "pronunciation": "\"yú qíng wēi jī\" hé \"gōng guān wēi jī\" yǒu shén me qū bié?",
+      "koreanMeaning": "'여론 위기'와 '홍보 위기'는 어떻게 다른가요?",
+      "nuanceTip": "비슷한 단어의 차이를 물으면 선생님의 설명이 길어져 학습 효과가 큽니다.",
+      "followUpCombo": "能再举一个例子吗？"
+    },
+    {
+      "context": "出格 사용 범위를 확인할 때",
+      "questionSentence": "“出格”可以用在好的方面吗，还是只能用在不好的方面？",
+      "pronunciation": "\"chū gé\" kě yǐ yòng zài hǎo de fāng miàn ma, hái shì zhǐ néng yòng zài bù hǎo de fāng miàn?",
+      "koreanMeaning": "'出格'는 좋은 쪽에도 쓸 수 있나요, 아니면 나쁜 쪽에만 쓰나요?",
+      "nuanceTip": "还是 ~ 의문문은 두 가지 선택지를 직접 비교해 물을 때 씁니다.",
+      "followUpCombo": "那“过分”呢？"
+    },
+    {
+      "context": "关注와 订阅를 구분하고 싶을 때",
+      "questionSentence": "在微博、YouTube 和抖音上，“关注”和“订阅”分别怎么用？",
+      "pronunciation": "zài wēi bó,YouTube hé dǒu yīn shàng,\"guān zhù\" hé \"dìng yuè\" fēn bié zěn me yòng?",
+      "koreanMeaning": "웨이보·유튜브·더우인에서 '关注'와 '订阅'는 각각 어떻게 쓰나요?",
+      "nuanceTip": "플랫폼별 용법을 물으면 배운 어휘를 정리하기 좋습니다.",
+      "followUpCombo": "“粉丝”可以用在所有平台吗？"
+    },
+    {
+      "context": "끈기 관련 어휘를 늘릴 때",
+      "questionSentence": "“持之以恒”和“坚持不懈”有什么不同？",
+      "pronunciation": "\"chí zhī yǐ héng\" hé \"jiān chí bù xiè\" yǒu shén me bù tóng?",
+      "koreanMeaning": "'持之以恒'과 '坚持不懈'는 뭐가 다른가요?",
+      "nuanceTip": "사자성어 두 개를 비교해 물으면 뉘앙스를 정확히 배울 수 있습니다.",
+      "followUpCombo": "哪个更适合写在工作总结里？"
+    },
+    {
+      "context": "AI 지시어 용어를 확인할 때",
+      "questionSentence": "给 AI 的指令，说“提示词”还是“指示词”更常见？",
+      "pronunciation": "gěi AI de zhǐ lìng, shuō \"tí shì cí\" hái shì \"zhǐ shì cí\" gèng cháng jiàn?",
+      "koreanMeaning": "AI에게 주는 지시는 '提示词'와 '指示词' 중 어느 쪽이 더 흔한가요?",
+      "nuanceTip": "수업에서 선생님이 指示词라고 했으니, 실제 현업 용어와 비교해 확인해 보는 질문입니다. 보통 IT 업계에서는 提示词를 많이 씁니다.",
+      "followUpCombo": "那“指令”呢？"
+    },
+    {
+      "context": "代工 모델을 설명하고 싶을 때",
+      "questionSentence": "TSMC 这样的“代工”模式，怎么解释给不懂的人听比较好？",
+      "pronunciation": "TSMC zhè yàng de \"dài gōng\" mó shì, zěn me jiě shì gěi bù dǒng de rén tīng bǐ jiào hǎo?",
+      "koreanMeaning": "TSMC 같은 '위탁생산(代工)' 모델은 비전문가에게 어떻게 설명하면 좋을까요?",
+      "nuanceTip": "怎么解释 + 给 ~ 听 구조는 설명 방법을 직접 물을 때 씁니다.",
+      "followUpCombo": "能用一个生活中的例子说明吗？"
+    }
+  ],
+  "scenarioTitle": "오늘 배운 핵심 단어 복습",
+  "scenarioContext": "오늘 수업에서 배운 舆情危机·出格·满脑子·订阅者를 직접 문장으로 말해 보는 복습 트랙입니다. (※ 실제 수업 녹취가 아니라 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+  "scenarioTurns": [
+    {
+      "role": "Tutor",
+      "speakerLabel": "중국어 선생님",
+      "foreignText": "钟声，我们先复习今天的新词。“舆情危机”是什么意思？",
+      "pronunciation": "zhōng shēng, wǒ men xiān fù xí jīn tiān de xīn cí.\"yú qíng wēi jī\" shì shén me yì si?",
+      "koreanText": "종성 님, 오늘 새 단어부터 복습해요. '舆情危机'는 무슨 뜻일까요?",
+      "keyExpression": "舆情危机",
+      "speakingTip": "업무와 직접 관련 없는 일로 여론 압박을 받는 위기입니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "舆情危机是指公司因为老板的个人问题，受到了舆论的压力。",
+      "pronunciation": "yú qíng wēi jī shì zhǐ gōng sī yīn wèi lǎo bǎn de gè rén wèn tí, shòu dào le yú lùn de yā lì.",
+      "koreanText": "여론 위기는 회사가 오너의 개인 문제 때문에 여론의 압박을 받는 것을 말합니다.",
+      "keyExpression": "因为 ~ 受到了舆论的压力",
+      "speakingTip": "원인-결과를 因为와 受到了로 정리하면 한 문장으로 설명됩니다."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "중국어 선생님",
+      "foreignText": "很好！那“出格”呢？你能造一个句子吗？",
+      "pronunciation": "hěn hǎo! nà \"chū gé\" ne? nǐ néng zào yí gè jù zi ma?",
+      "koreanText": "좋아요! 그럼 '出格'는요? 문장을 하나 만들어 볼래요?",
+      "keyExpression": "出格",
+      "speakingTip": "평소 이미지에서 벗어난 일탈에 씁니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "他平时形象很好，但这次的做法有点出格，所以很多人失望了。",
+      "pronunciation": "tā píng shí xíng xiàng hěn hǎo, dàn zhè cì de zuò fǎ yǒu diǎn chū gé, suǒ yǐ hěn duō rén shī wàng le.",
+      "koreanText": "그는 평소 이미지가 좋았는데 이번 행동이 좀 도를 넘어서 많은 사람이 실망했습니다.",
+      "keyExpression": "有点出格",
+      "speakingTip": "有点 + 부정적 평가를 붙이면 부드럽게 말할 수 있습니다."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "중국어 선생님",
+      "foreignText": "你最近满脑子都是什么？",
+      "pronunciation": "nǐ zuì jìn mǎn nǎo zi dōu shì shén me?",
+      "koreanText": "요즘 머릿속에 온통 뭐가 들어 있나요?",
+      "keyExpression": "满脑子都是",
+      "speakingTip": "'满脑子都是 + 명사' 문형을 되살립니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "我满脑子都是怎么用 AI 把工作自动化。",
+      "pronunciation": "wǒ mǎn nǎo zi dōu shì zěn me yòng AI bǎ gōng zuò zì dòng huà.",
+      "koreanText": "저는 머릿속이 온통 AI로 일을 자동화할 방법뿐입니다.",
+      "keyExpression": "满脑子都是 + 怎么 ~",
+      "speakingTip": "满脑子 뒤에 里를 붙이지 않는 점을 확인하세요."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "중국어 선생님",
+      "foreignText": "在 YouTube 上，“关注的人”应该怎么说？",
+      "pronunciation": "zài YouTube shàng,\"guān zhù de rén\" yīng gāi zěn me shuō?",
+      "koreanText": "유튜브에서 '팔로우하는 사람'은 뭐라고 해야 할까요?",
+      "keyExpression": "订阅者 / 粉丝",
+      "speakingTip": "플랫폼마다 쓰는 동사가 다릅니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "应该说“订阅者”，也可以说“粉丝”。",
+      "pronunciation": "yīng gāi shuō \"dìng yuè zhě\", yě kě yǐ shuō \"fěn sī\".",
+      "koreanText": "'订阅者'라고 하고 '粉丝'라고 해도 됩니다.",
+      "keyExpression": "订阅 vs 关注",
+      "speakingTip": "웨이보는 关注, 유튜브는 订阅입니다."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "s1",
+      "badge": "시나리오 1 · 심층 복습",
+      "title": "오늘 배운 핵심 단어 복습",
+      "context": "오늘 수업에서 배운 舆情危机·出格·满脑子·订阅者를 직접 문장으로 말해 보는 복습 트랙입니다. (※ 실제 수업 녹취가 아니라 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님",
+          "foreignText": "钟声，我们先复习今天的新词。“舆情危机”是什么意思？",
+          "pronunciation": "zhōng shēng, wǒ men xiān fù xí jīn tiān de xīn cí.\"yú qíng wēi jī\" shì shén me yì si?",
+          "koreanText": "종성 님, 오늘 새 단어부터 복습해요. '舆情危机'는 무슨 뜻일까요?",
+          "keyExpression": "舆情危机",
+          "speakingTip": "업무와 직접 관련 없는 일로 여론 압박을 받는 위기입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "舆情危机是指公司因为老板的个人问题，受到了舆论的压力。",
+          "pronunciation": "yú qíng wēi jī shì zhǐ gōng sī yīn wèi lǎo bǎn de gè rén wèn tí, shòu dào le yú lùn de yā lì.",
+          "koreanText": "여론 위기는 회사가 오너의 개인 문제 때문에 여론의 압박을 받는 것을 말합니다.",
+          "keyExpression": "因为 ~ 受到了舆论的压力",
+          "speakingTip": "원인-결과를 因为와 受到了로 정리하면 한 문장으로 설명됩니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님",
+          "foreignText": "很好！那“出格”呢？你能造一个句子吗？",
+          "pronunciation": "hěn hǎo! nà \"chū gé\" ne? nǐ néng zào yí gè jù zi ma?",
+          "koreanText": "좋아요! 그럼 '出格'는요? 문장을 하나 만들어 볼래요?",
+          "keyExpression": "出格",
+          "speakingTip": "평소 이미지에서 벗어난 일탈에 씁니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "他平时形象很好，但这次的做法有点出格，所以很多人失望了。",
+          "pronunciation": "tā píng shí xíng xiàng hěn hǎo, dàn zhè cì de zuò fǎ yǒu diǎn chū gé, suǒ yǐ hěn duō rén shī wàng le.",
+          "koreanText": "그는 평소 이미지가 좋았는데 이번 행동이 좀 도를 넘어서 많은 사람이 실망했습니다.",
+          "keyExpression": "有点出格",
+          "speakingTip": "有点 + 부정적 평가를 붙이면 부드럽게 말할 수 있습니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님",
+          "foreignText": "你最近满脑子都是什么？",
+          "pronunciation": "nǐ zuì jìn mǎn nǎo zi dōu shì shén me?",
+          "koreanText": "요즘 머릿속에 온통 뭐가 들어 있나요?",
+          "keyExpression": "满脑子都是",
+          "speakingTip": "'满脑子都是 + 명사' 문형을 되살립니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "我满脑子都是怎么用 AI 把工作自动化。",
+          "pronunciation": "wǒ mǎn nǎo zi dōu shì zěn me yòng AI bǎ gōng zuò zì dòng huà.",
+          "koreanText": "저는 머릿속이 온통 AI로 일을 자동화할 방법뿐입니다.",
+          "keyExpression": "满脑子都是 + 怎么 ~",
+          "speakingTip": "满脑子 뒤에 里를 붙이지 않는 점을 확인하세요."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님",
+          "foreignText": "在 YouTube 上，“关注的人”应该怎么说？",
+          "pronunciation": "zài YouTube shàng,\"guān zhù de rén\" yīng gāi zěn me shuō?",
+          "koreanText": "유튜브에서 '팔로우하는 사람'은 뭐라고 해야 할까요?",
+          "keyExpression": "订阅者 / 粉丝",
+          "speakingTip": "플랫폼마다 쓰는 동사가 다릅니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "应该说“订阅者”，也可以说“粉丝”。",
+          "pronunciation": "yīng gāi shuō \"dìng yuè zhě\", yě kě yǐ shuō \"fěn sī\".",
+          "koreanText": "'订阅者'라고 하고 '粉丝'라고 해도 됩니다.",
+          "keyExpression": "订阅 vs 关注",
+          "speakingTip": "웨이보는 关注, 유튜브는 订阅입니다."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "badge": "시나리오 2 · 비즈니스 응용",
+      "title": "중국 고객 앞에서 AI 자동화·반도체 이야기하기",
+      "context": "중국 고객과 미팅하는 상황을 가정해 AI 업무 방식과 반도체 산업 의견을 말하는 연습 스크립트입니다. (※ 실제 수업 녹취가 아니라 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 · 고객 역할",
+          "foreignText": "尹代表，听说您最近在用 AI 做网站和视频，能介绍一下吗？",
+          "pronunciation": "yǐn dài biǎo, tīng shuō nín zuì jìn zài yòng AI zuò wǎng zhàn hé shì pín, néng jiè shào yī xià ma?",
+          "koreanText": "윤 대표님, 최근 AI로 웹사이트와 영상을 만드신다고 들었는데 소개해 주시겠어요?",
+          "keyExpression": "能介绍一下吗",
+          "speakingTip": "정중하게 요청하는 기본 문형입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "可以。我同时让几个 AI 处理不同的任务，我负责检查结果和做决定。",
+          "pronunciation": "kě yǐ. wǒ tóng shí ràng jǐ gè AI chǔ lǐ bù tóng de rèn wù, wǒ fù zé jiǎn chá jié guǒ hé zuò jué dìng.",
+          "koreanText": "네. 저는 여러 AI에게 서로 다른 작업을 맡기고, 결과 확인과 결정은 제가 합니다.",
+          "keyExpression": "负责 + 检查结果和做决定",
+          "speakingTip": "负责 + 동사로 역할 분담을 말합니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 · 고객 역할",
+          "foreignText": "这样工作效率提高了多少？",
+          "pronunciation": "zhè yàng gōng zuò xiào lǜ tí gāo le duō shǎo?",
+          "koreanText": "그러면 업무 효율이 얼마나 올라갔나요?",
+          "keyExpression": "效率提高了",
+          "speakingTip": "提高了 + 多少는 정도를 묻습니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "工作时间差不多，但是能同时处理的事情多了很多，简单重复的事情不用我自己做了。",
+          "pronunciation": "gōng zuò shí jiān chà bù duō, dàn shì néng tóng shí chǔ lǐ de shì qíng duō le hěn duō, jiǎn dān chóng fù de shì qíng bù yòng wǒ zì jǐ zuò le.",
+          "koreanText": "일하는 시간은 비슷하지만 동시에 처리하는 일이 훨씬 많아졌고, 단순 반복 업무는 직접 안 해도 됩니다.",
+          "keyExpression": "不用我自己做了",
+          "speakingTip": "不用 ~ 了는 '더 이상 안 해도 된다'는 뜻입니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 · 고객 역할",
+          "foreignText": "那 AI 做出来的结果可靠吗？",
+          "pronunciation": "nà AI zuò chū lái de jié guǒ kě kào ma?",
+          "koreanText": "그럼 AI가 만든 결과는 믿을 만한가요?",
+          "keyExpression": "可靠吗",
+          "speakingTip": "可靠는 신뢰성을 묻는 가장 기본 어휘입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "不能百分之百相信，所以我一定会仔细检查。",
+          "pronunciation": "bù néng bǎi fēn zhī bǎi xiāng xìn, suǒ yǐ wǒ yí dìng huì zǐ xì jiǎn chá.",
+          "koreanText": "100% 믿을 수는 없어서 반드시 꼼꼼히 확인합니다.",
+          "keyExpression": "不能百分之百相信",
+          "speakingTip": "一定会 + 동사로 의지를 강조합니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 · 고객 역할",
+          "foreignText": "您对半导体行业也很了解，您怎么看台积电和三星的竞争？",
+          "pronunciation": "nín duì bàn dǎo tǐ háng yè yě hěn liǎo jiě, nín zěn me kàn tái jī diàn hé sān xīng de jìng zhēng?",
+          "koreanText": "반도체 업계도 잘 아시는데, TSMC와 삼성의 경쟁을 어떻게 보십니까?",
+          "keyExpression": "怎么看",
+          "speakingTip": "怎么看은 의견을 묻는 정중한 표현입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "台积电专注代工，客户很多，所以现在领先；三星也做代工，但还在追赶。",
+          "pronunciation": "tái jī diàn zhuān zhù dài gōng, kè hù hěn duō, suǒ yǐ xiàn zài lǐng xiān; sān xīng yě zuò dài gōng, dàn hái zài zhuī gǎn.",
+          "koreanText": "TSMC는 위탁생산에 집중하고 고객이 많아 지금 앞서 있고, 삼성도 위탁생산을 하지만 따라가는 중입니다.",
+          "keyExpression": "专注代工 / 还在追赶",
+          "speakingTip": "代工은 수업에서 배운 위탁생산 용어입니다."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "badge": "시나리오 3 · 꼬리질문 디펜스",
+      "title": "꼬리질문 디펜스: 교육·AI·유튜브",
+      "context": "선생님이 의견의 허점을 되묻는 상황을 가정하고, 주장과 근거를 끝까지 설명하는 연습 스크립트입니다. (※ 실제 수업 녹취가 아니라 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님",
+          "foreignText": "你说学校的教育要改革，具体应该怎么改？",
+          "pronunciation": "nǐ shuō xué xiào de jiào yù yào gǎi gé, jù tǐ yīng gāi zěn me gǎi?",
+          "koreanText": "학교 교육을 개혁해야 한다고 했는데 구체적으로 어떻게 바꿔야 할까요?",
+          "keyExpression": "具体应该怎么改",
+          "speakingTip": "具体 + 동사로 구체적인 방법을 묻습니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "现在需要背的东西 AI 都能告诉我们，所以应该多培养分析信息和做决定的能力。",
+          "pronunciation": "xiàn zài xū yào bèi de dōng xī AI dōu néng gào sù wǒ men, suǒ yǐ yīng gāi duō péi yǎng fèn xī xìn xī hé zuò jué dìng de néng lì.",
+          "koreanText": "지금은 외울 내용을 AI가 다 알려 주니, 정보를 분석하고 결정하는 능력을 더 길러야 합니다.",
+          "keyExpression": "多培养 ~ 的能力",
+          "speakingTip": "多 + 동사로 방향을 제시합니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님",
+          "foreignText": "但是考试需要标准答案，没有背诵怎么评分呢？",
+          "pronunciation": "dàn shì kǎo shì xū yào biāo zhǔn dá àn, méi yǒu bèi sòng zěn me píng fēn ne?",
+          "koreanText": "하지만 시험에는 정답이 필요한데 암기가 없으면 어떻게 채점하나요?",
+          "keyExpression": "怎么评分",
+          "speakingTip": "评分은 채점·평가 점수를 뜻합니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "可以多出“发散的问题”，看学生有没有自己的想法，也看他们的行动力。",
+          "pronunciation": "kě yǐ duō chū \"fā sàn de wèn tí\", kàn xué shēng yǒu méi yǒu zì jǐ de xiǎng fǎ, yě kàn tā men de xíng dòng lì.",
+          "koreanText": "'발산형 질문'을 더 내서 학생에게 자기 생각이 있는지, 실행력이 있는지 볼 수 있습니다.",
+          "keyExpression": "发散的问题",
+          "speakingTip": "封闭的问题와 반대되는 열린 질문입니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님",
+          "foreignText": "如果学生都依赖 AI，自己不思考怎么办？",
+          "pronunciation": "rú guǒ xué shēng dōu yī lài AI, zì jǐ bù sī kǎo zěn me bàn?",
+          "koreanText": "학생들이 모두 AI에 의존하고 스스로 생각하지 않으면 어떻게 하나요?",
+          "keyExpression": "依赖 AI",
+          "speakingTip": "依赖는 '의존하다'입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "所以要培养“主体意识”：先想清楚自己要做什么，再让 AI 帮忙。",
+          "pronunciation": "suǒ yǐ yào péi yǎng \"zhǔ tǐ yì shí\": xiān xiǎng qīng chǔ zì jǐ yào zuò shén me, zài ràng AI bāng máng.",
+          "koreanText": "그래서 '주체의식'을 길러야 합니다. 먼저 자기가 무엇을 할지 정하고 나서 AI에게 돕게 하는 겁니다.",
+          "keyExpression": "先 ~ 再 ~",
+          "speakingTip": "先 ~ 再 ~ 로 순서를 분명히 합니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님",
+          "foreignText": "你说 YouTube 要靠耐心，如果等了很久还是没有订阅者呢？",
+          "pronunciation": "nǐ shuō YouTube yào kào nài xīn, rú guǒ děng le hěn jiǔ hái shì méi yǒu dìng yuè zhě ne?",
+          "koreanText": "유튜브는 인내심이 필요하다고 했는데, 오래 기다려도 구독자가 없으면요?",
+          "keyExpression": "如果 ~ 还是 ~ 呢",
+          "speakingTip": "가정 질문의 전형적 형태입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "那就看一下播放量和内容主题，调整以后继续上传，耐心很重要。",
+          "pronunciation": "nà jiù kàn yī xià bō fàng liàng hé nèi róng zhǔ tí, tiáo zhěng yǐ hòu jì xù shàng chuán, nài xīn hěn zhòng yào.",
+          "koreanText": "그럼 조회수와 콘텐츠 주제를 확인해 조정한 뒤 계속 올립니다. 인내심이 중요합니다.",
+          "keyExpression": "播放量 / 调整",
+          "speakingTip": "播放量은 수업에서 배운 조회수 표현입니다."
+        }
+      ]
+    }
+  ]
+}

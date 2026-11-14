@@ -1,0 +1,719 @@
+{
+  "lang": "zh",
+  "langBadge": "🇨🇳 중국어 (中文)",
+  "ttsLang": "zh-CN",
+  "grammarCorrections": [
+    {
+      "myWrongSentence": "\"对，不短时间。\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "对，时间不短。",
+      "pronunciation": "duì, shí jiān bù duǎn.",
+      "grammarPoint": "'不短时间'은 수식 구조가 맞지 않습니다. 중국어에서는 '时间不短'(주어+서술어)이나 '很长时间/不短的时间'(的 필요)로 말합니다.",
+      "keyPattern": "时间 + 不短 / 不短的时间",
+      "alternativeExpressions": [
+        {
+          "label": "조금 더 구체적으로",
+          "sentence": "对，已经二十年了，时间不算短。",
+          "pronunciation": "duì, yǐ jīng èr shí nián le, shí jiān bù suàn duǎn.",
+          "nuance": "不算短은 '짧다고는 할 수 없다'는 완곡한 표현입니다."
+        },
+        {
+          "label": "구어",
+          "sentence": "是啊，挺长的时间了。",
+          "pronunciation": "shì a, tǐng zhǎng de shí jiān le.",
+          "nuance": "挺 ~ 的는 구어에서 정도를 부드럽게 나타냅니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"智能电脑。\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "AI 的中文是“人工智能”。",
+      "pronunciation": "AI de zhōng wén shì \"rén gōng zhì néng\".",
+      "grammarPoint": "'AI의 중국어가 뭐냐'는 질문에 '智能电脑'라고 답했고, 선생님이 人工智能으로 정정했습니다. 현재는 AI라는 영어를 그대로 쓰는 경우도 많지만 공식 번역은 人工智能입니다.",
+      "keyPattern": "AI = 人工智能",
+      "alternativeExpressions": [
+        {
+          "label": "약칭 소개",
+          "sentence": "人工智能，简称 AI。",
+          "pronunciation": "rén gōng zhì néng, jiǎn chēng AI.",
+          "nuance": "简称 ~ 로 약어 관계를 설명합니다."
+        },
+        {
+          "label": "현실적 용법",
+          "sentence": "现在很多人直接说 AI。",
+          "pronunciation": "xiàn zài hěn duō rén zhí jiē shuō AI.",
+          "nuance": "직접 말하는 현실 용법을 덧붙이면 대화가 자연스럽습니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"他们是发展的速度是就没想到的这样，很快乐的这种，这种。\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "它的发展速度非常快，出乎意料。",
+      "pronunciation": "tā de fā zhǎn sù dù fēi cháng kuài, chū hū yì liào.",
+      "grammarPoint": "'快乐'는 '즐겁다'라는 뜻이라 '속도가 빠르다'에는 맞지 않고 '快'를 써야 합니다. '是…是…'로 겹치는 구조도 '发展速度 + 非常快'로 정리하면 간결해집니다.",
+      "keyPattern": "发展速度 + 非常快",
+      "alternativeExpressions": [
+        {
+          "label": "예상 밖",
+          "sentence": "它发展得特别快，超出了大家的预期。",
+          "pronunciation": "tā fā zhǎn dé tè bié kuài, chāo chū le dà jiā de yù qī.",
+          "nuance": "超出预期는 비즈니스에서 자주 쓰는 평가 표현입니다."
+        },
+        {
+          "label": "수치 강조",
+          "sentence": "它的增长速度惊人。",
+          "pronunciation": "tā de zēng zhǎng sù dù jīng rén.",
+          "nuance": "惊人은 '놀랄 만하다'는 강한 형용입니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"他们的发展的速度和政府的，呃，财经，财经，财对吗？\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "它的发展速度快，主要得益于政府的补贴。",
+      "pronunciation": "tā de fā zhǎn sù dù kuài, zhǔ yào dé yì yú zhèng fǔ de bǔ tiē.",
+      "grammarPoint": "말하고 싶었던 단어는 '补贴(보조금)'였고, 선생님과 함께 확인한 뒤 본인도 '补贴'라고 말했습니다. '得益于'는 '~ 덕분이다'를 뜻하는 격식 표현입니다.",
+      "keyPattern": "得益于 + 政府的补贴",
+      "alternativeExpressions": [
+        {
+          "label": "쉬운 표현",
+          "sentence": "政府给了很多补贴，所以发展很快。",
+          "pronunciation": "zhèng fǔ gěi le hěn duō bǔ tiē, suǒ yǐ fā zhǎn hěn kuài.",
+          "nuance": "所以로 인과를 풀어 쓰면 더 쉽습니다."
+        },
+        {
+          "label": "지원 강조",
+          "sentence": "它得到了政府的大力支持。",
+          "pronunciation": "tā dé dào le zhèng fǔ de dà lì zhī chí.",
+          "nuance": "大力支持는 보조금 외 지원도 포함합니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"但是现在是，呃，受，受，被控，控制。\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "但是现在受到了贸易制裁。",
+      "pronunciation": "dàn shì xiàn zài shòu dào le mào yì zhì cái.",
+      "grammarPoint": "'被控制'는 '통제당하다'에 가까워 제재의 의미가 약합니다. 선생님이 알려 준 贸易制裁(무역 제재)를 쓰면 '受到了 + 명사' 구조로 완성됩니다.",
+      "keyPattern": "受到了 + 贸易制裁",
+      "alternativeExpressions": [
+        {
+          "label": "출구 관리",
+          "sentence": "它受到了美国的出口管制。",
+          "pronunciation": "tā shòu dào le měi guó de chū kǒu guǎn zhì.",
+          "nuance": "出口管制는 제재의 구체적 수단입니다."
+        },
+        {
+          "label": "영향 서술",
+          "sentence": "因为制裁，它的产品很难卖给美国企业。",
+          "pronunciation": "yīn wèi zhì cái, tā de chǎn pǐn hěn nán mài gěi měi guó qǐ yè.",
+          "nuance": "因为 ~ 로 결과까지 이어 줍니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"成，成长率会高。\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "它的增长率会更高。",
+      "pronunciation": "tā de zēng zhǎng lǜ huì gèng gāo.",
+      "grammarPoint": "선생님이 '增长率(성장률)'를 알려 주었고 학습자도 따라 말했습니다. 成长은 사람·기업의 성숙, 增长은 숫자·규모의 증가에 쓰입니다.",
+      "keyPattern": "增长率 + 会更高",
+      "alternativeExpressions": [
+        {
+          "label": "속도 표현",
+          "sentence": "它的增长速度会更快。",
+          "pronunciation": "tā de zēng zhǎng sù dù huì gèng kuài.",
+          "nuance": "增长速度는 속도, 增长率는 비율입니다."
+        },
+        {
+          "label": "시장 규모",
+          "sentence": "市场规模会大幅扩大。",
+          "pronunciation": "shì chǎng guī mó huì dà fú kuò dà.",
+          "nuance": "规模 + 扩大는 시장을 설명할 때 가장 흔한 조합입니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"就是，就是自动，自动开车的功能。\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "就是自动驾驶功能。",
+      "pronunciation": "jiù shì zì dòng jià shǐ gōng néng.",
+      "grammarPoint": "'자동으로 운전하는 기능'을 말로 풀어 설명하다가 선생님이 自动驾驶를 알려 주었습니다. 이처럼 한 단어로 정리하면 말이 훨씬 간결해집니다.",
+      "keyPattern": "自动驾驶 + 功能",
+      "alternativeExpressions": [
+        {
+          "label": "FSD 소개",
+          "sentence": "FSD 是特斯拉的全自动驾驶系统。",
+          "pronunciation": "FSD shì tè sī lā de quán zì dòng jià shǐ xì tǒng.",
+          "nuance": "全自动驾驶는 FSD의 일반적 번역입니다."
+        },
+        {
+          "label": "풀어 쓰기",
+          "sentence": "就是让车自己开的功能。",
+          "pronunciation": "jiù shì ràng chē zì jǐ kāi de gōng néng.",
+          "nuance": "모르는 단어일 때 우회 설명도 충분히 통합니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"我，我就这，这，这，这，这个行业有，有关系，关心，有关心。\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "我对这个行业很感兴趣。",
+      "pronunciation": "wǒ duì zhè ge háng yè hěn gǎn xìng qù.",
+      "grammarPoint": "'有关心'은 어색하고, 선생님이 알려 준 '对 + 대상 + 感兴趣'가 가장 자연스럽습니다. 지속적으로 지켜본다는 뜻이면 '很关注'도 가능합니다.",
+      "keyPattern": "对 ~ 感兴趣 / 很关注",
+      "alternativeExpressions": [
+        {
+          "label": "지켜본다",
+          "sentence": "我很关注这个行业。",
+          "pronunciation": "wǒ hěn guān zhù zhè ge háng yè.",
+          "nuance": "关注는 소식을 계속 확인한다는 느낌입니다."
+        },
+        {
+          "label": "업무 연관",
+          "sentence": "这个行业和我的工作也有关系。",
+          "pronunciation": "zhè ge háng yè hé wǒ de gōng zuò yě yǒu guān xì.",
+          "nuance": "和 ~ 有关系는 업무적 연관성을 말합니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"我已经让它做了很多，给它做，给它，给它了很多就，就，怎么说呢，事。\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "我已经给它安排了很多事，下达了几个指令。",
+      "pronunciation": "wǒ yǐ jīng gěi tā ān pái le hěn duō shì, xià dá le jǐ gè zhǐ lìng.",
+      "grammarPoint": "'给它了很多事'는 동사가 없어서 미완성입니다. 선생님이 '给它安排了很多事'와 '指令(명령)'를 알려 주었고, 이 두 가지를 결합하면 정확해집니다.",
+      "keyPattern": "给 + AI + 安排 / 下达指令",
+      "alternativeExpressions": [
+        {
+          "label": "간단히",
+          "sentence": "我已经给 AI 下了几个指令。",
+          "pronunciation": "wǒ yǐ jīng gěi AI xià le jǐ gè zhǐ lìng.",
+          "nuance": "下指令은 구어에서 下达指令보다 흔합니다."
+        },
+        {
+          "label": "자동화 강조",
+          "sentence": "我让它自动处理了好几项任务。",
+          "pronunciation": "wǒ ràng tā zì dòng chǔ lǐ le hǎo jǐ xiàng rèn wù.",
+          "nuance": "几项任务는 업무 단위를 명확히 합니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"然后偶尔就中国客人来，那就我去翻译和就直接沟通。\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "偶尔有中国客人来，我就去翻译或者直接沟通。",
+      "pronunciation": "ǒu ěr yǒu zhōng guó kè rén lái, wǒ jiù qù fān yì huò zhě zhí jiē gōu tōng.",
+      "grammarPoint": "'中国客人来' 앞에 존재를 나타내는 '有'가 빠졌습니다. 또 두 가지 중 하나를 말할 때는 '和'가 아니라 '或者'를 씁니다.",
+      "keyPattern": "有 + 客人 + 来 / A 或者 B",
+      "alternativeExpressions": [
+        {
+          "label": "조건절",
+          "sentence": "有中国客人来的时候，我会帮忙翻译。",
+          "pronunciation": "yǒu zhōng guó kè rén lái de shí hòu, wǒ huì bāng máng fān yì.",
+          "nuance": "的时候로 시점을 분명히 합니다."
+        },
+        {
+          "label": "직접 소통",
+          "sentence": "有时候我直接用中文跟他们沟通。",
+          "pronunciation": "yǒu shí hòu wǒ zhí jiē yòng zhōng wén gēn tā men gōu tōng.",
+          "nuance": "有时候는 빈도가 낮음을 나타냅니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"还还是不不好很很多\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "跟在中国的时候比，还是差很多。",
+      "pronunciation": "gēn zài zhōng guó de shí hòu bǐ, hái shì chà hěn duō.",
+      "grammarPoint": "'不好很多'는 '好'와 '很多'가 맞물려 어색합니다. 비교할 때는 '差很多' 또는 '没有 ~ 那么 ~ '를 쓰는 편이 자연스럽습니다.",
+      "keyPattern": "跟 ~ 比，还是差很多",
+      "alternativeExpressions": [
+        {
+          "label": "완곡하게",
+          "sentence": "没有在中国的时候那么流利。",
+          "pronunciation": "méi yǒu zài zhōng guó de shí hòu nà me liú lì.",
+          "nuance": "没有 ~ 那么 ~ 는 부정 비교의 기본형입니다."
+        },
+        {
+          "label": "직접 비교",
+          "sentence": "比在中国的时候差多了。",
+          "pronunciation": "bǐ zài zhōng guó de shí hòu chà duō le.",
+          "nuance": "差多了는 구어에서 차이를 강조합니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"老，老，老，老母娘。\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "我想跟丈母娘（岳母）沟通。",
+      "pronunciation": "wǒ xiǎng gēn zhàng mǔ niáng (yuè mǔ) gōu tōng.",
+      "grammarPoint": "장모님을 말하려다 '老母娘'이라 했고, 선생님이 '丈母娘'로 바로잡았습니다. 이어서 岳父岳母(장인·장모)도 함께 배웠습니다. 丈母娘는 구어, 岳母는 격식 있는 말입니다.",
+      "keyPattern": "丈母娘 / 岳母 / 岳父岳母",
+      "alternativeExpressions": [
+        {
+          "label": "격식체",
+          "sentence": "我的岳父岳母住在日本。",
+          "pronunciation": "wǒ de yuè fù yuè mǔ zhù zài rì běn.",
+          "nuance": "岳父岳母는 부모님을 한꺼번에 가리킵니다."
+        },
+        {
+          "label": "구어",
+          "sentence": "我和丈母娘用俄语沟通。",
+          "pronunciation": "wǒ hé zhàng mǔ niáng yòng é yǔ gōu tōng.",
+          "nuance": "用 + 언어 + 沟通로 소통 수단을 말합니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"中文就是很难学的一个语言\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "中文是一门很难学的语言。",
+      "pronunciation": "zhōng wén shì yī mén hěn nán xué de yǔ yán.",
+      "grammarPoint": "언어의 양사는 '个'보다 '门'(과목처럼 배우는 것)이나 '种'(종류)이 자연스럽고, '的' 앞의 수식어 뒤에 양사를 붙이는 순서도 '一门很难学的语言'이 됩니다. 같은 맥락의 '三个语言'도 '三种语言'이 맞습니다.",
+      "keyPattern": "一门 + 修饰语 + 的 + 语言 / 三种语言",
+      "alternativeExpressions": [
+        {
+          "label": "복수 언어",
+          "sentence": "在家里我们三种语言混着用。",
+          "pronunciation": "zài jiā lǐ wǒ men sān zhǒng yǔ yán hùn zhe yòng.",
+          "nuance": "混着用은 섞어 쓴다는 구어입니다."
+        },
+        {
+          "label": "난이도 평가",
+          "sentence": "我觉得中文是最难学的语言之一。",
+          "pronunciation": "wǒ jué de zhōng wén shì zuì nán xué de yǔ yán zhī yī.",
+          "nuance": "之一를 쓰면 단정을 피할 수 있습니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"日本是整个方面是比较很平均，高高的平。\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "日本平均来说水平比较高。",
+      "pronunciation": "rì běn píng jūn lái shuō shuǐ píng bǐ jiào gāo.",
+      "grammarPoint": "'比较'와 '很'이 정도 부사로 겹칩니다. 선생님이 알려 준 표현 '平均来说水平比较高'를 그대로 쓰면 의미가 정확합니다.",
+      "keyPattern": "平均来说 + 水平比较高",
+      "alternativeExpressions": [
+        {
+          "label": "전반적 평가",
+          "sentence": "日本整体水平比较高。",
+          "pronunciation": "rì běn zhěng tǐ shuǐ píng bǐ jiào gāo.",
+          "nuance": "整体는 '전반적으로'라는 뜻입니다."
+        },
+        {
+          "label": "균형",
+          "sentence": "日本各方面都比较均衡。",
+          "pronunciation": "rì běn gè fāng miàn dōu bǐ jiào jūn héng.",
+          "nuance": "均衡은 '고르다'는 의미입니다."
+        }
+      ]
+    }
+  ],
+  "betterAnswers": [
+    {
+      "situation": "중국어를 다시 공부하게 된 이유를 묻는 상황",
+      "betterSentence": "我现在的工作和 AI 有关，以后可能会有中国客户，所以想学跟 AI 相关的中文词汇。",
+      "pronunciation": "wǒ xiàn zài de gōng zuò hé AI yǒu guān, yǐ hòu kě néng huì yǒu zhōng guó kè hù, suǒ yǐ xiǎng xué gēn AI xiāng guān de zhōng wén cí huì.",
+      "koreanMeaning": "지금 일이 AI와 관련 있고 앞으로 중국 고객이 생길 수 있어서 AI 관련 중국어 어휘를 배우고 싶습니다.",
+      "nuanceTip": "跟 ~ 相关로 주제 범위를 말합니다. 人工智能이 정식 용어입니다.",
+      "followUpCombo": "你希望先学哪方面的词汇？"
+    },
+    {
+      "situation": "모르는 단어를 들었을 때 반응을 묻는 상황",
+      "betterSentence": "遇到不会的词，我会直接问对方：“这个词是什么意思？”，请他们解释一下。",
+      "pronunciation": "yù dào bú huì de cí, wǒ huì zhí jiē wèn duì fāng:\"zhè ge cí shì shén me yì si?\", qǐng tā men jiě shì yī xià.",
+      "koreanMeaning": "모르는 단어가 나오면 상대에게 '이 단어가 무슨 뜻이에요?'라고 바로 물어 설명을 부탁합니다.",
+      "nuanceTip": "请他们解释一下처럼 请 + 사람 + 동사 구조는 정중합니다.",
+      "followUpCombo": "对方一般怎么解释？"
+    },
+    {
+      "situation": "AI로 외국어를 예습하는 방법을 묻는 상황",
+      "betterSentence": "上课之前，我会让 AI 根据今天的主题做对话和教材，先预习几遍。",
+      "pronunciation": "shàng kè zhī qián, wǒ huì ràng AI gēn jù jīn tiān de zhǔ tí zuò duì huà hé jiào cái, xiān yù xí jǐ biàn.",
+      "koreanMeaning": "수업 전에 AI에게 오늘 주제의 대화와 교재를 만들게 해 몇 번 예습합니다.",
+      "nuanceTip": "让 + AI + 동사로 AI에게 맡기는 흐름을 표현합니다.",
+      "followUpCombo": "你觉得效果怎么样？"
+    },
+    {
+      "situation": "长鑫(CXMT)를 추천할지 묻는 상황",
+      "betterSentence": "我会推荐，因为中国国内市场很大，政府也有补贴，它的增长率会很高。",
+      "pronunciation": "wǒ huì tuī jiàn, yīn wèi zhōng guó guó nèi shì chǎng hěn dà, zhèng fǔ yě yǒu bǔ tiē, tā de zēng zhǎng lǜ huì hěn gāo.",
+      "koreanMeaning": "중국 내수 시장이 크고 정부 보조금도 있어서 성장률이 높을 것이므로 추천하겠습니다.",
+      "nuanceTip": "补贴·增长率는 수업에서 직접 배운 단어입니다.",
+      "followUpCombo": "那它最大的风险是什么？"
+    },
+    {
+      "situation": "자율주행 의견을 묻는 상황",
+      "betterSentence": "如果有自动驾驶功能，我肯定会买，因为我不太喜欢自己开车。",
+      "pronunciation": "rú guǒ yǒu zì dòng jià shǐ gōng néng, wǒ kěn dìng huì mǎi, yīn wèi wǒ bù tài xǐ huān zì jǐ kāi chē.",
+      "koreanMeaning": "자율주행 기능이 있으면 반드시 살 겁니다. 직접 운전하는 걸 별로 좋아하지 않거든요.",
+      "nuanceTip": "如果 ~，我肯定会 ~ 는 가정+의지 표현입니다.",
+      "followUpCombo": "你觉得它安全吗？"
+    },
+    {
+      "situation": "집에서 쓰는 언어를 묻는 상황",
+      "betterSentence": "在家里我们主要说韩语，有时候说日语和英语，三种语言混着用。",
+      "pronunciation": "zài jiā lǐ wǒ men zhǔ yào shuō hán yǔ, yǒu shí hòu shuō rì yǔ hé yīng yǔ, sān zhǒng yǔ yán hùn zhe yòng.",
+      "koreanMeaning": "집에서는 주로 한국어를 쓰고 가끔 일본어와 영어를 섞어서 씁니다.",
+      "nuanceTip": "三种语言은 양사 种을 쓴 올바른 형태입니다.",
+      "followUpCombo": "这样会不会觉得混乱？"
+    }
+  ],
+  "betterQuestions": [
+    {
+      "context": "补贴라는 단어를 확장할 때",
+      "questionSentence": "“补贴”和“补助”有什么区别？",
+      "pronunciation": "\"bǔ tiē\" hé \"bǔ zhù\" yǒu shén me qū bié?",
+      "koreanMeaning": "'补贴'와 '补助'는 어떻게 다른가요?",
+      "nuanceTip": "비슷한 단어의 차이를 물으면 표현 폭이 넓어집니다.",
+      "followUpCombo": "哪个更常用在企业方面？"
+    },
+    {
+      "context": "무역제재 용어를 구분할 때",
+      "questionSentence": "“贸易制裁”和“出口管制”可以互换吗？",
+      "pronunciation": "\"mào yì zhì cái\" hé \"chū kǒu guǎn zhì\" kě yǐ hù huàn ma?",
+      "koreanMeaning": "'贸易制裁'와 '出口管制'는 서로 바꿔 쓸 수 있나요?",
+      "nuanceTip": "可以 ~ 吗로 교체 가능 여부를 묻습니다.",
+      "followUpCombo": "新闻里一般用哪个？"
+    },
+    {
+      "context": "자율주행 용어를 구분할 때",
+      "questionSentence": "“自动驾驶”和“辅助驾驶”有什么不同？",
+      "pronunciation": "\"zì dòng jià shǐ\" hé \"fǔ zhù jià shǐ\" yǒu shén me bù tóng?",
+      "koreanMeaning": "'自动驾驶'와 '辅助驾驶'는 무엇이 다른가요?",
+      "nuanceTip": "FSD 이야기를 연결하기 좋은 질문입니다.",
+      "followUpCombo": "FSD 应该算哪一种？"
+    },
+    {
+      "context": "亲子时间 표현을 늘릴 때",
+      "questionSentence": "除了“亲子时间”，还有别的说法吗？",
+      "pronunciation": "chú le \"qīn zǐ shí jiān\", hái yǒu bié de shuō fǎ ma?",
+      "koreanMeaning": "'亲子时间' 외에 다른 표현이 있나요?",
+      "nuanceTip": "除了 ~，还有 ~ 는 대체 표현을 묻는 기본형입니다.",
+      "followUpCombo": "能造一个句子吗？"
+    },
+    {
+      "context": "가족 호칭을 구분할 때",
+      "questionSentence": "“岳父岳母”和“丈母娘、丈人”分别在什么场合用？",
+      "pronunciation": "\"yuè fù yuè mǔ\" hé \"zhàng mǔ niáng, zhàng rén\" fēn bié zài shén me chǎng hé yòng?",
+      "koreanMeaning": "'岳父岳母'와 '丈母娘·丈人'은 각각 어떤 상황에서 쓰나요?",
+      "nuanceTip": "分别在什么场合用은 호칭 구분 질문의 표준형입니다.",
+      "followUpCombo": "对别人介绍时用哪个？"
+    },
+    {
+      "context": "자기 발화를 점검받고 싶을 때",
+      "questionSentence": "我说中文的时候，哪些地方听起来不自然？",
+      "pronunciation": "wǒ shuō zhōng wén de shí hòu, nǎ xiē dì fāng tīng qǐ lái bù zì rán?",
+      "koreanMeaning": "제가 중국어를 말할 때 어디가 부자연스럽게 들리나요?",
+      "nuanceTip": "구체적 피드백을 요청하는 질문이라 학습에 가장 도움이 됩니다.",
+      "followUpCombo": "你能举几个例子吗？"
+    }
+  ],
+  "scenarioTitle": "수업 핵심 단어 복습",
+  "scenarioContext": "AI·补贴·贸易制裁·自动驾驶 등 수업에서 배운 핵심 단어를 되짚는 복습 트랙입니다. (※ 실제 수업 녹취가 아니라 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+  "scenarioTurns": [
+    {
+      "role": "Tutor",
+      "speakerLabel": "중국어 선생님 (Andy)",
+      "foreignText": "我们先复习一下。AI 的中文是什么？",
+      "pronunciation": "wǒ men xiān fù xí yī xià.AI de zhōng wén shì shén me?",
+      "koreanText": "먼저 복습해요. AI의 중국어는 뭘까요?",
+      "keyExpression": "人工智能",
+      "speakingTip": "공식 번역어는 人工智能입니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "是“人工智能”。现在很多人也直接说 AI。",
+      "pronunciation": "shì \"rén gōng zhì néng\". xiàn zài hěn duō rén yě zhí jiē shuō AI.",
+      "koreanText": "'人工智能'입니다. 요즘은 많은 사람이 그냥 AI라고도 합니다.",
+      "keyExpression": "也直接说 AI",
+      "speakingTip": "현실 사용을 덧붙이면 자연스럽습니다."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "중국어 선생님 (Andy)",
+      "foreignText": "很好。那政府给企业的钱，用哪个词比较准确？",
+      "pronunciation": "hěn hǎo. nà zhèng fǔ gěi qǐ yè de qián, yòng nǎ ge cí bǐ jiào zhǔn què?",
+      "koreanText": "좋아요. 정부가 기업에 주는 돈은 어떤 단어가 정확할까요?",
+      "keyExpression": "补贴",
+      "speakingTip": "补贴는 지속적 재정 지원입니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "应该用“补贴”，比如政府给半导体企业很多补贴。",
+      "pronunciation": "yīng gāi yòng \"bǔ tiē\", bǐ rú zhèng fǔ gěi bàn dǎo tǐ qǐ yè hěn duō bǔ tiē.",
+      "koreanText": "'补贴'를 써야 합니다. 예를 들어 정부가 반도체 기업에 많은 보조금을 줍니다.",
+      "keyExpression": "给 + 企业 + 补贴",
+      "speakingTip": "给 + 대상 + 목적어 구조입니다."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "중국어 선생님 (Andy)",
+      "foreignText": "美国限制中国半导体的买卖，这叫什么？",
+      "pronunciation": "měi guó xiàn zhì zhōng guó bàn dǎo tǐ de mǎi mài, zhè jiào shén me?",
+      "koreanText": "미국이 중국 반도체 거래를 제한하는 것을 뭐라고 하나요?",
+      "keyExpression": "贸易制裁",
+      "speakingTip": "贸易는 거래, 制裁는 불허입니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "这叫“贸易制裁”。",
+      "pronunciation": "zhè jiào \"mào yì zhì cái\".",
+      "koreanText": "'贸易制裁'라고 합니다.",
+      "keyExpression": "这叫 ~",
+      "speakingTip": "叫 + 명칭은 이름을 소개할 때 씁니다."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "중국어 선생님 (Andy)",
+      "foreignText": "特斯拉自己开车的功能，中文怎么说？",
+      "pronunciation": "tè sī lā zì jǐ kāi chē de gōng néng, zhōng wén zěn me shuō?",
+      "koreanText": "테슬라의 스스로 운전하는 기능은 중국어로 뭐라고 하나요?",
+      "keyExpression": "自动驾驶",
+      "speakingTip": "FSD는 全自动驾驶系统입니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "叫“自动驾驶”。我很想买有这个功能的车。",
+      "pronunciation": "jiào \"zì dòng jià shǐ\". wǒ hěn xiǎng mǎi yǒu zhè ge gōng néng de chē.",
+      "koreanText": "'自动驾驶'입니다. 저는 이 기능이 있는 차를 정말 사고 싶습니다.",
+      "keyExpression": "有这个功能的车",
+      "speakingTip": "有 ~ 的 + 명사는 수식어 구조입니다."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "s1",
+      "badge": "시나리오 1 · 심층 복습",
+      "title": "수업 핵심 단어 복습",
+      "context": "AI·补贴·贸易制裁·自动驾驶 등 수업에서 배운 핵심 단어를 되짚는 복습 트랙입니다. (※ 실제 수업 녹취가 아니라 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 (Andy)",
+          "foreignText": "我们先复习一下。AI 的中文是什么？",
+          "pronunciation": "wǒ men xiān fù xí yī xià.AI de zhōng wén shì shén me?",
+          "koreanText": "먼저 복습해요. AI의 중국어는 뭘까요?",
+          "keyExpression": "人工智能",
+          "speakingTip": "공식 번역어는 人工智能입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "是“人工智能”。现在很多人也直接说 AI。",
+          "pronunciation": "shì \"rén gōng zhì néng\". xiàn zài hěn duō rén yě zhí jiē shuō AI.",
+          "koreanText": "'人工智能'입니다. 요즘은 많은 사람이 그냥 AI라고도 합니다.",
+          "keyExpression": "也直接说 AI",
+          "speakingTip": "현실 사용을 덧붙이면 자연스럽습니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 (Andy)",
+          "foreignText": "很好。那政府给企业的钱，用哪个词比较准确？",
+          "pronunciation": "hěn hǎo. nà zhèng fǔ gěi qǐ yè de qián, yòng nǎ ge cí bǐ jiào zhǔn què?",
+          "koreanText": "좋아요. 정부가 기업에 주는 돈은 어떤 단어가 정확할까요?",
+          "keyExpression": "补贴",
+          "speakingTip": "补贴는 지속적 재정 지원입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "应该用“补贴”，比如政府给半导体企业很多补贴。",
+          "pronunciation": "yīng gāi yòng \"bǔ tiē\", bǐ rú zhèng fǔ gěi bàn dǎo tǐ qǐ yè hěn duō bǔ tiē.",
+          "koreanText": "'补贴'를 써야 합니다. 예를 들어 정부가 반도체 기업에 많은 보조금을 줍니다.",
+          "keyExpression": "给 + 企业 + 补贴",
+          "speakingTip": "给 + 대상 + 목적어 구조입니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 (Andy)",
+          "foreignText": "美国限制中国半导体的买卖，这叫什么？",
+          "pronunciation": "měi guó xiàn zhì zhōng guó bàn dǎo tǐ de mǎi mài, zhè jiào shén me?",
+          "koreanText": "미국이 중국 반도체 거래를 제한하는 것을 뭐라고 하나요?",
+          "keyExpression": "贸易制裁",
+          "speakingTip": "贸易는 거래, 制裁는 불허입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "这叫“贸易制裁”。",
+          "pronunciation": "zhè jiào \"mào yì zhì cái\".",
+          "koreanText": "'贸易制裁'라고 합니다.",
+          "keyExpression": "这叫 ~",
+          "speakingTip": "叫 + 명칭은 이름을 소개할 때 씁니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 (Andy)",
+          "foreignText": "特斯拉自己开车的功能，中文怎么说？",
+          "pronunciation": "tè sī lā zì jǐ kāi chē de gōng néng, zhōng wén zěn me shuō?",
+          "koreanText": "테슬라의 스스로 운전하는 기능은 중국어로 뭐라고 하나요?",
+          "keyExpression": "自动驾驶",
+          "speakingTip": "FSD는 全自动驾驶系统입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "叫“自动驾驶”。我很想买有这个功能的车。",
+          "pronunciation": "jiào \"zì dòng jià shǐ\". wǒ hěn xiǎng mǎi yǒu zhè ge gōng néng de chē.",
+          "koreanText": "'自动驾驶'입니다. 저는 이 기능이 있는 차를 정말 사고 싶습니다.",
+          "keyExpression": "有这个功能的车",
+          "speakingTip": "有 ~ 的 + 명사는 수식어 구조입니다."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "badge": "시나리오 2 · 비즈니스 응용",
+      "title": "중국 고객에게 반도체 시장 의견 말하기",
+      "context": "중국 고객과 대화한다고 가정하고 반도체 시장과 AI 업무 방식을 말하는 연습 스크립트입니다. (※ 실제 수업 녹취가 아니라 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 (Andy) · 고객 역할",
+          "foreignText": "尹代表，您对中国的半导体市场怎么看？",
+          "pronunciation": "yǐn dài biǎo, nín duì zhōng guó de bàn dǎo tǐ shì chǎng zěn me kàn?",
+          "koreanText": "윤 대표님은 중국 반도체 시장을 어떻게 보십니까?",
+          "keyExpression": "您怎么看",
+          "speakingTip": "您 + 怎么看은 정중합니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "我觉得它的增长率会很高，因为 AI 需要大量的半导体。",
+          "pronunciation": "wǒ jué de tā de zēng zhǎng lǜ huì hěn gāo, yīn wèi AI xū yào dà liàng de bàn dǎo tǐ.",
+          "koreanText": "AI에 반도체가 많이 필요하니 성장률이 높을 것이라고 봅니다.",
+          "keyExpression": "增长率会很高",
+          "speakingTip": "因为 ~ 로 근거를 붙입니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 (Andy) · 고객 역할",
+          "foreignText": "那主要的风险是什么？",
+          "pronunciation": "nà zhǔ yào de fēng xiǎn shì shén me?",
+          "koreanText": "그럼 주요 리스크는 무엇인가요?",
+          "keyExpression": "风险",
+          "speakingTip": "风险는 리스크입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "主要风险是美国的贸易制裁，会影响它卖给苹果和英伟达。",
+          "pronunciation": "zhǔ yào fēng xiǎn shì měi guó de mào yì zhì cái, huì yǐng xiǎng tā mài gěi píng guǒ hé yīng wěi dá.",
+          "koreanText": "주요 위험은 미국의 무역 제재로, 애플과 엔비디아에 파는 데 영향을 줄 수 있습니다.",
+          "keyExpression": "会影响 ~",
+          "speakingTip": "会影响은 '영향을 줄 것이다'입니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 (Andy) · 고객 역할",
+          "foreignText": "那您会推荐我们投资吗？",
+          "pronunciation": "nà nín huì tuī jiàn wǒ men tóu zī ma?",
+          "koreanText": "그럼 저희에게 투자를 추천하시겠습니까?",
+          "keyExpression": "推荐 + 投资",
+          "speakingTip": "推荐은 권유의 정중한 표현입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "我会推荐，但是要同时关注政策风险。",
+          "pronunciation": "wǒ huì tuī jiàn, dàn shì yào tóng shí guān zhù zhèng cè fēng xiǎn.",
+          "koreanText": "추천하지만 정책 리스크도 함께 지켜봐야 합니다.",
+          "keyExpression": "同时关注",
+          "speakingTip": "同时 + 동사로 병행을 말합니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 (Andy) · 고객 역할",
+          "foreignText": "您平时怎么提高工作效率？",
+          "pronunciation": "nín píng shí zěn me tí gāo gōng zuò xiào lǜ?",
+          "koreanText": "평소 업무 효율은 어떻게 높이십니까?",
+          "keyExpression": "提高工作效率",
+          "speakingTip": "提高는 '높이다'입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "我给 AI 下指令以后就去运动，回来再检查结果，因为我不想浪费时间。",
+          "pronunciation": "wǒ gěi AI xià zhǐ lìng yǐ hòu jiù qù yùn dòng, huí lái zài jiǎn chá jié guǒ, yīn wèi wǒ bù xiǎng làng fèi shí jiān.",
+          "koreanText": "AI에게 지시를 내린 뒤 운동하러 가고 돌아와서 결과를 확인합니다. 시간 낭비를 싫어하거든요.",
+          "keyExpression": "下指令 / 浪费时间",
+          "speakingTip": "下指令은 AI에게 명령할 때 씁니다."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "badge": "시나리오 3 · 꼬리질문 디펜스",
+      "title": "꼬리질문 디펜스: 투자·자율주행·학습법",
+      "context": "선생님이 주장의 근거를 되묻는 상황을 가정해 근거를 이어서 설명하는 연습 스크립트입니다. (※ 실제 수업 녹취가 아니라 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 (Andy)",
+          "foreignText": "你说会推荐长鑫，但政府补贴不是长期的，如果补贴减少了呢？",
+          "pronunciation": "nǐ shuō huì tuī jiàn zhǎng xīn, dàn zhèng fǔ bǔ tiē bú shì cháng qī de, rú guǒ bǔ tiē jiǎn shǎo le ne?",
+          "koreanText": "长鑫를 추천한다고 했지만 보조금이 영구적이진 않은데, 줄어들면요?",
+          "keyExpression": "如果 ~ 呢",
+          "speakingTip": "가정 질문 형식입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "补贴减少的话，增长会变慢，不过国内市场很大，需求还是很强。",
+          "pronunciation": "bǔ tiē jiǎn shǎo de huà, zēng zhǎng huì biàn màn, bù guò guó nèi shì chǎng hěn dà, xū qiú hái shì hěn qiáng.",
+          "koreanText": "보조금이 줄면 성장은 느려지겠지만 내수 시장이 크고 수요는 여전히 강합니다.",
+          "keyExpression": "不过 ~ 还是 ~",
+          "speakingTip": "不过로 반론을 정리합니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 (Andy)",
+          "foreignText": "很多人觉得自动驾驶有点危险，你为什么不担心？",
+          "pronunciation": "hěn duō rén jué de zì dòng jià shǐ yǒu diǎn wēi xiǎn, nǐ wèi shén me bù dān xīn?",
+          "koreanText": "많은 사람이 자율주행이 위험하다고 하는데 왜 걱정하지 않으세요?",
+          "keyExpression": "为什么不担心",
+          "speakingTip": "为什么 + 부정형은 이유를 직접 묻습니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "我觉得人自己开车也有危险，而且我不太喜欢开车。",
+          "pronunciation": "wǒ jué de rén zì jǐ kāi chē yě yǒu wēi xiǎn, ér qiě wǒ bù tài xǐ huān kāi chē.",
+          "koreanText": "사람이 직접 운전하는 것도 위험하고, 저는 운전을 별로 좋아하지도 않습니다.",
+          "keyExpression": "也有危险 / 而且",
+          "speakingTip": "而且로 이유를 추가합니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 (Andy)",
+          "foreignText": "你一边上课一边让 AI 工作，不会影响效率吗？",
+          "pronunciation": "nǐ yī biān shàng kè yī biān ràng AI gōng zuò, bú huì yǐng xiǎng xiào lǜ ma?",
+          "koreanText": "수업을 들으면서 AI에게 일을 시키면 효율에 영향이 없나요?",
+          "keyExpression": "一边 ~ 一边 ~",
+          "speakingTip": "동시 동작을 나타냅니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "我先给 AI 明确的指令，等它做完再仔细检查，所以不会影响。",
+          "pronunciation": "wǒ xiān gěi AI míng què de zhǐ lìng, děng tā zuò wán zài zǐ xì jiǎn chá, suǒ yǐ bú huì yǐng xiǎng.",
+          "koreanText": "AI에게 명확한 지시를 먼저 주고 끝나면 꼼꼼히 확인하니 영향이 없습니다.",
+          "keyExpression": "先 ~ 等 ~ 再 ~",
+          "speakingTip": "순서 설명의 표준 구조입니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 (Andy)",
+          "foreignText": "你学了日语、英语和西班牙语，哪个方法最有效？",
+          "pronunciation": "nǐ xué le rì yǔ, yīng yǔ hé xī bān yá yǔ, nǎ ge fāng fǎ zuì yǒu xiào?",
+          "koreanText": "일본어·영어·스페인어를 배웠는데 어떤 방법이 가장 효과적인가요?",
+          "keyExpression": "哪个方法最有效",
+          "speakingTip": "最 + 형용사는 최상급입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "我觉得最重要的是多听，如果听不懂，会说也没有用。",
+          "pronunciation": "wǒ jué de zuì zhòng yào de shì duō tīng, rú guǒ tīng bù dǒng, huì shuō yě méi yǒu yòng.",
+          "koreanText": "가장 중요한 건 많이 듣는 것이라고 생각합니다. 듣고 이해하지 못하면 말할 줄 알아도 소용없습니다.",
+          "keyExpression": "如果 ~ 也没有用",
+          "speakingTip": "如果 + 부정 + 也没用은 가정 결과 표현입니다."
+        }
+      ]
+    }
+  ]
+}

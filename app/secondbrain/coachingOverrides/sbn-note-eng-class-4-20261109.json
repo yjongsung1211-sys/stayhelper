@@ -1,0 +1,719 @@
+{
+  "lang": "en",
+  "langBadge": "🇺🇸 영어 · 자메이카 튜터 회화 (실제 발화 기반 코칭)",
+  "ttsLang": "en-US",
+  "grammarCorrections": [
+    {
+      "myWrongSentence": "\"I made, uh, some company with my family so I ha- I have to-\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "I started a business with my family, so I have to focus on it.",
+      "pronunciation": "아이 스타티드 어 비즈니스 윗 마이 패밀리, 소 아이 해브 투 포커스 온 잇",
+      "grammarPoint": "튜터 실제 교정: made company는 어색합니다. \"회사를 차리다\"는 start/set up/launch a company를 씁니다. (튜터는 \"I have company business with my family\"로 정정, \"commitment\"와 혼동 주의)",
+      "keyPattern": "start / set up + a company",
+      "alternativeExpressions": [
+        {
+          "label": "set up",
+          "sentence": "We set up a small company together as a family.",
+          "pronunciation": "위 셋 업 어 스몰 컴퍼니 투게더 애즈 어 패밀리",
+          "nuance": "\"설립하다\" 느낌, 공식적"
+        },
+        {
+          "label": "튜터 제안형",
+          "sentence": "I have company business with my family.",
+          "pronunciation": "아이 해브 컴퍼니 비즈니스 윗 마이 패밀리",
+          "nuance": "튜터가 실제로 알려준 표현. \"가족과 함께 하는 회사 일이 있다\""
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I hope I go to some, somewhere hot weather country.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I wish I could go somewhere hot, like Thailand or Vietnam.",
+      "pronunciation": "아이 위시 아이 쿠드 고 섬웨어 핫, 라이크 타일랜드 오어 비엣남",
+      "grammarPoint": "현실적으로 어려운 소망은 hope + 현재형이 아니라 wish + could. 본인도 곧 \"I wish\"로 말했습니다.",
+      "keyPattern": "I wish I could + 동사원형",
+      "alternativeExpressions": [
+        {
+          "label": "더 구어체",
+          "sentence": "I would love to escape to somewhere warm for the winter.",
+          "pronunciation": "아이 우드 러브 투 이스케이프 투 섬웨어 웜 포 더 윈터",
+          "nuance": "겨울을 피해 떠나고 싶다는 느낌"
+        },
+        {
+          "label": "hope 사용형",
+          "sentence": "I hope to go somewhere warm someday.",
+          "pronunciation": "아이 호프 투 고 섬웨어 웜 섬데이",
+          "nuance": "실현 가능성이 있는 바람일 때"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Today almost, uh, we arrive the zero.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Today it almost reached zero degrees.",
+      "pronunciation": "투데이 잇 올모스트 리치드 지로 디그리즈",
+      "grammarPoint": "날씨의 주어는 it, arrive는 장소에 도착할 때. 기온은 reach / drop to.",
+      "keyPattern": "It reached / dropped to + 온도",
+      "alternativeExpressions": [
+        {
+          "label": "drop to",
+          "sentence": "It dropped to almost zero today.",
+          "pronunciation": "잇 드랍트 투 올모스트 지로 투데이",
+          "nuance": "\"떨어졌다\" 변화 강조"
+        },
+        {
+          "label": "기온 말하기",
+          "sentence": "It was close to freezing today.",
+          "pronunciation": "잇 워즈 클로스 투 프리징 투데이",
+          "nuance": "\"영하 직전\" 자연스러운 표현"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"It's, actually her age isn't care.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Actually, her age doesn't matter to us.",
+      "pronunciation": "액추얼리, 허 에이지 더즌트 매터 투 어스",
+      "grammarPoint": "care는 사람이 주어. 사물/조건이 주어면 matter. \"나이는 상관없다\"=age doesn't matter / I don't care about her age (본인이 뒤에 이렇게 말함).",
+      "keyPattern": "X doesn't matter / I don't care about X",
+      "alternativeExpressions": [
+        {
+          "label": "사람 주어",
+          "sentence": "I don't care about her age; we travel anyway.",
+          "pronunciation": "아이 돈트 케어 어바웃 허 에이지, 위 트래블 애니웨이",
+          "nuance": "나의 태도를 강조"
+        },
+        {
+          "label": "it makes no difference",
+          "sentence": "Her age makes no difference to our travel plans.",
+          "pronunciation": "허 에이지 메익스 노 디퍼런스 투 아워 트래블 플랜즈",
+          "nuance": "조금 더 격식 있는 표현"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"until she, she was three, two, two, two month, we got, we, we went to Japan\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "When she was two months old, we went to Japan.",
+      "pronunciation": "웬 쉬 워즈 투 먼스 올드, 위 웬트 투 재팬",
+      "grammarPoint": "나이는 \"숫자 + month(s) old\", 복수형 -s 필요. until이 아니라 when.",
+      "keyPattern": "When + 주어 + was + N months old",
+      "alternativeExpressions": [
+        {
+          "label": "at 형태",
+          "sentence": "At two months old, she already flew to Japan.",
+          "pronunciation": "앳 투 먼스 올드, 쉬 올레디 플루 투 재팬",
+          "nuance": "\"~살 때\" 짧게"
+        },
+        {
+          "label": "before 형태",
+          "sentence": "Before she turned one, we traveled around the world.",
+          "pronunciation": "비포 쉬 턴드 원, 위 트래블드 어라운드 더 월드",
+          "nuance": "돌 이전 기간 표현"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"the, the, the YouTuber t- make, make some, uh, movie from AI\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "The YouTuber makes movies with AI.",
+      "pronunciation": "더 유튜버 메익스 무비즈 윗 에이아이",
+      "grammarPoint": "3인칭 단수 makes, 만드는 도구는 from이 아니라 with/using.",
+      "keyPattern": "주어 + makes + N + with/using AI",
+      "alternativeExpressions": [
+        {
+          "label": "관계절",
+          "sentence": "There's a YouTuber who makes whole movies using AI.",
+          "pronunciation": "데어즈 어 유튜버 후 메익스 홀 무비즈 유징 에이아이",
+          "nuance": "\"~하는 유튜버\" 소개에 편리"
+        },
+        {
+          "label": "explain",
+          "sentence": "He explains how to make a movie with AI step by step.",
+          "pronunciation": "히 익스플레인즈 하우 투 메익 어 무비 윗 에이아이 스텝 바이 스텝",
+          "nuance": "내용 설명으로 확장"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"now I'm thinking, I'm thought about what I make.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I've been thinking about what to make.",
+      "pronunciation": "아이브 빈 씽킹 어바웃 왓 투 메익",
+      "grammarPoint": "I'm thought는 혼합형. 진행: I've been thinking about / 의문사 + to부정사.",
+      "keyPattern": "I've been thinking about + what to + 동사",
+      "alternativeExpressions": [
+        {
+          "label": "단순",
+          "sentence": "I thought about what I could make.",
+          "pronunciation": "아이 쏘트 어바웃 왓 아이 쿠드 메익",
+          "nuance": "과거에 생각했던 것"
+        },
+        {
+          "label": "고민",
+          "sentence": "I'm trying to decide what to create first.",
+          "pronunciation": "아임 트라잉 투 디사이드 왓 투 크리에이트 퍼스트",
+          "nuance": "\"무엇부터 만들지 결정 중\""
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"maybe I, I make, I make a AI girl group or idol.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Maybe I could make an AI girl group.",
+      "pronunciation": "메이비 아이 쿠드 메익 언 에이아이 걸 그룹",
+      "grammarPoint": "모음 발음 앞은 an (an AI). 계획/가능성은 현재형이 아니라 could / I'm thinking of making.",
+      "keyPattern": "I'm thinking of + V-ing / I could + 동사",
+      "alternativeExpressions": [
+        {
+          "label": "thinking of",
+          "sentence": "I'm thinking of making an AI girl group.",
+          "pronunciation": "아임 씽킹 오브 메이킹 언 에이아이 걸 그룹",
+          "nuance": "구체적 계획 단계"
+        },
+        {
+          "label": "what if",
+          "sentence": "What if I created an AI idol group?",
+          "pronunciation": "왓 이프 아이 크리에이티드 언 에이아이 아이돌 그룹",
+          "nuance": "아이디어를 제안하는 톤"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"if my blogger is died\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "If my blog dies, I can start something new.",
+      "pronunciation": "이프 마이 블로그 다이즈, 아이 캔 스타트 섬씽 뉴",
+      "grammarPoint": "blogger는 \"블로그 쓰는 사람\". 글쓴이가 아닌 블로그는 blog. die는 동사라 is died 불가 (is dead 또는 dies).",
+      "keyPattern": "X dies / X is dead",
+      "alternativeExpressions": [
+        {
+          "label": "fails",
+          "sentence": "If my blog doesn't take off, I'll try something else.",
+          "pronunciation": "이프 마이 블로그 더즌트 테이크 오프, 아일 트라이 섬씽 엘스",
+          "nuance": "\"자리 못 잡으면\" 자연스러움"
+        },
+        {
+          "label": "dead",
+          "sentence": "My blog is basically dead because nobody reads it.",
+          "pronunciation": "마이 블로그 이즈 베이시컬리 데드 비커즈 노바디 리즈 잇",
+          "nuance": "지금 상태 묘사"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"and woman thought and man thought are, were different\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "Women and men had different opinions about it.",
+      "pronunciation": "위민 앤 멘 해드 디퍼런트 오피니언즈 어바웃 잇",
+      "grammarPoint": "\"여자의 생각/남자의 생각\"은 복수 women's / men's views. 시제는 과거 일치(were).",
+      "keyPattern": "Women and men saw it differently",
+      "alternativeExpressions": [
+        {
+          "label": "views",
+          "sentence": "Women's views and men's views were quite different.",
+          "pronunciation": "위민즈 뷰즈 앤 멘즈 뷰즈 워 콰이트 디퍼런트",
+          "nuance": "대비 구조"
+        },
+        {
+          "label": "split",
+          "sentence": "Opinions were split along gender lines.",
+          "pronunciation": "오피니언즈 워 스플릿 얼롱 젠더 라인즈",
+          "nuance": "토론 성격의 격식 표현"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I didn't, uh, agree her all\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I didn't agree with everything she did.",
+      "pronunciation": "아이 디든트 어그리 윗 에브리씽 쉬 디드",
+      "grammarPoint": "agree는 전치사 with (사람/의견) 필요. \"전부\"=all 단독이 아니라 everything.",
+      "keyPattern": "agree with + 사람/의견",
+      "alternativeExpressions": [
+        {
+          "label": "partly",
+          "sentence": "I only partly agree with her.",
+          "pronunciation": "아이 온리 파트리 어그리 윗 허",
+          "nuance": "부분 동의"
+        },
+        {
+          "label": "sympathize",
+          "sentence": "I sympathize with her, but I can't justify what she did.",
+          "pronunciation": "아이 심퍼타이즈 윗 허, 벗 아이 캔트 저스티파이 왓 쉬 디드",
+          "nuance": "공감과 비판 균형"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"How, how, how do you think about, mm?\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "What do you think about it?",
+      "pronunciation": "왓 두 유 씽크 어바웃 잇",
+      "grammarPoint": "의견을 묻는 think about는 What. How는 \"어때?\"로 쓰려면 How do you feel about ~. 실제로 뒤에 \"Victim or not?\"으로 이어짐.",
+      "keyPattern": "What do you think about + N?",
+      "alternativeExpressions": [
+        {
+          "label": "feel about",
+          "sentence": "How do you feel about it?",
+          "pronunciation": "하우 두 유 필 어바웃 잇",
+          "nuance": "감정/입장을 묻는 느낌"
+        },
+        {
+          "label": "take",
+          "sentence": "What's your take on this?",
+          "pronunciation": "왓츠 유어 테이크 온 디스",
+          "nuance": "\"관점이 뭐예요\" 구어체"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Next time, uh, I will watch- I will watching some, something action or-\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "Next time I'll watch an action movie.",
+      "pronunciation": "넥스트 타임 아일 워치 언 액션 무비",
+      "grammarPoint": "will 뒤에는 동사원형 (will watch). will watching은 불가. 말하다 스스로 \"I will watch\"로 거의 정정함.",
+      "keyPattern": "I'll + 동사원형",
+      "alternativeExpressions": [
+        {
+          "label": "going to",
+          "sentence": "Next time I'm going to pick a lighter movie, maybe an action one.",
+          "pronunciation": "넥스트 타임 아임 고잉 투 픽 어 라이터 무비, 메이비 언 액션 원",
+          "nuance": "계획 확정 느낌"
+        },
+        {
+          "label": "how about",
+          "sentence": "How about we talk about an action movie next time?",
+          "pronunciation": "하우 어바웃 위 톡 어바웃 언 액션 무비 넥스트 타임",
+          "nuance": "제안형"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I just read the substitute.\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "I just read the subtitles.",
+      "pronunciation": "아이 저스트 리드 더 서브타이틀즈",
+      "grammarPoint": "튜터 실제 교정: substitute(대체물)가 아니라 subtitle(s). 복수형으로 쓰는 경우가 많음.",
+      "keyPattern": "watch with subtitles",
+      "alternativeExpressions": [
+        {
+          "label": "without",
+          "sentence": "I'm trying to watch without subtitles.",
+          "pronunciation": "아임 트라잉 투 워치 위다웃 서브타이틀즈",
+          "nuance": "자막 없이 듣기 훈련"
+        },
+        {
+          "label": "captions",
+          "sentence": "I turn on English captions to follow along.",
+          "pronunciation": "아이 턴 온 잉글리시 캡션즈 투 팔로우 얼롱",
+          "nuance": "영어 자막이면 captions도 자주 씀"
+        }
+      ]
+    }
+  ],
+  "betterAnswers": [
+    {
+      "situation": "AI 걸그룹(AI idol) 계획을 설명할 때",
+      "betterSentence": "After watching a YouTube video about making movies with AI, I came up with an idea: an AI girl group.",
+      "pronunciation": "애프터 워칭 어 유튜브 비디오 어바웃 메이킹 무비즈 윗 에이아이, 아이 케임 업 윗 언 아이디어: 언 에이아이 걸 그룹",
+      "koreanMeaning": "유튜브에서 AI로 영화 만드는 영상을 보고 AI 걸그룹 아이디어를 떠올렸어요.",
+      "nuanceTip": "came up with an idea = 아이디어를 떠올리다. 수업에서 말한 흐름(영상→캐릭터→걸그룹)을 한 문장으로 정리.",
+      "followUpCombo": "And I can create the music, dance, members, and stories with AI."
+    },
+    {
+      "situation": "성공하지 못해도 배울 게 있다고 말할 때",
+      "betterSentence": "Even if it doesn't succeed, I'll learn a lot from the process.",
+      "pronunciation": "이븐 이프 잇 더즌트 석시드, 아일 런 어 랏 프롬 더 프로세스",
+      "koreanMeaning": "성공하지 못해도 과정에서 많이 배울 거예요.",
+      "nuanceTip": "Even if + 현재형: 가정. 본인이 말한 \"I can learn something from it\"의 확장.",
+      "followUpCombo": "Honestly, trying is the best way to learn."
+    },
+    {
+      "situation": "AI 덕분에 바로 시작할 수 있다고 말할 때",
+      "betterSentence": "Before AI, we could only think about ideas, but now we can start building right away.",
+      "pronunciation": "비포 에이아이, 위 쿠드 온리 씽크 어바웃 아이디어즈, 벗 나우 위 캔 스타트 빌딩 라이트 어웨이",
+      "koreanMeaning": "AI 이전에는 생각만 했지만 이제는 바로 만들 수 있어요.",
+      "nuanceTip": "\"big change\"를 구체적 대비 구조(Before ~, now ~)로 확장.",
+      "followUpCombo": "It's a big change for one-person businesses."
+    },
+    {
+      "situation": "영화에 대한 내 입장(유죄지만 슬프다)을 말할 때",
+      "betterSentence": "I think they're guilty because they chose a bad path, but their stories are very sad.",
+      "pronunciation": "아이 씽크 데이어 길티 비커즈 데이 초즈 어 배드 패스, 벗 데어 스토리즈 아 베리 새드",
+      "koreanMeaning": "나쁜 길을 선택했기에 유죄지만 사연은 슬퍼요.",
+      "nuanceTip": "\"choose bad way\"를 chose a bad path로. 상반된 감정은 but으로 연결.",
+      "followUpCombo": "If they had a loving family, things might have been different."
+    },
+    {
+      "situation": "자막 없이 듣기 연습을 설명할 때",
+      "betterSentence": "I used to just read the subtitles, but now I try to listen without them.",
+      "pronunciation": "아이 유스트 투 저스트 리드 더 서브타이틀즈, 벗 나우 아이 트라이 투 리슨 위다웃 뎀",
+      "koreanMeaning": "예전엔 자막만 읽었지만 지금은 자막 없이 들으려 해요.",
+      "nuanceTip": "used to + 동사원형 = 과거 습관. 본인이 말한 \"I try to listen\"에 대비 구조 추가.",
+      "followUpCombo": "I realized I was practicing reading, not listening."
+    },
+    {
+      "situation": "무거운 주제를 꺼낸 걸 사과할 때",
+      "betterSentence": "Sorry, that topic was a bit heavy. Let's switch to something lighter.",
+      "pronunciation": "쏘리, 댓 토픽 워즈 어 빗 헤비. 렛츠 스위치 투 섬씽 라이터",
+      "koreanMeaning": "죄송해요, 주제가 좀 무거웠네요. 가벼운 걸로 바꿔요.",
+      "nuanceTip": "\"My bad\"도 좋지만 격식 있는 수업에서는 이 정도가 자연스러움.",
+      "followUpCombo": "Next time I'll bring a fun movie to talk about."
+    }
+  ],
+  "betterQuestions": [
+    {
+      "context": "튜터의 블로그/시(poetry)를 읽고 나서",
+      "questionSentence": "What inspired you to write poetry instead of long articles?",
+      "pronunciation": "왓 인스파이어드 유 투 라이트 포이트리 인스테드 오브 롱 아티클즈",
+      "koreanMeaning": "긴 글 대신 시를 쓰게 된 계기가 뭔가요?",
+      "nuanceTip": "What inspired you to ~? 창작 동기 질문의 표준형.",
+      "followUpCombo": "Which poem is your favorite?"
+    },
+    {
+      "context": "자메이카 날씨(겨울 18~25도)가 신기했을 때",
+      "questionSentence": "So what do people do in winter if it never gets cold?",
+      "pronunciation": "소 왓 두 피플 두 인 윈터 이프 잇 네버 겟츠 콜드",
+      "koreanMeaning": "추워지지 않으면 겨울에 사람들은 뭘 하나요?",
+      "nuanceTip": "조건 질문 if it never gets cold. 문화 차이 대화를 확장.",
+      "followUpCombo": "Do you celebrate Christmas in warm weather?"
+    },
+    {
+      "context": "튜터의 의견(정신질환 가설)에 되묻기",
+      "questionSentence": "Do you think trauma can fully explain what they did?",
+      "pronunciation": "두 유 씽크 트라우마 캔 풀리 익스플레인 왓 데이 디드",
+      "koreanMeaning": "트라우마가 그들의 행동을 완전히 설명한다고 보세요?",
+      "nuanceTip": "\"What do you think?\"보다 구체적 반론 질문.",
+      "followUpCombo": "Where do you draw the line between cause and excuse?"
+    },
+    {
+      "context": "AI 가수가 빌보드에 올랐다는 말을 듣고",
+      "questionSentence": "How do listeners react when they find out a singer is AI?",
+      "pronunciation": "하우 리스너즈 리액트 웬 데이 파인드 아웃 어 싱어 이즈 에이아이",
+      "koreanMeaning": "AI 가수라는 걸 알면 청취자들은 어떻게 반응하나요?",
+      "nuanceTip": "find out = 알게 되다. 현상에 대한 반응을 묻는 질문.",
+      "followUpCombo": "Would you listen to an AI idol's songs?"
+    },
+    {
+      "context": "듣기 실력을 늘리고 싶을 때",
+      "questionSentence": "Could you recommend a few podcasts or shows for my level?",
+      "pronunciation": "쿠드 유 레커멘드 어 퓨 팟캐스츠 오어 쇼즈 포 마이 레벨",
+      "koreanMeaning": "제 수준에 맞는 팟캐스트나 쇼를 추천해 주실래요?",
+      "nuanceTip": "본인의 \"how can I improve my listening skill?\"을 구체화.",
+      "followUpCombo": "Should I use English subtitles at first?"
+    },
+    {
+      "context": "튜터가 추천한 영화를 확인할 때",
+      "questionSentence": "What makes Kung Fu Nanny worth watching?",
+      "pronunciation": "왓 메익스 쿵푸 내니 워스 워칭",
+      "koreanMeaning": "쿵푸 내니의 어떤 점이 볼 만한가요?",
+      "nuanceTip": "worth + V-ing = ~할 가치가 있는.",
+      "followUpCombo": "Is the English easy to follow for a learner?"
+    }
+  ],
+  "scenarioTitle": "복습 시나리오 1: AI 걸그룹 아이디어와 블로그 이야기",
+  "scenarioContext": "※ 이 대화는 수업 주제를 바탕으로 만든 연습용 스크립트이며, 실제 수업 녹취가 아닙니다. 수업에서 다룬 AI 걸그룹 기획과 개인 블로그 공유 주제를 정확한 문장으로 다시 말해 보는 연습입니다.",
+  "scenarioTurns": [
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "What are you working on these days?",
+      "pronunciation": "왓 아 유 워킹 온 디즈 데이즈",
+      "koreanText": "요즘 뭐 하고 있어요?",
+      "keyExpression": "What are you working on?",
+      "speakingTip": "진행 중인 일을 묻는 기본 질문."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "I'm thinking of making an AI girl group.",
+      "pronunciation": "아임 씽킹 오브 메이킹 언 에이아이 걸 그룹",
+      "koreanText": "AI 걸그룹을 만들까 생각 중이에요.",
+      "keyExpression": "I'm thinking of + V-ing",
+      "speakingTip": "an AI처럼 모음 앞은 an."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "That sounds creative. Why a girl group?",
+      "pronunciation": "댓 사운즈 크리에이티브. 와이 어 걸 그룹",
+      "koreanText": "창의적이네요. 왜 걸그룹이에요?",
+      "keyExpression": "That sounds + 형용사",
+      "speakingTip": "이유 질문에 짧게 답할 준비."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Because Korean idols are famous all over the world.",
+      "pronunciation": "비커즈 코리안 아이돌즈 아 페이머스 올 오버 더 월드",
+      "koreanText": "한국 아이돌이 전 세계에서 유명하니까요.",
+      "keyExpression": "all over the world",
+      "speakingTip": "근거 한 문장이면 충분."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "How would you build the characters?",
+      "pronunciation": "하우 우드 유 빌드 더 캐릭터즈",
+      "koreanText": "캐릭터는 어떻게 만들 건가요?",
+      "keyExpression": "How would you ~?",
+      "speakingTip": "가정형 질문에는 would로 답변."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "I'd create each member's personality, music, and story with AI.",
+      "pronunciation": "아이드 크리에이트 이치 멤버즈 퍼스널리티, 뮤직, 앤 스토리 윗 에이아이",
+      "koreanText": "멤버별 성격, 음악, 스토리를 AI로 만들 거예요.",
+      "keyExpression": "create + A, B, and C",
+      "speakingTip": "나열은 마지막에 and."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "And what about your blog? Is anyone reading it?",
+      "pronunciation": "앤 왓 어바웃 유어 블로그? 이즈 애니원 리딩 잇",
+      "koreanText": "블로그는요? 읽는 사람 있어요?",
+      "keyExpression": "What about ~?",
+      "speakingTip": "화제 전환 표현."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Not many people yet, but operating a blog isn't easy.",
+      "pronunciation": "낫 메니 피플 옛, 벗 오퍼레이팅 어 블로그 이즌트 이지",
+      "koreanText": "아직 많지 않지만 블로그 운영은 쉽지 않아요.",
+      "keyExpression": "Not many people yet",
+      "speakingTip": "\"no one read\"보다 부드러운 표현."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "s1",
+      "badge": "시나리오 1 · 심층 복습",
+      "title": "복습 시나리오 1: AI 걸그룹 아이디어와 블로그 이야기",
+      "context": "※ 이 대화는 수업 주제를 바탕으로 만든 연습용 스크립트이며, 실제 수업 녹취가 아닙니다. 수업에서 다룬 AI 걸그룹 기획과 개인 블로그 공유 주제를 정확한 문장으로 다시 말해 보는 연습입니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What are you working on these days?",
+          "pronunciation": "왓 아 유 워킹 온 디즈 데이즈",
+          "koreanText": "요즘 뭐 하고 있어요?",
+          "keyExpression": "What are you working on?",
+          "speakingTip": "진행 중인 일을 묻는 기본 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I'm thinking of making an AI girl group.",
+          "pronunciation": "아임 씽킹 오브 메이킹 언 에이아이 걸 그룹",
+          "koreanText": "AI 걸그룹을 만들까 생각 중이에요.",
+          "keyExpression": "I'm thinking of + V-ing",
+          "speakingTip": "an AI처럼 모음 앞은 an."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "That sounds creative. Why a girl group?",
+          "pronunciation": "댓 사운즈 크리에이티브. 와이 어 걸 그룹",
+          "koreanText": "창의적이네요. 왜 걸그룹이에요?",
+          "keyExpression": "That sounds + 형용사",
+          "speakingTip": "이유 질문에 짧게 답할 준비."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Because Korean idols are famous all over the world.",
+          "pronunciation": "비커즈 코리안 아이돌즈 아 페이머스 올 오버 더 월드",
+          "koreanText": "한국 아이돌이 전 세계에서 유명하니까요.",
+          "keyExpression": "all over the world",
+          "speakingTip": "근거 한 문장이면 충분."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "How would you build the characters?",
+          "pronunciation": "하우 우드 유 빌드 더 캐릭터즈",
+          "koreanText": "캐릭터는 어떻게 만들 건가요?",
+          "keyExpression": "How would you ~?",
+          "speakingTip": "가정형 질문에는 would로 답변."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I'd create each member's personality, music, and story with AI.",
+          "pronunciation": "아이드 크리에이트 이치 멤버즈 퍼스널리티, 뮤직, 앤 스토리 윗 에이아이",
+          "koreanText": "멤버별 성격, 음악, 스토리를 AI로 만들 거예요.",
+          "keyExpression": "create + A, B, and C",
+          "speakingTip": "나열은 마지막에 and."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "And what about your blog? Is anyone reading it?",
+          "pronunciation": "앤 왓 어바웃 유어 블로그? 이즈 애니원 리딩 잇",
+          "koreanText": "블로그는요? 읽는 사람 있어요?",
+          "keyExpression": "What about ~?",
+          "speakingTip": "화제 전환 표현."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Not many people yet, but operating a blog isn't easy.",
+          "pronunciation": "낫 메니 피플 옛, 벗 오퍼레이팅 어 블로그 이즌트 이지",
+          "koreanText": "아직 많지 않지만 블로그 운영은 쉽지 않아요.",
+          "keyExpression": "Not many people yet",
+          "speakingTip": "\"no one read\"보다 부드러운 표현."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "badge": "시나리오 2 · 비즈니스 응용",
+      "title": "비즈니스 응용: AI로 콘텐츠 사업 시작하기",
+      "context": "※ 이 대화는 수업 주제를 바탕으로 만든 연습용 스크립트이며, 실제 수업 녹취가 아닙니다. 수업의 \"AI 덕분에 바로 시작할 수 있다\"는 대목을 1인 기업 상황으로 확장한 연습 스크립트입니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "How has AI changed the way you start new projects?",
+          "pronunciation": "하우 해즈 에이아이 체인지드 더 웨이 유 스타트 뉴 프로젝츠",
+          "koreanText": "AI가 프로젝트 시작 방식을 어떻게 바꿨나요?",
+          "keyExpression": "How has AI changed ~?",
+          "speakingTip": "현재완료로 변화 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Before AI, I only thought about ideas. Now I can start right away.",
+          "pronunciation": "비포 에이아이, 아이 온리 쏘트 어바웃 아이디어즈. 나우 아이 캔 스타트 라이트 어웨이",
+          "koreanText": "AI 전에는 생각만 했는데 이제 바로 시작해요.",
+          "keyExpression": "Before ~, now ~",
+          "speakingTip": "대비 구조가 깔끔함."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What's the first step in your process?",
+          "pronunciation": "왓츠 더 퍼스트 스텝 인 유어 프로세스",
+          "koreanText": "첫 단계는 뭐예요?",
+          "keyExpression": "first step",
+          "speakingTip": "순서를 묻는 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "First, I create a consistent character. That's the key.",
+          "pronunciation": "퍼스트, 아이 크리에이트 어 컨시스턴트 캐릭터. 댓츠 더 키",
+          "koreanText": "먼저 일관된 캐릭터를 만들어요. 그게 핵심이에요.",
+          "keyExpression": "consistent character",
+          "speakingTip": "영상에서 들은 핵심 포인트."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What if it doesn't succeed?",
+          "pronunciation": "왓 이프 잇 더즌트 석시드",
+          "koreanText": "성공 못 하면요?",
+          "keyExpression": "What if ~?",
+          "speakingTip": "리스크 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Even then, I'll learn something and start another project.",
+          "pronunciation": "이븐 덴, 아일 런 섬씽 앤 스타트 어나더 프로젝트",
+          "koreanText": "그래도 배우고 다른 프로젝트를 시작할 거예요.",
+          "keyExpression": "Even then",
+          "speakingTip": "실패 수용 태도 표현."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "How will you promote it?",
+          "pronunciation": "하우 윌 유 프로모트 잇",
+          "koreanText": "어떻게 홍보할 건가요?",
+          "keyExpression": "promote",
+          "speakingTip": "마케팅 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I'll test short videos first and see what works.",
+          "pronunciation": "아일 테스트 쇼트 비디오즈 퍼스트 앤 씨 왓 웍스",
+          "koreanText": "짧은 영상으로 먼저 테스트해 보고 효과를 볼게요.",
+          "keyExpression": "see what works",
+          "speakingTip": "린 실험 표현."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "badge": "시나리오 3 · 꼬리질문 디펜스",
+      "title": "꼬리질문 디펜스: 무거운 주제와 의견 방어",
+      "context": "※ 이 대화는 수업 주제를 바탕으로 만든 연습용 스크립트이며, 실제 수업 녹취가 아닙니다. 넷플릭스 범죄 실화 토론에서 나온 \"유죄지만 슬프다\"는 입장을 영어로 방어하는 연습 스크립트입니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "So, do you think they deserve to be punished?",
+          "pronunciation": "소, 두 유 씽크 데이 디저브 투 비 퍼니쉬드",
+          "koreanText": "처벌받아 마땅하다고 생각하세요?",
+          "keyExpression": "deserve to be punished",
+          "speakingTip": "의견 질문 첫 문장."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "I think they're guilty, but their stories are very sad.",
+          "pronunciation": "아이 씽크 데이어 길티, 벗 데어 스토리즈 아 베리 새드",
+          "koreanText": "유죄지만 사연은 매우 슬퍼요.",
+          "keyExpression": "guilty, but ~",
+          "speakingTip": "상반된 평가를 but으로."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Why are they guilty if they were victims too?",
+          "pronunciation": "와이 아 데이 길티 이프 데이 워 빅팀즈 투",
+          "koreanText": "피해자이기도 한데 왜 유죄죠?",
+          "keyExpression": "victims too",
+          "speakingTip": "반론 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Because they chose a bad path. Being hurt doesn't justify killing.",
+          "pronunciation": "비커즈 데이 초즈 어 배드 패스. 비잉 허트 더즌트 저스티파이 킬링",
+          "koreanText": "나쁜 길을 선택했으니까요. 상처가 살인을 정당화하진 않아요.",
+          "keyExpression": "doesn't justify",
+          "speakingTip": "핵심 논거."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "But what if the trauma shaped their choices?",
+          "pronunciation": "벗 왓 이프 더 트라우마 쉐이프트 데어 초이시즈",
+          "koreanText": "트라우마가 선택을 만들었다면요?",
+          "keyExpression": "shaped their choices",
+          "speakingTip": "튜터 입장(트라우마)과 연결."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "That's a fair point. A good family might have changed everything.",
+          "pronunciation": "댓츠 어 페어 포인트. 어 굿 패밀리 마이트 해브 체인지드 에브리씽",
+          "koreanText": "맞는 말이에요. 좋은 가정이 모든 걸 바꿨을지도요.",
+          "keyExpression": "might have + p.p.",
+          "speakingTip": "과거 가능성."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "So is it fair to judge only the person?",
+          "pronunciation": "소 이즈 잇 페어 투 저지 온리 더 퍼슨",
+          "koreanText": "그럼 개인만 판단하는 게 공정할까요?",
+          "keyExpression": "Is it fair to ~?",
+          "speakingTip": "심화 꼬리질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Both matter: the person and the environment. It's a heavy topic, sorry!",
+          "pronunciation": "보스 매터: 더 퍼슨 앤 디 인바이런먼트. 잇츠 어 헤비 토픽, 쏘리",
+          "koreanText": "둘 다 중요해요. 무거운 주제라 죄송해요!",
+          "keyExpression": "Both matter",
+          "speakingTip": "마무리 한 줄 + 분위기 전환."
+        }
+      ]
+    }
+  ]
+}

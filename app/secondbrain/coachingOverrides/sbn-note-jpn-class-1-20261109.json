@@ -1,0 +1,740 @@
+{
+  "lang": "ja",
+  "langBadge": "🇯🇵 일본어 (日本語)",
+  "ttsLang": "ja-JP",
+  "grammarCorrections": [
+    {
+      "myWrongSentence": "\"顔がめっちゃいいですね。今日。今日笑顔が。もういいです。\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "今日は笑顔がとても素敵ですね。",
+      "pronunciation": "쿄오와 에가오가 토테모 스테키데스네",
+      "grammarPoint": "'顔がいい'는 '잘생겼다/미남·미녀'라는 외모 평가로 들려 선생님께 어색합니다. 웃음이나 분위기는 '笑顔が素敵'로 말하고, 선생님께는 めっちゃ보다 とても가 안전합니다.",
+      "keyPattern": "～が素敵ですね",
+      "alternativeExpressions": [
+        {
+          "label": "화장 칭찬",
+          "sentence": "今日はメイクがとても似合っていますね。",
+          "pronunciation": "쿄오와 메이쿠가 토테모 니아앗테이마스네",
+          "nuance": "화장 이야기가 나왔을 때"
+        },
+        {
+          "label": "분위기",
+          "sentence": "今日はいつもと雰囲気が違いますね。",
+          "pronunciation": "쿄오와 이츠모토 훙이키가 치가이마스네",
+          "nuance": "실제로 대화에서 나온 느낌을 부드럽게"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"動画より、動画よりも良くないかもしれませんね。\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "動画ほど良くないかもしれませんね。",
+      "pronunciation": "도오가호도 요쿠나이카모시레마센네",
+      "grammarPoint": "'AよりBが良くない'보다 부정과 함께 쓰는 비교는 'Aほど～ない'가 자연스럽습니다.",
+      "keyPattern": "Aほど～ない",
+      "alternativeExpressions": [
+        {
+          "label": "기대 대비",
+          "sentence": "動画で見るほどではないかもしれません。",
+          "pronunciation": "도오가데 미루호도데와 나이카모시레마센",
+          "nuance": "영상 기대와 현실의 차이"
+        },
+        {
+          "label": "솔직한 감상",
+          "sentence": "写真の方がきれいに見えますよ。",
+          "pronunciation": "샤신노 호오가 키레이니 미에마스요",
+          "nuance": "사진이 더 예쁘게 보인다는 의미"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"セブに行って見たことは多いですよね。\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "セブに行ってジンベエザメを見たことがある人は多いですよね。",
+      "pronunciation": "세부니 잇테 진베에자메오 미타 코토가 아루 히토와 오오이데스요네",
+      "grammarPoint": "'見たことは多い'는 주어가 불분명합니다. '～たことがある人は多い'로 사람을 주어로 말해야 문장이 완성됩니다. 선생님도 'セブに行ってみる人が多いですか？'라고 되물었습니다.",
+      "keyPattern": "～たことがある人は多い",
+      "alternativeExpressions": [
+        {
+          "label": "관광객 중심",
+          "sentence": "セブに行く韓国人は多いですよ。",
+          "pronunciation": "세부니 이쿠 칸코쿠진와 오오이데스요",
+          "nuance": "단순하게 사람 수를 말할 때"
+        },
+        {
+          "label": "이유 포함",
+          "sentence": "近いし安いので、セブに行く人が多いです。",
+          "pronunciation": "치카이시 야스이노데 세부니 이쿠 히토가 오오이데스",
+          "nuance": "이유를 같이 말하는 응용"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"どうして今も台湾は日本を。日本をすごく好きで。\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "どうして台湾の人は今でも日本がすごく好きなんでしょうか。",
+      "pronunciation": "도오시테 타이완노 히토와 이마데모 니혼가 스고쿠 스키난데쇼오카",
+      "grammarPoint": "'好き'는 형용동사라 조사가 'を'가 아니라 'が'입니다. 문장도 끝맺지 못했으므로 ～んでしょうか로 마무리합니다.",
+      "keyPattern": "～が好き／どうして～んでしょうか",
+      "alternativeExpressions": [
+        {
+          "label": "더 부드럽게",
+          "sentence": "台湾の人はどうして日本が好きなのか気になります。",
+          "pronunciation": "타이완노 히토와 도오시테 니혼가 스키나노카 키니나리마스",
+          "nuance": "궁금함을 표현"
+        },
+        {
+          "label": "단순",
+          "sentence": "台湾は親日的ですよね。",
+          "pronunciation": "타이완와 신니치테키데스요네",
+          "nuance": "親日的 = 친일본적인"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"あんまり台湾と韓国はもう親切かな。仲良くない。\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "台湾と韓国はあまり仲が良くないですよね。",
+      "pronunciation": "타이완토 칸코쿠와 아마리 나카가 요쿠나이데스요네",
+      "grammarPoint": "대표님이 말한 '親切(친절)'은 나라 사이의 관계에 맞지 않고, 스스로 '仲良くない'로 고쳤습니다. 관계는 '仲が良い/悪い'를 씁니다.",
+      "keyPattern": "～は仲が良い／良くない",
+      "alternativeExpressions": [
+        {
+          "label": "관계 표현",
+          "sentence": "両国の関係はあまり良くないです。",
+          "pronunciation": "료오코쿠노 칸케이와 아마리 요쿠나이데스",
+          "nuance": "조금 격식 있는 표현"
+        },
+        {
+          "label": "감정 표현",
+          "sentence": "互いにあまり好きではないようです。",
+          "pronunciation": "타가이니 아마리 스키데와 나이 요오데스",
+          "nuance": "～ようです는 추측"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"１０月末に神戸に行った。行く予定があるんですけど。\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "10月末に神戸に行く予定があるんです。",
+      "pronunciation": "쥬우가츠마츠니 코오베니 이쿠 요테이가 아룬데스",
+      "grammarPoint": "앞으로의 일인데 '行った'(과거)로 말하면 의미가 어긋납니다. 예정은 '行く予定がある'.",
+      "keyPattern": "～予定がある",
+      "alternativeExpressions": [
+        {
+          "label": "일정 소개",
+          "sentence": "10月末に神戸へ行く予定です。",
+          "pronunciation": "쥬우가츠마츠니 코오베에 이쿠 요테이데스",
+          "nuance": "가장 간단한 형태"
+        },
+        {
+          "label": "목적 포함",
+          "sentence": "妻の学会があるので、神戸に行きます。",
+          "pronunciation": "츠마노 각카이가 아루노데 코오베니 이키마스",
+          "nuance": "이유를 함께"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"予約したことは宇治田原という宇治、宇治、宇治かな。\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "予約したのは宇治田原という所です。",
+      "pronunciation": "요야쿠시타노와 우지타와라토 이우 토코로데스",
+      "grammarPoint": "'予約したこと'가 아니라 '予約したの(は)'로 말해야 '내가 예약한 곳'이라는 뜻이 됩니다. 장소는 ～という所.",
+      "keyPattern": "～したのは～です",
+      "alternativeExpressions": [
+        {
+          "label": "지역 설명",
+          "sentence": "宇治の近くの宇治田原に泊まります。",
+          "pronunciation": "우지노 치카쿠노 우지타와라니 토마리마스",
+          "nuance": "근처를 설명"
+        },
+        {
+          "label": "예약 장소",
+          "sentence": "Airbnbで宇治田原の家を予約しました。",
+          "pronunciation": "에어비앤비데 우지타와라노 이에오 요야쿠시마시타",
+          "nuance": "사실 그대로"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"ストレスされない方がもう自分重要ですね。\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "ストレスを感じない方が自分には大切ですね。",
+      "pronunciation": "스토레스오 칸지나이 호오가 지분니와 타이세츠데스네",
+      "grammarPoint": "ストレス는 'する'가 아니라 'ストレスを感じる'/'ストレスがたまる'로 말합니다. 대표님은 이 문장 근처에서 'ストレスがあるから続けない'도 말했습니다.",
+      "keyPattern": "ストレスを感じる",
+      "alternativeExpressions": [
+        {
+          "label": "부담 없이",
+          "sentence": "無理をしない方が続きます。",
+          "pronunciation": "무리오 시나이 호오가 츠즈키마스",
+          "nuance": "무리하지 않아야 계속된다는 의미"
+        },
+        {
+          "label": "즐겁게",
+          "sentence": "楽しくやるのが一番大事です。",
+          "pronunciation": "타노시쿠 야루노가 이치방 다이지데스",
+          "nuance": "즐겁게 하는 것"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"ストレスがあるから、あるともう続けない。\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "ストレスがあると、続かないんです。",
+      "pronunciation": "스토레스가 아루토 츠즈카나인데스",
+      "grammarPoint": "'続ける'는 타동사(내가 계속하다), '続かない'는 자동사(저절로 이어지지 않는다). 직후 대표님도 '続かないから'로 스스로 고쳤습니다.",
+      "keyPattern": "続く／続ける",
+      "alternativeExpressions": [
+        {
+          "label": "습관",
+          "sentence": "ストレスがあると、長続きしません。",
+          "pronunciation": "스토레스가 아루토 나가츠즈키시마센",
+          "nuance": "長続き = 오래 지속"
+        },
+        {
+          "label": "방법",
+          "sentence": "楽しくないと続けられません。",
+          "pronunciation": "타노시쿠나이토 츠즈케라레마센",
+          "nuance": "가능형 続けられる"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"本を終わりする目標で。\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "本を最後まで読み終える目標で。",
+      "pronunciation": "홍오 사이고마데 요미오에루 모쿠효오데",
+      "grammarPoint": "'終わりする'는 일본어가 아닙니다. '読み終える'(다 읽다), '終わらせる'(끝내다)를 씁니다.",
+      "keyPattern": "～を読み終える",
+      "alternativeExpressions": [
+        {
+          "label": "끝까지",
+          "sentence": "一冊を最後まで読み切ることが目標です。",
+          "pronunciation": "잇사츠오 사이고마데 요미키루 코토가 모쿠효오데스",
+          "nuance": "読み切る = 끝까지 다 읽다"
+        },
+        {
+          "label": "완독",
+          "sentence": "とにかく一冊読み終えるのが大事です。",
+          "pronunciation": "토니카쿠 잇사츠 요미오에루노가 다이지데스",
+          "nuance": "완독이 중요"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"一つ目は時間ま、使わない方がいいですよ。\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "最初は時間をかけない方がいいですよ。",
+      "pronunciation": "사이쇼와 지칸오 카케나이 호오가 이이데스요",
+      "grammarPoint": "시간을 '들이다'는 '使う'보다 '時間をかける'가 자연스럽습니다. 직후 'かけない方がいいです'라고 다시 말한 부분과 일치합니다.",
+      "keyPattern": "時間をかける",
+      "alternativeExpressions": [
+        {
+          "label": "정독 반대",
+          "sentence": "最初は軽く読むだけで十分です。",
+          "pronunciation": "사이쇼와 카루쿠 요무다케데 쥬우분데스",
+          "nuance": "가볍게 읽으라는 조언"
+        },
+        {
+          "label": "건너뛰기",
+          "sentence": "分からない所は飛ばしても大丈夫です。",
+          "pronunciation": "와카라나이 토코로와 토바시테모 다이죠오부데스",
+          "nuance": "飛ばす = 건너뛰다"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"ギリシャのケバブがおいしいですね。Turkeyよりケバブが美味しいですよ。\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "ギリシャのケバブはおいしいですね。トルコのケバブよりおいしいですよ。",
+      "pronunciation": "기리샤노 케바부와 오이시이데스네 토루코노 케바부요리 오이시이데스요",
+      "grammarPoint": "대화 중 'Turkey'를 일본어로 말해야 했고, 선생님이 'トルコ'라고 알려 주었습니다. 나라 이름은 トルコ입니다.",
+      "keyPattern": "トルコ (Turkey)",
+      "alternativeExpressions": [
+        {
+          "label": "국가명",
+          "sentence": "トルコ料理も有名ですよね。",
+          "pronunciation": "토루코료오리모 유우메이데스요네",
+          "nuance": "튀르키예 요리"
+        },
+        {
+          "label": "정식명칭",
+          "sentence": "トルコはトルコ共和国ともいいます。",
+          "pronunciation": "토루코와 토루코쿄오와코쿠토모 이이마스",
+          "nuance": "참고용"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Turkeyのケバブはあまり美味しいじゃないですよ。\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "トルコのケバブはあまり美味しくないですよ。",
+      "pronunciation": "토루코노 케바부와 아마리 오이시쿠나이데스요",
+      "grammarPoint": "い형용사는 '～じゃない'가 아니라 '～くない'로 부정합니다. (美味しい → 美味しくない)",
+      "keyPattern": "い형용사 + くない",
+      "alternativeExpressions": [
+        {
+          "label": "부드럽게",
+          "sentence": "私の好みとは少し違いました。",
+          "pronunciation": "와타시노 코노미토와 스코시 치가이마시타",
+          "nuance": "직접적인 부정을 피함"
+        },
+        {
+          "label": "기대와 차이",
+          "sentence": "思っていたケバブと違いました。",
+          "pronunciation": "오못테이타 케바부토 치가이마시타",
+          "nuance": "대표님이 실제로 한 말과 같은 의도"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"昔は私日本語と英語がもうできない時があるんですよ。\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "昔は日本語と英語ができなかった時があるんです。",
+      "pronunciation": "무카시와 니혼고토 에이고가 데키나캇타 토키가 아룬데스",
+      "grammarPoint": "'昔は'(과거)와 맞추려면 'できなかった時がある'로 과거형을 써야 합니다.",
+      "keyPattern": "～なかった時がある",
+      "alternativeExpressions": [
+        {
+          "label": "과거 상황",
+          "sentence": "以前は日本語が話せませんでした。",
+          "pronunciation": "이젠와 니혼고가 하나세마센데시타",
+          "nuance": "話せる 가능형"
+        },
+        {
+          "label": "지금과 대비",
+          "sentence": "今は問題ありませんが、昔は苦労しました。",
+          "pronunciation": "이마와 몬다이 아리마센가 무카시와 쿠로오시마시타",
+          "nuance": "지금과 과거 대비"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"英語と英語より近いじゃないから。\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "ドイツ語は英語ほど身近ではないですから。",
+      "pronunciation": "도이츠고와 에이고호도 미지카데와 나이데스카라",
+      "grammarPoint": "비교는 'Aほど～ない', 명사/な형용사 부정은 '～ではない'. 문장도 중복 표현으로 어색합니다.",
+      "keyPattern": "Aほど～ではない",
+      "alternativeExpressions": [
+        {
+          "label": "난이도",
+          "sentence": "ドイツ語は英語より難しく感じます。",
+          "pronunciation": "도이츠고와 에이고요리 무즈카시쿠 칸지마스",
+          "nuance": "느낌 표현"
+        },
+        {
+          "label": "거리감",
+          "sentence": "英語ほど単語がなじみません。",
+          "pronunciation": "에이고호도 탄고가 나지미마센",
+          "nuance": "なじむ = 익숙해지다"
+        }
+      ]
+    }
+  ],
+  "betterAnswers": [
+    {
+      "situation": "여행 간 선생님께 그리스 여행 감상 묻기",
+      "betterSentence": "ギリシャはどうでしたか。一番印象に残った場所はどこですか。",
+      "pronunciation": "기리샤와 도오데시타카 이치방 인쇼오니 노콧타 바쇼와 도코데스카",
+      "koreanMeaning": "그리스는 어땠어요? 가장 인상 깊었던 곳은요?",
+      "nuanceTip": "印象に残る = 인상에 남다.",
+      "followUpCombo": "ロードス島はどんな島ですか。"
+    },
+    {
+      "situation": "산토리니 감상을 말할 때",
+      "betterSentence": "サントリーニは動画ほど良くなかったですが、白と青の景色は有名です。",
+      "pronunciation": "산토리니와 도오가호도 요쿠나캇타데스가 시로토 아오노 케시키와 유우메이데스",
+      "koreanMeaning": "산토리니는 영상만큼은 아니었지만 흰색과 파란색 풍경은 유명해요.",
+      "nuanceTip": "Aほど～なかった로 비교.",
+      "followUpCombo": "ビーチがないので海には入れません。"
+    },
+    {
+      "situation": "세부에서 고래상어를 본 경험 말하기",
+      "betterSentence": "セブでジンベエザメを近くで見ました。とても大きくて驚きました。",
+      "pronunciation": "세부데 진베에자메오 치카쿠데 미마시타 토테모 오오키쿠테 오도로키마시타",
+      "koreanMeaning": "세부에서 고래상어를 가까이서 봤어요. 정말 커서 놀랐어요.",
+      "nuanceTip": "ジンベエザメ = 고래상어.",
+      "followUpCombo": "同時に四匹くらい見ました。"
+    },
+    {
+      "situation": "한국인이 세부를 많이 가는 이유 설명",
+      "betterSentence": "韓国からは近くて安いので、セブに行く人が多いです。",
+      "pronunciation": "칸코쿠카라와 치카쿠테 야스이노데 세부니 이쿠 히토가 오오이데스",
+      "koreanMeaning": "한국에서는 가깝고 싸서 세부에 가는 사람이 많아요.",
+      "nuanceTip": "이유는 ～ので로.",
+      "followUpCombo": "飛行機代は一人三万円くらいです。"
+    },
+    {
+      "situation": "다음 여행 계획 말하기",
+      "betterSentence": "10月末に神戸に行く予定です。妻の学会があって、一緒に行きます。",
+      "pronunciation": "쥬우가츠마츠니 코오베니 이쿠 요테이데스 츠마노 각카이가 앗테 잇쇼니 이키마스",
+      "koreanMeaning": "10월 말에 고베에 갈 예정이에요. 아내 학회가 있어서 함께 가요.",
+      "nuanceTip": "予定です로 계획을 말함.",
+      "followUpCombo": "京都のAirbnbを予約しました。"
+    },
+    {
+      "situation": "독일어 공부 방법 조언",
+      "betterSentence": "最初は一冊買って、分からない所は飛ばして最後まで読み終えるのがおすすめです。",
+      "pronunciation": "사이쇼와 잇사츠 캇테 와카라나이 토코로와 토바시테 사이고마데 요미오에루노가 오스스메데스",
+      "koreanMeaning": "처음엔 책 한 권을 사서 모르는 부분은 건너뛰고 끝까지 읽는 걸 추천해요.",
+      "nuanceTip": "おすすめです = 추천.",
+      "followUpCombo": "ストレスを感じないことが一番大切です。"
+    }
+  ],
+  "betterQuestions": [
+    {
+      "situation": "선생님의 화장·준비를 물을 때",
+      "betterSentence": "今日は仕事が早いんですか。何時に家を出ますか。",
+      "pronunciation": "쿄오와 시고토가 하야인데스카 난지니 이에오 데마스카",
+      "koreanMeaning": "오늘은 일이 일찍 시작하나요? 몇 시에 집을 나서요?",
+      "nuanceTip": "家を出る = 집을 나서다.",
+      "followUpCombo": "準備に何分くらいかかりますか。"
+    },
+    {
+      "situation": "여행 기간을 물을 때",
+      "betterSentence": "ギリシャには何日間行っていましたか。",
+      "pronunciation": "기리샤니와 난니치칸 잇테 이마시타카",
+      "koreanMeaning": "그리스에는 며칠간 다녀오셨어요?",
+      "nuanceTip": "何日間 = 며칠 동안.",
+      "followUpCombo": "ロードス島だけに行きましたか。"
+    },
+    {
+      "situation": "신혼여행에 대해 물을 때",
+      "betterSentence": "新婚旅行はどこに行きましたか。",
+      "pronunciation": "신콘료코오와 도코니 이키마시타카",
+      "koreanMeaning": "신혼여행은 어디로 갔어요?",
+      "nuanceTip": "",
+      "followUpCombo": "何日くらい行きましたか。"
+    },
+    {
+      "situation": "단어를 확인할 때",
+      "betterSentence": "「学会」は英語でカンファレンスですか。",
+      "pronunciation": "각카이와 에이고데 칸파렌스데스카",
+      "koreanMeaning": "'학회'는 영어로 컨퍼런스예요?",
+      "nuanceTip": "모르는 말은 일본어로 확인하는 연습.",
+      "followUpCombo": "もう一度ゆっくり言ってください。"
+    },
+    {
+      "situation": "일본의 해외 인기도를 물을 때",
+      "betterSentence": "台湾の人はどうして日本が好きなんでしょうか。",
+      "pronunciation": "타이완노 히토와 도오시테 니혼가 스키난데쇼오카",
+      "koreanMeaning": "대만 사람들은 왜 일본을 좋아할까요?",
+      "nuanceTip": "好き 앞 조사는 が.",
+      "followUpCombo": "日本人は韓国についてどう思っていますか。"
+    },
+    {
+      "situation": "공부 방법을 물을 때",
+      "betterSentence": "日本語はどうやって勉強していますか。",
+      "pronunciation": "니혼고와 도오얏테 벤쿄오시테 이마스카",
+      "koreanMeaning": "일본어는 어떻게 공부하고 있어요?",
+      "nuanceTip": "どうやって = 어떤 방법으로.",
+      "followUpCombo": "YouTubeもよく見ますか。"
+    }
+  ],
+  "scenarioTitle": "그리스·산토리니·신혼여행·외국어 공부법 복습",
+  "scenarioContext": "이 시나리오는 수업에서 다룬 주제(그리스 여행, 산토리니, 신혼여행)를 바탕으로 만든 연습용 스크립트이며, 실제 대화 녹취가 아닙니다.",
+  "scenarioTurns": [
+    {
+      "role": "Tutor",
+      "speakerLabel": "일본어 튜터",
+      "foreignText": "一昨日までギリシャに行っていました。",
+      "pronunciation": "오토토이마데 기리샤니 잇테 이마시타",
+      "koreanText": "그저께까지 그리스에 다녀왔어요.",
+      "keyExpression": "～までに行っていました",
+      "speakingTip": "시간 표현."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "ギリシャはどうでしたか。",
+      "pronunciation": "기리샤와 도오데시타카",
+      "koreanText": "그리스는 어땠나요?",
+      "keyExpression": "どうでしたか",
+      "speakingTip": "감상을 묻기."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "일본어 튜터",
+      "foreignText": "とても良かったです。白い建物も海もきれいでした。",
+      "pronunciation": "토테모 요캇타데스 시로이 타테모노모 우미모 키레이데시타",
+      "koreanText": "정말 좋았어요. 하얀 건물도 바다도 예뻤어요.",
+      "keyExpression": "きれいでした",
+      "speakingTip": "な형용사 과거."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "サントリーニは行ったことがありますか。",
+      "pronunciation": "산토리니와 잇타 코토가 아리마스카",
+      "koreanText": "산토리니는 가본 적 있어요?",
+      "keyExpression": "行ったことがある",
+      "speakingTip": "경험."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "일본어 튜터",
+      "foreignText": "はい、あります。でも動画ほど良くなかったです。",
+      "pronunciation": "하이 아리마스 데모 도오가호도 요쿠나캇타데스",
+      "koreanText": "네. 하지만 영상만큼 좋진 않았어요.",
+      "keyExpression": "ほど～なかった",
+      "speakingTip": "비교 부정."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "どうしてですか。",
+      "pronunciation": "도오시테데스카",
+      "koreanText": "왜요?",
+      "keyExpression": "どうしてですか",
+      "speakingTip": "이유 질문."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "일본어 튜터",
+      "foreignText": "ビーチがないので、海には入れません。",
+      "pronunciation": "비이치가 나이노데 우미니와 하이레마센",
+      "koreanText": "해변이 없어서 바다에는 들어갈 수 없어요.",
+      "keyExpression": "ので",
+      "speakingTip": "이유."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "そうなんですね。知りませんでした。",
+      "pronunciation": "소오난데스네 시리마센데시타",
+      "koreanText": "그렇군요. 몰랐어요.",
+      "keyExpression": "そうなんですね",
+      "speakingTip": "맞장구."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "s1",
+      "badge": "시나리오 1 · 심층 복습",
+      "title": "그리스 여행과 산토리니 이야기",
+      "context": "이 시나리오는 수업에서 다룬 주제(그리스 여행, 산토리니, 신혼여행)를 바탕으로 만든 연습용 스크립트이며, 실제 대화 녹취가 아닙니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "일본어 튜터",
+          "foreignText": "一昨日までギリシャに行っていました。",
+          "pronunciation": "오토토이마데 기리샤니 잇테 이마시타",
+          "koreanText": "그저께까지 그리스에 다녀왔어요.",
+          "keyExpression": "～までに行っていました",
+          "speakingTip": "시간 표현."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "ギリシャはどうでしたか。",
+          "pronunciation": "기리샤와 도오데시타카",
+          "koreanText": "그리스는 어땠나요?",
+          "keyExpression": "どうでしたか",
+          "speakingTip": "감상을 묻기."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "일본어 튜터",
+          "foreignText": "とても良かったです。白い建物も海もきれいでした。",
+          "pronunciation": "토테모 요캇타데스 시로이 타테모노모 우미모 키레이데시타",
+          "koreanText": "정말 좋았어요. 하얀 건물도 바다도 예뻤어요.",
+          "keyExpression": "きれいでした",
+          "speakingTip": "な형용사 과거."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "サントリーニは行ったことがありますか。",
+          "pronunciation": "산토리니와 잇타 코토가 아리마스카",
+          "koreanText": "산토리니는 가본 적 있어요?",
+          "keyExpression": "行ったことがある",
+          "speakingTip": "경험."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "일본어 튜터",
+          "foreignText": "はい、あります。でも動画ほど良くなかったです。",
+          "pronunciation": "하이 아리마스 데모 도오가호도 요쿠나캇타데스",
+          "koreanText": "네. 하지만 영상만큼 좋진 않았어요.",
+          "keyExpression": "ほど～なかった",
+          "speakingTip": "비교 부정."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "どうしてですか。",
+          "pronunciation": "도오시테데스카",
+          "koreanText": "왜요?",
+          "keyExpression": "どうしてですか",
+          "speakingTip": "이유 질문."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "일본어 튜터",
+          "foreignText": "ビーチがないので、海には入れません。",
+          "pronunciation": "비이치가 나이노데 우미니와 하이레마센",
+          "koreanText": "해변이 없어서 바다에는 들어갈 수 없어요.",
+          "keyExpression": "ので",
+          "speakingTip": "이유."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "そうなんですね。知りませんでした。",
+          "pronunciation": "소오난데스네 시리마센데시타",
+          "koreanText": "그렇군요. 몰랐어요.",
+          "keyExpression": "そうなんですね",
+          "speakingTip": "맞장구."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "badge": "시나리오 2 · 비즈니스 응용",
+      "title": "일본 거래처와의 출장 일정 이야기",
+      "context": "이 시나리오는 수업에서 나온 여행 일정·예약 주제를 비즈니스 출장 상황으로 응용한 연습용 스크립트이며, 실제 대화 녹취가 아닙니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "일본어 튜터",
+          "foreignText": "来月の出張の予定を教えてください。",
+          "pronunciation": "라이게츠노 슛쵸오노 요테이오 오시에테 쿠다사이",
+          "koreanText": "다음 달 출장 일정을 알려 주세요.",
+          "keyExpression": "予定を教えてください",
+          "speakingTip": "요청 표현."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "10月末に神戸に行く予定です。",
+          "pronunciation": "쥬우가츠마츠니 코오베니 이쿠 요테이데스",
+          "koreanText": "10월 말에 고베에 갈 예정입니다.",
+          "keyExpression": "行く予定です",
+          "speakingTip": "미래 일정."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "일본어 튜터",
+          "foreignText": "ホテルはもう予約しましたか。",
+          "pronunciation": "호테루와 모오 요야쿠시마시타카",
+          "koreanText": "호텔은 이미 예약하셨어요?",
+          "keyExpression": "もう～しましたか",
+          "speakingTip": "완료 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "はい。宇治の近くの家を予約したのは先週です。",
+          "pronunciation": "하이 우지노 치카쿠노 이에오 요야쿠시타노와 센슈우데스",
+          "koreanText": "네. 우지 근처 집을 예약한 건 지난주예요.",
+          "keyExpression": "予約したのは",
+          "speakingTip": "～のは 강조."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "일본어 튜터",
+          "foreignText": "打ち合わせは何日にしますか。",
+          "pronunciation": "우치아와세와 난니치니 시마스카",
+          "koreanText": "미팅은 며칠로 할까요?",
+          "keyExpression": "打ち合わせ",
+          "speakingTip": "비즈니스 단어."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "4日間なので、少し短いかもしれません。",
+          "pronunciation": "욧카칸나노데 스코시 미지카이카모시레마센",
+          "koreanText": "4일간이라 조금 짧을지도 몰라요.",
+          "keyExpression": "かもしれません",
+          "speakingTip": "추측."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "일본어 튜터",
+          "foreignText": "では、京都の予定は後で相談しましょう。",
+          "pronunciation": "데와 쿄오토노 요테이와 아토데 소오단시마쇼오",
+          "koreanText": "그럼 교토 일정은 나중에 상의합시다.",
+          "keyExpression": "相談しましょう",
+          "speakingTip": "제안."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "はい、よろしくお願いします。",
+          "pronunciation": "하이 요로시쿠 오네가이시마스",
+          "koreanText": "네, 잘 부탁드립니다.",
+          "keyExpression": "よろしくお願いします",
+          "speakingTip": "마무리."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "badge": "시나리오 3 · 꼬리질문 디펜스",
+      "title": "독일어 공부법과 일본어 학습 꼬리질문",
+      "context": "이 시나리오는 수업에서 나온 외국어 학습 방법(책 한 권 끝내기, 유튜브 듣기) 주제를 바탕으로 한 꼬리질문 연습용 스크립트이며, 실제 대화 녹취가 아닙니다.",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "일본어 튜터",
+          "foreignText": "新しい言語は、どうやって勉強しますか。",
+          "pronunciation": "아타라시이 겐고와 도오얏테 벤쿄오시마스카",
+          "koreanText": "새로운 언어는 어떻게 공부해요?",
+          "keyExpression": "どうやって",
+          "speakingTip": "방법 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "最初は本を一冊買って、最後まで読み終えます。",
+          "pronunciation": "사이쇼와 홍오 잇사츠 캇테 사이고마데 요미오에마스",
+          "koreanText": "처음에는 책 한 권을 사서 끝까지 읽어요.",
+          "keyExpression": "読み終える",
+          "speakingTip": "終わりする 금지."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "일본어 튜터",
+          "foreignText": "分からない所はどうしますか。",
+          "pronunciation": "와카라나이 토코로와 도오시마스카",
+          "koreanText": "모르는 부분은 어떻게 해요?",
+          "keyExpression": "どうしますか",
+          "speakingTip": "대처 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "飛ばします。最初は時間をかけない方がいいです。",
+          "pronunciation": "토바시마스 사이쇼와 지칸오 카케나이 호오가 이이데스",
+          "koreanText": "건너뛰어요. 처음엔 시간을 들이지 않는 게 좋아요.",
+          "keyExpression": "時間をかける",
+          "speakingTip": "자연스러운 짝."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "일본어 튜터",
+          "foreignText": "単語は暗記しませんか。",
+          "pronunciation": "탄고와 안키시마셍카",
+          "koreanText": "단어는 암기하지 않아요?",
+          "keyExpression": "暗記する",
+          "speakingTip": "부정 의문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "最初は暗記しません。ストレスを感じると続かないからです。",
+          "pronunciation": "사이쇼와 안키시마센 스토레스오 칸지루토 츠즈카나이카라데스",
+          "koreanText": "처음엔 안 해요. 스트레스를 느끼면 계속하지 못하니까요.",
+          "keyExpression": "続かない",
+          "speakingTip": "자동사."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "일본어 튜터",
+          "foreignText": "毎日どのくらい勉強しますか。",
+          "pronunciation": "마이니치 도노쿠라이 벤쿄오시마스카",
+          "koreanText": "매일 어느 정도 공부해요?",
+          "keyExpression": "どのくらい",
+          "speakingTip": "양 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "毎日続けることが大事です。YouTubeもよく聞きます。",
+          "pronunciation": "마이니치 츠즈케루 코토가 다이지데스 유튜브모 요쿠 키키마스",
+          "koreanText": "매일 계속하는 게 중요해요. 유튜브도 자주 들어요.",
+          "keyExpression": "続けることが大事",
+          "speakingTip": "～ことが大事."
+        }
+      ]
+    }
+  ]
+}

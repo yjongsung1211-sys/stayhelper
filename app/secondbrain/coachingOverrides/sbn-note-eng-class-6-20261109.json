@@ -1,0 +1,740 @@
+{
+  "lang": "en",
+  "langBadge": "🇺🇸 영어 (English)",
+  "ttsLang": "en-US",
+  "grammarCorrections": [
+    {
+      "myWrongSentence": "\"Mm. Today, our, mm, how, how, how can I say? Uh, customer?\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "The biggest news today is that the Korean stock market, KOSPI, dropped.",
+      "pronunciation": "더 비기스트 뉴스 투데이 이즈 댓 더 코리안 스톡 마켓, 코스피, 드랍트",
+      "grammarPoint": "말이 막혀 'customer?'로 흘러갔고 튜터가 'Your what?'으로 되물었습니다. 막히면 'The biggest news is that + 절' 틀에 핵심어(KOSPI)를 넣으면 됩니다.",
+      "keyPattern": "The biggest news is that + 절",
+      "alternativeExpressions": [
+        {
+          "label": "단어가 막힐 때",
+          "sentence": "How can I say this... the stock market, KOSPI, fell sharply.",
+          "pronunciation": "하우 캔 아이 세이 디스... 더 스톡 마켓, 코스피, 펠 샤프리",
+          "nuance": "'fell sharply' 급락"
+        },
+        {
+          "label": "간단 버전",
+          "sentence": "KOSPI dropped a lot today.",
+          "pronunciation": "코스피 드랍트 어 랏 투데이",
+          "nuance": "짧게 핵심만"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Yeah, stock market is broke.\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "Yes, the stock market crashed today.",
+      "pronunciation": "예스, 더 스톡 마켓 크래시트 투데이",
+      "grammarPoint": "broke는 '돈이 없다(broke = 무일푼)'는 뜻으로 쓰여 주식시장에는 어색합니다. 시장이 떨어졌다는 crash / drop / plunge가 맞고 stock market 앞에 the가 필요합니다.",
+      "keyPattern": "The stock market crashed / dropped / plunged",
+      "alternativeExpressions": [
+        {
+          "label": "정도 조절",
+          "sentence": "The market dropped about three percent.",
+          "pronunciation": "더 마켓 드랍트 어바웃 쓰리 퍼센트",
+          "nuance": "수치를 쓰면 정확"
+        },
+        {
+          "label": "약한 표현",
+          "sentence": "The market took a hit today.",
+          "pronunciation": "더 마켓 툭 어 힛 투데이",
+          "nuance": "take a hit = 타격을 입다"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Semiconductor is a boomer for me.\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "Semiconductors are booming right now.",
+      "pronunciation": "세미컨덕터스 아 부밍 라이트 나우",
+      "grammarPoint": "boomer는 '베이비붐 세대'라는 뜻의 명사입니다. '호황이다'는 동사 boom의 진행형(are booming)을 씁니다. 반도체는 보통 복수로 말합니다.",
+      "keyPattern": "be booming / be in a boom",
+      "alternativeExpressions": [
+        {
+          "label": "호황 이유",
+          "sentence": "The semiconductor industry is booming because of AI.",
+          "pronunciation": "더 세미컨덕터 인더스트리 이즈 부밍 비커즈 오브 에이아이",
+          "nuance": "because of + 명사"
+        },
+        {
+          "label": "수요 강조",
+          "sentence": "Demand for memory chips is surging.",
+          "pronunciation": "디맨드 포 메모리 칩스 이즈 서징",
+          "nuance": "surge = 급증하다"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"there are two company, Samsung and SK Hynix, but their sell- selling is very good, but stock market, i- is not follow, not good.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "There are two companies, Samsung and SK Hynix. Their sales are very strong, but their stock prices aren't following.",
+      "pronunciation": "데어 아 투 컴퍼니즈, 삼성 앤 에스케이 하이닉스. 데어 세일즈 아 베리 스트롱, 벗 데어 스톡 프라이시즈 아란트 팔로잉",
+      "grammarPoint": "two 뒤는 복수 companies, 판매량은 selling이 아니라 명사 sales, 'is not follow'는 are not following으로 진행형을 써야 합니다. '주가'는 stock prices입니다.",
+      "keyPattern": "Their sales are strong, but their stock prices aren't following",
+      "alternativeExpressions": [
+        {
+          "label": "대비",
+          "sentence": "Sales are booming, yet share prices are flat.",
+          "pronunciation": "세일즈 아 부밍, 옛 셰어 프라이시즈 아 플랫",
+          "nuance": "yet = 그럼에도"
+        },
+        {
+          "label": "원인 추측",
+          "sentence": "Maybe investors are worried about customers pushing prices down.",
+          "pronunciation": "메이비 인베스터스 아 워리드 어바웃 커스터머스 푸싱 프라이시즈 다운",
+          "nuance": "추측은 Maybe + 절"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"now just, just four company make a chip, RAM.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Only four companies make DRAM chips now.",
+      "pronunciation": "온리 포 컴퍼니즈 메이크 디램 칩스 나우",
+      "grammarPoint": "four 뒤에는 복수 companies, 'just'는 only가 더 자연스럽고 RAM보다 구체적으로 DRAM이라고 하면 정확합니다. 칩은 복수 chips입니다.",
+      "keyPattern": "Only + 숫자 + 복수명사 + 동사",
+      "alternativeExpressions": [
+        {
+          "label": "시장 독과점",
+          "sentence": "The DRAM market is dominated by just four companies.",
+          "pronunciation": "더 디램 마켓 이즈 도미네이티드 바이 저스트 포 컴퍼니즈",
+          "nuance": "be dominated by = ~가 지배하는"
+        },
+        {
+          "label": "중요성",
+          "sentence": "That's why those chips are so strategically important.",
+          "pronunciation": "댓츠 와이 도즈 칩스 아 쏘 스트래티지컬리 임포턴트",
+          "nuance": "strategically important = 전략적으로 중요"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"already, mm, in the max, mm, public product ability, use pro- product ability\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "Korean companies are already running at full production capacity.",
+      "pronunciation": "코리안 컴퍼니즈 아 올레디 러닝 앳 풀 프로덕션 커패서티",
+      "grammarPoint": "'생산능력'은 production capacity이고 '가동률 최대'는 run at full capacity입니다. 'public product ability'는 의미가 통하지 않아 단어 교체가 필요합니다.",
+      "keyPattern": "run at full capacity",
+      "alternativeExpressions": [
+        {
+          "label": "설명 추가",
+          "sentence": "They can't produce any more, so prices keep going up.",
+          "pronunciation": "데이 캔트 프로듀스 애니 모어, 쏘 프라이시즈 킵 고잉 업",
+          "nuance": "결과 연결: so + 절"
+        },
+        {
+          "label": "수요 대비",
+          "sentence": "Supply can't keep up with demand.",
+          "pronunciation": "서플라이 캔트 킵 업 위드 디맨드",
+          "nuance": "keep up with = 따라가다"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"whole world so, so jealous Korea now.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "The whole world is jealous of Korea right now.",
+      "pronunciation": "더 홀 월드 이즈 젤러스 오브 코리아 라이트 나우",
+      "grammarPoint": "be jealous of + 대상 형태이고, whole world 앞에 the, 동사 is가 필요합니다. envious of도 같은 의미입니다.",
+      "keyPattern": "be jealous of / envious of",
+      "alternativeExpressions": [
+        {
+          "label": "부드럽게",
+          "sentence": "Many countries envy Korea's memory chip industry.",
+          "pronunciation": "매니 컨트리즈 엔비 코리아스 메모리 칩 인더스트리",
+          "nuance": "envy 타동사"
+        },
+        {
+          "label": "의존 표현",
+          "sentence": "Everyone depends on Korea's memory chips.",
+          "pronunciation": "에브리원 디펜즈 온 코리아스 메모리 칩스",
+          "nuance": "의존성 강조"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Korea government, uh, doesn't have, do- doesn't have any policy, policy about the-\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "The Korean government doesn't have a policy on self-driving cars yet.",
+      "pronunciation": "더 코리안 거버먼트 더즌트 해브 어 팔리시 온 셀프 드라이빙 카스 옛",
+      "grammarPoint": "'Korea government'는 형용사형 the Korean government이고, 뒤 이어서 말한 'automatic car'는 변속기 자동 차량이라는 뜻이 되어, 자율주행은 self-driving / autonomous car입니다. 'policy about'보다 'policy on'을 자주 씁니다.",
+      "keyPattern": "a policy on + 주제 / self-driving car",
+      "alternativeExpressions": [
+        {
+          "label": "규제 표현",
+          "sentence": "Fully autonomous driving isn't allowed in Korea yet.",
+          "pronunciation": "풀리 어토노머스 드라이빙 이즌트 얼라우드 인 코리아 옛",
+          "nuance": "be allowed = 허용되다"
+        },
+        {
+          "label": "이유 추측",
+          "sentence": "I think the government wants to protect local carmakers.",
+          "pronunciation": "아이 씽크 더 거버먼트 원츠 투 프로텍트 로컬 카메이커스",
+          "nuance": "protect local companies"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I heard if Chinese car is broke, you ha- you, you need to buy new one because fix price-\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I heard that if a Chinese car breaks down, you almost have to buy a new one because repairs cost so much.",
+      "pronunciation": "아이 허드 댓 이프 어 차이니즈 카 브레이크스 다운, 유 얼모스트 해브 투 바이 어 뉴 원 비커즈 리페어스 코스트 쏘 머치",
+      "grammarPoint": "차가 고장나다는 break down(3인칭 breaks down)이고, is broke는 틀립니다. 차는 a Chinese car(단수 관사), 수리비는 repair costs입니다.",
+      "keyPattern": "break down / repairs cost a lot",
+      "alternativeExpressions": [
+        {
+          "label": "간단 표현",
+          "sentence": "Chinese cars are cheap, but repairs can be expensive.",
+          "pronunciation": "차이니즈 카스 아 칩, 벗 리페어스 캔 비 익스펜시브",
+          "nuance": "cheap, but ~ 대비"
+        },
+        {
+          "label": "신뢰 문제",
+          "sentence": "Many Koreans don't fully trust their safety yet.",
+          "pronunciation": "매니 코리안즈 돈트 풀리 트러스트 데어 세이프티 옛",
+          "nuance": "trust + 대상"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"I, I, I'm so expected to watch, waiting, waiting the vote in USA November.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "I'm really looking forward to watching the vote in the U.S. this November.",
+      "pronunciation": "아임 리얼리 루킹 포워드 투 워칭 더 보트 인 더 유에스 디스 노벰버",
+      "grammarPoint": "'I'm expected to'는 '기대받는다'는 수동태가 되므로 '기대하다'는 look forward to + -ing(to 뒤 동명사)입니다. 'waiting the vote'는 'wait for the vote'이고, 'USA November' 대신 'the U.S. this November'로 씁니다.",
+      "keyPattern": "look forward to + -ing",
+      "alternativeExpressions": [
+        {
+          "label": "호기심 표현",
+          "sentence": "I'm curious how the world will change after the vote.",
+          "pronunciation": "아임 큐리어스 하우 더 월드 윌 체인지 애프터 더 보트",
+          "nuance": "curious how ~"
+        },
+        {
+          "label": "관전 포인트",
+          "sentence": "I can't wait to see the midterm results.",
+          "pronunciation": "아이 캔트 웨이트 투 씨 더 미드텀 리절츠",
+          "nuance": "midterm results"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Korea, Korea government will, will invite, will invite to Alaska for, for-\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "The Korean government will invest in Alaska's gas development.",
+      "pronunciation": "더 코리안 거버먼트 윌 인베스트 인 알래스카스 개스 디벨롭먼트",
+      "grammarPoint": "invite(초대하다)와 invest(투자하다)가 혼동되었고 튜터도 'Invite Alaska?'라고 되물었습니다. 본인이 곧바로 'Invest'로 정정한 점이 좋았고 전치사는 invest in입니다.",
+      "keyPattern": "invest in + 대상",
+      "alternativeExpressions": [
+        {
+          "label": "투자 목적",
+          "sentence": "Korea may invest in Alaska to secure natural gas.",
+          "pronunciation": "코리아 메이 인베스트 인 알래스카 투 시큐어 내추럴 개스",
+          "nuance": "secure = 확보하다"
+        },
+        {
+          "label": "정치 배경",
+          "sentence": "It seems Trump is pushing Korea to invest.",
+          "pronunciation": "잇 심즈 트럼프 이즈 푸싱 코리아 투 인베스트",
+          "nuance": "push + 목적어 + to 동사"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"This election, maybe Trump first side is-\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "In this midterm election, Trump's side might not win.",
+      "pronunciation": "인 디스 미드텀 일렉션, 트럼프스 사이드 마이트 낫 윈",
+      "grammarPoint": "튜터가 'It's not a presidential election'이라고 바로잡았습니다. 11월 선거는 중간선거(midterm election)이고 'Trump first side'는 'Trump's side/party'입니다. 이어 말한 'not wins'는 might not win / won't win이어야 합니다.",
+      "keyPattern": "Trump's side might not win / midterm election",
+      "alternativeExpressions": [
+        {
+          "label": "결과 영향",
+          "sentence": "If they lose, he could become a lame duck.",
+          "pronunciation": "이프 데이 루즈, 히 쿠드 비컴 어 레임 덕",
+          "nuance": "lame duck = 레임덕"
+        },
+        {
+          "label": "관전",
+          "sentence": "The result could change a lot of things.",
+          "pronunciation": "더 리절트 쿠드 체인지 어 랏 오브 띵스",
+          "nuance": "could = 가능성"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Elon Musk will, will be earn more money.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Elon Musk will earn even more money.",
+      "pronunciation": "일론 머스크 윌 언 이븐 모어 머니",
+      "grammarPoint": "will 뒤에는 동사원형 하나만 오며 will be earn은 틀립니다(will earn). 튜터도 'What?'이라고 되물었고 'He has more money?'로 오해했습니다.",
+      "keyPattern": "will + 동사원형",
+      "alternativeExpressions": [
+        {
+          "label": "미래 근거",
+          "sentence": "Elon Musk will probably make even more money because of SpaceX.",
+          "pronunciation": "일론 머스크 윌 프라바블리 메이크 이븐 모어 머니 비커즈 오브 스페이스엑스",
+          "nuance": "probably로 추측 톤"
+        },
+        {
+          "label": "진행 가능",
+          "sentence": "He's going to earn a lot more from AI data centers in space.",
+          "pronunciation": "히즈 고잉 투 언 어 랏 모어 프럼 에이아이 데이터 센터스 인 스페이스",
+          "nuance": "be going to = 예정"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Yeah, UN is died. UN is died.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "The UN is dead.",
+      "pronunciation": "더 유엔 이즈 데드",
+      "grammarPoint": "die는 동사이고 상태는 형용사 dead를 써서 'is dead' 또는 'has died'입니다(is died ✕). 'The UN is practically useless'처럼 비유가 덜 직설적인 표현도 가능합니다.",
+      "keyPattern": "be dead / has died",
+      "alternativeExpressions": [
+        {
+          "label": "비유 완화",
+          "sentence": "The UN has become almost irrelevant.",
+          "pronunciation": "더 유엔 해즈 비컴 올모스트 이렐러번트",
+          "nuance": "irrelevant = 영향력 없는"
+        },
+        {
+          "label": "관점 표시",
+          "sentence": "In my opinion, the UN has lost its power.",
+          "pronunciation": "인 마이 오피니언, 디 유엔 해즈 로스트 잇츠 파워",
+          "nuance": "In my opinion + 절"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"California, California's GDP is, is higher than Japan.\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "California's GDP is higher than Japan's.",
+      "pronunciation": "캘리포니아스 지디피 이즈 하이어 댄 재팬스",
+      "grammarPoint": "비교 대상이 같아야 합니다. GDP와 비교할 대상은 국가가 아니라 'Japan's (GDP)'이고 소유격을 써야 합니다.",
+      "keyPattern": "A's GDP is higher than B's",
+      "alternativeExpressions": [
+        {
+          "label": "대안",
+          "sentence": "California's economy is bigger than Japan's.",
+          "pronunciation": "캘리포니아스 이코노미 이즈 비거 댄 재팬스",
+          "nuance": "economy도 가능"
+        },
+        {
+          "label": "순위 표현",
+          "sentence": "If California were a country, it would rank above Japan.",
+          "pronunciation": "이프 캘리포니아 워 어 컨트리, 잇 우드 랭크 어보브 재팬",
+          "nuance": "가정법으로 흥미 유발"
+        }
+      ]
+    }
+  ],
+  "betterAnswers": [
+    {
+      "situation": "한국 증시와 반도체 상황을 설명할 때",
+      "betterSentence": "The semiconductor industry is booming because of AI, and Samsung and SK Hynix have strong sales, but their stock prices aren't following.",
+      "pronunciation": "더 세미컨덕터 인더스트리 이즈 부밍 비커즈 오브 에이아이, 앤 삼성 앤 에스케이 하이닉스 해브 스트롱 세일즈, 벗 데어 스톡 프라이시즈 아란트 팔로잉",
+      "koreanMeaning": "반도체는 AI로 호황이고 삼성·SK하이닉스 매출도 강하지만 주가는 따라가지 못하고 있어요.",
+      "nuanceTip": "'booming because of'로 이유를 먼저 제시하면 설득력이 올라갑니다.",
+      "followUpCombo": "I think big customers are pushing prices down."
+    },
+    {
+      "situation": "HBM·DRAM 공급 구조를 설명할 때",
+      "betterSentence": "Only four companies make DRAM, and Korean makers are already at full capacity, so prices keep rising.",
+      "pronunciation": "온리 포 컴퍼니즈 메이크 디램, 앤 코리안 메이커스 아 올레디 앳 풀 커패서티, 쏘 프라이시즈 킵 라이징",
+      "koreanMeaning": "DRAM은 네 회사만 만들고 한국 업체는 이미 풀가동이라 가격이 계속 올라요.",
+      "nuanceTip": "run at full capacity 표현은 비즈니스 영어에서 유용합니다.",
+      "followUpCombo": "That's why the whole world depends on Korea."
+    },
+    {
+      "situation": "자율주행과 중국 전기차를 설명할 때",
+      "betterSentence": "Korea doesn't allow fully self-driving cars yet, and many Koreans don't trust Chinese electric cars because repairs are expensive.",
+      "pronunciation": "코리아 더즌트 얼라우 풀리 셀프 드라이빙 카스 옛, 앤 매니 코리안즈 돈트 트러스트 차이니즈 일렉트릭 카스 비커즈 리페어스 아 익스펜시브",
+      "koreanMeaning": "한국은 완전 자율주행을 아직 허용하지 않고, 중국 전기차는 수리비 때문에 신뢰가 낮아요.",
+      "nuanceTip": "automatic car 대신 self-driving car를 쓰세요.",
+      "followUpCombo": "I'd like to buy a Tesla, not a flying car."
+    },
+    {
+      "situation": "텍사스 데이터센터와 캘리포니아 GDP를 비교할 때",
+      "betterSentence": "Many AI data centers are being built in Texas because it has cheap land, low taxes, and lots of electricity.",
+      "pronunciation": "매니 에이아이 데이터 센터스 아 빙 빌트 인 텍사스 비커즈 잇 해즈 칩 랜드, 로우 택시스, 앤 랏츠 오브 일렉트리시티",
+      "koreanMeaning": "AI 데이터센터는 싼 땅, 낮은 세금, 풍부한 전력 때문에 텍사스에 많이 지어지고 있어요.",
+      "nuanceTip": "are being built(수동 진행)로 현재 진행 중인 건설을 표현.",
+      "followUpCombo": "Meanwhile, California's GDP is higher than Japan's."
+    },
+    {
+      "situation": "알래스카와 지정학을 말할 때",
+      "betterSentence": "Russia sold Alaska to the US for a low price, and now it regrets it, because Alaska has a lot of oil and gas.",
+      "pronunciation": "러시아 솔드 알래스카 투 더 유에스 포 어 로우 프라이스, 앤 나우 잇 리그렛츠 잇, 비커즈 알래스카 해즈 어 랏 오브 오일 앤 개스",
+      "koreanMeaning": "러시아가 알래스카를 싸게 팔았다가 지금은 석유와 가스 때문에 후회해요.",
+      "nuanceTip": "regret + 목적어로 간단히.",
+      "followUpCombo": "And Korea may invest in Alaska's gas development."
+    },
+    {
+      "situation": "트럼프와 중간선거에 대해 의견을 말할 때",
+      "betterSentence": "I don't personally like Trump, but I'm looking forward to the midterm elections this November to see how the world changes.",
+      "pronunciation": "아이 돈트 퍼스널리 라이크 트럼프, 벗 아임 루킹 포워드 투 더 미드텀 일렉션스 디스 노벰버 투 씨 하우 더 월드 체인지스",
+      "koreanMeaning": "개인적으로 트럼프를 좋아하진 않지만 11월 중간선거 후 세상이 어떻게 변할지 기대돼요.",
+      "nuanceTip": "look forward to 뒤에는 명사(the midterm elections)도 가능.",
+      "followUpCombo": "If his side loses, he could become a lame duck."
+    }
+  ],
+  "betterQuestions": [
+    {
+      "context": "튜터가 한국 뉴스를 물을 때를 준비하며",
+      "questionSentence": "Which Korean news would you like to hear about today?",
+      "pronunciation": "위치 코리안 뉴스 우쥬 라이크 투 히어 어바웃 투데이",
+      "koreanMeaning": "오늘 한국 뉴스 중 어떤 걸 듣고 싶으세요?",
+      "nuanceTip": "선택권을 주는 질문.",
+      "followUpCombo": "I can start with the stock market."
+    },
+    {
+      "context": "미국 서부 튜터에게 AI 데이터센터를 물을 때",
+      "questionSentence": "Why are so many AI data centers being built in Texas rather than California?",
+      "pronunciation": "와이 아 쏘 매니 에이아이 데이터 센터스 빙 빌트 인 텍사스 래더 댄 캘리포니아",
+      "koreanMeaning": "왜 캘리포니아보다 텍사스에 AI 데이터센터가 많이 지어질까요?",
+      "nuanceTip": "rather than으로 비교.",
+      "followUpCombo": "Is electricity cost the main reason?"
+    },
+    {
+      "context": "캘리포니아 물가·휘발유 가격이 궁금할 때",
+      "questionSentence": "Why is gas more expensive in California than in other states?",
+      "pronunciation": "와이 이즈 개스 모어 익스펜시브 인 캘리포니아 댄 인 아더 스테이츠",
+      "koreanMeaning": "캘리포니아 휘발유가 다른 주보다 비싼 이유가 뭔가요?",
+      "nuanceTip": "in California than in other states 비교 구조.",
+      "followUpCombo": "Is it mainly because of taxes?"
+    },
+    {
+      "context": "테슬라 쇼케이스에 대해 물을 때",
+      "questionSentence": "Would you ever buy a Tesla, or do you prefer another brand?",
+      "pronunciation": "우쥬 에버 바이 어 테슬라, 오어 두 유 프리퍼 어나더 브랜드",
+      "koreanMeaning": "테슬라를 사시겠어요, 아니면 다른 브랜드를 선호하세요?",
+      "nuanceTip": "Would you ever ~ 는 가정 질문.",
+      "followUpCombo": "What do you think about self-driving cars?"
+    },
+    {
+      "context": "알래스카·그린란드 이슈를 물을 때",
+      "questionSentence": "Do Americans think Greenland and Alaska are strategically important?",
+      "pronunciation": "두 어메리칸즈 씽크 그린랜드 앤 알래스카 아 스트래티지컬리 임포턴트",
+      "koreanMeaning": "미국인들은 그린란드와 알래스카가 전략적으로 중요하다고 생각하나요?",
+      "nuanceTip": "strategically important는 지정학 핵심어.",
+      "followUpCombo": "How do ordinary people feel about it?"
+    },
+    {
+      "context": "중간선거에 대해 물을 때",
+      "questionSentence": "How do you think the midterm elections will affect Trump's policies?",
+      "pronunciation": "하우 두 유 씽크 더 미드텀 일렉션스 윌 어펙트 트럼프스 팔러시스",
+      "koreanMeaning": "중간선거가 트럼프 정책에 어떤 영향을 미칠 것 같나요?",
+      "nuanceTip": "affect(동사) vs effect(명사)를 구분하세요.",
+      "followUpCombo": "Could he become a lame duck?"
+    }
+  ],
+  "scenarioTitle": "반도체 4강 구도 심층 복습",
+  "scenarioContext": "수업에서 다룬 한국 증시, DRAM·HBM 공급 구조를 영어로 정확히 말해보는 연습입니다. (※ 수업 주제를 바탕으로 만든 연습용 스크립트이며 실제 수업 녹취가 아닙니다.)",
+  "scenarioTurns": [
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "What's the biggest news in Korea today?",
+      "pronunciation": "왓츠 더 비기스트 뉴스 인 코리아 투데이",
+      "koreanText": "오늘 한국의 가장 큰 뉴스는 뭐예요?",
+      "keyExpression": "What's the biggest news",
+      "speakingTip": "질문 형태를 그대로 활용하세요."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "The biggest news is that the stock market, KOSPI, dropped.",
+      "pronunciation": "더 비기스트 뉴스 이즈 댓 더 스톡 마켓, 코스피, 드랍트",
+      "koreanText": "가장 큰 뉴스는 코스피가 하락한 거예요.",
+      "keyExpression": "The biggest news is that",
+      "speakingTip": "단어가 막히면 틀에 넣기."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "Why? I thought chip companies were doing well.",
+      "pronunciation": "와이 아이 쏘트 칩 컴퍼니즈 워 두잉 웰",
+      "koreanText": "왜요? 반도체 회사는 잘 나가는 줄 알았는데요.",
+      "keyExpression": "doing well",
+      "speakingTip": "의문을 되짚는 질문."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "They are. Samsung and SK Hynix have strong sales, but their stock prices aren't following.",
+      "pronunciation": "데이 아. 삼성 앤 에스케이 하이닉스 해브 스트롱 세일즈, 벗 데어 스톡 프라이시즈 아란트 팔로잉",
+      "koreanText": "맞아요. 매출은 강하지만 주가가 따라가지 못해요.",
+      "keyExpression": "stock prices",
+      "speakingTip": "sales는 복수 명사."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "What do these companies actually make?",
+      "pronunciation": "왓 두 디즈 컴퍼니즈 액추얼리 메이크",
+      "koreanText": "이 회사들은 실제로 뭘 만들죠?",
+      "keyExpression": "actually make",
+      "speakingTip": "핵심 사실 확인 질문."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "They make DRAM and HBM memory, which is used in NVIDIA's GPUs for AI data centers.",
+      "pronunciation": "데이 메이크 디램 앤 에이치비엠 메모리, 위치 이즈 유스트 인 엔비디아스 지피유스 포 에이아이 데이터 센터스",
+      "koreanText": "DRAM과 HBM을 만들고 AI 데이터센터용 엔비디아 GPU에 쓰여요.",
+      "keyExpression": "which is used in",
+      "speakingTip": "관계절 which."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "English Tutor",
+      "foreignText": "How many companies make DRAM in the world?",
+      "pronunciation": "하우 매니 컴퍼니즈 메이크 디램 인 더 월드",
+      "koreanText": "세계에서 몇 개 회사가 DRAM을 만들죠?",
+      "keyExpression": "How many companies",
+      "speakingTip": "many + 복수."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Only four, and Korean companies are already running at full capacity, so prices keep rising.",
+      "pronunciation": "온리 포, 앤 코리안 컴퍼니즈 아 올레디 러닝 앳 풀 커패서티, 쏘 프라이시즈 킵 라이징",
+      "koreanText": "네 곳뿐이고 한국 기업은 이미 풀가동이라 가격이 계속 올라요.",
+      "keyExpression": "run at full capacity",
+      "speakingTip": "keep + -ing."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "s1",
+      "badge": "시나리오 1 · 심층 복습",
+      "title": "반도체 4강 구도 심층 복습",
+      "context": "수업에서 다룬 한국 증시, DRAM·HBM 공급 구조를 영어로 정확히 말해보는 연습입니다. (※ 수업 주제를 바탕으로 만든 연습용 스크립트이며 실제 수업 녹취가 아닙니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What's the biggest news in Korea today?",
+          "pronunciation": "왓츠 더 비기스트 뉴스 인 코리아 투데이",
+          "koreanText": "오늘 한국의 가장 큰 뉴스는 뭐예요?",
+          "keyExpression": "What's the biggest news",
+          "speakingTip": "질문 형태를 그대로 활용하세요."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "The biggest news is that the stock market, KOSPI, dropped.",
+          "pronunciation": "더 비기스트 뉴스 이즈 댓 더 스톡 마켓, 코스피, 드랍트",
+          "koreanText": "가장 큰 뉴스는 코스피가 하락한 거예요.",
+          "keyExpression": "The biggest news is that",
+          "speakingTip": "단어가 막히면 틀에 넣기."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Why? I thought chip companies were doing well.",
+          "pronunciation": "와이 아이 쏘트 칩 컴퍼니즈 워 두잉 웰",
+          "koreanText": "왜요? 반도체 회사는 잘 나가는 줄 알았는데요.",
+          "keyExpression": "doing well",
+          "speakingTip": "의문을 되짚는 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "They are. Samsung and SK Hynix have strong sales, but their stock prices aren't following.",
+          "pronunciation": "데이 아. 삼성 앤 에스케이 하이닉스 해브 스트롱 세일즈, 벗 데어 스톡 프라이시즈 아란트 팔로잉",
+          "koreanText": "맞아요. 매출은 강하지만 주가가 따라가지 못해요.",
+          "keyExpression": "stock prices",
+          "speakingTip": "sales는 복수 명사."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What do these companies actually make?",
+          "pronunciation": "왓 두 디즈 컴퍼니즈 액추얼리 메이크",
+          "koreanText": "이 회사들은 실제로 뭘 만들죠?",
+          "keyExpression": "actually make",
+          "speakingTip": "핵심 사실 확인 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "They make DRAM and HBM memory, which is used in NVIDIA's GPUs for AI data centers.",
+          "pronunciation": "데이 메이크 디램 앤 에이치비엠 메모리, 위치 이즈 유스트 인 엔비디아스 지피유스 포 에이아이 데이터 센터스",
+          "koreanText": "DRAM과 HBM을 만들고 AI 데이터센터용 엔비디아 GPU에 쓰여요.",
+          "keyExpression": "which is used in",
+          "speakingTip": "관계절 which."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "How many companies make DRAM in the world?",
+          "pronunciation": "하우 매니 컴퍼니즈 메이크 디램 인 더 월드",
+          "koreanText": "세계에서 몇 개 회사가 DRAM을 만들죠?",
+          "keyExpression": "How many companies",
+          "speakingTip": "many + 복수."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Only four, and Korean companies are already running at full capacity, so prices keep rising.",
+          "pronunciation": "온리 포, 앤 코리안 컴퍼니즈 아 올레디 러닝 앳 풀 커패서티, 쏘 프라이시즈 킵 라이징",
+          "koreanText": "네 곳뿐이고 한국 기업은 이미 풀가동이라 가격이 계속 올라요.",
+          "keyExpression": "run at full capacity",
+          "speakingTip": "keep + -ing."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "badge": "시나리오 2 · 비즈니스 응용",
+      "title": "AI 인프라·자율주행 비즈니스 응용",
+      "context": "텍사스 데이터센터, 캘리포니아 GDP, 자율주행·전기차를 비즈니스 관점에서 설명하는 연습입니다. (※ 수업 주제를 바탕으로 만든 연습용 스크립트이며 실제 수업 녹취가 아닙니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Where are most AI data centers being built?",
+          "pronunciation": "웨어 아 모스트 에이아이 데이터 센터스 빙 빌트",
+          "koreanText": "AI 데이터센터는 주로 어디에 지어지나요?",
+          "keyExpression": "are being built",
+          "speakingTip": "수동 진행형."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Many are going up in Texas because land and taxes are cheaper and electricity is abundant.",
+          "pronunciation": "매니 아 고잉 업 인 텍사스 비커즈 랜드 앤 택시스 아 치퍼 앤 일렉트리시티 이즈 어번던트",
+          "koreanText": "땅과 세금이 싸고 전력이 풍부해서 텍사스에 많이 지어져요.",
+          "keyExpression": "go up",
+          "speakingTip": "go up = 건설되다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "But California is huge economically, isn't it?",
+          "pronunciation": "벗 캘리포니아 이즈 휴즈 이코노미컬리, 이즌트 잇",
+          "koreanText": "그래도 캘리포니아 경제는 거대하죠?",
+          "keyExpression": "tag question",
+          "speakingTip": "부가의문문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Yes, California's GDP is higher than Japan's, but its population is only about thirty percent of Japan's.",
+          "pronunciation": "예스, 캘리포니아스 지디피 이즈 하이어 댄 재팬스, 벗 잇츠 파퓰레이션 이즈 온리 어바웃 써티 퍼센트 오브 재팬스",
+          "koreanText": "네, GDP는 일본보다 높지만 인구는 일본의 30% 정도예요.",
+          "keyExpression": "Japan's",
+          "speakingTip": "소유격 비교."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What about self-driving cars in Korea?",
+          "pronunciation": "왓 어바웃 셀프 드라이빙 카스 인 코리아",
+          "koreanText": "한국의 자율주행차는요?",
+          "keyExpression": "self-driving cars",
+          "speakingTip": "automatic car 아님."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "The government doesn't have a policy on them yet, and I think it wants to protect Hyundai and Kia.",
+          "pronunciation": "더 거버먼트 더즌트 해브 어 팔러시 온 뎀 옛, 앤 아이 씽크 잇 원츠 투 프로텍트 현대 앤 기아",
+          "koreanText": "정부에 아직 정책이 없고 현대·기아를 보호하려는 것 같아요.",
+          "keyExpression": "a policy on",
+          "speakingTip": "on을 쓰세요."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Would you buy a Chinese electric car?",
+          "pronunciation": "우쥬 바이 어 차이니즈 일렉트릭 카",
+          "koreanText": "중국 전기차 사시겠어요?",
+          "keyExpression": "Would you buy",
+          "speakingTip": "가정 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "No. They're cheap, but if one breaks down, repairs cost so much that you almost have to buy a new one.",
+          "pronunciation": "노. 데이아 칩, 벗 이프 원 브레이크스 다운, 리페어스 코스트 쏘 머치 댓 유 얼모스트 해브 투 바이 어 뉴 원",
+          "koreanText": "아뇨. 싸지만 고장나면 수리비가 커서 새 차를 사야 할 정도예요.",
+          "keyExpression": "break down",
+          "speakingTip": "is broke ✕."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "badge": "시나리오 3 · 꼬리질문 디펜스",
+      "title": "트럼프·중간선거·머스크 꼬리질문 디펜스",
+      "context": "정치·지정학 의견에 대한 후속 질문에 근거를 들어 답변하는 연습입니다. (※ 수업 주제를 바탕으로 만든 연습용 스크립트이며 실제 수업 녹취가 아닙니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Do you like Trump?",
+          "pronunciation": "두 유 라이크 트럼프",
+          "koreanText": "트럼프를 좋아하세요?",
+          "keyExpression": "Do you like",
+          "speakingTip": "직설 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Personally, no, but as an America First politician he has huge influence.",
+          "pronunciation": "퍼스널리, 노, 벗 애즈 언 아메리카 퍼스트 폴리티션 히 해즈 휴즈 인플루언스",
+          "koreanText": "개인적으론 아니지만 미국 우선 정치인으로서 영향력이 커요.",
+          "keyExpression": "Personally, no, but",
+          "speakingTip": "개인 의견과 사실 분리."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Why do other countries follow him?",
+          "pronunciation": "와이 두 아더 컨트리즈 팔로우 힘",
+          "koreanText": "왜 다른 나라들이 따르죠?",
+          "keyExpression": "follow him",
+          "speakingTip": "근거 요구."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Because the US is the center of the global system, so even when we disagree, we have to follow.",
+          "pronunciation": "비커즈 더 유에스 이즈 더 센터 오브 더 글로벌 시스템, 쏘 이븐 웬 위 디스어그리, 위 해브 투 팔로우",
+          "koreanText": "미국이 글로벌 시스템의 중심이라 동의하지 않아도 따라야 해요.",
+          "keyExpression": "even when",
+          "speakingTip": "양보 표현."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "What do you expect from the midterm elections?",
+          "pronunciation": "왓 두 유 익스펙트 프럼 더 미드텀 일렉션스",
+          "koreanText": "중간선거에 무엇을 기대하세요?",
+          "keyExpression": "midterm elections",
+          "speakingTip": "대통령 선거 아님."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "If his side doesn't win, he could become a lame duck. I'm really looking forward to watching.",
+          "pronunciation": "이프 히즈 사이드 더즌트 윈, 히 쿠드 비컴 어 레임 덕. 아임 리얼리 루킹 포워드 투 워칭",
+          "koreanText": "그의 진영이 못 이기면 레임덕이 될 수 있어요. 지켜보는 게 기대돼요.",
+          "keyExpression": "doesn't win",
+          "speakingTip": "'not wins' 금지."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "English Tutor",
+          "foreignText": "Why do you think Elon Musk will make more money?",
+          "pronunciation": "와이 두 유 씽크 일론 머스크 윌 메이크 모어 머니",
+          "koreanText": "왜 머스크가 더 벌 거라 생각하세요?",
+          "keyExpression": "will make",
+          "speakingTip": "이유 질문."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Because he has SpaceX and Starlink, and he may build AI data centers in space. His dream is bigger than most people can imagine.",
+          "pronunciation": "비커즈 히 해즈 스페이스엑스 앤 스타링크, 앤 히 메이 빌드 에이아이 데이터 센터스 인 스페이스. 히즈 드림 이즈 비거 댄 모스트 피플 캔 이매진",
+          "koreanText": "스페이스X와 스타링크가 있고 우주에 AI 데이터센터도 지을 수 있어서요. 꿈이 상상 이상으로 커요.",
+          "keyExpression": "bigger than most people can imagine",
+          "speakingTip": "비교 구조."
+        }
+      ]
+    }
+  ]
+}

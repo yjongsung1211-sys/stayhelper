@@ -1,0 +1,698 @@
+{
+  "lang": "es",
+  "langBadge": "🇪🇸 스페인어 (Español)",
+  "ttsLang": "es-ES",
+  "grammarCorrections": [
+    {
+      "myWrongSentence": "\"No, no tengo frío.\" (실제 발화 · 어색한 표현 · 튜터 교정)",
+      "correctedSentence": "Hace frío. / Está haciendo frío.",
+      "pronunciation": "아세 프리오 / 에스따 아시엔도 프리오",
+      "grammarPoint": "튜터 설명: \"날씨(el tiempo)를 묻는 질문이지 당신에 대한 질문이 아니다.\" 날씨는 hacer(hace frío/calor), 내 체감은 tener(tengo frío)입니다.",
+      "keyPattern": "hace + frío/calor (날씨) vs tengo + frío (내 체감)",
+      "alternativeExpressions": [
+        {
+          "label": "진행형",
+          "sentence": "Está haciendo frío.",
+          "pronunciation": "에스따 아시엔도 프리오",
+          "nuance": "지금 이 순간의 날씨를 강조"
+        },
+        {
+          "label": "체감 표현",
+          "sentence": "Tengo frío.",
+          "pronunciation": "뗑고 프리오",
+          "nuance": "내 몸이 춥다고 말할 때만 사용"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Oh, es, es el otoño en Corea.\" (실제 발화 · 더 자연스럽게 · 질문 의도)",
+      "correctedSentence": "En Corea está soleado y hace frío.",
+      "pronunciation": "엔 꼬레아 에스따 솔레아도 이 아세 프리오",
+      "grammarPoint": "튜터: \"좋지만 날씨를 물었지 계절을 물은 게 아니다.\" ¿Cómo está el tiempo?는 날씨 상태, 계절은 ¿Qué estación es?",
+      "keyPattern": "¿Cómo está el tiempo? → está + 형용사 / hace + 명사",
+      "alternativeExpressions": [
+        {
+          "label": "기온으로 답",
+          "sentence": "Hace cinco grados Celsius.",
+          "pronunciation": "아세 신꼬 그라도스 셀시우스",
+          "nuance": "숫자로 구체적으로 답할 때"
+        },
+        {
+          "label": "계절 + 날씨",
+          "sentence": "Es otoño y hace fresco.",
+          "pronunciation": "에스 오또뇨 이 아세 프레스꼬",
+          "nuance": "계절을 말하고 싶을 때는 날씨를 덧붙이기"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Está nevanto\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Está nevando.",
+      "pronunciation": "에스따 네반도",
+      "grammarPoint": "-ar 동사의 현재분사는 -ando입니다 (nevar → nevando, hablar → hablando). 튜터도 \"Nevando\"로 교정했습니다.",
+      "keyPattern": "-ar → -ando (현재분사)",
+      "alternativeExpressions": [
+        {
+          "label": "다른 -ar 동사",
+          "sentence": "Está hablando.",
+          "pronunciation": "에스따 아블란도",
+          "nuance": "같은 규칙 확인용"
+        },
+        {
+          "label": "비 오는 날씨",
+          "sentence": "Está lloviendo.",
+          "pronunciation": "에스따 쟈비엔도",
+          "nuance": "-er/-ir 동사는 -iendo (llover → lloviendo)"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Oh, tú tengo, tú tengo pregunta.\" (실제 발화 · 문법 오류 · 문장 미완성)",
+      "correctedSentence": "Tengo una pregunta: ¿cómo está el tiempo en Venezuela?",
+      "pronunciation": "뗑고 우나 쁘레군따: 꼬모 에스따 엘 띠엠뽀 엔 베네수엘라",
+      "grammarPoint": "주어 tú와 tengo(1인칭)가 섞였고 관사 una가 빠졌습니다. \"질문 있어요\"는 Tengo una pregunta. 튜터가 원한 건 같은 질문을 되묻는 것이었습니다.",
+      "keyPattern": "Tengo + una pregunta",
+      "alternativeExpressions": [
+        {
+          "label": "허락 구하기",
+          "sentence": "¿Puedo hacerte una pregunta?",
+          "pronunciation": "뿌에도 아세르떼 우나 쁘레군따",
+          "nuance": "더 공손하게 질문을 시작"
+        },
+        {
+          "label": "바로 묻기",
+          "sentence": "¿Y cómo está el tiempo en tu ciudad?",
+          "pronunciation": "이 꼬모 에스따 엘 띠엠뽀 엔 뚜 시우닫",
+          "nuance": "되묻기 표준 문장"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Sabato, Saturday.\" (실제 발화 · 어휘 오류 · 철자/발음)",
+      "correctedSentence": "sábado",
+      "pronunciation": "사바도",
+      "grammarPoint": "토요일은 sábado (악센트는 첫 음절 sá-). 스페인어 요일은 소문자로 씁니다.",
+      "keyPattern": "lunes · martes · miércoles · jueves · viernes · sábado · domingo",
+      "alternativeExpressions": [
+        {
+          "label": "요일 묻기",
+          "sentence": "¿Qué día es hoy? — Hoy es sábado.",
+          "pronunciation": "께 디아 에스 오이? 오이 에스 사바도",
+          "nuance": "오늘 요일 묻고 답하기"
+        },
+        {
+          "label": "주말 표현",
+          "sentence": "El sábado y el domingo son el fin de semana.",
+          "pronunciation": "엘 사바도 이 엘 도밍고 손 엘 핀 데 세마나",
+          "nuance": "요일 복수 일치"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Primero y enero.\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "Primero de enero.",
+      "pronunciation": "쁘리메로 데 에네로",
+      "grammarPoint": "날짜는 \"일 + de + 월\" 순서입니다. 튜터 설명: 매월 1일만 primero, 2일부터는 dos, tres, cuatro…",
+      "keyPattern": "el + 숫자 + de + 월",
+      "alternativeExpressions": [
+        {
+          "label": "2일 이후",
+          "sentence": "El dos de febrero.",
+          "pronunciation": "엘 도스 데 페브레로",
+          "nuance": "2일부터는 기수 숫자 사용"
+        },
+        {
+          "label": "날짜 묻기",
+          "sentence": "¿Qué fecha es hoy?",
+          "pronunciation": "께 페차 에스 오이",
+          "nuance": "오늘 날짜를 묻는 표현"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Cuá-cuá-cuándo es? Cuándo es en Venezuela?\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "¿Qué hora es en Venezuela?",
+      "pronunciation": "께 오라 에스 엔 베네수엘라",
+      "grammarPoint": "시간을 묻고 싶었다면 cuándo(언제)가 아니라 qué hora(몇 시)입니다. 튜터도 ¿Qué hora es?로 받아주었습니다.",
+      "keyPattern": "¿Qué hora es? / ¿Cuándo es...? (사건의 시점)",
+      "alternativeExpressions": [
+        {
+          "label": "요일 묻기",
+          "sentence": "¿Qué día es hoy en Venezuela?",
+          "pronunciation": "께 디아 에스 오이 엔 베네수엘라",
+          "nuance": "날짜·요일은 qué día"
+        },
+        {
+          "label": "시점 묻기",
+          "sentence": "¿Cuándo es la clase?",
+          "pronunciation": "꾸안도 에스 라 끌라세",
+          "nuance": "cuándo는 행사·일정의 시점"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Oh, en Corea, en Corea es son... Las, las ocho y media.\" (실제 발화 · 문법 오류 · 문장 미완성)",
+      "correctedSentence": "En Corea son las ocho y media.",
+      "pronunciation": "엔 꼬레아 손 라스 오초 이 메디아",
+      "grammarPoint": "시간은 복수 son las + 시각 (1시만 es la una). es와 son을 섞지 말고 한 번에 말합니다.",
+      "keyPattern": "Son las + 시각 / Es la una",
+      "alternativeExpressions": [
+        {
+          "label": "아침 표시",
+          "sentence": "Son las ocho y media de la mañana.",
+          "pronunciation": "손 라스 오초 이 메디아 데 라 마냐나",
+          "nuance": "튜터가 de la mañana로 덧붙임"
+        },
+        {
+          "label": "1시",
+          "sentence": "Es la una y media.",
+          "pronunciation": "에스 라 우나 이 메디아",
+          "nuance": "1시는 단수"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Diciembre, once.\" (실제 발화 · 문장 미완성 · 더 자연스럽게)",
+      "correctedSentence": "Mi cumpleaños es el once de diciembre.",
+      "pronunciation": "미 꿈쁠레아뇨스 에스 엘 온세 데 디시엠브레",
+      "grammarPoint": "튜터 교정: \"먼저 날짜(일), 그다음 월.\" 단어만 말하는 대신 완전한 문장으로 말해보세요.",
+      "keyPattern": "Mi cumpleaños es el + 일 + de + 월",
+      "alternativeExpressions": [
+        {
+          "label": "월만 답하기",
+          "sentence": "Mi cumpleaños es en diciembre.",
+          "pronunciation": "미 꿈쁠레아뇨스 에스 엔 디시엠브레",
+          "nuance": "\"몇 월\"을 물었을 때"
+        },
+        {
+          "label": "나이 말하기",
+          "sentence": "Cumplo años en diciembre.",
+          "pronunciation": "꿈쁠로 아뇨스 엔 디시엠브레",
+          "nuance": "\"나는 12월에 생일이야\""
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"día de la parents es...\" (실제 발화 · 문장 미완성 · 영어 혼용)",
+      "correctedSentence": "El Día de los Padres es el ocho de mayo.",
+      "pronunciation": "엘 디아 데 로스 빠드레스 에스 엘 오초 데 마요",
+      "grammarPoint": "튜터가 \"De los padres\"로 채워 주었습니다. 부모 전체는 los padres(남성 복수가 혼성 포함).",
+      "keyPattern": "el Día de + 관사 + 명사",
+      "alternativeExpressions": [
+        {
+          "label": "어머니날",
+          "sentence": "El Día de la Madre",
+          "pronunciation": "엘 디아 데 라 마드레",
+          "nuance": "라틴 아메리카는 보통 5월(튜터 설명: 둘째 일요일)"
+        },
+        {
+          "label": "아버지날",
+          "sentence": "El Día del Padre",
+          "pronunciation": "엘 디아 델 빠드레",
+          "nuance": "de + el = del"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"el mes es el catorce de febrero\" (실제 발화 · 더 자연스럽게 · 질문 의도)",
+      "correctedSentence": "El mes del amor es febrero.",
+      "pronunciation": "엘 메스 델 아모르 에스 페브레로",
+      "grammarPoint": "튜터: 답은 맞지만 \"어느 달(qué mes)\"을 물었으므로 월만 답합니다. 날짜까지 말하고 싶으면 문장을 따로 덧붙이세요.",
+      "keyPattern": "¿En qué mes...? → es en + 월",
+      "alternativeExpressions": [
+        {
+          "label": "월 + 날짜",
+          "sentence": "Es en febrero, el catorce.",
+          "pronunciation": "에스 엔 페브레로, 엘 까또르세",
+          "nuance": "월 먼저, 날짜는 보충"
+        },
+        {
+          "label": "질문 되받기",
+          "sentence": "¿En qué mes es el Día de San Valentín?",
+          "pronunciation": "엔 께 메스 에스 엘 디아 데 산 발렌띤",
+          "nuance": "튜터 질문 그대로 연습"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Es julio. Ah. En verano es julio\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "El verano es en julio.",
+      "pronunciation": "엘 베라노 에스 엔 훌리오",
+      "grammarPoint": "튜터가 주어를 앞에 세운 \"El verano es en julio\"로 교정했습니다. 주어(계절)를 먼저 말하고 시기(en + 월)를 붙입니다.",
+      "keyPattern": "El + 계절 + es + en + 월",
+      "alternativeExpressions": [
+        {
+          "label": "겨울",
+          "sentence": "El invierno es en diciembre.",
+          "pronunciation": "엘 인비에르노 에스 엔 디시엠브레",
+          "nuance": "같은 구조 반복"
+        },
+        {
+          "label": "질문 형태",
+          "sentence": "¿Cuándo es el verano?",
+          "pronunciation": "꾸안도 에스 엘 베라노",
+          "nuance": "튜터가 묻던 형태"
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"Temprano, hace temprano\" (실제 발화 · 어휘 오류)",
+      "correctedSentence": "En primavera en Corea hace fresco.",
+      "pronunciation": "엔 쁘리마베라 엔 꼬레아 아세 프레스꼬",
+      "grammarPoint": "temprano는 \"이른\"이라는 뜻입니다. 튜터는 \"templado\"를 제시했지만 일상에서는 hace fresco / está fresco가 훨씬 자주 쓰인다고 설명했습니다.",
+      "keyPattern": "hace fresco / está fresco (일상) · clima templado (격식)",
+      "alternativeExpressions": [
+        {
+          "label": "격식 표현",
+          "sentence": "En primavera hay un clima templado.",
+          "pronunciation": "엔 쁘리마베라 아이 운 끌리마 뗌쁠라도",
+          "nuance": "튜터: clima를 붙여야 자연스러움"
+        },
+        {
+          "label": "덥지 않은 날",
+          "sentence": "Hoy no hace calor, hace fresco.",
+          "pronunciation": "오이 노 아세 깔로르, 아세 프레스꼬",
+          "nuance": "\"선선하다\""
+        }
+      ]
+    }
+  ],
+  "betterAnswers": [
+    {
+      "situation": "\"¿Cómo está el tiempo en Corea?\" 라는 질문을 받았을 때",
+      "betterSentence": "Hoy está soleado y hace frío. Hace cinco grados Celsius.",
+      "pronunciation": "오이 에스따 솔레아도 이 아세 프리오. 아세 신꼬 그라도스 셀시우스",
+      "koreanMeaning": "오늘은 맑고 추워요. 섭씨 5도예요.",
+      "nuanceTip": "날씨 상태(está) + 기온(hace)을 한 번에 답하면 튜터 교정을 모두 반영한 문장이 됩니다.",
+      "followUpCombo": "¿Y en tu ciudad cuál es la temperatura?"
+    },
+    {
+      "situation": "\"¿En qué mes es tu cumpleaños?\"",
+      "betterSentence": "Mi cumpleaños es el once de diciembre.",
+      "pronunciation": "미 꿈쁠레아뇨스 에스 엘 온세 데 디시엠브레",
+      "koreanMeaning": "제 생일은 12월 11일이에요.",
+      "nuanceTip": "일 → de → 월 순서. 월만 묻는다면 \"en diciembre\"만 말해도 충분합니다.",
+      "followUpCombo": "¿Y el tuyo?"
+    },
+    {
+      "situation": "\"¿En qué mes es el Día de los Padres?\"",
+      "betterSentence": "En Corea el Día de los Padres es el ocho de mayo, un solo día para mamá y papá.",
+      "pronunciation": "엔 꼬레아 엘 디아 데 로스 빠드레스 에스 엘 오초 데 마요, 운 솔로 디아 빠라 마마 이 빠빠",
+      "koreanMeaning": "한국에서는 어버이날이 5월 8일, 엄마·아빠를 위한 하루예요.",
+      "nuanceTip": "수업에서 직접 말한 내용(5월 8일)을 완전한 문장으로 확장한 예시입니다.",
+      "followUpCombo": "¿Y en Venezuela?"
+    },
+    {
+      "situation": "\"¿Cuál es tu estación favorita?\"",
+      "betterSentence": "Mi estación favorita es el verano porque hace calor.",
+      "pronunciation": "미 에스따시온 파보리따 에스 엘 베라노 뽀르께 아세 깔로르",
+      "koreanMeaning": "제가 좋아하는 계절은 여름이에요. 덥거든요.",
+      "nuanceTip": "수업에서는 \"Me gusta el verano\"까지 말했습니다. porque로 이유를 붙이면 한 단계 업그레이드.",
+      "followUpCombo": "¿Cuándo son las vacaciones de verano?"
+    },
+    {
+      "situation": "\"¿En qué mes son las vacaciones?\"",
+      "betterSentence": "Normalmente las vacaciones son en julio.",
+      "pronunciation": "노르말멘떼 라스 바까시오네스 손 엔 훌리오",
+      "koreanMeaning": "보통 휴가는 7월이에요.",
+      "nuanceTip": "실제 발화 \"normalmente es en julio\"에서 복수 일치(las vacaciones son)만 다듬었습니다.",
+      "followUpCombo": "¿Y tú, cuándo tomas vacaciones?"
+    },
+    {
+      "situation": "\"¿Qué hora es en Corea?\"",
+      "betterSentence": "En Corea son las ocho y media de la mañana.",
+      "pronunciation": "엔 꼬레아 손 라스 오초 이 메디아 데 라 마냐나",
+      "koreanMeaning": "한국은 아침 8시 반이에요.",
+      "nuanceTip": "시차 설명용 필수 문장. de la mañana/tarde/noche를 붙이면 오해가 없습니다.",
+      "followUpCombo": "Aquí es de noche, ¿verdad?"
+    }
+  ],
+  "betterQuestions": [
+    {
+      "context": "수업 중 \"¿Cómo está el tiempo?\"를 되묻고 싶을 때",
+      "questionSentence": "¿Cómo está el tiempo hoy en tu ciudad?",
+      "pronunciation": "꼬모 에스따 엘 띠엠뽀 오이 엔 뚜 시우닫",
+      "koreanMeaning": "오늘 네 도시 날씨는 어때?",
+      "nuanceTip": "수업에서 직접 던진 질문에 hoy, en tu ciudad를 붙여 구체화했습니다.",
+      "followUpCombo": "¿Hace mucho calor?"
+    },
+    {
+      "context": "기온을 묻고 싶을 때",
+      "questionSentence": "¿Cuál es la temperatura en este momento?",
+      "pronunciation": "꾸알 에스 라 뗌뻬라뚜라 엔 에스떼 모멘또",
+      "koreanMeaning": "지금 기온이 몇 도야?",
+      "nuanceTip": "수업에서 \"¿Cuál es la temperatura?\"를 정확히 말했습니다. en este momento는 튜터 답변에서 가져온 표현.",
+      "followUpCombo": "¿Celsius o Fahrenheit?"
+    },
+    {
+      "context": "시차를 확인할 때",
+      "questionSentence": "¿Qué hora es en Venezuela ahora?",
+      "pronunciation": "께 오라 에스 엔 베네수엘라 아오라",
+      "koreanMeaning": "지금 베네수엘라는 몇 시야?",
+      "nuanceTip": "수업에서 cuándo로 헷갈렸던 부분을 qué hora로 바로잡은 질문.",
+      "followUpCombo": "¿Qué día es hoy para ti?"
+    },
+    {
+      "context": "기념일 비교",
+      "questionSentence": "¿En qué mes es el Día de San Valentín en tu país?",
+      "pronunciation": "엔 께 메스 에스 엘 디아 데 산 발렌띤 엔 뚜 빠이스",
+      "koreanMeaning": "네 나라에서 발렌타인데이는 몇 월이야?",
+      "nuanceTip": "튜터가 \"국가마다 다르다\"고 설명한 주제를 질문으로 만든 것.",
+      "followUpCombo": "¿Y el Día de la Madre?"
+    },
+    {
+      "context": "어머니날 확인",
+      "questionSentence": "¿Cuándo es el Día de la Madre en Venezuela?",
+      "pronunciation": "꾸안도 에스 엘 디아 데 라 마드레 엔 베네수엘라",
+      "koreanMeaning": "베네수엘라 어머니날은 언제야?",
+      "nuanceTip": "튜터 설명(5월 둘째 일요일) 기반. 고정 날짜가 아닌 경우를 더 물어볼 수 있습니다.",
+      "followUpCombo": "¿Es una fecha fija?"
+    },
+    {
+      "context": "계절 날씨 묻기",
+      "questionSentence": "¿Cómo es el clima en tu ciudad en invierno?",
+      "pronunciation": "꼬모 에스 엘 끌리마 엔 뚜 시우닫 엔 인비에르노",
+      "koreanMeaning": "네 도시 겨울 날씨는 어때?",
+      "nuanceTip": "수업의 계절 질문(¿Cómo es el clima en…?)을 그대로 응용.",
+      "followUpCombo": "¿Nieva mucho?"
+    }
+  ],
+  "scenarioTitle": "날씨·기온 심층 복습",
+  "scenarioContext": "수업의 날씨·기온 표현(hace frío, está nevando, ¿cuál es la temperatura?)을 복습하는 연습용 대화입니다. (※ 실제 수업 녹취가 아니라, 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+  "scenarioTurns": [
+    {
+      "role": "Tutor",
+      "speakerLabel": "스페인어 튜터",
+      "foreignText": "¿Cómo está el tiempo en Corea hoy?",
+      "pronunciation": "꼬모 에스따 엘 띠엠뽀 엔 꼬레아 오이",
+      "koreanText": "오늘 한국 날씨는 어때요?",
+      "keyExpression": "¿Cómo está el tiempo?",
+      "speakingTip": "계절이 아니라 날씨 상태로 답하세요."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "Hoy está soleado y hace frío.",
+      "pronunciation": "오이 에스따 솔레아도 이 아세 프리오",
+      "koreanText": "오늘은 맑고 추워요.",
+      "keyExpression": "está + 형용사 / hace + 명사",
+      "speakingTip": "\"tengo frío\"는 내 체감일 때만!"
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "스페인어 튜터",
+      "foreignText": "¿Cuál es la temperatura?",
+      "pronunciation": "꾸알 에스 라 뗌뻬라뚜라",
+      "koreanText": "기온은 몇 도예요?",
+      "keyExpression": "¿Cuál es la temperatura?",
+      "speakingTip": "수업에서 정확히 말했던 질문입니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "En Corea hace cinco grados Celsius.",
+      "pronunciation": "엔 꼬레아 아세 신꼬 그라도스 셀시우스",
+      "koreanText": "한국은 섭씨 5도예요.",
+      "keyExpression": "hace + 숫자 + grados",
+      "speakingTip": "Celsius는 \"셀시우스\"로 또박또박 발음 연습."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "스페인어 튜터",
+      "foreignText": "¿Y está nevando ahora?",
+      "pronunciation": "이 에스따 네반도 아오라",
+      "koreanText": "지금 눈 오고 있어요?",
+      "keyExpression": "estar + -ando",
+      "speakingTip": "nevanto가 아니라 nevando."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "No, no está nevando, pero está nublado.",
+      "pronunciation": "노, 노 에스따 네반도, 뻬로 에스따 누블라도",
+      "koreanText": "아니요, 눈은 안 오지만 흐려요.",
+      "keyExpression": "no está + gerundio",
+      "speakingTip": "pero로 대조 문장을 이어보세요."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "스페인어 튜터",
+      "foreignText": "¿Cómo es el clima en invierno?",
+      "pronunciation": "꼬모 에스 엘 끌리마 엔 인비에르노",
+      "koreanText": "겨울 날씨는 어때요?",
+      "keyExpression": "¿Cómo es el clima?",
+      "speakingTip": "계절 전체 특징을 물을 땐 es."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "En invierno hace mucho frío y a veces nieva.",
+      "pronunciation": "엔 인비에르노 아세 무초 프리오 이 아 베세스 니에바",
+      "koreanText": "겨울엔 아주 춥고 가끔 눈이 와요.",
+      "keyExpression": "a veces + 동사",
+      "speakingTip": "nieva(현재)와 nevando(진행) 구분."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "s1",
+      "badge": "시나리오 1 · 심층 복습",
+      "title": "날씨·기온 심층 복습",
+      "context": "수업의 날씨·기온 표현(hace frío, está nevando, ¿cuál es la temperatura?)을 복습하는 연습용 대화입니다. (※ 실제 수업 녹취가 아니라, 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Cómo está el tiempo en Corea hoy?",
+          "pronunciation": "꼬모 에스따 엘 띠엠뽀 엔 꼬레아 오이",
+          "koreanText": "오늘 한국 날씨는 어때요?",
+          "keyExpression": "¿Cómo está el tiempo?",
+          "speakingTip": "계절이 아니라 날씨 상태로 답하세요."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Hoy está soleado y hace frío.",
+          "pronunciation": "오이 에스따 솔레아도 이 아세 프리오",
+          "koreanText": "오늘은 맑고 추워요.",
+          "keyExpression": "está + 형용사 / hace + 명사",
+          "speakingTip": "\"tengo frío\"는 내 체감일 때만!"
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Cuál es la temperatura?",
+          "pronunciation": "꾸알 에스 라 뗌뻬라뚜라",
+          "koreanText": "기온은 몇 도예요?",
+          "keyExpression": "¿Cuál es la temperatura?",
+          "speakingTip": "수업에서 정확히 말했던 질문입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "En Corea hace cinco grados Celsius.",
+          "pronunciation": "엔 꼬레아 아세 신꼬 그라도스 셀시우스",
+          "koreanText": "한국은 섭씨 5도예요.",
+          "keyExpression": "hace + 숫자 + grados",
+          "speakingTip": "Celsius는 \"셀시우스\"로 또박또박 발음 연습."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Y está nevando ahora?",
+          "pronunciation": "이 에스따 네반도 아오라",
+          "koreanText": "지금 눈 오고 있어요?",
+          "keyExpression": "estar + -ando",
+          "speakingTip": "nevanto가 아니라 nevando."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "No, no está nevando, pero está nublado.",
+          "pronunciation": "노, 노 에스따 네반도, 뻬로 에스따 누블라도",
+          "koreanText": "아니요, 눈은 안 오지만 흐려요.",
+          "keyExpression": "no está + gerundio",
+          "speakingTip": "pero로 대조 문장을 이어보세요."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Cómo es el clima en invierno?",
+          "pronunciation": "꼬모 에스 엘 끌리마 엔 인비에르노",
+          "koreanText": "겨울 날씨는 어때요?",
+          "keyExpression": "¿Cómo es el clima?",
+          "speakingTip": "계절 전체 특징을 물을 땐 es."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "En invierno hace mucho frío y a veces nieva.",
+          "pronunciation": "엔 인비에르노 아세 무초 프리오 이 아 베세스 니에바",
+          "koreanText": "겨울엔 아주 춥고 가끔 눈이 와요.",
+          "keyExpression": "a veces + 동사",
+          "speakingTip": "nieva(현재)와 nevando(진행) 구분."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "badge": "시나리오 2 · 비즈니스 응용",
+      "title": "시차·일정 비즈니스 응용",
+      "context": "시차·요일·날짜 표현을 해외 파트너와의 일정 조율에 응용하는 연습용 대화입니다. (※ 실제 수업 녹취가 아니라, 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "Buenos días. ¿Qué hora es en Corea ahora?",
+          "pronunciation": "부에노스 디아스. 께 오라 에스 엔 꼬레아 아오라",
+          "koreanText": "좋은 아침이에요. 한국은 지금 몇 시예요?",
+          "keyExpression": "¿Qué hora es?",
+          "speakingTip": "cuándo가 아니라 qué hora."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Aquí son las ocho y media de la mañana.",
+          "pronunciation": "아끼 손 라스 오초 이 메디아 데 라 마냐나",
+          "koreanText": "여기는 아침 8시 반이에요.",
+          "keyExpression": "Son las + 시각",
+          "speakingTip": "es son 섞지 않기."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "Aquí son las siete y media de la noche. ¿Qué día es hoy para ti?",
+          "pronunciation": "아끼 손 라스 시에떼 이 메디아 데 라 노체. 께 디아 에스 오이 빠라 띠",
+          "koreanText": "여기는 저녁 7시 반이에요. 당신은 오늘 무슨 요일이에요?",
+          "keyExpression": "¿Qué día es hoy?",
+          "speakingTip": "시차로 요일이 다를 수 있음."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Para mí es miércoles. ¿Y para ti?",
+          "pronunciation": "빠라 미 에스 미에르꼴레스. 이 빠라 띠",
+          "koreanText": "저는 수요일이에요. 당신은요?",
+          "keyExpression": "Para mí es + 요일",
+          "speakingTip": "수업에서 말한 \"Hoy es miércoles\"의 확장."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "Para mí es martes. ¿Cuándo son las vacaciones de verano en Corea?",
+          "pronunciation": "빠라 미 에스 마르떼스. 꾸안도 손 라스 바까시오네스 데 베라노 엔 꼬레아",
+          "koreanText": "저는 화요일이에요. 한국 여름휴가는 언제예요?",
+          "keyExpression": "las vacaciones son…",
+          "speakingTip": "복수 일치."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Normalmente son en julio.",
+          "pronunciation": "노르말멘떼 손 엔 훌리오",
+          "koreanText": "보통 7월이에요.",
+          "keyExpression": "son en + 월",
+          "speakingTip": "수업에서 말한 문장입니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "Entonces propongo la reunión en agosto. ¿Qué te parece el primero de agosto?",
+          "pronunciation": "엔똔세스 쁘로뽕고 라 레우니온 엔 아고스또. 께 떼 빠레세 엘 쁘리메로 데 아고스또",
+          "koreanText": "그럼 8월에 회의를 제안해요. 8월 1일 어때요?",
+          "keyExpression": "el primero de + 월",
+          "speakingTip": "1일만 primero."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Me parece bien. Nos vemos el primero de agosto.",
+          "pronunciation": "메 빠레세 비엔. 노스 베모스 엘 쁘리메로 데 아고스또",
+          "koreanText": "좋아요. 8월 1일에 봐요.",
+          "keyExpression": "Me parece bien",
+          "speakingTip": "de를 빼먹지 않기."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "badge": "시나리오 3 · 꼬리질문 디펜스",
+      "title": "날짜·월 꼬리질문 디펜스",
+      "context": "수업에서 튜터가 교정한 부분(월만 답하기, 일→월 순서, 계절 vs 날씨)을 되짚는 연습용 꼬리질문 대화입니다. (※ 실제 수업 녹취가 아니라, 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿En qué mes es el Día de San Valentín?",
+          "pronunciation": "엔 께 메스 에스 엘 디아 데 산 발렌띤",
+          "koreanText": "발렌타인데이는 몇 월이에요?",
+          "keyExpression": "¿En qué mes…?",
+          "speakingTip": "월만 답하세요."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Es en febrero.",
+          "pronunciation": "에스 엔 페브레로",
+          "koreanText": "2월이에요.",
+          "keyExpression": "es en + 월",
+          "speakingTip": "튜터: \"solo febrero\"."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Y cuál es la fecha exacta?",
+          "pronunciation": "이 꾸알 에스 라 페차 엑삭따",
+          "koreanText": "정확한 날짜는요?",
+          "keyExpression": "la fecha exacta",
+          "speakingTip": "이제 일까지 말해도 됩니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Es el catorce de febrero.",
+          "pronunciation": "에스 엘 까또르세 데 페브레로",
+          "koreanText": "2월 14일이에요.",
+          "keyExpression": "el + 일 + de + 월",
+          "speakingTip": "질문 범위에 맞게 답하기."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Cuándo es tu cumpleaños?",
+          "pronunciation": "꾸안도 에스 뚜 꿈쁠레아뇨스",
+          "koreanText": "생일은 언제예요?",
+          "keyExpression": "¿Cuándo es…?",
+          "speakingTip": "\"Diciembre, once\" 대신 문장으로."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Mi cumpleaños es el once de diciembre.",
+          "pronunciation": "미 꿈쁠레아뇨스 에스 엘 온세 데 디시엠브레",
+          "koreanText": "제 생일은 12월 11일이에요.",
+          "keyExpression": "Mi cumpleaños es el…",
+          "speakingTip": "일 먼저, 월 다음."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "스페인어 튜터",
+          "foreignText": "¿Y el Día de los Padres en Corea?",
+          "pronunciation": "이 엘 디아 데 로스 빠드레스 엔 꼬레아",
+          "koreanText": "한국의 어버이날은요?",
+          "keyExpression": "el Día de los Padres",
+          "speakingTip": "parents 대신 los padres."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "Es el ocho de mayo, un solo día para madre y padre.",
+          "pronunciation": "에스 엘 오초 데 마요, 운 솔로 디아 빠라 마드레 이 빠드레",
+          "koreanText": "5월 8일, 엄마·아빠를 위한 하루예요.",
+          "keyExpression": "un solo día",
+          "speakingTip": "수업에서 한 설명을 스페인어로."
+        }
+      ]
+    }
+  ]
+}

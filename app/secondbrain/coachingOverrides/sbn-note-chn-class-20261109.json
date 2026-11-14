@@ -1,0 +1,719 @@
+{
+  "lang": "zh",
+  "langBadge": "🇨🇳 중국어 (中文)",
+  "ttsLang": "zh-CN",
+  "grammarCorrections": [
+    {
+      "myWrongSentence": "\"它会骗人。\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "它有时候会产生“AI 幻觉”，给出假的信息。",
+      "pronunciation": "tā yǒu shí hòu huì chǎn shēng \"AI huàn jué\", gěi chū jiǎ de xìn xī.",
+      "grammarPoint": "'骗人'은 의도적으로 속인다는 뜻이 강합니다. 선생님이 알려 준 'AI 幻觉'(AI 환각)을 쓰면 모델이 사실이 아닌 정보를 만들어 내는 현상을 정확히 가리킵니다.",
+      "keyPattern": "AI 幻觉 / 给出假的信息",
+      "alternativeExpressions": [
+        {
+          "label": "선생님 표현",
+          "sentence": "AI 有时候会不懂装懂。",
+          "pronunciation": "AI yǒu shí hòu huì bù dǒng zhuāng dǒng.",
+          "nuance": "不懂装懂은 선생님이 쓴 관용구입니다."
+        },
+        {
+          "label": "검증 강조",
+          "sentence": "它的结果不一定可靠，需要自己核实。",
+          "pronunciation": "tā de jié guǒ bù yí dìng kě kào, xū yào zì jǐ hé shí.",
+          "nuance": "核实는 사실 확인에 쓰는 정확한 동사입니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"还有一个AI能当十个人的工作。\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "一个 AI 能抵得上十个人的工作。",
+      "pronunciation": "yí gè AI néng dǐ de shàng shí gè rén de gōng zuò.",
+      "grammarPoint": "'当十个人的工作'는 어색합니다. 선생님이 정리해 준 '抵得上'(맞먹다)를 쓰면 '한 명이 열 명 몫을 한다'는 뜻이 자연스럽습니다.",
+      "keyPattern": "A 能抵得上 B",
+      "alternativeExpressions": [
+        {
+          "label": "구어",
+          "sentence": "一个 AI 顶十个人。",
+          "pronunciation": "yí gè AI dǐng shí gè rén.",
+          "nuance": "顶은 '맞먹다'를 뜻하는 구어입니다."
+        },
+        {
+          "label": "업무량",
+          "sentence": "AI 的工作量相当于十个人。",
+          "pronunciation": "AI de gōng zuò liàng xiāng dāng yú shí gè rén.",
+          "nuance": "相当于는 수치 비교에 쓰는 격식 표현입니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"然后就随便做出来，然后告诉给我。\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "然后随便做出一个结果就交给我了。",
+      "pronunciation": "rán hòu suí biàn zuò chū yí gè jié guǒ jiù jiāo gěi wǒ le.",
+      "grammarPoint": "'告诉给我'는 중국어에서 쓰지 않는 결합입니다. '告诉我'(알려 주다) 또는 '交给我'(건네주다)로 의미에 맞게 고르세요. 결과물을 넘겨주는 상황이므로 交给我가 어울립니다.",
+      "keyPattern": "告诉我 / 交给我",
+      "alternativeExpressions": [
+        {
+          "label": "의미 구분",
+          "sentence": "然后随便做一个结果，告诉我已经完成了。",
+          "pronunciation": "rán hòu suí biàn zuò yí gè jié guǒ, gào sù wǒ yǐ jīng wán chéng le.",
+          "nuance": "告诉我는 정보를 전달할 때 씁니다."
+        },
+        {
+          "label": "불만 표현",
+          "sentence": "它有时候会敷衍地给我一个答案。",
+          "pronunciation": "tā yǒu shí hòu huì fū yǎn dì gěi wǒ yí gè dá àn.",
+          "nuance": "敷衍은 '대충 때우다'입니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"但是现在是它不知道也说知道的话，然后随便说\" (실제 발화 · 더 자연스럽게)",
+      "correctedSentence": "现在的 AI 有时候不懂装懂，不知道也装作知道。",
+      "pronunciation": "xiàn zài de AI yǒu shí hòu bù dǒng zhuāng dǒng, bù zhī dào yě zhuāng zuò zhī dào.",
+      "grammarPoint": "선생님이 '不懂装懂 — 모르면서 아는 척한다'는 표현으로 바로 이어 주었습니다. 말을 돌려 설명하는 대신 이 관용구를 쓰면 간결합니다.",
+      "keyPattern": "不懂装懂 / 装作知道",
+      "alternativeExpressions": [
+        {
+          "label": "간결하게",
+          "sentence": "它有时候不知道也装知道。",
+          "pronunciation": "tā yǒu shí hòu bù zhī dào yě zhuāng zhī dào.",
+          "nuance": "装 + 동사는 '~인 척하다'입니다."
+        },
+        {
+          "label": "원인 연결",
+          "sentence": "所以重要的内容我一定要自己再查一遍。",
+          "pronunciation": "suǒ yǐ zhòng yào de nèi róng wǒ yí dìng yào zì jǐ zài chá yī biàn.",
+          "nuance": "再查一遍은 재확인한다는 구어입니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"我-我不认识的就是行业的话\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "对于我不熟悉的行业，只能相信它给我的信息。",
+      "pronunciation": "duì yú wǒ bù shú xī de háng yè, zhǐ néng xiāng xìn tā gěi wǒ de xìn xī.",
+      "grammarPoint": "'不认识'는 사람이나 글자에 쓰고, 분야나 업종에는 '不熟悉'(익숙하지 않다)나 '不了解'를 씁니다. '对于 ~ 来说'로 주제를 먼저 제시하면 문장이 정돈됩니다.",
+      "keyPattern": "对于 + 不熟悉的 + 领域",
+      "alternativeExpressions": [
+        {
+          "label": "대안",
+          "sentence": "对于陌生的领域，我只能先相信它。",
+          "pronunciation": "duì yú mò shēng de lǐng yù, wǒ zhǐ néng xiān xiāng xìn tā.",
+          "nuance": "陌生은 '낯설다'입니다."
+        },
+        {
+          "label": "현재 습관",
+          "sentence": "不过现在我会自己再查一遍。",
+          "pronunciation": "bù guò xiàn zài wǒ huì zì jǐ zài chá yī biàn.",
+          "nuance": "不过 ~ 现在로 변화를 보여 줍니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"人的人数是会生长\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "人口会增加。",
+      "pronunciation": "rén kǒu huì zēng jiā.",
+      "grammarPoint": "'生长'은 식물이나 몸이 자라는 것에 쓰고, 숫자의 증가에는 '增加/增长'를 씁니다. '人的人数'도 '人口'로 간단히 말할 수 있습니다.",
+      "keyPattern": "人口 + 会增加 / 增长",
+      "alternativeExpressions": [
+        {
+          "label": "출생 연결",
+          "sentence": "出生人口会变多。",
+          "pronunciation": "chū shēng rén kǒu huì biàn duō.",
+          "nuance": "出生人口는 '태어나는 인구'입니다."
+        },
+        {
+          "label": "문제 제기",
+          "sentence": "人口增加了，但是人权方面可能会出问题。",
+          "pronunciation": "rén kǒu zēng jiā le, dàn shì rén quán fāng miàn kě néng huì chū wèn tí.",
+          "nuance": "但是로 반전을 만듭니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"没，没达到 就电影里面的，嗯，很远。\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "还没达到电影里面的程度，差得很远。",
+      "pronunciation": "hái méi dá dào diàn yǐng lǐ miàn de chéng dù, chà de hěn yuǎn.",
+      "grammarPoint": "'没达到 ~ 很远'은 구조가 섞였습니다. 선생님이 '还没达到电影里面的程度'로 정리해 주었고, '差得很远'으로 격차를 덧붙이면 완성됩니다.",
+      "keyPattern": "还没达到 + 程度 / 差得很远",
+      "alternativeExpressions": [
+        {
+          "label": "거리감",
+          "sentence": "离电影里的世界还很远。",
+          "pronunciation": "lí diàn yǐng lǐ de shì jiè hái hěn yuǎn.",
+          "nuance": "离 ~ 还很远은 목표까지 거리를 말합니다."
+        },
+        {
+          "label": "비교",
+          "sentence": "现在的 AI 远远不如电影里的那样。",
+          "pronunciation": "xiàn zài de AI yuǎn yuǎn bù rú diàn yǐng lǐ de nà yàng.",
+          "nuance": "远远不如는 격차가 매우 클 때 씁니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"反正就被辞职了，就人多嘛\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "很多人因为 AI 失业了，被公司裁员了。",
+      "pronunciation": "hěn duō rén yīn wèi AI shī yè le, bèi gōng sī cái yuán le.",
+      "grammarPoint": "'被辞职'는 '被 + 동사'에 맞지 않습니다. 직접 말한 '失业'가 맞고, 회사에서 내보낸 경우는 '被裁员/被辞退'입니다. 본인이 그만두면 '辞职'만 씁니다.",
+      "keyPattern": "失业 / 被裁员 / 被辞退",
+      "alternativeExpressions": [
+        {
+          "label": "원인 명시",
+          "sentence": "很多人因为 AI 丢了工作。",
+          "pronunciation": "hěn duō rén yīn wèi AI diū le gōng zuò.",
+          "nuance": "丢了工作는 구어적 '실직'입니다."
+        },
+        {
+          "label": "기업 시점",
+          "sentence": "公司因为用了 AI 而裁员。",
+          "pronunciation": "gōng sī yīn wèi yòng le AI ér cái yuán.",
+          "nuance": "裁员은 회사가 주어일 때 자연스럽습니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"当大学毕业的就人。\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "企业不招聘刚毕业的大学毕业生。",
+      "pronunciation": "qǐ yè bù zhāo pìn gāng bì yè de dà xué bì yè shēng.",
+      "grammarPoint": "'当大学毕业的人'을 말하려다 조사가 겹쳤고, 선생님이 '大学毕业生'로 정리해 주었습니다. 취업 맥락에서 '应届毕业生'도 자주 씁니다.",
+      "keyPattern": "大学毕业生 / 应届毕业生",
+      "alternativeExpressions": [
+        {
+          "label": "채용 용어",
+          "sentence": "企业不再招聘应届毕业生。",
+          "pronunciation": "qǐ yè bù zài zhāo pìn yīng jiè bì yè shēng.",
+          "nuance": "应届毕业生는 올해 졸업 예정자입니다."
+        },
+        {
+          "label": "구어",
+          "sentence": "刚毕业的年轻人很难找到工作。",
+          "pronunciation": "gāng bì yè de nián qīng rén hěn nán zhǎo dào gōng zuò.",
+          "nuance": "年轻人은 폭넓게 쓰입니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"那我们要税，付税。\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "我们还要交税。",
+      "pronunciation": "wǒ men hái yào jiāo shuì.",
+      "grammarPoint": "'付税'는 흔한 결합이 아니고, 세금은 '交税/缴税'라고 합니다. '要税'도 '交税'로 바꾸면 한 문장으로 정리됩니다.",
+      "keyPattern": "交税 / 缴税",
+      "alternativeExpressions": [
+        {
+          "label": "격식체",
+          "sentence": "还要缴纳各种税费。",
+          "pronunciation": "hái yào jiǎo nà gè zhǒng shuì fèi.",
+          "nuance": "缴纳는 공식 문서에서 씁니다."
+        },
+        {
+          "label": "창업 맥락",
+          "sentence": "创业以后要自己处理税务问题。",
+          "pronunciation": "chuàng yè yǐ hòu yào zì jǐ chǔ lǐ shuì wù wèn tí.",
+          "nuance": "处理税务问题는 경영 맥락에서 자주 씁니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"把它就算力，算力中心， 就做建筑-\" (실제 발화 · 문장 미완성)",
+      "correctedSentence": "把算力中心建在有电力的国家。",
+      "pronunciation": "bǎ suàn lì zhōng xīn jiàn zài yǒu diàn lì de guó jiā.",
+      "grammarPoint": "'做建筑'는 건물을 짓는다는 뜻으로는 부적절합니다. 선생님이 정리해 준 '把算力中心建在 ~'를 쓰면 위치까지 자연스럽게 담깁니다. 동사는 建设/建造도 가능합니다.",
+      "keyPattern": "把 + 算力中心 + 建在 + 장소",
+      "alternativeExpressions": [
+        {
+          "label": "건설 강조",
+          "sentence": "很多企业在有电力的国家建设算力中心。",
+          "pronunciation": "hěn duō qǐ yè zài yǒu diàn lì de guó jiā jiàn shè suàn lì zhōng xīn.",
+          "nuance": "建设는 대규모 시설에 쓰는 동사입니다."
+        },
+        {
+          "label": "원인",
+          "sentence": "因为没有电力，算力中心就用不了。",
+          "pronunciation": "yīn wèi méi yǒu diàn lì, suàn lì zhōng xīn jiù yòng bù liǎo.",
+          "nuance": "因为 ~ 就用不了는 원인과 결과를 간단히 묶습니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"煤气的，从俄罗斯过来的煤气的，用那个煤气发电了。\" (실제 발화 · 어색한 표현)",
+      "correctedSentence": "它们用从俄罗斯进口的天然气发电。",
+      "pronunciation": "tā men yòng cóng é luó sī jìn kǒu de tiān rán qì fā diàn.",
+      "grammarPoint": "발전용 가스는 '煤气'(석탄가스)가 아니라 '天然气'입니다. 수업 마무리에서 선생님도 '天然气'라고 말했습니다. '从俄罗斯过来的'는 '从俄罗斯进口的'가 더 자연스럽습니다.",
+      "keyPattern": "天然气 + 发电 / 从 ~ 进口的",
+      "alternativeExpressions": [
+        {
+          "label": "간결하게",
+          "sentence": "德国改用天然气发电。",
+          "pronunciation": "dé guó gǎi yòng tiān rán qì fā diàn.",
+          "nuance": "改用 + 수단은 '교체해 쓰다'입니다."
+        },
+        {
+          "label": "의존성",
+          "sentence": "他们依赖进口的天然气来发电。",
+          "pronunciation": "tā men yī lài jìn kǒu de tiān rán qì lái fā diàn.",
+          "nuance": "依赖 ~ 来 ~ 는 의존 관계를 보여 줍니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"日本一样就经常，经常会发生地震那种的。\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "韩国不像日本那样经常发生地震。",
+      "pronunciation": "hán guó bù xiàng rì běn nà yàng jīng cháng fā shēng dì zhèn.",
+      "grammarPoint": "'日本一样'은 '일본과 같다'로 읽혀 의도(한국은 일본과 다르다)와 반대 뜻이 됩니다. '不像 A 那样 ~'로 대비를 표현해야 합니다.",
+      "keyPattern": "不像 A 那样 + 동사",
+      "alternativeExpressions": [
+        {
+          "label": "대비",
+          "sentence": "和日本相比，韩国很少发生地震。",
+          "pronunciation": "hé rì běn xiàng bǐ, hán guó hěn shǎo fā shēng dì zhèn.",
+          "nuance": "和 ~ 相比는 비교 문장의 격식 표현입니다."
+        },
+        {
+          "label": "간단히",
+          "sentence": "韩国地震很少，不像日本。",
+          "pronunciation": "hán guó dì zhèn hěn shǎo, bù xiàng rì běn.",
+          "nuance": "不像 + 명사로 짧게 끝낼 수 있습니다."
+        }
+      ]
+    },
+    {
+      "myWrongSentence": "\"把， 收的养老金的年龄就高-高两岁了。\" (실제 발화 · 문법 오류)",
+      "correctedSentence": "把领取养老金的年龄推迟了两年。",
+      "pronunciation": "bǎ lǐng qǔ yǎng lǎo jīn de nián líng tuī chí le liǎng nián.",
+      "grammarPoint": "'收'는 받는 것이 아니라 거두는 쪽이라 연금은 '领取'(수령하다)가 맞습니다. 나이를 올린다는 뜻은 '推迟/延迟'를 쓰고, 기간은 '两年'입니다(나이 '两岁'는 사람 나이에만 씁니다).",
+      "keyPattern": "把 + 领取养老金的年龄 + 推迟了 + 两年",
+      "alternativeExpressions": [
+        {
+          "label": "퇴직 연령",
+          "sentence": "把退休年龄推迟了两年。",
+          "pronunciation": "bǎ tuì xiū nián líng tuī chí le liǎng nián.",
+          "nuance": "退休年龄는 퇴직 시점의 나이입니다."
+        },
+        {
+          "label": "수령 조건",
+          "sentence": "要到六十五岁才能领养老金。",
+          "pronunciation": "yào dào liù shí wǔ suì cái néng lǐng yǎng lǎo jīn.",
+          "nuance": "要 ~ 才能 ~ 는 조건 제한을 보여 줍니다."
+        }
+      ]
+    }
+  ],
+  "betterAnswers": [
+    {
+      "situation": "요즘 하는 일을 묻는 상황",
+      "betterSentence": "我最近自己和 AI 一起做网页，遇到问题就一个一个地解决。",
+      "pronunciation": "wǒ zuì jìn zì jǐ hé AI yì qǐ zuò wǎng yè, yù dào wèn tí jiù yí gè yí gè dì jiě jué.",
+      "koreanMeaning": "요즘 AI와 함께 웹페이지를 만들고 있고, 문제가 생기면 하나씩 해결합니다.",
+      "nuanceTip": "一个一个地는 선생님이 쓴 표현으로 문제를 순서대로 처리한다는 뜻입니다.",
+      "followUpCombo": "最难解决的是什么问题？"
+    },
+    {
+      "situation": "AI와 사람의 차이를 묻는 상황",
+      "betterSentence": "AI 不需要休息，随时都能回应，而且一个 AI 能抵得上好几个人的工作。",
+      "pronunciation": "AI bù xū yào xiū xī, suí shí dōu néng huí yìng, ér qiě yí gè AI néng dǐ de shàng hǎo jǐ gè rén de gōng zuò.",
+      "koreanMeaning": "AI는 쉬지 않고 언제든 응답하며, 한 AI가 여러 사람 몫을 합니다.",
+      "nuanceTip": "随时 + 都能 + 동사는 상시 가능함을 표현합니다.",
+      "followUpCombo": "那它有什么缺点吗？"
+    },
+    {
+      "situation": "AI 한계를 묻는 상황",
+      "betterSentence": "AI 有时候会不懂装懂，所以重要的内容我一定会自己核实。",
+      "pronunciation": "AI yǒu shí hòu huì bù dǒng zhuāng dǒng, suǒ yǐ zhòng yào de nèi róng wǒ yí dìng huì zì jǐ hé shí.",
+      "koreanMeaning": "AI는 가끔 모르면서 아는 척하므로 중요한 내용은 직접 확인합니다.",
+      "nuanceTip": "核实는 '사실을 검증하다'로, 重要的内容 앞에 쓰면 신뢰감이 있습니다.",
+      "followUpCombo": "你一般怎么核实？"
+    },
+    {
+      "situation": "AI 시대 실직 문제에 대한 의견을 묻는 상황",
+      "betterSentence": "有些职业会消失，但是新的职业也会出现，人是适应环境的动物。",
+      "pronunciation": "yǒu xiē zhí yè huì xiāo shī, dàn shì xīn de zhí yè yě huì chū xiàn, rén shì shì yìng huán jìng de dòng wù.",
+      "koreanMeaning": "일부 직업은 사라지지만 새로운 직업이 생기고, 인간은 환경에 적응하는 동물입니다.",
+      "nuanceTip": "有些 ~ 但是 ~ 로 균형 있게 견해를 말합니다.",
+      "followUpCombo": "你觉得哪些新职业会出现？"
+    },
+    {
+      "situation": "졸업생 진로를 묻는 상황",
+      "betterSentence": "没有工作经验的毕业生可以借助 AI 创业，在实践中学习整个企业的运作。",
+      "pronunciation": "méi yǒu gōng zuò jīng yàn de bì yè shēng kě yǐ jiè zhù AI chuàng yè, zài shí jiàn zhōng xué xí zhěng gè qǐ yè de yùn zuò.",
+      "koreanMeaning": "경력 없는 졸업생은 AI의 힘을 빌려 창업하고 실무를 하며 기업 운영을 배울 수 있습니다.",
+      "nuanceTip": "借助는 수업에서 배운 '~의 힘을 빌려'라는 표현입니다.",
+      "followUpCombo": "创业失败了怎么办？"
+    },
+    {
+      "situation": "연금 문제에 대한 의견을 묻는 상황",
+      "betterSentence": "我觉得应该交多少领多少，政府的钱是有限的，只能适当补助。",
+      "pronunciation": "wǒ jué de yīng gāi jiāo duō shǎo lǐng duō shǎo, zhèng fǔ de qián shì yǒu xiàn de, zhǐ néng shì dàng bǔ zhù.",
+      "koreanMeaning": "낸 만큼 받아야 하고 정부 재원은 한정되어 적당히 보조할 수밖에 없다고 봅니다.",
+      "nuanceTip": "交多少领多少는 '낸 만큼 받는다'는 구어적 표현입니다.",
+      "followUpCombo": "那已经退休的人怎么办？"
+    }
+  ],
+  "betterQuestions": [
+    {
+      "context": "借助라는 단어를 확장할 때",
+      "questionSentence": "“借助”和“利用”有什么区别？",
+      "pronunciation": "\"jiè zhù\" hé \"lì yòng\" yǒu shén me qū bié?",
+      "koreanMeaning": "'借助'와 '利用'은 무엇이 다른가요?",
+      "nuanceTip": "借助는 도움의 느낌, 利用은 이용의 느낌이 있어 질문 가치가 있습니다.",
+      "followUpCombo": "哪个更适合正式场合？"
+    },
+    {
+      "context": "AI 幻觉 개념을 구체화할 때",
+      "questionSentence": "“AI 幻觉”除了假信息，还包括哪些情况？",
+      "pronunciation": "\"AI huàn jué\" chú le jiǎ xìn xī, hái bāo kuò nǎ xiē qíng kuàng?",
+      "koreanMeaning": "'AI 환각'에는 가짜 정보 외에 어떤 경우가 포함되나요?",
+      "nuanceTip": "除了 ~，还 ~ 는 범위를 넓혀 묻는 기본형입니다.",
+      "followUpCombo": "能举一个具体例子吗？"
+    },
+    {
+      "context": "채용 용어를 정리할 때",
+      "questionSentence": "“应聘”和“求职”怎么区分？",
+      "pronunciation": "\"yìng pìn\" hé \"qiú zhí\" zěn me qū fēn?",
+      "koreanMeaning": "'应聘'과 '求职'는 어떻게 구분하나요?",
+      "nuanceTip": "招聘과 반대되는 말을 배웠으니 비슷한 말도 확인하는 질문입니다.",
+      "followUpCombo": "面试时用哪个更自然？"
+    },
+    {
+      "context": "算力中心 용어를 확인할 때",
+      "questionSentence": "“算力中心”和“数据中心”是一回事吗？",
+      "pronunciation": "\"suàn lì zhōng xīn\" hé \"shù jù zhōng xīn\" shì yī huí shì ma?",
+      "koreanMeaning": "'算力中心'와 '数据中心'는 같은 건가요?",
+      "nuanceTip": "是一回事吗는 같은지 확인하는 구어체 질문입니다.",
+      "followUpCombo": "新闻里哪个更常见？"
+    },
+    {
+      "context": "퇴직 연령 용어를 확인할 때",
+      "questionSentence": "“延迟退休”和“推迟退休年龄”可以互换吗？",
+      "pronunciation": "\"yán chí tuì xiū\" hé \"tuī chí tuì xiū nián líng\" kě yǐ hù huàn ma?",
+      "koreanMeaning": "'延迟退休'와 '推迟退休年龄'는 서로 바꿔 쓸 수 있나요?",
+      "nuanceTip": "정책 뉴스에서 자주 쓰는 표현이라 알아 두면 유용합니다.",
+      "followUpCombo": "中国现在是怎么规定的？"
+    },
+    {
+      "context": "연금 동사를 구분할 때",
+      "questionSentence": "“削减”“冻结”“缩减”用在养老金上有什么不同？",
+      "pronunciation": "\"xuē jiǎn\"\"dòng jié\"\"suō jiǎn\" yòng zài yǎng lǎo jīn shàng yǒu shén me bù tóng?",
+      "koreanMeaning": "연금에 '削减·冻结·缩减'를 쓸 때 각각 뭐가 다른가요?",
+      "nuanceTip": "선생님이 쓴 冻结·削减와 본인이 쓴 缩를 비교하는 질문입니다.",
+      "followUpCombo": "哪个最容易引起争议？"
+    }
+  ],
+  "scenarioTitle": "수업 핵심 단어 복습",
+  "scenarioContext": "AI 幻觉·借助·应聘·算力中心 등 수업에서 배운 단어를 말해 보는 복습 트랙입니다. (※ 실제 수업 녹취가 아니라 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+  "scenarioTurns": [
+    {
+      "role": "Tutor",
+      "speakerLabel": "중국어 선생님",
+      "foreignText": "我们复习一下。AI 有时候给出假的信息，这叫什么？",
+      "pronunciation": "wǒ men fù xí yī xià.AI yǒu shí hòu gěi chū jiǎ de xìn xī, zhè jiào shén me?",
+      "koreanText": "복습해 봅시다. AI가 가끔 가짜 정보를 주는 것을 뭐라고 하죠?",
+      "keyExpression": "AI 幻觉",
+      "speakingTip": "가짜 정보를 만들어 내는 현상입니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "叫“AI 幻觉”，也可以说 AI “不懂装懂”。",
+      "pronunciation": "jiào \"AI huàn jué\", yě kě yǐ shuō AI \"bù dǒng zhuāng dǒng\".",
+      "koreanText": "'AI 환각'이라고 하고 AI가 '모르면서 아는 척한다'고도 합니다.",
+      "keyExpression": "不懂装懂",
+      "speakingTip": "관용구로 암기하면 편합니다."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "중국어 선생님",
+      "foreignText": "很好。那“借助”怎么用？",
+      "pronunciation": "hěn hǎo. nà \"jiè zhù\" zěn me yòng?",
+      "koreanText": "좋아요. 그럼 '借助'는 어떻게 쓰나요?",
+      "keyExpression": "借助",
+      "speakingTip": "'~의 힘을 빌려'라는 뜻입니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "比如“我借助 AI 做出了自己的网页”。",
+      "pronunciation": "bǐ rú \"wǒ jiè zhù AI zuò chū le zì jǐ de wǎng yè\".",
+      "koreanText": "예를 들어 '저는 AI의 도움으로 제 웹페이지를 만들었습니다'처럼 씁니다.",
+      "keyExpression": "借助 + AI + 동사",
+      "speakingTip": "借助 뒤에는 도움을 주는 대상이 옵니다."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "중국어 선생님",
+      "foreignText": "“招聘”的反义词是什么？",
+      "pronunciation": "\"zhāo pìn\" de fǎn yì cí shì shén me?",
+      "koreanText": "'招聘'의 반대말은 무엇인가요?",
+      "keyExpression": "应聘",
+      "speakingTip": "회사는 招聘, 사람은 应聘입니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "是“应聘”。公司招聘，人去应聘。",
+      "pronunciation": "shì \"yìng pìn\". gōng sī zhāo pìn, rén qù yìng pìn.",
+      "koreanText": "'应聘'입니다. 회사는 채용하고 사람은 지원합니다.",
+      "keyExpression": "公司招聘，人应聘",
+      "speakingTip": "주어에 따라 동사가 달라집니다."
+    },
+    {
+      "role": "Tutor",
+      "speakerLabel": "중국어 선생님",
+      "foreignText": "把算力中心建在有电力的国家，你能完整地说一遍吗？",
+      "pronunciation": "bǎ suàn lì zhōng xīn jiàn zài yǒu diàn lì de guó jiā, nǐ néng wán zhěng dì shuō yī biàn ma?",
+      "koreanText": "데이터센터를 전력이 있는 나라에 짓는다는 문장을 완성해서 말해 볼래요?",
+      "keyExpression": "把 ~ 建在 ~",
+      "speakingTip": "把 구문으로 위치를 말합니다."
+    },
+    {
+      "role": "Me",
+      "speakerLabel": "윤종성 대표 (Me)",
+      "foreignText": "很多 AI 企业会把算力中心建在有电力的国家。",
+      "pronunciation": "hěn duō AI qǐ yè huì bǎ suàn lì zhōng xīn jiàn zài yǒu diàn lì de guó jiā.",
+      "koreanText": "많은 AI 기업이 전력이 있는 나라에 데이터센터를 짓습니다.",
+      "keyExpression": "有电力的国家",
+      "speakingTip": "有 ~ 的 + 명사는 수식어 구조입니다."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "s1",
+      "badge": "시나리오 1 · 심층 복습",
+      "title": "수업 핵심 단어 복습",
+      "context": "AI 幻觉·借助·应聘·算力中心 등 수업에서 배운 단어를 말해 보는 복습 트랙입니다. (※ 실제 수업 녹취가 아니라 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님",
+          "foreignText": "我们复习一下。AI 有时候给出假的信息，这叫什么？",
+          "pronunciation": "wǒ men fù xí yī xià.AI yǒu shí hòu gěi chū jiǎ de xìn xī, zhè jiào shén me?",
+          "koreanText": "복습해 봅시다. AI가 가끔 가짜 정보를 주는 것을 뭐라고 하죠?",
+          "keyExpression": "AI 幻觉",
+          "speakingTip": "가짜 정보를 만들어 내는 현상입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "叫“AI 幻觉”，也可以说 AI “不懂装懂”。",
+          "pronunciation": "jiào \"AI huàn jué\", yě kě yǐ shuō AI \"bù dǒng zhuāng dǒng\".",
+          "koreanText": "'AI 환각'이라고 하고 AI가 '모르면서 아는 척한다'고도 합니다.",
+          "keyExpression": "不懂装懂",
+          "speakingTip": "관용구로 암기하면 편합니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님",
+          "foreignText": "很好。那“借助”怎么用？",
+          "pronunciation": "hěn hǎo. nà \"jiè zhù\" zěn me yòng?",
+          "koreanText": "좋아요. 그럼 '借助'는 어떻게 쓰나요?",
+          "keyExpression": "借助",
+          "speakingTip": "'~의 힘을 빌려'라는 뜻입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "比如“我借助 AI 做出了自己的网页”。",
+          "pronunciation": "bǐ rú \"wǒ jiè zhù AI zuò chū le zì jǐ de wǎng yè\".",
+          "koreanText": "예를 들어 '저는 AI의 도움으로 제 웹페이지를 만들었습니다'처럼 씁니다.",
+          "keyExpression": "借助 + AI + 동사",
+          "speakingTip": "借助 뒤에는 도움을 주는 대상이 옵니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님",
+          "foreignText": "“招聘”的反义词是什么？",
+          "pronunciation": "\"zhāo pìn\" de fǎn yì cí shì shén me?",
+          "koreanText": "'招聘'의 반대말은 무엇인가요?",
+          "keyExpression": "应聘",
+          "speakingTip": "회사는 招聘, 사람은 应聘입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "是“应聘”。公司招聘，人去应聘。",
+          "pronunciation": "shì \"yìng pìn\". gōng sī zhāo pìn, rén qù yìng pìn.",
+          "koreanText": "'应聘'입니다. 회사는 채용하고 사람은 지원합니다.",
+          "keyExpression": "公司招聘，人应聘",
+          "speakingTip": "주어에 따라 동사가 달라집니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님",
+          "foreignText": "把算力中心建在有电力的国家，你能完整地说一遍吗？",
+          "pronunciation": "bǎ suàn lì zhōng xīn jiàn zài yǒu diàn lì de guó jiā, nǐ néng wán zhěng dì shuō yī biàn ma?",
+          "koreanText": "데이터센터를 전력이 있는 나라에 짓는다는 문장을 완성해서 말해 볼래요?",
+          "keyExpression": "把 ~ 建在 ~",
+          "speakingTip": "把 구문으로 위치를 말합니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "很多 AI 企业会把算力中心建在有电力的国家。",
+          "pronunciation": "hěn duō AI qǐ yè huì bǎ suàn lì zhōng xīn jiàn zài yǒu diàn lì de guó jiā.",
+          "koreanText": "많은 AI 기업이 전력이 있는 나라에 데이터센터를 짓습니다.",
+          "keyExpression": "有电力的国家",
+          "speakingTip": "有 ~ 的 + 명사는 수식어 구조입니다."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "badge": "시나리오 2 · 비즈니스 응용",
+      "title": "중국 고객에게 AI 데이터센터·에너지 설명하기",
+      "context": "중국 기업 담당자와 대화한다고 가정하고 한국의 AI 인프라와 에너지 상황을 설명하는 연습 스크립트입니다. (※ 실제 수업 녹취가 아니라 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 · 고객 역할",
+          "foreignText": "尹代表，我们想在亚洲建一个算力中心，您觉得韩国怎么样？",
+          "pronunciation": "yǐn dài biǎo, wǒ men xiǎng zài yà zhōu jiàn yí gè suàn lì zhōng xīn, nín jué de hán guó zěn me yàng?",
+          "koreanText": "윤 대표님, 저희가 아시아에 AI 컴퓨팅센터를 지으려는데 한국은 어떻게 보세요?",
+          "keyExpression": "您觉得 ~ 怎么样",
+          "speakingTip": "의견을 묻는 정중한 표현입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "韩国政府很支持，半导体产业也很强，不过电力是关键问题。",
+          "pronunciation": "hán guó zhèng fǔ hěn zhī chí, bàn dǎo tǐ chǎn yè yě hěn qiáng, bù guò diàn lì shì guān jiàn wèn tí.",
+          "koreanText": "한국 정부는 적극 지원하고 반도체 산업도 강하지만 전력이 핵심 문제입니다.",
+          "keyExpression": "不过 + 关键问题",
+          "speakingTip": "不过로 반전을 보여 줍니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 · 고객 역할",
+          "foreignText": "核电对这个问题有帮助吗？",
+          "pronunciation": "hé diàn duì zhè ge wèn tí yǒu bāng zhù ma?",
+          "koreanText": "원전이 이 문제에 도움이 될까요?",
+          "keyExpression": "有帮助吗",
+          "speakingTip": "有帮助는 도움이 있음을 묻습니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "韩国国土小，太阳能和水力有限，所以核电是比较现实的选择。",
+          "pronunciation": "hán guó guó tǔ xiǎo, tài yáng néng hé shuǐ lì yǒu xiàn, suǒ yǐ hé diàn shì bǐ jiào xiàn shí de xuǎn zé.",
+          "koreanText": "한국은 국토가 좁아 태양광과 수력에 한계가 있어 원전이 현실적인 선택입니다.",
+          "keyExpression": "比较现实的选择",
+          "speakingTip": "现实는 실현 가능함을 가리킵니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 · 고객 역할",
+          "foreignText": "那地震风险呢？",
+          "pronunciation": "nà dì zhèn fēng xiǎn ne?",
+          "koreanText": "그럼 지진 리스크는요?",
+          "keyExpression": "地震风险",
+          "speakingTip": "风险는 위험 요소입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "韩国几乎没有大地震，不像日本那样经常发生，所以比较有利。",
+          "pronunciation": "hán guó jī hū méi yǒu dà dì zhèn, bù xiàng rì běn nà yàng jīng cháng fā shēng, suǒ yǐ bǐ jiào yǒu lì.",
+          "koreanText": "한국은 큰 지진이 거의 없어 일본처럼 자주 발생하지 않으므로 비교적 유리합니다.",
+          "keyExpression": "不像 ~ 那样",
+          "speakingTip": "대비 구문입니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님 · 고객 역할",
+          "foreignText": "您觉得 AI 会代替我们的员工吗？",
+          "pronunciation": "nín jué de AI huì dài tì wǒ men de yuán gōng ma?",
+          "koreanText": "AI가 저희 직원을 대체할 거라고 보세요?",
+          "keyExpression": "代替",
+          "speakingTip": "代替는 '대체하다'입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "不会完全代替。应该让 AI 做重复的工作，人负责判断和决策。",
+          "pronunciation": "bú huì wán quán dài tì. yīng gāi ràng AI zuò chóng fù de gōng zuò, rén fù zé pàn duàn hé jué cè.",
+          "koreanText": "완전히 대체하진 않을 겁니다. AI는 반복 업무를, 사람은 판단과 의사결정을 맡아야 합니다.",
+          "keyExpression": "负责判断和决策",
+          "speakingTip": "负责 + 업무로 역할 분담을 말합니다."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "badge": "시나리오 3 · 꼬리질문 디펜스",
+      "title": "꼬리질문 디펜스: 신입·창업·연금",
+      "context": "선생님이 주장의 허점을 되묻는 상황을 가정해 근거를 이어서 말하는 연습 스크립트입니다. (※ 실제 수업 녹취가 아니라 수업에서 다룬 주제를 바탕으로 만든 연습용 스크립트입니다.)",
+      "turns": [
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님",
+          "foreignText": "你说 AI 比新人懂得多，那企业还需要培养新人吗？",
+          "pronunciation": "nǐ shuō AI bǐ xīn rén dǒng de duō, nà qǐ yè hái xū yào péi yǎng xīn rén ma?",
+          "koreanText": "AI가 신입보다 아는 게 많다면 기업은 신입을 키울 필요가 있을까요?",
+          "keyExpression": "还需要 ~ 吗",
+          "speakingTip": "필요 여부를 되묻습니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "不再需要从零开始培训，但是新人可以借助 AI 更快地上手。",
+          "pronunciation": "bù zài xū yào cóng líng kāi shǐ péi xùn, dàn shì xīn rén kě yǐ jiè zhù AI gèng kuài dì shàng shǒu.",
+          "koreanText": "처음부터 교육할 필요는 없지만 신입은 AI의 도움으로 더 빨리 업무에 익숙해질 수 있습니다.",
+          "keyExpression": "上手",
+          "speakingTip": "上手는 '손에 익다'는 뜻입니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님",
+          "foreignText": "如果创业失败了怎么办？",
+          "pronunciation": "rú guǒ chuàng yè shī bài le zěn me bàn?",
+          "koreanText": "창업에 실패하면 어떻게 하나요?",
+          "keyExpression": "失败了怎么办",
+          "speakingTip": "가정 질문입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "失败也能积累经验，而且年轻的时候尝试的成本更低。",
+          "pronunciation": "shī bài yě néng jī lěi jīng yàn, ér qiě nián qīng de shí hòu cháng shì de chéng běn gèng dī.",
+          "koreanText": "실패해도 경험이 쌓이고 젊을 때는 시도 비용이 더 낮습니다.",
+          "keyExpression": "积累经验",
+          "speakingTip": "积累는 '쌓다'입니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님",
+          "foreignText": "你说退休以后还要继续工作，如果身体不允许呢？",
+          "pronunciation": "nǐ shuō tuì xiū yǐ hòu hái yào jì xù gōng zuò, rú guǒ shēn tǐ bù yǔn xǔ ne?",
+          "koreanText": "퇴직 후에도 계속 일해야 한다고 했는데 몸이 허락하지 않으면요?",
+          "keyExpression": "如果 ~ 呢",
+          "speakingTip": "되묻는 가정 형식입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "未来体力劳动会越来越少，主要是脑力劳动，所以年纪大了也可以工作。",
+          "pronunciation": "wèi lái tǐ lì láo dòng huì yuè lái yuè shǎo, zhǔ yào shì nǎo lì láo dòng, suǒ yǐ nián jì dà le yě kě yǐ gōng zuò.",
+          "koreanText": "앞으로는 육체노동이 줄고 주로 두뇌 노동이므로 나이가 들어도 일할 수 있습니다.",
+          "keyExpression": "体力劳动 / 脑力劳动",
+          "speakingTip": "수업에서 배운 대비 어휘입니다."
+        },
+        {
+          "role": "Tutor",
+          "speakerLabel": "중국어 선생님",
+          "foreignText": "你认为养老金应该每年增加吗？",
+          "pronunciation": "nǐ rèn wéi yǎng lǎo jīn yīng gāi měi nián zēng jiā ma?",
+          "koreanText": "연금은 매년 늘어나야 한다고 생각하나요?",
+          "keyExpression": "应该 ~ 吗",
+          "speakingTip": "의견 묻기 형식입니다."
+        },
+        {
+          "role": "Me",
+          "speakerLabel": "윤종성 대표 (Me)",
+          "foreignText": "我觉得应该交多少领多少，政府的钱是有限的，不可能给得太多。",
+          "pronunciation": "wǒ jué de yīng gāi jiāo duō shǎo lǐng duō shǎo, zhèng fǔ de qián shì yǒu xiàn de, bù kě néng gěi dé tài duō.",
+          "koreanText": "낸 만큼 받아야 하고 정부 재원은 한정되어 너무 많이 줄 수 없다고 봅니다.",
+          "keyExpression": "不可能 + 동사 + 得太多",
+          "speakingTip": "不可能로 한계를 강조합니다."
+        }
+      ]
+    }
+  ]
+}
