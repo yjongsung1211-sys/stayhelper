@@ -83,22 +83,22 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 2. Multimodal Prompt with Strict East Asian (Korean) Facial Identity Lock
-    // IMPORTANT: We do NOT pass the Caucasian stock photo as an image to Gemini.
-    // Instead, we pass ONLY the user's authentic reference photo(s), and rich, photographic art direction for the destination venue.
-    const promptText = `A cinematic, ultra-photorealistic 8K wedding portrait of the REAL East Asian Korean couple in the reference photo(s).
+    // 2. Multimodal Prompt with Strict Facial Identity, Expression & Landmark Lock
+    const promptText = `A breathtaking, cinematic, ultra-photorealistic 8K luxury wedding portrait of the REAL couple in the reference photo(s).
 
-[CRITICAL REQUIREMENT 1: 100% KOREAN FACIAL LIKENESS & ETHNIC IDENTITY LOCK]
-- The man and woman in the reference photo(s) are the REAL BRIDE AND GROOM.
-- GROOM: You MUST 100% PRESERVE his exact Korean facial bone structure, eye shape (monolid/natural contour), clean eyebrows, masculine jawline, and genuine warm smile. Groom height: ${groomHeight}cm, weight: ${groomWeight}kg. He is styled with clean modern dapper hair, dressed in ${preset.groomAttire || 'a bespoke tailored ivory-cream Italian linen tuxedo with a black silk bow tie'}.
-- BRIDE: You MUST 100% PRESERVE her exact lovely Korean face, delicate eye contours, charming cheek dimples, refined nose bridge, and radiant genuine smile. Bride height: ${brideHeight}cm, weight: ${brideWeight}kg. Her hair is styled in an effortless romantic low chignon with delicate fresh bridal floral pins, dressed in ${preset.brideAttire || 'an exquisite haute couture backless mermaid lace bridal gown with an ethereal chapel train'}.
-- Both have luminous Korean luxury porcelain glass-skin (수분 물광 피부), natural dewy complexion with zero blemishes.
-- Zero Caucasianization, zero Westernization, zero replacement with stock models. Their friends and family MUST recognize them immediately: "That is 100% our bride and groom!"
+[CRITICAL MANDATE 1: 100% AUTHENTIC FACIAL LIKENESS & BIOMETRIC IDENTITY LOCK]
+- The man and woman in the reference photo(s) are the REAL GROOM AND BRIDE.
+- EXACT NATURAL EXPRESSION LOCK: You MUST preserve their EXACT natural, warm, gentle closed-mouth resting smile from the reference photo. DO NOT OPEN THEIR MOUTHS. DO NOT RENDER ARTIFICIAL TEETH. Their lips must rest naturally together in a subtle, genuine, tender smile.
+- 100% IDENTICAL BONE STRUCTURE: Preserve the groom's exact eye shape, eyelid contour, nose shape, and natural jaw width. Preserve the bride's exact lovely eye folds, natural cheek fullness, and nose curvature. Do not slim, taper, or V-shape their chins. Do not apply generic K-pop plastic surgery filters.
+- GROOM DETAILS: Height ${groomHeight}cm, weight ${groomWeight}kg, styled with clean modern dapper hair, dressed in ${preset.groomAttire || 'a bespoke tailored ivory-cream Italian linen tuxedo with a black silk bow tie'}.
+- BRIDE DETAILS: Height ${brideHeight}cm, weight ${brideWeight}kg, styled with an effortless romantic low chignon with delicate fresh bridal floral pins, dressed in ${preset.brideAttire || 'an exquisite haute couture backless mermaid lace bridal gown with an ethereal chapel train'}.
+- AUTHENTIC SKIN & LIGHTING: Luminous Korean luxury porcelain glass-skin (수분 물광 피부), natural dewy complexion with zero blemishes, authentic skin micro-texture.
+- IMMEDIATE SELF-RECOGNITION: When the bride and groom view this photo, they and their families must recognize themselves immediately: "That is 100% truly US on our wedding day!"
 
 [SETTING & COMPOSITION: ${angleTitle.toUpperCase()} AT ${preset.venueName.toUpperCase()}]
 - Destination: ${preset.destination} (${preset.venueName}).
 - Scene context: ${preset.promptDescription}.
-- Composition & Camera: Shot on Hasselblad H6D-100c with prime portrait lens, beautiful natural golden hour rim light highlighting the veil lace and tuxedo fabric, perfect depth of field, pristine luxury bridal atelier standard.`;
+- Composition & Camera: Shot on Hasselblad H6D-100c with 85mm f/1.4 prime portrait lens, beautiful natural golden hour rim light highlighting the veil lace and tuxedo fabric, perfect depth of field, pristine luxury bridal atelier standard.`;
 
     const requestParts: any[] = [
       ...userImageParts,
@@ -116,8 +116,11 @@ export async function POST(req: NextRequest) {
 
     if (apiKey) {
       const candidateModels = [
-        'gemini-2.5-flash-image',
+        'gemini-3-pro-image-preview',
+        'gemini-3-pro-image',
+        'gemini-3.1-flash-image-preview',
         'gemini-3.1-flash-image',
+        'gemini-2.5-flash-image',
       ];
 
       for (const currentModel of candidateModels) {
