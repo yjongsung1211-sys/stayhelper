@@ -437,6 +437,16 @@ export default function WeddingHelperPage() {
             </span>
           </div>
 
+          {/* Pro Quality Likeness Tip Banner */}
+          <div className="mb-6 p-4 bg-gradient-to-r from-[#F5EEDB]/60 via-white/80 to-[#FAF8F5] border border-[#C5A059]/30 rounded-2xl flex items-center gap-3.5 text-xs text-[#1F181B] shadow-xs">
+            <div className="w-8 h-8 rounded-full bg-[#C5A059]/15 flex items-center justify-center text-[#C5A059] shrink-0">
+              <Sparkles className="w-4 h-4" />
+            </div>
+            <div className="leading-relaxed">
+              <strong className="text-[#C5A059] font-bold">100% 동일 인물 화보를 위한 팁:</strong> 인위적인 뷰티 필터(스노우 등) 없이, <strong className="font-semibold text-[#1F181B]">자연스러운 정면 조명과 부드러운 잔잔한 미소</strong>의 사진을 올려주시면 신랑·신부님의 실제 이목구비가 8K 명품 화보에 1:1 완벽하게 보존됩니다.
+            </div>
+          </div>
+
           {/* 3 Upload Slots */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             {/* Slot 1: Couple Photo (Primary) */}

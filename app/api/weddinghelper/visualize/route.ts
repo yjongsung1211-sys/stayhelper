@@ -84,10 +84,14 @@ export async function POST(req: NextRequest) {
     }
 
     // 2. Multimodal Prompt with Strict Facial Identity, Expression & Landmark Lock
+    const multiPhotoInstruction = userImageParts.length > 1
+      ? `\n- MULTI-PHOTO REFERENCE MAPPING: Reference Image 1 provides the couple's overall appearance and harmony. Reference Image 2 is the Bride's detailed close-up portrait (preserve her exact eye contours, eyelids, nose bridge, cheek dimples, and lip shape). Reference Image 3 (if provided) is the Groom's detailed close-up portrait (preserve his exact eye folds, nose structure, masculine jaw angle, and natural brow).`
+      : '';
+
     const promptText = `A breathtaking, cinematic, ultra-photorealistic 8K luxury wedding portrait of the REAL couple in the reference photo(s).
 
 [CRITICAL MANDATE 1: 100% AUTHENTIC FACIAL LIKENESS & BIOMETRIC IDENTITY LOCK]
-- The man and woman in the reference photo(s) are the REAL GROOM AND BRIDE.
+- The man and woman in the reference photo(s) are the REAL GROOM AND BRIDE.${multiPhotoInstruction}
 - EXACT NATURAL EXPRESSION LOCK: You MUST preserve their EXACT natural, warm, gentle closed-mouth resting smile from the reference photo. DO NOT OPEN THEIR MOUTHS. DO NOT RENDER ARTIFICIAL TEETH. Their lips must rest naturally together in a subtle, genuine, tender smile.
 - 100% IDENTICAL BONE STRUCTURE: Preserve the groom's exact eye shape, eyelid contour, nose shape, and natural jaw width. Preserve the bride's exact lovely eye folds, natural cheek fullness, and nose curvature. Do not slim, taper, or V-shape their chins. Do not apply generic K-pop plastic surgery filters.
 - GROOM DETAILS: Height ${groomHeight}cm, weight ${groomWeight}kg, styled with clean modern dapper hair, dressed in ${preset.groomAttire || 'a bespoke tailored ivory-cream Italian linen tuxedo with a black silk bow tie'}.
