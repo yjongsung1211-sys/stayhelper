@@ -33,16 +33,16 @@ export async function notifyNewOrder(params: {
   plan: string;
   themeTitle: string;
 }): Promise<void> {
-  const msg = `💍 <b>[WeddingHelper] 신규 $19 VIP 주문 접수!</b>
+  const msg = `💍 <b>[WeddingHelper] 240장 풀 앨범 이메일 발송 신청 접수!</b>
 
 ━━━━━━━━━━━━━━━━━━━━━
-• <b>고객 이메일</b>: ${params.email}
-• <b>선택 플랜</b>: ${params.plan.toUpperCase()} ($19 Launch Pass)
+• <b>고객 이메일</b>: <code>${params.email}</code>
 • <b>주문 번호</b>: <code>${params.orderId}</code>
-• <b>시작 테마</b>: ${params.themeTitle}
-• <b>갤러리 링크</b>: <a href="https://www.weddinghelper.love/gallery?orderId=${params.orderId}">https://www.weddinghelper.love/gallery?orderId=${params.orderId}</a>
+• <b>선택 플랜</b>: ${params.plan.toUpperCase()} (12콘셉트 대표 확인 후 240장 앨범 신청)
+• <b>요청 테마</b>: ${params.themeTitle}
+• <b>갤러리 링크</b>: <a href="https://www.weddinghelper.love/weddinghelper/gallery?orderId=${params.orderId}">고객 전용 갤러리 확인</a>
 ━━━━━━━━━━━━━━━━━━━━━
-✨ <i>첫 3장 즉시 렌더링 후 백그라운드 240장 제작 큐가 가동되었습니다.</i>`;
+✨ <i>12개 콘셉트 대표 1장 확인 완료. 나머지 228장 비동기 렌더링 및 이메일 발송 큐에 정상 등록되었습니다.</i>`;
 
   await sendTelegramNotification(msg);
 }

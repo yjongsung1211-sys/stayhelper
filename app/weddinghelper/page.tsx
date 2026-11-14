@@ -8,7 +8,7 @@ import {
   Heart, Sparkles, Upload, ArrowRight, ShieldCheck, 
   MapPin, CheckCircle2, ChevronRight, Gem, Calendar,
   Share2, Download, RefreshCw, X, ExternalLink, Clock, CreditCard,
-  SlidersHorizontal, Eye, Lock, Unlock, Check
+  SlidersHorizontal, Eye, Lock, Unlock, Check, Mail, Send
 } from 'lucide-react';
 import { WEDDING_12_PRESETS, WeddingThemePreset } from '@/lib/wedding-presets';
 import { LuxuryHotspotLayer, type ShowroomPin } from '@/components/stylinghelper/LuxurySpecCard';
@@ -68,6 +68,17 @@ export default function WeddingHelperPage() {
   const [previewStepText, setPreviewStepText] = useState<string>('');
   const previewRef = useRef<HTMLDivElement>(null);
 
+  // 12 Concepts Showcase & Asynchronous Email Delivery States
+  const [conceptPreviews, setConceptPreviews] = useState<Record<string, string>>({});
+  const [activeConceptModal, setActiveConceptModal] = useState<{ id: string; title: string; dest: string; venue: string; img: string } | null>(null);
+  const [isGenerating12, setIsGenerating12] = useState<boolean>(false);
+  const [show12Showcase, setShow12Showcase] = useState<boolean>(false);
+  const [deliveryEmail, setDeliveryEmail] = useState<string>('');
+  const [isSubmittingDelivery, setIsSubmittingDelivery] = useState<boolean>(false);
+  const [deliverySubmittedOrder, setDeliverySubmittedOrder] = useState<string | null>(null);
+  const showcaseRef = useRef<HTMLDivElement>(null);
+  const emailDeliveryRef = useRef<HTMLDivElement>(null);
+
   // File input refs
   const coupleInputRef = useRef<HTMLInputElement>(null);
   const brideInputRef = useRef<HTMLInputElement>(null);
@@ -106,6 +117,22 @@ export default function WeddingHelperPage() {
         if (parsed.groomWeight) setGroomWeight(parsed.groomWeight);
         if (parsed.brideHeight) setBrideHeight(parsed.brideHeight);
         if (parsed.brideWeight) setBrideWeight(parsed.brideWeight);
+      }
+
+      const savedPreviews = localStorage.getItem('weddinghelper_concept_previews');
+      if (savedPreviews) {
+        try {
+          const parsed = JSON.parse(savedPreviews);
+          if (parsed && typeof parsed === 'object' && Object.keys(parsed).length > 0) {
+            setConceptPreviews(parsed);
+            setShow12Showcase(true);
+          }
+        } catch (e) {}
+      }
+
+      const savedOrderId = localStorage.getItem('weddinghelper_delivery_order');
+      if (savedOrderId) {
+        setDeliverySubmittedOrder(savedOrderId);
       }
     } catch (e) {
       console.warn('Hydration error:', e);
@@ -222,6 +249,153 @@ export default function WeddingHelperPage() {
     } finally {
       setIsGeneratingPreview(false);
       setPreviewStepText('');
+    }
+  };
+
+  // 🌟 12 Concepts Showcase Synthesis Handler
+  const handleGenerate12Concepts = async () => {
+    const imagesToUse = getClientImages();
+    if (imagesToUse.length === 0) {
+      showToast('⚠️ 먼저 신랑·신부님 커플 사진을 등록해 주세요.');
+      coupleInputRef.current?.click();
+      return;
+    }
+
+    setIsGenerating12(true);
+    setShow12Showcase(true);
+    setPreviewStepText('12개 콘셉트 분석 및 첫 번째 대표 화보(발리 채플) 렌더링 중...');
+
+    // Scroll to showcase
+    setTimeout(() => {
+      showcaseRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 200);
+
+    try {
+      const res = await fetch('/api/weddinghelper/visualize', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          images: imagesToUse,
+          image: imagesToUse[0],
+          targetSceneImage: '/images/weddings_240/theme_01_bali/scene_01.jpg',
+          themeId: 'theme_01_bali',
+          angleTitle: 'Ceremonial Altar Vows',
+          groomHeight,
+          groomWeight,
+          brideHeight,
+          brideWeight,
+        }),
+      });
+
+      const data = await res.json();
+      if (data?.success && data?.visualizedImageUrl) {
+        const updated = { ...conceptPreviews, theme_01_bali: data.visualizedImageUrl };
+        setConceptPreviews(updated);
+        try {
+          localStorage.setItem('weddinghelper_concept_previews', JSON.stringify(updated));
+        } catch (e) {}
+        showToast('🎉 첫 번째 대표 화보 합성 완료! 12개 콘셉트를 확인하세요.', 4500);
+      } else {
+        showToast('⚠️ 실시간 AI 합성 대기열이 많아 고화질 콘셉트 화보로 우선 공개합니다.');
+      }
+    } catch (err) {
+      console.warn('12-concept preview error:', err);
+      showToast('⚠️ 네트워크 연결 상태를 확인 후 다시 시도해 주세요.');
+    } finally {
+      setIsGenerating12(false);
+      setPreviewStepText('');
+    }
+  };
+
+  // 🌟 Synthesize any specific concept with user's face
+  const handleSynthesizeSingleConcept = async (themeId: string, angleTitle = 'Ceremonial Altar Vows') => {
+    const imagesToUse = getClientImages();
+    if (imagesToUse.length === 0) {
+      showToast('⚠️ 먼저 사진을 등록해 주세요.');
+      coupleInputRef.current?.click();
+      return;
+    }
+
+    const themeConfig = DESTINATION_240_CONFIGS.find((t) => t.id === themeId);
+    showToast(`✨ ${themeConfig?.title || themeId} 대표 화보 합성 중...`);
+
+    try {
+      const res = await fetch('/api/weddinghelper/visualize', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          images: imagesToUse,
+          image: imagesToUse[0],
+          targetSceneImage: themeConfig?.heroImg,
+          themeId,
+          angleTitle,
+          groomHeight,
+          groomWeight,
+          brideHeight,
+          brideWeight,
+        }),
+      });
+
+      const data = await res.json();
+      if (data?.success && data?.visualizedImageUrl) {
+        const updated = { ...conceptPreviews, [themeId]: data.visualizedImageUrl };
+        setConceptPreviews(updated);
+        try {
+          localStorage.setItem('weddinghelper_concept_previews', JSON.stringify(updated));
+        } catch (e) {}
+        showToast(`🎉 ${themeConfig?.title} 대표 화보 합성 완료!`);
+      } else {
+        showToast('⚠️ 합성 처리 지연. 잠시 후 다시 시도해 주세요.');
+      }
+    } catch (e) {
+      showToast('⚠️ 합성 처리 오류. 네트워크를 확인해 주세요.');
+    }
+  };
+
+  // 🌟 Asynchronous Full 240 Album Email Delivery Request
+  const handleSubmitEmailDelivery = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!deliveryEmail || !deliveryEmail.includes('@')) {
+      showToast('⚠️ 올바른 이메일 주소를 입력해 주세요.');
+      return;
+    }
+
+    const imagesToUse = getClientImages();
+    if (imagesToUse.length === 0) {
+      showToast('⚠️ 먼저 신랑·신부님 사진을 등록해 주세요.');
+      coupleInputRef.current?.click();
+      return;
+    }
+
+    setIsSubmittingDelivery(true);
+    try {
+      const res = await fetch('/api/weddinghelper/order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: deliveryEmail.trim().toLowerCase(),
+          plan: 'grand',
+          selectedTheme: 'all_12_themes',
+          proportions: { groomHeight, groomWeight, brideHeight, brideWeight },
+          clientImages: imagesToUse,
+        }),
+      });
+
+      const data = await res.json();
+      if (data?.success && data?.orderId) {
+        setDeliverySubmittedOrder(data.orderId);
+        try {
+          localStorage.setItem('weddinghelper_delivery_order', data.orderId);
+        } catch (e) {}
+        showToast('🎉 신청 완료! 240장 풀 앨범 패키지가 이메일로 안전하게 발송됩니다.', 6000);
+      } else {
+        showToast('⚠️ 접수 중 일시적인 오류가 발생했습니다. 다시 시도해 주세요.');
+      }
+    } catch (err) {
+      console.warn('Delivery submit error:', err);
+      showToast('⚠️ 네트워크 연결 상태를 확인해 주세요.');
+    } finally {
+      setIsSubmittingDelivery(false);
     }
   };
 
@@ -575,146 +749,303 @@ export default function WeddingHelperPage() {
             </div>
           </div>
 
-          {/* Action CTAs: Free Preview & Unlock 240 */}
+          {/* Action CTAs: 12 Concepts Showcase & Email Delivery */}
           <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
             <button
               type="button"
-              onClick={handleGenerateFreePreview}
-              disabled={isGeneratingPreview}
-              className="w-full sm:flex-1 py-4 px-6 rounded-2xl bg-[#F5EEDB] text-[#1F181B] border border-[#D4AF37]/60 hover:bg-[#EBDDC4] font-extrabold text-xs uppercase tracking-wider transition shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              onClick={handleGenerate12Concepts}
+              disabled={isGenerating12 || isGeneratingPreview}
+              className="w-full sm:flex-1 py-4 px-6 rounded-2xl bg-gradient-to-r from-[#D4AF37] via-[#F3C669] to-[#D4AF37] text-[#1F181B] font-extrabold text-xs sm:text-sm uppercase tracking-wider transition shadow-xl border border-[#D4AF37]/50 hover:brightness-105 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
             >
-              {isGeneratingPreview ? (
+              {isGenerating12 ? (
                 <>
-                  <RefreshCw className="w-4 h-4 animate-spin text-[#C5A059]" />
-                  <span>{previewStepText || 'Synthesizing Sample...'}</span>
+                  <RefreshCw className="w-4 h-4 animate-spin text-[#1F181B]" />
+                  <span>{previewStepText || '12개 콘셉트 렌더링 중...'}</span>
                 </>
               ) : (
                 <>
-                  <Sparkles className="w-4 h-4 fill-[#C5A059] text-[#C5A059]" />
-                  <span>Generate 1 Free Sample Masterpiece</span>
+                  <Sparkles className="w-4 h-4 fill-[#1F181B] text-[#1F181B]" />
+                  <span>12개 세계 랜드마크 대표 화보 즉시 생성 (1장씩 먼저 보기)</span>
+                  <ArrowRight className="w-4 h-4" />
                 </>
               )}
             </button>
 
             <button
               type="button"
-              onClick={handleUnlock240Masterpieces}
-              className="w-full sm:flex-1 py-4 px-6 rounded-2xl bg-[#1F181B] text-[#D4AF37] hover:bg-[#2C2426] font-extrabold text-xs uppercase tracking-wider transition shadow-xl border border-[#D4AF37]/40 flex items-center justify-center gap-2 cursor-pointer"
+              onClick={() => {
+                setShow12Showcase(true);
+                setTimeout(() => {
+                  emailDeliveryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 150);
+              }}
+              className="w-full sm:w-auto py-4 px-6 rounded-2xl bg-[#FAF8F5] text-[#1F181B] hover:bg-[#F5EEDB] font-bold text-xs uppercase tracking-wider transition border border-[#1F181B]/15 flex items-center justify-center gap-2 cursor-pointer"
             >
-              <Gem className="w-4 h-4 text-[#D4AF37]" />
-              <span>Pay $19 & Unlock All 240 Scenes</span>
-              <ArrowRight className="w-4 h-4" />
+              <Mail className="w-4 h-4 text-[#C5A059]" />
+              <span>나머지 228장 이메일 수령 신청</span>
             </button>
           </div>
         </div>
       </section>
 
-      {/* 4. FREE PREVIEW REVEAL SECTION (Visible when generated) */}
-      {freePreviewImage && (
-        <section ref={previewRef} className="max-w-4xl mx-auto px-4 sm:px-8 pb-16 animate-fadeIn">
-          <div className="bg-[#1F181B] text-white rounded-3xl p-6 sm:p-10 border border-[#D4AF37]/50 shadow-2xl relative overflow-hidden">
-            <div className="text-center max-w-xl mx-auto mb-6">
-              <span className="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest bg-[#D4AF37] text-[#1F181B] shadow-md">
-                YOUR FREE AI SAMPLE MASTERPIECE
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mt-3">
-                Look at That Breathtaking Likeness.
-              </h3>
-              <p className="text-white/70 text-xs sm:text-sm mt-1">
-                Your authentic facial contours transplanted into Angle #01: Ceremonial Altar Vows at Mandapa Ritz-Carlton Bali.
-              </p>
-            </div>
-
-            {/* Generated Masterpiece Showcase */}
-            <div className="relative aspect-[3/4] sm:aspect-[16/10] w-full max-w-2xl mx-auto rounded-2xl overflow-hidden border border-[#D4AF37]/40 shadow-2xl">
-              <Image 
-                src={freePreviewImage} 
-                alt="Your Synthesized Wedding Masterpiece" 
-                fill 
-                unoptimized 
-                className="object-cover" 
-              />
-              <LuxuryHotspotLayer lookId="wedding_bali_sample" pins={WEDDING_SAMPLE_PINS} />
-              <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md text-[#D4AF37] text-[10px] font-bold uppercase tracking-wider border border-[#D4AF37]/30">
-                Sample Preview • 1 of 240
-              </div>
-            </div>
-
-            {/* High-Converting Upgrade Banner */}
-            <div className="mt-8 pt-6 border-t border-white/10 text-center max-w-xl mx-auto">
-              <p className="text-[#D4AF37] font-serif text-lg font-bold">
-                Imagine Having All 240 Masterpieces across 12 Destinations.
-              </p>
-              <p className="text-white/60 text-xs sm:text-sm mt-1 leading-relaxed">
-                Zero watermarks. 4K Lossless Hasselblad prints. 20 distinct cinematic vantage points for every world.
-              </p>
-
-              <button
-                type="button"
-                onClick={handleUnlock240Masterpieces}
-                className="mt-6 w-full py-4 px-8 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3C669] to-[#D4AF37] text-[#1F181B] font-extrabold text-sm uppercase tracking-wider hover:brightness-105 transition shadow-2xl flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <span>Unlock All 240 Masterpieces for Just $19</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* 5. 12 Global Destinations Showcase */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-8 pb-20">
+      {/* 4. 12 CONCEPTS SHOWCASE SECTION (1 Representative Photo per Concept) */}
+      <section ref={showcaseRef} className="max-w-6xl mx-auto px-4 sm:px-8 pb-16">
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-[#C5A059] block">
-            THE 12 GLOBAL SANCTUARIES
+          <span className="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest bg-[#F5EEDB] text-[#C5A059] border border-[#C5A059]/30">
+            12 WORLD CONCEPTS • 1 REPRESENTATIVE PREVIEW EACH
           </span>
-          <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#1F181B] mt-1">
-            20 Editorial Angles for Every World
+          <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#1F181B] mt-3">
+            12개 세계 최고급 랜드마크 웨딩 대표 화보
           </h2>
-          <p className="text-sm text-[#1F181B]/60 mt-2">
-            Each destination is crafted with 20 distinct camera angles — wide sanctuary panoramic views, emotional vow close-ups, candelit toasts, and sunset silhouettes.
+          <p className="text-xs sm:text-sm text-[#1F181B]/70 mt-1 max-w-lg mx-auto">
+            신랑·신부님의 실제 얼굴과 체형이 반영된 12개 세계적 휴양지 대표 씬입니다. 각 콘셉트별 나머지 19개 시네마틱 앵글(총 240장)은 하단에서 이메일로 받아보실 수 있습니다.
           </p>
         </div>
 
-        {/* 12 Destination Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {DESTINATION_240_CONFIGS.map((dest, idx) => (
-            <Link
-              key={dest.id}
-              href={`/weddinghelper/gallery?dest=${dest.id}`}
-              className="group bg-[#FAF8F5] rounded-2xl overflow-hidden border border-[#1F181B]/10 hover:border-[#C5A059] transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col"
-            >
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-black/20">
-                <Image
-                  src={dest.heroImg}
-                  alt={dest.title}
-                  fill
-                  unoptimized
-                  loading="lazy"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+        {/* 12 Destination Grid with 1 Preview Photo Each */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {DESTINATION_240_CONFIGS.map((dest, idx) => {
+            const isSynthesized = Boolean(conceptPreviews[dest.id]);
+            const displayImg = conceptPreviews[dest.id] || dest.heroImg;
+
+            return (
+              <div
+                key={dest.id}
+                className="group bg-white rounded-3xl overflow-hidden border border-[#1F181B]/10 hover:border-[#C5A059] transition-all duration-300 shadow-md hover:shadow-xl flex flex-col"
+              >
+                {/* Image Container */}
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-black/10">
+                  <Image
+                    src={displayImg}
+                    alt={dest.title}
+                    fill
+                    unoptimized
+                    loading="lazy"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  
+                  {/* Status Badges */}
+                  <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
+                    <span className="px-2.5 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-[#1F181B]/85 text-[#D4AF37] backdrop-blur-md border border-[#D4AF37]/30 shadow-xs">
+                      Concept #{String(idx + 1).padStart(2, '0')}
+                    </span>
+                    {isSynthesized && (
+                      <span className="px-2.5 py-0.5 rounded-full text-[9px] font-extrabold bg-[#10B981] text-white shadow-xs flex items-center gap-1">
+                        <CheckCircle2 className="w-2.5 h-2.5" /> 1:1 얼굴 합성 완료
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Zoom button */}
+                  <button
+                    type="button"
+                    onClick={() => setActiveConceptModal({ ...dest, img: displayImg })}
+                    className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 cursor-pointer shadow-md"
+                    title="크게 보기"
+                  >
+                    <Eye className="w-4 h-4" />
+                  </button>
+
+                  {/* Bottom Angle Tag */}
+                  <div className="absolute bottom-2.5 inset-x-2.5 px-3 py-1.5 rounded-xl bg-black/75 backdrop-blur-md text-white text-[10px] font-medium flex items-center justify-between border border-white/10">
+                    <span className="text-[#D4AF37] font-bold">Angle #01 Ceremonial</span>
+                    <span className="text-white/60 text-[9px]">나머지 19개 앵글은 이메일 발송</span>
+                  </div>
+                </div>
+
+                {/* Card Info */}
+                <div className="p-4 flex flex-col justify-between flex-1 bg-[#FAF8F5]">
+                  <div>
+                    <h4 className="font-serif font-bold text-sm text-[#1F181B] group-hover:text-[#C5A059] transition-colors leading-snug">
+                      {dest.title}
+                    </h4>
+                    <p className="text-[11px] text-[#1F181B]/60 mt-1 truncate">
+                      {dest.venue}
+                    </p>
+                    <p className="text-[10px] text-[#C5A059] font-medium mt-0.5">
+                      📍 {dest.dest}
+                    </p>
+                  </div>
+
+                  {/* Card Action */}
+                  <div className="mt-4 pt-3 border-t border-[#1F181B]/10 flex items-center justify-between gap-2">
+                    <button
+                      type="button"
+                      onClick={() => handleSynthesizeSingleConcept(dest.id)}
+                      className="text-[11px] font-bold text-[#1F181B] hover:text-[#C5A059] flex items-center gap-1 transition-colors cursor-pointer"
+                    >
+                      <Sparkles className="w-3 h-3 text-[#C5A059]" />
+                      <span>{isSynthesized ? '다시 합성' : '내 얼굴로 합성'}</span>
+                    </button>
+                    <Link
+                      href={`/weddinghelper/gallery?dest=${dest.id}`}
+                      className="text-[10px] font-bold text-[#C5A059] hover:underline flex items-center gap-0.5"
+                    >
+                      <span>20앵글 보기</span>
+                      <ChevronRight className="w-3 h-3" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* 5. EMAIL DELIVERY LEAD-CAPTURE SECTION (나머지 228장 이메일 수령 신청) */}
+        <div ref={emailDeliveryRef} className="mt-16 bg-[#1F181B] text-white rounded-3xl p-6 sm:p-12 border border-[#D4AF37]/50 shadow-2xl relative overflow-hidden">
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#D4AF37] text-[10px] font-extrabold uppercase tracking-widest mb-4">
+              <Mail className="w-3.5 h-3.5" />
+              <span>FULL 240 ALBUM ASYNC DELIVERY SYSTEM</span>
+            </div>
+
+            <h3 className="text-2xl sm:text-4xl font-serif font-bold text-white">
+              나머지 228장 풀 앨범 이메일 수령 신청
+            </h3>
+            <p className="text-white/70 text-xs sm:text-sm mt-2 leading-relaxed">
+              12개 콘셉트의 대표 화보 1장씩을 확인하셨나요? 제단 서약, 베일 바람, 샴페인 토스트, 야간 샹들리에 댄스 등 각 여행지마다 20개씩 준비된 <strong>초호화 전문 앵글(총 240장 4K 무손실 앨범 & 다운로드 링크)</strong>을 입력하신 이메일로 순차 렌더링하여 안전하게 발송해 드립니다.
+            </p>
+
+            {/* Included Perks Checklist */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left text-xs text-white/80 my-8 bg-white/5 p-5 rounded-2xl border border-white/10">
+              <div className="flex items-center gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                <span><strong>12개 전 세계 랜드마크 × 20개 전문 앵글</strong> (총 240장)</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                <span><strong>4K 무손실 Hasselblad 원본 ZIP 파일</strong> 제공</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                <span><strong>4대 명품(드레스, 턱시도, 까르띠에 웨딩밴드)</strong> 1:1 스펙 시트</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                <span><strong>신랑·신부 1:1 안면 골격 및 체형 비율 100% 보존</strong></span>
+              </div>
+            </div>
+
+            {/* Email Form or Success State */}
+            {deliverySubmittedOrder ? (
+              <div className="p-6 bg-gradient-to-r from-[#10B981]/20 via-[#10B981]/10 to-[#10B981]/20 border border-[#10B981]/40 rounded-2xl text-center">
+                <div className="w-12 h-12 rounded-full bg-[#10B981]/20 text-[#10B981] flex items-center justify-center mx-auto mb-3">
+                  <CheckCircle2 className="w-6 h-6" />
+                </div>
+                <h4 className="font-serif font-bold text-lg text-white">
+                  240장 풀 앨범 이메일 발송 신청 완료!
+                </h4>
+                <p className="text-white/80 text-xs sm:text-sm mt-1">
+                  입력하신 이메일(<span className="text-[#D4AF37] font-semibold">{deliveryEmail}</span>)로 240장 고화질 앨범 패키지가 준비되는 대로 안전하게 발송됩니다.
+                </p>
+                <div className="mt-4 pt-3 border-t border-white/10 flex flex-wrap items-center justify-center gap-3 text-xs text-white/60">
+                  <span>주문 번호: <code className="text-[#D4AF37] font-mono">{deliverySubmittedOrder}</code></span>
+                  <span>•</span>
+                  <span>상태: <strong className="text-[#10B981]">백그라운드 240장 렌더링 큐 가동 중</strong></span>
+                </div>
+                <Link
+                  href={`/weddinghelper/gallery?orderId=${deliverySubmittedOrder}`}
+                  className="mt-5 inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#D4AF37] text-[#1F181B] font-extrabold text-xs uppercase tracking-wider hover:brightness-105 transition"
+                >
+                  <span>고객 전용 갤러리 실시간 확인하기</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmitEmailDelivery} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+                <input
+                  type="email"
+                  required
+                  placeholder="수령하실 이메일 주소를 입력하세요 (예: bride@wedding.com)"
+                  value={deliveryEmail}
+                  onChange={(e) => setDeliveryEmail(e.target.value)}
+                  className="flex-1 px-5 py-4 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-white/40 text-xs sm:text-sm focus:outline-hidden focus:border-[#D4AF37] transition"
                 />
-                <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-[#1F181B]/80 text-[#D4AF37] backdrop-blur-md border border-[#D4AF37]/30">
-                  #{String(idx + 1).padStart(2, '0')} • 20 Angles
-                </span>
-              </div>
-              <div className="p-4 flex flex-col justify-between flex-1">
-                <div>
-                  <h4 className="font-serif font-bold text-sm text-[#1F181B] group-hover:text-[#C5A059] transition-colors">
-                    {dest.title}
-                  </h4>
-                  <p className="text-xs text-[#1F181B]/50 mt-0.5 truncate">
-                    {dest.dest}
-                  </p>
-                </div>
-                <div className="mt-3 pt-2.5 border-t border-[#1F181B]/5 flex items-center justify-between text-xs font-sans font-bold text-[#C5A059]">
-                  <span>Explore 20 Angles</span>
-                  <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
-            </Link>
-          ))}
+                <button
+                  type="submit"
+                  disabled={isSubmittingDelivery}
+                  className="px-8 py-4 rounded-2xl bg-gradient-to-r from-[#D4AF37] via-[#F3C669] to-[#D4AF37] text-[#1F181B] font-extrabold text-xs sm:text-sm uppercase tracking-wider hover:brightness-105 transition shadow-xl flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shrink-0"
+                >
+                  {isSubmittingDelivery ? (
+                    <>
+                      <RefreshCw className="w-4 h-4 animate-spin text-[#1F181B]" />
+                      <span>신청 처리 중...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>240장 풀 앨범 이메일 수령</span>
+                      <Send className="w-4 h-4" />
+                    </>
+                  )}
+                </button>
+              </form>
+            )}
+
+            <p className="text-white/40 text-[11px] mt-4">
+              🔒 입력하신 이메일은 240장 앨범 및 다운로드 링크 발송 외의 목적으로는 사용되지 않습니다.
+            </p>
+          </div>
         </div>
       </section>
+
+      {/* 12 Concept Detail Modal */}
+      {activeConceptModal && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-fadeIn">
+          <div className="bg-[#1F181B] text-white rounded-3xl max-w-3xl w-full overflow-hidden border border-[#D4AF37]/50 shadow-2xl">
+            <div className="p-4 sm:p-6 flex items-center justify-between border-b border-white/10">
+              <div>
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#D4AF37]">
+                  {activeConceptModal.dest}
+                </span>
+                <h3 className="font-serif font-bold text-lg sm:text-xl text-white">
+                  {activeConceptModal.title}
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setActiveConceptModal(null)}
+                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center cursor-pointer transition"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <div className="relative aspect-[3/4] sm:aspect-[16/10] w-full bg-black">
+              <Image
+                src={activeConceptModal.img}
+                alt={activeConceptModal.title}
+                fill
+                unoptimized
+                className="object-contain"
+              />
+            </div>
+            <div className="p-4 sm:p-6 bg-[#251E20] flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div className="text-xs text-white/70">
+                <span>베뉴: <strong className="text-white">{activeConceptModal.venue}</strong></span>
+                <span className="block text-[11px] text-[#D4AF37] mt-0.5">대표 앵글 #01 수록 • 나머지 19개 앵글은 이메일 발송 패키지에 포함</span>
+              </div>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleSynthesizeSingleConcept(activeConceptModal.id);
+                    setActiveConceptModal(null);
+                  }}
+                  className="px-4 py-2 rounded-xl bg-[#D4AF37] text-[#1F181B] font-bold text-xs uppercase tracking-wider hover:brightness-105 transition cursor-pointer"
+                >
+                  내 얼굴로 합성
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveConceptModal(null)}
+                  className="px-4 py-2 rounded-xl bg-white/10 text-white font-bold text-xs uppercase tracking-wider hover:bg-white/20 transition cursor-pointer"
+                >
+                  닫기
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* 6. Honest Transparent Pricing: The Grand 12 VIP Pass ($19) */}
       <section className="max-w-4xl mx-auto px-4 sm:px-8 pb-20">
