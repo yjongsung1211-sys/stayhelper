@@ -511,6 +511,126 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: true, chatHistory: state.chatHistory });
     }
 
+    // 2-1) File / Photo Upload from CellHana (셀하나)
+    if (mode === 'file_upload' || mode === 'file_transfer') {
+      const fileName = String(body.fileName || `cellhana_${Date.now()}.bin`).trim();
+      const cleanFileName = path.basename(fileName).replace(/[^a-zA-Z0-9가-힣._-]/g, '_');
+      const fileType = String(body.fileType || 'application/octet-stream');
+      const b64Data = String(body.content || body.b64Content || '');
+      const caption = String(body.caption || '').trim();
+      const fileSize = Number(body.fileSize || 0);
+
+      const nowIso = new Date().toISOString();
+      const nowStr = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+      const sizeStr =
+        fileSize > 1024 * 1024
+          ? `${(fileSize / (1024 * 1024)).toFixed(2)} MB`
+          : `${(fileSize / 1024).toFixed(1)} KB`;
+
+      // 1) Save directly if running on local PC
+      if (!isCloudEnvironment()) {
+        try {
+          const uploadDir = path.join(process.cwd(), 'data', 'cellhana_uploads');
+          fs.mkdirSync(uploadDir, { recursive: true });
+          const rawBuffer = Buffer.from(
+            b64Data.includes('base64,') ? b64Data.split('base64,')[1] : b64Data,
+            'base64'
+          );
+          fs.writeFileSync(path.join(uploadDir, cleanFileName), rawBuffer);
+
+          const vaultInbox = path.join(
+            'C:\\Users\\Administrator\\Desktop\\1인기업_세컨브레인_Vault',
+            '00_Inbox',
+            '셀하나_전송파일'
+          );
+          if (fs.existsSync(path.dirname(vaultInbox))) {
+            fs.mkdirSync(vaultInbox, { recursive: true });
+            fs.writeFileSync(path.join(vaultInbox, cleanFileName), rawBuffer);
+
+            const mdNote = `---
+title: "셀하나 전송 파일: ${cleanFileName}"
+date: ${nowStr}
+source: cellhana_mobile
+file_size: ${sizeStr}
+tags:
+  - 셀하나
+  - 스마트폰_사진
+  - 파일전송
+---
+
+# 📱 [셀하나 ➔ 내 PC 전송 파일]
+- **파일명**: \`${cleanFileName}\`
+- **수신 일시**: \`${nowStr}\`
+- **파일 크기**: \`${sizeStr}\`
+${caption ? `- **동봉 메모**: "${caption}"\n` : ''}- **로컬 보관 경로**: \`data/cellhana_uploads/${cleanFileName}\`
+
+![[${cleanFileName}]]
+`;
+            fs.writeFileSync(
+              path.join(vaultInbox, `${cleanFileName.replace(/\.[^.]+$/, '')}_기록.md`),
+              mdNote,
+              'utf8'
+            );
+          }
+        } catch (e) {
+          console.error('[Local File Save Error]', e);
+        }
+      }
+
+      // 2) Queue command for PC daemon (works seamlessly even when uploaded via Vercel)
+      const cmdId = `cmd-file-${Date.now()}`;
+      state.commandQueue.push({
+        id: cmdId,
+        action: 'file_transfer',
+        prompt: JSON.stringify({
+          fileName: cleanFileName,
+          fileType,
+          fileSize,
+          caption,
+          content: b64Data,
+        }),
+        status: isCloudEnvironment() ? 'queued' : 'completed',
+        result: `📥 파일 \`${cleanFileName}\` (${sizeStr}) 수신 완료`,
+        createdAt: nowIso,
+        completedAt: !isCloudEnvironment() ? nowIso : undefined,
+        executedBy: !isCloudEnvironment() ? 'pc-direct' : undefined,
+      });
+
+      // 3) Append user message and assistant reply to chat history
+      const userText = caption
+        ? `📎 [셀하나 파일 전송] **${cleanFileName}** (${sizeStr})\n\n${caption}`
+        : `📎 [셀하나 파일 전송] **${cleanFileName}** (${sizeStr})`;
+
+      state.chatHistory.push({
+        id: `user-file-${Date.now()}`,
+        role: 'user',
+        text: userText,
+        timestamp: nowIso,
+        tag: 'CELLHANA FILE UPLOAD',
+      });
+
+      const replyText = `📥 **[셀하나 ➔ 내 PC 파일 전송 완료]**\n\n• **파일명**: \`${cleanFileName}\`\n• **크기**: ${sizeStr}\n• **보관 위치**: 내 PC \`data/cellhana_uploads/${cleanFileName}\` 및 옵시디언 \`00_Inbox/셀하나_전송파일/\`에 안전하게 보관되었습니다.\n\n${caption ? `*동봉 메모:* \"${caption}\"` : ''}`;
+
+      state.chatHistory.push({
+        id: `ast-file-${Date.now()}`,
+        role: 'assistant',
+        text: replyText,
+        timestamp: nowIso,
+        tag: 'FILE RECEIVED',
+        executedBy: 'CellHana Bridge Engine',
+      });
+
+      await saveBridgeState(state, sha);
+
+      return NextResponse.json({
+        success: true,
+        fileName: cleanFileName,
+        fileSize: sizeStr,
+        reply: replyText,
+        chatHistory: state.chatHistory,
+      });
+    }
+
     // 3) Quick Memo -> Save directly to Antigravity Private Vault & Obsidian Vault
     if (mode === 'memo') {
       const memoText = String(body.text || '').trim();

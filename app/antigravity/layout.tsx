@@ -1,13 +1,13 @@
 import type { Metadata, Viewport } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Antigravity & Hana | 대표님 전용 모바일 사령탑',
-  description: '윤종성 대표님 전용 안티그래비티(Antigravity) & AI 수석 비서 하나(Hana) 안드로이드 모바일 앱',
+  title: '셀하나 (CellHana) · 윤종성 대표님 전용 모바일 사령탑',
+  description: '윤종성 대표님 전용 스마트폰 AI 비서 셀하나(CellHana) - 24/7 사진·파일 PC 즉송 및 세컨브레인 사령탑',
   manifest: '/antigravity-manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'Antigravity',
+    title: '셀하나 (CellHana)',
   },
 };
 

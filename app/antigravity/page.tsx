@@ -37,6 +37,9 @@ import {
   Check,
   Folder,
   ArrowRight,
+  Paperclip,
+  Image as ImageIcon,
+  FileUp,
 } from 'lucide-react';
 
 interface VaultDocItem {
@@ -94,6 +97,13 @@ interface PcStatus {
 }
 
 const QUICK_ACTIONS = [
+  {
+    id: 'upload_file',
+    title: '사진·파일 PC 전송',
+    subtitle: '스마트폰 갤러리·파일 ➔ 내 PC 직송',
+    icon: ImageIcon,
+    badge: 'DIRECT PC',
+  },
   {
     id: 'status',
     title: '실시간 전사 관제',
@@ -165,6 +175,15 @@ const SUGGESTED_PROMPTS = [
   '최근 외국어 회화 수업 교정 표현 3회독 복습 카드 보여줘',
 ];
 
+interface UploadingFileItem {
+  id: string;
+  name: string;
+  size: number;
+  type: string;
+  previewUrl?: string;
+  b64Content?: string;
+}
+
 export default function AntigravityMobilePage() {
   const [activeTab, setActiveTab] = useState<'chat' | 'vault' | 'deck' | 'bridge' | 'memo'>('chat');
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
@@ -186,6 +205,12 @@ export default function AntigravityMobilePage() {
     notesCount: 24,
   });
 
+  // 셀하나(CellHana) 사진·파일 ➔ 내 PC 즉송 상태
+  const [attachedFiles, setAttachedFiles] = useState<UploadingFileItem[]>([]);
+  const [isUploadingFiles, setIsUploadingFiles] = useState(false);
+  const [uploadProgressText, setUploadProgressText] = useState('');
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const imageInputRef = useRef<HTMLInputElement | null>(null);
   const [inputText, setInputText] = useState('');
   const [dispatchToPc, setDispatchToPc] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -577,9 +602,137 @@ export default function AntigravityMobilePage() {
     window.speechSynthesis.speak(utter);
   };
 
+  // 셀하나(CellHana) 클라이언트 이미지 최적화 및 파일 가공
+  const processSelectedFile = async (file: File): Promise<UploadingFileItem> => {
+    let b64 = '';
+    let previewUrl: string | undefined = undefined;
+
+    if (file.type.startsWith('image/')) {
+      b64 = await new Promise<string>((resolve) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const rawB64 = reader.result as string;
+          if (file.size < 1.5 * 1024 * 1024) {
+            resolve(rawB64);
+            return;
+          }
+          try {
+            const img = new Image();
+            img.onload = () => {
+              const canvas = document.createElement('canvas');
+              let { width, height } = img;
+              const maxDim = 1920;
+              if (width > maxDim || height > maxDim) {
+                if (width > height) {
+                  height = Math.round((height * maxDim) / width);
+                  width = maxDim;
+                } else {
+                  width = Math.round((width * maxDim) / height);
+                  height = maxDim;
+                }
+              }
+              canvas.width = width;
+              canvas.height = height;
+              const ctx = canvas.getContext('2d');
+              ctx?.drawImage(img, 0, 0, width, height);
+              resolve(canvas.toDataURL('image/jpeg', 0.85));
+            };
+            img.onerror = () => resolve(rawB64);
+            img.src = rawB64;
+          } catch {
+            resolve(rawB64);
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+      previewUrl = b64;
+    } else {
+      b64 = await new Promise<string>((resolve) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    return {
+      id: `f-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+      name: file.name,
+      size: file.size,
+      type: file.type || 'application/octet-stream',
+      previewUrl,
+      b64Content: b64,
+    };
+  };
+
+  const handleFileSelected = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    setIsUploadingFiles(true);
+    setUploadProgressText('파일 처리 및 최적화 중...');
+    try {
+      const processed: UploadingFileItem[] = [];
+      for (let i = 0; i < files.length; i++) {
+        if (files[i].size > 25 * 1024 * 1024) {
+          alert(`파일 "${files[i].name}"이 25MB를 초과하여 제외되었습니다.`);
+          continue;
+        }
+        const item = await processSelectedFile(files[i]);
+        processed.push(item);
+      }
+      setAttachedFiles((prev) => [...prev, ...processed]);
+      setActiveTab('chat');
+    } catch (err) {
+      console.error('File load error', err);
+    } finally {
+      setIsUploadingFiles(false);
+      setUploadProgressText('');
+      e.target.value = '';
+    }
+  };
+
+  const handleRemoveAttached = (id: string) => {
+    setAttachedFiles((prev) => prev.filter((f) => f.id !== id));
+  };
+
   const handleSendChat = async (overrideQuery?: string) => {
     const q = (overrideQuery ?? inputText).trim();
-    if (!q || isLoading) return;
+    if ((!q && attachedFiles.length === 0) || isLoading || isUploadingFiles) return;
+
+    // 셀하나 첨부 파일 ➔ 내 PC 직송 처리
+    if (attachedFiles.length > 0) {
+      setIsLoading(true);
+      setUploadProgressText(`셀하나 ➔ 내 PC로 파일 전송 중 (${attachedFiles.length}건)...`);
+      try {
+        for (let i = 0; i < attachedFiles.length; i++) {
+          const f = attachedFiles[i];
+          const res = await fetch('/api/antigravity', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              mode: 'file_upload',
+              fileName: f.name,
+              fileType: f.type,
+              fileSize: f.size,
+              content: f.b64Content,
+              caption: q,
+            }),
+          });
+          const data = await res.json();
+          if (Array.isArray(data.chatHistory)) {
+            setChatHistory(data.chatHistory);
+          }
+        }
+        setAttachedFiles([]);
+        if (!overrideQuery) setInputText('');
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+        setUploadProgressText('');
+      }
+      return;
+    }
+
     if (!overrideQuery) setInputText('');
     setIsLoading(true);
     setActiveTab('chat');
@@ -626,6 +779,10 @@ export default function AntigravityMobilePage() {
   };
 
   const handleExecuteQuickAction = async (actionId: string, topicStr = '') => {
+    if (actionId === 'upload_file') {
+      imageInputRef.current?.click();
+      return;
+    }
     if (isLoading) return;
     setIsLoading(true);
     setSelectedActionId(null);
@@ -711,7 +868,7 @@ export default function AntigravityMobilePage() {
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-1.5">
-              <h1 className="text-sm font-bold tracking-tight text-slate-950 whitespace-nowrap">ANTIGRAVITY</h1>
+              <h1 className="text-sm font-bold tracking-tight text-slate-950 whitespace-nowrap flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />셀하나 (CellHana)</h1>
               <span className="text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-800 border border-slate-300 whitespace-nowrap">
                 &amp; HANA
               </span>
@@ -833,6 +990,15 @@ export default function AntigravityMobilePage() {
 
             {/* Suggested One-Tap Prompts */}
             <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+              <button
+                type="button"
+                onClick={() => imageInputRef.current?.click()}
+                className="shrink-0 px-3.5 py-2 rounded-full bg-slate-900 text-white border border-slate-900 text-xs font-bold flex items-center gap-1.5 hover:bg-slate-800 transition cursor-pointer shadow-xs"
+                title="스마트폰 사진·파일을 내 PC로 즉시 전송"
+              >
+                <ImageIcon className="w-3.5 h-3.5 text-emerald-400" />
+                <span>📸 사진·파일 PC 전송</span>
+              </button>
               {SUGGESTED_PROMPTS.map((prompt, idx) => (
                 <button
                   key={idx}
@@ -850,14 +1016,14 @@ export default function AntigravityMobilePage() {
                 <div className="p-4 rounded-2xl bg-white border border-slate-200 space-y-3 shadow-xs">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-800 border border-slate-300">
-                      ANTIGRAVITY &amp; HANA READY
+                      👑 셀하나 (CellHana) 사령탑 가동 중
                     </span>
                     <span className="text-xs text-emerald-700 font-bold">
                       ● 실시간 브릿지 정상
                     </span>
                   </div>
                   <p className="text-[13.5px] text-slate-800 leading-relaxed font-medium">
-                    윤종성 대표님, 안티그래비티 &amp; 수석비서 하나 모바일 사령탑입니다. 상단 추천 명령을 터치하시거나 하단 마이크·채팅창으로 무엇이든 지시해 주세요.
+                    윤종성 대표님, 스마트폰 전용 **셀하나(CellHana)** 모바일 사령탑입니다. 스마트폰 갤러리의 사진이나 문서를 [사진/파일 첨부] 버튼으로 내 PC에 즉시 보내실 수 있으며, 음성 지시 및 세컨브레인 검색을 24시간 언제 어디서나 수행합니다.
                   </p>
                   <div className="grid grid-cols-2 gap-2 pt-1">
                     <button
@@ -1358,12 +1524,71 @@ export default function AntigravityMobilePage() {
 
       {/* Chat Input Bar (Visible on Chat Tab) */}
       {activeTab === 'chat' && (
-        <div className="shrink-0 px-3.5 py-3 bg-white border-t border-slate-200 shadow-md">
-          <div className="flex items-center gap-2">
+        <div className="shrink-0 bg-white border-t border-slate-200 shadow-md">
+          {/* Hidden File & Image Pickers */}
+          <input
+            ref={imageInputRef}
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={handleFileSelected}
+            className="hidden"
+          />
+          <input
+            ref={fileInputRef}
+            type="file"
+            multiple
+            accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.txt,.zip,.xlsx,.csv"
+            onChange={handleFileSelected}
+            className="hidden"
+          />
+
+          {/* Attached Files Preview Strip */}
+          {attachedFiles.length > 0 && (
+            <div className="px-3.5 py-2 bg-slate-50 border-b border-slate-200 flex items-center gap-2 overflow-x-auto">
+              <span className="text-[11px] font-bold text-slate-700 shrink-0">
+                📎 내 PC 전송 대기 ({attachedFiles.length}):
+              </span>
+              {attachedFiles.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex items-center gap-1.5 bg-white border border-slate-300 rounded-xl px-2.5 py-1 shrink-0 shadow-2xs text-xs"
+                >
+                  {item.previewUrl ? (
+                    <img src={item.previewUrl} alt={item.name} className="w-5 h-5 rounded object-cover" />
+                  ) : (
+                    <FileText className="w-3.5 h-3.5 text-slate-700" />
+                  )}
+                  <span className="font-semibold text-slate-900 max-w-[110px] truncate">{item.name}</span>
+                  <span className="text-[10px] text-slate-500">
+                    {item.size > 1024 * 1024
+                      ? `${(item.size / (1024 * 1024)).toFixed(1)}MB`
+                      : `${Math.round(item.size / 1024)}KB`}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveAttached(item.id)}
+                    className="text-slate-400 hover:text-rose-600 p-0.5 rounded transition cursor-pointer"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {uploadProgressText && (
+            <div className="px-3.5 py-1 bg-emerald-50 text-[11px] font-bold text-emerald-800 flex items-center gap-1.5 animate-pulse">
+              <RefreshCw className="w-3 h-3 animate-spin" />
+              <span>{uploadProgressText}</span>
+            </div>
+          )}
+
+          <div className="px-3.5 py-2.5 flex items-center gap-1.5">
             <button
               type="button"
               onClick={toggleVoiceInput}
-              className={`p-2.5 rounded-xl border transition shrink-0 cursor-pointer ${
+              className={`p-2 rounded-xl border transition shrink-0 cursor-pointer ${
                 isListening
                   ? 'bg-rose-50 border-rose-300 text-rose-600 animate-pulse'
                   : 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-800'
@@ -1371,6 +1596,26 @@ export default function AntigravityMobilePage() {
               title="음성으로 지시하기"
             >
               {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => imageInputRef.current?.click()}
+              disabled={isUploadingFiles}
+              className="p-2 rounded-xl border border-slate-200 bg-slate-100 hover:bg-slate-200 text-slate-800 transition shrink-0 cursor-pointer shadow-2xs"
+              title="스마트폰 사진·카메라 찍어서 내 PC로 보내기"
+            >
+              <ImageIcon className="w-4 h-4 text-slate-800" />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={isUploadingFiles}
+              className="p-2 rounded-xl border border-slate-200 bg-slate-100 hover:bg-slate-200 text-slate-800 transition shrink-0 cursor-pointer shadow-2xs"
+              title="스마트폰 문서·파일 내 PC로 보내기"
+            >
+              <Paperclip className="w-4 h-4 text-slate-800" />
             </button>
 
             <input
@@ -1384,18 +1629,21 @@ export default function AntigravityMobilePage() {
                 }
               }}
               placeholder={
-                isListening
+                attachedFiles.length > 0
+                  ? '사진·파일에 남길 메모(선택사항)를 입력하거나 전송을 누르세요...'
+                  : isListening
                   ? '듣고 있습니다... 말씀해 주세요'
-                  : '안티그래비티 & 하나에게 무엇이든 지시하세요...'
+                  : '셀하나에게 지시하거나 사진·파일을 내 PC로 보내세요...'
               }
-              className="flex-1 px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-800 focus:bg-white"
+              className="flex-1 px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-800 focus:bg-white"
             />
 
             <button
               type="button"
               onClick={() => handleSendChat()}
-              disabled={isLoading || !inputText.trim()}
+              disabled={isLoading || isUploadingFiles || (!inputText.trim() && attachedFiles.length === 0)}
               className="p-2.5 rounded-xl bg-slate-900 disabled:opacity-40 text-white font-bold hover:bg-slate-800 transition shrink-0 cursor-pointer shadow-2xs"
+              title="전송"
             >
               <Send className="w-4 h-4" />
             </button>
@@ -1412,7 +1660,7 @@ export default function AntigravityMobilePage() {
           }`}
         >
           <Sparkles className="w-4.5 h-4.5" />
-          <span className="text-xs font-semibold mt-1">대화·지시</span>
+          <span className="text-xs font-semibold mt-1">셀하나</span>
         </button>
 
         <button

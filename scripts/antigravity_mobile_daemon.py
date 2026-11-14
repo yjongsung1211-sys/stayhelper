@@ -58,6 +58,77 @@ def execute_action_locally(action: str, query: str = "") -> str:
     """로컬 PC의 실제 파이썬 엔진 및 스크립트를 구동하여 결과를 반환"""
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     try:
+        # 셀하나(CellHana) 파일/사진 ➔ 로컬 PC 및 세컨브레인 무인 수신 핸들러
+        if action in ("file_transfer", "file_upload", "upload"):
+            upload_dir = DATA_DIR / "cellhana_uploads"
+            upload_dir.mkdir(parents=True, exist_ok=True)
+            vault_inbox = Path(r"C:\Users\Administrator\Desktop\1인기업_세컨브레인_Vault\00_Inbox\셀하나_전송파일")
+            vault_inbox.mkdir(parents=True, exist_ok=True)
+
+            try:
+                payload = json.loads(query)
+            except Exception:
+                payload = {"fileName": f"cellhana_{int(time.time())}.bin", "content": query}
+
+            fname = payload.get("fileName") or f"upload_{int(time.time())}.bin"
+            fname = re.sub(r'[^a-zA-Z0-9가-힣._-]', '_', Path(fname).name)
+            caption = payload.get("caption", "").strip()
+            b64_content = payload.get("content") or payload.get("b64Content") or ""
+
+            if "," in b64_content and "base64," in b64_content:
+                b64_content = b64_content.split("base64,")[1]
+
+            raw_bytes = base64.b64decode(b64_content) if b64_content else b""
+            size_kb = len(raw_bytes) / 1024
+            size_str = f"{size_kb:.1f} KB" if size_kb < 1024 else f"{(size_kb/1024):.2f} MB"
+
+            local_target = upload_dir / fname
+            local_target.write_bytes(raw_bytes)
+
+            vault_target = vault_inbox / fname
+            vault_target.write_bytes(raw_bytes)
+
+            caption_line = f"- **동봉 메모**: \"{caption}\"\n" if caption else ""
+            md_content = f"""---
+title: "셀하나 전송 파일: {fname}"
+date: {now_str}
+source: cellhana_mobile
+file_size: {size_str}
+tags:
+  - 셀하나
+  - 스마트폰_사진
+  - 파일전송
+---
+
+# 📱 [셀하나 ➔ 내 PC 전송 파일]
+- **파일명**: `{fname}`
+- **수신 일시**: `{now_str}`
+- **파일 크기**: `{size_str}`
+{caption_line}- **로컬 보관 경로**: `data/cellhana_uploads/{fname}`
+
+![[{fname}]]
+"""
+            stem = Path(fname).stem
+            (vault_inbox / f"{stem}_기록.md").write_text(md_content, encoding="utf-8")
+
+            # CEO 텔레그램으로도 수신 알림 발송
+            try:
+                from hermes_env import TELEGRAM_BOT_TOKEN
+                tg_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+                tg_text = f"📱 [셀하나 ➔ 내 PC 파일 수신 완료]\n\n• 파일명: {fname}\n• 크기: {size_str}\n• PC 저장: data/cellhana_uploads/{fname}\n• 옵시디언: 00_Inbox/셀하나_전송파일/ 에 안전하게 보관되었습니다."
+                if caption:
+                    tg_text += f"\n• 동봉 메모: {caption}"
+                req = urllib.request.Request(
+                    tg_url,
+                    data=json.dumps({"chat_id": "8971100274", "text": tg_text}).encode("utf-8"),
+                    headers={"Content-Type": "application/json"}
+                )
+                urllib.request.urlopen(req, timeout=5)
+            except Exception:
+                pass
+
+            return f"📥 **[셀하나 ➔ 내 PC 수신 완료]**\n\n• 파일명: **`{fname}`**\n• 크기: **{size_str}**\n• 로컬 PC `data/cellhana_uploads/{fname}` 및 세컨브레인 `00_Inbox/셀하나_전송파일/`에 안전하게 보관되었습니다."
+
         if action in ("chat", "chat_task"):
             from scripts.telegram_ai_brain import handle_ai_chief_chat
             raw = handle_ai_chief_chat(query or "현재 전사 핵심 현황을 요약해줘")
@@ -205,8 +276,11 @@ def start_cloudflare_tunnel(local_port: int = 3000) -> dict:
     try:
         creationflags = 0x08000000 if os.name == "nt" else 0  # CREATE_NO_WINDOW
         proc = subprocess.Popen(
-            [str(cf_bin), "tunnel", "--url", f"http://127.0.0.1:{local_port}"],
-            stdout=subprocess.PIPE,
+            # --config: isolated empty config so ~/.cloudflared/config.yml (named StylingHelper tunnel
+            # with a catch-all http_status:404 ingress) does not override --url
+            [str(cf_bin), "tunnel", "--config", str(WORKSPACE_DIR / "scripts" / "cloudflared_quick.yml"),
+             "--url", f"http://127.0.0.1:{local_port}"],
+            stdout=subprocess.DEVNULL,  # never read; a full pipe would stall cloudflared
             stderr=subprocess.PIPE,
             text=True,
             encoding="utf-8",
