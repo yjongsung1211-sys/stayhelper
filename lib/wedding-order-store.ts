@@ -27,14 +27,16 @@ export interface WeddingOrder {
 const MEMORY_ORDER_CACHE: Record<string, WeddingOrder> = {};
 
 function getStoreFilePath(): string {
-  // Use /tmp in production serverless or local data dir
-  const dir = process.env.NODE_ENV === 'production' ? '/tmp' : path.join(process.cwd(), 'data');
-  if (!fs.existsSync(dir)) {
-    try {
-      fs.mkdirSync(dir, { recursive: true });
-    } catch (e) {}
+  const primaryDir = path.join(process.cwd(), 'data');
+  try {
+    if (!fs.existsSync(primaryDir)) {
+      fs.mkdirSync(primaryDir, { recursive: true });
+    }
+    return path.join(primaryDir, 'wedding_orders.json');
+  } catch (e) {
+    const tmpDir = process.env.TMP || process.env.TEMP || '/tmp';
+    return path.join(tmpDir, 'wedding_orders.json');
   }
-  return path.join(dir, 'wedding_orders.json');
 }
 
 function loadOrdersFromFile(): Record<string, WeddingOrder> {
