@@ -28,18 +28,18 @@ const WEDDING_SAMPLE_PINS: ShowroomPin[] = (WEDDING_12_PRESETS['bali-jungle']?.p
 
 // 12 World-Class Luxury Destination Configs (20 Editorial Angles Each)
 const DESTINATION_240_CONFIGS = [
-  { id: 'theme_01_bali', title: 'Bali Rainforest Infinity Chapel', dest: 'Ubud, Bali, Indonesia', venue: 'The Edge Bali & Mandapa Ritz-Carlton', heroImg: '/images/weddings_240/theme_01_bali/scene_01.jpg' },
-  { id: 'theme_02_amalfi', title: 'Amalfi Coast Cliffside Belvedere', dest: 'Positano, Amalfi Coast, Italy', venue: 'Villa Cimbrone & Le Sirenuse', heroImg: '/images/weddings_240/theme_02_amalfi/scene_01.jpg' },
-  { id: 'theme_03_lake_como', title: 'Lake Como Villa Renaissance', dest: 'Bellagio, Lake Como, Italy', venue: 'Villa d\'Este & Villa del Balbianello', heroImg: '/images/weddings_240/theme_03_lake_como/scene_01.jpg' },
-  { id: 'theme_04_paris', title: 'Paris Private Palace & Seine Terrace', dest: 'Paris, France', venue: 'Hôtel de Crillon & Shangri-La Paris', heroImg: '/images/weddings_240/theme_04_paris/scene_01.jpg' },
-  { id: 'theme_05_nyc', title: 'Manhattan Skyline Penthouse & Central Park', dest: 'New York City, USA', venue: 'The Glasshouses & Aman New York', heroImg: '/images/weddings_240/theme_05_nyc/scene_01.jpg' },
-  { id: 'theme_06_hanok', title: 'Korean Royal Hanok Heritage Sanctuary', dest: 'Seoul, South Korea', venue: 'Rakkojae Seoul & Yeongbingwan', heroImg: '/images/weddings_240/theme_06_hanok/scene_01.jpg' },
-  { id: 'theme_07_kyoto', title: 'Kyoto Bamboo Forest Zen Garden', dest: 'Kyoto, Japan', venue: 'Aman Kyoto & Hoshinoya Kyoto', heroImg: '/images/weddings_240/theme_07_kyoto/scene_01.jpg' },
-  { id: 'theme_08_udaipur', title: 'Rajasthan Royal Palace Sanctuary', dest: 'Udaipur, Rajasthan, India', venue: 'Taj Lake Palace & The Leela Palace', heroImg: '/images/weddings_240/theme_08_udaipur/scene_01.jpg' },
-  { id: 'theme_09_santorini', title: 'Santorini Caldera Sunset Cliff', dest: 'Oia, Santorini, Greece', venue: 'Canaves Oia Epitome & Grace Hotel', heroImg: '/images/weddings_240/theme_09_santorini/scene_01.jpg' },
-  { id: 'theme_10_cabo', title: 'Cabo San Lucas Oceanfront Modernist', dest: 'Cabo San Lucas, Mexico', venue: 'Montage Los Cabos & Waldorf Astoria', heroImg: '/images/weddings_240/theme_10_cabo/scene_01.jpg' },
-  { id: 'theme_11_liwa', title: 'Dubai Liwa Desert Golden Dunes', dest: 'Liwa Oasis, Abu Dhabi, UAE', venue: 'Qasr Al Sarab Desert Resort by Anantara', heroImg: '/images/weddings_240/theme_11_liwa/scene_01.jpg' },
-  { id: 'theme_12_swiss_alps', title: 'Swiss Alps Matterhorn Glass Chalet', dest: 'Zermatt, Switzerland', venue: 'The Omnia & Riffelalp Resort 2222m', heroImg: '/images/weddings_240/theme_12_swiss_alps/scene_01.jpg' },
+  { id: 'theme_01_bali', title: 'Bali Rainforest Infinity Chapel', dest: 'Ubud, Bali, Indonesia', venue: 'The Edge Bali & Mandapa Ritz-Carlton', heroImg: '/images/weddings_240/theme_01_bali/scene_01.jpg', position: 'center center' },
+  { id: 'theme_02_amalfi', title: 'Amalfi Coast Cliffside Belvedere', dest: 'Positano, Amalfi Coast, Italy', venue: 'Villa Cimbrone & Le Sirenuse', heroImg: '/images/weddings_240/theme_02_amalfi/scene_01.jpg', position: 'center center' },
+  { id: 'theme_03_lake_como', title: 'Lake Como Villa Renaissance', dest: 'Bellagio, Lake Como, Italy', venue: 'Villa d\'Este & Villa del Balbianello', heroImg: '/images/weddings_240/theme_03_lake_como/scene_01.jpg', position: 'center center' },
+  { id: 'theme_04_paris', title: 'Paris Private Palace & Seine Terrace', dest: 'Paris, France', venue: 'Hôtel de Crillon & Shangri-La Paris', heroImg: '/images/weddings_240/theme_04_paris/scene_01.jpg', position: 'center center' },
+  { id: 'theme_05_nyc', title: 'Manhattan Skyline Penthouse & Central Park', dest: 'New York City, USA', venue: 'The Glasshouses & Aman New York', heroImg: '/images/weddings_240/theme_05_nyc/scene_01.jpg', position: 'center center' },
+  { id: 'theme_06_hanok', title: 'Korean Royal Hanok Heritage Sanctuary', dest: 'Seoul, South Korea', venue: 'Rakkojae Seoul & Yeongbingwan', heroImg: '/images/weddings_240/theme_06_hanok/scene_01.jpg', position: 'center center' },
+  { id: 'theme_07_kyoto', title: 'Kyoto Bamboo Forest Zen Garden', dest: 'Kyoto, Japan', venue: 'Aman Kyoto & Hoshinoya Kyoto', heroImg: '/images/weddings_240/theme_07_kyoto/scene_01.jpg', position: 'center center' },
+  { id: 'theme_08_udaipur', title: 'Rajasthan Royal Palace Sanctuary', dest: 'Udaipur, Rajasthan, India', venue: 'Taj Lake Palace & The Leela Palace', heroImg: '/images/weddings_240/theme_08_udaipur/scene_01.jpg', position: 'center center' },
+  { id: 'theme_09_santorini', title: 'Santorini Caldera Sunset Cliff', dest: 'Oia, Santorini, Greece', venue: 'Canaves Oia Epitome & Grace Hotel', heroImg: '/images/weddings_240/theme_09_santorini/scene_01.jpg', position: 'center center' },
+  { id: 'theme_10_cabo', title: 'Cabo San Lucas Oceanfront Modernist', dest: 'Cabo San Lucas, Mexico', venue: 'Montage Los Cabos & Waldorf Astoria', heroImg: '/images/weddings_240/theme_10_cabo/scene_01.jpg', position: 'center center' },
+  { id: 'theme_11_liwa', title: 'Dubai Liwa Desert Golden Dunes', dest: 'Liwa Oasis, Abu Dhabi, UAE', venue: 'Qasr Al Sarab Desert Resort by Anantara', heroImg: '/images/weddings_240/theme_11_liwa/scene_01.jpg', position: '55% center' },
+  { id: 'theme_12_swiss_alps', title: 'Swiss Alps Matterhorn Glass Chalet', dest: 'Zermatt, Switzerland', venue: 'The Omnia & Riffelalp Resort 2222m', heroImg: '/images/weddings_240/theme_12_swiss_alps/scene_01.jpg', position: 'center center' },
 ];
 
 export default function WeddingHelperPage() {
@@ -695,7 +695,7 @@ export default function WeddingHelperPage() {
                   <td className="py-3.5 px-3 font-semibold text-[#1F181B]">Time & Fatigue</td>
                   <td className="py-3.5 px-3">5 to 7 Days Minimum (14hr Flights, Jet Lag, Outdoor Exhaustion)</td>
                   <td className="py-3.5 px-3 font-bold text-[#8C6D23] bg-[#F5EEDB]/50">
-                    Upload 1 Photo ➔ <strong>Instant 1-Sec Rendering</strong> (Zero Fatigue)
+                    Upload Couple & Close-Up Photos ➔ <strong>Instant AI Rendering</strong> (Zero Travel Fatigue)
                   </td>
                 </tr>
                 <tr>
@@ -998,6 +998,7 @@ export default function WeddingHelperPage() {
                     unoptimized
                     loading="lazy"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    style={{ objectPosition: isSynthesized ? 'center center' : (dest.position || 'center center') }}
                   />
                   
                   {/* Status Badges */}
