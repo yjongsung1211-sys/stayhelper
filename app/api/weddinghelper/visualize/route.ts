@@ -102,12 +102,14 @@ The couple must look undeniably like THEMSELVES, but at the absolute PEAK OF THE
   * Even if the groom's reference photo shows facial hair, mustache shadow, or beard stubble, YOU MUST COMPLETELY AIRBRUSH AND REMOVE IT. The groom's lower face (chin, jaw, upper lip) must have the exact same bright, creamy, luminous, silky-smooth porcelain skin tone as his forehead and cheeks—matching the highest Cheongdam-dong celebrity bridal studio grooming standard.
 - STUDIO BEAUTY LIGHTING: Flattering, diffused high-key studio softbox lighting (Profoto beauty dish) that wraps gently around their faces, casting soft angelic highlights on cheekbones, forehead, and bridge of the nose.
 
-[2. FLATTERING AESTHETIC ENHANCEMENT & GROOM/BRIDE CHARM]
-- GROOM: Dashing, noble, exceptionally handsome (귀티 나고 훤칠한 미남 신랑상).
-  * Retain his authentic eye contour, eyelid structure, nose slope, and smile.
+[2. PROFESSIONAL CELEBRITY GROOM MAKEUP & SLIM JAWLINE SCULPTING (신랑 청담동 샵 풀 메이크업 & 갸름한 윤곽 리터칭)]
+- GROOM: Dashing, noble, exceptionally handsome (귀티 나고 훤칠한 미남 신랑상). He must look as if professionally groomed and styled with full celebrity wedding makeup at Cheongdam-dong's premier bridal salon (화보 촬영을 위해 전문 샵에서 풀 메이크업과 윤곽 관리를 받은 훈남 배우 비주얼).
+  * CRISP, DARKER, DENSELY FILLED-IN EYEBROWS (선명하고 짙은 훈남 눈썹): The groom's eyebrows must be noticeably darker, thicker, crisply defined, and filled in with clean micro-hair strokes (짙고 또렷한 훈남 눈썹). Neatly shaped masculine arch with a sharp tail. Zero faint, faded, or blurry brows. Sharp, handsome eyebrows that frame his eyes with dignity, charisma, and youthful sharpness.
+  * VIBRANT, HEALTHY, NATURALLY TINTED LIPS (생기 넘치는 촉촉한 틴트 립): The groom's lips must NOT look pale, dry, chapped, or purplish. Give his lips unmistakable healthy romantic vitality with a subtle, natural rosy-coral / MLBB tinted moisture balm finish (생기 있고 촉촉한 자연스러운 틴티드 립). Supple, moisturized, youthful, healthy, and full of warm life.
+  * SLIM, REFINED, CHISELED V-LINE CONTOURING (갸름하고 날렵하게 다듬어진 턱선과 윤곽 쉐이딩): Slim down and refine the groom's facial contour. Apply professional studio shading along the lower cheeks and jawline to eliminate puffiness, cheek roundness, and double chin. Sculpt a slim, photogenic, elegant V-to-U masculine jawline with a crisp, tapered chin (붓기와 볼살 정리, 갸름하고 날렵한 턱선). Keep his core facial bone identity 100% recognizable, but sculpt the silhouette to be visibly slimmer, photogenic, and sharp.
   * 100% Clean-shaven, baby-smooth porcelain chin and jaw with ZERO stubble, ZERO beard shadow, ZERO bluish tint, and ZERO visible follicle pores.
-  * Refine his jawline: cleanly defined, sculpted, modern masculine jaw with zero double chin and zero jowls.
-  * Impeccable grooming: styled dapper hair, perfectly groomed brows, completely hairless and radiant lower face, dignified and charismatic.
+  * Retain his authentic eye contour, eyelid structure, nose slope, and smile.
+  * Impeccable grooming: styled dapper hair, handsome charismatic aristocratic glow.
   * Proportions: Height ${groomHeight}cm, weight ${groomWeight}kg, dressed in ${preset.groomAttire || 'a bespoke tailored ivory-cream Italian linen tuxedo with a black silk bow tie'}.
 - BRIDE: Stunningly gorgeous, elegant, pure, and radiant (여배우급 청순미와 화사한 미모의 신부).
   * Retain her authentic lovely eye shape, brow arch, and facial proportions.
@@ -118,7 +120,7 @@ The couple must look undeniably like THEMSELVES, but at the absolute PEAK OF THE
 - EXPRESSIONS: Gentle, warm, joyful, affectionate closed-mouth or subtle resting smile. DO NOT OPEN MOUTHS EXAGGERATEDLY. DO NOT RENDER ARTIFICIAL CHALK-WHITE TEETH. Lips rest together in a soft, tender, romantic smile.
 
 [3. CRITICAL NEGATIVE CONSTRAINTS - STRICTLY FORBIDDEN]
-- FORBIDDEN ON GROOM: NO BEARD, NO MUSTACHE, NO GOATEE, NO 5 O'CLOCK SHADOW, NO STUBBLE, NO DARK FOLLICLE DOTS, NO BLUE-GRAY OR ASHY CHIN SHADOW (수염, 수염 자국, 턱 푸른기 절대 금지). The lower face must be completely hairless, smooth, clear, and radiant.
+- FORBIDDEN ON GROOM: NO BEARD, NO MUSTACHE, NO GOATEE, NO 5 O'CLOCK SHADOW, NO STUBBLE, NO DARK FOLLICLE DOTS, NO BLUE-GRAY OR ASHY CHIN SHADOW (수염, 수염 자국, 턱 푸른기 절대 금지). NO FAINT OR INVISIBLE EYEBROWS. NO PALE, DRY, OR PURPLISH CHAPPED LIPS. NO ROUND PUFFY CHEEKS OR DOUBLE CHIN (둥글넙적한 얼굴, 볼살 붓기 금지). The lower face must be completely hairless, smooth, clear, slim, and radiant.
 - FORBIDDEN ON BOTH: NO ROUGH PORES, NO BLEMISHES, NO ACNE, NO UNFLATTERING FACIAL DISTORTIONS, NO ARTIFICIAL CHALK-WHITE HORSE TEETH, NO EXAGGERATED MOUTH OPENINGS. Both wear tender, gentle, natural closed-mouth smiles.
 
 [4. IMMEDIATE SELF-RECOGNITION & WOW FACTOR]
