@@ -56,10 +56,12 @@ function getDeviceData() {
   try {
     if (fs.existsSync(DEVICE_FILE)) {
       const data = fs.readFileSync(DEVICE_FILE, 'utf-8');
-      return JSON.parse(data);
+      if (data && data.trim()) {
+        return JSON.parse(data.trim());
+      }
     }
   } catch (e) {
-    console.error('Error reading device data:', e);
+    // Non-blocking fallback if file was momentarily locked during sync write
   }
   return {
     device: {

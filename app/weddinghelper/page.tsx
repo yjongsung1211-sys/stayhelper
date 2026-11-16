@@ -8,7 +8,8 @@ import {
   Heart, Sparkles, Upload, ArrowRight, ShieldCheck, 
   MapPin, CheckCircle2, ChevronRight, Gem, Calendar,
   Share2, Download, RefreshCw, X, ExternalLink, Clock, CreditCard,
-  SlidersHorizontal, Eye, Lock, Unlock, Check, Mail, Send
+  SlidersHorizontal, Eye, Lock, Unlock, Check, Mail, Send,
+  RotateCcw, Trash2
 } from 'lucide-react';
 import { WEDDING_12_PRESETS, WeddingThemePreset } from '@/lib/wedding-presets';
 import { LuxuryHotspotLayer, type ShowroomPin } from '@/components/stylinghelper/LuxurySpecCard';
@@ -92,6 +93,25 @@ export default function WeddingHelperPage() {
   // Hydrate user from localStorage
   useEffect(() => {
     try {
+      // Auto-clear trigger if requested via URL query (?reset=true or ?clear=true)
+      if (typeof window !== 'undefined') {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('reset') === 'true' || params.get('clear') === 'true') {
+          localStorage.removeItem('weddinghelper_uploaded_images');
+          localStorage.removeItem('weddinghelper_concept_previews');
+          localStorage.removeItem('weddinghelper_delivery_order');
+          setCoupleImage(null);
+          setBrideImage(null);
+          setGroomImage(null);
+          setFreePreviewImage(null);
+          setConceptPreviews({});
+          setShow12Showcase(false);
+          window.history.replaceState({}, '', '/weddinghelper');
+          showToast('✨ All uploaded photos have been reset.');
+          return;
+        }
+      }
+
       const savedUserStr = localStorage.getItem('weddinghelper_user');
       if (savedUserStr) {
         const parsed = JSON.parse(savedUserStr);
@@ -138,6 +158,45 @@ export default function WeddingHelperPage() {
       console.warn('Hydration error:', e);
     }
   }, []);
+
+  // Reset all uploaded photos to blank
+  const handleResetAllPhotos = () => {
+    try {
+      localStorage.removeItem('weddinghelper_uploaded_images');
+      localStorage.removeItem('weddinghelper_concept_previews');
+      localStorage.removeItem('weddinghelper_delivery_order');
+    } catch (e) {}
+    setCoupleImage(null);
+    setBrideImage(null);
+    setGroomImage(null);
+    setFreePreviewImage(null);
+    setConceptPreviews({});
+    setShow12Showcase(false);
+    showToast('✨ All uploaded photos have been reset to blank.');
+  };
+
+  // Remove a single uploaded photo
+  const handleRemoveSinglePhoto = (slot: 'couple' | 'bride' | 'groom') => {
+    let updatedCouple = coupleImage;
+    let updatedBride = brideImage;
+    let updatedGroom = groomImage;
+
+    if (slot === 'couple') {
+      setCoupleImage(null);
+      updatedCouple = null;
+    } else if (slot === 'bride') {
+      setBrideImage(null);
+      updatedBride = null;
+    } else if (slot === 'groom') {
+      setGroomImage(null);
+      updatedGroom = null;
+    }
+
+    try {
+      localStorage.setItem('weddinghelper_uploaded_images', JSON.stringify([updatedCouple, updatedBride, updatedGroom]));
+    } catch (e) {}
+    showToast(`✓ ${slot === 'couple' ? 'Couple' : slot === 'bride' ? 'Bride' : 'Groom'} photo removed.`);
+  };
 
   // Compress and handle image uploads
   const handleFileUpload = (slot: 'couple' | 'bride' | 'groom', file: File) => {
@@ -559,37 +618,109 @@ export default function WeddingHelperPage() {
         </div>
       </header>
 
-      {/* 2. Architectural Hero Section */}
+      {/* 2. Architectural Hero Section with Loss-Aversion 55.7% Hook */}
       <section className="relative pt-12 sm:pt-20 pb-12 px-4 sm:px-8 max-w-5xl mx-auto text-center">
+        {/* Real-time VIP Scarcity Alert Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1F181B] text-[#D4AF37] border border-[#D4AF37]/50 text-xs font-bold uppercase tracking-[0.15em] mb-4 shadow-md animate-pulse">
+          <Sparkles className="w-3.5 h-3.5 fill-[#D4AF37]" />
+          <span>High-Precision Server Allocation • Only 7 VIP 4K Slots Remaining This Week</span>
+        </div>
+
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F5EEDB] border border-[#D4AF37]/40 text-[#1F181B] text-xs font-bold uppercase tracking-[0.2em] mb-5 shadow-xs">
           <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
           <span>12 Global Sanctuaries • 240 Editorial Camera Angles</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-serif font-normal text-[#1F181B] tracking-tight leading-[1.15]">
-          Your Dream Luxury Wedding in <br className="hidden sm:inline" />
+          Don't Waste <span className="line-through text-[#1F181B]/40 font-mono text-2xl sm:text-4xl">$15,000+</span> & 14-Hour Flights on Destination Shoots.<br className="hidden sm:inline" />
           <span className="font-serif font-bold text-[#8C6D23] italic">
-            240 Haute Couture Masterpieces.
+            240 Haute Couture Masterpieces in 1-Second.
           </span>
         </h1>
 
         <p className="mt-5 text-sm sm:text-base md:text-lg text-[#1F181B]/70 max-w-3xl mx-auto font-sans leading-relaxed">
-          Upload your authentic couple photo. We transplant your exact facial bone structures and genuine smiles into Aman Kyoto, Ritz-Carlton Bali, Villa d\'Este Lake Como, and 9 more iconic sanctuaries with <strong>100% facial likeness lock</strong>.
+          Skip the exhausting travel, jet lag, and unpredictable weather. We transplant your <strong>exact facial bone structures and genuine expressions</strong> into Lake Como, Amalfi Coast, Paris Palaces, Bali Ritz-Carlton, and 8 more global sanctuaries across <strong>240 editorial camera angles in seconds</strong> — with <strong>100% facial likeness lock</strong>.
         </p>
 
         {/* 3 Core Value Badges */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm font-sans font-medium text-[#1F181B]/80">
           <div className="flex items-center gap-1.5 bg-[#FAF8F5] px-3.5 py-1.5 rounded-full border border-[#1F181B]/10 shadow-xs">
             <CheckCircle2 className="w-4 h-4 text-[#C5A059]" />
-            <span>1:1 Facial Likeness Locked</span>
+            <span>1:1 Facial Likeness Locked (Zero AI Distortion)</span>
           </div>
           <div className="flex items-center gap-1.5 bg-[#FAF8F5] px-3.5 py-1.5 rounded-full border border-[#1F181B]/10 shadow-xs">
             <CheckCircle2 className="w-4 h-4 text-[#C5A059]" />
-            <span>240 Bespoke Editorial Angles</span>
+            <span>240 Bespoke Editorial Angles (12 Sanctuaries)</span>
           </div>
           <div className="flex items-center gap-1.5 bg-[#FAF8F5] px-3.5 py-1.5 rounded-full border border-[#1F181B]/10 shadow-xs">
             <CheckCircle2 className="w-4 h-4 text-[#C5A059]" />
-            <span>1-Click 4K Lossless ZIP ($19 Special)</span>
+            <span>99.8% Cost Savings ($19 Lifetime VIP Special)</span>
+          </div>
+        </div>
+      </section>
+
+      {/* 2-1. Cost & Value Contrast Comparison Matrix (Traditional Shoot vs WeddingHelper) */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-8 pb-16">
+        <div className="bg-[#FAF8F5] rounded-3xl border border-[#D4AF37]/30 p-6 sm:p-8 shadow-lg">
+          <div className="text-center mb-6">
+            <span className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-[#C5A059] block">
+              HONEST VALUE COMPARISON
+            </span>
+            <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#1F181B] mt-1">
+              Traditional Destination Shoot vs. WeddingHelper 1:1 Matrix
+            </h3>
+            <p className="text-xs text-[#1F181B]/60 mt-1">
+              Why forward-thinking couples choose WeddingHelper before booking flights and hotels.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs sm:text-sm font-sans">
+              <thead>
+                <tr className="border-b border-[#1F181B]/10 text-[#1F181B]/60 uppercase text-[10px] tracking-wider">
+                  <th className="py-3 px-3">Comparison Metric</th>
+                  <th className="py-3 px-3">Traditional Overseas Shoot</th>
+                  <th className="py-3 px-3 text-[#8C6D23] font-bold bg-[#F5EEDB]/50 rounded-t-xl">WeddingHelper VIP All-Access</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#1F181B]/5 text-[#1F181B]/80">
+                <tr>
+                  <td className="py-3.5 px-3 font-semibold text-[#1F181B]">Total Investment</td>
+                  <td className="py-3.5 px-3 text-red-600 font-medium">$15,000 - $22,000 USD (Flights, 5-Star Hotel, Photographer, HMU)</td>
+                  <td className="py-3.5 px-3 font-bold text-[#8C6D23] bg-[#F5EEDB]/50">
+                    <span className="text-base font-extrabold text-[#1F181B] mr-1">$19</span> USD (One-Time, 99.8% Savings)
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-3 font-semibold text-[#1F181B]">Time & Fatigue</td>
+                  <td className="py-3.5 px-3">5 to 7 Days Minimum (14hr Flights, Jet Lag, Outdoor Exhaustion)</td>
+                  <td className="py-3.5 px-3 font-bold text-[#8C6D23] bg-[#F5EEDB]/50">
+                    Upload 1 Photo ➔ <strong>Instant 1-Sec Rendering</strong> (Zero Fatigue)
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-3 font-semibold text-[#1F181B]">Sanctuary Variety</td>
+                  <td className="py-3.5 px-3">Single City / Location (Additional Destinations Cost Thousands)</td>
+                  <td className="py-3.5 px-3 font-bold text-[#8C6D23] bg-[#F5EEDB]/50">
+                    <strong>12 Iconic Sanctuaries Across 240 Bespoke Angles</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-3 font-semibold text-[#1F181B]">Delivery Turnaround</td>
+                  <td className="py-3.5 px-3">3 to 6 Months Waiting for Color Grading & Edits</td>
+                  <td className="py-3.5 px-3 font-bold text-[#8C6D23] bg-[#F5EEDB]/50">
+                    <strong>Instant 4K Lossless ZIP Download</strong> Available Immediately
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-3 font-semibold text-[#1F181B]">Facial Likeness</td>
+                  <td className="py-3.5 px-3">Subject to Photographer's Personal Retouching Style</td>
+                  <td className="py-3.5 px-3 font-bold text-[#8C6D23] bg-[#F5EEDB]/50">
+                    <strong>1:1 Biometric Facial Identity Lock</strong> (Zero Distortion / Westernization)
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
@@ -606,9 +737,21 @@ export default function WeddingHelperPage() {
                 Upload Your Authentic Couple Photos
               </h2>
             </div>
-            <span className="text-xs font-sans text-[#1F181B]/60">
-              Face & body shape are 100% preserved
-            </span>
+            <div className="flex items-center gap-3">
+              {(coupleImage || brideImage || groomImage) && (
+                <button
+                  type="button"
+                  onClick={handleResetAllPhotos}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 text-xs font-bold transition shadow-xs cursor-pointer"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>Reset All Photos</span>
+                </button>
+              )}
+              <span className="text-xs font-sans text-[#1F181B]/60">
+                Face & body shape are 100% preserved
+              </span>
+            </div>
           </div>
 
           {/* Pro Quality Likeness Tip Banner */}
@@ -639,6 +782,17 @@ export default function WeddingHelperPage() {
                   <span className="absolute top-2 left-2 px-2.5 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-[#1F181B] text-[#D4AF37]">
                     Couple Photo ✓
                   </span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRemoveSinglePhoto('couple');
+                    }}
+                    className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/70 hover:bg-red-600 text-white flex items-center justify-center transition z-20 cursor-pointer shadow-md"
+                    title="Remove couple photo"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
                 </>
               ) : (
                 <div className="flex flex-col items-center gap-2">
@@ -667,6 +821,17 @@ export default function WeddingHelperPage() {
                   <span className="absolute top-2 left-2 px-2.5 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-[#1F181B] text-[#D4AF37]">
                     Bride Close-Up ✓
                   </span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRemoveSinglePhoto('bride');
+                    }}
+                    className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/70 hover:bg-red-600 text-white flex items-center justify-center transition z-20 cursor-pointer shadow-md"
+                    title="Remove bride photo"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
                 </>
               ) : (
                 <div className="flex flex-col items-center gap-2">
@@ -695,6 +860,17 @@ export default function WeddingHelperPage() {
                   <span className="absolute top-2 left-2 px-2.5 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-[#1F181B] text-[#D4AF37]">
                     Groom Close-Up ✓
                   </span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRemoveSinglePhoto('groom');
+                    }}
+                    className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/70 hover:bg-red-600 text-white flex items-center justify-center transition z-20 cursor-pointer shadow-md"
+                    title="Remove groom photo"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
                 </>
               ) : (
                 <div className="flex flex-col items-center gap-2">
@@ -1046,6 +1222,56 @@ export default function WeddingHelperPage() {
           </div>
         </div>
       )}
+
+      {/* 5-1. Viral Mobile Invitation & Instagram Engine */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-8 pb-16">
+        <div className="bg-gradient-to-br from-[#1F181B] via-[#2A2124] to-[#1F181B] text-white rounded-3xl p-6 sm:p-10 border border-[#D4AF37]/30 shadow-xl relative overflow-hidden">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="space-y-4 max-w-xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#D4AF37] text-[10px] font-extrabold uppercase tracking-[0.2em]">
+                <Share2 className="w-3 h-3 text-[#D4AF37]" />
+                <span>Viral Flywheel • High-Impact Guest Invitations</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white leading-tight">
+                "Where Was This Shot?" <br />
+                <span className="text-[#D4AF37]">Receive Endless Compliments from Every Guest.</span>
+              </h3>
+              <p className="text-white/70 text-xs sm:text-sm font-sans leading-relaxed">
+                Curate your favorite master portraits from your 240 couture collection into an <strong>interactive mobile wedding invitation link</strong>. Includes background music, venue maps, RSVP guestbook, and 9:16 4K visual assets tailored for Instagram Reels and Stories.
+              </p>
+              <div className="grid grid-cols-2 gap-3 pt-2 text-xs text-white/80 font-sans">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                  <span>Instagram Reels & Stories 9:16 Ready</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                  <span>Unlimited Guest Mobile Invitations</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full md:w-64 bg-white/5 border border-white/10 rounded-2xl p-5 text-center shrink-0 backdrop-blur-xs">
+              <div className="w-12 h-12 rounded-full bg-[#D4AF37]/20 text-[#D4AF37] flex items-center justify-center mx-auto mb-3">
+                <Sparkles className="w-6 h-6" />
+              </div>
+              <span className="text-[11px] font-bold text-white block uppercase tracking-wider">
+                Digital Mobile Invitation
+              </span>
+              <p className="text-[11px] text-white/50 mt-1 mb-4">
+                Mobile invitation templates across all 12 destinations automatically unlocked with VIP Pass
+              </p>
+              <button
+                type="button"
+                onClick={() => setIsCheckoutOpen(true)}
+                className="w-full py-2.5 rounded-xl bg-[#D4AF37] text-[#1F181B] font-extrabold text-xs uppercase tracking-wider hover:brightness-105 transition cursor-pointer shadow-lg"
+              >
+                Get Started with VIP Pass ($19)
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* 6. Honest Transparent Pricing: The Grand 12 VIP Pass ($19) */}
       <section className="max-w-4xl mx-auto px-4 sm:px-8 pb-20">
