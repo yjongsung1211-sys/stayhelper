@@ -93,11 +93,14 @@ export async function POST(req: NextRequest) {
 [SUPREME CORE MANDATE: THIS IS A ONCE-IN-A-LIFETIME DREAM WEDDING PHOTO! (이건 평생 간직할 웨딩사진이다!)]
 Wedding clients demand the absolute PEAK OF BEAUTY, SLIMNESS, GLAMOUR, AND YOUTH. Even if the reference photo shows flaws, thinning hair, skin blemishes, or extra weight, YOU MUST DRAMATICALLY ENHANCE THEM TO BE AS HANDSOME, GORGEOUS, SLENDER, AND RADIANT AS TOP-TIER KOREAN CELEBRITY LEADS, while retaining core self-recognition!${multiPhotoInstruction}
 
-[1. GROOM HAIR: 100% VOLUMINOUS, THICK, DENSE HAIR & PERFECT LOW HAIRLINE (대머리/탈모 무조건 풍성하게)]
-- UNCONDITIONAL THICK & FULL HAIR: Even if the groom's reference photo shows hair loss, a high receding forehead, M-shaped hairline, or thinning crown, YOU MUST COMPLETELY AND UNCONDITIONALLY GIVE HIM A DENSE, VOLUMINOUS, YOUTHFUL HEAD OF HAIR (무조건 풍성하고 빽빽한 훈남 헤어스타일).
-- Lower and fill in the hairline gracefully with rich, natural hair fibers (자연스러운 헤어라인 교정, 이마 축소 효과).
-- Style with a trendy, voluminous Korean actor dapper cut (풍성한 볼륨의 가르마 애즈펌 또는 댄디 컷) with generous root lift (뿌리 볼륨), thick temple coverage, and sharp tapered sideburns.
-- FORBIDDEN: NO BALDNESS, NO THINNING HAIR, NO RECEDING M-HAIRLINE, NO EXPOSED HIGH FOREHEAD, NO VISIBLE BARE SCALP (탈모, M자 이마, 벗겨진 머리 절대 금지).
+[1. GROOM HAIRSTYLE: FORWARD-FALLING DANDY BANGS & COMPACT FOREHEAD (앞머리를 차분히 내려 이마를 덮는 훈남 댄디컷)]
+- CRITICAL HAIRSTYLE OVERHAUL: DO NOT STYLE THE GROOM'S HAIR UPWARD OR BACKWARD.
+- THE GROOM MUST WEAR A KOREAN CELEBRITY DANDY CUT / TEXTURED LEAF CUT WITH FORWARD-FALLING BANGS (앞머리를 차분하고 풍성하게 앞으로 내려서 이마를 70% 이상 가려주는 세련된 댄디컷 헤어스타일).
+- The bangs and fringe must gracefully fall forward and downward, resting right above the groom's eyebrows, completely covering the tall forehead and receding hairline (이마를 덮어 이마 면적이 전혀 넓어 보이지 않게 아담하고 갸름한 동안 소두 얼굴형 완성).
+- The bangs have rich volume, soft natural texture, and slight separation (공기감 있는 시스루 댄디뱅 / 내린 가르마 애즈펌).
+- ZERO POMPADOUR, ZERO SLICKED-BACK HAIR, ZERO UPWARD COMBED HAIR, ZERO EXPOSED HIGH BARE FOREHEAD (올린 머리, 깐머리, 노출된 높은 이마 100% 절대 금지).
+- Rich, thick, dense hair roots and voluminous sides and temples. ZERO bald spots, ZERO thinning, ZERO high receding forehead, ZERO bare scalp.
+- FORBIDDEN: NO BALDNESS, NO THINNING HAIR, NO HIGH HAIRLINE, NO EXPANSIVE FOREHEAD, NO TALL BARE FOREHEAD, NO SLICKED-BACK RECEDING HAIR, NO M-SHAPED RECEDING TEMPLES (탈모, 높은 이마, 넓은 이마, M자 이마, 올린 머리 절대 금지).
 
 [2. FLAWLESS PORCELAIN AIRBRUSH MAKEUP (피부가 안 좋아도 화장한 것처럼 완벽한 깐달걀 피부)]
 - HIGH-COVERAGE CELEBRITY STUDIO MAKEUP: Even if the groom or bride has blemishes, rough texture, acne scars, brown sun spots, freckles, melasma, redness, or enlarged pores, AIRBRUSH IT COMPLETELY AWAY 100%.

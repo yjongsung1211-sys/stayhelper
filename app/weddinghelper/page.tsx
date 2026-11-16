@@ -312,7 +312,7 @@ export default function WeddingHelperPage() {
     }
   };
 
-  // 🌟 12 Concepts Showcase Synthesis Handler
+  // 🌟 Random Landmark Concept Showcase Synthesis Handler (1 Photo)
   const handleGenerate12Concepts = async () => {
     const imagesToUse = getClientImages();
     if (imagesToUse.length === 0) {
@@ -321,10 +321,14 @@ export default function WeddingHelperPage() {
       return;
     }
 
+    // Pick 1 random landmark destination from the 12 concepts
+    const randomIndex = Math.floor(Math.random() * DESTINATION_240_CONFIGS.length);
+    const targetConcept = DESTINATION_240_CONFIGS[randomIndex];
+
     setIsGenerating12(true);
     setShow12Showcase(true);
-    setSynthesizingConceptId('theme_01_bali');
-    setPreviewStepText('Analyzing 12 concepts & rendering 1st showcase portrait (Bali Chapel)...');
+    setSynthesizingConceptId(targetConcept.id);
+    setPreviewStepText(`Selecting random destination & synthesizing 1 masterpiece (${targetConcept.title})...`);
 
     // Scroll to showcase
     setTimeout(() => {
@@ -338,8 +342,8 @@ export default function WeddingHelperPage() {
         body: JSON.stringify({
           images: imagesToUse,
           image: imagesToUse[0],
-          targetSceneImage: '/images/weddings_240/theme_01_bali/scene_01.jpg',
-          themeId: 'theme_01_bali',
+          targetSceneImage: targetConcept.heroImg,
+          themeId: targetConcept.id,
           angleTitle: 'Ceremonial Altar Vows',
           groomHeight,
           groomWeight,
@@ -350,17 +354,17 @@ export default function WeddingHelperPage() {
 
       const data = await res.json();
       if (data?.success && data?.visualizedImageUrl) {
-        const updated = { ...conceptPreviews, theme_01_bali: data.visualizedImageUrl };
+        const updated = { ...conceptPreviews, [targetConcept.id]: data.visualizedImageUrl };
         setConceptPreviews(updated);
         try {
           localStorage.setItem('weddinghelper_concept_previews', JSON.stringify(updated));
         } catch (e) {}
-        showToast('🎉 1st showcase portrait synthesized! Explore all 12 concepts below.', 4500);
+        showToast(`🎉 Random masterpiece synthesized for ${targetConcept.title}!`, 4500);
       } else {
         showToast('⚠️ High synthesis volume. Displaying high-definition editorial previews first.');
       }
     } catch (err) {
-      console.warn('12-concept preview error:', err);
+      console.warn('Random concept preview error:', err);
       showToast('⚠️ Network connection busy. Please check your connection and retry.');
     } finally {
       setIsGenerating12(false);
@@ -942,12 +946,12 @@ export default function WeddingHelperPage() {
               {isGenerating12 ? (
                 <>
                   <RefreshCw className="w-4 h-4 animate-spin text-[#1F181B]" />
-                  <span>{previewStepText || 'Rendering 12 Concepts...'}</span>
+                  <span>{previewStepText || 'Rendering Random Masterpiece...'}</span>
                 </>
               ) : (
                 <>
                   <Sparkles className="w-4 h-4 fill-[#1F181B] text-[#1F181B]" />
-                  <span>Generate 12 Landmark Showcase Portraits (Preview 1 Each)</span>
+                  <span>Generate 1 Random Landmark Showcase Portrait (Free Preview)</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
