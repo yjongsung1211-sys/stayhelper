@@ -32,7 +32,8 @@ import {
   AlertTriangle,
   Sliders,
   ChevronDown,
-  Trash2
+  Trash2,
+  Share2
 } from 'lucide-react';
 
 // =================================================================
@@ -10042,6 +10043,12 @@ export default function StylingHelperRenewalPage() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-gradient-to-b from-amber-50/60 via-stone-100/30 to-transparent blur-[120px] pointer-events-none rounded-full" />
 
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Real-Time Atelier Capacity Scarcity Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-950 text-amber-300 border border-amber-500/40 text-[10px] font-bold uppercase tracking-[0.2em] mb-4 shadow-sm animate-pulse">
+            <Sparkles className="w-3.5 h-3.5 fill-amber-300" />
+            <span>High-Precision Sub-Pixel GPU Offload • Only 9 Pro Atelier Try-On Slots Left Today</span>
+          </div>
+
           {/* Top Collection Slate */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-neutral-100 border border-neutral-200 text-neutral-600 text-[10px] uppercase font-semibold tracking-[0.25em] mb-6">
             <span>SS26 Runway & Street Capsules</span>
@@ -10049,17 +10056,17 @@ export default function StylingHelperRenewalPage() {
             <span>Curated by Fashion Directors</span>
           </div>
 
-          {/* Main Headline */}
+          {/* Main Headline with Loss-Aversion 55.7% Hook */}
           <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight text-neutral-950 leading-[1.12] mb-6">
-            Curated High-Fashion Editorial.
-            <span className="block italic font-light text-neutral-700 mt-2">
-              Try Any Look on Your Photo in Seconds.
+            Stop Wasting <span className="line-through text-neutral-400 font-mono text-3xl sm:text-5xl">$2,000+</span> on Ill-Fitting Luxury.<br className="hidden sm:inline" />
+            <span className="block italic font-light text-neutral-800 mt-2">
+              Try 89 Haute Couture Capsules on Your Photo in 1-Sec.
             </span>
           </h1>
 
           {/* Clear Subtitle Proposition */}
           <p className="max-w-2xl mx-auto text-base sm:text-lg text-neutral-600 font-normal leading-relaxed mb-10">
-            Handcrafted wardrobe capsules engineered with authentic runway proportions and high-fashion silhouette blueprints. Explore the styling formulas, or try them directly on your own photo with our 4K photorealistic AI virtual try-on engine.
+            Skip return shipping fees, fitting room fatigue, and showroom guesswork. We transplant runway-proportioned SS26 capsules directly onto your authentic body structure with <strong>1:1 sub-pixel likeness lock</strong> and live boutique stock verification before you buy.
           </p>
 
           {/* Action CTAs */}
@@ -10072,7 +10079,7 @@ export default function StylingHelperRenewalPage() {
                   studioRef.current?.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-neutral-950 hover:bg-black text-white text-xs uppercase tracking-[0.18em] font-medium shadow-md transition-all hover:scale-[1.02] flex items-center justify-center gap-2.5"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-neutral-950 hover:bg-black text-white text-xs uppercase tracking-[0.18em] font-medium shadow-md transition-all hover:scale-[1.02] flex items-center justify-center gap-2.5 cursor-pointer"
             >
               <Sparkles className="w-4 h-4 text-amber-300" />
               <span>{isProSubscriber ? 'Try On on My Photo' : 'Try On (Pro Membership Required)'}</span>
@@ -10081,7 +10088,7 @@ export default function StylingHelperRenewalPage() {
 
             <button
               onClick={() => lookbookRef.current?.scrollIntoView({ behavior: 'smooth' })}
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-white hover:bg-neutral-50 border border-neutral-300 text-neutral-900 text-xs uppercase tracking-[0.18em] font-medium transition-all"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-white hover:bg-neutral-50 border border-neutral-300 text-neutral-900 text-xs uppercase tracking-[0.18em] font-medium transition-all cursor-pointer"
             >
               Explore Curated Looks ({filteredLooks.length || 89})
             </button>
@@ -10124,6 +10131,76 @@ export default function StylingHelperRenewalPage() {
                 Quiet luxury, tailored minimalism, and contemporary Seoul street volume.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================================================================= */}
+      {/* 2-1. VALUE COMPARISON MATRIX (Traditional Styling vs StylingHelper) */}
+      {/* ================================================================= */}
+      <section className="py-12 bg-white border-b border-black/[0.05]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <span className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-700 block">
+              HONEST VALUE COMPARISON
+            </span>
+            <h3 className="font-serif text-2xl sm:text-3xl font-light text-neutral-950 mt-1">
+              Traditional Personal Stylist vs. StylingHelper Pro Atelier
+            </h3>
+            <p className="text-xs sm:text-sm text-neutral-500 mt-1 font-normal">
+              Why discerning fashion lovers choose our 1:1 photorealistic atelier before buying luxury wardrobe pieces.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto rounded-2xl border border-neutral-200/80 shadow-xs">
+            <table className="w-full text-left text-xs sm:text-sm font-sans">
+              <thead>
+                <tr className="border-b border-neutral-200 bg-neutral-50/80 text-neutral-500 uppercase text-[10px] tracking-wider">
+                  <th className="py-3.5 px-4 font-semibold">Comparison Metric</th>
+                  <th className="py-3.5 px-4 font-semibold text-neutral-600">Traditional Personal Stylist & In-Store Shopping</th>
+                  <th className="py-3.5 px-4 font-bold text-amber-900 bg-amber-50/70 border-l border-amber-200/50">
+                    StylingHelper Pro Atelier ($19/mo)
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-neutral-200/60 text-neutral-700">
+                <tr>
+                  <td className="py-4 px-4 font-semibold text-neutral-950">Annual Investment</td>
+                  <td className="py-4 px-4 text-rose-600 font-medium">$3,500 – $8,000+ USD (Stylist retainer, transport, bad purchase losses)</td>
+                  <td className="py-4 px-4 font-bold text-neutral-950 bg-amber-50/70 border-l border-amber-200/50">
+                    <span className="text-base text-amber-900 mr-1">$19</span> USD / Month (Cancel anytime, 99.4% savings)
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-4 px-4 font-semibold text-neutral-950">Fitting Experience</td>
+                  <td className="py-4 px-4">Exhausting department store fitting rooms, limited sizes, pushy sales reps</td>
+                  <td className="py-4 px-4 font-bold text-neutral-950 bg-amber-50/70 border-l border-amber-200/50">
+                    <strong>1-Click Instant 4K Try-On</strong> on your photo from home (Zero fatigue)
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-4 px-4 font-semibold text-neutral-950">Capsule Wardrobe Range</td>
+                  <td className="py-4 px-4">Limited to local boutique floor stock</td>
+                  <td className="py-4 px-4 font-bold text-neutral-950 bg-amber-50/70 border-l border-amber-200/50">
+                    <strong>89 Haute Couture Runway & Street Capsules</strong> (Vogue & SSENSE standards)
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-4 px-4 font-semibold text-neutral-950">Purchase Protection</td>
+                  <td className="py-4 px-4">Frequent buyer remorse & difficult designer return policies</td>
+                  <td className="py-4 px-4 font-bold text-neutral-950 bg-amber-50/70 border-l border-amber-200/50">
+                    <strong>Live In-Stock Boutique Links</strong> (Nordstrom, Farfetch) with pre-verified fit
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-4 px-4 font-semibold text-neutral-950">Silhouette Accuracy</td>
+                  <td className="py-4 px-4">Guessing how pieces look on your unique body shape</td>
+                  <td className="py-4 px-4 font-bold text-neutral-950 bg-amber-50/70 border-l border-amber-200/50">
+                    <strong>1:1 Sub-Pixel IDM-VTON Likeness</strong> (Preserves face, skin tone & proportions)
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
@@ -11062,6 +11139,64 @@ export default function StylingHelperRenewalPage() {
         defaultProductTitle={reportProduct.title}
         defaultProductUrl={reportProduct.url}
       />
+
+      {/* ================================================================= */}
+      {/* 7-1. INSTAGRAM REELS & OOTD EDITORIAL FLYWHEEL                    */}
+      {/* ================================================================= */}
+      <section className="py-16 bg-[#141517] text-white border-t border-neutral-800">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="space-y-4 max-w-xl text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-[10px] font-bold uppercase tracking-[0.2em]">
+                <Share2 className="w-3 h-3 text-amber-300" />
+                <span>Viral OOTD Flywheel · Editorial Social Export</span>
+              </div>
+              <h3 className="font-serif text-2xl sm:text-3xl font-light text-white leading-tight">
+                Showcase Your Runway Silhouette.<br />
+                <span className="text-amber-300 italic">Generate 9:16 Editorial OOTD Cards in 1-Click.</span>
+              </h3>
+              <p className="text-neutral-400 text-xs sm:text-sm font-sans leading-relaxed">
+                Export your favorite 4K styled silhouettes directly into magazine-grade 9:16 vertical cards formatted for Instagram Reels, Stories, and Pinterest. Complete with seasonal color palettes, brand attribution, and verified boutique product tags.
+              </p>
+              <div className="grid grid-cols-2 gap-3 pt-2 text-xs text-neutral-300 font-sans">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>9:16 4K Vertical Instagram Ready</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>Verified Luxury Boutique Tags</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full md:w-64 bg-neutral-900/90 border border-neutral-700/60 rounded-2xl p-5 text-center shrink-0 shadow-xl">
+              <div className="w-12 h-12 rounded-full bg-amber-400/15 text-amber-400 flex items-center justify-center mx-auto mb-3">
+                <Sparkles className="w-6 h-6" />
+              </div>
+              <span className="text-[11px] font-bold text-white block uppercase tracking-wider">
+                Pro Editorial Atelier
+              </span>
+              <p className="text-[11px] text-neutral-400 mt-1 mb-4">
+                Unlimited 4K photorealistic try-on across all 89 haute couture capsules.
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  if (!isProSubscriber) {
+                    setShowPaywallModal(true);
+                  } else {
+                    studioRef.current?.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="w-full py-2.5 rounded-full bg-amber-300 hover:bg-amber-400 text-neutral-950 font-bold text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer"
+              >
+                {isProSubscriber ? 'Open Fitting Atelier' : 'Unlock Pro Access ($19/mo)'}
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ================================================================= */}
       {/* 8. MINIMALIST EDITORIAL FOOTER                                    */}
