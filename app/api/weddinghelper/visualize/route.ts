@@ -96,7 +96,7 @@ export async function POST(req: NextRequest) {
 - 100% IDENTICAL BONE STRUCTURE: Preserve the groom's exact eye shape, eyelid contour, nose shape, and natural jaw width. Preserve the bride's exact lovely eye folds, natural cheek fullness, and nose curvature. Do not slim, taper, or V-shape their chins. Do not apply generic K-pop plastic surgery filters.
 - GROOM DETAILS: Height ${groomHeight}cm, weight ${groomWeight}kg, styled with clean modern dapper hair, dressed in ${preset.groomAttire || 'a bespoke tailored ivory-cream Italian linen tuxedo with a black silk bow tie'}.
 - BRIDE DETAILS: Height ${brideHeight}cm, weight ${brideWeight}kg, styled with an effortless romantic low chignon with delicate fresh bridal floral pins, dressed in ${preset.brideAttire || 'an exquisite haute couture backless mermaid lace bridal gown with an ethereal chapel train'}.
-- AUTHENTIC SKIN & LIGHTING: Luminous Korean luxury porcelain glass-skin (수분 물광 피부), natural dewy complexion with zero blemishes, authentic skin micro-texture.
+- AUTHENTIC SKIN & LIGHTING: Luminous luxury porcelain glass-skin (dewy glass-skin), natural dewy complexion with zero blemishes, authentic skin micro-texture.
 - IMMEDIATE SELF-RECOGNITION: When the bride and groom view this photo, they and their families must recognize themselves immediately: "That is 100% truly US on our wedding day!"
 
 [SETTING & COMPOSITION: ${angleTitle.toUpperCase()} AT ${preset.venueName.toUpperCase()}]
