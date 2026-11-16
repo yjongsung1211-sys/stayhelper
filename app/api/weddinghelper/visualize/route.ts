@@ -101,16 +101,15 @@ export async function POST(req: NextRequest) {
   * PRESERVE HER AUTHENTIC EYE ARCH, SWEET SIGNATURE CHEEK DIMPLES, AND NATURAL FACIAL GEOMETRY.
   * DO NOT NARROW HER NOSE OR DISTORT HER AUTHENTIC EYE/LIP PROPORTIONS.${multiPhotoInstruction}
 
-[1. GROOM HAIRSTYLE: REGAL UPWARD-STYLED HAIR WITH MAXIMUM LOWERED HAIRLINE & NARROW FOREHEAD (이마를 훤히 올린 스타일 + 헤어라인을 최대한 밑으로 내려 좁고 아담한 이마)]
-- UPWARD REGENT / POMPADOUR WEDDING STYLING (이마를 가리지 않고 단정하고 세련되게 올린 스타일):
-  * The groom's hair must be styled UPWARD and neatly groomed away from the face (단정하고 기품 있게 위로 넘긴 클래식 포마드 / 가르마 리젠트 스타일).
-  * DO NOT cover the forehead with hanging bangs or fringe. The forehead must be cleanly open, exposed, confident, and aristocratic.
-- DRAMATICALLY LOWERED HAIRLINE (헤어라인을 최대한 밑으로 대폭 하향 조정):
-  * Lower the hairline significantly down toward the eyebrows so that the exposed forehead vertical height is very NARROW, COMPACT, AND SMALL (헤어라인을 최대한 아래로 끌어내려 이마 상하 길이를 아주 좁고 아담하게 연출).
-  * The forehead height must be short and compact (황금비율 이마 축소 효과, 눈썹과 헤어라인 사이 간격이 좁음).
-  * Rich, dense hair roots along the newly lowered, natural hairline with full temples and clean sideburns.
-  * ZERO receding hairline, ZERO high forehead, ZERO M-shaped recession, ZERO bare scalp.
-- FORBIDDEN: NO COVERED FOREHEAD, NO FORWARD-HANGING BANGS (앞머리로 이마 덮지 말 것 - 올린 스타일 엄수). NO TALL EXPANSIVE FOREHEAD, NO HIGH HAIRLINE, NO RECEDING TEMPLES, NO BALDNESS (넓고 높은 이마 절대 금지 - 헤어라인 최대한 밑으로 내릴 것).
+[1. GROOM HAIRSTYLE: COMPLETE EXTREME MAKEOVER TO SWEPT-UP POMPADOUR / REGENT (원형 캐주얼 앞머리 완전 박멸 & 이마 100% 올린 리젠트 스타일)]
+- CRITICAL OVERHAUL: DO NOT PRESERVE THE GROOM'S CASUAL STRAIGHT-DOWN BANGS, BOWL CUT, OR FORWARD FRINGE FROM HIS REFERENCE PHOTO (신랑의 원본 캐주얼 바가지머리/앞머리 절대 유지 금지).
+- COMPLETE HAIRSTYLE MAKEOVER TO AN ARISTOCRATIC CELEBRITY WEDDING REGENT POMPADOUR:
+  * The groom's hair MUST BE COMPLETELY SWEPT UP AND BACKWARDS (앞머리를 위로 완전히 빗어 넘긴 깔끔한 리젠트 포마드 헤어스타일).
+  * 100% BARE FOREHEAD: The forehead must be completely exposed, open, masculine, confident, and noble. Zero bangs, zero fringe, zero hair hanging down onto his forehead or eyes.
+  * DRAMATICALLY LOWERED YOUTHFUL HAIRLINE: Position his new hairline significantly LOWER, close to his eyebrows, so that his exposed forehead is NARROW, COMPACT, AND PERFECTLY PROPORTIONED (좁고 아담한 이마, 헤어라인을 밑으로 당겨 이마 높이 축소).
+  * Voluminous pompadour wave at the top with clean, tapered, dapper sides and sharp sideburns.
+  * ZERO straight-down bangs, ZERO bowl cut, ZERO messy fringe, ZERO casual unstyled hair.
+- FORBIDDEN: NO COVERED FOREHEAD, NO FORWARD-HANGING BANGS, NO BOWL CUT, NO DOWNWARD HAIR (앞머리로 이마 덮기 100% 엄금). NO TALL EXPANSIVE FOREHEAD, NO HIGH HAIRLINE, NO RECEDING TEMPLES, NO BALDNESS (넓고 높은 이마 절대 금지 - 헤어라인 최대한 밑으로 내릴 것).
 
 [2. FLAWLESS PORCELAIN AIRBRUSH MAKEUP & ZERO BEARD STUBBLE]
 - High-coverage celebrity studio bridal makeup: airbrush away blemishes, rough texture, acne scars, brown sun spots, redness, and enlarged pores.

@@ -1167,10 +1167,9 @@ export default function WeddingHelperPage() {
                 </Link>
               </div>
             ) : (
-              <form onSubmit={handleSubmitEmailDelivery} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+              <form onSubmit={handleSubmitEmailDelivery} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto" noValidate>
                 <input
                   type="email"
-                  required
                   placeholder="Enter your email to receive the album (e.g. bride@wedding.com)"
                   value={deliveryEmail}
                   onChange={(e) => setDeliveryEmail(e.target.value)}
