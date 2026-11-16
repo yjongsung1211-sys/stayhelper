@@ -29,7 +29,7 @@ const WEDDING_SAMPLE_PINS: ShowroomPin[] = (WEDDING_12_PRESETS['bali-jungle']?.p
 // 12 World-Class Luxury Destination Configs (20 Editorial Angles Each)
 const DESTINATION_240_CONFIGS = [
   { id: 'theme_01_bali', title: 'Bali Rainforest Infinity Chapel', dest: 'Ubud, Bali, Indonesia', venue: 'The Edge Bali & Mandapa Ritz-Carlton', heroImg: '/images/weddings_240/theme_01_bali/scene_01.jpg', position: 'center center' },
-  { id: 'theme_02_amalfi', title: 'Amalfi Coast Cliffside Belvedere', dest: 'Positano, Amalfi Coast, Italy', venue: 'Villa Cimbrone & Le Sirenuse', heroImg: '/images/weddings_240/theme_02_amalfi/scene_01.jpg', position: 'center center' },
+  { id: 'theme_02_amalfi', title: 'Amalfi Coast Cliffside Belvedere', dest: 'Positano, Amalfi Coast, Italy', venue: 'Villa Cimbrone & Le Sirenuse', heroImg: '/images/weddings_240/theme_02_amalfi/scene_01_v2.jpg', position: 'center center' },
   { id: 'theme_03_lake_como', title: 'Lake Como Villa Renaissance', dest: 'Bellagio, Lake Como, Italy', venue: 'Villa d\'Este & Villa del Balbianello', heroImg: '/images/weddings_240/theme_03_lake_como/scene_01.jpg', position: 'center center' },
   { id: 'theme_04_paris', title: 'Paris Private Palace & Seine Terrace', dest: 'Paris, France', venue: 'Hôtel de Crillon & Shangri-La Paris', heroImg: '/images/weddings_240/theme_04_paris/scene_01.jpg', position: 'center center' },
   { id: 'theme_05_nyc', title: 'Manhattan Skyline Penthouse & Central Park', dest: 'New York City, USA', venue: 'The Glasshouses & Aman New York', heroImg: '/images/weddings_240/theme_05_nyc/scene_01.jpg', position: 'center center' },
@@ -321,6 +321,13 @@ export default function WeddingHelperPage() {
       return;
     }
 
+    // Require PayPal VIP Pass ($19) to synthesize and transform photos
+    if (!user?.isVip && user?.plan !== 'grand') {
+      setIsCheckoutOpen(true);
+      showToast('🔒 Please complete the $19 VIP Pass with PayPal to transform your photos into high-fashion destinations.');
+      return;
+    }
+
     // Pick 1 random landmark destination from the 12 concepts
     const randomIndex = Math.floor(Math.random() * DESTINATION_240_CONFIGS.length);
     const targetConcept = DESTINATION_240_CONFIGS[randomIndex];
@@ -373,12 +380,19 @@ export default function WeddingHelperPage() {
     }
   };
 
-  // 🌟 Synthesize any specific concept with user's face
+  // 🌟 Synthesize any specific concept with user's face (Gated by PayPal VIP Pass)
   const handleSynthesizeSingleConcept = async (themeId: string, angleTitle = 'Ceremonial Altar Vows') => {
     const imagesToUse = getClientImages();
     if (imagesToUse.length === 0) {
       showToast('⚠️ Please upload your reference photo first.');
       coupleInputRef.current?.click();
+      return;
+    }
+
+    // Require PayPal VIP Pass ($19) to synthesize individual concepts
+    if (!user?.isVip && user?.plan !== 'grand') {
+      setIsCheckoutOpen(true);
+      showToast('🔒 Please activate the $19 VIP Pass with PayPal to synthesize your face into all destinations.');
       return;
     }
 

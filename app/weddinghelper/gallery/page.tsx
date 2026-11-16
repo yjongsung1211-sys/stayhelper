@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -18,7 +18,9 @@ import {
   ExternalLink,
   ShieldCheck,
   Lock,
-  ArrowRight
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import JSZip from 'jszip';
 
@@ -133,6 +135,7 @@ function GalleryContent() {
   const [checkoutEmail, setCheckoutEmail] = useState('');
 
   const [activeTab, setActiveTab] = useState<string>(initialDest);
+  const tabsScrollRef = useRef<HTMLDivElement>(null);
   const [activeLightboxScene, setActiveLightboxScene] = useState<Wedding240Scene | null>(null);
   const [personalizedScenes, setPersonalizedScenes] = useState<Record<string, string>>({});
   const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
@@ -909,38 +912,77 @@ function GalleryContent() {
               );
             })()}
 
-            {/* 12 Destination Tabs Bar */}
-            <div className="bg-[#1C1719] rounded-2xl border border-white/10 p-2.5 mb-8 flex items-center gap-2 overflow-x-auto scrollbar-thin">
+            {/* 12 Destination Tabs Bar with Left/Right Navigation */}
+            <div className="relative mb-8 group/tabs">
+              {/* Left Arrow Button */}
               <button
                 type="button"
-                onClick={() => setActiveTab('all')}
-                className={`px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition cursor-pointer ${
-                  activeTab === 'all'
-                    ? 'bg-[#D4AF37] text-[#1F181B] shadow-md ring-2 ring-[#D4AF37]/50'
-                    : 'bg-white/5 text-white/80 hover:bg-white/15'
-                }`}
+                aria-label="Scroll tabs left"
+                onClick={() => {
+                  if (tabsScrollRef.current) {
+                    tabsScrollRef.current.scrollBy({ left: -260, behavior: 'smooth' });
+                  }
+                }}
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-[#1F181B]/95 border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#1F181B] transition shadow-xl flex items-center justify-center cursor-pointer backdrop-blur-md"
               >
-                All 240 Scenes (240)
+                <ChevronLeft className="w-4 h-4 stroke-[2.5]" />
               </button>
-              {DESTINATION_240_CONFIGS.map((dest, idx) => {
-                const isActive = activeTab === dest.id;
-                return (
-                  <button
-                    key={dest.id}
-                    type="button"
-                    onClick={() => setActiveTab(dest.id)}
-                    className={`px-3.5 py-2.5 rounded-xl text-xs font-semibold tracking-wider whitespace-nowrap transition cursor-pointer flex items-center gap-1.5 ${
-                      isActive
-                        ? 'bg-[#D4AF37] text-[#1F181B] font-bold shadow-md'
-                        : 'bg-white/5 text-white/70 hover:bg-white/15'
-                    }`}
-                  >
-                    <span className="opacity-70 font-mono">#{idx + 1}</span>
-                    <span>{dest.title.split(' ')[0]} {dest.title.split(' ')[1] || ''}</span>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-black/40 text-white/90">20</span>
-                  </button>
-                );
-              })}
+
+              {/* Right Arrow Button */}
+              <button
+                type="button"
+                aria-label="Scroll tabs right"
+                onClick={() => {
+                  if (tabsScrollRef.current) {
+                    tabsScrollRef.current.scrollBy({ left: 260, behavior: 'smooth' });
+                  }
+                }}
+                className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-[#1F181B]/95 border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#1F181B] transition shadow-xl flex items-center justify-center cursor-pointer backdrop-blur-md"
+              >
+                <ChevronRight className="w-4 h-4 stroke-[2.5]" />
+              </button>
+
+              {/* Scrollable Tabs Container */}
+              <div
+                ref={tabsScrollRef}
+                className="bg-[#1C1719] rounded-2xl border border-white/10 p-2.5 px-12 flex items-center gap-2 overflow-x-auto scroll-smooth select-none cursor-grab active:cursor-grabbing [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+                onWheel={(e) => {
+                  if (e.deltaY !== 0 && tabsScrollRef.current) {
+                    tabsScrollRef.current.scrollLeft += e.deltaY;
+                  }
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('all')}
+                  className={`px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition cursor-pointer shrink-0 ${
+                    activeTab === 'all'
+                      ? 'bg-[#D4AF37] text-[#1F181B] shadow-md ring-2 ring-[#D4AF37]/50'
+                      : 'bg-white/5 text-white/80 hover:bg-white/15'
+                  }`}
+                >
+                  All 240 Scenes (240)
+                </button>
+                {DESTINATION_240_CONFIGS.map((dest, idx) => {
+                  const isActive = activeTab === dest.id;
+                  return (
+                    <button
+                      key={dest.id}
+                      type="button"
+                      onClick={() => setActiveTab(dest.id)}
+                      className={`px-3.5 py-2.5 rounded-xl text-xs font-semibold tracking-wider whitespace-nowrap transition cursor-pointer shrink-0 flex items-center gap-1.5 ${
+                        isActive
+                          ? 'bg-[#D4AF37] text-[#1F181B] font-bold shadow-md'
+                          : 'bg-white/5 text-white/70 hover:bg-white/15'
+                      }`}
+                    >
+                      <span className="opacity-70 font-mono">#{idx + 1}</span>
+                      <span>{dest.title.split(' ')[0]} {dest.title.split(' ')[1] || ''}</span>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-black/40 text-white/90">20</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Destination Subheader */}
