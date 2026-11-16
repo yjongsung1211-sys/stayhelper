@@ -74,6 +74,7 @@ export default function WeddingHelperPage() {
   const [activeConceptModal, setActiveConceptModal] = useState<{ id: string; title: string; dest: string; venue: string; img: string } | null>(null);
   const [isGenerating12, setIsGenerating12] = useState<boolean>(false);
   const [show12Showcase, setShow12Showcase] = useState<boolean>(false);
+  const [synthesizingConceptId, setSynthesizingConceptId] = useState<string | null>(null);
   const [deliveryEmail, setDeliveryEmail] = useState<string>('');
   const [isSubmittingDelivery, setIsSubmittingDelivery] = useState<boolean>(false);
   const [deliverySubmittedOrder, setDeliverySubmittedOrder] = useState<string | null>(null);
@@ -322,6 +323,7 @@ export default function WeddingHelperPage() {
 
     setIsGenerating12(true);
     setShow12Showcase(true);
+    setSynthesizingConceptId('theme_01_bali');
     setPreviewStepText('Analyzing 12 concepts & rendering 1st showcase portrait (Bali Chapel)...');
 
     // Scroll to showcase
@@ -362,6 +364,7 @@ export default function WeddingHelperPage() {
       showToast('⚠️ Network connection busy. Please check your connection and retry.');
     } finally {
       setIsGenerating12(false);
+      setSynthesizingConceptId(null);
       setPreviewStepText('');
     }
   };
@@ -376,6 +379,7 @@ export default function WeddingHelperPage() {
     }
 
     const themeConfig = DESTINATION_240_CONFIGS.find((t) => t.id === themeId);
+    setSynthesizingConceptId(themeId);
     showToast(`✨ Synthesizing showcase portrait for ${themeConfig?.title || themeId}...`);
 
     try {
@@ -408,6 +412,8 @@ export default function WeddingHelperPage() {
       }
     } catch (e) {
       showToast('⚠️ Synthesis error. Please check your network connection.');
+    } finally {
+      setSynthesizingConceptId(null);
     }
   };
 
@@ -993,16 +999,36 @@ export default function WeddingHelperPage() {
                 <div className="relative aspect-[3/4] w-full overflow-hidden bg-black/10">
                   <Image
                     src={displayImg}
-                    alt={dest.title}
+                    alt=""
+                    aria-label={dest.title}
                     fill
                     unoptimized
                     loading="lazy"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                     style={{ objectPosition: isSynthesized ? 'center center' : (dest.position || 'center center') }}
                   />
+
+                  {/* Haute Couture Atelier Waiting Overlay */}
+                  {synthesizingConceptId === dest.id && (
+                    <div className="absolute inset-0 bg-[#1F181B]/90 backdrop-blur-sm flex flex-col items-center justify-center p-4 text-center z-20">
+                      <div className="relative w-12 h-12 rounded-full border border-[#D4AF37]/40 flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.35)] mb-2.5">
+                        <div className="absolute inset-0 rounded-full border-2 border-[#D4AF37] border-t-transparent animate-spin" />
+                        <Sparkles className="w-5 h-5 text-[#D4AF37] animate-pulse" />
+                      </div>
+                      <span className="text-xs font-serif font-bold text-white tracking-wide">
+                        Crafting 4K Masterpiece...
+                      </span>
+                      <span className="text-[9px] text-[#D4AF37] font-mono mt-1 px-2 py-0.5 rounded-full bg-black/50 border border-[#D4AF37]/30">
+                        Applying 1:1 Biometric Glass-Skin...
+                      </span>
+                      <div className="w-20 h-1 bg-white/10 rounded-full mt-2.5 overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] animate-pulse" style={{ width: '80%' }} />
+                      </div>
+                    </div>
+                  )}
                   
                   {/* Status Badges */}
-                  <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
+                  <div className="absolute top-3 left-3 flex flex-col gap-1 z-10 pointer-events-none">
                     <span className="px-2.5 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-[#1F181B]/85 text-[#D4AF37] backdrop-blur-md border border-[#D4AF37]/30 shadow-xs">
                       Concept #{String(idx + 1).padStart(2, '0')}
                     </span>
@@ -1046,14 +1072,22 @@ export default function WeddingHelperPage() {
 
                   {/* Card Action */}
                   <div className="mt-4 pt-3 border-t border-[#1F181B]/10 flex items-center justify-between gap-2">
-                    <button
-                      type="button"
-                      onClick={() => handleSynthesizeSingleConcept(dest.id)}
-                      className="text-[11px] font-bold text-[#1F181B] hover:text-[#C5A059] flex items-center gap-1 transition-colors cursor-pointer"
-                    >
-                      <Sparkles className="w-3 h-3 text-[#C5A059]" />
-                      <span>{isSynthesized ? 'Re-Synthesize' : 'Synthesize My Face'}</span>
-                    </button>
+                    {synthesizingConceptId === dest.id ? (
+                      <div className="text-[11px] font-bold text-[#D4AF37] flex items-center gap-1.5 animate-pulse">
+                        <RefreshCw className="w-3 h-3 animate-spin text-[#D4AF37]" />
+                        <span>Synthesizing...</span>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => handleSynthesizeSingleConcept(dest.id)}
+                        disabled={Boolean(synthesizingConceptId)}
+                        className="text-[11px] font-bold text-[#1F181B] hover:text-[#C5A059] flex items-center gap-1 transition-colors cursor-pointer disabled:opacity-50"
+                      >
+                        <Sparkles className="w-3 h-3 text-[#C5A059]" />
+                        <span>{isSynthesized ? 'Re-Synthesize' : 'Synthesize My Face'}</span>
+                      </button>
+                    )}
                     <Link
                       href={`/weddinghelper/gallery?dest=${dest.id}`}
                       className="text-[10px] font-bold text-[#C5A059] hover:underline flex items-center gap-0.5"

@@ -75,6 +75,12 @@ const ANGLE_20_TITLES = [
   '8K Heritage Canvas Masterpiece'
 ];
 
+const ATELIER_STAGES = [
+  'Reading facial bone contours & eye alignment...',
+  'Sculpting Cheongdam Haute Couture glass-skin...',
+  'Rendering 4K Hasselblad Masterpiece Canvas...',
+];
+
 const WEDDING_240_SCENES: Wedding240Scene[] = DESTINATION_240_CONFIGS.flatMap((dest) => {
   return Array.from({ length: 20 }, (_, idx) => {
     const angleNum = idx + 1;
@@ -129,12 +135,14 @@ function GalleryContent() {
   const [activeTab, setActiveTab] = useState<string>(initialDest);
   const [activeLightboxScene, setActiveLightboxScene] = useState<Wedding240Scene | null>(null);
   const [personalizedScenes, setPersonalizedScenes] = useState<Record<string, string>>({});
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
   const [transformingSceneId, setTransformingSceneId] = useState<string | null>(null);
   const [isBatchSynthesizing, setIsBatchSynthesizing] = useState(false);
   const [batchProgress, setBatchProgress] = useState<{ current: number; total: number; title: string } | null>(null);
   const [isDownloadingZip, setIsDownloadingZip] = useState(false);
   const [zipProgress, setZipProgress] = useState(0);
   const [toastMessage, setToastMessage] = useState('');
+  const [atelierStepTicker, setAtelierStepTicker] = useState(0);
 
   // Proportions and uploaded photos from localStorage
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
@@ -177,8 +185,18 @@ function GalleryContent() {
 
       const storedPersonalized = localStorage.getItem('weddinghelper_personalized_scenes');
       if (storedPersonalized) {
-        const parsed = JSON.parse(storedPersonalized);
-        if (parsed && typeof parsed === 'object') setPersonalizedScenes(parsed);
+        try {
+          const parsed = JSON.parse(storedPersonalized);
+          if (parsed && typeof parsed === 'object') {
+            const cleaned: Record<string, string> = {};
+            for (const [k, v] of Object.entries(parsed)) {
+              if (typeof v === 'string' && !v.startsWith('blob:') && v.length > 20) {
+                cleaned[k] = v;
+              }
+            }
+            setPersonalizedScenes(cleaned);
+          }
+        } catch (e) {}
       }
 
       // Hydrate from Server Order Store if orderId is available
@@ -193,7 +211,13 @@ function GalleryContent() {
               if (ord.clientImages?.length) setUploadedImages(ord.clientImages);
               if (ord.proportions) setProportions(ord.proportions);
               if (ord.completedScenes && Object.keys(ord.completedScenes).length > 0) {
-                setPersonalizedScenes((prev) => ({ ...prev, ...ord.completedScenes }));
+                const cleaned: Record<string, string> = {};
+                for (const [k, v] of Object.entries(ord.completedScenes)) {
+                  if (typeof v === 'string' && !v.startsWith('blob:') && v.length > 20) {
+                    cleaned[k] = v;
+                  }
+                }
+                setPersonalizedScenes((prev) => ({ ...prev, ...cleaned }));
               }
             }
           })
@@ -204,16 +228,75 @@ function GalleryContent() {
     }
   }, []);
 
-  // Sync personalized scenes to localStorage
+  // Cycle atelier steps for dynamic waiting animation
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setAtelierStepTicker((prev) => (prev + 1) % 3);
+    }, 3200);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Live real-time polling for order updates (when orderId is active)
+  useEffect(() => {
+    if (!orderId) return;
+
+    let isMounted = true;
+    const pollTimer = setInterval(async () => {
+      try {
+        const res = await fetch(`/api/weddinghelper/order?orderId=${encodeURIComponent(orderId)}`);
+        const data = await res.json();
+        if (isMounted && data?.success && data.order?.completedScenes) {
+          const incoming = data.order.completedScenes;
+          if (Object.keys(incoming).length > 0) {
+            setPersonalizedScenes((prev) => {
+              let updated = false;
+              const next = { ...prev };
+              for (const [k, v] of Object.entries(incoming)) {
+                if (typeof v === 'string' && !v.startsWith('blob:') && next[k] !== v) {
+                  next[k] = v;
+                  updated = true;
+                }
+              }
+              return updated ? next : prev;
+            });
+          }
+        }
+      } catch (e) {
+        // silent polling failure catch
+      }
+    }, 4500);
+
+    return () => {
+      isMounted = false;
+      clearInterval(pollTimer);
+    };
+  }, [orderId]);
+
+  // Sync valid personalized scenes to localStorage (excluding temporary blob URLs)
   useEffect(() => {
     if (Object.keys(personalizedScenes).length > 0) {
       try {
-        localStorage.setItem('weddinghelper_personalized_scenes', JSON.stringify(personalizedScenes));
+        const toSave: Record<string, string> = {};
+        for (const [k, v] of Object.entries(personalizedScenes)) {
+          if (typeof v === 'string' && !v.startsWith('blob:') && v.length > 20) {
+            toSave[k] = v;
+          }
+        }
+        localStorage.setItem('weddinghelper_personalized_scenes', JSON.stringify(toSave));
       } catch (e) {
         console.warn('Failed saving personalized scenes to localStorage', e);
       }
     }
   }, [personalizedScenes]);
+
+  const handleImageError = (sceneId: string) => {
+    setFailedImages((prev) => ({ ...prev, [sceneId]: true }));
+    setPersonalizedScenes((prev) => {
+      const next = { ...prev };
+      delete next[sceneId];
+      return next;
+    });
+  };
 
   // Handle auto-synthesis if unlocked and triggered by query param
   const isUnlocked = Boolean(user?.isVip || user?.plan === 'grand');
@@ -345,7 +428,12 @@ function GalleryContent() {
 
       const data = await res.json();
       if (data.success && data.isAiGenerated && data.visualizedImageUrl) {
-        const safeUrl = dataUrlToBlobUrl(data.visualizedImageUrl);
+        const safeUrl = data.visualizedImageUrl;
+        setFailedImages((prev) => {
+          const next = { ...prev };
+          delete next[scene.id];
+          return next;
+        });
         setPersonalizedScenes((prev) => ({
           ...prev,
           [scene.id]: safeUrl,
@@ -421,7 +509,12 @@ function GalleryContent() {
 
         const data = await res.json();
         if (data.success && data.isAiGenerated && data.visualizedImageUrl) {
-          const safeUrl = dataUrlToBlobUrl(data.visualizedImageUrl);
+          const safeUrl = data.visualizedImageUrl;
+          setFailedImages((prev) => {
+            const next = { ...prev };
+            delete next[scene.id];
+            return next;
+          });
           setPersonalizedScenes((prev) => ({
             ...prev,
             [scene.id]: safeUrl,
@@ -767,37 +860,54 @@ function GalleryContent() {
             </div>
 
             {/* VIP Atelier Production & Safe Tab Closure Reassurance Banner */}
-            {isUnlocked && (
-              <div className="bg-gradient-to-r from-[#201A1D] via-[#2A2024] to-[#201A1D] border border-[#D4AF37]/50 rounded-2xl p-5 mb-8 shadow-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-wider text-[#D4AF37]">
-                    <Sparkles className="w-3.5 h-3.5 fill-[#D4AF37]" />
-                    <span>High-Speed Atelier Production Active • Order #{orderId ? orderId.replace('WH_', '') : 'VIP-GRAND'}</span>
+            {isUnlocked && (() => {
+              const totalReady = Object.keys(personalizedScenes).filter((id) => !failedImages[id]).length;
+              const pct = Math.max(5, Math.min(100, Math.round((totalReady / 240) * 100)));
+              return (
+                <div className="bg-gradient-to-r from-[#201A1D] via-[#2A2024] to-[#201A1D] border border-[#D4AF37]/50 rounded-2xl p-5 mb-8 shadow-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="flex-1 w-full">
+                    <div className="flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-wider text-[#D4AF37]">
+                      <Sparkles className="w-3.5 h-3.5 fill-[#D4AF37]" />
+                      <span>High-Speed Atelier Production Active • Order #{orderId ? orderId.replace('WH_', '') : 'VIP-GRAND'}</span>
+                    </div>
+                    <h3 className="text-white font-serif text-base sm:text-lg font-bold mt-1">
+                      Your First Masterpieces Are Unlocked Below
+                    </h3>
+                    <p className="text-white/70 text-xs sm:text-sm mt-1 leading-relaxed">
+                      All 240 bespoke editorial angles across 12 destinations are currently hand-crafting in the background. 
+                      <strong className="text-amber-200 ml-1">You can safely close this browser window anytime.</strong> 
+                      Your complete 4K gallery link and ZIP download are permanently saved and will be delivered to <span className="text-[#D4AF37] font-mono">{user?.email || 'your email'}</span>.
+                    </p>
+
+                    {/* Live Atelier Progress Bar */}
+                    <div className="mt-3 flex items-center gap-3">
+                      <div className="flex-1 h-2 rounded-full bg-black/40 border border-white/10 overflow-hidden">
+                        <div
+                          className="h-full bg-gradient-to-r from-[#D4AF37] via-[#F3C669] to-[#D4AF37] transition-all duration-500"
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                      <span className="text-[11px] font-mono text-[#D4AF37] font-bold shrink-0">
+                        {totalReady} / 240 Scenes Ready ({pct}%)
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="text-white font-serif text-base sm:text-lg font-bold mt-1">
-                    Your First Masterpieces Are Unlocked Below
-                  </h3>
-                  <p className="text-white/70 text-xs sm:text-sm mt-1 leading-relaxed">
-                    All 240 bespoke editorial angles across 12 destinations are currently hand-crafting in the background. 
-                    <strong className="text-amber-200 ml-1">You can safely close this browser window anytime.</strong> 
-                    Your complete 4K gallery link and ZIP download are permanently saved and will be delivered to <span className="text-[#D4AF37] font-mono">{user?.email || 'your email'}</span>.
-                  </p>
+                  <div className="flex items-center gap-2 self-stretch sm:self-center shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const shareUrl = typeof window !== 'undefined' ? `${window.location.origin}/weddinghelper/gallery${orderId ? `?orderId=${orderId}` : ''}` : '';
+                        navigator.clipboard.writeText(shareUrl);
+                        showToast('📋 Private Gallery Link copied to clipboard!');
+                      }}
+                      className="flex-1 sm:flex-none px-4 py-2.5 rounded-full bg-[#D4AF37] text-[#1F181B] font-extrabold text-xs uppercase tracking-wider hover:bg-[#F3C669] transition shadow-md whitespace-nowrap cursor-pointer"
+                    >
+                      Copy Gallery Link 🔗
+                    </button>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 self-stretch sm:self-center">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const shareUrl = typeof window !== 'undefined' ? `${window.location.origin}/weddinghelper/gallery${orderId ? `?orderId=${orderId}` : ''}` : '';
-                      navigator.clipboard.writeText(shareUrl);
-                      showToast('📋 Private Gallery Link copied to clipboard!');
-                    }}
-                    className="flex-1 sm:flex-none px-4 py-2.5 rounded-full bg-[#D4AF37] text-[#1F181B] font-extrabold text-xs uppercase tracking-wider hover:bg-[#F3C669] transition shadow-md whitespace-nowrap cursor-pointer"
-                  >
-                    Copy Gallery Link 🔗
-                  </button>
-                </div>
-              </div>
-            )}
+              );
+            })()}
 
             {/* 12 Destination Tabs Bar */}
             <div className="bg-[#1C1719] rounded-2xl border border-white/10 p-2.5 mb-8 flex items-center gap-2 overflow-x-auto scrollbar-thin">
@@ -877,64 +987,120 @@ function GalleryContent() {
             {/* 20-Scene Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-5">
               {displayedScenes.map((scene) => {
-                const isCustomPersonalized = Boolean(personalizedScenes[scene.id]);
-                const displayImage = personalizedScenes[scene.id] || scene.imagePath;
+                const isCustomPersonalized = Boolean(personalizedScenes[scene.id]) && !failedImages[scene.id];
+                const isActivelySynthesizing = transformingSceneId === scene.id || (isBatchSynthesizing && batchProgress?.title === scene.angleTitle);
+                const isBatchQueued = isBatchSynthesizing && !isCustomPersonalized && !isActivelySynthesizing;
+                const displayImage = isCustomPersonalized ? personalizedScenes[scene.id] : scene.imagePath;
 
                 return (
                   <div
                     key={scene.id}
-                    className={`group relative bg-[#1E181B] rounded-2xl overflow-hidden border transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col ${
+                    className={`group relative bg-[#1A1417] rounded-2xl overflow-hidden border transition-all duration-500 shadow-lg flex flex-col ${
                       isCustomPersonalized
-                        ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/70 shadow-[0_0_25px_rgba(212,175,55,0.35)]'
-                        : 'border-white/10 hover:border-[#D4AF37]/60'
+                        ? 'border-[#D4AF37] ring-1 ring-[#D4AF37]/70 shadow-[0_0_25px_rgba(212,175,55,0.25)]'
+                        : isActivelySynthesizing
+                        ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/50 shadow-[0_0_30px_rgba(212,175,55,0.35)]'
+                        : 'border-white/10 hover:border-[#D4AF37]/50'
                     }`}
                   >
-                    {/* Image Thumbnail */}
-                    <div
-                      className="relative aspect-[3/4] w-full overflow-hidden bg-black/40 cursor-pointer"
-                      onClick={() => setActiveLightboxScene({ ...scene, imagePath: displayImage })}
-                    >
-                      <Image
-                        src={displayImage}
-                        alt={scene.angleTitle}
-                        fill
-                        unoptimized
-                        loading="lazy"
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 opacity-60 group-hover:opacity-40 transition-opacity" />
+                    {/* Image Thumbnail Container */}
+                    {isActivelySynthesizing ? (
+                      /* Haute Couture Atelier Live Synthesis View */
+                      <div className="relative aspect-[3/4] w-full bg-gradient-to-b from-[#181316] via-[#22181C] to-[#181316] flex flex-col items-center justify-center p-4 text-center overflow-hidden">
+                        {/* Ambient radial gold glow */}
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.2)_0%,transparent_70%)] animate-pulse pointer-events-none" />
 
-                      {/* Top Badges */}
-                      <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start z-10">
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-black/70 text-[#D4AF37] backdrop-blur-md border border-[#D4AF37]/40 shadow-sm">
-                          Angle #{String(scene.angleNum).padStart(2, '0')}
-                        </span>
-                        {isCustomPersonalized ? (
-                          <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#1F181B] shadow-md flex items-center gap-1 ring-1 ring-white/40">
+                        {/* Top Badges */}
+                        <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start z-20">
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-black/80 text-[#D4AF37] backdrop-blur-md border border-[#D4AF37]/40 shadow-sm">
+                            Angle #{String(scene.angleNum).padStart(2, '0')}
+                          </span>
+                          <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-gradient-to-r from-[#D4AF37] via-[#F59E0B] to-[#D4AF37] text-[#1F181B] shadow-md flex items-center gap-1 ring-1 ring-white/50 animate-pulse">
                             <Sparkles className="w-2.5 h-2.5 fill-[#1F181B]" />
-                            <span>YOUR PHOTO LOCKED</span>
+                            <span>CRAFTING 4K MASTERPIECE</span>
                           </span>
-                        ) : transformingSceneId === scene.id ? (
-                          <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-gradient-to-r from-amber-400 to-yellow-500 text-black shadow-md flex items-center gap-1 ring-1 ring-white/50 animate-pulse">
-                            <RefreshCw className="w-2.5 h-2.5 animate-spin text-black" />
-                            <span>SYNTHESIZING...</span>
-                          </span>
-                        ) : (
-                          <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-black/80 text-amber-300 border border-amber-400/40 backdrop-blur-xs flex items-center gap-1">
-                            <Clock className="w-2.5 h-2.5 text-amber-300" />
-                            <span>QUEUED FOR SYNTHESIS</span>
-                          </span>
-                        )}
-                      </div>
+                        </div>
 
-                      {/* Zoom Hover Icon */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                        <div className="w-10 h-10 rounded-full bg-black/70 text-[#D4AF37] flex items-center justify-center border border-[#D4AF37]/50 shadow-xl">
-                          <Eye className="w-5 h-5" />
+                        {/* Center Animated Atelier Ring */}
+                        <div className="relative w-14 h-14 rounded-full border border-[#D4AF37]/30 flex items-center justify-center shadow-[0_0_25px_rgba(212,175,55,0.35)] mb-3 z-10">
+                          <div className="absolute inset-0 rounded-full border-2 border-[#D4AF37] border-t-transparent animate-spin" />
+                          <Sparkles className="w-6 h-6 text-[#D4AF37] animate-pulse" />
+                        </div>
+
+                        {/* Live Step Text */}
+                        <span className="text-[11px] font-serif font-bold text-[#FAF3EF] tracking-wide z-10 block">
+                          {scene.angleTitle}
+                        </span>
+                        <span className="text-[9px] text-[#D4AF37] font-mono tracking-wider mt-1.5 z-10 px-2.5 py-0.5 rounded-full bg-black/60 border border-[#D4AF37]/30 backdrop-blur-xs transition-all duration-300">
+                          {ATELIER_STAGES[atelierStepTicker]}
+                        </span>
+
+                        {/* Mini gold shimmer bar */}
+                        <div className="w-28 h-1 bg-white/10 rounded-full mt-3 overflow-hidden z-10">
+                          <div className="h-full bg-gradient-to-r from-[#D4AF37] via-[#F3C669] to-[#D4AF37] animate-pulse" style={{ width: '85%' }} />
                         </div>
                       </div>
-                    </div>
+                    ) : (
+                      /* Standard / Personalized Image View */
+                      <div
+                        className="relative aspect-[3/4] w-full overflow-hidden bg-black/40 cursor-pointer"
+                        onClick={() => setActiveLightboxScene({ ...scene, imagePath: displayImage })}
+                      >
+                        <Image
+                          src={displayImage}
+                          alt=""
+                          aria-label={scene.angleTitle}
+                          fill
+                          unoptimized
+                          loading="lazy"
+                          onError={() => handleImageError(scene.id)}
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 opacity-60 group-hover:opacity-40 transition-opacity" />
+
+                        {/* If Batch Queued: Luxury Frosted Veil Overlay */}
+                        {isBatchQueued && (
+                          <div className="absolute inset-0 bg-black/65 backdrop-blur-[2px] flex flex-col items-center justify-center p-3 text-center z-10 pointer-events-none">
+                            <div className="px-3 py-1.5 rounded-full bg-black/80 border border-[#D4AF37]/40 text-[#EAD8B1] text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-lg">
+                              <Clock className="w-3 h-3 text-[#D4AF37]" />
+                              <span>Queued for Synthesis</span>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Top Badges */}
+                        <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start z-20 pointer-events-none">
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-black/75 text-[#D4AF37] backdrop-blur-md border border-[#D4AF37]/40 shadow-sm">
+                            Angle #{String(scene.angleNum).padStart(2, '0')}
+                          </span>
+                          {isCustomPersonalized ? (
+                            <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#1F181B] shadow-md flex items-center gap-1 ring-1 ring-white/40">
+                              <Sparkles className="w-2.5 h-2.5 fill-[#1F181B]" />
+                              <span>YOUR PHOTO LOCKED</span>
+                            </span>
+                          ) : isBatchQueued ? (
+                            <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-black/80 text-amber-300 border border-amber-400/40 backdrop-blur-xs flex items-center gap-1">
+                              <Clock className="w-2.5 h-2.5 text-amber-300" />
+                              <span>ATELIER QUEUE</span>
+                            </span>
+                          ) : (
+                            <span className="px-2 py-0.5 rounded-full text-[9px] font-medium uppercase tracking-wider bg-black/60 text-white/70 border border-white/20 backdrop-blur-xs">
+                              Haute Couture Angle
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Zoom Hover Icon */}
+                        {!isBatchQueued && (
+                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                            <div className="w-10 h-10 rounded-full bg-black/70 text-[#D4AF37] flex items-center justify-center border border-[#D4AF37]/50 shadow-xl">
+                              <Eye className="w-5 h-5" />
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
 
                     {/* Card Footer */}
                     <div className="p-3 bg-[#1A1517] border-t border-white/5 flex flex-col justify-between flex-1">
@@ -948,7 +1114,17 @@ function GalleryContent() {
                       </div>
 
                       <div className="flex flex-col gap-1.5 mt-2.5 pt-2 border-t border-white/5">
-                        {!isCustomPersonalized && (
+                        {isActivelySynthesizing ? (
+                          <div className="w-full py-1.5 px-2 rounded-lg bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[#D4AF37] text-[10px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 animate-pulse">
+                            <RefreshCw className="w-3 h-3 animate-spin text-[#D4AF37]" />
+                            <span>Synthesizing Face...</span>
+                          </div>
+                        ) : isBatchQueued ? (
+                          <div className="w-full py-1.5 px-2 rounded-lg bg-white/5 border border-white/10 text-white/50 text-[10px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-not-allowed">
+                            <Clock className="w-3 h-3 text-white/40" />
+                            <span>Waiting in Atelier Queue</span>
+                          </div>
+                        ) : !isCustomPersonalized ? (
                           <button
                             type="button"
                             onClick={(e) => {
@@ -958,25 +1134,23 @@ function GalleryContent() {
                             disabled={transformingSceneId === scene.id}
                             className="w-full py-1.5 px-2 rounded-lg bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#1F181B] text-[10px] font-extrabold uppercase tracking-wider transition hover:opacity-95 flex items-center justify-center gap-1 shadow-md cursor-pointer disabled:opacity-50"
                           >
-                            {transformingSceneId === scene.id ? (
-                              <>
-                                <RefreshCw className="w-3 h-3 animate-spin text-[#1F181B]" />
-                                <span>Synthesizing...</span>
-                              </>
-                            ) : (
-                              <>
-                                <Sparkles className="w-3 h-3 fill-[#1F181B] text-[#1F181B]" />
-                                <span>Synthesize with My Face</span>
-                              </>
-                            )}
+                            <Sparkles className="w-3 h-3 fill-[#1F181B] text-[#1F181B]" />
+                            <span>Synthesize with My Face</span>
                           </button>
-                        )}
+                        ) : null}
 
+                        {/* Action Buttons */}
                         <div className="flex items-center gap-1.5">
                           <a
                             href={displayImage}
                             download={`WeddingHelper_${scene.themeId}_Angle_${scene.angleNum}.jpg`}
-                            className="flex-1 py-1.5 px-2 rounded-lg bg-white/10 hover:bg-white/20 text-white/90 text-[10px] font-bold uppercase tracking-wider transition text-center flex items-center justify-center gap-1"
+                            className={`flex-1 py-1.5 px-2 rounded-lg text-[10px] font-bold uppercase tracking-wider transition text-center flex items-center justify-center gap-1 ${
+                              isActivelySynthesizing || isBatchQueued
+                                ? 'bg-white/5 text-white/30 cursor-not-allowed pointer-events-none'
+                                : isCustomPersonalized
+                                ? 'bg-[#D4AF37]/20 hover:bg-[#D4AF37]/30 text-[#D4AF37] border border-[#D4AF37]/40 shadow-xs'
+                                : 'bg-white/10 hover:bg-white/20 text-white/90'
+                            }`}
                           >
                             <Download className="w-3 h-3 text-[#D4AF37]" />
                             <span>JPG</span>
@@ -984,8 +1158,13 @@ function GalleryContent() {
 
                           <button
                             type="button"
+                            disabled={isActivelySynthesizing || isBatchQueued}
                             onClick={() => handleSetInvitationCover(displayImage, scene.angleTitle)}
-                            className="flex-1 py-1.5 px-2 rounded-lg bg-[#D4AF37]/20 hover:bg-[#D4AF37]/30 text-[#D4AF37] text-[10px] font-bold uppercase tracking-wider transition text-center flex items-center justify-center gap-1 cursor-pointer"
+                            className={`flex-1 py-1.5 px-2 rounded-lg text-[10px] font-bold uppercase tracking-wider transition text-center flex items-center justify-center gap-1 ${
+                              isActivelySynthesizing || isBatchQueued
+                                ? 'bg-white/5 text-white/30 cursor-not-allowed'
+                                : 'bg-[#D4AF37]/20 hover:bg-[#D4AF37]/30 text-[#D4AF37] cursor-pointer'
+                            }`}
                             title="Set as Invitation Cover"
                           >
                             <Heart className="w-3 h-3 fill-[#D4AF37]" />
