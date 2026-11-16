@@ -48,7 +48,36 @@ export async function POST(req: NextRequest) {
       brideHeight = '167',
       brideWeight = '49',
       angleTitle = 'Ceremonial Altar Vows',
+      email,
     } = body;
+
+    // 🔒 STRICT PAYMENT GATE: Block any unauthorized AI image generation without paid VIP Pass
+    const normalizedEmail = typeof email === 'string' ? email.trim().toLowerCase() : '';
+    const membersFile = path.join(process.cwd(), 'data', 'weddinghelper_members.json');
+    let isVerifiedVip = false;
+
+    if (normalizedEmail && fs.existsSync(membersFile)) {
+      try {
+        const membersData = JSON.parse(fs.readFileSync(membersFile, 'utf-8') || '{}');
+        const member = membersData[normalizedEmail];
+        if (member && (member.isVip || member.plan === 'grand')) {
+          isVerifiedVip = true;
+        }
+      } catch (err) {
+        console.error('[WeddingHelper VIP Verification Error]', err);
+      }
+    }
+
+    if (!isVerifiedVip) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: '🔒 $19 VIP Pass Required. Please complete payment via PayPal to transform your photos.',
+          requiresPayment: true,
+        },
+        { status: 402 }
+      );
+    }
 
     const rawUserImages: string[] = [];
     if (Array.isArray(images) && images.length > 0) {

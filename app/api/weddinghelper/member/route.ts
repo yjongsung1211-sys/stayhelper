@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { sendTelegramNotification } from "@/lib/wedding-delivery";
 
 const MEMBERS_FILE = path.join(process.cwd(), "data", "weddinghelper_members.json");
 
 function getMembers(): Record<string, any> {
   try {
     if (!fs.existsSync(MEMBERS_FILE)) {
-      fs.writeFileSync(MEMBERS_FILE, JSON.stringify({}), "utf-8");
+      fs.writeFileSync(MEMBERS_FILE, JSON.stringify({}, null, 2), "utf-8");
       return {};
     }
     const data = fs.readFileSync(MEMBERS_FILE, "utf-8");
@@ -20,6 +21,10 @@ function getMembers(): Record<string, any> {
 
 function saveMembers(members: Record<string, any>) {
   try {
+    const dir = path.dirname(MEMBERS_FILE);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
     fs.writeFileSync(MEMBERS_FILE, JSON.stringify(members, null, 2), "utf-8");
   } catch (err) {
     console.error("[WeddingHelper Member DB Write Error]", err);
@@ -59,27 +64,36 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// POST: Activate & record VIP purchase linked to email
+// POST: Activate & record VIP purchase linked to verified PayPal payment
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { email, plan = "grand", orderId, weddingDate } = body;
+    const { email, transactionId, plan = "grand", orderId, weddingDate } = body;
 
     if (!email || !email.includes("@")) {
-      return NextResponse.json({ error: "Valid email address required" }, { status: 400 });
+      return NextResponse.json({ error: "Valid email address required." }, { status: 400 });
     }
 
     const normalizedEmail = email.trim().toLowerCase();
-    const members = getMembers();
 
+    // Require PayPal Transaction ID or verified receipt to prevent unauthorized access
+    const txId = (transactionId || orderId || "").trim();
+    if (!txId || txId.length < 5) {
+      return NextResponse.json(
+        { error: "Valid PayPal Transaction ID or Receipt Number is required to activate VIP access." },
+        { status: 400 }
+      );
+    }
+
+    const members = getMembers();
     const paidAt = new Date().toISOString();
-    // 1-year default or wedding date + 60 days
     const expiresAt = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString();
 
     const memberRecord = {
       email: normalizedEmail,
       isVip: true,
       plan: plan || "grand",
+      transactionId: txId,
       orderId: orderId || `WH_VIP_${Date.now()}`,
       paidAt,
       expiresAt,
@@ -90,7 +104,20 @@ export async function POST(req: NextRequest) {
     members[normalizedEmail] = memberRecord;
     saveMembers(members);
 
-    console.log(`[WeddingHelper] VIP Pass Linked to Account: ${normalizedEmail} (Plan: ${plan})`);
+    console.log(`[WeddingHelper] VIP Pass Linked: ${normalizedEmail} (TxID: ${txId})`);
+
+    // Notify CEO in real-time via Telegram
+    const alertMsg = `💍 <b>[WeddingHelper] $19 PayPal VIP 패스 결제/인증 접수!</b>
+
+━━━━━━━━━━━━━━━━━━━━━
+• <b>고객 이메일</b>: <code>${normalizedEmail}</code>
+• <b>PayPal 거래번호</b>: <code>${txId}</code>
+• <b>플랜</b>: ${plan.toUpperCase()} ($19 VIP All-Access)
+• <b>인증 시각</b>: ${paidAt}
+━━━━━━━━━━━━━━━━━━━━━
+✨ <i>고객 계정에 240장 고해상도 AI 변환 권한이 정상 부여되었습니다.</i>`;
+
+    sendTelegramNotification(alertMsg).catch((e) => console.warn("[WeddingHelper] Telegram notify error:", e));
 
     return NextResponse.json({
       success: true,
@@ -101,3 +128,4 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
+

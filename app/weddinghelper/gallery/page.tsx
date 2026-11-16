@@ -20,7 +20,9 @@ import {
   Lock,
   ArrowRight,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  CreditCard,
+  Loader2
 } from 'lucide-react';
 import JSZip from 'jszip';
 
@@ -133,6 +135,8 @@ function GalleryContent() {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [restoreEmail, setRestoreEmail] = useState('');
   const [checkoutEmail, setCheckoutEmail] = useState('');
+  const [transactionId, setTransactionId] = useState('');
+  const [isVerifyingPayment, setIsVerifyingPayment] = useState(false);
 
   const [activeTab, setActiveTab] = useState<string>(initialDest);
   const tabsScrollRef = useRef<HTMLDivElement>(null);
@@ -166,9 +170,30 @@ function GalleryContent() {
     try {
       const savedUserStr = localStorage.getItem('weddinghelper_user');
       if (savedUserStr) {
-        const parsed = JSON.parse(savedUserStr);
-        if (parsed?.email && (parsed.isVip || parsed.plan === 'grand')) {
-          setUser(parsed);
+        try {
+          const parsed = JSON.parse(savedUserStr);
+          if (parsed?.email) {
+            fetch(`/api/weddinghelper/member?email=${encodeURIComponent(parsed.email)}`)
+              .then((res) => res.json())
+              .then((data) => {
+                if (data?.isVip) {
+                  setUser({ email: parsed.email, isVip: true, plan: data.plan || 'grand' });
+                } else {
+                  localStorage.removeItem('weddinghelper_user');
+                  setUser(null);
+                }
+              })
+              .catch(() => {
+                localStorage.removeItem('weddinghelper_user');
+                setUser(null);
+              });
+          } else {
+            localStorage.removeItem('weddinghelper_user');
+            setUser(null);
+          }
+        } catch (e) {
+          localStorage.removeItem('weddinghelper_user');
+          setUser(null);
         }
       }
 
@@ -310,89 +335,97 @@ function GalleryContent() {
     }
   }, [isUnlocked, shouldAutoSynthesize, uploadedImages]);
 
-  // Handle Complete Order ($19 VIP Activation)
-  const handleCompleteOrder = async () => {
-    const payerEmail = (checkoutEmail || restoreEmail || 'vip.couple@wedding.com').trim().toLowerCase();
-    const vipRecord = {
-      email: payerEmail,
-      isVip: true,
-      plan: 'grand' as const,
-      paidAt: new Date().toISOString(),
-    };
+  // Handle VIP Activation with verified PayPal Email & Transaction ID
+  const handleVerifyAndActivateVip = async () => {
+    const email = (checkoutEmail || restoreEmail).trim().toLowerCase();
+    const txId = transactionId.trim();
 
-    try {
-      await fetch('/api/weddinghelper/member', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: payerEmail,
-          plan: 'grand',
-          orderId: `WH_VIP_${Date.now()}`
-        })
-      });
-    } catch (e) {}
-
-    try {
-      const localDbStr = localStorage.getItem('weddinghelper_vip_db');
-      const localDb = localDbStr ? JSON.parse(localDbStr) : {};
-      localDb[payerEmail] = vipRecord;
-      localStorage.setItem('weddinghelper_vip_db', JSON.stringify(localDb));
-      localStorage.setItem('weddinghelper_user', JSON.stringify(vipRecord));
-    } catch (e) {}
-
-    // Create order on server
-    try {
-      const orderRes = await fetch('/api/weddinghelper/order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: payerEmail,
-          plan: 'grand',
-          selectedTheme: activeTab,
-          proportions,
-          clientImages: uploadedImages,
-        }),
-      });
-      const orderData = await orderRes.json();
-      if (orderData?.success && orderData.orderId) {
-        setOrderId(orderData.orderId);
-        window.history.replaceState(null, '', `?orderId=${orderData.orderId}&dest=${activeTab}`);
-      }
-    } catch (orderErr) {
-      console.warn('Order create err on gallery:', orderErr);
+    if (!email || !email.includes('@')) {
+      alert('Please enter your valid PayPal email address.');
+      return;
+    }
+    if (!txId || txId.length < 5) {
+      alert('Please enter your PayPal Transaction ID or receipt number.');
+      return;
     }
 
-    setUser(vipRecord);
-    setIsCheckoutOpen(false);
-    showToast('🎉 $19 VIP All-Access Pass Activated! All 240 Masterpieces Unlocked.');
+    setIsVerifyingPayment(true);
+    try {
+      const res = await fetch('/api/weddinghelper/member', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          transactionId: txId,
+          plan: 'grand',
+        }),
+      });
+
+      const data = await res.json();
+      if (data?.success && data?.member?.isVip) {
+        const vipRecord = {
+          email,
+          isVip: true,
+          plan: 'grand' as const,
+        };
+        setUser(vipRecord);
+        localStorage.setItem('weddinghelper_user', JSON.stringify(vipRecord));
+        setIsCheckoutOpen(false);
+        showToast('🎉 $19 VIP All-Access Pass Activated! All 240 Masterpieces Unlocked.');
+
+        // Create order on server
+        try {
+          const orderRes = await fetch('/api/weddinghelper/order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email,
+              plan: 'grand',
+              selectedTheme: activeTab,
+              proportions,
+              clientImages: uploadedImages,
+            }),
+          });
+          const orderData = await orderRes.json();
+          if (orderData?.success && orderData.orderId) {
+            setOrderId(orderData.orderId);
+            window.history.replaceState(null, '', `?orderId=${orderData.orderId}&dest=${activeTab}`);
+          }
+        } catch (orderErr) {
+          console.warn('Order create err on gallery:', orderErr);
+        }
+      } else {
+        alert(`Verification failed: ${data?.error || 'Invalid payment credentials'}`);
+      }
+    } catch (e) {
+      alert('Network error during payment verification.');
+    } finally {
+      setIsVerifyingPayment(false);
+    }
   };
 
-  // Restore VIP Access via Email
-  const handleRestoreEmail = () => {
+  // Restore VIP Access via Server Verified Email
+  const handleRestoreEmail = async () => {
     const email = restoreEmail.trim().toLowerCase();
     if (!email || !email.includes('@')) {
       alert('Please enter a valid email address.');
       return;
     }
-    try {
-      const localDbStr = localStorage.getItem('weddinghelper_vip_db');
-      const localDb = localDbStr ? JSON.parse(localDbStr) : {};
-      if (localDb[email] && (localDb[email].isVip || localDb[email].plan === 'grand')) {
-        setUser(localDb[email]);
-        localStorage.setItem('weddinghelper_user', JSON.stringify(localDb[email]));
-        showToast('🎉 VIP Pass Restored successfully!');
-        return;
-      }
-    } catch (e) {}
 
-    // Special test access for development/admin/ceo
-    if (email.includes('ceo') || email.includes('admin') || email.includes('test')) {
-      const vipRecord = { email, isVip: true, plan: 'grand' as const };
-      setUser(vipRecord);
-      localStorage.setItem('weddinghelper_user', JSON.stringify(vipRecord));
-      showToast('🎉 VIP Pass Unlocked!');
-    } else {
-      alert('No active $19 VIP Pass found for this email. Please complete payment to unlock.');
+    try {
+      const res = await fetch(`/api/weddinghelper/member?email=${encodeURIComponent(email)}`);
+      const data = await res.json();
+      if (data?.isVip) {
+        const vipRecord = { email, isVip: true, plan: data.plan || ('grand' as const) };
+        setUser(vipRecord);
+        localStorage.setItem('weddinghelper_user', JSON.stringify(vipRecord));
+        setIsCheckoutOpen(false);
+        showToast('🎉 VIP Pass Restored successfully! Welcome back.');
+      } else {
+        alert('No active $19 VIP Pass found for this email. Please complete payment via PayPal to unlock.');
+      }
+    } catch (err) {
+      alert('Verification error. Please check your internet connection.');
     }
   };
 
@@ -417,6 +450,7 @@ function GalleryContent() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          email: user?.email,
           images: imagesToUse,
           image: imagesToUse[0],
           targetSceneImage: scene.imagePath,
@@ -428,6 +462,14 @@ function GalleryContent() {
           brideWeight: proportions.brideWeight,
         }),
       });
+
+      if (res.status === 402) {
+        localStorage.removeItem('weddinghelper_user');
+        setUser(null);
+        setIsCheckoutOpen(true);
+        showToast('🔒 $19 VIP Pass required. Please complete payment via PayPal.');
+        return;
+      }
 
       const data = await res.json();
       if (data.success && data.isAiGenerated && data.visualizedImageUrl) {
@@ -498,6 +540,7 @@ function GalleryContent() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
+            email: user?.email,
             images: imagesToUse,
             image: imagesToUse[0],
             targetSceneImage: scene.imagePath,
@@ -509,6 +552,14 @@ function GalleryContent() {
             brideWeight: proportions.brideWeight,
           }),
         });
+
+        if (res.status === 402) {
+          localStorage.removeItem('weddinghelper_user');
+          setUser(null);
+          setIsCheckoutOpen(true);
+          showToast('🔒 $19 VIP Pass required. Please complete payment via PayPal.');
+          break;
+        }
 
         const data = await res.json();
         if (data.success && data.isAiGenerated && data.visualizedImageUrl) {
@@ -1304,56 +1355,98 @@ function GalleryContent() {
               One-time payment • Lifetime access to all 12 destinations & Digital Invitation Studio
             </p>
 
-            {/* Email input for pass activation */}
-            <div className="mt-5 text-left">
-              <label className="text-[11px] font-bold text-white/80 uppercase tracking-wider mb-1 block">
-                Your Email Address (for VIP Pass Lifetime Link)
-              </label>
-              <input
-                type="email"
-                value={checkoutEmail}
-                onChange={(e) => setCheckoutEmail(e.target.value)}
-                placeholder="bride.groom@wedding.com"
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-xs text-white placeholder-white/40 focus:outline-none focus:border-[#C5A059]"
-              />
-            </div>
-
-            {/* Price Box */}
-            <div className="mt-5 p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
-              <span className="text-xs font-bold text-white">All 240 Masterpiece Angles</span>
-              <div className="flex items-baseline gap-2">
-                <span className="line-through text-xs text-white/40">$79</span>
-                <span className="text-2xl font-serif font-extrabold text-[#EAD8B1]">$19</span>
-                <span className="text-[10px] text-white/60">USD</span>
+            {/* Step 1: PayPal Checkout */}
+            <div className="mt-5 p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3 text-left">
+              <div className="flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-[#C5A059] text-[#1F181B] font-black text-xs flex items-center justify-center">1</span>
+                <span className="text-xs font-bold text-white tracking-wide uppercase">Official PayPal Payment</span>
               </div>
-            </div>
-
-            {/* Payment CTAs */}
-            <div className="mt-6 space-y-3">
-              {/* PayPal Checkout Button */}
+              <p className="text-[11px] text-white/60">
+                Complete your $19 payment via PayPal or Credit/Debit Card in the secure window.
+              </p>
               <a
                 href="https://www.paypal.com/ncp/payment/LVRRE8SJKD3VA"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={handleCompleteOrder}
-                className="w-full py-4 px-6 rounded-2xl bg-[#0070BA] hover:bg-[#005EA6] text-white font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 shadow-xl transition-all active:scale-[0.99] cursor-pointer"
+                className="w-full py-3.5 px-6 rounded-xl bg-[#0070BA] hover:bg-[#005EA6] text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition active:scale-[0.99] cursor-pointer"
               >
-                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                  <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.002.535 5.32.26 5.69.26h7.248c2.457 0 4.394.57 5.485 1.603 1.05.992 1.488 2.454 1.233 4.116-.54 3.513-2.915 5.485-6.516 5.485h-2.31l-1.398 8.873a1.002 1.002 0 0 1-.989.843l-1.367.157z" />
-                </svg>
+                <CreditCard className="w-4 h-4" />
                 <span>Pay $19.00 with PayPal or Card</span>
-                <ExternalLink className="w-4 h-4 opacity-80" />
+                <ExternalLink className="w-3.5 h-3.5 opacity-80" />
               </a>
+            </div>
 
-              {/* Instant 1-Click Test Unlock */}
+            {/* Step 2: Activate VIP with Payer Email & Transaction ID */}
+            <div className="mt-4 p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3 text-left">
+              <div className="flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-[#C5A059] text-[#1F181B] font-black text-xs flex items-center justify-center">2</span>
+                <span className="text-xs font-bold text-white tracking-wide uppercase">Activate VIP Pass</span>
+              </div>
+              <p className="text-[11px] text-white/60">
+                Enter your PayPal payer email & transaction ID to unlock all 240 high-fashion destination transformations:
+              </p>
+              <div>
+                <label className="text-[10px] font-bold text-white/70 block mb-1">
+                  PayPal Payer Email
+                </label>
+                <input
+                  type="email"
+                  value={checkoutEmail}
+                  onChange={(e) => setCheckoutEmail(e.target.value)}
+                  placeholder="your-paypal-email@example.com"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-black/40 border border-white/20 text-white text-xs placeholder:text-white/30 focus:outline-hidden focus:border-[#C5A059]"
+                />
+              </div>
+              <div>
+                <label className="text-[10px] font-bold text-white/70 block mb-1">
+                  PayPal Transaction ID / Receipt Number
+                </label>
+                <input
+                  type="text"
+                  value={transactionId}
+                  onChange={(e) => setTransactionId(e.target.value)}
+                  placeholder="e.g. 17-character PayPal Transaction ID"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-black/40 border border-white/20 text-white text-xs placeholder:text-white/30 focus:outline-hidden focus:border-[#C5A059]"
+                />
+              </div>
               <button
                 type="button"
-                onClick={handleCompleteOrder}
-                className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition active:scale-[0.99] cursor-pointer"
+                disabled={isVerifyingPayment}
+                onClick={handleVerifyAndActivateVip}
+                className="w-full py-3 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#1F181B] font-extrabold text-xs uppercase tracking-wider transition shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
-                <Sparkles className="w-4 h-4 text-emerald-200" />
-                <span>⚡ Instant 1-Click VIP Pass Unlock</span>
+                {isVerifyingPayment ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Verifying Payment...</span>
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="w-4 h-4 text-[#1F181B]" />
+                    <span>Verify & Unlock 240 Scenes ($19)</span>
+                  </>
+                )}
               </button>
+            </div>
+
+            <div className="mt-4 pt-3 border-t border-white/10 text-center">
+              <span className="text-[10px] text-white/50 block mb-1">Already an activated VIP member?</span>
+              <div className="flex gap-2">
+                <input
+                  type="email"
+                  value={restoreEmail}
+                  onChange={(e) => setRestoreEmail(e.target.value)}
+                  placeholder="Enter existing VIP email"
+                  className="flex-1 px-3 py-2 rounded-lg bg-white/5 border border-white/20 text-white text-xs placeholder:text-white/30 focus:outline-hidden focus:border-[#C5A059]"
+                />
+                <button
+                  type="button"
+                  onClick={handleRestoreEmail}
+                  className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition cursor-pointer"
+                >
+                  Restore
+                </button>
+              </div>
             </div>
 
             <div className="mt-5 flex items-center justify-center gap-1.5 text-[10px] text-white/50">
