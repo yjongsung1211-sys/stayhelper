@@ -90,46 +90,39 @@ export async function POST(req: NextRequest) {
 
     const promptText = `A breathtaking, 8K ultra-luxury haute couture wedding masterpiece featuring the REAL couple from the reference photo(s), retouched to the highest Cheongdam-dong / Vogue bridal master standard.
 
-[ESSENTIAL OBJECTIVE: BREATHTAKING BEAUTY & INSTANT SELF-RECOGNITION]
-The couple must look undeniably like THEMSELVES, but at the absolute PEAK OF THEIR BEAUTY, YOUTH, AND CHARM (인생 최고의 수려함과 화사함).${multiPhotoInstruction}
+[SUPREME CORE MANDATE: THIS IS A ONCE-IN-A-LIFETIME DREAM WEDDING PHOTO! (이건 평생 간직할 웨딩사진이다!)]
+Wedding clients demand the absolute PEAK OF BEAUTY, SLIMNESS, GLAMOUR, AND YOUTH. Even if the reference photo shows flaws, thinning hair, skin blemishes, or extra weight, YOU MUST DRAMATICALLY ENHANCE THEM TO BE AS HANDSOME, GORGEOUS, SLENDER, AND RADIANT AS TOP-TIER KOREAN CELEBRITY LEADS, while retaining core self-recognition!${multiPhotoInstruction}
 
-[1. FLAWLESS PORCELAIN GLASS-SKIN & TOTAL BEARD-SHADOW ERADICATION (결점 없는 도자기 물광 피부 & 수염 자국 100% 완전 제거)]
-- SILK-SMOOTH TEXTURE: Both bride and groom have perfectly smooth, radiant, poreless, creamy porcelain skin with an ethereal dewy hydration glow.
-- ZERO IMPERFECTIONS: Zero rough texture, zero acne scars, zero enlarged pores, zero redness, zero gray/ashy undertones, zero dark under-eye circles, zero deep nasolabial creases.
-- ZERO BEARD SHADOW / ZERO STUBBLE (수염 자국·푸르스름한 턱자국 100% 완전 제거):
-  * The groom MUST be 100% completely clean-shaven, baby-smooth, and hairless on the chin, jawline, upper lip, philtrum, and neck.
-  * Completely eliminate all 5 o'clock shadow, dark hair follicle roots, stubble dots, and blue-gray/green-gray undertones around the mouth, chin, and jawline.
-  * Even if the groom's reference photo shows facial hair, mustache shadow, or beard stubble, YOU MUST COMPLETELY AIRBRUSH AND REMOVE IT. The groom's lower face (chin, jaw, upper lip) must have the exact same bright, creamy, luminous, silky-smooth porcelain skin tone as his forehead and cheeks—matching the highest Cheongdam-dong celebrity bridal studio grooming standard.
-- STUDIO BEAUTY LIGHTING: Flattering, diffused high-key studio softbox lighting (Profoto beauty dish) that wraps gently around their faces, casting soft angelic highlights on cheekbones, forehead, and bridge of the nose.
+[1. GROOM HAIR: 100% VOLUMINOUS, THICK, DENSE HAIR & PERFECT LOW HAIRLINE (대머리/탈모 무조건 풍성하게)]
+- UNCONDITIONAL THICK & FULL HAIR: Even if the groom's reference photo shows hair loss, a high receding forehead, M-shaped hairline, or thinning crown, YOU MUST COMPLETELY AND UNCONDITIONALLY GIVE HIM A DENSE, VOLUMINOUS, YOUTHFUL HEAD OF HAIR (무조건 풍성하고 빽빽한 훈남 헤어스타일).
+- Lower and fill in the hairline gracefully with rich, natural hair fibers (자연스러운 헤어라인 교정, 이마 축소 효과).
+- Style with a trendy, voluminous Korean actor dapper cut (풍성한 볼륨의 가르마 애즈펌 또는 댄디 컷) with generous root lift (뿌리 볼륨), thick temple coverage, and sharp tapered sideburns.
+- FORBIDDEN: NO BALDNESS, NO THINNING HAIR, NO RECEDING M-HAIRLINE, NO EXPOSED HIGH FOREHEAD, NO VISIBLE BARE SCALP (탈모, M자 이마, 벗겨진 머리 절대 금지).
 
-[2. PROFESSIONAL CELEBRITY GROOM MAKEUP & SLIM JAWLINE SCULPTING (신랑 청담동 샵 풀 메이크업 & 갸름한 윤곽 리터칭)]
-- GROOM: Dashing, noble, exceptionally handsome (귀티 나고 훤칠한 미남 신랑상). He must look as if professionally groomed and styled with full celebrity wedding makeup at Cheongdam-dong's premier bridal salon (화보 촬영을 위해 전문 샵에서 풀 메이크업과 윤곽 관리를 받은 훈남 배우 비주얼).
-  * CRISP, DARKER, DENSELY FILLED-IN EYEBROWS (선명하고 짙은 훈남 눈썹): The groom's eyebrows must be noticeably darker, thicker, crisply defined, and filled in with clean micro-hair strokes (짙고 또렷한 훈남 눈썹). Neatly shaped masculine arch with a sharp tail. Zero faint, faded, or blurry brows. Sharp, handsome eyebrows that frame his eyes with dignity, charisma, and youthful sharpness.
-  * VIBRANT, HEALTHY, NATURALLY TINTED LIPS (생기 넘치는 촉촉한 틴트 립): The groom's lips must NOT look pale, dry, chapped, or purplish. Give his lips unmistakable healthy romantic vitality with a subtle, natural rosy-coral / MLBB tinted moisture balm finish (생기 있고 촉촉한 자연스러운 틴티드 립). Supple, moisturized, youthful, healthy, and full of warm life.
-  * SLIM, REFINED, CHISELED V-LINE CONTOURING (갸름하고 날렵하게 다듬어진 턱선과 윤곽 쉐이딩): Slim down and refine the groom's facial contour. Apply professional studio shading along the lower cheeks and jawline to eliminate puffiness, cheek roundness, and double chin. Sculpt a slim, photogenic, elegant V-to-U masculine jawline with a crisp, tapered chin (붓기와 볼살 정리, 갸름하고 날렵한 턱선). Keep his core facial bone identity 100% recognizable, but sculpt the silhouette to be visibly slimmer, photogenic, and sharp.
-  * 100% Clean-shaven, baby-smooth porcelain chin and jaw with ZERO stubble, ZERO beard shadow, ZERO bluish tint, and ZERO visible follicle pores.
-  * Retain his authentic eye contour, eyelid structure, nose slope, and smile.
-  * Impeccable grooming: styled dapper hair, handsome charismatic aristocratic glow.
-  * Proportions: Height ${groomHeight}cm, weight ${groomWeight}kg, dressed in ${preset.groomAttire || 'a bespoke tailored ivory-cream Italian linen tuxedo with a black silk bow tie'}.
-- BRIDE: Stunningly gorgeous, elegant, pure, and radiant (여배우급 청순미와 화사한 미모의 신부).
-  * Retain her authentic lovely eye shape, brow arch, and facial proportions.
-  * Slim, elegant facial contour: graceful V-oval jawline, delicate chin, slender swan-like neck.
-  * Eyes: Bright, sparkling, loving gaze with delicate natural lashes and subtle youthful aegyo-sal.
-  * Lips: Petal-pink, naturally hydrated, soft lips with gently upturned smiling corners.
-  * Proportions: Height ${brideHeight}cm, weight ${brideWeight}kg, styled with an effortless romantic low chignon with delicate fresh bridal floral pins, dressed in ${preset.brideAttire || 'an exquisite haute couture backless mermaid lace bridal gown with an ethereal chapel train'}.
-- EXPRESSIONS: Gentle, warm, joyful, affectionate closed-mouth or subtle resting smile. DO NOT OPEN MOUTHS EXAGGERATEDLY. DO NOT RENDER ARTIFICIAL CHALK-WHITE TEETH. Lips rest together in a soft, tender, romantic smile.
+[2. FLAWLESS PORCELAIN AIRBRUSH MAKEUP (피부가 안 좋아도 화장한 것처럼 완벽한 깐달걀 피부)]
+- HIGH-COVERAGE CELEBRITY STUDIO MAKEUP: Even if the groom or bride has blemishes, rough texture, acne scars, brown sun spots, freckles, melasma, redness, or enlarged pores, AIRBRUSH IT COMPLETELY AWAY 100%.
+- Both must have silky-smooth, poreless, creamy, luminous porcelain glass-skin with an ethereal dewy hydration glow (청담동 최고급 샵에서 신부화장/신랑화장 베이스를 완벽하게 받은 무결점 피부).
+- ZERO BEARD SHADOW / ZERO STUBBLE: 100% clean-shaven, baby-smooth porcelain chin, jaw, and philtrum with zero dark hair roots, zero blue-gray undertones, and zero 5 o'clock shadow.
+- GROOM MAKEUP: Densely defined, darker, crisply groomed masculine eyebrows; healthy rosy-coral hydrated tinted lips; subtle high-definition studio contouring.
 
-[3. CRITICAL NEGATIVE CONSTRAINTS - STRICTLY FORBIDDEN]
-- FORBIDDEN ON GROOM: NO BEARD, NO MUSTACHE, NO GOATEE, NO 5 O'CLOCK SHADOW, NO STUBBLE, NO DARK FOLLICLE DOTS, NO BLUE-GRAY OR ASHY CHIN SHADOW (수염, 수염 자국, 턱 푸른기 절대 금지). NO FAINT OR INVISIBLE EYEBROWS. NO PALE, DRY, OR PURPLISH CHAPPED LIPS. NO ROUND PUFFY CHEEKS OR DOUBLE CHIN (둥글넙적한 얼굴, 볼살 붓기 금지). The lower face must be completely hairless, smooth, clear, slim, and radiant.
+[3. DRAMATIC DIET & SLIMMING CONTOURING (다이어트 성공한 듯 날씬하고 날렵한 V라인)]
+- SLIM, CHISELED, ATHLETIC JAWLINE: Slim down the groom's facial contour by 20% (다이어트 -10kg 효과). Eliminate all cheek puffiness, facial bloating, double chin, and neck heaviness.
+- Sculpt a razor-sharp, masculine, photogenic V-to-U jawline with a crisp mandibular line that separates cleanly and gracefully from the shirt collar.
+- BRIDE SLIMNESS: Slender, graceful V-oval face, delicate chin, elegant swan-like neck, beautifully toned shoulders and collarbones.
+
+[4. EXPRESSIONS & EYES (기품 있고 다정한 눈빛과 미소)]
+- Groom: Warm, clear, charismatic open eyes with sparkling studio catchlights. NO SQUINTING, NO SLEEPY SLIT EYES. Calm, confident, noble closed-mouth smile. NO AWKWARD TEETH GRIMACE.
+- Bride: Breathtakingly beautiful, gentle loving gaze, soft petal-pink smile.
+- Retain both individuals' unique facial identity and core bone structure so they instantly recognize themselves at their absolute dream best.
+
+[5. CRITICAL NEGATIVE CONSTRAINTS - STRICTLY FORBIDDEN]
+- FORBIDDEN ON GROOM: NO BALDNESS, NO THINNING HAIR, NO RECEDING HAIRLINE, NO HIGH BARE FOREHEAD. NO SQUINTING, NO HALF-CLOSED TIRED EYES, NO ACCIDENTAL BLINK (게슴츠레한 실눈 절대 금지). NO AWKWARD HORIZONTAL TEETH-SHOWING GRIMACE, NO SQUINTING GRIN, NO DEEP NASOLABIAL SMILE LINES. NO DOUBLE CHIN, NO PUFFY ROUND CHEEKS, NO BLUNT JAWLINE. NO BEARD, NO MUSTACHE, NO GOATEE, NO 5 O'CLOCK SHADOW, NO STUBBLE, NO DARK FOLLICLE DOTS, NO BLUE-GRAY OR ASHY CHIN SHADOW. NO FAINT OR INVISIBLE EYEBROWS. NO PALE, DRY, OR PURPLISH CHAPPED LIPS.
 - FORBIDDEN ON BOTH: NO ROUGH PORES, NO BLEMISHES, NO ACNE, NO UNFLATTERING FACIAL DISTORTIONS, NO ARTIFICIAL CHALK-WHITE HORSE TEETH, NO EXAGGERATED MOUTH OPENINGS. Both wear tender, gentle, natural closed-mouth smiles.
 
-[4. IMMEDIATE SELF-RECOGNITION & WOW FACTOR]
-When the couple and their loved ones view this portrait, their immediate joyful reaction must be: "Oh my gosh, that is 100% truly US, but looking like the most stunning, handsome, and radiant best versions of ourselves in our entire lives!"
-
-[5. SETTING & COMPOSITION: ${angleTitle.toUpperCase()} AT ${preset.venueName.toUpperCase()}]
+[6. SETTING & COMPOSITION: ${angleTitle.toUpperCase()} AT ${preset.venueName.toUpperCase()}]
 - Destination: ${preset.destination} (${preset.venueName}).
 - Scene context: ${preset.promptDescription}.
-- Composition & Camera: Shot on Hasselblad H6D-100c with 85mm f/1.4 prime portrait lens, beautiful natural golden hour rim light highlighting the veil lace and tuxedo fabric, perfect depth of field, pristine luxury bridal atelier standard.`;
+- Composition & Camera: Shot on Hasselblad H6D-100c with 85mm f/1.4 prime portrait lens, romantic sunset rim light, centered couple composition, bespoke ivory Italian tuxedo and haute couture lace mermaid gown.`;
 
     const requestParts: any[] = [
       ...userImageParts,
