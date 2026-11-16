@@ -90,8 +90,16 @@ export async function POST(req: NextRequest) {
 
     const promptText = `A breathtaking, 8K ultra-luxury haute couture wedding masterpiece featuring the REAL couple from the reference photo(s), retouched to the highest Cheongdam-dong / Vogue bridal master standard.
 
-[SUPREME CORE MANDATE: THIS IS A ONCE-IN-A-LIFETIME DREAM WEDDING PHOTO! (이건 평생 간직할 웨딩사진이다!)]
-Wedding clients demand the absolute PEAK OF BEAUTY, SLIMNESS, GLAMOUR, AND YOUTH. Even if the reference photo shows flaws, thinning hair, skin blemishes, or extra weight, YOU MUST DRAMATICALLY ENHANCE THEM TO BE AS HANDSOME, GORGEOUS, SLENDER, AND RADIANT AS TOP-TIER KOREAN CELEBRITY LEADS, while retaining core self-recognition!${multiPhotoInstruction}
+[SUPREME CORE MANDATE: 100% STRICT BIOMETRIC IDENTITY LOCK (본인 얼굴 100% 완전 보존 & 타인 변형 절대 금지)]
+- ABSOLUTELY DO NOT REPLACE OR DRIFT THEIR FACES INTO GENERIC ACTORS, STOCK MODELS, OR STRANGERS!
+- The couple and their families must look at this portrait and immediately say with 100% joy: "This is truly US, but professionally styled, lit, and groomed at our absolute best!"
+- GROOM FACIAL BIOMETRIC FIDELITY (신랑 고유 이목구비 1:1 완벽 보존):
+  * PRESERVE HIS EXACT NATURAL HOODED / MONOLID EYE CONTOUR AND CANTHAL TILT. DO NOT ADD ARTIFICIAL DOUBLE EYELIDS. DO NOT ENLARGE OR ROUND HIS EYES INTO A STRANGER'S.
+  * PRESERVE HIS EXACT NATURAL NOSE STRUCTURE AND SOFT BRIDGE. DO NOT RESCULPT HIS NOSE INTO A STANDARDIZED SHARP ACTOR NOSE.
+  * PRESERVE HIS AUTHENTIC GENTLE SMILE AND NATURAL MOUTH GEOMETRY. DO NOT FORCE AN EXAGGERATED OPEN-MOUTH TOOTHY GRIN.
+- BRIDE FACIAL BIOMETRIC FIDELITY (신부 고유 이목구비 1:1 완벽 보존):
+  * PRESERVE HER AUTHENTIC EYE ARCH, SWEET SIGNATURE CHEEK DIMPLES, AND NATURAL FACIAL GEOMETRY.
+  * DO NOT NARROW HER NOSE OR DISTORT HER AUTHENTIC EYE/LIP PROPORTIONS.${multiPhotoInstruction}
 
 [1. GROOM HAIRSTYLE: FORWARD-FALLING DANDY BANGS & COMPACT FOREHEAD (앞머리를 차분히 내려 이마를 덮는 훈남 댄디컷)]
 - CRITICAL HAIRSTYLE OVERHAUL: DO NOT STYLE THE GROOM'S HAIR UPWARD OR BACKWARD.
@@ -100,27 +108,27 @@ Wedding clients demand the absolute PEAK OF BEAUTY, SLIMNESS, GLAMOUR, AND YOUTH
 - The bangs have rich volume, soft natural texture, and slight separation (공기감 있는 시스루 댄디뱅 / 내린 가르마 애즈펌).
 - ZERO POMPADOUR, ZERO SLICKED-BACK HAIR, ZERO UPWARD COMBED HAIR, ZERO EXPOSED HIGH BARE FOREHEAD (올린 머리, 깐머리, 노출된 높은 이마 100% 절대 금지).
 - Rich, thick, dense hair roots and voluminous sides and temples. ZERO bald spots, ZERO thinning, ZERO high receding forehead, ZERO bare scalp.
-- FORBIDDEN: NO BALDNESS, NO THINNING HAIR, NO HIGH HAIRLINE, NO EXPANSIVE FOREHEAD, NO TALL BARE FOREHEAD, NO SLICKED-BACK RECEDING HAIR, NO M-SHAPED RECEDING TEMPLES (탈모, 높은 이마, 넓은 이마, M자 이마, 올린 머리 절대 금지).
 
-[2. FLAWLESS PORCELAIN AIRBRUSH MAKEUP (피부가 안 좋아도 화장한 것처럼 완벽한 깐달걀 피부)]
-- HIGH-COVERAGE CELEBRITY STUDIO MAKEUP: Even if the groom or bride has blemishes, rough texture, acne scars, brown sun spots, freckles, melasma, redness, or enlarged pores, AIRBRUSH IT COMPLETELY AWAY 100%.
-- Both must have silky-smooth, poreless, creamy, luminous porcelain glass-skin with an ethereal dewy hydration glow (청담동 최고급 샵에서 신부화장/신랑화장 베이스를 완벽하게 받은 무결점 피부).
-- ZERO BEARD SHADOW / ZERO STUBBLE: 100% clean-shaven, baby-smooth porcelain chin, jaw, and philtrum with zero dark hair roots, zero blue-gray undertones, and zero 5 o'clock shadow.
-- GROOM MAKEUP: Densely defined, darker, crisply groomed masculine eyebrows; healthy rosy-coral hydrated tinted lips; subtle high-definition studio contouring.
+[2. FLAWLESS PORCELAIN AIRBRUSH MAKEUP & ZERO BEARD STUBBLE]
+- High-coverage celebrity studio bridal makeup: airbrush away blemishes, rough texture, acne scars, brown sun spots, redness, and enlarged pores.
+- Silky-smooth, poreless, creamy, luminous porcelain glass-skin with an ethereal dewy hydration glow.
+- 100% clean-shaven baby-smooth chin, jaw, and philtrum with ZERO dark hair roots, ZERO blue-gray undertones, ZERO stubble, and ZERO 5 o'clock shadow.
+- Densely defined, darker, crisply groomed masculine eyebrows; healthy rosy-coral hydrated tinted lips; subtle high-definition studio contouring.
 
-[3. DRAMATIC DIET & SLIMMING CONTOURING (다이어트 성공한 듯 날씬하고 날렵한 V라인)]
-- SLIM, CHISELED, ATHLETIC JAWLINE: Slim down the groom's facial contour by 20% (다이어트 -10kg 효과). Eliminate all cheek puffiness, facial bloating, double chin, and neck heaviness.
+[3. DRAMATIC DIET & SLIMMING V-LINE CONTOURING (-10KG DIET EFFECT)]
+- Slim down the groom's facial contour by 20% (-10kg diet effect). Eliminate cheek puffiness, facial bloating, double chin, and neck heaviness.
 - Sculpt a razor-sharp, masculine, photogenic V-to-U jawline with a crisp mandibular line that separates cleanly and gracefully from the shirt collar.
-- BRIDE SLIMNESS: Slender, graceful V-oval face, delicate chin, elegant swan-like neck, beautifully toned shoulders and collarbones.
+- Bride: Slender, graceful V-oval face, delicate chin, elegant swan-like neck, beautifully toned shoulders and collarbones.
 
-[4. EXPRESSIONS & EYES (기품 있고 다정한 눈빛과 미소)]
+[4. EXPRESSIONS & EYES (기품 있고 다정한 본인 눈빛과 미소)]
 - Groom: Warm, clear, charismatic open eyes with sparkling studio catchlights. NO SQUINTING, NO SLEEPY SLIT EYES. Calm, confident, noble closed-mouth smile. NO AWKWARD TEETH GRIMACE.
 - Bride: Breathtakingly beautiful, gentle loving gaze, soft petal-pink smile.
-- Retain both individuals' unique facial identity and core bone structure so they instantly recognize themselves at their absolute dream best.
 
 [5. CRITICAL NEGATIVE CONSTRAINTS - STRICTLY FORBIDDEN]
-- FORBIDDEN ON GROOM: NO BALDNESS, NO THINNING HAIR, NO RECEDING HAIRLINE, NO HIGH BARE FOREHEAD. NO SQUINTING, NO HALF-CLOSED TIRED EYES, NO ACCIDENTAL BLINK (게슴츠레한 실눈 절대 금지). NO AWKWARD HORIZONTAL TEETH-SHOWING GRIMACE, NO SQUINTING GRIN, NO DEEP NASOLABIAL SMILE LINES. NO DOUBLE CHIN, NO PUFFY ROUND CHEEKS, NO BLUNT JAWLINE. NO BEARD, NO MUSTACHE, NO GOATEE, NO 5 O'CLOCK SHADOW, NO STUBBLE, NO DARK FOLLICLE DOTS, NO BLUE-GRAY OR ASHY CHIN SHADOW. NO FAINT OR INVISIBLE EYEBROWS. NO PALE, DRY, OR PURPLISH CHAPPED LIPS.
-- FORBIDDEN ON BOTH: NO ROUGH PORES, NO BLEMISHES, NO ACNE, NO UNFLATTERING FACIAL DISTORTIONS, NO ARTIFICIAL CHALK-WHITE HORSE TEETH, NO EXAGGERATED MOUTH OPENINGS. Both wear tender, gentle, natural closed-mouth smiles.
+- NO DIFFERENT PERSON, NO STRANGER FACE, NO GENERIC STOCK MODEL FACE, NO FAKE PLASTIC SURGERY LOOK, NO ALTERED EYE SHAPE, NO FORCED DOUBLE EYELIDS, NO ARTIFICIAL SHARPENED NOSE, NO STRANGE HORIZONTAL TOOTHY GRIN, NO EXAGGERATED MOUTH OPENINGS.
+- NO UPWARD COMBED HAIR, NO POMPADOUR, NO HIGH FOREHEAD, NO SLICK-BACK, NO TALL BARE FOREHEAD, NO VISIBLE HAIRLINE RECESSION, NO BALDNESS.
+- NO BEARD, NO MUSTACHE, NO GOATEE, NO 5 O'CLOCK SHADOW, NO STUBBLE, NO DARK FOLLICLE DOTS, NO BLUE-GRAY OR ASHY CHIN SHADOW. NO FAINT OR INVISIBLE EYEBROWS. NO PALE, DRY, OR PURPLISH CHAPPED LIPS.
+- NO ROUGH PORES, NO BLEMISHES, NO ACNE, NO UNFLATTERING FACIAL DISTORTIONS.
 
 [6. SETTING & COMPOSITION: ${angleTitle.toUpperCase()} AT ${preset.venueName.toUpperCase()}]
 - Destination: ${preset.destination} (${preset.venueName}).
