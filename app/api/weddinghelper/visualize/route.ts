@@ -93,16 +93,21 @@ export async function POST(req: NextRequest) {
 [ESSENTIAL OBJECTIVE: BREATHTAKING BEAUTY & INSTANT SELF-RECOGNITION]
 The couple must look undeniably like THEMSELVES, but at the absolute PEAK OF THEIR BEAUTY, YOUTH, AND CHARM (인생 최고의 수려함과 화사함).${multiPhotoInstruction}
 
-[1. FLAWLESS PORCELAIN GLASS-SKIN & MASTER AIRBRUSH FINISH (결점 없는 도자기 물광 피부)]
+[1. FLAWLESS PORCELAIN GLASS-SKIN & TOTAL BEARD-SHADOW ERADICATION (결점 없는 도자기 물광 피부 & 수염 자국 100% 완전 제거)]
 - SILK-SMOOTH TEXTURE: Both bride and groom have perfectly smooth, radiant, poreless, creamy porcelain skin with an ethereal dewy hydration glow.
 - ZERO IMPERFECTIONS: Zero rough texture, zero acne scars, zero enlarged pores, zero redness, zero gray/ashy undertones, zero dark under-eye circles, zero deep nasolabial creases.
+- ZERO BEARD SHADOW / ZERO STUBBLE (수염 자국·푸르스름한 턱자국 100% 완전 제거):
+  * The groom MUST be 100% completely clean-shaven, baby-smooth, and hairless on the chin, jawline, upper lip, philtrum, and neck.
+  * Completely eliminate all 5 o'clock shadow, dark hair follicle roots, stubble dots, and blue-gray/green-gray undertones around the mouth, chin, and jawline.
+  * Even if the groom's reference photo shows facial hair, mustache shadow, or beard stubble, YOU MUST COMPLETELY AIRBRUSH AND REMOVE IT. The groom's lower face (chin, jaw, upper lip) must have the exact same bright, creamy, luminous, silky-smooth porcelain skin tone as his forehead and cheeks—matching the highest Cheongdam-dong celebrity bridal studio grooming standard.
 - STUDIO BEAUTY LIGHTING: Flattering, diffused high-key studio softbox lighting (Profoto beauty dish) that wraps gently around their faces, casting soft angelic highlights on cheekbones, forehead, and bridge of the nose.
 
 [2. FLATTERING AESTHETIC ENHANCEMENT & GROOM/BRIDE CHARM]
 - GROOM: Dashing, noble, exceptionally handsome (귀티 나고 훤칠한 미남 신랑상).
   * Retain his authentic eye contour, eyelid structure, nose slope, and smile.
+  * 100% Clean-shaven, baby-smooth porcelain chin and jaw with ZERO stubble, ZERO beard shadow, ZERO bluish tint, and ZERO visible follicle pores.
   * Refine his jawline: cleanly defined, sculpted, modern masculine jaw with zero double chin and zero jowls.
-  * Impeccable grooming: styled dapper hair, clean-shaven, dignified and charismatic.
+  * Impeccable grooming: styled dapper hair, perfectly groomed brows, completely hairless and radiant lower face, dignified and charismatic.
   * Proportions: Height ${groomHeight}cm, weight ${groomWeight}kg, dressed in ${preset.groomAttire || 'a bespoke tailored ivory-cream Italian linen tuxedo with a black silk bow tie'}.
 - BRIDE: Stunningly gorgeous, elegant, pure, and radiant (여배우급 청순미와 화사한 미모의 신부).
   * Retain her authentic lovely eye shape, brow arch, and facial proportions.
@@ -112,10 +117,14 @@ The couple must look undeniably like THEMSELVES, but at the absolute PEAK OF THE
   * Proportions: Height ${brideHeight}cm, weight ${brideWeight}kg, styled with an effortless romantic low chignon with delicate fresh bridal floral pins, dressed in ${preset.brideAttire || 'an exquisite haute couture backless mermaid lace bridal gown with an ethereal chapel train'}.
 - EXPRESSIONS: Gentle, warm, joyful, affectionate closed-mouth or subtle resting smile. DO NOT OPEN MOUTHS EXAGGERATEDLY. DO NOT RENDER ARTIFICIAL CHALK-WHITE TEETH. Lips rest together in a soft, tender, romantic smile.
 
-[3. IMMEDIATE SELF-RECOGNITION & WOW FACTOR]
+[3. CRITICAL NEGATIVE CONSTRAINTS - STRICTLY FORBIDDEN]
+- FORBIDDEN ON GROOM: NO BEARD, NO MUSTACHE, NO GOATEE, NO 5 O'CLOCK SHADOW, NO STUBBLE, NO DARK FOLLICLE DOTS, NO BLUE-GRAY OR ASHY CHIN SHADOW (수염, 수염 자국, 턱 푸른기 절대 금지). The lower face must be completely hairless, smooth, clear, and radiant.
+- FORBIDDEN ON BOTH: NO ROUGH PORES, NO BLEMISHES, NO ACNE, NO UNFLATTERING FACIAL DISTORTIONS, NO ARTIFICIAL CHALK-WHITE HORSE TEETH, NO EXAGGERATED MOUTH OPENINGS. Both wear tender, gentle, natural closed-mouth smiles.
+
+[4. IMMEDIATE SELF-RECOGNITION & WOW FACTOR]
 When the couple and their loved ones view this portrait, their immediate joyful reaction must be: "Oh my gosh, that is 100% truly US, but looking like the most stunning, handsome, and radiant best versions of ourselves in our entire lives!"
 
-[4. SETTING & COMPOSITION: ${angleTitle.toUpperCase()} AT ${preset.venueName.toUpperCase()}]
+[5. SETTING & COMPOSITION: ${angleTitle.toUpperCase()} AT ${preset.venueName.toUpperCase()}]
 - Destination: ${preset.destination} (${preset.venueName}).
 - Scene context: ${preset.promptDescription}.
 - Composition & Camera: Shot on Hasselblad H6D-100c with 85mm f/1.4 prime portrait lens, beautiful natural golden hour rim light highlighting the veil lace and tuxedo fabric, perfect depth of field, pristine luxury bridal atelier standard.`;
