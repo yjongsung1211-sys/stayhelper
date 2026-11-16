@@ -83,23 +83,39 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 2. Multimodal Prompt with Strict Facial Identity, Expression & Landmark Lock
+    // 2. Multimodal Prompt with Cheongdam-dong Haute Couture Bridal Glamour & Flawless Glass-Skin Lock
     const multiPhotoInstruction = userImageParts.length > 1
-      ? `\n- MULTI-PHOTO REFERENCE MAPPING: Reference Image 1 provides the couple's overall appearance and harmony. Reference Image 2 is the Bride's detailed close-up portrait (preserve her exact eye contours, eyelids, nose bridge, cheek dimples, and lip shape). Reference Image 3 (if provided) is the Groom's detailed close-up portrait (preserve his exact eye folds, nose structure, masculine jaw angle, and natural brow).`
+      ? `\n- MULTI-PHOTO REFERENCE MAPPING: Reference Image 1 provides the couple's overall facial harmony and proportions. Reference Image 2 is the Bride's detailed portrait (preserve her authentic eye contour, eyelid structure, nose curve, cheek dimples, and lip contour). Reference Image 3 (if provided) is the Groom's detailed portrait (preserve his authentic eye shape, nose bridge, masculine jawline, and natural brow).`
       : '';
 
-    const promptText = `A breathtaking, cinematic, ultra-photorealistic 8K luxury wedding portrait of the REAL couple in the reference photo(s).
+    const promptText = `A breathtaking, 8K ultra-luxury haute couture wedding masterpiece featuring the REAL couple from the reference photo(s), retouched to the highest Cheongdam-dong / Vogue bridal master standard.
 
-[CRITICAL MANDATE 1: 100% AUTHENTIC FACIAL LIKENESS & BIOMETRIC IDENTITY LOCK]
-- The man and woman in the reference photo(s) are the REAL GROOM AND BRIDE.${multiPhotoInstruction}
-- EXACT NATURAL EXPRESSION LOCK: You MUST preserve their EXACT natural, warm, gentle closed-mouth resting smile from the reference photo. DO NOT OPEN THEIR MOUTHS. DO NOT RENDER ARTIFICIAL TEETH. Their lips must rest naturally together in a subtle, genuine, tender smile.
-- 100% IDENTICAL BONE STRUCTURE: Preserve the groom's exact eye shape, eyelid contour, nose shape, and natural jaw width. Preserve the bride's exact lovely eye folds, natural cheek fullness, and nose curvature. Do not slim, taper, or V-shape their chins. Do not apply generic K-pop plastic surgery filters.
-- GROOM DETAILS: Height ${groomHeight}cm, weight ${groomWeight}kg, styled with clean modern dapper hair, dressed in ${preset.groomAttire || 'a bespoke tailored ivory-cream Italian linen tuxedo with a black silk bow tie'}.
-- BRIDE DETAILS: Height ${brideHeight}cm, weight ${brideWeight}kg, styled with an effortless romantic low chignon with delicate fresh bridal floral pins, dressed in ${preset.brideAttire || 'an exquisite haute couture backless mermaid lace bridal gown with an ethereal chapel train'}.
-- AUTHENTIC SKIN & LIGHTING: Luminous luxury porcelain glass-skin (dewy glass-skin), natural dewy complexion with zero blemishes, authentic skin micro-texture.
-- IMMEDIATE SELF-RECOGNITION: When the bride and groom view this photo, they and their families must recognize themselves immediately: "That is 100% truly US on our wedding day!"
+[ESSENTIAL OBJECTIVE: BREATHTAKING BEAUTY & INSTANT SELF-RECOGNITION]
+The couple must look undeniably like THEMSELVES, but at the absolute PEAK OF THEIR BEAUTY, YOUTH, AND CHARM (인생 최고의 수려함과 화사함).${multiPhotoInstruction}
 
-[SETTING & COMPOSITION: ${angleTitle.toUpperCase()} AT ${preset.venueName.toUpperCase()}]
+[1. FLAWLESS PORCELAIN GLASS-SKIN & MASTER AIRBRUSH FINISH (결점 없는 도자기 물광 피부)]
+- SILK-SMOOTH TEXTURE: Both bride and groom have perfectly smooth, radiant, poreless, creamy porcelain skin with an ethereal dewy hydration glow.
+- ZERO IMPERFECTIONS: Zero rough texture, zero acne scars, zero enlarged pores, zero redness, zero gray/ashy undertones, zero dark under-eye circles, zero deep nasolabial creases.
+- STUDIO BEAUTY LIGHTING: Flattering, diffused high-key studio softbox lighting (Profoto beauty dish) that wraps gently around their faces, casting soft angelic highlights on cheekbones, forehead, and bridge of the nose.
+
+[2. FLATTERING AESTHETIC ENHANCEMENT & GROOM/BRIDE CHARM]
+- GROOM: Dashing, noble, exceptionally handsome (귀티 나고 훤칠한 미남 신랑상).
+  * Retain his authentic eye contour, eyelid structure, nose slope, and smile.
+  * Refine his jawline: cleanly defined, sculpted, modern masculine jaw with zero double chin and zero jowls.
+  * Impeccable grooming: styled dapper hair, clean-shaven, dignified and charismatic.
+  * Proportions: Height ${groomHeight}cm, weight ${groomWeight}kg, dressed in ${preset.groomAttire || 'a bespoke tailored ivory-cream Italian linen tuxedo with a black silk bow tie'}.
+- BRIDE: Stunningly gorgeous, elegant, pure, and radiant (여배우급 청순미와 화사한 미모의 신부).
+  * Retain her authentic lovely eye shape, brow arch, and facial proportions.
+  * Slim, elegant facial contour: graceful V-oval jawline, delicate chin, slender swan-like neck.
+  * Eyes: Bright, sparkling, loving gaze with delicate natural lashes and subtle youthful aegyo-sal.
+  * Lips: Petal-pink, naturally hydrated, soft lips with gently upturned smiling corners.
+  * Proportions: Height ${brideHeight}cm, weight ${brideWeight}kg, styled with an effortless romantic low chignon with delicate fresh bridal floral pins, dressed in ${preset.brideAttire || 'an exquisite haute couture backless mermaid lace bridal gown with an ethereal chapel train'}.
+- EXPRESSIONS: Gentle, warm, joyful, affectionate closed-mouth or subtle resting smile. DO NOT OPEN MOUTHS EXAGGERATEDLY. DO NOT RENDER ARTIFICIAL CHALK-WHITE TEETH. Lips rest together in a soft, tender, romantic smile.
+
+[3. IMMEDIATE SELF-RECOGNITION & WOW FACTOR]
+When the couple and their loved ones view this portrait, their immediate joyful reaction must be: "Oh my gosh, that is 100% truly US, but looking like the most stunning, handsome, and radiant best versions of ourselves in our entire lives!"
+
+[4. SETTING & COMPOSITION: ${angleTitle.toUpperCase()} AT ${preset.venueName.toUpperCase()}]
 - Destination: ${preset.destination} (${preset.venueName}).
 - Scene context: ${preset.promptDescription}.
 - Composition & Camera: Shot on Hasselblad H6D-100c with 85mm f/1.4 prime portrait lens, beautiful natural golden hour rim light highlighting the veil lace and tuxedo fabric, perfect depth of field, pristine luxury bridal atelier standard.`;
