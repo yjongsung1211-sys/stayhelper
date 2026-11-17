@@ -9528,21 +9528,7 @@ export default function StylingHelperRenewalPage() {
       localStorage.removeItem('styling_free_trial_used');
       const searchParams = new URLSearchParams(window.location.search);
       
-      // Admin / Testing direct activation (?pro=true grants exact 30-day cycle)
-      if (searchParams.get('pro') === 'true') {
-        const nowIso = new Date().toISOString();
-        const expiresIso = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
-        const adminSub = {
-          isPro: true,
-          isExpired: false,
-          daysRemaining: 30,
-          paidAt: nowIso,
-          expiresAt: expiresIso,
-          plan: 'monthly'
-        };
-        localStorage.setItem('styling_subscription', JSON.stringify(adminSub));
-        localStorage.setItem('styling_is_pro_subscriber', 'true');
-      }
+      // Backdoor purged: No client-side ?pro=true query bypass. Pro status requires verified server subscription.
 
       // Precise 30-day expiration engine
       const validateSubscription = () => {

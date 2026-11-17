@@ -83,7 +83,8 @@ Output pure JSON only without markdown code blocks.`;
       ? `Transcript to analyze:\n"""\n${effectiveTranscript}\n"""\nTarget Learning Language: ${targetLang}\nMode: ${mode}`
       : `Please listen to the attached audio file carefully. Transcribe it accurately into the 'transcript' field, and then produce the executive summary, actionItems, and languageCoaching in target language: ${targetLang}.`;
 
-    const geminiKey = (apiKey && apiKey.trim()) || process.env.GEMINI_API_KEY;
+    // 🔒 Strictly require client-provided API key; do NOT expose server-side GEMINI_API_KEY to anonymous requests
+    const geminiKey = apiKey && apiKey.trim();
     const hasValidGeminiKey = Boolean(geminiKey && !geminiKey.startsWith('AQ.'));
 
     // 1. Google Gemini (if valid AIza key is provided)

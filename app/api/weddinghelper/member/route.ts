@@ -76,11 +76,12 @@ export async function POST(req: NextRequest) {
 
     const normalizedEmail = email.trim().toLowerCase();
 
-    // Require PayPal Transaction ID or verified receipt to prevent unauthorized access
+    // Require genuine PayPal Transaction ID or verified receipt to prevent unauthorized access
     const txId = (transactionId || orderId || "").trim();
-    if (!txId || txId.length < 5) {
+    const isTestingMock = /^(12345|test|admin|asdf|qwerty|00000|11111)$/i.test(txId);
+    if (!txId || txId.length < 10 || isTestingMock) {
       return NextResponse.json(
-        { error: "Valid PayPal Transaction ID or Receipt Number is required to activate VIP access." },
+        { error: "Valid PayPal Transaction ID (e.g. 17-character alphanumeric receipt number) is required to activate VIP access." },
         { status: 400 }
       );
     }
