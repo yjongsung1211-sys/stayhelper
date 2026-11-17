@@ -350,7 +350,7 @@ export default function WeddingHelperPage() {
     }
   };
 
-  // 🌟 Random Landmark Concept Showcase Synthesis Handler (1 Photo)
+  // 🌟 12 World Concepts Showcase Synthesis Handler (1 Representative Photo per Concept)
   const handleGenerate12Concepts = async () => {
     const imagesToUse = getClientImages();
     if (imagesToUse.length === 0) {
@@ -366,64 +366,76 @@ export default function WeddingHelperPage() {
       return;
     }
 
-    // Pick 1 random landmark destination from the 12 concepts
-    const randomIndex = Math.floor(Math.random() * DESTINATION_240_CONFIGS.length);
-    const targetConcept = DESTINATION_240_CONFIGS[randomIndex];
-
     setIsGenerating12(true);
     setShow12Showcase(true);
-    setSynthesizingConceptId(targetConcept.id);
-    setPreviewStepText(`Selecting random destination & synthesizing 1 masterpiece (${targetConcept.title})...`);
 
     // Scroll to showcase
     setTimeout(() => {
       showcaseRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 200);
 
-    try {
-      const res = await fetch('/api/weddinghelper/visualize', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: user?.email,
-          images: imagesToUse,
-          image: imagesToUse[0],
-          targetSceneImage: targetConcept.heroImg,
-          themeId: targetConcept.id,
-          angleTitle: 'Ceremonial Altar Vows',
-          groomHeight,
-          groomWeight,
-          brideHeight,
-          brideWeight,
-        }),
-      });
+    let currentPreviews = { ...conceptPreviews };
+    let successCount = 0;
 
-      if (res.status === 402) {
-        localStorage.removeItem('weddinghelper_user');
-        setUser(null);
-        setIsCheckoutOpen(true);
-        showToast('🔒 $19 VIP Pass required. Please complete payment via PayPal.');
-        return;
+    for (let i = 0; i < DESTINATION_240_CONFIGS.length; i++) {
+      const concept = DESTINATION_240_CONFIGS[i];
+      setSynthesizingConceptId(concept.id);
+      setPreviewStepText(`Synthesizing Concept ${i + 1}/12: ${concept.title}...`);
+
+      // Gentle pause to respect API rate limits
+      if (i > 0) {
+        await new Promise((r) => setTimeout(r, 1200));
       }
 
-      const data = await res.json();
-      if (data?.success && data?.visualizedImageUrl) {
-        const updated = { ...conceptPreviews, [targetConcept.id]: data.visualizedImageUrl };
-        setConceptPreviews(updated);
-        try {
-          localStorage.setItem('weddinghelper_concept_previews', JSON.stringify(updated));
-        } catch (e) {}
-        showToast(`🎉 Random masterpiece synthesized for ${targetConcept.title}!`, 4500);
-      } else {
-        showToast('⚠️ High synthesis volume. Displaying high-definition editorial previews first.');
+      try {
+        const res = await fetch('/api/weddinghelper/visualize', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: user?.email,
+            images: imagesToUse,
+            image: imagesToUse[0],
+            targetSceneImage: concept.heroImg,
+            themeId: concept.id,
+            angleTitle: 'Ceremonial Altar Vows',
+            groomHeight,
+            groomWeight,
+            brideHeight,
+            brideWeight,
+          }),
+        });
+
+        if (res.status === 402) {
+          localStorage.removeItem('weddinghelper_user');
+          setUser(null);
+          setIsCheckoutOpen(true);
+          showToast('🔒 $19 VIP Pass required. Please complete payment via PayPal.');
+          break;
+        }
+
+        const data = await res.json();
+        if (data?.success && data?.visualizedImageUrl) {
+          currentPreviews[concept.id] = data.visualizedImageUrl;
+          setConceptPreviews({ ...currentPreviews });
+          try {
+            localStorage.setItem('weddinghelper_concept_previews', JSON.stringify(currentPreviews));
+          } catch (e) {}
+          successCount++;
+        }
+      } catch (err) {
+        console.warn(`Concept ${concept.id} synthesis error:`, err);
       }
-    } catch (err) {
-      console.warn('Random concept preview error:', err);
-      showToast('⚠️ Network connection busy. Please check your connection and retry.');
-    } finally {
-      setIsGenerating12(false);
-      setSynthesizingConceptId(null);
-      setPreviewStepText('');
+    }
+
+    setIsGenerating12(false);
+    setSynthesizingConceptId(null);
+    setPreviewStepText('');
+
+    if (successCount > 0) {
+      showToast(`🎉 12 Concepts Showcase Complete! Enter your email below to receive all 240 photos.`, 6000);
+      setTimeout(() => {
+        emailDeliveryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 400);
     }
   };
 
@@ -1053,12 +1065,12 @@ export default function WeddingHelperPage() {
               {isGenerating12 ? (
                 <>
                   <RefreshCw className="w-4 h-4 animate-spin text-[#1F181B]" />
-                  <span>{previewStepText || 'Rendering Random Masterpiece...'}</span>
+                  <span>{previewStepText || 'Synthesizing 12 World Concepts (1 Each)...'}</span>
                 </>
               ) : (
                 <>
                   <Sparkles className="w-4 h-4 fill-[#1F181B] text-[#1F181B]" />
-                  <span>Generate 1 Random Landmark Showcase Portrait (Free Preview)</span>
+                  <span>Generate 12 World Concepts (1 Photo Each)</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
@@ -1075,7 +1087,7 @@ export default function WeddingHelperPage() {
               className="w-full sm:w-auto py-4 px-6 rounded-2xl bg-[#FAF8F5] text-[#1F181B] hover:bg-[#F5EEDB] font-bold text-xs uppercase tracking-wider transition border border-[#1F181B]/15 flex items-center justify-center gap-2 cursor-pointer"
             >
               <Mail className="w-4 h-4 text-[#C5A059]" />
-              <span>Request Remaining 228 Photos by Email</span>
+              <span>Send All 240 Photos via Email ➔</span>
             </button>
           </div>
         </div>
@@ -1085,13 +1097,13 @@ export default function WeddingHelperPage() {
       <section ref={showcaseRef} className="max-w-6xl mx-auto px-4 sm:px-8 pb-16">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <span className="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest bg-[#F5EEDB] text-[#C5A059] border border-[#C5A059]/30">
-            12 WORLD CONCEPTS • 1 REPRESENTATIVE PREVIEW EACH
+            12 WORLD CONCEPTS • 1 PHOTO EACH FIRST
           </span>
           <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#1F181B] mt-3">
             12 World-Class Luxury Landmark Wedding Showcase
           </h2>
           <p className="text-xs sm:text-sm text-[#1F181B]/70 mt-1 max-w-lg mx-auto">
-            Representative master scenes from 12 iconic global sanctuaries featuring your authentic faces and proportions. Request all remaining 19 bespoke angles per destination (240 total) via email below.
+            12개 세계관의 대표 1장(총 12장)을 먼저 실시간으로 확인하신 후, 전체 240장 4K 화보 패키지를 이메일로 안전하게 발송해 드립니다.
           </p>
         </div>
 
@@ -1213,7 +1225,7 @@ export default function WeddingHelperPage() {
           })}
         </div>
 
-        {/* 5. EMAIL DELIVERY LEAD-CAPTURE SECTION (Request Remaining 228 Photos) */}
+        {/* 5. EMAIL DELIVERY LEAD-CAPTURE SECTION (Receive All 240 Photos via Email) */}
         <div ref={emailDeliveryRef} className="mt-16 bg-[#1F181B] text-white rounded-3xl p-6 sm:p-12 border border-[#D4AF37]/50 shadow-2xl relative overflow-hidden">
           <div className="max-w-2xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#D4AF37] text-[10px] font-extrabold uppercase tracking-widest mb-4">
@@ -1222,10 +1234,10 @@ export default function WeddingHelperPage() {
             </div>
 
             <h3 className="text-2xl sm:text-4xl font-serif font-bold text-white">
-              Receive the Full 228-Photo Album by Email
+              Receive the Full 240-Photo Album by Email
             </h3>
             <p className="text-white/70 text-xs sm:text-sm mt-2 leading-relaxed">
-              Previewed the 12 representative master scenes? From Altar Vows and Cathedral Veils to Champagne Toasts and Midnight Chandelier Dances, each sanctuary offers 20 bespoke editorial angles. We render your full <strong>240-portrait 4K lossless album & download package</strong> asynchronously and deliver it straight to your email.
+              컨셉별 대표 1장(총 12장) 확인 완료 후, 12개 세계관의 전체 20개 앵글(총 240장 4K 화보 패키지)을 이메일로 안전하게 발송해 드립니다.
             </p>
 
             {/* Included Perks Checklist */}
@@ -1277,7 +1289,7 @@ export default function WeddingHelperPage() {
               <form onSubmit={handleSubmitEmailDelivery} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto" noValidate>
                 <input
                   type="email"
-                  placeholder="Enter your email to receive the album (e.g. bride@wedding.com)"
+                  placeholder="Enter your email to receive all 240 photos"
                   value={deliveryEmail}
                   onChange={(e) => setDeliveryEmail(e.target.value)}
                   className="flex-1 px-5 py-4 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-white/40 text-xs sm:text-sm focus:outline-hidden focus:border-[#D4AF37] transition"
@@ -1290,11 +1302,11 @@ export default function WeddingHelperPage() {
                   {isSubmittingDelivery ? (
                     <>
                       <RefreshCw className="w-4 h-4 animate-spin text-[#1F181B]" />
-                      <span>Processing Request...</span>
+                      <span>Sending 240 Photos...</span>
                     </>
                   ) : (
                     <>
-                      <span>Get Full 240 Album via Email</span>
+                      <span>Send Full 240 Album via Email</span>
                       <Send className="w-4 h-4" />
                     </>
                   )}

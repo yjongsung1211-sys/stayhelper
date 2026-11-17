@@ -22,7 +22,8 @@ import {
   ChevronLeft,
   ChevronRight,
   CreditCard,
-  Loader2
+  Loader2,
+  Mail
 } from 'lucide-react';
 import JSZip from 'jszip';
 
@@ -148,6 +149,7 @@ function GalleryContent() {
   const [batchProgress, setBatchProgress] = useState<{ current: number; total: number; title: string } | null>(null);
   const [isDownloadingZip, setIsDownloadingZip] = useState(false);
   const [zipProgress, setZipProgress] = useState(0);
+  const [isSendingEmail, setIsSendingEmail] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [atelierStepTicker, setAtelierStepTicker] = useState(0);
 
@@ -665,6 +667,44 @@ function GalleryContent() {
     }
   };
 
+  // Send all 240 photos via email
+  const handleSendAllToEmail = async () => {
+    let targetEmail = user?.email;
+    if (!targetEmail) {
+      targetEmail = window.prompt('240장 풀 화보를 수신할 이메일 주소를 입력해 주세요:') || '';
+    }
+    if (!targetEmail || !targetEmail.includes('@')) {
+      showToast('⚠️ 올바른 이메일 주소를 입력해 주세요.');
+      return;
+    }
+
+    setIsSendingEmail(true);
+    showToast(`✉️ 240장 풀 화보 앨범을 ${targetEmail}로 발송 중입니다...`);
+    try {
+      const res = await fetch('/api/weddinghelper/order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: targetEmail.trim().toLowerCase(),
+          plan: user?.plan || 'grand',
+          selectedTheme: 'all_12_themes',
+          proportions,
+          sendCompletionEmail: true,
+        }),
+      });
+      const data = await res.json();
+      if (data?.success) {
+        showToast(`🎉 240장 풀 화보 앨범 및 4K 다운로드 링크가 ${targetEmail}로 발송되었습니다!`, 6000);
+      } else {
+        showToast('⚠️ 이메일 발송 중 일시적인 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+      }
+    } catch (e) {
+      showToast('⚠️ 네트워크 연결을 확인해 주세요.');
+    } finally {
+      setIsSendingEmail(false);
+    }
+  };
+
   // Set photo as invitation cover and redirect
   const handleSetInvitationCover = (photoUrl: string, title: string) => {
     try {
@@ -892,7 +932,17 @@ function GalleryContent() {
                 </p>
               </div>
 
-              <div className="flex items-center gap-3 shrink-0">
+              <div className="flex flex-wrap items-center gap-3 shrink-0">
+                <button
+                  type="button"
+                  onClick={handleSendAllToEmail}
+                  disabled={isSendingEmail}
+                  className="px-5 py-3 rounded-full font-extrabold text-xs uppercase tracking-wider transition flex items-center gap-2 shadow-lg bg-white/10 hover:bg-white/20 border border-[#D4AF37]/50 text-[#EAD8B1] cursor-pointer"
+                >
+                  <Mail className="w-4 h-4 text-[#D4AF37]" />
+                  <span>{isSendingEmail ? 'Sending...' : 'Email All 240 Photos'}</span>
+                </button>
+
                 <button
                   type="button"
                   onClick={handleBatchSynthesize}
@@ -946,7 +996,16 @@ function GalleryContent() {
                       </span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 self-stretch sm:self-center shrink-0">
+                  <div className="flex flex-wrap items-center gap-2 self-stretch sm:self-center shrink-0">
+                    <button
+                      type="button"
+                      onClick={handleSendAllToEmail}
+                      disabled={isSendingEmail}
+                      className="flex-1 sm:flex-none px-4 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-[#D4AF37]/50 text-[#EAD8B1] font-extrabold text-xs uppercase tracking-wider transition shadow-md whitespace-nowrap cursor-pointer flex items-center justify-center gap-1.5"
+                    >
+                      <Mail className="w-3.5 h-3.5 text-[#D4AF37]" />
+                      <span>{isSendingEmail ? 'Sending...' : 'Email All 240 Photos ✉️'}</span>
+                    </button>
                     <button
                       type="button"
                       onClick={() => {

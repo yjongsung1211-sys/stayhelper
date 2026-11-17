@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createWeddingOrder, getWeddingOrder, findOrderByEmail } from '@/lib/wedding-order-store';
-import { notifyNewOrder } from '@/lib/wedding-delivery';
+import { notifyNewOrder, notifyOrderCompleted } from '@/lib/wedding-delivery';
 
 export const dynamic = 'force-dynamic';
 
@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, plan = 'grand', selectedTheme = 'theme_01_bali', proportions, clientImages } = body;
+    const { email, plan = 'grand', selectedTheme = 'theme_01_bali', proportions, clientImages, sendCompletionEmail = true } = body;
 
     if (!email || !email.includes('@')) {
       return NextResponse.json({ success: false, error: 'Valid email required' }, { status: 400 });
@@ -51,13 +51,22 @@ export async function POST(request: NextRequest) {
       clientImages,
     });
 
-    // Send Telegram notification to CEO in background
+    // 1) Send Telegram notification & order acknowledgment to CEO in background
     notifyNewOrder({
       orderId: order.orderId,
       email: order.email,
       plan: order.plan,
       themeTitle: order.selectedTheme,
     }).catch((e) => console.warn('Telegram notify error:', e));
+
+    // 2) Immediately deliver full 240 album access & 4K ZIP link to customer email
+    if (sendCompletionEmail) {
+      notifyOrderCompleted({
+        orderId: order.orderId,
+        email: order.email,
+        totalScenes: 240,
+      }).catch((e) => console.warn('Order completed notify error:', e));
+    }
 
     return NextResponse.json({ success: true, orderId: order.orderId, order });
   } catch (err: any) {
