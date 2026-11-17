@@ -284,11 +284,21 @@ export async function notifyNewOrder(params: {
     galleryUrl,
   });
 
-  await sendEmailDelivery({
+  const emailResult = await sendEmailDelivery({
     to: params.email,
     subject: `💍 [WeddingHelper] 240장 웨딩 마스터피스 제작 요청이 정상 접수되었습니다`,
     html: emailHtml,
   });
+
+  // If customer email failed due to unverified domain on free tier, forward full delivery copy to CEO
+  if (!emailResult.success) {
+    console.log(`[WeddingDelivery] Customer direct email notice (${emailResult.error}). Forwarding copy to CEO inbox.`);
+    await sendEmailDelivery({
+      to: 'yjongsung1211@gmail.com',
+      subject: `[고객 발송 사본] 💍 [WeddingHelper] ${params.email} 고객 접수 앨범 링크`,
+      html: emailHtml,
+    }).catch(() => {});
+  }
 }
 
 /**
@@ -322,9 +332,18 @@ export async function notifyOrderCompleted(params: {
     galleryUrl,
   });
 
-  await sendEmailDelivery({
+  const emailResult = await sendEmailDelivery({
     to: params.email,
     subject: `✨ [WeddingHelper] 240장 풀 앨범 완성본이 준비되었습니다 (4K Hasselblad Collection)`,
     html: emailHtml,
   });
+
+  // If customer email failed due to unverified domain on free tier, forward full completion copy to CEO
+  if (!emailResult.success) {
+    await sendEmailDelivery({
+      to: 'yjongsung1211@gmail.com',
+      subject: `[고객 완성본 사본] ✨ [WeddingHelper] ${params.email} 고객 240장 다운로드 링크`,
+      html: emailHtml,
+    }).catch(() => {});
+  }
 }
