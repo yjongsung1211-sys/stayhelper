@@ -36,6 +36,7 @@
   "exclude": [
     "node_modules",
     "remotion_studio",
-    "scratch"
+    "scratch",
+    "dist_secondbrain_standalone"
   ]
 }

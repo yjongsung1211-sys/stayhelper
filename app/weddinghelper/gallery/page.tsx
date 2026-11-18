@@ -28,8 +28,8 @@ import {
 import JSZip from 'jszip';
 
 // Official PayPal NCP Payment URLs
-const PAYPAL_CLASSIC_URL = process.env.NEXT_PUBLIC_PAYPAL_WEDDING_CLASSIC_URL || 'https://www.paypal.com/ncp/payment/LVRRE8SJKD3VA'; // $15 Classic (Single Destination 20 Scenes)
-const PAYPAL_GRAND_URL = process.env.NEXT_PUBLIC_PAYPAL_WEDDING_GRAND_URL || 'https://www.paypal.com/ncp/payment/LVRRE8SJKD3VA'; // $29 Grand VIP (All 12 Destinations 240 Scenes)
+const PAYPAL_CLASSIC_URL = process.env.NEXT_PUBLIC_PAYPAL_WEDDING_CLASSIC_URL || 'https://www.paypal.com/ncp/payment/L8V4LCHRKXTQ2'; // $15 Classic (Single Destination 20 Scenes)
+const PAYPAL_GRAND_URL = process.env.NEXT_PUBLIC_PAYPAL_WEDDING_GRAND_URL || 'https://www.paypal.com/ncp/payment/8XU7HYL9KZQJN'; // $29 Grand VIP (All 12 Destinations 240 Scenes)
 
 // ==========================================
 // 240 HAUTE COUTURE MASTERPIECE SCENES MANIFEST
