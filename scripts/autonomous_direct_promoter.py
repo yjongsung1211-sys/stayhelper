@@ -54,93 +54,90 @@ REDDIT_USER_AGENT = os.getenv("REDDIT_USER_AGENT", "HanaAutonomousPromoter/1.0 (
 REDDIT_USERNAME = os.getenv("REDDIT_USERNAME", "jayyoun84")
 REDDIT_PASSWORD = os.getenv("REDDIT_PASSWORD", "")
 
-# 4대 서비스 홍보 캠페인 마스터 규격 (스텔스 봇 필터 회피형)
+# 4대 서비스 홍보 캠페인 마스터 규격 (낚시 문구 0%, 100% 진정성 있는 인디 메이커 쇼케이스)
 CAMPAIGNS: Dict[str, Dict[str, Any]] = {
     "wedding": {
         "service_name": "WeddingHelper (웨딩헬퍼)",
-        "subreddits": ["SideProject", "Weddingsunder10k", "destinationweddings"],
+        "subreddits": ["SideProject"],
         "target_url": "https://weddinghelper.love",
-        "title": "I built an atelier web tool with Gemini 2.5 to stop AI from turning destination wedding photos into generic Western strangers (Preserves 100% Asian monolid/eye contours)",
+        "title": "I built a web tool to preview pre-wedding photos in Lake Como and Bali while preserving authentic facial features",
         "flair": "Show & Tell",
-        "body": """Hey everyone! 👋
+        "body": """Hey r/SideProject! 👋
 
-I started building this after seeing so many couples get frustrated by destination wedding costs. A pre-wedding photoshoot in Lake Como or Amalfi easily tops $5,000–$8,000 with flights and photographer fees, but existing "AI face swap" apps turn authentic facial bone structures into plastic generic Caucasian stock models that look nothing like the real couple.
+I started working on this after seeing friends spend $5,000+ flying out to Europe or Bali just for pre-wedding photoshoots. Most existing photo apps completely warp facial bone structures into generic stock models that look nothing like the actual couple.
 
-Over the past few months, I built **WeddingHelper** (https://weddinghelper.love) using Next.js 14 and Gemini 2.5 Flash Image.
+Over the past few months, I built **WeddingHelper** (https://weddinghelper.love) with Next.js 14.
 
-📸 What the pipeline does:
-1. Multi-Photo Biometric Geometry Lock: Preserves exact monolid/hooded eye contours, nasal curves, natural jawlines, and authentic smile geometry (Zero Westernization).
-2. Aristocratic Regent Hair Makeover: Completely sweeps up the groom's casual straight bangs into a red-carpet pompadour with a compact youthful hairline.
-3. 12 Global Luxury Destinations: 240 distinct scenes across Bali, Amalfi, Lake Como, Paris, Kyoto, Swiss Alps, and Korean Royal Hanok.
-4. Two-Tier Scope:
-   • Classic Pass ($15): 20 high-res photos for 1 chosen destination.
-   • Grand VIP ($29): Complete 240-scene album across all 12 destinations + 1-Click 4K ZIP + digital mobile invitation studio.
+What it does:
+• Keeps real facial identity: preserves natural monolid/hooded eye shapes, smile lines, and jaw contours without plastic filter distortion.
+• 12 destination settings: Bali rainforests, Amalfi cliffs, Lake Como villas, Paris châteaux, Kyoto shrines, and Swiss Alps.
+• High-fashion groom styling: sweeps up straight bangs into a clean red-carpet hairstyle.
 
-I'd love your honest feedback on the mobile UX flow and facial rendering naturalness!
+It runs entirely in the browser with live previews.
 
-🔗 Live web atelier: https://weddinghelper.love (runs directly in your browser)""",
-    },
-    "color": {
-        "service_name": "PersonalColorHelper (퍼스널컬러 헬퍼)",
-        "subreddits": ["SideProject", "kbeauty", "AsianBeauty"],
-        "target_url": "https://personalcolorhelper.com/?lang=en",
-        "title": "I coded an interactive 12-season virtual personal color draping tool with side-by-side Warm vs Cool split view to recreate the Seoul salon experience",
-        "flair": "Show & Tell",
-        "body": """Hey everyone! 👋
+🔗 Live site: https://weddinghelper.love
 
-Like many of you, I've always loved Korean personal color analysis, but seeing Cheongdam-dong studios charge $200+ with 3-month waitlists felt crazy for anyone living outside Korea.
-
-Physical fabric draping works because seeing real undertones directly against your jawline reveals whether your skin brightens up or turns dull. Most mobile filter apps just slap a generic badge on your photo without letting you *see* the fabric interaction yourself.
-
-So I coded an interactive virtual draping tool in Next.js:
-
-✨ Key Features:
-1. Real-time seasonal fabric drapes (Spring, Summer, Autumn, Winter) placed under your selfie or webcam.
-2. Side-by-Side Split View: Left side gets warm tones, right side gets cool tones simultaneously to spot yellowing vs dullness in 1 second.
-3. 12-Tone Fine Sub-Matrix: Light, Bright, Mute, and Deep sub-tones instead of basic 4 seasons.
-4. Instant 4-Model Presets: Test all features on 4 pre-loaded seasonal models without uploading your own photo first.
-
-Supports English and Japanese as well.
-
-I would genuinely love your honest feedback on the palette accuracy!
-
-🔗 Test it free: https://personalcolorhelper.com/?lang=en (runs in browser, no app download needed)""",
+I would genuinely appreciate your honest feedback on the mobile UI and how natural the photos look!""",
     },
     "styling": {
         "service_name": "StylingHelper (스타일링헬퍼)",
-        "subreddits": ["SideProject", "frugalfashion", "femalefashionadvice"],
+        "subreddits": ["SideProject"],
         "target_url": "https://stylinghelper.com",
-        "title": "I built an automated luxury price-drop and in-stock tracker for timeless designer staple pieces (Celine, Max Mara) across authorized US department stores",
+        "title": "I built a price-drop and stock tracker for classic designer bags across authorized US department stores",
         "flair": "Show & Tell",
         "body": """Hey everyone! 👋
 
-I've always been frustrated by how difficult it is to track legitimate flash markdowns on classic investment pieces across authorized department stores (Nordstrom, Shopbop, Saks) without getting lured into gray-market counterfeit risks.
+I've always found it frustrating to track legitimate markdowns on classic investment pieces (Celine, Max Mara, etc.) across authorized department stores like Nordstrom and Shopbop without getting lured into sketchy gray-market sites.
 
-So I built **StylingHelper** (https://stylinghelper.com) to automatically track:
-1. Verified in-stock checkout status (`In Stock` & `Add to Bag` verified)
-2. Live flash markdown radar on classic capsule wardrobe items (Celine Triomphe, Max Mara Manuela, etc.)
-3. 1:1 direct routing to verified authorized merchants
+So I built **StylingHelper** (https://stylinghelper.com) to track:
+1. Real-time in-stock status (verified "Add to Bag" availability)
+2. Flash markdown alerts on timeless wardrobe staples
+3. 1:1 direct links to authorized retailers only
 
-Would love to get feedback on the UI and which luxury brands/stores I should add next!
+🔗 Live tracker: https://stylinghelper.com
 
-🔗 Live tracker: https://stylinghelper.com""",
+I'd love any feedback on the UI and suggestions for which brands or department stores to add next!""",
+    },
+    "color": {
+        "service_name": "PersonalColorHelper (퍼스널컬러 헬퍼)",
+        "subreddits": ["SideProject"],
+        "target_url": "https://personalcolorhelper.com/?lang=en",
+        "title": "I built an interactive 12-season virtual color draping tool with a side-by-side Warm vs Cool split view",
+        "flair": "Show & Tell",
+        "body": """Hey r/SideProject! 👋
+
+Personal color analysis has become huge in Seoul, but salon consultations often cost $200+ with multi-month waitlists.
+
+Physical fabric draping works because seeing warm vs cool colors directly against your jawline reveals whether your skin tone looks clear or washed out. Most apps just slap a static badge on a photo, which doesn't really explain why a color works.
+
+So I built an interactive draping tool with Next.js:
+• Real-time seasonal fabric drapes (Spring, Summer, Autumn, Winter) placed under your photo or webcam.
+• Side-by-side split screen: warm tones on the left, cool tones on the right simultaneously so you can spot the contrast instantly.
+• 12 fine-tuned sub-palettes (Light, Bright, Mute, Deep).
+• Pre-loaded sample models so you can test it without uploading your own photo first.
+
+🔗 Free web tool: https://personalcolorhelper.com/?lang=en
+
+Would love your thoughts on the split-screen comparison flow!""",
     },
     "stay": {
         "service_name": "StayHelper (스테이헬퍼)",
-        "subreddits": ["SideProject", "luxurytravel", "hotels"],
+        "subreddits": ["SideProject"],
         "target_url": "https://www.thestayhelper.com",
-        "title": "We built a 4K luxury hotel portal comparing guaranteed upgrades and $200 hotel credits across Aman, Four Seasons, and Bulgari properties",
+        "title": "I built a 4K luxury hotel directory comparing complimentary room upgrades and property credits",
         "flair": "Show & Tell",
-        "body": """Having stayed across ultra-luxury properties in Asia and Europe, booking directly through public retail rack rates often leaves hundreds of dollars in amenities on the table.
+        "body": """Hey everyone! 👋
 
-We built **StayHelper** (https://www.thestayhelper.com) featuring:
-1. 6-Act 4K cinematic walkthroughs of suites, wellness spas, and dining
-2. Guaranteed late checkout and $100–$200 food & beverage / spa credits
-3. Direct partner VIP booking routing for properties like Aman Tokyo, Villa d'Este Lake Como, and Bulgari Rome.
+When booking luxury properties (Aman, Four Seasons, Bulgari), direct public retail rates often miss out on partner amenities like guaranteed room upgrades, early check-in, and $100–$200 spa/dining credits.
 
-Would love any thoughts from fellow luxury travelers on property curation!
+I built **StayHelper** (https://www.thestayhelper.com) to curate:
+• 4K cinematic walkthroughs of suites, private pools, and amenities
+• Clear breakdowns of verified VIP perks and credits for each property
+• Direct partner booking routing for verified properties in Lake Como, Amalfi, and Tokyo.
 
-🔗 Walkthrough directory: https://www.thestayhelper.com""",
+🔗 Directory: https://www.thestayhelper.com
+
+Would love any thoughts from fellow travel enthusiasts on the curation and layout!""",
     },
 }
 
