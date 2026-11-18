@@ -73,13 +73,22 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Check orderId store if provided
+    // Check orderId store if provided (must belong to a verified paid member)
     if (body.orderId) {
       const order = getWeddingOrder(body.orderId);
-      if (order) {
-        isVerifiedVip = true;
-        if (order.plan === 'classic') memberPlan = 'classic';
-        if (order.selectedTheme) memberAllowedTheme = order.selectedTheme;
+      if (order && order.email) {
+        const orderEmail = order.email.trim().toLowerCase();
+        try {
+          const membersData = fs.existsSync(membersFile) ? JSON.parse(fs.readFileSync(membersFile, 'utf-8') || '{}') : {};
+          const member = membersData[orderEmail];
+          if (member && (member.isVip || member.plan === 'grand' || member.plan === 'classic')) {
+            isVerifiedVip = true;
+            if (member.plan === 'classic' || order.plan === 'classic') memberPlan = 'classic';
+            if (member.selectedTheme || order.selectedTheme) memberAllowedTheme = member.selectedTheme || order.selectedTheme || '';
+          }
+        } catch (err) {
+          console.error('[WeddingHelper Order VIP Check Error]', err);
+        }
       }
     }
 
@@ -262,12 +271,13 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    const isAiSuccess = Boolean(generatedImageUrl);
     const resolvedSceneUrl = generatedImageUrl || targetSceneImage || preset.heroImage;
     const finalModel = modelUsed || 'weddinghelper-studio-v2';
 
     return NextResponse.json({
-      success: true,
-      isAiGenerated: true,
+      success: isAiSuccess,
+      isAiGenerated: isAiSuccess,
       modelUsed: finalModel,
       visualizedImageUrl: resolvedSceneUrl,
       theme: {

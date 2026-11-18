@@ -513,6 +513,14 @@ export default function WeddingHelperPage() {
       return;
     }
 
+    // Require PayPal payment activation before creating album delivery request
+    if (!user?.isVip && user?.plan !== 'grand' && user?.plan !== 'classic') {
+      setCheckoutEmail(deliveryEmail);
+      setIsCheckoutOpen(true);
+      showToast('🔒 Please activate your VIP Pass ($15 Classic / $29 Grand VIP) via PayPal first to receive your bespoke album by email.');
+      return;
+    }
+
     const imagesToUse = getClientImages();
     if (imagesToUse.length === 0) {
       showToast('⚠️ Please upload the bride & groom photos first.');
@@ -527,12 +535,18 @@ export default function WeddingHelperPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: deliveryEmail.trim().toLowerCase(),
-          plan: 'grand',
-          selectedTheme: 'all_12_themes',
+          plan: user?.plan || 'grand',
+          selectedTheme: user?.selectedTheme || 'theme_01_bali',
           proportions: { groomHeight, groomWeight, brideHeight, brideWeight },
           clientImages: imagesToUse,
         }),
       });
+
+      if (res.status === 402) {
+        setIsCheckoutOpen(true);
+        showToast('🔒 VIP Pass payment required. Please complete payment via PayPal.');
+        return;
+      }
 
       const data = await res.json();
       if (data?.success && data?.orderId) {
@@ -540,9 +554,9 @@ export default function WeddingHelperPage() {
         try {
           localStorage.setItem('weddinghelper_delivery_order', data.orderId);
         } catch (e) {}
-        showToast('🎉 Request submitted! Your full 240-portrait album package will be delivered to your email.', 6000);
+        showToast('🎉 Request submitted! Your bespoke wedding album will be delivered to your email.', 6000);
       } else {
-        showToast('⚠️ A temporary error occurred while submitting. Please retry.');
+        showToast(`⚠️ ${data?.error || 'A temporary error occurred while submitting. Please retry.'}`);
       }
     } catch (err) {
       console.warn('Delivery submit error:', err);

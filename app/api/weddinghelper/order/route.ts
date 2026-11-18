@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import fs from 'fs';
+import path from 'path';
 import { createWeddingOrder, getWeddingOrder, findOrderByEmail } from '@/lib/wedding-order-store';
 import { notifyNewOrder, notifyOrderCompleted } from '@/lib/wedding-delivery';
 
@@ -43,10 +45,41 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: 'Valid email required' }, { status: 400 });
     }
 
+    const normalizedEmail = email.trim().toLowerCase();
+    const membersFile = path.join(process.cwd(), 'data', 'weddinghelper_members.json');
+    let isMemberVip = false;
+    let verifiedPlan: 'classic' | 'grand' = plan === 'classic' ? 'classic' : 'grand';
+    let verifiedTheme = selectedTheme;
+
+    if (fs.existsSync(membersFile)) {
+      try {
+        const membersData = JSON.parse(fs.readFileSync(membersFile, 'utf-8') || '{}');
+        const member = membersData[normalizedEmail];
+        if (member && (member.isVip || member.plan === 'grand' || member.plan === 'classic')) {
+          isMemberVip = true;
+          if (member.plan === 'classic') verifiedPlan = 'classic';
+          if (member.selectedTheme) verifiedTheme = member.selectedTheme;
+        }
+      } catch (err) {
+        console.error('[WeddingHelper Order VIP Check Error]', err);
+      }
+    }
+
+    if (!isMemberVip) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: '🔒 Payment required. Please activate VIP Pass with PayPal before creating an album order.',
+          requiresPayment: true,
+        },
+        { status: 402 }
+      );
+    }
+
     const order = createWeddingOrder({
-      email,
-      plan,
-      selectedTheme,
+      email: normalizedEmail,
+      plan: verifiedPlan,
+      selectedTheme: verifiedTheme,
       proportions,
       clientImages,
     });
@@ -59,12 +92,14 @@ export async function POST(request: NextRequest) {
       themeTitle: order.selectedTheme,
     }).catch((e) => console.warn('Telegram notify error:', e));
 
-    // 2) Immediately deliver full 240 album access & 4K ZIP link to customer email
+    // 2) Immediately deliver album access & 4K ZIP link to customer email
     if (sendCompletionEmail) {
       notifyOrderCompleted({
         orderId: order.orderId,
         email: order.email,
-        totalScenes: 240,
+        totalScenes: verifiedPlan === 'classic' ? 20 : 240,
+        plan: verifiedPlan,
+        selectedTheme: verifiedTheme,
       }).catch((e) => console.warn('Order completed notify error:', e));
     }
 
