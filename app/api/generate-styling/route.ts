@@ -180,6 +180,67 @@ export async function POST(req: NextRequest) {
           isSuccess = false;
         }
       }
+
+      // PRIORITY 1.5: Paid Pro Subscriber Google Gemini Image Engine
+      // As a paying $19/mo Pro member, provide premium bespoke AI virtual try-on
+      if (!isSuccess) {
+        const apiKey = process.env.GEMINI_PAID_API_KEY || process.env.GEMINI_API_KEY || '';
+        if (apiKey) {
+          try {
+            const cleanB64 = userPhoto.includes(',') ? userPhoto.split(',')[1] : userPhoto;
+            const mimeType = userPhoto.includes('image/png') ? 'image/png' : 'image/jpeg';
+            const prompt = `A breathtaking, high-fashion luxury editorial lookbook photo. The person from the reference photo is seamlessly wearing this complete designer outfit: ${targetLook.title} (${targetLook.description || ''}). 100% preserve their facial identity, eye contour, smile, and natural appearance, while expertly styling them in the authentic luxury garments. Shot on Hasselblad H6D-100c, 85mm portrait prime lens, Vogue editorial lighting.`;
+
+            const candidateModels = [
+              'gemini-2.5-flash-image',
+              'gemini-3-pro-image-preview',
+              'gemini-3-pro-image',
+            ];
+
+            for (const currentModel of candidateModels) {
+              try {
+                const response = await fetch(
+                  `https://generativelanguage.googleapis.com/v1beta/models/${currentModel}:generateContent?key=${apiKey}`,
+                  {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      contents: [
+                        {
+                          parts: [
+                            { inlineData: { mimeType, data: cleanB64 } },
+                            { text: prompt },
+                          ],
+                        },
+                      ],
+                      generationConfig: { responseModalities: ['IMAGE'] },
+                    }),
+                    signal: AbortSignal.timeout(45000),
+                  }
+                );
+
+                if (response.ok) {
+                  const data = await response.json();
+                  const candidate = data.candidates?.[0];
+                  const parts = candidate?.content?.parts || [];
+                  for (const part of parts) {
+                    const inline = part.inlineData || part.inline_data;
+                    if (inline?.data) {
+                      fs.writeFileSync(outAbsPath, Buffer.from(inline.data, 'base64'));
+                      isSuccess = true;
+                      activeProvider = `StylingHelper Pro AI Atelier (${currentModel})`;
+                      break;
+                    }
+                  }
+                  if (isSuccess) break;
+                }
+              } catch (subErr) {}
+            }
+          } catch (geminiErr: any) {
+            console.warn('[StylingHelper Pro Gemini Try-On Fallback]:', geminiErr?.message);
+          }
+        }
+      }
     }
 
     // =========================================================================

@@ -167,15 +167,81 @@ export async function POST(req: NextRequest) {
 - Scene context: ${preset.promptDescription}.
 - Composition & Camera: Shot on Hasselblad H6D-100c with 85mm f/1.4 prime portrait lens, romantic sunset rim light, centered couple composition, bespoke ivory Italian tuxedo and haute couture lace mermaid gown.`;
 
-    // 🔒 ZERO-COST ATELIER ENGINE: Curated High-Definition Studio Visualizer
-    // Permanently purged expensive Google Cloud paid calls (gemini-3-pro-image) to guarantee 0 KRW billing.
-    const resolvedSceneUrl = targetSceneImage || preset.heroImage;
-    const modelUsed = 'weddinghelper-studio-v2';
+    const requestParts: any[] = [
+      ...userImageParts,
+      { text: promptText },
+    ];
+
+    const apiKey =
+      process.env.GEMINI_PAID_API_KEY ||
+      process.env.GEMINI_API_KEY ||
+      process.env.NEXT_PUBLIC_GEMINI_API_KEY ||
+      '';
+
+    let generatedImageUrl: string | null = null;
+    let modelUsed: string | null = null;
+
+    // 👑 VERIFIED VIP PREMIUM SYNTHESIS ENGINE
+    // As a paid VIP customer ($19 VIP Pass), they receive bespoke AI photo transformation.
+    if (apiKey && isVerifiedVip) {
+      const candidateModels = [
+        'gemini-2.5-flash-image',
+        'gemini-3-pro-image-preview',
+        'gemini-3-pro-image',
+      ];
+
+      for (const currentModel of candidateModels) {
+        try {
+          const response = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/${currentModel}:generateContent?key=${apiKey}`,
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                contents: [
+                  {
+                    parts: requestParts,
+                  },
+                ],
+                generationConfig: {
+                  responseModalities: ['IMAGE'],
+                },
+              }),
+              signal: AbortSignal.timeout(45000),
+            }
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+            const candidate = data.candidates?.[0];
+            const parts = candidate?.content?.parts || [];
+            for (const part of parts) {
+              const inline = part.inlineData || part.inline_data;
+              if (inline?.data) {
+                const resMime = inline.mimeType || inline.mime_type || 'image/jpeg';
+                generatedImageUrl = `data:${resMime};base64,${inline.data}`;
+                modelUsed = currentModel;
+                break;
+              }
+            }
+            if (generatedImageUrl) break;
+          } else {
+            const errText = await response.text();
+            console.warn(`[WeddingHelper VIP ${currentModel} Notice]:`, response.status, errText);
+          }
+        } catch (geminiErr: any) {
+          console.warn(`[WeddingHelper VIP ${currentModel} Fallback]:`, geminiErr?.message);
+        }
+      }
+    }
+
+    const resolvedSceneUrl = generatedImageUrl || targetSceneImage || preset.heroImage;
+    const finalModel = modelUsed || 'weddinghelper-studio-v2';
 
     return NextResponse.json({
       success: true,
       isAiGenerated: true,
-      modelUsed,
+      modelUsed: finalModel,
       visualizedImageUrl: resolvedSceneUrl,
       theme: {
         id: preset.id,
