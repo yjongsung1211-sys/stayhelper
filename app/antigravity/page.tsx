@@ -175,6 +175,114 @@ const SUGGESTED_PROMPTS = [
   '최근 외국어 회화 수업 교정 표현 3회독 복습 카드 보여줘',
 ];
 
+interface CellHanaPromoItem {
+  id: string;
+  service: string;
+  name: string;
+  sub: string;
+  badge: string;
+  color: string;
+  postTitle: string;
+  postBody: string;
+}
+
+const CELLHANA_PROMOTIONS: CellHanaPromoItem[] = [
+  {
+    id: 'wedding',
+    service: 'WeddingHelper',
+    name: '💍 웨딩헬퍼 1-Touch 홍보',
+    sub: 'SideProject',
+    badge: 'WEDDING',
+    color: 'from-amber-600 to-amber-700',
+    postTitle: 'I built an atelier web tool with Gemini 2.5 to stop AI from turning destination wedding photos into generic Western strangers (Preserves 100% Asian monolid/eye contours)',
+    postBody: `Hey everyone! 👋
+
+I started building this after seeing so many couples get frustrated by destination wedding costs. A pre-wedding photoshoot in Lake Como or Amalfi easily tops $5,000–$8,000 with flights and photographer fees, but existing "AI face swap" apps turn authentic facial bone structures into plastic generic Caucasian stock models that look nothing like the real couple.
+
+Over the past few months, I built **WeddingHelper** (https://weddinghelper.love) using Next.js 14 and Gemini 2.5 Flash Image.
+
+📸 What the pipeline does:
+1. Multi-Photo Biometric Geometry Lock: Preserves exact monolid/hooded eye contours, nasal curves, natural jawlines, and authentic smile geometry (Zero Westernization).
+2. Aristocratic Regent Hair Makeover: Completely sweeps up the groom's casual straight bangs into a red-carpet pompadour with a compact youthful hairline.
+3. 12 Global Luxury Destinations: 240 distinct scenes across Bali, Amalfi, Lake Como, Paris, Kyoto, Swiss Alps, and Korean Royal Hanok.
+4. Two-Tier Scope:
+   • Classic Pass ($15): 20 high-res photos for 1 chosen destination.
+   • Grand VIP ($29): Complete 240-scene album across all 12 destinations + 1-Click 4K ZIP + digital mobile invitation studio.
+
+I'd love your honest feedback on the mobile UX flow and facial rendering naturalness!
+
+🔗 Live web atelier: https://weddinghelper.love (runs directly in your browser)`,
+  },
+  {
+    id: 'color',
+    service: 'PersonalColorHelper',
+    name: '🎨 퍼스널컬러 1-Touch 홍보',
+    sub: 'SideProject',
+    badge: 'COLOR',
+    color: 'from-purple-600 to-indigo-700',
+    postTitle: 'I coded an interactive 12-season virtual personal color draping tool with side-by-side Warm vs Cool split view to recreate the Seoul salon experience',
+    postBody: `Hey everyone! 👋
+
+Like many of you, I've always loved Korean personal color analysis, but seeing Cheongdam-dong studios charge $200+ with 3-month waitlists felt crazy for anyone living outside Korea.
+
+Physical fabric draping works because seeing real undertones directly against your jawline reveals whether your skin brightens up or turns dull. Most mobile filter apps just slap a generic badge on your photo without letting you *see* the fabric interaction yourself.
+
+So I coded an interactive virtual draping tool in Next.js:
+
+✨ Key Features:
+1. Real-time seasonal fabric drapes (Spring, Summer, Autumn, Winter) placed under your selfie or webcam.
+2. Side-by-Side Split View: Left side gets warm tones, right side gets cool tones simultaneously to spot yellowing vs dullness in 1 second.
+3. 12-Tone Fine Sub-Matrix: Light, Bright, Mute, and Deep sub-tones instead of basic 4 seasons.
+4. Instant 4-Model Presets: Test all features on 4 pre-loaded seasonal models without uploading your own photo first.
+
+Supports English and Japanese as well.
+
+I would genuinely love your honest feedback on the palette accuracy!
+
+🔗 Test it free: https://personalcolorhelper.com/?lang=en (runs in browser, no app download needed)`,
+  },
+  {
+    id: 'styling',
+    service: 'StylingHelper',
+    name: '✨ 스타일링헬퍼 1-Touch 홍보',
+    sub: 'SideProject',
+    badge: 'LUXURY',
+    color: 'from-rose-600 to-pink-700',
+    postTitle: 'I built an automated luxury price-drop and in-stock tracker for timeless designer staple pieces (Celine, Max Mara) across authorized US department stores',
+    postBody: `Hey everyone! 👋
+
+I've always been frustrated by how difficult it is to track legitimate flash markdowns on classic investment pieces across authorized department stores (Nordstrom, Shopbop, Saks) without getting lured into gray-market counterfeit risks.
+
+So I built **StylingHelper** (https://stylinghelper.com) to automatically track:
+1. Verified in-stock checkout status (\`In Stock\` & \`Add to Bag\` verified)
+2. Live flash markdown radar on classic capsule wardrobe items (Celine Triomphe, Max Mara Manuela, etc.)
+3. 1:1 direct routing to verified authorized merchants
+
+Would love to get feedback on the UI and which luxury brands/stores I should add next!
+
+🔗 Live tracker: https://stylinghelper.com`,
+  },
+  {
+    id: 'stay',
+    service: 'StayHelper',
+    name: '🏨 스테이헬퍼 1-Touch 홍보',
+    sub: 'SideProject',
+    badge: 'HOTEL',
+    color: 'from-emerald-600 to-teal-700',
+    postTitle: 'We built a 4K luxury hotel portal comparing guaranteed upgrades and $200 hotel credits across Aman, Four Seasons, and Bulgari properties',
+    postBody: `Having stayed across ultra-luxury properties in Asia and Europe, booking directly through public retail rack rates often leaves hundreds of dollars in amenities on the table.
+
+We built **StayHelper** (https://www.thestayhelper.com) featuring:
+1. 6-Act 4K cinematic walkthroughs of suites, wellness spas, and dining
+2. Guaranteed late checkout and $100–$200 food & beverage / spa credits
+3. Direct partner VIP booking routing for properties like Aman Tokyo, Villa d'Este Lake Como, and Bulgari Rome.
+
+Would love any thoughts from fellow luxury travelers on property curation!
+
+🔗 Walkthrough directory: https://www.thestayhelper.com`,
+  },
+];
+
 interface UploadingFileItem {
   id: string;
   name: string;
@@ -220,7 +328,21 @@ export default function AntigravityMobilePage() {
   const [selectedActionId, setSelectedActionId] = useState<string | null>(null);
   const [quickMemoText, setQuickMemoText] = useState('');
   const [memoSavedToast, setMemoSavedToast] = useState('');
+  const [promoToast, setPromoToast] = useState('');
   const [isSyncing, setIsSyncing] = useState(false);
+
+  // 🚀 셀하나 1-Touch 무인 홍보 발사 핸들러 (제목/본문 자동 채움 레딧 다이렉트 링크)
+  const handleLaunchPromotion = async (item: CellHanaPromoItem) => {
+    try {
+      if (typeof navigator !== 'undefined' && navigator.clipboard) {
+        await navigator.clipboard.writeText(item.postTitle + '\n\n' + item.postBody);
+      }
+    } catch {}
+    const submitUrl = `https://www.reddit.com/r/${item.sub}/submit?title=${encodeURIComponent(item.postTitle)}&text=${encodeURIComponent(item.postBody)}`;
+    setPromoToast(`🎉 [${item.service}] 레딧 작성창이 자동 완성되었습니다. [Post]만 누르면 즉시 배포됩니다!`);
+    window.open(submitUrl, '_blank');
+    setTimeout(() => setPromoToast(''), 6000);
+  };
 
   // 1. 스마트폰 '공유하기(Share Target)' 실시간 수신 상태
   const [sharedArrival, setSharedArrival] = useState<SharedArrival | null>(null);
@@ -915,6 +1037,19 @@ export default function AntigravityMobilePage() {
         </div>
       </header>
 
+      {/* 🚀 Promo Toast Notification */}
+      {promoToast && (
+        <div className="fixed top-16 left-4 right-4 z-50 p-3.5 rounded-2xl bg-slate-900 text-white shadow-2xl border border-slate-700 flex items-center justify-between animate-in fade-in slide-in-from-top-3">
+          <div className="flex items-center gap-2 text-xs font-bold leading-relaxed">
+            <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+            <span>{promoToast}</span>
+          </div>
+          <button onClick={() => setPromoToast('')} className="p-1 rounded-full text-slate-400 hover:text-white">
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
+
       {/* Smart Share Target Floating Arrival Banner */}
       {sharedArrival && (
         <div className="shrink-0 mx-3.5 mt-2.5 p-4 rounded-2xl bg-white border border-slate-300 shadow-lg flex flex-col gap-2 animate-fadeIn z-30">
@@ -998,6 +1133,15 @@ export default function AntigravityMobilePage() {
               >
                 <ImageIcon className="w-3.5 h-3.5 text-emerald-400" />
                 <span>📸 사진·파일 PC 전송</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('deck')}
+                className="shrink-0 px-3.5 py-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white border border-purple-500 text-xs font-bold flex items-center gap-1.5 hover:opacity-90 transition cursor-pointer shadow-xs"
+                title="레딧 1-Touch 무인 홍보 발사대로 이동"
+              >
+                <Send className="w-3.5 h-3.5 text-white" />
+                <span>🚀 1-Touch 레딧 홍보</span>
               </button>
               {SUGGESTED_PROMPTS.map((prompt, idx) => (
                 <button
@@ -1278,6 +1422,53 @@ export default function AntigravityMobilePage() {
         {/* TAB 3: 11 EXECUTIVE ONE-TOUCH DECK */}
         {activeTab === 'deck' && (
           <div className="space-y-3.5 pb-4">
+            {/* 🚀 셀하나 1-Touch 레딧 무인 홍보 발사대 */}
+            <div className="p-4 rounded-2xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white shadow-md border border-indigo-900/50 space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-extrabold px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-400/30">
+                  🔥 REDDIT 1-TOUCH LAUNCHPAD
+                </span>
+                <span className="text-[11px] text-emerald-400 font-bold">
+                  ● r/SideProject 공식 쇼케이스
+                </span>
+              </div>
+              <h2 className="text-base font-bold text-white flex items-center gap-2">
+                <Send className="w-5 h-5 text-indigo-400" />
+                셀하나 1-Touch 글로벌 무인 홍보 발사대
+              </h2>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                클라우드플레어 차단이나 봇 검증 없이, 대표님의 스마트폰 레딧 세션으로 <strong>제목·본문이 100% 자동 채워진 작성창</strong>이 열립니다. 아래 카드를 터치하고 레딧에서 <strong>[Post]</strong> 버튼만 누르면 0초 배포 완료!
+              </p>
+
+              <div className="grid grid-cols-2 gap-2 pt-1.5">
+                {CELLHANA_PROMOTIONS.map((promo) => (
+                  <button
+                    key={promo.id}
+                    onClick={() => handleLaunchPromotion(promo)}
+                    className="p-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-left transition flex flex-col justify-between cursor-pointer group active:scale-95 shadow-sm"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-white/20 text-white">
+                          {promo.badge}
+                        </span>
+                        <span className="text-[10px] text-indigo-300 font-medium">
+                          r/{promo.sub}
+                        </span>
+                      </div>
+                      <div className="text-xs font-bold text-white group-hover:text-indigo-200 line-clamp-1">
+                        {promo.name}
+                      </div>
+                    </div>
+                    <div className="mt-2.5 flex items-center justify-between text-[11px] text-indigo-300 font-bold">
+                      <span>1-Touch 발사</span>
+                      <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 transition" />
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs">
               <h2 className="text-base font-bold text-slate-950 flex items-center gap-2">
                 <Zap className="w-5 h-5 text-slate-900" />
