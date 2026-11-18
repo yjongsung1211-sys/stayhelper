@@ -774,9 +774,26 @@ def start_commander_loop():
                         elif text.startswith("/incubate") or text.startswith("기획:") or text.startswith("기획 ") or text.startswith("신사업:") or text.startswith("신사업 "):
                             raw_topic = re.sub(r'^(?:/incubate|기획:|기획|신사업:|신사업)\s*', '', text).strip()
                             handle_incubate(raw_topic)
+                        elif text.startswith("/promote") or text.startswith("/홍보") or text.startswith("홍보:") or text.startswith("홍보 ") or text == "홍보":
+                            theme_arg = re.sub(r'^(?:/promote|/홍보|홍보:|홍보)\s*', '', text).strip().lower()
+                            if any(k in theme_arg for k in ["웨딩", "결혼", "wedding"]):
+                                resolved_theme = "wedding"
+                            elif any(k in theme_arg for k in ["컬러", "퍼스널컬러", "color"]):
+                                resolved_theme = "color"
+                            elif any(k in theme_arg for k in ["스타일", "패션", "styling"]):
+                                resolved_theme = "styling"
+                            elif any(k in theme_arg for k in ["스테이", "호텔", "stay"]):
+                                resolved_theme = "stay"
+                            else:
+                                resolved_theme = "wedding"
+                            from scripts.autonomous_direct_promoter import execute_autonomous_promotion
+                            send_reply(f"🚀 <b>[무인 직접 홍보 가동]</b> <code>{resolved_theme.upper()}</code> 캠페인을 즉시 집행합니다...")
+                            execute_autonomous_promotion(resolved_theme)
                         elif text.startswith("/reddit") or text.startswith("레딧:") or text.startswith("레딧 ") or text == "레딧":
-                            theme = re.sub(r'^(?:/reddit|레딧:|레딧)\s*', '', text).strip() or "docu"
-                            handle_reddit(theme)
+                            theme = re.sub(r'^(?:/reddit|레딧:|레딧)\s*', '', text).strip() or "wedding"
+                            from scripts.autonomous_direct_promoter import execute_autonomous_promotion
+                            send_reply(f"🌐 <b>[레딧 무인 직접 홍보 가동]</b> <code>{theme.upper()}</code> 캠페인을 집행합니다...")
+                            execute_autonomous_promotion(theme)
                         elif text.startswith("/patrol") or text in ["순찰", "순찰해", "점검"]:
                             handle_patrol()
                         elif text.startswith("/heal") or text in ["치유", "치유해", "자가치유"]:
