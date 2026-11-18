@@ -42,6 +42,10 @@ const DESTINATION_240_CONFIGS = [
   { id: 'theme_12_swiss_alps', title: 'Swiss Alps Matterhorn Glass Chalet', dest: 'Zermatt, Switzerland', venue: 'The Omnia & Riffelalp Resort 2222m', heroImg: '/images/weddings_240/theme_12_swiss_alps/scene_01.jpg', position: 'center center' },
 ];
 
+// Official PayPal NCP Payment URLs
+const PAYPAL_CLASSIC_URL = process.env.NEXT_PUBLIC_PAYPAL_WEDDING_CLASSIC_URL || 'https://www.paypal.com/ncp/payment/LVRRE8SJKD3VA'; // $15 Classic (Single Destination 20 Scenes)
+const PAYPAL_GRAND_URL = process.env.NEXT_PUBLIC_PAYPAL_WEDDING_GRAND_URL || 'https://www.paypal.com/ncp/payment/LVRRE8SJKD3VA'; // $29 Grand VIP (All 12 Destinations 240 Scenes)
+
 export default function WeddingHelperPage() {
   const router = useRouter();
 
@@ -1447,59 +1451,118 @@ export default function WeddingHelperPage() {
                 onClick={() => setIsCheckoutOpen(true)}
                 className="w-full py-2.5 rounded-xl bg-[#D4AF37] text-[#1F181B] font-extrabold text-xs uppercase tracking-wider hover:brightness-105 transition cursor-pointer shadow-lg"
               >
-                Get Started with VIP Pass ($19)
+                Get Started with VIP Pass ($15 / $29)
               </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 6. Honest Transparent Pricing: The Grand 12 VIP Pass ($19) */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-8 pb-20">
-        <div className="bg-[#1F181B] text-white rounded-3xl p-8 sm:p-12 border border-[#D4AF37]/40 shadow-2xl relative overflow-hidden text-center">
+      {/* 6. Honest Transparent Pricing: Classic ($15) & Grand VIP ($29) */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-8 pb-20">
+        <div className="text-center max-w-2xl mx-auto mb-10">
           <span className="px-3.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-[0.2em] bg-[#D4AF37] text-[#1F181B] shadow-md">
             LIFETIME VIP ACCESS • LAUNCH SPECIAL
           </span>
-
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-white mt-4">
-            The Grand 12 All-Access Pass
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#1F181B] mt-4">
+            Transparent Atelier Pricing
           </h2>
-          <p className="text-white/60 text-xs sm:text-sm mt-1 max-w-lg mx-auto">
-            Zero subscriptions. Zero recurring fees. Instant lifetime access to all 240 haute couture masterpiece portraits across all 12 destinations.
+          <p className="text-[#1F181B]/70 text-xs sm:text-sm mt-1">
+            Zero subscriptions. Zero hidden fees. Choose single-location classic focus or all-inclusive world tour.
           </p>
+        </div>
 
-          <div className="my-6">
-            <span className="text-white/40 line-through text-lg font-mono mr-3">$120 USD</span>
-            <span className="text-4xl sm:text-5xl font-mono font-extrabold text-[#D4AF37]">$19</span>
-            <span className="text-white/70 text-xs uppercase tracking-wider ml-2">USD (One-Time)</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          {/* Classic Plan ($15) */}
+          <div className="bg-[#1F181B] text-white rounded-3xl p-6 sm:p-8 border border-white/10 shadow-xl flex flex-col justify-between text-left">
+            <div>
+              <div className="text-[10px] font-extrabold text-[#D4AF37] uppercase tracking-widest">SINGLE DESTINATION</div>
+              <h3 className="text-2xl font-serif font-bold text-white mt-1">Classic Pass</h3>
+              <p className="text-white/60 text-xs mt-1">Perfect for couples who have 1 dream wedding sanctuary in mind.</p>
+              <div className="my-5">
+                <span className="text-white/40 line-through text-base font-mono mr-2">$45 USD</span>
+                <span className="text-4xl font-mono font-extrabold text-[#D4AF37]">$15</span>
+                <span className="text-white/70 text-xs uppercase tracking-wider ml-1.5">USD (One-Time)</span>
+              </div>
+              <ul className="space-y-2.5 text-xs text-white/80 border-t border-white/10 pt-4">
+                <li className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                  <span><strong>20 Bespoke Masterpiece Photos</strong> of 1 selected destination</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                  <span><strong>1:1 Facial Likeness Locked</strong> (Zero Westernization)</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                  <span><strong>Full 4K Ultra-HD Resolution</strong> JPG Downloads</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                  <span><strong>Private Gallery Access</strong> for selected location</span>
+                </li>
+              </ul>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setCheckoutPlan('classic');
+                setIsCheckoutOpen(true);
+              }}
+              className="mt-6 w-full py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-extrabold text-xs uppercase tracking-wider transition border border-white/20 cursor-pointer"
+            >
+              Choose Classic ($15) ➔
+            </button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto text-left text-xs text-white/80 mb-8 font-sans">
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
-              <span><strong>240 Masterpiece Portraits</strong> (20 angles x 12 worlds)</span>
+          {/* Grand VIP Plan ($29) */}
+          <div className="bg-[#1F181B] text-white rounded-3xl p-6 sm:p-8 border-2 border-[#D4AF37] shadow-2xl flex flex-col justify-between text-left relative overflow-hidden">
+            <span className="absolute top-4 right-4 px-2.5 py-0.5 rounded-full bg-[#D4AF37] text-[#1F181B] text-[9px] font-black uppercase tracking-wider shadow-sm">
+              BEST VALUE • 85% SAVE
+            </span>
+            <div>
+              <div className="text-[10px] font-extrabold text-[#D4AF37] uppercase tracking-widest">ALL-ACCESS WORLD TOUR</div>
+              <h3 className="text-2xl font-serif font-bold text-white mt-1">Grand VIP Pass</h3>
+              <p className="text-white/60 text-xs mt-1">All 12 iconic global destinations with full digital invitation suite.</p>
+              <div className="my-5">
+                <span className="text-white/40 line-through text-base font-mono mr-2">$149 USD</span>
+                <span className="text-4xl font-mono font-extrabold text-[#D4AF37]">$29</span>
+                <span className="text-white/70 text-xs uppercase tracking-wider ml-1.5">USD (One-Time)</span>
+              </div>
+              <ul className="space-y-2.5 text-xs text-white/80 border-t border-white/10 pt-4">
+                <li className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                  <span><strong>All 240 Masterpiece Portraits</strong> (20 angles × 12 destinations)</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                  <span><strong>1-Click 4K ZIP Package</strong> organized by destination</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                  <span><strong>Interactive Mobile Invitation Link</strong> with RSVP & BGM</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                  <span><strong>Instagram Reels/Stories 9:16 Assets</strong> Included</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                  <span><strong>Priority Background Rendering Queue</strong> & Email Delivery</span>
+                </li>
+              </ul>
             </div>
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
-              <span><strong>1-Click 4K ZIP Download</strong> organized by destination</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
-              <span><strong>1:1 Facial Likeness Locked</strong> (Zero Westernization)</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
-              <span><strong>Real Haute Gown Links</strong> (In-Stock Nordstrom/Shopbop)</span>
-            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setCheckoutPlan('grand');
+                setIsCheckoutOpen(true);
+              }}
+              className="mt-6 w-full py-3.5 rounded-full bg-[#D4AF37] hover:bg-[#F3C669] text-[#1F181B] font-extrabold text-xs uppercase tracking-wider transition shadow-lg cursor-pointer"
+            >
+              Get Grand VIP ($29) ➔
+            </button>
           </div>
-
-          <button
-            type="button"
-            onClick={handleUnlock240Masterpieces}
-            className="w-full sm:w-auto px-10 py-4 rounded-full bg-[#D4AF37] text-[#1F181B] font-extrabold text-sm uppercase tracking-wider hover:bg-[#F3C669] transition shadow-2xl cursor-pointer"
-          >
-            Pay $19 & Unlock All 240 Masterpieces ➔
-          </button>
         </div>
       </section>
 
@@ -1594,7 +1657,7 @@ export default function WeddingHelperPage() {
                   Tap below to securely complete payment via PayPal or Card. You will receive an official receipt number.
                 </p>
                 <a
-                  href="https://www.paypal.com/ncp/payment/LVRRE8SJKD3VA"
+                  href={checkoutPlan === 'classic' ? PAYPAL_CLASSIC_URL : PAYPAL_GRAND_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-3.5 px-6 rounded-xl bg-[#0070BA] hover:bg-[#003087] text-white font-bold text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center gap-2 cursor-pointer"
@@ -1654,7 +1717,7 @@ export default function WeddingHelperPage() {
                   ) : (
                     <>
                       <Sparkles className="w-4 h-4 text-[#1F181B]" />
-                      <span>Verify & Unlock VIP Access ($19)</span>
+                      <span>Verify & Unlock {checkoutPlan === 'classic' ? 'Classic Pass ($15)' : 'Grand VIP Access ($29)'}</span>
                     </>
                   )}
                 </button>

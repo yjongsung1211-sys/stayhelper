@@ -27,6 +27,10 @@ import {
 } from 'lucide-react';
 import JSZip from 'jszip';
 
+// Official PayPal NCP Payment URLs
+const PAYPAL_CLASSIC_URL = process.env.NEXT_PUBLIC_PAYPAL_WEDDING_CLASSIC_URL || 'https://www.paypal.com/ncp/payment/LVRRE8SJKD3VA'; // $15 Classic (Single Destination 20 Scenes)
+const PAYPAL_GRAND_URL = process.env.NEXT_PUBLIC_PAYPAL_WEDDING_GRAND_URL || 'https://www.paypal.com/ncp/payment/LVRRE8SJKD3VA'; // $29 Grand VIP (All 12 Destinations 240 Scenes)
+
 // ==========================================
 // 240 HAUTE COUTURE MASTERPIECE SCENES MANIFEST
 // 12 Destinations x 20 Ultra-HD Editorial Camera Angles
@@ -135,6 +139,8 @@ function GalleryContent() {
   const [user, setUser] = useState<{ email: string; isVip: boolean; plan?: 'single' | 'classic' | 'grand'; selectedTheme?: string } | null>(null);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
+  const [checkoutPlan, setCheckoutPlan] = useState<'classic' | 'grand'>('grand');
+  const [checkoutSelectedTheme, setCheckoutSelectedTheme] = useState<string>('theme_01_bali');
   const [restoreEmail, setRestoreEmail] = useState('');
   const [checkoutEmail, setCheckoutEmail] = useState('');
   const [transactionId, setTransactionId] = useState('');
@@ -364,13 +370,15 @@ function GalleryContent() {
 
     setIsVerifyingPayment(true);
     try {
+      const selectedLocation = checkoutPlan === 'classic' ? (checkoutSelectedTheme || activeTab) : undefined;
       const res = await fetch('/api/weddinghelper/member', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email,
           transactionId: txId,
-          plan: 'grand',
+          plan: checkoutPlan,
+          selectedTheme: selectedLocation,
         }),
       });
 
@@ -379,12 +387,18 @@ function GalleryContent() {
         const vipRecord = {
           email,
           isVip: true,
-          plan: 'grand' as const,
+          plan: checkoutPlan,
+          selectedTheme: selectedLocation,
         };
         setUser(vipRecord);
         localStorage.setItem('weddinghelper_user', JSON.stringify(vipRecord));
         setIsCheckoutOpen(false);
-        showToast('🎉 $19 VIP All-Access Pass Activated! All 240 Masterpieces Unlocked.');
+
+        const isClassic = checkoutPlan === 'classic';
+        const successMsg = isClassic
+          ? '🎉 Classic Pass Activated! 20 Masterpiece scenes unlocked for your selected location.'
+          : '🎉 Grand VIP All-Access Pass Activated! All 240 Masterpiece scenes unlocked.';
+        showToast(successMsg, 5000);
 
         // Create order on server
         try {
@@ -393,8 +407,8 @@ function GalleryContent() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               email,
-              plan: 'grand',
-              selectedTheme: activeTab,
+              plan: checkoutPlan,
+              selectedTheme: selectedLocation || activeTab,
               proportions,
               clientImages: uploadedImages,
             }),
@@ -402,7 +416,7 @@ function GalleryContent() {
           const orderData = await orderRes.json();
           if (orderData?.success && orderData.orderId) {
             setOrderId(orderData.orderId);
-            window.history.replaceState(null, '', `?orderId=${orderData.orderId}&dest=${activeTab}`);
+            window.history.replaceState(null, '', `?orderId=${orderData.orderId}&dest=${selectedLocation || activeTab}`);
           }
         } catch (orderErr) {
           console.warn('Order create err on gallery:', orderErr);
@@ -801,7 +815,7 @@ function GalleryContent() {
                 className="px-4 py-2 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#1F181B] font-extrabold text-xs uppercase tracking-wider hover:opacity-95 shadow-md flex items-center gap-1.5 cursor-pointer active:scale-95"
               >
                 <Gem className="w-3.5 h-3.5" />
-                <span>Unlock Pass · $19</span>
+                <span>Unlock Pass · $15 / $29</span>
               </button>
             )}
 
@@ -867,16 +881,33 @@ function GalleryContent() {
                 This high-resolution portfolio is exclusively available to couples with an active VIP Pass. Unlock all 20 Ultra-HD camera angles across 12 global destinations, bespoke facial synthesis, 8K canvas print downloads, and complete Digital Invitation Studio.
               </p>
 
-              {/* Price Banner */}
-              <div className="mt-8 p-6 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
-                <div className="text-left">
-                  <span className="text-xs text-white/50 uppercase tracking-wider block">The Grand 12 VIP Pass</span>
-                  <span className="text-sm font-bold text-white">Lifetime Couple Access</span>
+              {/* Dual Tier Price Banner */}
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
+                <div
+                  onClick={() => { setCheckoutPlan('classic'); setIsCheckoutOpen(true); }}
+                  className={`p-4 rounded-2xl border transition cursor-pointer ${
+                    checkoutPlan === 'classic'
+                      ? 'bg-[#C5A059]/15 border-[#C5A059]'
+                      : 'bg-white/5 border-white/10 hover:border-white/30'
+                  }`}
+                >
+                  <span className="text-[10px] text-[#C5A059] font-bold uppercase tracking-wider block">Single Location</span>
+                  <div className="text-base font-bold text-white mt-0.5">Classic Pass ($15)</div>
+                  <div className="text-[11px] text-white/50 mt-1">20 bespoke 4K photos of 1 selected destination</div>
                 </div>
-                <div className="text-right">
-                  <span className="line-through text-xs text-white/40 font-mono mr-2">$79</span>
-                  <span className="text-3xl font-serif font-extrabold text-[#EAD8B1]">$19</span>
-                  <span className="text-[10px] text-white/60 block">USD / Single Pay</span>
+
+                <div
+                  onClick={() => { setCheckoutPlan('grand'); setIsCheckoutOpen(true); }}
+                  className={`p-4 rounded-2xl border transition cursor-pointer relative ${
+                    checkoutPlan === 'grand'
+                      ? 'bg-[#C5A059]/20 border-[#C5A059] ring-2 ring-[#C5A059]/40'
+                      : 'bg-white/5 border-white/10 hover:border-white/30'
+                  }`}
+                >
+                  <span className="absolute -top-2 right-2 px-1.5 py-0.5 rounded-full bg-[#D4AF37] text-[#1F181B] text-[8px] font-black uppercase">BEST VALUE</span>
+                  <span className="text-[10px] text-[#C5A059] font-bold uppercase tracking-wider block">All 12 Destinations</span>
+                  <div className="text-base font-bold text-white mt-0.5">Grand VIP ($29)</div>
+                  <div className="text-[11px] text-white/50 mt-1">All 240 photos + 4K ZIP + Digital Studio</div>
                 </div>
               </div>
 
@@ -884,15 +915,15 @@ function GalleryContent() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 my-6 text-left text-xs text-white/80">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#C5A059] shrink-0" />
-                  <span>240 Masterpiece Portraits</span>
+                  <span>240 Masterpiece Portraits (12 Worlds)</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#C5A059] shrink-0" />
-                  <span>All 12 Iconic Destinations</span>
+                  <span>100% Facial Bone Structure Locked</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#C5A059] shrink-0" />
-                  <span>8K Canvas Print-Ready JPGs</span>
+                  <span>4K Lossless Canvas Print-Ready JPGs</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#C5A059] shrink-0" />
@@ -908,7 +939,7 @@ function GalleryContent() {
                   className="w-full py-4 sm:py-5 px-6 rounded-2xl bg-gradient-to-r from-[#D4AF37] via-[#F59E0B] to-[#D4AF37] text-[#1F181B] font-extrabold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-xl transition active:scale-[0.99] cursor-pointer hover:opacity-95"
                 >
                   <Sparkles className="w-5 h-5 text-[#1F181B]" />
-                  <span>PAY $19 & UNLOCK 240 MASTERPIECES</span>
+                  <span>CHOOSE VIP PASS ($15 CLASSIC / $29 GRAND)</span>
                   <ArrowRight className="w-4 h-4 text-[#1F181B]" />
                 </button>
 
@@ -1449,46 +1480,100 @@ function GalleryContent() {
         </div>
       )}
 
-      {/* $19 VIP All-Access Checkout Modal */}
+      {/* Atelier Dual-Tier VIP Checkout Modal */}
       {isCheckoutOpen && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
           <div className="relative max-w-xl w-full bg-[#181315] border-2 border-[#C5A059] rounded-[36px] p-6 sm:p-10 shadow-2xl font-sans text-center">
             <button
               onClick={() => setIsCheckoutOpen(false)}
-              className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition border border-white/10"
+              className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition border border-white/10 cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
 
             <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#C5A059]/20 border border-[#C5A059]/40 text-xs font-bold uppercase tracking-widest text-[#EAD8B1] mb-3">
               <Gem className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>THE GRAND 12 VIP ALL-ACCESS PASS</span>
+              <span>OFFICIAL ATELIER CHECKOUT</span>
             </span>
 
             <h3 className="text-2xl sm:text-3xl font-serif text-white font-light">
-              Unlock 240 Masterpiece Gallery
+              Choose Your Atelier Tier
             </h3>
             <p className="text-xs text-white/60 mt-1.5">
-              One-time payment • Lifetime access to all 12 destinations & Digital Invitation Studio
+              Select your bespoke high-fashion wedding portfolio package
             </p>
 
+            {/* Plan Tier Selector */}
+            <div className="grid grid-cols-2 gap-2 mt-4 mb-2 text-left">
+              <button
+                type="button"
+                onClick={() => setCheckoutPlan('classic')}
+                className={`p-3 rounded-2xl border transition cursor-pointer relative ${
+                  checkoutPlan === 'classic'
+                    ? 'border-[#D4AF37] bg-[#D4AF37]/15 ring-2 ring-[#D4AF37]/40'
+                    : 'border-white/10 bg-white/5 opacity-70 hover:opacity-100'
+                }`}
+              >
+                <div className="text-[10px] font-bold text-[#D4AF37] uppercase tracking-wider">Single Location</div>
+                <div className="text-base font-bold text-white mt-0.5">Classic ($15)</div>
+                <div className="text-[10px] text-white/60 mt-1 leading-tight">20 bespoke 4K photos of 1 selected destination</div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setCheckoutPlan('grand')}
+                className={`p-3 rounded-2xl border transition cursor-pointer relative ${
+                  checkoutPlan === 'grand'
+                    ? 'border-[#D4AF37] bg-[#D4AF37]/15 ring-2 ring-[#D4AF37]/40'
+                    : 'border-white/10 bg-white/5 opacity-70 hover:opacity-100'
+                }`}
+              >
+                <span className="absolute -top-2 right-2 px-1.5 py-0.5 rounded-full bg-[#D4AF37] text-[#1F181B] text-[8px] font-black uppercase">BEST VALUE</span>
+                <div className="text-[10px] font-bold text-[#D4AF37] uppercase tracking-wider">All-Access Pass</div>
+                <div className="text-base font-bold text-white mt-0.5">Grand VIP ($29)</div>
+                <div className="text-[10px] text-white/60 mt-1 leading-tight">All 240 photos across 12 world destinations</div>
+              </button>
+            </div>
+
+            {/* Single Theme Selection (Only shown when Classic plan is selected) */}
+            {checkoutPlan === 'classic' && (
+              <div className="mb-3 p-3 rounded-xl bg-white/5 border border-white/15 text-left">
+                <label className="text-[10px] font-bold text-[#D4AF37] uppercase tracking-wider block mb-1.5">
+                  Select Your Exclusive Destination (20 Photos Locked)
+                </label>
+                <select
+                  value={checkoutSelectedTheme}
+                  onChange={(e) => setCheckoutSelectedTheme(e.target.value)}
+                  className="w-full px-3 py-2 rounded-xl bg-black/60 border border-white/20 text-white text-xs focus:outline-hidden focus:border-[#D4AF37]"
+                >
+                  {DESTINATION_240_CONFIGS.map((d) => (
+                    <option key={d.id} value={d.id} className="bg-[#1F181B] text-white">
+                      {d.title} ({d.dest})
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
             {/* Step 1: PayPal Checkout */}
-            <div className="mt-5 p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3 text-left">
+            <div className="mt-4 p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3 text-left">
               <div className="flex items-center gap-2">
                 <span className="w-5 h-5 rounded-full bg-[#C5A059] text-[#1F181B] font-black text-xs flex items-center justify-center">1</span>
-                <span className="text-xs font-bold text-white tracking-wide uppercase">Official PayPal Payment</span>
+                <span className="text-xs font-bold text-white tracking-wide uppercase">
+                  PayPal Payment ({checkoutPlan === 'classic' ? '$15' : '$29'})
+                </span>
               </div>
               <p className="text-[11px] text-white/60">
-                Complete your $19 payment via PayPal or Credit/Debit Card in the secure window.
+                Complete your payment securely via PayPal or Credit/Debit Card in the official checkout window.
               </p>
               <a
-                href="https://www.paypal.com/ncp/payment/LVRRE8SJKD3VA"
+                href={checkoutPlan === 'classic' ? PAYPAL_CLASSIC_URL : PAYPAL_GRAND_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-3.5 px-6 rounded-xl bg-[#0070BA] hover:bg-[#005EA6] text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition active:scale-[0.99] cursor-pointer"
               >
                 <CreditCard className="w-4 h-4" />
-                <span>Pay $19.00 with PayPal or Card</span>
+                <span>Pay {checkoutPlan === 'classic' ? '$15' : '$29'} with PayPal or Card</span>
                 <ExternalLink className="w-3.5 h-3.5 opacity-80" />
               </a>
             </div>
@@ -1497,10 +1582,12 @@ function GalleryContent() {
             <div className="mt-4 p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3 text-left">
               <div className="flex items-center gap-2">
                 <span className="w-5 h-5 rounded-full bg-[#C5A059] text-[#1F181B] font-black text-xs flex items-center justify-center">2</span>
-                <span className="text-xs font-bold text-white tracking-wide uppercase">Activate VIP Pass</span>
+                <span className="text-xs font-bold text-white tracking-wide uppercase">
+                  Activate {checkoutPlan === 'classic' ? 'Classic Pass ($15)' : 'Grand VIP Access ($29)'}
+                </span>
               </div>
               <p className="text-[11px] text-white/60">
-                Enter your PayPal payer email & transaction ID to unlock all 240 high-fashion destination transformations:
+                Enter your PayPal payer email & transaction ID to unlock {checkoutPlan === 'classic' ? 'your 20 destination photos' : 'all 240 luxury photos'}:
               </p>
               <div>
                 <label className="text-[10px] font-bold text-white/70 block mb-1">
@@ -1540,7 +1627,7 @@ function GalleryContent() {
                 ) : (
                   <>
                     <Sparkles className="w-4 h-4 text-[#1F181B]" />
-                    <span>Verify & Unlock 240 Scenes ($19)</span>
+                    <span>Verify & Unlock {checkoutPlan === 'classic' ? 'Classic Pass ($15)' : 'Grand VIP Access ($29)'}</span>
                   </>
                 )}
               </button>
@@ -1604,7 +1691,7 @@ function GalleryContent() {
                 • <strong className="text-[#D4AF37]">Lifetime Digital Invitation Studio</strong>: Unlimited luxury cover selections.
               </p>
               <a
-                href="https://www.paypal.com/ncp/payment/LVRRE8SJKD3VA"
+                href={PAYPAL_GRAND_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-3.5 px-6 rounded-xl bg-[#D4AF37] hover:bg-[#F3C669] text-[#1F181B] font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition active:scale-[0.99] cursor-pointer"
