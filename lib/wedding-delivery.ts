@@ -182,21 +182,34 @@ function buildOrderConfirmationEmail(params: {
 }
 
 /**
- * 4. HTML Email Template: 240 Masterpieces Completed & 1-Click ZIP Delivery
+ * 4. HTML Email Template: Masterpieces Completed & 1-Click ZIP Delivery
  */
 function buildOrderCompletedEmail(params: {
   orderId: string;
   email: string;
   totalScenes: number;
   galleryUrl: string;
+  plan?: string;
+  themeTitle?: string;
 }): string {
+  const isClassic = params.plan === 'classic' || params.totalScenes <= 20;
+  const badgeText = isClassic
+    ? `🎉 ${params.themeTitle ? params.themeTitle.toUpperCase() : 'EXCLUSIVE'} 20 MASTERPIECES READY`
+    : '🎉 240 MASTERPIECES READY';
+  const mainTitle = isClassic
+    ? `축하드립니다!<br><span style="color: #D4AF37; font-weight: 700;">${params.themeTitle || '선택 로케이션'} 20장 화보 완성</span>`
+    : `축하드립니다!<br><span style="color: #D4AF37; font-weight: 700;">240장 풀 화보가 완성되었습니다</span>`;
+  const subText = isClassic
+    ? `고객님께서 선택하신 단독 럭셔리 로케이션의 20개 모든 앵글이 완벽한 4K 규격으로 완성되었습니다.`
+    : `12개 전 세계 럭셔리 로케이션의 모든 에디토리얼 앵글이 완벽한 4K Hasselblad 규격으로 패키징되었습니다.`;
+
   return `
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WeddingHelper Atelier 240 Masterpieces Completed</title>
+  <title>WeddingHelper Atelier ${params.totalScenes} Masterpieces Completed</title>
 </head>
 <body style="margin: 0; padding: 0; background-color: #120E10; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #FAF8F5;">
   <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #120E10; padding: 40px 16px;">
@@ -207,13 +220,13 @@ function buildOrderCompletedEmail(params: {
           <tr>
             <td align="center" style="padding: 48px 32px 24px; background: linear-gradient(180deg, rgba(212, 175, 55, 0.16) 0%, rgba(31, 24, 27, 0) 100%);">
               <span style="display: inline-block; padding: 6px 16px; border-radius: 9999px; background-color: rgba(212, 175, 55, 0.25); border: 1px solid #D4AF37; color: #D4AF37; font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;">
-                🎉 240 MASTERPIECES READY
+                ${badgeText}
               </span>
-              <h1 style="margin: 18px 0 8px; font-family: Georgia, serif; font-size: 30px; font-weight: 300; letter-spacing: 0.05em; color: #FFFFFF; line-height: 1.3;">
-                축하드립니다!<br><span style="color: #D4AF37; font-weight: 700;">240장 풀 화보가 완성되었습니다</span>
+              <h1 style="margin: 18px 0 8px; font-family: Georgia, serif; font-size: 28px; font-weight: 300; letter-spacing: 0.05em; color: #FFFFFF; line-height: 1.3;">
+                ${mainTitle}
               </h1>
               <p style="margin: 0; font-size: 13px; color: rgba(250, 248, 245, 0.7); line-height: 1.6;">
-                12개 전 세계 럭셔리 로케이션의 모든 에디토리얼 앵글이 완벽한 4K Hasselblad 규격으로 패키징되었습니다.
+                ${subText}
               </p>
             </td>
           </tr>
@@ -226,7 +239,7 @@ function buildOrderCompletedEmail(params: {
                   총 <strong>${params.totalScenes}장</strong>의 초고해상도 화보를 1-Click 4K ZIP으로 즉시 다운로드하실 수 있습니다.
                 </p>
                 <a href="${params.galleryUrl}" target="_blank" style="display: block; width: 100%; max-width: 420px; margin: 0 auto; padding: 18px 24px; background: linear-gradient(135deg, #D4AF37 0%, #F59E0B 100%); color: #1F181B; text-align: center; text-decoration: none; font-size: 15px; font-weight: 800; letter-spacing: 0.05em; border-radius: 9999px; box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.5); text-transform: uppercase;">
-                  📦 4K ZIP 전체 다운로드 & 갤러리 열기 ➔
+                  📦 4K ZIP 다운로드 & 갤러리 열기 ➔
                 </a>
               </div>
               <p style="margin: 0; font-size: 11px; color: rgba(250, 248, 245, 0.4);">
@@ -308,33 +321,55 @@ export async function notifyOrderCompleted(params: {
   orderId: string;
   email: string;
   totalScenes: number;
+  plan?: string;
+  selectedTheme?: string;
 }): Promise<void> {
   const galleryUrl = `${SITE_URL}/weddinghelper/gallery?orderId=${encodeURIComponent(params.orderId)}`;
+  const isClassic = params.plan === 'classic' || params.totalScenes <= 20;
+  const themeName = params.selectedTheme ? params.selectedTheme.replace('theme_', '').replace(/_/g, ' ') : 'Wedding';
 
   // 1) Send Telegram notification to CEO
-  const telegramMsg = `🎉 <b>[WeddingHelper] 240장 마스터피스 제작 완료!</b>
+  const telegramMsg = isClassic
+    ? `💍 <b>[WeddingHelper] 기본형 (${themeName.toUpperCase()}) 20장 제작 완료!</b>
+
+━━━━━━━━━━━━━━━━━━━━━
+• <b>고객 이메일</b>: <code>${params.email}</code>
+• <b>주문 번호</b>: <code>${params.orderId}</code>
+• <b>플랜</b>: CLASSIC (단일 테마 20장 한정)
+• <b>완성 사진 수</b>: 총 ${params.totalScenes}장
+• <b>전용 갤러리</b>: <a href="${galleryUrl}">고객 갤러리 열기</a>
+━━━━━━━━━━━━━━━━━━━━━
+🚀 <i>고객 편지함으로 선택 로케이션 20장 완성 안내 및 다운로드 링크가 발송되었습니다.</i>`
+    : `🎉 <b>[WeddingHelper] 240장 그랜드 VIP 마스터피스 제작 완료!</b>
 
 ━━━━━━━━━━━━━━━━━━━━━
 • <b>고객 이메일</b>: ${params.email}
 • <b>주문 번호</b>: <code>${params.orderId}</code>
+• <b>플랜</b>: GRAND VIP (12대 휴양지 240장 풀패키지)
 • <b>완성 사진 수</b>: 총 ${params.totalScenes}장 (12개 전 세계 휴양지)
 • <b>전용 갤러리</b>: <a href="${galleryUrl}">고객 전용 갤러리 열기</a>
 ━━━━━━━━━━━━━━━━━━━━━
-🚀 <i>고객 편지함으로 완성 안내 및 1-Click 4K ZIP 다운로드 이메일이 자동 발송되었습니다.</i>`;
+🚀 <i>고객 편지함으로 240장 풀 앨범 완성 안내 및 1-Click 4K ZIP 다운로드 이메일이 자동 발송되었습니다.</i>`;
 
   await sendTelegramNotification(telegramMsg);
 
-  // 2) Send Haute Couture Completion & 4K ZIP Download Email to Customer
+  // 2) Send Haute Couture Completion Email to Customer
   const emailHtml = buildOrderCompletedEmail({
     orderId: params.orderId,
     email: params.email,
     totalScenes: params.totalScenes,
     galleryUrl,
+    plan: params.plan,
+    themeTitle: themeName,
   });
+
+  const subject = isClassic
+    ? `💍 [WeddingHelper] ${themeName.toUpperCase()} 20장 웨딩 화보 완성본이 준비되었습니다 (4K Collection)`
+    : `✨ [WeddingHelper] 240장 풀 앨범 완성본이 준비되었습니다 (4K Hasselblad Collection)`;
 
   const emailResult = await sendEmailDelivery({
     to: params.email,
-    subject: `✨ [WeddingHelper] 240장 풀 앨범 완성본이 준비되었습니다 (4K Hasselblad Collection)`,
+    subject,
     html: emailHtml,
   });
 
@@ -342,7 +377,7 @@ export async function notifyOrderCompleted(params: {
   if (!emailResult.success) {
     await sendEmailDelivery({
       to: 'yjongsung1211@gmail.com',
-      subject: `[고객 완성본 사본] ✨ [WeddingHelper] ${params.email} 고객 240장 다운로드 링크`,
+      subject: `[고객 완성본 사본] ${subject} - ${params.email}`,
       html: emailHtml,
     }).catch(() => {});
   }

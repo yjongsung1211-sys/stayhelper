@@ -47,7 +47,7 @@
   - **4대 타겟 응용처(Application)**: **드론(전파 교란 방지), 자율주행차(와이어링 감축 및 초고속 데이터 전송), 방위산업(스텔스 통신), 스마트홈·로보틱스(초저지연 센싱)**에 AI 비즈니스 모델(BM)을 결합하여 고부가가치 솔루션 기업으로 육성합니다.
 
 - **★ [AIDC 전력 M&A 판과의 철저한 독립 분리 원칙] (Strict Track Isolation - ★대표 지침 영구 픽스)**:
-  - 현재 화천퍼스트 및 일진전기·다스테크·동양산전·이지트로닉스·나인테크 등과 추진 중인 **AI 데이터센터(AIDC) 전력·수배전·냉각 인프라 상장사 M&A 판과 퀀텀테크놀로지 딜은 이해관계 충돌 방지 및 고유 기술 가치 보존을 위해 100% 상호 분리 독립 운영**합니다.
+  - 현재 화천퍼스트 및 일진전기·다쓰테크·동양산전·이지트로닉스·나인테크 등과 추진 중인 **AI 데이터센터(AIDC) 전력·수배전·냉각 인프라 상장사 M&A 판과 퀀텀테크놀로지 딜은 이해관계 충돌 방지 및 고유 기술 가치 보존을 위해 100% 상호 분리 독립 운영**합니다.
 
 - **★ [데이터센터 PUE 10배 포텐셜 & 상장사 디딤돌 원칙] (10x Value & Listing Stepping Stone - ★대표 지침 영구 픽스)**:
   - 데이터센터 배선 체계가 구리선 ➔ 광섬유 ➔ 광무선(Optical Wireless Interconnect)으로 진화할 때 발열과 전력소모(PUE)를 근본적으로 해결하는 핵심 기술로서, **원천기술 포텐셜 10배 가치**를 견지합니다.
@@ -167,9 +167,15 @@
 
 ## 1-0. 유튜브 글로벌 과학 다큐멘터리 [Lab TO Life] 제작 규칙 (★대표 지침으로 영구 픽스)
 
-- **★ [전사 골든 레퍼런스 영구 고정] 오늘 제작 완료된 Docu 05 ("The Physics of Longevity")를 전편 불변 표준으로 고정 (Golden Benchmark Standard - ★대표 지침으로 영구 픽스)**:
-  - 대표님의 "다음부터 바뀌지 않게 오늘 영상을 기본으로 하게 저장해둬" 지침에 따라, **2026-11-09 완성된 Docu 05 ("The Physics of Longevity")를 향후 모든 [Lab TO Life] 과학 다큐멘터리의 공식 골든 레퍼런스(Golden Benchmark Standard)로 영구 고정**합니다.
-  - 모든 후속 에피소드는 `youtube_paper_studio/templates/docu_master_standard/`에 영구 보존된 4대 표준 템플릿 파이프라인(`generate_scientific_visuals_template.py`, `render_full_docu_template.py`, `render_cut_01_prestige_opening_template.py`, `render_cut_32_climax_outro_template.py`)을 100% 동일하게 복제하여 제작하며, 독자적인 임의 변형을 영구 금지합니다.
+- **★ [전사 골든 레퍼런스 영구 고정] 오늘 제작 완료된 Docu 05 및 Docu 09 리모션 익스플레이너 형식을 전편 불변 표준으로 고정 (Remotion Intelligent Explainer Standard - ★대표 지침으로 영구 픽스)**:
+  - 대표님의 "이 형식을 기억하고 이후에는 이렇게 제작해줘" 및 "영어로 만들어야지, 그리고 채널 이름 나오는 첫장면은 무조건 있어야 해", "사진이 설명을 해줘" 지침에 따라, **2026-11-16 완성된 Docu 09 ("The Gut-Brain Highway") 리모션 익스플레이너(Remotion Intelligent Explainer) 형식을 향후 모든 [Lab TO Life] 과학 다큐멘터리의 공식 골든 레퍼런스(Golden Benchmark Standard)로 영구 고정**합니다.
+  - **리모션 인텔리전트 익스플레이너 5대 핵심 불변 규격**:
+    1) **오프닝 채널명 공식 브랜드 슬레이트 (0.0s ~ 1.8s)**: 영상 0초 즉시 딥 다크 캔버스 위에 골드 뱃지 `OFFICIAL CHANNEL • PEER-REVIEWED SCIENCE`, 중앙 볼드 브랜딩 **`Lab TO Life`**, 시그니처 골드 디바이더, 슬로건(`Translating World-Class Science into Daily Human Performance`)을 100% 필수로 표출하고, 1.8초 시점에 실사 비주얼 및 좌측 프레스티지 타이틀 패널로 부드럽게 크로스페이드(Crossfade) 전환합니다.
+    2) **100% 브로드캐스트 영문 온스크린 텍스트 (Broadcast-Grade English)**: 글로벌 시청자를 위한 정규 과학 다큐멘터리 규격에 맞추어 화면 내 모든 타이틀, 글래스모피즘 해설 카드, 과학 개념 태그, 수치 배지, 인용 논문, 아웃트로 인용구를 100% 고품질 영문으로 제작합니다 (국/영문 2종 SRT 동시 제공).
+    3) **사진이 능동적으로 설명하는 반응형 글래스모피즘 카드 (Explainer Glass Cards)**: 단순 정적 이미지 슬라이드쇼를 전면 금지하고, 26개 실사 씬 좌측/하단에 Remotion Spring 물리 모션으로 진입하는 글래스모피즘 카드가 핵심 메커니즘과 피어리뷰 논문 팩트를 시각적으로 직관 설명합니다.
+    4) **6대 핵심 분자 다이어그램 순차 하이라이트 (Sequential Diagram Highlighter)**: 주요 메커니즘 다이어그램 씬(Cuts 05, 08, 13, 19, 22, 26 등)은 나레이션 진행 타이밍에 맞추어 3개 핵심 축이 1.5초 간격으로 스케일 확대(1.03x), 골드 글로우 테두리 발광, 소프트 펄스를 순차적으로 점등하여 시청자의 이해도를 극대화합니다.
+    5) **사진 재사용 100% 절대 금지 & 신규 8K 시네마틱 비주얼**: 과거 에피소드의 이미지를 일체 재사용하지 않고, 에피소드마다 32개 씬 전체에 대해 100% 새로운 초고해상도 시네마틱 8K 비주얼과 전용 다이어그램을 신규 생성합니다.
+  - 모든 후속 에피소드는 `remotion_studio/`의 React/TypeScript 컴포넌트 파이프라인(`Docu09Explainer.tsx` 아키텍처) 및 `youtube_paper_studio/`의 표준 오디오/스크립트 파이프라인을 복제하여 제작합니다.
 
 - **★ [오프닝 필수 규격] 채널 이름 & 에피소드 제목 맨 앞 100% 필수 노출 원칙 (Brand Slate & Prestige Title First - ★대표 지침으로 영구 픽스)**:
   - 모든 유튜브 과학 다큐멘터리 영상의 첫 씬(Cut 01, 0.0s ~ 6.0s) 맨 앞에는 **공식 채널명(`Lab TO Life`)과 에피소드 정식 영문 제목이 100% 필수로 노출**되어야 합니다.

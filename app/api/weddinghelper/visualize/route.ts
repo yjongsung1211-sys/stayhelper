@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import { WEDDING_12_PRESETS } from '@/lib/wedding-presets';
+import { getWeddingOrder } from '@/lib/wedding-order-store';
 
 const DEST_TO_THEME_MAP: Record<string, string> = {
   theme_01_bali: 'bali-jungle',
@@ -51,20 +52,34 @@ export async function POST(req: NextRequest) {
       email,
     } = body;
 
-    // 🔒 STRICT PAYMENT GATE: Block any unauthorized AI image generation without paid VIP Pass
+    // 🔒 STRICT PAYMENT & TIER GATE: Block unauthorized requests and isolate single-theme Classic passes
     const normalizedEmail = typeof email === 'string' ? email.trim().toLowerCase() : '';
     const membersFile = path.join(process.cwd(), 'data', 'weddinghelper_members.json');
     let isVerifiedVip = false;
+    let memberPlan: 'grand' | 'classic' = 'grand';
+    let memberAllowedTheme = '';
 
     if (normalizedEmail && fs.existsSync(membersFile)) {
       try {
         const membersData = JSON.parse(fs.readFileSync(membersFile, 'utf-8') || '{}');
         const member = membersData[normalizedEmail];
-        if (member && (member.isVip || member.plan === 'grand')) {
+        if (member && (member.isVip || member.plan === 'grand' || member.plan === 'classic')) {
           isVerifiedVip = true;
+          memberPlan = member.plan === 'classic' ? 'classic' : 'grand';
+          memberAllowedTheme = member.selectedTheme || '';
         }
       } catch (err) {
         console.error('[WeddingHelper VIP Verification Error]', err);
+      }
+    }
+
+    // Check orderId store if provided
+    if (body.orderId) {
+      const order = getWeddingOrder(body.orderId);
+      if (order) {
+        isVerifiedVip = true;
+        if (order.plan === 'classic') memberPlan = 'classic';
+        if (order.selectedTheme) memberAllowedTheme = order.selectedTheme;
       }
     }
 
@@ -72,10 +87,22 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: '🔒 $19 VIP Pass Required. Please complete payment via PayPal to transform your photos.',
+          error: '🔒 VIP Pass Required. Please complete payment via PayPal to transform your photos.',
           requiresPayment: true,
         },
         { status: 402 }
+      );
+    }
+
+    // 🔒 STRICT SCOPE ISOLATION: Classic plan is locked strictly to their selected single theme
+    if (memberPlan === 'classic' && memberAllowedTheme && themeId !== memberAllowedTheme) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `🔒 Your Classic Pass is exclusively locked to ${memberAllowedTheme}. Upgrade to Grand VIP ($29) to generate all 12 destinations.`,
+          requiresUpgrade: true,
+        },
+        { status: 403 }
       );
     }
 

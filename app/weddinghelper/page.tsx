@@ -46,8 +46,10 @@ export default function WeddingHelperPage() {
   const router = useRouter();
 
   // User VIP state
-  const [user, setUser] = useState<{ email: string; isVip: boolean; plan?: 'single' | 'trio' | 'grand' } | null>(null);
+  const [user, setUser] = useState<{ email: string; isVip: boolean; plan?: 'single' | 'classic' | 'grand'; selectedTheme?: string } | null>(null);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [checkoutPlan, setCheckoutPlan] = useState<'classic' | 'grand'>('grand');
+  const [checkoutSelectedTheme, setCheckoutSelectedTheme] = useState<string>('theme_01_bali');
   const [checkoutEmail, setCheckoutEmail] = useState('');
   const [transactionId, setTransactionId] = useState('');
   const [isVerifyingPayment, setIsVerifyingPayment] = useState(false);
@@ -616,7 +618,8 @@ export default function WeddingHelperPage() {
         body: JSON.stringify({
           email,
           transactionId: txId,
-          plan: 'grand',
+          plan: checkoutPlan,
+          selectedTheme: checkoutSelectedTheme,
         }),
       });
 
@@ -625,12 +628,18 @@ export default function WeddingHelperPage() {
         const vipRecord = {
           email,
           isVip: true,
-          plan: 'grand' as const,
+          plan: checkoutPlan,
+          selectedTheme: checkoutSelectedTheme,
         };
         setUser(vipRecord);
         localStorage.setItem('weddinghelper_user', JSON.stringify(vipRecord));
         setIsCheckoutOpen(false);
-        showToast('🎉 $19 VIP All-Access Pass Activated! All 240 destinations unlocked.', 4500);
+
+        const isClassic = checkoutPlan === 'classic';
+        const successMsg = isClassic
+          ? '🎉 Classic Single-Theme Pass Activated! 20 Masterpiece scenes unlocked.'
+          : '🎉 Grand VIP All-Access Pass Activated! All 240 destination scenes unlocked.';
+        showToast(successMsg, 5000);
 
         // Create server order and navigate
         const imagesToUse = getClientImages();
@@ -641,8 +650,8 @@ export default function WeddingHelperPage() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               email,
-              plan: 'grand',
-              selectedTheme: 'theme_01_bali',
+              plan: checkoutPlan,
+              selectedTheme: checkoutSelectedTheme,
               proportions: { groomHeight, groomWeight, brideHeight, brideWeight },
               clientImages: imagesToUse,
             }),
@@ -653,8 +662,9 @@ export default function WeddingHelperPage() {
           }
         } catch (e) {}
 
+        const targetTheme = checkoutSelectedTheme || 'theme_01_bali';
         setTimeout(() => {
-          router.push(`/weddinghelper/gallery?dest=theme_01_bali&autoSynthesize=true${orderIdParam}`);
+          router.push(`/weddinghelper/gallery?dest=${targetTheme}&autoSynthesize=true${orderIdParam}`);
         }, 400);
       } else {
         showToast(`❌ Verification failed: ${data?.error || 'Invalid payment credentials'}`);
@@ -1490,27 +1500,84 @@ export default function WeddingHelperPage() {
               <X className="w-5 h-5" />
             </button>
 
-            <div className="text-center mb-6">
+            <div className="text-center mb-5">
               <span className="px-3 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-widest bg-[#D4AF37] text-[#1F181B]">
-                OFFICIAL VIP CHECKOUT
+                OFFICIAL ATELIER CHECKOUT
               </span>
               <h3 className="text-2xl font-serif font-bold text-white mt-2">
-                The Grand 12 VIP Pass ($19)
+                Choose Your Atelier Tier
               </h3>
               <p className="text-white/60 text-xs mt-1">
-                Lifetime access to all 240 photos across 12 global destinations.
+                Select your bespoke high-fashion wedding portfolio package
               </p>
             </div>
+
+            {/* Plan Tier Selector */}
+            <div className="grid grid-cols-2 gap-2 mb-4">
+              <button
+                type="button"
+                onClick={() => setCheckoutPlan('classic')}
+                className={`p-3 rounded-2xl border text-left transition cursor-pointer relative ${
+                  checkoutPlan === 'classic'
+                    ? 'border-[#D4AF37] bg-[#D4AF37]/15 ring-2 ring-[#D4AF37]/40'
+                    : 'border-white/10 bg-white/5 opacity-70 hover:opacity-100'
+                }`}
+              >
+                <div className="text-[10px] font-bold text-[#D4AF37] uppercase tracking-wider">Single Location</div>
+                <div className="text-base font-bold text-white mt-0.5">Classic ($15)</div>
+                <div className="text-[10px] text-white/60 mt-1 leading-tight">20 bespoke 4K photos of 1 selected destination</div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setCheckoutPlan('grand')}
+                className={`p-3 rounded-2xl border text-left transition cursor-pointer relative ${
+                  checkoutPlan === 'grand'
+                    ? 'border-[#D4AF37] bg-[#D4AF37]/15 ring-2 ring-[#D4AF37]/40'
+                    : 'border-white/10 bg-white/5 opacity-70 hover:opacity-100'
+                }`}
+              >
+                <span className="absolute -top-2 right-2 px-1.5 py-0.5 rounded-full bg-[#D4AF37] text-[#1F181B] text-[8px] font-black uppercase">BEST VALUE</span>
+                <div className="text-[10px] font-bold text-[#D4AF37] uppercase tracking-wider">All-Access Pass</div>
+                <div className="text-base font-bold text-white mt-0.5">Grand VIP ($29)</div>
+                <div className="text-[10px] text-white/60 mt-1 leading-tight">All 240 photos across 12 world destinations</div>
+              </button>
+            </div>
+
+            {/* Single Theme Selection (Only shown when Classic plan is selected) */}
+            {checkoutPlan === 'classic' && (
+              <div className="mb-4 p-3 rounded-xl bg-white/5 border border-white/15">
+                <label className="text-[10px] font-bold text-[#D4AF37] uppercase tracking-wider block mb-1.5">
+                  Select Your Exclusive Destination (20 Photos Locked)
+                </label>
+                <select
+                  value={checkoutSelectedTheme}
+                  onChange={(e) => setCheckoutSelectedTheme(e.target.value)}
+                  className="w-full px-3 py-2 rounded-xl bg-black/60 border border-white/20 text-white text-xs focus:outline-hidden focus:border-[#D4AF37]"
+                >
+                  {DESTINATION_240_CONFIGS.map((d) => (
+                    <option key={d.id} value={d.id} className="bg-[#1F181B] text-white">
+                      {d.title} ({d.dest})
+                    </option>
+                  ))}
+                </select>
+                <p className="text-[9px] text-white/50 mt-1.5">
+                  🔒 Note: Classic Pass strictly isolates and renders only this destination. Other destinations remain locked.
+                </p>
+              </div>
+            )}
 
             <div className="space-y-4">
               {/* Step 1: PayPal Checkout */}
               <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
                 <div className="flex items-center gap-2">
                   <span className="w-5 h-5 rounded-full bg-[#D4AF37] text-[#1F181B] font-black text-xs flex items-center justify-center">1</span>
-                  <span className="text-xs font-bold text-white tracking-wide uppercase">Official PayPal Payment</span>
+                  <span className="text-xs font-bold text-white tracking-wide uppercase">
+                    PayPal Payment ({checkoutPlan === 'classic' ? '$15' : '$29'})
+                  </span>
                 </div>
                 <p className="text-[11px] text-white/60">
-                  Tap below to securely complete the $19 payment via PayPal or Credit/Debit Card. A transaction receipt will be provided upon completion.
+                  Tap below to securely complete payment via PayPal or Card. You will receive an official receipt number.
                 </p>
                 <a
                   href="https://www.paypal.com/ncp/payment/LVRRE8SJKD3VA"
@@ -1519,7 +1586,7 @@ export default function WeddingHelperPage() {
                   className="w-full py-3.5 px-6 rounded-xl bg-[#0070BA] hover:bg-[#003087] text-white font-bold text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <CreditCard className="w-4 h-4" />
-                  <span>Pay $19 with PayPal or Credit Card</span>
+                  <span>Pay {checkoutPlan === 'classic' ? '$15' : '$29'} with PayPal or Card</span>
                   <ExternalLink className="w-3.5 h-3.5 opacity-70" />
                 </a>
               </div>
@@ -1528,10 +1595,12 @@ export default function WeddingHelperPage() {
               <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
                 <div className="flex items-center gap-2">
                   <span className="w-5 h-5 rounded-full bg-[#D4AF37] text-[#1F181B] font-black text-xs flex items-center justify-center">2</span>
-                  <span className="text-xs font-bold text-white tracking-wide uppercase">Activate VIP Access</span>
+                  <span className="text-xs font-bold text-white tracking-wide uppercase">
+                    Activate {checkoutPlan === 'classic' ? 'Classic Pass' : 'Grand VIP Access'}
+                  </span>
                 </div>
                 <p className="text-[11px] text-white/60">
-                  Enter your PayPal payer email & transaction ID to unlock 240 high-fashion destination transformations:
+                  Enter your PayPal payer email & receipt ID to unlock {checkoutPlan === 'classic' ? 'your 20 destination photos' : 'all 240 luxury photos'}:
                 </p>
                 <div>
                   <label className="text-[10px] font-bold text-white/70 block mb-1">

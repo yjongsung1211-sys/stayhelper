@@ -4,7 +4,7 @@ import path from 'path';
 export interface WeddingOrder {
   orderId: string;
   email: string;
-  plan: 'grand' | 'trio' | 'single';
+  plan: 'grand' | 'classic' | 'trio' | 'single';
   selectedTheme: string;
   proportions: {
     groomHeight: number;
@@ -63,18 +63,21 @@ function saveOrdersToFile(orders: Record<string, WeddingOrder>): void {
 
 export function createWeddingOrder(params: {
   email: string;
-  plan?: 'grand' | 'trio' | 'single';
+  plan?: 'grand' | 'classic' | 'trio' | 'single';
   selectedTheme?: string;
   proportions?: { groomHeight: number; groomWeight: number; brideHeight: number; brideWeight: number };
   clientImages?: string[];
 }): WeddingOrder {
   const now = new Date().toISOString();
   const orderId = `WH_${Date.now().toString(36).toUpperCase()}_${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+  const plan = params.plan || 'grand';
+  const isSingleTheme = plan === 'classic' || plan === 'single';
+  const totalSteps = isSingleTheme ? 20 : 240;
 
   const order: WeddingOrder = {
     orderId,
     email: params.email.trim().toLowerCase(),
-    plan: params.plan || 'grand',
+    plan,
     selectedTheme: params.selectedTheme || 'theme_01_bali',
     proportions: params.proportions || {
       groomHeight: 181,
@@ -85,7 +88,7 @@ export function createWeddingOrder(params: {
     clientImages: params.clientImages || [],
     status: 'pending',
     currentStep: 0,
-    totalSteps: 240,
+    totalSteps,
     completedScenes: {},
     createdAt: now,
     updatedAt: now,

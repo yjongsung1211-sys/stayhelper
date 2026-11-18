@@ -26,7 +26,8 @@ export async function POST(request: NextRequest) {
     }
 
     const completedCount = Object.keys(completedScenes).length;
-    const newStatus = isFinished || completedCount >= 240 ? 'completed' : 'processing';
+    const maxSteps = order.totalSteps || 240;
+    const newStatus = isFinished || completedCount >= maxSteps ? 'completed' : 'processing';
 
     const updated = updateWeddingOrder(orderId, {
       completedScenes,
@@ -40,6 +41,8 @@ export async function POST(request: NextRequest) {
         orderId,
         email: order.email,
         totalScenes: completedCount,
+        plan: order.plan,
+        selectedTheme: order.selectedTheme,
       }).catch((e) => console.warn('Order completed notify error:', e));
     }
 
@@ -47,7 +50,7 @@ export async function POST(request: NextRequest) {
       success: true,
       orderId,
       currentStep: completedCount,
-      totalSteps: 240,
+      totalSteps: maxSteps,
       status: newStatus,
     });
   } catch (err: any) {

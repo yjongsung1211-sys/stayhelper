@@ -132,8 +132,9 @@ function GalleryContent() {
   const [orderId, setOrderId] = useState<string | null>(orderIdFromUrl);
 
   // VIP Membership State (Default null = locked until paid)
-  const [user, setUser] = useState<{ email: string; isVip: boolean; plan?: 'single' | 'trio' | 'grand' } | null>(null);
+  const [user, setUser] = useState<{ email: string; isVip: boolean; plan?: 'single' | 'classic' | 'grand'; selectedTheme?: string } | null>(null);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
   const [restoreEmail, setRestoreEmail] = useState('');
   const [checkoutEmail, setCheckoutEmail] = useState('');
   const [transactionId, setTransactionId] = useState('');
@@ -179,7 +180,12 @@ function GalleryContent() {
               .then((res) => res.json())
               .then((data) => {
                 if (data?.isVip) {
-                  setUser({ email: parsed.email, isVip: true, plan: data.plan || 'grand' });
+                  const resolvedPlan = data.plan || parsed.plan || 'grand';
+                  const resolvedTheme = data.selectedTheme || parsed.selectedTheme || 'theme_01_bali';
+                  setUser({ email: parsed.email, isVip: true, plan: resolvedPlan, selectedTheme: resolvedTheme });
+                  if (resolvedPlan === 'classic') {
+                    setActiveTab(resolvedTheme);
+                  }
                 } else {
                   localStorage.removeItem('weddinghelper_user');
                   setUser(null);
@@ -237,7 +243,12 @@ function GalleryContent() {
             if (d?.success && d.order) {
               const ord = d.order;
               setOrderId(ord.orderId);
-              setUser({ email: ord.email, isVip: true, plan: 'grand' });
+              const resolvedPlan = ord.plan || 'grand';
+              const resolvedTheme = ord.selectedTheme || 'theme_01_bali';
+              setUser({ email: ord.email, isVip: true, plan: resolvedPlan, selectedTheme: resolvedTheme });
+              if (resolvedPlan === 'classic') {
+                setActiveTab(resolvedTheme);
+              }
               if (ord.clientImages?.length) setUploadedImages(ord.clientImages);
               if (ord.proportions) setProportions(ord.proportions);
               if (ord.completedScenes && Object.keys(ord.completedScenes).length > 0) {
@@ -600,7 +611,7 @@ function GalleryContent() {
     showToast(`🎉 All ${targetScenes.length} scenes synthesized with your authentic faces!`, 6000);
   };
 
-  // 1-Click ZIP Download for all 240 photos
+  // 1-Click ZIP Download (Strictly respects Classic 20 scenes vs Grand 240 scenes)
   const handleDownloadAll240Zip = async () => {
     if (!isUnlocked) {
       setIsCheckoutOpen(true);
@@ -609,15 +620,19 @@ function GalleryContent() {
     if (isDownloadingZip) return;
     setIsDownloadingZip(true);
     setZipProgress(0);
-    showToast('📦 Packaging all 240 Haute Couture Masterpiece photos into a ZIP archive...');
+
+    const scenesToPack = displayedScenes;
+    const total = scenesToPack.length;
+    const isClassic = isClassicPlan || total <= 20;
+    const zipTitle = isClassic ? `your 20 ${currentDestConfig?.title || 'destination'}` : 'all 240 Haute Couture Masterpiece';
+    showToast(`📦 Packaging ${zipTitle} photos into a 4K ZIP archive...`);
 
     try {
       const zip = new JSZip();
-      const total = WEDDING_240_SCENES.length;
       const batchSize = 10;
 
       for (let i = 0; i < total; i += batchSize) {
-        const batch = WEDDING_240_SCENES.slice(i, i + batchSize);
+        const batch = scenesToPack.slice(i, i + batchSize);
         await Promise.all(
           batch.map(async (scene) => {
             const destFolder = zip.folder(scene.themeTitle.replace(/[/\\?%*:|"<>]/g, '_')) || zip;
@@ -650,14 +665,17 @@ function GalleryContent() {
       const downloadUrl = URL.createObjectURL(zipBlob);
       const tempLink = document.createElement('a');
       tempLink.href = downloadUrl;
-      tempLink.download = `WeddingHelper_240_Masterpieces_${Date.now()}.zip`;
+      const downloadFilename = isClassic
+        ? `WeddingHelper_${allowedTheme}_20_Photos_${Date.now()}.zip`
+        : `WeddingHelper_240_Masterpieces_${Date.now()}.zip`;
+      tempLink.download = downloadFilename;
       document.body.appendChild(tempLink);
       tempLink.click();
       document.body.removeChild(tempLink);
       URL.revokeObjectURL(downloadUrl);
 
       setZipProgress(100);
-      showToast('🎉 All 240 Masterpiece Photos downloaded successfully!');
+      showToast(`🎉 ${total} Masterpiece Photos downloaded successfully!`);
     } catch (err) {
       console.error('ZIP failed:', err);
       showToast('⚠️ ZIP packaging error. Please try again.');
@@ -667,11 +685,14 @@ function GalleryContent() {
     }
   };
 
-  // Send all 240 photos via email
+  // Send photos via email (Strictly respects Classic 20 scenes vs Grand 240 scenes)
   const handleSendAllToEmail = async () => {
     let targetEmail = user?.email;
+    const isClassic = isClassicPlan;
+    const countLabel = isClassic ? '선택하신 20장' : '240장 풀';
+
     if (!targetEmail) {
-      targetEmail = window.prompt('240장 풀 화보를 수신할 이메일 주소를 입력해 주세요:') || '';
+      targetEmail = window.prompt(`${countLabel} 화보를 수신할 이메일 주소를 입력해 주세요:`) || '';
     }
     if (!targetEmail || !targetEmail.includes('@')) {
       showToast('⚠️ 올바른 이메일 주소를 입력해 주세요.');
@@ -679,22 +700,22 @@ function GalleryContent() {
     }
 
     setIsSendingEmail(true);
-    showToast(`✉️ 240장 풀 화보 앨범을 ${targetEmail}로 발송 중입니다...`);
+    showToast(`✉️ ${countLabel} 화보 앨범을 ${targetEmail}로 발송 중입니다...`);
     try {
       const res = await fetch('/api/weddinghelper/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: targetEmail.trim().toLowerCase(),
-          plan: user?.plan || 'grand',
-          selectedTheme: 'all_12_themes',
+          plan: isClassic ? 'classic' : 'grand',
+          selectedTheme: isClassic ? allowedTheme : 'all_12_themes',
           proportions,
           sendCompletionEmail: true,
         }),
       });
       const data = await res.json();
       if (data?.success) {
-        showToast(`🎉 240장 풀 화보 앨범 및 4K 다운로드 링크가 ${targetEmail}로 발송되었습니다!`, 6000);
+        showToast(`🎉 ${countLabel} 화보 앨범 및 4K 다운로드 링크가 ${targetEmail}로 발송되었습니다!`, 6000);
       } else {
         showToast('⚠️ 이메일 발송 중 일시적인 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
       }
@@ -721,12 +742,17 @@ function GalleryContent() {
     }
   };
 
-  // Filter scenes for current tab
+  // Strict Scope Isolation for Classic Pass (Single theme only)
+  const isClassicPlan = user?.plan === 'classic';
+  const allowedTheme = user?.selectedTheme || 'theme_01_bali';
+  const effectiveTab = isClassicPlan ? allowedTheme : activeTab;
+
+  // Filter scenes for current tab (Classic plan is strictly isolated to its single selected theme)
   const displayedScenes = WEDDING_240_SCENES.filter(
-    (s) => activeTab === 'all' || s.themeId === activeTab
+    (s) => (effectiveTab === 'all' && !isClassicPlan) || s.themeId === effectiveTab
   );
 
-  const currentDestConfig = DESTINATION_240_CONFIGS.find((d) => d.id === activeTab);
+  const currentDestConfig = DESTINATION_240_CONFIGS.find((d) => d.id === effectiveTab);
 
   return (
     <div className="min-h-screen bg-[#120E10] text-white font-sans selection:bg-[#C5A059]/30 relative overflow-x-hidden">
@@ -1062,33 +1088,63 @@ function GalleryContent() {
                   }
                 }}
               >
+                {/* All 240 Scenes Button */}
                 <button
                   type="button"
-                  onClick={() => setActiveTab('all')}
-                  className={`px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition cursor-pointer shrink-0 ${
-                    activeTab === 'all'
+                  onClick={() => {
+                    if (isClassicPlan) {
+                      showToast('🔒 Classic Pass includes 20 photos for your chosen destination. Upgrade to Grand VIP ($29) for all 12 destinations!');
+                      setIsUpgradeModalOpen(true);
+                      return;
+                    }
+                    setActiveTab('all');
+                  }}
+                  className={`px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition cursor-pointer shrink-0 flex items-center gap-1.5 ${
+                    effectiveTab === 'all' && !isClassicPlan
                       ? 'bg-[#D4AF37] text-[#1F181B] shadow-md ring-2 ring-[#D4AF37]/50'
+                      : isClassicPlan
+                      ? 'bg-white/5 text-white/40 border border-white/5 hover:bg-white/10'
                       : 'bg-white/5 text-white/80 hover:bg-white/15'
                   }`}
                 >
-                  All 240 Scenes (240)
+                  {isClassicPlan && <span className="text-[11px]">🔒</span>}
+                  <span>All 240 Scenes (240)</span>
+                  {isClassicPlan && <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-[#D4AF37]/20 text-[#D4AF37] font-bold">VIP ONLY</span>}
                 </button>
+
+                {/* Individual Destination Tabs */}
                 {DESTINATION_240_CONFIGS.map((dest, idx) => {
-                  const isActive = activeTab === dest.id;
+                  const isDestinationLocked = isClassicPlan && dest.id !== allowedTheme;
+                  const isActive = effectiveTab === dest.id;
+
                   return (
                     <button
                       key={dest.id}
                       type="button"
-                      onClick={() => setActiveTab(dest.id)}
+                      onClick={() => {
+                        if (isDestinationLocked) {
+                          showToast(`🔒 ${dest.title} is locked. Upgrade to Grand VIP ($29) to unlock all 12 destinations!`);
+                          setIsUpgradeModalOpen(true);
+                          return;
+                        }
+                        setActiveTab(dest.id);
+                      }}
                       className={`px-3.5 py-2.5 rounded-xl text-xs font-semibold tracking-wider whitespace-nowrap transition cursor-pointer shrink-0 flex items-center gap-1.5 ${
                         isActive
                           ? 'bg-[#D4AF37] text-[#1F181B] font-bold shadow-md'
+                          : isDestinationLocked
+                          ? 'bg-white/5 text-white/35 hover:bg-white/10 cursor-not-allowed'
                           : 'bg-white/5 text-white/70 hover:bg-white/15'
                       }`}
                     >
-                      <span className="opacity-70 font-mono">#{idx + 1}</span>
+                      <span className="opacity-70 font-mono">
+                        {isDestinationLocked ? '🔒' : `#${idx + 1}`}
+                      </span>
                       <span>{dest.title.split(' ')[0]} {dest.title.split(' ')[1] || ''}</span>
                       <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-black/40 text-white/90">20</span>
+                      {isActive && isClassicPlan && (
+                        <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-black/60 text-[#D4AF37] font-bold">YOUR PASS</span>
+                      )}
                     </button>
                   );
                 })}
@@ -1099,12 +1155,14 @@ function GalleryContent() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
               <div>
                 <h2 className="text-white font-serif text-2xl font-normal">
-                  {activeTab === 'all'
+                  {effectiveTab === 'all' && !isClassicPlan
                     ? 'Complete 240 Haute Couture Masterpiece Portfolio'
+                    : isClassicPlan
+                    ? `${currentDestConfig?.title} (Classic Pass • 20 Photos)`
                     : currentDestConfig?.title}
                 </h2>
                 <p className="text-white/60 text-xs sm:text-sm mt-0.5">
-                  {activeTab === 'all'
+                  {effectiveTab === 'all' && !isClassicPlan
                     ? 'Showing all 240 ultra-high definition editorial angles across 12 destinations'
                     : `${currentDestConfig?.venue} · ${currentDestConfig?.dest}`}
                 </p>
@@ -1511,6 +1569,50 @@ function GalleryContent() {
             <div className="mt-5 flex items-center justify-center gap-1.5 text-[10px] text-white/50">
               <ShieldCheck className="w-3.5 h-3.5 text-[#2E7D32]" />
               <span>Official 256-bit encrypted checkout via PayPal • Lifetime Access</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Upgrade to Grand VIP Modal for Classic Pass holders */}
+      {isUpgradeModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="relative max-w-lg w-full bg-[#181315] border-2 border-[#D4AF37] rounded-[36px] p-6 sm:p-8 shadow-2xl font-sans text-center">
+            <button
+              onClick={() => setIsUpgradeModalOpen(false)}
+              className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition border border-white/10 cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/50 text-xs font-bold uppercase tracking-widest text-[#D4AF37] mb-2">
+              <Gem className="w-3.5 h-3.5 text-[#D4AF37]" />
+              <span>GRAND VIP UPGRADE ($29)</span>
+            </span>
+
+            <h3 className="text-2xl font-serif text-white font-light mt-1">
+              Unlock All 12 Destinations (240 Photos)
+            </h3>
+            <p className="text-xs text-white/60 mt-1.5 leading-relaxed">
+              Your Classic Pass includes 20 photos for your selected location. Upgrade to Grand VIP to access all 12 global luxury destinations, complete 240-scene album, and 1-Click 4K ZIP download.
+            </p>
+
+            <div className="mt-5 p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3 text-left">
+              <p className="text-xs text-white/70 leading-relaxed">
+                • <strong className="text-[#D4AF37]">240 Haute Couture Masterpieces</strong>: Bali, Amalfi, Lake Como, Paris, NYC, Hanok, Kyoto, Udaipur, Santorini, Cabo, Liwa, Swiss Alps.<br />
+                • <strong className="text-[#D4AF37]">Full 4K ZIP Packaging</strong>: Instant download & complete email delivery.<br />
+                • <strong className="text-[#D4AF37]">Lifetime Digital Invitation Studio</strong>: Unlimited luxury cover selections.
+              </p>
+              <a
+                href="https://www.paypal.com/ncp/payment/LVRRE8SJKD3VA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3.5 px-6 rounded-xl bg-[#D4AF37] hover:bg-[#F3C669] text-[#1F181B] font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition active:scale-[0.99] cursor-pointer"
+              >
+                <CreditCard className="w-4 h-4 text-[#1F181B]" />
+                <span>Upgrade to Grand VIP ($29) via PayPal</span>
+                <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+              </a>
             </div>
           </div>
         </div>
