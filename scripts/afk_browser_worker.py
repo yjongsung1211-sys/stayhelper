@@ -191,6 +191,24 @@ async def execute_afk_browser_duties() -> Dict[str, Any]:
     except Exception as e:
         summary["errors"].append(f"유튜브 버퍼 점검 오류: {e}")
 
+    # 중간 복귀 체크
+    if get_system_idle_seconds() < 10.0:
+        print("  ⚠️ 대표님 복귀 감지 -> 즉시 제어권 반환.")
+        summary["interrupted_by_user"] = True
+        return summary
+
+    # 5. 글로벌 커뮤니티 무인 직접 홍보 (방법 2: 대표님 부재 중 4대 서비스 순환 배포)
+    try:
+        from autonomous_direct_promoter import execute_autonomous_promotion
+        print("  [Duty 5/5] 글로벌 커뮤니티 무인 직접 홍보 가동 (AFK 순환 모드)...")
+        promo_res = execute_autonomous_promotion(theme="auto", is_afk=True)
+        if promo_res.get("status") == "COOLDOWN_ACTIVE":
+            summary["tasks_completed"].append("무인 직접 홍보 대기 (계정 안전 2시간 쿨다운 유지)")
+        else:
+            summary["tasks_completed"].append(f"무인 직접 홍보 집행 ({promo_res.get('service', 'WeddingHelper')})")
+    except Exception as e:
+        summary["errors"].append(f"무인 직접 홍보 오류: {e}")
+
     summary["finished_at"] = datetime.now().isoformat()
     return summary
 

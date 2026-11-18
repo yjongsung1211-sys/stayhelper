@@ -177,6 +177,43 @@ def record_promotion_history(entry: Dict[str, Any]):
     with open(HISTORY_FILE, "w", encoding="utf-8") as f:
         json.dump(history, f, indent=2, ensure_ascii=False)
 
+def get_next_campaign_theme() -> str:
+    """4대 서비스(웨딩 -> 컬러 -> 스타일링 -> 스테이) 라운드로빈 순환"""
+    themes = ["wedding", "color", "styling", "stay"]
+    if not HISTORY_FILE.exists():
+        return "wedding"
+    try:
+        with open(HISTORY_FILE, "r", encoding="utf-8") as f:
+            history = json.load(f)
+        if not history:
+            return "wedding"
+        last_theme = history[-1].get("theme", "stay")
+        if last_theme in themes:
+            next_idx = (themes.index(last_theme) + 1) % len(themes)
+            return themes[next_idx]
+    except Exception:
+        pass
+    return "wedding"
+
+def is_cooldown_active(cooldown_seconds: int = 7200) -> bool:
+    """계정 보호를 위해 최소 2시간(7200초) 쿨다운 검사"""
+    if not HISTORY_FILE.exists():
+        return False
+    try:
+        with open(HISTORY_FILE, "r", encoding="utf-8") as f:
+            history = json.load(f)
+        if not history:
+            return False
+        last_ts_str = history[-1].get("timestamp")
+        if last_ts_str:
+            last_dt = datetime.fromisoformat(last_ts_str)
+            elapsed = (datetime.now() - last_dt).total_seconds()
+            if elapsed < cooldown_seconds:
+                return True
+    except Exception:
+        pass
+    return False
+
 def post_via_praw(campaign_key: str, target_sub: str) -> Dict[str, Any]:
     """Track A: PRAW Reddit API Posting"""
     if not (REDDIT_CLIENT_ID and REDDIT_CLIENT_SECRET and REDDIT_PASSWORD):
@@ -237,10 +274,18 @@ async def post_via_playwright(campaign_key: str, target_sub: str, headless: bool
         finally:
             await browser.close()
 
-def execute_autonomous_promotion(theme: str = "wedding") -> Dict[str, Any]:
-    """Main execution entrypoint"""
-    if theme not in CAMPAIGNS:
-        theme = "wedding"
+def execute_autonomous_promotion(theme: str = "wedding", is_afk: bool = False) -> Dict[str, Any]:
+    """Main execution entrypoint (AFK 무인 순환 지원)"""
+    if theme == "auto" or theme not in CAMPAIGNS:
+        theme = get_next_campaign_theme()
+
+    if is_afk and is_cooldown_active(cooldown_seconds=7200):
+        print("  ⏳ [무인 홍보] 계정 보호 세이프가드: 2시간 쿨다운 대기 중 (스팸 제재 방지)")
+        return {
+            "status": "COOLDOWN_ACTIVE",
+            "theme": theme,
+            "note": "2시간 이내 기발행 이력 존재 -> 계정 밴 방지 쿨다운 대기"
+        }
 
     campaign = CAMPAIGNS[theme]
     target_sub = campaign["subreddits"][0]  # e.g. SideProject (Safe & Allowed)
