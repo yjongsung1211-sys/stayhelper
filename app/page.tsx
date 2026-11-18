@@ -1264,10 +1264,11 @@ const MAKEUP_EYE_PRESETS = [
 ];
 
 const CARD_ASSET_VER = "?v=20261108_v1";
+const PAYPAL_COLORHELPER_URL = process.env.NEXT_PUBLIC_PAYPAL_COLORHELPER_URL || "https://www.paypal.com/ncp/payment/THK8UABNTYCMY";
 
 export default function ColorHelperPage() {
-  // ── 언어 상태 (기본 한국어, 쿼리/스토리지 지원) ─────────────────
-  const [lang, setLang] = useState<LangType>("ko");
+  // ── 언어 상태 (영어/일본어 전용, 쿼리/스토리지 지원) ─────────────
+  const [lang, setLang] = useState<LangType>("en");
   const t = UI_TEXT[lang];
 
   // ── State ───────────────────────────────────────────────────
@@ -1354,15 +1355,15 @@ export default function ColorHelperPage() {
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const qLang = urlParams.get("lang") as LangType | null;
-      if (qLang && ["ko", "en", "ja"].includes(qLang)) {
+      if (qLang && ["en", "ja"].includes(qLang)) {
         setLang(qLang);
       } else {
         const savedLang = localStorage.getItem("colorhelper_lang") as LangType | null;
-        if (savedLang && ["ko", "en", "ja"].includes(savedLang)) {
+        if (savedLang && ["en", "ja"].includes(savedLang)) {
           setLang(savedLang);
         } else {
-          // 한국어("ko") 기본 최우선 고정
-          setLang("ko");
+          // 지원 언어 중 영어를 기본으로 사용
+          setLang("en");
         }
       }
 
@@ -1923,31 +1924,25 @@ export default function ColorHelperPage() {
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* 다국어 전환 탭 [KO | EN | JA] */}
+          {/* 언어 전환 탭 [US | JP] */}
           <div className="inline-flex p-1 rounded-xl bg-gray-100 border border-gray-200 text-xs font-bold text-gray-600">
             <button
-              onClick={() => switchLanguage("ko")}
-              className={`px-2.5 py-1 rounded-lg transition ${
-                lang === "ko" ? "bg-white text-gray-900 shadow-sm" : "hover:text-gray-900"
-              }`}
-            >
-              🇰🇷 한국어
-            </button>
-            <button
               onClick={() => switchLanguage("en")}
+              aria-label="Switch language to US English"
               className={`px-2.5 py-1 rounded-lg transition ${
                 lang === "en" ? "bg-white text-gray-900 shadow-sm" : "hover:text-gray-900"
               }`}
             >
-              🇺🇸 English
+              US
             </button>
             <button
               onClick={() => switchLanguage("ja")}
+              aria-label="Switch language to Japanese"
               className={`px-2.5 py-1 rounded-lg transition ${
                 lang === "ja" ? "bg-white text-gray-900 shadow-sm" : "hover:text-gray-900"
               }`}
             >
-              🇯🇵 日本語
+              JP
             </button>
           </div>
 
@@ -1973,48 +1968,50 @@ export default function ColorHelperPage() {
       )}
 
       {/* ── HEADER ────────────────────────────────────────── */}
-      <header className="text-center mb-10">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E07A5F]/10 border border-[#E07A5F]/20 text-[#E07A5F] text-xs font-semibold tracking-wider uppercase mb-3">
+      <header className="relative isolate text-center mb-10 overflow-hidden rounded-[2rem] border border-[#FFB6A8]/60 bg-[linear-gradient(135deg,#FF9A9E_0%,#FAD0C4_58%,#FFE6B8_100%)] px-5 py-10 sm:px-10 sm:py-14 shadow-[0_18px_50px_rgba(224,122,95,0.18)]">
+        <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-24 -z-10 h-64 w-64 rounded-full bg-white/35 blur-3xl" />
+        <div aria-hidden="true" className="pointer-events-none absolute -bottom-28 -left-16 -z-10 h-64 w-64 rounded-full bg-[#FF6B6B]/20 blur-3xl" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/65 border border-white/80 text-[#8D4038] text-xs font-bold tracking-wider uppercase mb-4 shadow-sm backdrop-blur-sm">
           <Sparkles className="w-3.5 h-3.5" />
           {t.brandTag}
         </div>
-        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#1E1B18] mb-3">
+        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#332321] mb-3 [text-shadow:0_2px_0_rgba(255,255,255,0.72),0_8px_24px_rgba(125,56,47,0.12)]">
           {lang === "ko" ? (
             <>
-              퍼스널컬러<span className="text-[#E07A5F]">헬퍼</span>
+              퍼스널컬러<span className="text-[#C94F54]">헬퍼</span>
             </>
           ) : lang === "ja" ? (
             <>
-              パーソナルカラー<span className="text-[#E07A5F]">ヘルパー</span>
+              パーソナルカラー<span className="text-[#C94F54]">ヘルパー</span>
             </>
           ) : (
             <>
-              PERSONAL COLOR <span className="text-[#E07A5F]">HELPER</span>
+              PERSONAL COLOR <span className="text-[#C94F54]">HELPER</span>
             </>
           )}
         </h1>
-        <p className="text-sm sm:text-base text-gray-600 max-w-xl mx-auto leading-relaxed">
+        <p className="text-sm sm:text-base text-[#5F4844] max-w-xl mx-auto leading-relaxed">
           {t.subtitle}
         </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-3 mt-4 text-xs font-medium text-gray-500">
-          <span className="inline-flex items-center gap-1 bg-white px-2.5 py-1 rounded-full shadow-sm border border-gray-200">
+        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mt-5 text-xs font-semibold text-[#634B46]">
+          <span className="inline-flex items-center gap-1 bg-white/75 px-2.5 py-1 rounded-full shadow-sm border border-white/90 backdrop-blur-sm">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> {t.badgePrice}
           </span>
-          <span className="inline-flex items-center gap-1 bg-white px-2.5 py-1 rounded-full shadow-sm border border-gray-200">
+          <span className="inline-flex items-center gap-1 bg-white/75 px-2.5 py-1 rounded-full shadow-sm border border-white/90 backdrop-blur-sm">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> {t.badgePayPal}
           </span>
-          <span className="inline-flex items-center gap-1 bg-white px-2.5 py-1 rounded-full shadow-sm border border-gray-200">
+          <span className="inline-flex items-center gap-1 bg-white/75 px-2.5 py-1 rounded-full shadow-sm border border-white/90 backdrop-blur-sm">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> {t.badgeNoLogin}
           </span>
-          <span className="inline-flex items-center gap-1 bg-white px-2.5 py-1 rounded-full shadow-sm border border-gray-200">
+          <span className="inline-flex items-center gap-1 bg-white/75 px-2.5 py-1 rounded-full shadow-sm border border-white/90 backdrop-blur-sm">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> {t.badgeMatrix}
           </span>
         </div>
       </header>
 
       {/* ── STEP 1: 사진 등록 & 1초 프리셋 모델 선택 ──────────────── */}
-      <section className="bg-white rounded-3xl p-4 sm:p-7 lg:p-8 shadow-lg border border-gray-200/90 mb-8 overflow-hidden max-w-full box-border">
+      <section className="relative bg-[linear-gradient(145deg,#FFFFFF_0%,#FFFAF7_58%,#FFF2EA_100%)] rounded-3xl p-4 sm:p-7 lg:p-8 shadow-[0_18px_48px_rgba(103,64,49,0.10)] border border-[#F2D9D0] mb-8 overflow-hidden max-w-full box-border">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 sm:gap-6 mb-7 pb-6 border-b border-gray-100">
           <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
             <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-2xl bg-gradient-to-tr from-amber-100 to-[#E07A5F]/20 text-[#E07A5F] flex items-center justify-center shadow-inner flex-shrink-0">
@@ -2038,16 +2035,16 @@ export default function ColorHelperPage() {
             />
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 font-extrabold text-xs sm:text-sm border border-gray-300 shadow-xs transition"
+              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-[#FF6B6B] to-[#FF8C00] hover:from-[#F45B61] hover:to-[#F47A00] text-white font-extrabold text-xs sm:text-sm border border-white/50 shadow-[0_8px_18px_rgba(255,107,107,0.32)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_13px_24px_rgba(255,107,107,0.42)] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C94F54] focus-visible:ring-offset-2"
             >
-              <Upload className="w-4 h-4 text-gray-700" />
+              <Upload className="w-4 h-4 text-white" />
               <span>{t.uploadFileBtn}</span>
             </button>
 
             {!cameraActive ? (
               <button
                 onClick={startCamera}
-                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-[#E07A5F] hover:from-amber-600 hover:to-[#D0694E] text-white font-extrabold text-xs sm:text-sm shadow-sm transition"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-[#FF8C00] to-[#E85D68] hover:from-[#F47A00] hover:to-[#D94B58] text-white font-extrabold text-xs sm:text-sm shadow-[0_8px_18px_rgba(232,93,104,0.28)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_13px_24px_rgba(232,93,104,0.38)] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C94F54] focus-visible:ring-offset-2"
               >
                 <Camera className="w-4 h-4 text-white" />
                 <span>{t.cameraBtn}</span>
@@ -2108,7 +2105,7 @@ export default function ColorHelperPage() {
               <button
                 key={preset.id}
                 onClick={() => loadPresetModel(preset)}
-                className="flex items-center gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-2xl border border-gray-200 hover:border-[#E07A5F] hover:bg-[#FFFBF9] transition text-left group shadow-xs"
+                className="flex items-center gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-2xl border border-[#F0DCD5] bg-white/85 hover:border-[#E07A5F] hover:bg-[#FFF4EF] hover:-translate-y-1 hover:shadow-[0_12px_24px_rgba(224,122,95,0.16)] transition-all duration-300 text-left group shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E07A5F] focus-visible:ring-offset-2"
               >
                 <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${preset.avatarBg} flex items-center justify-center flex-shrink-0 shadow-inner`}>
                   <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-white shadow-sm" style={{ backgroundColor: preset.lipHex }} />
@@ -2882,7 +2879,7 @@ export default function ColorHelperPage() {
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                         {lang === "ko"
                           ? `LIVE 환율 $1 ≈ ₩${luxuryFxKrw.toLocaleString()} · 클린룸 재고 ${luxurySkuCount}종 동기화`
-                          : `LIVE FX $1 ≈ ₩${luxuryFxKrw.toLocaleString()} · ${luxurySkuCount} Verified SKUs`}
+                          : `LIVE US INVENTORY · ${luxurySkuCount} Verified SKUs`}
                       </span>
                     )}
                   </div>
@@ -3145,15 +3142,74 @@ export default function ColorHelperPage() {
               </div>
             </div>
 
-            {/* 공식 페이팔 스마트 버튼 마운트 영역 */}
-            <div className="mb-3">
-              <div className="flex items-center justify-between text-[11px] text-gray-500 font-medium mb-2 px-1">
-                <span>{lang === "ko" ? "공식 페이팔 & 신용/체크카드 결제" : lang === "ja" ? "公式PayPal＆クレジットカード決済" : "Official PayPal & Credit/Debit Card"}</span>
+            {/* 공식 페이팔 100% 라이브 결제 버튼 영역 (Sandbox 오류 원천 차단) */}
+            <div className="mb-4 space-y-2.5">
+              <div className="flex items-center justify-between text-[11px] text-gray-500 font-medium px-1">
+                <span>{lang === "ko" ? "공식 페이팔 & 글로벌 카드 결제" : lang === "ja" ? "公式PayPal＆クレジットカード決済" : "Official PayPal & Card Checkout"}</span>
                 <span className="text-emerald-600 font-bold flex items-center gap-1">
                   <ShieldCheck className="w-3.5 h-3.5" /> 256-bit SSL
                 </span>
               </div>
-              <div id="paypal-button-container" className="min-h-[96px] w-full" />
+
+              {/* 1. Official PayPal Gold Live Button */}
+              <a
+                href={PAYPAL_COLORHELPER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3.5 px-4 rounded-2xl bg-[#FFC439] hover:bg-[#F2BA36] text-[#003087] font-black text-sm shadow-md transition flex items-center justify-center gap-2 cursor-pointer border border-[#E0A526] group"
+              >
+                <span className="italic font-black text-base tracking-wider">PayPal</span>
+                <span>
+                  {lang === "ko"
+                    ? "$1 페이팔 계정으로 결제하기"
+                    : lang === "ja"
+                    ? "$1 PayPalアカウントで決済する"
+                    : "Pay $1 with PayPal"}
+                </span>
+                <ExternalLink className="w-4 h-4 ml-1 opacity-70 group-hover:translate-x-0.5 transition-transform" />
+              </a>
+
+              {/* 2. Official PayPal Dark Card Button */}
+              <a
+                href={PAYPAL_COLORHELPER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3.5 px-4 rounded-2xl bg-[#2C2E2F] hover:bg-[#1C1E1F] text-white font-extrabold text-xs shadow-md transition flex items-center justify-center gap-2 cursor-pointer border border-black/20 group"
+              >
+                <CreditCard className="w-4 h-4 text-gray-300" />
+                <span>
+                  {lang === "ko"
+                    ? "직불카드 또는 신용카드 결제 ($1)"
+                    : lang === "ja"
+                    ? "デビットカードまたはクレジットカード決済 ($1)"
+                    : "Debit or Credit Card Checkout ($1)"}
+                </span>
+                <ExternalLink className="w-4 h-4 ml-1 opacity-70 group-hover:translate-x-0.5 transition-transform" />
+              </a>
+
+              {/* 3. Unlock Report Confirmation Button (After Payment) */}
+              <div className="pt-3 border-t border-gray-100 text-center">
+                <p className="text-[11px] text-gray-500 mb-2">
+                  {lang === "ko"
+                    ? "페이팔 결제 창에서 $1 결제를 마친 후 아래 버튼을 누르면 리포트가 즉시 해금됩니다."
+                    : lang === "ja"
+                    ? "PayPal決済画面で $1 の支払いを完了後、下のボタンを押すとレポートが即時解除されます。"
+                    : "After completing your $1 payment on PayPal, tap below to unlock your report instantly."}
+                </p>
+                <button
+                  onClick={() => executePayment("single")}
+                  className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 hover:from-emerald-700 hover:to-teal-800 text-white font-black text-xs shadow-md transition flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <CheckCircle2 className="w-4 h-4 text-emerald-200" />
+                  <span>
+                    {lang === "ko"
+                      ? "✓ 결제 완료 확인 & 12톤 상세 리포트 열기"
+                      : lang === "ja"
+                      ? "✓ 決済完了の確認＆12タイプ詳細レポートを開く"
+                      : "✓ Confirm Payment & Unlock Full Report"}
+                  </span>
+                </button>
+              </div>
             </div>
 
 
