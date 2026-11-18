@@ -43,16 +43,20 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // If audioBase64 is provided, first transcribe via Node WAV STT engine if WAV or via Gemini if valid API key
-    if (audioBase64 && !effectiveTranscript) {
-      try {
-        const cleanB64 = audioBase64.includes(',') ? audioBase64.split(',')[1] : audioBase64;
-        const buf = Buffer.from(cleanB64, 'base64');
-        const sttRes = await transcribeWavBufferInNode(buf, targetLang);
-        if (sttRes.transcript && sttRes.transcript.trim()) {
-          effectiveTranscript = sttRes.transcript.trim();
-        }
-      } catch {}
+    // 🔒 Strictly require client-provided API key; do NOT expose server-side GEMINI_API_KEY to anonymous requests
+    const geminiKey = apiKey && apiKey.trim();
+    const hasValidGeminiKey = Boolean(geminiKey);
+
+    // If audioBase64 is provided and no client API key, block server-side Google Cloud billing
+    if (audioBase64 && !effectiveTranscript && !hasValidGeminiKey) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error: '🔒 음성 AI 분석을 위해 상단 [설정]에서 개인 Gemini 또는 OpenAI API 키를 입력해 주세요. (서버 과금 방지 0원 원칙)',
+          requiresApiKey: true,
+        },
+        { status: 401 }
+      );
     }
 
     const systemPrompt = `You are NoteHelper AI, an executive voice note summarizer, speech transcriber, and language coaching engine.
@@ -83,15 +87,11 @@ Output pure JSON only without markdown code blocks.`;
       ? `Transcript to analyze:\n"""\n${effectiveTranscript}\n"""\nTarget Learning Language: ${targetLang}\nMode: ${mode}`
       : `Please listen to the attached audio file carefully. Transcribe it accurately into the 'transcript' field, and then produce the executive summary, actionItems, and languageCoaching in target language: ${targetLang}.`;
 
-    // 🔒 Strictly require client-provided API key; do NOT expose server-side GEMINI_API_KEY to anonymous requests
-    const geminiKey = apiKey && apiKey.trim();
-    const hasValidGeminiKey = Boolean(geminiKey && !geminiKey.startsWith('AQ.'));
-
-    // 1. Google Gemini (if valid AIza key is provided)
+    // 1. Google Gemini (if valid API key is provided)
     if ((provider === 'gemini' || audioBase64) && hasValidGeminiKey) {
-      let activeModel = model || 'gemini-2.0-flash';
-      if (activeModel.includes('1.5')) {
-        activeModel = 'gemini-2.0-flash';
+      let activeModel = model || 'gemini-3.8-flash';
+      if (activeModel.includes('1.5') || activeModel.includes('2.0')) {
+        activeModel = 'gemini-3.8-flash';
       }
 
       const geminiParts: any[] = [{ text: `${systemPrompt}\n\n${userPrompt}` }];
@@ -229,27 +229,8 @@ Output pure JSON only without markdown code blocks.`;
       } catch {}
     }
 
-    // 5. Built-in Cloud Frontier AI Fallback (works 24/7 with zero API key setup!)
+    // 5. Zero-Cost Local Parsing Fallback (0 KRW - Google Cloud 과금 원천 차단)
     if (effectiveTranscript) {
-      try {
-        const aiJsonStr = await callCloudFrontierAi(`${systemPrompt}\n\n${userPrompt}`, {
-          temperature: 0.2,
-          maxTokens: 1400,
-          jsonMode: true,
-        });
-        if (aiJsonStr) {
-          const cleanJson = aiJsonStr.replace(/^```json\s*|\s*```$/g, '').trim();
-          const parsed = JSON.parse(cleanJson);
-          if (!parsed.transcript) parsed.transcript = effectiveTranscript;
-          return NextResponse.json({
-            ok: true,
-            data: parsed,
-            provider: 'gemini',
-            model: 'cloud-frontier-ai',
-          });
-        }
-      } catch {}
-
       const sentences = effectiveTranscript
         .split(/(?<=[.?!다요죠함음])\s+|\n+/)
         .map((s) => s.trim())
@@ -269,8 +250,8 @@ Output pure JSON only without markdown code blocks.`;
             roleplaySuggestion: firstSentence,
           },
         },
-        provider: 'gemini',
-        model: 'cloud-stt',
+        provider: 'local-zero-cost',
+        model: 'zero-cost-parser',
       });
     }
 

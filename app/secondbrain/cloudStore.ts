@@ -190,6 +190,19 @@ export function resolveUniversalLanguage(rawLangOrText?: string): UniversalLangu
   };
 }
 
+function getGeminiApiKey(): string {
+  // 🔒 ZERO GOOGLE CLOUD BILLING GUARANTEE:
+  // Strictly block runaway Google Cloud Gemini charges.
+  // Unless explicitly authorized via ENABLE_GOOGLE_CLOUD_BILLING=true, always return empty string
+  // to ensure 0 KRW billing and force seamless switch to free frontier AI / local Ollama.
+  if (process.env.ENABLE_GOOGLE_CLOUD_BILLING !== 'true') {
+    return '';
+  }
+  if (process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY.trim()) return process.env.GEMINI_API_KEY.trim();
+  if (process.env.GOOGLE_GENERATIVE_AI_API_KEY && process.env.GOOGLE_GENERATIVE_AI_API_KEY.trim()) return process.env.GOOGLE_GENERATIVE_AI_API_KEY.trim();
+  return '';
+}
+
 export async function callCloudFrontierAi(
   prompt: string,
   options?: {
@@ -202,16 +215,13 @@ export async function callCloudFrontierAi(
   const temp = options?.temperature ?? 0.2;
   const maxTokens = options?.maxTokens ?? 1600;
 
-  // 1) Cloud Frontier AI #1: Google Gemini API (gemini-2.5-flash / gemini-2.0-flash)
-  const geminiKey =
-    process.env.GEMINI_API_KEY ||
-    process.env.GOOGLE_GENERATIVE_AI_API_KEY ||
-    process.env.NANOBANANA_API_KEY;
-  if (geminiKey && !geminiKey.startsWith('AQ.')) {
+  // 1) Cloud Frontier AI #1: Google Gemini API (gemini-3.8-flash)
+  const geminiKey = getGeminiApiKey();
+  if (geminiKey) {
     try {
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 11000);
-      const model = process.env.GEMINI_TEXT_MODEL || 'gemini-2.0-flash';
+      const timer = setTimeout(() => controller.abort(), 25000);
+      const model = process.env.GEMINI_TEXT_MODEL || process.env.GEMINI_MODEL || 'gemini-3.8-flash';
       const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(
         geminiKey
       )}`;
@@ -1284,16 +1294,13 @@ export async function transcribeWavBufferInNode(
   const durationSec = Math.round((totalFrames / sampleRate) * 10) / 10;
   const resolvedLang = resolveUniversalLanguage(langHint || 'auto');
 
-  // 1) Try Cloud Frontier Multimodal Audio STT (Gemini 2.0 Flash Audio / OpenAI Whisper-1) for 100+ languages & code-switching
-  const geminiKey =
-    process.env.GEMINI_API_KEY ||
-    process.env.GOOGLE_GENERATIVE_AI_API_KEY ||
-    process.env.NANOBANANA_API_KEY;
-  if (geminiKey && !geminiKey.startsWith('AQ.') && wavBuffer.length < 15 * 1024 * 1024) {
+  // 1) Try Cloud Frontier Multimodal Audio STT (Gemini 3.8 Flash Audio / OpenAI Whisper-1) for 100+ languages & code-switching
+  const geminiKey = getGeminiApiKey();
+  if (geminiKey && wavBuffer.length < 15 * 1024 * 1024) {
     try {
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 14000);
-      const model = process.env.GEMINI_TEXT_MODEL || 'gemini-2.0-flash';
+      const timer = setTimeout(() => controller.abort(), 20000);
+      const model = process.env.GEMINI_TEXT_MODEL || process.env.GEMINI_MODEL || 'gemini-3.8-flash';
       const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(
         geminiKey
       )}`;
