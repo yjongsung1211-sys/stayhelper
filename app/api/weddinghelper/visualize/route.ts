@@ -219,7 +219,9 @@ export async function POST(req: NextRequest) {
 
     // 👑 VERIFIED VIP PREMIUM SYNTHESIS ENGINE
     // As a paid VIP customer ($19 VIP Pass), they receive bespoke AI photo transformation.
-    if (apiKey && isVerifiedVip) {
+    // 🔒 ZERO GOOGLE CLOUD BILLING GUARANTEE: Requires explicit ENABLE_GOOGLE_CLOUD_BILLING=true
+    const isBillingEnabled = process.env.ENABLE_GOOGLE_CLOUD_BILLING === 'true';
+    if (apiKey && isVerifiedVip && isBillingEnabled) {
       const candidateModels = [
         'gemini-2.5-flash-image',
         'gemini-3-pro-image-preview',

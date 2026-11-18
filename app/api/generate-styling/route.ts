@@ -183,7 +183,9 @@ export async function POST(req: NextRequest) {
 
       // PRIORITY 1.5: Paid Pro Subscriber Google Gemini Image Engine
       // As a paying $19/mo Pro member, provide premium bespoke AI virtual try-on
-      if (!isSuccess) {
+      // 🔒 ZERO GOOGLE CLOUD BILLING GUARANTEE: Requires explicit ENABLE_GOOGLE_CLOUD_BILLING=true
+      const isBillingEnabled = process.env.ENABLE_GOOGLE_CLOUD_BILLING === 'true';
+      if (!isSuccess && isBillingEnabled) {
         const apiKey = process.env.GEMINI_PAID_API_KEY || process.env.GEMINI_API_KEY || '';
         if (apiKey) {
           try {
