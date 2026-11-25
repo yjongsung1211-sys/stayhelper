@@ -1,0 +1,202 @@
+[
+  {
+    "id": "ls-ko-01",
+    "lang": "Korean",
+    "bcp47": "ko-KR",
+    "category": "Seoul Cafe",
+    "sentence": "아이스 아메리카노 테이크아웃이요!",
+    "romanization": "[A-i-seu A-me-ri-ka-no te-i-keu-a-ut-i-yo!]",
+    "meaning": "Iced Americano to go, please!",
+    "tip": "In Seoul, 'Eol-juk-a' means drinking Iced Americano even in freezing winter."
+  },
+  {
+    "id": "ls-ko-02",
+    "lang": "Korean",
+    "bcp47": "ko-KR",
+    "category": "Tax-Free Shopping",
+    "sentence": "택스프리 되나요?",
+    "romanization": "[Taek-seu-peu-ri doe-na-yo?]",
+    "meaning": "Is tax-free refund available?",
+    "tip": "Show your passport at Olive Young or department stores for instant VAT refund."
+  },
+  {
+    "id": "ls-ko-03",
+    "lang": "Korean",
+    "bcp47": "ko-KR",
+    "category": "Midnight Taxi",
+    "sentence": "기사님, 여기 앞에서 내려주세요!",
+    "romanization": "[Gi-sa-nim, yeo-gi ap-e-seo nae-ryeo-ju-se-yo!]",
+    "meaning": "Driver, please drop me off right here!",
+    "tip": "Addressing your driver as 'Gi-sa-nim' is the polite local standard in Korea."
+  },
+  {
+    "id": "ls-ko-04",
+    "lang": "Korean",
+    "bcp47": "ko-KR",
+    "category": "2026 K-Slang",
+    "sentence": "오늘도 갓생 살았다!",
+    "romanization": "[O-neul-do gat-saeng sal-at-da!]",
+    "meaning": "I lived a super productive God-life today!",
+    "tip": "'Gat-saeng' (God + Life) celebrates disciplined, fulfilling daily routines."
+  },
+  {
+    "id": "ls-en-01",
+    "lang": "English",
+    "bcp47": "en-US",
+    "category": "Cafe Order",
+    "sentence": "Can I get an iced Americano with light ice?",
+    "romanization": "[캔 아이 겟 언 아이스트 아메리카노 윗 라잇 아이스?]",
+    "meaning": "아이스 아메리카노 얼음 조금만 넣어주시겠어요?",
+    "tip": "'light ice' = 얼음 적게, 'no ice' = 얼음 빼고 주문할 때 쓰는 원어민 필수 표현!"
+  },
+  {
+    "id": "ls-en-02",
+    "lang": "English",
+    "bcp47": "en-US",
+    "category": "Tax-Free",
+    "sentence": "Can I get a tax refund form for this?",
+    "romanization": "[캔 아이 겟 어 택스 리펀드 폼 포 디스?]",
+    "meaning": "이거 면세 환급 서류 받을 수 있나요?",
+    "tip": "해외 백화점 결제 직전 여권과 함께 말하면 세금 즉시 환급!"
+  },
+  {
+    "id": "ls-en-03",
+    "lang": "English",
+    "bcp47": "en-US",
+    "category": "Uber / Taxi",
+    "sentence": "Could you drop me off right in front of the hotel?",
+    "romanization": "[쿠쥬 드랍 미 오프 라잇 인 프론트 오브 더 호텔?]",
+    "meaning": "호텔 바로 앞에서 내려주시겠어요?",
+    "tip": "'drop me off ~'는 차에서 내려달라고 할 때 원어민이 100% 쓰는 동사구!"
+  },
+  {
+    "id": "ls-en-04",
+    "lang": "English",
+    "bcp47": "en-US",
+    "category": "2026 Slang",
+    "sentence": "No way, that is honestly next level!",
+    "romanization": "[노 웨이, 댓 이즈 어니스트리 넥스트 레벨!]",
+    "meaning": "말도 안 돼, 이건 진짜 차원이 다르다!",
+    "tip": "'next level'은 퀄리티가 압도적일 때 쓰는 최고의 원어민 칭찬!"
+  },
+  {
+    "id": "ls-ja-01",
+    "lang": "Japanese",
+    "bcp47": "ja-JP",
+    "category": "Tokyo Cafe",
+    "sentence": "氷少なめでお願いします。",
+    "romanization": "[코오리 스쿠나메데 오네가이시마스.]",
+    "meaning": "얼음은 적게 넣어주세요.",
+    "tip": "'少なめ(스쿠나메)'는 얼음·시럽·밥 양을 줄여달라고 할 때 만능 표현!"
+  },
+  {
+    "id": "ls-ja-02",
+    "lang": "Japanese",
+    "bcp47": "ja-JP",
+    "category": "Duty-Free",
+    "sentence": "免税手続きをお願いできますか？",
+    "romanization": "[멘제이 테츠즈키오 오네가이 데키마스카?]",
+    "meaning": "면세 절차 부탁드려도 될까요?",
+    "tip": "'免税(멘제이)'만 말해도 일본 돈키호테·백화점에서 바로 면세 카운터로 안내!"
+  },
+  {
+    "id": "ls-ja-03",
+    "lang": "Japanese",
+    "bcp47": "ja-JP",
+    "category": "Tokyo Taxi",
+    "sentence": "この辺りで止めていただけますか？",
+    "romanization": "[코노 아타리데 토메테 이타다케마스카?]",
+    "meaning": "이 근처에서 세워주시겠어요?",
+    "tip": "'この辺り(코노 아타리)' = 이 근처! 호텔 앞에서 정중하게 하차할 때 필수!"
+  },
+  {
+    "id": "ls-ja-04",
+    "lang": "Japanese",
+    "bcp47": "ja-JP",
+    "category": "Travel Photo",
+    "sentence": "すみません、写真を撮っていただけますか？",
+    "romanization": "[스미마센, 샤신오 톳테 이타다케마스카?]",
+    "meaning": "실례지만 사진 좀 찍어주실 수 있나요?",
+    "tip": "낯선 사람에게 정중하게 촬영을 부탁하는 완벽한 일본어!"
+  },
+  {
+    "id": "ls-zh-01",
+    "lang": "Chinese",
+    "bcp47": "zh-CN",
+    "category": "Cafe Order",
+    "sentence": "请给我少冰半糖。",
+    "romanization": "[칭 게이 워 샤오빙 반탕.]",
+    "meaning": "얼음 적게, 당도는 반으로 해주세요.",
+    "tip": "'少冰(샤오빙)=얼음 적게', '半糖(반탕)=당도 50%' 밀크티 필수 공식!"
+  },
+  {
+    "id": "ls-zh-02",
+    "lang": "Chinese",
+    "bcp47": "zh-CN",
+    "category": "Tax Refund",
+    "sentence": "请问这里可以办理退税吗？",
+    "romanization": "[칭원 쩌리 커이 반리 투이쉐이 마?]",
+    "meaning": "혹시 여기서 세금 환급 처리가 되나요?",
+    "tip": "'退税(투이쉐이)' = Tax Refund! 대형 백화점 쇼핑 필수 단어!"
+  },
+  {
+    "id": "ls-zh-03",
+    "lang": "Chinese",
+    "bcp47": "zh-CN",
+    "category": "Didi Taxi",
+    "sentence": "师傅，请在前面路口停一下。",
+    "romanization": "[스푸, 칭 짜이 치엔미엔 루커우 팅 이샤.]",
+    "meaning": "기사님, 앞 교차로에서 잠시 세워주세요.",
+    "tip": "중국 택시 기사님을 '师傅(스푸)'라고 부르면 친절하고 정중합니다!"
+  },
+  {
+    "id": "ls-zh-04",
+    "lang": "Chinese",
+    "bcp47": "zh-CN",
+    "category": "2026 Slang",
+    "sentence": "这也太绝了吧！",
+    "romanization": "[쩌 예 타이 쥐에러 바!]",
+    "meaning": "이거 진짜 대박(미쳤다)이잖아!",
+    "tip": "'绝了(쥐에러)'는 맛·비주얼·실력이 완벽할 때 쓰는 중국 유행어 1위!"
+  },
+  {
+    "id": "ls-es-01",
+    "lang": "Spanish",
+    "bcp47": "es-ES",
+    "category": "Madrid Cafe",
+    "sentence": "Un café solo con hielo, por favor.",
+    "romanization": "[운 카페 솔로 콘 이엘로, 포르 파보르.]",
+    "meaning": "아이스 블랙커피 한 잔 주세요.",
+    "tip": "스페인에서는 에스프레소와 얼음 잔을 따로 주는 'café con hielo'가 정석!"
+  },
+  {
+    "id": "ls-es-02",
+    "lang": "Spanish",
+    "bcp47": "es-ES",
+    "category": "Tax-Free",
+    "sentence": "¿Me puede hacer el formulario de Tax Free?",
+    "romanization": "[메 푸에데 아세르 엘 포르물라리오 데 택스 프리?]",
+    "meaning": "택스프리 서류 작성해 주실 수 있나요?",
+    "tip": "스페인 자라·명품 매장에서 결제 전 여권과 함께 건네는 마법의 문장!"
+  },
+  {
+    "id": "ls-es-03",
+    "lang": "Spanish",
+    "bcp47": "es-ES",
+    "category": "Taxi Drop-off",
+    "sentence": "Por favor, déjeme aquí en la esquina.",
+    "romanization": "[포르 파보르, 데헤메 아키 엔 라 에스키나.]",
+    "meaning": "여기 모퉁이에서 내려주세요.",
+    "tip": "'déjeme aquí(데헤메 아키)' = 저를 여기에 내려주세요!"
+  },
+  {
+    "id": "ls-es-04",
+    "lang": "Spanish",
+    "bcp47": "es-ES",
+    "category": "Travel Photo",
+    "sentence": "Perdona, ¿nos puedes sacar una foto?",
+    "romanization": "[페르도나, 노스 푸에데스 사카르 우나 포토?]",
+    "meaning": "실례지만 저희 사진 한 장 찍어주실 수 있나요?",
+    "tip": "스페인에서는 'tomar'보다 'sacar una foto'를 훨씬 자주 씁니다!"
+  }
+]

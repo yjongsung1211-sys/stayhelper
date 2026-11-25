@@ -1,0 +1,322 @@
+'use client';
+
+import React, { useMemo, useState } from 'react';
+import Link from 'next/link';
+import lessonsData from '@/data/loopshadow_lessons.json';
+
+interface ShadowLesson {
+  id: string;
+  lang: string;
+  bcp47: string;
+  category: string;
+  sentence: string;
+  romanization: string;
+  meaning: string;
+  tip: string;
+}
+
+const LESSONS: ShadowLesson[] = lessonsData as ShadowLesson[];
+const LANGS = ['All', 'Korean', 'English', 'Japanese', 'Chinese', 'Spanish'] as const;
+
+function calcMatchScore(target: string, spoken: string): number {
+  const clean = (s: string) =>
+    s
+      .toLowerCase()
+      .replace(/[.,!?;:'"¿¡()[\]{}。、！？，\-]/g, '')
+      .trim();
+  const t = clean(target);
+  const sp = clean(spoken);
+  if (!t || !sp) return 0;
+  if (t === sp) return 100;
+  const tChars = Array.from(t.replace(/\s+/g, ''));
+  const spStr = sp.replace(/\s+/g, '');
+  let hits = 0;
+  for (const ch of tChars) {
+    if (spStr.includes(ch)) hits++;
+  }
+  return Math.min(99, Math.round((hits / Math.max(tChars.length, 1)) * 100));
+}
+
+export default function LoopShadowPage() {
+  const [selectedLang, setSelectedLang] = useState<string>('All');
+  const [speed, setSpeed] = useState<number>(1.0);
+  const [speakingId, setSpeakingId] = useState<string | null>(null);
+  const [listeningId, setListeningId] = useState<string | null>(null);
+  const [results, setResults] = useState<Record<string, { spoken: string; score: number }>>({});
+  const [micNote, setMicNote] = useState<string>('');
+
+  const langCounts = useMemo(() => {
+    const map: Record<string, number> = { All: LESSONS.length };
+    for (const l of LESSONS) {
+      map[l.lang] = (map[l.lang] || 0) + 1;
+    }
+    return map;
+  }, []);
+
+  const filtered = useMemo(() => {
+    if (selectedLang === 'All') return LESSONS;
+    return LESSONS.filter((l) => l.lang === selectedLang);
+  }, [selectedLang]);
+
+  const playVoice = (lesson: ShadowLesson, rate: number) => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(lesson.sentence);
+    utter.lang = lesson.bcp47;
+    utter.rate = rate;
+    utter.onstart = () => setSpeakingId(lesson.id);
+    utter.onend = () => setSpeakingId(null);
+    utter.onerror = () => setSpeakingId(null);
+    window.speechSynthesis.speak(utter);
+  };
+
+  const startShadowCheck = (lesson: ShadowLesson) => {
+    if (typeof window === 'undefined') return;
+    const SpeechRec = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRec) {
+      setMicNote('Voice check works best in Chrome or Edge desktop/mobile browsers.');
+      return;
+    }
+    setMicNote('');
+    const rec = new SpeechRec();
+    rec.lang = lesson.bcp47;
+    rec.interimResults = false;
+    rec.maxAlternatives = 1;
+    setListeningId(lesson.id);
+
+    rec.onresult = (event: any) => {
+      const spoken = event?.results?.[0]?.[0]?.transcript || '';
+      const score = calcMatchScore(lesson.sentence, spoken);
+      setResults((prev) => ({ ...prev, [lesson.id]: { spoken, score } }));
+      setListeningId(null);
+    };
+    rec.onerror = () => {
+      setListeningId(null);
+      setMicNote('Microphone permission denied or no speech detected. Please try again.');
+    };
+    rec.onend = () => setListeningId(null);
+    rec.start();
+  };
+
+  return (
+    <div className="min-h-screen bg-white text-neutral-950 selection:bg-neutral-900 selection:text-white">
+      {/* Header */}
+      <header className="sticky top-0 z-30 border-b border-neutral-200 bg-white/95 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+          <div className="flex items-center gap-3">
+            <span className="text-lg font-bold tracking-tight text-neutral-950">LOOPSHADOW</span>
+            <span className="rounded-full border border-neutral-200 bg-neutral-50 px-2.5 py-0.5 text-[11px] font-medium text-neutral-600">
+              100% Free Forever &middot; Zero Auto-Renewal Traps
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/beautyhelper"
+              className="hidden rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs font-semibold text-neutral-700 transition hover:border-neutral-900 sm:inline-block"
+            >
+              BeautyHelper
+            </Link>
+            <Link
+              href="/colorhelper"
+              className="rounded-full bg-neutral-950 px-3.5 py-1.5 text-xs font-semibold text-white transition hover:bg-neutral-800"
+            >
+              Free Color Test &rarr;
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="border-b border-neutral-100 bg-neutral-50/60">
+        <div className="mx-auto max-w-6xl px-5 py-12 md:py-16">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500">
+            INSTANT BROWSER SHADOWING &middot; ZERO LATENCY &middot; NO PAYWALL
+          </p>
+          <h1 className="mt-3 max-w-3xl text-3xl font-bold tracking-tight text-neutral-950 md:text-5xl md:leading-[1.12]">
+            Practice real travel &amp; daily phrases out loud—100% free, no trial traps.
+          </h1>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-neutral-600 md:text-base">
+            Tired of $160/year subscription traps and 4-second AI chat delays? Listen at 0.75&times; or 1.0&times; native speed and shadow{' '}
+            <strong className="font-semibold text-neutral-900">{LESSONS.length} curated daily sentences</strong> directly in your browser with instant pronunciation matching.
+          </p>
+
+          {/* Language Filter & Speed Toggle */}
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-wrap gap-2">
+              {LANGS.map((lang) => {
+                const active = selectedLang === lang;
+                return (
+                  <button
+                    key={lang}
+                    onClick={() => setSelectedLang(lang)}
+                    className={`rounded-full px-4 py-2 text-xs font-semibold transition cursor-pointer ${
+                      active
+                        ? 'bg-neutral-950 text-white'
+                        : 'border border-neutral-200 bg-white text-neutral-700 hover:border-neutral-400'
+                    }`}
+                  >
+                    {lang}{' '}
+                    <span className={active ? 'text-neutral-300' : 'text-neutral-400'}>
+                      ({langCounts[lang] || 0})
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white p-1">
+              {[0.75, 1.0].map((r) => (
+                <button
+                  key={r}
+                  onClick={() => setSpeed(r)}
+                  className={`rounded-full px-3 py-1 text-xs font-semibold transition cursor-pointer ${
+                    speed === r ? 'bg-neutral-950 text-white' : 'text-neutral-600 hover:text-neutral-950'
+                  }`}
+                >
+                  {r === 0.75 ? '0.75x Slow' : '1.0x Native'}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {micNote && (
+            <p className="mt-4 rounded-xl border border-neutral-200 bg-white px-4 py-2 text-xs text-neutral-600">
+              {micNote}
+            </p>
+          )}
+        </div>
+      </section>
+
+      {/* Lessons Grid */}
+      <main className="mx-auto max-w-6xl px-5 py-10">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          {filtered.map((lesson) => {
+            const isPlaying = speakingId === lesson.id;
+            const isListening = listeningId === lesson.id;
+            const res = results[lesson.id];
+
+            return (
+              <article
+                key={lesson.id}
+                className="flex flex-col justify-between rounded-2xl border border-neutral-200 bg-white p-6 transition hover:border-neutral-400"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="rounded-md bg-neutral-100 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-neutral-700">
+                      {lesson.lang} &middot; {lesson.category}
+                    </span>
+                    {res && (
+                      <span className="rounded-full bg-neutral-950 px-2.5 py-0.5 text-[11px] font-bold text-white">
+                        Match {res.score}%
+                      </span>
+                    )}
+                  </div>
+
+                  <h2 className="mt-4 text-xl font-bold tracking-tight text-neutral-950">
+                    {lesson.sentence}
+                  </h2>
+                  <p className="mt-1 text-xs font-medium text-neutral-500">{lesson.romanization}</p>
+                  <p className="mt-2 text-sm font-semibold text-neutral-800">{lesson.meaning}</p>
+                  <p className="mt-3 rounded-xl bg-neutral-50 px-3.5 py-2.5 text-xs leading-relaxed text-neutral-600">
+                    {lesson.tip}
+                  </p>
+
+                  {res && (
+                    <p className="mt-2 text-xs text-neutral-500">
+                      You said: <span className="font-semibold text-neutral-900">&ldquo;{res.spoken}&rdquo;</span>
+                    </p>
+                  )}
+                </div>
+
+                {/* Controls */}
+                <div className="mt-5 flex flex-wrap gap-2 border-t border-neutral-100 pt-4">
+                  <button
+                    onClick={() => playVoice(lesson, speed)}
+                    className="flex-1 rounded-xl border border-neutral-900 bg-neutral-950 px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-neutral-800 cursor-pointer"
+                  >
+                    {isPlaying ? 'Playing...' : `Listen (${speed}x)`}
+                  </button>
+                  <button
+                    onClick={() => startShadowCheck(lesson)}
+                    className={`flex-1 rounded-xl border px-4 py-2.5 text-xs font-semibold transition cursor-pointer ${
+                      isListening
+                        ? 'border-neutral-950 bg-neutral-200 text-neutral-950'
+                        : 'border-neutral-300 bg-white text-neutral-900 hover:border-neutral-900'
+                    }`}
+                  >
+                    {isListening ? 'Listening... Speak Now' : 'Shadow & Check Mic'}
+                  </button>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        {/* Partner 1:1 Native Tutor Section (Affiliate Revenue) */}
+        <section className="mt-14 rounded-2xl border border-neutral-200 bg-neutral-50 p-6 md:p-8">
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
+            <div className="max-w-xl">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-neutral-400">
+                READY FOR REAL HUMAN CONVERSATION?
+              </p>
+              <h3 className="mt-1 text-xl font-bold text-neutral-950">
+                Practice 1-on-1 with Verified Native Tutors
+              </h3>
+              <p className="mt-2 text-xs leading-relaxed text-neutral-600">
+                LoopShadow is 100% free forever for daily solo drills. When you are ready to speak with real native teachers in Seoul, Tokyo, or Madrid, book flexible pay-per-lesson sessions with our trusted language partners.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="https://www.italki.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-neutral-950 px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-neutral-800"
+              >
+                Explore italki Tutors &rarr;
+              </a>
+              <a
+                href="https://preply.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-neutral-300 bg-white px-5 py-2.5 text-xs font-semibold text-neutral-900 transition hover:border-neutral-900"
+              >
+                Explore Preply Tutors &rarr;
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Cross-Promotion Hub: Helper Family */}
+        <section className="mt-12 border-t border-neutral-200 pt-10">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-neutral-400">
+            EXPLORE THE HELPER FAMILY (100% FREE &amp; CURATED)
+          </p>
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {[
+              { name: 'BeautyHelper', desc: 'K-Beauty 12-season shade & US lowest price tracker', href: '/beautyhelper' },
+              { name: 'PersonalColorHelper', desc: 'Free 12-season Warm vs Cool virtual draping', href: 'https://personalcolorhelper.com' },
+              { name: 'StylingHelper', desc: 'Authorized US designer bag stock & markdowns', href: 'https://stylinghelper.com' },
+              { name: 'WeddingHelper', desc: 'Lake Como & Bali pre-wedding photo previews', href: 'https://weddinghelper.love' },
+              { name: 'StayHelper', desc: '4K luxury hotel VIP perks & room upgrades', href: 'https://www.thestayhelper.com' },
+            ].map((s) => (
+              <a
+                key={s.name}
+                href={s.href}
+                target={s.href.startsWith('http') ? '_blank' : undefined}
+                rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className="group rounded-2xl border border-neutral-200 bg-white p-4 transition hover:border-neutral-900"
+              >
+                <h4 className="text-sm font-bold text-neutral-950 group-hover:underline">{s.name} &rarr;</h4>
+                <p className="mt-1 text-xs leading-relaxed text-neutral-600">{s.desc}</p>
+              </a>
+            ))}
+          </div>
+          <p className="mt-6 text-center text-[11px] text-neutral-400">
+            Disclosure: LoopShadow is 100% free with zero subscriptions. Some tutor links may earn a partner commission at no extra cost to you.
+          </p>
+        </section>
+      </main>
+    </div>
+  );
+}
