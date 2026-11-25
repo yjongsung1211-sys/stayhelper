@@ -36,3 +36,17 @@ next-env.d.ts
 data/secondbrain_kernel.db*
 data/secondbrain_kernel*.log
 data/secondbrain_kernel.pid
+
+# --- System Hygiene (2026-11-25 Cleanup) ---
+scratch/
+backups/
+archive/
+models/
+output/
+remotion_studio/output/
+youtube_paper_studio/output/
+token*.json
+client_secret*.json
+*.mp4
+*.wav
+*.gguf

@@ -1387,60 +1387,8 @@ export async function transcribeWavBufferInNode(
     chunks.push(buf);
   }
 
-  const googleKey = 'AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw';
-  const primaryLang = resolvedLang.bcp47 || 'ko-KR';
-
-  const recognizeChunkWithLang = async (chunkBuf: Buffer, langBcp47: string): Promise<string> => {
-    try {
-      const endpoint = `http://www.google.com/speech-api/v2/recognize?client=chromium&lang=${encodeURIComponent(
-        langBcp47
-      )}&key=${googleKey}&pFilter=0`;
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': `audio/l16; rate=${sampleRate}` },
-        body: new Uint8Array(chunkBuf),
-      });
-      const text = await res.text();
-      const lines = text.split('\n').filter((l) => l.trim().length > 0);
-      for (const line of lines) {
-        try {
-          const parsed = JSON.parse(line);
-          if (Array.isArray(parsed.result) && parsed.result.length > 0) {
-            const alts = parsed.result[0]?.alternative;
-            if (Array.isArray(alts) && alts.length > 0) {
-              const best = alts
-                .slice(0, 2)
-                .reduce((a, b) =>
-                  (b.transcript || '').trim().length > (a.transcript || '').trim().length ? b : a
-                );
-              if (best && best.transcript) {
-                return cleanDomainTerms(best.transcript.trim());
-              }
-            }
-          }
-        } catch {}
-      }
-    } catch {}
-    return '';
-  };
-
-  const results = await Promise.all(
-    chunks.map(async (chunkBuf) => {
-      const primaryText = await recognizeChunkWithLang(chunkBuf, primaryLang);
-      if (primaryText) return primaryText;
-
-      const fallbackLangs = ['ko-KR', 'en-US', 'zh-CN', 'ja-JP'].filter((l) => l !== primaryLang);
-      const fallbackCandidates = await Promise.all(
-        fallbackLangs.map((l) => recognizeChunkWithLang(chunkBuf, l))
-      );
-      const nonEmpty = fallbackCandidates.filter(Boolean);
-      if (nonEmpty.length > 0) {
-        return nonEmpty.reduce((a, b) => (b.length > a.length ? b : a));
-      }
-      return '';
-    })
-  );
-
-  const combined = cleanDomainTerms(results.filter(Boolean).join(' ').trim());
-  return { transcript: combined, durationSec };
+  // [ZERO EXTERNAL STT API POLICY] 구글 Speech API 호출 영구 금지 (안티그래비티 전담)
+  void resolvedLang;
+  void chunks;
+  return { transcript: '', durationSec };
 }

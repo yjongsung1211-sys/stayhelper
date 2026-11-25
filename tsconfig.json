@@ -37,6 +37,8 @@
     "node_modules",
     "remotion_studio",
     "scratch",
+    "archive",
+    "backups",
     "dist_secondbrain_standalone"
   ]
 }
