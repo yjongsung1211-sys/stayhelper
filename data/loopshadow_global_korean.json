@@ -1,0 +1,102 @@
+[
+  {
+    "id": "ko-01",
+    "category": "Seoul Cafe",
+    "korean": "아이스 아메리카노 테이크아웃이요!",
+    "romanization": "[A-i-seu A-me-ri-ka-no te-i-keu-a-ut-i-yo!]",
+    "en": "Iced Americano to go, please!",
+    "es": "¡Un americano helado para llevar, por favor!",
+    "tipEn": "In Seoul, 'Eol-juk-a' means drinking Iced Americano even in freezing winter.",
+    "tipEs": "En Seúl, 'Eol-juk-a' significa tomar café helado incluso en pleno invierno."
+  },
+  {
+    "id": "ko-02",
+    "category": "Olive Young & Shopping",
+    "korean": "이거 제일 잘 나가요?",
+    "romanization": "[I-geo je-il jal na-ga-yo?]",
+    "en": "Is this the #1 bestseller?",
+    "es": "¿Es este el producto más vendido?",
+    "tipEn": "Ask this at Olive Young in Myeongdong or Seongsu to find what locals actually buy.",
+    "tipEs": "Usa esta frase en Olive Young para descubrir qué compran realmente los coreanos."
+  },
+  {
+    "id": "ko-03",
+    "category": "Tax-Free Refund",
+    "korean": "택스프리 되나요?",
+    "romanization": "[Taek-seu-peu-ri doe-na-yo?]",
+    "en": "Is tax-free refund available?",
+    "es": "¿Tienen devolución de impuestos Tax-Free?",
+    "tipEn": "Show your passport before paying at Olive Young or department stores for instant VAT refund.",
+    "tipEs": "Muestra tu pasaporte antes de pagar para obtener el descuento inmediato."
+  },
+  {
+    "id": "ko-04",
+    "category": "Midnight Taxi",
+    "korean": "기사님, 여기 앞에서 내려주세요!",
+    "romanization": "[Gi-sa-nim, yeo-gi ap-e-seo nae-ryeo-ju-se-yo!]",
+    "en": "Driver, please drop me off right here!",
+    "es": "¡Señor conductor, déjeme justo aquí!",
+    "tipEn": "Calling your driver 'Gi-sa-nim' is the polite Seoul standard.",
+    "tipEs": "Llamar 'Gi-sa-nim' al conductor es la forma respetuosa y natural en Corea."
+  },
+  {
+    "id": "ko-05",
+    "category": "K-BBQ & Dining",
+    "korean": "삼겹살 2인분하고 된장찌개 주세요.",
+    "romanization": "[Sam-gyeop-sal i-in-bun-ha-go doen-jang-jji-gae ju-se-yo.]",
+    "en": "Two servings of pork belly and soybean paste stew, please.",
+    "es": "Dos porciones de samgyeopsal y sopa de pasta de soja, por favor.",
+    "tipEn": "Ordering 'Doenjang-jjigae' alongside Samgyeopsal is the ultimate local K-BBQ combo.",
+    "tipEs": "Pedir doenjang-jjigae junto con el samgyeopsal es el combo clásico de Seúl."
+  },
+  {
+    "id": "ko-06",
+    "category": "Han River Ramen",
+    "korean": "라면 끓이는 기계 어디 있어요?",
+    "romanization": "[Ra-myeon kkeul-i-neun gi-gye eo-di iss-eo-yo?]",
+    "en": "Where is the ramen cooking machine?",
+    "es": "¿Dónde está la máquina para cocinar ramen?",
+    "tipEn": "24h convenience stores by the Han River have instant foil-cooker machines!",
+    "tipEs": "Las tiendas 24h junto al Río Han tienen máquinas automáticas de ramen."
+  },
+  {
+    "id": "ko-07",
+    "category": "Life4Cuts Photo Booth",
+    "korean": "우리 포즈 뭐 할래?",
+    "romanization": "[U-ri po-jeu mwo hal-lae?]",
+    "en": "What pose should we do?",
+    "es": "¿Qué pose hacemos para la foto?",
+    "tipEn": "Life4Cuts (Insaeng-nekeot) booths are a must-do hangout in Hongdae & Seongsu.",
+    "tipEs": "Las cabinas Life4Cuts son parada obligatoria con amigos en Hongdae."
+  },
+  {
+    "id": "ko-08",
+    "category": "Hanbok & Palace",
+    "korean": "한복 입으면 무료 입장인가요?",
+    "romanization": "[Han-bok ip-eu-myeon mu-ryo ip-jang-in-ga-yo?]",
+    "en": "Is entry free if I wear a Hanbok?",
+    "es": "¿La entrada es gratis si uso Hanbok?",
+    "tipEn": "Wearing a rented Hanbok gives 100% free entry to Gyeongbokgung Palace.",
+    "tipEs": "Alquilar un Hanbok te da entrada 100% gratuita al Palacio Gyeongbokgung."
+  },
+  {
+    "id": "ko-09",
+    "category": "K-Drama Reaction",
+    "korean": "진짜 대박! 어이없네!",
+    "romanization": "[Jin-jja dae-bak! Eo-i-eop-ne!]",
+    "en": "Unbelievable! That's ridiculous!",
+    "es": "¡Increíble! ¡No puede ser!",
+    "tipEn": "Spoken daily in Seoul to react to shocking or exciting news.",
+    "tipEs": "Expresiones súper reales que escucharás todos los días en Seúl."
+  },
+  {
+    "id": "ko-10",
+    "category": "2026 K-Slang",
+    "korean": "오늘도 갓생 살았다!",
+    "romanization": "[O-neul-do gat-saeng sal-at-da!]",
+    "en": "I lived a super productive God-life today!",
+    "es": "¡Hoy viví un día súper productivo!",
+    "tipEn": "'Gat-saeng' (God + Life) praises disciplined, fulfilling daily routines.",
+    "tipEs": "'Gat-saeng' (Vida de Dios) celebra los días llenos de buenos hábitos."
+  }
+]

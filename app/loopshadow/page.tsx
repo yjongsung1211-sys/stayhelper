@@ -2,21 +2,20 @@
 
 import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
-import lessonsData from '@/data/loopshadow_lessons.json';
+import lessonsData from '@/data/loopshadow_global_korean.json';
 
-interface ShadowLesson {
+interface GlobalKoreanLesson {
   id: string;
-  lang: string;
-  bcp47: string;
   category: string;
-  sentence: string;
+  korean: string;
   romanization: string;
-  meaning: string;
-  tip: string;
+  en: string;
+  es: string;
+  tipEn: string;
+  tipEs: string;
 }
 
-const LESSONS: ShadowLesson[] = lessonsData as ShadowLesson[];
-const LANGS = ['All', 'Korean', 'English', 'Japanese', 'Chinese', 'Spanish'] as const;
+const LESSONS: GlobalKoreanLesson[] = lessonsData as GlobalKoreanLesson[];
 
 function calcMatchScore(target: string, spoken: string): number {
   const clean = (s: string) =>
@@ -37,32 +36,29 @@ function calcMatchScore(target: string, spoken: string): number {
   return Math.min(99, Math.round((hits / Math.max(tChars.length, 1)) * 100));
 }
 
-export default function LoopShadowPage() {
-  const [selectedLang, setSelectedLang] = useState<string>('All');
+export default function LoopShadowGlobalPage() {
+  const [uiLang, setUiLang] = useState<'en' | 'es'>('en');
+  const [selectedCat, setSelectedCat] = useState<string>('All');
   const [speed, setSpeed] = useState<number>(1.0);
   const [speakingId, setSpeakingId] = useState<string | null>(null);
   const [listeningId, setListeningId] = useState<string | null>(null);
   const [results, setResults] = useState<Record<string, { spoken: string; score: number }>>({});
   const [micNote, setMicNote] = useState<string>('');
 
-  const langCounts = useMemo(() => {
-    const map: Record<string, number> = { All: LESSONS.length };
-    for (const l of LESSONS) {
-      map[l.lang] = (map[l.lang] || 0) + 1;
-    }
-    return map;
+  const categories = useMemo(() => {
+    return ['All', ...Array.from(new Set(LESSONS.map((l) => l.category)))];
   }, []);
 
   const filtered = useMemo(() => {
-    if (selectedLang === 'All') return LESSONS;
-    return LESSONS.filter((l) => l.lang === selectedLang);
-  }, [selectedLang]);
+    if (selectedCat === 'All') return LESSONS;
+    return LESSONS.filter((l) => l.category === selectedCat);
+  }, [selectedCat]);
 
-  const playVoice = (lesson: ShadowLesson, rate: number) => {
+  const playVoice = (lesson: GlobalKoreanLesson, rate: number) => {
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
-    const utter = new SpeechSynthesisUtterance(lesson.sentence);
-    utter.lang = lesson.bcp47;
+    const utter = new SpeechSynthesisUtterance(lesson.korean);
+    utter.lang = 'ko-KR';
     utter.rate = rate;
     utter.onstart = () => setSpeakingId(lesson.id);
     utter.onend = () => setSpeakingId(null);
@@ -70,29 +66,37 @@ export default function LoopShadowPage() {
     window.speechSynthesis.speak(utter);
   };
 
-  const startShadowCheck = (lesson: ShadowLesson) => {
+  const startShadowCheck = (lesson: GlobalKoreanLesson) => {
     if (typeof window === 'undefined') return;
     const SpeechRec = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SpeechRec) {
-      setMicNote('Voice check works best in Chrome or Edge desktop/mobile browsers.');
+      setMicNote(
+        uiLang === 'en'
+          ? 'Voice check works best in Chrome or Edge desktop/mobile browsers.'
+          : 'El micrófono funciona mejor en navegadores Chrome o Edge.'
+      );
       return;
     }
     setMicNote('');
     const rec = new SpeechRec();
-    rec.lang = lesson.bcp47;
+    rec.lang = 'ko-KR';
     rec.interimResults = false;
     rec.maxAlternatives = 1;
     setListeningId(lesson.id);
 
     rec.onresult = (event: any) => {
       const spoken = event?.results?.[0]?.[0]?.transcript || '';
-      const score = calcMatchScore(lesson.sentence, spoken);
+      const score = calcMatchScore(lesson.korean, spoken);
       setResults((prev) => ({ ...prev, [lesson.id]: { spoken, score } }));
       setListeningId(null);
     };
     rec.onerror = () => {
       setListeningId(null);
-      setMicNote('Microphone permission denied or no speech detected. Please try again.');
+      setMicNote(
+        uiLang === 'en'
+          ? 'Microphone permission denied or no speech detected. Please try again.'
+          : 'No se detectó voz o falta permiso de micrófono. Inténtalo de nuevo.'
+      );
     };
     rec.onend = () => setListeningId(null);
     rec.start();
@@ -106,21 +110,34 @@ export default function LoopShadowPage() {
           <div className="flex items-center gap-3">
             <span className="text-lg font-bold tracking-tight text-neutral-950">LOOPSHADOW</span>
             <span className="rounded-full border border-neutral-200 bg-neutral-50 px-2.5 py-0.5 text-[11px] font-medium text-neutral-600">
-              100% Free Forever &middot; Zero Auto-Renewal Traps
+              100% Free Korean Shadowing
             </span>
           </div>
           <div className="flex items-center gap-2">
+            {/* EN / ES Toggle for Global Learners */}
+            <div className="flex rounded-full border border-neutral-200 bg-neutral-50 p-0.5 text-[11px] font-semibold">
+              <button
+                onClick={() => setUiLang('en')}
+                className={`rounded-full px-2.5 py-1 transition cursor-pointer ${
+                  uiLang === 'en' ? 'bg-neutral-950 text-white' : 'text-neutral-600'
+                }`}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setUiLang('es')}
+                className={`rounded-full px-2.5 py-1 transition cursor-pointer ${
+                  uiLang === 'es' ? 'bg-neutral-950 text-white' : 'text-neutral-600'
+                }`}
+              >
+                ES
+              </button>
+            </div>
             <Link
-              href="/beautyhelper"
-              className="hidden rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs font-semibold text-neutral-700 transition hover:border-neutral-900 sm:inline-block"
+              href="/loopshadow/kr"
+              className="rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs font-semibold text-neutral-700 transition hover:border-neutral-900"
             >
-              BeautyHelper
-            </Link>
-            <Link
-              href="/colorhelper"
-              className="rounded-full bg-neutral-950 px-3.5 py-1.5 text-xs font-semibold text-white transition hover:bg-neutral-800"
-            >
-              Free Color Test &rarr;
+              한국인 외국어 학습 &rarr;
             </Link>
           </div>
         </div>
@@ -130,41 +147,43 @@ export default function LoopShadowPage() {
       <section className="border-b border-neutral-100 bg-neutral-50/60">
         <div className="mx-auto max-w-6xl px-5 py-12 md:py-16">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500">
-            INSTANT BROWSER SHADOWING &middot; ZERO LATENCY &middot; NO PAYWALL
+            {uiLang === 'en'
+              ? 'FOR SEOUL TRAVELERS & K-CULTURE FANS · ZERO AUTO-RENEWAL TRAPS'
+              : 'PARA VIAJEROS A SEÚL Y FANS DEL K-DRAMA · 100% GRATIS SIN TRAMPAS'}
           </p>
           <h1 className="mt-3 max-w-3xl text-3xl font-bold tracking-tight text-neutral-950 md:text-5xl md:leading-[1.12]">
-            Practice real travel &amp; daily phrases out loud—100% free, no trial traps.
+            {uiLang === 'en'
+              ? 'Speak real Seoul Korean out loud—100% free in your browser.'
+              : 'Habla coreano real de Seúl en voz alta—100% gratis en tu navegador.'}
           </h1>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-neutral-600 md:text-base">
-            Tired of $160/year subscription traps and 4-second AI chat delays? Listen at 0.75&times; or 1.0&times; native speed and shadow{' '}
-            <strong className="font-semibold text-neutral-900">{LESSONS.length} curated daily sentences</strong> directly in your browser with instant pronunciation matching.
+            {uiLang === 'en'
+              ? `No $160/year subscription traps and zero AI lag. Practice ${LESSONS.length} essential Seoul phrases (cafes, Olive Young, taxis, K-BBQ) with native speed control and instant mic feedback.`
+              : `Sin suscripciones de $160/año ni demoras. Practica ${LESSONS.length} frases esenciales de Seúl (cafés, Olive Young, taxis, K-BBQ) con voz nativa y evaluación de micrófono al instante.`}
           </p>
 
-          {/* Language Filter & Speed Toggle */}
+          {/* Filter & Speed */}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-wrap gap-2">
-              {LANGS.map((lang) => {
-                const active = selectedLang === lang;
+              {categories.map((cat) => {
+                const active = selectedCat === cat;
                 return (
                   <button
-                    key={lang}
-                    onClick={() => setSelectedLang(lang)}
-                    className={`rounded-full px-4 py-2 text-xs font-semibold transition cursor-pointer ${
+                    key={cat}
+                    onClick={() => setSelectedCat(cat)}
+                    className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition cursor-pointer ${
                       active
                         ? 'bg-neutral-950 text-white'
                         : 'border border-neutral-200 bg-white text-neutral-700 hover:border-neutral-400'
                     }`}
                   >
-                    {lang}{' '}
-                    <span className={active ? 'text-neutral-300' : 'text-neutral-400'}>
-                      ({langCounts[lang] || 0})
-                    </span>
+                    {cat}
                   </button>
                 );
               })}
             </div>
 
-            <div className="flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white p-1">
+            <div className="flex shrink-0 items-center gap-1.5 rounded-full border border-neutral-200 bg-white p-1">
               {[0.75, 1.0].map((r) => (
                 <button
                   key={r}
@@ -187,7 +206,7 @@ export default function LoopShadowPage() {
         </div>
       </section>
 
-      {/* Lessons Grid */}
+      {/* Lessons */}
       <main className="mx-auto max-w-6xl px-5 py-10">
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           {filtered.map((lesson) => {
@@ -203,7 +222,7 @@ export default function LoopShadowPage() {
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="rounded-md bg-neutral-100 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-neutral-700">
-                      {lesson.lang} &middot; {lesson.category}
+                      {lesson.category}
                     </span>
                     {res && (
                       <span className="rounded-full bg-neutral-950 px-2.5 py-0.5 text-[11px] font-bold text-white">
@@ -212,29 +231,37 @@ export default function LoopShadowPage() {
                     )}
                   </div>
 
-                  <h2 className="mt-4 text-xl font-bold tracking-tight text-neutral-950">
-                    {lesson.sentence}
+                  <h2 className="mt-4 text-2xl font-bold tracking-tight text-neutral-950">
+                    {lesson.korean}
                   </h2>
                   <p className="mt-1 text-xs font-medium text-neutral-500">{lesson.romanization}</p>
-                  <p className="mt-2 text-sm font-semibold text-neutral-800">{lesson.meaning}</p>
+                  <p className="mt-2 text-sm font-semibold text-neutral-800">
+                    {uiLang === 'en' ? lesson.en : lesson.es}
+                  </p>
                   <p className="mt-3 rounded-xl bg-neutral-50 px-3.5 py-2.5 text-xs leading-relaxed text-neutral-600">
-                    {lesson.tip}
+                    {uiLang === 'en' ? lesson.tipEn : lesson.tipEs}
                   </p>
 
                   {res && (
                     <p className="mt-2 text-xs text-neutral-500">
-                      You said: <span className="font-semibold text-neutral-900">&ldquo;{res.spoken}&rdquo;</span>
+                      {uiLang === 'en' ? 'You said:' : 'Dijiste:'}{' '}
+                      <span className="font-semibold text-neutral-900">&ldquo;{res.spoken}&rdquo;</span>
                     </p>
                   )}
                 </div>
 
-                {/* Controls */}
                 <div className="mt-5 flex flex-wrap gap-2 border-t border-neutral-100 pt-4">
                   <button
                     onClick={() => playVoice(lesson, speed)}
                     className="flex-1 rounded-xl border border-neutral-900 bg-neutral-950 px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-neutral-800 cursor-pointer"
                   >
-                    {isPlaying ? 'Playing...' : `Listen (${speed}x)`}
+                    {isPlaying
+                      ? uiLang === 'en'
+                        ? 'Playing...'
+                        : 'Reproduciendo...'
+                      : uiLang === 'en'
+                      ? `Listen (${speed}x)`
+                      : `Escuchar (${speed}x)`}
                   </button>
                   <button
                     onClick={() => startShadowCheck(lesson)}
@@ -244,7 +271,13 @@ export default function LoopShadowPage() {
                         : 'border-neutral-300 bg-white text-neutral-900 hover:border-neutral-900'
                     }`}
                   >
-                    {isListening ? 'Listening... Speak Now' : 'Shadow & Check Mic'}
+                    {isListening
+                      ? uiLang === 'en'
+                        ? 'Listening... Speak Now'
+                        : 'Escuchando... Habla ahora'
+                      : uiLang === 'en'
+                      ? 'Shadow & Check Mic'
+                      : 'Repetir y Evaluar'}
                   </button>
                 </div>
               </article>
@@ -252,45 +285,49 @@ export default function LoopShadowPage() {
           })}
         </div>
 
-        {/* Partner 1:1 Native Tutor Section (Affiliate Revenue) */}
+        {/* Native Korean Tutors Partner CTA */}
         <section className="mt-14 rounded-2xl border border-neutral-200 bg-neutral-50 p-6 md:p-8">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
             <div className="max-w-xl">
               <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-neutral-400">
-                READY FOR REAL HUMAN CONVERSATION?
+                {uiLang === 'en' ? 'PRACTICE WITH REAL SEOUL TUTORS' : 'PRACTICA CON TUTORES NATIVOS DE SEÚL'}
               </p>
               <h3 className="mt-1 text-xl font-bold text-neutral-950">
-                Practice 1-on-1 with Verified Native Tutors
+                {uiLang === 'en'
+                  ? 'Book 1-on-1 Korean Conversation Lessons'
+                  : 'Reserva Clases 1 a 1 de Coreano Nativo'}
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-neutral-600">
-                LoopShadow is 100% free forever for daily solo drills. When you are ready to speak with real native teachers in Seoul, Tokyo, or Madrid, book flexible pay-per-lesson sessions with our trusted language partners.
+                {uiLang === 'en'
+                  ? 'LoopShadow is 100% free forever for solo drills. Ready to talk with real native Korean teachers? Try flexible pay-per-lesson sessions.'
+                  : 'LoopShadow es 100% gratis siempre. ¿Listo para conversar con profesores nativos de Corea? Prueba sesiones flexibles por clase.'}
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
               <a
-                href="https://www.italki.com/"
+                href="https://www.italki.com/en/teachers/korean"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-full bg-neutral-950 px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-neutral-800"
               >
-                Explore italki Tutors &rarr;
+                Korean Tutors on italki &rarr;
               </a>
               <a
-                href="https://preply.com/"
+                href="https://preply.com/en/online/korean-tutors"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-full border border-neutral-300 bg-white px-5 py-2.5 text-xs font-semibold text-neutral-900 transition hover:border-neutral-900"
               >
-                Explore Preply Tutors &rarr;
+                Korean Tutors on Preply &rarr;
               </a>
             </div>
           </div>
         </section>
 
-        {/* Cross-Promotion Hub: Helper Family */}
+        {/* Helper Family Cross-Promotion Hub */}
         <section className="mt-12 border-t border-neutral-200 pt-10">
           <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-neutral-400">
-            EXPLORE THE HELPER FAMILY (100% FREE &amp; CURATED)
+            EXPLORE THE HELPER FAMILY (SEOUL K-BEAUTY &amp; LIFESTYLE TOOLS)
           </p>
           <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {[
@@ -313,7 +350,7 @@ export default function LoopShadowPage() {
             ))}
           </div>
           <p className="mt-6 text-center text-[11px] text-neutral-400">
-            Disclosure: LoopShadow is 100% free with zero subscriptions. Some tutor links may earn a partner commission at no extra cost to you.
+            Disclosure: LoopShadow is 100% free with zero paywalls. Some tutor links may earn a partner commission at no extra cost to you.
           </p>
         </section>
       </main>

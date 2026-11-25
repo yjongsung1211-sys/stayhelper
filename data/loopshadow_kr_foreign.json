@@ -1,0 +1,152 @@
+[
+  {
+    "id": "kr-en-01",
+    "lang": "영어 (EN)",
+    "bcp47": "en-US",
+    "category": "해외 카페",
+    "sentence": "Can I get an iced Americano with light ice?",
+    "pronunciation": "[캔 아이 겟 언 아이스트 아메리카노 윗 라잇 아이스?]",
+    "meaning": "아이스 아메리카노 얼음 조금만 넣어주시겠어요?",
+    "tip": "'light ice'는 얼음 적게, 'no ice'는 얼음 빼고 주문할 때 쓰는 원어민 치트키!"
+  },
+  {
+    "id": "kr-en-02",
+    "lang": "영어 (EN)",
+    "bcp47": "en-US",
+    "category": "면세 쇼핑",
+    "sentence": "Can I get a tax refund form for this?",
+    "pronunciation": "[캔 아이 겟 어 택스 리펀드 폼 포 디스?]",
+    "meaning": "이거 면세 환급 서류 받을 수 있나요?",
+    "tip": "해외 백화점 결제 직전 여권과 함께 말하면 세금 즉시 환급!"
+  },
+  {
+    "id": "kr-en-03",
+    "lang": "영어 (EN)",
+    "bcp47": "en-US",
+    "category": "우버·택시",
+    "sentence": "Could you drop me off right in front of the hotel?",
+    "pronunciation": "[쿠쥬 드랍 미 오프 라잇 인 프론트 오브 더 호텔?]",
+    "meaning": "호텔 바로 앞에서 내려주시겠어요?",
+    "tip": "'drop me off ~'는 차에서 내려달라고 할 때 원어민이 100% 쓰는 동사구!"
+  },
+  {
+    "id": "kr-ja-01",
+    "lang": "일본어 (JA)",
+    "bcp47": "ja-JP",
+    "category": "도쿄 카페",
+    "sentence": "氷少なめでお願いします。",
+    "pronunciation": "[코오리 스쿠나메데 오네가이시마스.]",
+    "meaning": "얼음은 적게 넣어주세요.",
+    "tip": "'少なめ(스쿠나메)'는 얼음·시럽·밥 양을 줄여달라고 할 때 만능 표현!"
+  },
+  {
+    "id": "kr-ja-02",
+    "lang": "일본어 (JA)",
+    "bcp47": "ja-JP",
+    "category": "돈키호테 면세",
+    "sentence": "免税手続きをお願いできますか？",
+    "pronunciation": "[멘제이 테츠즈키오 오네가이 데키마스카?]",
+    "meaning": "면세 절차 부탁드려도 될까요?",
+    "tip": "'免税(멘제이)'만 말해도 직원이 바로 면세 카운터로 안내해 줍니다!"
+  },
+  {
+    "id": "kr-ja-03",
+    "lang": "일본어 (JA)",
+    "bcp47": "ja-JP",
+    "category": "일본 택시",
+    "sentence": "この辺りで止めていただけますか？",
+    "pronunciation": "[코노 아타리데 토메테 이타다케마스카?]",
+    "meaning": "이 근처에서 세워주시겠어요?",
+    "tip": "'この辺り(코노 아타리)' = 이 근처! 좁은 골목이나 호텔 앞에서 쓰기 딱 좋은 표현!"
+  },
+  {
+    "id": "kr-zh-01",
+    "lang": "중국어 (ZH)",
+    "bcp47": "zh-CN",
+    "category": "중국 카페",
+    "sentence": "请给我少冰半糖。",
+    "pronunciation": "[칭 게이 워 샤오빙 반탕.]",
+    "meaning": "얼음 적게, 당도는 반으로 해주세요.",
+    "tip": "'少冰(샤오빙)=얼음 적게', '半糖(반탕)=당도 50%' 밀크티 필수 공식!"
+  },
+  {
+    "id": "kr-zh-02",
+    "lang": "중국어 (ZH)",
+    "bcp47": "zh-CN",
+    "category": "중국 면세",
+    "sentence": "请问这里可以办理退税吗？",
+    "pronunciation": "[칭원 쩌리 커이 반리 투이쉐이 마?]",
+    "meaning": "혹시 여기서 세금 환급 처리가 되나요?",
+    "tip": "'退税(투이쉐이)' = Tax Refund! 대형 백화점 쇼핑 필수 단어!"
+  },
+  {
+    "id": "kr-zh-03",
+    "lang": "중국어 (ZH)",
+    "bcp47": "zh-CN",
+    "category": "중국 디디택시",
+    "sentence": "师傅，请在前面路口停一下。",
+    "pronunciation": "[스푸, 칭 짜이 치엔미엔 루커우 팅 이샤.]",
+    "meaning": "기사님, 앞 교차로에서 잠시 세워주세요.",
+    "tip": "중국 택시 기사님을 '师傅(스푸)'라고 불러야 친절하고 정중합니다!"
+  },
+  {
+    "id": "kr-es-01",
+    "lang": "스페인어 (ES)",
+    "bcp47": "es-ES",
+    "category": "스페인 카페",
+    "sentence": "Un café solo con hielo, por favor.",
+    "pronunciation": "[운 카페 솔로 콘 이엘로, 포르 파보르.]",
+    "meaning": "아이스 블랙커피 한 잔 주세요.",
+    "tip": "스페인에서는 에스프레소와 얼음 잔을 따로 주는 'café con hielo'가 정석!"
+  },
+  {
+    "id": "kr-es-02",
+    "lang": "스페인어 (ES)",
+    "bcp47": "es-ES",
+    "category": "스페인 면세",
+    "sentence": "¿Me puede hacer el formulario de Tax Free?",
+    "pronunciation": "[메 푸에데 아세르 엘 포르물라리오 데 택스 프리?]",
+    "meaning": "택스프리 서류 작성해 주실 수 있나요?",
+    "tip": "자라·명품 매장에서 결제 전 여권과 함께 건네는 마법의 문장!"
+  },
+  {
+    "id": "kr-es-03",
+    "lang": "스페인어 (ES)",
+    "bcp47": "es-ES",
+    "category": "여행 사진",
+    "sentence": "Perdona, ¿nos puedes sacar una foto?",
+    "pronunciation": "[페르도나, 노스 푸에데스 사카르 우나 포토?]",
+    "meaning": "실례지만 저희 사진 한 장 찍어주실 수 있나요?",
+    "tip": "스페인에서는 'tomar'보다 'sacar una foto'를 훨씬 자주 씁니다!"
+  },
+  {
+    "id": "kr-id-01",
+    "lang": "인니어 (ID)",
+    "bcp47": "id-ID",
+    "category": "발리 카페",
+    "sentence": "Tolong esnya sedikit dan kurang manis ya.",
+    "pronunciation": "[톨롱 에스냐 스디킷 단 쿠랑 마니스 야.]",
+    "meaning": "얼음 조금, 덜 달게 부탁해요.",
+    "tip": "'kurang manis(쿠랑 마니스)' = 덜 달게! 발리·동남아 카페 생존 1순위!"
+  },
+  {
+    "id": "kr-id-02",
+    "lang": "인니어 (ID)",
+    "bcp47": "id-ID",
+    "category": "발리 그랩",
+    "sentence": "Pak, tolong berhenti di depan sini ya.",
+    "pronunciation": "[팍, 톨롱 브르흔티 디 드판 시니 야.]",
+    "meaning": "기사님, 여기 바로 앞에 세워주세요.",
+    "tip": "남성 기사님께 'Pak(팍)'을 붙이면 현지인처럼 예의 바른 호칭이 됩니다!"
+  },
+  {
+    "id": "kr-id-03",
+    "lang": "인니어 (ID)",
+    "bcp47": "id-ID",
+    "category": "발리 인생샷",
+    "sentence": "Permisi, bisa tolong fotokan kami sebentar?",
+    "pronunciation": "[프르미시, 비사 톨롱 포토칸 카미 스븐타르?]",
+    "meaning": "실례지만 잠깐 저희 사진 좀 찍어주실 수 있나요?",
+    "tip": "'Permisi(실례합니다)' + 'sebentar(잠깐만)' 조합이면 미소로 100% 오케이!"
+  }
+]
