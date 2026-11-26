@@ -98,5 +98,55 @@
     "es": "¡Hoy viví un día súper productivo!",
     "tipEn": "'Gat-saeng' (God + Life) praises disciplined, fulfilling daily routines.",
     "tipEs": "'Gat-saeng' (Vida de Dios) celebra los días llenos de buenos hábitos."
+  },
+  {
+    "id": "ko-11",
+    "category": "Olive Young K-Beauty",
+    "korean": "이거 쿨톤한테 잘 어울리나요?",
+    "romanization": "[I-geo kul-ton-han-te jal eo-ul-li-na-yo?]",
+    "en": "Does this shade suit cool undertones?",
+    "es": "¿Este tono queda bien para subtono frío?",
+    "tipEn": "Ask this at Olive Young Myeongdong or Seongsu—staff instantly recommend K-Beauty shades!",
+    "tipEs": "Pregunta esto en Olive Young Seúl y el personal te recomendará tonos exactos de K-Beauty."
+  },
+  {
+    "id": "ko-12",
+    "category": "Korean BBQ Restaurant",
+    "korean": "사장님, 삼겹살 2인분 주세요!",
+    "romanization": "[Sa-jang-nim, sam-gyeop-sal i-in-bun ju-se-yo!]",
+    "en": "Two servings of pork belly, please!",
+    "es": "¡Dos porciones de panceta (samgyeopsal), por favor!",
+    "tipEn": "In Korea, BBQ is ordered per person ('in-bun'). Calling 'Sa-jang-nim' gets instant friendly service.",
+    "tipEs": "En Corea la barbacoa se pide por porciones ('in-bun'). Di 'Sa-jang-nim' para pedir con respeto."
+  },
+  {
+    "id": "ko-13",
+    "category": "Seoul Subway",
+    "korean": "성수역으로 가려면 어디서 갈아타요?",
+    "romanization": "[Seong-su-yeok-eu-ro ga-ryeo-myeon eo-di-seo gal-a-ta-yo?]",
+    "en": "Where do I transfer to get to Seongsu Station?",
+    "es": "¿Dónde hago transbordo para ir a la estación Seongsu?",
+    "tipEn": "'Gal-a-ta-yo' means 'transfer'. Essential for navigating Seoul's mega subway network.",
+    "tipEs": "'Gal-a-ta-yo' significa 'hacer transbordo', clave para moverse en el metro de Seúl."
+  },
+  {
+    "id": "ko-14",
+    "category": "Convenience Store (CU/GS25)",
+    "korean": "이거 전자레인지에 데워주세요.",
+    "romanization": "[I-geo jeon-ja-re-in-ji-e de-wo-ju-se-yo.]",
+    "en": "Could you heat this up in the microwave?",
+    "es": "¿Podría calentar esto en el microondas?",
+    "tipEn": "Korean convenience stores heat up triangle kimbap and ramen bowls in seconds!",
+    "tipEs": "Las tiendas 24h en Corea calientan tu kimbap o ramen en segundos."
+  },
+  {
+    "id": "ko-15",
+    "category": "Cafe Wi-Fi & Power",
+    "korean": "와이파이 비밀번호가 뭐예요?",
+    "romanization": "[Wa-i-pa-i bi-mil-beon-ho-ga mwo-ye-yo?]",
+    "en": "What is the Wi-Fi password?",
+    "es": "¿Cuál es la contraseña del Wi-Fi?",
+    "tipEn": "Nearly every Seoul cafe prints the Wi-Fi password on your receipt or near the counter.",
+    "tipEs": "Casi todos los cafés de Seúl tienen Wi-Fi gratis en el recibo o en la barra."
   }
 ]

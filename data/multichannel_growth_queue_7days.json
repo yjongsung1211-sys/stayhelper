@@ -1,0 +1,55 @@
+{
+  "generated_at": "2026-11-26T12:15:00",
+  "policy": "Zero clickbait, zero ?lang=en tracking params, link strictly in first comment for Reddit, 3h+ spacing",
+  "days": [
+    {
+      "day": "Day 1 (11/26)",
+      "channel": "Reddit r/AsianBeauty",
+      "product": "BeautyHelper",
+      "url": "https://personalcolorhelper.com/beautyhelper",
+      "angle": "28 K-Beauty 12-season shades + Olive Young Global vs YesStyle vs Amazon US live price comparison"
+    },
+    {
+      "day": "Day 2 (11/27)",
+      "channel": "Reddit r/Korean",
+      "product": "LoopShadow Global",
+      "url": "https://personalcolorhelper.com/loopshadow",
+      "angle": "15 Seoul real-life phrases with 0.75x slow native audio + free browser mic shadowing (EN/ES)"
+    },
+    {
+      "day": "Day 3 (11/28)",
+      "channel": "Reddit r/kbeauty",
+      "product": "BeautyHelper + ColorHelper",
+      "url": "https://personalcolorhelper.com/beautyhelper",
+      "angle": "How to stop buying wrong-undertone tints (Spring/Summer/Autumn/Winter 28-SKU comparison table)"
+    },
+    {
+      "day": "Day 4 (11/29)",
+      "channel": "IndieHackers",
+      "product": "BeautyHelper + LoopShadow",
+      "url": "https://personalcolorhelper.com/loopshadow",
+      "angle": "Zero-API-cost indie micro-tools built with Next.js + Web Speech API monetized purely via affiliates"
+    },
+    {
+      "day": "Day 5 (11/30)",
+      "channel": "Reddit r/languagelearning",
+      "product": "LoopShadow Global",
+      "url": "https://personalcolorhelper.com/loopshadow",
+      "angle": "1-minute daily shadowing habit for Korean learners without paywalls or account creation"
+    },
+    {
+      "day": "Day 6 (12/01)",
+      "channel": "X / Threads (@solo_enterprise.ai)",
+      "product": "BeautyHelper",
+      "url": "https://personalcolorhelper.com/beautyhelper",
+      "angle": "Price gap alert: Rom&nd / TIRTIR / Dasique up to 26% cheaper depending on US retailer"
+    },
+    {
+      "day": "Day 7 (12/02)",
+      "channel": "Korean Communities / YouTube Community (LanguageLoop)",
+      "product": "LoopShadow KR",
+      "url": "https://personalcolorhelper.com/loopshadow/kr",
+      "angle": "출퇴근 1분 5개국어(영·일·중·스·인니) 20개 실전 회화 100% 무료 브라우저 쉐도잉"
+    }
+  ]
+}

@@ -254,5 +254,197 @@
       { "retailer": "YesStyle", "usd": 22.8, "url": "https://www.yesstyle.com/en/wakemake-soft-blurring-eye-palette/info.html/pid.1112345678" },
       { "retailer": "Amazon US", "usd": 26.5, "url": "https://www.amazon.com/s?k=wakemake+lavender+blurring+eye+palette" }
     ]
+  },
+  {
+    "id": "kb-17",
+    "brand": "TIRTIR",
+    "name": "Mask Fit Red Cushion",
+    "shade": "21W Natural Ivory",
+    "category": "Cushion",
+    "season": "Spring Warm",
+    "subtone": "Spring Warm Light",
+    "swatchHex": "#ECCDB2",
+    "whyItFits": "Viral 72-hour glass-skin cushion in warm ivory that stays luminous without oxidizing orange.",
+    "prices": [
+      { "retailer": "Olive Young Global", "usd": 25.0, "url": "https://global.oliveyoung.com/display/search?query=TIRTIR+Mask+Fit+Red+Cushion" },
+      { "retailer": "YesStyle", "usd": 19.9, "url": "https://www.yesstyle.com/en/tirtir-mask-fit-red-cushion/info.html/pid.1114567890" },
+      { "retailer": "Amazon US", "usd": 22.5, "url": "https://www.amazon.com/s?k=tirtir+mask+fit+red+cushion+21W" }
+    ]
+  },
+  {
+    "id": "kb-18",
+    "brand": "Fwee",
+    "name": "Lip & Cheek Blurry Pudding Pot",
+    "shade": "ND04 My",
+    "category": "Blush / Lip",
+    "season": "Spring Warm",
+    "subtone": "Spring Warm Bright",
+    "swatchHex": "#E78C7A",
+    "whyItFits": "Whipped coral-apricot cloud formula that melts seamlessly onto warm cheeks and lips.",
+    "prices": [
+      { "retailer": "Olive Young Global", "usd": 18.0, "url": "https://global.oliveyoung.com/display/search?query=fwee+pudding+pot+my" },
+      { "retailer": "YesStyle", "usd": 14.8, "url": "https://www.yesstyle.com/en/fwee-lip-cheek-blurry-pudding-pot/info.html/pid.1127890123" },
+      { "retailer": "Amazon US", "usd": 17.5, "url": "https://www.amazon.com/s?k=fwee+blurry+pudding+pot+nd04+my" }
+    ]
+  },
+  {
+    "id": "kb-19",
+    "brand": "Clio",
+    "name": "Kill Cover Founwear Cushion",
+    "shade": "2.5 Ivory",
+    "category": "Cushion",
+    "season": "Spring Warm",
+    "subtone": "Spring Warm Light",
+    "swatchHex": "#EED3BA",
+    "whyItFits": "High-coverage semi-matte Korean bestseller with balanced warm yellow undertone.",
+    "prices": [
+      { "retailer": "Olive Young Global", "usd": 32.0, "url": "https://global.oliveyoung.com/display/search?query=Clio+Kill+Cover+Founwear+Cushion" },
+      { "retailer": "YesStyle", "usd": 24.5, "url": "https://www.yesstyle.com/en/clio-kill-cover-founwear-cushion/info.html/pid.1118901234" },
+      { "retailer": "Amazon US", "usd": 27.9, "url": "https://www.amazon.com/s?k=clio+kill+cover+founwear+cushion+ivory" }
+    ]
+  },
+  {
+    "id": "kb-20",
+    "brand": "Rom&nd",
+    "name": "Glasting Melting Balm",
+    "shade": "#07 Mauve Whip",
+    "category": "Lip Tint",
+    "season": "Summer Cool",
+    "subtone": "Summer Cool Mute",
+    "swatchHex": "#C8879D",
+    "whyItFits": "Sheer rosy-mauve butter balm that adds effortless Seoul cool-tone gloss without harshness.",
+    "prices": [
+      { "retailer": "Olive Young Global", "usd": 13.5, "url": "https://global.oliveyoung.com/display/search?query=Romand+Glasting+Melting+Balm+Mauve+Whip" },
+      { "retailer": "YesStyle", "usd": 9.9, "url": "https://www.yesstyle.com/en/romand-glasting-melting-balm/info.html/pid.1117654321" },
+      { "retailer": "Amazon US", "usd": 11.9, "url": "https://www.amazon.com/s?k=romand+glasting+melting+balm+mauve+whip" }
+    ]
+  },
+  {
+    "id": "kb-21",
+    "brand": "Dasique",
+    "name": "Blending Mood Cheek",
+    "shade": "#04 Beige Knit",
+    "category": "Blush / Lip",
+    "season": "Summer Cool",
+    "subtone": "Summer Cool Light",
+    "swatchHex": "#DFBCC5",
+    "whyItFits": "4-pan pastel pink-lavender blush quad that diffuses redness on light cool complexions.",
+    "prices": [
+      { "retailer": "Olive Young Global", "usd": 26.0, "url": "https://global.oliveyoung.com/display/search?query=Dasique+Blending+Mood+Cheek" },
+      { "retailer": "YesStyle", "usd": 19.4, "url": "https://www.yesstyle.com/en/dasique-blending-mood-cheek/info.html/pid.1115432109" },
+      { "retailer": "Amazon US", "usd": 23.0, "url": "https://www.amazon.com/s?k=dasique+blending+mood+cheek" }
+    ]
+  },
+  {
+    "id": "kb-22",
+    "brand": "Peripera",
+    "name": "Pure Blushed Sunshine Cheek",
+    "shade": "#11 Picnic Pink",
+    "category": "Blush / Lip",
+    "season": "Summer Cool",
+    "subtone": "Summer Cool Light",
+    "swatchHex": "#E9A9BE",
+    "whyItFits": "Milky strawberry-pink powder blush beloved in Seoul studios for brightening Summer Light skin.",
+    "prices": [
+      { "retailer": "Olive Young Global", "usd": 9.5, "url": "https://global.oliveyoung.com/display/search?query=Peripera+Pure+Blushed+Sunshine+Cheek" },
+      { "retailer": "YesStyle", "usd": 7.2, "url": "https://www.yesstyle.com/en/peripera-pure-blushed-sunshine-cheek/info.html/pid.1099876543" },
+      { "retailer": "Amazon US", "usd": 8.9, "url": "https://www.amazon.com/s?k=peripera+pure+blushed+sunshine+cheek+picnic+pink" }
+    ]
+  },
+  {
+    "id": "kb-23",
+    "brand": "3CE",
+    "name": "Mood Recipe Multi Eye Color Palette",
+    "shade": "#Overtake",
+    "category": "Eye Palette",
+    "season": "Autumn Warm",
+    "subtone": "Autumn Warm Mute",
+    "swatchHex": "#A66E5E",
+    "whyItFits": "Iconic 9-pan warm rosewood and toasted caramel palette engineered for Autumn Warm eyes.",
+    "prices": [
+      { "retailer": "Olive Young Global", "usd": 38.0, "url": "https://global.oliveyoung.com/display/search?query=3CE+Overtake+Palette" },
+      { "retailer": "YesStyle", "usd": 28.9, "url": "https://www.yesstyle.com/en/3ce-mood-recipe-multi-eye-color-palette/info.html/pid.1066543210" },
+      { "retailer": "Amazon US", "usd": 33.5, "url": "https://www.amazon.com/s?k=3ce+overtake+eye+palette" }
+    ]
+  },
+  {
+    "id": "kb-24",
+    "brand": "Hince",
+    "name": "Mood Enhancer Water Liquid Glow",
+    "shade": "W006 Refined",
+    "category": "Lip Tint",
+    "season": "Autumn Warm",
+    "subtone": "Autumn Warm Deep",
+    "swatchHex": "#A4493D",
+    "whyItFits": "Editorial brick-fig glaze with rich depth that flatters Autumn Deep undertones effortlessly.",
+    "prices": [
+      { "retailer": "Olive Young Global", "usd": 19.0, "url": "https://global.oliveyoung.com/display/search?query=Hince+Water+Liquid+Glow" },
+      { "retailer": "YesStyle", "usd": 15.2, "url": "https://www.yesstyle.com/en/hince-mood-enhancer-water-liquid-glow/info.html/pid.1113210987" },
+      { "retailer": "Amazon US", "usd": 18.0, "url": "https://www.amazon.com/s?k=hince+mood+enhancer+water+liquid+glow" }
+    ]
+  },
+  {
+    "id": "kb-25",
+    "brand": "Amuse",
+    "name": "Jel-Fit Tint",
+    "shade": "#06 Seoul Girl",
+    "category": "Lip Tint",
+    "season": "Autumn Warm",
+    "subtone": "Autumn Warm Mute",
+    "swatchHex": "#B97574",
+    "whyItFits": "Bouncy vegan jelly tint in muted mauve-brown that pairs cleanly with soft autumn makeup.",
+    "prices": [
+      { "retailer": "Olive Young Global", "usd": 20.0, "url": "https://global.oliveyoung.com/display/search?query=Amuse+Jel+Fit+Tint" },
+      { "retailer": "YesStyle", "usd": 15.6, "url": "https://www.yesstyle.com/en/amuse-jel-fit-tint/info.html/pid.1119876543" },
+      { "retailer": "Amazon US", "usd": 18.5, "url": "https://www.amazon.com/s?k=amuse+jel+fit+tint+seoul+girl" }
+    ]
+  },
+  {
+    "id": "kb-26",
+    "brand": "Laka",
+    "name": "Fruity Glam Tint",
+    "shade": "#111 Mellow",
+    "category": "Lip Tint",
+    "season": "Winter Cool",
+    "subtone": "Winter Cool Bright",
+    "swatchHex": "#BC3D67",
+    "whyItFits": "High-shine vegan berry-rose stain with cool blue undertones that pops against Winter skin.",
+    "prices": [
+      { "retailer": "Olive Young Global", "usd": 16.0, "url": "https://global.oliveyoung.com/display/search?query=Laka+Fruity+Glam+Tint" },
+      { "retailer": "YesStyle", "usd": 12.4, "url": "https://www.yesstyle.com/en/laka-fruity-glam-tint/info.html/pid.1112233445" },
+      { "retailer": "Amazon US", "usd": 14.9, "url": "https://www.amazon.com/s?k=laka+fruity+glam+tint" }
+    ]
+  },
+  {
+    "id": "kb-27",
+    "brand": "TIRTIR",
+    "name": "Mask Fit Red Cushion",
+    "shade": "17C Porcelain",
+    "category": "Cushion",
+    "season": "Winter Cool",
+    "subtone": "Winter Cool Bright",
+    "swatchHex": "#F3DFDC",
+    "whyItFits": "Crisp cool-pink porcelain shade designed for fair Winter Cool skin without yellow cast.",
+    "prices": [
+      { "retailer": "Olive Young Global", "usd": 25.0, "url": "https://global.oliveyoung.com/display/search?query=TIRTIR+Mask+Fit+Red+Cushion+17C" },
+      { "retailer": "YesStyle", "usd": 19.9, "url": "https://www.yesstyle.com/en/tirtir-mask-fit-red-cushion/info.html/pid.1114567890" },
+      { "retailer": "Amazon US", "usd": 22.5, "url": "https://www.amazon.com/s?k=tirtir+mask+fit+red+cushion+17C" }
+    ]
+  },
+  {
+    "id": "kb-28",
+    "brand": "Clio",
+    "name": "Pro Eye Palette Air",
+    "shade": "#04 Pink Pairing",
+    "category": "Eye Palette",
+    "season": "Winter Cool",
+    "subtone": "Winter Cool Deep",
+    "swatchHex": "#A05E7C",
+    "whyItFits": "12-pan cool berry, silver-glitter, and deep cocoa shadow edit made for high-contrast Winter eyes.",
+    "prices": [
+      { "retailer": "Olive Young Global", "usd": 34.0, "url": "https://global.oliveyoung.com/display/search?query=Clio+Pro+Eye+Palette+Air+Pink+Pairing" },
+      { "retailer": "YesStyle", "usd": 24.9, "url": "https://www.yesstyle.com/en/clio-pro-eye-palette-air/info.html/pid.1124567890" },
+      { "retailer": "Amazon US", "usd": 28.5, "url": "https://www.amazon.com/s?k=clio+pro+eye+palette+air+pink+pairing" }
+    ]
   }
 ]
