@@ -59,5 +59,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'daily',
       priority: 0.9,
     },
+    // SeoulHelper (100% Free Seoul Travel Budget, Tax-Free & District Planner)
+    {
+      url: 'https://personalcolorhelper.com/seoulhelper',
+      lastModified: now,
+      changeFrequency: 'daily',
+      priority: 1.0,
+    },
   ];
 }

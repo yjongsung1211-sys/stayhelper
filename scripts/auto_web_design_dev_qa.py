@@ -28,6 +28,7 @@ TARGETS = [
     ("BeautyHelper", "https://personalcolorhelper.com/beautyhelper"),
     ("LoopShadow(Global)", "https://personalcolorhelper.com/loopshadow"),
     ("LoopShadow(KR)", "https://personalcolorhelper.com/loopshadow/kr"),
+    ("SeoulHelper", "https://personalcolorhelper.com/seoulhelper"),
     ("ColorHelper", "https://personalcolorhelper.com"),
     ("StayHelper", "https://thestayhelper.com"),
     ("StylingHelper", "https://stylinghelper.com"),
