@@ -37,9 +37,26 @@ interface Essential {
   url: string;
 }
 
+interface ForaHotel {
+  id: string;
+  rank: string;
+  program: string;
+  areaEn: string;
+  areaEs: string;
+  areaKr: string;
+  nameEn: string;
+  nameEs: string;
+  nameKr: string;
+  perksEn: string[];
+  perksEs: string[];
+  perksKr: string[];
+  url: string;
+}
+
 const FX = curatedData.fxKrwPerUsd;
 const DISTRICTS: District[] = curatedData.districts as District[];
 const ESSENTIALS: Essential[] = curatedData.essentials as Essential[];
+const FORA_HOTELS: ForaHotel[] = curatedData.foraHotels as ForaHotel[];
 
 // District-specific Dancheong & Seoul heritage accent bars
 const DISTRICT_ACCENTS: Record<string, { bar: string; chipBg: string; chipText: string }> = {
@@ -102,6 +119,10 @@ export default function SeoulHelperPage() {
       daysUnit: 'Days',
       essTitle: '4 Verified Seoul Travel Essentials',
       essSub: 'Direct official partner links for instant airport arrival & transit.',
+      foraKicker: 'FORA PREFERRED PARTNER × STAYHELPER VIP',
+      foraTitle: '5 Seoul 5-Star Hotels with Free Fora VIP Perks',
+      foraSub: 'Pay the exact same public flexible rate—and unlock complimentary daily breakfast for 2, $100 hotel credit, room upgrades & Stay 3 Pay 2 promos via our Fora Advisor desk.',
+      foraCta: 'Unlock VIP Perks',
       crossTitle: 'More 100% Free Tools by Helper Family',
     },
     es: {
@@ -119,6 +140,10 @@ export default function SeoulHelperPage() {
       daysUnit: 'Días',
       essTitle: '4 Esenciales Verificados para Viajar a Seúl',
       essSub: 'Enlaces directos de socios para llegar conectado y sin esperas.',
+      foraKicker: 'FORA PREFERRED PARTNER × STAYHELPER VIP',
+      foraTitle: '5 Hoteles 5 Estrellas en Seúl con Beneficios VIP Fora',
+      foraSub: 'Misma tarifa oficial flexible, pero con desayuno diario para 2, $100 de crédito, upgrade de habitación y promos 3ª noche gratis vía StayHelper.',
+      foraCta: 'Solicitar VIP Gratis',
       crossTitle: 'Más Herramientas 100% Gratis de Helper Family',
     },
     kr: {
@@ -135,7 +160,11 @@ export default function SeoulHelperPage() {
       selectedLabel: '선택한 일정',
       daysUnit: '일 코스',
       essTitle: '서울 여행 필수 예약 4선 (공식 파트너)',
-      essSub: 'eSIM · 공항철도 AREX · 한복 대여 · 역세권 호텔 바로가기',
+      essSub: 'eSIM · 공항철도 AREX · 한복 대여 · Fora VIP 호텔 바로가기',
+      foraKicker: 'FORA PREFERRED PARTNER × STAYHELPER VIP',
+      foraTitle: 'Fora 연계 서울 5대 특급호텔 무료 VIP 특전',
+      foraSub: '호텔 공식 공시가 그대로 예약하면서 2인 무료 조식 + $100 크레딧 + 객실 업그레이드 + 3박 2요금 프로모션까지 StayHelper × Fora 어드바이저로 무료 적용받으세요.',
+      foraCta: 'VIP 특전 받기',
       crossTitle: 'Helper 패밀리 100% 무료 연동 도구',
     },
   }[lang];
@@ -455,6 +484,84 @@ export default function SeoulHelperPage() {
                 </a>
               );
             })}
+          </div>
+        </section>
+
+        {/* 3.5. 5 Fora-Partnered Seoul Luxury Hotels Showcase (StayHelper × Fora) */}
+        <section
+          id="fora-seoul-hotels"
+          className="overflow-hidden rounded-2xl border border-[#D4C29E] bg-gradient-to-br from-[#1B3A34] via-[#1E3F39] to-[#232A32] text-[#FAF6EE] shadow-md"
+        >
+          <div className="h-1.5 w-full bg-gradient-to-r from-[#C6923A] via-[#B83B2A] to-[#1F5C4E]" />
+          <div className="p-6 md:p-8">
+            <div className="flex flex-col justify-between gap-3 md:flex-row md:items-end">
+              <div>
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#C6923A]/50 bg-[#142A25]/80 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[#E9CA8B]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#E05A47]" />
+                  {copy.foraKicker}
+                </span>
+                <h2
+                  className="mt-3 text-2xl font-bold tracking-tight text-[#FFFBF2] md:text-3xl"
+                  style={{ fontFamily: "'Cormorant Garamond', 'Noto Serif KR', serif" }}
+                >
+                  {copy.foraTitle}
+                </h2>
+                <p className="mt-2 max-w-3xl text-xs leading-relaxed text-[#DFD6C5] md:text-sm">
+                  {copy.foraSub}
+                </p>
+              </div>
+              <a
+                href="https://thestayhelper.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 rounded-full bg-[#B83B2A] px-5 py-2.5 text-xs font-bold text-[#FFFDF9] shadow-sm transition hover:bg-[#C6923A] hover:text-[#1E242B]"
+              >
+                StayHelper VIP Desk &rarr;
+              </a>
+            </div>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+              {FORA_HOTELS.map((h) => {
+                const name = lang === 'kr' ? h.nameKr : lang === 'es' ? h.nameEs : h.nameEn;
+                const area = lang === 'kr' ? h.areaKr : lang === 'es' ? h.areaEs : h.areaEn;
+                const perks = lang === 'kr' ? h.perksKr : lang === 'es' ? h.perksEs : h.perksEn;
+                return (
+                  <a
+                    key={h.id}
+                    href={h.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex flex-col justify-between rounded-xl border border-[#C6923A]/30 bg-[#FAF6EE]/95 p-4 text-[#1E242B] transition hover:-translate-y-0.5 hover:border-[#C6923A] hover:bg-white hover:shadow-lg"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="rounded bg-[#B83B2A] px-2 py-0.5 text-[10px] font-bold text-[#FAF6EE]">
+                          #{h.rank}
+                        </span>
+                        <span className="truncate text-[10px] font-bold uppercase tracking-wide text-[#1F5C4E]">
+                          {h.program}
+                        </span>
+                      </div>
+                      <h3 className="mt-2.5 text-sm font-bold leading-snug text-[#1E242B]">
+                        {name}
+                      </h3>
+                      <p className="mt-1 text-[11px] font-medium text-[#7A6B55]">{area}</p>
+                      <ul className="mt-3 space-y-1 text-[11px] text-[#3F3A34]">
+                        {perks.map((pk) => (
+                          <li key={pk} className="flex items-start gap-1.5">
+                            <span className="mt-0.5 text-[#1F5C4E]">✓</span>
+                            <span>{pk}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="mt-4 border-t border-[#E5DAC6] pt-2.5 text-xs font-bold text-[#B83B2A] group-hover:text-[#1F5C4E]">
+                      {copy.foraCta} &rarr;
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
           </div>
         </section>
 
