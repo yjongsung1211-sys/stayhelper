@@ -36,6 +36,16 @@ export const metadata: Metadata = {
   },
 };
 
+const weddingJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "WeddingHelper",
+  url: "https://www.weddinghelper.love",
+  applicationCategory: "LifestyleApplication",
+  operatingSystem: "Web",
+  description: "AI destination wedding photoshoots and bespoke luxury mobile wedding invitations.",
+};
+
 export default function WeddingHelperLayout({
   children,
 }: {
@@ -43,6 +53,10 @@ export default function WeddingHelperLayout({
 }) {
   return (
     <div className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(weddingJsonLd) }}
+      />
       {children}
     </div>
   );

@@ -38,6 +38,16 @@ export const metadata: Metadata = {
   },
 };
 
+const colorJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "PersonalColorHelper",
+  url: "https://personalcolorhelper.com",
+  applicationCategory: "LifestyleApplication",
+  operatingSystem: "Web",
+  description: "AI 12-season Seoul personal color virtual draping and curated beauty recommendations.",
+};
+
 export default function ColorHelperLayout({
   children,
 }: {
@@ -45,6 +55,10 @@ export default function ColorHelperLayout({
 }) {
   return (
     <div className="min-h-screen bg-[#FAF7F5] text-[#1E1B18] antialiased selection:bg-[#E07A5F] selection:text-white font-sans">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(colorJsonLd) }}
+      />
       {children}
     </div>
   );

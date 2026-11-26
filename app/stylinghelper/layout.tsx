@@ -47,10 +47,28 @@ export const metadata: Metadata = {
   },
 };
 
+const stylingJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'StylingHelper US',
+  url: 'https://stylinghelper.com',
+  applicationCategory: 'ShoppingApplication',
+  operatingSystem: 'Web',
+  description: 'Curated Seoul K-Fashion lookbook with 1:1 in-stock US retail items.',
+};
+
 export default function StylingHelperLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(stylingJsonLd) }}
+      />
+      {children}
+    </>
+  );
 }

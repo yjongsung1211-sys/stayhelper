@@ -25,13 +25,13 @@
     2. 셀하나 1-Touch 홍보 발사대 및 5대 쇼룸 링크 정상 작동 일일 체크
     3. 모바일 지시·메모 큐 처리 및 전날 실적 아침 보고 제출
 
-### 🏢 제1본부: 커머스·웹 본부 (Helper 5대 사이트 총괄)
+### 🏢 제1본부: 커머스·웹 본부 (Helper 5대 + 신사업 웹 총괄)
 - **부장**: **커머스·웹 부장**
-  - **검수·재지시 기준**: Next.js TypeScript 에러 0건, 클린 화이트·블랙 미니멀, 실물 1:1 바닥 접지 15%, 실시간 `In Stock`, PayPal 결제 검증
-- **실무 부하**:
-  1. `웹 개발 담당`: 5대 Helper 사이트 구축·배포 (`npx next start -p 3000`)
+  - **검수·재지시 기준**: Next.js TypeScript 에러 0건, 클린 화이트·블랙 미니멀, 실물 1:1 바닥 접지 15%, 실시간 `In Stock`, PayPal 결제 검증, 8대 웹사이트 콘솔/404/빌드 오류 0건
+- **실무 부서**:
+  1. `홈페이지 프로그래밍팀` *(★전담 격상 · 제6본부 디자인팀과 상시 합동)*: Next.js 14/TypeScript 프론트·백엔드 오류 즉시 수정, 디자인팀 개편안 구현, 성능 최적화 및 `tsc`+`next build` 검증·Vercel 배포 (`scripts/auto_web_design_dev_qa.py`)
   2. `재고·링크 순찰 담당`: 24/7 링크·DOM 순찰 (`scripts/patrol_readonly.py`, `scripts/browser_use_auditor.py`)
-  3. `미국 아비트라지 담당`: 미국 VPN 기반 명품·호텔 차익 발굴 (`scripts/luxury_price_arbitrage_radar.py`)
+  3. `미국 아비트라지 담당`: 미국 VPN 기반 명품·호텔·K-뷰티 차익 발굴 (`scripts/auto_beautyhelper_price_sync.py`, `scripts/luxury_price_arbitrage_radar.py`)
 
 ### 🎬 제2본부: 글로벌 미디어 본부 (유튜브 5대 채널 총괄)
 - **부장**: **글로벌 미디어 부장**
@@ -41,12 +41,14 @@
   2. `예약·배출 관리 담당`: 큐 드레인 및 쿼터 자동 재개 (`auto_drain_languageloop.py`, `audit_yt_channels.py`)
   3. `지나월드·랩투라이프 전담`: 가족 프로필·자막 검수 및 과학 다큐 제작
 
-### 📈 제3본부: 그로스·홍보 본부 (트래픽 & 전환 총괄)
-- **부장**: **그로스·홍보 부장**
-  - **검수·재지시 기준**: 낚시 문구 0%, `?lang=en` 쿼리 0%, 레딧 스팸 필터 회피, 2~4시간 안전 분산 발행, 대표님 릴스 임의 렌더링·업로드 절대 금지
-- **실무 부하**:
-  1. `글로벌 커뮤니티 홍보 담당`: 미국 VPN 기반 Reddit/X 홍보 (`scripts/autonomous_direct_promoter.py`)
-  2. `리드·트렌드·카피 담당`: 미국 VIP 리드 수집 및 대표님 릴스용 손실회피 55.7% 훅 지원 (`scripts/build_us_market_intelligence.py`)
+### 📈 제3본부: 마케팅·그로스 본부 (트래픽 · SEO · 멀티채널 배포 · 제휴 전환 총괄 · ★4개 팀 확대 개편)
+- **부장**: **마케팅·그로스 부장**
+  - **검수·재지시 기준**: 낚시 문구 0%, `?lang=en` 쿼리 0%, 레딧 본문 링크 0건·첫 댓글 링크·3시간 쿨다운, 대표님 릴스 임의 렌더링·업로드 절대 금지, 일일 순유입·제휴 CTR 수치 보고
+- **실무 부서 (4개 팀)**:
+  1. `SEO·검색 유입팀` *(★신설)*: `sitemap.ts`, `robots.ts`, `WebApplication/Product` JSON-LD, 주간 키워드·SKU·레슨 자동 확장 (`scripts/auto_weekly_content_expander.py`)
+  2. `SNS·커뮤니티 실행팀 (Aside 전담)` *(★강화)*: Reddit(`u/jayyoun84`) · Instagram(`@solo_enterprise.ai`) · X/Threads · IndieHackers 안전 분산 발행 (`scripts/auto_community_safe_dispatcher.py`, `data/multichannel_growth_queue_7days.json`)
+  3. `트렌드·카피·릴스 지원팀`: 미국 VIP 리드 수집 및 매일 09:00 대표님 릴스·쇼츠 아침 1장 기획팩(손실회피 55.7% 훅 + 실시간 가격차 TOP 3) 배달 (`scripts/auto_reels_morning_pack.py`)
+  4. `제휴·전환(CRO) 성과분석팀` *(★신설)*: Olive Young Global·YesStyle·Amazon US·italki·Preply 제휴 전환 분석 및 매일 21:00 전사 유입·채널 대시보드 보고 (`scripts/auto_daily_traffic_dashboard.py`)
 
 ### 🛡️ 제4본부: 전략·재무·보안 본부 (딥테크·AIDC M&A & 비용 0원 감사 총괄)
 - **부장**: **전략·재무·보안 부장**
@@ -79,5 +81,5 @@
 - **부장**: **디자인 부장**
   - **검수·재지시 기준**: ① 클린 화이트·블랙 미니멀 표준 준수, ② 실물 1:1 바닥 접지 여백 15%(발끝 잘림 0건), ③ Shorts Safe Zone 100% · 눈을 찌르는 네온 원색/선 겹침 0건, ④ 유료 이미지 API 사전 승인 필수 (미달 시 즉시 반려·재작업 지시)
 - **실무 부서 (2개 팀)**:
-  1. `UI/UX·브랜드 디자인팀`: Helper 5대 사이트 & 신사업(`BeautyHelper`) 디자인 시스템·컴포넌트·랜딩 UI·제안서 슬라이드 설계 (`ui-ux-pro-max`, `brand`, `slides`)
+  1. `홈페이지 디자인팀 (UI/UX·리디자인 전담)` *(★제1본부 프로그래밍팀과 상시 합동)*: 8대 웹사이트 UI/UX·모바일/PC 반응형 시각 검수, 레이아웃·여백·타이포 결함 진단, 페이지 리디자인·CTA 개편 설계 (`ui-ux-pro-max`, `design-system`, `scripts/auto_web_design_dev_qa.py`)
   2. `비주얼·썸네일·검수팀`: 유튜브 5대 채널 썸네일·자막 레이아웃 디자인 및 쇼룸 화보 1:1 시각 정합성 검수 (`helper-visual-auditor`, `video-motion-auditor`)

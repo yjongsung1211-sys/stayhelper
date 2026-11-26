@@ -39,12 +39,12 @@ DIVISIONS = [
     },
     {
         "div": "제1본부: 커머스·웹 본부",
-        "director": "커머스·웹 부장 (빌드·1:1접지·재고·결제 검수)",
+        "director": "커머스·웹 부장 (빌드·1:1접지·재고·결제·오류0건 검수)",
         "staff": [
-            ("웹 개발 담당 (Next.js :3000)", "상시", "next\\dist\\bin\\next"),
+            ("홈페이지 프로그래밍팀 (오류수정·개편·빌드)", "상시/매일06:00", "next\\dist\\bin\\next"),
             ("재고·링크 순찰 담당", "부팅자동", "patrol_readonly.py"),
             ("DOM 순찰 담당", "온디맨드", "browser_use_auditor.py"),
-            ("미국 아비트라지 담당", "온디맨드", "luxury_price_arbitrage_radar.py"),
+            ("미국 아비트라지 담당", "매일04:30", "auto_beautyhelper_price_sync.py"),
         ],
     },
     {
@@ -57,11 +57,13 @@ DIVISIONS = [
         ],
     },
     {
-        "div": "제3본부: 그로스·홍보 본부",
-        "director": "그로스·홍보 부장 (비낚시·스팸회피·릴스지원 검수)",
+        "div": "제3본부: 마케팅·그로스 본부 (4개 팀)",
+        "director": "마케팅·그로스 부장 (SEO·비낚시·첫댓글링크·제휴CTR 검수)",
         "staff": [
-            ("글로벌 커뮤니티 홍보 담당", "온디맨드", "autonomous_direct_promoter.py"),
-            ("리드·트렌드·카피 담당", "온디맨드", "build_us_market_intelligence.py"),
+            ("SEO·검색 유입팀", "매주일03:00", "auto_weekly_content_expander.py"),
+            ("SNS·커뮤니티 실행팀 (Aside)", "3시간마다", "auto_community_safe_dispatcher.py"),
+            ("트렌드·카피·릴스 지원팀", "매일09:00", "auto_reels_morning_pack.py"),
+            ("제휴·전환(CRO) 성과분석팀", "매일21:00", "auto_daily_traffic_dashboard.py"),
         ],
     },
     {
@@ -87,7 +89,7 @@ DIVISIONS = [
         "div": "제6본부: 디자인부",
         "director": "디자인 부장 (화이트블랙·바닥접지15%·SafeZone·네온0건 검수)",
         "staff": [
-            ("UI/UX·브랜드 디자인팀", "온디맨드", "next\\dist\\bin\\next"),
+            ("홈페이지 디자인팀 (UI/UX·리디자인·QA)", "상시/매일06:00", "next\\dist\\bin\\next"),
             ("비주얼·썸네일·검수팀", "온디맨드", "browser_use_auditor.py"),
         ],
     },
@@ -137,7 +139,7 @@ def main():
     now = datetime.now().strftime("%Y-%m-%d %H:%M")
 
     print("=" * 88)
-    print(f"👑 [1비서실(하나) + 4본부] 전사 에이전트 관제판  |  {now}")
+    print(f"👑 [1비서실(하나) + 6본부] 전사 에이전트 관제판  |  {now}")
     print("=" * 88)
 
     tg_lines = [f"👑 <b>[비서실장 하나] 전사 4본부 조직 개편 완료 및 실시간 보고</b>\n🕒 {now}\n"]

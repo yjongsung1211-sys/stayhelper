@@ -45,6 +45,16 @@ export const metadata: Metadata = {
   },
 };
 
+const stayJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "StayHelper",
+  url: "https://thestayhelper.com",
+  applicationCategory: "TravelApplication",
+  operatingSystem: "Web",
+  description: "Curated editorial collection of the world's finest 5-star luxury sanctuaries with verified VIP perks.",
+};
+
 export default function StayHelperLayout({
   children,
 }: {
@@ -52,6 +62,10 @@ export default function StayHelperLayout({
 }) {
   return (
     <div className="bg-[#070707] text-[#F3EFE6] min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(stayJsonLd) }}
+      />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link
