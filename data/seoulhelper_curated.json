@@ -123,7 +123,7 @@
       "descEs": "El tren más rápido sin paradas desde Incheon T1/T2 directo a Seoul Station.",
       "descKr": "인천공항 제1·2터미널에서 서울역까지 논스톱 43분 지정좌석.",
       "provider": "Klook Official Ticket",
-      "url": "https://www.klook.com/activity/1163-airport-railroad-arex-incheon-seoul/"
+      "url": "https://www.klook.com/search/result/?query=AREX+Incheon+Airport+Express+Train"
     },
     {
       "id": "hanbok",
@@ -149,7 +149,7 @@
       "descEs": "Compara precios reales en Seúl cerca del metro o accede a beneficios VIP en StayHelper.",
       "descKr": "역세권 서울 호텔 실시간 최저가 비교 및 StayHelper VIP 특전.",
       "provider": "Trip.com Seoul Hotels",
-      "url": "https://www.trip.com/hotels/seoul-hotels-list-234/"
+      "url": "https://www.trip.com/hotels/list?city=234"
     }
   ]
 }
