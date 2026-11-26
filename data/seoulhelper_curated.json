@@ -3,6 +3,7 @@
   "districts": [
     {
       "id": "seongsu",
+      "image": "/images/seoulhelper/district_seongsu.jpg",
       "nameEn": "Seongsu-dong",
       "nameEs": "Seongsu-dong",
       "nameKr": "성수동",
@@ -19,6 +20,7 @@
     },
     {
       "id": "myeongdong",
+      "image": "/images/seoulhelper/district_myeongdong.jpg",
       "nameEn": "Myeongdong",
       "nameEs": "Myeongdong",
       "nameKr": "명동",
@@ -35,6 +37,7 @@
     },
     {
       "id": "bukchon",
+      "image": "/images/seoulhelper/district_bukchon.jpg",
       "nameEn": "Bukchon & Gyeongbokgung",
       "nameEs": "Bukchon y Palacio Gyeongbokgung",
       "nameKr": "북촌 · 경복궁",
@@ -51,6 +54,7 @@
     },
     {
       "id": "hongdae",
+      "image": "/images/seoulhelper/district_hongdae.jpg",
       "nameEn": "Hongdae & Yeonnam",
       "nameEs": "Hongdae y Yeonnam",
       "nameKr": "홍대 · 연남동",
@@ -67,6 +71,7 @@
     },
     {
       "id": "gangnam",
+      "image": "/images/seoulhelper/district_gangnam.jpg",
       "nameEn": "Gangnam & Cheongdam",
       "nameEs": "Gangnam y Cheongdam",
       "nameKr": "강남 · 청담",
@@ -83,6 +88,7 @@
     },
     {
       "id": "hannam",
+      "image": "/images/seoulhelper/district_hannam.jpg",
       "nameEn": "Hannam-dong & Itaewon",
       "nameEs": "Hannam-dong e Itaewon",
       "nameKr": "한남동 · 이태원",
@@ -155,6 +161,7 @@
   "foraHotels": [
     {
       "id": "four-seasons-seoul",
+      "image": "/images/seoulhelper/hotel_four_seasons_seoul.jpg",
       "rank": "01",
       "program": "Four Seasons Preferred Partner",
       "areaEn": "Gwanghwamun · Steps from Gyeongbokgung",
@@ -170,6 +177,7 @@
     },
     {
       "id": "park-hyatt-seoul",
+      "image": "/images/seoulhelper/hotel_park_hyatt_seoul.jpg",
       "rank": "02",
       "program": "Hyatt Privé",
       "areaEn": "Gangnam · Samseong / COEX",
@@ -185,6 +193,7 @@
     },
     {
       "id": "josun-palace-seoul",
+      "image": "/images/seoulhelper/hotel_josun_palace_seoul.jpg",
       "rank": "03",
       "program": "Marriott STARS",
       "areaEn": "Gangnam · Yeoksam Luxury Hub",
@@ -200,6 +209,7 @@
     },
     {
       "id": "fairmont-conrad-seoul",
+      "image": "/images/seoulhelper/hotel_fairmont_conrad_seoul.jpg",
       "rank": "04",
       "program": "Virtuoso · Impresario · Stay 3 Pay 2",
       "areaEn": "Yeouido · Han River Skyline",
@@ -215,6 +225,7 @@
     },
     {
       "id": "signiel-seoul",
+      "image": "/images/seoulhelper/hotel_signiel_seoul.jpg",
       "rank": "05",
       "program": "Virtuoso Preferred",
       "areaEn": "Jamsil · Lotte World Tower (76F–101F)",

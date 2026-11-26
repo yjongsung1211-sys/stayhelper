@@ -8,6 +8,7 @@ type Lang = 'en' | 'es' | 'kr';
 
 interface District {
   id: string;
+  image: string;
   nameEn: string;
   nameEs: string;
   nameKr: string;
@@ -39,6 +40,7 @@ interface Essential {
 
 interface ForaHotel {
   id: string;
+  image: string;
   rank: string;
   program: string;
   areaEn: string;
@@ -217,51 +219,27 @@ export default function SeoulHelperPage() {
         </div>
       </header>
 
-      {/* Gyeongbokgung Royal Palace Hero Section */}
-      <section className="relative overflow-hidden border-b border-[#DFD2BC] bg-gradient-to-br from-[#1B3A34] via-[#1F4A41] to-[#273038] text-[#FAF6EE]">
-        {/* Subtle Traditional Korean Lattice Pattern Overlay */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-10"
-          style={{
-            backgroundImage:
-              'linear-gradient(to right, #E2C38B 1px, transparent 1px), linear-gradient(to bottom, #E2C38B 1px, transparent 1px)',
-            backgroundSize: '44px 44px',
-          }}
+      {/* Gyeongbokgung Royal Palace Editorial Photo Hero */}
+      <section className="relative overflow-hidden border-b border-[#DFD2BC] bg-[#1B3A34] text-[#FAF6EE]">
+        <img
+          src="/images/seoulhelper/hero_gyeongbokgung.jpg"
+          alt="Gyeongbokgung Palace Geunjeongjeon in Seoul at Golden Hour"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
-        {/* Gyeongbokgung Geunjeongjeon Roofline Silhouette SVG */}
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1200 220"
-          className="pointer-events-none absolute bottom-0 right-0 h-44 w-auto opacity-20 md:h-56"
-          fill="none"
-        >
-          <path
-            d="M120 220 L120 155 L260 155 L260 110 L170 110 C260 95 340 72 410 42 L790 42 C860 72 940 95 1030 110 L940 110 L940 155 L1080 155 L1080 220 Z"
-            fill="#E2C38B"
-          />
-          <path
-            d="M340 42 C430 28 510 14 600 4 C690 14 770 28 860 42 Z"
-            fill="#C6923A"
-          />
-          <rect x="295" y="120" width="22" height="100" fill="#B83B2A" />
-          <rect x="440" y="120" width="22" height="100" fill="#B83B2A" />
-          <rect x="589" y="120" width="22" height="100" fill="#B83B2A" />
-          <rect x="738" y="120" width="22" height="100" fill="#B83B2A" />
-          <rect x="883" y="120" width="22" height="100" fill="#B83B2A" />
-        </svg>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#162D28]/90 via-[#1B3A34]/75 to-[#1E242B]/55" />
 
-        <div className="relative mx-auto max-w-6xl px-5 py-12 md:py-16">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#C6923A]/50 bg-[#142B26]/70 px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#E9CA8B]">
+        <div className="relative mx-auto max-w-6xl px-5 py-16 md:py-24">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#E9CA8B]/60 bg-[#142B26]/80 px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#F2D99B] backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-[#E05A47]" />
             GYEONGBOKGUNG EDITION &middot; LIVE FX ₩{FX.toLocaleString()} / $1
           </div>
           <h1
-            className="mt-4 max-w-3xl text-3xl font-bold tracking-tight text-[#FFFBF2] md:text-5xl"
+            className="mt-4 max-w-3xl text-3xl font-bold tracking-tight text-[#FFFBF2] drop-shadow-sm md:text-5xl"
             style={{ fontFamily: "'Cormorant Garamond', 'Noto Serif KR', serif" }}
           >
             {copy.h1}
           </h1>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#E3DAC9] md:text-base">
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#F1E8D8] md:text-base">
             {copy.sub}
           </p>
         </div>
@@ -392,31 +370,37 @@ export default function SeoulHelperPage() {
                 <div
                   key={d.id}
                   onClick={() => toggleDistrict(d.id)}
-                  className={`cursor-pointer overflow-hidden rounded-2xl border transition ${
+                  className={`group cursor-pointer overflow-hidden rounded-2xl border transition ${
                     active
                       ? 'border-[#B83B2A] bg-[#FFFDF9] shadow-md'
-                      : 'border-[#E5DAC6] bg-[#FFFDF9] hover:border-[#C6923A]'
+                      : 'border-[#E5DAC6] bg-[#FFFDF9] hover:border-[#C6923A] hover:shadow-md'
                   }`}
                 >
                   <div className={`h-1.5 w-full ${accent.bar}`} />
-                  <div className="p-5">
-                    <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <h3 className="text-base font-bold text-[#1E242B]">{name}</h3>
-                        <p className="mt-0.5 text-xs text-[#6B6256]">{d.vibe}</p>
-                      </div>
-                      <span
-                        className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${
-                          active
-                            ? 'bg-[#B83B2A] text-[#FAF6EE]'
-                            : `${accent.chipBg} ${accent.chipText}`
-                        }`}
-                      >
-                        {active ? '✓ Added' : '+ Add'}
-                      </span>
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#EAE2D3]">
+                    <img
+                      src={d.image}
+                      alt={name}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1E242B]/70 via-transparent to-transparent" />
+                    <span
+                      className={`absolute right-3 top-3 rounded-full px-2.5 py-0.5 text-[11px] font-semibold shadow-sm ${
+                        active
+                          ? 'bg-[#B83B2A] text-[#FAF6EE]'
+                          : 'bg-[#FAF6EE]/95 text-[#1E242B]'
+                      }`}
+                    >
+                      {active ? '✓ Added' : '+ Add'}
+                    </span>
+                    <div className="absolute bottom-3 left-3 right-3 text-white">
+                      <h3 className="text-base font-bold drop-shadow-sm">{name}</h3>
+                      <p className="text-[11px] text-[#F1E8D8]">{d.vibe}</p>
                     </div>
-
-                    <p className="mt-3 text-xs font-medium text-[#1F5C4E]">🚇 {d.subway}</p>
+                  </div>
+                  <div className="p-5">
+                    <p className="text-xs font-medium text-[#1F5C4E]">🚇 {d.subway}</p>
 
                     <ul className="mt-3 space-y-1.5 text-xs text-[#4A443C]">
                       {highlights.map((h) => (
@@ -531,31 +515,40 @@ export default function SeoulHelperPage() {
                     href={h.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex flex-col justify-between rounded-xl border border-[#C6923A]/30 bg-[#FAF6EE]/95 p-4 text-[#1E242B] transition hover:-translate-y-0.5 hover:border-[#C6923A] hover:bg-white hover:shadow-lg"
+                    className="group flex flex-col justify-between overflow-hidden rounded-xl border border-[#C6923A]/40 bg-[#FAF6EE] text-[#1E242B] transition hover:-translate-y-1 hover:border-[#E9CA8B] hover:bg-white hover:shadow-xl"
                   >
                     <div>
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="rounded bg-[#B83B2A] px-2 py-0.5 text-[10px] font-bold text-[#FAF6EE]">
+                      <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#232A32]">
+                        <img
+                          src={h.image}
+                          alt={name}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#14221F]/70 via-transparent to-transparent" />
+                        <span className="absolute left-2.5 top-2.5 rounded bg-[#B83B2A] px-2 py-0.5 text-[10px] font-bold text-[#FAF6EE] shadow-sm">
                           #{h.rank}
                         </span>
-                        <span className="truncate text-[10px] font-bold uppercase tracking-wide text-[#1F5C4E]">
+                        <span className="absolute bottom-2 left-2.5 right-2.5 truncate text-[10px] font-bold uppercase tracking-wide text-[#F2D99B]">
                           {h.program}
                         </span>
                       </div>
-                      <h3 className="mt-2.5 text-sm font-bold leading-snug text-[#1E242B]">
-                        {name}
-                      </h3>
-                      <p className="mt-1 text-[11px] font-medium text-[#7A6B55]">{area}</p>
-                      <ul className="mt-3 space-y-1 text-[11px] text-[#3F3A34]">
-                        {perks.map((pk) => (
-                          <li key={pk} className="flex items-start gap-1.5">
-                            <span className="mt-0.5 text-[#1F5C4E]">✓</span>
-                            <span>{pk}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      <div className="p-4">
+                        <h3 className="text-sm font-bold leading-snug text-[#1E242B]">
+                          {name}
+                        </h3>
+                        <p className="mt-1 text-[11px] font-medium text-[#7A6B55]">{area}</p>
+                        <ul className="mt-3 space-y-1 text-[11px] text-[#3F3A34]">
+                          {perks.map((pk) => (
+                            <li key={pk} className="flex items-start gap-1.5">
+                              <span className="mt-0.5 text-[#1F5C4E]">✓</span>
+                              <span>{pk}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                    <div className="mt-4 border-t border-[#E5DAC6] pt-2.5 text-xs font-bold text-[#B83B2A] group-hover:text-[#1F5C4E]">
+                    <div className="border-t border-[#E5DAC6] px-4 py-2.5 text-xs font-bold text-[#B83B2A] group-hover:text-[#1F5C4E]">
                       {copy.foraCta} &rarr;
                     </div>
                   </a>
