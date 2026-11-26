@@ -256,6 +256,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
+        {/* Root WebApplication JSON-LD for PersonalColorHelper / Helper Family SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebApplication',
+              name: 'PersonalColorHelper & Helper Family',
+              url: 'https://personalcolorhelper.com',
+              applicationCategory: 'LifestyleApplication',
+              operatingSystem: 'Web',
+              description:
+                'AI 12-season Seoul personal color draping, free K-Beauty shade & US lowest price tracker (BeautyHelper), and free browser shadowing trainer (LoopShadow).',
+            }),
+          }}
+        />
         {/* Vercel Web Analytics Engine with Multi-Site Domain Routing */}
         <script
           dangerouslySetInnerHTML={{

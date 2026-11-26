@@ -198,5 +198,105 @@
     "pronunciation": "[비사 피잣 르비 플란 스디킷 야?]",
     "meaning": "마사지 조금만 더 부드럽게(살살) 해주시겠어요?",
     "tip": "'pelan(플란)=살살/부드럽게', 반대로 세게는 'lebih kuat(르비 쿠앗)'!"
+  },
+  {
+    "id": "kr-en-05",
+    "lang": "영어 (EN)",
+    "bcp47": "en-US",
+    "category": "해외 쇼핑 교환",
+    "sentence": "Do you have a fresh one in a medium size?",
+    "pronunciation": "[두 유 해브 어 프레쉬 원 인 어 미디엄 사이즈?]",
+    "meaning": "미디엄 사이즈로 새 제품 있을까요?",
+    "tip": "'a fresh one' = 디피 상품 말고 창고의 새 제품! 해외 편집샵 필수 표현!"
+  },
+  {
+    "id": "kr-en-06",
+    "lang": "영어 (EN)",
+    "bcp47": "en-US",
+    "category": "비즈니스 스몰톡",
+    "sentence": "That makes total sense. Let's move forward with that.",
+    "pronunciation": "[댓 메이크스 토탈 센스. 렛츠 무브 포워드 윗 댓.]",
+    "meaning": "완전히 납득됩니다. 그 방향대로 진행하시죠.",
+    "tip": "글로벌 화상회의에서 긍정 동의 + 실행 결정까지 한 번에 끝내는 원어민 표현!"
+  },
+  {
+    "id": "kr-ja-05",
+    "lang": "일본어 (JA)",
+    "bcp47": "ja-JP",
+    "category": "일본 쇼핑 피팅",
+    "sentence": "こちら、試着してもいいですか？",
+    "pronunciation": "[코치라, 시차쿠시테모 이이데스카?]",
+    "meaning": "이거 한번 입어봐도 될까요?",
+    "tip": "'試着(시차쿠)' = 피팅/시착! 시부야·하라주쿠 쇼핑 1초 필수어!"
+  },
+  {
+    "id": "kr-ja-06",
+    "lang": "일본어 (JA)",
+    "bcp47": "ja-JP",
+    "category": "도쿄 계산·카드",
+    "sentence": "お会計お願いします。カードは使えますか？",
+    "pronunciation": "[오카이케이 오네가이시마스. 카도와 츠카에마스카?]",
+    "meaning": "계산 부탁드립니다. 카드 쓸 수 있나요?",
+    "tip": "'お会計(오카이케이)' = 계산! 현금 전용 가게가 많은 일본에서 필수 확인!"
+  },
+  {
+    "id": "kr-zh-05",
+    "lang": "중국어 (ZH)",
+    "bcp47": "zh-CN",
+    "category": "중국 알리페이 결제",
+    "sentence": "服务员，买单！可以扫支付宝吗？",
+    "pronunciation": "[푸우위안, 마이단! 커이 사오 즈푸바오 마?]",
+    "meaning": "직원분, 계산이요! 알리페이 스캔 되나요?",
+    "tip": "'买单(마이단)=계산', '支付宝(즈푸바오)=알리페이'! 중국 여행 필수 1초 문장!"
+  },
+  {
+    "id": "kr-zh-06",
+    "lang": "중국어 (ZH)",
+    "bcp47": "zh-CN",
+    "category": "중국 호텔 짐보관",
+    "sentence": "请问可以寄存一下行李吗？",
+    "pronunciation": "[칭원 커이 지춘 이샤 싱리 마?]",
+    "meaning": "혹시 짐 좀 잠시 맡길 수 있을까요?",
+    "tip": "'寄存行李(지춘 싱리)' = 수하물 보관! 호텔·공항·기차역 만능 표현!"
+  },
+  {
+    "id": "kr-es-05",
+    "lang": "스페인어 (ES)",
+    "bcp47": "es-ES",
+    "category": "스페인 피팅룸",
+    "sentence": "Perdona, ¿dónde están los probadores?",
+    "pronunciation": "[페르도나, 돈데 에스탄 로스 프로바도레스?]",
+    "meaning": "실례지만 탈의실(피팅룸)이 어디인가요?",
+    "tip": "'probadores(프로바도레스)' = 피팅룸! 스페인 자라·망고 쇼핑 필수!"
+  },
+  {
+    "id": "kr-es-06",
+    "lang": "스페인어 (ES)",
+    "bcp47": "es-ES",
+    "category": "스페인 맛집 추천",
+    "sentence": "¿Qué plato me recomienda hoy?",
+    "pronunciation": "[케 플라토 메 레코미엔다 오이?]",
+    "meaning": "오늘 어떤 요리를 추천하시나요?",
+    "tip": "'recomienda(레코미엔다)' = 추천하다! 바르셀로나 타파스 바 치트키!"
+  },
+  {
+    "id": "kr-id-05",
+    "lang": "인니어 (ID)",
+    "bcp47": "id-ID",
+    "category": "발리 맛집 맵기",
+    "sentence": "Tolong jangan terlalu pedas ya.",
+    "pronunciation": "[톨롱 장안 트를랄루 프다스 야.]",
+    "meaning": "너무 맵지 않게 만들어 주세요.",
+    "tip": "'jangan terlalu pedas' = 너무 맵지 않게! 매운 삼발 소스 대비 필수!"
+  },
+  {
+    "id": "kr-id-06",
+    "lang": "인니어 (ID)",
+    "bcp47": "id-ID",
+    "category": "발리 카드 결제",
+    "sentence": "Minta bill ya, bisa bayar pakai kartu?",
+    "pronunciation": "[민타 빌 야, 비사 바야르 파카이 카르투?]",
+    "meaning": "계산서 주세요, 카드로 결제 가능한가요?",
+    "tip": "'bayar pakai kartu(바야르 파카이 카르투)' = 카드로 결제하다!"
   }
 ]

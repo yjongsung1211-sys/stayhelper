@@ -148,5 +148,155 @@
     "es": "¿Cuál es la contraseña del Wi-Fi?",
     "tipEn": "Nearly every Seoul cafe prints the Wi-Fi password on your receipt or near the counter.",
     "tipEs": "Casi todos los cafés de Seúl tienen Wi-Fi gratis en el recibo o en la barra."
+  },
+  {
+    "id": "ko-16",
+    "category": "Restaurant Payment",
+    "korean": "계산할게요! 카드로 결제할게요.",
+    "romanization": "[Gye-san-hal-ge-yo! Ka-deu-ro gyeol-je-hal-ge-yo.]",
+    "en": "I'll pay now! I'll pay by card.",
+    "es": "¡Voy a pagar! Pagaré con tarjeta.",
+    "tipEn": "In Korea, you usually walk up to the counter near the exit to pay—no tipping needed!",
+    "tipEs": "En Corea se paga en la caja al salir y no hace falta dejar propina."
+  },
+  {
+    "id": "ko-17",
+    "category": "Spicy Food Check",
+    "korean": "이거 많이 매워요? 덜 맵게 해주세요.",
+    "romanization": "[I-geo ma-ni mae-wo-yo? Deol maep-ge hae-ju-se-yo.]",
+    "en": "Is this very spicy? Please make it less spicy.",
+    "es": "¿Esto pica mucho? Hágalo menos picante, por favor.",
+    "tipEn": "'Deol maep-ge' (less spicy) is a lifesaver at tteokbokki and stew restaurants.",
+    "tipEs": "'Deol maep-ge' (menos picante) te salvará en los restaurantes de comida picante."
+  },
+  {
+    "id": "ko-18",
+    "category": "Seongsu Pop-Up Store",
+    "korean": "지금 웨이팅 얼마나 걸려요?",
+    "romanization": "[Ji-geum we-i-ting eol-ma-na geol-lyeo-yo?]",
+    "en": "How long is the wait right now?",
+    "es": "¿Cuánto tiempo de espera hay ahora?",
+    "tipEn": "Koreans use the Konglish word 'we-i-ting' (waiting) at every trendy Seongsu pop-up & cafe.",
+    "tipEs": "En Seúl todos usan 'we-i-ting' para preguntar por la fila en cafés y tiendas pop-up."
+  },
+  {
+    "id": "ko-19",
+    "category": "Personal Color Studio",
+    "korean": "저한테 어울리는 립 컬러 추천해 주세요.",
+    "romanization": "[Jeo-han-te eo-ul-li-neun rip keol-leo chu-cheon-hae ju-se-yo.]",
+    "en": "Please recommend a lip color that suits me.",
+    "es": "Por favor, recomiéndeme un color de labial que me quede bien.",
+    "tipEn": "Great phrase for Seoul personal color studios and Myeongdong beauty flagship stores!",
+    "tipEs": "Frase perfecta para estudios de color personal y tiendas de K-Beauty en Seúl."
+  },
+  {
+    "id": "ko-20",
+    "category": "Hotel Check-In",
+    "korean": "체크인 전에 짐 맡길 수 있나요?",
+    "romanization": "[Che-keu-in jeon-e jim mat-gil su in-na-yo?]",
+    "en": "Can I leave my luggage before check-in?",
+    "es": "¿Puedo dejar mi equipaje antes del check-in?",
+    "tipEn": "'Jim mat-gi-da' = leave luggage. Every Seoul hotel offers free luggage storage.",
+    "tipEs": "'Jim mat-gi-da' significa dejar el equipaje; casi todos los hoteles lo guardan gratis."
+  },
+  {
+    "id": "ko-21",
+    "category": "Shopping Size",
+    "korean": "이거 한 사이즈 더 큰 거 있나요?",
+    "romanization": "[I-geo han sa-i-jeu deo keun geo in-na-yo?]",
+    "en": "Do you have this in one size bigger?",
+    "es": "¿Tienen esto en una talla más grande?",
+    "tipEn": "Swap 'keun geo' (bigger) with 'ja-geun geo' (smaller) at Hongdae & Garosugil boutiques.",
+    "tipEs": "Cambia 'keun geo' (grande) por 'ja-geun geo' (pequeña) cuando compres ropa en Seúl."
+  },
+  {
+    "id": "ko-22",
+    "category": "Fitting Room",
+    "korean": "이거 한번 입어봐도 될까요?",
+    "romanization": "[I-geo han-beon ip-eo-bwa-do doel-kka-yo?]",
+    "en": "May I try this on?",
+    "es": "¿Puedo probarme esto?",
+    "tipEn": "Polite and natural in every department store and Seoul indie showroom.",
+    "tipEs": "Muy educado y natural en cualquier boutique o centro comercial de Corea."
+  },
+  {
+    "id": "ko-23",
+    "category": "K-Drama Everyday",
+    "korean": "밥 먹었어? 언제 밥 한번 먹자!",
+    "romanization": "[Bap meo-geo-sseo? Eon-je bap han-beon meok-ja!]",
+    "en": "Have you eaten? Let's grab a meal sometime!",
+    "es": "¿Ya comiste? ¡Quedemos a comer algún día!",
+    "tipEn": "Asking 'Have you eaten?' is the warmest Korean way of saying 'How are you?'",
+    "tipEs": "Preguntar '¿ya comiste?' es la forma más cálida de saludar en Corea."
+  },
+  {
+    "id": "ko-24",
+    "category": "K-Pop Concert",
+    "korean": "오늘 무대 진짜 레전드였어요!",
+    "romanization": "[O-neul mu-dae jin-jja re-jeon-deu-yeo-sseo-yo!]",
+    "en": "Today's stage was truly legendary!",
+    "es": "¡La presentación de hoy fue realmente legendaria!",
+    "tipEn": "'Mu-dae' (stage) + 're-jeon-deu' (legend) is the #1 K-Pop fan compliment.",
+    "tipEs": "'Mu-dae' (escenario) + 're-jeon-deu' (leyenda) es el elogio favorito de los fans de K-Pop."
+  },
+  {
+    "id": "ko-25",
+    "category": "Pharmacy / Wellness",
+    "korean": "감기약 좀 추천해 주세요.",
+    "romanization": "[Gam-gi-yak jom chu-cheon-hae ju-se-yo.]",
+    "en": "Please recommend some cold medicine.",
+    "es": "Por favor, recomiéndeme medicina para el resfriado.",
+    "tipEn": "Look for the green '약 (Yak)' sign—Korean pharmacists give fast, tailored remedies.",
+    "tipEs": "Busca el cartel '약 (Yak)'; las farmacias coreanas preparan remedios súper rápidos."
+  },
+  {
+    "id": "ko-26",
+    "category": "Airport AREX",
+    "korean": "인천공항 가는 직통열차 어디서 타요?",
+    "romanization": "[In-cheon-gong-hang ga-neun jik-tong-yeol-cha eo-di-seo ta-yo?]",
+    "en": "Where do I board the express train to Incheon Airport?",
+    "es": "¿Dónde tomo el tren expreso al aeropuerto de Incheon?",
+    "tipEn": "The AREX Express from Seoul Station reaches Incheon Airport in just 43 minutes.",
+    "tipEs": "El tren expreso AREX desde Seoul Station llega a Incheon en solo 43 minutos."
+  },
+  {
+    "id": "ko-27",
+    "category": "Korean Delivery",
+    "korean": "문 앞에 두고 벨 눌러주세요.",
+    "romanization": "[Mun ap-e du-go bel nul-leo-ju-se-yo.]",
+    "en": "Please leave it at the door and ring the bell.",
+    "es": "Déjelo en la puerta y toque el timbre, por favor.",
+    "tipEn": "Standard note for Coupang Eats and Baemin food delivery in Seoul.",
+    "tipEs": "La frase clásica para entregas a domicilio en apps coreanas."
+  },
+  {
+    "id": "ko-28",
+    "category": "Polite Refusal",
+    "korean": "괜찮아요, 그냥 구경하는 거예요.",
+    "romanization": "[Gwaen-cha-na-yo, geu-nyang gu-gyeong-ha-neun geo-ye-yo.]",
+    "en": "I'm okay, I'm just looking around.",
+    "es": "Está bien, solo estoy mirando.",
+    "tipEn": "'Gu-gyeong' means browsing/window-shopping. Friendly and zero awkwardness!",
+    "tipEs": "'Gu-gyeong' significa mirar tiendas sin compromiso. Súper útil y amable."
+  },
+  {
+    "id": "ko-29",
+    "category": "Making Friends",
+    "korean": "인스타 아이디 알려줄 수 있어요?",
+    "romanization": "[In-seu-ta a-i-di al-lyeo-jul su i-sseo-yo?]",
+    "en": "Could you share your Instagram handle?",
+    "es": "¿Me puedes dar tu cuenta de Instagram?",
+    "tipEn": "In Seoul, exchanging Instagram ('In-seu-ta') is the most natural way to stay in touch.",
+    "tipEs": "En Seúl intercambiar Instagram ('In-seu-ta') es la forma más común de hacer amigos."
+  },
+  {
+    "id": "ko-30",
+    "category": "Warm Farewell",
+    "korean": "오늘 진짜 재밌었어요! 조심히 들어가세요!",
+    "romanization": "[O-neul jin-jja jae-mi-sseo-sseo-yo! Jo-sim-hi deu-reo-ga-se-yo!]",
+    "en": "Today was so much fun! Get home safely!",
+    "es": "¡Hoy fue súper divertido! ¡Vuelve con cuidado a casa!",
+    "tipEn": "'Jo-sim-hi deu-reo-ga-se-yo' (Get home safely) is the classic warm Korean goodbye.",
+    "tipEs": "'Jo-sim-hi deu-reo-ga-se-yo' es la despedida más cariñosa y auténtica en Corea."
   }
 ]
