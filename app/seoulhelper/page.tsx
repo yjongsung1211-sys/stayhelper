@@ -59,6 +59,16 @@ const FX = curatedData.fxKrwPerUsd;
 const DISTRICTS: District[] = curatedData.districts as District[];
 const ESSENTIALS: Essential[] = curatedData.essentials as Essential[];
 const FORA_HOTELS: ForaHotel[] = curatedData.foraHotels as ForaHotel[];
+const FORA_VIP_INTAKE_URL = 'https://secure.foratravel.com/intake/VXwROA88te';
+
+function getDefaultDates() {
+  const d1 = new Date();
+  d1.setDate(d1.getDate() + 14);
+  const d2 = new Date(d1);
+  d2.setDate(d2.getDate() + 3);
+  const fmt = (d: Date) => d.toISOString().slice(0, 10);
+  return { checkin: fmt(d1), checkout: fmt(d2) };
+}
 
 // District-specific Dancheong & Seoul heritage accent bars
 const DISTRICT_ACCENTS: Record<string, { bar: string; chipBg: string; chipText: string }> = {
@@ -84,6 +94,18 @@ export default function SeoulHelperPage() {
   const [lang, setLang] = useState<Lang>('en');
   const [spendKrw, setSpendKrw] = useState<number>(150000);
   const [selectedIds, setSelectedIds] = useState<string[]>(['bukchon', 'seongsu', 'myeongdong']);
+  const [activeHotel, setActiveHotel] = useState<ForaHotel | null>(null);
+  const defaultDates = useMemo(() => getDefaultDates(), []);
+  const [checkIn, setCheckIn] = useState<string>(defaultDates.checkin);
+  const [checkOut, setCheckOut] = useState<string>(defaultDates.checkout);
+  const [guests, setGuests] = useState<number>(2);
+
+  const nights = useMemo(() => {
+    const t1 = Date.parse(checkIn);
+    const t2 = Date.parse(checkOut);
+    if (isNaN(t1) || isNaN(t2) || t2 <= t1) return 1;
+    return Math.round((t2 - t1) / 86400000);
+  }, [checkIn, checkOut]);
 
   const toggleDistrict = (id: string) => {
     setSelectedIds((prev) =>
@@ -124,7 +146,13 @@ export default function SeoulHelperPage() {
       foraKicker: 'FORA PREFERRED PARTNER × STAYHELPER VIP',
       foraTitle: '5 Seoul 5-Star Hotels with Free Fora VIP Perks',
       foraSub: 'Pay the exact same public flexible rate—and unlock complimentary daily breakfast for 2, $100 hotel credit, room upgrades & Stay 3 Pay 2 promos via our Fora Advisor desk.',
-      foraCta: 'Unlock VIP Perks',
+      foraCta: 'Search Live Rates & VIP',
+      modalCheckIn: 'Check-in',
+      modalCheckOut: 'Check-out',
+      modalGuests: 'Guests',
+      modalSearchBtn: 'Search Live Room Rates Now',
+      modalForaBtn: 'Request Free Fora VIP Booking ($100 Credit + Breakfast)',
+      modalNote: 'Opens live date-matched rates for this exact hotel, or lock free Fora Advisor VIP perks directly.',
       crossTitle: 'More 100% Free Tools by Helper Family',
     },
     es: {
@@ -145,7 +173,13 @@ export default function SeoulHelperPage() {
       foraKicker: 'FORA PREFERRED PARTNER × STAYHELPER VIP',
       foraTitle: '5 Hoteles 5 Estrellas en Seúl con Beneficios VIP Fora',
       foraSub: 'Misma tarifa oficial flexible, pero con desayuno diario para 2, $100 de crédito, upgrade de habitación y promos 3ª noche gratis vía StayHelper.',
-      foraCta: 'Solicitar VIP Gratis',
+      foraCta: 'Buscar Tarifas y VIP',
+      modalCheckIn: 'Entrada',
+      modalCheckOut: 'Salida',
+      modalGuests: 'Huéspedes',
+      modalSearchBtn: 'Buscar Tarifas en Vivo Ahora',
+      modalForaBtn: 'Solicitar Reserva VIP Fora Gratis ($100 + Desayuno)',
+      modalNote: 'Abre tarifas en vivo para tus fechas exactas o solicita beneficios VIP Fora gratis.',
       crossTitle: 'Más Herramientas 100% Gratis de Helper Family',
     },
     kr: {
@@ -166,7 +200,13 @@ export default function SeoulHelperPage() {
       foraKicker: 'FORA PREFERRED PARTNER × STAYHELPER VIP',
       foraTitle: 'Fora 연계 서울 5대 특급호텔 무료 VIP 특전',
       foraSub: '호텔 공식 공시가 그대로 예약하면서 2인 무료 조식 + $100 크레딧 + 객실 업그레이드 + 3박 2요금 프로모션까지 StayHelper × Fora 어드바이저로 무료 적용받으세요.',
-      foraCta: 'VIP 특전 받기',
+      foraCta: '실시간 요금 검색 · VIP',
+      modalCheckIn: '체크인',
+      modalCheckOut: '체크아웃',
+      modalGuests: '인원',
+      modalSearchBtn: '실시간 객실·최저가 바로 검색',
+      modalForaBtn: 'Fora VIP 무료 특전 예약 신청 (조식 + $100 크레딧)',
+      modalNote: '선택한 날짜로 해당 호텔 실시간 객실 요금을 바로 검색하거나, Fora 어드바이저 무료 VIP 특전을 신청할 수 있습니다.',
       crossTitle: 'Helper 패밀리 100% 무료 연동 도구',
     },
   }[lang];
@@ -494,14 +534,13 @@ export default function SeoulHelperPage() {
                   {copy.foraSub}
                 </p>
               </div>
-              <a
-                href="https://thestayhelper.com"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={() => setActiveHotel(FORA_HOTELS[0])}
                 className="shrink-0 rounded-full bg-[#B83B2A] px-5 py-2.5 text-xs font-bold text-[#FFFDF9] shadow-sm transition hover:bg-[#C6923A] hover:text-[#1E242B]"
               >
-                StayHelper VIP Desk &rarr;
-              </a>
+                🔍 {copy.foraCta} &rarr;
+              </button>
             </div>
 
             <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
@@ -510,14 +549,13 @@ export default function SeoulHelperPage() {
                 const area = lang === 'kr' ? h.areaKr : lang === 'es' ? h.areaEs : h.areaEn;
                 const perks = lang === 'kr' ? h.perksKr : lang === 'es' ? h.perksEs : h.perksEn;
                 return (
-                  <a
+                  <button
                     key={h.id}
-                    href={h.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex flex-col justify-between overflow-hidden rounded-xl border border-[#C6923A]/40 bg-[#FAF6EE] text-[#1E242B] transition hover:-translate-y-1 hover:border-[#E9CA8B] hover:bg-white hover:shadow-xl"
+                    type="button"
+                    onClick={() => setActiveHotel(h)}
+                    className="group flex flex-col justify-between overflow-hidden rounded-xl border border-[#C6923A]/40 bg-[#FAF6EE] text-left text-[#1E242B] transition hover:-translate-y-1 hover:border-[#E9CA8B] hover:bg-white hover:shadow-xl"
                   >
-                    <div>
+                    <div className="w-full">
                       <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#232A32]">
                         <img
                           src={h.image}
@@ -548,10 +586,10 @@ export default function SeoulHelperPage() {
                         </ul>
                       </div>
                     </div>
-                    <div className="border-t border-[#E5DAC6] px-4 py-2.5 text-xs font-bold text-[#B83B2A] group-hover:text-[#1F5C4E]">
-                      {copy.foraCta} &rarr;
+                    <div className="w-full border-t border-[#E5DAC6] px-4 py-2.5 text-xs font-bold text-[#B83B2A] group-hover:text-[#1F5C4E]">
+                      🔍 {copy.foraCta} &rarr;
                     </div>
-                  </a>
+                  </button>
                 );
               })}
             </div>
@@ -585,6 +623,163 @@ export default function SeoulHelperPage() {
           </div>
         </section>
       </main>
+
+      {/* Direct Hotel Live Rate Search & Fora VIP Modal */}
+      {activeHotel && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#14221F]/75 p-4 backdrop-blur-sm"
+          onClick={() => setActiveHotel(null)}
+        >
+          <div
+            className="w-full max-w-lg overflow-hidden rounded-2xl border border-[#C6923A]/60 bg-[#FAF6EE] text-[#1E242B] shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="relative h-48 w-full overflow-hidden bg-[#1E242B]">
+              <img
+                src={activeHotel.image}
+                alt={activeHotel.nameEn}
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#14221F]/90 via-[#14221F]/35 to-transparent" />
+              <button
+                type="button"
+                onClick={() => setActiveHotel(null)}
+                aria-label="Close modal"
+                className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#1E242B]/80 text-sm font-bold text-white hover:bg-[#B83B2A]"
+              >
+                ✕
+              </button>
+              <div className="absolute bottom-3 left-4 right-4 text-white">
+                <span className="inline-block rounded bg-[#B83B2A] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#FAF6EE]">
+                  {activeHotel.program}
+                </span>
+                <h3
+                  className="mt-1 text-xl font-bold leading-tight text-[#FFFBF2]"
+                  style={{ fontFamily: "'Cormorant Garamond', 'Noto Serif KR', serif" }}
+                >
+                  {lang === 'kr'
+                    ? activeHotel.nameKr
+                    : lang === 'es'
+                    ? activeHotel.nameEs
+                    : activeHotel.nameEn}
+                </h3>
+                <p className="text-xs text-[#E3DAC9]">
+                  {lang === 'kr'
+                    ? activeHotel.areaKr
+                    : lang === 'es'
+                    ? activeHotel.areaEs
+                    : activeHotel.areaEn}
+                </p>
+              </div>
+            </div>
+
+            <div className="p-5">
+              {/* Hotel Quick Switcher */}
+              <div className="mb-4 flex flex-wrap gap-1.5">
+                {FORA_HOTELS.map((h) => (
+                  <button
+                    key={h.id}
+                    type="button"
+                    onClick={() => setActiveHotel(h)}
+                    className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
+                      activeHotel.id === h.id
+                        ? 'bg-[#1F5C4E] text-[#FAF6EE]'
+                        : 'border border-[#D8C9AE] bg-white text-[#4E463C] hover:border-[#1F5C4E]'
+                    }`}
+                  >
+                    #{h.rank} {lang === 'kr' ? h.nameKr.split(' ')[0] : h.nameEn.split(' ')[0]}
+                  </button>
+                ))}
+              </div>
+
+              {/* Date & Guest Live Search Inputs */}
+              <div className="grid grid-cols-3 gap-2.5">
+                <div className="rounded-xl border border-[#DFD2BC] bg-white p-2.5">
+                  <label className="block text-[10px] font-bold uppercase text-[#6B6256]">
+                    {copy.modalCheckIn}
+                  </label>
+                  <input
+                    type="date"
+                    value={checkIn}
+                    onChange={(e) => setCheckIn(e.target.value)}
+                    className="mt-1 w-full bg-transparent text-xs font-bold text-[#1E242B] outline-none"
+                  />
+                </div>
+                <div className="rounded-xl border border-[#DFD2BC] bg-white p-2.5">
+                  <label className="block text-[10px] font-bold uppercase text-[#6B6256]">
+                    {copy.modalCheckOut}
+                  </label>
+                  <input
+                    type="date"
+                    value={checkOut}
+                    onChange={(e) => setCheckOut(e.target.value)}
+                    className="mt-1 w-full bg-transparent text-xs font-bold text-[#1E242B] outline-none"
+                  />
+                </div>
+                <div className="rounded-xl border border-[#DFD2BC] bg-white p-2.5">
+                  <label className="block text-[10px] font-bold uppercase text-[#6B6256]">
+                    {copy.modalGuests} ({nights}N)
+                  </label>
+                  <select
+                    value={guests}
+                    onChange={(e) => setGuests(Number(e.target.value))}
+                    className="mt-1 w-full bg-transparent text-xs font-bold text-[#1E242B] outline-none"
+                  >
+                    {[1, 2, 3, 4].map((n) => (
+                      <option key={n} value={n}>
+                        {n} {lang === 'kr' ? '명' : 'Adults'}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* Included Free Perks */}
+              <div className="mt-4 flex flex-wrap gap-1.5">
+                {(lang === 'kr'
+                  ? activeHotel.perksKr
+                  : lang === 'es'
+                  ? activeHotel.perksEs
+                  : activeHotel.perksEn
+                ).map((pk) => (
+                  <span
+                    key={pk}
+                    className="rounded-full border border-[#CBE0D9] bg-[#EBF5F2] px-2.5 py-0.5 text-[11px] font-semibold text-[#17483D]"
+                  >
+                    ✓ {pk}
+                  </span>
+                ))}
+              </div>
+
+              {/* Direct Search + Fora VIP Buttons */}
+              <div className="mt-5 space-y-2.5">
+                <a
+                  href={`https://www.google.com/travel/hotels?q=${encodeURIComponent(
+                    `${activeHotel.nameEn} Seoul`
+                  )}&checkin=${encodeURIComponent(checkIn)}&checkout=${encodeURIComponent(
+                    checkOut
+                  )}&adults=${guests}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center rounded-xl bg-[#B83B2A] px-4 py-3 text-sm font-bold text-[#FFFDF9] shadow-sm transition hover:bg-[#9A2F20]"
+                >
+                  🔍 {copy.modalSearchBtn} ({nights}N) &rarr;
+                </a>
+                <a
+                  href={FORA_VIP_INTAKE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center rounded-xl border border-[#1F5C4E] bg-[#1F5C4E] px-4 py-2.5 text-xs font-bold text-[#FAF6EE] transition hover:bg-[#17443A]"
+                >
+                  👑 {copy.modalForaBtn} &rarr;
+                </a>
+              </div>
+
+              <p className="mt-3 text-center text-[11px] text-[#6B6256]">{copy.modalNote}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
