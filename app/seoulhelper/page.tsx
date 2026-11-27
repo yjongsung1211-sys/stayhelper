@@ -152,6 +152,7 @@ export default function SeoulHelperPage() {
       modalGuests: 'Guests',
       modalSearchBtn: 'Search Live Room Rates Now',
       modalForaBtn: 'Request Free Fora VIP Booking ($100 Credit + Breakfast)',
+      modalTrust: '$0 Advisor Fee · Pay Hotel Directly · Earn 100% Marriott/Hyatt Points',
       modalNote: 'Opens live date-matched rates for this exact hotel, or lock free Fora Advisor VIP perks directly.',
       crossTitle: 'More 100% Free Tools by Helper Family',
     },
@@ -179,6 +180,7 @@ export default function SeoulHelperPage() {
       modalGuests: 'Huéspedes',
       modalSearchBtn: 'Buscar Tarifas en Vivo Ahora',
       modalForaBtn: 'Solicitar Reserva VIP Fora Gratis ($100 + Desayuno)',
+      modalTrust: '$0 Comisión · Pago Directo al Hotel · 100% Puntos Marriott/Hyatt',
       modalNote: 'Abre tarifas en vivo para tus fechas exactas o solicita beneficios VIP Fora gratis.',
       crossTitle: 'Más Herramientas 100% Gratis de Helper Family',
     },
@@ -206,6 +208,7 @@ export default function SeoulHelperPage() {
       modalGuests: '인원',
       modalSearchBtn: '실시간 객실·최저가 바로 검색',
       modalForaBtn: 'Fora VIP 무료 특전 예약 신청 (조식 + $100 크레딧)',
+      modalTrust: '수수료 0원 · 호텔 현장 직접 결제 · 메리어트/하얏트 포인트 100% 적립',
       modalNote: '선택한 날짜로 해당 호텔 실시간 객실 요금을 바로 검색하거나, Fora 어드바이저 무료 VIP 특전을 신청할 수 있습니다.',
       crossTitle: 'Helper 패밀리 100% 무료 연동 도구',
     },
@@ -749,6 +752,11 @@ export default function SeoulHelperPage() {
                     ✓ {pk}
                   </span>
                 ))}
+              </div>
+
+              {/* Zero-Risk Trust Bar */}
+              <div className="mt-4 rounded-xl border border-[#DFD2BC] bg-[#F3ECE0] px-3 py-2 text-center text-[11px] font-bold text-[#1F5C4E]">
+                🛡️ {copy.modalTrust}
               </div>
 
               {/* Direct Search + Fora VIP Buttons */}
