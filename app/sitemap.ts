@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { headers } from 'next/headers';
+import { COLORHELPER_SEASONS } from '@/lib/colorhelper-seasons';
 
 export const dynamic = 'force-dynamic';
 
@@ -27,8 +28,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }
 
   // Default: personalcolorhelper.com (ColorHelper + BeautyHelper + LoopShadow + SeoulHelper)
+  const colorHelperEntries: MetadataRoute.Sitemap = COLORHELPER_SEASONS.map((season) => ({
+    url: `https://personalcolorhelper.com/colorhelper/${season.slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.95,
+  }));
+
   return [
     { url: 'https://personalcolorhelper.com', lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    ...colorHelperEntries,
     { url: 'https://personalcolorhelper.com/seoulhelper', lastModified: now, changeFrequency: 'daily', priority: 1.0 },
     { url: 'https://personalcolorhelper.com/seoulhelper/best-5-star-hotels-seoul', lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: 'https://personalcolorhelper.com/seoulhelper/korea-tax-refund-guide', lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
