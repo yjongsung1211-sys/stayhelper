@@ -1,70 +1,37 @@
 import { MetadataRoute } from 'next';
+import { headers } from 'next/headers';
+
+export const dynamic = 'force-dynamic';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
+  const host = (headers().get('x-forwarded-host') || headers().get('host') || '').toLowerCase();
 
+  if (host.includes('weddinghelper')) {
+    return [
+      { url: 'https://www.weddinghelper.love', lastModified: now, changeFrequency: 'daily', priority: 1.0 },
+      { url: 'https://www.weddinghelper.love/gallery', lastModified: now, changeFrequency: 'daily', priority: 0.9 },
+    ];
+  }
+
+  if (host.includes('stylinghelper')) {
+    return [
+      { url: 'https://www.stylinghelper.com', lastModified: now, changeFrequency: 'daily', priority: 1.0 },
+    ];
+  }
+
+  if (host.includes('thestayhelper') || host.includes('stayhelper')) {
+    return [
+      { url: 'https://thestayhelper.com', lastModified: now, changeFrequency: 'daily', priority: 1.0 },
+    ];
+  }
+
+  // Default: personalcolorhelper.com (ColorHelper + BeautyHelper + LoopShadow + SeoulHelper)
   return [
-    // WeddingHelper
-    {
-      url: 'https://www.weddinghelper.love',
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 1.0,
-    },
-    {
-      url: 'https://www.weddinghelper.love/gallery',
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 0.9,
-    },
-    // StylingHelper
-    {
-      url: 'https://www.stylinghelper.com',
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 1.0,
-    },
-    // StayHelper
-    {
-      url: 'https://thestayhelper.com',
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 1.0,
-    },
-    // PersonalColorHelper
-    {
-      url: 'https://personalcolorhelper.com',
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    // BeautyHelper (100% Free K-Beauty 12-Season & US Lowest Price Tracker)
-    {
-      url: 'https://personalcolorhelper.com/beautyhelper',
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 1.0,
-    },
-    // LoopShadow Global (100% Free Korean Shadowing EN/ES)
-    {
-      url: 'https://personalcolorhelper.com/loopshadow',
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 1.0,
-    },
-    // LoopShadow KR (100% Free 5-Language Shadowing for Koreans)
-    {
-      url: 'https://personalcolorhelper.com/loopshadow/kr',
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 0.9,
-    },
-    // SeoulHelper (100% Free Seoul Travel Budget, Tax-Free & District Planner)
-    {
-      url: 'https://personalcolorhelper.com/seoulhelper',
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 1.0,
-    },
+    { url: 'https://personalcolorhelper.com', lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    { url: 'https://personalcolorhelper.com/seoulhelper', lastModified: now, changeFrequency: 'daily', priority: 1.0 },
+    { url: 'https://personalcolorhelper.com/beautyhelper', lastModified: now, changeFrequency: 'daily', priority: 1.0 },
+    { url: 'https://personalcolorhelper.com/loopshadow', lastModified: now, changeFrequency: 'daily', priority: 1.0 },
+    { url: 'https://personalcolorhelper.com/loopshadow/kr', lastModified: now, changeFrequency: 'daily', priority: 0.9 },
   ];
 }
