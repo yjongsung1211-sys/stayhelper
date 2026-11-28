@@ -48,5 +48,6 @@ youtube_paper_studio/output/
 token*.json
 client_secret*.json
 *.mp4
+!public/videos/seoulhelper/*.mp4
 *.wav
 *.gguf

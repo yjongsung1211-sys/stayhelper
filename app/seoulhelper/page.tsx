@@ -99,6 +99,8 @@ export default function SeoulHelperPage() {
   const [checkIn, setCheckIn] = useState<string>(defaultDates.checkin);
   const [checkOut, setCheckOut] = useState<string>(defaultDates.checkout);
   const [guests, setGuests] = useState<number>(2);
+  const [isVideoMuted, setIsVideoMuted] = useState<boolean>(true);
+  const [unmutedReelId, setUnmutedReelId] = useState<string | null>(null);
 
   const nights = useMemo(() => {
     const t1 = Date.parse(checkIn);
@@ -137,6 +139,27 @@ export default function SeoulHelperPage() {
       inputLabel: 'Shopping Amount (KRW ₩)',
       refundLabel: 'Est. VAT Refund',
       netLabel: 'Final Net Cost',
+      videoBadge: 'MYEONGDONG LIVE PREVIEW · 20S',
+      videoTitle: 'See How Instant Passport Tax-Free Works in Myeongdong',
+      videoSub: 'Skip airport refund lines—present your physical passport right at the flagship store counter.',
+      videoSteps: [
+        'Spend ₩15,000+ (~$11) at Olive Young or K-Beauty flagships',
+        'Show your physical passport at the Tax Refund counter',
+        'Get up to 7.5% deducted on the spot in 10 seconds',
+      ],
+      unmuteBtn: 'Sound On',
+      muteBtn: 'Mute',
+      reelsKicker: 'SEOUL IN MOTION · 9:16 TRAVEL REELS',
+      reelsTitle: 'Watch Before You Land in Seoul',
+      reelsSub: 'Quick 10–15s visual guides to skip airport taxi traps and unlock 100% free palace entry.',
+      reelArexBadge: 'AIRPORT HACK · 15S',
+      reelArexTitle: 'Incheon Airport to Seoul in 43 Minutes',
+      reelArexDesc: 'Activate Korea 5G eSIM before boarding and take the non-stop AREX Express (~$8.20) instead of a $60+ taxi.',
+      reelArexCta: 'Book 5G eSIM & AREX →',
+      reelHanbokBadge: 'FREE PALACE ENTRY · 10S',
+      reelHanbokTitle: 'Gyeongbokgung Palace 100% Free in Hanbok',
+      reelHanbokDesc: 'Rent a silk Hanbok right outside the palace (from $14) and walk into Gyeongbokgung & Changdeokgung for $0.',
+      reelHanbokCta: 'Reserve Hanbok From $14 →',
       planTitle: `Seoul ${DISTRICTS.length}-District Interactive Budget Planner`,
       planSub: 'Tap neighborhoods to build your custom Seoul itinerary & daily spend estimate.',
       selectedLabel: 'Selected Itinerary',
@@ -165,6 +188,27 @@ export default function SeoulHelperPage() {
       inputLabel: 'Monto de Compra (KRW ₩)',
       refundLabel: 'Reembolso Estimado',
       netLabel: 'Costo Neto Final',
+      videoBadge: 'VISTA PREVIA MYEONGDONG · 20S',
+      videoTitle: 'Cómo funciona el Tax-Free inmediato en Myeongdong',
+      videoSub: 'Evita las filas en el aeropuerto: muestra tu pasaporte físico directamente en caja.',
+      videoSteps: [
+        'Compra desde ₩15,000 (~$11) en Olive Young o tiendas K-Beauty',
+        'Presenta tu pasaporte físico en el mostrador Tax Refund',
+        'Recibe hasta 7.5% de descuento al instante en 10 segundos',
+      ],
+      unmuteBtn: 'Activar Audio',
+      muteBtn: 'Silenciar',
+      reelsKicker: 'SEÚL EN MOVIMIENTO · REELS 9:16',
+      reelsTitle: 'Mira Esto Antes de Aterrizar en Seúl',
+      reelsSub: 'Guías visuales de 10–15s para ahorrar en el aeropuerto y entrar gratis a los palacios reales.',
+      reelArexBadge: 'TRUCO AEROPUERTO · 15S',
+      reelArexTitle: 'Aeropuerto Incheon a Seúl en 43 Minutos',
+      reelArexDesc: 'Activa tu eSIM 5G antes de volar y toma el tren expreso AREX (~$8.20) en lugar de un taxi de $60+.',
+      reelArexCta: 'Ver eSIM 5G y AREX →',
+      reelHanbokBadge: 'ENTRADA GRATIS · 10S',
+      reelHanbokTitle: 'Palacio Gyeongbokgung 100% Gratis con Hanbok',
+      reelHanbokDesc: 'Alquila un Hanbok frente al palacio (desde $14) y entra gratis a Gyeongbokgung y Changdeokgung.',
+      reelHanbokCta: 'Reservar Hanbok desde $14 →',
       planTitle: `Planificador de Presupuesto (${DISTRICTS.length} Zonas de Seúl)`,
       planSub: 'Selecciona barrios para calcular tus días y presupuesto estimado en Seúl.',
       selectedLabel: 'Itinerario Seleccionado',
@@ -193,6 +237,27 @@ export default function SeoulHelperPage() {
       inputLabel: '결제 예정 금액 (원 KRW)',
       refundLabel: '예상 환급액',
       netLabel: '실제 체감 결제액',
+      videoBadge: '명동 현장 프리뷰 · 20초',
+      videoTitle: '명동 K-뷰티 매장 여권 즉시 환급 실제 이용 장면',
+      videoSub: '공항 환급 줄 설 필요 없이, 매장 TAX REFUND 카운터에서 여권 스캔 한 번으로 즉시 차감됩니다.',
+      videoSteps: [
+        '올리브영·K-뷰티 플래그십에서 15,000원 이상 구매',
+        '매장 내 TAX REFUND 카운터에 실물 여권 제시',
+        '10초 여권 스캔으로 최대 7.5% 즉시 할인 완료',
+      ],
+      unmuteBtn: '소리 켜기',
+      muteBtn: '음소거',
+      reelsKicker: 'SEOUL IN MOTION · 9:16 핵심 릴스',
+      reelsTitle: '서울 여행 전 15초 만에 보는 핵심 꿀팁 릴스',
+      reelsSub: '인천공항 43분 직통 루트부터 경복궁 0원 무료 입장까지, 영상으로 먼저 확인하세요.',
+      reelArexBadge: '공항 필수 팁 · 15초',
+      reelArexTitle: '인천공항 → 서울역 43분 논스톱 (eSIM + AREX)',
+      reelArexDesc: '출국 전 5G eSIM QR 개통 후 AREX 직통열차(₩11,000)로 택시비 $60를 아끼세요.',
+      reelArexCta: '5G eSIM · AREX 예약 →',
+      reelHanbokBadge: '경복궁 0원 입장 · 10초',
+      reelHanbokTitle: '한복 입고 경복궁·창덕궁 100% 무료 입장',
+      reelHanbokDesc: '경복궁 앞 프리미엄 한복 대여($14~)로 입장료 0원 혜택과 인생샷을 동시에 잡으세요.',
+      reelHanbokCta: '경복궁 한복 대여 보기 →',
       planTitle: `서울 핵심 ${DISTRICTS.length}대 권역 여행 예산 플래너`,
       planSub: '방문할 권역을 클릭하면 추천 일수 및 총 예상 경비가 실시간 합산됩니다.',
       selectedLabel: '선택한 일정',
@@ -366,6 +431,53 @@ export default function SeoulHelperPage() {
                 </p>
               </div>
             </div>
+
+            {/* Embedded Myeongdong Tax-Free Live Video Preview (16:9) */}
+            <div className="mt-6 grid items-center gap-5 rounded-xl border border-[#E5DAC6] bg-[#FAF6EE] p-4 md:grid-cols-12 md:p-5">
+              <div className="relative overflow-hidden rounded-xl border border-[#D8C9AE] bg-[#14181C] shadow-sm md:col-span-7">
+                <video
+                  src="/videos/seoulhelper/myeongdong_tax_refund.mp4"
+                  poster="/images/seoulhelper/district_myeongdong.jpg"
+                  autoPlay
+                  muted={isVideoMuted}
+                  loop
+                  playsInline
+                  preload="metadata"
+                  className="aspect-video w-full object-cover"
+                />
+                <button
+                  type="button"
+                  onClick={() => setIsVideoMuted((prev) => !prev)}
+                  className="absolute bottom-3 right-3 rounded-full border border-white/25 bg-[#14181C]/75 px-3 py-1 text-[11px] font-semibold text-[#FAF6EE] backdrop-blur-sm transition hover:bg-[#B83B2A]"
+                >
+                  {isVideoMuted ? `🔇 ${copy.unmuteBtn}` : `🔊 ${copy.muteBtn}`}
+                </button>
+              </div>
+
+              <div className="space-y-3 md:col-span-5">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-[#D8C9AE] bg-[#FFFDF9] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#B83B2A]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#B83B2A]" />
+                  {copy.videoBadge}
+                </span>
+                <h3
+                  className="text-lg font-bold leading-snug text-[#1E242B]"
+                  style={{ fontFamily: "'Cormorant Garamond', 'Noto Serif KR', serif" }}
+                >
+                  {copy.videoTitle}
+                </h3>
+                <p className="text-xs leading-relaxed text-[#5F564A]">{copy.videoSub}</p>
+                <ul className="space-y-1.5 text-xs text-[#2F363D]">
+                  {copy.videoSteps.map((step, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#1F5C4E] text-[10px] font-bold text-[#FAF6EE]">
+                        {idx + 1}
+                      </span>
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -463,6 +575,100 @@ export default function SeoulHelperPage() {
                         {helperLabel} &rarr;
                       </Link>
                     </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* 2.5. Seoul in Motion — 9:16 Travel Reels (EP.02 & EP.03) */}
+        <section>
+          <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#B83B2A]">
+            {copy.reelsKicker}
+          </span>
+          <h2
+            className="mt-1 text-xl font-bold tracking-tight text-[#1E242B] md:text-2xl"
+            style={{ fontFamily: "'Cormorant Garamond', 'Noto Serif KR', serif" }}
+          >
+            {copy.reelsTitle}
+          </h2>
+          <p className="mt-1 text-xs text-[#6B6256]">{copy.reelsSub}</p>
+
+          <div className="mt-6 grid gap-5 md:grid-cols-2">
+            {[
+              {
+                id: 'arex-esim',
+                src: '/videos/seoulhelper/incheon_arex_esim.mp4',
+                poster: '/images/seoulhelper/district_hongdae.jpg',
+                badge: copy.reelArexBadge,
+                title: copy.reelArexTitle,
+                desc: copy.reelArexDesc,
+                cta: copy.reelArexCta,
+                href: 'https://www.klook.com/search/result/?query=AREX+Incheon+Airport+Express+Train',
+                accentBg: 'bg-[#1F5C4E]',
+              },
+              {
+                id: 'gyeongbokgung-hanbok',
+                src: '/videos/seoulhelper/gyeongbokgung_hanbok.mp4',
+                poster: '/images/seoulhelper/district_bukchon.jpg',
+                badge: copy.reelHanbokBadge,
+                title: copy.reelHanbokTitle,
+                desc: copy.reelHanbokDesc,
+                cta: copy.reelHanbokCta,
+                href: 'https://www.klook.com/search/result/?query=Gyeongbokgung+Hanbok+Rental',
+                accentBg: 'bg-[#B83B2A]',
+              },
+            ].map((reel) => {
+              const isUnmuted = unmutedReelId === reel.id;
+              return (
+                <div
+                  key={reel.id}
+                  className="grid items-center gap-4 overflow-hidden rounded-2xl border border-[#DFD2BC] bg-[#FFFDF9] p-4 shadow-sm sm:grid-cols-12"
+                >
+                  <div className="relative mx-auto w-full max-w-[210px] overflow-hidden rounded-xl border border-[#D8C9AE] bg-[#14181C] shadow-sm sm:col-span-5 sm:max-w-none">
+                    <video
+                      src={reel.src}
+                      poster={reel.poster}
+                      autoPlay
+                      muted={!isUnmuted}
+                      loop
+                      playsInline
+                      preload="metadata"
+                      className="aspect-[9/16] w-full object-cover"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setUnmutedReelId(isUnmuted ? null : reel.id)}
+                      className="absolute bottom-2.5 right-2.5 rounded-full border border-white/25 bg-[#14181C]/75 px-2.5 py-1 text-[10px] font-semibold text-[#FAF6EE] backdrop-blur-sm transition hover:bg-[#B83B2A]"
+                    >
+                      {isUnmuted ? `🔊 ${copy.muteBtn}` : `🔇 ${copy.unmuteBtn}`}
+                    </button>
+                  </div>
+
+                  <div className="flex h-full flex-col justify-between space-y-3 sm:col-span-7 sm:py-1">
+                    <div className="space-y-2.5">
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-[#D8C9AE] bg-[#FAF6EE] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#B83B2A]">
+                        <span className={`h-1.5 w-1.5 rounded-full ${reel.accentBg}`} />
+                        {reel.badge}
+                      </span>
+                      <h3
+                        className="text-lg font-bold leading-snug text-[#1E242B]"
+                        style={{ fontFamily: "'Cormorant Garamond', 'Noto Serif KR', serif" }}
+                      >
+                        {reel.title}
+                      </h3>
+                      <p className="text-xs leading-relaxed text-[#5F564A]">{reel.desc}</p>
+                    </div>
+
+                    <a
+                      href={reel.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`inline-flex w-fit items-center justify-center rounded-xl px-4 py-2 text-xs font-semibold text-[#FAF6EE] shadow-sm transition hover:opacity-90 ${reel.accentBg}`}
+                    >
+                      {reel.cta}
+                    </a>
                   </div>
                 </div>
               );
