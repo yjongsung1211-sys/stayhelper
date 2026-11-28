@@ -228,6 +228,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head suppressHydrationWarning>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="google-site-verification" content="DL7TLs3r0-RipZHB2C0Gt9PEQyDVe1ClSR1v2_mUj0c" />
         {/* Guaranteed Full Tailwind CSS Engine (Zero 404 Chunk Issues) */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
