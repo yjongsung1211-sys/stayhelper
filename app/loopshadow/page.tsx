@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import lessonsData from '@/data/loopshadow_global_korean.json';
+import grammarData from '@/data/loopshadow_korean_grammar.json';
 
 interface GlobalKoreanLesson {
   id: string;
@@ -15,7 +16,27 @@ interface GlobalKoreanLesson {
   tipEs: string;
 }
 
+interface GrammarLesson {
+  ep: number;
+  pattern: string;
+  titleEn: string;
+  titleEs: string;
+  formulaEn: string;
+  formulaEs: string;
+  ruleEn: string;
+  ruleEs: string;
+  exampleKr: string;
+  exampleRom: string;
+  exampleEn: string;
+  exampleEs: string;
+  quizPromptEn: string;
+  quizPromptEs: string;
+  options: string[];
+  answerIndex: number;
+}
+
 const LESSONS: GlobalKoreanLesson[] = lessonsData as GlobalKoreanLesson[];
+const GRAMMAR_LESSONS: GrammarLesson[] = grammarData as GrammarLesson[];
 
 function calcMatchScore(target: string, spoken: string): number {
   const clean = (s: string) =>
@@ -38,12 +59,33 @@ function calcMatchScore(target: string, spoken: string): number {
 
 export default function LoopShadowGlobalPage() {
   const [uiLang, setUiLang] = useState<'en' | 'es'>('en');
+  const [activeTab, setActiveTab] = useState<'shadowing' | 'grammar'>('shadowing');
   const [selectedCat, setSelectedCat] = useState<string>('All');
   const [speed, setSpeed] = useState<number>(1.0);
   const [speakingId, setSpeakingId] = useState<string | null>(null);
   const [listeningId, setListeningId] = useState<string | null>(null);
   const [results, setResults] = useState<Record<string, { spoken: string; score: number }>>({});
+  const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({});
   const [micNote, setMicNote] = useState<string>('');
+
+  const grammarScore = useMemo(() => {
+    return GRAMMAR_LESSONS.reduce(
+      (acc, g) => acc + (quizAnswers[g.ep] === g.answerIndex ? 1 : 0),
+      0
+    );
+  }, [quizAnswers]);
+
+  const playText = (id: string, text: string, rate: number) => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'ko-KR';
+    utter.rate = rate;
+    utter.onstart = () => setSpeakingId(id);
+    utter.onend = () => setSpeakingId(null);
+    utter.onerror = () => setSpeakingId(null);
+    window.speechSynthesis.speak(utter);
+  };
 
   const categories = useMemo(() => {
     return ['All', ...Array.from(new Set(LESSONS.map((l) => l.category)))];
@@ -162,8 +204,37 @@ export default function LoopShadowGlobalPage() {
               : `Sin suscripciones de $160/año ni demoras. Practica ${LESSONS.length} frases esenciales de Seúl (cafés, Olive Young, taxis, K-BBQ) con voz nativa y evaluación de micrófono al instante.`}
           </p>
 
+          {/* Mode Switcher: Shadowing vs Grammar 10-Lesson Cheat Sheet */}
+          <div className="mt-7 flex flex-wrap gap-2">
+            <button
+              onClick={() => setActiveTab('shadowing')}
+              className={`rounded-full px-5 py-2.5 text-xs font-bold transition cursor-pointer ${
+                activeTab === 'shadowing'
+                  ? 'bg-neutral-950 text-white shadow-sm'
+                  : 'border border-neutral-300 bg-white text-neutral-700 hover:border-neutral-900'
+              }`}
+            >
+              {uiLang === 'en'
+                ? `Shadowing Drills (${LESSONS.length})`
+                : `Práctica Shadowing (${LESSONS.length})`}
+            </button>
+            <button
+              onClick={() => setActiveTab('grammar')}
+              className={`rounded-full px-5 py-2.5 text-xs font-bold transition cursor-pointer ${
+                activeTab === 'grammar'
+                  ? 'bg-neutral-950 text-white shadow-sm'
+                  : 'border border-neutral-300 bg-white text-neutral-700 hover:border-neutral-900'
+              }`}
+            >
+              {uiLang === 'en'
+                ? `Korean Grammar Cheat Sheet & Quiz (${GRAMMAR_LESSONS.length})`
+                : `Gramática Coreana + Quiz (${GRAMMAR_LESSONS.length})`}
+            </button>
+          </div>
+
           {/* Filter & Speed */}
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          {activeTab === 'shadowing' && (
+          <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-wrap gap-2">
               {categories.map((cat) => {
                 const active = selectedCat === cat;
@@ -197,6 +268,7 @@ export default function LoopShadowGlobalPage() {
               ))}
             </div>
           </div>
+          )}
 
           {micNote && (
             <p className="mt-4 rounded-xl border border-neutral-200 bg-white px-4 py-2 text-xs text-neutral-600">
@@ -206,8 +278,138 @@ export default function LoopShadowGlobalPage() {
         </div>
       </section>
 
-      {/* Lessons */}
+      {/* Lessons or Grammar Cheat Sheet */}
       <main className="mx-auto max-w-6xl px-5 py-10">
+        {activeTab === 'grammar' ? (
+          <div>
+            <div className="mb-6 flex flex-col justify-between gap-3 rounded-2xl border border-neutral-200 bg-neutral-50 p-5 sm:flex-row sm:items-center">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-neutral-500">
+                  {uiLang === 'en'
+                    ? 'COMPANION TO KOREANLOOP YOUTUBE 10-EPISODE GRAMMAR SERIES'
+                    : 'COMPLEMENTO DE LA SERIE DE 10 CLASES EN HOLA COREANO'}
+                </p>
+                <h2 className="mt-1 text-lg font-bold text-neutral-950">
+                  {uiLang === 'en'
+                    ? '10 Essential Korean Grammar Rules + Instant Quiz'
+                    : '10 Reglas Esenciales de Gramática Coreana + Quiz'}
+                </h2>
+              </div>
+              <div className="rounded-full bg-neutral-950 px-4 py-2 text-xs font-bold text-white">
+                {uiLang === 'en' ? 'Quiz Score' : 'Puntuación'}: {grammarScore} / {GRAMMAR_LESSONS.length}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              {GRAMMAR_LESSONS.map((g) => {
+                const picked = quizAnswers[g.ep];
+                const isAnswered = picked !== undefined;
+                const isCorrect = picked === g.answerIndex;
+                const gVoiceId = `grammar-${g.ep}`;
+
+                return (
+                  <article
+                    key={g.ep}
+                    className="flex flex-col justify-between rounded-2xl border border-neutral-200 bg-white p-6"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="rounded-md bg-neutral-950 px-2.5 py-0.5 text-[11px] font-bold text-white">
+                          EP {String(g.ep).padStart(2, '0')}
+                        </span>
+                        <span className="rounded-full bg-neutral-100 px-2.5 py-0.5 text-[11px] font-semibold text-neutral-700">
+                          {uiLang === 'en' ? g.formulaEn : g.formulaEs}
+                        </span>
+                      </div>
+
+                      <h3 className="mt-3 text-xl font-bold text-neutral-950">{g.pattern}</h3>
+                      <p className="text-xs font-semibold text-neutral-500">
+                        {uiLang === 'en' ? g.titleEn : g.titleEs}
+                      </p>
+                      <p className="mt-3 text-xs leading-relaxed text-neutral-700">
+                        {uiLang === 'en' ? g.ruleEn : g.ruleEs}
+                      </p>
+
+                      {/* Example Box */}
+                      <div className="mt-4 rounded-xl border border-neutral-200 bg-neutral-50 p-3.5">
+                        <div className="flex items-start justify-between gap-3">
+                          <div>
+                            <p className="text-base font-bold text-neutral-950">{g.exampleKr}</p>
+                            <p className="mt-0.5 text-[11px] text-neutral-500">{g.exampleRom}</p>
+                            <p className="mt-1 text-xs font-medium text-neutral-800">
+                              {uiLang === 'en' ? g.exampleEn : g.exampleEs}
+                            </p>
+                          </div>
+                          <button
+                            onClick={() => playText(gVoiceId, g.exampleKr, speed)}
+                            className="shrink-0 rounded-lg bg-neutral-950 px-3 py-1.5 text-[11px] font-semibold text-white transition hover:bg-neutral-800 cursor-pointer"
+                          >
+                            {speakingId === gVoiceId
+                              ? uiLang === 'en'
+                                ? 'Playing...'
+                                : 'Sonando...'
+                              : uiLang === 'en'
+                              ? 'Listen'
+                              : 'Escuchar'}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Mini Quiz */}
+                    <div className="mt-4 border-t border-neutral-100 pt-4">
+                      <p className="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
+                        {uiLang === 'en' ? 'QUICK CHECK' : 'PRUEBA RÁPIDA'}
+                      </p>
+                      <p className="mt-1 text-xs font-medium text-neutral-800">
+                        {uiLang === 'en' ? g.quizPromptEn : g.quizPromptEs}
+                      </p>
+                      <div className="mt-2.5 flex flex-col gap-2 sm:flex-row">
+                        {g.options.map((opt, idx) => {
+                          const selected = picked === idx;
+                          const correctOpt = idx === g.answerIndex;
+                          let btnStyle =
+                            'border-neutral-300 bg-white text-neutral-900 hover:border-neutral-900';
+                          if (isAnswered && correctOpt) {
+                            btnStyle = 'border-emerald-600 bg-emerald-50 text-emerald-900';
+                          } else if (selected && !correctOpt) {
+                            btnStyle = 'border-rose-500 bg-rose-50 text-rose-900';
+                          }
+                          return (
+                            <button
+                              key={opt}
+                              onClick={() =>
+                                setQuizAnswers((prev) => ({ ...prev, [g.ep]: idx }))
+                              }
+                              className={`flex-1 rounded-xl border px-3 py-2 text-xs font-semibold transition cursor-pointer ${btnStyle}`}
+                            >
+                              {opt}
+                            </button>
+                          );
+                        })}
+                      </div>
+                      {isAnswered && (
+                        <p
+                          className={`mt-2 text-[11px] font-semibold ${
+                            isCorrect ? 'text-emerald-700' : 'text-rose-700'
+                          }`}
+                        >
+                          {isCorrect
+                            ? uiLang === 'en'
+                              ? 'Correct! Great instinct.'
+                              : '¡Correcto! Muy bien.'
+                            : uiLang === 'en'
+                            ? `Almost! The natural Korean answer is "${g.options[g.answerIndex]}".`
+                            : `¡Casi! La forma natural es "${g.options[g.answerIndex]}".`}
+                        </p>
+                      )}
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           {filtered.map((lesson) => {
             const isPlaying = speakingId === lesson.id;
@@ -284,6 +486,7 @@ export default function LoopShadowGlobalPage() {
             );
           })}
         </div>
+        )}
 
         {/* Native Korean Tutors Partner CTA */}
         <section className="mt-14 rounded-2xl border border-neutral-200 bg-neutral-50 p-6 md:p-8">
@@ -331,10 +534,10 @@ export default function LoopShadowGlobalPage() {
           </p>
           <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {[
+              { name: 'SeoulHelper', desc: 'Free Seoul Trip Planner, VAT Tax-Free Calculator & 5-Star VIP Perks', href: '/seoulhelper' },
               { name: 'BeautyHelper', desc: 'K-Beauty 12-season shade & US lowest price tracker', href: '/beautyhelper' },
               { name: 'PersonalColorHelper', desc: 'Free 12-season Warm vs Cool virtual draping', href: 'https://personalcolorhelper.com' },
               { name: 'StylingHelper', desc: 'Authorized US designer bag stock & markdowns', href: 'https://stylinghelper.com' },
-              { name: 'WeddingHelper', desc: 'Lake Como & Bali pre-wedding photo previews', href: 'https://weddinghelper.love' },
               { name: 'StayHelper', desc: '4K luxury hotel VIP perks & room upgrades', href: 'https://www.thestayhelper.com' },
             ].map((s) => (
               <a

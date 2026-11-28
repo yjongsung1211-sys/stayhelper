@@ -831,6 +831,37 @@ export default function SeoulHelperPage() {
             ))}
           </div>
         </section>
+
+        {/* Deep-Dive SEO Travel Guides */}
+        <section className="mt-10 rounded-2xl border border-[#DFD2BC] bg-[#FFFDF9] p-6">
+          <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#B83B2A]">
+            {lang === 'kr' ? '심층 서울 가이드 (2026)' : lang === 'es' ? 'GUÍAS COMPLETAS DE SEÚL 2026' : 'IN-DEPTH SEOUL TRAVEL GUIDES (2026)'}
+          </p>
+          <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <Link
+              href="/seoulhelper/best-5-star-hotels-seoul"
+              className="rounded-xl border border-[#E6DDD0] bg-[#FAF6EE] p-4 transition hover:border-[#B83B2A]"
+            >
+              <h3 className="text-sm font-bold text-[#1E242B]">
+                Best 5-Star Hotels in Seoul 2026: Free Breakfast &amp; $100 Credit &rarr;
+              </h3>
+              <p className="mt-1 text-xs text-[#5E574D]">
+                Side-by-side Fora VIP comparison: Four Seasons, Park Hyatt, Josun Palace, Fairmont &amp; Signiel.
+              </p>
+            </Link>
+            <Link
+              href="/seoulhelper/korea-tax-refund-guide"
+              className="rounded-xl border border-[#E6DDD0] bg-[#FAF6EE] p-4 transition hover:border-[#1F5C4E]"
+            >
+              <h3 className="text-sm font-bold text-[#1E242B]">
+                Korea VAT Tax Refund Guide 2026: Olive Young &amp; Incheon Airport &rarr;
+              </h3>
+              <p className="mt-1 text-xs text-[#5E574D]">
+                Exact ₩15,000+ refund brackets, instant passport deduction rules &amp; airport kiosk steps.
+              </p>
+            </Link>
+          </div>
+        </section>
       </main>
 
       {/* Direct Hotel Live Rate Search & Fora VIP Modal */}

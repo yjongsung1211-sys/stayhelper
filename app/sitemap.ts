@@ -30,6 +30,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: 'https://personalcolorhelper.com', lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: 'https://personalcolorhelper.com/seoulhelper', lastModified: now, changeFrequency: 'daily', priority: 1.0 },
+    { url: 'https://personalcolorhelper.com/seoulhelper/best-5-star-hotels-seoul', lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
+    { url: 'https://personalcolorhelper.com/seoulhelper/korea-tax-refund-guide', lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: 'https://personalcolorhelper.com/beautyhelper', lastModified: now, changeFrequency: 'daily', priority: 1.0 },
     { url: 'https://personalcolorhelper.com/loopshadow', lastModified: now, changeFrequency: 'daily', priority: 1.0 },
     { url: 'https://personalcolorhelper.com/loopshadow/kr', lastModified: now, changeFrequency: 'daily', priority: 0.9 },
